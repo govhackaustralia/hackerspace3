@@ -31,12 +31,20 @@ Rails.application.configure do
   config.active_storage.service = :local
 
   # Don't care if the mailer can't send.
-  config.action_mailer.raise_delivery_errors = false
+  config.action_mailer.raise_delivery_errors = true
 
   config.action_mailer.perform_caching = false
 
   config.action_mailer.default_url_options = { host: ENV['DOMAIN'], port: 3000 }
 
+  config.action_mailer.smtp_settings = {
+    :address => ENV['AWS_SES_SERVER'],
+    :port => 587,
+    :user_name => ENV['AWS_SES_ID'],
+    :password => ENV['AWS_SES_KEY'],
+    :authentication => :login,
+    :enable_starttls_auto => true
+  }
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log
 

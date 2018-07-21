@@ -27,3 +27,7 @@ wiki](https://github.com/cassar/hackerspace3/wiki).
   - Authorised redirect URI
 
  
+- AWS_SES_ID
+- AWS_SES_KEY
+- AWS_SES_SERVER
+- DEFAULT_FROM_EMAIL
