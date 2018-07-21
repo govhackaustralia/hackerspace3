@@ -10,3 +10,20 @@ wiki](https://github.com/cassar/hackerspace3/wiki).
 ## Environment Variables Required.
 
 - DOMAIN
+- GOOGLE_CLIENT_ID
+- GOOGLE_CLIENT_SECRET
+
+## External Platform Configuration
+
+### Google Omniauth
+
+- Go to the [Google Developers Console](https://console.developers.google.com)
+- Select your project.
+- Click 'Enable and manage APIs'.
+- Make sure "Google+ API" is on.
+- Go to Credentials, then select the "OAuth consent screen" tab on top, and
+  provide an 'EMAIL ADDRESS' and a 'PRODUCT NAME'
+- Set Authorised URIs
+  - Authorised redirect URI
+
+ 
