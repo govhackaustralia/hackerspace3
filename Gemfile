@@ -23,6 +23,8 @@ gem 'bootsnap', '>= 1.1.0', require: false
 gem 'devise'
 # Oauth2 strategy for Google
 gem 'omniauth-google-oauth2'
+# Add JQuery to Rails
+gem 'jquery-rails'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -36,7 +38,6 @@ group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
-
   # Command line tool to easily handle events on file system modifications.
   gem 'guard'
   # A Ruby static code analyzer and formatter, based on the community Ruby style guide.
