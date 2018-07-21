@@ -9,4 +9,4 @@ wiki](https://github.com/cassar/hackerspace3/wiki).
 
 ## Environment Variables Required.
 
--
+- DOMAIN
