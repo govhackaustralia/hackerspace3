@@ -1,0 +1,9 @@
+<h2>Update Personal Details</h2>
+
+<%= form_with(model: @user, local: true) do |form| %>
+
+  <%= form.label :full_name %><br>
+  <%= form.text_field :full_name %><br>
+  <%= form.submit %>
+
+<% end %>

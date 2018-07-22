@@ -1,0 +1,8 @@
+<header>
+  <nav>
+    <% unless current_page?(root_path) %>
+      <%= link_to "Home", root_path %><br>
+    <% end %>
+    <%= render "shared/session_links" %>
+  </nav>
+</header>
