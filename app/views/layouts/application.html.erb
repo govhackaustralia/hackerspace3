@@ -10,9 +10,9 @@
   </head>
 
   <body>
+    <%= render "shared/top_bar" %>
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
-    <%= link_to "Home", root_path %>
     <%= yield %>
   </body>
 </html>

@@ -33,6 +33,10 @@ guard :minitest do
   watch(%r{^lib/(.*/)?([^/]+)\.rb$})     { |m| "test/#{m[1]}test_#{m[2]}.rb" }
   watch(%r{^test/test_helper\.rb$})      { 'test' }
 
+  # tests files in app/models/_
+  watch(%r{^app/models/(.+)\.rb}) { |m| "test/models/#{m[1]}_test.rb" }
+  watch(%r{^test/models/(.+)_test\.rb}) { |m| "test/models/#{m[1]}_test.rb" }
+
   # with Minitest::Spec
   # watch(%r{^spec/(.*)_spec\.rb$})
   # watch(%r{^lib/(.+)\.rb$})         { |m| "spec/#{m[1]}_spec.rb" }
