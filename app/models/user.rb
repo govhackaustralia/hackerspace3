@@ -3,6 +3,8 @@ class User < ApplicationRecord
          :trackable, :validatable, :confirmable, :lockable, :timeoutable,
          :omniauthable
 
+  has_many :assignments
+
   def self.from_omniauth(access_token)
     data = access_token.info
     user = User.where(email: data['email']).first
@@ -12,5 +14,9 @@ class User < ApplicationRecord
                          password: Devise.friendly_token[0, 20],
                          google_img: data['image'])
     user
+  end
+
+  def make_management_team
+    Competition.current.assignments.create(user: self, title: MANAGEMENT_TEAM)
   end
 end
