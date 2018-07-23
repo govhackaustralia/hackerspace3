@@ -11,6 +11,14 @@ class Region < ApplicationRecord
   end
 
   def parent
-    Region.find(parent_id)
+    Region.where(id: parent_id).first
+  end
+
+  def self.root
+    Region.find_or_create_by(parent_id: nil, name: ROOT_REGION_NAME)
+  end
+
+  def parent_root?
+    return true if Region.root == parent
   end
 end

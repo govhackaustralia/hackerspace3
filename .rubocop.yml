@@ -12,6 +12,7 @@ AllCops:
     - 'bin/*'
     - 'db/**/*'
     - 'app/controllers/users/*'
+    - 'app/controllers/admin/regions_controller.rb'
 
 Style/Documentation:
   Enabled: false

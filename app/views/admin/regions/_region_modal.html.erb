@@ -1,0 +1,22 @@
+<% heading = locals[:heading] %>
+<% region = locals[:region] %>
+
+<<%= 'h' + heading.to_s %>>
+  <%= region.name %>
+</<%= 'h' + heading.to_s %>>
+
+<% if region.time_zone %>
+  <div>Time Zone: <%= region.time_zone %></div>
+<% end %>
+
+<%= form_tag("/admin/regions", method: "post") do %>
+  <%= label_tag(:name, "Name:") %>
+  <%= text_field_tag(:name) %>
+  <%= hidden_field_tag(:parent_id, region.id) %>
+  <%= select_tag(:time_zone, options_from_collection_for_select(ActiveSupport::TimeZone.country_zones('AU'), :name, :name)) %>
+  <%= submit_tag("Create New Sub Region for " + region.name) %>
+<% end %>
+
+<% region.sub_regions.each do |region| %>
+  <%= render 'region_modal', locals: { region: region, heading: heading + 1 } %>
+<% end %>
