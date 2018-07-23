@@ -6,8 +6,14 @@
 </<%= 'h' + heading.to_s %>>
 
 <% if region.time_zone %>
-  <div>Time Zone: <%= region.time_zone %></div>
+  Time Zone: <%= region.time_zone %></br>
 <% end %>
+
+<% if (director = region.director).present? %>
+  Director: <%= director.full_name %></br>
+<% end %>
+
+<%= link_to "Manage #{region.name} Region", admin_region_path(region.id) %>
 
 <%= form_tag("/admin/regions", method: "post") do %>
   <%= label_tag(:name, "Name:") %>

@@ -11,5 +11,9 @@ one:
   assignable_type: 'Competition'
   title: GovHack Management Team
 
-two: {}
-# column: value
+two:
+  id: 2
+  user_id: 1
+  assignable_id: 1
+  assignable_type: 'Region'
+  title: Region Director

@@ -13,5 +13,7 @@ Rails.application.routes.draw do
   get 'edit_personal_details', to: 'users#edit'
   get 'competition_management', to: 'admin/assignments#index'
 
+  post 'admin/region_assignment', to: 'admin/regions#assignment'
+
   root 'static_pages#index'
 end

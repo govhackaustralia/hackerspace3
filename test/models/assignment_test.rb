@@ -2,18 +2,25 @@ require 'test_helper'
 
 class AssignmentTest < ActiveSupport::TestCase
   setup do
-    @assignment = Assignment.find(1)
+    @comp_assignment = Assignment.find(1)
     @competition = Competition.find(1)
+
+    @region_assignment = Assignment.find(2)
+    @region = Region.find(1)
+
     @user = User.find(1)
   end
 
   test 'assignment associations' do
-    assert(@assignment.assignable == @competition)
-    assert(@assignment.user == @user)
+    assert(@comp_assignment.assignable == @competition)
+    assert(@comp_assignment.user == @user)
+
+    assert(@region_assignment.assignable == @region)
+    assert(@region_assignment.user == @user)
   end
 
   test 'assignment validations' do
-    @assignment.destroy
+    @comp_assignment.destroy
     # No Title
     assignment = @competition.assignments.create(user: @user)
     assert_not(assignment.persisted?)

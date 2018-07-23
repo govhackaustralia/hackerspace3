@@ -1,0 +1,32 @@
+<h2><%= @region.name %></h2>
+
+<% if @region.time_zone %>
+  Time Zone: <%= @region.time_zone %></br>
+<% end %>
+
+<h3>Region Director</h3>
+
+<% if (director = @region.director).present? %>
+  Full Name: <%= director.full_name %></br>
+<% else %>
+  <%= form_tag(admin_region_assignment_url, method: "post") do %>
+    <%= label_tag(:user_email, "User Email:") %>
+    <%= text_field_tag(:user_email) %>
+    <%= hidden_field_tag(:region_id, @region.id) %>
+    <%= hidden_field_tag(:title, REGION_DIRECTOR) %>
+    <%= submit_tag("Assign New Region Director for #{@region.name}") %>
+  <% end %>
+<% end %>
+
+<h3>Region Support</h3>
+<% @region.supports.each do |support| %>
+  Full Name: <%= support.full_name %></br>
+<% end %>
+
+<%= form_tag(admin_region_assignment_url, method: "post") do %>
+  <%= label_tag(:user_email, "User Email:") %>
+  <%= text_field_tag(:user_email) %>
+  <%= hidden_field_tag(:region_id, @region.id) %>
+  <%= hidden_field_tag(:title, REGION_SUPPORT) %>
+  <%= submit_tag("Assign New Region Support for #{@region.name}") %>
+<% end %>
