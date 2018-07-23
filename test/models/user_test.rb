@@ -8,6 +8,10 @@ class UserTest < ActiveSupport::TestCase
 
   test 'user associations' do
     assert(@user.assignments.include?(@assignment))
+    # Dependent Destroy
+    id = @user.id
+    @user.destroy
+    assert(Assignment.where(user_id: id).empty?)
   end
 
   test 'admin_privileges' do

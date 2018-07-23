@@ -3,7 +3,7 @@ class User < ApplicationRecord
          :trackable, :validatable, :confirmable, :lockable, :timeoutable,
          :omniauthable
 
-  has_many :assignments
+  has_many :assignments, dependent: :destroy
 
   def self.from_omniauth(access_token)
     data = access_token.info
@@ -21,10 +21,10 @@ class User < ApplicationRecord
   end
 
   def make_site_admin
-    Competition.current.assignments.create(user: self, title: ADMIN)
+    Competition.current.assignments.find_or_create_by(user: self, title: ADMIN)
   end
 
   def make_management_team
-    Competition.current.assignments.create(user: self, title: MANAGEMENT_TEAM)
+    Competition.current.assignments.find_or_create_by(user: self, title: MANAGEMENT_TEAM)
   end
 end

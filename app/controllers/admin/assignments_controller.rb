@@ -4,7 +4,15 @@ class Admin::AssignmentsController < ApplicationController
 
   def index; end
 
-  def new; end
+  def create
+    if (@user = User.find_by(email: params[:email])).present?
+      @user.make_management_team
+      flash[:notice] = 'New Management Team Member Added.'
+    else
+      flash[:notice] = 'Email address not found.'
+    end
+    redirect_to competition_management_path
+  end
 
   private
 

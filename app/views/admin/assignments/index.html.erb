@@ -16,6 +16,12 @@
   <% end %>
 </table>
 
+<%= form_tag("/admin/assignments", method: "post") do %>
+  <%= label_tag(:email, "User Email:") %>
+  <%= text_field_tag(:email) %>
+  <%= submit_tag("Assign New Mangement Team Member") %>
+<% end %>
+
 <h3>Site Admin</h3>
 
 <table>
