@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  id: 1
+  name: Australia
+  parent_id:
+  time_zone:
+
+two:
+  id: 2
+  name: Queensland
+  parent_id: 1
+  time_zone: Brisbane
