@@ -1,10 +1,10 @@
-class AssignmentsController < ApplicationController
+class Admin::AssignmentsController < ApplicationController
   before_action :authenticate_user!
   before_action :check_for_privileges
 
-  def index
-    @assignments = current_user.assignments
-  end
+  def index; end
+
+  def new; end
 
   private
 

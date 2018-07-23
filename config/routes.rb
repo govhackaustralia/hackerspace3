@@ -5,9 +5,13 @@ Rails.application.routes.draw do
 
   resources :users
 
+  namespace :admin do
+    resources :assignments
+  end
+
   get 'manage_account', to: 'users#show'
   get 'edit_personal_details', to: 'users#edit'
-  get 'admin', to: 'assignments#index'
+  get 'competition_management', to: 'admin/assignments#index'
 
   root 'static_pages#index'
 end
