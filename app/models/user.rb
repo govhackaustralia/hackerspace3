@@ -16,6 +16,14 @@ class User < ApplicationRecord
     user
   end
 
+  def admin_privileges?
+    return true unless (assignments.pluck(:title) & VALID_ADMIN_TITLES).empty?
+  end
+
+  def make_site_admin
+    Competition.current.assignments.create(user: self, title: ADMIN)
+  end
+
   def make_management_team
     Competition.current.assignments.create(user: self, title: MANAGEMENT_TEAM)
   end

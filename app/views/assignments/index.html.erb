@@ -1,0 +1,33 @@
+<h2>Competiton Management</h2>
+
+<h3>GovHack Management Team</h3>
+
+<table>
+  <tr>
+    <th>Full Name</th>
+    <th>E-mail</th>
+  </tr>
+  <% Competition.management_team.each do |assignment| %>
+    <% user = assignment.user %>
+    <tr>
+      <td><%= user.full_name %></td>
+      <td><%= user.email %></td>
+    </tr>
+  <% end %>
+</table>
+
+<h3>Site Admin</h3>
+
+<table>
+  <tr>
+    <th>Full Name</th>
+    <th>E-mail</th>
+  </tr>
+  <% Competition.site_admin.each do |assignment| %>
+    <% user = assignment.user %>
+    <tr>
+      <td><%= user.full_name %></td>
+      <td><%= user.email %></td>
+    </tr>
+  <% end %>
+</table>
