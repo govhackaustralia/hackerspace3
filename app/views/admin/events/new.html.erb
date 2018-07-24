@@ -1,0 +1,7 @@
+<h2>Create New Event for Region: <%= @region.name %></h2>
+
+<%= form_for [:admin, @region, @event] do |f| %>
+  <%= f.label(:name, "Event name:") %>
+  <%= f.text_field(:name) %>
+  <%= f.submit "Create Event" %>
+<% end %>

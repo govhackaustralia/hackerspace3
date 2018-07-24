@@ -6,7 +6,10 @@ Rails.application.routes.draw do
   resources :users
 
   namespace :admin do
-    resources :assignments, :regions
+    resources :assignments
+    resources :regions do
+      resources :events
+    end
   end
 
   get 'manage_account', to: 'users#show'

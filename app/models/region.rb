@@ -1,5 +1,6 @@
 class Region < ApplicationRecord
   has_many :assignments, as: :assignable
+  has_many :events
 
   validates :name, presence: true
   validates :name, uniqueness: true

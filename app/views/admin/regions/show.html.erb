@@ -30,3 +30,12 @@
   <%= hidden_field_tag(:title, REGION_SUPPORT) %>
   <%= submit_tag("Assign New Region Support for #{@region.name}") %>
 <% end %>
+
+<h3>Events</h3>
+
+<% @region.events.where(competition: Competition.current).each do |event| %>
+  <h4><%= event.name %></h4>
+  <%= link_to "Mange #{event.name}", admin_region_event_path(@region, event) %></br>
+<% end %>
+
+<%= link_to "Create New Event", new_admin_region_event_path(@region) %>

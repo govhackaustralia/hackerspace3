@@ -4,6 +4,7 @@ class RegionTest < ActiveSupport::TestCase
   setup do
     @parent_region = Region.first
     @child_region = Region.second
+    @event = Event.first
     @assignment = Assignment.second
     @user = User.first
   end
@@ -12,6 +13,7 @@ class RegionTest < ActiveSupport::TestCase
     assert(@parent_region.sub_regions.include?(@child_region))
     assert(@child_region.parent == @parent_region)
     assert(@parent_region.assignments.include?(@assignment))
+    assert(@child_region.events.include?(@event))
   end
 
   test 'region validations' do
