@@ -17,7 +17,7 @@ class User < ApplicationRecord
   end
 
   def admin_privileges?
-    return true unless (assignments.pluck(:title) & VALID_ADMIN_TITLES).empty?
+    return true unless (assignments.pluck(:title) & COMP_ADMIN).empty?
   end
 
   def make_site_admin

@@ -6,21 +6,10 @@
 #
 one:
   id: 1
-  user_id: 1
-  assignable_id: 1
-  assignable_type: 'Competition'
-  title: GovHack Management Team
+  name: Brisbane Connection
+  region_id: 2
+  competition_id: 1
 
-two:
-  id: 2
-  user_id: 1
-  assignable_id: 1
-  assignable_type: 'Region'
-  title: Region Director
-
-three:
-  id: 3
-  user_id: 1
-  assignable_id: 1
-  assignable_type: 'Event'
-  title: Event Host
+#
+two: {}
+# column: value
