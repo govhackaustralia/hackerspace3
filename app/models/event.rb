@@ -4,5 +4,18 @@ class Event < ApplicationRecord
   belongs_to :competition
 
   validates :name, presence: true
-  validates :name, uniqueness: true
+
+  def host
+    assignment = assignments.where(title: EVENT_HOST).first
+    return assignment if assignment.nil?
+    assignment.user
+  end
+
+  def supports
+    supports = []
+    assignments.where(title: EVENT_SUPPORT).each do |assignment|
+      supports << assignment.user
+    end
+    supports
+  end
 end

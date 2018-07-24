@@ -15,7 +15,7 @@ class Admin::EventsController < ApplicationController
     if @event.save
       redirect_to admin_region_event_path(@region, @event)
     else
-      render new_admin_region_event_path(@region)
+      render new_admin_region_event_path(@region, @event)
     end
   end
 

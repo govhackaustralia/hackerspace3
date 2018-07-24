@@ -20,18 +20,6 @@ class Admin::RegionsController < ApplicationController
     @region = Region.find(params[:id])
   end
 
-  def assignment
-    @region = Region.find_by_id(params[:region_id])
-    @user = User.find_by_email(params[:user_email])
-    assignment = @region.assignments.find_or_create_by(user: @user, title: params[:title])
-    flash[:notice] = if assignment.persisted?
-                       "New #{params[:title]} '#{@user.full_name}' added."
-                     else
-                       "Could not find User with email #{params[:user_email]}"
-                     end
-    redirect_to admin_region_path(@region.id)
-  end
-
   private
 
   def check_for_privileges

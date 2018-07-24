@@ -6,12 +6,14 @@ class Admin::AssignmentsController < ApplicationController
 
   def create
     if (@user = User.find_by(email: params[:email])).present?
-      @user.make_management_team
-      flash[:notice] = 'New Management Team Member Added.'
+      @user.assignments.find_or_create_by(title: params[:title],
+                                          assignable_type: params[:assignable_type],
+                                          assignable_id: params[:assignable_id])
+      flash[:notice] = "New #{params[:title]} member Added."
     else
       flash[:notice] = 'Email address not found.'
     end
-    redirect_to competition_management_path
+    redirect_back(fallback_location: root_path)
   end
 
   private

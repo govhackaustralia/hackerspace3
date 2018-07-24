@@ -32,9 +32,5 @@ class RegionTest < ActiveSupport::TestCase
   test 'region director' do
     # Retrievs Director
     assert(@assignment.user == @parent_region.director)
-    # Creates Director
-    @assignment.destroy
-    @parent_region.assign_director(@user)
-    assert(@parent_region.director == @user)
   end
 end

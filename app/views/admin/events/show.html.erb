@@ -1,1 +1,32 @@
 <h2><%= @event.name %> Event</h2>
+
+<h3>Event Host</h3>
+
+  <% if (host = @event.host).present? %>
+    Full Name: <%= host.full_name %></br>
+  <% else %>
+    <%= form_tag("/admin/assignments", method: "post") do %>
+      <%= label_tag(:email, "User Email:") %>
+      <%= text_field_tag(:email) %>
+      <%= hidden_field_tag(:title, EVENT_HOST) %>
+      <%= hidden_field_tag(:assignable_type, 'Event') %>
+      <%= hidden_field_tag(:assignable_id, @event.id) %>
+      <%= submit_tag("Assign New #{EVENT_HOST} Member") %>
+    <% end %>
+  <% end %>
+
+<h3>Event Support</h3>
+  <% @event.supports.each do |support| %>
+    Full Name: <%= support.full_name %></br>
+  <% end %>
+
+  <%= form_tag("/admin/assignments", method: "post") do %>
+    <%= label_tag(:email, "User Email:") %>
+    <%= text_field_tag(:email) %>
+    <%= hidden_field_tag(:title, EVENT_SUPPORT) %>
+    <%= hidden_field_tag(:assignable_type, 'Event') %>
+    <%= hidden_field_tag(:assignable_id, @event.id) %>
+    <%= submit_tag("Assign New #{EVENT_SUPPORT} Member") %>
+  <% end %>
+
+<%= link_to "Go back to #{@event.region.name} region", admin_region_path(@event.region) %>

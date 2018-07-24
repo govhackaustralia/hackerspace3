@@ -25,18 +25,10 @@ class Region < ApplicationRecord
     return true if Region.root == parent
   end
 
-  def assign_director(user)
-    assignments.find_or_create_by(user: user, title: REGION_DIRECTOR)
-  end
-
   def director
     assignment = assignments.where(title: REGION_DIRECTOR).first
     return assignment if assignment.nil?
     assignment.user
-  end
-
-  def assign_support(user)
-    assignments.find_or_create_by(user: user, title: REGION_SUPPORT)
   end
 
   def supports

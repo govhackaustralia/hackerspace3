@@ -19,7 +19,10 @@
 <%= form_tag("/admin/assignments", method: "post") do %>
   <%= label_tag(:email, "User Email:") %>
   <%= text_field_tag(:email) %>
-  <%= submit_tag("Assign New Mangement Team Member") %>
+  <%= hidden_field_tag(:title, MANAGEMENT_TEAM) %>
+  <%= hidden_field_tag(:assignable_type, 'Competition') %>
+  <%= hidden_field_tag(:assignable_id, Competition.current.id) %>
+  <%= submit_tag("Assign New #{MANAGEMENT_TEAM} Member") %>
 <% end %>
 
 <h3>Site Admin</h3>

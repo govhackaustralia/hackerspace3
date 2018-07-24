@@ -9,12 +9,13 @@
 <% if (director = @region.director).present? %>
   Full Name: <%= director.full_name %></br>
 <% else %>
-  <%= form_tag(admin_region_assignment_url, method: "post") do %>
-    <%= label_tag(:user_email, "User Email:") %>
-    <%= text_field_tag(:user_email) %>
-    <%= hidden_field_tag(:region_id, @region.id) %>
+  <%= form_tag("/admin/assignments", method: "post") do %>
+    <%= label_tag(:email, "User Email:") %>
+    <%= text_field_tag(:email) %>
     <%= hidden_field_tag(:title, REGION_DIRECTOR) %>
-    <%= submit_tag("Assign New Region Director for #{@region.name}") %>
+    <%= hidden_field_tag(:assignable_type, 'Region') %>
+    <%= hidden_field_tag(:assignable_id, @region.id) %>
+    <%= submit_tag("Assign New #{REGION_DIRECTOR} Member") %>
   <% end %>
 <% end %>
 
@@ -23,12 +24,13 @@
   Full Name: <%= support.full_name %></br>
 <% end %>
 
-<%= form_tag(admin_region_assignment_url, method: "post") do %>
-  <%= label_tag(:user_email, "User Email:") %>
-  <%= text_field_tag(:user_email) %>
-  <%= hidden_field_tag(:region_id, @region.id) %>
+<%= form_tag("/admin/assignments", method: "post") do %>
+  <%= label_tag(:email, "User Email:") %>
+  <%= text_field_tag(:email) %>
   <%= hidden_field_tag(:title, REGION_SUPPORT) %>
-  <%= submit_tag("Assign New Region Support for #{@region.name}") %>
+  <%= hidden_field_tag(:assignable_type, 'Region') %>
+  <%= hidden_field_tag(:assignable_id, @region.id) %>
+  <%= submit_tag("Assign New #{REGION_SUPPORT} Member") %>
 <% end %>
 
 <h3>Events</h3>
