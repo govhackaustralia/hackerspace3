@@ -1,5 +1,20 @@
 <h2>Competiton Management</h2>
 
+<h3>Competition Director</h3>
+
+<% if (director = @competition.director).present? %>
+  Full Name: <%= director.full_name %></br>
+<% else %>
+  <%= form_tag("/admin/assignments", method: "post") do %>
+    <%= label_tag(:email, "User Email:") %>
+    <%= text_field_tag(:email) %>
+    <%= hidden_field_tag(:title, COMPETITION_DIRECTOR) %>
+    <%= hidden_field_tag(:assignable_type, 'Competition') %>
+    <%= hidden_field_tag(:assignable_id, @competition.id) %>
+    <%= submit_tag("Assign New #{COMPETITION_DIRECTOR}") %>
+  <% end %>
+<% end %>
+
 <h3>GovHack Management Team</h3>
 
 <table>
@@ -7,7 +22,7 @@
     <th>Full Name</th>
     <th>E-mail</th>
   </tr>
-  <% Competition.management_team.each do |assignment| %>
+  <% @competition.management_team.each do |assignment| %>
     <% user = assignment.user %>
     <tr>
       <td><%= user.full_name %></td>
@@ -32,7 +47,7 @@
     <th>Full Name</th>
     <th>E-mail</th>
   </tr>
-  <% Competition.site_admin.each do |assignment| %>
+  <% @competition.site_admin.each do |assignment| %>
     <% user = assignment.user %>
     <tr>
       <td><%= user.full_name %></td>

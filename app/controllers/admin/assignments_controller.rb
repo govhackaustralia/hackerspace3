@@ -2,8 +2,6 @@ class Admin::AssignmentsController < ApplicationController
   before_action :authenticate_user!
   before_action :check_for_privileges
 
-  def index; end
-
   def create
     if (@user = User.find_by(email: params[:email])).present?
       @user.assignments.find_or_create_by(title: params[:title],

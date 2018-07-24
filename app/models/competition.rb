@@ -7,11 +7,17 @@ class Competition < ApplicationRecord
     find_or_create_by(year: Time.current.year)
   end
 
-  def self.management_team
-    current.assignments.where(title: MANAGEMENT_TEAM)
+  def director
+    assignment = assignments.where(title: COMPETITION_DIRECTOR).first
+    return assignment if assignment.nil?
+    assignment.user
   end
 
-  def self.site_admin
-    current.assignments.where(title: ADMIN)
+  def management_team
+    assignments.where(title: MANAGEMENT_TEAM)
+  end
+
+  def site_admin
+    assignments.where(title: ADMIN)
   end
 end
