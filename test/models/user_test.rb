@@ -15,11 +15,10 @@ class UserTest < ActiveSupport::TestCase
   end
 
   test 'admin_privileges' do
+    # Does have.
+    assert(@user.admin_privileges?)
     # Does not have.
     @assignment.destroy
     assert_not(@user.admin_privileges?)
-    # Does have.
-    @user.make_management_team
-    assert(@user.admin_privileges?)
   end
 end

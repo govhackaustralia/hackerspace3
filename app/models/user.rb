@@ -23,8 +23,4 @@ class User < ApplicationRecord
   def make_site_admin
     Competition.current.assignments.find_or_create_by(user: self, title: ADMIN)
   end
-
-  def make_management_team
-    Competition.current.assignments.find_or_create_by(user: self, title: MANAGEMENT_TEAM)
-  end
 end
