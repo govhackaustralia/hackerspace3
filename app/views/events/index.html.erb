@@ -1,0 +1,6 @@
+<h2>Events</h2>
+
+<% @events.each do |event| %>
+  <h3><%= event.name %> - <%= event.region.name %></h3>
+  <%= link_to 'See Event', event_path(event) %></br>
+<% end %>
