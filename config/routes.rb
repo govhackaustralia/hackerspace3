@@ -15,5 +15,5 @@ Rails.application.routes.draw do
   get 'manage_account', to: 'users#show'
   get 'edit_personal_details', to: 'users#edit'
 
-  root 'static_pages#index'
+  root 'competitions#index'
 end
