@@ -14,6 +14,7 @@ AllCops:
     - 'app/controllers/users/*'
     - 'app/controllers/admin/regions_controller.rb'
     - 'app/controllers/admin/assignments_controller.rb'
+    - 'app/controllers/attendances_controller.rb'
 
 Style/Documentation:
   Enabled: false

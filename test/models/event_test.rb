@@ -17,10 +17,14 @@ class EventTest < ActiveSupport::TestCase
     assert(@event.attendances.include?(@attendance))
   end
 
-  test 'test validations' do
+  test 'event validations' do
     # No name
     assert_not(Event.create(name: nil).persisted?)
     # Duplicate Name
     assert_not(Event.create(name: @event.name).persisted?)
+  end
+
+  test 'attending method' do
+    assert(@event.attending(@user))
   end
 end

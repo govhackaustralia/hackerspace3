@@ -1,0 +1,9 @@
+<h2>Register your Attendance for <%= @event.name %> - <%= @event.region.name %></h2>
+
+<%= form_for [@event, @attendance] do |f| %>
+  <%= f.radio_button(:status, INTENDING, options = {checked: true}) %>
+  <%= f.label(:status, INTENDING) %>
+  <%= f.radio_button(:status, NON_ATTENDING) %>
+  <%= f.label(:status, NON_ATTENDING) %>
+  <%= f.submit "Register Attendance" %>
+<% end %>

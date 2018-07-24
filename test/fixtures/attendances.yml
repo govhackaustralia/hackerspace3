@@ -9,7 +9,7 @@ one:
   event_id: 1
   assignment_id: 4
   time_notified: 2018-07-22 12:34:03
-  status: Attending
+  status: Intending
 
 two: {}
 # column: value

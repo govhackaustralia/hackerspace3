@@ -19,4 +19,10 @@ class Event < ApplicationRecord
     end
     supports
   end
+
+  def attending(user)
+    return true if attendances.find_by(assignment: user.event_assignment,
+                                       status: INTENDING).present?
+    false
+  end
 end

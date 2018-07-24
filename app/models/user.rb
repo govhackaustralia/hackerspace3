@@ -23,4 +23,10 @@ class User < ApplicationRecord
   def make_site_admin
     Competition.current.assignments.find_or_create_by(user: self, title: ADMIN)
   end
+
+  def event_assignment
+    assignment = Competition.current.assignments.find_by(user: self, title: VIP)
+    return assignment unless assignment.nil?
+    Competition.current.assignments.find_or_create_by(user: self, title: PARTICIPANT)
+  end
 end
