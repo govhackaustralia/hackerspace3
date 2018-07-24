@@ -1,5 +1,6 @@
 class Event < ApplicationRecord
   has_many :assignments, as: :assignable
+  has_many :attendances
   belongs_to :region
   belongs_to :competition
 

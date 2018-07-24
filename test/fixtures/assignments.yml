@@ -24,3 +24,10 @@ three:
   assignable_id: 1
   assignable_type: 'Event'
   title: Event Host
+
+four:
+  id: 4
+  user_id: 1
+  assignable_id: 1
+  assignable_type: 'Competition'
+  title: Participant

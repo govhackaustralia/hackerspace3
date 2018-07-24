@@ -73,3 +73,7 @@ EVENT_SUPPORT = 'Event Support'
 EVENT_ADMIN = [EVENT_HOST, EVENT_SUPPORT]
 
 VALID_ASSIGNMENT_TITLES = COMP_ADMIN + REGION_ADMIN + EVENT_ADMIN
+
+# Attendance Statuses
+
+VALID_ATTENDANCE_STATUSES = ['Pending', 'Intending', 'Non Attending', 'Attended']
