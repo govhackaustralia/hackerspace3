@@ -2,7 +2,9 @@ class Admin::RegionsController < ApplicationController
   before_action :authenticate_user!
   before_action :check_for_privileges
 
-  def index; end
+  def index
+    @region = Region.root
+  end
 
   def create
     @region = Region.create(name: params[:name],

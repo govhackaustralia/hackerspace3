@@ -5,7 +5,7 @@ class Admin::CompetitionsController < ApplicationController
   def index
     @competition = Competition.current
   end
-  
+
   private
 
   def check_for_privileges
