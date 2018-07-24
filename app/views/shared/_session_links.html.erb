@@ -4,6 +4,7 @@
   <% if current_user.admin_privileges? %>
     <%= link_to 'Competition Mangement', admin_competitions_path %><br>
     <%= link_to 'Region Mangement', admin_regions_path %><br>
+    <%= link_to 'Manage Users', admin_users_path %><br>
   <% end %>
 <% else %>
   <%= link_to 'Sign In', user_session_path %><br>

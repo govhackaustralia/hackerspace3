@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   end
 
   namespace :admin do
-    resources :assignments, :competitions
+    resources :assignments, :competitions, :users
     resources :regions do
       resources :events
     end
