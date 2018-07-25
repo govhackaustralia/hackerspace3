@@ -13,6 +13,7 @@ class UsersController < ApplicationController
     @user = current_user
     if current_user.update(user_params)
       redirect_to manage_account_path
+      flash[:notice] = 'Your personal details have been updated.'
     else
       render 'edit'
     end
