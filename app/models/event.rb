@@ -1,6 +1,7 @@
 class Event < ApplicationRecord
   has_many :assignments, as: :assignable
   has_many :attendances
+  has_many :attendance_assignments, through: :attendances, source: :assignment
   belongs_to :region
   belongs_to :competition
 
@@ -24,5 +25,13 @@ class Event < ApplicationRecord
     return true if attendances.find_by(assignment: user.event_assignment,
                                        status: INTENDING).present?
     false
+  end
+
+  def vips
+    attendance_assignments.where(title: VIP)
+  end
+
+  def participants
+    attendance_assignments.where(title: PARTICIPANT)
   end
 end

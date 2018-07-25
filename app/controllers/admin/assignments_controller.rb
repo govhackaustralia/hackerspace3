@@ -14,6 +14,13 @@ class Admin::AssignmentsController < ApplicationController
     redirect_back(fallback_location: root_path)
   end
 
+  # Used to promote an assignment to VIP
+  def update
+    @assignment = Assignment.find(params[:id])
+    @assignment.update(title: VIP)
+    redirect_back(fallback_location: root_path)
+  end
+
   private
 
   def check_for_privileges

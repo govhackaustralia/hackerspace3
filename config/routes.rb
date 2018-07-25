@@ -14,6 +14,9 @@ Rails.application.routes.draw do
     resources :regions do
       resources :events
     end
+    resources :events do
+      resources :attendances
+    end
   end
 
   get 'manage_account', to: 'users#show'

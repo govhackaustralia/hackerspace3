@@ -12,6 +12,7 @@ class Admin::UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    @assignment = @user.event_assignment
   end
 
   def create

@@ -5,11 +5,13 @@ class AttendanceTest < ActiveSupport::TestCase
     @assignment = Assignment.find(4)
     @attendance = Attendance.find(1)
     @event = Event.find(1)
+    @user = User.first
   end
 
   test 'attendance associations' do
     assert(@attendance.assignment == @assignment)
     assert(@attendance.event == @event)
+    assert(@attendance.user == @user)
   end
 
   test 'attendance validations' do

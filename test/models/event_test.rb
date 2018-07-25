@@ -15,6 +15,7 @@ class EventTest < ActiveSupport::TestCase
     assert(@event.competition == @competition)
     assert(@event.assignments.include?(@assignment))
     assert(@event.attendances.include?(@attendance))
+    assert(@event.attendance_assignments.include?(@attendance.assignment))
   end
 
   test 'event validations' do
