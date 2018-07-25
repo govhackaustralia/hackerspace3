@@ -32,6 +32,7 @@
   <%= form.label :twitter %><br>
   <%= form.text_field :twitter %><br>
 
+  <%= form.label :tshirt_size %><br>
   <%= form.select(:tshirt_size, options_for_select(AVAILABLE_TSHIRT_SIZES, @user.tshirt_size)) %><br>
 
   <%= form.check_box :mailing_list, { checked: @user.mailing_list }, true, false  %>

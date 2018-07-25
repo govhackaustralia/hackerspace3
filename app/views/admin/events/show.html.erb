@@ -1,5 +1,11 @@
 <h2><%= @event.name %> Event</h2>
 
+<h3>Event Information</h3>
+
+Region: <%= @event.region.name %><br>
+Event Category: <%= @event.category_type %><br>
+Registration Type: <%= @event.registration_type %><br>
+
 <h3>Event Host</h3>
 
   <% if (host = @event.host).present? %>
@@ -81,4 +87,5 @@
   <% end %>
 </table>
 
+<%= link_to "Edit #{@event.name} Event", edit_admin_region_event_path(@event.region, @event) %><br>
 <%= link_to "Go back to #{@event.region.name} region", admin_region_path(@event.region) %>

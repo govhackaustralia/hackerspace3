@@ -7,6 +7,9 @@ class Event < ApplicationRecord
 
   validates :name, presence: true
 
+  validates :registration_type, inclusion: { in: EVENT_REGISTRATION_TYPES }
+  validates :category_type, inclusion: { in: EVENT_CATEGORY_TYPES }
+
   def host
     assignment = assignments.where(title: EVENT_HOST).first
     return assignment if assignment.nil?

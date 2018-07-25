@@ -25,10 +25,27 @@ class Admin::EventsController < ApplicationController
     @attendance = Attendance.new
   end
 
+  def edit
+    @region = Region.find(params[:region_id])
+    @event = Event.find(params[:id])
+  end
+
+  def update
+    @event = Event.find(params[:id])
+    if @event.update(event_params)
+      redirect_to admin_region_event_path(@event.region_id, @event)
+    else
+      render 'edit'
+    end
+  end
+
   private
 
   def event_params
-    params.require(:event).permit(:name)
+    params.require(:event).permit(:name, :category_type, :registration_type,
+    :capacity, :email, :twitter, :address, :accessibility, :youth_support,
+    :parking, :public_transport, :operation_hours, :catering, :video_url,
+    :start_time, :end_time)
   end
 
   def check_for_privileges

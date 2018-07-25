@@ -1,5 +1,11 @@
 <h2><%= @event.name %> - <%= @event.region.name %></h2>
 
+<h3>Event Information</h3>
+
+Region: <%= @event.region.name %><br>
+Event Category: <%= @event.category_type %><br>
+Registration Type: <%= @event.registration_type %><br>
+
 <% unless @event.attending(current_user) %>
   <%= link_to 'Register to Attend Event', new_event_attendance_path(@event) %>
 <% else %>
