@@ -14,6 +14,13 @@ class UserTest < ActiveSupport::TestCase
     assert(Assignment.where(user_id: id).empty?)
   end
 
+  test 'user validations' do
+    # Incorrect Region
+    assert_not(@user.update(preferred_img: 'Yahooooo'))
+    # Correct Region
+    assert(@user.update(preferred_img: VALID_IMAGE_OPTIONS.first))
+  end
+
   test 'admin_privileges' do
     # Does have.
     assert(@user.admin_privileges?)

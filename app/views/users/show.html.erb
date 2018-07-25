@@ -1,8 +1,10 @@
 <h2>Manage Acccount</h2>
 
+<img src="<%= @user.preferred_img_url %>" alt="Profile Picture" /><br>
 <%= @user.email %><br>
 <%= @user.preferred_name %><br>
 <%= @user.full_name %><br>
+
 
 <%= link_to 'Update Personal Details' , edit_personal_details_path %><br>
 <%= link_to 'Change Email and Password' , edit_user_registration_path %><br>

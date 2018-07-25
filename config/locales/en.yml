@@ -30,4 +30,12 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  helpers:
+    label:
+      user:
+        mailing_list: Consent to be added to the GovHack mailing list.
+        challenge_sponsor_contact_place: Can be contacted by sponsors of a challenge if I am placed in a challenge.
+        challenge_sponsor_contact_enter: Can be contacted by sponsors of a challenge if I enter a challenge.
+        my_project_sponsor_contact: Can be contacted by sponsors that are interested in my project.
+        me_govhack_contact: Can be contacted by GovHack.
+        how_did_you_hear: How did you hear about GovHack?
