@@ -14,8 +14,18 @@ class Competition < ApplicationRecord
     assignment.user
   end
 
+  def sponsorship_director
+    assignment = assignments.where(title: SPONSORSHIP_DIRECTOR).first
+    return assignment if assignment.nil?
+    assignment.user
+  end
+
   def management_team
     assignments.where(title: MANAGEMENT_TEAM)
+  end
+
+  def volunteers
+    assignments.where(title: VOLUNTEER)
   end
 
   def site_admin
