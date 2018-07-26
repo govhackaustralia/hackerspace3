@@ -31,4 +31,8 @@ class Competition < ApplicationRecord
   def site_admin
     assignments.where(title: ADMIN)
   end
+
+  def admin_assignments
+    assignments.where(title: COMP_ADMIN).to_a
+  end
 end

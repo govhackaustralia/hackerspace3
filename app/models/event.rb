@@ -42,4 +42,11 @@ class Event < ApplicationRecord
   def participants
     attendance_assignments.where(title: PARTICIPANT)
   end
+
+  def admin_assignments
+    collected = assignments.where(title: EVENT_ADMIN).to_a
+    collected << region.admin_assignments
+    collected << competition.admin_assignments
+    collected.flatten
+  end
 end

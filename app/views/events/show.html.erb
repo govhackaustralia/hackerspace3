@@ -1,12 +1,12 @@
-<h2><%= @event.name %> - <%= @event.region.name %></h2>
+<h2><%= @event.name %> - <%= @region.name %></h2>
 
 <h3>Event Information</h3>
 
-Region: <%= @event.region.name %><br>
+Region: <%= @region.name %><br>
 Event Category: <%= @event.category_type %><br>
 Registration Type: <%= @event.registration_type %><br>
 
-<% if @event.attending(current_user) %>
+<% if user_signed_in? && @event.attending(current_user) %>
   <h4>Your Dietary Requirements</h4>
   <%= form_with(model: current_user, local: true) do |form| %>
     <%= form.label :dietary_requirements, 'Currently we have...' %><br>
@@ -15,11 +15,14 @@ Registration Type: <%= @event.registration_type %><br>
   <% end %>
 <% end %>
 
-<% unless @event.registered(current_user) %>
+<% unless user_signed_in? && @event.registered(current_user) %>
   <%= link_to 'Register to Attend Event', new_event_attendance_path(@event) %><br>
 <% else %>
   You are registered as: <%= @attendance.status %><br>
   <%= link_to 'Update Attendance', edit_event_attendance_path(@event, @attendance) %><br>
 <% end %>
 
+<% if user_signed_in? && (@event.admin_assignments & current_user.assignments).present? %>
+  <%= link_to 'Manage this Event', admin_region_event_path(@region, @event) %><br>
+<% end %>
 <%= link_to 'Back to Events', events_path %>

@@ -38,4 +38,11 @@ class Region < ApplicationRecord
     end
     supports
   end
+
+  # Will retrieve all assignments up through to the root region.
+  def admin_assignments(collected = [])
+    collected << assignments.where(title: REGION_ADMIN).to_a
+    return collected.flatten if parent_id.nil?
+    parent.admin_assignments_to_root(collected)
+  end
 end
