@@ -24,6 +24,10 @@ class User < ApplicationRecord
     return true unless (assignments.pluck(:title) & COMP_ADMIN).empty?
   end
 
+  def admin_assignments
+    assignments.where(title: ADMIN_TITLES)
+  end
+
   def make_site_admin
     Competition.current.assignments.find_or_create_by(user: self, title: ADMIN)
   end

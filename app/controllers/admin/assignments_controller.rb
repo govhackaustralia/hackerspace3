@@ -21,6 +21,14 @@ class Admin::AssignmentsController < ApplicationController
     redirect_back(fallback_location: root_path)
   end
 
+  def destroy
+    @assignment = Assignment.find(params[:id])
+    @user = @assignment.user
+    @assignment.destroy
+    flash[:notice] = 'Assignment Removed'
+    redirect_to admin_user_path(@user)
+  end
+
   private
 
   def check_for_privileges
