@@ -1,6 +1,9 @@
 <h2>Manage Account</h2>
-
-<img src="<%= @user.preferred_img_url %>" alt="Profile Picture" /><br>
+<% if @user.preferred_img == GOVHACK && @user.govhack_img.attached? %>
+  <img src="<%= url_for(@user.govhack_img) %>" alt="Profile Picture" /><br>
+<% else %>
+  <img src="<%= @user.preferred_img_url %>" alt="Profile Picture" /><br>
+<% end %>
 <%= @user.email %><br>
 <%= @user.preferred_name %><br>
 <%= @user.full_name %><br>

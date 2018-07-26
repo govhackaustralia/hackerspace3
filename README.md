@@ -16,3 +16,7 @@ wiki](https://github.com/cassar/hackerspace3/wiki).
 - AWS_SES_KEY
 - AWS_SES_SERVER
 - DEFAULT_FROM_EMAIL
+- AWS_ACCESS_ID
+- AWS_ACCESS_KEY
+- AWS_S3_REGION
+- AWS_S3_BUCKET

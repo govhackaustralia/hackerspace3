@@ -14,7 +14,12 @@
   <%= form.label :phone_number %><br>
   <%= telephone_field(:user, :phone_number) %><br>
 
-  <img src="<%= @user.govhack_img %>" alt="GovHack Profile Picture" /><br>
+  <% if @user.govhack_img.attached? %>
+    <img src="<%= url_for(@user.govhack_img) %>" alt="GovHack Profile Picture" /><br>
+  <% else %>
+    <%= form.file_field :govhack_img %><br>
+  <% end %>
+
   <%= form.radio_button(:preferred_img, GOVHACK, options = {checked: GOVHACK == @user.preferred_img}) %><br>
   <%= form.label(:preferred_img, 'GovHack') %><br>
 

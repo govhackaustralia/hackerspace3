@@ -7,6 +7,8 @@ class User < ApplicationRecord
 
   validates :preferred_img, inclusion: { in: VALID_IMAGE_OPTIONS }
 
+  has_one_attached :govhack_img
+
   def self.from_omniauth(access_token)
     data = access_token.info
     user = User.find_by_email(data['email'])
@@ -46,8 +48,6 @@ class User < ApplicationRecord
     case preferred_img
     when GRAVITAR
       gravitar_img_url
-    when GOVHACK
-      govhack_img
     when GOOGLE
       google_img
     end

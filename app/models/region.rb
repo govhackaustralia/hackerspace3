@@ -43,6 +43,6 @@ class Region < ApplicationRecord
   def admin_assignments(collected = [])
     collected << assignments.where(title: REGION_ADMIN).to_a
     return collected.flatten if parent_id.nil?
-    parent.admin_assignments_to_root(collected)
+    parent.admin_assignments(collected)
   end
 end

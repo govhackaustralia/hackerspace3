@@ -25,6 +25,8 @@ gem 'devise'
 gem 'omniauth-google-oauth2'
 # Add JQuery to Rails
 gem 'jquery-rails'
+# Enable AWS S3
+gem "aws-sdk-s3", require: false
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
