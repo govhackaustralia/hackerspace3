@@ -87,5 +87,6 @@ Registration Type: <%= @event.registration_type %><br>
   <% end %>
 </table>
 
+<%= link_to 'Go to Event Page', event_path(@event) %><br>
 <%= link_to "Edit #{@event.name} Event", edit_admin_region_event_path(@event.region, @event) %><br>
 <%= link_to "Go back to #{@event.region.name} region", admin_region_path(@event.region) %>

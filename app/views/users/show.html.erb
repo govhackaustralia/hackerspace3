@@ -6,5 +6,19 @@
 <%= @user.full_name %><br>
 
 
+
 <%= link_to 'Update Personal Details' , edit_personal_details_path %><br>
 <%= link_to 'Change Email and Password' , edit_user_registration_path %><br>
+
+<h3>My Events</h3>
+
+<% @user.event_assignment.attendances.each do |attendance| %>
+  <% event = attendance.event %>
+  <% region = event.region %>
+  <h4><%= event.name %> -  <%= region.name %></h4>
+
+  You are registered as: <%= attendance.status %><br>
+
+  <%= link_to 'Go to Event Page', event_path(event) %><br>
+  <%= link_to 'Update Attendance', edit_event_attendance_path(event, attendance) %><br>
+<% end %>

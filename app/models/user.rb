@@ -34,6 +34,10 @@ class User < ApplicationRecord
     Competition.current.assignments.find_or_create_by(user: self, title: PARTICIPANT)
   end
 
+  def attendances
+    event_assignment.attendances
+  end
+
   def preferred_img_url
     case preferred_img
     when GRAVITAR

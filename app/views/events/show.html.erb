@@ -7,19 +7,19 @@ Event Category: <%= @event.category_type %><br>
 Registration Type: <%= @event.registration_type %><br>
 
 <% if @event.attending(current_user) %>
-  <div>
-    Be sure to notify us of any dietary requirements you may have.
-    Currently we have...
-  </div>
+  <h4>Your Dietary Requirements</h4>
   <%= form_with(model: current_user, local: true) do |form| %>
-    <%= form.label :dietary_requirements %><br>
+    <%= form.label :dietary_requirements, 'Currently we have...' %><br>
     <%= form.text_field :dietary_requirements %><br>
     <%= form.submit 'Update Dietary Requirements' %>
   <% end %>
 <% end %>
 
-<% unless @event.attending(current_user) %>
-  <%= link_to 'Register to Attend Event', new_event_attendance_path(@event) %>
+<% unless @event.registered(current_user) %>
+  <%= link_to 'Register to Attend Event', new_event_attendance_path(@event) %><br>
 <% else %>
-  You have registered to attend this event.
+  You are registered as: <%= @attendance.status %><br>
+  <%= link_to 'Update Attendance', edit_event_attendance_path(@event, @attendance) %><br>
 <% end %>
+
+<%= link_to 'Back to Events', events_path %>

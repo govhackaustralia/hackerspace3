@@ -30,6 +30,11 @@ class Event < ApplicationRecord
     false
   end
 
+  def registered(user)
+    return true if attendances.find_by(assignment: user.event_assignment).present?
+    false
+  end
+
   def vips
     attendance_assignments.where(title: VIP)
   end
