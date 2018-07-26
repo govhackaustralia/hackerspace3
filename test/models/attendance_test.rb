@@ -15,6 +15,7 @@ class AttendanceTest < ActiveSupport::TestCase
   end
 
   test 'attendance validations' do
+    @attendance.destroy
     # Must have status
     new_attendance = @event.attendances.create(assignment: @assignment, status: nil)
     assert_not(new_attendance.persisted?)

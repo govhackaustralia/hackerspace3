@@ -31,3 +31,10 @@ four:
   assignable_id: 1
   assignable_type: 'Competition'
   title: Participant
+
+five:
+  id: 5
+  user_id: 1
+  assignable_id: 1
+  assignable_type: 'Sponsor'
+  title: Sponsor Contact

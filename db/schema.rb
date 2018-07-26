@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_07_26_060750) do
+ActiveRecord::Schema.define(version: 2018_07_26_113140) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -93,6 +93,34 @@ ActiveRecord::Schema.define(version: 2018_07_26_060750) do
     t.integer "parent_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "sponsors", force: :cascade do |t|
+    t.string "name"
+    t.text "description"
+    t.string "website"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "competition_id"
+  end
+
+  create_table "sponsorship_types", force: :cascade do |t|
+    t.integer "competition_id"
+    t.string "name"
+    t.integer "order"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "sponsorships", force: :cascade do |t|
+    t.integer "sponsor_id"
+    t.integer "sponsorship_type_id"
+    t.string "sponsorable_type"
+    t.integer "sponsorable_id"
+    t.integer "approved", default: 1
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["sponsorable_type", "sponsorable_id"], name: "index_sponsorships_on_sponsorable_type_and_sponsorable_id"
   end
 
   create_table "users", force: :cascade do |t|

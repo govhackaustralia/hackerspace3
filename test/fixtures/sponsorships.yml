@@ -1,0 +1,20 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+# This model initially had no columns defined. If you add columns to the
+# model remove the '{}' from the fixture names and add the columns immediately
+# below each fixture, per the syntax in the comments below
+#
+one:
+  id: 1
+  sponsor_id: 1
+  sponsorship_type_id: 1
+  sponsorable_type: 'Event'
+  sponsorable_id: 1
+
+#
+two:
+  id: 2
+  sponsor_id: 1
+  sponsorship_type_id: 1
+  sponsorable_type: 'Region'
+  sponsorable_id: 1

@@ -1,5 +1,7 @@
 class Competition < ApplicationRecord
   has_many :assignments, as: :assignable
+  has_many :sponsors
+  has_many :sponsorship_types
   has_many :events
 
   validates :year, presence: true
