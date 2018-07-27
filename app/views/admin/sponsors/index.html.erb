@@ -1,0 +1,25 @@
+<h2>Competition <%= @competition.year %> Sponsors </h2>
+
+<%= link_to 'Sponsorship Type Management', admin_sponsorship_types_path %><br>
+
+<% @sponsors.each do |sponsor| %>
+
+  <h3><%= sponsor.name %></h3>
+  <% if sponsor.logo.attached? %>
+    <img src="<%= url_for(sponsor.logo) %>" alt="<%= sponsor.name %> logo" /><br>
+  <% end %>
+  <article><%= sponsor.description %></article>
+
+  <h4>Sponsorships</h4>
+  <div>Please go to individual events and regions to add sponsorships.</div>
+  <% if (sponsorships = sponsor.sponsorships).empty? %>
+    <div>No sponsorships for <%= sponsor.name %></div>
+  <% else %>
+    <% sponsorships.each do |sponsorship| %>
+      <h3><%= sponsorship.sponsorable_type %>: <%= sponsorship.sponsorable.name %></h3>
+      Sponsorship type: <%= sponsorship.sponsorship_type.name %><br>
+    <% end %>
+  <% end %>
+<% end %>
+
+<%= link_to 'New Sponsor', new_admin_sponsor_path %><br>

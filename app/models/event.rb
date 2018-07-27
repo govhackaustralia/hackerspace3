@@ -4,7 +4,7 @@ class Event < ApplicationRecord
   has_many :attendance_assignments, through: :attendances, source: :assignment
   belongs_to :region
   belongs_to :competition
-  has_one :sponsorship, as: :sponsorable
+  has_many :sponsorships, as: :sponsorable
 
   validates :name, presence: true
 

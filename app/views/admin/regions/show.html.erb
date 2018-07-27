@@ -55,6 +55,18 @@
 <% end %>
 
 <%= link_to "Create New Event", new_admin_region_event_path(@region) %></br>
-<% if @region.parent_id.present? %>
-  <%= link_to "Back to #{@region.parent.name} Region", admin_region_path(@region.parent_id) %>
+
+<h3>Sponsorships</h3>
+
+<% @region.sponsorships.each do |sponsorship| %>
+  <h4><%= sponsorship.sponsor.name %></h4>
+  Sponsorship Type: <%= sponsorship.sponsorship_type.name %><br>
+<% end %>
+
+<%= link_to 'Add Sponsorship', new_admin_region_sponsorship_path(@region) %><br>
+
+<% if (parent = @region.parent).nil? %>
+  <%= link_to 'Back to Regions', admin_regions_path %><br>
+<% else %>
+  <%= link_to "Back to #{parent.name} Region", admin_region_path(parent)  %><br>
 <% end %>

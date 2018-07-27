@@ -17,6 +17,7 @@ AllCops:
     - 'app/controllers/attendances_controller.rb'
     - 'app/controllers/admin/users_controller.rb'
     - 'app/controllers/admin/attendances_controller.rb'
+    - 'app/controllers/admin/sponsorship_types_controller.rb'
 
 Style/Documentation:
   Enabled: false
