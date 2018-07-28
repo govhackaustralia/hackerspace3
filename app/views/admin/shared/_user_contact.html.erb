@@ -1,6 +1,6 @@
 <% user = locals[:user] %>
 <div>
-  Full name: <%= user.full_name %><br>
+  <strong>Full name: <%= user.full_name %></strong><br>
   <% if user.preferred_name.present? %>
     Preferred name: <%= user.preferred_name %><br>
   <% end %>

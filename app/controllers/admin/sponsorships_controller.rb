@@ -5,8 +5,7 @@ class Admin::SponsorshipsController < ApplicationController
   def new
     new_sponsorship if @sponsorship.nil?
     return if params[:term].nil? || params[:term] == ''
-    @sponsor = Sponsor.find_by_name(params[:term])
-    @sponsors = Sponsor.search(params[:term]) unless @sponsor.present?
+    search_sponsors
   end
 
   def create
@@ -42,5 +41,10 @@ class Admin::SponsorshipsController < ApplicationController
     @sponsor = Sponsor.find(params[:sponsor_id])
     @sponsorship = @sponsorable.sponsorships.new(sponsorship_params)
     @sponsorship.update(sponsor: @sponsor)
+  end
+
+  def search_sponsors
+    @sponsor = Sponsor.find_by_name(params[:term])
+    @sponsors = Sponsor.search(params[:term]) unless @sponsor.present?
   end
 end

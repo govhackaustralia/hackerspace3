@@ -19,4 +19,5 @@
   This event does not currently have any supports.<br>
 <% end %>
 <%= link_to "New #{EVENT_SUPPORT} Assignment", new_admin_event_assignment_path(@event, title: EVENT_SUPPORT) %><br>
+
 <%= link_to "Back to #{@event.name} Event", admin_region_event_path(@event.region, @event) %>

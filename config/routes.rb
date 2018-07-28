@@ -11,6 +11,9 @@ Rails.application.routes.draw do
 
   namespace :admin do
     resources :assignments, :competitions, :users, :sponsorship_types, :sponsors
+    resources :competitions do
+      resources :assignments, controller: 'competitions/assignments'
+    end
     resources :regions do
       resources :events, :sponsorships
       resources :assignments, controller: 'regions/assignments'

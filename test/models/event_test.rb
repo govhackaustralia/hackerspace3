@@ -8,7 +8,6 @@ class EventTest < ActiveSupport::TestCase
     @assignment = Assignment.third
     @registration = Registration.find(1)
     @user = User.first
-    @sponsorship = Sponsorship.first
   end
 
   test 'event associations' do
@@ -17,7 +16,6 @@ class EventTest < ActiveSupport::TestCase
     assert(@event.assignments.include?(@assignment))
     assert(@event.registrations.include?(@registration))
     assert(@event.registration_assignments.include?(@registration.assignment))
-    assert(@event.sponsorships.include?(@sponsorship))
   end
 
   test 'event validations' do

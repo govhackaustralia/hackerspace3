@@ -12,26 +12,36 @@ class Competition < ApplicationRecord
 
   def director
     assignment = assignments.where(title: COMPETITION_DIRECTOR).first
-    return assignment if assignment.nil?
+    return nil if assignment.nil?
     assignment.user
   end
 
   def sponsorship_director
     assignment = assignments.where(title: SPONSORSHIP_DIRECTOR).first
-    return assignment if assignment.nil?
+    return nil if assignment.nil?
+    assignment.user
+  end
+
+  def site_admin
+    assignment = assignments.where(title: ADMIN).first
+    return nil if assignment.nil?
     assignment.user
   end
 
   def management_team
-    assignments.where(title: MANAGEMENT_TEAM)
+    members = []
+    assignments.where(title: MANAGEMENT_TEAM).each do |assignment|
+      members << assignment.user
+    end
+    members
   end
 
   def volunteers
-    assignments.where(title: VOLUNTEER)
-  end
-
-  def site_admin
-    assignments.where(title: ADMIN)
+    members = []
+    assignments.where(title: VOLUNTEER).each do |assignment|
+      members << assignment.user
+    end
+    members
   end
 
   def admin_assignments

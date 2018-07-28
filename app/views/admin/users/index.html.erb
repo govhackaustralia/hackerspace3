@@ -1,8 +1,7 @@
 <h2>User Management</h2>
 
 <% @users.each do |user| %>
-  <h3><%= user.full_name %></h3>
-  <%= user.email %></br>
+  <%= render 'admin/shared/user_contact', locals: { user: user } %>
   <%= link_to 'See User', admin_user_path(user) %></br>
 <% end %>
 
