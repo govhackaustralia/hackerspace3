@@ -7,7 +7,6 @@ class Sponsor < ApplicationRecord
   has_one_attached :logo
   validates :name, uniqueness: true
 
-
   def self.search(term)
     results = []
     Sponsor.all.each do |sponsor|

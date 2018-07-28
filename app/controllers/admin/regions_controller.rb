@@ -6,16 +6,19 @@ class Admin::RegionsController < ApplicationController
     @region = Region.root
   end
 
+  def new
+    @region = Region.new if @region.nil?
+  end
+
   def create
-    @region = Region.create(name: params[:name],
-                            time_zone: params[:time_zone],
-                            parent_id: params[:parent_id])
-    flash[:notice] = if @region.persisted?
-                       "New Region '#{@region.name}' added."
-                     else
-                       @region.errors.full_messages.to_sentence
-                     end
-    redirect_to admin_regions_path
+    create_new_region
+    if @region.save
+      flash[:notice] = "New Region '#{@region.name}' added."
+      redirect_to admin_regions_path
+    else
+      flash.now[:notice] = @region.errors.full_messages.to_sentence
+      render 'new'
+    end
   end
 
   def show
@@ -24,9 +27,18 @@ class Admin::RegionsController < ApplicationController
 
   private
 
+  def region_params
+    params.require(:region).permit(:time_zone, :name)
+  end
+
   def check_for_privileges
     return if current_user.admin_privileges?
     flash[:error] = 'You must have valid assignments to access this section.'
     redirect_to root_path
+  end
+
+  def create_new_region
+    @region = Region.new(region_params)
+    @region.update(parent_id: Region.root.id)
   end
 end

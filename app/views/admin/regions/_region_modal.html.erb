@@ -1,20 +1,13 @@
-<% heading = locals[:heading] %>
 <% region = locals[:region] %>
 
-<<%= 'h' + heading.to_s %>>
-  <%= region.name %>
-</<%= 'h' + heading.to_s %>>
+<h3><%= region.name %></h3>
 
 <% if region.time_zone %>
   Time Zone: <%= region.time_zone %></br>
 <% end %>
-
 <% if (director = region.director).present? %>
-  Director: <%= director.full_name %></br>
+  <h4> Region Director</h4>
+  <%= render 'admin/shared/user_contact', locals: { user: director } %>
 <% end %>
 
-<%= link_to "Manage #{region.name} Region", admin_region_path(region.id) %>
-
-<% region.sub_regions.each do |region| %>
-  <%= render 'region_modal', locals: { region: region, heading: heading + 1 } %>
-<% end %>
+<%= link_to "Manage #{region.name} Region", admin_region_path(region) %><br>

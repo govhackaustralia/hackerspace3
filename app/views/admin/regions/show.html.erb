@@ -33,20 +33,6 @@
   <%= submit_tag("Assign New #{REGION_SUPPORT} Member") %>
 <% end %>
 
-<h3>Sub Regions</h3>
-
-<% @region.sub_regions.each do |sub_region| %>
-  <%= render 'region_modal', locals: { region: sub_region, heading: 4 } %>
-<% end %>
-
-<%= form_tag("/admin/regions", method: "post") do %>
-  <%= label_tag(:name, "Name:") %>
-  <%= text_field_tag(:name) %>
-  <%= hidden_field_tag(:parent_id, @region.id) %>
-  <%= select_tag(:time_zone, options_from_collection_for_select(ActiveSupport::TimeZone.country_zones('AU'), :name, :name)) %>
-  <%= submit_tag("Create New Sub Region for " + @region.name) %>
-<% end %>
-
 <h3>Events</h3>
 
 <% @region.events.where(competition: Competition.current).each do |event| %>
