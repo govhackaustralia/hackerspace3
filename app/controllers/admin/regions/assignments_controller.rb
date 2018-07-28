@@ -18,7 +18,7 @@ class Admin::Regions::AssignmentsController < ApplicationController
     create_new_assignment
     if @assignment.save
       flash[:notice] = "New #{@title} Assignment Added."
-      redirect_to admin_region_assignments_path(@region)
+      redirect_to admin_region_assignments_path(@assignable)
     else
       flash.now[:notice] = @assignment.errors.full_messages.to_sentence
       render 'new'
@@ -34,20 +34,20 @@ class Admin::Regions::AssignmentsController < ApplicationController
   end
 
   def new_assignment
-    @region = Region.find(params[:region_id])
-    @assignment = @region.assignments.new
+    @assignable = Region.find(params[:region_id])
+    @assignment = @assignable.assignments.new
     @title = params[:title]
   end
 
   def create_new_assignment
-    @region = Region.find(params[:region_id])
+    @assignable = Region.find(params[:region_id])
     @user = User.find(params[:user_id])
     @title = params[:title]
-    @assignment = @region.assignments.new(user: @user, title: @title)
+    @assignment = @assignable.assignments.new(user: @user, title: @title)
   end
 
   def user_found
-    @existing_assignment = @user.assignments.find_by(assignable: @region, title: @title)
+    @existing_assignment = @user.assignments.find_by(assignable: @assignable, title: @title)
   end
 
   def search_other_fields

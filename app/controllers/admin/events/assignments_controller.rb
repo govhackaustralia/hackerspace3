@@ -18,7 +18,7 @@ class Admin::Events::AssignmentsController < ApplicationController
     create_new_assignment
     if @assignment.save
       flash[:notice] = "New #{@title} Assignment Added."
-      redirect_to admin_event_assignments_path(@event)
+      redirect_to admin_event_assignments_path(@assignable)
     else
       flash.now[:notice] = @assignment.errors.full_messages.to_sentence
       render 'new'
@@ -34,20 +34,20 @@ class Admin::Events::AssignmentsController < ApplicationController
   end
 
   def new_assignment
-    @event = Event.find(params[:event_id])
-    @assignment = @event.assignments.new
+    @assignable = Event.find(params[:event_id])
+    @assignment = @assignable.assignments.new
     @title = params[:title]
   end
 
   def create_new_assignment
-    @event = Event.find(params[:event_id])
+    @assignable = Event.find(params[:event_id])
     @user = User.find(params[:user_id])
     @title = params[:title]
-    @assignment = @event.assignments.new(user: @user, title: @title)
+    @assignment = @assignable.assignments.new(user: @user, title: @title)
   end
 
   def user_found
-    @existing_assignment = @user.assignments.find_by(assignable: @event, title: @title)
+    @existing_assignment = @user.assignments.find_by(assignable: @assignable, title: @title)
   end
 
   def search_other_fields
