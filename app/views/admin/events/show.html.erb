@@ -28,11 +28,11 @@ Registration Type: <%= @event.registration_type %><br>
 
 <h3>Event Registrations</h3>
 
-<%= @event.attendances.where(status: INTENDING).count %> registered attending.<br>
-<%= @event.attendances.where(status: NON_ATTENDING).count %> registered not attending.<br>
-<%= @event.attendances.where(status: PENDING).count %> registered pending.<br>
+<%= @event.registrations.where(status: INTENDING).count %> registered attending.<br>
+<%= @event.registrations.where(status: NON_ATTENDING).count %> registered not attending.<br>
+<%= @event.registrations.where(status: PENDING).count %> registered pending.<br>
 
-<%= link_to "Manage #{@event.name} Registrations", admin_event_attendances_path(@event) %>
+<%= link_to "Manage #{@event.name} Registrations", admin_event_registrations_path(@event) %>
 
 <h3>Event Partner</h3>
 

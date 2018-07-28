@@ -1,7 +1,7 @@
 class Event < ApplicationRecord
   has_many :assignments, as: :assignable
-  has_many :attendances
-  has_many :attendance_assignments, through: :attendances, source: :assignment
+  has_many :registrations
+  has_many :registration_assignments, through: :registrations, source: :assignment
   belongs_to :region
   belongs_to :competition
   has_many :sponsorships, as: :sponsorable
@@ -26,22 +26,22 @@ class Event < ApplicationRecord
   end
 
   def attending(user)
-    return true if attendances.find_by(assignment: user.event_assignment,
-                                       status: INTENDING).present?
+    return true if registrations.find_by(assignment: user.event_assignment,
+                                         status: INTENDING).present?
     false
   end
 
   def registered(user)
-    return true if attendances.find_by(assignment: user.event_assignment).present?
+    return true if registrations.find_by(assignment: user.event_assignment).present?
     false
   end
 
   def vips
-    attendance_assignments.where(title: VIP)
+    registration_assignments.where(title: VIP)
   end
 
   def participants
-    attendance_assignments.where(title: PARTICIPANT)
+    registration_assignments.where(title: PARTICIPANT)
   end
 
   def admin_assignments

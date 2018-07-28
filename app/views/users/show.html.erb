@@ -15,13 +15,13 @@
 
 <h3>My Events</h3>
 
-<% @user.event_assignment.attendances.each do |attendance| %>
-  <% event = attendance.event %>
+<% @user.event_assignment.registrations.each do |registration| %>
+  <% event = registration.event %>
   <% region = event.region %>
   <h4><%= event.name %> -  <%= region.name %></h4>
 
-  You are registered as: <%= attendance.status %><br>
+  You are registered as: <%= registration.status %><br>
 
   <%= link_to 'Go to Event Page', event_path(event) %><br>
-  <%= link_to 'Update Attendance', edit_event_attendance_path(event, attendance) %><br>
+  <%= link_to 'Update Registration', edit_event_registration_path(event, registration) %><br>
 <% end %>

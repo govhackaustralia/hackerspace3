@@ -1,4 +1,4 @@
-class Attendance < ApplicationRecord
+class Registration < ApplicationRecord
   belongs_to :assignment
   has_one :user, through: :assignment
   belongs_to :event

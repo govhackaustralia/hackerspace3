@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   resources :users
 
   resources :events do
-    resources :attendances
+    resources :registrations
   end
 
   namespace :admin do
@@ -15,7 +15,7 @@ Rails.application.routes.draw do
       resources :events, :sponsorships
     end
     resources :events do
-      resources :attendances, :sponsorships
+      resources :registrations, :sponsorships
       resources :assignments, controller: 'events/assignments'
     end
   end

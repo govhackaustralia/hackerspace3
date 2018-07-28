@@ -1,7 +1,7 @@
-<%= form_for [:admin, @event, @attendance] do |f| %>
+<%= form_for [:admin, @event, @registration] do |f| %>
   <% [INTENDING, NON_ATTENDING, PENDING].each do |status| %>
     <%= f.radio_button(:status, status,
-      options = {checked: @attendance.status == status}) %>
+      options = {checked: @registration.status == status}) %>
     <%= f.label(:status, status) %>
   <% end %>
   <%= hidden_field_tag(:assignment_id, @event_assignment.id) %>

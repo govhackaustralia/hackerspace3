@@ -10,7 +10,7 @@
 
   <%= render 'admin/shared/user_contact', locals: { user: @user } %>
 
-  <% unless @existing_attendance.present? # check for existing registration %>
+  <% unless @existing_registration.present? # check for existing registration %>
 
     <%= form_for [:admin, @event, @assignment] do |f| %>
       <%= hidden_field_tag(:user_id, @user.id) %>

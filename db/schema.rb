@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_07_26_113140) do
+ActiveRecord::Schema.define(version: 2018_07_28_074039) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -44,15 +44,6 @@ ActiveRecord::Schema.define(version: 2018_07_26_113140) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["assignable_type", "assignable_id"], name: "index_assignments_on_assignable_type_and_assignable_id"
-  end
-
-  create_table "attendances", force: :cascade do |t|
-    t.integer "assignment_id"
-    t.datetime "time_notified"
-    t.string "status"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer "event_id"
   end
 
   create_table "competitions", force: :cascade do |t|
@@ -93,6 +84,15 @@ ActiveRecord::Schema.define(version: 2018_07_26_113140) do
     t.integer "parent_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "registrations", force: :cascade do |t|
+    t.integer "assignment_id"
+    t.datetime "time_notified"
+    t.string "status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "event_id"
   end
 
   create_table "sponsors", force: :cascade do |t|

@@ -6,7 +6,7 @@ class EventTest < ActiveSupport::TestCase
     @region = Region.second
     @competition = Competition.first
     @assignment = Assignment.third
-    @attendance = Attendance.find(1)
+    @registration = Registration.find(1)
     @user = User.first
     @sponsorship = Sponsorship.first
   end
@@ -15,8 +15,8 @@ class EventTest < ActiveSupport::TestCase
     assert(@event.region == @region)
     assert(@event.competition == @competition)
     assert(@event.assignments.include?(@assignment))
-    assert(@event.attendances.include?(@attendance))
-    assert(@event.attendance_assignments.include?(@attendance.assignment))
+    assert(@event.registrations.include?(@registration))
+    assert(@event.registration_assignments.include?(@registration.assignment))
     assert(@event.sponsorships.include?(@sponsorship))
   end
 

@@ -8,13 +8,13 @@
   </tr>
   <% assignments.each do |assignment| %>
     <% user = assignment.user %>
-    <% attendance = Attendance.find_by(event: @event, assignment: assignment) %>
+    <% registration = Registration.find_by(event: @event, assignment: assignment) %>
     <tr>
       <td><%= user.full_name %></td>
       <td><%= user.email %></td>
-      <td><%= attendance.status %></td>
+      <td><%= registration.status %></td>
       <td>
-        <%= link_to 'Edit', edit_admin_event_attendance_path(@event, attendance) %>
+        <%= link_to 'Edit', edit_admin_event_registration_path(@event, registration) %>
       </td>
     </tr>
   <% end %>

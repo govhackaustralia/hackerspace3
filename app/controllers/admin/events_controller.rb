@@ -22,7 +22,7 @@ class Admin::EventsController < ApplicationController
   def show
     @region = Region.find(params[:region_id])
     @event = Event.find(params[:id])
-    @attendance = Attendance.new
+    @registration = Registration.new
   end
 
   def edit

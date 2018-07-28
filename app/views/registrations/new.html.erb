@@ -1,0 +1,7 @@
+<h2>Register your Registration for <%= @event.name %> - <%= @event.region.name %></h2>
+
+<%= form_for [@event, @registration] do |f| %>
+  <%= f.radio_button(:status, INTENDING, options = {checked: true}) %>
+  <%= f.label(:status, INTENDING) %>
+  <%= f.submit "Register Registration" %>
+<% end %>

@@ -7,6 +7,6 @@ class EventsController < ApplicationController
     @event = Event.find(params[:id])
     @region = @event.region
     return unless user_signed_in? && @event.registered(current_user)
-    @attendance = current_user.attendances.find_by(event: @event)
+    @registration = current_user.registrations.find_by(event: @event)
   end
 end

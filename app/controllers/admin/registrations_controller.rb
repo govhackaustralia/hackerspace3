@@ -1,4 +1,4 @@
-class Admin::AttendancesController < ApplicationController
+class Admin::RegistrationsController < ApplicationController
   before_action :authenticate_user!
   before_action :check_for_privileges
 
@@ -7,7 +7,7 @@ class Admin::AttendancesController < ApplicationController
   end
 
   def new
-    new_attendance
+    new_registration
     return if params[:term].nil? || params[:term] == ''
     @user = User.find_by_email(params[:term])
     user_found if @user.present?
@@ -16,25 +16,25 @@ class Admin::AttendancesController < ApplicationController
 
   def edit
     @event = Event.find(params[:event_id])
-    @attendance = Attendance.find(params[:id])
-    @event_assignment = @attendance.assignment
+    @registration = Registration.find(params[:id])
+    @event_assignment = @registration.assignment
   end
 
   def update
     @event = Event.find(params[:event_id])
-    @attendance = Attendance.find(params[:id])
-    @attendance.update(attendance_params)
+    @registration = Registration.find(params[:id])
+    @registration.update(registration_params)
     flash[:notice] = 'Registration Updated.'
-    redirect_to admin_event_attendances_path(@event)
+    redirect_to admin_event_registrations_path(@event)
   end
 
   def create
-    create_new_attendance
-    if @attendance.save
+    create_new_registration
+    if @registration.save
       flash[:notice] = 'New Registration Added.'
-      redirect_to admin_event_attendances_path(@event)
+      redirect_to admin_event_registrations_path(@event)
     else
-      flash.now[:notice] = @attendance.errors.full_messages.to_sentence
+      flash.now[:notice] = @registration.errors.full_messages.to_sentence
       @user = @assignment.user
       render 'new'
     end
@@ -42,8 +42,8 @@ class Admin::AttendancesController < ApplicationController
 
   private
 
-  def attendance_params
-    params.require(:attendance).permit(:status)
+  def registration_params
+    params.require(:registration).permit(:status)
   end
 
   def check_for_privileges
@@ -52,21 +52,21 @@ class Admin::AttendancesController < ApplicationController
     redirect_to root_path
   end
 
-  def new_attendance
+  def new_registration
     @event = Event.find(params[:event_id])
-    @attendance = @event.attendances.new
+    @registration = @event.registrations.new
   end
 
-  def create_new_attendance
+  def create_new_registration
     @event = Event.find(params[:event_id])
     @assignment = Assignment.find(params[:assignment_id])
-    @attendance = @event.attendances.new(attendance_params)
-    @attendance.update(assignment: @assignment)
-    @attendance.update(time_notified: params)
+    @registration = @event.registrations.new(registration_params)
+    @registration.update(assignment: @assignment)
+    @registration.update(time_notified: params)
   end
 
   def user_found
-    @existing_attendance = @user.attendances.find_by(event: @event)
+    @existing_registration = @user.registrations.find_by(event: @event)
     @event_assignment = @user.event_assignment
   end
 

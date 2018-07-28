@@ -16,10 +16,10 @@ Registration Type: <%= @event.registration_type %><br>
 <% end %>
 
 <% unless user_signed_in? && @event.registered(current_user) %>
-  <%= link_to 'Register to Attend Event', new_event_attendance_path(@event) %><br>
+  <%= link_to 'Register to Attend Event', new_event_registration_path(@event) %><br>
 <% else %>
-  You are registered as: <%= @attendance.status %><br>
-  <%= link_to 'Update Attendance', edit_event_attendance_path(@event, @attendance) %><br>
+  You are registered as: <%= @registration.status %><br>
+  <%= link_to 'Update Registration', edit_event_registration_path(@event, @registration) %><br>
 <% end %>
 
 <% if user_signed_in? && (@event.admin_assignments & current_user.assignments).present? %>
