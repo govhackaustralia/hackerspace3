@@ -1,0 +1,13 @@
+<h2>Registrations for <%= @event.name %> Event</h2>
+
+<%= link_to 'New Registration', new_admin_event_attendance_path(@event) %><br>
+
+<h4>VIPS</h4>
+
+<%= render 'table', locals: { assignments: @event.vips } %>
+
+<h4>Participants</h4>
+
+<%= render 'table', locals: { assignments: @event.participants } %>
+
+<%= link_to "Back to #{@event.name} Event", admin_region_event_path(@event.region, @event) %>

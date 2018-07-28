@@ -6,6 +6,9 @@ Region: <%= @event.region.name %><br>
 Event Category: <%= @event.category_type %><br>
 Registration Type: <%= @event.registration_type %><br>
 
+<%= link_to "Edit #{@event.name} Event", edit_admin_region_event_path(@event.region, @event) %><br>
+<%= link_to 'Go to Event Page', event_path(@event) %><br>
+
 <h3>Event Host</h3>
 
   <% if (host = @event.host).present? %>
@@ -35,57 +38,13 @@ Registration Type: <%= @event.registration_type %><br>
     <%= submit_tag("Assign New #{EVENT_SUPPORT} Member") %>
   <% end %>
 
-<h3>Guests Attending</h3>
+<h3>Event Registrations</h3>
 
-<h4>VIPS</h4>
+<%= @event.attendances.where(status: INTENDING).count %> registered attending.<br>
+<%= @event.attendances.where(status: NON_ATTENDING).count %> registered not attending.<br>
+<%= @event.attendances.where(status: PENDING).count %> registered pending.<br>
 
-<table>
-  <tr>
-    <th>Full Name</th>
-    <th>E-mail</th>
-    <th>Status</th>
-  </tr>
-  <% @event.vips.each do |assignment| %>
-    <% user = assignment.user %>
-    <% attendance = Attendance.find_by(event: @event, assignment: assignment) %>
-    <tr>
-      <td><%= user.full_name %></td>
-      <td><%= user.email %></td>
-      <td><%= attendance.status %></td>
-    </tr>
-  <% end %>
-</table>
-
-<%= form_for [:admin, @event, @attendance] do %>
-  <%= label_tag(:email, "User Email:") %>
-  <%= text_field_tag(:email) %>
-  <%= radio_button_tag(:status, PENDING, options = {checked: true}) %>
-  <%= label_tag(:status, PENDING) %>
-  <%= radio_button_tag(:status, INTENDING) %>
-  <%= label_tag(:status, INTENDING) %>
-  <%= radio_button_tag(:status, NON_ATTENDING) %>
-  <%= label_tag(:status, NON_ATTENDING) %>
-  <%= submit_tag("Add #{VIP} to Guest List") %>
-<% end %>
-
-<h4>Participants</h4>
-
-<table>
-  <tr>
-    <th>Full Name</th>
-    <th>E-mail</th>
-    <th>Status</th>
-  </tr>
-  <% @event.participants.each do |assignment| %>
-    <% user = assignment.user %>
-    <% attendance = Attendance.find_by(event: @event, assignment: assignment) %>
-    <tr>
-      <td><%= user.full_name %></td>
-      <td><%= user.email %></td>
-      <td><%= attendance.status %></td>
-    </tr>
-  <% end %>
-</table>
+<%= link_to "Manage #{@event.name} Registrations", admin_event_attendances_path(@event) %>
 
 <h3>Event Partner</h3>
 
@@ -96,6 +55,4 @@ Registration Type: <%= @event.registration_type %><br>
   <%= link_to 'Add Sponsorship', new_admin_event_sponsorship_path(@event) %><br>
 <% end %>
 
-<%= link_to 'Go to Event Page', event_path(@event) %><br>
-<%= link_to "Edit #{@event.name} Event", edit_admin_region_event_path(@event.region, @event) %><br>
 <%= link_to "Go back to #{@event.region.name} region", admin_region_path(@event.region) %>

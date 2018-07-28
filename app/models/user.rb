@@ -56,4 +56,13 @@ class User < ApplicationRecord
   def gravitar_img_url
     GRAVITAR_IMG_REQUEST_URL + Digest::MD5.hexdigest(email)
   end
+
+  def self.search(term)
+    results = []
+    User.all.each do |user|
+      user_string = (user.full_name + user.email).downcase
+      results << user if user_string.include? term.downcase
+    end
+    results
+  end
 end

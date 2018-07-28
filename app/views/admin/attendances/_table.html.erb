@@ -1,0 +1,21 @@
+<% assignments = locals[:assignments] %>
+<table>
+  <tr>
+    <th>Full Name</th>
+    <th>E-mail</th>
+    <th>Status</th>
+    <th>Action</th>
+  </tr>
+  <% assignments.each do |assignment| %>
+    <% user = assignment.user %>
+    <% attendance = Attendance.find_by(event: @event, assignment: assignment) %>
+    <tr>
+      <td><%= user.full_name %></td>
+      <td><%= user.email %></td>
+      <td><%= attendance.status %></td>
+      <td>
+        <%= link_to 'Edit', edit_admin_event_attendance_path(@event, attendance) %>
+      </td>
+    </tr>
+  <% end %>
+</table>

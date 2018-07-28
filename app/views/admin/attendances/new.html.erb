@@ -1,0 +1,41 @@
+<h2>Add New Registration</h2>
+
+<%= form_tag(new_admin_event_attendance_path, method: :get) do %>
+  <%= text_field_tag :term, params[:term] %>
+  <%= submit_tag 'Search' %>
+<% end %><br>
+
+<% if @user.present? # User found show registration options. %>
+
+  Full Name: <%= @user.full_name %><br>
+  Email: <%= @user.email %><br>
+  Event Assignment: <%= @event_assignment.title %><br>
+  <%= link_to 'Update Event Assignment', admin_user_path(@user) %><br>
+
+  <% unless @existing_attendance.present? # check for existing registration %>
+    <%= render 'form' %>
+  <% else %>
+    Registration for <%= @user.full_name %> already exists.<br>
+    <%= link_to 'Update Registration', edit_admin_event_attendance_path(@event, @existing_attendance) %><br>
+  <% end %>
+
+<% elsif @users.present? # Review search results %>
+
+  <% @users.each do |user| %>
+    Full Name: <%= user.full_name %><br>
+    Email: <%= user.email %><br>
+    Event Assignment: <%= (event_assignment = user.event_assignment).title %><br>
+    <%= link_to 'Select', new_admin_event_attendance_path(@event, term: user.email) %><br>
+  <% end %>
+
+<% elsif params[:term].present? # Could not find anything. %>
+
+  Apologies, no name matching search term '<%= params[:term] %>'<br>
+
+<% else # No search term entered / first visit to page %>
+
+  Please enter an email address or name to search for a user.<br>
+
+<% end %>
+
+<%= link_to "Back to #{@event.name} Registrations", admin_event_attendances_path(@event) %>

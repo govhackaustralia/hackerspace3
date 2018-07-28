@@ -6,5 +6,5 @@ class Attendance < ApplicationRecord
   validates :status, presence: true
   validates :status, inclusion: { in: VALID_ATTENDANCE_STATUSES }
   validates :assignment_id, uniqueness: { scope: :event_id,
-                                          message: 'Only one registration per event' }
+                                          message: 'Registration already exists' }
 end

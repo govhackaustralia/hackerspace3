@@ -24,20 +24,24 @@ class AttendancesController < ApplicationController
   end
 
   def create
-    @event = Event.find(params[:event_id])
-    @assignment = current_user.event_assignment
-    @attendance = Attendance.find_or_create_by(event: @event, assignment: @assignment)
-    @attendance.update(attendance_params)
-    @attendance.update(time_notified: Time.now)
-    flash[:notice] = if @attendance.persisted?
-                       'Thanks for registering, see you at the event!'
-                     else
-                       'Apologies but we could not add you at this time.'
-                     end
-    redirect_to event_path(@event)
+    if @attendance.save
+      flash[:notice] = 'You have registered for this event.'
+      redirect_to event_path(@event)
+    else
+      flash[:notice] = 'Apologies but we could not add you at this time.'
+      redirect_to event_path(@event)
+    end
   end
 
   private
+
+  def create_attendance
+    @event = Event.find(params[:event_id])
+    @assignment = current_user.event_assignment
+    @attendance = Attendance.new(event: @event, assignment: @assignment)
+    @attendance.update(status: INTENDING)
+    @attendance.update(time_notified: Time.now)
+  end
 
   def attendance_params
     params.require(:attendance).permit(:status)
