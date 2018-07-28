@@ -22,25 +22,25 @@ Registration Type: <%= @event.registration_type %><br>
 
 <h4>Event Support</h4>
 
-<%= @event.supports.count %> events supports currently assigned to event.<br>
+<%= pluralize @event.supports.count, 'event support' %> currently assigned to event.<br>
 
 <%= link_to "Manage #{@event.name} Assignments", admin_event_assignments_path(@event) %>
 
 <h3>Event Registrations</h3>
 
-<%= @event.registrations.where(status: INTENDING).count %> registered attending.<br>
-<%= @event.registrations.where(status: NON_ATTENDING).count %> registered not attending.<br>
-<%= @event.registrations.where(status: PENDING).count %> registered pending.<br>
+<%= pluralize @event.registrations.where(status: INTENDING).count, 'guest' %> attending.<br>
+<%= pluralize @event.registrations.where(status: NON_ATTENDING).count, 'guest' %> registered not attending.<br>
+<%= pluralize @event.registrations.where(status: PENDING).count, 'guest' %> yet to respond.<br>
 
 <%= link_to "Manage #{@event.name} Registrations", admin_event_registrations_path(@event) %>
 
 <h3>Event Partner</h3>
 
-<% if (sponsorship = @event.sponsorships.first).present? %>
-  <h4><%= sponsorship.sponsor.name %></h4>
-  Sponsorship Type: <%= sponsorship.sponsorship_type.name %><br>
+<% if (event_partner = @event.event_partner).present? %>
+  <h4><%= event_partner.sponsor.name %></h4>
+  <div><%= event_partner.sponsor.description %></div>
 <% else %>
-  <%= link_to 'Add Sponsorship', new_admin_event_sponsorship_path(@event) %><br>
+  <%= link_to 'Add Event Partner', new_admin_event_event_partner_path(@event) %><br>
 <% end %>
 
 <%= link_to "Go back to #{@event.region.name} region", admin_region_path(@event.region) %>

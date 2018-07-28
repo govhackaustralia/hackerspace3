@@ -15,7 +15,7 @@ Rails.application.routes.draw do
       resources :events, :sponsorships
     end
     resources :events do
-      resources :registrations, :sponsorships
+      resources :registrations, :event_partners
       resources :assignments, controller: 'events/assignments'
     end
   end

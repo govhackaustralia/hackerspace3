@@ -4,7 +4,7 @@ class Event < ApplicationRecord
   has_many :registration_assignments, through: :registrations, source: :assignment
   belongs_to :region
   belongs_to :competition
-  has_many :sponsorships, as: :sponsorable
+  has_one :event_partner
 
   validates :name, presence: true
 
