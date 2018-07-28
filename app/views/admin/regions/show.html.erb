@@ -21,9 +21,15 @@
 
 <h3>Events</h3>
 
-<% @region.events.where(competition: Competition.current).each do |event| %>
-  <h4><%= event.name %></h4>
-  <%= link_to "Manage #{event.name}", admin_region_event_path(@region, event) %></br>
+<% if (events = @region.events.where(competition: Competition.current)).present? %>
+
+  <% events.each do |event| %>
+    <h4><%= event.name %></h4>
+    <%= link_to "Manage #{event.name}", admin_region_event_path(@region, event) %></br>
+  <% end %>
+
+<% else %>
+    <div>There are currently no events planned for the current Competitition.</div>
 <% end %>
 
 <%= link_to "Create New Event", new_admin_region_event_path(@region) %></br>
@@ -31,7 +37,7 @@
 <h3>Sponsorships</h3>
 
 <% @region.sponsorships.each do |sponsorship| %>
-  <h4><%= sponsorship.sponsor.name %></h4>
+  <%= render 'admin/sponsors/sponsor', locals: { sponsor: sponsorship.sponsor } %>
   Sponsorship Type: <%= sponsorship.sponsorship_type.name %><br>
 <% end %>
 
