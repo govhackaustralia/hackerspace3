@@ -13,6 +13,7 @@ Rails.application.routes.draw do
     resources :assignments, :competitions, :users, :sponsorship_types, :sponsors
     resources :regions do
       resources :events, :sponsorships
+      resources :assignments, controller: 'regions/assignments'
     end
     resources :events do
       resources :registrations, :event_partners

@@ -7,31 +7,17 @@
 <h3>Region Director</h3>
 
 <% if (director = @region.director).present? %>
-  Full Name: <%= director.full_name %></br>
+  <%= render 'admin/shared/user_contact', locals: { user: director } %>
 <% else %>
-  <%= form_tag("/admin/assignments", method: "post") do %>
-    <%= label_tag(:email, "User Email:") %>
-    <%= text_field_tag(:email) %>
-    <%= hidden_field_tag(:title, REGION_DIRECTOR) %>
-    <%= hidden_field_tag(:assignable_type, 'Region') %>
-    <%= hidden_field_tag(:assignable_id, @region.id) %>
-    <%= submit_tag("Assign New #{REGION_DIRECTOR}") %>
-  <% end %>
+  This region does not currently have a director.<br>
+  <%= link_to "New #{REGION_DIRECTOR} Assignment", new_admin_region_assignment_path(@region, title: REGION_DIRECTOR) %><br>
 <% end %>
 
 <h3>Region Support</h3>
-<% @region.supports.each do |support| %>
-  Full Name: <%= support.full_name %></br>
-<% end %>
 
-<%= form_tag("/admin/assignments", method: "post") do %>
-  <%= label_tag(:email, "User Email:") %>
-  <%= text_field_tag(:email) %>
-  <%= hidden_field_tag(:title, REGION_SUPPORT) %>
-  <%= hidden_field_tag(:assignable_type, 'Region') %>
-  <%= hidden_field_tag(:assignable_id, @region.id) %>
-  <%= submit_tag("Assign New #{REGION_SUPPORT} Member") %>
-<% end %>
+<%= pluralize @region.supports.count, 'region support' %> currently assigned to event.<br>
+
+<%= link_to "Manage #{@region.name} Assignments", admin_region_assignments_path(@region) %>
 
 <h3>Events</h3>
 
