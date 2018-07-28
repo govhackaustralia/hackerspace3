@@ -1,0 +1,42 @@
+<h2>Add New Assignment to <%= @event.name %> Event</h2>
+
+<%= form_tag(new_admin_event_assignment_path, method: :get) do %>
+  <%= text_field_tag :term, params[:term] %>
+  <%= hidden_field_tag(:title, @title) %>
+  <%= submit_tag 'Search' %>
+<% end %><br>
+
+<% if @user.present? # User found show create new assignment for %>
+
+  <%= render 'admin/shared/user_contact', locals: { user: @user } %>
+
+  <% unless @existing_attendance.present? # check for existing registration %>
+
+    <%= form_for [:admin, @event, @assignment] do |f| %>
+      <%= hidden_field_tag(:user_id, @user.id) %>
+      <%= hidden_field_tag(:title, @title) %>
+      <%= f.submit "Create #{@title} Assignment for #{@user.full_name}" %>
+    <% end %>
+
+  <% else %>
+    Assignment for <%= @user.full_name %> to <%= @event.name %> as <%= @title %> already exists.<br>
+  <% end %>
+
+<% elsif @users.present? # Review search results %>
+
+  <% @users.each do |user| %>
+    <%= render 'admin/shared/user_contact', locals: { user: user } %>
+    <%= link_to 'Select', new_admin_event_assignment_path(@event, title: @title, term: user.email) %><br>
+  <% end %>
+
+<% elsif params[:term].present? # Could not find anything. %>
+
+  Apologies, no name matching search term '<%= params[:term] %>'<br>
+
+<% else # No search term entered / first visit to page %>
+
+  Please enter an email address or name to search for a user.<br>
+
+<% end %>
+
+<%= link_to "Back to #{@event.name} Event Assignments", admin_event_assignments_path(@event) %>

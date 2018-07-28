@@ -7,8 +7,7 @@
 
 <% if @user.present? # User found show registration options. %>
 
-  Full Name: <%= @user.full_name %><br>
-  Email: <%= @user.email %><br>
+  <%= render 'admin/shared/user_contact', locals: { user: @user } %>
   Event Assignment: <%= @event_assignment.title %><br>
   <%= link_to 'Update Event Assignment', admin_user_path(@user) %><br>
 
@@ -22,8 +21,7 @@
 <% elsif @users.present? # Review search results %>
 
   <% @users.each do |user| %>
-    Full Name: <%= user.full_name %><br>
-    Email: <%= user.email %><br>
+    <%= render 'admin/shared/user_contact', locals: { user: user } %>
     Event Assignment: <%= (event_assignment = user.event_assignment).title %><br>
     <%= link_to 'Select', new_admin_event_attendance_path(@event, term: user.email) %><br>
   <% end %>

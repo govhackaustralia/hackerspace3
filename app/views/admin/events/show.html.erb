@@ -9,34 +9,22 @@ Registration Type: <%= @event.registration_type %><br>
 <%= link_to "Edit #{@event.name} Event", edit_admin_region_event_path(@event.region, @event) %><br>
 <%= link_to 'Go to Event Page', event_path(@event) %><br>
 
-<h3>Event Host</h3>
+<h3>Event Assignments</h3>
 
-  <% if (host = @event.host).present? %>
-    Full Name: <%= host.full_name %></br>
-  <% else %>
-    <%= form_tag("/admin/assignments", method: "post") do %>
-      <%= label_tag(:email, "User Email:") %>
-      <%= text_field_tag(:email) %>
-      <%= hidden_field_tag(:title, EVENT_HOST) %>
-      <%= hidden_field_tag(:assignable_type, 'Event') %>
-      <%= hidden_field_tag(:assignable_id, @event.id) %>
-      <%= submit_tag("Assign New #{EVENT_HOST}") %>
-    <% end %>
-  <% end %>
+<h4>Event Host</h4>
 
-<h3>Event Support</h3>
-  <% @event.supports.each do |support| %>
-    Full Name: <%= support.full_name %></br>
-  <% end %>
+<% if (host = @event.host).present? %>
+  <%= render 'admin/shared/user_contact', locals: { user: host } %>
+<% else %>
+  This event does not currently have a host.<br>
+  <%= link_to "New #{EVENT_HOST} Assignment", new_admin_event_assignment_path(@event, title: EVENT_HOST) %><br>
+<% end %>
 
-  <%= form_tag("/admin/assignments", method: "post") do %>
-    <%= label_tag(:email, "User Email:") %>
-    <%= text_field_tag(:email) %>
-    <%= hidden_field_tag(:title, EVENT_SUPPORT) %>
-    <%= hidden_field_tag(:assignable_type, 'Event') %>
-    <%= hidden_field_tag(:assignable_id, @event.id) %>
-    <%= submit_tag("Assign New #{EVENT_SUPPORT} Member") %>
-  <% end %>
+<h4>Event Support</h4>
+
+<%= @event.supports.count %> events supports currently assigned to event.<br>
+
+<%= link_to "Manage #{@event.name} Assignments", admin_event_assignments_path(@event) %>
 
 <h3>Event Registrations</h3>
 
