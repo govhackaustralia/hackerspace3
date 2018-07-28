@@ -1,15 +1,43 @@
 <h2>Create New Sponsorship for <%= @sponsorable.name %></h2>
 
-<%= form_for [:admin, @sponsorable, @sponsorship] do |f| %>
-  <%= f.label :sponsor_id %><br>
-  <%= f.select(:sponsor_id, options_from_collection_for_select(Sponsor.all, :id, :name)) %><br>
-  <%= f.label :sponsorship_type_id %><br>
-  <%= f.select(:sponsorship_type_id, options_from_collection_for_select(SponsorshipType.all, :id, :name)) %><br>
-  <%= f.submit %>
+<%= form_tag(new_admin_region_sponsorship_path, method: :get) do %>
+  <%= text_field_tag :term, params[:term] %>
+  <%= submit_tag 'Search' %>
+<% end %><br>
+
+<% if @sponsor.present? # Sponsor found show create new event partnership for %>
+
+  Sponsor: <%= @sponsor.name %><br>
+
+  <% unless @existing_event_partnership.present? # check for existing event partnership %>
+
+    <%= form_for [:admin, @sponsorable, @sponsorship] do |f| %>
+      <%= hidden_field_tag(:sponsor_id, @sponsor.id) %>
+      <%= f.label :sponsorship_type_id %><br>
+      <%= f.select(:sponsorship_type_id, options_from_collection_for_select(SponsorshipType.all, :id, :name, @sponsorship.sponsorship_type)) %><br>
+      <%= f.submit "Create new Region Sponsorship with #{@sponsor.name}" %>
+    <% end %>
+
+  <% else %>
+    Event Partnership for <%= @sponsor.name %> to <%= @sponsorable.name %> already exists.<br>
+  <% end %>
+
+<% elsif @sponsors.present? # Review search results %>
+
+  <% @sponsors.each do |sponsor| %>
+    Sponsor: <%= sponsor.name %><br>
+    <%= link_to 'Select', new_admin_region_sponsorship_path(@sponsorable, term: sponsor.name) %><br>
+  <% end %>
+
+<% elsif params[:term].present? # Could not find anything. %>
+
+  Apologies, no sponsor name matching search term '<%= params[:term] %>'<br>
+
+<% else # No search term entered / first visit to page %>
+
+  Please enter a sponsor name above.<br>
+
 <% end %>
 
-<% if @sponsorable.class == Region %>
-  <%= link_to "Back to #{@sponsorable.name}", admin_region_path(@sponsorable) %>
-<% else %>
-  <%= link_to "Back to #{@sponsorable.name}", admin_region_event_path(@sponsorable.region, @sponsorable) %>
-<% end %>
+
+<%= link_to "Back to #{@sponsorable.name}", admin_region_path(@sponsorable) %>

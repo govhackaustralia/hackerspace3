@@ -3,26 +3,27 @@ class Admin::SponsorshipsController < ApplicationController
   before_action :check_for_privileges
 
   def new
-    sponsorable
-    @sponsorship = Sponsorship.new
+    new_sponsorship if @sponsorship.nil?
+    return if params[:term].nil? || params[:term] == ''
+    @sponsor = Sponsor.find_by_name(params[:term])
+    @sponsors = Sponsor.search(params[:term]) unless @sponsor.present?
   end
 
   def create
-    sponsorable
-    @sponsorship = @sponsorable.sponsorships.new(sponsorship_params)
+    create_new_sponsorship
     if @sponsorship.save
       flash[:notice] = 'New sponsorship created'
-      redirect_successful_create
+      redirect_to admin_region_path(@sponsorable)
     else
-      flash[:notice] = 'Could not save sponsorship'
-      render_unsuccessful_create
+      flash.now[:notice] = @sponsorship.errors.full_messages.to_sentence
+      render 'new'
     end
   end
 
   private
 
   def sponsorship_params
-    params.require(:sponsorship).permit(:sponsorship_type_id, :sponsor_id)
+    params.require(:sponsorship).permit(:sponsorship_type_id)
   end
 
   def check_for_privileges
@@ -31,24 +32,15 @@ class Admin::SponsorshipsController < ApplicationController
     redirect_to root_path
   end
 
-  def sponsorable
-    @sponsorable = Event.find_by_id(params[:event_id])
-    @sponsorable ||= Region.find_by_id(params[:region_id])
+  def new_sponsorship
+    @sponsorable = Region.find(params[:region_id])
+    @sponsorship = Sponsorship.new
   end
 
-  def redirect_successful_create
-    if @sponsorable.class == Region
-      redirect_to admin_region_path(@sponsorable)
-    else
-      redirect_to admin_region_event_path(@sponsorable.region, @sponsorable)
-    end
-  end
-
-  def render_unsuccessful_create
-    if @sponsorable.class == Region
-      redirect_to new_admin_region_sponsorship_path(@sponsorable)
-    else
-      redirect_to new_admin_event_sponsorship_path(@sponsorable)
-    end
+  def create_new_sponsorship
+    @sponsorable = Region.find(params[:region_id])
+    @sponsor = Sponsor.find(params[:sponsor_id])
+    @sponsorship = @sponsorable.sponsorships.new(sponsorship_params)
+    @sponsorship.update(sponsor: @sponsor)
   end
 end

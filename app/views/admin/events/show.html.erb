@@ -37,8 +37,7 @@ Registration Type: <%= @event.registration_type %><br>
 <h3>Event Partner</h3>
 
 <% if (event_partner = @event.event_partner).present? %>
-  <h4><%= event_partner.sponsor.name %></h4>
-  <div><%= event_partner.sponsor.description %></div>
+  <%= render 'admin/sponsors/sponsor', locals: { sponsor: event_partner.sponsor } %>
 <% else %>
   <%= link_to 'Add Event Partner', new_admin_event_event_partner_path(@event) %><br>
 <% end %>
