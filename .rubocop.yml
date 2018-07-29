@@ -12,9 +12,7 @@ AllCops:
     - 'bin/*'
     - 'db/**/*'
     - 'app/controllers/users/*'
-    - 'app/controllers/admin/assignments_controller.rb'
     - 'app/controllers/registrations_controller.rb'
-    - 'app/controllers/admin/users_controller.rb'
     - 'app/controllers/admin/sponsorship_types_controller.rb'
 
 Style/Documentation:

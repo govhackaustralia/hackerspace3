@@ -16,11 +16,8 @@ class Admin::UsersController < ApplicationController
   end
 
   def create
-    @user = User.new(user_params)
-    @user.password = Devise.friendly_token[0, 20]
-    @user.skip_confirmation_notification!
-    @user.save
-    if @user.persisted?
+    create_new_unauthed_user
+    if @user.save
       flash[:notice] = 'New user saved'
       redirect_to admin_user_path(@user)
     else
@@ -39,5 +36,11 @@ class Admin::UsersController < ApplicationController
 
   def user_params
     params.require(:user).permit(:full_name, :email)
+  end
+
+  def create_new_unauthed_user
+    @user = User.new(user_params)
+    @user.password = Devise.friendly_token[0, 20]
+    @user.skip_confirmation_notification!
   end
 end

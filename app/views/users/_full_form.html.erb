@@ -1,0 +1,66 @@
+<%= form_for current_user do |form| %>
+
+  <%= form.label :full_name, 'Full name: (Required)' %><br>
+  <%= form.text_field :full_name %><br>
+
+  <%= form.label :preferred_name %><br>
+  <%= form.text_field :preferred_name %><br>
+
+  <%= form.label :organisation_name %><br>
+  <%= form.text_field :organisation_name %><br>
+
+  <%= form.label :phone_number %><br>
+  <%= telephone_field(:user, :phone_number) %><br>
+
+  <%= form.label :twitter %><br>
+  <%= form.text_field :twitter %><br>
+
+  <%= form.label :dietary_requirements %><br>
+  <%= form.text_field :dietary_requirements %><br>
+
+  <%= form.label :tshirt_size %><br>
+  <%= form.select(:tshirt_size, options_for_select(AVAILABLE_TSHIRT_SIZES, @user.tshirt_size)) %><br>
+
+  <%= form.radio_button(:preferred_img, GOVHACK, options = {checked: GOVHACK == @user.preferred_img}) %>
+  <%= form.label(:preferred_img, 'GovHack') %><br>
+  <% if @user.govhack_img.attached? %>
+    <img src="<%= url_for(@user.govhack_img) %>" alt="GovHack Profile Picture" /><br>
+  <% else %>
+    <%= image_tag "default_profile_pic.png" %><br>
+    Upload a profile picture.<br>
+    <%= form.file_field :govhack_img %><br>
+  <% end %>
+
+  <%= form.radio_button(:preferred_img, GOOGLE, options = {checked: GOOGLE == @user.preferred_img}) %>
+  <%= form.label(:preferred_img, 'Google') %><br>
+  <% if current_user.google_img.nil? %>
+    <%= link_to 'Connect Google Account', user_google_omniauth_authorize_path %><br>
+  <% else %>
+    <img src="<%= @user.google_img %>" alt="Google Profile Picture" /><br>
+  <% end %>
+
+  <%= form.radio_button(:preferred_img, GRAVITAR, options = {checked: GRAVITAR == @user.preferred_img}) %>
+  <%= form.label(:preferred_img, 'Gravitar') %><br>
+  <%= image_tag @user.gravatar_url %><br>
+
+  <%= form.check_box :mailing_list, { checked: @user.mailing_list }, true, false  %>
+  <%= form.label :mailing_list %><br>
+
+  <%= form.check_box :challenge_sponsor_contact_place, { checked: @user.challenge_sponsor_contact_place }, true, false  %>
+  <%= form.label :challenge_sponsor_contact_place %><br>
+
+  <%= form.check_box :challenge_sponsor_contact_enter, { checked: @user.challenge_sponsor_contact_enter }, true, false  %>
+  <%= form.label :challenge_sponsor_contact_enter %><br>
+
+  <%= form.check_box :my_project_sponsor_contact, { checked: @user.my_project_sponsor_contact }, true, false  %>
+  <%= form.label :my_project_sponsor_contact %><br>
+
+  <%= form.check_box :me_govhack_contact, { checked: @user.me_govhack_contact }, true, false  %>
+  <%= form.label :me_govhack_contact %><br>
+
+  <%= form.label :how_did_you_hear %><br>
+  <%= form.text_field :how_did_you_hear %><br>
+
+  <%= form.submit %>
+
+<% end %>

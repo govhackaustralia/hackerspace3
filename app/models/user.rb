@@ -1,26 +1,17 @@
 class User < ApplicationRecord
+  # Devise options
   devise :database_authenticatable, :registerable, :recoverable, :rememberable,
          :trackable, :validatable, :confirmable, :lockable, :timeoutable,
          :omniauthable
 
   has_many :assignments, dependent: :destroy
 
-  validates :preferred_img, inclusion: { in: VALID_IMAGE_OPTIONS }
+  # Gravitar Gem
+  include Gravtastic
+  has_gravatar
 
+  # Active Storage prifel image.
   has_one_attached :govhack_img
-
-  def self.from_omniauth(access_token)
-    data = access_token.info
-    user = User.find_by_email(data['email'])
-
-    user ||= User.new(full_name: data['name'],
-                      email: data['email'],
-                      password: Devise.friendly_token[0, 20])
-    user.skip_confirmation_notification!
-    user.save
-    user.update(google_img: data['image'])
-    user
-  end
 
   def admin_privileges?
     return true unless (assignments.pluck(:title) & COMP_ADMIN).empty?
@@ -44,19 +35,6 @@ class User < ApplicationRecord
     event_assignment.registrations
   end
 
-  def preferred_img_url
-    case preferred_img
-    when GRAVITAR
-      gravitar_img_url
-    when GOOGLE
-      google_img
-    end
-  end
-
-  def gravitar_img_url
-    GRAVITAR_IMG_REQUEST_URL + Digest::MD5.hexdigest(email)
-  end
-
   def self.search(term)
     results = []
     User.all.each do |user|
@@ -64,5 +42,29 @@ class User < ApplicationRecord
       results << user if user_string.include? term.downcase
     end
     results
+  end
+
+  def self.from_omniauth(access_token)
+    data = access_token.info
+    user = User.find_by_email(data['email'])
+    user ||= new_user_from_google(data)
+    user.skip_confirmation_notification!
+    update_user_info_from_google(user, data)
+    user.save
+    user
+  end
+
+  private
+
+  def self.new_user_from_google(data)
+    User.new(full_name: data['name'],
+             email: data['email'],
+             password: Devise.friendly_token[0, 20])
+  end
+
+  def self.update_user_info_from_google(user, data)
+    user.update(google_img: data['image'])
+    return unless user.full_name.nil? || user.full_name == ''
+    user.update(full_name: data['name'])
   end
 end

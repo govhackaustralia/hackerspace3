@@ -27,6 +27,8 @@ gem 'omniauth-google-oauth2'
 gem 'jquery-rails'
 # Enable AWS S3
 gem "aws-sdk-s3", require: false
+# Add Gravatars to your Rails
+gem 'gravtastic'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

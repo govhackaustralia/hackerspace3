@@ -102,8 +102,6 @@ GRAVITAR = 'gravitar_img'
 
 VALID_IMAGE_OPTIONS = [GOVHACK, GOOGLE, GRAVITAR]
 
-GRAVITAR_IMG_REQUEST_URL = 'https://www.gravatar.com/avatar/'
-
 # T-shirt sizes
 
 AVAILABLE_TSHIRT_SIZES = ['Small', 'Medium', 'Large']

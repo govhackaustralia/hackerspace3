@@ -1,0 +1,15 @@
+<h2>GovHack Terms and Conditions.</h2>
+
+<div>
+  Clauses marked (+) are still valid under the charter of 1225, but with a few minor amendments. Clauses marked (*) were omitted in all later reissues of the charter. In the charter itself the clauses are not numbered, and the text reads continuously. The translation sets out to convey the sense rather than the precise wording of the original Latin.
+
+  JOHN, by the grace of God King of England, Lord of Ireland, Duke of Normandy and Aquitaine, and Count of Anjou, to his archbishops, bishops, abbots, earls, barons, justices, foresters, sheriffs, stewards, servants, and to all his officials and loyal subjects, Greeting.
+
+  KNOW THAT BEFORE GOD, for the health of our soul and those of our ancestors and heirs, to the honour of God, the exaltation of the holy Church, and the better ordering of our kingdom, at the advice of our reverend fathers Stephen, archbishop of Canterbury, primate of all England, and cardinal of the holy Roman Church, Henry archbishop of Dublin, William bishop of London, Peter bishop of Winchester, Jocelin bishop of Bath and Glastonbury, Hugh bishop of Lincoln, Walter bishop of Worcester, William bishop of Coventry, Benedict bishop of Rochester, Master Pandulf subdeacon and member of the papal household, Brother Aymeric master of the knighthood of the Temple in England, William Marshal earl of Pembroke, William earl of Salisbury, William earl of Warren, William earl of Arundel, Alan of Galloway constable of Scotland, Warin fitz Gerald, Peter fitz Herbert, Hubert de Burgh seneschal of Poitou, Hugh de Neville, Matthew fitz Herbert, Thomas Basset, Alan Basset, Philip Daubeny, Robert de Roppeley, John Marshal, John fitz Hugh, and other loyal subjects:
+<div>
+
+<%= form_for current_user do |f| %>
+  <%= f.check_box(:accepted_terms_and_conditions, {}, true, false) %>
+  <%= f.label(:accepted_terms_and_conditions, 'I accept GovHack terms and Conditions') %>
+  <%= f.submit 'Accept GovHack Terms and Conditions' %>
+<% end %>

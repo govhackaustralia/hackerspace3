@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_07_28_084352) do
+ActiveRecord::Schema.define(version: 2018_07_29_042433) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -138,8 +138,6 @@ ActiveRecord::Schema.define(version: 2018_07_28_084352) do
     t.string "preferred_name"
     t.string "preferred_img"
     t.string "google_img"
-    t.string "govhack_img"
-    t.string "gravitar_img"
     t.text "dietary_requirements"
     t.string "tshirt_size"
     t.string "twitter"
@@ -168,6 +166,7 @@ ActiveRecord::Schema.define(version: 2018_07_28_084352) do
     t.string "organisation_name"
     t.string "phone_number"
     t.text "how_did_you_hear"
+    t.boolean "accepted_terms_and_conditions", default: false
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true

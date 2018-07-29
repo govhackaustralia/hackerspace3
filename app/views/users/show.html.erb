@@ -1,27 +1,30 @@
 <h2>Manage Account</h2>
-<% if @user.preferred_img == GOVHACK && @user.govhack_img.attached? %>
-  <img src="<%= url_for(@user.govhack_img) %>" alt="Profile Picture" /><br>
-<% else %>
-  <img src="<%= @user.preferred_img_url %>" alt="Profile Picture" /><br>
-<% end %>
-<%= @user.email %><br>
-<%= @user.preferred_name %><br>
-<%= @user.full_name %><br>
 
+<%= render 'user_profile_pic' %>
 
+<%= render 'user_contact', locals: { user: @user } %>
 
 <%= link_to 'Update Personal Details' , edit_personal_details_path %><br>
 <%= link_to 'Change Email and Password' , edit_user_registration_path %><br>
 
 <h3>My Events</h3>
 
-<% @user.event_assignment.registrations.each do |registration| %>
-  <% event = registration.event %>
-  <% region = event.region %>
-  <h4><%= event.name %> -  <%= region.name %></h4>
+<% if (registrations = @user.event_assignment.registrations).present? %>
 
-  You are registered as: <%= registration.status %><br>
+  <% @user.event_assignment.registrations.each do |registration| %>
+    <% event = registration.event %>
+    <% region = event.region %>
+    <h4><%= event.name %> -  <%= region.name %></h4>
 
-  <%= link_to 'Go to Event Page', event_path(event) %><br>
-  <%= link_to 'Update Registration', edit_event_registration_path(event, registration) %><br>
+    You are registered as: <%= registration.status %><br>
+
+    <%= link_to 'Go to Event Page', event_path(event) %><br>
+    <%= link_to 'Update Registration', edit_event_registration_path(event, registration) %><br>
+  <% end %>
+
+<% else %>
+
+  <div>You are not currently registered for any events.</div>
+  <% link_to 'Find events', events_path %>
+
 <% end %>
