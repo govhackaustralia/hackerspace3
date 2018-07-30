@@ -1,3 +1,84 @@
 // Place all the styles related to the Events controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.events_page {
+	padding: 2em 5em;
+}
+
+.events_page h2 {
+	color: #4c9ad2;
+	font-size: 2em;
+}
+
+.events_page h3 {
+	font-size: 1.5em;
+}
+
+.events_page > section {
+	padding: 2em 2em;
+}
+
+.events_page section.info p {
+	margin-top: 0.5em;
+	font-size: 1.25em;
+}
+
+.events_page section.events {
+	padding: 2em 2em;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-around;
+	align-content: center;
+	align-items: center;
+}
+
+.events_page section.events article {
+	font-size: 1.5em;
+	text-align: center;
+	line-height: 1.2em;
+	width: 250px;
+	margin: 2em 2em;
+	background-image: url("/assets/cta.png");
+	background-size: cover;
+	background-position: center center;
+	display: flex;
+	align-content: stretch;
+	align-items: stretch;
+}
+
+.events_page section.events article div {
+	padding: 2.5em 0.5em;
+	width: 100%;
+	height: 100%;
+	transition: all 1s ease;
+}
+
+.events_page section.events a:nth-of-type(3n+0) div {
+	background-color: rgba(202, 30, 86, 0.5);
+	border-bottom: 1em solid #ca1e56;
+}
+
+.events_page section.events a:nth-of-type(3n+1) div {
+	background-color: rgba(76, 154, 210, 0.5);
+	border-bottom: 1em solid #4c9ad2;
+}
+
+.events_page section.events a:nth-of-type(3n+2) div
+{
+	background-color: rgba(113, 113, 113, 0.5);
+    border-bottom: 1em solid #717171;
+}
+
+.events_page section.events article h3, .events_page section.events article h4 {
+	color: #ddd;
+	margin-bottom: 0.5em;
+}
+
+.events_page section.events a {
+	text-decoration: none;
+}
+
+.events_page section.events article div:hover {
+	transform: scale(1.1, 1.1);
+}

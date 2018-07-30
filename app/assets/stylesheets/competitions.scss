@@ -2,7 +2,7 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-main {
+.index_page {
 	background-size: cover;
 	background-position: center center;
 	text-align: center;
@@ -11,18 +11,18 @@ main {
 	background-image: url("/assets/sydneyback.jpg");
 }
 
-main h2 {
+.index_page h2 {
 	padding-top: 5em;
 	padding-bottom: 4em;
 	background-color: rgba(255, 255, 255, 0.75);
 }
 
-main nav {
+.index_page nav {
 	padding-bottom: 4em;
 	background-color: rgba(255, 255, 255, 0.75);
 }
 
-main nav section {
+.index_page nav section {
 	display: flex;
 	justify-content: space-around;
 	align-items: stretch;
@@ -30,7 +30,7 @@ main nav section {
 	padding: 0 10em;
 }
 
-main nav section div {
+.index_page nav section div {
 	background-image: url("/assets/cta.png");
 	background-size: cover;
 	background-position: center center;
@@ -38,7 +38,7 @@ main nav section div {
 	padding: 0;
 }
 
-main nav section div a {
+.index_page nav section div a {
 	display: block;
 	text-decoration: none;
 	color: white;
@@ -50,16 +50,16 @@ main nav section div a {
 	transition: all 1s ease;
 }
 
-main nav section div:nth-of-type(even) a {
+.index_page nav section div:nth-of-type(even) a {
 	background-color: rgba(202, 30, 86, 0.5);
 	border-bottom: 1em solid #ca1e56;
 }
 
-main nav section div:nth-of-type(odd) a {
+.index_page nav section div:nth-of-type(odd) a {
 	background-color: rgba(76, 154, 210, 0.5);
 	border-bottom: 1em solid #4c9ad2;
 }
 
-main nav section div a:hover, main nav section div:hover {
+.index_page nav section div a:hover {
 	transform:scale(1.1);
 }
