@@ -1,5 +1,24 @@
-<h2>Update Registration</h2>
+<h2>Update Registration for <%= @user.display_name %> <%= @event.name %> <%= @region.name %></h2>
 
-<%= render 'pre_waitlist_form' %>
+<% if @event.not_attending?(@event_assignment) && @event.at_capacity?  %>
 
-<%= link_to "Back to #{@event.name} Registrations", admin_event_registrations_path(@event) %>
+This event is at capacity. Please add yourself to the waitlist below and you
+will be emailed should a space become available.<br>
+
+<%= render 'form', locals: { options: [WAITLIST, NON_ATTENDING] } %>
+
+<% elsif @event.waitlisted? @event_assignment %>
+
+  You are on the waitlist and will be emailed should a space become available.
+
+  <%= render 'form', locals: { options: [WAITLIST, NON_ATTENDING] } %>
+
+<% else %>
+
+  You are registerd as attending.
+
+  <%= render 'form', locals: { options: [ATTENDING, NON_ATTENDING] } %>
+
+<% end %>
+
+<%= link_to 'Back to Event', event_path(@event) %>

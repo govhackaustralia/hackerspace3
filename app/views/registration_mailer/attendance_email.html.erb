@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>Looking forward to seeing you!</h1>
+    <p>
+      A space has opened up for the event <%= @event.name %> <%= @region.name %>.<br>
+    </p>
+    <p>
+      You have now been removed to from the waiting list.
+    </p>
+    <p>
+      If you would like to review your registration or update your dietary
+      requirements please use the link below.
+    </p>
+
+    <p>
+      <%= link_to 'Review your registration', event_registration_url(@event, @registration) %>
+    </p>
+
+    <p>
+      All the best from the Govhack Management Team
+    <p>
+  </body>
+</html>

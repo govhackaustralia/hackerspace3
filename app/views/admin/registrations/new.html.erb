@@ -14,11 +14,11 @@
   <% unless @existing_registration.present? # check for existing registration %>
 
     <% if @event_assignment.title == VIP || @event.below_capacity?%>
-      <%= render 'pre_waitlist_form' %>
+      <%= render 'form', locals: { options: [ATTENDING, NON_ATTENDING] } %>
     <% else %>
       <strong>This event is at capacity</strong><br>
       All future participant registrations will be added to the waiting list.<br>
-      <%= render 'waitlist_form' %>
+      <%= render 'form', locals: { options: [WAITLIST, NON_ATTENDING] } %>
     <% end %>
 
   <% else %>

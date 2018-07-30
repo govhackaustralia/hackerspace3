@@ -5,6 +5,7 @@
     Name: <%= registration.assignment.user.display_name %><br>
     Title: <%= registration.assignment.title %><br>
     Status: <%= registration.status %><br>
+    <%= link_to 'Edit User Registration', edit_admin_event_registration_path(@event, registration) %><br>
   </div>
 <% end %>
 
