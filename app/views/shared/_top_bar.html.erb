@@ -1,8 +1,17 @@
 <header>
-  <nav>
-    <% unless current_page?(root_path) %>
-      <%= link_to "Home", root_path %><br>
-    <% end %>
-    <%= render "shared/session_links" %>
+  <nav id="main-menu">
+    <section>
+	  <%= link_to (render "shared/logo"), root_path %>
+	  <article>
+	    <%= link_to 'Events', events_path %>
+	  </article>
+	</section>
+	<%= render "shared/session_login_links" %>
   </nav>
+  <% if user_signed_in? %>
+  	<nav id="secondary-menu">
+	  	<%= render "shared/session_links" %>
+  	</nav>
+  <% end %>
+	  
 </header>

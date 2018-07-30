@@ -1,5 +1,8 @@
-<h1>Welcome to GovHack <%= @competition.year %></h1>
-
-<%= render 'shared/logo' %>
-
-<%= link_to 'Events', events_path %>
+<main>
+	<h2>Welcome to GovHack <%= @competition.year %> Hackerspace</h2>
+	<nav>
+		<section>
+			<div><%= link_to 'Browse Events', events_path %></div>
+		</section>
+	</nav>
+</main>

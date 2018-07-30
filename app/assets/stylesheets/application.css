@@ -13,3 +13,124 @@
  *= require_tree .
  *= require_self
  */
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,700');
+
+* {
+	margin: 0;
+	padding: 0;
+}
+
+ul {
+	list-style: none;
+}
+
+body {
+	font-family: "Open Sans", Helvetica, Arial, sans-serif;
+	font-size: 14px;
+	line-height: 1.5em;
+	background-color: #eee;
+	color: #626262;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	color: #424242;
+}
+
+/* Main Menu */
+
+#main-menu {
+	display: flex;
+	justify-content: space-between;
+	background-color: white;
+	border-bottom: 3em solid #23282D;
+}
+
+#main-menu section {
+	display: flex;
+	align-items: center;
+}
+
+#main-menu section a {
+	text-decoration: none;
+}
+
+#main-menu section #logo {
+	display: flex;
+	align-items: center;
+	padding: 0.25em 0.5em 0.25em 0.5em;
+}
+
+#main-menu section #logo img {
+	max-width: 300px;
+	padding-right: 1em;
+	width: auto;
+	height: auto;
+}
+
+#main-menu section #logo {
+	font-size: 3em;
+	font-weight: 700;
+	color: #424242;
+}
+
+#main-menu section article {
+	display: flex;
+	justify-content: center;
+	text-align: center;
+	align-items: stretch;
+}
+
+#main-menu section article a {
+	display: block;
+	text-decoration: none;
+	text-transform: uppercase;
+	color: #424242;
+	font-size: 2em;
+	padding: 0.5em 0.5em;
+	margin: 0 0.25em;
+	border-radius: 10px;
+	transition: all 1s ease;
+}
+
+#main-menu section article a:hover {
+	transform: scale(1.15, 1.15);
+}
+
+#main-menu a:nth-child(odd):hover {
+	color: #ca1e56;
+}
+
+#main-menu a:nth-child(even):hover {
+	color: #4c9ad2;
+}
+
+#main-menu aside {
+	display: flex;
+	flex-direction: column;
+	text-align: right;
+	justify-content: center;
+}
+
+#main-menu aside a {
+	display: block;
+	text-decoration: none;
+	text-transform: uppercase;
+	color: #424242;
+	font-size: 1.15em;
+	padding: 0.25em 0.5em;
+	margin: 0 1em;
+	transition: all 0.5s ease;
+}
+
+#main-menu aside a:hover {
+	transform: scale(1.15, 1.15);
+}
+
+footer {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	text-align: center;
+	font-size: 10px;
+	margin-top: 2em;
+}

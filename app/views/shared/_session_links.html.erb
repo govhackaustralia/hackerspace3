@@ -1,13 +1,8 @@
 <% if user_signed_in? %>
-  <%= link_to 'Manage Account', manage_account_path %><br>
-  <%= link_to 'Sign Out', destroy_user_session_path, :method => :delete %><br>
   <% if current_user.admin_privileges? %>
     <%= link_to 'Competition Management', admin_competitions_path %><br>
     <%= link_to 'Sponsor Management', admin_sponsors_path %><br>
     <%= link_to 'Region Management', admin_regions_path %><br>
     <%= link_to 'User Management', admin_users_path %><br>
   <% end %>
-<% else %>
-  <%= link_to 'Sign In', user_session_path %><br>
-  <%= link_to 'Sign Up', new_user_registration_path %><br>
 <% end %>
