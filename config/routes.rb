@@ -10,7 +10,8 @@ Rails.application.routes.draw do
   end
 
   namespace :admin do
-    resources :assignments, :competitions, :users, :sponsorship_types, :sponsors
+    resources :assignments, :sponsorship_types, :sponsors
+
     resources :competitions do
       resources :assignments, controller: 'competitions/assignments'
     end
@@ -22,6 +23,11 @@ Rails.application.routes.draw do
       resources :registrations, :event_partners
       resources :assignments, controller: 'events/assignments'
     end
+
+    resources :users do
+      resources :assignments, controller: 'users/assignments'
+    end
+
   end
 
   get 'manage_account', to: 'users#show'

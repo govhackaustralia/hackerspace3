@@ -1,43 +1,7 @@
 <h2><%= @user.full_name %></h2>
 Email: <%= @user.email %></br>
 Event Assignment Title: <%= @event_assignment.title %></br>
-<% if @event_assignment.title == PARTICIPANT %>
-  <%= form_for [:admin, @assignment] do |f| %>
-    <%= f.submit "Make VIP" %>
-  <% end %>
-<% end %>
-</br>
 
-<h3>Assignments</h3>
-
-<% unless @user.admin_assignments.present? %>
-
-  <div>No other assignments within competition.</div>
-
-<% else %>
-
-  <% if (assignments = @user.admin_assignments.where(title: MANAGEMENT_TEAM)).present? %>
-    <h4>Competition Assignments</h4>
-
-    <table>
-      <tr>
-        <th>Year</th>
-        <th>Title</th>
-        <th>Action</th>
-      </tr>
-      <% assignments.each do |assignment| %>
-        <tr>
-          <td><%= assignment.assignable.year %></td>
-          <td><%= assignment.title %></td>
-          <td><%= link_to 'Remove Assignment', admin_assignment_path(assignment),
-                method: :delete,
-                data: { confirm: 'Are you sure?' } %></td>
-        </tr>
-      <% end %>
-    </table>
-
-  <% end %>
-
-<% end %>
+<%= link_to 'Update Event Assignment', edit_admin_user_assignment_path(@user, @event_assignment) %><br>
 
 <%= link_to 'Back to Users', admin_users_path %>
