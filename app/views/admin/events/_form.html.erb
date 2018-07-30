@@ -1,0 +1,51 @@
+<%= form_for [:admin, @region, @event] do |form| %>
+  <%= form.label :name %><br>
+  <%= form.text_field :name %><br>
+
+  <%= form.label :category_type %><br>
+  <%= form.select(:category_type, options_for_select(EVENT_CATEGORY_TYPES, @event.category_type)) %><br>
+
+  <%= form.label :registration_type %><br>
+  <%= form.select(:registration_type, options_for_select(EVENT_REGISTRATION_TYPES, @event.registration_type)) %><br>
+
+  <%= form.label :capacity %><br>
+  <%= form.number_field :capacity %><br>
+
+  <%= form.label :email %><br>
+  <%= form.email_field :email %><br>
+
+  <%= form.label :twitter %><br>
+  <%= form.text_field :twitter %><br>
+
+  <%= form.label :address %><br>
+  <%= form.text_field :address %><br>
+
+  <%= form.label :accessibility %><br>
+  <%= form.text_field :accessibility %><br>
+
+  <%= form.label :youth_support %><br>
+  <%= form.text_field :youth_support %><br>
+
+  <%= form.label :parking %><br>
+  <%= form.text_field :parking %><br>
+
+  <%= form.label :public_transport %><br>
+  <%= form.text_field :public_transport %><br>
+
+  <%= form.label :operation_hours %><br>
+  <%= form.text_field :operation_hours %><br>
+
+  <%= form.label :catering %><br>
+  <%= form.text_field :catering %><br>
+
+  <%= form.label :video_url %><br>
+  <%= form.url_field :video_url %><br>
+
+  <%= form.label :start_time %><br>
+  <%= form.datetime_local_field :start_time %><br>
+
+  <%= form.label :end_time %><br>
+  <%= form.datetime_local_field :end_time %><br>
+
+  <%= form.submit %>
+<% end %>

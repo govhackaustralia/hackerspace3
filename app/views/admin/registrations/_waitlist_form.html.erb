@@ -1,0 +1,4 @@
+<%= form_for [:admin, @event, @registration] do |f| %>
+  <%= hidden_field_tag(:status, WAITLIST) %>
+  <%= f.submit 'Add to waiting list.' %>
+<% end %>

@@ -12,7 +12,15 @@
   <%= link_to 'Update Event Assignment', admin_user_path(@user) %><br>
 
   <% unless @existing_registration.present? # check for existing registration %>
-    <%= render 'form' %>
+
+    <% if @event_assignment.title == VIP || @event.below_capacity?%>
+      <%= render 'pre_waitlist_form' %>
+    <% else %>
+      <strong>This event is at capacity</strong><br>
+      All future participant registrations will be added to the waiting list.<br>
+      <%= render 'waitlist_form' %>
+    <% end %>
+
   <% else %>
     Registration for <%= @user.full_name %> already exists.<br>
     <%= link_to 'Update Registration', edit_admin_event_registration_path(@event, @existing_registration) %><br>

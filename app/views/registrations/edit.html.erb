@@ -1,9 +1,24 @@
-<h2>Change your Registration for <%= @event.name %> - <%= @event.region.name %></h2>
+<h2>Update Registration for <%= @event.name %> <%= @region.name %></h2>
 
-<%= form_for [@event, @registration] do |f| %>
-  <%= f.radio_button(:status, INTENDING, options = {checked: @registration.status ==  INTENDING}) %>
-  <%= f.label(:status, INTENDING) %>
-  <%= f.radio_button(:status, NON_ATTENDING, options = {checked: @registration.status ==  NON_ATTENDING}) %>
-  <%= f.label(:status, NON_ATTENDING) %>
-  <%= f.submit "Register Registration" %>
+<% if @event.not_attending?(@event_assignment) && @event.at_capacity?  %>
+
+This event is at capacity. Please add yourself to the waitlist below and you
+will be emailed should a space become available.<br>
+
+<%= render 'form', locals: { options: [WAITLIST, NON_ATTENDING] } %>
+
+<% elsif @event.waitlisted? @event_assignment %>
+
+  You are on the waitlist and will be emailed should a space become available.
+
+  <%= render 'form', locals: { options: [WAITLIST, NON_ATTENDING] } %>
+
+<% else %>
+
+  You are registerd as attending.
+
+  <%= render 'form', locals: { options: [ATTENDING, NON_ATTENDING] } %>
+
 <% end %>
+
+<%= link_to 'Back to Event', event_path(@event) %>

@@ -26,6 +26,6 @@ class EventTest < ActiveSupport::TestCase
   end
 
   test 'attending method' do
-    assert(@event.attending(@user))
+    assert(@event.attending?(@user))
   end
 end

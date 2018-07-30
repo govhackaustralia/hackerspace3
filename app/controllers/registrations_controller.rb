@@ -3,45 +3,52 @@ class RegistrationsController < ApplicationController
 
   def new
     @event = Event.find(params[:event_id])
-    @registration = @event.registrations.find_or_create_by(assignment: current_user.event_assignment)
+    @region = @event.region
+    @registration = @event.registrations.new
+  end
+
+  def show
+    @event = Event.find(params[:event_id])
+    @region = @event.region
+    @registration = Registration.find(params[:id])
+    @event_assignment = current_user.event_assignment
+    @user = current_user
   end
 
   def edit
     @event = Event.find(params[:event_id])
+    @region = @event.region
     @registration = Registration.find(params[:id])
   end
 
   def update
+    @event = Event.find(params[:event_id])
     @registration = Registration.find(params[:id])
     @registration.update(registration_params)
     if @registration.save
       flash[:notice] = 'Your registration has been updated'
-      redirect_to event_path(@registration.event)
+      redirect_to event_registration_path(@event, @registration)
     else
-      flash[:notice] = 'Something went wrong'
-      render edit_event_registration_path(@registration.event, @registration)
+      flash[:notice] = @registration.errors.full_messages.to_sentence
+      render edit_event_registration_path(@event, @registration)
     end
   end
 
   def create
+    @event = Event.find(params[:event_id])
+    @region = @event.region
+    @registration = @event.registrations.new(registration_params)
+    @registration.update(assignment: current_user.event_assignment)
     if @registration.save
       flash[:notice] = 'You have registered for this event.'
-      redirect_to event_path(@event)
+      redirect_to event_registration_path(@event, @registration)
     else
-      flash[:notice] = 'Apologies but we could not add you at this time.'
-      redirect_to event_path(@event)
+      flash[:notice] = @registration.errors.full_messages.to_sentence
+      render 'new'
     end
   end
 
   private
-
-  def create_registration
-    @event = Event.find(params[:event_id])
-    @assignment = current_user.event_assignment
-    @registration = Registration.new(event: @event, assignment: @assignment)
-    @registration.update(status: INTENDING)
-    @registration.update(time_notified: Time.now)
-  end
 
   def registration_params
     params.require(:registration).permit(:status)

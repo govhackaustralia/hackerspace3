@@ -25,6 +25,11 @@ class User < ApplicationRecord
     Competition.current.assignments.find_or_create_by(user: self, title: ADMIN)
   end
 
+  def display_name
+    return preferred_name unless preferred_name.nil? || preferred_name.empty?
+    full_name
+  end
+
   def event_assignment
     assignment = Competition.current.assignments.find_by(user: self, title: VIP)
     return assignment unless assignment.nil?
@@ -52,6 +57,10 @@ class User < ApplicationRecord
     update_user_info_from_google(user, data)
     user.save
     user
+  end
+
+  def no_dietary_requirements?
+    dietary_requirments.nil? || dietary_requirments == ''
   end
 
   private

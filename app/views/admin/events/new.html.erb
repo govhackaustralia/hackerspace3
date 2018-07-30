@@ -1,7 +1,5 @@
 <h2>Create New Event for Region: <%= @region.name %></h2>
 
-<%= form_for [:admin, @region, @event] do |f| %>
-  <%= f.label(:name, "Event name:") %>
-  <%= f.text_field(:name) %>
-  <%= f.submit "Create Event" %>
-<% end %>
+<%= render 'form' %>
+
+<%= link_to 'Back to Region', admin_region_path(@region) %>
