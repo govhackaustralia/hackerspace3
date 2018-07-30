@@ -82,4 +82,4 @@ production:
   <<: *default
   database: hackerspace3_production
   username: hackerspace3
-  password: <%= ENV['HACKERSPACE3_DATABASE_PASSWORD'] %>
+  password: <%= ENV['DATABASE_URL'] %>
