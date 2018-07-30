@@ -1,5 +1,4 @@
 class RegistrationMailer < ApplicationMailer
-
   def attendance_email(registration)
     @registration = registration
     @assignment = registration.assignment

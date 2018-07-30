@@ -53,7 +53,7 @@ class Event < ApplicationRecord
     attending_participants_count < capacity
   end
 
-  def has_waitlist?
+  def waitlist?
     Registration.find_by(status: WAITLIST, event: self).present?
   end
 

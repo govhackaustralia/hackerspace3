@@ -8,9 +8,6 @@ class Admin::EventsController < ApplicationController
   end
 
   def create
-    @region = Region.find(params[:region_id])
-    @event = @region.events.new(event_params)
-    @event.competition = Competition.current
     if @event.save
       flash[:notice] = 'New event created.'
       redirect_to admin_region_event_path(@region, @event)
@@ -53,5 +50,11 @@ class Admin::EventsController < ApplicationController
     return if current_user.admin_privileges?
     flash[:error] = 'You must have valid assignments to access this section.'
     redirect_to root_path
+  end
+
+  def create_new_event
+    @region = Region.find(params[:region_id])
+    @event = @region.events.new(event_params)
+    @event.competition = Competition.current
   end
 end

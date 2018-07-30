@@ -26,7 +26,7 @@ class UsersController < ApplicationController
                                  :tshirt_size, :twitter, :mailing_list, :challenge_sponsor_contact_place,
                                  :challenge_sponsor_contact_enter, :my_project_sponsor_contact,
                                  :me_govhack_contact, :dietary_requirements, :organisation_name,
-                                 :how_did_you_hear, :govhack_img_url, :accepted_terms_and_conditions)
+                                 :how_did_you_hear, :govhack_img, :accepted_terms_and_conditions)
   end
 
   def account_update_successfully

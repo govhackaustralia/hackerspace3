@@ -63,8 +63,6 @@ class User < ApplicationRecord
     dietary_requirments.nil? || dietary_requirments == ''
   end
 
-  private
-
   def self.new_user_from_google(data)
     User.new(full_name: data['name'],
              email: data['email'],
@@ -73,7 +71,7 @@ class User < ApplicationRecord
 
   def self.update_user_info_from_google(user, data)
     user.update(google_img: data['image'])
-    return unless user.full_name.nil? || user.full_name == ''
+    return unless user.full_name.nil? || user.full_name.empty?
     user.update(full_name: data['name'])
   end
 end

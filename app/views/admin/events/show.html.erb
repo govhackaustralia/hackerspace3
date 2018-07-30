@@ -37,7 +37,7 @@ Event Capacity: <%= @event.capacity %><br>
 <%= pluralize @event.registrations.where(status: ATTENDING).count, 'guest' %> attending
 (<%= pluralize @event.attending_participants_count, 'participant' %> and
 <%= pluralize @event.registration_assignments.where(title: VIP).count, 'vip' %>).<br>
-<% if @event.has_waitlist? %>
+<% if @event.waitlist? %>
   <%= pluralize @event.registrations.where(status: WAITLIST).count, 'participant' %> on the wait list.<br>
 <% end %>
 <%= pluralize @event.registrations.where(status: NON_ATTENDING).count, 'guest' %> registered not attending.<br>

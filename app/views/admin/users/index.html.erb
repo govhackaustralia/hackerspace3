@@ -1,8 +1,21 @@
 <h2>User Management</h2>
 
-<% @users.each do |user| %>
-  <%= render 'admin/shared/user_contact', locals: { user: user } %>
-  <%= link_to 'See User', admin_user_path(user) %></br>
+<%= form_tag(admin_users_path, method: :get) do %>
+  <%= text_field_tag :term, params[:term] %>
+  <%= submit_tag 'Search' %>
+<% end %><br>
+
+<% if @users.present? %>
+
+  <% @users.each do |user| %>
+    <%= render 'admin/shared/user_contact', locals: { user: user } %>
+    <%= link_to 'See User', admin_user_path(user) %></br>
+  <% end %>
+
+<% else %>
+
+  No users matching search term, '<%= params[:term] %> '<br>
+  
 <% end %>
 
 <%= link_to 'Create New User',  new_admin_user_path %>

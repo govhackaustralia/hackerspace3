@@ -17,9 +17,7 @@ class Registration < ApplicationRecord
     return unless event.below_capacity?
     waitlist_registrations = event.registrations.where(status: WAITLIST).order(time_notified: :asc)
     return unless (new_attendee = waitlist_registrations.first).present?
-    # START TRANSACTION
-      new_attendee.update(status: ATTENDING)
-      # SEND MAIL
-    # END TRANSACTION
+    new_attendee.update(status: ATTENDING)
+    RegistrationMailer.attendance_email(new_attendee).deliver_now
   end
 end
