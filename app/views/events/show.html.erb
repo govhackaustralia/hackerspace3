@@ -6,23 +6,18 @@ Region: <%= @region.name %><br>
 Event Category: <%= @event.category_type %><br>
 Registration Type: <%= @event.registration_type %><br>
 
-<% if user_signed_in? && @event.attending(current_user) %>
-  <h4>Your Dietary Requirements</h4>
-  <%= form_with(model: current_user, local: true) do |form| %>
-    <%= form.label :dietary_requirements, 'Currently we have...' %><br>
-    <%= form.text_field :dietary_requirements %><br>
-    <%= form.submit 'Update Dietary Requirements' %>
+<% if user_signed_in? %>
+  <% if @registration.present? %>
+    <%= link_to 'Manage your Event Registration', event_registration_path(@event, @registration) %><br>
+  <% else %>
+    <%= link_to 'Register to Attend this Event', new_event_registration_path(@event) %><br>
   <% end %>
-<% end %>
-
-<% unless user_signed_in? && @event.registered(current_user) %>
-  <%= link_to 'Register to Attend Event', new_event_registration_path(@event) %><br>
 <% else %>
-  You are registered as: <%= @registration.status %><br>
-  <%= link_to 'Update Registration', edit_event_registration_path(@event, @registration) %><br>
+  <%= link_to 'Sign in to register', new_user_session_path %><br>
 <% end %>
 
 <% if user_signed_in? && (@event.admin_assignments & current_user.assignments).present? %>
   <%= link_to 'Manage this Event', admin_region_event_path(@region, @event) %><br>
 <% end %>
-<%= link_to 'Back to Events', events_path %>
+
+<%= link_to 'Back to Events', events_path %><br>

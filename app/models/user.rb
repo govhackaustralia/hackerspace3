@@ -25,6 +25,11 @@ class User < ApplicationRecord
     Competition.current.assignments.find_or_create_by(user: self, title: ADMIN)
   end
 
+  def display_name
+    return preferred_name unless preferred_name.nil? || preferred_name.empty?
+    full_name
+  end
+
   def event_assignment
     assignment = Competition.current.assignments.find_by(user: self, title: VIP)
     return assignment unless assignment.nil?
@@ -54,7 +59,9 @@ class User < ApplicationRecord
     user
   end
 
-  private
+  def no_dietary_requirements?
+    dietary_requirments.nil? || dietary_requirments == ''
+  end
 
   def self.new_user_from_google(data)
     User.new(full_name: data['name'],
@@ -64,7 +71,7 @@ class User < ApplicationRecord
 
   def self.update_user_info_from_google(user, data)
     user.update(google_img: data['image'])
-    return unless user.full_name.nil? || user.full_name == ''
+    return unless user.full_name.nil? || user.full_name.empty?
     user.update(full_name: data['name'])
   end
 end

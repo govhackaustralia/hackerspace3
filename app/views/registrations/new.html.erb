@@ -1,7 +1,18 @@
-<h2>Register your Registration for <%= @event.name %> - <%= @event.region.name %></h2>
+<h2>Register to attend <%= @event.name %> <%= @region.name %></h2>
 
-<%= form_for [@event, @registration] do |f| %>
-  <%= f.radio_button(:status, INTENDING, options = {checked: true}) %>
-  <%= f.label(:status, INTENDING) %>
-  <%= f.submit "Register Registration" %>
+<% if @event.below_capacity? %>
+
+  <%= render 'form', locals: { options: [ATTENDING, NON_ATTENDING] } %>
+
+<% else %>
+
+  This event is at capacity.<br>
+
+  If you add yourself to the waitlist below, you will be emailed should a space
+  become available.<br>
+
+  <%= render 'form', locals: { options: [WAITLIST, NON_ATTENDING] } %>
+
 <% end %>
+
+<%= link_to 'Back to Event', event_path(@event) %>

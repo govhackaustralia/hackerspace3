@@ -16,8 +16,10 @@ class Admin::RegistrationsController < ApplicationController
 
   def edit
     @event = Event.find(params[:event_id])
+    @region = @event.region
     @registration = Registration.find(params[:id])
     @event_assignment = @registration.assignment
+    @user = @event_assignment.user
   end
 
   def update

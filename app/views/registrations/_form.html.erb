@@ -1,11 +1,10 @@
 <% options = locals[:options] %>
 
-<%= form_for [:admin, @event, @registration] do |f| %>
+<%= form_for [@event, @registration] do |f| %>
   <% options.each do |status| %>
     <%= f.radio_button(:status, status,
       options = {checked: @registration.status == status}) %>
     <%= f.label(:status, status) %>
-    <%= hidden_field_tag(:assignment_id, @event_assignment.id) %>
   <% end %>
   <%= f.submit %>
 <% end %>

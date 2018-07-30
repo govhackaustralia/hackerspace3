@@ -1,0 +1,39 @@
+<h2>Registration for <%= @event.name %></h2>
+
+<% if @event.attending? @event_assignment %>
+
+You are registered to attend the event.<br>
+
+If you no longer wish to attend, please update your registration below.<br>
+
+<% elsif @event.waitlisted? @event_assignment %>
+
+  You are on the waitlist, you will be notified should a space become available.<br>
+
+  If you no longer wish to attend, please update your registration below.<br>
+
+<% elsif @event.not_attending? @event_assignment %>
+
+  You are registered as not attending.<br>
+
+  Please update your registration below if you wish to attend.<br>
+
+<% end %>
+
+<%= link_to 'Update Registration', edit_event_registration_path(@event, @registration) %><br>
+
+<h3>Dietary Requirements</h3>
+
+<% if @user.dietary_requirements.nil? || @user.dietary_requirements.empty? %>
+
+  <div>We do not have any dietary requirements for you on record</div>
+
+<% else %>
+
+  <div><%= @user.dietary_requirements %></div>
+
+<% end %>
+
+<%= link_to 'Update Dietary Requirements', edit_user_path(@user) %><br>
+
+<%= link_to 'Back to Event', event_path(@event) %>

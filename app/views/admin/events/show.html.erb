@@ -5,6 +5,7 @@
 Region: <%= @event.region.name %><br>
 Event Category: <%= @event.category_type %><br>
 Registration Type: <%= @event.registration_type %><br>
+Event Capacity: <%= @event.capacity %><br>
 
 <%= link_to "Edit #{@event.name} Event", edit_admin_region_event_path(@event.region, @event) %><br>
 <%= link_to 'Go to Event Page', event_path(@event) %><br>
@@ -13,7 +14,7 @@ Registration Type: <%= @event.registration_type %><br>
 
 <h4>Event Host</h4>
 
-<% if (host = @event.host).present? %>
+<% if (host = @event.host_user).present? %>
   <%= render 'admin/shared/user_contact', locals: { user: host } %>
 <% else %>
   This event does not currently have a host.<br>
@@ -22,15 +23,24 @@ Registration Type: <%= @event.registration_type %><br>
 
 <h4>Event Support</h4>
 
-<%= pluralize @event.supports.count, 'event support' %> currently assigned to event.<br>
+<%= pluralize @event.support_users.count, 'event support' %> currently assigned to event.<br>
 
 <%= link_to "Manage #{@event.name} Assignments", admin_event_assignments_path(@event) %>
 
 <h3>Event Registrations</h3>
 
-<%= pluralize @event.registrations.where(status: INTENDING).count, 'guest' %> attending.<br>
+<% if @event.at_capacity? %>
+  <strong>This event is at capacity</strong><br>
+  All future participant registrations will be added to the waiting list.<br>
+<% end %>
+
+<%= pluralize @event.registrations.where(status: ATTENDING).count, 'guest' %> attending
+(<%= pluralize @event.attending_participants_count, 'participant' %> and
+<%= pluralize @event.registration_assignments.where(title: VIP).count, 'vip' %>).<br>
+<% if @event.waitlist? %>
+  <%= pluralize @event.registrations.where(status: WAITLIST).count, 'participant' %> on the wait list.<br>
+<% end %>
 <%= pluralize @event.registrations.where(status: NON_ATTENDING).count, 'guest' %> registered not attending.<br>
-<%= pluralize @event.registrations.where(status: PENDING).count, 'guest' %> yet to respond.<br>
 
 <%= link_to "Manage #{@event.name} Registrations", admin_event_registrations_path(@event) %>
 

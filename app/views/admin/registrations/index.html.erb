@@ -1,13 +1,13 @@
 <h2>Registrations for <%= @event.name %> Event</h2>
 
+<% @event.registrations.each do |registration| %>
+  <div>
+    Name: <%= registration.assignment.user.display_name %><br>
+    Title: <%= registration.assignment.title %><br>
+    Status: <%= registration.status %><br>
+    <%= link_to 'Edit User Registration', edit_admin_event_registration_path(@event, registration) %><br>
+  </div>
+<% end %>
+
 <%= link_to 'New Registration', new_admin_event_registration_path(@event) %><br>
-
-<h4>VIPS</h4>
-
-<%= render 'table', locals: { assignments: @event.vips } %>
-
-<h4>Participants</h4>
-
-<%= render 'table', locals: { assignments: @event.participants } %>
-
-<%= link_to "Back to #{@event.name} Event", admin_region_event_path(@event.region, @event) %>
+<%= link_to "Back to #{@event.name} Event", admin_region_event_path(@event.region, @event) %><br>
