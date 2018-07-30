@@ -63,7 +63,11 @@ end
 end
 
 20.times do |time|
-  Sponsor.create(name: "Vandelay  Industries #{time}", description: "Worldwide leader in latex products", website: 'www.vandel.com', created_at: "2018-07-26 23:01:28", updated_at: "2018-07-26 23:01:28", competition: comp)
+  comp.sponsors.create(name: "Vandelay  Industries #{time}", description: "Worldwide leader in latex products", website: 'www.vandel.com', created_at: "2018-07-26 23:01:28", updated_at: "2018-07-26 23:01:28")
+end
+
+10.times do |time|
+  comp.sponsorship_types.create(name: "Tier #{time + 1}", order: time + 1)
 end
 
 Region.create(name: 'New South Wales', time_zone: 'Sydney', parent_id: Region.root.id)
@@ -92,6 +96,11 @@ Region.all.each do |region|
 
   region.assignments.create(user: User.find(4+counter), title: REGION_SUPPORT)
 
+  3.times do |time|
+    region.sponsorships.create(sponsor: Sponsor.find((counter + time) % Sponsor.count),
+    sponsorship_type: SponsorshipType.find(counter % SponsorshipType.count))
+  end
+
   opening = region.events.create(competition: comp, name: 'Opening Night',
   registration_type: OPEN, capacity: 50, email: "#{region.name}@mail.com", twitter: '@qld',
   address: "Eagle Stree, #{region.name} QLD, 4217", accessibility: 'Access through the stairs',
@@ -102,6 +111,8 @@ Region.all.each do |region|
   start_time: '2018-09-10 19:20:33 +1000', end_time: '2018-09-10 19:20:33 +1000',
   category_type: STATE_CONNECTIONS)
 
+  EventPartner.create(event: opening, sponsor: Sponsor.find(counter))
+
   opening.assignments.create(user: User.find(5+counter), title: EVENT_HOST)
 
   opening.assignments.create(user: User.find(6+counter), title: EVENT_SUPPORT)
@@ -109,11 +120,11 @@ Region.all.each do |region|
   opening.assignments.create(user: User.find(7+counter), title: EVENT_SUPPORT)
 
   Assignment.where(title: PARTICIPANT).take(10).each do |particiant|
-    opening.registrations.create(status: INTENDING, assignment: particiant)
+    opening.registrations.create(status: ATTENDING, assignment: particiant)
   end
 
   Assignment.where(title: VIP).take(10).each do |vip|
-    opening.registrations.create(status: INTENDING, assignment: vip)
+    opening.registrations.create(status: ATTENDING, assignment: vip)
   end
 
   counter += 1

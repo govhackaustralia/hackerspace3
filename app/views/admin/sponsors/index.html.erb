@@ -1,7 +1,5 @@
 <h2>Competition <%= @competition.year %> Sponsors </h2>
 
-<%= link_to 'Sponsorship Type Management', admin_sponsorship_types_path %><br>
-
 <% @sponsors.each do |sponsor| %>
 
   <h3><%= sponsor.name %></h3>
