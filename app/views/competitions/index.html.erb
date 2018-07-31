@@ -2,9 +2,8 @@
 	<h2>Welcome to GovHack <%= @competition.year %> Hackerspace</h2>
 	<nav>
 		<section>
-			<!--<div><%= link_to 'Browse Events', events_path %></div>-->
 			<% if @competition.events_on? STATE_CONNECTIONS %>
-				<div><%= link_to 'Connection Events', state_connections_path %></div>
+				<div><%= link_to 'Connection Events', connection_events_path %></div>
 			<% end %>
 		</section>
 	</nav>

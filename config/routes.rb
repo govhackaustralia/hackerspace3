@@ -32,7 +32,7 @@ Rails.application.routes.draw do
 
   get 'manage_account', to: 'users#show'
   get 'edit_personal_details', to: 'users#edit'
-  get 'state_connections', to: 'events#index', category_type: STATE_CONNECTIONS
+  get 'connection_events', to: 'events#index', category_type: STATE_CONNECTIONS
 
   root 'competitions#index'
 end
