@@ -5,7 +5,7 @@
 This event is at capacity. Please add yourself to the waitlist below and you
 will be emailed should a space become available.<br>
 
-<%= render 'form', locals: { options: [WAITLIST, NON_ATTENDING] } %>
+<%= render 'edit_form', locals: { options: [WAITLIST, NON_ATTENDING] } %>
 
 <% elsif @event.waitlisted? @event_assignment %>
 
@@ -17,7 +17,7 @@ will be emailed should a space become available.<br>
 
   You are registerd as attending.
 
-  <%= render 'form', locals: { options: [ATTENDING, NON_ATTENDING] } %>
+  <%= render 'edit_form', locals: { options: [ATTENDING, NON_ATTENDING] } %>
 
 <% end %>
 

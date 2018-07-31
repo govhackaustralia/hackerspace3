@@ -12,7 +12,6 @@ AllCops:
     - 'bin/*'
     - 'db/**/*'
     - 'app/controllers/users/*'
-    - 'app/controllers/registrations_controller.rb'
     - 'app/controllers/admin/sponsorship_types_controller.rb'
 
 Style/Documentation:

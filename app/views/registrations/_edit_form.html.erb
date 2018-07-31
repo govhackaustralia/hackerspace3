@@ -1,0 +1,20 @@
+<% options = locals[:options] %>
+
+<%= form_for [@event, @registration] do |f| %>
+  <% options.each do |status| %>
+    <%= f.radio_button(:status, status,
+      options = {checked: @registration.status == status}) %>
+    <%= f.label(:status, status) %>
+  <% end %><br>
+
+  <%= label_tag :preferred_name %><br>
+  <%= text_field_tag :preferred_name, @user.preferred_name %><br>
+
+  <%= label_tag :organisation_name %><br>
+  <%= text_field_tag :organisation_name, @user.organisation_name %><br>
+
+  <%= label_tag :dietary_requirements %><br>
+  <%= text_field_tag :dietary_requirements, @user.dietary_requirements %><br>
+
+  <%= f.submit %>
+<% end %>

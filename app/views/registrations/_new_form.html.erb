@@ -1,0 +1,18 @@
+<% status = locals[:status] %>
+<% label = locals[:label] %>
+
+<%= form_for [@event, @registration] do |f| %>
+
+  <%= label_tag :preferred_name %><br>
+  <%= text_field_tag :preferred_name, @user.preferred_name %><br>
+
+  <%= label_tag :organisation_name %><br>
+  <%= text_field_tag :organisation_name, @user.organisation_name %><br>
+
+  <%= label_tag :dietary_requirements %><br>
+  <%= text_field_tag :dietary_requirements, @user.dietary_requirements %><br>
+
+  <%= hidden_field_tag(:status, status) %>
+
+  <%= f.submit label %>
+<% end %>
