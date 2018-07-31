@@ -5,7 +5,7 @@ Rails.application.routes.draw do
 
   resources :users
 
-  resources :events do
+  resources :events, param: :identifier do
     resources :registrations
   end
 

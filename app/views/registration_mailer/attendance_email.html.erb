@@ -12,9 +12,9 @@
       If you would like to review your registration or update your dietary
       requirements please use the link below.
     </p>
-    
+
     <p>
-      <%= link_to 'Review your registration', event_registration_url(@event, @registration) %>
+      <%= link_to 'Review your registration', event_registration_url(@event.identifier, @registration) %>
     </p>
 
     <p>

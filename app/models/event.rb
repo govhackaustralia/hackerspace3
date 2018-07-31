@@ -12,6 +12,8 @@ class Event < ApplicationRecord
   validates :registration_type, inclusion: { in: EVENT_REGISTRATION_TYPES }
   validates :category_type, inclusion: { in: EVENT_CATEGORY_TYPES }
 
+  after_save :update_identifier
+
   # Event Administration
 
   def host_user
@@ -62,5 +64,22 @@ class Event < ApplicationRecord
     attending_ids = registrations.where(status: ATTENDING).pluck(:assignment_id)
     vip_ids = registration_assignments.where(title: VIP).pluck(:id)
     (attending_ids - vip_ids).count
+  end
+
+  private
+
+  def update_identifier
+    new_identifier = uri_pretty("#{category_type}-#{name}")
+    if Event.find_by_identifier(new_identifier).present?
+      new_identifier = uri_pretty("#{category_type}-#{name}-#{id}")
+    end
+    update_columns(identifier: new_identifier)
+  end
+
+  def uri_pretty(string)
+    array = string.split(/\W/)
+    words = array - ['']
+    new_name = words.join('_')
+    CGI.escape(new_name.downcase)
   end
 end

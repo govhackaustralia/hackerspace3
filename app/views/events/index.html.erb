@@ -25,10 +25,10 @@
 		<% else %>
 			<section class="events">
 		<% end %>
-			
+
 
 			<% @events.each do |event| %>
-				<%= link_to (render partial: "event_single", locals: { event: event } ), event_path(event) %></br>
+				<%= link_to (render partial: "event_single", locals: { event: event } ), event_path(event.identifier) %></br>
 			<% end %>
 
 		</section>
