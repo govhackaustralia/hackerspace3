@@ -2,10 +2,12 @@
 	<div>
 	<h3><%= event.name %></h3>
 	<h4><%= event.region.name %></h4>
-	<h4><%= event.start_time.strftime("%e %B %Y") %></h4>
-	<h4><%= event.start_time.strftime("%I.%M %p") %></h4>
-	<% if event.category_type == "State Connections" %>
-	<p>Connection Event</p>
+	<% unless event.start_time.nil? || event.end_time.nil? %>
+		<h4><%= event.start_time.strftime("%e %B %Y") %></h4>
+		<h4><%= event.start_time.strftime("%I.%M %p") %></h4>
+	<% end %>
+	<% if event.category_type == STATE_CONNECTIONS %>
+		<p>Connection Event</p>
 	<% end %>
 	</div>
 </article>
