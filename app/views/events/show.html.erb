@@ -17,6 +17,10 @@ Public Transport: <%= @event.public_transport %><br>
 Operating hours: <%= @event.operation_hours %><br>
 Catering: <%= @event.catering %><br>
 
+<iframe width="600" height="450" frameborder="0" style="border:0"
+src="https://www.google.com/maps/embed/v1/place?q=place_id:<%= @event.place_id %>&key=<%= ENV['GOOGLE_API_KEY'] %>" allowfullscreen></iframe>
+
+
 <% if user_signed_in? %>
   <% if @registration.present? %>
     <%= link_to 'Manage your Event Registration', event_registration_path(@event, @registration) %><br>

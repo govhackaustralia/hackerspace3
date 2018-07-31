@@ -26,6 +26,11 @@
   <%= form.label :address %><br>
   <%= form.text_field :address %><br>
 
+
+  <%= form.label :place_id, 'Google Place ID' %><br>
+  <%= form.text_field :place_id %><br>
+  <%= link_to 'Use this link to find your Event Location\'s Google Place ID', 'https://developers.google.com/places/place-id', { target: '_blank' } %><br>
+
   <%= form.label :accessibility %><br>
   <%= form.text_field :accessibility %><br>
 
