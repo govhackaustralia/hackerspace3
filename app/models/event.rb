@@ -70,7 +70,7 @@ class Event < ApplicationRecord
 
   def update_identifier
     new_identifier = uri_pretty("#{category_type}-#{name}")
-    if Event.find_by_identifier(new_identifier).present?
+    if Event.find_by(identifier:new_identifier).present?
       new_identifier = uri_pretty("#{category_type}-#{name}-#{id}")
     end
     update_columns(identifier: new_identifier)
