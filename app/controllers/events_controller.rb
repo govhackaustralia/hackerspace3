@@ -1,6 +1,10 @@
 class EventsController < ApplicationController
   def index
-    @events = Competition.current.events
+    if params[:category_type].nil?
+      @events = Competition.current.events
+    else
+      @events = Competition.current.events.where(category_type: params[:category_type])
+    end
   end
 
   def show

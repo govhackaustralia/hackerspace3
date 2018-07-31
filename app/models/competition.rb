@@ -47,4 +47,8 @@ class Competition < ApplicationRecord
   def admin_assignments
     assignments.where(title: COMP_ADMIN).to_a
   end
+
+  def events_on?(category_type)
+    events.where(category_type: category_type).present?
+  end
 end
