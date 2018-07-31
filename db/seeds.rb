@@ -107,8 +107,8 @@ Region.all.each do |region|
   address: "Eagle Stree, #{region.name} QLD, 4217", accessibility: 'Access through the stairs',
   youth_support: 'Always here.', parking: 'None, on street.',
   public_transport: 'Trains near by.', operation_hours: '9-5',
-  catering: 'Lots of food, vego available.', lat: -27.4697707,
-  long: 153.02512350000006, video_url: 'https://www.youtube.com/watch?v=0Mv48ZM7gu4',
+  catering: 'Lots of food, vego available.', place_id: 'ChIJ15yzA3lakWsRdtSXdwYk7uQ',
+  video_url: 'https://www.youtube.com/watch?v=0Mv48ZM7gu4',
   start_time: '2018-09-10 19:20:33 +1000', end_time: '2018-09-10 19:20:33 +1000',
   category_type: STATE_CONNECTIONS)
 
