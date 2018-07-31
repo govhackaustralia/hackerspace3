@@ -5,6 +5,17 @@
 Region: <%= @region.name %><br>
 Event Category: <%= @event.category_type %><br>
 Registration Type: <%= @event.registration_type %><br>
+Email: <%= @event.email %><br>
+Twitter: <%= @event.twitter %><br>
+Address: <%= @event.address %><br>
+Start time: <%= @event.start_time %><br>
+End time: <%= @event.end_time %><br>
+Accessibility: <%= @event.accessibility %><br>
+Youth Support: <%= @event.youth_support %><br>
+Parking: <%= @event.parking %><br>
+Public Transport: <%= @event.public_transport %><br>
+Operating hours: <%= @event.operation_hours %><br>
+Catering: <%= @event.catering %><br>
 
 <% if user_signed_in? %>
   <% if @registration.present? %>
