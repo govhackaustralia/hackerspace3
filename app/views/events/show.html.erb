@@ -18,7 +18,7 @@ Operating hours: <%= @event.operation_hours %><br>
 Catering: <%= @event.catering %><br>
 
 <iframe width="600" height="450" frameborder="0" style="border:0"
-src="https://www.google.com/maps/embed/v1/place?q=place_id:<%= @event.place_id %>&key=<%= ENV['GOOGLE_API_KEY'] %>" allowfullscreen></iframe>
+src="https://www.google.com/maps/embed/v1/place?q=place_id:<%= @event.place_id %>&key=<%= ENV['GOOGLE_API_KEY'] %>" allowfullscreen></iframe><br>
 
 
 <% if user_signed_in? %>
