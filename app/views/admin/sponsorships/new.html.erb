@@ -9,7 +9,7 @@
 
   Sponsor: <%= @sponsor.name %><br>
 
-  <% unless @existing_event_partnership.present? # check for existing event partnership %>
+  <% unless @existing_sponsorship.present? # check for existing event partnership %>
 
     <%= form_for [:admin, @sponsorable, @sponsorship] do |f| %>
       <%= hidden_field_tag(:sponsor_id, @sponsor.id) %>

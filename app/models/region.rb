@@ -2,6 +2,7 @@ class Region < ApplicationRecord
   has_many :assignments, as: :assignable
   has_many :events
   has_many :sponsorships, as: :sponsorable
+  has_many :sponsorship_types, through: :sponsorships
 
   validates :name, presence: true
   validates :name, uniqueness: true

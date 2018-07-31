@@ -3,7 +3,7 @@ class Admin::SponsorshipsController < ApplicationController
   before_action :check_for_privileges
 
   def new
-    new_sponsorship if @sponsorship.nil?
+    new_sponsorship
     return if params[:term].nil? || params[:term] == ''
     search_sponsors
   end
@@ -45,6 +45,10 @@ class Admin::SponsorshipsController < ApplicationController
 
   def search_sponsors
     @sponsor = Sponsor.find_by_name(params[:term])
-    @sponsors = Sponsor.search(params[:term]) unless @sponsor.present?
+    if @sponsor.present?
+      @existing_sponsorship = Sponsorship.find_by(sponsor: @sponsor, sponsorable: @sponsorable)
+    else
+      @sponsors = Sponsor.search(params[:term])
+    end
   end
 end

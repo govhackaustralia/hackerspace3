@@ -8,14 +8,46 @@ Registration Type: <%= @event.registration_type %><br>
 Email: <%= @event.email %><br>
 Twitter: <%= @event.twitter %><br>
 Address: <%= @event.address %><br>
-Start time: <%= @event.start_time.strftime("%I:%M%p") %><br>
-End time: <%= @event.end_time.strftime("%I:%M%p") %><br>
+<% unless @event.start_time.nil? || @event.end_time.nil? %>
+  Start time: <%= @event.start_time.strftime("%I:%M%p") %><br>
+  End time: <%= @event.end_time.strftime("%I:%M%p") %><br>
+<% end %>
 Accessibility: <%= @event.accessibility %><br>
 Youth Support: <%= @event.youth_support %><br>
 Parking: <%= @event.parking %><br>
 Public Transport: <%= @event.public_transport %><br>
 Operating hours: <%= @event.operation_hours %><br>
 Catering: <%= @event.catering %><br>
+
+<% if @event_partner.present? %>
+
+  <h3>Event Partner - <%= @event_partner.name %></h3>
+
+  <% if @event_partner.logo.attached? %>
+    <%= image_tag url_for(@event_partner.logo) %>
+  <% else %>
+    <%= image_tag 'default_profile_pic.png' %>
+  <% end %>
+
+<% end %><br>
+
+<% if @sponsorship_types.present? %>
+
+  <h3>Regional Sponsors</h3>
+
+  <% @sponsorship_types.each do |sponsorship_type| %>
+    <h4><%= sponsorship_type.name %></h4>
+    <% sponsorship_type.sponsorships.where(sponsorable: @region).order(:created_at).each do |sponsorship| %>
+      <% sponsor = sponsorship.sponsor %>
+      <h5><%= sponsor.name %></h5>
+      <% if sponsor.logo.attached? %>
+        <%= image_tag url_for(sponsor.logo) %>
+      <% else %>
+        <%= image_tag 'default_profile_pic.png' %>
+      <% end %>
+    <% end %>
+  <% end %>
+<% end %><br>
 
 <% if user_signed_in? %>
   <% if @registration.present? %>

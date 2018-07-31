@@ -1,17 +1,17 @@
-class Admin::EventPartnersController < ApplicationController
+class Admin::EventPartnershipsController < ApplicationController
   before_action :authenticate_user!
   before_action :check_for_privileges
 
   def new
-    new_event_partner
+    new_event_partnership
     return if params[:term].nil? || params[:term] == ''
     @sponsor = Sponsor.find_by_name(params[:term])
     @sponsors = Sponsor.search(params[:term]) unless @sponsor.present?
   end
 
   def create
-    create_new_event_partner
-    if @event_partner.save
+    create_new_event_partnership
+    if @event_partnership.save
       flash[:notice] = 'New Event Partner Added.'
       redirect_to admin_region_event_path(@event.region, @event)
     else
@@ -28,14 +28,14 @@ class Admin::EventPartnersController < ApplicationController
     redirect_to root_path
   end
 
-  def new_event_partner
+  def new_event_partnership
     @event = Event.find(params[:event_id])
-    @event_partner = EventPartner.new
+    @event_partnership = EventPartnership.new
   end
 
-  def create_new_event_partner
+  def create_new_event_partnership
     @event = Event.find(params[:event_id])
     @sponsor = Sponsor.find(params[:sponsor_id])
-    @event_partner = EventPartner.new(event: @event, sponsor: @sponsor)
+    @event_partnership = EventPartnership.new(event: @event, sponsor: @sponsor)
   end
 end

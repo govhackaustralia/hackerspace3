@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class EventPartnerTest < ActiveSupport::TestCase
+class EventPartnershipTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end

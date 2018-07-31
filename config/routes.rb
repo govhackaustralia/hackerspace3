@@ -20,7 +20,7 @@ Rails.application.routes.draw do
       resources :assignments, controller: 'regions/assignments'
     end
     resources :events do
-      resources :registrations, :event_partners
+      resources :registrations, :event_partnerships
       resources :assignments, controller: 'events/assignments'
     end
 

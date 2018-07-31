@@ -8,6 +8,7 @@ class Admin::EventsController < ApplicationController
   end
 
   def create
+    create_new_event
     if @event.save
       flash[:notice] = 'New event created.'
       redirect_to admin_region_event_path(@region, @event)

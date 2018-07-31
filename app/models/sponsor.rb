@@ -2,7 +2,7 @@ class Sponsor < ApplicationRecord
   has_many :assignments, as: :assignable
   belongs_to :competition
   has_many :sponsorships
-  has_many :event_partners
+  has_many :event_partnerships
 
   has_one_attached :logo
   validates :name, uniqueness: true

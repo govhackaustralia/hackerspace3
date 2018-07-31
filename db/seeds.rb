@@ -100,6 +100,7 @@ Region.all.each do |region|
     region.sponsorships.create(sponsor: Sponsor.find((counter + time) % Sponsor.count),
     sponsorship_type: SponsorshipType.find(counter % SponsorshipType.count))
   end
+  counter += 1
 
   opening = region.events.create(competition: comp, name: 'Brisbane',
   registration_type: OPEN, capacity: 50, email: "#{region.name}@mail.com", twitter: '@qld',
@@ -111,7 +112,7 @@ Region.all.each do |region|
   start_time: '2018-09-10 19:20:33 +1000', end_time: '2018-09-10 19:20:33 +1000',
   category_type: STATE_CONNECTIONS)
 
-  EventPartner.create(event: opening, sponsor: Sponsor.find(counter))
+  EventPartnership.create(event: opening, sponsor: Sponsor.find(counter))
 
   opening.assignments.create(user: User.find(5+counter), title: EVENT_HOST)
 
