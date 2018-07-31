@@ -69,10 +69,17 @@ class Event < ApplicationRecord
   private
 
   def update_identifier
-    new_identifier = CGI.escape("#{category_type}-#{name}".downcase.tr(' ', '_'))
+    new_identifier = uri_pretty("#{category_type}-#{name}")
     if Event.find_by_identifier(new_identifier).present?
-      new_identifier = CGI.escape("#{category_type}-#{name}-#{id}".downcase.tr(' ', '_'))
+      new_identifier = uri_pretty("#{category_type}-#{name}-#{id}")
     end
     update_columns(identifier: new_identifier)
+  end
+
+  def uri_pretty(string)
+    array = string.split(/\W/)
+    words = array - ['']
+    new_name = words.join('_')
+    CGI.escape(new_name.downcase)
   end
 end
