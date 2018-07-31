@@ -36,6 +36,9 @@
 	background-position: center center;
 	transition: all 1s ease;
 	padding: 0;
+	display: flex;
+	align-content: stretch;
+	align-items: stretch;
 }
 
 .index_page nav section div a {
@@ -48,6 +51,8 @@
 	width: 200px;
 	padding: 1.5em 0.5em;
 	transition: all 1s ease;
+	display: flex;
+	align-items: center;
 }
 
 .index_page nav section div:nth-of-type(even) a {

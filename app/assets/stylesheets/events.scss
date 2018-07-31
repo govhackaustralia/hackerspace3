@@ -79,6 +79,14 @@
 	text-decoration: none;
 }
 
+.events_page section.events p {
+	color: #ddd;
+}
+
+.events_page section.events.connections p {
+	display: none;
+}
+
 .events_page section.events article div:hover {
 	transform: scale(1.1, 1.1);
 }
