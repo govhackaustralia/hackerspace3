@@ -1,85 +1,78 @@
+<main class="events_page single-event">
+
 <h2><%= @event.name %> - <%= @region.name %></h2>
 
+<section>
 <h3>Event Information</h3>
 
-Registration Type: <%= @event.registration_type %><br>
+<% if @event.category_type == STATE_CONNECTIONS %>
+
+			<section class="info">
+
+				<p>Want a winning edge or perhaps you are intrigued and want to find out what GovHack is all about?</p>
+
+				<p>The local GovHack team will give you an overview of the competition and answer any questions you may have. Learn more about official events in your region and all about youth, maker or special interest themed nodes.</p>
+
+				<p>The best teams have a mix of skills, and this event is a great opportunity to find a team to join. Many new friendships are formed at GovHack and this is the perfect place for you to meet like minded people.</p>
+
+				<p>Data Mentors will be in attendance to share their knowledge of open government data and to provide insight that could help incubate ideas to pursue during the competition.</p>
+
+				<p>Tech savvy mentors may even be available to share some tips and tricks to help you create winning concepts.</p>
+			</section>
+
+		<% end %>
+<section>
+<article>
+
+<div class="event-info"><h4>Registration Type:</h4><p> <%= @event.registration_type %></p></div>
 
 <% unless @event.email.nil? || @event.email.empty?  %>
-  Email: <%= @event.email %><br>
+  <div class="event-info"><h4>Email:</h4><p> <%= @event.email %></p></div>
 <% end %>
 
 <% unless @event.twitter.nil? || @event.twitter.empty?  %>
-  Twitter: <%= @event.twitter %><br>
+  <div class="event-info"><h4>Twitter:</h4><p> <%= @event.twitter %></p></div>
 <% end %>
 
 <% unless @event.address.nil? || @event.address.empty?  %>
-  Address: <%= @event.address %><br>
+  <div class="event-info"><h4>Address:</h4><p> <%= @event.address %></p></div>
 <% end %>
 
 <% unless @event.start_time.nil? || @event.end_time.nil? %>
-  Start time: <%= @event.start_time.strftime("%I:%M%p") %><br>
-  End time: <%= @event.end_time.strftime("%I:%M%p") %><br>
+  <div class="event-info"><h4>Start time:</h4><p> <%= @event.start_time.strftime("%I:%M%p") %></p></div>
+  <div class="event-info"><h4>End time:</h4><p> <%= @event.end_time.strftime("%I:%M%p") %></p></div>
 <% end %>
 
 <% unless @event.accessibility.nil? || @event.accessibility.empty?  %>
-  Accessibility: <%= @event.accessibility %><br>
+  <div class="event-info"><h4>Accessibility:</h4><p> <%= @event.accessibility %></p></div>
 <% end %>
 
 <% unless @event.youth_support.nil? || @event.youth_support.empty?  %>
-  Youth Support: <%= @event.youth_support %><br>
+  <div class="event-info"><h4>Youth Support:</h4><p> <%= @event.youth_support %></p></div>
 <% end %>
 
 <% unless @event.parking.nil? || @event.parking.empty?  %>
-  Parking: <%= @event.parking %><br>
+  <div class="event-info"><h4>Parking:</h4><p> <%= @event.parking %></p></div>
 <% end %>
 
 <% unless @event.public_transport.nil? || @event.public_transport.empty?  %>
-  Public Transport: <%= @event.public_transport %><br>
+  <div class="event-info"><h4>Public Transport:</h4><p> <%= @event.public_transport %></p></div>
 <% end %>
 
 <% unless @event.operation_hours.nil? || @event.operation_hours.empty?  %>
-  Operating hours: <%= @event.operation_hours %><br>
+  <div class="event-info"><h4>Operating hours:</h4><p> <%= @event.operation_hours %></p></div>
 <% end %>
 
 <% unless @event.catering.nil? || @event.catering.empty?  %>
-  Catering: <%= @event.catering %><br>
+  <div class="event-info"><h4>Catering:</h4><p> <%= @event.catering %></p></div>
 <% end %>
 
+  </article>
+<aside>
 <% unless @event.place_id.nil? || @event.place_id.empty?  %>
   <iframe width="600" height="450" frameborder="0" style="border:0"
   src="https://www.google.com/maps/embed/v1/place?q=place_id:<%= @event.place_id %>&key=<%= ENV['GOOGLE_API_KEY'] %>" allowfullscreen></iframe><br>
 <% end %>
-
-<% if @event_partner.present? %>
-
-  <h3>Event Partner - <%= @event_partner.name %></h3>
-
-  <% if @event_partner.logo.attached? %>
-    <%= image_tag url_for(@event_partner.logo) %>
-  <% else %>
-    <%= image_tag 'default_profile_pic.png' %>
-  <% end %>
-
-<% end %><br>
-
-<% if @sponsorship_types.present? %>
-
-  <h3>Regional Sponsors</h3>
-
-  <% @sponsorship_types.each do |sponsorship_type| %>
-    <h4><%= sponsorship_type.name %></h4>
-    <% sponsorship_type.sponsorships.where(sponsorable: @region).order(:created_at).each do |sponsorship| %>
-      <% sponsor = sponsorship.sponsor %>
-      <h5><%= sponsor.name %></h5>
-      <% if sponsor.logo.attached? %>
-        <%= image_tag url_for(sponsor.logo) %>
-      <% else %>
-        <%= image_tag 'default_profile_pic.png' %>
-      <% end %>
-    <% end %>
-  <% end %>
-<% end %><br>
-
 <% if user_signed_in? %>
   <% if @registration.present? %>
     <%= link_to 'Manage your Event Registration', event_registration_path(@event.identifier, @registration) %><br>
@@ -89,9 +82,46 @@ Registration Type: <%= @event.registration_type %><br>
 <% else %>
   <%= link_to 'Sign in to register', new_user_session_path %><br>
 <% end %>
+<% if @event_partner.present? %>
+<h3>Event Partner</h3>
+<figure>
+
+  <% if @event_partner.logo.attached? %>
+    <%= image_tag url_for(@event_partner.logo) %>
+  <% else %>
+    <%= image_tag 'default_profile_pic.png' %>
+  <% end %>
+</figure>
+<% end %>
+</aside>
+</section>
+
+<% if @sponsorship_types.present? %>
+
+  <h3>Regional Sponsors</h3>
+
+  <% @sponsorship_types.each do |sponsorship_type| %>
+  <h4><%= sponsorship_type.name %></h4>
+  <div class="sponsors">
+    <% sponsorship_type.sponsorships.where(sponsorable: @region).order(:created_at).each do |sponsorship| %>
+      <% sponsor = sponsorship.sponsor %>
+	  <figure>
+      <% if sponsor.logo.attached? %>
+        <%= image_tag url_for(sponsor.logo) %>
+      <% else %>
+        <%= image_tag 'default_profile_pic.png' %>
+      <% end %>
+	  </figure>
+    <% end %>
+  </div>
+  <% end %>
+<% end %><br>
 
 <% if user_signed_in? && (@event.admin_assignments & current_user.assignments).present? %>
   <%= link_to 'Manage this Event', admin_region_event_path(@region, @event) %><br>
 <% end %>
 
 <%= link_to 'Back to Events', events_path %><br>
+
+</section>
+</main>

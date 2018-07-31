@@ -1,12 +1,19 @@
+<main class="registration single-col manage-account">
+
 <h2>Manage Account</h2>
 
+<section>
+	<article>
 <%= render 'user_profile_pic' %>
 
 <%= render 'user_contact', locals: { user: @user } %>
 
 <%= link_to 'Update Personal Details' , edit_personal_details_path %><br>
 <%= link_to 'Change Email and Password' , edit_user_registration_path %><br>
-
+</article>
+</section>
+<section>
+	<article>
 <h3>My Events</h3>
 
 <% if (registrations = @user.event_assignment.registrations).present? %>
@@ -28,3 +35,6 @@
   <%= link_to 'Find events', events_path %>
 
 <% end %>
+    </article>
+    </section>
+</main>

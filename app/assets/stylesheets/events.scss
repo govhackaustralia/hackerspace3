@@ -23,6 +23,101 @@
 	//background-color: rgba(255, 255, 255, 0.75);
 }
 
+.single-event > section > section {
+	display: flex;
+}
+
+.single-event > section > section > article {
+	box-sizing: border-box;
+	width: 50%;
+	padding-right: 2em;
+}
+
+.single-event > section > section > aside {
+	box-sizing: border-box;
+	width: 50%;
+	padding-left: 2em;
+}
+
+.single-event .info {
+	display: block;
+}
+
+.single-event > section > section > aside a {
+	box-sizing: border-box;
+	font-size: 1.5em;
+	padding: 0.5em 1.5em;
+	width: 100%;
+	display: block;
+	text-align: center;
+	margin-top: 1em;
+    background-color: #ca1e56;
+    color: #ddd;
+    font-weight: 700;
+    text-transform: uppercase;
+    text-decoration: none;
+}
+
+.single-event > section > section > aside iframe {
+	width: 100%;
+}
+
+.single-event > section > section > aside figure {
+	display: flex;
+	flex-direction: column;
+	align-content: center;
+	align-items: center;
+	padding: 1em 2em;
+	border: 1px solid #dde4e6;
+	transition: all 0.4s ease;
+	cursor: pointer;
+}
+
+.single-event > section > section > aside figure:hover {
+	background-color: #fff;
+}
+
+.single-event > section > section > aside figure img {
+	display: inline-block;
+	width: auto !important;
+	height: auto !important;
+	max-height: 125px;
+}
+
+.single-event .sponsors {
+	display: flex;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-around;
+	align-content: center;
+	align-items: center;
+}
+
+.single-event .sponsors figure {
+	display: flex;
+	flex-direction: column;
+	align-content: center;
+	align-items: center;
+	padding: 1em 2em;
+	border: 1px solid #dde4e6;
+	transition: all 0.4s ease;
+	cursor: pointer;
+	width: 30%;
+	box-sizing: border-box;
+}
+
+.single-event .sponsors figure:hover {
+	background-color: #fff;
+}
+
+.single-event .sponsors figure img {
+	display: inline-block;
+	width: auto !important;
+	height: auto !important;
+	max-height: 125px;
+}
+
+
 .events_page section.info p {
 	margin-top: 0.5em;
 	font-size: 1.25em;
@@ -93,6 +188,10 @@
 
 .events_page section.events article div:hover {
 	transform: scale(1.1, 1.1);
+}
+
+.event-info {
+	padding: 0.5em;
 }
 
 @media only screen and (max-width: 900px) {

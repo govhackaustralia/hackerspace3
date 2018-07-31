@@ -210,12 +210,16 @@ img {
 	display: none;
 }
 
-.registration.single-col.toc section, .registration.single-col.edit-account section, .registration.single-col.change-email-password section {
+.registration.single-col.toc section, .registration.single-col.edit-account section, .registration.single-col.change-email-password section, .registration.single-col.manage-account section {
 	flex-direction: column;
 }
 
 .registration.single-col.edit-account section form, .registration.single-col.change-email-password section form {
 	width: 100%;
+}
+
+.registration.single-col.manage-account section article {
+	padding: 2em 2em;
 }
 
 .registration.single-col.toc section article {
