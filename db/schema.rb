@@ -84,6 +84,7 @@ ActiveRecord::Schema.define(version: 2018_07_31_075215) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "category_type"
+    t.string "place_id"
   end
 
   create_table "regions", force: :cascade do |t|
