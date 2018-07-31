@@ -108,7 +108,7 @@ AVAILABLE_TSHIRT_SIZES = ['Small', 'Medium', 'Large']
 # Event Category
 
 COMPETITION = 'Competition'
-STATE_CONNECTIONS = 'State Connections'
+STATE_CONNECTIONS = 'Connections'
 STATE_AWARDS = 'State Awards'
 NATIONAL_AWARDS = 'National Awards'
 
