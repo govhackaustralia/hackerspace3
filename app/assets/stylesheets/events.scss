@@ -94,3 +94,18 @@
 .events_page section.events article div:hover {
 	transform: scale(1.1, 1.1);
 }
+
+@media only screen and (max-width: 900px) {
+	
+	.events_page {
+		padding: 1em 1em;
+	}
+	
+	.events_page section.events article {
+		margin: .5em .5em;
+	}
+	
+	.events_page > section {
+		padding: .5em .5em;
+	}
+}

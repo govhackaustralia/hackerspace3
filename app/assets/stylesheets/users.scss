@@ -53,7 +53,7 @@ img {
 	font-size: 0.85em;
 }
 
-.registration form > div.field > input {
+.registration form > div.field > input, .registration form > div.field > select {
 	box-sizing: border-box;
 	width: 50%;
 	padding-left: 1em;
@@ -62,9 +62,52 @@ img {
 	display: flex;
 }
 
+.registration form > div.field div.field {
+	display: flex;
+	padding: 0.5em 0em;
+	align-items: center;
+}
+
+.registration form > div.field div.field {
+	text-align: left !important;
+}
+
+.registration form > div.field div.select-profile {
+	padding: 0;
+}
+
+.registration form > div.field div.field div {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	width: 90%;
+	box-sizing: border-box;
+}
+
+.registration form > div.field div.field .govhack-profile {
+	flex-direction: column;
+}
+
+.registration form > div.field div.field .govhack-profile div{
+	display: flex;
+	justify-content: space-between;
+	width: 100%;
+}
+
+.registration form > div.field div.field .govhack-profile input[type="file"] {
+	width: auto;
+}
+
+.registration form > div.field div.field input {
+	box-sizing: border-box;
+	width: 10%;
+	padding-right:1em;
+}
+
 .registration form > div.actions {
 	display: flex;
 	justify-content: center;
+	margin-top: 1em;
 	margin-bottom: 1em;
 }
 
@@ -165,4 +208,48 @@ img {
 
 .registration.signin #signgoogle .wrapper .message p:first-of-type {
 	display: none;
+}
+
+.registration.single-col.toc section, .registration.single-col.edit-account section {
+	flex-direction: column;
+}
+
+.registration.single-col.edit-account section form {
+	width: 100%;
+}
+
+.registration.single-col.toc section article {
+	padding: 2em 2em;
+}
+
+.registration.single-col.toc section article h3:not(:first-of-type) {
+	margin-top: 1em;
+}
+
+.registration.single-col.toc section article p:not(:first-of-type) {
+	margin-top: 0.5em;
+}
+
+.registration.single-col.toc section article li {
+	list-style: square;
+	margin-left: 2em;
+}
+
+.registration.single-col.toc section form {
+	width: 100%;
+}
+
+@media only screen and (max-width: 1000px) {
+	.registration > section {
+		flex-direction: column;
+	}
+	
+	.registration form {
+		border-right: none;
+		width: 100%;
+	}
+	
+	.registration aside {
+		width: 100%;
+	}
 }
