@@ -11,6 +11,12 @@
   <%= form.label :capacity %><br>
   <%= form.number_field :capacity %><br>
 
+  <%= form.label :start_time %><br>
+  <%= form.datetime_local_field :start_time %><br>
+
+  <%= form.label :end_time %><br>
+  <%= form.datetime_local_field :end_time %><br>
+
   <%= form.label :email %><br>
   <%= form.email_field :email %><br>
 
@@ -40,12 +46,6 @@
 
   <%= form.label :video_url %><br>
   <%= form.url_field :video_url %><br>
-
-  <%= form.label :start_time %><br>
-  <%= form.datetime_local_field :start_time %><br>
-
-  <%= form.label :end_time %><br>
-  <%= form.datetime_local_field :end_time %><br>
 
   <%= form.submit %>
 <% end %>
