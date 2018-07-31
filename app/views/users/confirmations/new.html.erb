@@ -1,5 +1,7 @@
+<main class="registration single-col resend-confirmation"> 
 <h2>Resend confirmation instructions</h2>
 
+<section>
 <%= form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post }) do |f| %>
   <%= devise_error_messages! %>
 
@@ -11,6 +13,7 @@
   <div class="actions">
     <%= f.submit "Resend confirmation instructions" %>
   </div>
+  <%= render "users/shared/links" %>
 <% end %>
-
-<%= render "users/shared/links" %>
+</section>
+</main>

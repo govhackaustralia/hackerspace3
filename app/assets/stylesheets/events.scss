@@ -4,6 +4,9 @@
 
 .events_page {
 	padding: 2em 5em;
+	//background-size: cover;
+	//background-position: center center;
+	//background-image: url("/assets/sydneyback.jpg");
 }
 
 .events_page h2 {
@@ -17,6 +20,7 @@
 
 .events_page > section {
 	padding: 2em 2em;
+	//background-color: rgba(255, 255, 255, 0.75);
 }
 
 .events_page section.info p {
