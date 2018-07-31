@@ -15,3 +15,10 @@
 //= require turbolinks
 //= require jquery
 //= require_tree .
+
+
+$(document).ready(function() {
+	$("p.alert, p.notice").click(function(event) {
+		$(this).hide();
+	});
+});
