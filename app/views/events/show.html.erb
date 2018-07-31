@@ -2,25 +2,58 @@
 
 <h3>Event Information</h3>
 
-Region: <%= @region.name %><br>
-Event Category: <%= @event.category_type %><br>
 Registration Type: <%= @event.registration_type %><br>
-Email: <%= @event.email %><br>
-Twitter: <%= @event.twitter %><br>
-Address: <%= @event.address %><br>
+
+<% unless @event.email.nil? || @event.email.empty?  %>
+  Email: <%= @event.email %><br>
+<% end %>
+
+<% unless @event.twitter.nil? || @event.twitter.empty?  %>
+  Twitter: <%= @event.twitter %><br>
+<% end %>
+
+<% unless @event.address.nil? || @event.address.empty?  %>
+  Address: <%= @event.address %><br>
+<% end %>
+
 <% unless @event.start_time.nil? || @event.end_time.nil? %>
   Start time: <%= @event.start_time.strftime("%I:%M%p") %><br>
   End time: <%= @event.end_time.strftime("%I:%M%p") %><br>
 <% end %>
-Accessibility: <%= @event.accessibility %><br>
-Youth Support: <%= @event.youth_support %><br>
-Parking: <%= @event.parking %><br>
-Public Transport: <%= @event.public_transport %><br>
-Operating hours: <%= @event.operation_hours %><br>
-Catering: <%= @event.catering %><br>
 
-<iframe width="600" height="450" frameborder="0" style="border:0"
-src="https://www.google.com/maps/embed/v1/place?q=place_id:<%= @event.place_id %>&key=<%= ENV['GOOGLE_API_KEY'] %>" allowfullscreen></iframe><br>
+<% unless @event.accessibility.nil? || @event.accessibility.empty?  %>
+  Accessibility: <%= @event.accessibility %><br>
+<% end %>
+
+<% unless @event.youth_support.nil? || @event.youth_support.empty?  %>
+  Youth Support: <%= @event.youth_support %><br>
+<% end %>
+
+<% unless @event.parking.nil? || @event.parking.empty?  %>
+  Parking: <%= @event.parking %><br>
+<% end %>
+
+<% unless @event.public_transport.nil? || @event.public_transport.empty?  %>
+  Public Transport: <%= @event.public_transport %><br>
+<% end %>
+
+<% unless @event.operation_hours.nil? || @event.operation_hours.empty?  %>
+  Operating hours: <%= @event.operation_hours %><br>
+<% end %>
+
+<% unless @event.catering.nil? || @event.catering.empty?  %>
+  Catering: <%= @event.catering %><br>
+<% end %>
+
+<% unless @event.place_id.nil? || @event.place_id.empty?  %>
+  <iframe width="600" height="450" frameborder="0" style="border:0"
+  src="https://www.google.com/maps/embed/v1/place?q=place_id:<%= @event.place_id %>&key=<%= ENV['GOOGLE_API_KEY'] %>" allowfullscreen></iframe><br>
+<% end %>
+
+<% unless @event.video_url.nil? || @event.video_url.empty?  %>
+  <iframe id="player" type="text/html" width="640" height="390" src="<%= @event.video_url %>"
+  frameborder="0"></iframe>
+<% end %>
 
 <% if @event_partner.present? %>
 
