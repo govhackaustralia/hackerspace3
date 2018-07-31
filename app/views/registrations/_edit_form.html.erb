@@ -6,15 +6,20 @@
       options = {checked: @registration.status == status}) %>
     <%= f.label(:status, status) %>
   <% end %><br>
-
-  <%= label_tag :preferred_name %><br>
-  <%= text_field_tag :preferred_name, @user.preferred_name %><br>
-
-  <%= label_tag :organisation_name %><br>
-  <%= text_field_tag :organisation_name, @user.organisation_name %><br>
-
-  <%= label_tag :dietary_requirements %><br>
-  <%= text_field_tag :dietary_requirements, @user.dietary_requirements %><br>
-
+<div class="field">
+  <%= label_tag :preferred_name %>
+  <%= text_field_tag :preferred_name, @user.preferred_name %>
+  </div>
+  <div class="field">
+  
+  <%= label_tag :organisation_name %>
+  <%= text_field_tag :organisation_name, @user.organisation_name %>
+  </div>
+  <div class="field">
+  <%= label_tag :dietary_requirements %>
+  <%= text_field_tag :dietary_requirements, @user.dietary_requirements %>
+  </div>
+  <div class="actions">
   <%= f.submit %>
+  </div>
 <% end %>
