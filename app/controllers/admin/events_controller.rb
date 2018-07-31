@@ -43,7 +43,7 @@ class Admin::EventsController < ApplicationController
   def event_params
     params.require(:event).permit(:name, :category_type, :registration_type,
                                   :capacity, :email, :twitter, :address, :accessibility, :youth_support,
-                                  :parking, :public_transport, :operation_hours, :catering, :video_url,
+                                  :parking, :public_transport, :operation_hours, :catering, :video_id,
                                   :start_time, :end_time, :place_id)
   end
 
