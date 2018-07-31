@@ -210,11 +210,11 @@ img {
 	display: none;
 }
 
-.registration.single-col.toc section, .registration.single-col.edit-account section {
+.registration.single-col.toc section, .registration.single-col.edit-account section, .registration.single-col.change-email-password section {
 	flex-direction: column;
 }
 
-.registration.single-col.edit-account section form {
+.registration.single-col.edit-account section form, .registration.single-col.change-email-password section form {
 	width: 100%;
 }
 
@@ -237,6 +237,24 @@ img {
 
 .registration.single-col.toc section form {
 	width: 100%;
+}
+
+.change-email-password aside {
+	flex-direction: column;
+	width: 100%;
+}
+
+.change-email-password aside input {
+	box-sizing: border-box;
+	font-size: 1.1em;
+	padding: 0.25em 1.25em;
+	-webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-color: #C00;
+    color: #ddd;
+    font-weight: 700;
+    text-transform: uppercase;
 }
 
 @media only screen and (max-width: 1000px) {
