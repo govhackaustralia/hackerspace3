@@ -13,11 +13,13 @@ class Registration < ApplicationRecord
   private
 
   def check_for_newly_freed_space
-    event = self.event
-    return unless event.below_capacity?
-    waitlist_registrations = event.registrations.where(status: WAITLIST).order(time_notified: :asc)
-    return unless (new_attendee = waitlist_registrations.first).present?
-    new_attendee.update(status: ATTENDING)
-    RegistrationMailer.attendance_email(new_attendee).deliver_now
+    ActiveRecord::Base.transaction do
+      event = self.event
+      return unless event.below_capacity?
+      waitlist_registrations = event.registrations.where(status: WAITLIST).order(time_notified: :asc)
+      return unless (new_attendee = waitlist_registrations.first).present?
+      new_attendee.update(status: ATTENDING)
+      RegistrationMailer.attendance_email(new_attendee).deliver_now
+    end
   end
 end
