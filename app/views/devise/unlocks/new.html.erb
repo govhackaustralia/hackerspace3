@@ -1,4 +1,4 @@
-<main class="registration single-col resend-unlock"> 
+<main class="registration single-col resend-unlock">
 <h2>Resend unlock instructions</h2>
 <section>
 <%= form_for(resource, as: resource_name, url: unlock_path(resource_name), html: { method: :post }) do |f| %>
@@ -12,8 +12,7 @@
   <div class="actions">
     <%= f.submit "Resend unlock instructions" %>
   </div>
-  <%= render "users/shared/links" %>
+  <%= render "devise/shared/links" %>
 <% end %>
 </section>
 </main>
-

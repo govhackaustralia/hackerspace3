@@ -4,12 +4,12 @@
 	<section>
 	<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
 	  <%= devise_error_messages! %>
-	
+
 	  <div class="field">
 	    <div><%= f.label :email %></div>
 	    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
 	  </div>
-	
+
 	  <div class="field">
 	   	<div>
 		   	<%= f.label :password %>
@@ -19,21 +19,20 @@
 	  	</div>
 	    <%= f.password_field :password, autocomplete: "off" %>
 	  </div>
-	
+
 	  <div class="field">
 	    <div><%= f.label :password_confirmation %></div>
 	    <%= f.password_field :password_confirmation, autocomplete: "off" %>
 	  </div>
-	
+
 	  <div class="actions">
 	    <%= f.submit "Sign up" %>
 	  </div>
-	  <%= render "users/shared/links" %>
+	  <%= render "devise/shared/links" %>
 	<% end %>
 	<aside>
-		<%= link_to (render "users/shared/google"), user_google_omniauth_authorize_path %>
+		<%= link_to (render "devise/shared/google"), user_google_omniauth_authorize_path %>
 	</aside>
-	
-	<!--<%= render "users/shared/links" %>-->
+
 	</section>
 </main>
