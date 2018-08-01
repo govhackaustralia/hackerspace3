@@ -2,14 +2,14 @@ class RegistrationsController < ApplicationController
   before_action :authenticate_user!
 
   def new
-    @event = Event.find_by(identifier:params[:event_identifier])
+    @event = Event.find_by(identifier: params[:event_identifier])
     @region = @event.region
     @registration = @event.registrations.new
     @user = current_user
   end
 
   def show
-    @event = Event.find_by(identifier:params[:event_identifier])
+    @event = Event.find_by(identifier: params[:event_identifier])
     @region = @event.region
     @registration = Registration.find(params[:id])
     @event_assignment = current_user.event_assignment
@@ -17,7 +17,7 @@ class RegistrationsController < ApplicationController
   end
 
   def edit
-    @event = Event.find_by(identifier:params[:event_identifier])
+    @event = Event.find_by(identifier: params[:event_identifier])
     @region = @event.region
     @registration = Registration.find(params[:id])
     @user = current_user
