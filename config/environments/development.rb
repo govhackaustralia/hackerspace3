@@ -37,6 +37,8 @@ Rails.application.configure do
 
   config.action_mailer.default_url_options = { host: ENV['DOMAIN'], port: 3000 }
 
+  config.action_mailer.asset_host = ENV['HOST']
+
   config.action_mailer.smtp_settings = {
     :address => ENV['AWS_SES_SERVER'],
     :port => 587,
