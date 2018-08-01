@@ -1,3 +1,5 @@
+<main class="register">
+
 <h2>Registration for <%= @event.name %></h2>
 
 <% if @event.attending? @event_assignment %>
@@ -20,7 +22,9 @@ If you no longer wish to attend, please update your registration below.<br>
 
 <% end %>
 
-<%= link_to 'Update Registration', edit_event_registration_path(@event.identifier, @registration) %><br>
+<div class="actions">
+  <%= link_to 'Update Registration', edit_event_registration_path(@event.identifier, @registration) %><br>
+</div>
 
 <h3>Dietary Requirements</h3>
 
@@ -37,3 +41,5 @@ If you no longer wish to attend, please update your registration below.<br>
 <%= link_to 'Update Dietary Requirements', edit_user_path(@user) %><br>
 
 <%= link_to 'Back to Event', event_path(@event.identifier) %>
+
+</main>

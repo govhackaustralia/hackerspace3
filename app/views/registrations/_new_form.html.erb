@@ -2,23 +2,22 @@
 <% label = locals[:label] %>
 
 <%= form_for [@event, @registration] do |f| %>
-<div class="field">
-	<div>
-  <%= label_tag :preferred_name %><br>
-  <em>(this will be the name printed on your badge)</em></div>
-  <%= text_field_tag :preferred_name, @user.preferred_name %>
-</div>
-<div class="field">
-  <%= label_tag :organisation_name %>
-  <%= text_field_tag :organisation_name, @user.organisation_name %>
-</div>
-<div class="field">
-  <%= label_tag :dietary_requirements %>
-  <%= text_field_tag :dietary_requirements, @user.dietary_requirements %>
-</div>
-
+	<div class="field">
+		<div>
+	  <%= label_tag :preferred_name %><br>
+	  <em>(this will be the name printed on your badge)</em></div>
+	  <%= text_field_tag :preferred_name, @user.preferred_name %>
+	</div>
+	<div class="field">
+	  <%= label_tag :organisation_name %>
+	  <%= text_field_tag :organisation_name, @user.organisation_name %>
+	</div>
+	<div class="field">
+	  <%= label_tag :dietary_requirements %>
+	  <%= text_field_tag :dietary_requirements, @user.dietary_requirements %>
+	</div>
   <%= hidden_field_tag(:status, status) %>
-<div class="actions">
-  <%= f.submit label %>
-</div>
+	<div class="actions">
+	  <%= f.submit label %>
+	</div>
 <% end %>
