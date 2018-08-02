@@ -82,7 +82,7 @@
 
 <% if user_signed_in? %>
   <% if @registration.present? %>
-    <%= link_to 'Manage your Event Registration', registration_path(@registration) %><br>
+    <%= link_to 'Manage your Event Registration', event_registration_path(@registration) %><br>
   <% else %>
     <%= link_to 'Register to Attend this Event', new_connection_registration_path(@event.identifier) %><br>
   <% end %>

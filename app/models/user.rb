@@ -60,11 +60,11 @@ class User < ApplicationRecord
   end
 
   def no_dietary_requirements?
-    dietary_requirments.nil? || dietary_requirments == ''
+    dietary_requirments.nil? || dietary_requirments.empty?
   end
 
   def registering_account?
-    how_did_you_hear.empty? || how_did_you_hear.nil?
+    how_did_you_hear.nil? || how_did_you_hear.empty?
   end
 
   def self.new_user_from_google(data)

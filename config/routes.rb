@@ -3,7 +3,9 @@ Rails.application.routes.draw do
 
   devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
 
-  resources :events, :registrations, :users
+  resources :events, :users
+
+  resources :registrations, as: 'event_registrations'
 
   resources :connections, param: :identifier do
     resources :registrations

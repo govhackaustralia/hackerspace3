@@ -28,10 +28,10 @@ class RegistrationsController < ApplicationController
     update_user_preferences
     if @registration.save
       flash[:notice] = 'Your registration has been updated'
-      redirect_to registration_path(@registration)
+      redirect_to event_registration_path(@registration)
     else
       flash[:notice] = @registration.errors.full_messages.to_sentence
-      render edit_registration_path(@registration)
+      render edit_event_registration_path(@registration)
     end
   end
 
@@ -58,7 +58,7 @@ class RegistrationsController < ApplicationController
                      else
                        'You have been added to the waitlist.'
                      end
-    redirect_to registration_path(@registration)
+    redirect_to event_registration_path(@registration)
   end
 
   def create_new_registration
