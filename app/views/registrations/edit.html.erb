@@ -1,5 +1,5 @@
 <main class="register">
-  <h2>Update Registration for <%= @event.name %> <%= @region.name %></h2>
+  <h2>Update Registration for <%= @event.name %> <%= @event.region.name %></h2>
 
   <% if @event.not_attending?(@event_assignment) && @event.at_capacity?  %>
 

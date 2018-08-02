@@ -1,49 +1,50 @@
 <main class="register">
 
-<h2>Registration for <%= @event.name %></h2>
+	<h2>Registration for <%= @event.name %></h2>
 
-<section>
-	<article>
-<% if @event.attending? @event_assignment %>
+	<section>
+		<article>
+			<% if @event.attending? @event_assignment %>
 
-<p>You are registered to attend the event.</p>
+				<p>You are registered to attend the event.</p>
 
-<p>If you no longer wish to attend, please update your registration below.</p>
+				<p>If you no longer wish to attend, please update your registration below.</p>
 
-<% elsif @event.waitlisted? @event_assignment %>
+			<% elsif @event.waitlisted? @event_assignment %>
 
-  <p>You are on the waitlist, you will be notified should a space become available.</p>
+			  <p>You are on the waitlist, you will be notified should a space become available.</p>
 
-  <p>If you no longer wish to attend, please update your registration below.</p>
+			  <p>If you no longer wish to attend, please update your registration below.</p>
 
-<% elsif @event.not_attending? @event_assignment %>
+			<% elsif @event.not_attending? @event_assignment %>
 
-  <p>You are registered as not attending.</p>
+			  <p>You are registered as not attending.</p>
 
-  <p>Please update your registration below if you wish to attend.</p>
+			  <p>Please update your registration below if you wish to attend.</p>
 
-<% end %>
+			<% end %>
 
-<div class="actions">
-  <%= link_to 'Update Registration', edit_registration_path(@registration) %><br>
-</div>
+			<div class="actions">
+			  <%= link_to 'Update Registration', edit_event_registration_path(@registration) %><br>
+			</div>
 
-<h3>Dietary Requirements</h3>
+			<h3>Dietary Requirements</h3>
 
-<% if @user.dietary_requirements.nil? || @user.dietary_requirements.empty? %>
+			<% if @user.no_dietary_requirements? %>
 
-  <div>We do not have any dietary requirements for you on record</div>
+			  <div>We do not have any dietary requirements for you on record</div>
 
-<% else %>
+			<% else %>
 
-  <div><%= @user.dietary_requirements %></div>
+			  <div><%= @user.dietary_requirements %></div>
 
-<% end %>
-<div class="actions">
-<%= link_to 'Update Dietary Requirements', edit_user_path(@user), :class=>"update-button" %>
-</div>
-<p><%= link_to 'Back to Event', connection_path(@event.identifier) %></p>
-</article>
-</section>
+			<% end %>
+
+			<div class="actions">
+				<%= link_to 'Update Dietary Requirements', edit_user_path(@user), :class=>"update-button" %>
+			</div>
+			<p><%= link_to 'Back to Event', connection_path(@event.identifier) %></p>
+		</article>
+	</section>
 
 </main>
