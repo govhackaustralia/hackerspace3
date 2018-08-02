@@ -2,23 +2,25 @@
 
 <h2>Registration for <%= @event.name %></h2>
 
+<section>
+	<article>
 <% if @event.attending? @event_assignment %>
 
-You are registered to attend the event.<br>
+<p>You are registered to attend the event.</p>
 
-If you no longer wish to attend, please update your registration below.<br>
+<p>If you no longer wish to attend, please update your registration below.</p>
 
 <% elsif @event.waitlisted? @event_assignment %>
 
-  You are on the waitlist, you will be notified should a space become available.<br>
+  <p>You are on the waitlist, you will be notified should a space become available.</p>
 
-  If you no longer wish to attend, please update your registration below.<br>
+  <p>If you no longer wish to attend, please update your registration below.</p>
 
 <% elsif @event.not_attending? @event_assignment %>
 
-  You are registered as not attending.<br>
+  <p>You are registered as not attending.</p>
 
-  Please update your registration below if you wish to attend.<br>
+  <p>Please update your registration below if you wish to attend.</p>
 
 <% end %>
 
@@ -37,9 +39,11 @@ If you no longer wish to attend, please update your registration below.<br>
   <div><%= @user.dietary_requirements %></div>
 
 <% end %>
-
-<%= link_to 'Update Dietary Requirements', edit_user_path(@user) %><br>
-
-<%= link_to 'Back to Event', connection_path(@event.identifier) %><br>
+<div class="actions">
+<%= link_to 'Update Dietary Requirements', edit_user_path(@user), :class=>"update-button" %>
+</div>
+<p><%= link_to 'Back to Event', connection_path(@event.identifier) %></p>
+</article>
+</section>
 
 </main>
