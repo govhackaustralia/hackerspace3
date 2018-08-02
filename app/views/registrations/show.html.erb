@@ -39,13 +39,11 @@
   <div><%= @user.dietary_requirements %></div>
 
 <% end %>
-
-<p><%= link_to 'Update Dietary Requirements', edit_user_path(@user), :class=>"update-button" %></p>
-
+<div class="actions">
+<%= link_to 'Update Dietary Requirements', edit_user_path(@user), :class=>"update-button" %>
+</div>
 <p><%= link_to 'Back to Event', event_path(@event.identifier) %></p>
 </article>
 </section>
-
-<%= link_to 'Back to Event', event_path(@event.identifier) %>
 
 </main>

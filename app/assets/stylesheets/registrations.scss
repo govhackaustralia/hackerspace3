@@ -79,6 +79,27 @@
 	margin-bottom: 1em;
 }
 
+.register div.actions {
+	display: flex;
+	justify-content: center;
+	margin-top: 1em;
+	margin-bottom: 1em;
+}
+
+.register div.actions a {
+	box-sizing: border-box;
+	font-size: 1.25em;
+	padding: 0.25em 1.25em;
+	-webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-color: #4c9ad2;
+    color: #ddd;
+    font-weight: 700;
+    text-transform: uppercase;
+    text-decoration: none;;
+}
+
 .register form > div.actions input {
 	box-sizing: border-box;
 	font-size: 1.5em;
