@@ -65,13 +65,14 @@ class RegistrationsController < ApplicationController
     @event = Event.find(params[:connection_identifier])
     @registration = @event.registrations.new(status: params[:status])
     @user = current_user
-    @registration.update(assignment: @user.event_assignment)
+    @registration.update(assignment: @user.event_assignment, time_notified: Time.now)
   end
 
   def update_registration
     @registration = Registration.find(params[:id])
     @event = @registration.event
     @registration.update(registration_params)
+    @registration.update(time_notified: Time.now)
     @user = current_user
   end
 
