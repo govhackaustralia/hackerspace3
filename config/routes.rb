@@ -32,7 +32,11 @@ Rails.application.routes.draw do
 
   get 'manage_account', to: 'users#show'
 
-  get 'edit_personal_details', to: 'users#edit'
+  get 'complete_registration', to: 'users#edit'
+
+  get 'update_personal_details', to: 'users#edit'
+
+  get 'terms_and_conditions', to: 'users#edit'
 
   root 'competitions#index'
 end

@@ -63,6 +63,10 @@ class User < ApplicationRecord
     dietary_requirments.nil? || dietary_requirments == ''
   end
 
+  def registering_account?
+    how_did_you_hear.empty? || how_did_you_hear.nil?
+  end
+
   def self.new_user_from_google(data)
     User.new(full_name: data['name'],
              email: data['email'],

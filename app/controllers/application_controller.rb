@@ -7,7 +7,7 @@ class ApplicationController < ActionController::Base
   def accept_terms_and_conditions
     return unless ts_and_cs_conditions_not_met
     flash[:notice] = 'Please accept our terms and conditions'
-    redirect_to edit_user_path(current_user)
+    redirect_to terms_and_conditions_path
   end
 
   def ts_and_cs_conditions_not_met

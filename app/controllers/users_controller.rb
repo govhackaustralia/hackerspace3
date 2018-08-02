@@ -10,6 +10,8 @@ class UsersController < ApplicationController
   end
 
   def update
+    @user = current_user
+    @account_registration = @user.registering_account?
     if params[:user].nil?
       redirect_to root_path
     elsif current_user.update(user_params)
@@ -32,7 +34,13 @@ class UsersController < ApplicationController
   def account_update_successfully
     if params[:user][:accepted_terms_and_conditions]
       flash[:notice] = 'Welcome! Please complete your registration.'
-      redirect_to edit_user_path
+      redirect_to complete_registration_path
+    elsif @account_registration
+      if @user.how_did_you_hear.empty?
+        current_user.update(how_did_you_hear: NO_RESPONSE)
+      end
+      flash[:notice] = 'Your account has been created.'
+      redirect_to manage_account_path
     else
       flash[:notice] = 'Your personal details have been updated.'
       redirect_to manage_account_path

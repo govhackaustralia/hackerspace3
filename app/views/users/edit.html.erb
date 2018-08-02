@@ -1,10 +1,15 @@
 <% if current_user.accepted_terms_and_conditions %>
-<main class="registration single-col edit-account">
-  <h2>Update Personal Details</h2>
-  <section>
-  <%= render 'full_form' %>
-  <%= link_to 'Back to Account', manage_account_path %>
-  </section>
+  <main class="registration single-col edit-account">
+    <% if @user.registering_account? %>
+      <h2>Complete Account Registration</h2>
+    <% else %>
+      <h2>Update Personal Details</h2>
+    <% end %>
+    <section>
+      <%= render 'full_form' %>
+      <%= link_to 'Back to Account', manage_account_path %>
+    </section>
+  </main>
 <% else %>
   <%= render 'terms_and_conditions' %>
 <% end %>

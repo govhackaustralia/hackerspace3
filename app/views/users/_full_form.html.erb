@@ -4,40 +4,40 @@
   <%= form.label :full_name, 'Full name: (Required)' %>
   <%= form.text_field :full_name %>
   </div>
-  
+
 <div class="field">
   <%= form.label :preferred_name %>
   <%= form.text_field :preferred_name %>
   </div>
-  
+
 <div class="field">
   <%= form.label :organisation_name %>
   <%= form.text_field :organisation_name %>
   </div>
-  
+
 <div class="field">
   <%= form.label :phone_number %>
   <%= telephone_field(:user, :phone_number) %>
   </div>
-  
+
 <div class="field">
   <%= form.label :twitter %>
   <%= form.text_field :twitter %>
   </div>
-  
+
 <div class="field">
   <%= form.label :dietary_requirements %>
   <%= form.text_field :dietary_requirements %>
   </div>
-  
+
 <div class="field">
   <%= form.label :tshirt_size %>
   <%= form.select(:tshirt_size, options_for_select(AVAILABLE_TSHIRT_SIZES, @user.tshirt_size)) %>
   </div>
-  
+
 <div class="field">
 	<label>Profile picture</label>
-	
+
 	<div class="select-profile">
 		<div class="field">
 		  <%= form.radio_button(:preferred_img, GOVHACK, options = {checked: GOVHACK == @user.preferred_img}) %>
@@ -80,40 +80,51 @@
 <div class="field">
   <%= form.label :mailing_list %>
   <%= form.check_box :mailing_list, { checked: @user.mailing_list }, true, false  %>
-  
+
 </div>
 
 <div class="field">
   <%= form.label :challenge_sponsor_contact_place %>
   <%= form.check_box :challenge_sponsor_contact_place, { checked: @user.challenge_sponsor_contact_place }, true, false  %>
-  
+
 </div>
 
 <div class="field">
   <%= form.label :challenge_sponsor_contact_enter %>
   <%= form.check_box :challenge_sponsor_contact_enter, { checked: @user.challenge_sponsor_contact_enter }, true, false  %>
-  
+
 </div>
 
 <div class="field">
   <%= form.label :my_project_sponsor_contact %>
   <%= form.check_box :my_project_sponsor_contact, { checked: @user.my_project_sponsor_contact }, true, false  %>
-  
+
 </div>
 
 <div class="field">
   <%= form.label :me_govhack_contact %>
   <%= form.check_box :me_govhack_contact, { checked: @user.me_govhack_contact }, true, false  %>
-  
+
 </div>
 
-<div class="field">
-  <%= form.label :how_did_you_hear %>
-  <%= form.text_field :how_did_you_hear %>
-</div>
+<% if @user.registering_account? %>
 
-<div class="actions">
-  <%= form.submit %>
-</div>
+  <div class="field">
+    <%= form.label :how_did_you_hear %>
+    <%= form.text_field :how_did_you_hear %>
+    <%= hidden_field_tag(:account_registration, true) %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit 'Complete Registration' %>
+  </div>
+
+<% else %>
+
+  <div class="actions">
+    <%= form.submit 'Update Details' %>
+  </div>
+
+<% end %>
 
 <% end %>

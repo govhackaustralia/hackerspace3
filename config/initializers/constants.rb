@@ -116,3 +116,7 @@ OPEN_AND_INVITATION = 'Open and Invitation'
 INVITATION_ONLY = 'Invitation Only'
 
 EVENT_REGISTRATION_TYPES = [OPEN, OPEN_AND_INVITATION, INVITATION_ONLY]
+
+# How did you hear about us no response placeholder
+
+NO_RESPONSE = '[no response recorded]'
