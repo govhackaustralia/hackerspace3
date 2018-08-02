@@ -124,7 +124,7 @@
   <% end %>
 <% end %><br>
 
-<% if user_signed_in? && (@event.admin_assignments & current_user.assignments).present? %>
+<% if user_signed_in? && current_user.admin_privileges? %>
   <%= link_to 'Manage this Event', admin_region_connection_path(@region, @event) %><br>
 <% end %>
 

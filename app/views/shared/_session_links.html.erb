@@ -1,7 +1,0 @@
-<% if user_signed_in? %>
-  <% if current_user.admin_privileges? %>
-    <%= link_to 'Competition Management', admin_competitions_path %><br>
-    <%= link_to 'Region Management', admin_regions_path %><br>
-    <%= link_to 'User Management', admin_users_path %><br>
-  <% end %>
-<% end %>

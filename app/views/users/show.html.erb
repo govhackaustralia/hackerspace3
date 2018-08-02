@@ -1,40 +1,46 @@
 <main class="registration single-col manage-account">
 
-<h2>Manage Account</h2>
+	<h2>Manage Account</h2>
 
-<section>
-	<article>
-<%= render 'user_profile_pic' %>
+	<section>
+		<article>
+			<%= render 'user_profile_pic' %>
 
-<%= render 'user_contact', locals: { user: @user } %>
+			<%= render 'user_contact', locals: { user: @user } %>
 
-<%= link_to 'Update Personal Details' , update_personal_details_path %><br>
-<%= link_to 'Change Email and Password' , edit_user_registration_path %><br>
-</article>
-</section>
-<section>
-	<article>
-<h3>My Events</h3>
+			<%= link_to 'Update Personal Details' , update_personal_details_path %><br>
+			<%= link_to 'Change Email and Password' , edit_user_registration_path %><br>
+			<% if current_user.admin_privileges? %>
+				<%= link_to 'Competition Management', admin_competitions_path %><br>
+				<%= link_to 'Region Management', admin_regions_path %><br>
+				<%= link_to 'User Management', admin_users_path %><br>
+			<% end %>
+		</article>
+	</section>
 
-<% if (registrations = @user.event_assignment.registrations).present? %>
+	<section>
+		<article>
+		<h3>My Events</h3>
 
-  <% @user.event_assignment.registrations.each do |registration| %>
-    <% event = registration.event %>
-    <% region = event.region %>
-    <h4><%= event.name %> -  <%= region.name %></h4>
+		<% if (registrations = @user.event_assignment.registrations).present? %>
 
-    You are registered as: <%= registration.status %><br>
+			<% @user.event_assignment.registrations.each do |registration| %>
+			<% event = registration.event %>
+			<% region = event.region %>
+			<h4><%= event.name %> -  <%= region.name %></h4>
 
-    <%= link_to 'Go to Event Page', connection_path(event.identifier) %><br>
-    <%= link_to 'Update Registration', edit_registration_path(registration) %><br>
-  <% end %>
+			You are registered as: <%= registration.status %><br>
 
-<% else %>
+			<%= link_to 'Go to Event Page', connection_path(event.identifier) %><br>
+			<%= link_to 'Update Registration', edit_registration_path(registration) %><br>
+		<% end %>
 
-  <div>You are not currently registered for any events.</div>
-  <%= link_to 'Find events', events_path %>
+		<% else %>
 
-<% end %>
-    </article>
-    </section>
+			<div>You are not currently registered for any events.</div>
+			<%= link_to 'Find events', events_path %>
+
+		<% end %>
+		</article>
+	</section>
 </main>
