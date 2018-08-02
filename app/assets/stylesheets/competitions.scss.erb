@@ -8,7 +8,7 @@
 	text-align: center;
 	font-size: 1.4em;
 	line-height: 1.5em;
-	background-image: url("/assets/sydneyback.jpg");
+	background-image: url(<%= asset_path 'sydneyback.jpg' %>);
 }
 
 .index_page h2 {
@@ -31,7 +31,7 @@
 }
 
 .index_page nav section div {
-	background-image: url("/assets/cta.png");
+	background-image: url(<%= asset_path 'cta.png' %>);
 	background-size: cover;
 	background-position: center center;
 	transition: all 1s ease;
