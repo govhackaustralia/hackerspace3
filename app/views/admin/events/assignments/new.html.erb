@@ -1,6 +1,6 @@
 <h2>Add New Assignment to <%= @assignable.name %> <%= @assignable.class.to_s %></h2>
 
-<%= form_tag(new_admin_event_assignment_path, method: :get) do %>
+<%= form_tag(new_admin_connection_assignment_path, method: :get) do %>
   <%= text_field_tag :term, params[:term] %>
   <%= hidden_field_tag(:title, @title) %>
   <%= submit_tag 'Search' %>
@@ -26,7 +26,7 @@
 
   <% @users.each do |user| %>
     <%= render 'admin/shared/user_contact', locals: { user: user } %>
-    <%= link_to 'Select', new_admin_event_assignment_path(@assignable, title: @title, term: user.email) %><br>
+    <%= link_to 'Select', new_admin_connection_assignment_path(@assignable, title: @title, term: user.email) %><br>
   <% end %>
 
 <% elsif params[:term].present? # Could not find anything. %>
@@ -39,4 +39,4 @@
 
 <% end %>
 
-<%= link_to "Back to #{@assignable.name} #{@assignable.class.to_s} Assignments", admin_event_assignments_path(@assignable) %>
+<%= link_to "Back to #{@assignable.name} #{@assignable.class.to_s} Assignments", admin_connection_assignments_path(@assignable) %>

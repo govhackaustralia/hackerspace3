@@ -6,7 +6,7 @@ A space has opened up for the event <%= @event.name %> <%= @region.name %>.
 If you would like to review your registration or update your dietary
 requirements please use the link below.
 
-<%= link_to 'Review your registration', event_registration_url(@event.identifier, @registration) %>
+<%= link_to 'Review your registration', registration_url(@registration) %>
 
 All the best.
 

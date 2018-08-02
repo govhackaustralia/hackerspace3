@@ -102,15 +102,14 @@ Region.all.each do |region|
   end
   counter += 1
 
-  opening = region.events.create(competition: comp, name: 'Brisbane',
+  opening = region.connections.create(competition: comp, name: 'Brisbane',
   registration_type: OPEN, capacity: 50, email: "#{region.name}@mail.com", twitter: '@qld',
   address: "Eagle Stree, #{region.name} QLD, 4217", accessibility: 'Access through the stairs',
   youth_support: 'Always here.', parking: 'None, on street.',
   public_transport: 'Trains near by.', operation_hours: '9-5',
   catering: 'Lots of food, vego available.', place_id: 'ChIJ15yzA3lakWsRdtSXdwYk7uQ',
   video_id: '0Mv48ZM7gu4',
-  start_time: '2018-09-10 19:20:33 +1000', end_time: '2018-09-10 19:20:33 +1000',
-  category_type: STATE_CONNECTIONS)
+  start_time: '2018-09-10 19:20:33 +1000', end_time: '2018-09-10 19:20:33 +1000')
 
   EventPartnership.create(event: opening, sponsor: Sponsor.find(counter))
 

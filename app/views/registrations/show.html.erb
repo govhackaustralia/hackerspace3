@@ -23,7 +23,7 @@ If you no longer wish to attend, please update your registration below.<br>
 <% end %>
 
 <div class="actions">
-  <%= link_to 'Update Registration', edit_event_registration_path(@event.identifier, @registration) %><br>
+  <%= link_to 'Update Registration', edit_registration_path(@registration) %><br>
 </div>
 
 <h3>Dietary Requirements</h3>
@@ -40,6 +40,6 @@ If you no longer wish to attend, please update your registration below.<br>
 
 <%= link_to 'Update Dietary Requirements', edit_user_path(@user) %><br>
 
-<%= link_to 'Back to Event', event_path(@event.identifier) %>
+<%= link_to 'Back to Event', connection_path(@event.identifier) %><br>
 
 </main>

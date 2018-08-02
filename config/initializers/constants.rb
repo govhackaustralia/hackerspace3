@@ -107,12 +107,7 @@ AVAILABLE_TSHIRT_SIZES = ['Small', 'Medium', 'Large']
 
 # Event Category
 
-COMPETITION = 'Competition'
-STATE_CONNECTIONS = 'Connections'
-STATE_AWARDS = 'State Awards'
-NATIONAL_AWARDS = 'National Awards'
-
-EVENT_CATEGORY_TYPES = [COMPETITION, STATE_CONNECTIONS, STATE_AWARDS, NATIONAL_AWARDS]
+STATE_CONNECTION = 'Connection'
 
 # Event Registration Types
 

@@ -25,14 +25,14 @@
 
   <% events.each do |event| %>
     <h4><%= event.name %></h4>
-    <%= link_to "Manage #{event.name}", admin_region_event_path(@region, event) %></br>
+    <%= link_to "Manage #{event.name}", admin_region_connection_path(@region, event) %></br>
   <% end %>
 
 <% else %>
     <div>There are currently no events planned for the current Competitition.</div>
 <% end %>
 
-<%= link_to "Create New Event", new_admin_region_event_path(@region) %></br>
+<%= link_to "Create New Connections Event", new_admin_region_connection_path(@region) %></br>
 
 <h3>Sponsorships</h3>
 

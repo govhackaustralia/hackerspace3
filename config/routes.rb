@@ -3,9 +3,9 @@ Rails.application.routes.draw do
 
   devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
 
-  resources :users
+  resources :events, :registrations, :users
 
-  resources :events, param: :identifier do
+  resources :connections, param: :identifier do
     resources :registrations
   end
 
@@ -16,10 +16,10 @@ Rails.application.routes.draw do
       resources :assignments, controller: 'competitions/assignments'
     end
     resources :regions do
-      resources :events, :sponsorships
+      resources :connections, :sponsorships
       resources :assignments, controller: 'regions/assignments'
     end
-    resources :events do
+    resources :connections do
       resources :registrations, :event_partnerships
       resources :assignments, controller: 'events/assignments'
     end
@@ -31,8 +31,8 @@ Rails.application.routes.draw do
   end
 
   get 'manage_account', to: 'users#show'
+
   get 'edit_personal_details', to: 'users#edit'
-  get 'connection_events', to: 'events#index', category_type: STATE_CONNECTIONS
 
   root 'competitions#index'
 end

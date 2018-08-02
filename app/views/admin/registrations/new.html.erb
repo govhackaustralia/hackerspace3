@@ -1,6 +1,6 @@
 <h2>Add New Registration</h2>
 
-<%= form_tag(new_admin_event_registration_path, method: :get) do %>
+<%= form_tag(new_admin_connection_registration_path, method: :get) do %>
   <%= text_field_tag :term, params[:term] %>
   <%= submit_tag 'Search' %>
 <% end %><br>
@@ -23,7 +23,7 @@
 
   <% else %>
     Registration for <%= @user.full_name %> already exists.<br>
-    <%= link_to 'Update Registration', edit_admin_event_registration_path(@event, @existing_registration) %><br>
+    <%= link_to 'Update Registration', edit_admin_connection_registration_path(@event, @existing_registration) %><br>
   <% end %>
 
 <% elsif @users.present? # Review search results %>
@@ -31,7 +31,7 @@
   <% @users.each do |user| %>
     <%= render 'admin/shared/user_contact', locals: { user: user } %>
     Event Assignment: <%= (event_assignment = user.event_assignment).title %><br>
-    <%= link_to 'Select', new_admin_event_registration_path(@event, term: user.email) %><br>
+    <%= link_to 'Select', new_admin_connection_registration_path(@event, term: user.email) %><br>
   <% end %>
 
 <% elsif params[:term].present? # Could not find anything. %>
@@ -44,4 +44,4 @@
 
 <% end %>
 
-<%= link_to "Back to #{@event.name} Registrations", admin_event_registrations_path(@event) %>
+<%= link_to "Back to #{@event.name} Registrations", admin_connection_registrations_path(@event) %>

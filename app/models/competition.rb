@@ -3,6 +3,7 @@ class Competition < ApplicationRecord
   has_many :sponsors
   has_many :sponsorship_types
   has_many :events
+  has_many :connections
 
   validates :year, presence: true
 
@@ -48,7 +49,7 @@ class Competition < ApplicationRecord
     assignments.where(title: COMP_ADMIN).to_a
   end
 
-  def events_on?(category_type)
-    events.where(category_type: category_type).present?
+  def events_on?(type)
+    events.where(type: type).present?
   end
 end

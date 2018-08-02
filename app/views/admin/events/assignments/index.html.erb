@@ -6,7 +6,7 @@
   <%= render 'admin/shared/user_contact', locals: { user: host } %>
 <% else %>
   This event does not currently have a host.<br>
-  <%= link_to "New #{EVENT_HOST} Assignment", new_admin_event_assignment_path(@event, title: EVENT_HOST) %><br>
+  <%= link_to "New #{EVENT_HOST} Assignment", new_admin_connection_assignment_path(@event, title: EVENT_HOST) %><br>
 <% end %>
 
 <h3>Event Support</h3>
@@ -18,6 +18,6 @@
 <% else %>
   This event does not currently have any supports.<br>
 <% end %>
-<%= link_to "New #{EVENT_SUPPORT} Assignment", new_admin_event_assignment_path(@event, title: EVENT_SUPPORT) %><br>
+<%= link_to "New #{EVENT_SUPPORT} Assignment", new_admin_connection_assignment_path(@event, title: EVENT_SUPPORT) %><br>
 
-<%= link_to "Back to #{@event.name} Event", admin_region_event_path(@event.region, @event) %>
+<%= link_to "Back to #{@event.name} Event", admin_region_connection_path(@event.region, @event) %>

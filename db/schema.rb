@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_07_31_201135) do
+ActiveRecord::Schema.define(version: 2018_08_01_130707) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -81,9 +81,9 @@ ActiveRecord::Schema.define(version: 2018_07_31_201135) do
     t.boolean "approval"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "category_type"
     t.string "place_id"
     t.string "identifier"
+    t.string "type"
     t.index ["identifier"], name: "index_events_on_identifier"
   end
 

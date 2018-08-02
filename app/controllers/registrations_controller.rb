@@ -2,24 +2,24 @@ class RegistrationsController < ApplicationController
   before_action :authenticate_user!
 
   def new
-    @event = Event.find_by(identifier: params[:event_identifier])
+    @event = Event.find_by(identifier: params[:connection_identifier])
     @region = @event.region
     @registration = @event.registrations.new
     @user = current_user
   end
 
   def show
-    @event = Event.find_by(identifier: params[:event_identifier])
-    @region = @event.region
-    @registration = Registration.find(params[:id])
-    @event_assignment = current_user.event_assignment
     @user = current_user
+    @event_assignment = @user.event_assignment
+    @registration = Registration.find(params[:id])
+    @event = @registration.event
+    @region = @event.region
   end
 
   def edit
-    @event = Event.find_by(identifier: params[:event_identifier])
-    @region = @event.region
     @registration = Registration.find(params[:id])
+    @event = @registration.event
+    @region = @event.region
     @user = current_user
   end
 
@@ -28,10 +28,10 @@ class RegistrationsController < ApplicationController
     update_user_preferences
     if @registration.save
       flash[:notice] = 'Your registration has been updated'
-      redirect_to event_registration_path(@event.identifier, @registration)
+      redirect_to registration_path(@registration)
     else
       flash[:notice] = @registration.errors.full_messages.to_sentence
-      render edit_event_registration_path(@event.identifier, @registration)
+      render edit_registration_path(@registration)
     end
   end
 
@@ -58,19 +58,19 @@ class RegistrationsController < ApplicationController
                      else
                        'You have been added to the waitlist.'
                      end
-    redirect_to event_registration_path(@event.identifier, @registration)
+    redirect_to registration_path(@registration)
   end
 
   def create_new_registration
-    @event = Event.find(params[:event_identifier])
+    @event = Event.find(params[:connection_identifier])
     @registration = @event.registrations.new(status: params[:status])
     @user = current_user
     @registration.update(assignment: @user.event_assignment)
   end
 
   def update_registration
-    @event = Event.find(params[:event_identifier])
     @registration = Registration.find(params[:id])
+    @event = @registration.event
     @registration.update(registration_params)
     @user = current_user
   end

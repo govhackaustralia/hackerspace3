@@ -6,7 +6,7 @@
 		<h4><%= event.start_time.strftime("%e %B %Y") %></h4>
 		<h4><%= event.start_time.strftime("%I.%M %p") %></h4>
 	<% end %>
-	<% if event.category_type == STATE_CONNECTIONS %>
+	<% if event.type == STATE_CONNECTION %>
 		<p>Connection Event</p>
 	<% end %>
 	</div>

@@ -2,9 +2,6 @@
   <%= form.label :name %><br>
   <%= form.text_field :name %><br>
 
-  <%= form.label :category_type %><br>
-  <%= form.select(:category_type, options_for_select(EVENT_CATEGORY_TYPES, @event.category_type)) %><br>
-
   <%= form.label :registration_type %><br>
   <%= form.select(:registration_type, options_for_select(EVENT_REGISTRATION_TYPES, @event.registration_type)) %><br>
 

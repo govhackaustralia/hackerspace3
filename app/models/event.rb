@@ -7,10 +7,9 @@ class Event < ApplicationRecord
   has_one :event_partnership
   has_one :event_partner, through: :event_partnership, source: :sponsor
 
-  validates :name, :capacity, :registration_type, :category_type, presence: true
+  validates :name, :capacity, :registration_type, :type, presence: true
 
   validates :registration_type, inclusion: { in: EVENT_REGISTRATION_TYPES }
-  validates :category_type, inclusion: { in: EVENT_CATEGORY_TYPES }
 
   after_save :update_identifier
 
@@ -69,14 +68,21 @@ class Event < ApplicationRecord
   private
 
   def update_identifier
-    new_identifier = uri_pretty("#{category_type}-#{name}")
-    if Event.find_by(identifier: new_identifier).present?
-      new_identifier = uri_pretty("#{category_type}-#{name}-#{id}")
+    new_identifier = uri_pritty(name)
+    if already_there?(new_identifier)
+      new_identifier = uri_pritty("#{name}-#{region.name}")
+      if already_there?(new_identifier)
+        new_identifier = uri_pritty("#{name}-#{region.name}-#{id}")
+      end
     end
     update_columns(identifier: new_identifier)
   end
 
-  def uri_pretty(string)
+  def already_there?(new_identifier)
+    Event.find_by(identifier: new_identifier).present?
+  end
+
+  def uri_pritty(string)
     array = string.split(/\W/)
     words = array - ['']
     new_name = words.join('_')
