@@ -30,6 +30,8 @@
   <%= form.text_field :dietary_requirements %>
   </div>
 
+<% if false %>
+
 <div class="field">
   <%= form.label :tshirt_size %>
   <%= form.select(:tshirt_size, options_for_select(AVAILABLE_TSHIRT_SIZES, @user.tshirt_size)) %>
@@ -76,6 +78,8 @@
 </div>
 </div>
 </div>
+
+<% end %>
 
 <div class="field">
   <%= form.label :mailing_list %>
