@@ -60,7 +60,7 @@ class User < ApplicationRecord
   end
 
   def no_dietary_requirements?
-    dietary_requirments.nil? || dietary_requirments.empty?
+    dietary_requirements.nil? || dietary_requirements.empty?
   end
 
   def registering_account?
