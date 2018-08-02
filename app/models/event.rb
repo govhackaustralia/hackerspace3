@@ -65,6 +65,10 @@ class Event < ApplicationRecord
     (attending_ids - vip_ids).count
   end
 
+  def closed?
+    registration_type == CLOSED
+  end
+
   private
 
   def update_identifier

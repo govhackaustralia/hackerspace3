@@ -80,15 +80,18 @@
   frameborder="0"></iframe><br>
 <% end %>
 
-<% if user_signed_in? %>
-  <% if @registration.present? %>
-    <%= link_to 'Manage your Event Registration', event_registration_path(@registration) %><br>
-  <% else %>
-    <%= link_to 'Register to Attend this Event', new_connection_registration_path(@event.identifier) %><br>
-  <% end %>
-<% else %>
-  <%= link_to 'Sign in to register', new_user_session_path %><br>
+<% unless @event.closed? %>
+	<% if user_signed_in? %>
+	  <% if @registration.present? %>
+	    <%= link_to 'Manage your Event Registration', event_registration_path(@registration) %><br>
+	  <% else %>
+	    <%= link_to 'Register to Attend this Event', new_connection_registration_path(@event.identifier) %><br>
+	  <% end %>
+	<% else %>
+	  <%= link_to 'Sign in to register', new_user_session_path %><br>
+	<% end %>
 <% end %>
+
 <% if @event_partner.present? %>
 <h3>Event Partner</h3>
 <figure>
