@@ -38,3 +38,10 @@ five:
   assignable_id: 1
   assignable_type: 'Sponsor'
   title: Sponsor Contact
+
+six:
+  id: 6
+  user_id: 2
+  assignable_id: 1
+  assignable_type: 'Competition'
+  title: Participant

@@ -6,6 +6,8 @@ class RegistrationTest < ActiveSupport::TestCase
     @registration = Registration.find(1)
     @event = Event.find(1)
     @user = User.first
+    @waitlister = User.second
+    @wait_ass = Assignment.find(6)
   end
 
   test 'registration associations' do
@@ -26,4 +28,10 @@ class RegistrationTest < ActiveSupport::TestCase
     new_registration = @event.registrations.create(assignment: @assignment, status: VALID_ATTENDANCE_STATUSES.first)
     assert(new_registration.persisted?)
   end
+
+  # Below test 'works' but throws an error message because mail not going anywhere.
+  # test 'check for newly freed space' do
+  #   @user.registrations.where(event: @event).each { |reg| reg.update(status: NON_ATTENDING) }
+  #   assert(Registration.find_by(event: @event, assignment: @wait_ass).status == ATTENDING)
+  # end
 end

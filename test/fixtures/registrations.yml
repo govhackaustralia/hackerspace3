@@ -11,5 +11,9 @@ one:
   time_notified: 2018-07-22 12:34:03
   status: Attending
 
-two: {}
-# column: value
+two:
+  id: 2
+  event_id: 1
+  assignment_id: 6
+  time_notified: 2018-07-22 12:34:03
+  status: Waitlist

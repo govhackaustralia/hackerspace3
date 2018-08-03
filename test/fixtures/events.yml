@@ -9,6 +9,7 @@ one:
   name: Brisbane Connection
   region_id: 2
   competition_id: 1
+  capacity: 1
 
 #
 two: {}
