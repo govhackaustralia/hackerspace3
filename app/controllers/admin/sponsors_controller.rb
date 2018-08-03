@@ -22,6 +22,13 @@ class Admin::SponsorsController < ApplicationController
     end
   end
 
+  def destroy
+    @sponsor = Sponsor.find(params[:id])
+    @sponsor.destroy
+    flash[:notice] = 'Sponsor Destroyed'
+    redirect_to admin_sponsors_path
+  end
+
   private
 
   def sponsor_params

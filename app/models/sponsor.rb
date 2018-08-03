@@ -1,8 +1,8 @@
 class Sponsor < ApplicationRecord
   has_many :assignments, as: :assignable
   belongs_to :competition
-  has_many :sponsorships
-  has_many :event_partnerships
+  has_many :sponsorships, dependent: :destroy
+  has_many :event_partnerships, dependent: :destroy
 
   has_one_attached :logo
   validates :name, uniqueness: true

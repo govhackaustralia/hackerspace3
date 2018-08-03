@@ -12,7 +12,7 @@ Rails.application.routes.draw do
   end
 
   namespace :admin do
-    resources :assignments, :sponsorship_types, :sponsors
+    resources :assignments, :sponsorship_types, :sponsors, :sponsorships, :event_partnerships
 
     resources :competitions do
       resources :assignments, controller: 'competitions/assignments'

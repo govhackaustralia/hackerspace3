@@ -20,6 +20,13 @@ class Admin::EventPartnershipsController < ApplicationController
     end
   end
 
+  def destroy
+    @event_partnership = EventPartnership.find(params[:id])
+    @event_partnership.destroy
+    flash[:notice] = 'Event Partnership Destroyed'
+    redirect_to admin_sponsors_path
+  end
+
   private
 
   def check_for_privileges

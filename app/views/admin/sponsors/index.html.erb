@@ -6,18 +6,42 @@
   <% if sponsor.logo.attached? %>
     <img src="<%= url_for(sponsor.logo) %>" alt="<%= sponsor.name %> logo" /><br>
   <% end %>
+
+  <%= link_to 'Destroy Sponsor', admin_sponsor_path(sponsor),
+                method: :delete,
+                data: { confirm: 'Are you sure?' } %><br>
+
   <article><%= sponsor.description %></article>
 
   <h4>Sponsorships</h4>
-  <div>Please go to individual events and regions to add sponsorships.</div>
+  <div>Please go to individual regions to add sponsorships.</div>
   <% if (sponsorships = sponsor.sponsorships).empty? %>
     <div>No sponsorships for <%= sponsor.name %></div>
   <% else %>
     <% sponsorships.each do |sponsorship| %>
       <h3><%= sponsorship.sponsorable_type %>: <%= sponsorship.sponsorable.name %></h3>
       Sponsorship type: <%= sponsorship.sponsorship_type.name %><br>
+      <%= link_to 'Destroy Sponsorship', admin_sponsorship_path(sponsorship),
+                    method: :delete,
+                    data: { confirm: 'Are you sure?' } %><br>
     <% end %>
   <% end %>
+
+
+  <h4>Event Partnerships</h4>
+  <div>Please go to individual events to add event parter.</div>
+  <% if (event_partnerships = sponsor.event_partnerships).empty? %>
+    <div>No event partnerships for <%= sponsor.name %></div>
+  <% else %>
+    <% event_partnerships.each do |event_partnership| %>
+      Event: <%= event_partnership.event.name %><br>
+      <%= link_to 'Destroy Event Partnership', admin_event_partnership_path(event_partnership),
+                    method: :delete,
+                    data: { confirm: 'Are you sure?' } %><br>
+    <% end %>
+  <% end %>
+
 <% end %>
+
 
 <%= link_to 'New Sponsor', new_admin_sponsor_path %><br>
