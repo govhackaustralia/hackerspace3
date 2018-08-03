@@ -29,6 +29,8 @@ gem 'jquery-rails'
 gem "aws-sdk-s3", require: false
 # Add Gravatars to your Rails
 gem 'gravtastic'
+# Simple Rails app configuration
+gem 'figaro'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -48,8 +50,6 @@ group :development do
   gem 'guard-rubocop'
   gem 'guard-minitest'
   gem 'guard-bundler'
- # Simple Rails app configuration
-  gem 'figaro'
 end
 
 group :test do
