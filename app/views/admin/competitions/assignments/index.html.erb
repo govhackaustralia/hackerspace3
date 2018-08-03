@@ -20,7 +20,12 @@
 
 <h3>Site Admin</h3>
 
-<%= render 'admin/shared/user_contact', locals: { user: @competition.site_admin } %>
+<% if (site_admin = @competition.site_admin).present? %>
+  <%= render 'admin/shared/user_contact', locals: { user: @competition.site_admin } %>
+<% else %>
+  This competition does not currently have a site admin.<br>
+  <%= link_to "New #{ADMIN} Assignment", new_admin_competition_assignment_path(@competition, title: ADMIN) %><br>
+<% end %>
 
 <h3>GovHack Management Team</h3>
 
