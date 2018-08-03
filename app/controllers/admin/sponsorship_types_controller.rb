@@ -17,8 +17,7 @@ class Admin::SponsorshipTypesController < ApplicationController
   end
 
   def create
-    SponsorshipType.reorder_from(params[:sponsorship_type][:order].to_i)
-    @sponsorship_type = Competition.current.sponsorship_types.new(sponsorship_type_params)
+    create_new_sponsorship_type
     if @sponsorship_type.save
       flash[:notice] = 'New Sponsorship Type Created'
       redirect_to admin_sponsorship_types_path
@@ -48,5 +47,10 @@ class Admin::SponsorshipTypesController < ApplicationController
     return if current_user.admin_privileges?
     flash[:error] = 'You must have valid assignments to access this section.'
     redirect_to root_path
+  end
+
+  def create_new_sponsorship_type
+    SponsorshipType.reorder_from(params[:sponsorship_type][:order].to_i)
+    @sponsorship_type = Competition.current.sponsorship_types.new(sponsorship_type_params)
   end
 end

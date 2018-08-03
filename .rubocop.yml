@@ -11,8 +11,6 @@ AllCops:
     - 'Rakefile'
     - 'bin/*'
     - 'db/**/*'
-    - 'app/controllers/users/*'
-    - 'app/controllers/admin/sponsorship_types_controller.rb'
 
 Style/Documentation:
   Enabled: false

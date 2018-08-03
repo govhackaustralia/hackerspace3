@@ -36,14 +36,18 @@ class UsersController < ApplicationController
       flash[:notice] = 'Welcome! Please complete your registration.'
       redirect_to complete_registration_path
     elsif @account_registration
-      if @user.how_did_you_hear.empty?
-        current_user.update(how_did_you_hear: NO_RESPONSE)
-      end
-      flash[:notice] = 'Your account has been created.'
-      redirect_to manage_account_path
+      handle_end_of_registration
     else
       flash[:notice] = 'Your personal details have been updated.'
       redirect_to manage_account_path
     end
+  end
+
+  def handle_end_of_registration
+    if @user.how_did_you_hear.empty?
+      current_user.update(how_did_you_hear: NO_RESPONSE)
+    end
+    flash[:notice] = 'Your account has been created.'
+    redirect_to manage_account_path
   end
 end
