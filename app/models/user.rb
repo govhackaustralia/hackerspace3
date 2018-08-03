@@ -43,7 +43,8 @@ class User < ApplicationRecord
   def self.search(term)
     results = []
     User.all.each do |user|
-      user_string = (user.full_name + user.email).downcase
+      next if
+      user_string = "#{user.full_name} #{user.email} #{user.preferred_name}"
       results << user if user_string.include? term.downcase
     end
     results

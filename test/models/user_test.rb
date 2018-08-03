@@ -6,6 +6,14 @@ class UserTest < ActiveSupport::TestCase
     @assignment = Assignment.find(1)
   end
 
+  test 'user_validations' do
+    # no email don't save
+    assert_not(User.create(email: nil).save)
+
+    # no full name don't save
+    assert_not(User.create(preferred_name: nil).save)
+  end
+
   test 'user associations' do
     assert(@user.assignments.include?(@assignment))
     # Dependent Destroy

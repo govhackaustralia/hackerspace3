@@ -10,7 +10,7 @@ class Sponsor < ApplicationRecord
   def self.search(term)
     results = []
     Sponsor.all.each do |sponsor|
-      sponsor_string = (sponsor.name + sponsor.description).downcase
+      sponsor_string = "#{sponsor.name} #{sponsor.description}".downcase
       results << sponsor if sponsor_string.include? term.downcase
     end
     results
