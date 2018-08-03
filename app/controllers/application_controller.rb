@@ -20,7 +20,7 @@ class ApplicationController < ActionController::Base
   def fill_in_required_fields
     return unless required_conditions_not_met
     flash[:notice] = 'Please complete the required fields.'
-    redirect_to edit_user_path(current_user)
+    redirect_to complete_registration_path
   end
 
   def required_conditions_not_met

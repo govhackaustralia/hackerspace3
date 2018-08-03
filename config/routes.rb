@@ -17,10 +17,12 @@ Rails.application.routes.draw do
     resources :competitions do
       resources :assignments, controller: 'competitions/assignments'
     end
+    
     resources :regions do
       resources :connections, :sponsorships
       resources :assignments, controller: 'regions/assignments'
     end
+
     resources :connections do
       resources :registrations, :event_partnerships
       resources :assignments, controller: 'events/assignments'
