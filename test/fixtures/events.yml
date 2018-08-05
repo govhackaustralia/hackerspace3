@@ -6,10 +6,13 @@
 #
 one:
   id: 1
-  name: Brisbane Connection
+  name: Brisbane
   region_id: 2
   competition_id: 1
   capacity: 1
+  type: Connection
+  registration_type: Open
+  identifier: brisbane
 
 #
 two: {}
