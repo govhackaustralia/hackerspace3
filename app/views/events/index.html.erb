@@ -1,12 +1,5 @@
-<main class="events_page">
-	<section>
-			<h2>Events</h2>
-			<section class="events">
-
-			<% @events.each do |event| %>
-				<%= link_to (render partial: "events/event_single", locals: { event: event } ), connection_path(event.identifier) %>
-			<% end %>
-		</section>
-
-	</section>
-</main>
+<% if params[:event_type] == STATE_CONNECTION %>
+  <%= render 'connections' %>
+<% else %>
+    <%= render 'all_events' %>
+<% end %>

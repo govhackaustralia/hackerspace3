@@ -7,9 +7,11 @@ class Event < ApplicationRecord
   has_one :event_partnership
   has_one :event_partner, through: :event_partnership, source: :sponsor
 
-  validates :name, :capacity, :registration_type, :type, presence: true
+  validates :name, :capacity, :registration_type, :event_type, presence: true
 
   validates :registration_type, inclusion: { in: EVENT_REGISTRATION_TYPES }
+
+  validates :event_type, inclusion: { in: EVENT_TYPES }
 
   after_save :update_identifier
 
@@ -74,9 +76,9 @@ class Event < ApplicationRecord
   def update_identifier
     new_identifier = uri_pritty(name)
     if already_there?(new_identifier)
-      new_identifier = uri_pritty("#{name}-#{region.name}")
+      new_identifier = uri_pritty("#{event_type}-#{name}-#{region.name}")
       if already_there?(new_identifier)
-        new_identifier = uri_pritty("#{name}-#{region.name}-#{id}")
+        new_identifier = uri_pritty("#{event_type}-#{name}-#{region.name}-#{id}")
       end
     end
     update_columns(identifier: new_identifier)

@@ -2,7 +2,7 @@ class RegistrationsController < ApplicationController
   before_action :authenticate_user!
 
   def new
-    @event = Event.find_by(identifier: params[:connection_identifier])
+    @event = Event.find_by(identifier: params[:event_identifier])
     @region = @event.region
     @registration = @event.registrations.new
     @user = current_user
@@ -28,10 +28,10 @@ class RegistrationsController < ApplicationController
     update_user_preferences
     if @registration.save
       flash[:notice] = 'Your registration has been updated'
-      redirect_to event_registration_path(@registration)
+      redirect_to event_registration_path(@event.identifier, @registration)
     else
       flash[:notice] = @registration.errors.full_messages.to_sentence
-      render edit_event_registration_path(@registration)
+      render edit_event_registration_path(@event.identifier, @registration)
     end
   end
 
@@ -58,11 +58,11 @@ class RegistrationsController < ApplicationController
                      else
                        'You have been added to the waitlist.'
                      end
-    redirect_to event_registration_path(@registration)
+    redirect_to event_registration_path(@event.identifier, @registration)
   end
 
   def create_new_registration
-    @event = Event.find(params[:connection_identifier])
+    @event = Event.find(params[:event_identifier])
     @registration = @event.registrations.new(status: params[:status])
     @user = current_user
     @registration.update(assignment: @user.event_assignment, time_notified: Time.now)

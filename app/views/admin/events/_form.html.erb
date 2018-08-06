@@ -5,6 +5,9 @@
   <%= form.label :registration_type %><br>
   <%= form.select(:registration_type, options_for_select(EVENT_REGISTRATION_TYPES, @event.registration_type)) %><br>
 
+  <%= form.label :event_type %><br>
+  <%= form.select(:event_type, options_for_select(EVENT_TYPES, @event.event_type)) %><br>
+
   <%= form.label :capacity %><br>
   <%= form.number_field :capacity %><br>
 

@@ -5,7 +5,7 @@
 <section>
 <h3>Event Information</h3>
 
-<% if @event.type == STATE_CONNECTION %>
+<% if @event.event_type == STATE_CONNECTION %>
 
 			<section class="info">
 
@@ -83,9 +83,9 @@
 <% unless @event.closed? %>
 	<% if user_signed_in? %>
 	  <% if @registration.present? %>
-	    <%= link_to 'Manage your Event Registration', event_registration_path(@registration) %><br>
+	    <%= link_to 'Manage your Event Registration', event_registration_path(@event.identifier, @registration) %><br>
 	  <% else %>
-	    <%= link_to 'Register to Attend this Event', new_connection_registration_path(@event.identifier) %><br>
+	    <%= link_to 'Register to Attend this Event', new_event_registration_path(@event.identifier) %><br>
 	  <% end %>
 	<% else %>
 	  <%= link_to 'Sign in to register', new_user_session_path %><br>
@@ -128,10 +128,10 @@
 <% end %><br>
 
 <% if user_signed_in? && current_user.admin_privileges? %>
-  <%= link_to 'Manage this Event', admin_region_connection_path(@region, @event) %><br>
+  <%= link_to 'Manage this Event', admin_region_event_path(@region, @event) %><br>
 <% end %>
 
-<%= link_to 'Back to Events', connections_path %><br>
+<%= link_to 'Back to Events', events_path %><br>
 
 </section>
 </main>

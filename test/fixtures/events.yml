@@ -10,7 +10,7 @@ one:
   region_id: 2
   competition_id: 1
   capacity: 1
-  type: Connection
+  event_type: Connection
   registration_type: Open
   identifier: brisbane
 

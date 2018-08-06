@@ -102,7 +102,7 @@ Region.all.each do |region|
   end
   counter += 1
 
-  opening = region.connections.create(competition: comp, name: 'Brisbane',
+  opening = region.events.create(event_type: STATE_CONNECTION, competition: comp, name: 'Brisbane',
   registration_type: OPEN, capacity: 50, email: "#{region.name}@mail.com", twitter: '@qld',
   address: "Eagle Stree, #{region.name} QLD, 4217", accessibility: 'Access through the stairs',
   youth_support: 'Always here.', parking: 'None, on street.',

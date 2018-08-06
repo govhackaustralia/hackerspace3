@@ -1,6 +1,6 @@
 <h2>Create New Event Partner for <%= @event.name %></h2>
 
-<%= form_tag(new_admin_connection_event_partnership_path, method: :get) do %>
+<%= form_tag(new_admin_event_event_partnership_path, method: :get) do %>
   <%= text_field_tag :term, params[:term] %>
   <%= submit_tag 'Search' %>
 <% end %><br>
@@ -24,7 +24,7 @@
 
   <% @sponsors.each do |sponsor| %>
     Sponsor: <%= sponsor.name %><br>
-    <%= link_to 'Select', new_admin_connection_event_partnership_path(@event, term: sponsor.name) %><br>
+    <%= link_to 'Select', new_admin_event_event_partnership_path(@event, term: sponsor.name) %><br>
   <% end %>
 
 <% elsif params[:term].present? # Could not find anything. %>
@@ -37,4 +37,4 @@
 
 <% end %>
 
-<%= link_to "Back to #{@event.name} Event", admin_region_connection_path(@event.region, @event) %>
+<%= link_to "Back to #{@event.name} Event", admin_region_event_path(@event.region, @event) %>

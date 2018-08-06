@@ -4,14 +4,14 @@ class Admin::EventsController < ApplicationController
 
   def new
     @region = Region.find(params[:region_id])
-    @event = @region.connections.new
+    @event = @region.events.new
   end
 
   def create
     create_new_event
     if @event.save
       flash[:notice] = 'New event created.'
-      redirect_to admin_region_connection_path(@region, @event)
+      redirect_to admin_region_event_path(@region, @event)
     else
       flash[:notice] = @event.errors.full_messages.to_sentence
       render 'new'
@@ -31,8 +31,8 @@ class Admin::EventsController < ApplicationController
 
   def update
     @event = Event.find(params[:id])
-    if @event.update(connection_params)
-      redirect_to admin_region_connection_path(@event.region_id, @event)
+    if @event.update(event_params)
+      redirect_to admin_region_event_path(@event.region_id, @event)
     else
       render 'edit'
     end
@@ -40,8 +40,8 @@ class Admin::EventsController < ApplicationController
 
   private
 
-  def connection_params
-    params.require(:connection).permit(:name, :type, :registration_type,
+  def event_params
+    params.require(:event).permit(:name, :type, :registration_type,
                                        :capacity, :email, :twitter, :address, :accessibility, :youth_support,
                                        :parking, :public_transport, :operation_hours, :catering, :video_id,
                                        :start_time, :end_time, :place_id)
@@ -55,7 +55,7 @@ class Admin::EventsController < ApplicationController
 
   def create_new_event
     @region = Region.find(params[:region_id])
-    @event = @region.connections.new(connection_params)
+    @event = @region.events.new(event_params)
     @event.competition = Competition.current
   end
 end

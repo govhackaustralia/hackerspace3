@@ -13,7 +13,7 @@ class Admin::EventPartnershipsController < ApplicationController
     create_new_event_partnership
     if @event_partnership.save
       flash[:notice] = 'New Event Partner Added.'
-      redirect_to admin_region_connection_path(@event.region, @event)
+      redirect_to admin_region_event_path(@event.region, @event)
     else
       flash.now[:notice] = @assignment.errors.full_messages.to_sentence
       render 'new'
@@ -36,12 +36,12 @@ class Admin::EventPartnershipsController < ApplicationController
   end
 
   def new_event_partnership
-    @event = Event.find(params[:connection_id])
+    @event = Event.find(params[:event_id])
     @event_partnership = EventPartnership.new
   end
 
   def create_new_event_partnership
-    @event = Event.find(params[:connection_id])
+    @event = Event.find(params[:event_id])
     @sponsor = Sponsor.find(params[:sponsor_id])
     @event_partnership = EventPartnership.new(event: @event, sponsor: @sponsor)
   end

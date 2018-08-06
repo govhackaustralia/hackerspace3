@@ -105,9 +105,12 @@ VALID_IMAGE_OPTIONS = [GOVHACK, GOOGLE, GRAVITAR]
 
 AVAILABLE_TSHIRT_SIZES = ['Small', 'Medium', 'Large']
 
-# Event Category
+# Event Types
 
 STATE_CONNECTION = 'Connection'
+COMPETITION_EVENT = 'Competition'
+
+EVENT_TYPES = [STATE_CONNECTION, COMPETITION_EVENT]
 
 # Event Registration Types
 

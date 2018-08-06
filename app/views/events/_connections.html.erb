@@ -16,7 +16,7 @@
 <section class="events connections">
 
   <% @events.each do |event| %>
-    <%= link_to (render partial: "events/event_single", locals: { event: event } ), connection_path(event.identifier) %>
+    <%= link_to (render partial: "events/event_single", locals: { event: event } ), event_path(event.identifier) %>
   <% end %>
 
 </section>

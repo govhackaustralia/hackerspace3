@@ -1,7 +1,6 @@
 class Region < ApplicationRecord
   has_many :assignments, as: :assignable
   has_many :events
-  has_many :connections
   has_many :sponsorships, as: :sponsorable
   has_many :sponsorship_types, through: :sponsorships
 

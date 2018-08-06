@@ -2,7 +2,7 @@
 	<h2>Welcome to GovHack <%= @competition.year %> Hackerspace</h2>
 	<nav>
 		<section>
-			<% if @competition.connections.present? %>
+			<% if @competition.events.where(event_type: STATE_CONNECTION).present? %>
 				<div><%= link_to 'Connection Events', connections_path %></div>
 			<% end %>
 		</section>

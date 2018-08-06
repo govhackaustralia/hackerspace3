@@ -3,7 +3,7 @@ class Admin::Events::AssignmentsController < ApplicationController
   before_action :check_for_privileges
 
   def index
-    @event = Event.find(params[:connection_id])
+    @event = Event.find(params[:event_id])
   end
 
   def new
@@ -18,7 +18,7 @@ class Admin::Events::AssignmentsController < ApplicationController
     create_new_assignment
     if @assignment.save
       flash[:notice] = "New #{@title} Assignment Added."
-      redirect_to admin_connection_assignments_path(@assignable)
+      redirect_to admin_event_assignments_path(@assignable)
     else
       flash.now[:notice] = @assignment.errors.full_messages.to_sentence
       render 'new'
@@ -34,13 +34,13 @@ class Admin::Events::AssignmentsController < ApplicationController
   end
 
   def new_assignment
-    @assignable = Event.find(params[:connection_id])
+    @assignable = Event.find(params[:event_id])
     @assignment = @assignable.assignments.new
     @title = params[:title]
   end
 
   def create_new_assignment
-    @assignable = Event.find(params[:connection_id])
+    @assignable = Event.find(params[:event_id])
     @user = User.find(params[:user_id])
     @title = params[:title]
     @assignment = @assignable.assignments.new(user: @user, title: @title)

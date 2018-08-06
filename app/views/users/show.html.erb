@@ -33,8 +33,8 @@
 
 			You are registered as: <%= registration.status %><br>
 
-			<%= link_to 'Go to Event Page', connection_path(event.identifier) %><br>
-			<%= link_to 'Update Registration', edit_event_registration_path(registration) %><br>
+			<%= link_to 'Go to Event Page', event_path(event.identifier) %><br>
+			<%= link_to 'Update Registration', edit_event_registration_path(event.identifier, registration) %><br>
 		<% end %>
 
 		<% else %>
