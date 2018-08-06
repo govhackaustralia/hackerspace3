@@ -53,7 +53,6 @@ class User < ApplicationRecord
     data = access_token.info
     user = User.find_by_email(data['email'])
     user ||= new_user_from_google(data)
-    user.skip_confirmation_notification!
     update_user_info_from_google(user, data)
     user.save
     user
