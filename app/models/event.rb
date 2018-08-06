@@ -33,6 +33,10 @@ class Event < ApplicationRecord
     collected.flatten
   end
 
+  def admin_privileges?(user)
+    (admin_assignments & user.assignments).present?
+  end
+
   # Event Registrations
 
   def attending?(event_assignment)
