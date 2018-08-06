@@ -1,9 +1,9 @@
 class EventsController < ApplicationController
   def index
-    if params[:event_type] == STATE_CONNECTION
-      @events = Competition.current.events.where(event_type: STATE_CONNECTION)
+    if params[:event_type].present?
+      @events = Competition.current.events.where(event_type: params[:event_type]).order(start_time: :asc)
     else
-      @events = Competition.current.events
+      @events = Competition.current.events.order(start_time: :asc)
     end
   end
 

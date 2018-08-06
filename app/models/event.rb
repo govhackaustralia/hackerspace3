@@ -71,18 +71,15 @@ class Event < ApplicationRecord
     registration_type == CLOSED
   end
 
-  private
-
   def update_identifier
-    new_identifier = uri_pritty(name)
+    new_identifier = uri_pritty("#{event_type}-#{name}-#{region.name}")
     if already_there?(new_identifier)
-      new_identifier = uri_pritty("#{event_type}-#{name}-#{region.name}")
-      if already_there?(new_identifier)
-        new_identifier = uri_pritty("#{event_type}-#{name}-#{region.name}-#{id}")
-      end
+      new_identifier = uri_pritty("#{event_type}-#{name}-#{region.name}-#{id}")
     end
     update_columns(identifier: new_identifier)
   end
+
+  private
 
   def already_there?(new_identifier)
     Event.find_by(identifier: new_identifier).present?

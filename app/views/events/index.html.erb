@@ -1,5 +1,7 @@
 <% if params[:event_type] == STATE_CONNECTION %>
   <%= render 'connections' %>
+<% elsif params[:event_type] == COMPETITION_EVENT %>
+  <%= render 'competition_events' %>
 <% else %>
-    <%= render 'all_events' %>
+  <%= render 'all_events' %>
 <% end %>

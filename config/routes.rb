@@ -42,5 +42,7 @@ Rails.application.routes.draw do
 
   get 'connections', to: 'events#index', event_type: STATE_CONNECTION
 
+  get 'competition_events', to: 'events#index', event_type: COMPETITION_EVENT
+
   root 'competitions#index'
 end

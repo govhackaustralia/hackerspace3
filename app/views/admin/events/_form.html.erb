@@ -30,6 +30,9 @@
   <%= form.text_field :place_id %><br>
   <%= link_to 'Use this link to find your Event Location\'s Google Place ID', 'https://developers.google.com/places/place-id', { target: '_blank' } %><br>
 
+  <%= form.label :video_id, 'YouTube Video ID' %><br>
+  <%= form.text_field :video_id %><br>
+
   <%= form.label :accessibility %><br>
   <%= form.text_field :accessibility %><br>
 
@@ -47,9 +50,6 @@
 
   <%= form.label :catering %><br>
   <%= form.text_field :catering %><br>
-
-  <%= form.label :video_id %><br>
-  <%= form.text_field :video_id %><br>
 
   <%= form.submit %>
 <% end %>

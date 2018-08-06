@@ -36,38 +36,63 @@ user.make_site_admin
   user.save
 end
 
+@counter = 0
+def random_user_id
+  @counter += 1
+  random_id = @counter % User.count
+  random_id = 1 if random_id.zero?
+  random_id
+end
+
 comp = Competition.current
 
-comp.assignments.create(user: User.find(2), title: MANAGEMENT_TEAM)
+comp.assignments.create(user_id: random_user_id, title: MANAGEMENT_TEAM)
 
-comp.assignments.create(user: User.find(3), title: MANAGEMENT_TEAM)
+comp.assignments.create(user_id: random_user_id, title: MANAGEMENT_TEAM)
 
-comp.assignments.create(user: User.find(4), title: MANAGEMENT_TEAM)
+comp.assignments.create(user_id: random_user_id, title: MANAGEMENT_TEAM)
 
-comp.assignments.create(user: User.find(5), title: MANAGEMENT_TEAM)
+comp.assignments.create(user_id: random_user_id, title: MANAGEMENT_TEAM)
 
-comp.assignments.create(user: User.find(6), title: COMPETITION_DIRECTOR)
+comp.assignments.create(user_id: random_user_id, title: COMPETITION_DIRECTOR)
 
-comp.assignments.create(user: User.find(7), title: SPONSORSHIP_DIRECTOR)
+comp.assignments.create(user_id: random_user_id, title: SPONSORSHIP_DIRECTOR)
 
 10.times do |time|
-  comp.assignments.create(user: User.find(time + 1), title: VOLUNTEER)
+  comp.assignments.create(user_id: random_user_id, title: VOLUNTEER)
 end
 
 20.times do |time|
-  comp.assignments.create(user: User.find(time + 2), title: VIP)
+  comp.assignments.create(user_id: random_user_id, title: VIP)
 end
 
 20.times do |time|
-  comp.assignments.create(user: User.find(time + 3), title: PARTICIPANT)
+  comp.assignments.create(user_id: random_user_id, title: PARTICIPANT)
 end
 
 20.times do |time|
-  comp.sponsors.create(name: "Vandelay  Industries #{time}", description: "Worldwide leader in latex products", website: 'www.vandel.com', created_at: "2018-07-26 23:01:28", updated_at: "2018-07-26 23:01:28")
+  comp.sponsors.create(name: "Vandelay  Industries #{time}",
+    description: "Worldwide leader in latex products",
+    website: 'www.vandel.com', created_at: "2018-07-26 23:01:28",
+    updated_at: "2018-07-26 23:01:28")
+end
+
+def random_sponsor_id
+  @counter += 1
+  random_id = @counter % Sponsor.count
+  random_id = 1 if random_id.zero?
+  random_id
 end
 
 10.times do |time|
   comp.sponsorship_types.create(name: "Tier #{time + 1}", order: time + 1)
+end
+
+def random_sponsorship_type_id
+  @counter += 1
+  random_id = @counter % SponsorshipType.count
+  random_id = 1 if random_id.zero?
+  random_id
 end
 
 Region.create(name: 'New South Wales', time_zone: 'Sydney', parent_id: Region.root.id)
@@ -84,48 +109,52 @@ Region.create(name: 'ACT', time_zone: 'Canberra', parent_id: Region.root.id)
 
 Region.create(name: 'Queensland', time_zone: 'Brisbane', parent_id: Region.root.id)
 
-counter = 1
-
 Region.all.each do |region|
 
-  region.assignments.create(user: User.find(1+counter), title: REGION_DIRECTOR)
+  region.assignments.create(user_id: random_user_id, title: REGION_DIRECTOR)
 
-  region.assignments.create(user: User.find(2+counter), title: REGION_SUPPORT)
+  region.assignments.create(user_id: random_user_id, title: REGION_SUPPORT)
 
-  region.assignments.create(user: User.find(3+counter), title: REGION_SUPPORT)
+  region.assignments.create(user_id: random_user_id, title: REGION_SUPPORT)
 
-  region.assignments.create(user: User.find(4+counter), title: REGION_SUPPORT)
+  region.assignments.create(user_id: random_user_id, title: REGION_SUPPORT)
 
   3.times do |time|
-    region.sponsorships.create(sponsor: Sponsor.find((counter + time) % Sponsor.count),
-    sponsorship_type: SponsorshipType.find(counter % SponsorshipType.count))
-  end
-  counter += 1
-
-  opening = region.events.create(event_type: STATE_CONNECTION, competition: comp, name: 'Brisbane',
-  registration_type: OPEN, capacity: 50, email: "#{region.name}@mail.com", twitter: '@qld',
-  address: "Eagle Stree, #{region.name} QLD, 4217", accessibility: 'Access through the stairs',
-  youth_support: 'Always here.', parking: 'None, on street.',
-  public_transport: 'Trains near by.', operation_hours: '9-5',
-  catering: 'Lots of food, vego available.', place_id: 'ChIJ15yzA3lakWsRdtSXdwYk7uQ',
-  video_id: '0Mv48ZM7gu4',
-  start_time: '2018-09-10 19:20:33 +1000', end_time: '2018-09-10 19:20:33 +1000')
-
-  EventPartnership.create(event: opening, sponsor: Sponsor.find(counter))
-
-  opening.assignments.create(user: User.find(5+counter), title: EVENT_HOST)
-
-  opening.assignments.create(user: User.find(6+counter), title: EVENT_SUPPORT)
-
-  opening.assignments.create(user: User.find(7+counter), title: EVENT_SUPPORT)
-
-  Assignment.where(title: PARTICIPANT).take(10).each do |particiant|
-    opening.registrations.create(status: ATTENDING, assignment: particiant)
+    region.sponsorships.create(sponsor_id: random_sponsor_id,
+    sponsorship_type_id: random_sponsorship_type_id)
   end
 
-  Assignment.where(title: VIP).take(10).each do |vip|
-    opening.registrations.create(status: ATTENDING, assignment: vip)
-  end
+  event_name = region.time_zone
+  event_name ||= 'Australia'
 
-  counter += 1
+  EVENT_TYPES.each do |event_type|
+
+    event = region.events.create(event_type: event_type, competition: comp,
+      name: event_name, registration_type: OPEN, capacity: 50,
+      email: "#{event_name}@mail.com", twitter: '@qld',
+      address: "Eagle Stree, #{region.name} QLD, 4217",
+      accessibility: 'Access through the stairs',
+      youth_support: 'Always here.', parking: 'None, on street.',
+      public_transport: 'Trains near by.', operation_hours: '9-5',
+      catering: 'Lots of food, vego available.',
+      place_id: 'ChIJ15yzA3lakWsRdtSXdwYk7uQ', video_id: '0Mv48ZM7gu4',
+      start_time: '2018-09-10 19:20:33 +1000',
+      end_time: '2018-09-10 19:20:33 +1000')
+
+    EventPartnership.create(event: event, sponsor_id: random_sponsor_id)
+
+    event.assignments.create(user_id: random_user_id, title: EVENT_HOST)
+
+    event.assignments.create(user_id: random_user_id, title: EVENT_SUPPORT)
+
+    event.assignments.create(user_id: random_user_id, title: EVENT_SUPPORT)
+
+    Assignment.where(title: PARTICIPANT).take(10).each do |particiant|
+      event.registrations.create(status: ATTENDING, assignment: particiant)
+    end
+
+    Assignment.where(title: VIP).take(10).each do |vip|
+      event.registrations.create(status: ATTENDING, assignment: vip)
+    end
+  end
 end
