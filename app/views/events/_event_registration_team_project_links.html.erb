@@ -1,0 +1,28 @@
+<% unless @event.closed? %>
+
+  <% if user_signed_in? %>
+
+    <% if @registration.present? %>
+      <%= link_to 'Manage your Event Registration', event_registration_path(@event.identifier, @registration) %><br>
+
+      <% if @event.event_type == COMPETITION_EVENT %>
+
+        <% if (team_projects = @user.team_projects(@event)).present? %>
+          <% team_projects.each do |team_project| %>
+            <%= link_to "Go to #{team_project.current_version.name}", team_project_path(team_project) %>
+          <% end %>
+        <% else %>
+          <%= link_to 'Create a Team Project', new_event_team_project_path(@event.identifier) %>
+        <% end %>
+
+      <% end %>
+
+    <% else %>
+      <%= link_to 'Register to Attend this Event', new_event_registration_path(@event.identifier) %><br>
+    <% end %>
+
+  <% else %>
+    <%= link_to 'Sign in to register', new_user_session_path %><br>
+  <% end %>
+
+<% end %>

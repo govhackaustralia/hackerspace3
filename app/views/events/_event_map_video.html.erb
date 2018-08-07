@@ -1,0 +1,10 @@
+<% unless @event.place_id.nil? || @event.place_id.empty?  %>
+  <iframe width="600" height="450" frameborder="0" style="border:0"
+  src="https://www.google.com/maps/embed/v1/place?q=place_id:<%= @event.place_id %>&key=<%= ENV['GOOGLE_API_KEY'] %>" allowfullscreen></iframe><br>
+<% end %>
+
+<% unless @event.video_id.nil? || @event.video_id.empty?  %>
+<iframe id="ytplayer" type="text/html" width="640" height="360"
+  src="https://www.youtube.com/embed/<%= @event.video_id %>"
+  frameborder="0"></iframe><br>
+<% end %>

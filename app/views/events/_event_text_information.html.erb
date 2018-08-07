@@ -1,0 +1,40 @@
+<% unless @event.email.nil? || @event.email.empty?  %>
+  <div class="event-info"><h4>Email:</h4><p> <%= @event.email %></p></div>
+<% end %>
+
+<% unless @event.twitter.nil? || @event.twitter.empty?  %>
+  <div class="event-info"><h4>Twitter:</h4><p> <%= @event.twitter %></p></div>
+<% end %>
+
+<% unless @event.address.nil? || @event.address.empty?  %>
+  <div class="event-info"><h4>Address:</h4><p> <%= @event.address %></p></div>
+<% end %>
+
+<% unless @event.start_time.nil? || @event.end_time.nil? %>
+  <div class="event-info"><h4>Start time:</h4><p> <%= @event.start_time.strftime("%I:%M%p") %></p></div>
+  <div class="event-info"><h4>End time:</h4><p> <%= @event.end_time.strftime("%I:%M%p") %></p></div>
+<% end %>
+
+<% unless @event.accessibility.nil? || @event.accessibility.empty?  %>
+  <div class="event-info"><h4>Accessibility:</h4><p> <%= @event.accessibility %></p></div>
+<% end %>
+
+<% unless @event.youth_support.nil? || @event.youth_support.empty?  %>
+  <div class="event-info"><h4>Youth Support:</h4><p> <%= @event.youth_support %></p></div>
+<% end %>
+
+<% unless @event.parking.nil? || @event.parking.empty?  %>
+  <div class="event-info"><h4>Parking:</h4><p> <%= @event.parking %></p></div>
+<% end %>
+
+<% unless @event.public_transport.nil? || @event.public_transport.empty?  %>
+  <div class="event-info"><h4>Public Transport:</h4><p> <%= @event.public_transport %></p></div>
+<% end %>
+
+<% unless @event.operation_hours.nil? || @event.operation_hours.empty?  %>
+  <div class="event-info"><h4>Operating hours:</h4><p> <%= @event.operation_hours %></p></div>
+<% end %>
+
+<% unless @event.catering.nil? || @event.catering.empty?  %>
+  <div class="event-info"><h4>Catering:</h4><p> <%= @event.catering %></p></div>
+<% end %>

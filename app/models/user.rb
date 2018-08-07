@@ -44,6 +44,12 @@ class User < ApplicationRecord
     event_assignment.registrations
   end
 
+  def team_projects(event = nil)
+    team_project_assignment_ids = assignments.where(assignable_type: 'TeamProject').pluck(:assignable_id)
+    return if team_project_assignment_ids.nil?
+    TeamProject.where(id: team_project_assignment_ids, event: event)
+  end
+
   def self.search(term)
     results = []
     User.all.each do |user|

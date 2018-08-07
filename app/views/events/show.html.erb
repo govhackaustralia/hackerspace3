@@ -1,126 +1,68 @@
 <main class="events_page single-event">
 
-<h2><%= @event.name %> - <%= @region.name %></h2>
+	<h2><%= @event.name %> - <%= @region.name %></h2>
 
-<section>
-<h3>Event Information</h3>
+	<section>
+		<h3>Event Information</h3>
 
-<% if @event.event_type == STATE_CONNECTION %>
-	<section class="info">
-		<% render 'connection_description' %>
+		<% if @event.event_type == STATE_CONNECTION %>
+			<section class="info">
+				<%= render 'connection_description' %>
+			</section>
+		<% end %>
+
+		<section>
+			<article>
+
+				<div class="event-info">
+					<h4>Registration Type:</h4>
+					<p> <%= @event.registration_type %></p>
+				</div>
+				<%= render 'event_text_information' %>
+
+			</article>
+			<aside>
+				<%= render 'event_map_video' %>
+
+				<%= render 'event_registration_team_project_links' %>
+
+				<% if @event_partner.present? %>
+					<h3>Event Partner</h3>
+					<figure>
+					  <% if @event_partner.logo.attached? %>
+					    <%= image_tag url_for(@event_partner.logo) %>
+					  <% else %>
+					    <%= image_tag 'default_profile_pic.png' %>
+					  <% end %>
+					</figure>
+				<% end %>
+			</aside>
+		</section>
+
+		<% if @sponsorship_types.present? %>
+		  <h3>Regional Sponsors</h3>
+		  <% @sponsorship_types.each do |sponsorship_type| %>
+			  <h4><%= sponsorship_type.name %></h4>
+			  <div class="sponsors">
+			    <% sponsorship_type.sponsorships.where(sponsorable: @region).order(:created_at).each do |sponsorship| %>
+			      <% sponsor = sponsorship.sponsor %>
+					  <figure>
+				      <% if sponsor.logo.attached? %>
+				        <%= image_tag url_for(sponsor.logo) %>
+				      <% else %>
+				        <%= image_tag 'default_profile_pic.png' %>
+				      <% end %>
+					  </figure>
+			    <% end %>
+			  </div>
+			<% end %>
+		<% end %><br>
+
+		<% if user_signed_in? && @event.admin_privileges?(current_user) %>
+		  <%= link_to 'Manage this Event', admin_region_event_path(@region, @event) %><br>
+		<% end %>
+
+		<%= link_to 'Back to Events', events_path %><br>
+
 	</section>
-<% end %>
-<section>
-<article>
-
-<div class="event-info"><h4>Registration Type:</h4><p> <%= @event.registration_type %></p></div>
-
-<% unless @event.email.nil? || @event.email.empty?  %>
-  <div class="event-info"><h4>Email:</h4><p> <%= @event.email %></p></div>
-<% end %>
-
-<% unless @event.twitter.nil? || @event.twitter.empty?  %>
-  <div class="event-info"><h4>Twitter:</h4><p> <%= @event.twitter %></p></div>
-<% end %>
-
-<% unless @event.address.nil? || @event.address.empty?  %>
-  <div class="event-info"><h4>Address:</h4><p> <%= @event.address %></p></div>
-<% end %>
-
-<% unless @event.start_time.nil? || @event.end_time.nil? %>
-  <div class="event-info"><h4>Start time:</h4><p> <%= @event.start_time.strftime("%I:%M%p") %></p></div>
-  <div class="event-info"><h4>End time:</h4><p> <%= @event.end_time.strftime("%I:%M%p") %></p></div>
-<% end %>
-
-<% unless @event.accessibility.nil? || @event.accessibility.empty?  %>
-  <div class="event-info"><h4>Accessibility:</h4><p> <%= @event.accessibility %></p></div>
-<% end %>
-
-<% unless @event.youth_support.nil? || @event.youth_support.empty?  %>
-  <div class="event-info"><h4>Youth Support:</h4><p> <%= @event.youth_support %></p></div>
-<% end %>
-
-<% unless @event.parking.nil? || @event.parking.empty?  %>
-  <div class="event-info"><h4>Parking:</h4><p> <%= @event.parking %></p></div>
-<% end %>
-
-<% unless @event.public_transport.nil? || @event.public_transport.empty?  %>
-  <div class="event-info"><h4>Public Transport:</h4><p> <%= @event.public_transport %></p></div>
-<% end %>
-
-<% unless @event.operation_hours.nil? || @event.operation_hours.empty?  %>
-  <div class="event-info"><h4>Operating hours:</h4><p> <%= @event.operation_hours %></p></div>
-<% end %>
-
-<% unless @event.catering.nil? || @event.catering.empty?  %>
-  <div class="event-info"><h4>Catering:</h4><p> <%= @event.catering %></p></div>
-<% end %>
-
-  </article>
-<aside>
-<% unless @event.place_id.nil? || @event.place_id.empty?  %>
-  <iframe width="600" height="450" frameborder="0" style="border:0"
-  src="https://www.google.com/maps/embed/v1/place?q=place_id:<%= @event.place_id %>&key=<%= ENV['GOOGLE_API_KEY'] %>" allowfullscreen></iframe><br>
-<% end %>
-
-<% unless @event.video_id.nil? || @event.video_id.empty?  %>
-<iframe id="ytplayer" type="text/html" width="640" height="360"
-  src="https://www.youtube.com/embed/<%= @event.video_id %>"
-  frameborder="0"></iframe><br>
-<% end %>
-
-<% unless @event.closed? %>
-	<% if user_signed_in? %>
-	  <% if @registration.present? %>
-	    <%= link_to 'Manage your Event Registration', event_registration_path(@event.identifier, @registration) %><br>
-	  <% else %>
-	    <%= link_to 'Register to Attend this Event', new_event_registration_path(@event.identifier) %><br>
-	  <% end %>
-	<% else %>
-	  <%= link_to 'Sign in to register', new_user_session_path %><br>
-	<% end %>
-<% end %>
-
-<% if @event_partner.present? %>
-<h3>Event Partner</h3>
-<figure>
-
-  <% if @event_partner.logo.attached? %>
-    <%= image_tag url_for(@event_partner.logo) %>
-  <% else %>
-    <%= image_tag 'default_profile_pic.png' %>
-  <% end %>
-</figure>
-<% end %>
-</aside>
-</section>
-
-<% if @sponsorship_types.present? %>
-
-  <h3>Regional Sponsors</h3>
-
-  <% @sponsorship_types.each do |sponsorship_type| %>
-  <h4><%= sponsorship_type.name %></h4>
-  <div class="sponsors">
-    <% sponsorship_type.sponsorships.where(sponsorable: @region).order(:created_at).each do |sponsorship| %>
-      <% sponsor = sponsorship.sponsor %>
-	  <figure>
-      <% if sponsor.logo.attached? %>
-        <%= image_tag url_for(sponsor.logo) %>
-      <% else %>
-        <%= image_tag 'default_profile_pic.png' %>
-      <% end %>
-	  </figure>
-    <% end %>
-  </div>
-  <% end %>
-<% end %><br>
-
-<% if user_signed_in? && @event.admin_privileges?(current_user) %>
-  <%= link_to 'Manage this Event', admin_region_connection_path(@region, @event) %><br>
-<% end %>
-
-<%= link_to 'Back to Events', events_path %><br>
-
-</section>
 </main>

@@ -22,27 +22,43 @@
 
 	<section>
 		<article>
-		<h3>My Events</h3>
+			<h3>My Events</h3>
 
-		<% if (registrations = @user.event_assignment.registrations).present? %>
+			<% if (registrations = @user.event_assignment.registrations).present? %>
 
-			<% @user.event_assignment.registrations.each do |registration| %>
-			<% event = registration.event %>
-			<% region = event.region %>
-			<h4><%= event.name %> -  <%= region.name %></h4>
+				<% registrations.each do |registration| %>
+				<% event = registration.event %>
+				<% region = event.region %>
+				<h4><%= event.name %> -  <%= region.name %></h4>
 
-			You are registered as: <%= registration.status %><br>
+				You are registered as: <%= registration.status %><br>
 
-			<%= link_to 'Go to Event Page', event_path(event.identifier) %><br>
-			<%= link_to 'Update Registration', edit_event_registration_path(event.identifier, registration) %><br>
-		<% end %>
+				<%= link_to 'Go to Event Page', event_path(event.identifier) %><br>
+				<%= link_to 'Update Registration', edit_event_registration_path(event.identifier, registration) %><br>
+			<% end %>
 
-		<% else %>
+			<% else %>
 
-			<div>You are not currently registered for any events.</div>
-			<%= link_to 'Find events', events_path %>
+				<div>You are not currently registered for any events.</div>
+				<%= link_to 'Find events', events_path %>
 
-		<% end %>
+			<% end %>
+		</article>
+		<article>
+			<h3>My Team Projects</h3>
+			<% if (team_projects = @user.team_projects).present? %>
+
+				<% team_projects.each do |team_project| %>
+					<% event = team_project.event %>
+					<% team_project_name = team_project.current_version.team_name %>
+					<%= "#{team_project_name} entered @ #{event.name}" %>
+					<%= link_to "Go to #{team_project_name}", team_projects_path(team_project) %>
+				<% end %>
+
+			<% else %>
+				<div>You are not currenty apart of any team projects.</div>
+				<%= link_to 'Find Competition Events', competition_events_path %><br>
+			<% end %>
 		</article>
 	</section>
 </main>
