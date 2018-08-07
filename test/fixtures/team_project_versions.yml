@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  id: 1
+  team_project_id: 1
+  team_name: Open Data Team
+  description: An awesome team full of people who work well together.
+  data_story: This data tells a story.
+  source_code_url:
+  video_url:
+  homepage_url:
+
+two:
+  team_name: MyString
+  description: MyText
+  data_story: MyText
+  source_code_url: MyString
+  video_url: MyString
+  homepage_url: MyString

@@ -8,6 +8,7 @@ class EventTest < ActiveSupport::TestCase
     @assignment = Assignment.third
     @registration = Registration.find(1)
     @user = User.first
+    @team_project = TeamProject.first
   end
 
   test 'event associations' do
@@ -16,6 +17,7 @@ class EventTest < ActiveSupport::TestCase
     assert(@event.assignments.include?(@assignment))
     assert(@event.registrations.include?(@registration))
     assert(@event.registration_assignments.include?(@registration.assignment))
+    assert(@event.team_projects.include?(@team_project))
   end
 
   test 'event validations' do
