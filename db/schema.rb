@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_08_06_073343) do
+ActiveRecord::Schema.define(version: 2018_08_07_042855) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -130,6 +130,13 @@ ActiveRecord::Schema.define(version: 2018_08_06_073343) do
     t.datetime "updated_at", null: false
     t.boolean "approved", default: false
     t.index ["sponsorable_type", "sponsorable_id"], name: "index_sponsorships_on_sponsorable_type_and_sponsorable_id"
+  end
+
+  create_table "team_projects", force: :cascade do |t|
+    t.integer "event_id"
+    t.integer "team_project_version_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|

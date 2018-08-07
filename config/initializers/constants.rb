@@ -56,6 +56,8 @@ end
 
 # Assignment Permissions Framework Titles
 
+## Competition Assignments
+
 ADMIN = 'Admin'
 MANAGEMENT_TEAM = 'GovHack Management Team'
 COMPETITION_DIRECTOR = 'Competition Director'
@@ -67,6 +69,8 @@ PARTICIPANT = 'Participant'
 COMP_ADMIN = [MANAGEMENT_TEAM, ADMIN, COMPETITION_DIRECTOR]
 COMP_NON_ADMIN = [VIP, PARTICIPANT, VOLUNTEER]
 
+## Region Assignments
+
 REGION_DIRECTOR = 'Region Director'
 REGION_SUPPORT = 'Region Support'
 
@@ -75,9 +79,13 @@ REGION_ADMIN = [REGION_DIRECTOR, REGION_SUPPORT]
 EVENT_HOST = 'Event Host'
 EVENT_SUPPORT = 'Event Support'
 
+## Sponsor Assignments
+
 SPONSOR_CONTACT = 'Sponsor Contact'
 
 SPONSOR_ADMIN = [SPONSOR_CONTACT, SPONSORSHIP_DIRECTOR]
+
+## Event Assignments
 
 EVENT_ADMIN = [EVENT_HOST, EVENT_SUPPORT]
 
@@ -85,7 +93,17 @@ EVENT_PRIVILEGES = EVENT_ADMIN + REGION_ADMIN + COMP_ADMIN
 
 ADMIN_TITLES = COMP_ADMIN + REGION_ADMIN + EVENT_ADMIN
 
-VALID_ASSIGNMENT_TITLES = COMP_ADMIN + REGION_ADMIN + EVENT_ADMIN + COMP_NON_ADMIN + SPONSOR_ADMIN
+## TeamProject assignments
+
+TEAM_LEADER = 'Team Leader'
+TEAM_MEMBER = 'Team Member'
+
+TEAM_ADMIN = [TEAM_LEADER, TEAM_MEMBER]
+
+## Assignment Title Validation
+
+VALID_ASSIGNMENT_TITLES = COMP_ADMIN + REGION_ADMIN + EVENT_ADMIN +
+  COMP_NON_ADMIN + SPONSOR_ADMIN + TEAM_ADMIN
 
 # Registration Statuses
 
