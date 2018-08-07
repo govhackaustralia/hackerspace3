@@ -5,11 +5,13 @@
 	<section>
 		<h3>Event Information</h3>
 
-		<% if @event.event_type == STATE_CONNECTION %>
-			<section class="info">
+		<section class="info">
+			<% if @event.event_type == STATE_CONNECTION %>
 				<%= render 'connection_description' %>
-			</section>
-		<% end %>
+			<% else %>
+				<%= render 'competition_event_description' %>
+			<% end %>
+		</section>
 
 		<section>
 			<article>

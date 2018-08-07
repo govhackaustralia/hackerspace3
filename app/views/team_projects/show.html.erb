@@ -10,4 +10,5 @@
   <% end %>
 <% end %>
 
-<% link_to 'Add Team Members', new_team_project_assignment_path(@team_project) %>
+<%= link_to 'Add Team Members', new_team_project_assignment_path(@team_project, title: TEAM_MEMBER) %><br>
+<%= link_to 'Back to Event', event_path(@team_project.event.identifier) %><br>

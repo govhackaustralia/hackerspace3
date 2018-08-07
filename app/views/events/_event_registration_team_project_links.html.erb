@@ -9,7 +9,7 @@
 
         <% if (team_projects = @user.team_projects(@event)).present? %>
           <% team_projects.each do |team_project| %>
-            <%= link_to "Go to #{team_project.current_version.name}", team_project_path(team_project) %>
+            <%= link_to "Go to #{team_project.current_version.team_name}", team_project_path(team_project) %>
           <% end %>
         <% else %>
           <%= link_to 'Create a Team Project', new_event_team_project_path(@event.identifier) %>
