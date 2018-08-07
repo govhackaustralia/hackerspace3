@@ -14,7 +14,11 @@ class User < ApplicationRecord
   has_one_attached :govhack_img
 
   def admin_privileges?
-    return true unless (assignments.pluck(:title) & COMP_ADMIN).empty?
+    (assignments.pluck(:title) & COMP_ADMIN).present?
+  end
+
+  def event_privileges?
+    (assignments.pluck(:title) & EVENT_PRIVILEGES).present?
   end
 
   def admin_assignments
@@ -53,7 +57,6 @@ class User < ApplicationRecord
     data = access_token.info
     user = User.find_by_email(data['email'])
     user ||= new_user_from_google(data)
-    user.skip_confirmation_notification!
     update_user_info_from_google(user, data)
     user.save
     user

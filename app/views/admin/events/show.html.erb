@@ -51,5 +51,7 @@ Event Capacity: <%= @event.capacity %><br>
   <%= link_to 'Add Event Partner', new_admin_event_event_partnership_path(@event) %><br>
 <% end %>
 
-<%= link_to 'Go to Event Page', event_path(@event.identifier) %><br>
-<%= link_to "Go back to #{@event.region.name} region", admin_region_path(@event.region) %>
+<%= link_to 'Go to Event Page', connection_path(@event.identifier) %><br>
+<% if current_user.admin_privileges? %>
+  <%= link_to "Go back to #{@event.region.name} region", admin_region_path(@event.region) %>
+<% end %>
