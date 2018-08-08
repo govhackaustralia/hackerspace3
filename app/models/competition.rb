@@ -3,6 +3,7 @@ class Competition < ApplicationRecord
   has_many :sponsors
   has_many :sponsorship_types
   has_many :events
+  has_many :challenges
 
   validates :year, presence: true
 

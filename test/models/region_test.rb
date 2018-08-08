@@ -8,6 +8,7 @@ class RegionTest < ActiveSupport::TestCase
     @assignment = Assignment.second
     @user = User.first
     @sponsorship = Sponsorship.second
+    @challenge = Challenge.first
   end
 
   test 'region associations' do
@@ -16,6 +17,7 @@ class RegionTest < ActiveSupport::TestCase
     assert(@parent_region.assignments.include?(@assignment))
     assert(@child_region.events.include?(@event))
     assert(@parent_region.sponsorships.include?(@sponsorship))
+    assert(@parent_region.challenges.include?(@challenge))
   end
 
   test 'region validations' do

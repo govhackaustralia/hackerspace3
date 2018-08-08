@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_08_08_045215) do
+ActiveRecord::Schema.define(version: 2018_08_08_082315) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -44,6 +44,20 @@ ActiveRecord::Schema.define(version: 2018_08_08_045215) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["assignable_type", "assignable_id"], name: "index_assignments_on_assignable_type_and_assignable_id"
+  end
+
+  create_table "challenges", force: :cascade do |t|
+    t.integer "region_id"
+    t.integer "competition_id"
+    t.string "name"
+    t.text "short_desc"
+    t.text "long_desc"
+    t.text "eligibility"
+    t.string "video_url"
+    t.string "data_set_url"
+    t.boolean "approved"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "competitions", force: :cascade do |t|
