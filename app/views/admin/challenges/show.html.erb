@@ -17,5 +17,22 @@ Name: <%= @challenge.name %><br>
   Data Set URL: <%= @challenge.data_set_url %><br>
 <% end %>
 
+<h3>Sponsorships</h3>
+
+<% if (sponsorships = @challenge.sponsorships).present? %>
+
+  <% sponsorships.each do |sponsorship| %>
+    <%= render 'admin/sponsors/sponsor', locals: { sponsor: sponsorship.sponsor } %>
+    Sponsorship Type: <%= sponsorship.sponsorship_type.name %><br>
+  <% end %>
+
+<% else %>
+
+  <div>There are currently no sponsorships for this challenge in the current competition.</div>
+
+<% end %>
+
+<%= link_to 'Add Sponsorship', new_admin_challenge_sponsorship_path(@challenge) %><br>
+
 <%= link_to "Update #{@challenge.name} Challenge", edit_admin_region_challenge_path(@region, @challenge) %><br>
 <%= link_to "Back to #{@region.name} Region", admin_region_path(@region) %>

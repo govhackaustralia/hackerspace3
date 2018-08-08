@@ -8,6 +8,9 @@
 			<% if @competition.events.where(event_type: COMPETITION_EVENT).present? %>
 				<div><%= link_to 'Competition Events', competition_events_path %></div>
 			<% end %>
+			<% if @competition.challenges.present? %>
+				<div><%= link_to 'Challenges', challenges_path %></div>
+			<% end %>
 		</section>
 	</nav>
 </main>

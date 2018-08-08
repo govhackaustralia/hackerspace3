@@ -1,0 +1,23 @@
+<h2><%= @challenge.name %> Challenge <%= @region.name %> Region</h2>
+
+Name: <%= @challenge.name %><br>
+<% unless @challenge.short_desc.blank? %>
+  Short Description: <%= @challenge.short_desc %><br>
+<% end %>
+<% unless @challenge.long_desc.blank? %>
+  Long Description: <%= @challenge.long_desc %><br>
+<% end %>
+<% unless @challenge.eligibility.blank? %>
+  Eligibility: <%= @challenge.eligibility %><br>
+<% end %>
+<% unless @challenge.video_url.blank? %>
+  Video URL: <%= @challenge.video_url %><br>
+<% end %>
+<% unless @challenge.data_set_url.blank? %>
+  Data Set URL: <%= @challenge.data_set_url %><br>
+<% end %>
+
+<h3>Sponsorships</h3>
+
+
+<%= link_to 'Back to Challenges', challenges_path %>

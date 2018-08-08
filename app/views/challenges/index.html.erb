@@ -1,0 +1,9 @@
+<h2>Challenges for Competition <%= Competition.current.year %></h2>
+
+<% @competition.challenges.each do |challenge| %>
+  <h3><%= challenge.name %></h3>
+  <% unless challenge.short_desc.blank? %>
+    Short Description: <%= challenge.short_desc %><br>
+  <% end %>
+  <%= link_to 'Go to Challange', challenge_path(challenge) %>
+<% end %>
