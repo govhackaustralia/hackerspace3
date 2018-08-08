@@ -36,12 +36,40 @@
 
 <h3>Sponsorships</h3>
 
-<% @region.sponsorships.each do |sponsorship| %>
-  <%= render 'admin/sponsors/sponsor', locals: { sponsor: sponsorship.sponsor } %>
-  Sponsorship Type: <%= sponsorship.sponsorship_type.name %><br>
+<% if (sponsorships = @region.sponsorships).present? %>
+
+  <% sponsorships.each do |sponsorship| %>
+    <%= render 'admin/sponsors/sponsor', locals: { sponsor: sponsorship.sponsor } %>
+    Sponsorship Type: <%= sponsorship.sponsorship_type.name %><br>
+  <% end %>
+
+<% else %>
+
+  <div>There are currently no sponsorships for this region in the current competition.</div>
+
 <% end %>
 
 <%= link_to 'Add Sponsorship', new_admin_region_sponsorship_path(@region) %><br>
+
+<h3>Challenges</h3>
+
+<% if (challenges = @region.challenges).present? %>
+
+  <% challenges.each do |challenge| %>
+    Name: <%= challenge.name %><br>
+    <% unless challenge.short_desc.blank? %>
+      Short Description: <%= challenge.short_desc %><br>
+    <% end %>
+    <%= link_to 'Go to Challenge', admin_region_challenge_path(@region, challenge) %><br>
+  <% end %>
+
+<% else %>
+
+  <div>There are currently no challenges for this region in the current competition.</div>
+
+<% end %>
+
+<%= link_to "Create New Challenge for #{@region.name}", new_admin_region_challenge_path(@region) %><br>
 
 <% if (parent = @region.parent).nil? %>
   <%= link_to 'Back to Regions', admin_regions_path %><br>

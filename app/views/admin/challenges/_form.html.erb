@@ -1,0 +1,23 @@
+<%= form_for [:admin, @region, @challenge] do |form| %>
+
+  <%= form.label :name %>
+  <%= form.text_field :name %><br>
+
+  <%= form.label :short_desc %>
+  <%= form.text_field :short_desc %><br>
+
+  <%= form.label :long_desc %>
+  <%= form.text_field :long_desc %><br>
+
+  <%= form.label :eligibility %>
+  <%= form.text_field :eligibility %><br>
+
+  <%= form.label :video_url %>
+  <%= form.url_field :video_url %><br>
+
+  <%= form.label :data_set_url %>
+  <%= form.url_field :data_set_url %><br>
+
+  <%= form.submit %>
+
+<% end %>

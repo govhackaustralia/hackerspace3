@@ -3,7 +3,7 @@ Rails.application.routes.draw do
 
   devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
 
-  resources :users
+  resources :users, :challenges
 
   resources :teams do
     resources :assignments, controller: 'teams/assignments'
@@ -22,7 +22,7 @@ Rails.application.routes.draw do
     end
 
     resources :regions do
-      resources :events, :sponsorships
+      resources :events, :sponsorships, :challenges
       resources :assignments, controller: 'regions/assignments'
     end
 
