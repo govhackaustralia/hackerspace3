@@ -2,6 +2,7 @@ class TeamsController < ApplicationController
   def show
     @team = Team.find(params[:id])
     @current_project = @team.current_project
+    @event = @team.event
   end
 
   def new
@@ -11,6 +12,7 @@ class TeamsController < ApplicationController
 
   def edit
     @team = Team.find(params[:id])
+    @events = Event.where(event_type: COMPETITION_EVENT, competition: Competition.current)
   end
 
   def create
@@ -28,7 +30,7 @@ class TeamsController < ApplicationController
     @team = Team.find(params[:id])
     @team.update(team_params)
     if @team.save
-      flash[:notice] = 'Team Project Upated'
+      flash[:notice] = 'Team Participating Event Upated'
       redirect_to team_path(@team)
     else
       @team.errors.full_messages.to_sentence

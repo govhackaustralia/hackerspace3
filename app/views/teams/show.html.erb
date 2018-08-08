@@ -33,4 +33,8 @@
 <% end %>
 
 <%= link_to 'Add Team Members', new_team_assignment_path(@team, title: TEAM_MEMBER) %><br>
+
+<h3>Competition Event</h3>
+<%= @event.name %><br>
+<%= link_to 'Change Participating Competition Event', edit_team_path(@team) %><br>
 <%= link_to 'Back to Event', event_path(@team.event.identifier) %><br>
