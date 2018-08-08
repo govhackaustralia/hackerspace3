@@ -1,0 +1,22 @@
+<%= form_for [@team, @project] do |project_form| %>
+
+      <%= project_form.label :team_name %>
+      <%= project_form.text_field :team_name %><br>
+
+      <%= project_form.label :description %>
+      <%= project_form.text_field :description %><br>
+
+      <%= project_form.label :data_story %>
+      <%= project_form.text_field :data_story %><br>
+
+      <%= project_form.label :source_code_url %>
+      <%= project_form.url_field :source_code_url %><br>
+
+      <%= project_form.label :video_url %>
+      <%= project_form.url_field :video_url %><br>
+
+      <%= project_form.label :homepage_url %>
+      <%= project_form.url_field :homepage_url %><br>
+
+    <%= project_form.submit %>
+<% end %>

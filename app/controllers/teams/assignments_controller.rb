@@ -1,4 +1,4 @@
-class TeamProjects::AssignmentsController < ApplicationController
+class Teams::AssignmentsController < ApplicationController
   before_action :authenticate_user!
   before_action :check_for_privileges
 
@@ -14,7 +14,7 @@ class TeamProjects::AssignmentsController < ApplicationController
     create_new_assignment
     if @assignment.save
       flash[:notice] = "New #{@title} Assignment Added."
-      redirect_to team_project_path(@assignable)
+      redirect_to team_path(@assignable)
     else
       flash.now[:notice] = @assignment.errors.full_messages.to_sentence
       render 'new'
@@ -30,13 +30,13 @@ class TeamProjects::AssignmentsController < ApplicationController
   end
 
   def new_assignment
-    @assignable = TeamProject.find(params[:team_project_id])
+    @assignable = Team.find(params[:team_id])
     @assignment = @assignable.assignments.new
     @title = params[:title]
   end
 
   def create_new_assignment
-    @assignable = TeamProject.find(params[:team_project_id])
+    @assignable = Team.find(params[:team_id])
     @user = User.find(params[:user_id])
     @title = params[:title]
     @assignment = @assignable.assignments.new(user: @user, title: @title)

@@ -6,7 +6,7 @@ class Event < ApplicationRecord
   belongs_to :competition
   has_one :event_partnership
   has_one :event_partner, through: :event_partnership, source: :sponsor
-  has_many :team_projects
+  has_many :teams
 
   validates :name, :capacity, :registration_type, :event_type, presence: true
 

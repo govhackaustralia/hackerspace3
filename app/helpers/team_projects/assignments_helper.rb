@@ -1,2 +1,0 @@
-module TeamProjects::AssignmentsHelper
-end

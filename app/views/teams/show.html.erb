@@ -1,0 +1,36 @@
+<h2><%= @current_project.team_name %></h2>
+
+<% unless @current_project.description.blank? %>
+  Description: <%= @current_project.description %><br>
+<% end %>
+
+<% unless @current_project.data_story.blank? %>
+  Data Story: <%= @current_project.data_story %><br>
+<% end %>
+
+<% unless @current_project.source_code_url.blank? %>
+  Sorce Code Url: <%= @current_project.source_code_url %><br>
+<% end %>
+
+<% unless @current_project.video_url.blank? %>
+  Video URL: <%= @current_project.video_url %><br>
+<% end %>
+
+<% unless @current_project.homepage_url.blank? %>
+  Homepage URL: <%= @current_project.homepage_url %><br>
+<% end %>
+
+<%= link_to 'Update Team Project', edit_team_project_path(@team, @team.current_project) %>
+
+<h3>Team Leader</h3>
+<%= render 'users/user_contact', locals: { user: @team.team_leader } %>
+<h3>Team Members</h3>
+
+<% if (team_members = @team.team_members).present? %>
+  <% team_members.each do |team_member| %>
+    <%= render 'users/user_contact', locals: { user: team_member } %>
+  <% end %>
+<% end %>
+
+<%= link_to 'Add Team Members', new_team_assignment_path(@team, title: TEAM_MEMBER) %><br>
+<%= link_to 'Back to Event', event_path(@team.event.identifier) %><br>

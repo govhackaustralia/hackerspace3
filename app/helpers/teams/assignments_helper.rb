@@ -1,0 +1,2 @@
+module Teams::AssignmentsHelper
+end

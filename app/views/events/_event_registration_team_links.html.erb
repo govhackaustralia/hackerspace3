@@ -7,12 +7,14 @@
 
       <% if @event.event_type == COMPETITION_EVENT %>
 
-        <% if (team_projects = @user.team_projects(@event)).present? %>
-          <% team_projects.each do |team_project| %>
-            <%= link_to "Go to #{team_project.current_version.team_name}", team_project_path(team_project) %>
+        <% if (teams = @user.teams(@event)).present? %>
+          <% teams.each do |team| %>
+            <%= link_to "Go to #{team.current_project.team_name}", team_path(team) %>
           <% end %>
         <% else %>
-          <%= link_to 'Create a Team Project', new_event_team_project_path(@event.identifier) %>
+          <%= form_for [@event, @team] do |f| %>
+            <%= f.submit %>
+          <% end %>
         <% end %>
 
       <% end %>

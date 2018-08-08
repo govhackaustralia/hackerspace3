@@ -5,12 +5,13 @@ Rails.application.routes.draw do
 
   resources :users
 
-  resources :team_projects do
-    resources :assignments, controller: 'team_projects/assignments'
+  resources :teams do
+    resources :assignments, controller: 'teams/assignments'
+    resources :projects
   end
 
   resources :events, param: :identifier do
-    resources :registrations, :team_projects
+    resources :registrations, :teams
   end
 
   namespace :admin do

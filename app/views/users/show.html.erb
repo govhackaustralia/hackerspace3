@@ -46,13 +46,13 @@
 		</article>
 		<article>
 			<h3>My Team Projects</h3>
-			<% if (team_projects = @user.team_projects).present? %>
+			<% if (teams = @user.teams).present? %>
 
-				<% team_projects.each do |team_project| %>
-					<% event = team_project.event %>
-					<% team_project_name = team_project.current_version.team_name %>
-					<%= "#{team_project_name} entered @ #{event.name}" %>
-					<%= link_to "Go to #{team_project_name}", team_projects_path(team_project) %>
+				<% teams.each do |team| %>
+					<% event = team.event %>
+					<% team_name = team.current_project.team_name %>
+					<%= "#{team_name} entered @ #{event.name}" %><br>
+					<%= link_to "Go to #{team_name}", team_path(team) %><br>
 				<% end %>
 
 			<% else %>
