@@ -33,6 +33,7 @@ user.make_site_admin
       accepted_terms_and_conditions: false, password: Devise.friendly_token[0, 20])
   end
   user.skip_confirmation_notification!
+  user.confirm
   user.save
 end
 

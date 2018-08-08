@@ -1,0 +1,19 @@
+<% unless @current_project.description.blank? %>
+  Description: <%= @current_project.description %><br>
+<% end %>
+
+<% unless @current_project.data_story.blank? %>
+  Data Story: <%= @current_project.data_story %><br>
+<% end %>
+
+<% unless @current_project.source_code_url.blank? %>
+  Sorce Code Url: <%= @current_project.source_code_url %><br>
+<% end %>
+
+<% unless @current_project.video_url.blank? %>
+  Video URL: <%= @current_project.video_url %><br>
+<% end %>
+
+<% unless @current_project.homepage_url.blank? %>
+  Homepage URL: <%= @current_project.homepage_url %><br>
+<% end %>

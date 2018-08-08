@@ -1,29 +1,28 @@
 <h2><%= @current_project.team_name %></h2>
 
-<% unless @current_project.description.blank? %>
-  Description: <%= @current_project.description %><br>
-<% end %>
-
-<% unless @current_project.data_story.blank? %>
-  Data Story: <%= @current_project.data_story %><br>
-<% end %>
-
-<% unless @current_project.source_code_url.blank? %>
-  Sorce Code Url: <%= @current_project.source_code_url %><br>
-<% end %>
-
-<% unless @current_project.video_url.blank? %>
-  Video URL: <%= @current_project.video_url %><br>
-<% end %>
-
-<% unless @current_project.homepage_url.blank? %>
-  Homepage URL: <%= @current_project.homepage_url %><br>
-<% end %>
+<%= render 'team_project_info' %>
 
 <%= link_to 'Update Team Project', edit_team_project_path(@team, @team.current_project) %>
 
+<h3>Team Data Sets</h3>
+
+<% if (team_data_sets = @team.team_data_sets).present? %>
+
+  <% team_data_sets.each do |team_data_set| %>
+    <%= render 'team_data_set', locals: { data_set: team_data_set } %>
+    <%= link_to 'Update Data Set', edit_team_team_data_set_path(@team, team_data_set) %><br>
+  <% end %>
+
+<% else %>
+  <div>Your team does not currently have any data sets.</div>
+<% end %>
+
+<%= link_to 'Add New Data Set', new_team_team_data_set_path(@team) %>
+
 <h3>Team Leader</h3>
+
 <%= render 'users/user_contact', locals: { user: @team.team_leader } %>
+
 <h3>Team Members</h3>
 
 <% if (team_members = @team.team_members).present? %>

@@ -1,0 +1,17 @@
+<% data_set = locals[:data_set] %>
+
+<% unless data_set.name.blank? %>
+  Name: <%= data_set.name %><br>
+<% end %>
+
+<% unless data_set.description.blank? %>
+  Description: <%= data_set.description %><br>
+<% end %>
+
+<% unless data_set.description_of_use.blank? %>
+  Description of Use: <%= data_set.description_of_use %><br>
+<% end %>
+
+<% unless data_set.url.blank? %>
+  URL: <%= data_set.url %><br>
+<% end %>
