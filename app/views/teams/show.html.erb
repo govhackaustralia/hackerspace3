@@ -30,8 +30,11 @@
     <%= render 'users/user_contact', locals: { user: team_member } %>
   <% end %>
 <% end %>
-
-<%= link_to 'Add Team Members', new_team_assignment_path(@team, title: TEAM_MEMBER) %><br>
+<% if @team.assignments.count < MAX_TEAM_SIZE %>
+  <%= link_to 'Add Team Members', new_team_assignment_path(@team, title: TEAM_MEMBER) %><br>
+<% else %>
+  <div>You have reached the maximum team size of <%= MAX_TEAM_SIZE %><div>
+<% end %>
 
 <h3>Competition Event</h3>
 <%= @event.name %><br>
