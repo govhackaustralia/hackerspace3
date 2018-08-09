@@ -6,6 +6,10 @@ class Admin::CompetitionsController < ApplicationController
     @competition = Competition.current
   end
 
+  def show
+    @competition = Competition.find(params[:id])
+  end
+
   private
 
   def check_for_privileges

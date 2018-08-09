@@ -18,10 +18,12 @@
   <%= link_to "New #{SPONSORSHIP_DIRECTOR} Assignment", new_admin_competition_assignment_path(@competition, title: SPONSORSHIP_DIRECTOR) %><br>
 <% end %>
 
-<h3>Site Admin</h3>
+<h3>Site Admins</h3>
 
-<% if (site_admin = @competition.site_admin).present? %>
-  <%= render 'admin/shared/user_contact', locals: { user: @competition.site_admin } %>
+<% if (site_admins = @competition.site_admins).present? %>
+  <% site_admins.each do |site_admin| %>
+    <%= render 'admin/shared/user_contact', locals: { user: site_admin } %>
+  <% end %>
 <% else %>
   This competition does not currently have a site admin.<br>
   <%= link_to "New #{ADMIN} Assignment", new_admin_competition_assignment_path(@competition, title: ADMIN) %><br>

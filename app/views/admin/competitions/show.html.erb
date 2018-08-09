@@ -1,0 +1,39 @@
+<h2>Competition <%= @competition.year %><h2>
+
+<h3>Competition Assignments</h3>
+
+<h4>Competition Director</h4>
+
+<% if (director = @competition.director).present? %>
+  <%= render 'admin/shared/user_contact', locals: { user: director } %>
+<% else %>
+  This competition does not currently have a director.<br>
+<% end %>
+
+<h4>Site Admins</h4>
+
+<% if (site_admins = @competition.site_admins).present? %>
+  <% site_admins.each do |site_admin| %>
+    <%= render 'admin/shared/user_contact', locals: { user: site_admin } %>
+  <% end %>
+<% else %>
+  This competition does not currently have any site admins.<br>
+<% end %>
+
+<h4>GovHack Management Team</h4>
+
+<% if (members = @competition.management_team).present? %>
+  <% members.each do |member| %>
+    <%= render 'admin/shared/user_contact', locals: { user: member } %>
+  <% end %>
+<% else %>
+  This competition does not currently have any management team members.<br>
+<% end %>
+
+<%= link_to 'Assignments Management', admin_competition_assignments_path(@competition) %><br>
+
+<h3>Competition Events<h3>
+
+<% @competition.events.where(event_type: COMPETITION_EVENT).each do |event| %>
+  <%= render 'admin/events/event_single', locals: { event: event } %>
+<% end %>

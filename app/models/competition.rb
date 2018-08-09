@@ -23,26 +23,22 @@ class Competition < ApplicationRecord
     assignment.user
   end
 
-  def site_admin
-    assignment = assignments.where(title: ADMIN).first
-    return nil if assignment.nil?
-    assignment.user
+  def site_admins
+    assignment_user_ids = assignments.where(title: ADMIN).pluck(:user_id)
+    return nil if assignment_user_ids.nil?
+    User.where(id: assignment_user_ids)
   end
 
   def management_team
-    members = []
-    assignments.where(title: MANAGEMENT_TEAM).each do |assignment|
-      members << assignment.user
-    end
-    members
+    assignment_user_ids = assignments.where(title: MANAGEMENT_TEAM).pluck(:user_id)
+    return nil if assignment_user_ids.nil?
+    User.where(id: assignment_user_ids)
   end
 
   def volunteers
-    members = []
-    assignments.where(title: VOLUNTEER).each do |assignment|
-      members << assignment.user
-    end
-    members
+    assignment_user_ids = assignments.where(title: VOLUNTEER).pluck(:user_id)
+    return nil if assignment_user_ids.nil?
+    User.where(id: assignment_user_ids)
   end
 
   def admin_assignments
