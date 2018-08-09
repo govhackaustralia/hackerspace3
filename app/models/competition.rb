@@ -4,6 +4,7 @@ class Competition < ApplicationRecord
   has_many :sponsorship_types
   has_many :events
   has_many :challenges
+  has_many :checkpoints
 
   validates :year, presence: true
 

@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  competition_id: 1
+  end_time: 2018-08-09 17:08:15
+
+two:
+  competition_id: 1
+  end_time: 2018-08-09 17:08:15
