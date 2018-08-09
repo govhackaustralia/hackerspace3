@@ -9,17 +9,26 @@
 <% if @user.present? # User found show create new assignment for %>
 
   <%= render 'admin/shared/user_contact', locals: { user: @user } %>
-
   <% unless @existing_registration.present? # check for existing registration %>
 
     <%= form_for [@assignable, @assignment] do |f| %>
       <%= hidden_field_tag(:user_id, @user.id) %>
       <%= hidden_field_tag(:title, @title) %>
-      <%= f.submit "Create #{@title} Assignment for #{@user.full_name}" %>
+      <%= f.submit "Add #{@user.display_name} to #{@assignable.current_project.team_name}" %>
     <% end %>
 
   <% else %>
-    Assignment for <%= @user.full_name %> to <%= @assignable.name %> as <%= @title %> already exists.<br>
+    Assignment for <%= @user.display_name %> to <%= @assignable.current_project.team_name %> as <%= @existing_registration.title %> already exists.<br>
+  <% end %>
+
+<% elsif params[:term].present? && params[:term].match?(VALID_EMAIL_REGEX) %>
+
+  <div>No current user with email <%= params[:term]%>, save team position for unregisterd user?</div>
+
+  <%= form_for [@assignable, @assignment] do |f| %>
+    <%= hidden_field_tag(:email, params[:term]) %>
+    <%= hidden_field_tag(:title, @title) %>
+    <%= f.submit "Add #{params[:term]} to #{@assignable.current_project.team_name}" %>
   <% end %>
 
 <% elsif @users.present? # Review search results %>

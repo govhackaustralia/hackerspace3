@@ -30,8 +30,9 @@ class User < ApplicationRecord
   end
 
   def display_name
-    full_name
     return preferred_name unless preferred_name.blank?
+    return full_name unless full_name.blank?
+    email
   end
 
   def event_assignment
