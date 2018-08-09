@@ -12,7 +12,7 @@ class Admin::SponsorshipsController < ApplicationController
     create_new_sponsorship
     if @sponsorship.save
       flash[:notice] = 'New sponsorship created'
-      redirect_to admin_region_path(@sponsorable)
+      redirect_to_sponsorable
     else
       flash.now[:notice] = @sponsorship.errors.full_messages.to_sentence
       render 'new'
@@ -21,9 +21,10 @@ class Admin::SponsorshipsController < ApplicationController
 
   def destroy
     @sponsorship = Sponsorship.find(params[:id])
+    @sponsor = @sponsorship.sponsor
     @sponsorship.destroy
     flash[:notice] = 'Sponsorship Destroyed'
-    redirect_to admin_sponsors_path
+    redirect_to_post_destroy_path
   end
 
   private
@@ -36,18 +37,6 @@ class Admin::SponsorshipsController < ApplicationController
     return if current_user.admin_privileges?
     flash[:error] = 'You must have valid assignments to access this section.'
     redirect_to root_path
-  end
-
-  def new_sponsorship
-    @sponsorable = Region.find(params[:region_id])
-    @sponsorship = Sponsorship.new
-  end
-
-  def create_new_sponsorship
-    @sponsorable = Region.find(params[:region_id])
-    @sponsor = Sponsor.find(params[:sponsor_id])
-    @sponsorship = @sponsorable.sponsorships.new(sponsorship_params)
-    @sponsorship.update(sponsor: @sponsor)
   end
 
   def search_sponsors

@@ -21,9 +21,18 @@ Rails.application.routes.draw do
       resources :assignments, controller: 'competitions/assignments'
     end
 
+    resources :sponsors do
+      resources :sponsorships, controller: 'sponsors/sponsorships'
+    end
+
     resources :regions do
-      resources :events, :sponsorships, :challenges
+      resources :events, :challenges
       resources :assignments, controller: 'regions/assignments'
+      resources :sponsorships, controller: 'regions/sponsorships'
+    end
+
+    resources :challenges do
+      resources :sponsorships, controller: 'challenges/sponsorships'
     end
 
     resources :events do

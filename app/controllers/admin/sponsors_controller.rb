@@ -7,6 +7,10 @@ class Admin::SponsorsController < ApplicationController
     @sponsors = @competition.sponsors
   end
 
+  def show
+    @sponsor = Sponsor.find(params[:id])
+  end
+
   def new
     @sponsor = Sponsor.new
   end

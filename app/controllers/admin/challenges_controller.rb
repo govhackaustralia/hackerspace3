@@ -18,9 +18,7 @@ class Admin::ChallengesController < ApplicationController
   end
 
   def create
-    @region = Region.find(params[:region_id])
-    @challenge = @region.challenges.new(challenge_params)
-    @challenge.update(competition: Competition.current)
+    create_new_challenge
     if @challenge.save
       flash[:notice] = 'New Challenge Created'
       redirect_to admin_region_challenge_path(@region, @challenge)
@@ -31,8 +29,7 @@ class Admin::ChallengesController < ApplicationController
   end
 
   def update
-    @region = Region.find(params[:region_id])
-    @challenge = Challenge.find(params[:id])
+    update_challenge
     if @challenge.update(challenge_params)
       flash[:notice] = 'Challenge Updated'
       redirect_to admin_region_challenge_path(@region, @challenge)
@@ -52,6 +49,17 @@ class Admin::ChallengesController < ApplicationController
 
   def challenge_params
     params.require(:challenge).permit(:name, :short_desc, :long_desc,
-                   :eligibility, :video_url, :data_set_url)
+                                      :eligibility, :video_url, :data_set_url)
+  end
+
+  def update_challenge
+    @region = Region.find(params[:region_id])
+    @challenge = Challenge.find(params[:id])
+  end
+
+  def create_new_challenge
+    @region = Region.find(params[:region_id])
+    @challenge = @region.challenges.new(challenge_params)
+    @challenge.competition = Competition.current
   end
 end

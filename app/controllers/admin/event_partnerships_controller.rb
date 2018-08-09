@@ -22,9 +22,10 @@ class Admin::EventPartnershipsController < ApplicationController
 
   def destroy
     @event_partnership = EventPartnership.find(params[:id])
+    @sponsor = @event_partnership.sponsor
     @event_partnership.destroy
     flash[:notice] = 'Event Partnership Destroyed'
-    redirect_to admin_sponsors_path
+    redirect_to admin_sponsor_path(@sponsor)
   end
 
   private

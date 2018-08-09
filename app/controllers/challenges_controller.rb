@@ -1,5 +1,4 @@
 class ChallengesController < ApplicationController
-
   def index
     @competition = Competition.current
   end
