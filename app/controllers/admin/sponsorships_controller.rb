@@ -4,7 +4,7 @@ class Admin::SponsorshipsController < ApplicationController
 
   def new
     new_sponsorship
-    return if params[:term].nil? || params[:term] == ''
+    return if params[:term].blank?
     search_sponsors
   end
 

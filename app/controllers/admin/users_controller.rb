@@ -3,7 +3,7 @@ class Admin::UsersController < ApplicationController
   before_action :check_for_privileges
 
   def index
-    @users = if params[:term].nil? || params[:term].empty?
+    @users = if params[:term].blank?
                User.take(10)
              else
                User.search(params[:term])

@@ -4,7 +4,7 @@ class Admin::EventPartnershipsController < ApplicationController
 
   def new
     new_event_partnership
-    return if params[:term].nil? || params[:term] == ''
+    return if params[:term].blank?
     @sponsor = Sponsor.find_by_name(params[:term])
     @sponsors = Sponsor.search(params[:term]) unless @sponsor.present?
   end

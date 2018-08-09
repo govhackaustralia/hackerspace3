@@ -30,8 +30,8 @@ class User < ApplicationRecord
   end
 
   def display_name
-    return preferred_name unless preferred_name.nil? || preferred_name.empty?
     full_name
+    return preferred_name unless preferred_name.blank?
   end
 
   def event_assignment
@@ -70,11 +70,11 @@ class User < ApplicationRecord
   end
 
   def no_dietary_requirements?
-    dietary_requirements.nil? || dietary_requirements.empty?
+    dietary_requirements.blank?
   end
 
   def registering_account?
-    how_did_you_hear.nil? || how_did_you_hear.empty?
+    how_did_you_hear.blank?
   end
 
   def self.new_user_from_google(data)
@@ -85,7 +85,7 @@ class User < ApplicationRecord
 
   def self.update_user_info_from_google(user, data)
     user.update(google_img: data['image'])
-    return unless user.full_name.nil? || user.full_name.empty?
+    return unless user.full_name.blank?
     user.update(full_name: data['name'])
   end
 end

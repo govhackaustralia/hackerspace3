@@ -8,7 +8,7 @@ class Admin::RegistrationsController < ApplicationController
 
   def new
     new_registration
-    return if params[:term].nil? || params[:term] == ''
+    return if params[:term].blank?
     @user = User.find_by_email(params[:term])
     user_found if @user.present?
     search_other_fields unless @user.present?

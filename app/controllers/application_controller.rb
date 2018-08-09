@@ -25,7 +25,7 @@ class ApplicationController < ActionController::Base
 
   def required_conditions_not_met
     return unless user_signed_in?
-    return unless current_user.full_name.nil? || current_user.full_name == ''
+    return unless current_user.full_name.blank?
     return unless user_not_at_resolution_point
     true
   end
