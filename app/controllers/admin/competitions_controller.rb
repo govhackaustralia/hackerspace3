@@ -8,6 +8,7 @@ class Admin::CompetitionsController < ApplicationController
 
   def show
     @competition = Competition.find(params[:id])
+    @checkpoints = @competition.checkpoints
   end
 
   private

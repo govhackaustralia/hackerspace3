@@ -32,6 +32,24 @@
 
 <%= link_to 'Assignments Management', admin_competition_assignments_path(@competition) %><br>
 
+<h3>CheckPoints</h3>
+
+<% if @checkpoints.present? %>
+  <% @checkpoints.order(end_time: :asc).each_with_index do |checkpoint, order| %>
+    <h4>Checkpoint Number <%= order + 1 %></h4>
+    End Time: <%= checkpoint.end_time %><br>
+    <%= link_to 'Update Checkpoint', edit_admin_competition_checkpoint_path(@competition, checkpoint) %><br>
+  <% end %>
+<% else %>
+  <div>The Competition does not currently have any checkpoints set.<div>
+<% end %>
+
+<% if @checkpoints.count < MAX_COMPETITION_CHECKPOINTS %>
+  <%= link_to 'Add New Checkpoint', new_admin_competition_checkpoint_path(@competition) %><br>
+<% else %>
+  <div>The Competition has the maximum number of checkpoints</div>
+<% end %>
+
 <h3>Competition Events<h3>
 
 <% @competition.events.where(event_type: COMPETITION_EVENT).each do |event| %>

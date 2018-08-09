@@ -34,6 +34,7 @@ class Admin::EventsController < ApplicationController
     if @event.update(event_params)
       redirect_to admin_region_event_path(@event.region_id, @event)
     else
+      flash[:notice] = @event.errors.full_messages.to_sentence
       render 'edit'
     end
   end
