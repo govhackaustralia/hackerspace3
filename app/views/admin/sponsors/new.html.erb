@@ -1,11 +1,5 @@
 <h2>Create New Sponsor</h2>
 
-<%= form_for [:admin, @sponsor] do |f| %>
-  <%= f.label :name %><br>
-  <%= f.text_field :name  %><br>
-  <%= f.label :description %><br>
-  <%= f.text_field :description  %><br>
-  <%= f.label :logo %><br>
-  <%= f.file_field :logo %><br>
-  <%= f.submit %>
-<% end %>
+<%= render 'form' %>
+
+<%= link_to 'Back to Sponsors', admin_sponsors_path %>

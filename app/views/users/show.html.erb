@@ -14,6 +14,8 @@
 				<%= link_to 'Region Management', admin_regions_path %><br>
 				<%= link_to 'User Management', admin_users_path %><br>
 				<%= link_to 'Competiton Management', admin_competition_path(Competition.current) %><br>
+			<% end %>
+			<% if current_user.sponsor_privileges? %>
 				<%= link_to 'Sponsor Management', admin_sponsors_path %><br>
 				<%= link_to 'Sponsorship Type Management', admin_sponsorship_types_path %><br>
 			<% end %>
@@ -46,6 +48,7 @@
 		</article>
 		<article>
 			<h3>My Team Projects</h3>
+
 			<% if (teams = @user.teams).present? %>
 
 				<% teams.each do |team| %>

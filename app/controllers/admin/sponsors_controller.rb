@@ -21,7 +21,7 @@ class Admin::SponsorsController < ApplicationController
       flash[:notice] = 'New Sponsor Created'
       redirect_to admin_sponsors_path
     else
-      flash[:notice] = 'Could not save sponsor'
+      flash[:alert] = 'Could not save sponsor'
       render new_admin_sponsor_path(@sponsor)
     end
   end
@@ -33,6 +33,21 @@ class Admin::SponsorsController < ApplicationController
     redirect_to admin_sponsors_path
   end
 
+  def edit
+    @sponsor = Sponsor.find(params[:id])
+  end
+
+  def update
+    @sponsor = Sponsor.find(params[:id])
+    if @sponsor.update(sponsor_params)
+      flash[:notice] = 'Sponsor Updated'
+      redirect_to admin_sponsor_path(@sponsor)
+    else
+      flash[:alert] = @sponsor.errors.full_messages.to_sentence
+      render :edit
+    end
+  end
+
   private
 
   def sponsor_params
@@ -40,7 +55,7 @@ class Admin::SponsorsController < ApplicationController
   end
 
   def check_for_privileges
-    return if current_user.admin_privileges?
+    return if current_user.sponsor_privileges?
     flash[:error] = 'You must have valid assignments to access this section.'
     redirect_to root_path
   end

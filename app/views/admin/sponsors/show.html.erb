@@ -3,38 +3,51 @@
   <img src="<%= url_for(@sponsor.logo) %>" alt="<%= @sponsor.name %> logo" /><br>
 <% end %>
 
-<%= link_to 'Destroy Sponsor', admin_sponsor_path(@sponsor),
-              method: :delete,
-              data: { confirm: 'Are you sure?' } %><br>
+<% if current_user.sponsor_privileges? %>
+  <%= link_to 'Destroy Sponsor', admin_sponsor_path(@sponsor),
+                method: :delete,
+                data: { confirm: 'Are you sure?' } %><br>
+<% end %>
 
 <article><%= @sponsor.description %></article>
+<%= link_to 'Edit Sponsor', edit_admin_sponsor_path(@sponsor) %>
 
-<h4>Sponsorships</h4>
+<h3>Sponsor Contact</h3>
+
+
+
+<h3>Sponsorships</h3>
 <div>Please go to individual regions to add sponsorships.</div>
 <% if (sponsorships = @sponsor.sponsorships).empty? %>
   <div>No sponsorships for <%= @sponsor.name %></div>
 <% else %>
   <% sponsorships.each do |sponsorship| %>
-    <h3><%= sponsorship.sponsorable_type %>: <%= sponsorship.sponsorable.name %></h3>
+    <h4><%= sponsorship.sponsorable_type %>: <%= sponsorship.sponsorable.name %></h4>
     Sponsorship type: <%= sponsorship.sponsorship_type.name %><br>
-    <%= link_to 'Destroy Sponsorship', admin_sponsor_sponsorship_path(@sponsor, sponsorship),
-                  method: :delete,
-                  data: { confirm: 'Are you sure?' } %><br>
+    <% if current_user.sponsor_privileges? %>
+      <%= link_to 'Destroy Sponsorship', admin_sponsor_sponsorship_path(@sponsor, sponsorship),
+                    method: :delete,
+                    data: { confirm: 'Are you sure?' } %><br>
+    <% end %>
   <% end %>
 <% end %>
 
 
-<h4>Event Partnerships</h4>
+<h3>Event Partnerships</h3>
 <div>Please go to individual events to add event parter.</div>
 <% if (event_partnerships = @sponsor.event_partnerships).empty? %>
   <div>No event partnerships for <%= @sponsor.name %></div>
 <% else %>
   <% event_partnerships.each do |event_partnership| %>
-    Event: <%= event_partnership.event.name %><br>
-    <%= link_to 'Destroy Event Partnership', admin_event_partnership_path(event_partnership),
-                  method: :delete,
-                  data: { confirm: 'Are you sure?' } %><br>
+    <h4>Event: <%= event_partnership.event.name %></h4>
+    <% if current_user.sponsor_privileges? %>
+      <%= link_to 'Destroy Event Partnership', admin_event_partnership_path(event_partnership),
+                    method: :delete,
+                    data: { confirm: 'Are you sure?' } %><br>
+    <% end %>
   <% end %>
 <% end %>
 
-<%= link_to 'Back to Sponsors', admin_sponsors_path %>
+<% if current_user.sponsor_privileges? %>
+  <%= link_to 'Back to Sponsors', admin_sponsors_path %>
+<% end %>

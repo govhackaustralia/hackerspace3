@@ -6,6 +6,7 @@ class Sponsor < ApplicationRecord
 
   has_one_attached :logo
   validates :name, uniqueness: true
+  validates :name, presence: true
 
   def self.search(term)
     results = []
