@@ -17,6 +17,10 @@ class User < ApplicationRecord
     (assignments.pluck(:title) & COMP_ADMIN).present?
   end
 
+  def region_privileges?
+    (assignments.pluck(:title) & REGION_PRIVILEGES).present?
+  end
+
   def event_privileges?
     (assignments.pluck(:title) & EVENT_PRIVILEGES).present?
   end

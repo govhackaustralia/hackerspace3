@@ -42,10 +42,15 @@ class Region < ApplicationRecord
     supports
   end
 
+  def admin_privileges?(user)
+    (admin_assignments & user.assignments).present?
+  end
+
   # Will retrieve all assignments up through to the root region.
   def admin_assignments(collected = [])
     collected << assignments.where(title: REGION_ADMIN).to_a
+    collected << Competition.current.admin_assignments
     return collected.flatten if parent_id.nil?
-    parent.admin_assignments(collected)
+    parent.admin_assignments(collected).flatten
   end
 end

@@ -2,12 +2,12 @@
 
 <h3>Event Information</h3>
 
-Region: <%= @event.region.name %><br>
+Region: <%= @region.name %><br>
 Event Category: <%= @event.event_type %><br>
 Registration Type: <%= @event.registration_type %><br>
 Event Capacity: <%= @event.capacity %><br>
 
-<%= link_to "Edit #{@event.name} Event", edit_admin_region_event_path(@event.region, @event) %><br>
+<%= link_to "Edit #{@event.name} Event", edit_admin_region_event_path(@region, @event) %><br>
 
 <h3>Event Assignments</h3>
 
@@ -51,7 +51,7 @@ Event Capacity: <%= @event.capacity %><br>
   <%= link_to 'Add Event Partner', new_admin_event_event_partnership_path(@event) %><br>
 <% end %>
 
-<%= link_to 'Go to Event Page', connection_path(@event.identifier) %><br>
-<% if current_user.admin_privileges? %>
-  <%= link_to "Go back to #{@event.region.name} region", admin_region_path(@event.region) %>
+<%= link_to 'Go to Event Page', event_path(@event.identifier) %><br>
+<% if @region.admin_privileges?(current_user) %>
+  <%= link_to "Go back to #{@region.name} region", admin_region_path(@region) %>
 <% end %>

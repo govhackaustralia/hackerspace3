@@ -71,8 +71,10 @@
 
 <%= link_to "Create New Challenge for #{@region.name}", new_admin_region_challenge_path(@region) %><br>
 
-<% if (parent = @region.parent).nil? %>
-  <%= link_to 'Back to Regions', admin_regions_path %><br>
-<% else %>
+<% if (parent = @region.parent).present? && parent.admin_privileges?(current_user) %>
   <%= link_to "Back to #{parent.name} Region", admin_region_path(parent)  %><br>
+<% end %>
+
+<% if current_user.admin_privileges? %>
+  <%= link_to 'Back to Regions', admin_regions_path %><br>
 <% end %>
