@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  region_id: 1
+  competition_id: 1
+  name: MyString
+  url: MyString
+  description: MyText
+
+two:
+  region_id: 1
+  competition_id: 1
+  name: MyString
+  url: MyString
+  description: MyText

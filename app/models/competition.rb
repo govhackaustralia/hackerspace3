@@ -5,6 +5,7 @@ class Competition < ApplicationRecord
   has_many :events
   has_many :challenges
   has_many :checkpoints
+  has_many :data_sets
 
   validates :year, presence: true
 

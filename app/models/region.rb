@@ -4,6 +4,7 @@ class Region < ApplicationRecord
   has_many :sponsorships, as: :sponsorable
   has_many :sponsorship_types, through: :sponsorships
   has_many :challenges
+  has_many :data_sets
 
   validates :name, presence: true
   validates :name, uniqueness: true
