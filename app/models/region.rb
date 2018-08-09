@@ -36,11 +36,9 @@ class Region < ApplicationRecord
   end
 
   def supports
-    supports = []
-    assignments.where(title: REGION_SUPPORT).each do |assignment|
-      supports << assignment.user
-    end
-    supports
+    user_ids = assignments.where(title: REGION_SUPPORT).pluck(:user_id)
+    return nil if user_ids.empty?
+    User.where(id: user_ids)
   end
 
   def admin_privileges?(user)

@@ -71,6 +71,29 @@
 
 <%= link_to "Create New Challenge for #{@region.name}", new_admin_region_challenge_path(@region) %><br>
 
+<h3>Data Sets</h3>
+
+<% if (data_sets = @region.data_sets).present? %>
+
+  <% data_sets.each do |data_set| %>
+    Name: <%= data_set.name %><br>
+    <% unless data_set.description.blank? %>
+      Description: <%= data_set.description %><br>
+    <% end %>
+    <% unless data_set.url.blank? %>
+      URL: <%= data_set.url %><br>
+    <% end %>
+    <%= link_to 'Update to Data Set', edit_admin_region_data_set_path(@region, data_set) %><br>
+  <% end %>
+
+<% else %>
+
+  <div>There are currently no data sets for this region in the current competition.</div>
+
+<% end %>
+
+<%= link_to "Create New Data Set for #{@region.name}", new_admin_region_data_set_path(@region) %><br>
+
 <% if (parent = @region.parent).present? && parent.admin_privileges?(current_user) %>
   <%= link_to "Back to #{parent.name} Region", admin_region_path(parent)  %><br>
 <% end %>

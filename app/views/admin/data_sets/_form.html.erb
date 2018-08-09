@@ -1,0 +1,14 @@
+<%= form_for [:admin, @region, @data_set] do |form| %>
+
+  <%= form.label :name %>
+  <%= form.text_field :name %><br>
+
+  <%= form.label :description %>
+  <%= form.text_field :description %><br>
+
+  <%= form.label :url %>
+  <%= form.url_field :url %><br>
+
+  <%= form.submit %>
+
+<% end %>
