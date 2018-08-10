@@ -28,8 +28,7 @@ class Admin::SponsorshipTypesController < ApplicationController
   end
 
   def update
-    SponsorshipType.reorder_from(params[:sponsorship_type][:order].to_i)
-    @sponsorship_type = SponsorshipType.find(params[:id])
+    update_sponsorship_type
     if @sponsorship_type.update(sponsorship_type_params)
       flash[:notice] = 'Sponsorship Type Updated'
       redirect_to admin_sponsorship_types_path
@@ -54,5 +53,10 @@ class Admin::SponsorshipTypesController < ApplicationController
   def create_new_sponsorship_type
     SponsorshipType.reorder_from(params[:sponsorship_type][:order].to_i)
     @sponsorship_type = Competition.current.sponsorship_types.new(sponsorship_type_params)
+  end
+
+  def update_sponsorship_type
+    SponsorshipType.reorder_from(params[:sponsorship_type][:order].to_i)
+    @sponsorship_type = SponsorshipType.find(params[:id])
   end
 end

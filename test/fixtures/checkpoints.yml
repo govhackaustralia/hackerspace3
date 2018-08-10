@@ -1,9 +1,11 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
+  id: 1
   competition_id: 1
   end_time: 2018-08-09 17:08:15
 
 two:
+  id: 2
   competition_id: 1
   end_time: 2018-08-09 17:08:15

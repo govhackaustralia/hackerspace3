@@ -23,8 +23,7 @@ class Admin::RegistrationsController < ApplicationController
   end
 
   def update
-    @event = Event.find(params[:event_id])
-    @registration = Registration.find(params[:id])
+    update_registration
     if @registration.update(registration_params)
       flash[:notice] = 'Registration Updated.'
       redirect_to admin_event_registrations_path(@event)
@@ -78,5 +77,10 @@ class Admin::RegistrationsController < ApplicationController
 
   def search_other_fields
     @users = User.search(params[:term])
+  end
+
+  def update_registration
+    @event = Event.find(params[:event_id])
+    @registration = Registration.find(params[:id])
   end
 end

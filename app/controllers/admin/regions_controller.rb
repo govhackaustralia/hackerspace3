@@ -28,7 +28,7 @@ class Admin::RegionsController < ApplicationController
   def update
     @region = Region.find(params[:id])
     if @region.update(region_params)
-      flash[:notice] = "Region Updated"
+      flash[:notice] = 'Region Updated'
       redirect_to admin_region_path(@region)
     else
       flash.now[:alert] = @region.errors.full_messages.to_sentence

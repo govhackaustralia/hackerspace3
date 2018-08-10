@@ -7,8 +7,7 @@ class TeamDataSetsController < ApplicationController
   end
 
   def create
-    @team = Team.find(params[:team_id])
-    @team_data_set = @team.team_data_sets.new(team_data_set_params)
+    create_net_team_data_set
     if @team_data_set.save
       flash[:notice] = 'New Team Data Set Created'
       redirect_to team_path(@team)
@@ -43,5 +42,10 @@ class TeamDataSetsController < ApplicationController
   def set_team_and_data_set
     @team = Team.find(params[:team_id])
     @team_data_set = TeamDataSet.find(params[:id])
+  end
+
+  def create_net_team_data_set
+    @team = Team.find(params[:team_id])
+    @team_data_set = @team.team_data_sets.new(team_data_set_params)
   end
 end

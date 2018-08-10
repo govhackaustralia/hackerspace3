@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  team_id: 1
+  challenge_id: 1
+  checkpoint_id: 1
+  justification: MyText
+  eligible: false
+
+two:
+  team_id: 1
+  challenge_id: 1
+  checkpoint_id: 1
+  justification: MyText
+  eligible: false

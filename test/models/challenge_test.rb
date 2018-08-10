@@ -6,11 +6,13 @@ class ChallengeTest < ActiveSupport::TestCase
     @competition = Competition.first
     @region = Region.first
     @sponsorship = Sponsorship.third
+    @entry = Entry.first
   end
 
   test 'challenge associations' do
     assert(@challenge.competition == @competition)
     assert(@challenge.region == @region)
     assert(@challenge.sponsorships.include?(@sponsorship))
+    assert(@challenge.entries.include?(@entry))
   end
 end

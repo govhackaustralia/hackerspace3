@@ -8,8 +8,7 @@ class Admin::CheckpointsController < ApplicationController
   end
 
   def create
-    @competition = Competition.find(params[:competition_id])
-    @checkpoint = @competition.checkpoints.new(checkpoint_params)
+    create_new_checkpoint
     if @checkpoint.save
       flash[:notice] = 'Checkpoint created.'
       redirect_to admin_competition_path(@competition)
@@ -50,5 +49,10 @@ class Admin::CheckpointsController < ApplicationController
   def retrieve_competition_and_checkpoint
     @competition = Competition.find(params[:competition_id])
     @checkpoint = Checkpoint.find(params[:id])
+  end
+
+  def create_new_checkpoint
+    @competition = Competition.find(params[:competition_id])
+    @checkpoint = @competition.checkpoints.new(checkpoint_params)
   end
 end

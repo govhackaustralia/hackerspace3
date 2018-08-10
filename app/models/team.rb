@@ -3,6 +3,7 @@ class Team < ApplicationRecord
   belongs_to :event
   has_many :projects, dependent: :destroy
   has_many :team_data_sets, dependent: :destroy
+  has_many :entries, dependent: :destroy
 
   def team_leader
     assignment = Assignment.find_by(assignable_type: 'Team', assignable_id: id, title: TEAM_LEADER)

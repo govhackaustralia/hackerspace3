@@ -28,7 +28,7 @@ class User < ApplicationRecord
   def sponsor_privileges?
     (assignments.pluck(:title) & SPONSOR_PRIVILEGES).present?
   end
-    
+
   def admin_assignments
     assignments.where(title: ADMIN_TITLES)
   end
