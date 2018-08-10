@@ -4,6 +4,8 @@
   Time Zone: <%= @region.time_zone %></br>
 <% end %>
 
+<%= link_to 'Update Region Info', edit_admin_region_path(@region) %><br>
+
 <h3>Region Director</h3>
 
 <% if (director = @region.director).present? %>
@@ -24,7 +26,7 @@
 <% if (events = @region.events.where(competition: Competition.current)).present? %>
 
   <% events.each do |event| %>
-    <h4><%= event.name %></h4>
+    <h4><%= event.name %> - <%= event.event_type %></h4>
     <%= link_to "Manage #{event.name}", admin_region_event_path(@region, event) %></br>
   <% end %>
 

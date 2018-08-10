@@ -1,0 +1,7 @@
+<%= form_for [:admin, @region] do |f| %>
+  <%= f.label(:name, "Region name:") %><br>
+  <%= f.text_field(:name) %><br>
+  <%= f.label(:time_zone, "Time zone:") %><br>
+  <%= f.select(:time_zone, options_from_collection_for_select(ActiveSupport::TimeZone.country_zones('AU'), :name, :name, @region.time_zone)) %><br>
+  <%= f.submit %>
+<% end %>

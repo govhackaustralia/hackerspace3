@@ -10,6 +10,10 @@ class Admin::RegionsController < ApplicationController
     @region = Region.new if @region.nil?
   end
 
+  def edit
+    @region = Region.find(params[:id])
+  end
+
   def create
     create_new_region
     if @region.save
@@ -18,6 +22,17 @@ class Admin::RegionsController < ApplicationController
     else
       flash.now[:alert] = @region.errors.full_messages.to_sentence
       render :new
+    end
+  end
+
+  def update
+    @region = Region.find(params[:id])
+    if @region.update(region_params)
+      flash[:notice] = "Region Updated"
+      redirect_to admin_region_path(@region)
+    else
+      flash.now[:alert] = @region.errors.full_messages.to_sentence
+      render :edit
     end
   end
 
