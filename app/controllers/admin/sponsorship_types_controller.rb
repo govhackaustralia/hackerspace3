@@ -22,8 +22,8 @@ class Admin::SponsorshipTypesController < ApplicationController
       flash[:notice] = 'New Sponsorship Type Created'
       redirect_to admin_sponsorship_types_path
     else
-      flash[:notice] = 'Could not save sponsorship type'
-      render new_admin_sponsorship_type_path(@sponsorship_type)
+      flash[:alert] = 'Could not save sponsorship type'
+      render :new
     end
   end
 
@@ -31,9 +31,11 @@ class Admin::SponsorshipTypesController < ApplicationController
     SponsorshipType.reorder_from(params[:sponsorship_type][:order].to_i)
     @sponsorship_type = SponsorshipType.find(params[:id])
     if @sponsorship_type.update(sponsorship_type_params)
+      flash[:notice] = 'Sponsorship Type Updated'
       redirect_to admin_sponsorship_types_path
     else
-      render 'edit'
+      flash[:alert] = @sponsorship_type.errors.full_messages.to_sentence
+      render :edit
     end
   end
 
@@ -45,7 +47,7 @@ class Admin::SponsorshipTypesController < ApplicationController
 
   def check_for_privileges
     return if current_user.sponsor_privileges?
-    flash[:error] = 'You must have valid assignments to access this section.'
+    flash[:alert] = 'You must have valid assignments to access this section.'
     redirect_to root_path
   end
 

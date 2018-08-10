@@ -13,7 +13,7 @@ class TeamDataSetsController < ApplicationController
       flash[:notice] = 'New Team Data Set Created'
       redirect_to team_path(@team)
     else
-      @team_data_set.errors.full_messages.to_sentence
+      flash[:alert] = @team_data_set.errors.full_messages.to_sentence
       render :new
     end
   end
@@ -28,7 +28,7 @@ class TeamDataSetsController < ApplicationController
       flash[:notice] = 'New Team Data Set Updated'
       redirect_to team_path(@team)
     else
-      @team_data_set.errors.full_messages.to_sentence
+      flash[:alert] = @team_data_set.errors.full_messages.to_sentence
       render :edit
     end
   end

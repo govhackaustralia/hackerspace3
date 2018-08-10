@@ -23,7 +23,7 @@ class TeamsController < ApplicationController
     if @team.save
       handle_team_save
     else
-      @team.errors.full_messages.to_sentence
+      flash[:alert] = @team.errors.full_messages.to_sentence
       render :new
     end
   end
@@ -35,7 +35,7 @@ class TeamsController < ApplicationController
       flash[:notice] = 'Team Participating Event Upated'
       redirect_to team_path(@team)
     else
-      @team.errors.full_messages.to_sentence
+      flash[:alert] = @team.errors.full_messages.to_sentence
       render :new
     end
   end

@@ -23,7 +23,7 @@ class Admin::ChallengesController < ApplicationController
       flash[:notice] = 'New Challenge Created'
       redirect_to admin_region_challenge_path(@region, @challenge)
     else
-      @challenge.errors.full_messages.to_sentence
+      flash[:alert] = @challenge.errors.full_messages.to_sentence
       render :new
     end
   end
@@ -34,7 +34,7 @@ class Admin::ChallengesController < ApplicationController
       flash[:notice] = 'Challenge Updated'
       redirect_to admin_region_challenge_path(@region, @challenge)
     else
-      @challenge.errors.full_messages.to_sentence
+      flash[:alert] = @challenge.errors.full_messages.to_sentence
       render :edit
     end
   end
@@ -43,7 +43,7 @@ class Admin::ChallengesController < ApplicationController
 
   def check_for_privileges
     return if current_user.region_privileges?
-    flash[:error] = 'You must have valid assignments to access this section.'
+    flash[:alert] = 'You must have valid assignments to access this section.'
     redirect_to root_path
   end
 

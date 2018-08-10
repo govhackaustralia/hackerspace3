@@ -14,7 +14,7 @@ class Admin::CheckpointsController < ApplicationController
       flash[:notice] = 'Checkpoint created.'
       redirect_to admin_competition_path(@competition)
     else
-      @checkpoint.errors.full_messages.to_sentence
+      flash[:alert] = @checkpoint.errors.full_messages.to_sentence
       render :new
     end
   end
@@ -30,7 +30,7 @@ class Admin::CheckpointsController < ApplicationController
       flash[:notice] = 'Checkpoint updated.'
       redirect_to admin_competition_path(@competition)
     else
-      @checkpoint.errors.full_messages.to_sentence
+      flash[:alert] = @checkpoint.errors.full_messages.to_sentence
       render :new
     end
   end
@@ -39,7 +39,7 @@ class Admin::CheckpointsController < ApplicationController
 
   def check_for_privileges
     return if current_user.admin_privileges?
-    flash[:error] = 'You must have valid assignments to access this section.'
+    flash[:alert] = 'You must have valid assignments to access this section.'
     redirect_to root_path
   end
 

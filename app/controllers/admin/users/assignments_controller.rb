@@ -12,7 +12,7 @@ class Admin::Users::AssignmentsController < ApplicationController
       cannot_demote_vip
     else
       @assignment.update(assignment_params)
-      flash[:notice] = 'User event assignment has bee updated'
+      flash[:notice] = 'User event assignment has been updated'
       redirect_to admin_user_path(@user)
     end
   end
@@ -25,7 +25,7 @@ class Admin::Users::AssignmentsController < ApplicationController
 
   def check_for_privileges
     return if current_user.admin_privileges?
-    flash[:error] = 'You must have valid assignments to access this section.'
+    flash[:alert] = 'You must have valid assignments to access this section.'
     redirect_to root_path
   end
 
@@ -36,6 +36,6 @@ class Admin::Users::AssignmentsController < ApplicationController
 
   def cannot_demote_vip
     flash.now[:notice] = 'Apologies, event assignments cannot be reverted to Particpant'
-    render 'edit'
+    render :edit
   end
 end

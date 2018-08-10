@@ -30,8 +30,8 @@ class RegistrationsController < ApplicationController
       flash[:notice] = 'Your registration has been updated'
       redirect_to event_registration_path(@event.identifier, @registration)
     else
-      flash[:notice] = @registration.errors.full_messages.to_sentence
-      render edit_event_registration_path(@event.identifier, @registration)
+      flash[:alert] = @registration.errors.full_messages.to_sentence
+      render :edit
     end
   end
 
@@ -41,8 +41,8 @@ class RegistrationsController < ApplicationController
     if @registration.save
       handle_new_save
     else
-      flash[:notice] = @registration.errors.full_messages.to_sentence
-      render 'new'
+      flash[:alert] = @registration.errors.full_messages.to_sentence
+      render :new
     end
   end
 

@@ -16,8 +16,8 @@ class Admin::RegionsController < ApplicationController
       flash[:notice] = "New Region '#{@region.name}' added."
       redirect_to admin_regions_path
     else
-      flash.now[:notice] = @region.errors.full_messages.to_sentence
-      render 'new'
+      flash.now[:alert] = @region.errors.full_messages.to_sentence
+      render :new
     end
   end
 
@@ -33,7 +33,7 @@ class Admin::RegionsController < ApplicationController
 
   def check_for_privileges
     return if current_user.region_privileges?
-    flash[:error] = 'You must have valid assignments to access this section.'
+    flash[:alert] = 'You must have valid assignments to access this section.'
     redirect_to root_path
   end
 

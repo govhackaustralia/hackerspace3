@@ -13,8 +13,8 @@ class Admin::EventsController < ApplicationController
       flash[:notice] = 'New event created.'
       redirect_to admin_region_event_path(@region, @event)
     else
-      flash[:notice] = @event.errors.full_messages.to_sentence
-      render 'new'
+      flash[:alert] = @event.errors.full_messages.to_sentence
+      render :new
     end
   end
 
@@ -34,8 +34,8 @@ class Admin::EventsController < ApplicationController
     if @event.update(event_params)
       redirect_to admin_region_event_path(@event.region_id, @event)
     else
-      flash[:notice] = @event.errors.full_messages.to_sentence
-      render 'edit'
+      flash[:alert] = @event.errors.full_messages.to_sentence
+      render :edit
     end
   end
 
@@ -50,7 +50,7 @@ class Admin::EventsController < ApplicationController
 
   def check_for_privileges
     return if current_user.event_privileges?
-    flash[:error] = 'You must have valid assignments to access this section.'
+    flash[:alert] = 'You must have valid assignments to access this section.'
     redirect_to root_path
   end
 

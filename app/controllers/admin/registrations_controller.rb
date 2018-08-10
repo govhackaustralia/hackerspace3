@@ -25,9 +25,13 @@ class Admin::RegistrationsController < ApplicationController
   def update
     @event = Event.find(params[:event_id])
     @registration = Registration.find(params[:id])
-    @registration.update(registration_params)
-    flash[:notice] = 'Registration Updated.'
-    redirect_to admin_event_registrations_path(@event)
+    if @registration.update(registration_params)
+      flash[:notice] = 'Registration Updated.'
+      redirect_to admin_event_registrations_path(@event)
+    else
+      flash.now[:alert] = @registration.errors.full_messages.to_sentence
+      render :edit
+    end
   end
 
   def create
@@ -36,9 +40,9 @@ class Admin::RegistrationsController < ApplicationController
       flash[:notice] = 'New Registration Added.'
       redirect_to admin_event_registrations_path(@event)
     else
-      flash.now[:notice] = @registration.errors.full_messages.to_sentence
+      flash.now[:alert] = @registration.errors.full_messages.to_sentence
       @user = @assignment.user
-      render 'new'
+      render :new
     end
   end
 
@@ -50,7 +54,7 @@ class Admin::RegistrationsController < ApplicationController
 
   def check_for_privileges
     return if current_user.event_privileges?
-    flash[:error] = 'You must have valid assignments to access this section.'
+    flash[:alert] = 'You must have valid assignments to access this section.'
     redirect_to root_path
   end
 

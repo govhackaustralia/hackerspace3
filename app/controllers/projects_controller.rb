@@ -12,7 +12,7 @@ class ProjectsController < ApplicationController
     if @project.save
       handle_successful_save
     else
-      flash[:notice] = @project.errors.full_messages.to_sentence
+      flash[:alert] = @project.errors.full_messages.to_sentence
       render :new
     end
   end
