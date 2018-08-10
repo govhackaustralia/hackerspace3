@@ -7,7 +7,7 @@ Rails.application.routes.draw do
 
   resources :teams do
     resources :assignments, controller: 'teams/assignments'
-    resources :projects, :team_data_sets
+    resources :projects, :team_data_sets, :entries
   end
 
   resources :events, param: :identifier do

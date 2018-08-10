@@ -40,3 +40,17 @@
 <%= @event.name %><br>
 <%= link_to 'Change Participating Competition Event', edit_team_path(@team) %><br>
 <%= link_to 'Back to Event', event_path(@team.event.identifier) %><br>
+
+<h4>Challenge Entries</h4>
+
+<% if (entries = @team.entries).present? %>
+
+  <% entries.each do |entry| %>
+    Challenge: <%= entry.challenge.name %><br>
+    Checkpoint End Time: <%= entry.checkpoint.end_time %><br>
+  <% end %>
+
+<% else %>
+  <div>Your team is not currently entered into any challenges.</div>
+<% end %>
+<%= link_to 'Enter Challenge', new_team_entry_path(@team) %><br>
