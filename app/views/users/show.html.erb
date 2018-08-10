@@ -24,6 +24,16 @@
 
 	<section>
 		<article>
+			<% if (assignments = current_user.assignments.where(title: SPONSOR_CONTACT)).present? %>
+				<h3>My Sponsors</h3>
+				<% assignments.each do |assignment| %>
+					<h4><%= assignment.assignable.name %></h4>
+					<%= link_to 'Go to Sponsor', admin_sponsor_path(assignment.assignable) %>
+				<% end %>
+			<% end %>
+		</article>
+		<article>
+
 			<h3>My Events</h3>
 
 			<% if (registrations = @user.event_assignment.registrations).present? %>

@@ -24,6 +24,7 @@ Rails.application.routes.draw do
 
     resources :sponsors do
       resources :sponsorships, controller: 'sponsors/sponsorships'
+      resources :assignments, controller: 'sponsors/assignments'
     end
 
     resources :regions do

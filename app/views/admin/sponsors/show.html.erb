@@ -14,7 +14,15 @@
 
 <h3>Sponsor Contact</h3>
 
+<% if (contacts = @sponsor.assignments).present? %>
+  <% contacts.each do |contact| %>
+    <%= render 'admin/shared/user_contact', locals: { user: contact.user } %>
+  <% end %>
+<% else %>
+  This sponsor does not currently have any contacts.<br>
+<% end %>
 
+<%= link_to "New #{SPONSOR_CONTACT} Assignment", new_admin_sponsor_assignment_path(@sponsor, title: SPONSOR_CONTACT) %><br>
 
 <h3>Sponsorships</h3>
 <div>Please go to individual regions to add sponsorships.</div>
