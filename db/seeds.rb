@@ -47,6 +47,10 @@ end
 
 comp = Competition.current
 
+5.times do |time|
+  comp.checkpoints.create(end_time: Time.now + time.days)
+end
+
 comp.assignments.create(user_id: random_user_id, title: MANAGEMENT_TEAM)
 
 comp.assignments.create(user_id: random_user_id, title: MANAGEMENT_TEAM)
@@ -96,6 +100,13 @@ def random_sponsorship_type_id
   random_id
 end
 
+def random_challenge_id
+  @counter += 1
+  random_id = @counter % Challenge.count
+  random_id = 1 if random_id.zero?
+  random_id
+end
+
 Region.create(name: 'New South Wales', time_zone: 'Sydney', parent_id: Region.root.id)
 
 Region.create(name: 'Victoria', time_zone: 'Melbourne', parent_id: Region.root.id)
@@ -123,6 +134,23 @@ Region.all.each do |region|
   3.times do |time|
     region.sponsorships.create(sponsor_id: random_sponsor_id,
     sponsorship_type_id: random_sponsorship_type_id)
+  end
+
+  5.times do |time|
+    region.challenges.create(competition: comp,
+      name: "#{region.name} Challenge #{time}",
+      short_desc: 'A really good challenge',
+      long_desc: 'This challenge incorporates multiple data sets.',
+      eligibility: 'You must be this tall to go on this ride.',
+      video_url: 'https://www.youtube.com/watch?v=kqcrEFkA8g0',
+      data_set_url: 'https://data.gov.au/dataset/wyndham-smart-bin-fill-level')
+  end
+
+  10.times do |time|
+    region.data_sets.create(competition: comp,
+      name: "#{region.name} Data Set #{time}",
+      url: 'https://data.gov.au/dataset/wyndham-smart-bin-fill-level',
+      description: 'Random dataset that was taken from data.gov.')
   end
 
   event_name = region.time_zone
@@ -156,6 +184,38 @@ Region.all.each do |region|
 
     Assignment.where(title: VIP).take(10).each do |vip|
       event.registrations.create(status: ATTENDING, assignment: vip)
+    end
+
+    if event_type == COMPETITION_EVENT
+      team = event.teams.create
+
+      team.assign_leader(User.find(random_user_id))
+
+      8.times do |time|
+        team.assignments.create(title: TEAM_MEMBER, user_id: random_user_id)
+      end
+
+      team.projects.create(team_name: "#{event.name} team #{@counter += 1}",
+      description: 'Best team evaaaaaa!',
+      data_story: 'We will be taking a big data approach.',
+      source_code_url: 'https://github.com/tenderlove/allocation_sampler',
+      video_url: 'https://www.youtube.com/watch?v=8S0FDjFBj8o',
+      homepage_url: 'https://www.govhack.org/')
+
+      5.times do |time|
+        team.team_data_sets.create(name:
+          "#{team.current_project.team_name} dataset #{@counter += 1}",
+          description: 'Best dataset evaaaaaa',
+          description_of_use: 'We achieved a full variance analysis',
+          url: 'https://data.gov.au/dataset/city-of-gold-coast-road-closures'
+        )
+      end
+
+      Checkpoint.all.each do |checkpoint|
+        team.entries.create(checkpoint: checkpoint,
+          challenge_id: random_challenge_id,
+          justification: 'We think we would do excellently in this challenge.')
+        end
     end
   end
 end
