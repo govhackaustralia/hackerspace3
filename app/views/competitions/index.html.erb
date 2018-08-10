@@ -11,6 +11,12 @@
 			<% if @competition.challenges.present? %>
 				<div><%= link_to 'Challenges', challenges_path %></div>
 			<% end %>
+			<% if @competition.data_sets.present? %>
+				<div><%= link_to 'Data Sets', data_sets_path %></div>
+			<% end %>
+			<% if @competition.teams.present? %>
+				<div><%= link_to 'Projects', teams_path %></div>
+			<% end %>
 		</section>
 	</nav>
 </main>

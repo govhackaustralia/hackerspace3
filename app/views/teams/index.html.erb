@@ -1,0 +1,5 @@
+<h2>Projects for Competition <%= @competition.year %></h2>
+
+<% @teams.each do |team| %>
+Name: <%= team.current_project.team_name %><br>
+<% end %>

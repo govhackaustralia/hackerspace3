@@ -1,0 +1,5 @@
+<h2>Data Sets for Competition <%= @competition.year %></h2>
+
+<% @data_sets.each do |data_set| %>
+Name: <%= data_set.name %><br>
+<% end %>

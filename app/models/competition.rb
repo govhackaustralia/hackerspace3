@@ -3,6 +3,7 @@ class Competition < ApplicationRecord
   has_many :sponsors
   has_many :sponsorship_types
   has_many :events
+  has_many :teams, through: :events
   has_many :challenges
   has_many :checkpoints
   has_many :data_sets

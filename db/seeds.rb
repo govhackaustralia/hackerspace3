@@ -187,35 +187,37 @@ Region.all.each do |region|
     end
 
     if event_type == COMPETITION_EVENT
-      team = event.teams.create
+      10.times do |team_time|
+        team = event.teams.create
 
-      team.assign_leader(User.find(random_user_id))
+        team.assign_leader(User.find(random_user_id))
 
-      8.times do |time|
-        team.assignments.create(title: TEAM_MEMBER, user_id: random_user_id)
-      end
-
-      team.projects.create(team_name: "#{event.name} team #{@counter += 1}",
-      description: 'Best team evaaaaaa!',
-      data_story: 'We will be taking a big data approach.',
-      source_code_url: 'https://github.com/tenderlove/allocation_sampler',
-      video_url: 'https://www.youtube.com/watch?v=8S0FDjFBj8o',
-      homepage_url: 'https://www.govhack.org/')
-
-      5.times do |time|
-        team.team_data_sets.create(name:
-          "#{team.current_project.team_name} dataset #{@counter += 1}",
-          description: 'Best dataset evaaaaaa',
-          description_of_use: 'We achieved a full variance analysis',
-          url: 'https://data.gov.au/dataset/city-of-gold-coast-road-closures'
-        )
-      end
-
-      Checkpoint.all.each do |checkpoint|
-        team.entries.create(checkpoint: checkpoint,
-          challenge_id: random_challenge_id,
-          justification: 'We think we would do excellently in this challenge.')
+        8.times do |time|
+          team.assignments.create(title: TEAM_MEMBER, user_id: random_user_id)
         end
+
+        team.projects.create(team_name: "#{event.name} team #{team_time}",
+        description: 'Best team evaaaaaa!',
+        data_story: 'We will be taking a big data approach.',
+        source_code_url: 'https://github.com/tenderlove/allocation_sampler',
+        video_url: 'https://www.youtube.com/watch?v=8S0FDjFBj8o',
+        homepage_url: 'https://www.govhack.org/')
+
+        5.times do |time|
+          team.team_data_sets.create(name:
+            "#{team.current_project.team_name} dataset #{team_time + time}",
+            description: 'Best dataset evaaaaaa',
+            description_of_use: 'We achieved a full variance analysis',
+            url: 'https://data.gov.au/dataset/city-of-gold-coast-road-closures'
+          )
+        end
+
+        Checkpoint.all.each do |checkpoint|
+          team.entries.create(checkpoint: checkpoint,
+            challenge_id: random_challenge_id,
+            justification: 'We think we would do excellently in this challenge.')
+        end
+      end
     end
   end
 end

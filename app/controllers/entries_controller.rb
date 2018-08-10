@@ -9,8 +9,7 @@ class EntriesController < ApplicationController
   end
 
   def create
-    @team = Team.find(params[:team_id])
-    @entry = @team.entries.new(entry_params)
+    create_new_entry
     if @entry.save
       flash[:notice] = 'Challenge Entered'
       redirect_to team_path(@team)
@@ -24,6 +23,11 @@ class EntriesController < ApplicationController
 
   def entry_params
     params.require(:entry).permit(:checkpoint_id, :justification,
-                                          :challenge_id)
+                                  :challenge_id)
+  end
+
+  def create_new_entry
+    @team = Team.find(params[:team_id])
+    @entry = @team.entries.new(entry_params)
   end
 end
