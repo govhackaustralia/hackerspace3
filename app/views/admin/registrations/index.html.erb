@@ -1,3 +1,6 @@
+<main class="registrations_list">
+	<section>
+
 <h2>Registrations for <%= @event.name %> Event</h2>
 
 <table>
@@ -27,3 +30,6 @@
 
 <%= link_to 'New Registration', new_admin_connection_registration_path(@event) %><br>
 <%= link_to "Back to #{@event.name} Event", admin_region_connection_path(@event.region, @event) %><br>
+
+</section>
+</main>
