@@ -1,13 +1,32 @@
+<main class="registrations_list">
+	<section>
+
 <h2>Registrations for <%= @event.name %> Event</h2>
 
+<table>
+	<thead>
+		<tr>
+			<th>Full Name</th>
+			<th>Preferred Name</th>
+			<th>Organisation</th>
+			<th>Dietary</th>
+			<th>Status</th>
+			<th>Edit</th>
+		</tr>
+	</thead>
+	<tbody>
 <% @event.registrations.each do |registration| %>
-  <div>
-    Name: <%= registration.assignment.user.display_name %><br>
-    Title: <%= registration.assignment.title %><br>
-    Status: <%= registration.status %><br>
-    <%= link_to 'Edit User Registration', edit_admin_event_registration_path(@event, registration) %><br>
-  </div>
+	<tr>
+		<td><%= registration.assignment.user.full_name %></td>
+		<td><%= registration.assignment.user.preferred_name %></td>
+		<td><%= registration.assignment.user.organisation_name %></td>
+		<td><%= registration.assignment.user.dietary_requirements %></td>
+		<td><%= registration.status %></td>
+		<td><%= link_to 'Edit', edit_admin_connection_registration_path(@event, registration) %></td>
+	</tr>
 <% end %>
+	</tbody>
+</table>
 
 <%= link_to 'New Registration', new_admin_event_registration_path(@event) %><br>
 <%= link_to "Back to #{@event.name} Event", admin_region_event_path(@event.region, @event) %><br>
