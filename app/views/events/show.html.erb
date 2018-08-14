@@ -6,7 +6,11 @@
 		<h3>Event Information</h3>
 
 		<section class="info">
-			<% if @event.event_type == STATE_CONNECTION %>
+			<% if @event.description.present? %>
+				<% @event.description.split(/\r\n/).each do |paragraph| %>
+					<p><%= paragraph %></p>
+				<% end %>
+			<% elsif @event.event_type == STATE_CONNECTION %>
 				<%= render 'connection_description' %>
 			<% else %>
 				<%= render 'competition_event_description' %>
