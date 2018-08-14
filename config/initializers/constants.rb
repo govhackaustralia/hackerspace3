@@ -153,6 +153,15 @@ CLOSED = 'Closed'
 
 EVENT_REGISTRATION_TYPES = [OPEN, OPEN_AND_INVITATION, INVITATION_ONLY, CLOSED]
 
+# User Registration Types
+
+COMPETITOR = 'Competitor'
+YOUTH_COMPETITOR = 'Youth Competitor'
+GUARDIAN_OBSERVER = 'Guardian / Observer'
+SPONSOR_VIP_MEDIA = 'Sponsor / VIP / Media'
+
+USER_REGISTRATION_TYPES = [COMPETITOR, YOUTH_COMPETITOR, GUARDIAN_OBSERVER, SPONSOR_VIP_MEDIA]
+
 # How did you hear about us no response placeholder
 
 NO_RESPONSE = '[no response recorded]'

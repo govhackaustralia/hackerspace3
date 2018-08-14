@@ -26,7 +26,38 @@ class RegistrationsController < ApplicationController
   def update
     update_registration
     update_user_preferences
-    if @registration.save
+    handle_update
+  end
+
+  def create
+    create_new_registration
+    update_user_preferences
+    handle_create
+  end
+
+  private
+
+  def registration_params
+    params.require(:registration).permit(:status)
+  end
+
+  def handle_create
+    if parent_guardian_missing_and_needed?
+      flash[:alert] = 'Parent/Guardian name must be filled in for Youth Competitor'
+      render :new
+    elsif @registration.save
+      handle_new_save
+    else
+      flash[:alert] = @registration.errors.full_messages.to_sentence
+      render :new
+    end
+  end
+
+  def handle_update
+    if parent_guardian_missing_and_needed?
+      flash[:alert] = 'Parent/Guardian name must be filled in for Youth Competitor'
+      render :edit
+    elsif @registration.save
       flash[:notice] = 'Your registration has been updated'
       redirect_to event_registration_path(@event.identifier, @registration)
     else
@@ -35,21 +66,8 @@ class RegistrationsController < ApplicationController
     end
   end
 
-  def create
-    create_new_registration
-    update_user_preferences
-    if @registration.save
-      handle_new_save
-    else
-      flash[:alert] = @registration.errors.full_messages.to_sentence
-      render :new
-    end
-  end
-
-  private
-
-  def registration_params
-    params.require(:registration).permit(:status)
+  def parent_guardian_missing_and_needed?
+    @user.registration_type == YOUTH_COMPETITOR && @user.parent_guardian.blank?
   end
 
   def handle_new_save
@@ -65,7 +83,8 @@ class RegistrationsController < ApplicationController
     @event = Event.find(params[:event_identifier])
     @registration = @event.registrations.new(status: params[:status])
     @user = current_user
-    @registration.update(assignment: @user.event_assignment, time_notified: Time.now)
+    @registration.assignment = @user.event_assignment
+    @registration.time_notified = Time.now
   end
 
   def update_registration
@@ -77,8 +96,21 @@ class RegistrationsController < ApplicationController
   end
 
   def update_user_preferences
-    @user.update(preferred_name: params[:preferred_name])
-    @user.update(organisation_name: params[:organisation_name])
-    @user.update(dietary_requirements: params[:dietary_requirements])
+    update_standard_event_attrs
+    return unless @event.event_type == COMPETITION_EVENT
+    update_competition_event_attrs
+    update_skills_attrs
+  end
+
+  def update_standard_event_attrs
+    @user.update(preferred_name: params[:preferred_name], organisation_name: params[:organisation_name], dietary_requirements: params[:dietary_requirements])
+  end
+
+  def update_competition_event_attrs
+    @user.update(registration_type: params[:registration_type], parent_guardian: params[:parent_guardian], request_not_photographed: params[:request_not_photographed])
+  end
+
+  def update_skills_attrs
+    @user.update(data_cruncher: params[:data_cruncher], coder: params[:coder], creative: params[:creative], facilitator: params[:facilitator])
   end
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_08_10_141636) do
+ActiveRecord::Schema.define(version: 2018_08_13_125755) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -238,6 +238,13 @@ ActiveRecord::Schema.define(version: 2018_08_10_141636) do
     t.string "phone_number"
     t.text "how_did_you_hear"
     t.boolean "accepted_terms_and_conditions", default: false
+    t.string "registration_type"
+    t.string "parent_guardian"
+    t.boolean "request_not_photographed", default: false
+    t.boolean "data_cruncher", default: false
+    t.boolean "coder", default: false
+    t.boolean "creative", default: false
+    t.boolean "facilitator", default: false
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
