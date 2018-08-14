@@ -77,9 +77,9 @@ class Event < ApplicationRecord
   end
 
   def update_identifier
-    new_identifier = uri_pritty("#{event_type}-#{name}-#{region.name}")
+    new_identifier = uri_pritty("#{name}-#{region.name}")
     if already_there?(new_identifier)
-      new_identifier = uri_pritty("#{event_type}-#{name}-#{region.name}-#{id}")
+      new_identifier = uri_pritty("#{name}-#{region.name}-#{id}")
     end
     update_columns(identifier: new_identifier)
   end
@@ -87,7 +87,10 @@ class Event < ApplicationRecord
   private
 
   def already_there?(new_identifier)
-    Event.find_by(identifier: new_identifier).present?
+    event = Event.find_by(identifier: new_identifier)
+    return false if event.nil?
+    return false if event == self
+    true
   end
 
   def uri_pritty(string)
