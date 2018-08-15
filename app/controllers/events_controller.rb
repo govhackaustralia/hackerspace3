@@ -1,9 +1,9 @@
 class EventsController < ApplicationController
   def index
     @events = if params[:event_type].present?
-                Competition.current.events.where(event_type: params[:event_type]).order(start_time: :asc)
+                Competition.current.events.where(event_type: params[:event_type]).order(start_time: :asc, name: :asc)
               else
-                Competition.current.events.order(start_time: :asc)
+                Competition.current.events.order(start_time: :asc, name: :asc)
               end
   end
 
