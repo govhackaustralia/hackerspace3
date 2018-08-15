@@ -110,6 +110,7 @@
 	cursor: pointer;
 	width: 30%;
 	box-sizing: border-box;
+	height: calc(125px + 2em);
 }
 
 .single-event .sponsors figure:hover {
@@ -121,6 +122,7 @@
 	width: auto !important;
 	height: auto !important;
 	max-height: 125px;
+	max-width: 100%;
 }
 
 
