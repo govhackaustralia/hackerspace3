@@ -18,7 +18,18 @@
 			</h3>
 			<section class="events">
 			<% @events.each do |event| %>
-				<% if event.event_type == COMPETITION_EVENT %>
+				<% if event.event_type == COMPETITION_EVENT && event.name.starts_with?("Remote") == false %>
+				<%= link_to (render partial: "events/event_single", locals: { event: event } ), event_path(event.identifier) %>
+				<% end %>
+			<% end %>
+		</section>
+		
+		<h3>
+				Remote '<em>Kitchen Table</em>' Competition Events
+			</h3>
+			<section class="events">
+			<% @events.each do |event| %>
+				<% if event.event_type == COMPETITION_EVENT && event.name.starts_with?("Remote") %>
 				<%= link_to (render partial: "events/event_single", locals: { event: event } ), event_path(event.identifier) %>
 				<% end %>
 			<% end %>
