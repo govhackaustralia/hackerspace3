@@ -7,7 +7,7 @@
 <% end %>
 
 <% unless @event.address.blank? %>
-  <div class="event-info"><h4>Address:</h4><p> <%= @event.address %></p></div>
+  <div class="event-info"><h4>Address:</h4><p> <%= simple_format(@event.address) %></p></div>
 <% end %>
 
 <% unless @event.start_time.blank? %>
@@ -18,25 +18,25 @@
 <% end %>
 
 <% unless @event.accessibility.blank? %>
-  <div class="event-info"><h4>Accessibility:</h4><p> <%= @event.accessibility %></p></div>
+  <div class="event-info"><h4>Accessibility:</h4><p> <%= simple_format(@event.accessibility) %></p></div>
 <% end %>
 
 <% unless @event.youth_support.blank? %>
-  <div class="event-info"><h4>Youth Support:</h4><p> <%= @event.youth_support %></p></div>
+  <div class="event-info"><h4>Youth Support:</h4><p> <%= simple_format(@event.youth_support) %></p></div>
 <% end %>
 
 <% unless @event.parking.blank? %>
-  <div class="event-info"><h4>Parking:</h4><p> <%= @event.parking %></p></div>
+  <div class="event-info"><h4>Parking:</h4><p> <%= simple_format(@event.parking) %></p></div>
 <% end %>
 
 <% unless @event.public_transport.blank? %>
-  <div class="event-info"><h4>Public Transport:</h4><p> <%= @event.public_transport %></p></div>
+  <div class="event-info"><h4>Public Transport:</h4><p> <%= simple_format(@event.public_transport) %></p></div>
 <% end %>
 
 <% unless @event.operation_hours.blank? %>
-  <div class="event-info"><h4>Operating hours:</h4><p> <%= @event.operation_hours %></p></div>
+  <div class="event-info"><h4>Operating hours:</h4><p> <%= simple_format(@event.operation_hours) %></p></div>
 <% end %>
 
 <% unless @event.catering.blank? %>
-  <div class="event-info"><h4>Catering:</h4><p> <%= @event.catering %></p></div>
+  <div class="event-info"><h4>Catering:</h4><p> <%= simple_format(@event.catering) %></p></div>
 <% end %>

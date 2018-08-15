@@ -1,12 +1,40 @@
 <main class="events_page">
 	<section>
 			<h2>Events</h2>
+			<h3>
+				Upcoming Connection Events
+			</h3>
 			<section class="events">
-
 			<% @events.each do |event| %>
+				<% unless event.end_time.blank? %>
+				<% if event.event_type == STATE_CONNECTION && event.end_time > DateTime.now %>
 				<%= link_to (render partial: "events/event_single", locals: { event: event } ), event_path(event.identifier) %>
+				<% end %>
+				<% end %>
+			<% end %>
+			</section>
+			<h3>
+				Competition Events
+			</h3>
+			<section class="events">
+			<% @events.each do |event| %>
+				<% if event.event_type == COMPETITION_EVENT %>
+				<%= link_to (render partial: "events/event_single", locals: { event: event } ), event_path(event.identifier) %>
+				<% end %>
 			<% end %>
 		</section>
+		
+		<h3>
+				Previous Connection Events
+			</h3>
+			<section class="events">
+			<% @events.each do |event| %>
+				<% unless event.end_time.blank? %>
+				<% if event.event_type == STATE_CONNECTION && event.end_time < DateTime.now %>
+				<%= link_to (render partial: "events/event_single", locals: { event: event } ), event_path(event.identifier) %>
+				<% end %>
+				<% end %>
+			<% end %>
 
 	</section>
 </main>
