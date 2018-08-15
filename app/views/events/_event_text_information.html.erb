@@ -9,7 +9,7 @@
 <% unless @event.address.blank? %>
   <div class="event-info"><h4>Address:</h4><p> <%= simple_format(@event.address) %></p></div>
 <% end %>
-<% if event.event_type == STATE_CONNECTION %>
+<% if event.event_type == STATE_CONNECTION? %>
 	<% unless @event.start_time.blank? %>
 	  <div class="event-info"><h4>Start time:</h4><p> <%= @event.start_time.strftime("%I:%M%p") %></p></div>
 	<% end %>
