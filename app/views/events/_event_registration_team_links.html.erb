@@ -4,7 +4,7 @@
 
     <% if @registration.present? %>
       <%= link_to 'Manage your Event Registration', event_registration_path(@event.identifier, @registration) %><br>
-
+<% if false %>
       <% if @event.event_type == COMPETITION_EVENT %>
 
         <% if (teams = @user.teams(@event)).present? %>
@@ -16,7 +16,7 @@
             <%= f.submit %>
           <% end %>
         <% end %>
-
+<% end %>
       <% end %>
 
     <% else %>
