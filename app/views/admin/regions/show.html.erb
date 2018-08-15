@@ -17,7 +17,9 @@
 
 <h3>Region Support</h3>
 
+<% if @region.supports.present? %>
 <%= pluralize @region.supports.count, 'region support' %> currently assigned to event.<br>
+<% end %>
 
 <%= link_to "Manage #{@region.name} Assignments", admin_region_assignments_path(@region) %>
 
