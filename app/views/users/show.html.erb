@@ -10,9 +10,12 @@
 			<%= link_to 'Update Personal Details' , update_personal_details_path %><br>
 			<%= link_to 'Change Email and Password' , edit_user_registration_path %><br>
 			<% if current_user.admin_privileges? %>
-				<%= link_to 'Region Management', admin_regions_path %><br>
 				<%= link_to 'User Management', admin_users_path %><br>
 				<%= link_to 'Competiton Management', admin_competition_path(Competition.current) %><br>
+				<%= link_to 'Region Management', admin_regions_path %><br>
+			<% end %>
+			<% if current_user.event_privileges? %>
+				<%= link_to 'Event Management', admin_events_path %><br>
 			<% end %>
 			<% if current_user.sponsor_privileges? %>
 				<%= link_to 'Sponsor Management', admin_sponsors_path %><br>

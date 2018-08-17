@@ -49,9 +49,3 @@
 <% else %>
   <div>The Competition has the maximum number of checkpoints</div>
 <% end %>
-
-<h3>Competition Events<h3>
-
-<% @competition.events.where(event_type: COMPETITION_EVENT).each do |event| %>
-  <%= render 'admin/events/event_single', locals: { event: event } %>
-<% end %>
