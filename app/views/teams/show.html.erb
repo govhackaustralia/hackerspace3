@@ -31,6 +31,11 @@
       <% assignment = Assignment.find_by(assignable: @team, user: current_user) %>
       <%= link_to 'Leave Team', user_assignment_path(current_user, assignment),
       method: :delete, data: { confirm: 'Are you sure?' } %><br>
+    <% elsif @team.team_leader == current_user %>
+      <% assignment = Assignment.find_by(assignable: @team, user: team_member) %>
+      <%= form_for [team_member, assignment] do |f| %>
+        <%= f.submit 'Make Team Leader' %>
+      <% end %>
     <% end %>
   <% end %>
 <% end %>

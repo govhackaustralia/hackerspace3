@@ -1,7 +1,15 @@
 class Users::AssignmentsController < ApplicationController
+  before_action :authenticate_user!
+
   def update
     @assignment = Assignment.find(params[:id])
-    @assignment.update(title: TEAM_MEMBER)
+    if @assignment.title == INVITEE
+      @assignment.update(title: TEAM_MEMBER)
+    else
+      @assignment.update(title: TEAM_LEADER)
+      leader_assignment = Assignment.find_by(assignable: @assignment.assignable, user: current_user)
+      leader_assignment.update(title: TEAM_MEMBER)
+    end
     redirect_to team_path(@assignment.assignable)
   end
 
