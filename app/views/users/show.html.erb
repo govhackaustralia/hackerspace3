@@ -55,24 +55,28 @@
 
 			<% end %>
 		</article>
-		<% if false %>
 		<article>
-			<h3>My Team Projects</h3>
-
-			<% if (teams = @user.teams).present? %>
-
+			<% if (teams = @user.joined_teams).present? %>
+				<h3>My Team Projects</h3>
 				<% teams.each do |team| %>
-					<% event = team.event %>
-					<% team_name = team.current_project.team_name %>
-					<%= "#{team_name} entered @ #{event.name}" %><br>
-					<%= link_to "Go to #{team_name}", team_path(team) %><br>
+					<h4><%= "#{team.name} entered @ #{team.event.name}" %></h4>
+					<%= link_to "Go to #{team.name}", team_path(team) %><br>
 				<% end %>
+			<% end %>
+			<% if (teams = @user.invited_teams).present? %>
+				<h3>My Invitations</h3>
+				<% teams.each do |team| %>
+					<h4><%= "#{team.name} entered @ #{team.event.name}" %></h4>
+					<% assignment = Assignment.find_by(user: @user, assignable: team) %>
 
-			<% else %>
-				<div>You are not currenty apart of any team projects.</div>
-				<%= link_to 'Find Competition Events', competition_events_path %><br>
+					<%= form_for [@user, assignment] do |f| %>
+						<%= f.submit 'Accept Invitation and Go to Team' %>
+					<% end %>
+
+					<%= link_to 'Decline Invitation', user_assignment_path(@user, assignment), method: :delete,
+												data: { confirm: 'Are you sure?' } %><br>
+				<% end %>
 			<% end %>
 		</article>
-		<% end %>
 	</section>
 </main>

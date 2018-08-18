@@ -57,7 +57,19 @@ class User < ApplicationRecord
     assignment_ids = assignments.where(assignable_type: 'Team').pluck(:assignable_id)
     return if assignment_ids.nil?
     return Team.where(id: assignment_ids, event: event) unless event.nil?
-    Team.where(id: assignment_ids) if event.nil?
+    Team.where(id: assignment_ids)
+  end
+
+  def joined_teams
+    assignment_ids = assignments.where(assignable_type: 'Team', title: [TEAM_MEMBER, TEAM_LEADER]).pluck(:assignable_id)
+    return if assignment_ids.nil?
+    Team.where(id: assignment_ids)
+  end
+
+  def invited_teams
+    assignment_ids = assignments.where(assignable_type: 'Team', title: INVITEE).pluck(:assignable_id)
+    return if assignment_ids.nil?
+    Team.where(id: assignment_ids)
   end
 
   def self.search(term)

@@ -21,6 +21,12 @@ class Team < ApplicationRecord
     User.where(id: ids)
   end
 
+  def invitees
+    ids = assignments.where(title: INVITEE).pluck(:user_id)
+    return if ids.empty?
+    User.where(id: ids)
+  end
+
   def current_project
     return Project.find(project_id) unless project_id.nil?
     projects.order(created_at: :desc).first
@@ -28,5 +34,9 @@ class Team < ApplicationRecord
 
   def change_event(event)
     update(event: event)
+  end
+
+  def name
+    current_project.team_name
   end
 end
