@@ -27,6 +27,11 @@
   <h3>Team Members</h3>
   <% team_members.each do |team_member| %>
     <%= render 'users/user_contact', locals: { user: team_member } %>
+    <% if team_member == current_user %>
+      <% assignment = Assignment.find_by(assignable: @team, user: current_user) %>
+      <%= link_to 'Leave Team', user_assignment_path(current_user, assignment),
+      method: :delete, data: { confirm: 'Are you sure?' } %><br>
+    <% end %>
   <% end %>
 <% end %>
 
