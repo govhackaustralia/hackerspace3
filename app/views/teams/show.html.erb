@@ -1,8 +1,20 @@
 <h2><%= @current_project.team_name %></h2>
 
+<h3>Competition Event</h3>
+<%= @event.name %><br>
+<% if @team.published %>
+  This Project has been published.<br>
+<% else %>
+  This Project is yet to be published.<br>
+<% end %>
+<%= link_to 'Update Team', edit_team_path(@team) %><br>
+<%= link_to 'Back to Event', event_path(@team.event.identifier) %><br>
+
+<h3>Team Project Info</h3>
+
 <%= render 'team_project_info' %>
 
-<%= link_to 'Update Team Project', edit_team_project_path(@team, @team.current_project) %>
+<%= link_to 'Update Project', edit_team_project_path(@team, @team.current_project) %>
 
 <h3>Team Data Sets</h3>
 
@@ -53,12 +65,7 @@
   <div>You have reached the maximum team size of <%= MAX_TEAM_SIZE %><div>
 <% end %>
 
-<h3>Competition Event</h3>
-<%= @event.name %><br>
-<%= link_to 'Change Participating Competition Event', edit_team_path(@team) %><br>
-<%= link_to 'Back to Event', event_path(@team.event.identifier) %><br>
-
-<h4>Challenge Entries</h4>
+<h3>Challenge Entries</h3>
 
 <% if (entries = @team.entries).present? %>
 

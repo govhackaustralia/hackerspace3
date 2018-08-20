@@ -47,12 +47,12 @@ class TeamsController < ApplicationController
 
   def handle_team_save
     @team.assign_leader(current_user)
-    @team.projects.create(team_name: "Team #{@team.id}")
+    @team.projects.create(team_name: "Team #{@team.id}", user: current_user)
     flash[:notice] = 'New Team Project Created'
     redirect_to team_path(@team)
   end
 
   def team_params
-    params.require(:team).permit(:event_id)
+    params.require(:team).permit(:event_id, :published)
   end
 end

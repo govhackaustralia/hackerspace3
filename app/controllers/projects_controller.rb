@@ -9,6 +9,7 @@ class ProjectsController < ApplicationController
   def update
     @team = Team.find(params[:team_id])
     @project = @team.projects.new(project_params)
+    @project.user = current_user
     if @project.save
       handle_successful_save
     else
