@@ -10,6 +10,10 @@ class Competition < ApplicationRecord
 
   validates :year, presence: true
 
+  def name
+    "Competition #{year}"
+  end
+
   def assignment_privileges(_action, _access)
     assignments.where(title: [MANAGEMENT_TEAM, ADMIN, COMPETITION_DIRECTOR])
   end

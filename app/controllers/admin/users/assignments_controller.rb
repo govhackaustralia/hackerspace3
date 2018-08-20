@@ -17,6 +17,12 @@ class Admin::Users::AssignmentsController < ApplicationController
     end
   end
 
+  def destroy
+    existing_user_and_assignment
+    @assignment.destroy
+    redirect_to admin_user_path(@user)
+  end
+
   private
 
   def assignment_params

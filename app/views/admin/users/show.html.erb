@@ -1,7 +1,23 @@
-<h2><%= @user.full_name %></h2>
+<h2><%= @user.display_name %></h2>
 Email: <%= @user.email %></br>
+
+<h3>Event Assignment</h3>
 Event Assignment Title: <%= @event_assignment.title %></br>
 
 <%= link_to 'Update Event Assignment', edit_admin_user_assignment_path(@user, @event_assignment) %><br>
+
+<h3>All Other Assignments</h3>
+
+<% @user.assignments.each do |assignment| %>
+  <% next if assignment == @event_assignment %>
+  Title: <%= assignment.title %><br>
+  Assignable Type: <%= assignment.assignable.class.name %><br>
+  Assignable Name: <%= assignment.assignable.name %><br>
+  <% unless TEAM_ADMIN.include? assignment.title %>
+    <%= link_to 'Remove Assignment', admin_user_assignment_path(@user, assignment),
+                 method: :delete,
+                 data: { confirm: 'Are you sure?' } %><br>
+  <% end %>
+<% end %>
 
 <%= link_to 'Back to Users', admin_users_path %>
