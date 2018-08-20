@@ -17,6 +17,18 @@ Name: <%= @challenge.name %><br>
   Data Set URL: <%= @challenge.data_set_url %><br>
 <% end %>
 
+<h3>Judges</h3>
+
+<% if (judges = @challenge.assignments).present? %>
+  <% judges.each do |judge| %>
+    <%= render 'admin/shared/user_contact', locals: { user: judge.user } %>
+  <% end %>
+<% else %>
+  This challenge does not currently have any judges assigned.<br>
+<% end %>
+
+<%= link_to "New #{JUDGE} Assignment", new_admin_challenge_assignment_path(@challenge, title: JUDGE) %><br>
+
 <h3>Sponsorships</h3>
 
 <% if (sponsorships = @challenge.sponsorships).present? %>

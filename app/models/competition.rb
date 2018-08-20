@@ -34,6 +34,12 @@ class Competition < ApplicationRecord
     assignment.user
   end
 
+  def chief_judge
+    assignment = assignments.where(title: CHIEF_JUDGE).first
+    return nil if assignment.nil?
+    assignment.user
+  end
+
   def site_admins
     assignment_user_ids = assignments.where(title: ADMIN).pluck(:user_id)
     return nil if assignment_user_ids.empty?

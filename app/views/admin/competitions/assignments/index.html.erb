@@ -5,7 +5,7 @@
 <% if (director = @assignable.director).present? %>
   <%= render 'admin/shared/user_contact', locals: { user: director } %>
 <% else %>
-  This competition does not currently have a director.<br>
+  This competition does not currently have a Director.<br>
   <%= link_to "New #{COMPETITION_DIRECTOR} Assignment", new_admin_competition_assignment_path(@assignable, title: COMPETITION_DIRECTOR) %><br>
 <% end %>
 
@@ -14,8 +14,17 @@
 <% if (director = @assignable.sponsorship_director).present? %>
   <%= render 'admin/shared/user_contact', locals: { user: director } %>
 <% else %>
-  This competition does not currently have a sponsorship director.<br>
+  This competition does not currently have a Sponsorship Director.<br>
   <%= link_to "New #{SPONSORSHIP_DIRECTOR} Assignment", new_admin_competition_assignment_path(@assignable, title: SPONSORSHIP_DIRECTOR) %><br>
+<% end %>
+
+<h3>Chief Judge</h3>
+
+<% if (chief_judge = @assignable.chief_judge).present? %>
+  <%= render 'admin/shared/user_contact', locals: { user: chief_judge } %>
+<% else %>
+  This competition does not currently have a Chief Judge.<br>
+  <%= link_to "New #{CHIEF_JUDGE} Assignment", new_admin_competition_assignment_path(@assignable, title: CHIEF_JUDGE) %><br>
 <% end %>
 
 <h3>Site Admins</h3>
@@ -25,7 +34,7 @@
     <%= render 'admin/shared/user_contact', locals: { user: site_admin } %>
   <% end %>
 <% else %>
-  This competition does not currently have a site admin.<br>
+  This competition does not currently have any Site Admins.<br>
   <%= link_to "New #{ADMIN} Assignment", new_admin_competition_assignment_path(@assignable, title: ADMIN) %><br>
 <% end %>
 

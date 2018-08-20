@@ -38,6 +38,7 @@ Rails.application.routes.draw do
     end
 
     resources :challenges do
+      resources :assignments, controller: 'challenges/assignments'
       resources :sponsorships, controller: 'challenges/sponsorships'
     end
 
