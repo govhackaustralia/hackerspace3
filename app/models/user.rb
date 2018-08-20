@@ -13,6 +13,10 @@ class User < ApplicationRecord
   # Active Storage prifel image.
   has_one_attached :govhack_img
 
+  def privilege?(privileges)
+    (privileges & assignments).present?
+  end
+
   def admin_privileges?
     (assignments.pluck(:title) & COMP_ADMIN).present?
   end

@@ -16,4 +16,10 @@ class Sponsor < ApplicationRecord
     end
     results
   end
+
+  def admin_assignments
+    collected = assignments.where(title: SPONSOR_ADMIN).to_a
+    collected << competition.admin_assignments
+    collected.flatten
+  end
 end
