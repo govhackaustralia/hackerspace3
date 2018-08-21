@@ -9,14 +9,17 @@ class AssignmentTest < ActiveSupport::TestCase
     @region = Region.find(1)
 
     @user = User.find(1)
+
+    @judge = Assignment.find(7)
+    @challenge_judgement = ChallengeJudgement.first
   end
 
   test 'assignment associations' do
     assert(@comp_assignment.assignable == @competition)
     assert(@comp_assignment.user == @user)
-
     assert(@region_assignment.assignable == @region)
     assert(@region_assignment.user == @user)
+    assert(@judge.challenge_judgements.include?(@challenge_judgement))
   end
 
   test 'assignment validations' do

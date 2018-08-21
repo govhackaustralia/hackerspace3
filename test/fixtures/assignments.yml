@@ -45,3 +45,10 @@ six:
   assignable_id: 1
   assignable_type: 'Competition'
   title: Participant
+
+seven:
+  id: 7
+  user_id: 2
+  assignable_id: 1
+  assignable_type: 'Challenge'
+  title: Judge

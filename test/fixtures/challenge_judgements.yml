@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  id: 1
+  entry_id: 1
+  assignment_id: 7
+  challenge_criterion_id: 1
+  score: 1
+
+two:
+  id: 2
+  entry_id: 1
+  assignment_id: 1
+  challenge_criterion_id: 1
+  score: 1
