@@ -1,0 +1,22 @@
+<h2>Challenge Criteria for <%= @challenge.name%></h2>
+
+<% if (challenge_criteria = @challenge.challenge_criteria).present? %>
+
+  <% challenge_criteria.each do |challenge_criterion| %>
+    <h4><%= challenge_criterion.criterion.name %></h4>
+    <%= challenge_criterion.description %><br>
+    <%= link_to 'Update Challenge Criterion', edit_admin_challenge_challenge_criterion_path(@challenge, challenge_criterion) %><br>
+  <% end %>
+
+<% else %>
+
+  No Challenge Criteria for this Challenge recorded.<br>
+
+<% end %>
+
+<% if @available_criteria.present? %>
+  <%= link_to 'New Challenge Criterion', new_admin_challenge_challenge_criterion_path(@challenge) %><br>
+<% else %>
+  No Competition Criteria available / All allocated for this challenge.<br>
+<% end %>
+<%= link_to 'Back to Challenge', admin_region_challenge_path(@challenge.region_id, @challenge) %>

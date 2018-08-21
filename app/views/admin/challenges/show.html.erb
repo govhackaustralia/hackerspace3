@@ -29,6 +29,12 @@ Name: <%= @challenge.name %><br>
 
 <%= link_to "New #{JUDGE} Assignment", new_admin_challenge_assignment_path(@challenge, title: JUDGE) %><br>
 
+<h3>Challenge Criteria</h3>
+
+<%= pluralize @challenge.challenge_criteria.count, 'Challenge Criterion' %> saved.<br>
+
+<%= link_to 'View Challenge Criteria', admin_challenge_challenge_criteria_path(@challenge) %>
+
 <h3>Sponsorships</h3>
 
 <% if (sponsorships = @challenge.sponsorships).present? %>

@@ -9,6 +9,11 @@ class Challenge < ApplicationRecord
   validates :name, presence: true
   validates :name, uniqueness: true
 
+  def available_criteria
+    used_criteria = Criterion.where(id: challenge_criteria.pluck(:criterion_id))
+    competition.region_criteria - used_criteria
+  end
+
   def admin_assignments
     competition = Competition.current
     collected = competition.admin_assignments
