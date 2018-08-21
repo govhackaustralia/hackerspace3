@@ -8,7 +8,7 @@ class Event < ApplicationRecord
   has_one :event_partner, through: :event_partnership, source: :sponsor
   has_many :teams
 
-  validates :name, :capacity, :registration_type, :event_type, presence: true
+  validates :name, :capacity, presence: true
 
   validates :registration_type, inclusion: { in: EVENT_REGISTRATION_TYPES }
 
