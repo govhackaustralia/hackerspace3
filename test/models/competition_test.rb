@@ -9,6 +9,7 @@ class CompetitionTest < ActiveSupport::TestCase
     @sponsorship_type = SponsorshipType.first
     @challenge = Challenge.first
     @checkpoint = Checkpoint.first
+    @criterion = Criterion.first
   end
 
   test 'competition associations' do
@@ -18,6 +19,7 @@ class CompetitionTest < ActiveSupport::TestCase
     assert(@competition.sponsorship_types.include?(@sponsorship_type))
     assert(@competition.challenges.include?(@challenge))
     assert(@competition.checkpoints.include?(@checkpoint))
+    assert(@competition.criteria.include?(@criterion))
   end
 
   test 'competition validations' do

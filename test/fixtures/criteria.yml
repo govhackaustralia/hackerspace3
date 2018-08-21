@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  competition_id: 1
+  description: MyText
+  category: MyString
+
+two:
+  competition_id: 1
+  description: MyText
+  category: MyString

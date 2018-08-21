@@ -7,11 +7,20 @@ class Competition < ApplicationRecord
   has_many :challenges
   has_many :checkpoints
   has_many :data_sets
+  has_many :criteria
 
   validates :year, presence: true
 
   def name
     "Competition #{year}"
+  end
+
+  def region_criteria
+    criteria.where(category: REGIONAL_CHALLENGE)
+  end
+
+  def peoples_criteria
+    criteria.where(category: PEOPLES_CHOICE)
   end
 
   def assignment_privileges(_action, _access)

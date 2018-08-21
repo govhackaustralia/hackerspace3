@@ -173,3 +173,10 @@ USER_REGISTRATION_TYPES = [COMPETITOR, YOUTH_COMPETITOR, GUARDIAN_OBSERVER, SPON
 # How did you hear about us no response placeholder
 
 NO_RESPONSE = '[no response recorded]'
+
+# Judgement Categories
+
+REGIONAL_CHALLENGE = 'Regional Challenge'
+PEOPLES_CHOICE = 'People\'s Choice'
+
+JUDGEMENT_CATEGORIES = [REGIONAL_CHALLENGE, PEOPLES_CHOICE]

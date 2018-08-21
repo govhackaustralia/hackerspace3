@@ -50,8 +50,9 @@
   <div>The Competition has the maximum number of checkpoints</div>
 <% end %>
 
-<h3>Competition Events<h3>
+<h3>Criteria</h3>
 
-<% @competition.events.where(event_type: COMPETITION_EVENT).each do |event| %>
-  <%= render 'admin/events/event_single', locals: { event: event } %>
-<% end %>
+<%= pluralize @competition.region_criteria.count, 'Regional Challenge Criterion' %> saved.<br>
+<%= pluralize @competition.peoples_criteria.count, 'People\'s Choice Criterion' %> saved.<br>
+
+<% link_to 'Competition Criteria', admin_competition_criteria_path(@competition) %>
