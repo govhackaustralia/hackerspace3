@@ -4,6 +4,7 @@ class Challenge < ApplicationRecord
   belongs_to :region
   has_many :sponsorships, as: :sponsorable
   has_many :entries
+  has_many :challenge_criteria
 
   validates :name, presence: true
   validates :name, uniqueness: true
