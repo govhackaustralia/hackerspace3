@@ -1,0 +1,37 @@
+<h2>Criteria for <%= @competition.name%></h2>
+
+<h3>Regional Challenge</h3>
+
+<% if (region_criteria = @competition.region_criteria).present? %>
+
+  <% region_criteria.each do |criterion| %>
+    ID: <%= criterion.id %><br>
+    <%= criterion.description %><br>
+    <%= link_to 'Update Criteria', edit_admin_competition_criterion_path(@competition, criterion) %><br>
+  <% end %>
+
+<% else %>
+
+  No Regional Challenge Criteria for this Competition recorded.<br>
+
+<% end %>
+
+<h3>People's Choice</h3>
+
+
+<% if (peoples_criteria = @competition.peoples_criteria).present? %>
+
+  <% peoples_criteria.each do |criterion| %>
+    ID: <%= criterion.id %><br>
+    <%= criterion.description %><br>
+    <%= link_to 'Update Criteria', edit_admin_competition_criterion_path(@competition, criterion) %><br>
+  <% end %>
+
+<% else %>
+
+  No People's Choice Criteria for this Competition recorded.<br>
+
+<% end %>
+
+<%= link_to 'New Criterion', new_admin_competition_criterion_path(@competition) %><br>
+<%= link_to 'Back to Competition', admin_competition_path(@competition) %>

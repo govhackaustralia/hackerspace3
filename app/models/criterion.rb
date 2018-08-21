@@ -1,5 +1,6 @@
 class Criterion < ApplicationRecord
   belongs_to :competition
 
-  validates :event_type, inclusion: { in: JUDGEMENT_CATEGORIES }
+  validates :description, presence: true
+  validates :category, inclusion: { in: JUDGEMENT_CATEGORIES }
 end
