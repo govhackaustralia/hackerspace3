@@ -47,7 +47,7 @@ class Admin::CriteriaController < ApplicationController
   end
 
   def criterion_params
-    params.require(:criterion).permit(:category, :description)
+    params.require(:criterion).permit(:category, :name, :description)
   end
 
   def retrieve_competition_and_criterion

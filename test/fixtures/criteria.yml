@@ -3,11 +3,13 @@
 one:
   id: 1
   competition_id: 1
+  name: MyName
   description: MyText
   category: Regional Challenge
 
 two:
   id: 2
   competition_id: 1
+  name: MyName
   description: MyText
   category: People's Choice
