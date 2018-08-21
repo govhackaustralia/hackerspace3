@@ -2,12 +2,12 @@
 
 one:
   id: 1
-  challenge_scorecard_id: 1
-  challenge_criterion_id: 1
+  peoples_scorecard_id: 1
+  criterion_id: 1
   score: 1
 
 two:
   id: 2
-  challenge_scorecard_id: 1
-  challenge_criterion_id: 2
+  peoples_scorecard_id: 1
+  criterion_id: 2
   score: 1

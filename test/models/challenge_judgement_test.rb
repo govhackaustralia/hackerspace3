@@ -3,15 +3,13 @@ require 'test_helper'
 class ChallengeJudgementTest < ActiveSupport::TestCase
   setup do
     @challenge_judgement = ChallengeJudgement.first
-    @entry = Entry.first
     @challenge_criterion = ChallengeCriterion.first
-    @assignment = Assignment.find(7)
+    @challenge_scorecard = ChallengeScorecard.first
   end
 
   test 'challenge judgement associations' do
-    assert(@challenge_judgement.entry == @entry)
+    assert(@challenge_judgement.challenge_scorecard == @challenge_scorecard)
     assert(@challenge_judgement.challenge_criterion == @challenge_criterion)
-    assert(@challenge_judgement.assignment == @assignment)
   end
 
   test 'challenge judgement validations' do

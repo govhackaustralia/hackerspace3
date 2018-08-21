@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  id: 1
+  team_id: 1
+  assignment_id: 6
+
+two:
+  id: 2
+  team_id: 1
+  assignment_id: 1

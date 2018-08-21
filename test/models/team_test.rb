@@ -7,6 +7,7 @@ class TeamTest < ActiveSupport::TestCase
     @event = Event.first
     @team_data_set = TeamDataSet.first
     @entry = Entry.first
+    @peoples_scorecard = PeoplesScorecard.first
   end
 
   test 'team associations' do
@@ -14,6 +15,7 @@ class TeamTest < ActiveSupport::TestCase
     assert(@team.event == @event)
     assert(@team.team_data_sets.include?(@team_data_set))
     assert(@team.entries.include?(@entry))
+    assert(@team.peoples_scorecards.include?(@peoples_scorecard))
     @team.destroy
     assert(Project.find_by(team: @team).nil?)
   end

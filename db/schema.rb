@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_08_21_055135) do
+ActiveRecord::Schema.define(version: 2018_08_21_134221) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -55,10 +55,16 @@ ActiveRecord::Schema.define(version: 2018_08_21_055135) do
   end
 
   create_table "challenge_judgements", force: :cascade do |t|
-    t.integer "entry_id"
-    t.integer "assignment_id"
     t.integer "challenge_criterion_id"
     t.integer "score"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "challenge_scorecard_id"
+  end
+
+  create_table "challenge_scorecards", force: :cascade do |t|
+    t.integer "entry_id"
+    t.integer "assignment_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -153,6 +159,21 @@ ActiveRecord::Schema.define(version: 2018_08_21_055135) do
     t.string "event_type"
     t.text "description"
     t.index ["identifier"], name: "index_events_on_identifier"
+  end
+
+  create_table "peoples_judgements", force: :cascade do |t|
+    t.integer "criterion_id"
+    t.integer "score"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "peoples_scorecard_id"
+  end
+
+  create_table "peoples_scorecards", force: :cascade do |t|
+    t.integer "team_id"
+    t.integer "assignment_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "projects", force: :cascade do |t|
