@@ -19,7 +19,8 @@ Rails.application.routes.draw do
   end
 
   namespace :admin do
-    resources :assignments, :sponsorship_types, :sponsors, :sponsorships, :event_partnerships
+    resources :assignments, :sponsorship_types, :sponsors, :sponsorships,
+      :event_partnerships, :challenge_scorecards
 
     resources :competitions do
       resources :assignments, controller: 'competitions/assignments'
@@ -51,7 +52,6 @@ Rails.application.routes.draw do
     resources :users do
       resources :assignments, controller: 'users/assignments'
     end
-
   end
 
   get 'manage_account', to: 'users#show'

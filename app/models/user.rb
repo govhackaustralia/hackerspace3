@@ -37,6 +37,20 @@ class User < ApplicationRecord
     assignments.where(title: ADMIN_TITLES)
   end
 
+  def judge?
+    assignments.where(title: JUDGE).present?
+  end
+
+  def challenges_judging
+    Challenge.where(id: assignments.where(title: JUDGE).pluck(:assignable_id))
+  end
+
+  def challenge_scorecards(challenge)
+    judge_assignment = Assignment.find_by(user: self, assignable: challenge)
+    ChallengeScorecard.update_scorecards!(judge_assignment, challenge)
+    judge_assignment.challenge_scorecards
+  end
+
   def make_site_admin
     Competition.current.assignments.find_or_create_by(user: self, title: ADMIN)
   end

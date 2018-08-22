@@ -1,0 +1,2 @@
+module Admin::ChallengeScorecardsHelper
+end

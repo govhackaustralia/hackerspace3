@@ -1,0 +1,11 @@
+<h2>Update Scorecard For Team <%= @scorecard.team.name %></h2>
+
+<%= form_for [:admin, @scorecard] do |f| %>
+  <% @judgements.each do |judgement| %>
+    <%= fields_for "judgements[]", judgement do |judgement_form| %>
+      <%= judgement_form.label :score, judgement.challenge_criterion.criterion.name %>
+      <%= judgement_form.number_field(:score, { value: judgement.score, in: MIN_SCORE..MAX_SCORE, step: 1 }) %><br>
+    <% end %>
+  <% end %>
+  <%= f.submit %>
+<% end %>

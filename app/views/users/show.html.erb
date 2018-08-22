@@ -4,26 +4,32 @@
 
 	<section>
 		<article>
-
 			<%= render 'user_contact', locals: { user: @user } %>
-
 			<%= link_to 'Update Personal Details' , update_personal_details_path %><br>
 			<%= link_to 'Change Email and Password' , edit_user_registration_path %><br>
-			<% if current_user.admin_privileges? %>
+		</article>
+		<article>
+			<% if @user.admin_privileges? %>
+				<h3>Admin</h3>
 				<%= link_to 'Region Management', admin_regions_path %><br>
 				<%= link_to 'User Management', admin_users_path %><br>
 				<%= link_to 'Competiton Management', admin_competition_path(Competition.current) %><br>
 			<% end %>
-			<% if current_user.sponsor_privileges? %>
+			<% if @user.sponsor_privileges? %>
+				<h3>Sponsor Managmement</h3>
 				<%= link_to 'Sponsor Management', admin_sponsors_path %><br>
 				<%= link_to 'Sponsorship Type Management', admin_sponsorship_types_path %><br>
+			<% end %>
+			<% if @user.judge? %>
+				<h3>Challenge Judgeing</h3>
+				<%= link_to 'Challenge Scorecards', admin_challenge_scorecards_path %>
 			<% end %>
 		</article>
 	</section>
 
 	<section>
 		<article>
-			<% if (assignments = current_user.assignments.where(title: SPONSOR_CONTACT)).present? %>
+			<% if (assignments = @user.assignments.where(title: SPONSOR_CONTACT)).present? %>
 				<h3>My Sponsors</h3>
 				<% assignments.each do |assignment| %>
 					<h4><%= assignment.assignable.name %></h4>
@@ -59,7 +65,8 @@
 			<% if (teams = @user.joined_teams).present? %>
 				<h3>My Team Projects</h3>
 				<% teams.each do |team| %>
-					<h4><%= "#{team.name} entered @ #{team.event.name}" %></h4>
+					<h4><%= team.name %></h4>
+					Event: <%= team.event.name %><br>
 					<%= link_to "Go to #{team.name}", team_path(team) %><br>
 				<% end %>
 			<% end %>

@@ -1,0 +1,40 @@
+<h2>Challenge to Judging</h2>
+
+<% if @challenge.present? %>
+
+  <% @user.challenge_scorecards(@challenge).each do |scorecard| %>
+    <h3>Team: <%= scorecard.team.name %></h3>
+      <table>
+        <tr>
+          <th>Category</th>
+          <th>Score</th>
+        </tr>
+        <% scorecard.challenge_judgements.each do |judgement| %>
+          <tr>
+            <td><%= judgement.challenge_criterion.criterion.name %></td>
+            <td><%= judgement.display_score %></td>
+          </tr>
+        <% end %>
+        <tr>
+          <td>Total Score</td>
+          <td><%= scorecard.total_score %></td>
+        </tr>
+      </table>
+
+    <%= link_to 'Update Scorecard', edit_admin_challenge_scorecard_path(scorecard) %><br>
+    <%= link_to 'Back to all Challenges', admin_challenge_scorecards_path %>
+  <% end %>
+
+<% else %>
+
+  <% @challenges.each do |challenge| %>
+    <h3><%= challenge.name %></h3>
+    <%= pluralize challenge.entries.count, 'entry'%> in challenge.<br>
+    <% if challenge.challenge_criteria.present? %>
+      <%= link_to 'Go to Challenge Judging', admin_challenge_scorecards_path(challenge_id: challenge.id) %>
+    <% else %>
+      No Criteria set for this Challenge.<br>
+    <% end %>
+  <% end %>
+
+<% end %>
