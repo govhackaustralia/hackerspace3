@@ -10,7 +10,7 @@
 				<% @event.description.split(/\r\n/).each do |paragraph| %>
 					<p><%= paragraph %></p>
 				<% end %>
-			<% elsif @event.event_type == STATE_CONNECTION %>
+			<% elsif @event.event_type == CONNECTION_EVENT %>
 				<%= render 'connection_description' %>
 			<% else %>
 				<%= render 'competition_event_description' %>

@@ -4,7 +4,7 @@ class Admin::EventsController < ApplicationController
 
   def index
     @competition = Competition.current
-    @connections = @competition.events.where(event_type: STATE_CONNECTION)
+    @connections = @competition.events.where(event_type: CONNECTION_EVENT)
     @competition_events = @competition.events.where(event_type: COMPETITION_EVENT)
   end
 

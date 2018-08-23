@@ -39,6 +39,12 @@
     <%= render 'admin/events/event_single', locals: { event: event } %>
   <% end %>
 
+  <h4>Awards Events</h4>
+
+  <% @region.events.where(event_type: AWARD_EVENT).each do |event| %>
+    <%= render 'admin/events/event_single', locals: { event: event } %>
+  <% end %>
+
 <% else %>
     <div>There are currently no events planned for the current Competitition.</div>
 <% end %>

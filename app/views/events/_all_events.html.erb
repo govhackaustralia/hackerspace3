@@ -7,7 +7,7 @@
 			<section class="events">
 			<% @events.each do |event| %>
 				<% unless event.end_time.blank? %>
-				<% if event.event_type == STATE_CONNECTION && event.end_time > DateTime.now %>
+				<% if event.event_type == CONNECTION_EVENT && event.end_time > DateTime.now %>
 				<%= link_to (render partial: "events/event_single", locals: { event: event } ), event_path(event.identifier) %>
 				<% end %>
 				<% end %>
@@ -41,7 +41,7 @@
 			<section class="events">
 			<% @events.each do |event| %>
 				<% unless event.end_time.blank? %>
-				<% if event.event_type == STATE_CONNECTION && event.end_time < DateTime.now %>
+				<% if event.event_type == CONNECTION_EVENT && event.end_time < DateTime.now %>
 				<%= link_to (render partial: "events/event_single", locals: { event: event } ), event_path(event.identifier) %>
 				<% end %>
 				<% end %>

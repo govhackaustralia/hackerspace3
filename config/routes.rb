@@ -64,7 +64,7 @@ Rails.application.routes.draw do
 
   get 'terms_and_conditions', to: 'users#edit'
 
-  get 'connections', to: 'events#index', event_type: STATE_CONNECTION
+  get 'connections', to: 'events#index', event_type: CONNECTION_EVENT
 
   get 'competition_events', to: 'events#index', event_type: COMPETITION_EVENT
 
