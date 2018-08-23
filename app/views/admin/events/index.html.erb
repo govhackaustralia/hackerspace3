@@ -1,0 +1,15 @@
+<h2>Events</h2>
+
+<h3>Competition Events</h3>
+
+<% @competition_events.each do |event| %>
+  <%= render 'admin/events/event_single', locals: { event: event } %>
+<% end %>
+
+<h3>Connection Event</h3>
+
+<% @connections.each do |event| %>
+  <%= render 'admin/events/event_single', locals: { event: event } %>
+<% end %>
+
+<%= link_to "Back", :back %>

@@ -2,6 +2,12 @@ class Admin::EventsController < ApplicationController
   before_action :authenticate_user!
   before_action :check_for_privileges
 
+  def index
+    @competition = Competition.current
+    @connections = @competition.events.where(event_type: STATE_CONNECTION)
+    @competition_events = @competition.events.where(event_type: COMPETITION_EVENT)
+  end
+
   def new
     @region = Region.find(params[:region_id])
     @event = @region.events.new

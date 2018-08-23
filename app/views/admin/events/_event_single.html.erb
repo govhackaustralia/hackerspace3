@@ -2,9 +2,12 @@
 <% region = event.region %>
 <h4><%= "#{event.name} in #{region.name}" %></h4>
 <% unless event.start_time.blank? %>
-  Start Time: <%= event.start_time %><br>
+  Start Time: <%= event.start_time.strftime("%-d/%-m/%y: %H:%M") %><br>
 <% end %>
 <% unless event.end_time.blank? %>
-  End Time: <%= event.end_time %><br>
+  End Time: <%= event.end_time.strftime("%-d/%-m/%y: %H:%M") %><br>
 <% end %>
-<%= link_to 'Go to Event', admin_region_event_path(region, event) %><br>
+<%= "#{event.attending_participants_count}/#{event.capacity} (participants attending / capacity)" %><br>
+<% if event.admin_privileges?(current_user) %>
+  <%= link_to 'Manage this Event', admin_region_event_path(region, event) %><br>
+<% end %>

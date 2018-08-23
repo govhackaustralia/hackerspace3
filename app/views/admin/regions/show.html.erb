@@ -27,9 +27,16 @@
 
 <% if (events = @region.events.where(competition: Competition.current)).present? %>
 
-  <% events.each do |event| %>
-    <h4><%= event.name %> - <%= event.event_type %></h4>
-    <%= link_to "Manage #{event.name}", admin_region_event_path(@region, event) %></br>
+  <h4>Competition Events</h4>
+
+  <% @region.events.where(event_type: COMPETITION_EVENT).each do |event| %>
+    <%= render 'admin/events/event_single', locals: { event: event } %>
+  <% end %>
+
+  <h4>Connection Events</h4>
+
+  <% @region.events.where(event_type: COMPETITION_EVENT).each do |event| %>
+    <%= render 'admin/events/event_single', locals: { event: event } %>
   <% end %>
 
 <% else %>
