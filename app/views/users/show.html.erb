@@ -67,7 +67,7 @@
 				<% teams.each do |team| %>
 					<h4><%= team.name %></h4>
 					Event: <%= team.event.name %><br>
-					<%= link_to "Go to #{team.name}", team_path(team) %><br>
+					<%= link_to "Go to #{team.name}", team_management_team_path(team) %><br>
 				<% end %>
 			<% end %>
 			<% if (teams = @user.invited_teams).present? %>

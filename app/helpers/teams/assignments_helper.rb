@@ -1,2 +1,0 @@
-module Teams::AssignmentsHelper
-end

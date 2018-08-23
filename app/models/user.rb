@@ -90,6 +90,11 @@ class User < ApplicationRecord
     Team.where(id: assignment_ids)
   end
 
+  def in_team?(team)
+    return true if assignments.where(assignable: team).present?
+    false
+  end
+
   def self.search(term)
     results = []
     User.all.each do |user|

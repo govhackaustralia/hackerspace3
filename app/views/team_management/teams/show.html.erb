@@ -1,0 +1,81 @@
+<h2><%= @current_project.team_name %></h2>
+
+<h3>Competition Event</h3>
+<%= @event.name %><br>
+<% if @team.published %>
+  This Project has been published.<br>
+  <%= link_to 'Go to Team Page', team_path(@team) %><br>
+<% else %>
+  This Project is yet to be published.<br>
+<% end %>
+<%= link_to 'Update Team', edit_team_management_team_path(@team) %><br>
+<%= link_to 'Back to Event', event_path(@team.event.identifier) %><br>
+
+<h3>Team Project Info</h3>
+
+<%= render 'teams/team_project_info' %>
+
+<%= link_to 'Update Project', edit_team_management_team_project_path(@team, @team.current_project) %>
+
+<h3>Team Data Sets</h3>
+
+<% if (team_data_sets = @team.team_data_sets).present? %>
+
+  <% team_data_sets.each do |team_data_set| %>
+    <%= render 'teams/team_data_set', locals: { data_set: team_data_set } %>
+    <%= link_to 'Update Data Set', edit_team_management_team_team_data_set_path(@team, team_data_set) %><br>
+  <% end %>
+
+<% else %>
+  <div>Your team does not currently have any data sets.</div>
+<% end %>
+
+<%= link_to 'Add New Data Set', new_team_management_team_team_data_set_path(@team) %>
+
+<h3>Team Leader</h3>
+
+<%= render 'users/user_contact', locals: { user: @team.team_leader } %>
+
+<% if (team_members = @team.team_members).present? %>
+  <h3>Team Members</h3>
+  <% team_members.each do |team_member| %>
+    <%= render 'users/user_contact', locals: { user: team_member } %>
+    <% if team_member == current_user %>
+      <% assignment = Assignment.find_by(assignable: @team, user: current_user) %>
+      <%= link_to 'Leave Team', user_assignment_path(current_user, assignment),
+      method: :delete, data: { confirm: 'Are you sure?' } %><br>
+    <% elsif @team.team_leader == current_user %>
+      <% assignment = Assignment.find_by(assignable: @team, user: team_member) %>
+      <%= form_for [:team_management, team_member, assignment] do |f| %>
+        <%= f.submit 'Make Team Leader' %>
+      <% end %>
+    <% end %>
+  <% end %>
+<% end %>
+
+<% if (invitees = @team.invitees).present? %>
+  <h3>Invitees</h3>
+  <% invitees.each do |invitee| %>
+    <%= render 'users/user_contact', locals: { user: invitee } %>
+  <% end %>
+<% end %>
+
+<% if @team.assignments.count < MAX_TEAM_SIZE %>
+  <%= link_to 'Add Team Members', new_team_management_team_assignment_path(@team, title: INVITEE) %><br>
+<% else %>
+  <div>You have reached the maximum team size of <%= MAX_TEAM_SIZE %><div>
+<% end %>
+
+<h3>Challenge Entries</h3>
+
+<% if (entries = @team.entries).present? %>
+
+  <% entries.each do |entry| %>
+    Challenge: <%= entry.challenge.name %><br>
+    Checkpoint End Time: <%= entry.checkpoint.end_time %><br>
+  <% end %>
+
+<% else %>
+  <div>Your team is not currently entered into any challenges.</div>
+<% end %>
+<%= link_to 'Enter Challenge', new_team_management_team_entry_path(@team) %><br>

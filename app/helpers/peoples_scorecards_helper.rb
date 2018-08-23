@@ -1,0 +1,2 @@
+module PeoplesScorecardsHelper
+end

@@ -1,0 +1,2 @@
+module TeamManagement::ProjectsHelper
+end

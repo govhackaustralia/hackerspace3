@@ -1,0 +1,2 @@
+module TeamManagement::EntriesHelper
+end

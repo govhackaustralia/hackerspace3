@@ -1,0 +1,10 @@
+<%= form_for [:team_management, @team, @entry] do |form| %>
+  <%= form.label :challenge_id %>
+  <%= form.select :challenge_id, options_from_collection_for_select(@challenges, :id, :name, @entry.challenge_id.to_s) %><br>
+  <%= form.label :checkpoint_id %>
+  <%= form.select :checkpoint_id, options_from_collection_for_select(@checkpoints, :id, :end_time, @entry.checkpoint_id.to_s) %><br>
+  <%= form.label :justification %>
+  <%= form.text_field :justification %><br>
+
+  <%= form.submit %>
+<% end %>
