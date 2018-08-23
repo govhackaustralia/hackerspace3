@@ -12,9 +12,15 @@ class ChallengeScorecard < ApplicationRecord
   def total_score
     score = 0
     challenge_judgements.each do |judgement|
-      return 'Scorecard Incomplete' if judgement.score.nil?
+      return nil if judgement.score.nil?
       score += judgement.score
     end
+    score
+  end
+
+  def display_score
+    score = total_score
+    return 'Scorecard Incomplete' if score.nil?
     score
   end
 

@@ -17,6 +17,12 @@ Name: <%= @challenge.name %><br>
   Data Set URL: <%= @challenge.data_set_url %><br>
 <% end %>
 
+<h3>Teams Competing</h3>
+
+<%= pluralize @challenge.entries.count, 'team' %> entered challenge.<br>
+
+<%= link_to 'Go to Challenge Entries', admin_challenge_entries_path(@challenge) %>
+
 <h3>Judges</h3>
 
 <% if (judges = @challenge.assignments).present? %>

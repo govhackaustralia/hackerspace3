@@ -1,0 +1,21 @@
+<h2><%= @challenge.name %></h2>
+
+<h3>Entries Marked</h3>
+
+<% @entries_and_scores.each do |obj| %>
+
+  <h4><%= obj[:entry].team.name %></h4>
+  <%= "Average Score: #{obj[:score]} from #{obj[:entry].judges_voted}
+    of #{ pluralize @challenge.assignments.count, 'judge'}" %><br>
+
+<% end %>
+
+<h3>No Markes Allocated</h3>
+
+<% @nil_entries.each do |entry| %>
+
+  <h4><%= entry.team.name %></h4>
+
+<% end %>
+
+<%= link_to 'Back to Challenge', admin_region_challenge_path(@challenge.region, @challenge) %>
