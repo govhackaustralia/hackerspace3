@@ -1,0 +1,17 @@
+<h2>Checkpoints for Competition <%= @competition.year %></h2>
+
+<% if @checkpoints.present? %>
+  <% @checkpoints.order(end_time: :asc).each do |checkpoint| %>
+    <h4><%= checkpoint.name %></h4>
+    End Time: <%= checkpoint.end_time %><br>
+    <p><em>Max number of challenges a team can enter for this challenge...</em></p>
+    National Challenges: <%= checkpoint.max_national_challenges %><br>
+    Regional Challenges: <%= checkpoint.max_regional_challenges %><br>
+    <%= link_to 'Update Checkpoint', edit_admin_competition_checkpoint_path(@competition, checkpoint) %><br>
+  <% end %>
+<% else %>
+  <div>The Competition does not currently have any checkpoints set.<div>
+<% end %>
+
+<%= link_to 'Add New Checkpoint', new_admin_competition_checkpoint_path(@competition) %><br>
+<%= link_to 'Back to Competition', admin_competition_path(@competition) %><br>

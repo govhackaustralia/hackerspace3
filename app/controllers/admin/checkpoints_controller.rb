@@ -2,6 +2,11 @@ class Admin::CheckpointsController < ApplicationController
   before_action :authenticate_user!
   before_action :check_for_privileges
 
+  def index
+    @competition = Competition.find(params[:competition_id])
+    @checkpoints = @competition.checkpoints
+  end
+
   def new
     @competition = Competition.find(params[:competition_id])
     @checkpoint = @competition.checkpoints.new
@@ -11,7 +16,7 @@ class Admin::CheckpointsController < ApplicationController
     create_new_checkpoint
     if @checkpoint.save
       flash[:notice] = 'Checkpoint created.'
-      redirect_to admin_competition_path(@competition)
+      redirect_to admin_competition_checkpoints_path(@competition)
     else
       flash[:alert] = @checkpoint.errors.full_messages.to_sentence
       render :new
@@ -27,7 +32,7 @@ class Admin::CheckpointsController < ApplicationController
     retrieve_competition_and_checkpoint
     if @checkpoint.update(checkpoint_params)
       flash[:notice] = 'Checkpoint updated.'
-      redirect_to admin_competition_path(@competition)
+      redirect_to admin_competition_checkpoints_path(@competition)
     else
       flash[:alert] = @checkpoint.errors.full_messages.to_sentence
       render :new
@@ -43,7 +48,9 @@ class Admin::CheckpointsController < ApplicationController
   end
 
   def checkpoint_params
-    params.require(:checkpoint).permit(:end_time)
+    params.require(:checkpoint).permit(:end_time, :name,
+                                       :max_national_challenges,
+                                       :max_regional_challenges)
   end
 
   def retrieve_competition_and_checkpoint
