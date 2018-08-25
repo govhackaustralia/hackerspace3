@@ -7,10 +7,14 @@ Rails.application.routes.draw do
     resources :assignments, controller: 'users/assignments'
   end
 
-  resources :challenges, :data_sets, :teams, :peoples_scorecards
+  resources :data_sets, :teams, :peoples_scorecards
 
   resources :events, param: :identifier do
     resources :registrations, :teams
+  end
+
+  resources :challenges do
+    resources :entries
   end
 
   namespace :team_management do

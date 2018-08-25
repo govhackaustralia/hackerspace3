@@ -1,6 +1,6 @@
-<h2><%= @challenge.name %> Challenge <%= @region.name %> Region</h2>
+<h2><%= @challenge.name %></h2>
 
-Name: <%= @challenge.name %><br>
+Region: <%= @region.name %><br>
 <% unless @challenge.short_desc.blank? %>
   Short Description: <%= @challenge.short_desc %><br>
 <% end %>
@@ -11,13 +11,32 @@ Name: <%= @challenge.name %><br>
   Eligibility: <%= @challenge.eligibility %><br>
 <% end %>
 <% unless @challenge.video_url.blank? %>
-  Video URL: <%= @challenge.video_url %><br>
+  <a href='<%= @challenge.video_url %>' target="_blank">Video</a>
 <% end %>
 <% unless @challenge.data_set_url.blank? %>
-  Data Set URL: <%= @challenge.data_set_url %><br>
+  <a href='<%= @challenge.data_set_url %>' target="_blank">Data Set</a><br>
 <% end %>
 
-<h3>Sponsorships</h3>
+<h3>Team Entries</h3>
 
+<%= pluralize @challenge.entries.count, 'team' %> entered into challenge.<br>
+
+<h4>Your Team Entries</h4>
+<% if user_signed_in? %>
+  <% current_user.teams.each do |team| %>
+    <h5><%= team.name %></h4>
+    <% if (entry = Entry.find_by(team: team, challenge: @challenge)).present? %>
+      Team entered into this challange for <%= entry.checkpoint.name %> Checkpoint.<br>
+    <% else %>
+      <%= link_to 'Enter Challenge', new_team_management_team_entry_path(team, challenge_id: @challenge.id) %><br>
+    <% end %>
+  <% end %>
+<% else %>
+  Sign in to enter your team into this challenge.<br>
+<% end %>
+
+<%= link_to 'See all Challenge Entries', challenge_entries_path(@challenge) %>
+
+<h3>Sponsorships</h3>
 
 <%= link_to 'Back to Challenges', challenges_path %>

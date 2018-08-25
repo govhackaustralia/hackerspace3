@@ -8,7 +8,7 @@
 
         <% if (teams = @user.teams(@event)).present? %>
           <% teams.each do |team| %>
-            <%= link_to "Go to #{team.current_project.team_name}", team_path(team) %>
+            <%= link_to "Manage #{team.current_project.team_name}", team_management_team_path(team) %>
           <% end %>
         <% else %>
           <%= form_for [@event, @team] do |f| %>

@@ -1,0 +1,14 @@
+<h2>Entries for <%= @challenge.name %> Challenge</h2>
+
+<% @checkpoints.each do |checkpoint| %>
+
+  <h3><%= checkpoint.name %></h3>
+
+  <% checkpoint.entries.where(challenge: @challenge).each do |entry| %>
+    <h4><%= entry.team.name %></h4>
+    <%= link_to 'Go to Team', team_path(entry.team) %><br>
+  <% end %>
+
+<% end %>
+
+<%= link_to 'Back to Challenge', challenge_path(@challenge) %>

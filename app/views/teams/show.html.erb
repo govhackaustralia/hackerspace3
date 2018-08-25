@@ -44,6 +44,27 @@
   <div>This team does not currently have any datasets.</div>
 <% end %>
 
+<h3>Challenges</h3>
+
+<% @checkpoints.each do |checkpoint| %>
+
+  <h3><%= checkpoint.name %> Checkpoint</h3>
+  <% if (national_challenges = @team.national_challenges(checkpoint)).present? %>
+    <h4>National Challenges</h4>
+    <% national_challenges.each do |challenge| %>
+      <h5><%= challenge.name %></h5>
+      Region: <%= challenge.region.name %><br>
+    <% end %>
+  <% end %>
+
+  <% if (regional_challenges = @team.regional_challenges(checkpoint)).present? %>
+    <h4>Regional Challenges</h4>
+    <% regional_challenges.each do |challenge| %>
+      <h5><%= challenge.name %></h5>
+      Region: <%= challenge.region.name %><br>
+    <% end %>
+  <% end %>
+<% end %>
 
 <% if user_signed_in? && @user.in_team?(@team) %>
   <%= link_to 'Managage this Team Project', team_management_team_path(@team) %><br>

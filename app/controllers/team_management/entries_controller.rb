@@ -8,8 +8,8 @@ class TeamManagement::EntriesController < ApplicationController
 
   def new
     @team = Team.find(params[:team_id])
-    @entry = @team.entries.new
-    @challenges = Challenge.all
+    @challenge = Challenge.find(params[:challenge_id])
+    @entry = @team.entries.new(challenge: @challenge)
     @checkpoints = Checkpoint.all
   end
 
@@ -17,7 +17,7 @@ class TeamManagement::EntriesController < ApplicationController
     create_new_entry
     if @entry.save
       flash[:notice] = 'Challenge Entered'
-      redirect_to team_management_team_entries_path(@team)
+      redirect_to challenge_path(@entry.challenge)
     else
       flash[:alert] = @entry.errors.full_messages.to_sentence
       render :new
@@ -39,5 +39,7 @@ class TeamManagement::EntriesController < ApplicationController
   def create_new_entry
     @team = Team.find(params[:team_id])
     @entry = @team.entries.new(entry_params)
+    @challenge = Challenge.find(params[:challenge_id])
+    @entry.challenge = @challenge
   end
 end
