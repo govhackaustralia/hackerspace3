@@ -3,6 +3,7 @@ class TeamManagement::TeamsController < ApplicationController
     @team = Team.find(params[:id])
     @current_project = @team.current_project
     @event = @team.event
+    @competition = @event.competition
   end
 
   def new

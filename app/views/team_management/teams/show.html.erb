@@ -19,63 +19,27 @@
 
 <h3>Team Data Sets</h3>
 
-<% if (team_data_sets = @team.team_data_sets).present? %>
+This team currently has <%= pluralize @team.team_data_sets.count, 'data set' %>.<br>
 
-  <% team_data_sets.each do |team_data_set| %>
-    <%= render 'teams/team_data_set', locals: { data_set: team_data_set } %>
-    <%= link_to 'Update Data Set', edit_team_management_team_team_data_set_path(@team, team_data_set) %><br>
-  <% end %>
+<%= link_to 'Go to Team Data Sets', team_management_team_team_data_sets_path(@team) %>
 
-<% else %>
-  <div>Your team does not currently have any data sets.</div>
-<% end %>
+<h3>Team Members</h3>
 
-<%= link_to 'Add New Data Set', new_team_management_team_team_data_set_path(@team) %>
-
-<h3>Team Leader</h3>
+<h4>Team Leader</h4>
 
 <%= render 'users/user_contact', locals: { user: @team.team_leader } %>
 
 <% if (team_members = @team.team_members).present? %>
-  <h3>Team Members</h3>
-  <% team_members.each do |team_member| %>
-    <%= render 'users/user_contact', locals: { user: team_member } %>
-    <% if team_member == current_user %>
-      <% assignment = Assignment.find_by(assignable: @team, user: current_user) %>
-      <%= link_to 'Leave Team', user_assignment_path(current_user, assignment),
-      method: :delete, data: { confirm: 'Are you sure?' } %><br>
-    <% elsif @team.team_leader == current_user %>
-      <% assignment = Assignment.find_by(assignable: @team, user: team_member) %>
-      <%= form_for [:team_management, team_member, assignment] do |f| %>
-        <%= f.submit 'Make Team Leader' %>
-      <% end %>
-    <% end %>
-  <% end %>
+  <strong>+ <%= pluralize team_members.count, 'other team member' %>.</strong><br>
 <% end %>
-
 <% if (invitees = @team.invitees).present? %>
-  <h3>Invitees</h3>
-  <% invitees.each do |invitee| %>
-    <%= render 'users/user_contact', locals: { user: invitee } %>
-  <% end %>
+  <strong><%= pluralize invitees.count, 'invitee' %> invited.</strong><br>
 <% end %>
 
-<% if @team.assignments.count < MAX_TEAM_SIZE %>
-  <%= link_to 'Add Team Members', new_team_management_team_assignment_path(@team, title: INVITEE) %><br>
-<% else %>
-  <div>You have reached the maximum team size of <%= MAX_TEAM_SIZE %><div>
-<% end %>
+<%= link_to 'Manage Team Members', team_management_team_assignments_path(@team) %><br>
 
 <h3>Challenge Entries</h3>
 
-<% if (entries = @team.entries).present? %>
+<%= pluralize @team.challenges.count, 'challenge' %> entered.<br>
 
-  <% entries.each do |entry| %>
-    Challenge: <%= entry.challenge.name %><br>
-    Checkpoint End Time: <%= entry.checkpoint.end_time %><br>
-  <% end %>
-
-<% else %>
-  <div>Your team is not currently entered into any challenges.</div>
-<% end %>
-<%= link_to 'Enter Challenge', new_team_management_team_entry_path(@team) %><br>
+<%= link_to 'Manage Team Challange Entries', team_management_team_entries_path(@team) %>

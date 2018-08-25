@@ -2,6 +2,10 @@ class TeamManagement::Teams::AssignmentsController < ApplicationController
   before_action :authenticate_user!
   before_action :check_for_privileges
 
+  def index
+    @team = Team.find(params[:team_id])
+  end
+
   def new
     new_assignment
     return if params[:term].blank?
@@ -14,7 +18,7 @@ class TeamManagement::Teams::AssignmentsController < ApplicationController
     create_new_assignment
     if @assignment.save
       flash[:notice] = "New #{params[:title]} Assignment Added."
-      redirect_to team_management_team_path(@assignable)
+      redirect_to team_management_team_assignments_path(@assignable)
     else
       flash.now[:alert] = @assignment.errors.full_messages.to_sentence
       render :new

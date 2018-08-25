@@ -1,6 +1,11 @@
 class TeamManagement::TeamDataSetsController < ApplicationController
   before_action :authenticate_user!
 
+  def index
+    @team = Team.find(params[:team_id])
+    @team_data_sets = @team.team_data_sets
+  end
+
   def new
     @team = Team.find(params[:team_id])
     @team_data_set = @team.team_data_sets.new
@@ -10,7 +15,7 @@ class TeamManagement::TeamDataSetsController < ApplicationController
     create_net_team_data_set
     if @team_data_set.save
       flash[:notice] = 'New Team Data Set Created'
-      redirect_to team_management_team_path(@team)
+      redirect_to team_management_team_team_data_sets_path(@team)
     else
       flash[:alert] = @team_data_set.errors.full_messages.to_sentence
       render :new
@@ -25,7 +30,7 @@ class TeamManagement::TeamDataSetsController < ApplicationController
     set_team_and_data_set
     if @team_data_set.update(team_data_set_params)
       flash[:notice] = 'New Team Data Set Updated'
-      redirect_to team_management_team_path(@team)
+      redirect_to team_management_team_team_data_sets_path(@team)
     else
       flash[:alert] = @team_data_set.errors.full_messages.to_sentence
       render :edit

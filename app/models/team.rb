@@ -5,6 +5,7 @@ class Team < ApplicationRecord
   has_many :team_data_sets, dependent: :destroy
   has_many :entries, dependent: :destroy
   has_many :peoples_scorecards, dependent: :destroy
+  has_many :challenges, through: :entries
 
   def team_leader
     assignment = Assignment.find_by(assignable_type: 'Team', assignable_id: id, title: TEAM_LEADER)
@@ -39,5 +40,27 @@ class Team < ApplicationRecord
 
   def name
     current_project.team_name
+  end
+
+  def regional_challenges(checkpoint)
+    challenge_ids = entries.where(checkpoint: checkpoint).pluck(:challenge_id)
+    regional_challenges = []
+    national_region_id = Region.root.id
+    Challenge.where(id: challenge_ids).each do |challenge|
+      next if challenge.region_id == national_region_id
+      regional_challenges << challenge
+    end
+    regional_challenges
+  end
+
+  def national_challenges(checkpoint)
+    challenge_ids = entries.where(checkpoint: checkpoint).pluck(:challenge_id)
+    national_challenges = []
+    national_region_id = Region.root.id
+    Challenge.where(id: challenge_ids).each do |challenge|
+      next unless challenge.region_id == national_region_id
+      national_challenges << challenge
+    end
+    national_challenges
   end
 end

@@ -1,0 +1,37 @@
+<h2>Team Members</h2>
+
+<h3>Team Leader</h3>
+
+<%= render 'users/user_contact', locals: { user: @team.team_leader } %>
+
+<% if (team_members = @team.team_members).present? %>
+  <h3>Team Members</h3>
+  <% team_members.each do |team_member| %>
+    <%= render 'users/user_contact', locals: { user: team_member } %>
+    <% if team_member == current_user %>
+      <% assignment = Assignment.find_by(assignable: @team, user: current_user) %>
+      <%= link_to 'Leave Team', user_assignment_path(current_user, assignment),
+      method: :delete, data: { confirm: 'Are you sure?' } %><br>
+    <% elsif @team.team_leader == current_user %>
+      <% assignment = Assignment.find_by(assignable: @team, user: team_member) %>
+      <%= form_for [:team_management, team_member, assignment] do |f| %>
+        <%= f.submit 'Make Team Leader' %>
+      <% end %>
+    <% end %>
+  <% end %>
+<% end %>
+
+<% if (invitees = @team.invitees).present? %>
+  <h3>Invitees</h3>
+  <% invitees.each do |invitee| %>
+    <%= render 'users/user_contact', locals: { user: invitee } %>
+  <% end %>
+<% end %>
+
+<% if @team.assignments.count < MAX_TEAM_SIZE %>
+  <%= link_to 'Add Team Members', new_team_management_team_assignment_path(@team, title: INVITEE) %><br>
+<% else %>
+  <div>You have reached the maximum team size of <%= MAX_TEAM_SIZE %><div>
+<% end %>
+
+<%= link_to 'Back to Team', team_management_team_path(@team) %>
