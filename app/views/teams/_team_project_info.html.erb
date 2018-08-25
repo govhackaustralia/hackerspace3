@@ -1,9 +1,11 @@
 <% unless @current_project.description.blank? %>
-  Description: <%= @current_project.description %><br>
+  <h4>Description</h4>
+  <%= markdown @current_project.description %>
 <% end %>
 
 <% unless @current_project.data_story.blank? %>
-  Data Story: <%= @current_project.data_story %><br>
+  <h4>Data Story</h4>
+  <%= markdown @current_project.data_story %>
 <% end %>
 
 <% unless @current_project.source_code_url.blank? %>
