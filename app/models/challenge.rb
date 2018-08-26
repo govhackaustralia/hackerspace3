@@ -21,4 +21,16 @@ class Challenge < ApplicationRecord
     collected << region.admin_assignments
     collected.flatten
   end
+
+  require 'csv'
+
+  def self.to_csv(options = {})
+    desired_columns = %w[id region_id competition_id name short_desc long_desc eligibility video_url data_set_url created_at updated_at]
+    CSV.generate(options) do |csv|
+      csv << desired_columns
+      all.each do |challenge|
+        csv << challenge.attributes.values_at(*desired_columns)
+      end
+    end
+  end
 end

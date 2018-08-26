@@ -1,10 +1,10 @@
 class EventsController < ApplicationController
   def index
-    @events = if params[:event_type].present?
-                Competition.current.events.where(event_type: params[:event_type]).order(start_time: :asc, name: :asc)
-              else
-                Competition.current.events.order(start_time: :asc, name: :asc)
-              end
+    retrieve_events
+    respond_to do |format|
+      format.html
+      format.csv { send_data @events.to_csv }
+    end
   end
 
   def show
@@ -16,6 +16,14 @@ class EventsController < ApplicationController
   end
 
   private
+
+  def retrieve_events
+    @events = if params[:event_type].present?
+                Competition.current.events.where(event_type: params[:event_type]).order(start_time: :asc, name: :asc)
+              else
+                Competition.current.events.order(start_time: :asc, name: :asc)
+              end
+  end
 
   def set_signed_in_user_vars
     @user = current_user

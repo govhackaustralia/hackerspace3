@@ -88,6 +88,16 @@ class Event < ApplicationRecord
     event_type == COMPETITION_EVENT
   end
 
+  def self.to_csv(options = {})
+    desired_columns = %w[id name capacity email twitter address accessibility youth_support parking public_transport operation_hours catering video_id start_time end_time created_at updated_at place_id identifier event_type]
+    CSV.generate(options) do |csv|
+      csv << desired_columns
+      all.each do |event|
+        csv << event.attributes.values_at(*desired_columns)
+      end
+    end
+  end
+
   private
 
   def already_there?(new_identifier)

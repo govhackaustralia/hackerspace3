@@ -1,6 +1,7 @@
 <h2>Challenges for Competition <%= Competition.current.year %></h2>
+<%= link_to 'Download CSV', challenges_path(format: 'csv') %></br>
 
-<% @competition.challenges.each do |challenge| %>
+<% @challenges.each do |challenge| %>
   <h3><%= challenge.name %></h3>
   <% unless challenge.short_desc.blank? %>
     Short Description: <%= challenge.short_desc %><br>

@@ -5,6 +5,7 @@
   <%= submit_tag 'Search' %>
 <% end %>
 <%= link_to 'Clear Search', data_sets_path %></br>
+<%= link_to 'Download CSV', data_sets_path(format: 'csv') %></br>
 
 <% filter_data_sets(@data_sets, params[:term]).each do |data_set| %>
   <h3><%= data_set.name %></h3>

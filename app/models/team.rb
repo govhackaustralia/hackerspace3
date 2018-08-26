@@ -63,4 +63,14 @@ class Team < ApplicationRecord
     end
     national_challenges
   end
+
+  def self.to_csv(options = {})
+    project_columns = %w[team_name source_code_url video_url homepage_url created_at updated_at]
+    CSV.generate(options) do |csv|
+      csv << project_columns
+      all.each do |team|
+        csv << team.current_project.attributes.values_at(*project_columns)
+      end
+    end
+  end
 end

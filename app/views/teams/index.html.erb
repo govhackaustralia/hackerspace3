@@ -5,6 +5,7 @@
   <%= submit_tag 'Search' %>
 <% end %>
 <%= link_to 'Clear Search', teams_path %></br>
+<%= link_to 'Download CSV', teams_path(format: 'csv') %></br>
 
 <% filter_teams(@teams, params[:term]).each do |team| %>
   <h3><%= team.current_project.team_name %></h3>
