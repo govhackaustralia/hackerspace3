@@ -12,6 +12,7 @@ AllCops:
     - 'bin/*'
     - 'db/**/*'
     - 'app/models/user.rb'
+    - 'app/helpers/application_helper.rb'
 
 Style/Documentation:
   Enabled: false

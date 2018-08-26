@@ -84,6 +84,10 @@ class Event < ApplicationRecord
     update_columns(identifier: new_identifier)
   end
 
+  def competition_event?
+    event_type == COMPETITION_EVENT
+  end
+
   private
 
   def already_there?(new_identifier)

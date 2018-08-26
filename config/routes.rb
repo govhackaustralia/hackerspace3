@@ -10,7 +10,8 @@ Rails.application.routes.draw do
   resources :data_sets, :teams, :peoples_scorecards
 
   resources :events, param: :identifier do
-    resources :registrations, :teams
+    resources :registrations
+    resources :teams, controller: 'events/teams'
   end
 
   resources :challenges do

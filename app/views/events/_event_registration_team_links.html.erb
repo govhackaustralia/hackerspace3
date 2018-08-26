@@ -4,7 +4,7 @@
 
     <% if @registration.present? %>
       <%= link_to 'Manage your Event Registration', event_registration_path(@event.identifier, @registration) %><br>
-      <% if @event.event_type == COMPETITION_EVENT %>
+      <% if @event.competition_event? %>
 
         <% if (teams = @user.teams(@event)).present? %>
           <% teams.each do |team| %>
@@ -25,4 +25,8 @@
     <%= link_to 'Sign in to register', new_user_session_path %><br>
   <% end %>
 
+<% end %>
+
+<% if @event.competition_event? && @event.teams.where(published: true).present? %>
+  <%= link_to 'See Participating Teams', event_teams_path(@event.identifier) %>
 <% end %>

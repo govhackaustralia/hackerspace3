@@ -1,12 +1,22 @@
 <h2>Entries for <%= @challenge.name %> Challenge</h2>
 
+<%= form_tag challenge_entries_path(@challenge), method: :get do %>
+  <%= text_field_tag :term, params[:term] %>
+  <%= submit_tag 'Search' %>
+<% end %>
+<%= link_to 'Clear Search', challenge_entries_path(@challenge) %></br>
+
 <% @checkpoints.each do |checkpoint| %>
 
-  <h3><%= checkpoint.name %></h3>
+  <% if (teams = filter_challenge_teams(checkpoint, params[:term])).present? %>
 
-  <% checkpoint.entries.where(challenge: @challenge).each do |entry| %>
-    <h4><%= entry.team.name %></h4>
-    <%= link_to 'Go to Team', team_path(entry.team) %><br>
+    <h3><%= checkpoint.name %> Checkpoint</h3>
+
+    <% teams.each do |team| %>
+      <h4><%= team.name %></h4>
+      <%= link_to 'Go to Team', team_path(team) %><br>
+    <% end %>
+
   <% end %>
 
 <% end %>

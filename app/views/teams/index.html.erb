@@ -1,6 +1,12 @@
 <h2>Team Projects for Competition <%= @competition.year %></h2>
 
-<% @teams.each do |team| %>
+<%= form_tag teams_path, method: :get do %>
+  <%= text_field_tag :term, params[:term] %>
+  <%= submit_tag 'Search' %>
+<% end %>
+<%= link_to 'Clear Search', teams_path %></br>
+
+<% filter_teams(@teams, params[:term]).each do |team| %>
   <h3><%= team.current_project.team_name %></h3>
-  <%= link_to 'Go to Team', team_path(team) %>
+  <%= link_to 'Go to Team', team_path(team) %><br>
 <% end %>

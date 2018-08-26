@@ -1,0 +1,14 @@
+<h2>Participating Teams for Event <%= @event.name %></h2>
+
+<%= form_tag event_teams_path(@event.identifier), method: :get do %>
+  <%= text_field_tag :term, params[:term] %>
+  <%= submit_tag 'Search' %>
+<% end %>
+<%= link_to 'Clear Search', event_teams_path(@event.identifier) %></br>
+
+<% filter_teams(@teams, params[:term]).each do |team| %>
+  <h3><%= team.current_project.team_name %></h3>
+  <%= link_to 'Go to Team', team_path(team) %><br>
+<% end %>
+
+<%= link_to "Back to #{@event.name}", event_path(@event.identifier) %>
