@@ -1,5 +1,13 @@
 <h2>Data Sets for Competition <%= @competition.year %></h2>
 
-<% @data_sets.each do |data_set| %>
-Name: <%= data_set.name %><br>
+<%= form_tag data_sets_path, method: :get do %>
+  <%= text_field_tag :term, params[:term] %>
+  <%= submit_tag 'Search' %>
+<% end %>
+<%= link_to 'Clear Search', data_sets_path %></br>
+
+<% filter_data_sets(@data_sets, params[:term]).each do |data_set| %>
+  <h3><%= data_set.name %></h3>
+  Region: <%= data_set.region.name %><br>
+  <%= link_to 'Go to Data Set', data_set_path(data_set) %><br>
 <% end %>
