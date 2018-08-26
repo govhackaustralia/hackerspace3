@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_08_24_020214) do
+ActiveRecord::Schema.define(version: 2018_08_26_113612) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -164,6 +164,13 @@ ActiveRecord::Schema.define(version: 2018_08_24_020214) do
     t.string "event_type"
     t.text "description"
     t.index ["identifier"], name: "index_events_on_identifier"
+  end
+
+  create_table "favourites", force: :cascade do |t|
+    t.integer "assignment_id"
+    t.integer "team_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "peoples_judgements", force: :cascade do |t|

@@ -15,6 +15,7 @@ class AssignmentTest < ActiveSupport::TestCase
 
     @participant = Assignment.find(6)
     @peoples_scorecard = PeoplesScorecard.first
+    @favourite = Favourite.first
   end
 
   test 'assignment associations' do
@@ -24,6 +25,7 @@ class AssignmentTest < ActiveSupport::TestCase
     assert(@region_assignment.user == @user)
     assert(@judge.challenge_scorecards.include?(@challenge_scorecard))
     assert(@participant.peoples_scorecards.include?(@peoples_scorecard))
+    assert(@participant.favourites.include?(@favourite))
   end
 
   test 'assignment validations' do
