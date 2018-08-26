@@ -89,5 +89,15 @@
 				<% end %>
 			<% end %>
 		</article>
+		<article>
+			<% if (teams = @user.event_assignment.teams).present? %>
+				<h3>My Favourite Projects</h3>
+				<% teams.each do |team| %>
+					<h4><%= team.name %></h4>
+					Event: <%= team.event.name %><br>
+					<%= link_to "Go to #{team.name}", team_path(team) %><br>
+				<% end %>
+			<% end %>
+		</article>
 	</section>
 </main>

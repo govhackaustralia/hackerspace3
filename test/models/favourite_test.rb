@@ -8,7 +8,11 @@ class FavouriteTest < ActiveSupport::TestCase
   end
 
   test 'favourite associations' do
-    assert(@favourite.team == @team)
-    assert(@favourite.assignment == @assignment)
+    assert @favourite.team == @team
+    assert @favourite.assignment == @assignment
+  end
+
+  test 'favouite validations' do
+    assert_not Favourite.create(team: @team, assignment: @assignment).persisted?
   end
 end

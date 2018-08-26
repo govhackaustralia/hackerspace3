@@ -5,6 +5,7 @@ class Assignment < ApplicationRecord
   has_many :challenge_scorecards
   has_many :peoples_scorecards
   has_many :favourites
+  has_many :teams, through: :favourites
 
   validates :title, inclusion: { in: VALID_ASSIGNMENT_TITLES }
 end

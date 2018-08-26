@@ -22,6 +22,15 @@
 
   <% end %>
 
+  <h3>Favourites</h3>
+  <% if @favourite.present? %>
+    <%= link_to 'Unfavourite Project', favourite_path(@favourite),
+                  method: :delete,
+                  data: { confirm: 'Are you sure?' } %><br>
+  <% else %>
+    <%= link_to 'Favourite Project', favourites_path(team_id: @team.id), method: :post %>
+  <% end %>
+
 <% else %>
 
   Login to vote for this project in the People's Choice Awards.<br>
