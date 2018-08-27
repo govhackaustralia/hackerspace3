@@ -28,11 +28,9 @@ class TeamManagement::TeamsController < ApplicationController
   end
 
   def update
-    @team = Team.find(params[:id])
-    @team.update(team_params)
+    update_team
     if @team.save
-      flash[:notice] = 'Team Participating Event Upated'
-      redirect_to team_management_team_path(@team)
+      handle_update_redirect
     else
       flash[:alert] = @team.errors.full_messages.to_sentence
       render :new
@@ -40,6 +38,24 @@ class TeamManagement::TeamsController < ApplicationController
   end
 
   private
+
+  def handle_update_redirect
+    if params[:thumbnail].present?
+      flash[:notice] = 'Thumbnail Updated'
+      render :edit, thumbnail: true
+    elsif params[:high_res_image].present?
+      flash[:notice] = 'High Resolution Image Updated'
+      render :edit, high_res_image: true
+    else
+      flash[:notice] = 'Team Details Upated'
+      redirect_to team_management_team_path(@team)
+    end
+  end
+
+  def update_team
+    @team = Team.find(params[:id])
+    @team.update(team_params) unless params[:team].blank?
+  end
 
   def handle_team_save
     @team.assign_leader(current_user)
@@ -49,6 +65,6 @@ class TeamManagement::TeamsController < ApplicationController
   end
 
   def team_params
-    params.require(:team).permit(:event_id, :published)
+    params.require(:team).permit(:event_id, :published, :thumbnail, :high_res_image)
   end
 end

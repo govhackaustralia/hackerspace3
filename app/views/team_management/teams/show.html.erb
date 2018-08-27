@@ -8,7 +8,10 @@
 <% else %>
   This Project is yet to be published.<br>
 <% end %>
-<%= link_to 'Update Team', edit_team_management_team_path(@team) %><br>
+
+<%= link_to 'Update Team Details', edit_team_management_team_path(@team) %><br>
+<%= link_to 'Update Thumbnail', edit_team_management_team_path(@team, thumbnail: true) %><br>
+<%= link_to 'Update High Resolution Image', edit_team_management_team_path(@team, high_res_image: true) %><br>
 <%= link_to 'Back to Event', event_path(@team.event.identifier) %><br>
 
 <h3>Team Project Info</h3>

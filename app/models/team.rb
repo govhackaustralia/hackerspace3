@@ -8,6 +8,9 @@ class Team < ApplicationRecord
   has_many :challenges, through: :entries
   has_many :favourites, dependent: :destroy
 
+  has_one_attached :thumbnail
+  has_one_attached :high_res_image
+
   def team_leader
     assignment = Assignment.find_by(assignable_type: 'Team', assignable_id: id, title: TEAM_LEADER)
     return if assignment.nil?

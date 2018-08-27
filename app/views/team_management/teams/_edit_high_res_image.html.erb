@@ -1,0 +1,19 @@
+<h2>Update <%= @team.name %> High Resolution Image</h2>
+
+<%= form_for [:team_management, @team] do |form| %>
+  <% if @team.high_res_image.attached? %>
+    <img src="<%= url_for(@team.high_res_image) %>" alt="<%= "#{@team.name} High Resolution Image" %>" /><br>
+  <% else %>
+    <%= image_tag "default_profile_pic.png" %><br>
+  <% end %>
+
+  <%= form.label :high_res_image, 'Upload a High Resolution Image.' %><br>
+  <%= form.file_field :high_res_image %><br>
+
+  <%= hidden_field_tag(:high_res_image, true) %>
+  <% if @team.high_res_image.attached? %>
+    <%= form.submit 'Replace High Res Image' %>
+  <% else %>
+    <%= form.submit 'Upload High Res Image' %>
+  <% end %>
+<% end %>
