@@ -33,4 +33,6 @@
 <% end %>
 
 <%= link_to 'New Criterion', new_admin_competition_criterion_path(@competition) %><br>
-<%= link_to 'Back to Competition', admin_competition_path(@competition) %>
+<% if current_user.admin_privileges? %>
+  <%= link_to 'Back to Competition', admin_competition_path(@competition) %>
+<% end %>

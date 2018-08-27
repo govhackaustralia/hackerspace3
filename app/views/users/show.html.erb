@@ -24,8 +24,12 @@
 				<%= link_to 'Sponsor Management', admin_sponsors_path %><br>
 				<%= link_to 'Sponsorship Type Management', admin_sponsorship_types_path %><br>
 			<% end %>
+
+			<h3>Judgeing</h3>
+			<% if @user.chief_judge? %>
+				<%= link_to 'Competiton Criteria Management', admin_competition_criteria_path(@competition) %><br>
+			<% end %>
 			<% if @user.judge? %>
-				<h3>Challenge Judgeing</h3>
 				<%= link_to 'Challenge Scorecards', admin_challenge_scorecards_path %>
 			<% end %>
 		</article>

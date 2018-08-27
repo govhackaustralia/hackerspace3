@@ -33,12 +33,20 @@ class User < ApplicationRecord
     (assignments.pluck(:title) & SPONSOR_PRIVILEGES).present?
   end
 
+  def criterion_privileges?
+    (assignments.pluck(:title) & CRITERION_PRIVILEGES).present?
+  end
+
   def admin_assignments
     assignments.where(title: ADMIN_TITLES)
   end
 
   def judge?
     assignments.where(title: JUDGE).present?
+  end
+
+  def chief_judge?
+    assignments.where(title: CHIEF_JUDGE).present?
   end
 
   def challenges_judging
