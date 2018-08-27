@@ -1,0 +1,19 @@
+<%= form_for [:admin, @region, @challenge] do |form| %>
+
+  <% if @challenge.image.attached? %>
+    <img src="<%= url_for(@challenge.image) %>" alt="<%= "#{@challenge.name} image" %>" /><br>
+  <% else %>
+    <%= image_tag "default_profile_pic.png" %><br>
+  <% end %>
+
+  <%= form.label :image, 'Upload a New Image.' %><br>
+  <%= form.file_field :image %><br>
+
+  <%= hidden_field_tag(:image, true) %>
+
+  <% if @challenge.image.attached? %>
+    <%= form.submit 'Replace Image' %>
+  <% else %>
+    <%= form.submit 'Upload Image' %>
+  <% end %>
+<% end %>

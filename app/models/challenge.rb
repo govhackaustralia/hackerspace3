@@ -6,6 +6,8 @@ class Challenge < ApplicationRecord
   has_many :entries
   has_many :challenge_criteria
 
+  has_one_attached :image
+
   validates :name, presence: true
   validates :name, uniqueness: true
 

@@ -30,9 +30,9 @@ class Admin::ChallengesController < ApplicationController
 
   def update
     update_challenge
-    if @challenge.update(challenge_params)
-      flash[:notice] = 'Challenge Updated'
-      redirect_to admin_region_challenge_path(@region, @challenge)
+    @challenge.update(challenge_params) unless params[:challenge].blank?
+    if @challenge.save
+      handle_update_redirect
     else
       flash[:alert] = @challenge.errors.full_messages.to_sentence
       render :edit
@@ -40,6 +40,16 @@ class Admin::ChallengesController < ApplicationController
   end
 
   private
+
+  def handle_update_redirect
+    if params[:image].present?
+      flash[:notice] = 'Challenge Image Updated'
+      render :edit, image: true
+    else
+      flash[:notice] = 'Challenge Updated'
+      redirect_to admin_region_challenge_path(@region, @challenge)
+    end
+  end
 
   def check_for_privileges
     return if current_user.region_privileges?
@@ -50,7 +60,7 @@ class Admin::ChallengesController < ApplicationController
   def challenge_params
     params.require(:challenge).permit(:name, :short_desc, :long_desc,
                                       :eligibility, :video_url, :data_set_url,
-                                      :approved)
+                                      :approved, :image)
   end
 
   def update_challenge

@@ -1,5 +1,9 @@
-<h2>Update Challenge <%= @challenge.name %></h2>
-
-<%= render 'form' %>
+<% if params[:image].present? %>
+  <h2>Update <%= @challenge.name %> Image</h2>
+  <%= render 'edit_image' %>
+<% else %>
+  <h2>Update Challenge <%= @challenge.name %></h2>
+  <%= render 'form' %>
+<% end %>
 
 <%= link_to "Back to Challenge", admin_region_challenge_path(@region, @challenge) %><br>
