@@ -10,7 +10,7 @@ class TeamManagement::EntriesController < ApplicationController
     @team = Team.find(params[:team_id])
     @challenge = Challenge.find(params[:challenge_id])
     @entry = @team.entries.new(challenge: @challenge)
-    @checkpoints = Checkpoint.all
+    @checkpoints = @challenge.competition.available_checkpoints(@team.time_zone)
   end
 
   def create

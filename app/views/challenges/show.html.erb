@@ -28,7 +28,11 @@ Region: <%= @region.name %><br>
     <% if (entry = Entry.find_by(team: team, challenge: @challenge)).present? %>
       Team entered into this challange for <%= entry.checkpoint.name %> Checkpoint.<br>
     <% else %>
-      <%= link_to 'Enter Challenge', new_team_management_team_entry_path(team, challenge_id: @challenge.id) %><br>
+      <% if team.available_checkpoints? %>
+        <%= link_to 'Enter Challenge', new_team_management_team_entry_path(team, challenge_id: @challenge.id) %><br>
+      <% else %>
+        All Checkpoints have passed.<br>
+      <% end %>
     <% end %>
   <% end %>
 <% else %>

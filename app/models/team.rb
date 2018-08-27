@@ -1,6 +1,7 @@
 class Team < ApplicationRecord
   has_many :assignments, as: :assignable
   belongs_to :event
+  has_one :competition, through: :event
   has_many :projects, dependent: :destroy
   has_many :team_data_sets, dependent: :destroy
   has_many :entries, dependent: :destroy
@@ -66,6 +67,14 @@ class Team < ApplicationRecord
       national_challenges << challenge
     end
     national_challenges
+  end
+
+  def time_zone
+    event.region.time_zone
+  end
+
+  def available_checkpoints?
+    competition.available_checkpoints(time_zone).present?
   end
 
   def self.to_csv(options = {})

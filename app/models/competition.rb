@@ -74,4 +74,13 @@ class Competition < ApplicationRecord
   def events_on?(type)
     events.where(type: type).present?
   end
+
+  def available_checkpoints(time_zone)
+    valid_checkpoints = []
+    checkpoints.each do |checkpoint|
+      next unless checkpoint.end_time.to_formatted_s(:number) > Time.now.in_time_zone(time_zone).to_formatted_s(:number)
+      valid_checkpoints << checkpoint
+    end
+    valid_checkpoints
+  end
 end
