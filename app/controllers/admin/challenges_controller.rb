@@ -49,7 +49,8 @@ class Admin::ChallengesController < ApplicationController
 
   def challenge_params
     params.require(:challenge).permit(:name, :short_desc, :long_desc,
-                                      :eligibility, :video_url, :data_set_url)
+                                      :eligibility, :video_url, :data_set_url,
+                                      :approved)
   end
 
   def update_challenge

@@ -4,19 +4,24 @@
   <%= form.text_field :name %><br>
 
   <%= form.label :short_desc %>
-  <%= form.text_field :short_desc %><br>
+  <%= form.text_area :short_desc %><br>
 
   <%= form.label :long_desc %>
-  <%= form.text_field :long_desc %><br>
+  <%= form.text_area :long_desc %><br>
 
   <%= form.label :eligibility %>
-  <%= form.text_field :eligibility %><br>
+  <%= form.text_area :eligibility %><br>
 
   <%= form.label :video_url %>
   <%= form.url_field :video_url %><br>
 
   <%= form.label :data_set_url %>
   <%= form.url_field :data_set_url %><br>
+
+  <% if current_user.admin_privileges? %>
+    <%= form.label :approved %>
+    <%= form.check_box :approved, { checked: @challenge.approved } %><br>
+  <% end %>
 
   <%= form.submit %>
 

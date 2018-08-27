@@ -1,6 +1,5 @@
 <h2><%= @challenge.name %> Challenge <%= @region.name %> Region</h2>
 
-Name: <%= @challenge.name %><br>
 <% unless @challenge.short_desc.blank? %>
   Short Description: <%= @challenge.short_desc %><br>
 <% end %>
@@ -11,11 +10,19 @@ Name: <%= @challenge.name %><br>
   Eligibility: <%= @challenge.eligibility %><br>
 <% end %>
 <% unless @challenge.video_url.blank? %>
-  Video URL: <%= @challenge.video_url %><br>
+  <a href='<%= @challenge.video_url %>' target="_blank">Video</a>
 <% end %>
 <% unless @challenge.data_set_url.blank? %>
-  Data Set URL: <%= @challenge.data_set_url %><br>
+  <a href='<%= @challenge.data_set_url %>' target="_blank">Data Set</a><br>
 <% end %>
+
+<% if @challenge.approved %>
+  <%= link_to 'Go to Challenge Page', challenge_path(@challenge) %><br>
+<% else %>
+  <strong>This challenge is yet to be approved.</strong><br>
+<% end %>
+
+<%= link_to "Update Challenge", edit_admin_region_challenge_path(@region, @challenge) %><br>
 
 <h3>Teams Competing</h3>
 
@@ -57,6 +64,4 @@ Name: <%= @challenge.name %><br>
 <% end %>
 
 <%= link_to 'Add Sponsorship', new_admin_challenge_sponsorship_path(@challenge) %><br>
-
-<%= link_to "Update #{@challenge.name} Challenge", edit_admin_region_challenge_path(@region, @challenge) %><br>
 <%= link_to "Back to #{@region.name} Region", admin_region_path(@region) %>
