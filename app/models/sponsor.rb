@@ -17,6 +17,10 @@ class Sponsor < ApplicationRecord
     results
   end
 
+  def show_privileges?(user)
+    (user.assignments.pluck(:title) & [SPONSOR_CONTACT]).present?
+  end
+
   def admin_assignments
     collected = assignments.where(title: SPONSOR_ADMIN).to_a
     collected << competition.admin_assignments

@@ -25,6 +25,10 @@ Rails.application.routes.draw do
     end
   end
 
+  namespace :sponsorship_management do
+    resources :sponsors
+  end
+
   namespace :admin do
     resources :assignments, :sponsorship_types, :sponsors, :sponsorships,
       :event_partnerships, :challenge_scorecards

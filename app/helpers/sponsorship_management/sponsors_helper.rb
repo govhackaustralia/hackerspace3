@@ -1,0 +1,2 @@
+module SponsorshipManagement::SponsorsHelper
+end

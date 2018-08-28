@@ -16,19 +16,21 @@
 				<%= link_to 'Competiton Management', admin_competition_path(Competition.current) %><br>
 				<%= link_to 'Region Management', admin_regions_path %><br>
 			<% end %>
+
 			<% if current_user.event_privileges? %>
 				<%= link_to 'Event Management', admin_events_path %><br>
 			<% end %>
+
 			<% if @user.sponsor_privileges? %>
 				<h3>Sponsor Managmement</h3>
 				<%= link_to 'Sponsor Management', admin_sponsors_path %><br>
 				<%= link_to 'Sponsorship Type Management', admin_sponsorship_types_path %><br>
 			<% end %>
 
-			<h3>Judgeing</h3>
 			<% if @user.chief_judge? %>
 				<%= link_to 'Competiton Criteria Management', admin_competition_criteria_path(@competition) %><br>
 			<% end %>
+
 			<% if @user.judge? %>
 				<%= link_to 'Challenge Scorecards', admin_challenge_scorecards_path %>
 			<% end %>
@@ -41,7 +43,7 @@
 				<h3>My Sponsors</h3>
 				<% assignments.each do |assignment| %>
 					<h4><%= assignment.assignable.name %></h4>
-					<%= link_to 'Go to Sponsor', admin_sponsor_path(assignment.assignable) %>
+					<%= link_to 'Go to Sponsor', sponsorship_management_sponsor_path(assignment.assignable) %>
 				<% end %>
 			<% end %>
 		</article>

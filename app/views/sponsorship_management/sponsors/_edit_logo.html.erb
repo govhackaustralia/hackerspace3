@@ -1,0 +1,19 @@
+<h2>Update <%= @sponsor.name %> Logo</h2>
+
+<%= form_for [:sponsorship_management, @sponsor] do |form| %>
+  <% if @sponsor.logo.attached? %>
+    <img src="<%= url_for(@sponsor.logo) %>" alt="<%= "#{@sponsor.name} Logo" %>" /><br>
+  <% else %>
+    <%= image_tag "default_profile_pic.png" %><br>
+  <% end %>
+
+  <%= form.label :logo, 'Upload a Logo.' %><br>
+  <%= form.file_field :logo %><br>
+
+  <%= hidden_field_tag(:logo, true) %>
+  <% if @sponsor.logo.attached? %>
+    <%= form.submit 'Replace Logo' %>
+  <% else %>
+    <%= form.submit 'Upload Logo' %>
+  <% end %>
+<% end %>

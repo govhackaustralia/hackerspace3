@@ -1,0 +1,34 @@
+<h2><%= @sponsor.name %></h2>
+
+<% if @sponsor.logo.attached? %>
+  <img src="<%= url_for(@sponsor.logo) %>" alt="<%= @sponsor.name %> logo" /><br>
+<% else %>
+  <%= image_tag 'default_profile_pic.png' %><br>
+<% end %>
+<%= link_to 'Update Logo', edit_sponsorship_management_sponsor_path(@sponsor, logo: true) %><br>
+
+<article><%= @sponsor.description %></article>
+<%= link_to 'Edit Sponsor Details', edit_sponsorship_management_sponsor_path(@sponsor) %>
+
+<h3>Sponsorships</h3>
+
+<% if (sponsorships = @sponsor.sponsorships).empty? %>
+  <div>No sponsorships for <%= @sponsor.name %></div>
+<% else %>
+  <% sponsorships.each do |sponsorship| %>
+    <h4><%= sponsorship.sponsorable_type %>: <%= sponsorship.sponsorable.name %></h4>
+    Sponsorship type: <%= sponsorship.sponsorship_type.name %><br>
+  <% end %>
+<% end %>
+
+<h3>Event Partnerships</h3>
+
+<div>Please go to individual events to add event parter.</div>
+<% if (event_partnerships = @sponsor.event_partnerships).empty? %>
+  <div>No event partnerships for <%= @sponsor.name %></div>
+<% else %>
+  <% event_partnerships.each do |event_partnership| %>
+    <h4>Event: <%= event_partnership.event.name %></h4>
+    <%= link_to 'Go to Event', event_path(event_partnership.event.identifier) %><br>
+  <% end %>
+<% end %>
