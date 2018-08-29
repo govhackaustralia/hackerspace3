@@ -1,10 +1,12 @@
 <h2>Challenges for Competition <%= Competition.current.year %></h2>
 <%= link_to 'Download CSV', challenges_path(format: 'csv') %></br>
 
+<% challenge_entry_counts %>
 <% @challenges.each do |challenge| %>
   <h3><%= challenge.name %></h3>
   <% unless challenge.short_desc.blank? %>
     Short Description: <%= challenge.short_desc %><br>
   <% end %>
+  <%= pluralize @challenge_id_to_entry_count[challenge.id], 'team' %> have entered this challenge.<br>
   <%= link_to 'Go to Challange', challenge_path(challenge) %>
 <% end %>
