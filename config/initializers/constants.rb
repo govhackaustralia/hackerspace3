@@ -54,6 +54,8 @@ ActiveSupport::TimeZone.country_zones('AU').each do |zone|
   VALID_TIME_ZONES << zone.name
 end
 
+LAST_TIME_ZONE = 'Perth'
+
 # Assignment Permissions Framework Titles
 
 ## Competition Assignments

@@ -6,7 +6,7 @@
 <% end %>
 <%= link_to 'Clear Search', challenge_entries_path(@challenge) %></br>
 
-<% @checkpoints.each do |checkpoint| %>
+<% passed_competition_checkpoints.each do |checkpoint| %>
 
   <% if (teams = filter_challenge_teams(checkpoint, params[:term])).present? %>
 
