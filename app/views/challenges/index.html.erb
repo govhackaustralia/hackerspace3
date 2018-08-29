@@ -1,9 +1,16 @@
 <h2>Challenges for Competition <%= Competition.current.year %></h2>
+
+<%= form_tag challenges_path, method: :get do %>
+  <%= text_field_tag :term, params[:term] %>
+  <%= submit_tag 'Search' %>
+<% end %>
+<%= link_to 'Clear Search', challenges_path %></br>
 <%= link_to 'Download CSV', challenges_path(format: 'csv') %></br>
 
 <% challenge_entry_counts %>
-<% @challenges.each do |challenge| %>
+<% filter_challenges(@challenges, params[:term]).each do |challenge| %>
   <h3><%= challenge.name %></h3>
+  Region: <%= @region_id_to_region_name[challenge.region_id] %><br>
   <% unless challenge.short_desc.blank? %>
     Short Description: <%= challenge.short_desc %><br>
   <% end %>
