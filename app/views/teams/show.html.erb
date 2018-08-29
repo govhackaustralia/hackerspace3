@@ -55,7 +55,7 @@
 
 <h3>Challenges</h3>
 
-<% @checkpoints.each do |checkpoint| %>
+<% passed_checkpoints.each do |checkpoint| %>
 
   <h3><%= checkpoint.name %> Checkpoint</h3>
   <% if (national_challenges = @team.national_challenges(checkpoint)).present? %>
