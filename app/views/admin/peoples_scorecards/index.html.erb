@@ -1,0 +1,18 @@
+<h2>Peoples Judgements for <%= @competition.name %></h2>
+
+<table>
+  <tr>
+    <th>Team Name</th>
+    <th>Average Score</th>
+    <th>peoples_votes</th>
+  </tr>
+  <% teams_by_peoples_scorecards.each do |team| %>
+    <tr>
+      <td><%= team[:team_name] %></td>
+      <td><%= team[:average_score] %></td>
+      <td><%= team[:peoples_votes] %></td>
+    </tr>
+  <% end %>
+</table>
+
+<%= link_to 'Back to Competition', admin_competition_path(@competition) %>

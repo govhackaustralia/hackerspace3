@@ -2,8 +2,13 @@ class Competition < ApplicationRecord
   has_many :assignments, as: :assignable
   has_many :sponsors
   has_many :sponsorship_types
+
   has_many :events
   has_many :teams, through: :events
+  has_many :projects, through: :teams
+  has_many :peoples_scorecards, through: :teams
+  has_many :peoples_judgements, through: :peoples_scorecards
+
   has_many :challenges
   has_many :checkpoints
   has_many :data_sets
