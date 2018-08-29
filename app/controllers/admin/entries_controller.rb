@@ -3,26 +3,35 @@ class Admin::EntriesController < ApplicationController
 
   def index
     @challenge = Challenge.find(params[:challenge_id])
-    ordered_challenge_entries
+  end
+
+  def edit
+    @entry = Entry.find(params[:id])
+    @team = @entry.team
+    @checkpoint = @entry.checkpoint
+    @challenge = @entry.challenge
+  end
+
+  def update
+    update_entry
+    if @entry.save
+      flash[:notice] = 'Entry Updated'
+      redirect_to admin_challenge_entries_path(@challenge)
+    else
+      flash[:alert] = @entry.errors.full_messages.to_sentence
+      render :edit
+    end
   end
 
   private
 
-  def ordered_challenge_entries
-    @entries_and_scores = []
-    @nil_entries = []
-    sort_entries
-    @entries_and_scores.sort_by! { |obj| obj[:score] }.reverse!
+  def update_entry
+    @entry = Entry.find(params[:id])
+    @challenge = @entry.challenge
+    @entry.update(entry_params) if params[:entry].present?
   end
 
-  def sort_entries
-    @challenge.entries.each do |entry|
-      score = entry.average_score
-      if score.nil?
-        @nil_entries << entry
-      else
-        @entries_and_scores << { score: score, entry: entry }
-      end
-    end
+  def entry_params
+    params.require(:entry).permit(:eligible)
   end
 end

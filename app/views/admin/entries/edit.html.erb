@@ -1,0 +1,20 @@
+<h2>Review Entry</h2>
+
+Team: <%= @team.name %><br>
+Challenge: <%= @challenge.name %><br>
+Checkpoint: <%= @checkpoint.name %><br>
+Justification: <%= @entry.justification %><br>
+
+<%= form_for [:admin, @challenge, @entry] do |form| %>
+
+  <%= form.label(:eligible, 'Mark Eligible') %>
+  <%= form.radio_button(:eligible, true, options = {checked: @entry.eligible}) %>
+
+  <%= form.label(:eligible, 'Mark Ineligible') %>
+  <%= form.radio_button(:eligible, false, options = {checked: @entry.eligible}) %><br>
+
+  <%= form.submit %>
+<% end %>
+
+<%= link_to 'Go to Team Project', team_path(@team), target: '_blank' %><br>
+<%= link_to 'Back to Entries', admin_challenge_entries_path(@challenge) %>

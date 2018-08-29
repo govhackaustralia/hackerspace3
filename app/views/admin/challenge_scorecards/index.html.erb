@@ -1,8 +1,8 @@
-<h2>Challenge to Judging</h2>
-
 <% if @challenge.present? %>
+  <h2>Scorecards for <%= @challenge.name %></h2>
 
   <% @user.challenge_scorecards(@challenge).each do |scorecard| %>
+    <% next if scorecard.entry.eligible == false || scorecard.entry.eligible == nil %>
     <h3>Team: <%= scorecard.team.name %></h3>
       <table>
         <tr>
@@ -26,7 +26,7 @@
   <% end %>
 
 <% else %>
-
+  <h2>Challenges to Judge</h2>
   <% @challenges.each do |challenge| %>
     <h3><%= challenge.name %></h3>
     <%= pluralize challenge.entries.count, 'entry'%> in challenge.<br>

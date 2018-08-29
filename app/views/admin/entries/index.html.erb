@@ -1,5 +1,7 @@
 <h2><%= @challenge.name %></h2>
 
+<% ordered_challenge_entries %>
+
 <h3>Entries Marked</h3>
 
 <% @entries_and_scores.each do |obj| %>
@@ -15,6 +17,27 @@
 <% @nil_entries.each do |entry| %>
 
   <h4><%= entry.team.name %></h4>
+  <%= link_to 'Review Project', edit_admin_challenge_entry_path(@challenge, entry) %><br>
+  <%= link_to 'Go to Team Project', team_path(entry.team) %><br>
+
+<% end %>
+
+<h3>Projects yet to be marked Eligible</h3>
+
+<% @nil_eligible_entries.each do |entry| %>
+
+  <h4><%= entry.team.name %></h4>
+  <%= link_to 'Review Project', edit_admin_challenge_entry_path(@challenge, entry) %><br>
+  <%= link_to 'Go to Team Project', team_path(entry.team) %><br>
+<% end %>
+
+<h3>Non Eligible Projects</h3>
+
+<% @non_eligible_entries.each do |entry| %>
+
+  <h4><%= entry.team.name %></h4>
+  <%= link_to 'Review Project', edit_admin_challenge_entry_path(@challenge, entry) %><br>
+  <%= link_to 'Go to Team Project', team_path(entry.team) %><br>
 
 <% end %>
 
