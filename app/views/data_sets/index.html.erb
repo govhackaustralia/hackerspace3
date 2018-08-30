@@ -9,6 +9,6 @@
 
 <% filter_data_sets(@data_sets, params[:term]).each do |data_set| %>
   <h3><%= data_set.name %></h3>
-  Region: <%= data_set.region.name %><br>
+  Region: <%= @id_regions[data_set.region_id].name %><br>
   <%= link_to 'Go to Data Set', data_set_path(data_set) %><br>
 <% end %>

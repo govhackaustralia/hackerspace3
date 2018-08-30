@@ -1,7 +1,7 @@
 <article>
 	<div>
 	<h3><%= event.name %></h3>
-	<h4><%= event.region.name %></h4>
+	<h4><%= @id_regions[event.region_id].name %></h4>
 	<% if event.event_type == CONNECTION_EVENT %>
 	<% unless event.start_time.blank? %>
 		<h4><%= event.start_time.strftime("%e %B %Y") %></h4>

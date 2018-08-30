@@ -52,4 +52,13 @@ class Region < ApplicationRecord
     return collected.flatten if parent_id.nil?
     parent.admin_assignments(collected).flatten
   end
+
+  # Memory Objects
+
+  def self.id_regions(region_ids)
+    regions = where(id: region_ids.uniq)
+    id_regions = {}
+    regions.each { |region| id_regions[region.id] = region }
+    id_regions
+  end
 end

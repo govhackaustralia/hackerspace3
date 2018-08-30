@@ -1,6 +1,7 @@
 class EventsController < ApplicationController
   def index
     retrieve_events
+    @id_regions = Region.id_regions(@events.pluck(:region_id))
     respond_to do |format|
       format.html
       format.csv { send_data @events.to_csv }

@@ -2,5 +2,5 @@
 
 Region: <%= @data_set.region.name %><br>
 Description: <%= @data_set.description %><br>
-<a href="<%= @data_set %>">URL</a><br>
+<a href="<%= @data_set.url %>" target="_blank">URL</a><br>
 <%= link_to 'Back to Data Sets', data_sets_path %>
