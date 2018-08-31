@@ -11,6 +11,13 @@
 			<th>Organisation</th>
 			<th>Dietary</th>
 			<th>Status</th>
+			<th>Registration Type</th>
+			<th>Parent/Guardian</th>
+			<th>No Photos</th>
+			<th>Data Cruncher</th>
+			<th>Coder</th>
+			<th>Creativer</th>
+			<th>Facilitator</th>
 			<th>Edit</th>
 		</tr>
 	</thead>
@@ -22,6 +29,13 @@
 		<td><%= registration.assignment.user.organisation_name %></td>
 		<td><%= registration.assignment.user.dietary_requirements %></td>
 		<td><%= registration.status %></td>
+		<td><%= registration.assignment.user.registration_type %></td>
+		<td><%= registration.assignment.user.parent_guardian %></td>
+		<td><%= registration.assignment.user.request_not_photographed %></td>
+		<td><%= registration.assignment.user.data_cruncher %></td>
+		<td><%= registration.assignment.user.coder %></td>
+		<td><%= registration.assignment.user.creative %></td>
+		<td><%= registration.assignment.user.facilitator %></td>
 		<td><%= link_to 'Edit', edit_admin_event_registration_path(@event, registration) %></td>
 	</tr>
 <% end %>
@@ -30,3 +44,4 @@
 
 <%= link_to 'New Registration', new_admin_event_registration_path(@event) %><br>
 <%= link_to "Back to #{@event.name} Event", admin_region_event_path(@event.region, @event) %><br>
+
