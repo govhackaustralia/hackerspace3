@@ -243,6 +243,29 @@ img {
 	width: 100%;
 }
 
+.registration.single-col.toc section form input[type='checkbox'] {
+	-webkit-appearance:none;
+    width:30px;
+    height:30px;
+    background:white;
+    border-radius:5px;
+    border:2px solid #555;
+}
+
+.registration.single-col.toc section form input[type='checkbox']:after {
+	content: "\2718";
+	color: red;
+}
+
+.registration.single-col.toc section form input[type='checkbox']:checked {
+	background: #ca1e56;
+}
+
+.registration.single-col.toc section form input[type='checkbox']:checked:after {
+	content: "\2713";
+	color: white;
+}
+
 .change-email-password aside {
 	flex-direction: column;
 	width: 100%;
