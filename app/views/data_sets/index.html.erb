@@ -7,8 +7,15 @@
 <%= link_to 'Clear Search', data_sets_path %></br>
 <%= link_to 'Download CSV', data_sets_path(format: 'csv') %></br>
 
-<% filter_data_sets(@data_sets, params[:term]).each do |data_set| %>
-  <h3><%= data_set.name %></h3>
-  Region: <%= @id_regions[data_set.region_id].name %><br>
-  <%= link_to 'Go to Data Set', data_set_path(data_set) %><br>
+<% @regions.each do |region| %>
+  <% next if (data_sets = @region_sets[region.id]).empty? %>
+  <h3><%= region.name %></h3>
+  <% data_sets.each do |data_set| %>
+    <h4><%= data_set.name %></h4>
+    Description: <%= data_set.description %><br>
+    <a href="<%= data_set.url %>" target="_blank">URL</a><br>
+    <% if @competition.started? %>
+      <%= link_to 'Go to Data Set', data_set_path(data_set) %><br>
+    <% end %>
+  <% end %>
 <% end %>

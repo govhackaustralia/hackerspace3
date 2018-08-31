@@ -7,9 +7,9 @@ module ChallengesHelper
   end
 
   def search_challenge_string(challenge, term)
-    challenge_string = "#{challenge.name} #{challenge.short_desc}" +
+    challenge_string = "#{challenge.name} #{challenge.short_desc}" \
                        "#{challenge.eligibility}" +
-                       "#{@id_regions[challenge.region_id].name}".downcase
+                       @id_regions[challenge.region_id].name.to_s.downcase
     @filtered_challenges << challenge if challenge_string.include? term.downcase
   end
 end

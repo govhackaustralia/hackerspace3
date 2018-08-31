@@ -10,6 +10,7 @@ class EventsController < ApplicationController
 
   def show
     @event = Event.find_by(identifier: params[:identifier])
+    @competition = @event.competition
     @event_partner = @event.event_partner
     @region = @event.region
     @sponsorship_types = @region.sponsorship_types.distinct.order(order: :asc)

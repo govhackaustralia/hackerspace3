@@ -86,4 +86,31 @@ class Team < ApplicationRecord
       end
     end
   end
+
+  def self.id_teams_projects(team_ids)
+    teams = where(id: team_ids.uniq)
+    id_team_projects = {}
+
+    projects = Project.where(team_id: team_ids.uniq).order(created_at: :desc)
+    id_projects = Project.id_projects(projects)
+
+    team_id_to_projects = {}
+    projects.each do |project|
+      if team_id_to_projects[project.team_id].nil?
+        team_id_to_projects[project.team_id] = []
+      end
+      team_id_to_projects[project.team_id] << project
+    end
+
+    teams.each do |team|
+      project = if team.project_id.present?
+                  id_projects[team.project_id]
+                else
+                  team_id_to_projects[team.id].first
+                end
+      id_team_projects[team.id] = { team: team, current_project: project }
+    end
+
+    id_team_projects
+  end
 end

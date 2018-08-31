@@ -4,19 +4,6 @@
 
     <% if @registration.present? %>
       <%= link_to 'Manage your Event Registration', event_registration_path(@event.identifier, @registration) %><br>
-      <% if @event.competition_event? %>
-
-        <% if (teams = @user.teams(@event)).present? %>
-          <% teams.each do |team| %>
-            <%= link_to "Manage #{team.current_project.team_name}", team_management_team_path(team) %>
-          <% end %>
-        <% else %>
-          <%= form_for [@event, @team] do |f| %>
-            <%= f.submit %>
-          <% end %>
-        <% end %>
-      <% end %>
-
     <% else %>
       <%= link_to 'Register to Attend this Event', new_event_registration_path(@event.identifier) %><br>
     <% end %>
@@ -27,6 +14,6 @@
 
 <% end %>
 
-<% if @event.competition_event? && @event.teams.where(published: true).present? %>
+<% if @event.competition_event? && @competition.started? && @event.teams.where(published: true).present? %>
   <%= link_to 'See Participating Teams', event_teams_path(@event.identifier) %>
 <% end %>

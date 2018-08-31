@@ -13,6 +13,8 @@ class ChallengesController < ApplicationController
   def show
     @challenge = Challenge.find(params[:id])
     @region = @challenge.region
+    return if @challenge.competition.started?
+    redirect_to root_path
   end
 
   private
