@@ -2,11 +2,15 @@
 
 <h3>Competition Events</h3>
 
+<%= pluralize @competition_registrations.count, 'attending registration' %>.<br>
+
 <% @competition_events.each do |event| %>
   <%= render 'admin/events/event_single', locals: { event: event } %>
 <% end %>
 
 <h3>Connection Event</h3>
+
+<%= pluralize @connections_registrations.count, 'attending registration' %>.<br>
 
 <% @connections.each do |event| %>
   <%= render 'admin/events/event_single', locals: { event: event } %>

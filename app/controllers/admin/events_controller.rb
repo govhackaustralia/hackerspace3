@@ -5,7 +5,9 @@ class Admin::EventsController < ApplicationController
   def index
     @competition = Competition.current
     @connections = @competition.events.where(event_type: CONNECTION_EVENT)
+    @connections_registrations = Registration.where(event_id: @connections.pluck(:id))
     @competition_events = @competition.events.where(event_type: COMPETITION_EVENT)
+    @competition_registrations = Registration.where(event_id: @competition_events.pluck(:id))
   end
 
   def new
