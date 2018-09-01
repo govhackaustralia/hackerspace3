@@ -47,9 +47,7 @@ end
 
 comp = Competition.current
 
-5.times do |time|
-  comp.checkpoints.create(end_time: Time.now + time.days)
-end
+5.times { |time| comp.checkpoints.create(end_time: Time.now + time.days) }
 
 comp.assignments.create(user_id: random_user_id, title: MANAGEMENT_TEAM)
 
@@ -65,10 +63,6 @@ comp.assignments.create(user_id: random_user_id, title: SPONSORSHIP_DIRECTOR)
 
 10.times do |time|
   comp.assignments.create(user_id: random_user_id, title: VOLUNTEER)
-end
-
-20.times do |time|
-  comp.assignments.create(user_id: random_user_id, title: VIP)
 end
 
 20.times do |time|
@@ -201,11 +195,11 @@ Region.all.each do |region|
         data_story: 'We will be taking a big data approach.',
         source_code_url: 'https://github.com/tenderlove/allocation_sampler',
         video_url: 'https://www.youtube.com/watch?v=8S0FDjFBj8o',
-        homepage_url: 'https://www.govhack.org/')
+        homepage_url: 'https://www.govhack.org/', user: team.assignments.first.user)
 
         5.times do |time|
           team.team_data_sets.create(name:
-            "#{team.current_project.team_name} dataset #{team_time + time}",
+            "#{team.name} dataset #{team_time + time}",
             description: 'Best dataset evaaaaaa',
             description_of_use: 'We achieved a full variance analysis',
             url: 'https://data.gov.au/dataset/city-of-gold-coast-road-closures'
