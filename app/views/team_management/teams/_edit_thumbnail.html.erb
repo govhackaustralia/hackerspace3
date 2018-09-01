@@ -6,8 +6,8 @@
     <%= image_tag "default_profile_pic.png" %><br>
   <% end %>
 
-  <%= form.label :thumbnail, 'Upload a New Thumbnail.' %><br>
-  <%= form.file_field :thumbnail %><br>
+  <%= form.label :thumbnail, 'Upload a New Thumbnail (only png/gif/jpeg/jpg)' %><br>
+  <%= form.file_field :thumbnail, accept: 'image/png,image/gif,image/jpeg' %><br>
 
   <%= hidden_field_tag(:thumbnail, true) %>
   <% if @team.thumbnail.attached? %>

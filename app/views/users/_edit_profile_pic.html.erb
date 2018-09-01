@@ -13,7 +13,8 @@
 			  	<% end %>
 				</div>
 			<div class="field">
-				<%= form.file_field :govhack_img %><br>
+				<%= form.label :govhack_img, 'Upload a Profile Picture (only png/gif/jpeg/jpg)' %><br>
+				<%= form.file_field :govhack_img, accept: 'image/png,image/gif,image/jpeg' %><br>
 				<%= form.submit 'Upload Image' %><br>
 			</div>
 		</div>

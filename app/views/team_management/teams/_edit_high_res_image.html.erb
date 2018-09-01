@@ -7,8 +7,8 @@
     <%= image_tag "default_profile_pic.png" %><br>
   <% end %>
 
-  <%= form.label :high_res_image, 'Upload a High Resolution Image.' %><br>
-  <%= form.file_field :high_res_image %><br>
+  <%= form.label :high_res_image, 'Upload a High Resolution Image (only png/gif/jpeg/jpg)' %><br>
+  <%= form.file_field :high_res_image, accept: 'image/png,image/gif,image/jpeg' %><br>
 
   <%= hidden_field_tag(:high_res_image, true) %>
   <% if @team.high_res_image.attached? %>

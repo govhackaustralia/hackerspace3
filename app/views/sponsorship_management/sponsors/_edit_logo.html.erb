@@ -7,8 +7,8 @@
     <%= image_tag "default_profile_pic.png" %><br>
   <% end %>
 
-  <%= form.label :logo, 'Upload a Logo.' %><br>
-  <%= form.file_field :logo %><br>
+  <%= form.label :logo, 'Upload a Logo. (only png/gif/jpeg/jpg)' %><br>
+  <%= form.file_field :logo, accept: 'image/png,image/gif,image/jpeg' %><br>
 
   <%= hidden_field_tag(:logo, true) %>
   <% if @sponsor.logo.attached? %>
