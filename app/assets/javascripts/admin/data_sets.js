@@ -1,6 +1,6 @@
 // Place all the behaviors and hooks related to the matching controller here.
 // All this logic will automatically be available in application.js.
-
+var once = 
 $( document ).on('ready turbolinks:load', function() {
 	$("#data_set_url").blur(function() {
 		var url = $("#data_set_url").val();
@@ -25,9 +25,19 @@ $( document ).on('ready turbolinks:load', function() {
 			dataType: "jsonp"
 		})
 	});
-	
+	try {
 	$("#hiddendescription").width($("#data_set_description").width());
 	var content = $("#data_set_description").val().replace(/\n/g, "<br>");
 	$("#hiddendescription").html(content);
 	$("#data_set_description").css("height", $("#hiddendescription").outerHeight());
+	} catch (e) {
+		
+	}
+	
+	if (!$.fn.DataTable.isDataTable("#dataset_table")) {
+		$("#dataset_table").DataTable({
+			"lengthMenu": [[-1, 10, 25, 50], ["All", 10, 25, 50]],
+			"ordering":  false
+		});
+	}
 });
