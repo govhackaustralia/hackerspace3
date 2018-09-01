@@ -1,14 +1,19 @@
 <%= form_for [:admin, @region, @data_set] do |form| %>
 
-  <%= form.label :name %>
-  <%= form.text_field :name %><br>
-
-  <%= form.label :description %>
-  <%= form.text_field :description %><br>
-
+<div class="field">
   <%= form.label :url %>
-  <%= form.url_field :url %><br>
-
+  <%= form.url_field :url %>
+</div>
+<div class="field">
+  <%= form.label :name %>
+  <%= form.text_field :name %>
+</div>
+<div class="field">
+  <%= form.label :description %>
+  <%= form.text_area :description %>
+</div>
+<div class="actions">
   <%= form.submit %>
+</div>
 
 <% end %>
