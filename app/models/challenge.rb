@@ -7,6 +7,8 @@ class Challenge < ApplicationRecord
   has_many :challenge_criteria
 
   has_one_attached :image
+  has_one_attached :pdf
+  has_one_attached :pdf_preview
 
   validates :name, presence: true
   validates :name, uniqueness: true

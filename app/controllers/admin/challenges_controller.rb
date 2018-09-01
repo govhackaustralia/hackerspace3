@@ -45,6 +45,12 @@ class Admin::ChallengesController < ApplicationController
     if params[:image].present?
       flash[:notice] = 'Challenge Image Updated'
       render :edit, image: true
+    elsif params[:pdf].present?
+      flash[:notice] = 'Challenge PDF Updated'
+      render :edit, pdf: true
+    elsif params[:pdf_preview].present?
+      flash[:notice] = 'Challenge PDF Preview Updated'
+      render :edit, pdf_preview: true
     else
       flash[:notice] = 'Challenge Updated'
       redirect_to admin_region_challenge_path(@region, @challenge)
@@ -60,7 +66,7 @@ class Admin::ChallengesController < ApplicationController
   def challenge_params
     params.require(:challenge).permit(:name, :short_desc, :long_desc,
                                       :eligibility, :video_url, :data_set_url,
-                                      :approved, :image)
+                                      :approved, :image, :pdf, :pdf_preview)
   end
 
   def update_challenge
