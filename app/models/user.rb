@@ -41,14 +41,6 @@ class User < ApplicationRecord
     assignments.where(title: ADMIN_TITLES)
   end
 
-  def judge?
-    assignments.where(title: JUDGE).present?
-  end
-
-  def chief_judge?
-    assignments.where(title: CHIEF_JUDGE).present?
-  end
-
   def challenges_judging
     Challenge.where(id: assignments.where(title: JUDGE).pluck(:assignable_id))
   end

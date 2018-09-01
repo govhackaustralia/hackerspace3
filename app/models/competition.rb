@@ -80,6 +80,33 @@ class Competition < ApplicationRecord
     events.where(type: type).present?
   end
 
+  def started?
+    start_time.to_formatted_s(:number) < Time.now.to_formatted_s(:number)
+  end
+
+  def filter_data_sets(term)
+    sets = data_sets.order(:name)
+    id_regions = Region.id_regions(Region.all.pluck(:id))
+    region_sets = {}
+    id_regions.keys.each do |region_id|
+      region_sets[region_id] = []
+    end
+    if term.nil?
+      sets.each do |data_set|
+        region_sets[data_set.region_id] << data_set
+      end
+    else
+      sets.each do |data_set|
+        string = "#{data_set.name} #{data_set.description}" +
+                 id_regions[data_set.region_id].name.to_s.downcase
+        if string.include? term.downcase
+          region_sets[data_set.region_id] << data_set
+        end
+      end
+    end
+    region_sets
+  end
+
   def available_checkpoints(time_zone)
     valid_checkpoints = []
     checkpoints.each do |checkpoint|

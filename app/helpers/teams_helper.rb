@@ -18,4 +18,8 @@ module TeamsHelper
     end
     passed_checkpoints
   end
+
+  def team_name(team)
+    @id_teams_projects[team.id][:current_project].team_name
+  end
 end

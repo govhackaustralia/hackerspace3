@@ -34,7 +34,9 @@ This team currently has <%= pluralize @team.team_data_sets.count, 'data set' %>.
 
 <h4>Team Leader</h4>
 
-<%= render 'users/user_contact', locals: { user: @team.team_leader } %>
+<% if (team_leader = @team.team_leader).present? %>
+  <%= render 'users/user_contact', locals: { user: team_leader } %>
+<% end %>
 
 <% if (team_members = @team.team_members).present? %>
   <strong>+ <%= pluralize team_members.count, 'other team member' %>.</strong><br>

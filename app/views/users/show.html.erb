@@ -11,29 +11,29 @@
 			<%= link_to 'Change Email and Password' , edit_user_registration_path %><br>
 		</article>
 		<article>
-			<% if @user.admin_privileges? %>
+			<% if user_has_admin_privilieges? %>
 				<h3>Admin</h3>
 				<%= link_to 'Region Management', admin_regions_path %><br>
 				<%= link_to 'User Management', admin_users_path %><br>
-				<%= link_to 'Competiton Management', admin_competition_path(Competition.current) %><br>
+				<%= link_to 'Competiton Management', admin_competition_path(@competition) %><br>
 				<%= link_to 'Region Management', admin_regions_path %><br>
 			<% end %>
 
-			<% if current_user.event_privileges? %>
+			<% if user_has_event_privileges? %>
 				<%= link_to 'Event Management', admin_events_path %><br>
 			<% end %>
 
-			<% if @user.sponsor_privileges? %>
+			<% if user_has_sponsor_privileges? %>
 				<h3>Sponsor Managmement</h3>
 				<%= link_to 'Sponsor Management', admin_sponsors_path %><br>
 				<%= link_to 'Sponsorship Type Management', admin_sponsorship_types_path %><br>
 			<% end %>
 
-			<% if @user.chief_judge? %>
+			<% if user_is_chief_judge? %>
 				<%= link_to 'Competiton Criteria Management', admin_competition_criteria_path(@competition) %><br>
 			<% end %>
 
-			<% if @user.judge? %>
+			<% if user_is_a_judge? %>
 				<%= link_to 'Challenge Scorecards', admin_challenge_scorecards_path %>
 			<% end %>
 		</article>
@@ -41,11 +41,12 @@
 
 	<section>
 		<article>
-			<% if (assignments = @user.assignments.where(title: SPONSOR_CONTACT)).present? %>
+			<% if @sponsor_contact_assignments.present? %>
 				<h3>My Sponsors</h3>
-				<% assignments.each do |assignment| %>
-					<h4><%= assignment.assignable.name %></h4>
-					<%= link_to 'Go to Sponsor', sponsorship_management_sponsor_path(assignment.assignable) %>
+				<% @sponsor_contact_assignments.each do |assignment| %>
+					<% sponsor = @id_sponsors[assignment.assignable_id] %>
+					<h4><%= sponsor.name %></h4>
+					<%= link_to 'Go to Sponsor', sponsorship_management_sponsor_path(sponsor) %>
 				<% end %>
 			<% end %>
 		</article>
@@ -53,18 +54,17 @@
 
 			<h3>My Events</h3>
 
-			<% if (registrations = @user.event_assignment.registrations).present? %>
+			<% if @registrations.present? %>
 
-				<% registrations.each do |registration| %>
-				<% event = registration.event %>
-				<% region = event.region %>
-				<h4><%= event.name %> -  <%= region.name %></h4>
+				<% @registrations.each do |registration| %>
+					<% event = @id_events[registration.event_id] %>
+					<h4><%= event.name %> -  <%= @id_regions[event.region_id].name %></h4>
 
-				You are registered as: <%= registration.status %><br>
+					You are registered as: <%= registration.status %><br>
 
-				<%= link_to 'Go to Event Page', event_path(event.identifier) %><br>
-				<%= link_to 'Update Registration', edit_event_registration_path(event.identifier, registration) %><br>
-			<% end %>
+					<%= link_to 'Go to Event Page', event_path(event.identifier) %><br>
+					<%= link_to 'Update Registration', edit_event_registration_path(event.identifier, registration) %><br>
+				<% end %>
 
 			<% else %>
 
@@ -74,7 +74,7 @@
 			<% end %>
 		</article>
 		<article>
-			<% if (teams = @user.joined_teams).present? %>
+			<% if @competition.started? && (teams = @user.joined_teams).present? %>
 				<h3>My Team Projects</h3>
 				<% teams.each do |team| %>
 					<h4><%= team.name %></h4>
@@ -82,7 +82,7 @@
 					<%= link_to "Go to #{team.name}", team_management_team_path(team) %><br>
 				<% end %>
 			<% end %>
-			<% if (teams = @user.invited_teams).present? %>
+			<% if @competition.started? && (teams = @user.invited_teams).present? %>
 				<h3>My Invitations</h3>
 				<% teams.each do |team| %>
 					<h4><%= "#{team.name} entered @ #{team.event.name}" %></h4>
@@ -98,7 +98,7 @@
 			<% end %>
 		</article>
 		<article>
-			<% if (teams = @user.event_assignment.teams).present? %>
+			<% if @competition.started? && (teams = @user.event_assignment.teams).present? %>
 				<h3>My Favourite Projects</h3>
 				<% teams.each do |team| %>
 					<h4><%= team.name %></h4>

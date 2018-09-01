@@ -27,4 +27,11 @@ class Sponsor < ApplicationRecord
     collected << Assignment.where(title: REGION_ADMIN).to_a
     collected.flatten
   end
+
+  def self.id_sponsors(sponsor_ids)
+    sponsors = where(id: sponsor_ids.uniq)
+    id_sponsors = {}
+    sponsors.each { |sponsor| id_sponsors[sponsor.id] = sponsor }
+    id_sponsors
+  end
 end

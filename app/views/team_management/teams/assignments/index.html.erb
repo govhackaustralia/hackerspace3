@@ -2,7 +2,9 @@
 
 <h3>Team Leader</h3>
 
-<%= render 'users/user_contact', locals: { user: @team.team_leader } %>
+<% if (team_leader = @team.team_leader).present? %>
+  <%= render 'users/user_contact', locals: { user: team_leader } %>
+<% end %>
 
 <% if (team_members = @team.team_members).present? %>
   <h3>Team Members</h3>

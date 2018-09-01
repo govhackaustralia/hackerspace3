@@ -4,6 +4,36 @@ class UsersController < ApplicationController
   def show
     @user = current_user
     @competition = Competition.current
+
+    @assignments = @user.assignments
+    @assignment_titles = @assignments.pluck(:title)
+
+    @team_id_assignments = {}
+    @assignments.each do |assignment|
+      next unless assignment.assignable_type == 'Team'
+      @team_id_assignments[assignment.assignable_id] = assignment
+    end
+
+    @id_regions = Region.id_regions(Region.all.pluck(:id))
+
+    @event_assignment = @user.event_assignment
+    @registrations = @event_assignment.registrations
+
+    @sponsor_contact_assignments = @assignments.where(title: SPONSOR_CONTACT)
+    @id_sponsors = Sponsor.id_sponsors(@sponsor_contact_assignments.pluck(:assignable_id))
+
+    @favourite_teams = @event_assignment.teams
+
+    team_ids = []
+    team_ids << @favourite_teams.pluck(:id)
+
+    @id_teams_projects = Team.id_teams_projects(team_ids.flatten)
+
+    event_ids = []
+    event_ids << @favourite_teams.pluck(:event_id)
+    event_ids << @registrations.pluck(:event_id)
+
+    @id_events = Event.id_events(event_ids.flatten)
   end
 
   def edit

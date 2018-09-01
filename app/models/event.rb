@@ -98,6 +98,13 @@ class Event < ApplicationRecord
     end
   end
 
+  def self.id_events(event_ids)
+    events = where(id: event_ids.uniq)
+    id_events = {}
+    events.each { |event| id_events[event.id] = event }
+    id_events
+  end
+
   private
 
   def already_there?(new_identifier)
