@@ -35,11 +35,13 @@
 				<% if @event_partner.present? %>
 					<h3>Event Partner</h3>
 					<figure>
-					  <% if @event_partner.logo.attached? %>
-					    <%= image_tag url_for(@event_partner.logo) %>
-					  <% else %>
-					    <%= image_tag 'default_profile_pic.png' %>
-					  <% end %>
+						<a href='<%= @event_partner.website %>' target="_blank">
+						  <% if @event_partner.logo.attached? %>
+						    <%= image_tag url_for(@event_partner.logo) %>
+						  <% else %>
+						    <%= image_tag 'default_profile_pic.png' %>
+						  <% end %>
+						</a>
 					</figure>
 				<% end %>
 			</aside>
@@ -53,11 +55,13 @@
 			    <% sponsorship_type.sponsorships.where(sponsorable: @region).order(:created_at).each do |sponsorship| %>
 			      <% sponsor = sponsorship.sponsor %>
 					  <figure>
-				      <% if sponsor.logo.attached? %>
-				        <%= image_tag url_for(sponsor.logo) %>
-				      <% else %>
-				        <%= image_tag 'default_profile_pic.png' %>
-				      <% end %>
+							<a href='<%= sponsor.website %>' target="_blank">
+					      <% if sponsor.logo.attached? %>
+					        <%= image_tag url_for(sponsor.logo) %>
+					      <% else %>
+					        <%= image_tag 'default_profile_pic.png' %>
+					      <% end %>
+							</a>
 					  </figure>
 			    <% end %>
 			  </div>

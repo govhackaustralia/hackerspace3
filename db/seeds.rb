@@ -72,7 +72,8 @@ end
 20.times do |time|
   comp.sponsors.create(name: "Vandelay  Industries #{time}",
     description: "Worldwide leader in latex products",
-    website: 'www.vandel.com', created_at: "2018-07-26 23:01:28",
+    website: 'http://seinfeld.wikia.com/wiki/Vandelay_Industries',
+    created_at: "2018-07-26 23:01:28",
     updated_at: "2018-07-26 23:01:28")
 end
 

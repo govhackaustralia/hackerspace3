@@ -39,9 +39,15 @@ class Admin::SponsorsController < ApplicationController
 
   def update
     @sponsor = Sponsor.find(params[:id])
-    if @sponsor.update(sponsor_params)
-      flash[:notice] = 'Sponsor Updated'
-      redirect_to admin_sponsor_path(@sponsor)
+    @sponsor.update(sponsor_params) if params[:sponsor].present?
+    if @sponsor.save
+      if params[:logo].present?
+        flash[:notice] = 'Logo Uploaded'
+        render :edit, logo: true
+      else
+        flash[:notice] = 'Sponsor Updated'
+        redirect_to admin_sponsor_path(@sponsor)
+      end
     else
       flash[:alert] = @sponsor.errors.full_messages.to_sentence
       render :edit
@@ -51,7 +57,7 @@ class Admin::SponsorsController < ApplicationController
   private
 
   def sponsor_params
-    params.require(:sponsor).permit(:name, :description, :logo)
+    params.require(:sponsor).permit(:name, :description, :logo, :website)
   end
 
   def check_for_privileges

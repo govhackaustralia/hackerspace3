@@ -1,7 +1,10 @@
 <h2><%= @sponsor.name %></h2>
 <% if @sponsor.logo.attached? %>
   <img src="<%= url_for(@sponsor.logo) %>" alt="<%= @sponsor.name %> logo" /><br>
+<% else %>
+  <%= image_tag "default_profile_pic.png" %><br>
 <% end %>
+<%= link_to 'Change Logo', edit_admin_sponsor_path(@sponsor, logo: true) %><br>
 
 <% if current_user.sponsor_privileges? %>
   <%= link_to 'Destroy Sponsor', admin_sponsor_path(@sponsor),
@@ -9,8 +12,15 @@
                 data: { confirm: 'Are you sure?' } %><br>
 <% end %>
 
-<article><%= @sponsor.description %></article>
-<%= link_to 'Edit Sponsor', edit_admin_sponsor_path(@sponsor) %>
+<% if @sponsor.description.present? %>
+  <article>Description: <%= @sponsor.description %></article>
+<% end %>
+<% if @sponsor.website.present? %>
+  Website: <a href='<%= @sponsor.website %>' target="_blank"><%= @sponsor.website %></a><br>
+<% else %>
+  <p>No website recorded for this sponsor.</p>
+<% end %>
+<%= link_to 'Edit Sponsor', edit_admin_sponsor_path(@sponsor) %><br>
 
 <h3>Sponsor Contact</h3>
 

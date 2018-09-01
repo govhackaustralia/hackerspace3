@@ -1,9 +1,9 @@
 <%= form_for [:admin, @sponsor] do |f| %>
   <%= f.label :name %><br>
   <%= f.text_field :name  %><br>
+  <%= f.label :website %><br>
+  <%= f.url_field :website %><br>
   <%= f.label :description %><br>
   <%= f.text_field :description  %><br>
-  <%= f.label :logo %><br>
-  <%= f.file_field :logo %><br>
   <%= f.submit %>
 <% end %>
