@@ -15,10 +15,13 @@ class UsersController < ApplicationController
     @account_registration = @user.registering_account?
     if params[:user].nil?
       redirect_to root_path
-    elsif current_user.update(user_params)
-      account_update_successfully
     else
-      render 'edit'
+      @user.update(user_params) unless params.nil?
+      if @user.save
+        account_update_successfully
+      else
+        render 'edit'
+      end
     end
   end
 
@@ -26,10 +29,15 @@ class UsersController < ApplicationController
 
   def user_params
     params.require(:user).permit(:full_name, :preferred_name, :preferred_img,
-                                 :tshirt_size, :twitter, :phone_number, :mailing_list, :challenge_sponsor_contact_place,
-                                 :challenge_sponsor_contact_enter, :my_project_sponsor_contact,
-                                 :me_govhack_contact, :dietary_requirements, :organisation_name,
-                                 :how_did_you_hear, :govhack_img, :accepted_terms_and_conditions)
+                                 :tshirt_size, :twitter, :phone_number,
+                                 :mailing_list,
+                                 :challenge_sponsor_contact_place,
+                                 :challenge_sponsor_contact_enter,
+                                 :my_project_sponsor_contact,
+                                 :me_govhack_contact, :dietary_requirements,
+                                 :organisation_name,
+                                 :how_did_you_hear, :govhack_img,
+                                 :accepted_terms_and_conditions)
   end
 
   def account_update_successfully
@@ -38,6 +46,9 @@ class UsersController < ApplicationController
       redirect_to complete_registration_path
     elsif @account_registration
       handle_end_of_registration
+    elsif params[:user][:govhack_img].present?
+      flash[:notice] = 'GovHack Profile Uploaded'
+      render :edit, profile_pic: true
     else
       flash[:notice] = 'Your personal details have been updated.'
       redirect_to manage_account_path

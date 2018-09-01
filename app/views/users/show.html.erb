@@ -4,6 +4,8 @@
 
 	<section>
 		<article>
+			<%= render 'user_profile_pic'%>
+			<%= link_to 'Change Profile Pic', update_personal_details_path(profile_pic: true) %><br>
 			<%= render 'user_contact', locals: { user: @user } %>
 			<%= link_to 'Update Personal Details' , update_personal_details_path %><br>
 			<%= link_to 'Change Email and Password' , edit_user_registration_path %><br>

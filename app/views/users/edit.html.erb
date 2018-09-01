@@ -2,13 +2,20 @@
   <main class="registration single-col edit-account">
     <% if @user.registering_account? %>
       <h2>Complete Account Registration</h2>
+      <section>
+        <%= render 'full_form' %>
+        <%= link_to 'Back to Account', manage_account_path %>
+      </section>
+    <% elsif params[:profile_pic].present? %>
+      <h2>Update Profile Picture</h2>
+      <%= render 'edit_profile_pic' %><br>
     <% else %>
       <h2>Update Personal Details</h2>
+      <section>
+        <%= render 'full_form' %>
+        <%= link_to 'Back to Account', manage_account_path %>
+      </section>
     <% end %>
-    <section>
-      <%= render 'full_form' %>
-      <%= link_to 'Back to Account', manage_account_path %>
-    </section>
   </main>
 <% else %>
   <%= render 'terms_and_conditions' %>
