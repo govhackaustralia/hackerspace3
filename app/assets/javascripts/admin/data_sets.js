@@ -25,17 +25,9 @@ $( document ).on('ready turbolinks:load', function() {
 			dataType: "jsonp"
 		})
 	});
+	
+	$("#hiddendescription").width($("#data_set_description").width());
+	var content = $("#data_set_description").val().replace(/\n/g, "<br>");
+	$("#hiddendescription").html(content);
+	$("#data_set_description").css("height", $("#hiddendescription").outerHeight());
 });
-
-$(".journal-post aside.comments form textarea").keyup(function(event) {
-		
-		$(".hiddencomment").width($(this).width());
-		
-		var content = $(this).val();
-		
-		content = content.replace(/\n/g, "<br>");
-		$(".hiddencomment").html(content);
-		$(this).css("height", $(".hiddencomment").outerHeight());
-		$(this).parent().parent().removeClass("error");
-		
-	});
