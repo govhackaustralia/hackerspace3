@@ -9,7 +9,6 @@ $( document ).on('ready turbolinks:load', function() {
 		var data = {
 			id: separated[1]
 		}
-		console.log("get");
 		$.ajax({
 			type: "GET",
 			data: data,
@@ -17,8 +16,26 @@ $( document ).on('ready turbolinks:load', function() {
 			success: function (data) {
 				$("#data_set_name").val(data.result.title);
 				$("#data_set_description").val(data.result.notes);
+				
+				$("#hiddendescription").width($("#data_set_description").width());
+				var content = data.result.notes.replace(/\n/g, "<br>");
+				$("#hiddendescription").html(content);
+				$("#data_set_description").css("height", $("#hiddendescription").outerHeight());
 			},
 			dataType: "jsonp"
 		})
 	});
 });
+
+$(".journal-post aside.comments form textarea").keyup(function(event) {
+		
+		$(".hiddencomment").width($(this).width());
+		
+		var content = $(this).val();
+		
+		content = content.replace(/\n/g, "<br>");
+		$(".hiddencomment").html(content);
+		$(this).css("height", $(".hiddencomment").outerHeight());
+		$(this).parent().parent().removeClass("error");
+		
+	});
