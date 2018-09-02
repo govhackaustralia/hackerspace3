@@ -1,3 +1,156 @@
 // Place all the styles related to the challenges controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.challenge_index {
+	padding: 2em 5em;
+}
+
+.challenge_index h2 {
+	color: #4c9ad2;
+	font-size: 2em;
+}
+
+.challenge_index h3 {
+	font-size: 1.5em;
+	padding: 1em;
+}
+
+.challenge_index section.later {
+	padding: 1.5em 1.5em;
+}
+
+.challenge_page {
+	padding: 2em 5em;
+}
+
+.challenge_page h2 {
+	color: #4c9ad2;
+	font-size: 2em;
+}
+
+.challenge_page h3 {
+	font-size: 1.5em;
+	padding: 1em;
+}
+
+.challenge_page .challenge_head article {
+	width: 60%;
+}
+
+.challenge_page .challenge_head aside {
+	width: 40%;
+}
+
+.challenge_page .challenge_body article {
+	width: 60%;
+}
+
+.challenge_page .challenge_body aside {
+	width: 40%;
+}
+
+.challenge_page section {
+	padding: 0 1.5em;
+	display: flex;
+}
+
+.challenge_page section article {
+	box-sizing: border-box;
+	padding: 0.25em;
+}
+
+.challenge_page section aside {
+	box-sizing: border-box;
+	padding: 0.25em;
+}
+
+.challenge_page section article h4 {
+	color: #ca1e56;
+	font-weight: 400;
+	font-size: 1.5em;
+	font-style: italic;
+}
+
+.challenge_page section article p {
+	padding-bottom: 0.5em;
+	padding-left: 0.5em;
+	padding-right: 0.5em;
+}
+
+.challenge_page section article h5 {
+	font-weight: 400;
+	font-size: 1.25em;
+}
+
+.challenge_page .videoWrapper {
+	position: relative;
+	padding-bottom: 56.25%; /* 16:9 */
+	padding-top: 25px;
+	height: 0;
+}
+.challenge_page .videoWrapper iframe {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+}
+
+.challenge_page .sponsors {
+	display: flex;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: flex-end;
+	align-content: center;
+	align-items: flex-start;
+}
+
+.challenge_page .sponsors figure {
+	display: flex;
+	flex-direction: column;
+	align-content: center;
+	align-items: center;
+	padding: 1em 2em;
+	border: 1px solid #dde4e6;
+	transition: all 0.4s ease;
+	cursor: pointer;
+	width: 50%;
+	box-sizing: border-box;
+	height: calc(75px + 2em);
+	justify-content: center;
+}
+
+.challenge_page .sponsors figure:hover {
+	background-color: #fff;
+}
+
+.challenge_page .sponsors figure img {
+	display: inline-block;
+	width: auto !important;
+	height: auto !important;
+	max-height: 75px;
+	max-width: 100%;
+}
+
+@media only screen and (max-width: 800px) {
+	.challenge_page section {
+		flex-direction: column;
+	}
+	
+	.challenge_page .challenge_head article {
+		width: 100%;
+	}
+	
+	.challenge_page .challenge_head aside {
+		width: 100%;
+	}
+	
+	.challenge_page .challenge_body article {
+		width: 100%;
+	}
+	
+	.challenge_page .challenge_body aside {
+		width: 100%;
+	}
+}

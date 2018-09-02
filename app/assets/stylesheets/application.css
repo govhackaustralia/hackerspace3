@@ -165,6 +165,21 @@ p.alert:not(:empty):after, p.notice:not(:empty):after {
 	font-style: italic;
 }
 
+@media only screen and (max-width: 1200px) {
+	#main-menu section {
+		flex-direction: column;
+		align-items: flex-start;
+	}
+	
+	#main-menu section #logo img {
+		max-width: 100px;
+	}
+	
+	#main-menu section #logo {
+		font-size: 2em;
+	}
+}
+
 @media only screen and (max-width: 900px) {
 	#main-menu section {
 		flex-direction: column;
@@ -177,5 +192,13 @@ p.alert:not(:empty):after, p.notice:not(:empty):after {
 	
 	#main-menu section #logo {
 		font-size: 2em;
+	}
+	
+	#main-menu section article a {
+		font-size: 1.5em;
+	}
+	
+	#main-menu aside a {
+		font-size: 1em;
 	}
 }
