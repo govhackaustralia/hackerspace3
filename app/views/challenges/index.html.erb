@@ -1,6 +1,6 @@
 <h2>Challenges for Competition <%= @competition.year %></h2>
 
-<% if @competition.started? %>
+<% if @competition.started? || (user_signed_in? && current_user.region_privileges?) %>
 
   <%= form_tag challenges_path, method: :get do %>
     <%= text_field_tag :term, params[:term] %>
@@ -9,14 +9,17 @@
   <%= link_to 'Clear Search', challenges_path %></br>
   <%= link_to 'Download CSV', challenges_path(format: 'csv') %></br>
 
-  <% filter_challenges(@challenges, params[:term]).each do |challenge| %>
-    <h3><%= challenge.name %></h3>
-    Region: <%= @id_regions[challenge.region_id].name %><br>
-    <% unless challenge.short_desc.blank? %>
-      Short Description: <%= challenge.short_desc %><br>
+  <% @regions.each do |region| %>
+    <% next if (challenges = @region_challenges[region.id]).empty? %>
+    <h3><%= region.name %></h3>
+    <% challenges.each do |challenge| %>
+      <h4><%= challenge.name %></h4>
+      <% unless challenge.short_desc.blank? %>
+        Short Description: <%= challenge.short_desc %><br>
+      <% end %>
+      <%= pluralize @challenge_id_to_entry_count[challenge.id], 'team' %> have entered this challenge.<br>
+      <%= link_to 'Go to Challange', challenge_path(challenge) %>
     <% end %>
-    <%= pluralize @challenge_id_to_entry_count[challenge.id], 'team' %> have entered this challenge.<br>
-    <%= link_to 'Go to Challange', challenge_path(challenge) %>
   <% end %>
 
 <% else %>

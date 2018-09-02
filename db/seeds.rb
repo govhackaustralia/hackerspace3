@@ -141,7 +141,7 @@ Region.all.each do |region|
   5.times do |time|
     region.challenges.create(competition: comp,
       name: "#{region.name} Challenge #{time}",
-      short_desc: 'A really good challenge',
+      short_desc: 'A really good challenge', approved: true,
       long_desc: 'This challenge incorporates multiple data sets.',
       eligibility: 'You must be this tall to go on this ride.',
       video_url: 'https://www.youtube.com/watch?v=kqcrEFkA8g0')
