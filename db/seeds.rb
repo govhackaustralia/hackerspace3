@@ -47,7 +47,14 @@ end
 
 comp = Competition.current
 
-5.times { |time| comp.checkpoints.create(end_time: Time.now + time.days) }
+comp.update(start_time: Time.now + 3.days, end_time: Time.now + 5.days)
+
+5.times do |time|
+  comp.checkpoints.create(end_time: Time.now + time.days,
+                          name: "Checkpoint #{time}",
+                          max_national_challenges: 1,
+                          max_regional_challenges: 1)
+end
 
 comp.assignments.create(user_id: random_user_id, title: MANAGEMENT_TEAM)
 
