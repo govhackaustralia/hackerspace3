@@ -6,6 +6,7 @@ class Admin::ChallengesController < ApplicationController
     @region = Region.find(params[:region_id])
     @challenge = Challenge.find(params[:id])
     @challenge_sponsorships = @challenge.challenge_sponsorships
+    @challenge_data_sets = @challenge.challenge_data_sets
   end
 
   def new
@@ -66,8 +67,8 @@ class Admin::ChallengesController < ApplicationController
 
   def challenge_params
     params.require(:challenge).permit(:name, :short_desc, :long_desc,
-                                      :eligibility, :video_url, :data_set_url,
-                                      :approved, :image, :pdf, :pdf_preview)
+                                      :eligibility, :video_url, :approved,
+                                      :image, :pdf, :pdf_preview)
   end
 
   def update_challenge

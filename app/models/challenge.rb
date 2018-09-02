@@ -7,6 +7,9 @@ class Challenge < ApplicationRecord
   has_many :challenge_criteria, dependent: :destroy
   has_many :challenge_sponsorships, dependent: :destroy
 
+  has_many :challenge_data_sets, dependent: :destroy
+  has_many :data_sets, through: :challenge_data_sets
+
   has_one_attached :image
   has_one_attached :pdf
   has_one_attached :pdf_preview
@@ -30,7 +33,7 @@ class Challenge < ApplicationRecord
   require 'csv'
 
   def self.to_csv(options = {})
-    desired_columns = %w[id region_id competition_id name short_desc long_desc eligibility video_url data_set_url created_at updated_at]
+    desired_columns = %w[id region_id competition_id name short_desc long_desc eligibility video_url created_at updated_at]
     CSV.generate(options) do |csv|
       csv << desired_columns
       all.each do |challenge|

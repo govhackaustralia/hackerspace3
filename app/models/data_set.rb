@@ -4,6 +4,15 @@ class DataSet < ApplicationRecord
 
   validates :name, presence: true
 
+  def self.search(term)
+    results = []
+    DataSet.all.each do |data_set|
+      data_set_string = "#{data_set.name} #{data_set.url} #{data_set.description}".downcase
+      results << data_set if data_set_string.include? term.downcase
+    end
+    results
+  end
+
   require 'csv'
 
   def self.to_csv(options = {})

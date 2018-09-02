@@ -15,9 +15,6 @@
   <%= form.label :video_url %>
   <%= form.url_field :video_url %><br>
 
-  <%= form.label :data_set_url %>
-  <%= form.url_field :data_set_url %><br>
-
   <% if current_user.admin_privileges? %>
     <%= form.label :approved %>
     <%= form.check_box :approved, { checked: @challenge.approved } %><br>

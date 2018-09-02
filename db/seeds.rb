@@ -144,8 +144,7 @@ Region.all.each do |region|
       short_desc: 'A really good challenge',
       long_desc: 'This challenge incorporates multiple data sets.',
       eligibility: 'You must be this tall to go on this ride.',
-      video_url: 'https://www.youtube.com/watch?v=kqcrEFkA8g0',
-      data_set_url: 'https://data.gov.au/dataset/wyndham-smart-bin-fill-level')
+      video_url: 'https://www.youtube.com/watch?v=kqcrEFkA8g0')
   end
 
   10.times do |time|

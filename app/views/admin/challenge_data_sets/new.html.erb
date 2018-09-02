@@ -1,0 +1,42 @@
+<h2>Create New Data Set for <%= @challenge.name %></h2>
+
+<%= form_tag(new_admin_challenge_challenge_data_set_path, method: :get) do %>
+  <%= text_field_tag :term, params[:term] %>
+  <%= submit_tag 'Search' %>
+<% end %><br>
+
+<% if @data_set.present? # Data Set found show create challenge data_set for %>
+
+  Data Set: <%= @data_set.name %><br>
+  Data URL: <%= @data_set.url %>
+  <% unless @existing_challenge_data_set.present? # check for existing challenge data_set %>
+
+    <%= form_for [:admin, @challenge, @challenge_data_set] do |f| %>
+      <%= hidden_field_tag(:data_set_id, @data_set.id) %>
+      <%= f.submit "Create new Challenge Data Set with #{@data_set.name}" %>
+    <% end %>
+
+  <% else %>
+    Challenge Data Set <%= @data_set.name %> to <%= @challenge.name %> already exists.<br>
+  <% end %>
+
+<% elsif @data_sets.present? # Review search results %>
+
+  <% @data_sets.each do |data_set| %>
+    Data Set: <%= data_set.name %><br>
+    Data URL: <%= data_set.url %><br>
+    <%= link_to 'Select', new_admin_challenge_challenge_data_set_path(@challenge, term: data_set.url) %><br>
+  <% end %>
+
+<% elsif params[:term].present? # Could not find anything. %>
+
+  Apologies, no data_set name matching search term '<%= params[:term] %>'<br>
+
+<% else # No search term entered / first visit to page %>
+
+  Please enter a data set name above.<br>
+
+<% end %>
+
+
+<%= link_to "Back to #{@challenge.name}", admin_region_challenge_path(@challenge.region, @challenge) %>

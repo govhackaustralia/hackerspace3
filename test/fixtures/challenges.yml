@@ -9,7 +9,6 @@ one:
   long_desc: MyText
   eligibility: MyText
   video_url: MyString
-  data_set_url: MyString
   approved: false
 
 two:
@@ -21,5 +20,4 @@ two:
   long_desc: MyText
   eligibility: MyText
   video_url: MyString
-  data_set_url: MyString
   approved: false

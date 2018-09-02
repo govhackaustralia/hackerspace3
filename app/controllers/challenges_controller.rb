@@ -14,6 +14,9 @@ class ChallengesController < ApplicationController
     @challenge = Challenge.find(params[:id])
     @region = @challenge.region
     @challenge_sponsorships = @challenge.challenge_sponsorships
+    @entries = @challenge.entries
+    @checkpoints = @challenge.competition.checkpoints.order(:end_time)
+    @data_sets = @challenge.data_sets
     return if @challenge.competition.started? || (user_signed_in? && current_user.region_privileges?)
     redirect_to root_path
   end
