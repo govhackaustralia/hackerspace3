@@ -1,5 +1,9 @@
-<h2>Create a Data Set for <%= @region.name %> region</h2>
+<main class="dataset_page">
+
+<h2>Create a Data Set for <%= @region.name %></h2>
 
 <%= render 'form' %>
 
-<%= link_to "Back to #{@region.name} Region", admin_region_path(@region) %><br>
+<%= link_to "Back to #{@region.name} Region", admin_region_path(@region) %>
+
+</main>

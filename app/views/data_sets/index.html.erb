@@ -1,21 +1,149 @@
-<h2>Data Sets for Competition <%= @competition.year %></h2>
+<main class="dataset_page">
 
-<%= form_tag data_sets_path, method: :get do %>
-  <%= text_field_tag :term, params[:term] %>
-  <%= submit_tag 'Search' %>
-<% end %>
-<%= link_to 'Clear Search', data_sets_path %></br>
-<%= link_to 'Download CSV', data_sets_path(format: 'csv') %></br>
+<h2>Data for Competition <%= @competition.year %></h2>
 
-<% @regions.each do |region| %>
-  <% next if (data_sets = @region_sets[region.id]).empty? %>
-  <h3><%= region.name %></h3>
-  <% data_sets.each do |data_set| %>
-    <h4><%= data_set.name %></h4>
-    Description: <%= data_set.description %><br>
-    <a href="<%= data_set.url %>" target="_blank">URL</a><br>
-    <% if @competition.started? %>
-      <%= link_to 'Go to Data Set', data_set_path(data_set) %><br>
-    <% end %>
-  <% end %>
+<h3>Data Portals</h3>
+
+<section class="dataportals">
+	<a href="https://data.gov.au/"><article><div>
+		<h4>Australia</h4>
+		<p>data.gov.au</p>
+	</div></article></a>
+
+	<a href="https://stat.abs.gov.au/"><article><div>
+		<h4>Australian Bureau of Statistics</h4>
+		<p>ABS.Stat</p>
+	</div></article></a>
+
+	<a href="http://data.aad.gov.au/"><article><div>
+		<h4>Australian Antarctic Data Centre</h4>
+		<p>data.aad.gov.au</p>
+	</div></article></a>
+
+	<a href="http://www.aihw.gov.au/data/"><article><div>
+		<h4>Australian Institute of Health and Welfare</h4>
+		<p>www.aihw.gov.au/data</p>
+	</div></article></a>
+
+	<a href="https://data.aurin.org.au/"><article><div>
+		<h4>AURIN</h4>
+		<p>data.aurin.org.au</p>
+	</div></article></a>
+
+	<a href="https://data.csiro.au/dap/"><article><div>
+		<h4>CSIRO Data Access Portal</h4>
+		<p>data.csiro.au/dap</p>
+	</div></article></a>
+
+	<a href="https://www.ga.gov.au/data-pubs/"><article><div>
+		<h4>Geoscience Australia</h4>
+		<p>www.ga.gov.au/data-pubs</p>
+	</div></article></a>
+
+	<a href="http://portal.tern.org.au/"><article><div>
+		<h4>TERN Data Discovery Portal</h4>
+		<p>portal.tern.org.au</p>
+	</div></article></a>
+
+	<a href="https://trove.nla.gov.au/"><article><div>
+		<h4>Trove</h4>
+		<p>trove.nla.gov.au</p>
+	</div></article></a>
+
+	<a href="https://www.data.act.gov.au/"><article><div>
+		<h4>Australian Capital Territory</h4>
+		<p>data.act.gov.au</p>
+	</div></article></a>
+
+	<a href="http://actmapi-actgov.opendata.arcgis.com/"><article><div>
+		<h4>Australian Capital Territory Geospatial Data</h4>
+		<p>actmapi-actgov.opendata.arcgis.com</p>
+	</div></article></a>
+
+	<a href="https://data.nsw.gov.au/"><article><div>
+		<h4>New South Wales</h4>
+		<p>data.nsw.gov.au</p>
+	</div></article></a>
+
+	<a href="https://data.qld.gov.au/"><article><div>
+		<h4>Queensland</h4>
+		<p>data.qld.gov.au</p>
+	</div></article></a>
+
+	<a href="http://qldspatial.information.qld.gov.au/catalogue/"><article><div>
+		<h4>Queensland Qspatial</h4>
+		<p>qldspatial.information.qld.gov.au</p>
+	</div></article></a>
+
+	<a href="https://data.sa.gov.au/"><article><div>
+		<h4>South Australia</h4>
+		<p>data.sa.gov.au</p>
+	</div></article></a>
+
+	<a href="https://www.thelist.tas.gov.au/app/content/home"><article><div>
+		<h4>Tasmania</h4>
+		<p>www.thelist.tas.gov.au</p>
+	</div></article></a>
+
+	<a href="https://data.vic.gov.au/"><article><div>
+		<h4>Victoria</h4>
+		<p>data.vic.gov.au</p>
+	</div></article></a>
+
+	<a href="http://vicroadsopendata.vicroadsmaps.opendata.arcgis.com/"><article><div>
+		<h4>VicRoads</h4>
+		<p>vicroadsopendata-vicroadsmaps.opendata.arcgis.com</p>
+	</div></article></a>
+
+	<a href="https://data.wa.gov.au/"><article><div>
+		<h4>Western Australia</h4>
+		<p>data.wa.gov.au</p>
+	</div></article></a>
+
+	<a href="https://data.brisbane.qld.gov.au/"><article><div>
+		<h4>Brisbane City Council</h4>
+		<p>data.brisbane.qld.gov.au</p>
+	</div></article></a>
+
+	<a href="http://data-logancity.opendata.arcgis.com/"><article><div>
+		<h4>Logan City Council</h4>
+		<p>data-logancity.opendata.arcgis.com</p>
+	</div></article></a>
+
+	<a href="https://data.sunshinecoast.qld.gov.au/"><article><div>
+		<h4>Sunshine Coast Council</h4>
+		<p>data.sunshinecoast.qld.gov.au</p>
+	</div></article></a>
+
+	<a href="https://data.melbourne.vic.gov.au/"><article><div>
+		<h4>City of Melbourne</h4>
+		<p>data.melbourne.vic.gov.au</p>
+	</div></article></a>
+</section>
+
+<h3>Dataset Highlight</h3>
+
+<table id="dataset_table">
+	<thead>
+		<tr>
+			<th>Name</th>
+			<th>Description</th>
+			<th>Dataset URL</th>
+			<th>Jurisdiction</th>
+		</tr>
+	</thead>
+	<tbody>
+
+<% @data_sets.each do |data_set| %>
+		<tr>
+			<td><%= data_set.name %></td>
+			<td><%= simple_format(auto_link(data_set.description)) %></td>
+			<td><%= link_to(data_set.url, data_set.url, {:class => "dataseturl"}) %></td>
+			<td><%= @id_regions[data_set.region_id].name %></td>
+		</tr>
 <% end %>
+	</tbody>
+</table>
+<script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+<link href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" rel="stylesheet">
+</main>

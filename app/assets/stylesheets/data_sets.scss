@@ -1,3 +1,179 @@
 // Place all the styles related to the data_sets controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.dataset_page {
+	padding: 2em 5em;
+}
+
+.dataset_page h2 {
+	color: #4c9ad2;
+	font-size: 2em;
+}
+
+.dataset_page h3 {
+	font-size: 1.5em;
+	padding: 1em;
+}
+
+.dataset_page .dataportals {
+	padding: 1em;
+	padding-top: 0;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-around;
+	align-content: center;
+	align-items: center;
+}
+
+.dataset_page .dataportals a {
+	text-decoration: none;
+	text-align: center; 
+	color: #ddd;
+	margin: 0.5em;
+}
+
+.dataset_page .dataportals a article {
+	background-image: url("/assets/cta.png");
+	background-size: cover;
+	background-position: center center;
+	width: 250px; 
+	color: #ddd;
+	display: flex;
+	align-content: stretch;
+	align-items: stretch;
+}
+
+.dataset_page .dataportals a h4, .dataset_page .dataportals a p {
+	color: #ddd;
+}
+
+.dataset_page .dataportals a div {
+	padding: 2em;
+	width: 100%;
+	height: 100%;
+	transition: all 1s ease;
+}
+
+.dataset_page .dataportals a:nth-of-type(3n+1) div {
+	background-color: rgba(202, 30, 86, 0.5);
+	border-bottom: 1em solid #ca1e56;
+	overflow: hidden;
+}
+
+.dataset_page .dataportals a:nth-of-type(3n+2) div {
+	background-color: rgba(76, 154, 210, 0.5);
+	border-bottom: 1em solid #4c9ad2;
+	overflow: hidden;
+}
+
+.dataset_page .dataportals a:nth-of-type(3n+0) div {
+	background-color: rgba(113, 113, 113, 0.5);
+    border-bottom: 1em solid #717171;
+	overflow: hidden;
+}
+
+.dataset_page .dataportals article div:hover {
+	transform: scale(1.1, 1.1);
+}
+
+.dataset_page table {
+	box-sizing: border-box;
+	margin-top: 2em;
+	margin-left: 2em;
+	padding: 2em 2em;
+	border-collapse: collapse
+}
+
+.dataset_page table .dataseturl {
+	font-size: small;
+}
+
+.dataset_page table, .dataset_page th, .dataset_page td {
+	border: 1px solid #ca1e56;
+	padding: 0.25em 1em;
+	box-sizing: border-box;
+}
+
+.dataset_page tr td:nth-of-type(1), .dataset_page tr td:nth-of-type(3) {
+	width: 25%;
+}
+
+.dataset_page tr td:nth-of-type(2) {
+	width: 40%;
+}
+
+.dataset_page tr td:nth-of-type(4) {
+	width: 10%;
+}
+
+.dataset_page th {
+	background-color: #ca1e56;
+	color: #ddd;
+}
+
+.dataset_page form {
+	box-sizing: border-box;
+	padding: 2em 2em;
+}
+
+.dataset_page form > div.field {
+	display: flex;
+	padding: 0.5em 0em;
+	align-items: center;
+}
+
+.dataset_page form > div.field > label {
+	box-sizing: border-box;
+	width: 50%;
+	padding-right: 1em;
+	text-align: right;
+	font-size: 1.15em;
+}
+
+.dataset_page form > div.field > input {
+	box-sizing: border-box;
+	width: 50%;
+	padding-left: 1em;
+	font-size: 1em;
+	padding: 0.5em;
+	display: flex;
+}
+
+.dataset_page form > div.field > textarea {
+	box-sizing: border-box;
+	width: 50%;
+	padding-left: 1em;
+	font-size: 1em;
+	padding: 0.5em;
+	display: flex;
+}
+
+.dataset_page form > div.actions {
+	display: flex;
+	justify-content: center;
+	margin-top: 1em;
+	margin-bottom: 1em;
+}
+
+.dataset_page form > div.actions input {
+	box-sizing: border-box;
+	font-size: 1.5em;
+	padding: 0.5em 1.5em;
+	-webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-color: #ca1e56;
+    color: #ddd;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.dataset_page #hiddendescription {
+	box-sizing: border-box;
+	width: 50%;
+	padding-left: 1em;
+	font-size: 1em;
+	padding: 0.5em;
+	display: none;
+}

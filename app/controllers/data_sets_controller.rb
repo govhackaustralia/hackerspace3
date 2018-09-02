@@ -2,7 +2,8 @@ class DataSetsController < ApplicationController
   def index
     @competition = Competition.current
     @regions = Region.all
-    @region_sets = @competition.filter_data_sets(params[:term])
+    @id_regions = Region.id_regions(@regions.pluck(:id))
+    @data_sets = @competition.data_sets
     respond_to do |format|
       format.html
       format.csv { send_data @data_sets.to_csv }
