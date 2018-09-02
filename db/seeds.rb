@@ -144,7 +144,7 @@ Region.all.each do |region|
       short_desc: 'A really good challenge', approved: true,
       long_desc: 'This challenge incorporates multiple data sets.',
       eligibility: 'You must be this tall to go on this ride.',
-      video_url: 'https://www.youtube.com/watch?v=kqcrEFkA8g0')
+      video_url: 'https://www.youtube.com/embed/kqcrEFkA8g0')
   end
 
   10.times do |time|
@@ -201,7 +201,7 @@ Region.all.each do |region|
         description: 'Best team evaaaaaa!',
         data_story: 'We will be taking a big data approach.',
         source_code_url: 'https://github.com/tenderlove/allocation_sampler',
-        video_url: 'https://www.youtube.com/watch?v=8S0FDjFBj8o',
+        video_url: 'https://www.youtube.com/embed/kqcrEFkA8g0',
         homepage_url: 'https://www.govhack.org/', user: team.assignments.first.user)
 
         5.times do |time|

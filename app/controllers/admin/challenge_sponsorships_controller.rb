@@ -41,7 +41,7 @@ class Admin::ChallengeSponsorshipsController < ApplicationController
   def search_sponsors
     @sponsor = Sponsor.find_by_name(params[:term])
     if @sponsor.present?
-      @existing_sponsorship = Sponsorship.find_by(sponsor: @sponsor, sponsorable: @sponsorable)
+      @existing_sponsorship = ChallengeSponsorship.find_by(sponsor: @sponsor, challenge: @challenge)
     else
       @sponsors = Sponsor.search(params[:term])
     end

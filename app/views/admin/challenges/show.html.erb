@@ -17,7 +17,7 @@
   Eligibility: <%= @challenge.eligibility %><br>
 <% end %>
 <% unless @challenge.video_url.blank? %>
-  <a href='<%= @challenge.video_url %>' target="_blank">Video</a>
+  <a href='<%= @challenge.video_url %>' target="_blank">Video</a><br>
 <% end %>
 
 <% if @challenge.pdf.attached? && @challenge.pdf_preview.attached? %>
