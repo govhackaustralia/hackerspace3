@@ -1,3 +1,5 @@
+<main class="challenge_index">
+
 <h2>Challenges for Competition <%= @competition.year %></h2>
 
 <% if @competition.started? || (user_signed_in? && current_user.region_privileges?) %>
@@ -23,7 +25,7 @@
   <% end %>
 
 <% else %>
-
-  <strong>Check back here at the commencement of the competition at <%= @competition.start_time.strftime("%I.%M %p %e %B %Y") %></strong>
-
+<section class="later">
+  <p><strong>Check back here at the commencement of the competition at <%= @competition.start_time.strftime("%I.%M %p %e %B %Y") %></strong></p>
+</section>
 <% end %>

@@ -3,7 +3,7 @@
 	<nav>
 		<section>
 			<% if @competition.events.where(event_type: CONNECTION_EVENT).present? %>
-				<div><%= link_to 'Connection Events', connections_path %></div>
+				<!--<div><%= link_to 'Connection Events', connections_path %></div>-->
 			<% end %>
 			<% if @competition.events.where(event_type: COMPETITION_EVENT).present? %>
 				<div><%= link_to 'Competition Events', competition_events_path %></div>
@@ -16,7 +16,7 @@
 				<div><%= link_to 'Projects', teams_path %></div>
 			<% end %>
 			<% if @competition.data_sets.present? %>
-				<div><%= link_to 'Data Sets', data_sets_path %></div>
+				<div><%= link_to 'Datasets', data_sets_path %></div>
 			<% end %>
 		</section>
 	</nav>

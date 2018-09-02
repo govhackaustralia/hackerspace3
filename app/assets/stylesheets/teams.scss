@@ -1,3 +1,21 @@
 // Place all the styles related to the teams controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.project_index {
+	padding: 2em 5em;
+}
+
+.project_index h2 {
+	color: #4c9ad2;
+	font-size: 2em;
+}
+
+.project_index h3 {
+	font-size: 1.5em;
+	padding: 1em;
+}
+
+.project_index section.later {
+	padding: 1.5em 1.5em;
+}

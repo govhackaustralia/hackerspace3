@@ -1,36 +1,70 @@
+<main class="challenge_page">
+<section class="challenge_head">
+<article>
 <h2><%= @challenge.name %></h2>
 
-<% if @challenge.image.attached? %>
-  <img src="<%= url_for(@challenge.image) %>" alt="<%= @challenge.name %> image" /><br>
-<% end %>
+<h3>Jurisdiction: <%= @region.name %></h3>
+</article>
 
-Region: <%= @region.name %><br>
-<% unless @challenge.short_desc.blank? %>
-  Short Description: <%= @challenge.short_desc %><br>
+<aside class="sponsors">
+	<% if @challenge_sponsorships.present? %>
+  <% @challenge_sponsorships.each do |sponsorship| %>
+ 	<% sponsor = sponsorship.sponsor %>
+	  <figure>
+			<a href='<%= sponsor.website %>' target="_blank">
+	      <% if sponsor.logo.attached? %>
+	        <%= image_tag url_for(sponsor.logo) %>
+	      <% else %>
+	        <%= image_tag 'default_profile_pic.png' %>
+	      <% end %>
+			</a>
+	  </figure>
+			    
+  <% end %>
 <% end %>
-<% unless @challenge.long_desc.blank? %>
-  Long Description: <%= @challenge.long_desc %><br>
-<% end %>
-<% unless @challenge.eligibility.blank? %>
-  Eligibility: <%= @challenge.eligibility %><br>
-<% end %>
-<% unless @challenge.video_url.blank? %>
-  <a href='<%= @challenge.video_url %>' target="_blank">Video</a>
-<% end %>
+</aside>
+</section>
+<section class="challenge_body">
+	<article>
+		<% unless @challenge.short_desc.blank? %>
+		  <h4><%= @challenge.short_desc %></h4>
+		<% end %>
+		<% unless @challenge.long_desc.blank? %>
+		  <p><%= simple_format(@challenge.long_desc) %></p>
+		<% end %>
+		<% unless @challenge.eligibility.blank? %>
+		  <p><strong>Eligibility</strong>: <%= @challenge.eligibility %></p>
+		<% end %>
+		
+		<% if @data_sets.present? %>
+		
+		<h5>Dataset Highlight</h5>
+		
+		  <% @data_sets.each do |data_set| %>
+		 	<p><strong><%= data_set.name %></strong><br />
+		 	<%= link_to(data_set.url,data_set.url) %></p>
+					    
+		  <% end %>
+		<% end %>
+		
+	</article>
+	<aside>
+		<% unless @challenge.video_url.blank? %>
+			<div class="videoWrapper"><iframe width="560" height="315" src="<%= @challenge.video_url %>" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe></div>
+		<% end %>
+	</aside>
+</section>
 
 <% if @challenge.pdf.attached? && @challenge.pdf_preview.attached? %>
   <a href='<%= url_for(@challenge.pdf) %>' target="_blank">
     <img src="<%= url_for(@challenge.pdf_preview) %>" alt="<%= @challenge.name %> pdf_preview" title="Govhack Hackerspace" /><br>
   </a>
 <% end %>
-
-<h3>Data Sets</h3>
-
-<% @data_sets.each do |data_set| %>
-  <h4><%= data_set.name %></h4>
-  <%= data_set.url %><br>
+<% if @challenge.image.attached? %>
+  <img src="<%= url_for(@challenge.image) %>" alt="<%= @challenge.name %> image" /><br>
 <% end %>
 
+</section>
 <h3>Team Entries</h3>
 
 <%= pluralize @challenge.entries.count, 'team' %> entered into challenge.<br>
@@ -40,7 +74,7 @@ Region: <%= @region.name %><br>
   <% current_user.teams.each do |team| %>
     <h5><%= team.name %></h4>
     <% if (entry = Entry.find_by(team: team, challenge: @challenge)).present? %>
-      Team entered into this challange for <%= entry.checkpoint.name %> Checkpoint.<br>
+      Team entered into this challenge for <%= entry.checkpoint.name %> Checkpoint.<br>
     <% else %>
       <% if team.available_checkpoints? %>
         <%= link_to 'Enter Challenge', new_team_management_team_entry_path(team, challenge_id: @challenge.id) %><br>
@@ -70,11 +104,6 @@ Region: <%= @region.name %><br>
 
 <% end %>
 
-<% if @challenge_sponsorships.present? %>
-  <h3>Sponsorships</h3>
-  <% @challenge_sponsorships.each do |sponsorship| %>
-    <%= render 'admin/sponsors/sponsor', locals: { sponsor: sponsorship.sponsor } %>
-  <% end %>
-<% end %>
 
 <%= link_to 'Back to Challenges', challenges_path %>
+</main>
