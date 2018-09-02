@@ -5,6 +5,7 @@ class Admin::ChallengesController < ApplicationController
   def show
     @region = Region.find(params[:region_id])
     @challenge = Challenge.find(params[:id])
+    @challenge_sponsorships = @challenge.challenge_sponsorships
   end
 
   def new

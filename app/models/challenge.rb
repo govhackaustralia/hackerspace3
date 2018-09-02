@@ -3,8 +3,9 @@ class Challenge < ApplicationRecord
   belongs_to :competition
   belongs_to :region
   has_many :sponsorships, as: :sponsorable
-  has_many :entries
-  has_many :challenge_criteria
+  has_many :entries, dependent: :destroy
+  has_many :challenge_criteria, dependent: :destroy
+  has_many :challenge_sponsorships, dependent: :destroy
 
   has_one_attached :image
   has_one_attached :pdf

@@ -13,7 +13,8 @@ class ChallengesController < ApplicationController
   def show
     @challenge = Challenge.find(params[:id])
     @region = @challenge.region
-    return if @challenge.competition.started?
+    @challenge_sponsorships = @challenge.challenge_sponsorships
+    return if @challenge.competition.started? || (user_signed_in? && current_user.region_privileges?)
     redirect_to root_path
   end
 

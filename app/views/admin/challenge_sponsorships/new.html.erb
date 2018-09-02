@@ -1,0 +1,41 @@
+<h2>Create New Sponsorship for <%= @challenge.name %></h2>
+
+<%= form_tag(new_admin_challenge_challenge_sponsorship_path, method: :get) do %>
+  <%= text_field_tag :term, params[:term] %>
+  <%= submit_tag 'Search' %>
+<% end %><br>
+
+<% if @sponsor.present? # Sponsor found show create challenge sponsorship for %>
+
+  Sponsor: <%= @sponsor.name %><br>
+
+  <% unless @existing_sponsorship.present? # check for existing challenge sponsorship %>
+
+    <%= form_for [:admin, @challenge, @challenge_sponsorship] do |f| %>
+      <%= hidden_field_tag(:sponsor_id, @sponsor.id) %>
+      <%= f.submit "Create new Challenge Sponsorship with #{@sponsor.name}" %>
+    <% end %>
+
+  <% else %>
+    Challenge Sponsorship for <%= @sponsor.name %> to <%= @challenge.name %> already exists.<br>
+  <% end %>
+
+<% elsif @sponsors.present? # Review search results %>
+
+  <% @sponsors.each do |sponsor| %>
+    Sponsor: <%= sponsor.name %><br>
+    <%= link_to 'Select', new_admin_challenge_challenge_sponsorship_path(@challenge, term: sponsor.name) %><br>
+  <% end %>
+
+<% elsif params[:term].present? # Could not find anything. %>
+
+  Apologies, no sponsor name matching search term '<%= params[:term] %>'<br>
+
+<% else # No search term entered / first visit to page %>
+
+  Please enter a sponsor name above.<br>
+
+<% end %>
+
+
+<%= link_to "Back to #{@challenge.name}", admin_region_challenge_path(@challenge.region, @challenge) %>

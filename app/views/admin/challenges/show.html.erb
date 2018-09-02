@@ -23,27 +23,26 @@
   <a href='<%= @challenge.data_set_url %>' target="_blank">Data Set</a><br>
 <% end %>
 
-
 <% if @challenge.pdf.attached? && @challenge.pdf_preview.attached? %>
   <a href='<%= url_for(@challenge.pdf) %>' target="_blank">
     <img src="<%= url_for(@challenge.pdf_preview) %>" alt="<%= @challenge.name %> pdf_preview" title="Govhack Hackerspace" /><br>
   </a>
 <% end %>
+
 <% unless @challenge.pdf.attached? %>
   This Challenge does not have a PDF.<br>
 <% end %>
 <% unless @challenge.pdf_preview.attached? %>
   This Challenge does not have a PDF Preview.<br>
 <% end %>
+
 <%= link_to 'Update PDF Preview', edit_admin_region_challenge_path(@region, @challenge, pdf_preview: true) %><br>
 <%= link_to 'Update PDF', edit_admin_region_challenge_path(@region, @challenge, pdf: true) %><br>
 
-<% if @challenge.approved %>
-  <%= link_to 'Go to Challenge Page', challenge_path(@challenge) %><br>
-<% else %>
+<% unless @challenge.approved %>
   <strong>This challenge is yet to be approved.</strong><br>
 <% end %>
-
+<%= link_to 'Go to Challenge Page', challenge_path(@challenge) %><br>
 <%= link_to "Update Challenge", edit_admin_region_challenge_path(@region, @challenge) %><br>
 
 <h3>Teams Competing</h3>
@@ -70,20 +69,21 @@
 
 <%= link_to 'View Challenge Criteria', admin_challenge_challenge_criteria_path(@challenge) %>
 
-<h3>Sponsorships</h3>
+<h3>Challenge Sponsorships</h3>
 
-<% if (sponsorships = @challenge.sponsorships).present? %>
+<% if @challenge_sponsorships.present? %>
 
-  <% sponsorships.each do |sponsorship| %>
+  <% @challenge_sponsorships.each do |sponsorship| %>
     <%= render 'admin/sponsors/sponsor', locals: { sponsor: sponsorship.sponsor } %>
-    Sponsorship Type: <%= sponsorship.sponsorship_type.name %><br>
+    <%= link_to 'Destroy Challenge Sponsorship', admin_challenge_challenge_sponsorship_path(@challenge, sponsorship),
+                  method: :delete,
+                  data: { confirm: 'Are you sure?' } %><br>
   <% end %>
-
 <% else %>
 
   <div>There are currently no sponsorships for this challenge in the current competition.</div>
 
 <% end %>
 
-<%= link_to 'Add Sponsorship', new_admin_challenge_sponsorship_path(@challenge) %><br>
+<%= link_to 'Add Sponsorship', new_admin_challenge_challenge_sponsorship_path(@challenge) %><br>
 <%= link_to "Back to #{@region.name} Region", admin_region_path(@region) %>
