@@ -2,7 +2,7 @@ class ChallengeScorecard < ApplicationRecord
   belongs_to :assignment
   belongs_to :entry
 
-  has_many :challenge_judgements, inverse_of: :challenge_scorecard
+  has_many :challenge_judgements, dependent: :destroy, inverse_of: :challenge_scorecard
   accepts_nested_attributes_for :challenge_judgements
 
   def team

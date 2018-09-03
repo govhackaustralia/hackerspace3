@@ -2,7 +2,7 @@ class PeoplesScorecard < ApplicationRecord
   belongs_to :assignment
   belongs_to :team
 
-  has_many :peoples_judgements
+  has_many :peoples_judgements, dependent: :destroy
 
   def update_judgements
     peoples_criteria_ids = assignment.assignable.peoples_criteria.pluck(:id)

@@ -27,6 +27,8 @@ class RegistrationTest < ActiveSupport::TestCase
     # valid status
     new_registration = @event.registrations.create(assignment: @assignment, status: VALID_ATTENDANCE_STATUSES.first)
     assert(new_registration.persisted?)
+    @assignment.destroy
+    assert_not @registration.persisted?
   end
 
   # Below test 'works' but throws an error message because mail not going anywhere.
