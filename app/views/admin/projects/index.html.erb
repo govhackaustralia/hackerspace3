@@ -1,0 +1,18 @@
+<h2>Projects for <%= @current_project.team_name %></h2>
+
+<h3>All Projects</h3>
+
+<% @projects.each do |project| %>
+  <h4><%= project.team_name %>
+    <% if project == @current_project %>
+      <strong>(Current Project)</strong><br>
+    <% end %>
+  </h4>
+  Created At: <%= project.created_at %><br>
+  <% if (user = project.user).present? %>
+    User: <%= user.display_name %><br>
+  <% end %>
+  <%= link_to 'Go to project', admin_team_project_path(@team, project) %><br>
+<% end %>
+
+<%= link_to 'Back to Team Management', admin_team_path(@team) %>

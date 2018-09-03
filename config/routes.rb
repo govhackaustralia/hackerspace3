@@ -60,6 +60,7 @@ Rails.application.routes.draw do
     end
 
     resources :teams do
+      resources :entries, :projects
       resources :entries, controller: 'teams/entries'
     end
 

@@ -20,6 +20,18 @@ class Admin::TeamsController < ApplicationController
     @available_national_challenges = @team.available_challenges(NATIONAL)
   end
 
+  def update
+    @team = Team.find(params[:id])
+    @project = Project.find(params[:project_id])
+    @team.update(project_id: @project.id)
+    if @team.save
+      flash[:notice] = 'Current Project Updated'
+    else
+      flash[:alert] = @team.errors.full_messages.to_sentence
+    end
+    redirect_to admin_team_project_path(@team, @project)
+  end
+
   private
 
   def check_for_privileges
