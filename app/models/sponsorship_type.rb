@@ -1,6 +1,6 @@
 class SponsorshipType < ApplicationRecord
   belongs_to :competition
-  has_many :sponsorships
+  has_many :sponsorships, dependent: :destroy
 
   def self.reorder_from(from)
     placeholder = from

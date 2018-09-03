@@ -1,10 +1,10 @@
 class Event < ApplicationRecord
-  has_many :assignments, as: :assignable
+  has_many :assignments, as: :assignable, dependent: :destroy
   has_many :registrations, dependent: :destroy
   has_many :registration_assignments, through: :registrations, source: :assignment
   belongs_to :region
   belongs_to :competition
-  has_one :event_partnership
+  has_one :event_partnership, dependent: :destroy
   has_one :event_partner, through: :event_partnership, source: :sponsor
   has_many :teams
 

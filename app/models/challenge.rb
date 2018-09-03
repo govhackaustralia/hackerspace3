@@ -2,11 +2,9 @@ class Challenge < ApplicationRecord
   has_many :assignments, as: :assignable, dependent: :destroy
   belongs_to :competition
   belongs_to :region
-  has_many :sponsorships, as: :sponsorable
   has_many :entries, dependent: :destroy
   has_many :challenge_criteria, dependent: :destroy
   has_many :challenge_sponsorships, dependent: :destroy
-
   has_many :challenge_data_sets, dependent: :destroy
   has_many :data_sets, through: :challenge_data_sets
 

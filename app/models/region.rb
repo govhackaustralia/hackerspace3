@@ -1,10 +1,10 @@
 class Region < ApplicationRecord
-  has_many :assignments, as: :assignable
+  has_many :assignments, as: :assignable, dependent: :destroy
   has_many :events
-  has_many :sponsorships, as: :sponsorable
+  has_many :sponsorships, as: :sponsorable, dependent: :destroy
   has_many :sponsorship_types, through: :sponsorships
-  has_many :challenges
-  has_many :data_sets
+  has_many :challenges, dependent: :destroy
+  has_many :data_sets, dependent: :destroy
 
   validates :name, presence: true
   validates :name, uniqueness: true
