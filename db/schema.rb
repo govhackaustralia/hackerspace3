@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_09_02_130517) do
+ActiveRecord::Schema.define(version: 2018_09_03_120217) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -44,6 +44,8 @@ ActiveRecord::Schema.define(version: 2018_09_02_130517) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["assignable_type", "assignable_id"], name: "index_assignments_on_assignable_type_and_assignable_id"
+    t.index ["title"], name: "index_assignments_on_title"
+    t.index ["user_id"], name: "index_assignments_on_user_id"
   end
 
   create_table "challenge_criteria", force: :cascade do |t|
@@ -52,6 +54,8 @@ ActiveRecord::Schema.define(version: 2018_09_02_130517) do
     t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["challenge_id"], name: "index_challenge_criteria_on_challenge_id"
+    t.index ["criterion_id"], name: "index_challenge_criteria_on_criterion_id"
   end
 
   create_table "challenge_data_sets", force: :cascade do |t|
@@ -59,6 +63,8 @@ ActiveRecord::Schema.define(version: 2018_09_02_130517) do
     t.integer "data_set_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["challenge_id"], name: "index_challenge_data_sets_on_challenge_id"
+    t.index ["data_set_id"], name: "index_challenge_data_sets_on_data_set_id"
   end
 
   create_table "challenge_judgements", force: :cascade do |t|
@@ -67,6 +73,8 @@ ActiveRecord::Schema.define(version: 2018_09_02_130517) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "challenge_scorecard_id"
+    t.index ["challenge_criterion_id"], name: "index_challenge_judgements_on_challenge_criterion_id"
+    t.index ["challenge_scorecard_id"], name: "index_challenge_judgements_on_challenge_scorecard_id"
   end
 
   create_table "challenge_scorecards", force: :cascade do |t|
@@ -74,6 +82,8 @@ ActiveRecord::Schema.define(version: 2018_09_02_130517) do
     t.integer "assignment_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["assignment_id"], name: "index_challenge_scorecards_on_assignment_id"
+    t.index ["entry_id"], name: "index_challenge_scorecards_on_entry_id"
   end
 
   create_table "challenge_sponsorships", force: :cascade do |t|
@@ -81,6 +91,8 @@ ActiveRecord::Schema.define(version: 2018_09_02_130517) do
     t.integer "sponsor_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["challenge_id"], name: "index_challenge_sponsorships_on_challenge_id"
+    t.index ["sponsor_id"], name: "index_challenge_sponsorships_on_sponsor_id"
   end
 
   create_table "challenges", force: :cascade do |t|
@@ -94,6 +106,9 @@ ActiveRecord::Schema.define(version: 2018_09_02_130517) do
     t.boolean "approved", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["approved"], name: "index_challenges_on_approved"
+    t.index ["competition_id"], name: "index_challenges_on_competition_id"
+    t.index ["region_id"], name: "index_challenges_on_region_id"
   end
 
   create_table "checkpoints", force: :cascade do |t|
@@ -104,6 +119,7 @@ ActiveRecord::Schema.define(version: 2018_09_02_130517) do
     t.integer "max_regional_challenges"
     t.integer "max_national_challenges"
     t.string "name"
+    t.index ["competition_id"], name: "index_checkpoints_on_competition_id"
   end
 
   create_table "competitions", force: :cascade do |t|
@@ -112,6 +128,7 @@ ActiveRecord::Schema.define(version: 2018_09_02_130517) do
     t.datetime "updated_at", null: false
     t.datetime "start_time"
     t.datetime "end_time"
+    t.index ["year"], name: "index_competitions_on_year"
   end
 
   create_table "criteria", force: :cascade do |t|
@@ -121,6 +138,7 @@ ActiveRecord::Schema.define(version: 2018_09_02_130517) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "name"
+    t.index ["competition_id"], name: "index_criteria_on_competition_id"
   end
 
   create_table "data_sets", force: :cascade do |t|
@@ -131,6 +149,8 @@ ActiveRecord::Schema.define(version: 2018_09_02_130517) do
     t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["competition_id"], name: "index_data_sets_on_competition_id"
+    t.index ["region_id"], name: "index_data_sets_on_region_id"
   end
 
   create_table "entries", force: :cascade do |t|
@@ -141,6 +161,10 @@ ActiveRecord::Schema.define(version: 2018_09_02_130517) do
     t.boolean "eligible"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["challenge_id"], name: "index_entries_on_challenge_id"
+    t.index ["checkpoint_id"], name: "index_entries_on_checkpoint_id"
+    t.index ["eligible"], name: "index_entries_on_eligible"
+    t.index ["team_id"], name: "index_entries_on_team_id"
   end
 
   create_table "event_partnerships", force: :cascade do |t|
@@ -149,6 +173,9 @@ ActiveRecord::Schema.define(version: 2018_09_02_130517) do
     t.boolean "approved", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["approved"], name: "index_event_partnerships_on_approved"
+    t.index ["event_id"], name: "index_event_partnerships_on_event_id"
+    t.index ["sponsor_id"], name: "index_event_partnerships_on_sponsor_id"
   end
 
   create_table "events", force: :cascade do |t|
@@ -176,7 +203,10 @@ ActiveRecord::Schema.define(version: 2018_09_02_130517) do
     t.string "identifier"
     t.string "event_type"
     t.text "description"
+    t.index ["approval"], name: "index_events_on_approval"
+    t.index ["competition_id"], name: "index_events_on_competition_id"
     t.index ["identifier"], name: "index_events_on_identifier"
+    t.index ["region_id"], name: "index_events_on_region_id"
   end
 
   create_table "favourites", force: :cascade do |t|
@@ -184,6 +214,8 @@ ActiveRecord::Schema.define(version: 2018_09_02_130517) do
     t.integer "team_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["assignment_id"], name: "index_favourites_on_assignment_id"
+    t.index ["team_id"], name: "index_favourites_on_team_id"
   end
 
   create_table "peoples_judgements", force: :cascade do |t|
@@ -192,6 +224,8 @@ ActiveRecord::Schema.define(version: 2018_09_02_130517) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "peoples_scorecard_id"
+    t.index ["criterion_id"], name: "index_peoples_judgements_on_criterion_id"
+    t.index ["peoples_scorecard_id"], name: "index_peoples_judgements_on_peoples_scorecard_id"
   end
 
   create_table "peoples_scorecards", force: :cascade do |t|
@@ -199,6 +233,8 @@ ActiveRecord::Schema.define(version: 2018_09_02_130517) do
     t.integer "assignment_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["assignment_id"], name: "index_peoples_scorecards_on_assignment_id"
+    t.index ["team_id"], name: "index_peoples_scorecards_on_team_id"
   end
 
   create_table "projects", force: :cascade do |t|
@@ -212,6 +248,8 @@ ActiveRecord::Schema.define(version: 2018_09_02_130517) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "user_id"
+    t.index ["team_id"], name: "index_projects_on_team_id"
+    t.index ["user_id"], name: "index_projects_on_user_id"
   end
 
   create_table "regions", force: :cascade do |t|
@@ -220,6 +258,7 @@ ActiveRecord::Schema.define(version: 2018_09_02_130517) do
     t.integer "parent_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["parent_id"], name: "index_regions_on_parent_id"
   end
 
   create_table "registrations", force: :cascade do |t|
@@ -229,6 +268,9 @@ ActiveRecord::Schema.define(version: 2018_09_02_130517) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "event_id"
+    t.index ["assignment_id"], name: "index_registrations_on_assignment_id"
+    t.index ["event_id"], name: "index_registrations_on_event_id"
+    t.index ["status"], name: "index_registrations_on_status"
   end
 
   create_table "sponsors", force: :cascade do |t|
@@ -238,6 +280,7 @@ ActiveRecord::Schema.define(version: 2018_09_02_130517) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "competition_id"
+    t.index ["competition_id"], name: "index_sponsors_on_competition_id"
   end
 
   create_table "sponsorship_types", force: :cascade do |t|
@@ -246,6 +289,8 @@ ActiveRecord::Schema.define(version: 2018_09_02_130517) do
     t.integer "order"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["competition_id"], name: "index_sponsorship_types_on_competition_id"
+    t.index ["order"], name: "index_sponsorship_types_on_order"
   end
 
   create_table "sponsorships", force: :cascade do |t|
@@ -256,6 +301,8 @@ ActiveRecord::Schema.define(version: 2018_09_02_130517) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "approved", default: false
+    t.index ["approved"], name: "index_sponsorships_on_approved"
+    t.index ["sponsor_id"], name: "index_sponsorships_on_sponsor_id"
     t.index ["sponsorable_type", "sponsorable_id"], name: "index_sponsorships_on_sponsorable_type_and_sponsorable_id"
   end
 
@@ -267,6 +314,7 @@ ActiveRecord::Schema.define(version: 2018_09_02_130517) do
     t.string "url"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["team_id"], name: "index_team_data_sets_on_team_id"
   end
 
   create_table "teams", force: :cascade do |t|
@@ -275,6 +323,9 @@ ActiveRecord::Schema.define(version: 2018_09_02_130517) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "published", default: false
+    t.index ["event_id"], name: "index_teams_on_event_id"
+    t.index ["project_id"], name: "index_teams_on_project_id"
+    t.index ["published"], name: "index_teams_on_published"
   end
 
   create_table "users", force: :cascade do |t|
