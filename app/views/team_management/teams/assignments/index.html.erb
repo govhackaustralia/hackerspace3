@@ -4,6 +4,8 @@
 
 <% if (team_leader = @team.team_leader).present? %>
   <%= render 'users/user_contact', locals: { user: team_leader } %>
+<% else %>
+  <strong>No team leader assigned for this team.</strong><br>
 <% end %>
 
 <% if (team_members = @team.team_members).present? %>
@@ -14,11 +16,9 @@
       <% assignment = Assignment.find_by(assignable: @team, user: current_user) %>
       <%= link_to 'Leave Team', user_assignment_path(current_user, assignment),
       method: :delete, data: { confirm: 'Are you sure?' } %><br>
-    <% elsif @team.team_leader == current_user %>
+    <% elsif @team.team_leader == current_user || team_leader.nil? %>
       <% assignment = Assignment.find_by(assignable: @team, user: team_member) %>
-      <%= form_for [:team_management, team_member, assignment] do |f| %>
-        <%= f.submit 'Make Team Leader' %>
-      <% end %>
+      <%= link_to 'Make Team Leader', team_management_team_assignment_path(@team, assignment, title: TEAM_LEADER), method: :patch %>
     <% end %>
   <% end %>
 <% end %>
@@ -27,6 +27,9 @@
   <h3>Invitees</h3>
   <% invitees.each do |invitee| %>
     <%= render 'users/user_contact', locals: { user: invitee } %>
+    <% assignment = Assignment.find_by(assignable: @team, user: invitee) %>
+    <%= link_to 'Remove Invitee', team_management_team_assignment_path(@team, assignment),
+     method: :delete, data: { confirm: 'Are you sure?' } %><br>
   <% end %>
 <% end %>
 

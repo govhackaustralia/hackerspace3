@@ -25,6 +25,26 @@ class TeamManagement::Teams::AssignmentsController < ApplicationController
     end
   end
 
+  def update
+    @assignment = Assignment.find(params[:id])
+    @team = @assignment.assignable
+    @assignment.update(title: params[:title])
+    if @assignment.save
+      flash[:notice] = 'Assignment Updated'
+    else
+      flash[:alert] = @assignment.errors.full_messages.to_sentence
+    end
+    redirect_to team_management_team_assignments_path(@team)
+  end
+
+  def destroy
+    @assignment = Assignment.find(params[:id])
+    @team = @assignment.assignable
+    @assignment.destroy
+    flash[:notice] = 'Assignment Removed'
+    redirect_to team_management_team_assignments_path(@team)
+  end
+
   private
 
   def check_for_privileges

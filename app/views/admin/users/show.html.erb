@@ -13,11 +13,9 @@ Event Assignment Title: <%= @event_assignment.title %></br>
   Title: <%= assignment.title %><br>
   Assignable Type: <%= assignment.assignable.class.name %><br>
   Assignable Name: <%= assignment.assignable.name %><br>
-  <% unless TEAM_ADMIN.include? assignment.title %>
-    <%= link_to 'Remove Assignment', admin_user_assignment_path(@user, assignment),
-                 method: :delete,
-                 data: { confirm: 'Are you sure?' } %><br>
-  <% end %>
+  <%= link_to 'Remove Assignment', admin_user_assignment_path(@user, assignment),
+               method: :delete,
+               data: { confirm: 'Are you sure?' } %><br>
 <% end %>
 
 <%= link_to 'Back to Users', admin_users_path %>
