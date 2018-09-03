@@ -215,7 +215,7 @@ Region.all.each do |region|
 
         Checkpoint.all.each do |checkpoint|
           team.entries.create(checkpoint: checkpoint,
-            challenge_id: random_challenge_id,
+            challenge_id: random_challenge_id, eligible: (team.id % 2 == 0),
             justification: 'We think we would do excellently in this challenge.')
         end
       end
