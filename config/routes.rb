@@ -31,7 +31,7 @@ Rails.application.routes.draw do
 
   namespace :admin do
     resources :assignments, :sponsorship_types, :sponsors, :sponsorships,
-      :event_partnerships, :challenge_scorecards
+      :event_partnerships, :challenge_scorecards, :teams
 
     resources :competitions do
       resources :assignments, controller: 'competitions/assignments'
@@ -57,6 +57,10 @@ Rails.application.routes.draw do
     resources :events do
       resources :registrations, :event_partnerships
       resources :assignments, controller: 'events/assignments'
+    end
+
+    resources :teams do
+      resources :entries, controller: 'teams/entries'
     end
 
     resources :users do

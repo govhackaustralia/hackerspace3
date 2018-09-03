@@ -6,6 +6,9 @@ class Entry < ApplicationRecord
 
   validates :justification, presence: true
 
+  validates :challenge_id, uniqueness: { scope: :team_id,
+    message: "Teams are not able to enter the same Challenge twice." }
+
   def average_score
     cards = ChallengeScorecard.where(entry: self)
     total_score = 0

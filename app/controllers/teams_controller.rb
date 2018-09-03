@@ -2,6 +2,7 @@ class TeamsController < ApplicationController
   def index
     @competition = Competition.current
     @teams = @competition.teams.where(published: true)
+    @id_teams_projects = Team.id_teams_projects(@teams.pluck(:id))
     respond_to do |format|
       format.html
       format.csv { send_data @teams.to_csv }

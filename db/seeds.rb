@@ -189,7 +189,7 @@ Region.all.each do |region|
 
     if event_type == COMPETITION_EVENT
       10.times do |team_time|
-        team = event.teams.create
+        team = event.teams.create(published: true)
 
         team.assign_leader(User.find(random_user_id))
 

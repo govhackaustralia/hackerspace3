@@ -2,6 +2,7 @@ class Team < ApplicationRecord
   has_many :assignments, as: :assignable
   belongs_to :event
   has_one :competition, through: :event
+  has_one :region, through: :event
   has_many :projects, dependent: :destroy
   has_many :team_data_sets, dependent: :destroy
   has_many :entries, dependent: :destroy
@@ -77,6 +78,14 @@ class Team < ApplicationRecord
     competition.available_checkpoints(time_zone).present?
   end
 
+  def available_challenges(challenge_type)
+    if challenge_type == REGIONAL
+     region.challenges.where.not(id: entries.pluck(:challenge_id), approved: false)
+    else
+      Region.root.challenges.where.not(id: entries.pluck(:challenge_id), approved: false)
+    end
+  end
+
   def self.to_csv(options = {})
     project_columns = %w[team_name source_code_url video_url homepage_url created_at updated_at]
     CSV.generate(options) do |csv|
@@ -94,6 +103,8 @@ class Team < ApplicationRecord
     projects = Project.where(team_id: team_ids.uniq).order(created_at: :desc)
     id_projects = Project.id_projects(projects)
 
+    id_events = Event.id_events(teams.pluck(:event_id))
+
     team_id_to_projects = {}
     projects.each do |project|
       if team_id_to_projects[project.team_id].nil?
@@ -108,7 +119,7 @@ class Team < ApplicationRecord
                 else
                   team_id_to_projects[team.id].first
                 end
-      id_team_projects[team.id] = { team: team, current_project: project }
+      id_team_projects[team.id] = { team: team, current_project: project, event: id_events[team.event_id] }
     end
 
     id_team_projects

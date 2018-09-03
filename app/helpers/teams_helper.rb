@@ -3,7 +3,10 @@ module TeamsHelper
     return teams if term.nil?
     filtered_teams = []
     @teams.each do |team|
-      team_string = "#{team.name} #{team.event.name}".downcase
+      team_obj = @id_teams_projects[team.id]
+      team_name = team_obj[:current_project].team_name
+      event_name = team_obj[:event].name
+      team_string = "#{team_name} #{event_name}".downcase
       filtered_teams << team if team_string.include? term.downcase
     end
     filtered_teams

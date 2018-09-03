@@ -187,3 +187,8 @@ REGIONAL_CHALLENGE = 'Regional Challenge'
 PEOPLES_CHOICE = 'People\'s Choice'
 
 JUDGEMENT_CATEGORIES = [REGIONAL_CHALLENGE, PEOPLES_CHOICE]
+
+# Challenge Types
+
+REGIONAL = 'Regional'
+NATIONAL = 'National'

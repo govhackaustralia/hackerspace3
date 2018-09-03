@@ -12,7 +12,7 @@
   <%= link_to 'Download CSV', teams_path(format: 'csv') %></br>
 
   <% filter_teams(@teams, params[:term]).each do |team| %>
-    <h3><%= team.current_project.team_name %></h3>
+    <h3><%= @id_teams_projects[team.id][:current_project].team_name %></h3>
     <%= link_to 'Go to Team', team_path(team) %><br>
   <% end %>
 

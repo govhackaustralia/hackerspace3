@@ -1,0 +1,16 @@
+<h2>Teams for <%= @competition.name %></h2>
+
+<%= form_tag admin_teams_path, method: :get do %>
+  <%= text_field_tag :term, params[:term] %>
+  <%= submit_tag 'Search' %>
+<% end %>
+<%= link_to 'Clear Search', admin_teams_path %></br>
+<%= link_to 'Download CSV', teams_path(format: 'csv') %></br>
+
+<% filter_teams(@teams, params[:term]).each do |team| %>
+
+  <h3><%= @id_teams_projects[team.id][:current_project].team_name %></h3>
+  <%= link_to 'Go to Team', admin_team_path(team) %><br>
+<% end %>
+
+<%= link_to 'Back to Account Management', manage_account_path %>

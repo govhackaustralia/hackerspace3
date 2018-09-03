@@ -1,0 +1,35 @@
+<h2><%= @project.team_name %></h2>
+
+Event: <%= @event.name %><br>
+Region: <%= @region.name %><br>
+
+<h3>Project Version Management</h3>
+Project Version Count: <%= @projects.count %><br>
+Current Version Created At: <%= @project.created_at %>
+
+<h3>Challenge Management<h3>
+
+<% @checkpoints.each do |checkpoint| %>
+  <h4><%= checkpoint.name %> Checkpoint</h4>
+
+  <h4>National Challenges</h4>
+  <%= render 'challenge_category', locals:
+   { checkpoint: checkpoint,
+     type: NATIONAL,
+     max_challenges: checkpoint.max_national_challenges,
+     challenges: @team.national_challenges(checkpoint),
+     available_challenges: @available_national_challenges }
+  %>
+
+  <h4>Regional Challenges</h4>
+  <%= render 'challenge_category', locals:
+    { checkpoint: checkpoint,
+      type: REGIONAL,
+      max_challenges: checkpoint.max_regional_challenges,
+      challenges: @team.regional_challenges(checkpoint),
+      available_challenges: @available_regional_challenges }
+  %>
+
+<% end %>
+
+<%= link_to 'Back to Team Management', admin_teams_path %>
