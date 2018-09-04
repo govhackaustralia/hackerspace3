@@ -23,25 +23,26 @@
 	</thead>
 	<tbody>
 <% @event.registrations.each do |registration| %>
+	<% user = registration.assignment.user %>
 	<tr>
-		<td><%= registration.assignment.user.full_name %></td>
-		<td><%= registration.assignment.user.preferred_name %></td>
-		<td><%= registration.assignment.user.organisation_name %></td>
-		<td><%= registration.assignment.user.dietary_requirements %></td>
+		<td><%= user.full_name %></td>
+		<td><%= user.preferred_name %></td>
+		<td><%= user.organisation_name %></td>
+		<td><%= user.dietary_requirements %></td>
 		<td><%= registration.status %></td>
-		<td><%= registration.assignment.user.registration_type %></td>
-		<td><%= registration.assignment.user.parent_guardian %></td>
-		<td><%= registration.assignment.user.request_not_photographed %></td>
-		<td><%= registration.assignment.user.data_cruncher %></td>
-		<td><%= registration.assignment.user.coder %></td>
-		<td><%= registration.assignment.user.creative %></td>
-		<td><%= registration.assignment.user.facilitator %></td>
+		<td><%= user.registration_type %></td>
+		<td><%= user.parent_guardian %></td>
+		<td><%= user.request_not_photographed %></td>
+		<td><%= user.data_cruncher %></td>
+		<td><%= user.coder %></td>
+		<td><%= user.creative %></td>
+		<td><%= user.facilitator %></td>
 		<td><%= link_to 'Edit', edit_admin_event_registration_path(@event, registration) %></td>
 	</tr>
 <% end %>
 	</tbody>
 </table>
 
+<%= link_to 'Download CSV', admin_event_registrations_path(@event, format: 'csv') %></br>
 <%= link_to 'New Registration', new_admin_event_registration_path(@event) %><br>
 <%= link_to "Back to #{@event.name} Event", admin_region_event_path(@event.region, @event) %><br>
-

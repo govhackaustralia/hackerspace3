@@ -4,6 +4,10 @@ class Admin::RegistrationsController < ApplicationController
 
   def index
     @event = Event.find(params[:event_id])
+    respond_to do |format|
+      format.html
+      format.csv { send_data @event.registrations_to_csv }
+    end
   end
 
   def new

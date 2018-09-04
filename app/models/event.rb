@@ -98,6 +98,18 @@ class Event < ApplicationRecord
     end
   end
 
+  def registrations_to_csv(options = {})
+    user_columns = %w[full_name preferred_name organisation_name dietary_requirements registration_type parent_guardian request_not_photographed data_cruncher coder creative facilitator]
+    combined = user_columns + ['status']
+    CSV.generate(options) do |csv|
+      csv << combined
+      registrations.all.each do |registration|
+        user_values = registration.user.attributes.values_at(*user_columns)
+        csv << user_values + [registration.status]
+      end
+    end
+  end
+
   def self.id_events(event_ids)
     events = where(id: event_ids.uniq)
     id_events = {}
