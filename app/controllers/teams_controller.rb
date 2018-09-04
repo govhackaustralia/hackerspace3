@@ -25,10 +25,10 @@ class TeamsController < ApplicationController
       if @events.empty?
         flash[:alert] = 'To create a new team, first register for a competition event.'
         redirect_to root_path
-      else
-        flash[:alert] = 'To create a now team, first sign in.'
-        redirect_to root_path
       end
+    else
+      flash[:alert] = 'To create a now team, first sign in.'
+      redirect_to root_path
     end
   end
 

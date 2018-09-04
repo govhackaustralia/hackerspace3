@@ -1,6 +1,6 @@
 <h2>Creat New Team</h2>
 
-<%= form_for [:team_management, @team] do |form| %>
+<%= form_for @team do |form| %>
 
   <%= form.label :event_id %>
   <%= form.select :event_id, options_from_collection_for_select(@events, :id, :name, @team.event_id.to_s) %><br>
