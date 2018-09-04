@@ -10,7 +10,8 @@ class Entry < ApplicationRecord
                                     message: 'Teams are not able to enter the same Challenge twice.' }
 
   validate :entries_must_not_exceed_max_regional_allowed_for_checkpoint,
-           :entries_must_not_exceed_max_national_allowed_for_checkpoint
+           :entries_must_not_exceed_max_national_allowed_for_checkpoint,
+           :teams_cannot_enter_regional_challenges_from_regions_other_than_their_own
 
   def entries_must_not_exceed_max_regional_allowed_for_checkpoint
     return unless challenge.region.parent_id.nil?
@@ -27,6 +28,14 @@ class Entry < ApplicationRecord
     max_allowed = checkpoint.max_national_challenges
     if current_count == max_allowed
       errors.add(:checkpoint_id, 'Maximum National Challenges already entered for this Checkpoint')
+    end
+  end
+
+  def teams_cannot_enter_regional_challenges_from_regions_other_than_their_own
+    challenge_region = challenge.region
+    return if challenge_region.parent_id.nil?
+    if team.region != challenge_region
+      errors.add(:checkpoint_id, 'Teams are not able to enter Challenges in Regions other than their own')
     end
   end
 

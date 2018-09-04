@@ -28,6 +28,14 @@ class Challenge < ApplicationRecord
     collected.flatten
   end
 
+  def eligible_teams
+    if region.parent_id.nil?
+      competition.teams
+    else
+      region.teams
+    end
+  end
+
   require 'csv'
 
   def self.to_csv(options = {})

@@ -159,6 +159,8 @@ Region.all.each do |region|
 
   EVENT_TYPES.each do |event_type|
 
+    next if event_name == 'Australia' && event_type == COMPETITION_EVENT
+
     event = region.events.create(event_type: event_type, competition: comp,
       name: event_name, registration_type: OPEN, capacity: 50,
       email: "#{event_name}@mail.com", twitter: '@qld',
@@ -189,7 +191,7 @@ Region.all.each do |region|
 
     if event_type == COMPETITION_EVENT
       10.times do |team_time|
-        team = event.teams.create(published: true)
+        team = event.teams.create
 
         team.assign_leader(User.find(random_user_id))
 

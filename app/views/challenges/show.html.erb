@@ -67,27 +67,27 @@
 </section>
 <h3>Team Entries</h3>
 
-<%= pluralize @challenge.entries.count, 'team' %> entered into challenge.<br>
+<%= pluralize @challenge.entries.count, 'team' %> have entered into this challenge.<br>
 
-<h4>Your Team Entries</h4>
 <% if user_signed_in? %>
-  <% current_user.teams.each do |team| %>
-    <h5><%= team.name %></h4>
-    <% if (entry = Entry.find_by(team: team, challenge: @challenge)).present? %>
-      Team entered into this challenge for <%= entry.checkpoint.name %> Checkpoint.<br>
-    <% else %>
-      <% if team.available_checkpoints? %>
-        <%= link_to 'Enter Challenge', new_team_management_team_entry_path(team, challenge_id: @challenge.id) %><br>
-      <% else %>
-        All Checkpoints have passed.<br>
-      <% end %>
-    <% end %>
-  <% end %>
+	<% unless @user_eligible_teams.empty? %>
+		<h4>Your Team Entries</h4>
+	  <% @user_eligible_teams.each do |team| %>
+	    <h5><%= team.name %></h4>
+	    <% if (entry = Entry.find_by(team: team, challenge: @challenge)).present? %>
+	      Team entered into this challenge for <%= entry.checkpoint.name %> Checkpoint.<br>
+	    <% else %>
+	      <% if team.available_checkpoints? %>
+	        <%= link_to 'Enter Challenge', new_team_management_team_entry_path(team, challenge_id: @challenge.id) %><br>
+	      <% else %>
+	        All Checkpoints have passed.<br>
+	      <% end %>
+	    <% end %>
+	  <% end %>
+	<% end %>
 <% else %>
   Sign in to enter your team into this challenge.<br>
 <% end %>
-
-<h4>All team Entries</h4>
 
 <% passed_competition_checkpoints.each do |checkpoint| %>
 

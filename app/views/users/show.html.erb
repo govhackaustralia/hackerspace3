@@ -5,8 +5,8 @@
 	<section>
 		<article>
 			<% if false %>
-			<%= render 'user_profile_pic'%>
-			<%= link_to 'Change Profile Pic', update_personal_details_path(profile_pic: true) %><br>
+				<%= render 'user_profile_pic'%>
+				<%= link_to 'Change Profile Pic', update_personal_details_path(profile_pic: true) %><br>
 			<% end %>
 			<%= render 'user_contact', locals: { user: @user } %>
 			<%= link_to 'Update Personal Details' , update_personal_details_path %><br>
@@ -101,12 +101,16 @@
 			<% end %>
 		</article>
 		<article>
-			<% if @competition.started? && (teams = @user.event_assignment.teams).present? %>
+			<% if @competition.started? %>
 				<h3>My Favourite Projects</h3>
-				<% teams.each do |team| %>
-					<h4><%= team.name %></h4>
-					Event: <%= team.event.name %><br>
-					<%= link_to "Go to #{team.name}", team_path(team) %><br>
+				<% if (teams = @user.event_assignment.teams).present? %>
+					<% teams.each do |team| %>
+						<h4><%= team.name %></h4>
+						Event: <%= team.event.name %><br>
+						<%= link_to "Go to #{team.name}", team_path(team) %><br>
+					<% end %>
+				<% else %>
+					<p>Projects that you favourite will appear here.</p>
 				<% end %>
 			<% end %>
 		</article>
