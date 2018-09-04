@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_09_03_120217) do
+ActiveRecord::Schema.define(version: 2018_09_03_232308) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -91,6 +91,7 @@ ActiveRecord::Schema.define(version: 2018_09_03_120217) do
     t.integer "sponsor_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "approved", default: false
     t.index ["challenge_id"], name: "index_challenge_sponsorships_on_challenge_id"
     t.index ["sponsor_id"], name: "index_challenge_sponsorships_on_sponsor_id"
   end
@@ -323,6 +324,7 @@ ActiveRecord::Schema.define(version: 2018_09_03_120217) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "published", default: false
+    t.boolean "youth_team", default: false
     t.index ["event_id"], name: "index_teams_on_event_id"
     t.index ["project_id"], name: "index_teams_on_project_id"
     t.index ["published"], name: "index_teams_on_published"

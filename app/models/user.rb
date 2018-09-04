@@ -5,6 +5,7 @@ class User < ApplicationRecord
          :omniauthable
 
   has_many :assignments, dependent: :destroy
+  has_many :registrations, through: :assignments
 
   # Gravitar Gem
   include Gravtastic
@@ -119,6 +120,11 @@ class User < ApplicationRecord
 
   def registering_account?
     how_did_you_hear.blank?
+  end
+
+  def competition_events_attending(competition)
+    event_ids = registrations.where(status: ATTENDING).pluck(:event_id)
+    Event.where(id: event_ids, competition: competition, event_type: COMPETITION_EVENT)
   end
 
   def self.new_user_from_google(data)

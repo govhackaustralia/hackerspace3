@@ -1,4 +1,6 @@
 class TeamManagement::TeamsController < ApplicationController
+  before_action :authenticate_user!
+
   def show
     @team = Team.find(params[:id])
     @current_project = @team.current_project
@@ -7,18 +9,18 @@ class TeamManagement::TeamsController < ApplicationController
   end
 
   def new
-    @event = Event.find_by(identifier: params[:event_identifier])
-    @team = @event.teams.new
+    @competition = Competition.current
+    @team = Team.new
+    @events = current_user.competition_events_attending(@competition)
   end
 
   def edit
     @team = Team.find(params[:id])
-    @events = Event.where(event_type: COMPETITION_EVENT, competition: Competition.current)
+    @events = @team.member_competition_events
   end
 
   def create
-    @event = Event.find(params[:event_identifier])
-    @team = @event.teams.new
+    @team = Team.new(team_params)
     if @team.save
       handle_team_save
     else
@@ -65,6 +67,6 @@ class TeamManagement::TeamsController < ApplicationController
   end
 
   def team_params
-    params.require(:team).permit(:event_id, :published, :thumbnail, :high_res_image)
+    params.require(:team).permit(:event_id, :published, :thumbnail, :high_res_image, :youth_team)
   end
 end

@@ -1,25 +1,26 @@
 <h2><%= @team.name %></h2>
 
-<h3>People's Choice</h3>
-
 <% if user_signed_in? %>
 
-  <% if @user.in_team?(@team) %>
+  <% if false %>
+    <h3>People's Choice</h3>
+    <% if @user.in_team?(@team) %>
 
-    You are not elibable to vote for this project.
+      You are not elibable to vote for this project.
 
-  <% elsif @peoples_scorecard.present? %>
+    <% elsif @peoples_scorecard.present? %>
 
-    You gave this team a score of <%= @peoples_scorecard.display_score %><br>
+      You gave this team a score of <%= @peoples_scorecard.display_score %><br>
 
-    <%= link_to 'Update Scorecard', edit_peoples_scorecard_path(@peoples_scorecard) %>
+      <%= link_to 'Update Scorecard', edit_peoples_scorecard_path(@peoples_scorecard) %>
 
-  <% else %>
+    <% else %>
 
-    You are yet to judge this project, vote below.<br>
+      You are yet to judge this project, vote below.<br>
 
-    <%= link_to 'Vote', new_peoples_scorecard_path(team_id: @team.id) %>
+      <%= link_to 'Vote', new_peoples_scorecard_path(team_id: @team.id) %>
 
+    <% end %>
   <% end %>
 
   <h3>Favourites</h3>

@@ -84,6 +84,10 @@ class Competition < ApplicationRecord
     start_time.to_formatted_s(:number) < Time.now.to_formatted_s(:number)
   end
 
+  def not_finished?
+    Time.now.to_formatted_s(:number) < end_time.to_formatted_s(:number)
+  end
+
   def filter_data_sets(term)
     sets = data_sets.order(:name)
     id_regions = Region.id_regions(Region.all.pluck(:id))

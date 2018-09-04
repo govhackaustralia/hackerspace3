@@ -86,6 +86,13 @@ class Team < ApplicationRecord
     end
   end
 
+  def member_competition_events
+    user_ids = assignments.where(title: [TEAM_LEADER, TEAM_MEMBER]).pluck(:user_id)
+    assignment_ids = Assignment.where(user_id: user_ids, title: [PARTICIPANT, VIP]).pluck(:id)
+    event_ids = Registration.where(assignment_id: assignment_ids).pluck(:event_id)
+    Event.where(id: event_ids.uniq, event_type: COMPETITION_EVENT)
+  end
+
   def self.to_csv(options = {})
     project_columns = %w[team_name source_code_url video_url homepage_url created_at updated_at]
     CSV.generate(options) do |csv|

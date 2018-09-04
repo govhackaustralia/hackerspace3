@@ -10,6 +10,14 @@
   <% end %>
   <%= link_to 'Clear Search', teams_path %></br>
   <%= link_to 'Download CSV', teams_path(format: 'csv') %></br>
+  <% if user_signed_in? && @competition.not_finished? %>
+    <% if @attending_events.present? %>
+      <%= link_to 'Create New Team Project', new_team_management_team_path %><br>
+    <% else %>
+      <strong>Please register for a competition event to create a team.</strong><br>
+      <%= link_to 'Competition Events', competition_events_path %><br>
+    <% end %>
+  <% end %>
 
   <% filter_teams(@teams, params[:term]).each do |team| %>
     <h3><%= @id_teams_projects[team.id][:current_project].team_name %></h3>
