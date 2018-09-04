@@ -44,6 +44,6 @@ class TeamManagement::TeamsController < ApplicationController
   end
 
   def team_params
-    params.require(:team).permit(:event_id, :published, :thumbnail, :high_res_image, :youth_team)
+    params.require(:team).permit(:event_id, :thumbnail, :high_res_image, :youth_team)
   end
 end

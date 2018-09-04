@@ -44,6 +44,10 @@ class TeamsController < ApplicationController
 
   private
 
+  def team_params
+    params.require(:team).permit(:event_id, :youth_team)
+  end
+
   def handle_team_save
     @team.assign_leader(current_user)
     @team.projects.create(team_name: "Team #{@team.id}", user: current_user)

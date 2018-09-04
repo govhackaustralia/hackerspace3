@@ -22,14 +22,16 @@ class Admin::TeamsController < ApplicationController
 
   def update
     @team = Team.find(params[:id])
-    @project = Project.find(params[:project_id])
-    @team.update(project_id: @project.id)
-    if @team.save
+    if params[:project_id].present?
+      @project = Project.find(params[:project_id])
+      @team.update(project_id: @project.id)
       flash[:notice] = 'Current Project Updated'
-    else
-      flash[:alert] = @team.errors.full_messages.to_sentence
+      redirect_to admin_team_project_path(@team, @project)
+    elsif params[:published].present?
+      @team.update(published: params[:published])
+      flash[:notice] = 'Team Updated'
+      redirect_to admin_team_path(@team)
     end
-    redirect_to admin_team_project_path(@team, @project)
   end
 
   private
