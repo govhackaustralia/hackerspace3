@@ -91,9 +91,9 @@
 					<h4><%= "#{team.name} entered @ #{team.event.name}" %></h4>
 					<% assignment = Assignment.find_by(user: @user, assignable: team) %>
 
-					<%= form_for [@user, assignment] do |f| %>
-						<%= f.submit 'Accept Invitation and Go to Team' %>
-					<% end %>
+					<%= link_to 'Accept Invitation and Go to Team',
+							team_management_team_assignment_path(
+								team, assignment, title: TEAM_MEMBER), method: :patch %><br>
 
 					<%= link_to 'Decline Invitation', user_assignment_path(@user, assignment), method: :delete,
 												data: { confirm: 'Are you sure?' } %><br>

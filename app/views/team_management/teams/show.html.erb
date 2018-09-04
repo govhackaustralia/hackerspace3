@@ -44,7 +44,7 @@ This team currently has <%= pluralize @team.team_data_sets.count, 'data set' %>.
   <strong>+ <%= pluralize team_members.count, 'other team member' %>.</strong><br>
 <% end %>
 <% if (invitees = @team.invitees).present? %>
-  <strong><%= pluralize invitees.count, 'invitee' %> invited.</strong><br>
+  <strong><%= pluralize invitees.count, 'invitee' %>.</strong><br>
 <% end %>
 
 <%= link_to 'Manage Team Members', team_management_team_assignments_path(@team) %><br>
