@@ -1,13 +1,12 @@
 class TeamManagement::ProjectsController < ApplicationController
   before_action :authenticate_user!
+  before_action :check_user_team_privileges!
 
   def edit
-    @team = Team.find(params[:team_id])
     @project = Project.find(params[:id])
   end
 
   def update
-    @team = Team.find(params[:team_id])
     @project = @team.projects.new(project_params)
     @project.user = current_user
     if @project.save
@@ -29,5 +28,12 @@ class TeamManagement::ProjectsController < ApplicationController
     @team.update(project_id: @project.id)
     flash[:notice] = 'Team Project updated'
     redirect_to team_management_team_path(@team)
+  end
+
+  def check_user_team_privileges!
+    @team = Team.find(params[:team_id])
+    return if @team.permission?(current_user)
+    flash[:notice] = 'You do not have access permissions for this team.'
+    redirect_to root_path
   end
 end

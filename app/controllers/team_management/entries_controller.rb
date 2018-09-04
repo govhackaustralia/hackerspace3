@@ -1,13 +1,12 @@
 class TeamManagement::EntriesController < ApplicationController
   before_action :authenticate_user!
+  before_action :check_user_team_privileges!
 
   def index
-    @team = Team.find(params[:team_id])
     @competition = @team.event.competition
   end
 
   def new
-    @team = Team.find(params[:team_id])
     @challenge = Challenge.find(params[:challenge_id])
     @entry = @team.entries.new(challenge: @challenge)
     @checkpoints = @challenge.competition.available_checkpoints(@team.time_zone)
@@ -38,9 +37,15 @@ class TeamManagement::EntriesController < ApplicationController
   end
 
   def create_new_entry
-    @team = Team.find(params[:team_id])
     @entry = @team.entries.new(entry_params)
     @challenge = Challenge.find(params[:challenge_id])
     @entry.challenge = @challenge
+  end
+
+  def check_user_team_privileges!
+    @team = Team.find(params[:team_id])
+    return if @team.permission?(current_user)
+    flash[:notice] = 'You do not have access permissions for this team.'
+    redirect_to root_path
   end
 end

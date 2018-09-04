@@ -1,9 +1,8 @@
 class TeamManagement::Teams::AssignmentsController < ApplicationController
   before_action :authenticate_user!
+  before_action :check_user_team_privileges!
 
-  def index
-    @team = Team.find(params[:team_id])
-  end
+  def index; end
 
   def new
     new_assignment
@@ -18,7 +17,7 @@ class TeamManagement::Teams::AssignmentsController < ApplicationController
     create_new_assignment
     if @assignment.save
       flash[:notice] = "New #{params[:title]} Assignment Added."
-      redirect_to team_management_team_assignments_path(@assignable)
+      redirect_to team_management_team_assignments_path(@team)
     else
       flash.now[:alert] = @assignment.errors.full_messages.to_sentence
       render :new
@@ -28,7 +27,6 @@ class TeamManagement::Teams::AssignmentsController < ApplicationController
   def update
     @assignment = Assignment.find(params[:id])
     old_title = @assignment.title
-    @team = @assignment.assignable
     @assignment.update(title: params[:title])
     if @assignment.save
       if old_title == INVITEE
@@ -49,7 +47,6 @@ class TeamManagement::Teams::AssignmentsController < ApplicationController
 
   def destroy
     @assignment = Assignment.find(params[:id])
-    @team = @assignment.assignable
     @assignment.destroy
     flash[:notice] = 'Assignment Removed'
     redirect_to team_management_team_assignments_path(@team)
@@ -57,16 +54,22 @@ class TeamManagement::Teams::AssignmentsController < ApplicationController
 
   private
 
+  def check_user_team_privileges!
+    @team = Team.find(params[:team_id])
+    return if @team.permission?(current_user)
+    flash[:notice] = 'You do not have access permissions for this team.'
+    redirect_to root_path
+  end
+
   def new_assignment
-    @assignable = Team.find(params[:team_id])
-    @assignment = @assignable.assignments.new
+    @team = Team.find(params[:team_id])
+    @assignment = @team.assignments.new
     @title = params[:title]
   end
 
   def create_new_assignment
-    @assignable = Team.find(params[:team_id])
     @user = User.find(params[:user_id])
-    @assignment = @assignable.assignments.new(user: @user, title: params[:title])
+    @assignment = @team.assignments.new(user: @user, title: params[:title])
   end
 
   def search_other_fields
@@ -74,7 +77,7 @@ class TeamManagement::Teams::AssignmentsController < ApplicationController
   end
 
   def search_for_existing_assignment
-    @existing_assignment = @user.assignments.find_by(assignable: @assignable, title: [TEAM_LEADER, TEAM_MEMBER, INVITEE])
+    @existing_assignment = @user.assignments.find_by(assignable: @team, title: [TEAM_LEADER, TEAM_MEMBER, INVITEE])
   end
 
   def search_user_competition_event

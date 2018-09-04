@@ -4,7 +4,7 @@ class Admin::ChallengeSponsorshipsController < ApplicationController
 
   def new
     @challenge = Challenge.find(params[:challenge_id])
-    @challenge_sponsorship = @challenge.challenge_sponsorships.new()
+    @challenge_sponsorship = @challenge.challenge_sponsorships.new
     return if params[:term].blank?
     search_sponsors
   end

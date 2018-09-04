@@ -33,7 +33,7 @@ class ChallengesController < ApplicationController
 
   def filter_challenges
     @region_challenges = {}
-    @regions.each {|r| @region_challenges[r.id] = [] }
+    @regions.each { |r| @region_challenges[r.id] = [] }
     if params[:term].present?
       @id_regions = Region.id_regions(Region.all.pluck(:id))
       @challenges.each { |challenge| search_challenge_string(challenge, params[:term]) }

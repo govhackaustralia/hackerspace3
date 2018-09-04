@@ -7,10 +7,10 @@ class Entry < ApplicationRecord
   validates :justification, presence: true
 
   validates :team_id, uniqueness: { scope: :challenge_id,
-    message: "Teams are not able to enter the same Challenge twice." }
+                                    message: 'Teams are not able to enter the same Challenge twice.' }
 
   validate :entries_must_not_exceed_max_regional_allowed_for_checkpoint,
-    :entries_must_not_exceed_max_national_allowed_for_checkpoint
+           :entries_must_not_exceed_max_national_allowed_for_checkpoint
 
   def entries_must_not_exceed_max_regional_allowed_for_checkpoint
     return unless challenge.region.parent_id.nil?

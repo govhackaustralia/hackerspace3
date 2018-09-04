@@ -127,6 +127,10 @@ class User < ApplicationRecord
     Event.where(id: event_ids, competition: competition, event_type: COMPETITION_EVENT)
   end
 
+  def competition_event_participant?
+    competition_events_attending(Competition.current).present?
+  end
+
   def self.new_user_from_google(data)
     User.new(full_name: data['name'],
              email: data['email'],

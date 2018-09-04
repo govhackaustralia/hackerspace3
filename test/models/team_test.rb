@@ -21,9 +21,4 @@ class TeamTest < ActiveSupport::TestCase
     @team.destroy
     assert(Project.find_by(team: @team).nil?)
   end
-
-  test 'change_event' do
-    @second_event = Event.second
-    @team.change_event(@second_event)
-  end
 end

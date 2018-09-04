@@ -4,7 +4,7 @@ class Admin::ChallengeDataSetsController < ApplicationController
 
   def new
     @challenge = Challenge.find(params[:challenge_id])
-    @challenge_data_set = @challenge.challenge_data_sets.new()
+    @challenge_data_set = @challenge.challenge_data_sets.new
     return if params[:term].blank?
     search_data_sets
   end

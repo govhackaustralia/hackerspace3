@@ -24,7 +24,7 @@ class Admin::Teams::EntriesController < ApplicationController
 
   def destroy
     @team = Team.find(params[:team_id])
-    @entry =  Entry.find(params[:id])
+    @entry = Entry.find(params[:id])
     @entry.destroy
     flash[:notice] = 'Challenge Entry Removed'
     redirect_to admin_team_path(@team)

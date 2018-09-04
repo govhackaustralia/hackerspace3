@@ -40,10 +40,6 @@ class Team < ApplicationRecord
     projects.order(created_at: :desc).first
   end
 
-  def change_event(event)
-    update(event: event)
-  end
-
   def name
     current_project.team_name
   end
@@ -80,7 +76,7 @@ class Team < ApplicationRecord
 
   def available_challenges(challenge_type)
     if challenge_type == REGIONAL
-     region.challenges.where.not(id: entries.pluck(:challenge_id), approved: false)
+      region.challenges.where.not(id: entries.pluck(:challenge_id), approved: false)
     else
       Region.root.challenges.where.not(id: entries.pluck(:challenge_id), approved: false)
     end
@@ -91,6 +87,10 @@ class Team < ApplicationRecord
     assignment_ids = Assignment.where(user_id: user_ids, title: [PARTICIPANT, VIP]).pluck(:id)
     event_ids = Registration.where(assignment_id: assignment_ids).pluck(:event_id)
     Event.where(id: event_ids.uniq, event_type: COMPETITION_EVENT)
+  end
+
+  def permission?(user)
+    assignments.where(user: user).present?
   end
 
   def self.to_csv(options = {})
