@@ -77,7 +77,7 @@
 			<% end %>
 		</article>
 		<article>
-			<% if @competition.started? && (teams = @user.joined_teams).present? %>
+			<% if (@competition.started? || current_user.region_privileges?) && (teams = @user.joined_teams).present? %>
 				<h3>My Team Projects</h3>
 				<% teams.each do |team| %>
 					<h4><%= team.name %></h4>

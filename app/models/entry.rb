@@ -13,6 +13,17 @@ class Entry < ApplicationRecord
            :entries_must_not_exceed_max_national_allowed_for_checkpoint,
            :teams_cannot_enter_regional_challenges_from_regions_other_than_their_own
 
+  after_create :update_eligible
+
+  def update_eligible(project = nil)
+    project = team.current_project if project.nil?
+    if project.data_story.present? && project.video_url.present? && project.source_code_url.present?
+      update(eligible: true)
+    else
+      update(eligible: false)
+    end
+  end
+
   def entries_must_not_exceed_max_regional_allowed_for_checkpoint
     return unless challenge.region.parent_id.nil?
     current_count = team.regional_challenges(checkpoint).count

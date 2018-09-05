@@ -8,6 +8,7 @@ user.skip_confirmation_notification!
 user.save
 
 user.make_site_admin
+user.update(accepted_terms_and_conditions: true, how_did_you_hear: 'jas')
 
 100.times do |number|
   user = nil
@@ -217,7 +218,7 @@ Region.all.each do |region|
 
         Checkpoint.all.each do |checkpoint|
           team.entries.create(checkpoint: checkpoint,
-            challenge_id: random_challenge_id, eligible: (team.id % 2 == 0),
+            challenge_id: random_challenge_id,
             justification: 'We think we would do excellently in this challenge.')
         end
       end
