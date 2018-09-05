@@ -5,6 +5,9 @@ class ChallengeScorecard < ApplicationRecord
   has_many :challenge_judgements, dependent: :destroy, inverse_of: :challenge_scorecard
   accepts_nested_attributes_for :challenge_judgements
 
+  validates :assignment_id, uniqueness: { scope: :entry_id,
+                                    message: 'Scorecard already exists' }
+
   def team
     entry.team
   end
