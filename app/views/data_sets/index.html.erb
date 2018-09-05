@@ -29,6 +29,11 @@
 		<h4>AURIN</h4>
 		<p>data.aurin.org.au</p>
 	</div></article></a>
+	
+	<a href="http://govhack.bom.gov.au/"><article><div>
+        <h4>Bureau of Meteorology</h4>
+        <p>govhack.bom.gov.au</p>
+    </div></article></a>
 
 	<a href="https://data.csiro.au/dap/"><article><div>
 		<h4>CSIRO Data Access Portal</h4>
@@ -104,6 +109,11 @@
 		<h4>Brisbane City Council</h4>
 		<p>data.brisbane.qld.gov.au</p>
 	</div></article></a>
+	
+	<a href="http://open-darwin.opendata.arcgis.com/"><article><div>
+		<h4>City of Darwin</h4>
+		<p>open-darwin.opendata.arcgis.com</p>
+	</div></article></a>
 
 	<a href="http://data-logancity.opendata.arcgis.com/"><article><div>
 		<h4>Logan City Council</h4>
@@ -134,10 +144,10 @@
 	</thead>
 	<tbody>
 
-<% @data_sets.each do |data_set| %>
+<% @data_sets.order(:name).each do |data_set| %>
 		<tr>
 			<td><%= data_set.name %></td>
-			<td><%= simple_format(auto_link(data_set.description)) %></td>
+			<td><%= markdown data_set.description %></td>
 			<td><%= link_to(data_set.url, data_set.url, {:class => "dataseturl"}) %></td>
 			<td><%= @id_regions[data_set.region_id].name %></td>
 		</tr>
