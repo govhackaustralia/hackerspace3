@@ -16,6 +16,10 @@
 	padding: 1em;
 }
 
+.project_index p {
+	padding: 0em 2.25em;
+}
+
 .project_index section.later {
 	padding: 1.5em 1.5em;
 }
@@ -174,4 +178,42 @@
 	font-size: 0.5em;
 	padding: 0.5em;
 	display: none;
+}
+
+
+.project_index table {
+	box-sizing: border-box;
+	margin-top: 2em;
+	margin-left: 2em;
+	padding: 2em 2em;
+	border-collapse: collapse
+}
+
+.project_index table .dataseturl {
+	font-size: small;
+}
+
+.project_index table {
+	width: 100%;
+}
+
+.project_index table, .project_index th, .project_index td {
+	border: 1px solid #ca1e56;
+	padding: 0.25em 1em;
+	box-sizing: border-box;
+}
+
+.project_index tr td {
+	width: 50%;
+}
+
+
+.project_index th {
+	background-color: #ca1e56;
+	color: #ddd;
+}
+
+.project_index table a {
+	text-decoration: none;
+	color:#4c9ad2;
 }

@@ -12,7 +12,7 @@
 <% if competition_closed? %>
   <strong>Competition Closed No More Edits Possible</strong><br>
 <% else %>
-  <p><%= link_to 'Update Team Details', edit_team_management_team_path(@team) %></p>
+  <aside><p><%= link_to 'Update Team Details', edit_team_management_team_path(@team) %></p></aside>
   <p><%= link_to 'Update Thumbnail', edit_team_management_team_path(@team, thumbnail: true) %></p>
   <p><%= link_to 'Update High Resolution Image', edit_team_management_team_path(@team, high_res_image: true) %></p>
 <% end %>
@@ -22,15 +22,15 @@
 
 <%= render 'teams/team_project_info' %>
 <aside>
-  <p><%= link_to 'Update Project', edit_team_management_team_project_path(@team, @team.current_project) %></p>
+  <p><%= link_to 'Update Project Details', edit_team_management_team_project_path(@team, @team.current_project) %></p>
 </aside>
 
 <h3>Team Data Sets</h3>
 <section>
-This team currently has <%= pluralize @team.team_data_sets.count, 'data set' %>.<br>
-
-<%= link_to 'Manage Team Data Sets', team_management_team_team_data_sets_path(@team) %>
+<p>This team currently has <%= pluralize @team.team_data_sets.count, 'data set' %>.</p>
 </section>
+<aside><%= link_to 'Manage Team Data Sets', team_management_team_team_data_sets_path(@team) %></aside>
+
 <h3>Team Members</h3>
 <section>
 <h4>Team Leader</h4>
@@ -46,9 +46,9 @@ This team currently has <%= pluralize @team.team_data_sets.count, 'data set' %>.
 <% if (invitees = @team.invitees).present? %>
   <p><strong><%= pluralize invitees.count, 'invitee' %>.</strong></p>
 <% end %>
-
-<p><%= link_to 'Manage Team Members', team_management_team_assignments_path(@team) %></p>
 </section>
+<aside><p><%= link_to 'Manage Team Members', team_management_team_assignments_path(@team) %></p></aside>
+
 <h3>Challenge Entries</h3><aside>
   <p><%= link_to 'Manage Team Challange Entries', team_management_team_entries_path(@team) %></p>
 </aside>

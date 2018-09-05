@@ -1,3 +1,35 @@
 // Place all the styles related to the entries controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.entries_page {
+	padding: 2em 5em;
+}
+
+.entries_page h2 {
+	color: #4c9ad2;
+	font-size: 2em;
+}
+
+.entries_page table {
+	box-sizing: border-box;
+	margin-top: 2em;
+	margin-left: 2em;
+	padding: 2em 2em;
+	border-collapse: collapse
+}
+
+.entries_page table, .entries_page th, .entries_page td {
+	border: 1px solid #ca1e56;
+	padding: 0.25em 1em;
+	box-sizing: border-box;
+}
+
+.entries_page th {
+	background-color: #ca1e56;
+	color: #ddd;
+}
+
+.entries_page td {
+	text-align: center;
+}

@@ -1,3 +1,4 @@
+<main class="entries_page">
 <h2>National Challenge Entry Counts for <%= @competition.name %></h2>
 
 <table>
@@ -18,3 +19,4 @@
 </table>
 
 <%= javascript_tag  "window._region_counts = #{@region_counts.to_json}" %>
+</main>
