@@ -1,4 +1,10 @@
+<main class="team_page">
 <h2><%= @team.name %></h2>
+<% if user_signed_in? && @user.in_team?(@team) %>
+<aside>
+  <p><%= link_to 'Managage this Team Project', team_management_team_path(@team) %></p>
+</aside>
+<% end %>
 
 <% if user_signed_in? %>
 
@@ -23,7 +29,6 @@
     <% end %>
   <% end %>
 
-  <h3>Favourites</h3>
   <% if @favourite.present? %>
     <%= link_to 'Unfavourite Project', favourite_path(@favourite),
                   method: :delete,
@@ -44,6 +49,8 @@
 
 <h3>Team DataSets</h3>
 
+<section class="markdown">
+
 <% if (team_data_sets = @team.team_data_sets).present? %>
 
   <% team_data_sets.each do |team_data_set| %>
@@ -54,30 +61,33 @@
   <div>This team does not currently have any datasets.</div>
 <% end %>
 
+</section>
 <h3>Challenges</h3>
-
+<section class="markdown">
 <% passed_checkpoints.each do |checkpoint| %>
 
   <h3><%= checkpoint.name %> Checkpoint</h3>
   <% if (national_challenges = @team.national_challenges(checkpoint)).present? %>
+  <section class="markdown">
     <h4>National Challenges</h4>
     <% national_challenges.each do |challenge| %>
       <h5><%= challenge.name %></h5>
-      Region: <%= challenge.region.name %><br>
+      <p><strong>Region</strong>: <%= challenge.region.name %></p>
     <% end %>
+      </sectopm>
   <% end %>
 
   <% if (regional_challenges = @team.regional_challenges(checkpoint)).present? %>
     <h4>Regional Challenges</h4>
     <% regional_challenges.each do |challenge| %>
       <h5><%= challenge.name %></h5>
-      Region: <%= challenge.region.name %><br>
+      <p><strong>Region</strong>: <%= challenge.region.name %></p>
     <% end %>
   <% end %>
+      
 <% end %>
+</section>
 
-<% if user_signed_in? && @user.in_team?(@team) %>
-  <%= link_to 'Managage this Team Project', team_management_team_path(@team) %><br>
-<% end %>
 
 <%= link_to 'Back to Teams', teams_path %>
+  </main>

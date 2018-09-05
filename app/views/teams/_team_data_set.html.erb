@@ -1,17 +1,14 @@
 <% data_set = locals[:data_set] %>
-
+<section class="markdown">
 <% unless data_set.name.blank? %>
   <h4><%= data_set.name %></h4>
 <% end %>
 
-<% unless data_set.description.blank? %>
-  Description: <%= data_set.description %><br>
-<% end %>
-
 <% unless data_set.description_of_use.blank? %>
-  Description of Use: <%= data_set.description_of_use %><br>
+  <p><strong>Description of Use</strong>: <%= data_set.description_of_use %></p>
 <% end %>
 
 <% unless data_set.url.blank? %>
-  <a href='<%= data_set.url %>' target="_blank">Data Set</a><br>
+  <p><a href='<%= data_set.url %>' target="_blank">Data Set</a></p>
+</section>
 <% end %>

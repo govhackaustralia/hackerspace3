@@ -1,8 +1,14 @@
 <%= form_for [:team_management, @team, @entry] do |form| %>
+<div class="field">
   <%= form.label :checkpoint_id %>
-  <%= form.select :checkpoint_id, options_from_collection_for_select(@checkpoints, :id, :name, @entry.checkpoint_id.to_s) %><br>
+  <%= form.select :checkpoint_id, options_from_collection_for_select(@checkpoints, :id, :name, @entry.checkpoint_id.to_s) %>
+</div>
+<div class="field">
   <%= form.label :justification %>
-  <%= form.text_area :justification %><br>
+  <%= form.text_area :justification %>
+</div>
+<div class="actions">
   <%= hidden_field_tag(:challenge_id, @challenge.id) %>
   <%= form.submit %>
+</div>
 <% end %>

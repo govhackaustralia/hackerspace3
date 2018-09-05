@@ -1,18 +1,24 @@
+<main class="team_page">
 <h2>Update <%= @team.name %> Thumbnail</h2>
 <%= form_for [:team_management, @team] do |form| %>
+<div class="field">
   <% if @team.thumbnail.attached? %>
-    <img src="<%= url_for(@team.thumbnail) %>" alt="<%= "#{@team.name} thumbnail" %>" /><br>
+    <img src="<%= url_for(@team.thumbnail) %>" alt="<%= "#{@team.name} thumbnail" %>" />
   <% else %>
-    <%= image_tag "default_profile_pic.png" %><br>
+    <%= image_tag "default_profile_pic.png" %>
   <% end %>
-
-  <%= form.label :thumbnail, 'Upload a New Thumbnail (only png/gif/jpeg/jpg)' %><br>
-  <%= form.file_field :thumbnail, accept: 'image/png,image/gif,image/jpeg' %><br>
-
+    </div>
+    <div class="field">
+  <%= form.label :thumbnail, 'Upload a New Thumbnail (only png/gif/jpeg/jpg)' %>
+  <%= form.file_field :thumbnail, accept: 'image/png,image/gif,image/jpeg' %>
+</div>
   <%= hidden_field_tag(:thumbnail, true) %>
+  <div class="actions">
   <% if @team.thumbnail.attached? %>
     <%= form.submit 'Replace Thumbnail' %>
   <% else %>
     <%= form.submit 'Upload Thumbnail' %>
   <% end %>
+  </div>
 <% end %>
+  </main>

@@ -1,11 +1,16 @@
+<main class="team_page">
 <h2>Update <%= @team.name %> Details</h2>
 
 <%= form_for [:team_management, @team] do |form| %>
+<div class="field">
   <%= form.label :event_id %>
-  <%= form.select :event_id, options_from_collection_for_select(@events, :id, :name, @team.event_id.to_s) %><br>
-
+  <%= form.select :event_id, options_from_collection_for_select(@events, :id, :name, @team.event_id.to_s) %>
+</div>
+<div class="field">
+	<%= form.label :youth_team, 'Is your team a youth team (made up by at least 75% people aged under 18 years old)?' %>
   <%= form.check_box :youth_team %>
-  <%= form.label :youth_team, 'Is your team a youth team (made up by at least 75% people aged under 18 years old)?' %><br>
-
+  </div>
+  <div class="actions">
   <%= form.submit %>
+  </div>
 <% end %>

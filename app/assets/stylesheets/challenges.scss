@@ -13,11 +13,71 @@
 
 .challenge_index h3 {
 	font-size: 1.5em;
-	padding: 1em;
+	padding: .5em;
 }
 
 .challenge_index section.later {
 	padding: 1.5em 1.5em;
+}
+
+.challenge_index section.challenge {
+	padding: 0.5em 1em;
+	box-sizing: border-box;
+	display: flex;
+}
+
+.challenge_index section.challenge article {
+	width: 60%;
+	box-sizing: border-box;
+}
+
+.challenge_index section.challenge article h4 {
+	color: #4c9ad2;
+	font-size: 1.3em;
+}
+
+.challenge_index section.challenge article h5 {
+	color: #ca1e56;
+	font-weight: 400;
+	font-style: italic;
+	font-size: 1.25em;
+	padding: 0.5em 0.5em;
+}
+
+.challenge_index section.challenge aside {
+	width: 40%;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: flex-end;
+	align-content: center;
+	align-items: flex-start;
+}
+
+.challenge_index section.challenge aside figure {
+	display: flex;
+	flex-direction: column;
+	align-content: center;
+	align-items: center;
+	padding: 1em 2em;
+	border: 1px solid #dde4e6;
+	transition: all 0.4s ease;
+	cursor: pointer;
+	width: 50%;
+	box-sizing: border-box;
+	height: calc(75px + 2em);
+	justify-content: center;
+}
+
+.challenge_index section.challenge aside figure:hover {
+	background-color: #fff;
+}
+
+.challenge_index section.challenge aside figure img {
+	display: inline-block;
+	width: auto !important;
+	height: auto !important;
+	max-height: 75px;
+	max-width: 100%;
 }
 
 .challenge_page {
@@ -52,7 +112,36 @@
 
 .challenge_page section {
 	padding: 0 1.5em;
+}
+
+.challenge_page section.challenge_body, .challenge_page section.challenge_head {
+	padding: 0 1.5em;
 	display: flex;
+}
+
+.challenge_page section.teams h4 {
+	color: #ca1e56;
+	padding: 0.25em 0.25em;
+}
+
+.challenge_page section.teams h5 {
+	color: #4c9ad2;
+	padding: 0.25em 0.55em;
+}
+
+.challenge_page section article p.challenge_enter a {
+	box-sizing: border-box;
+	font-size: 1.5em;
+	padding: 0.5em 1.5em;
+	width: 100%;
+	display: block;
+	text-align: center;
+	margin-top: 0.25em;
+    background-color: #ca1e56;
+    color: #ddd;
+    font-weight: 700;
+    text-transform: uppercase;
+    text-decoration: none;
 }
 
 .challenge_page section article {

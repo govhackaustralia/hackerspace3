@@ -1,21 +1,31 @@
+<section class="markdown">
 <% unless @current_project.description.blank? %>
-  <h4>Description</h4>
+  <h4 class="sectionHeading">Project Description</h4>
+  <hr>
   <%= markdown @current_project.description %>
+  <hr>
 <% end %>
+</section>
 
+<section class="markdown">
 <% unless @current_project.data_story.blank? %>
-  <h4>Data Story</h4>
+  <h4 class="sectionHeading">Data Story</h4>
+  <hr>
   <%= markdown @current_project.data_story %>
+  <hr>
 <% end %>
+</section>
 
+<section class="markdown">
 <% unless @current_project.source_code_url.blank? %>
-  <a href='<%= @current_project.source_code_url %>' target="_blank">Sorce Code</a>
+  <p><a href='<%= @current_project.source_code_url %>' target="_blank">Source Code</a></p>
 <% end %>
 
 <% unless @current_project.video_url.blank? %>
-  <a href='<%= @current_project.video_url %>' target="_blank">Video</a>
+  <p><a href='<%= @current_project.video_url %>' target="_blank">Video</a></p>
 <% end %>
 
 <% unless @current_project.homepage_url.blank? %>
-  <a href='<%= @current_project.homepage_url %>' target="_blank">Homepage</a><br>
+  <p><a href='<%= @current_project.homepage_url %>' target="_blank">Homepage</a></p>
 <% end %>
+</section>

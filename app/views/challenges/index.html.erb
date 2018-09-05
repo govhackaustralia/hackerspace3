@@ -15,12 +15,32 @@
     <% next if (challenges = @region_challenges[region.id]).empty? %>
     <h3><%= region.name %></h3>
     <% challenges.each do |challenge| %>
+    <section class="challenge">
+	    <article>
       <h4><%= challenge.name %></h4>
       <% unless challenge.short_desc.blank? %>
-        Short Description: <%= challenge.short_desc %><br>
+        <h5><%= challenge.short_desc %></h5>
       <% end %>
-      <%= pluralize @challenge_id_to_entry_count[challenge.id], 'team' %> have entered this challenge.<br>
-      <%= link_to 'Go to Challange', challenge_path(challenge) %>
+      <p><%= link_to 'Go to Challange', challenge_path(challenge) %> | <%= pluralize @challenge_id_to_entry_count[challenge.id], 'team' %> have entered this challenge.</p>
+        </article>
+        <aside class="sponsors">
+	<% if challenge.challenge_sponsorships.present? %>
+  <% challenge.challenge_sponsorships.each do |sponsorship| %>
+ 	<% sponsor = sponsorship.sponsor %>
+	  <figure>
+			<a href='<%= sponsor.website %>' target="_blank">
+	      <% if sponsor.logo.attached? %>
+	        <%= image_tag url_for(sponsor.logo) %>
+	      <% else %>
+	        <%= image_tag 'default_profile_pic.png' %>
+	      <% end %>
+			</a>
+	  </figure>
+
+  <% end %>
+<% end %>
+</aside>
+        </section>
     <% end %>
   <% end %>
 

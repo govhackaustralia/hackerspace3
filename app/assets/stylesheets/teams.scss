@@ -19,3 +19,159 @@
 .project_index section.later {
 	padding: 1.5em 1.5em;
 }
+
+.team_page {
+	padding: 2em 5em;
+}
+
+.team_page h2 {
+	color: #4c9ad2;
+	font-size: 2em;
+}
+
+.team_page h3 {
+	font-size: 1.5em;
+	padding: 1em;
+}
+
+.team_page section {
+	padding: 0.25em 1.5em;
+}
+
+.team_page section.markdown .sectionHeading {
+	color: #4c9ad2;
+}
+
+.team_page section.markdown h1 {
+	font-size: 1.5em;
+	color: #ca1e56;
+}
+
+.team_page section.markdown h2 {
+	font-size: 1.4em;
+	color: #ca1e56;
+}
+
+.team_page section.markdown h3 {
+	font-size: 1.3em;
+	color: #ca1e56;
+}
+
+.team_page section.markdown h4 {
+	font-size: 1.2em;
+	color: #ca1e56;
+}
+
+.team_page section.markdown h5 {
+	font-size: 1.1em;
+	color: #ca1e56;
+}
+
+.team_page section.markdown h6 {
+	font-size: 1em;
+	color: #ca1e56;
+}
+
+.team_page aside {
+	float:right;
+}
+
+.team_page aside a {
+	box-sizing: border-box;
+	font-size: 1.5em;
+	padding: 0.5em 1.5em;
+	width: 100%;
+	display: block;
+	text-align: center;
+	margin-top: 1em;
+    background-color: #ca1e56;
+    color: #ddd;
+    font-weight: 700;
+    text-transform: uppercase;
+    text-decoration: none;
+}
+
+.team_page form > div.field {
+	display: flex;
+	padding: 0.5em 0em;
+	align-items: center;
+}
+
+.team_page form > div.field > label, .team_page form > div > div {
+	box-sizing: border-box;
+	width: 50%;
+	padding-right: 1em;
+	text-align: right;
+	font-size: 1.15em;
+}
+
+.team_page form > div > div em {
+	font-size: 0.85em;
+}
+
+.team_page form > div.field > input, .registration form > div.field > select {
+	box-sizing: border-box;
+	width: 50%;
+	padding-left: 1em;
+	font-size: 1em;
+	padding: 0.5em;
+	display: flex;
+}
+
+.team_page form textarea {
+	width: 50%;
+	height: 5em;
+}
+
+.team_page form select {
+	width: 50%;
+	padding: 0.5em;
+}
+
+.team_page form > div.field div.field {
+	display: flex;
+	padding: 0.5em 0em;
+	align-items: center;
+}
+
+.team_page form > div.field div.field {
+	text-align: left !important;
+}
+
+.team_page form > div.actions {
+	display: flex;
+	justify-content: center;
+	margin-top: 1em;
+	margin-bottom: 1em;
+}
+
+.team_page form > div.actions input {
+	box-sizing: border-box;
+	font-size: 1.5em;
+	padding: 0.5em 1.5em;
+	-webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-color: #ca1e56;
+    color: #ddd;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.team_page form > div.field > div.field_with_errors > input {
+	padding-left: 1em;
+	font-size: 1em;
+	padding: 0.5em;
+	display: flex;
+	width: 100%;
+	border: 1px solid #C00;
+}
+
+.team_page #hiddendescription {
+	box-sizing: border-box;
+	width: 50%;
+	padding-left: 1em;
+	font-size: 0.5em;
+	padding: 0.5em;
+	display: none;
+}

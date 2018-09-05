@@ -64,10 +64,10 @@
   <img src="<%= url_for(@challenge.image) %>" alt="<%= @challenge.name %> image" /><br>
 <% end %>
 
-</section>
+<section>
 <h3>Team Entries</h3>
 
-<%= pluralize @challenge.entries.count, 'team' %> have entered into this challenge.<br>
+<section class="teams"><%= pluralize @challenge.entries.count, 'team' %> have entered into this challenge.<br>
 
 <% if user_signed_in? %>
 	<% unless @user_eligible_teams.empty? %>
@@ -78,7 +78,9 @@
 	      Team entered into this challenge for <%= entry.checkpoint.name %> Checkpoint.<br>
 	    <% else %>
 	      <% if team.available_checkpoints(@challenge).present? %>
-	        <%= link_to 'Enter Challenge', new_team_management_team_entry_path(team, challenge_id: @challenge.id) %><br>
+	      <article>
+	        <p class="challenge_enter"><%= link_to 'Enter Challenge', new_team_management_team_entry_path(team, challenge_id: @challenge.id) %></p>
+	      </article>
 	      <% else %>
 					<% if team.all_checkpoints_passed? %>
 	        	All Checkpoints have passed.<br>
@@ -108,7 +110,8 @@
   <% end %>
 
 <% end %>
-
+      </section>
+      </section>
 
 <%= link_to 'Back to Challenges', challenges_path %>
 </main>

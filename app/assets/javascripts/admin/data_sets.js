@@ -1,6 +1,5 @@
 // Place all the behaviors and hooks related to the matching controller here.
 // All this logic will automatically be available in application.js.
-var once = 
 $( document ).on('ready turbolinks:load', function() {
 	$("#data_set_url").blur(function() {
 		var url = $("#data_set_url").val();
