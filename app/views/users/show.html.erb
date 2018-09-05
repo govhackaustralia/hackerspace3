@@ -101,7 +101,7 @@
 			<% end %>
 		</article>
 		<article>
-			<% if @competition.started? %>
+			<% if @competition.started? || current_user.region_privileges? %>
 				<h3>My Favourite Projects</h3>
 				<% if (teams = @user.event_assignment.teams).present? %>
 					<% teams.each do |team| %>

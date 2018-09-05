@@ -7,7 +7,7 @@ Rails.application.routes.draw do
     resources :assignments, controller: 'users/assignments'
   end
 
-  resources :data_sets, :teams, :peoples_scorecards, :favourites
+  resources :data_sets, :teams, :peoples_scorecards, :favourites, :entries
 
   resources :events, param: :identifier do
     resources :registrations

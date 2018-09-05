@@ -2,6 +2,7 @@ class Region < ApplicationRecord
   has_many :assignments, as: :assignable, dependent: :destroy
   has_many :events
   has_many :teams, through: :events
+  has_many :entries, through: :teams
   has_many :sponsorships, as: :sponsorable, dependent: :destroy
   has_many :sponsorship_types, through: :sponsorships
   has_many :challenges, dependent: :destroy
@@ -58,7 +59,24 @@ class Region < ApplicationRecord
     parent_id.nil?
   end
 
-  # Memory Objects
+  def self.national_challenges_region_counts
+    challenge_to_region_array = {}
+    regions = Region.where.not(parent_id: nil)
+    region_to_entries = {}
+    regions.each do |region|
+      region_to_entries[region] = region.entries
+    end
+
+    Region.root.challenges.each do |challenge|
+      challenge_entries = challenge.entries
+      challenge_to_region_array[challenge.name] = {}
+      regions.each do |region|
+        entry_count = (challenge_entries & region_to_entries[region]).count
+        challenge_to_region_array[challenge.name][region.name] = entry_count
+      end
+    end
+    challenge_to_region_array
+  end
 
   def self.id_regions(region_ids)
     regions = where(id: region_ids.uniq)
