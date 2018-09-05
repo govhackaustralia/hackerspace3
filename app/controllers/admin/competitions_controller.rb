@@ -29,7 +29,11 @@ class Admin::CompetitionsController < ApplicationController
   private
 
   def competition_params
-    params.require(:competition).permit(:end_time, :start_time)
+    params.require(:competition).permit(:end_time, :start_time,
+                                        :peoples_choice_start,
+                                        :peoples_choice_end,
+                                        :challenge_judging_start,
+                                        :challenge_judging_end)
   end
 
   def check_for_privileges

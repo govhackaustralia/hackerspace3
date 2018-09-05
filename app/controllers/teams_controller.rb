@@ -11,6 +11,7 @@ class TeamsController < ApplicationController
   end
 
   def show
+    @competition = Competition.current
     @team = Team.find(params[:id])
     @current_project = @team.current_project
     @checkpoints = @team.event.competition.checkpoints.order(:end_time)

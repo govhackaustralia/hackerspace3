@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_09_04_091827) do
+ActiveRecord::Schema.define(version: 2018_09_05_102354) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -129,6 +129,10 @@ ActiveRecord::Schema.define(version: 2018_09_04_091827) do
     t.datetime "updated_at", null: false
     t.datetime "start_time"
     t.datetime "end_time"
+    t.datetime "peoples_choice_start"
+    t.datetime "peoples_choice_end"
+    t.datetime "challenge_judging_start"
+    t.datetime "challenge_judging_end"
     t.index ["year"], name: "index_competitions_on_year"
   end
 

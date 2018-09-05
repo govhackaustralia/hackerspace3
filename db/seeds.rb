@@ -48,7 +48,11 @@ end
 
 comp = Competition.current
 
-comp.update(start_time: Time.now + 3.days, end_time: Time.now + 5.days)
+comp.update(start_time: Time.now + 3.days, end_time: Time.now + 5.days,
+            peoples_choice_start: Time.now + 6.days,
+            peoples_choice_end: Time.now + 1.month,
+            challenge_judging_start: Time.now + 6.days,
+            challenge_judging_end: Time.now + 1.month)
 
 5.times do |time|
   comp.checkpoints.create(end_time: Time.now + time.days,
@@ -71,10 +75,6 @@ comp.assignments.create(user_id: random_user_id, title: SPONSORSHIP_DIRECTOR)
 
 10.times do |time|
   comp.assignments.create(user_id: random_user_id, title: VOLUNTEER)
-end
-
-20.times do |time|
-  comp.assignments.create(user_id: random_user_id, title: PARTICIPANT)
 end
 
 20.times do |time|
@@ -199,12 +199,8 @@ Region.all.each do |region|
 
     event.assignments.create(user_id: random_user_id, title: EVENT_SUPPORT)
 
-    Assignment.where(title: PARTICIPANT).take(10).each do |particiant|
+    Assignment.where(title: PARTICIPANT).take(20).each do |particiant|
       event.registrations.create(status: ATTENDING, assignment: particiant)
-    end
-
-    Assignment.where(title: VIP).take(10).each do |vip|
-      event.registrations.create(status: ATTENDING, assignment: vip)
     end
 
     if event_type == COMPETITION_EVENT

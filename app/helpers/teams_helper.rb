@@ -25,4 +25,9 @@ module TeamsHelper
   def team_name(team)
     @id_teams_projects[team.id][:current_project].team_name
   end
+
+  def in_peoples_choice_window?
+    @competition.peoples_choice_start < Time.now &&
+    Time.now < @competition.peoples_choice_end
+  end
 end

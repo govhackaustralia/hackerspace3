@@ -22,4 +22,9 @@ module UsersHelper
   def user_is_a_sponsor_contact?
     @assignment_titles.include? SPONSOR_CONTACT
   end
+
+  def in_challenge_judging_window?
+    @competition.challenge_judging_start < Time.now &&
+    Time.now < @competition.challenge_judging_end
+  end
 end

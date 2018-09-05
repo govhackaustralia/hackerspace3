@@ -2,11 +2,11 @@
 
 <% if user_signed_in? %>
 
-  <% if false %>
+  <% if in_peoples_choice_window? %>
     <h3>People's Choice</h3>
     <% if @user.in_team?(@team) %>
 
-      You are not elibable to vote for this project.
+      Your team project is being judged in the People's Choice Awards.
 
     <% elsif @peoples_scorecard.present? %>
 
@@ -16,7 +16,7 @@
 
     <% else %>
 
-      You are yet to judge this project, vote below.<br>
+      You are yet to judge this project.<br>
 
       <%= link_to 'Vote', new_peoples_scorecard_path(team_id: @team.id) %>
 
