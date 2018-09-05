@@ -2,7 +2,7 @@
   <%= form.label :checkpoint_id %>
   <%= form.select :checkpoint_id, options_from_collection_for_select(@checkpoints, :id, :name, @entry.checkpoint_id.to_s) %><br>
   <%= form.label :justification %>
-  <%= form.text_field :justification %><br>
+  <%= form.text_area :justification %><br>
   <%= hidden_field_tag(:challenge_id, @challenge.id) %>
   <%= form.submit %>
 <% end %>

@@ -29,7 +29,7 @@ class Challenge < ApplicationRecord
   end
 
   def eligible_teams
-    if region.parent_id.nil?
+    if region.national?
       competition.teams
     else
       region.teams

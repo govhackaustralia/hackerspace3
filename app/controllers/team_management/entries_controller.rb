@@ -9,7 +9,7 @@ class TeamManagement::EntriesController < ApplicationController
   def new
     @challenge = Challenge.find(params[:challenge_id])
     @entry = @team.entries.new(challenge: @challenge)
-    @checkpoints = @challenge.competition.available_checkpoints(@team.time_zone)
+    @checkpoints = @team.available_checkpoints(@challenge)
   end
 
   def create
@@ -19,7 +19,7 @@ class TeamManagement::EntriesController < ApplicationController
       redirect_to challenge_path(@entry.challenge)
     else
       flash[:alert] = @entry.errors.full_messages.to_sentence
-      @checkpoints = @challenge.competition.available_checkpoints(@team.time_zone)
+      @checkpoints = @team.available_checkpoints(@challenge)
       render :new
     end
   end

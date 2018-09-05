@@ -14,7 +14,7 @@ class Team < ApplicationRecord
   has_one_attached :high_res_image
 
   def team_leader
-    assignment = Assignment.find_by(assignable_type: 'Team', assignable_id: id, title: TEAM_LEADER)
+    assignment = Assignment.find_by(assignable: self, title: TEAM_LEADER)
     return if assignment.nil?
     assignment.user
   end
@@ -70,8 +70,15 @@ class Team < ApplicationRecord
     event.region.time_zone
   end
 
-  def available_checkpoints?
-    competition.available_checkpoints(time_zone).present?
+  def available_checkpoints(challenge)
+    competition.available_checkpoints(self, challenge.region)
+  end
+
+  def all_checkpoints_passed?
+    competition.checkpoints.each do |checkpoint|
+      return false unless checkpoint.passed?(self)
+    end
+    return true
   end
 
   def available_challenges(challenge_type)

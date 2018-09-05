@@ -155,6 +155,23 @@ Region.all.each do |region|
       description: 'Random dataset that was taken from data.gov.')
   end
 
+  def random_data_set_id(region)
+    @counter += 1
+    random_id = @counter % region.data_sets.count
+    random_id = 1 if random_id.zero?
+    random_id
+  end
+
+  region.challenges.each do |challenge|
+    5.times do
+      challenge.challenge_data_sets.create(data_set_id: random_data_set_id(region))
+    end
+
+    3.times do
+      challenge.challenge_sponsorships.create(sponsor_id: random_sponsor_id)
+    end
+  end
+
   event_name = region.time_zone
   event_name ||= 'Australia'
 

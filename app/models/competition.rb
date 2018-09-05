@@ -111,10 +111,11 @@ class Competition < ApplicationRecord
     region_sets
   end
 
-  def available_checkpoints(time_zone)
+  def available_checkpoints(team, region)
     valid_checkpoints = []
     checkpoints.each do |checkpoint|
-      next unless checkpoint.end_time.to_formatted_s(:number) > Time.now.in_time_zone(time_zone).to_formatted_s(:number)
+      next if checkpoint.passed?(team)
+      next if checkpoint.limit_reached?(team, region)
       valid_checkpoints << checkpoint
     end
     valid_checkpoints

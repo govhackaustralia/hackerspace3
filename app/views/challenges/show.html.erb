@@ -77,10 +77,15 @@
 	    <% if (entry = Entry.find_by(team: team, challenge: @challenge)).present? %>
 	      Team entered into this challenge for <%= entry.checkpoint.name %> Checkpoint.<br>
 	    <% else %>
-	      <% if team.available_checkpoints? %>
+	      <% if team.available_checkpoints(@challenge).present? %>
 	        <%= link_to 'Enter Challenge', new_team_management_team_entry_path(team, challenge_id: @challenge.id) %><br>
 	      <% else %>
-	        All Checkpoints have passed.<br>
+					<% if team.all_checkpoints_passed? %>
+	        	All Checkpoints have passed.<br>
+					<% else %>
+						All avaiable checkpoint limits reached for
+						<%= @region.national? ? 'national' : 'regional' %> challenges.<br>
+					<% end %>
 	      <% end %>
 	    <% end %>
 	  <% end %>

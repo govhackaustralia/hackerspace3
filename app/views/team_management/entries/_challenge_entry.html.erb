@@ -4,13 +4,5 @@
 <% entry = Entry.find_by(team: @team, challenge: challenge, checkpoint: checkpoint) %>
 <h5><%= challenge.name %></h5>
 Region: <%= challenge.region.name %><br>
-Eligibility:
-<% if entry.eligible %>
-  This team has been marked eligible to enter this competition.
-<% elsif entry.eligible == false %>
-  This team has been mareked not eligible to enter this challenge.
-<% else %>
-  This team has yet to be marked eligible to enter this challenge.
-<% end %><br>
 <%= link_to 'Leave Challenge', team_management_team_entry_path(@team, entry),
 method: :delete, data: { confirm: 'Are you sure?' } %><br>

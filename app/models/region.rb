@@ -54,6 +54,10 @@ class Region < ApplicationRecord
     parent.admin_assignments(collected).flatten
   end
 
+  def national?
+    parent_id.nil?
+  end
+
   # Memory Objects
 
   def self.id_regions(region_ids)
