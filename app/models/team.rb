@@ -78,7 +78,7 @@ class Team < ApplicationRecord
     competition.checkpoints.each do |checkpoint|
       return false unless checkpoint.passed?(self)
     end
-    return true
+    true
   end
 
   def available_challenges(challenge_type)

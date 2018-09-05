@@ -6,7 +6,7 @@ class ChallengeScorecard < ApplicationRecord
   accepts_nested_attributes_for :challenge_judgements
 
   validates :assignment_id, uniqueness: { scope: :entry_id,
-                                    message: 'Scorecard already exists' }
+                                          message: 'Scorecard already exists' }
 
   def team
     entry.team
