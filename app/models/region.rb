@@ -82,8 +82,8 @@ class Region < ApplicationRecord
     challenge_to_region_array
   end
 
-  def self.id_regions(region_ids)
-    regions = where(id: region_ids.uniq)
+  def self.id_regions(regions)
+    regions = where(id: regions.uniq) if regions.class == Array
     id_regions = {}
     regions.each { |region| id_regions[region.id] = region }
     id_regions

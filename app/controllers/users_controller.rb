@@ -14,7 +14,7 @@ class UsersController < ApplicationController
       @team_id_assignments[assignment.assignable_id] = assignment
     end
 
-    @id_regions = Region.id_regions(Region.all.pluck(:id))
+    @id_regions = Region.id_regions(Region.all)
 
     @event_assignment = @user.event_assignment
     @registrations = @event_assignment.registrations

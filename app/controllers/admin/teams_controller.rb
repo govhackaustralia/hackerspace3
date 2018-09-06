@@ -5,7 +5,7 @@ class Admin::TeamsController < ApplicationController
   def index
     @competition = Competition.current
     @teams = @competition.teams
-    @id_teams_projects = Team.id_teams_projects(@teams.pluck(:id))
+    @id_teams_projects = Team.id_teams_projects(@teams)
   end
 
   def show

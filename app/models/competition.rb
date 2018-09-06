@@ -95,7 +95,7 @@ class Competition < ApplicationRecord
 
   def filter_data_sets(term)
     sets = data_sets.order(:name)
-    id_regions = Region.id_regions(Region.all.pluck(:id))
+    id_regions = Region.id_regions(Region.all)
     region_sets = {}
     id_regions.keys.each do |region_id|
       region_sets[region_id] = []

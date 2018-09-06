@@ -111,9 +111,13 @@ class Team < ApplicationRecord
     end
   end
 
-  def self.id_teams_projects(team_ids)
-    teams = where(id: team_ids.uniq)
-    id_team_projects = {}
+  def self.id_teams_projects(teams)
+    if teams.class == Array
+      team_ids = teams
+      teams = where(id: team_ids.uniq)
+    else
+      team_ids = teams.pluck(:id)
+    end
 
     projects = Project.where(team_id: team_ids.uniq).order(created_at: :desc)
     id_projects = Project.id_projects(projects)
@@ -128,13 +132,15 @@ class Team < ApplicationRecord
       team_id_to_projects[project.team_id] << project
     end
 
+    id_team_projects = {}
     teams.each do |team|
       project = if team.project_id.present?
                   id_projects[team.project_id]
                 else
                   team_id_to_projects[team.id].first
                 end
-      id_team_projects[team.id] = { team: team, current_project: project, event: id_events[team.event_id] }
+      id_team_projects[team.id] = { team: team, current_project: project,
+                                    event: id_events[team.event_id] }
     end
 
     id_team_projects

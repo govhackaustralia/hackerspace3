@@ -2,7 +2,7 @@ class ProjectsController < ApplicationController
   def index
     @competition = Competition.current
     @teams = @competition.teams.where(published: true)
-    @id_teams_projects = Team.id_teams_projects(@teams.pluck(:id))
+    @id_teams_projects = Team.id_teams_projects(@teams)
     @attending_events = current_user.competition_events_attending(@competition) if user_signed_in?
     respond_to do |format|
       format.html
@@ -16,7 +16,7 @@ class ProjectsController < ApplicationController
     @team = @current_project.team
     @checkpoints = @team.event.competition.checkpoints.order(:end_time)
     @challenges = @team.challenges
-    @id_regions = Region.id_regions(Region.all.pluck(:id))
+    @id_regions = Region.id_regions(Region.all)
     user_signed_in_records if user_signed_in?
   end
 
