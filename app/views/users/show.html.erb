@@ -105,11 +105,13 @@
 		<article>
 			<% if @competition.started? || current_user.region_privileges? %>
 				<h3>My Favourite Projects</h3>
-				<% if (teams = @user.event_assignment.teams).present? %>
-					<% teams.each do |team| %>
-						<h4><%= team.name %></h4>
-						Event: <%= team.event.name %><br>
-						<%= link_to "Go to #{team.name}", team_path(team) %><br>
+				<% if @favourite_teams.present? %>
+					<% @favourite_teams.each do |team| %>
+						<% project = @id_teams_projects[team.id][:current_project] %>
+						<% event = @id_teams_projects[team.id][:event] %>
+						<h4><%= "#{project.team_name} - #{project.project_name}" %></h4>
+						Event: <%= event.name %><br>
+						<%= link_to "Go to Team Project", project_path(project.identifier) %><br>
 					<% end %>
 				<% else %>
 					<p>Projects that you favourite will appear here.</p>

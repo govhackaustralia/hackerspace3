@@ -8,12 +8,12 @@
 			<% if @competition.events.where(event_type: COMPETITION_EVENT).present? %>
 				<div><%= link_to 'Competition Events', competition_events_path %></div>
 			<% end %>
-			
+
 			<% if @competition.challenges.present? %>
 				<div><%= link_to 'Challenges', challenges_path %></div>
 			<% end %>
 			<% if @competition.teams.present? %>
-				<div><%= link_to 'Projects', teams_path %></div>
+				<div><%= link_to 'Projects', projects_path %></div>
 			<% end %>
 			<% if @competition.data_sets.present? %>
 				<div><%= link_to 'Datasets', data_sets_path %></div>

@@ -28,6 +28,6 @@ module TeamsHelper
 
   def in_peoples_choice_window?
     @competition.peoples_choice_start < Time.now &&
-    Time.now < @competition.peoples_choice_end
+      Time.now < @competition.peoples_choice_end
   end
 end

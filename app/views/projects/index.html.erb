@@ -4,12 +4,12 @@
 
 <% if @competition.started? || (user_signed_in? && current_user.region_privileges?) %>
 
-  <%= form_tag teams_path, method: :get do %>
+  <%= form_tag projects_path, method: :get do %>
     <%= text_field_tag :term, params[:term] %>
     <%= submit_tag 'Search' %>
   <% end %>
-  <%= link_to 'Clear Search', teams_path %></br>
-  <%= link_to 'Download CSV', teams_path(format: 'csv') %></br>
+  <%= link_to 'Clear Search', projects_path %></br>
+  <%= link_to 'Download CSV', projects_path(format: 'csv') %></br>
   <% if user_signed_in? && @competition.not_finished? %>
     <% if @attending_events.present? %>
       <aside><%= link_to 'Create New Team Project', new_team_path %></aside>
@@ -27,8 +27,10 @@
 	<tbody>
   <% filter_teams(@teams, params[:term]).each do |team| %>
   <tr>
-    <td><%= link_to @id_teams_projects[team.id][:current_project].team_name, team_path(team) %></td>
-    <td><%= @id_teams_projects[team.id][:event].name %></td>
+    <% project = @id_teams_projects[team.id][:current_project] %>
+    <% event = @id_teams_projects[team.id][:event] %>
+    <td><%= link_to "#{project.team_name} - #{project.project_name}", project_path(project.identifier) %></td>
+    <td><%= event.name %></td>
   </tr>
   <% end %>
 	</tbody>

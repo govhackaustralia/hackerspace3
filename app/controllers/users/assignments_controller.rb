@@ -10,7 +10,7 @@ class Users::AssignmentsController < ApplicationController
       leader_assignment = Assignment.find_by(assignable: @assignment.assignable, user: current_user)
       leader_assignment.update(title: TEAM_MEMBER)
     end
-    redirect_to team_path(@assignment.assignable)
+    redirect_to project_path(@assignment.assignable.current_project)
   end
 
   def destroy

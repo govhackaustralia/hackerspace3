@@ -64,11 +64,11 @@ class Region < ApplicationRecord
     regions = Region.where.not(parent_id: nil)
     region_to_entries = {}
     regions.each do |region|
-      if checkpoint_ids.nil?
-        region_to_entries[region] = region.entries
-      else
-        region_to_entries[region] = region.entries.where(checkpoint_id: checkpoint_ids)
-      end
+      region_to_entries[region] = if checkpoint_ids.nil?
+                                    region.entries
+                                  else
+                                    region.entries.where(checkpoint_id: checkpoint_ids)
+                                  end
     end
 
     Region.root.challenges.each do |challenge|

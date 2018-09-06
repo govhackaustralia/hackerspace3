@@ -18,6 +18,7 @@ class ChallengesController < ApplicationController
     @challenge_sponsorships = @challenge.challenge_sponsorships
     passed_checkpoint_ids = @competition.passed_checkpoint_ids(@region.time_zone)
     @entries = @challenge.entries.where(checkpoint_id: passed_checkpoint_ids)
+    @id_team_projects = Team.id_teams_projects(@entries.pluck(:team_id))
     @checkpoints = @challenge.competition.checkpoints.order(:end_time)
     @data_sets = @challenge.data_sets
     @user_eligible_teams = @challenge.eligible_teams & current_user.teams if user_signed_in?

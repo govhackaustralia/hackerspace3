@@ -25,6 +25,6 @@ module UsersHelper
 
   def in_challenge_judging_window?
     @competition.challenge_judging_start < Time.now &&
-    Time.now < @competition.challenge_judging_end
+      Time.now < @competition.challenge_judging_end
   end
 end

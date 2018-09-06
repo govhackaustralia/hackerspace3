@@ -9,7 +9,7 @@ module Admin::EntriesHelper
   end
 
   def sort_entries
-    @challenge.entries.each do |entry|
+    @entries.each do |entry|
       score = entry.average_score
       if score.nil?
         sort_non_score(entry)

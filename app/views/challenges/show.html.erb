@@ -103,15 +103,16 @@
     <h3><%= checkpoint.name %> Checkpoint</h3>
 
     <% teams.each do |team| %>
-      <h4><%= team.name %></h4>
-      <%= link_to 'Go to Team', team_path(team) %><br>
+			<% project = @id_team_projects[team.id][:current_project] %>
+      <h4><%= "#{project.team_name} - #{project.project_name}" %></h4>
+      <%= link_to 'Go to Team Project', project_path(project.identifier) %><br>
     <% end %>
 
   <% end %>
 
 <% end %>
-      </section>
-      </section>
+</section>
+</section>
 
 <%= link_to 'Back to Challenges', challenges_path %>
 </main>

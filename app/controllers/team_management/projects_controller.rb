@@ -21,7 +21,8 @@ class TeamManagement::ProjectsController < ApplicationController
 
   def project_params
     params.require(:project).permit(:team_name, :description, :data_story,
-                                    :source_code_url, :video_url, :homepage_url)
+                                    :source_code_url, :video_url, :homepage_url,
+                                    :project_name)
   end
 
   def handle_successful_save

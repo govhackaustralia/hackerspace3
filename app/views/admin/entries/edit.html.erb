@@ -16,5 +16,5 @@ Justification: <%= @entry.justification %><br>
   <%= form.submit %>
 <% end %>
 
-<%= link_to 'Go to Team Project', team_path(@team), target: '_blank' %><br>
+<%= link_to 'Go to Team Project', project_path(@team.current_project.identifier), target: '_blank' %><br>
 <%= link_to 'Back to Entries', admin_challenge_entries_path(@challenge) %>

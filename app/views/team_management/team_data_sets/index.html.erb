@@ -4,7 +4,7 @@
 <% if @team_data_sets.present? %>
 
   <% @team_data_sets.each do |team_data_set| %>
-    <%= render 'teams/team_data_set', locals: { data_set: team_data_set } %>
+    <%= render 'projects/team_data_set', locals: { data_set: team_data_set } %>
     <%= link_to 'Update Data Set', edit_team_management_team_team_data_set_path(@team, team_data_set) %>
     <%= link_to 'Delete Data Set', team_management_team_team_data_set_path(@team, team_data_set),
                   method: :delete,

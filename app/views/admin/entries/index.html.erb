@@ -16,9 +16,7 @@
 
 <% @nil_entries.each do |entry| %>
 
-  <h4><%= entry.team.name %></h4>
-  <%= link_to 'Review Project', edit_admin_challenge_entry_path(@challenge, entry) %><br>
-  <%= link_to 'Go to Team Project', team_path(entry.team) %><br>
+  <%= render 'team_project_review', locals: { entry: entry } %>
 
 <% end %>
 
@@ -26,18 +24,15 @@
 
 <% @nil_eligible_entries.each do |entry| %>
 
-  <h4><%= entry.team.name %></h4>
-  <%= link_to 'Review Project', edit_admin_challenge_entry_path(@challenge, entry) %><br>
-  <%= link_to 'Go to Team Project', team_path(entry.team) %><br>
+  <%= render 'team_project_review', locals: { entry: entry } %>
+
 <% end %>
 
 <h3>Non Eligible Projects</h3>
 
 <% @non_eligible_entries.each do |entry| %>
 
-  <h4><%= entry.team.name %></h4>
-  <%= link_to 'Review Project', edit_admin_challenge_entry_path(@challenge, entry) %><br>
-  <%= link_to 'Go to Team Project', team_path(entry.team) %><br>
+  <%= render 'team_project_review', locals: { entry: entry } %>
 
 <% end %>
 

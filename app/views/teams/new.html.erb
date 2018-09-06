@@ -1,19 +1,19 @@
 <main class="team_page">
-<h2>Create New Team</h2>
+  <h2>Create New Team Project</h2>
 
-<%= form_for @team do |form| %>
+  <%= form_for @team do |form| %>
 
-  <div class="field"><%= form.label :event_id %>
-  <%= form.select :event_id, options_from_collection_for_select(@events, :id, :name, @team.event_id.to_s) %>
-  </div>
-  <div class="field">
-  <%= form.label :youth_team, 'Is your team a youth team (made up by at least 75% people aged under 18 years old)?' %>
-  <%= form.check_box :youth_team %>
-  </div>
-  <div class="actions">
-  <%= form.submit %>
-  </div>
-<% end %>
+    <div class="field"><%= form.label :event_id %>
+    <%= form.select :event_id, options_from_collection_for_select(@events, :id, :name, @team.event_id.to_s) %>
+    </div>
+    <div class="field">
+    <%= form.label :youth_team, 'Is your team a youth team (made up by at least 75% people aged under 18 years old)?' %>
+    <%= form.check_box :youth_team %>
+    </div>
+    <div class="actions">
+    <%= form.submit 'Create New Team Project' %>
+    </div>
+  <% end %>
 
-<p><%= link_to 'Back to Teams', teams_path %></p>
+  <p><%= link_to 'Back to Projects', projects_path %></p>
 </main>

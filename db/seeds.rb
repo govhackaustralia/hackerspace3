@@ -59,6 +59,11 @@ comp.update(start_time: Time.now + 3.days, end_time: Time.now + 5.days,
                           name: "Checkpoint #{time}",
                           max_national_challenges: 1,
                           max_regional_challenges: 1)
+  comp.criteria.create(name: "Peoples Choice Criterion #{time}", description: "#{time} Description
+    to end all descriptions for Peoples Choice.", category: PEOPLES_CHOICE)
+
+  comp.criteria.create(name: "Regional Challenge Criterion #{time}", description: "#{time} Description
+    to end all descriptions for Regional Challenge.", category: REGIONAL_CHALLENGE)
 end
 
 comp.assignments.create(user_id: random_user_id, title: MANAGEMENT_TEAM)
@@ -165,6 +170,13 @@ Region.all.each do |region|
   region.challenges.each do |challenge|
     5.times do
       challenge.challenge_data_sets.create(data_set_id: random_data_set_id(region))
+
+    end
+
+    comp.criteria.where(category: REGIONAL_CHALLENGE).each do |criterion|
+      challenge.challenge_criteria.create(criterion: criterion,
+        description: "Challenge #{challenge.id}, criterion #{criterion}, custom
+        description.")
     end
 
     3.times do
@@ -214,7 +226,7 @@ Region.all.each do |region|
         end
 
         team.projects.create(team_name: "#{event.name} team #{team_time}",
-        description: 'Best team evaaaaaa!',
+        description: 'Best team evaaaaaa!', project_name: "#{event.name} project #{team_time}",
         data_story: 'We will be taking a big data approach.',
         source_code_url: 'https://github.com/tenderlove/allocation_sampler',
         video_url: 'https://www.youtube.com/embed/kqcrEFkA8g0',

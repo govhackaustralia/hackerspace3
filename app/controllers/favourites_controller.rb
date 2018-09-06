@@ -9,7 +9,7 @@ class FavouritesController < ApplicationController
     else
       flash[:alert] = 'Error adding Favourite'
     end
-    redirect_to team_path(@team)
+    redirect_to project_path(@team.current_project.identifier)
   end
 
   def destroy
@@ -20,6 +20,6 @@ class FavouritesController < ApplicationController
     else
       flash[:alert] = 'Problem removing favourite'
     end
-    redirect_to team_path(@favourite.team)
+    redirect_to project_path(@favourite.team.current_project.identifier)
   end
 end

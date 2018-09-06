@@ -4,7 +4,7 @@
 
 <p><strong>Competition Event</strong>: <%= @event.name %></p>
 <% if @team.published %>
-  <p><%= link_to 'Go to Team Page', team_path(@team) %></p>
+  <p><%= link_to 'Go to Team Page', project_path(@current_project.identifier) %></p>
 <% else %>
   This Project is yet to be published.<br>
 <% end %>
@@ -20,9 +20,9 @@
 
 <h3>Team Project Info</h3>
 
-<%= render 'teams/team_project_info' %>
+<%= render 'projects/team_project_info' %>
 <aside>
-  <p><%= link_to 'Update Project Details', edit_team_management_team_project_path(@team, @team.current_project) %></p>
+  <p><%= link_to 'Update Project Details', edit_team_management_team_project_path(@team, @current_project) %></p>
 </aside>
 
 <h3>Team Data Sets</h3>

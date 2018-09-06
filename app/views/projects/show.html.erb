@@ -3,6 +3,12 @@
 <% if user_signed_in? && @user.in_team?(@team) %>
 <aside>
   <p><%= link_to 'Managage this Team Project', team_management_team_path(@team) %></p>
+  <% if @favourite.present? %>
+    <p><%= link_to 'Unfavourite this Project', favourite_path(@favourite),
+                  method: :delete %></p>
+  <% else %>
+    <p><%= link_to 'Favourite this Project', favourites_path(team_id: @team.id), method: :post %></p>
+  <% end %>
 </aside>
 <% end %>
 
@@ -12,29 +18,21 @@
     <h3>People's Choice</h3>
     <% if @user.in_team?(@team) %>
 
-      Your team project is being judged in the People's Choice Awards.
+      <p>Your team project is being judged in the People's Choice Awards.</p>
 
     <% elsif @peoples_scorecard.present? %>
 
-      You gave this team a score of <%= @peoples_scorecard.display_score %><br>
+      <p>You gave this team a score of <%= @peoples_scorecard.display_score %></p>
 
-      <%= link_to 'Update Scorecard', edit_peoples_scorecard_path(@peoples_scorecard) %>
+      <%= link_to 'Update Scorecard', edit_peoples_scorecard_path(@peoples_scorecard) %><br>
 
     <% else %>
 
-      You are yet to judge this project.<br>
+      <p>You are yet to judge this project.</p>
 
-      <%= link_to 'Vote', new_peoples_scorecard_path(team_id: @team.id) %>
+      <%= link_to 'Vote', new_peoples_scorecard_path(team_id: @team.id) %><br>
 
     <% end %>
-  <% end %>
-
-  <% if @favourite.present? %>
-    <%= link_to 'Unfavourite Project', favourite_path(@favourite),
-                  method: :delete,
-                  data: { confirm: 'Are you sure?' } %><br>
-  <% else %>
-    <%= link_to 'Favourite Project', favourites_path(team_id: @team.id), method: :post %>
   <% end %>
 
 <% else %>
@@ -89,5 +87,5 @@
 
 </section>
 
-<%= link_to 'Back to Teams', teams_path %>
+<%= link_to 'Back to Projects', projects_path %>
   </main>

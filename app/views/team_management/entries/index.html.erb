@@ -1,3 +1,4 @@
+<main class="team_page">
 <h2><%= @team.name %> Challenge Entries</h2>
 
 <% @competition.checkpoints.order(:end_time).each do |checkpoint| %>
@@ -20,3 +21,4 @@
 <% end %>
 
 <%= link_to 'Back to Team', team_management_team_path(@team) %>
+</main>

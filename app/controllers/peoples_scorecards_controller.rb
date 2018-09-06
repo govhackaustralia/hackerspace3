@@ -17,7 +17,7 @@ class PeoplesScorecardsController < ApplicationController
     retrieve_update_vars
     if process_judgements
       flash[:notice] = 'Peoples\'s Choice Judgement Saved'
-      redirect_to team_path(@team)
+      redirect_to project_path(@team.current_project)
     else
       flash[:alert] = 'Error: One or more scores missing or out of range'
       render :new

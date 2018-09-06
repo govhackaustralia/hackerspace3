@@ -3,6 +3,8 @@ class Admin::EntriesController < ApplicationController
 
   def index
     @challenge = Challenge.find(params[:challenge_id])
+    @entries = @challenge.entries
+    @id_team_projects = Team.id_teams_projects(@entries.pluck(:team_id))
   end
 
   def edit
