@@ -12,6 +12,9 @@ class DataSetsController < ApplicationController
 
   def show
     @data_set = DataSet.find(params[:id])
+    @team_data_sets = TeamDataSet.where(url: @data_set.url)
+    @teams = Team.where(id: @team_data_sets.pluck(:team_id))
+    @id_teams_projects = Team.id_teams_projects(@teams.pluck(:id))
     return if Competition.current.started?
     redirect_to root_path
   end

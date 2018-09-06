@@ -1,6 +1,21 @@
+<main class="project_index">
 <h2><%= @data_set.name %></h2>
 
 Region: <%= @data_set.region.name %><br>
 Description: <%= @data_set.description %><br>
 <a href="<%= @data_set.url %>" target="_blank">URL</a><br>
+
+<h3>Team Projects Utilising <%= @data_set.name %></h3>
+
+<% if @team_data_sets.present? %>
+<% @teams.each do |team| %>
+  <% project = @id_teams_projects[team.id][:current_project] %>
+  <h4><%= "#{ project.team_name } - #{ project.project_name }" %></h4>
+  <%= link_to 'Go to Team Project', project_path(project.identifier) %><br>
+<% end %>
+
+<% else %>
+  <p>No team projects utilising this data set currently.</p>
+<% end %>
 <%= link_to 'Back to Data Sets', data_sets_path %>
+</main>
