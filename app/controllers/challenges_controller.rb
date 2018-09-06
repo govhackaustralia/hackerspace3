@@ -19,10 +19,10 @@ class ChallengesController < ApplicationController
     passed_checkpoint_ids = @competition.passed_checkpoint_ids(@region.time_zone)
     @entries = @challenge.entries.where(checkpoint_id: passed_checkpoint_ids)
     @id_team_projects = Team.id_teams_projects(@entries.pluck(:team_id))
-    @checkpoints = @challenge.competition.checkpoints.order(:end_time)
+    @checkpoints = @competition.checkpoints.order(:end_time)
     @data_sets = @challenge.data_sets
     @user_eligible_teams = @challenge.eligible_teams & current_user.teams if user_signed_in?
-    return if @challenge.competition.started? || (user_signed_in? && current_user.region_privileges?)
+    return if @competition.started?(@region.time_zone) || (user_signed_in? && current_user.region_privileges?)
     redirect_to root_path
   end
 

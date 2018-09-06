@@ -80,8 +80,13 @@ class Competition < ApplicationRecord
     events.where(type: type).present?
   end
 
-  def started?
-    start_time.to_formatted_s(:number) < Time.now.to_formatted_s(:number)
+  def started?(time_zone = nil)
+    region_time = if time_zone.present?
+                    Time.now.in_time_zone(time_zone).to_formatted_s(:number)
+                  else
+                    Time.now.to_formatted_s(:number)
+                  end
+    start_time.to_formatted_s(:number) < region_time
   end
 
   def not_finished?
