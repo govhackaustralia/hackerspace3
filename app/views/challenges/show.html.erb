@@ -30,7 +30,7 @@
 		  <h4><%= @challenge.short_desc %></h4>
 		<% end %>
 		<% unless @challenge.long_desc.blank? %>
-		  <p><%= simple_format(@challenge.long_desc) %></p>
+		  <p><%= markdown @challenge.long_desc %></p>
 		<% end %>
 		<% unless @challenge.eligibility.blank? %>
 		  <p><strong>Eligibility</strong>: <%= @challenge.eligibility %></p>
