@@ -64,30 +64,30 @@
 </section>
 <h3>Challenges</h3>
 <section class="markdown">
-<% passed_checkpoints.each do |checkpoint| %>
 
-  <h3><%= checkpoint.name %> Checkpoint</h3>
-  <% if (national_challenges = @team.national_challenges(checkpoint)).present? %>
-  <section class="markdown">
-    <h4>National Challenges</h4>
-    <% national_challenges.each do |challenge| %>
-      <h5><%= challenge.name %></h5>
-      <p><strong>Region</strong>: <%= challenge.region.name %></p>
+  <% passed_checkpoints.each do |checkpoint| %>
+
+    <% if (national_challenges = @team.national_challenges(checkpoint)).present? %>
+    <section class="markdown">
+      <% national_challenges.each do |challenge| %>
+        <h4><%= challenge.name %></h4>
+        <p><strong>Region</strong>: <%= @id_regions[challenge.region_id].name %></p>
+        <%= link_to 'Challenge', challenge_path(challenge) %>
+      <% end %>
+        </section>
     <% end %>
-      </sectopm>
+
+    <% if (regional_challenges = @team.regional_challenges(checkpoint)).present? %>
+      <% regional_challenges.each do |challenge| %>
+        <h4><%= challenge.name %></h4>
+        <p><strong>Region</strong>: <%= @id_regions[challenge.region_id].name %></p>
+        <%= link_to 'Challenge', challenge_path(challenge) %>
+      <% end %>
+    <% end %>
+
   <% end %>
 
-  <% if (regional_challenges = @team.regional_challenges(checkpoint)).present? %>
-    <h4>Regional Challenges</h4>
-    <% regional_challenges.each do |challenge| %>
-      <h5><%= challenge.name %></h5>
-      <p><strong>Region</strong>: <%= challenge.region.name %></p>
-    <% end %>
-  <% end %>
-      
-<% end %>
 </section>
-
 
 <%= link_to 'Back to Teams', teams_path %>
   </main>

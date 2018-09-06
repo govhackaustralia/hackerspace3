@@ -15,6 +15,8 @@ class TeamsController < ApplicationController
     @team = Team.find(params[:id])
     @current_project = @team.current_project
     @checkpoints = @team.event.competition.checkpoints.order(:end_time)
+    @challenges = @team.challenges
+    @id_regions = Region.id_regions(Region.all.pluck(:id))
     user_signed_in_records if user_signed_in?
   end
 

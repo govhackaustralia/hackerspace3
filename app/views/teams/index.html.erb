@@ -28,7 +28,7 @@
   <% filter_teams(@teams, params[:term]).each do |team| %>
   <tr>
     <td><%= link_to @id_teams_projects[team.id][:current_project].team_name, team_path(team) %></td>
-    <td><%= team.event.name %></td>
+    <td><%= @id_teams_projects[team.id][:event].name %></td>
   </tr>
   <% end %>
 	</tbody>
