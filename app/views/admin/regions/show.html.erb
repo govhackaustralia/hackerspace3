@@ -111,6 +111,12 @@
 
 <%= link_to "Create New Data Set for #{@region.name}", new_admin_region_data_set_path(@region) %><br>
 
+<% if @region.national? %>
+  <h3>National Challenge Entries By Region</h3>
+  <p>(ignoring checkpoints unlike public screen)</p>
+
+  <%= render 'entries/national_challenge_entries' %>
+<% end %>
 <% if (parent = @region.parent).present? && parent.admin_privileges?(current_user) %>
   <%= link_to "Back to #{parent.name} Region", admin_region_path(parent)  %><br>
 <% end %>

@@ -17,7 +17,7 @@ class Checkpoint < ApplicationRecord
     true
   end
 
-  def passed?(team)
-    end_time.to_formatted_s(:number) < Time.now.in_time_zone(team.time_zone).to_formatted_s(:number)
+  def passed?(time_zone)
+    end_time.to_formatted_s(:number) < Time.now.in_time_zone(time_zone).to_formatted_s(:number)
   end
 end

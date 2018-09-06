@@ -1,22 +1,4 @@
 <main class="entries_page">
-<h2>National Challenge Entry Counts for <%= @competition.name %></h2>
-
-<table>
-  <tr>
-    <th>Chalenges</th>
-    <% @region_names.each do |region_name| %>
-      <th><%= region_name %></th>
-    <% end %>
-  </tr>
-  <% @challenge_names.each do |challenge_name| %>
-    <tr>
-      <th><%= challenge_name %></th>
-      <% @region_names.each do |region_name| %>
-        <td><%= @region_counts[challenge_name][region_name] %></td>
-      <% end %>
-    </tr>
-  <% end %>
-</table>
-
-<%= javascript_tag  "window._region_counts = #{@region_counts.to_json}" %>
+  <h2>National Challenge Entry Counts for <%= @competition.name %></h2>
+  <%= render 'national_challenge_entries' %>
 </main>

@@ -12,10 +12,12 @@ class ChallengesController < ApplicationController
   end
 
   def show
+    @competition = Competition.current
     @challenge = Challenge.find(params[:id])
     @region = @challenge.region
     @challenge_sponsorships = @challenge.challenge_sponsorships
-    @entries = @challenge.entries
+    passed_checkpoint_ids = @competition.passed_checkpoint_ids(@region.time_zone)
+    @entries = @challenge.entries.where(checkpoint_id: passed_checkpoint_ids)
     @checkpoints = @challenge.competition.checkpoints.order(:end_time)
     @data_sets = @challenge.data_sets
     @user_eligible_teams = @challenge.eligible_teams & current_user.teams if user_signed_in?
@@ -26,7 +28,8 @@ class ChallengesController < ApplicationController
   private
 
   def challenge_entry_counts
-    entries = Entry.where(challenge_id: @challenges.pluck(:id))
+    passed_checkpoint_ids = @competition.passed_checkpoint_ids(LAST_TIME_ZONE)
+    entries = Entry.where(challenge_id: @challenges.pluck(:id), checkpoint_id: passed_checkpoint_ids)
     @challenge_id_to_entry_count = {}
     @challenges.each { |challenge| @challenge_id_to_entry_count[challenge.id] = 0 }
     entries.each { |entry| @challenge_id_to_entry_count[entry.challenge_id] += 1 }

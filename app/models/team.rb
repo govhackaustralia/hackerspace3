@@ -75,8 +75,9 @@ class Team < ApplicationRecord
   end
 
   def all_checkpoints_passed?
+    team_time_zone = time_zone
     competition.checkpoints.each do |checkpoint|
-      return false unless checkpoint.passed?(self)
+      return false unless checkpoint.passed?(team_time_zone)
     end
     true
   end
