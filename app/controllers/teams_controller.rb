@@ -3,7 +3,7 @@ class TeamsController < ApplicationController
     if user_signed_in?
       @competition = Competition.current
       @team = Team.new
-      @events = current_user.competition_events_attending(@competition)
+      @events = current_user.competition_events_participating(@competition)
       if @events.empty?
         flash[:alert] = 'To create a new team, first register for a competition event.'
         redirect_to root_path

@@ -23,7 +23,7 @@
           <h5><%= challenge.short_desc %></h5>
         <% end %>
         <% entry_count = @challenge_id_to_entry_count[challenge.id] %>
-        <p><%= link_to 'Go to Challange', challenge_path(challenge) %> |
+        <p><%= link_to 'Go to Challenge', challenge_path(challenge) %> |
           <%= pluralize entry_count , 'team' %>
           <%= entry_count == 1 ? 'has' : 'have' %> entered this challenge.</p>
       </article>

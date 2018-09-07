@@ -3,7 +3,7 @@ class ProjectsController < ApplicationController
     @competition = Competition.current
     @teams = @competition.teams.where(published: true)
     @id_teams_projects = Team.id_teams_projects(@teams)
-    @attending_events = current_user.competition_events_attending(@competition) if user_signed_in?
+    @attending_events = current_user.competition_events_participating(@competition) if user_signed_in?
     respond_to do |format|
       format.html
       format.csv { send_data @teams.to_csv }
