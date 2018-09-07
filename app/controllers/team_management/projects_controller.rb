@@ -2,6 +2,10 @@ class TeamManagement::ProjectsController < ApplicationController
   before_action :authenticate_user!
   before_action :check_user_team_privileges!
 
+  def create
+    update
+  end
+
   def edit
     @project = Project.find(params[:id])
   end
@@ -10,10 +14,12 @@ class TeamManagement::ProjectsController < ApplicationController
     @project = @team.projects.new(project_params)
     @project.user = current_user
     if @project.save
-      handle_successful_save
+      @team.update(project_id: @project.id)
+      flash[:notice] = 'Team Project Saved'
+      redirect_to edit_team_management_team_project_path(@project.team, @project)
     else
       flash[:alert] = @project.errors.full_messages.to_sentence
-      render :new
+      render :edit
     end
   end
 
@@ -23,12 +29,6 @@ class TeamManagement::ProjectsController < ApplicationController
     params.require(:project).permit(:team_name, :description, :data_story,
                                     :source_code_url, :video_url, :homepage_url,
                                     :project_name)
-  end
-
-  def handle_successful_save
-    @team.update(project_id: @project.id)
-    flash[:notice] = 'Team Project updated'
-    redirect_to team_management_team_path(@team)
   end
 
   def check_user_team_privileges!
