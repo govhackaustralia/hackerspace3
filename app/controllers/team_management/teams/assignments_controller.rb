@@ -25,14 +25,12 @@ class TeamManagement::Teams::AssignmentsController < ApplicationController
   end
 
   def update
-    @assignment = Assignment.find(params[:id])
-    old_title = @assignment.title
-    @assignment.update(title: params[:title])
+    update_assignment
     if @assignment.save
-      if old_title == INVITEE
+      if @old_title == INVITEE
         flash[:notice] = "Welcome to #{@team.name}"
         redirect_to team_management_team_path(@team)
-      elsif old_title == TEAM_MEMBER && params[:title] == TEAM_LEADER
+      elsif @old_title == TEAM_MEMBER && params[:title] == TEAM_LEADER
         flash[:notice] = 'New Team Leader Assigned'
         redirect_to team_management_team_assignments_path(@team)
       else
@@ -69,7 +67,17 @@ class TeamManagement::Teams::AssignmentsController < ApplicationController
 
   def create_new_assignment
     @user = User.find(params[:user_id])
-    @assignment = @team.assignments.new(user: @user, title: params[:title])
+    @assignment = @team.assignments.new(user: @user, title: INVITEE)
+  end
+
+  def update_assignment
+    @assignment = Assignment.find(params[:id])
+    @old_title = @assignment.title
+    if params[:title] == TEAM_MEMBER
+      @assignment.update(title: TEAM_MEMBER)
+    elsif params[:title] == TEAM_LEADER
+      @assignment.update(title: TEAM_LEADER)
+    end
   end
 
   def search_other_fields

@@ -87,7 +87,7 @@
 					<%= link_to "Go to #{team.name}", team_management_team_path(team) %><br>
 				<% end %>
 			<% end %>
-			<% if @competition.started? && (teams = @user.invited_teams).present? %>
+			<% if (@competition.started? || current_user.region_privileges?) && (teams = @user.invited_teams).present? %>
 				<h3>My Invitations</h3>
 				<% teams.each do |team| %>
 					<h4><%= "#{team.name} entered @ #{team.event.name}" %></h4>
