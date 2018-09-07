@@ -82,16 +82,20 @@
 			<% if (@competition.started? || current_user.region_privileges?) && (teams = @user.joined_teams).present? %>
 				<h3>My Team Projects</h3>
 				<% teams.each do |team| %>
+				<% project = @id_teams_projects[team.id][:current_project] %>
+				<% event = @id_teams_projects[team.id][:event] %>
 					<h4><%= team.name %></h4>
-					Event: <%= team.event.name %><br>
+					Event: <%= event.name %><br>
 					<%= link_to "Go to #{team.name}", team_management_team_path(team) %><br>
 				<% end %>
 			<% end %>
 			<% if (@competition.started? || current_user.region_privileges?) && (teams = @user.invited_teams).present? %>
 				<h3>My Invitations</h3>
 				<% teams.each do |team| %>
-					<h4><%= "#{team.name} entered @ #{team.event.name}" %></h4>
-					<% assignment = Assignment.find_by(user: @user, assignable: team) %>
+				<% project = @id_teams_projects[team.id][:current_project] %>
+				<% event = @id_teams_projects[team.id][:event] %>
+					<h4><%= "#{team.name} entered @ #{event.name}" %></h4>
+					<% assignment = @team_id_assignments[team.id] %>
 
 					<%= link_to 'Accept Invitation and Go to Team',
 							team_management_team_assignment_path(

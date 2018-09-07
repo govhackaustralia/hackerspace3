@@ -23,17 +23,11 @@ class UsersController < ApplicationController
     @id_sponsors = Sponsor.id_sponsors(@sponsor_contact_assignments.pluck(:assignable_id))
 
     @favourite_teams = @event_assignment.teams
+    @comp_teams = @user.teams
 
-    team_ids = []
-    team_ids << @favourite_teams.pluck(:id)
+    @id_teams_projects = Team.id_teams_projects(@favourite_teams + @comp_teams)
 
-    @id_teams_projects = Team.id_teams_projects(team_ids.flatten)
-
-    event_ids = []
-    event_ids << @favourite_teams.pluck(:event_id)
-    event_ids << @registrations.pluck(:event_id)
-
-    @id_events = Event.id_events(event_ids.flatten)
+    @id_events = Event.id_events(@registrations.pluck(:event_id))
   end
 
   def edit

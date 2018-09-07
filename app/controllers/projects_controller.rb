@@ -14,7 +14,9 @@ class ProjectsController < ApplicationController
     @competition = Competition.current
     @current_project = Project.find_by(identifier: params[:identifier])
     @team = @current_project.team
-    @checkpoints = @team.event.competition.checkpoints.order(:end_time)
+    @checkpoints = @competition.checkpoints.order(:end_time)
+    passed_checkpoint_ids = @competition.passed_checkpoint_ids(@team.time_zone)
+    @challenges_to_display = Entry.where(checkpoint: passed_checkpoint_ids, team: @team).present?
     @challenges = @team.challenges
     @id_regions = Region.id_regions(Region.all)
     user_signed_in_records if user_signed_in?

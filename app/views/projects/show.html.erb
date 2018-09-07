@@ -1,8 +1,10 @@
 <main class="team_page">
-<h2><%= @team.name %></h2>
-<% if user_signed_in? && @user.in_team?(@team) %>
+<h2><%= @current_project.project_name %></h2>
+
 <aside>
+  <% if user_signed_in? && @user.in_team?(@team) %>
   <p><%= link_to 'Managage this Team Project', team_management_team_path(@team) %></p>
+  <% end %>
   <% if @favourite.present? %>
     <p><%= link_to 'Unfavourite this Project', favourite_path(@favourite),
                   method: :delete %></p>
@@ -10,35 +12,21 @@
     <p><%= link_to 'Favourite this Project', favourites_path(team_id: @team.id), method: :post %></p>
   <% end %>
 </aside>
-<% end %>
 
-<% if user_signed_in? %>
 
-  <% if in_peoples_choice_window? %>
-    <h3>People's Choice</h3>
-    <% if @user.in_team?(@team) %>
-
-      <p>Your team project is being judged in the People's Choice Awards.</p>
-
-    <% elsif @peoples_scorecard.present? %>
-
-      <p>You gave this team a score of <%= @peoples_scorecard.display_score %></p>
-
-      <%= link_to 'Update Scorecard', edit_peoples_scorecard_path(@peoples_scorecard) %><br>
-
-    <% else %>
-
-      <p>You are yet to judge this project.</p>
-
-      <%= link_to 'Vote', new_peoples_scorecard_path(team_id: @team.id) %><br>
-
-    <% end %>
+<% if user_signed_in? && in_peoples_choice_window? %>
+  <h3>People's Choice</h3>
+  <% if @user.in_team?(@team) %>
+    <p>Your team project is being judged in the People's Choice Awards.</p>
+  <% elsif @peoples_scorecard.present? %>
+    <p>You gave this team a score of <%= @peoples_scorecard.display_score %></p>
+    <%= link_to 'Update Scorecard', edit_peoples_scorecard_path(@peoples_scorecard) %><br>
+  <% else %>
+    <p>You are yet to judge this project.</p>
+    <%= link_to 'Vote', new_peoples_scorecard_path(team_id: @team.id) %><br>
   <% end %>
-
-<% else %>
-
-  Login to vote for this project in the People's Choice Awards.<br>
-
+<% elsif in_peoples_choice_window? %>
+  <p>Login to vote for this project in the People's Choice Awards.</p>
 <% end %>
 
 <h3>Project Info</h3>
@@ -62,26 +50,42 @@
 </section>
 <h3>Challenges</h3>
 <section class="markdown">
+  <% if passed_checkpoints.present? %>
 
-  <% passed_checkpoints.each do |checkpoint| %>
+    <% if @challenges_to_display %>
 
-    <% if (national_challenges = @team.national_challenges(checkpoint)).present? %>
-    <section class="markdown">
-      <% national_challenges.each do |challenge| %>
-        <h4><%= challenge.name %></h4>
-        <p><strong>Region</strong>: <%= @id_regions[challenge.region_id].name %></p>
-        <%= link_to 'Challenge', challenge_path(challenge) %>
+      <% passed_checkpoints.each do |checkpoint| %>
+
+        <% if (national_challenges = @team.national_challenges(checkpoint)).present? %>
+        <section class="markdown">
+          <% national_challenges.each do |challenge| %>
+            <h4><%= challenge.name %></h4>
+            <p><strong>Region</strong>: <%= @id_regions[challenge.region_id].name %></p>
+            <%= link_to 'Challenge', challenge_path(challenge) %>
+          <% end %>
+            </section>
+        <% end %>
+
+        <% if (regional_challenges = @team.regional_challenges(checkpoint)).present? %>
+          <% regional_challenges.each do |challenge| %>
+            <h4><%= challenge.name %></h4>
+            <p><strong>Region</strong>: <%= @id_regions[challenge.region_id].name %></p>
+            <%= link_to 'Challenge', challenge_path(challenge) %>
+          <% end %>
+        <% end %>
+
       <% end %>
-        </section>
+
+    <% else %>
+
+      <p>There are no challenges to display for this team as yet.</p>
+
     <% end %>
 
-    <% if (regional_challenges = @team.regional_challenges(checkpoint)).present? %>
-      <% regional_challenges.each do |challenge| %>
-        <h4><%= challenge.name %></h4>
-        <p><strong>Region</strong>: <%= @id_regions[challenge.region_id].name %></p>
-        <%= link_to 'Challenge', challenge_path(challenge) %>
-      <% end %>
-    <% end %>
+  <% else %>
+
+    <p>Check back here once the first checkpoint passes to see the challenges
+      this team has entered.</p>
 
   <% end %>
 

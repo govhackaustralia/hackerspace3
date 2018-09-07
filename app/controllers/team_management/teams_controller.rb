@@ -5,6 +5,7 @@ class TeamManagement::TeamsController < ApplicationController
   def show
     @current_project = @team.current_project
     @event = @team.event
+    @region = @event.region
     @competition = @event.competition
   end
 

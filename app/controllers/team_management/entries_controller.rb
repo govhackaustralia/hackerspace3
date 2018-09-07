@@ -27,6 +27,7 @@ class TeamManagement::EntriesController < ApplicationController
   def destroy
     @entry = Entry.find(params[:id])
     @entry.destroy
+    flash[:notice] = 'Challenge Entry Removed'
     redirect_to team_management_team_entries_path(@entry.team)
   end
 

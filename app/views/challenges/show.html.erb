@@ -67,7 +67,7 @@
 <section>
 <h3>Team Entries</h3>
 
-<section class="teams"><%= pluralize @entries.count, 'team' %> have entered into this challenge.<br>
+<section class="teams"><%= pluralize @entries.count, 'team' %> <%= @entries.count == 1 ? 'has' : 'have' %> entered into this challenge across all passed checkpoints.<br>
 
 <% if user_signed_in? %>
 	<% unless @user_eligible_teams.empty? %>
