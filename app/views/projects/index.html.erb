@@ -21,7 +21,8 @@
 
 <table>
 	<thead>
-		<th>Project/Team</th>
+		<th>Project</th>
+		<th>Team</th>
 		<th>Location</th>
 	</thead>
 	<tbody>
@@ -29,7 +30,8 @@
   <tr>
     <% project = @id_teams_projects[team.id][:current_project] %>
     <% event = @id_teams_projects[team.id][:event] %>
-    <td><%= link_to "#{project.team_name} - #{project.project_name}", project_path(project.identifier) %></td>
+    <td><%= link_to "#{project.project_name}", project_path(project.identifier) %></td>
+    <td><%= project.team_name %></td>
     <td><%= event.name %></td>
   </tr>
   <% end %>
