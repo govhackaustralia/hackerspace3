@@ -48,9 +48,7 @@ class ChallengesController < ApplicationController
   end
 
   def search_challenge_string(challenge, term)
-    challenge_string = "#{challenge.name} #{challenge.short_desc}" \
-                       "#{challenge.eligibility}" +
-                       @id_regions[challenge.region_id].name.to_s.downcase
+    challenge_string = "#{challenge.name} #{challenge.short_desc} #{@id_regions[challenge.region_id].name}".downcase
     @region_challenges[challenge.region_id] << challenge if challenge_string.include? term.downcase
   end
 end
