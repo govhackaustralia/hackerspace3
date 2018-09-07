@@ -27,9 +27,9 @@ class Project < ApplicationRecord
   private
 
   def already_there?(new_identifier)
-    event = Event.find_by(identifier: new_identifier)
-    return false if event.nil?
-    return false if event == self
+    project = Project.find_by(identifier: new_identifier)
+    return false if project.nil?
+    return false if project == self
     true
   end
 
