@@ -25,7 +25,7 @@
         <% entry_count = @challenge_id_to_entry_count[challenge.id] %>
         <p><%= link_to 'Go to Challenge', challenge_path(challenge) %> |
           <%= pluralize entry_count , 'team' %>
-          <%= entry_count == 1 ? 'has' : 'have' %> entered this challenge.</p>
+          <%= entry_count == 1 ? 'has' : 'have' %> entered into this challenge across all checkpoints that have passed.</p>
       </article>
       <aside class="sponsors">
          <% if challenge.challenge_sponsorships.present? %>

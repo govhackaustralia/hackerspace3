@@ -24,6 +24,27 @@ class TeamManagement::EntriesController < ApplicationController
     end
   end
 
+  def edit
+    @entry = Entry.find(params[:id])
+    @team = @entry.team
+    @challenge = @entry.challenge
+    @checkpoints = @team.available_checkpoints(@challenge)
+  end
+
+  def update
+    @entry = Entry.find(params[:id])
+    @team = @entry.team
+    if @entry.update(entry_params)
+      flash[:notice] = 'Entry Updated Successfully'
+      redirect_to team_management_team_entries_path(@team)
+    else
+      @challenge = @entry.challenge
+      @checkpoints = @team.available_checkpoints(@challenge)
+      flash[:alert] = @entry.errors.full_messages.to_sentence
+      render :edit
+    end
+  end
+
   def destroy
     @entry = Entry.find(params[:id])
     @entry.destroy
