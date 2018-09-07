@@ -84,7 +84,7 @@ class Competition < ApplicationRecord
     region_time = if time_zone.present?
                     Time.now.in_time_zone(time_zone).to_formatted_s(:number)
                   else
-                    Time.now.to_formatted_s(:number)
+                    Time.now.in_time_zone('Sydney').to_formatted_s(:number)
                   end
     start_time.to_formatted_s(:number) < region_time
   end
