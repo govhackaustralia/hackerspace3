@@ -11,7 +11,7 @@ class Entry < ApplicationRecord
 
   validate :entries_must_not_exceed_max_regional_allowed_for_checkpoint,
            :entries_must_not_exceed_max_national_allowed_for_checkpoint,
-           :teams_cannot_enter_regional_challenges_from_regions_other_than_their_own
+           :teams_cannot_enter_regional_challenges_from_regions_other_than_their_own, on: :create
 
   after_create :update_eligible
 
@@ -28,7 +28,7 @@ class Entry < ApplicationRecord
     return if challenge.region.national?
     current_count = team.regional_challenges(checkpoint).count
     max_allowed = checkpoint.max_regional_challenges
-    if current_count == max_allowed
+    if current_count >= max_allowed
       errors.add(:checkpoint_id, 'Maximum Regional Challenges already entered for this Checkpoint')
     end
   end
@@ -37,7 +37,7 @@ class Entry < ApplicationRecord
     return unless challenge.region.national?
     current_count = team.national_challenges(checkpoint).count
     max_allowed = checkpoint.max_national_challenges
-    if current_count == max_allowed
+    if current_count >= max_allowed
       errors.add(:checkpoint_id, 'Maximum National Challenges already entered for this Checkpoint')
     end
   end

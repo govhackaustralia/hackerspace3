@@ -8,10 +8,10 @@ Justification: <%= @entry.justification %><br>
 <%= form_for [:admin, @challenge, @entry] do |form| %>
 
   <%= form.label(:eligible, 'Mark Eligible') %>
-  <%= form.radio_button(:eligible, true, options = {checked: @entry.eligible}) %>
+  <%= form.radio_button(:eligible, true, options = {checked: @entry.eligible == true}) %>
 
   <%= form.label(:eligible, 'Mark Ineligible') %>
-  <%= form.radio_button(:eligible, false, options = {checked: @entry.eligible}) %><br>
+  <%= form.radio_button(:eligible, false, options = {checked: @entry.eligible == false}) %><br>
 
   <%= form.submit %>
 <% end %>

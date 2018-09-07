@@ -53,7 +53,8 @@ Rails.application.routes.draw do
 
     resources :challenges do
       resources :assignments, controller: 'challenges/assignments'
-      resources :challenge_criteria, :entries, :challenge_sponsorships, :challenge_data_sets
+      resources :challenge_criteria, :challenge_sponsorships, :challenge_data_sets
+      resources :entries, controller: 'challenges/entries'
     end
 
     resources :events do
@@ -62,7 +63,7 @@ Rails.application.routes.draw do
     end
 
     resources :teams do
-      resources :entries, :projects
+      resources :projects
       resources :entries, controller: 'teams/entries'
     end
 

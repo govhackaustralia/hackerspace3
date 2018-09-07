@@ -3,5 +3,5 @@
 <% project = @id_team_projects[entry.team_id][:current_project] %>
 
 <h4><%= "#{project.team_name} - #{project.project_name}" %></h4>
-<%= link_to 'Review Project', edit_admin_challenge_entry_path(@challenge, entry) %><br>
-<%= link_to 'Go to Team Project', project_path(project.identifier) %><br>
+<%= link_to 'Review Project', edit_admin_challenge_entry_path(@challenge, entry) %> -
+<%= link_to 'Go to Team Project', project_path(project.identifier) %></br>

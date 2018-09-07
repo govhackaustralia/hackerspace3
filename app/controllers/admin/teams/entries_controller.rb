@@ -10,8 +10,8 @@ class Admin::Teams::EntriesController < ApplicationController
 
   def create
     @team = Team.find(params[:team_id])
-    @entry = @team.entries.new(checkpoint_id: params[:checkpoint_id])
-    @entry.update(entry_params)
+    @entry = @team.entries.new(entry_params)
+    @entry.checkpoint_id = params[:checkpoint_id]
     if @entry.save
       flash[:notice] = 'New Challenge Entry Created'
       redirect_to admin_team_path(@team)
