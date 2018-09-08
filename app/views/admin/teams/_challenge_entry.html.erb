@@ -11,5 +11,6 @@ Eligibility:
 <% else %>
   This team has yet to be marked eligible to enter this challenge.
 <% end %><br>
-<%= link_to 'Remove Challenge', admin_team_entry_path(@team, entry),
-method: :delete, data: { confirm: 'Are you sure?' } %><br>
+<%= link_to 'Update Entry', edit_admin_team_entry_path(@team, entry) %>
+ | <%= link_to 'Remove Challenge', admin_team_entry_path(@team, entry),
+method: :delete, data: { confirm: 'Are you sure?' } %></br>

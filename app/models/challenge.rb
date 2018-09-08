@@ -36,6 +36,11 @@ class Challenge < ApplicationRecord
     end
   end
 
+  def type
+    return NATIONAL if region.national?
+    REGIONAL
+  end
+
   require 'csv'
 
   def self.to_csv(options = {})

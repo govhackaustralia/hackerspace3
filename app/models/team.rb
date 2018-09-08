@@ -67,11 +67,25 @@ class Team < ApplicationRecord
   end
 
   def time_zone
-    event.region.time_zone
+    region.time_zone
   end
 
   def available_checkpoints(challenge)
     competition.available_checkpoints(self, challenge.region)
+  end
+
+  def admin_available_checkpoints(challenge_type)
+    valid_checkpoints = []
+    if challenge_type == REGIONAL
+      challenge_region = region
+    else
+      challenge_region = Region.root
+    end
+    competition.checkpoints.each do |checkpoint|
+      next if checkpoint.limit_reached?(self, challenge_region)
+      valid_checkpoints << checkpoint
+    end
+    valid_checkpoints
   end
 
   def all_checkpoints_passed?

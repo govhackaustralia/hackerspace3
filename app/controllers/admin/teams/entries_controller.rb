@@ -8,6 +8,27 @@ class Admin::Teams::EntriesController < ApplicationController
     @challenges = @team.available_challenges(params[:challenge_type])
   end
 
+  def edit
+    @entry = Entry.find(params[:id])
+    @team = @entry.team
+    @challenge = @entry.challenge
+    @checkpoints = (@team.admin_available_checkpoints(@challenge.type) << @entry.checkpoint).uniq
+  end
+
+  def update
+    @entry = Entry.find(params[:id])
+    @challenge = @entry.challenge
+    @team = @entry.team
+    @checkpoints = (@team.admin_available_checkpoints(@challenge.type) << @entry.checkpoint).uniq
+    if @entry.update(entry_params)
+      flash[:notice] = 'Entry Updated Successfully'
+      redirect_to admin_team_path(@team)
+    else
+      flash[:alert] = @entry.errors.full_messages.to_sentence
+      render :edit
+    end
+  end
+
   def create
     @team = Team.find(params[:team_id])
     @entry = @team.entries.new(entry_params)
@@ -33,7 +54,7 @@ class Admin::Teams::EntriesController < ApplicationController
   private
 
   def entry_params
-    params.require(:entry).permit(:challenge_id, :justification)
+    params.require(:entry).permit(:challenge_id, :justification, :checkpoint_id)
   end
 
   def check_for_privileges
