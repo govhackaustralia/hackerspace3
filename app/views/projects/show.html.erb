@@ -52,27 +52,15 @@
 <section class="markdown">
   <% if passed_checkpoints.present? %>
 
-    <% if @challenges_to_display %>
+    <% if @entries_to_display.present? %>
 
-      <% passed_checkpoints.each do |checkpoint| %>
-
-        <% if (national_challenges = @team.national_challenges(checkpoint)).present? %>
+      <% @entries_to_display.each do |entry| %>
+        <% challenge = entry.challenge %>
         <section class="markdown">
-          <% national_challenges.each do |challenge| %>
             <h4><%= challenge.name %></h4>
             <p><strong>Region</strong>: <%= @id_regions[challenge.region_id].name %></p>
             <%= link_to 'Challenge', challenge_path(challenge) %>
-          <% end %>
-            </section>
-        <% end %>
-
-        <% if (regional_challenges = @team.regional_challenges(checkpoint)).present? %>
-          <% regional_challenges.each do |challenge| %>
-            <h4><%= challenge.name %></h4>
-            <p><strong>Region</strong>: <%= @id_regions[challenge.region_id].name %></p>
-            <%= link_to 'Challenge', challenge_path(challenge) %>
-          <% end %>
-        <% end %>
+        </section>
 
       <% end %>
 

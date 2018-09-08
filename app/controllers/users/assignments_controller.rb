@@ -3,7 +3,7 @@ class Users::AssignmentsController < ApplicationController
 
   def destroy
     @assignment = Assignment.find(params[:id])
-    if (@assignment.user == current_user)
+    if @assignment.user == current_user
       @assignment.destroy
       flash[:notice] = if @assignment.title == INVITEE
                          'Invitation Declined'

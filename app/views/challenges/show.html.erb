@@ -65,15 +65,13 @@
 <% end %>
 
 <section>
-<h3>Team Entries</h3>
-
-<section class="teams"><%= pluralize @entries.count, 'team' %> <%= @entries.count == 1 ? 'has' : 'have' %> entered into this challenge across all checkpoints that have passed.<br>
 
 <% if user_signed_in? %>
 	<% unless @user_eligible_teams.empty? %>
-		<h4>Your Team Entries</h4>
+		<h3>Your Team Entries</h3>
 	  <% @user_eligible_teams.each do |team| %>
-	    <h5><%= team.name %></h4>
+			<% project = team.current_project %>
+	    <h4><%= "#{project.team_name} - #{project.project_name}" %></h4>
 	    <% if (entry = Entry.find_by(team: team, challenge: @challenge)).present? %>
 	      Team entered into this challenge for <%= entry.checkpoint.name %> Checkpoint.<br>
 	    <% else %>
@@ -85,7 +83,7 @@
 					<% if team.all_checkpoints_passed? %>
 	        	All Checkpoints have passed.<br>
 					<% else %>
-						All avaiable checkpoint limits reached for
+						All available checkpoint limits reached for
 						<%= @region.national? ? 'national' : 'regional' %> challenges.<br>
 					<% end %>
 	      <% end %>
@@ -96,15 +94,20 @@
   Sign in to enter your team into this challenge.<br>
 <% end %>
 
-<% passed_competition_checkpoints.each do |checkpoint| %>
+<h3>All Team Entries</h3>
+
+<section class="teams"><%= pluralize @entries.count, 'team' %> <%= @entries.count == 1 ? 'has' : 'have' %> entered into this challenge across all checkpoints that have passed.<br>
+
+
+<% @passed_public_checkpoints.each do |checkpoint| %>
 
   <% if (teams = challenge_teams(checkpoint)).present? %>
 
-    <h3><%= checkpoint.name %> Checkpoint</h3>
+    <h4><%= checkpoint.name %> Checkpoint</h4>
 
     <% teams.each do |team| %>
 			<% project = @id_team_projects[team.id][:current_project] %>
-      <h4><%= "#{project.team_name} - #{project.project_name}" %></h4>
+      <h5><%= "#{project.team_name} - #{project.project_name}" %></h5>
       <%= link_to 'Go to Team Project', project_path(project.identifier) %><br>
     <% end %>
 

@@ -1,3 +1,4 @@
+<main class="project_index">
 <h2>Teams for <%= @competition.name %></h2>
 
 <%= form_tag admin_teams_path, method: :get do %>
@@ -7,10 +8,24 @@
 <%= link_to 'Clear Search', admin_teams_path %></br>
 <%= link_to 'Download CSV', teams_path(format: 'csv') %></br>
 
-<% filter_teams(@teams, params[:term]).each do |team| %>
-
-  <h3><%= @id_teams_projects[team.id][:current_project].team_name %></h3>
-  <%= link_to 'Go to Team', admin_team_path(team) %><br>
-<% end %>
+<table>
+	<thead>
+		<th>Project</th>
+		<th>Team</th>
+		<th>Location</th>
+	</thead>
+	<tbody>
+  <% filter_teams(@teams, params[:term]).each do |team| %>
+  <tr>
+    <% project = @id_teams_projects[team.id][:current_project] %>
+    <% event = @id_teams_projects[team.id][:event] %>
+    <td><%= link_to "#{project.project_name}", admin_team_path(team) %></td>
+    <td><%= project.team_name %></td>
+    <td><%= event.name %></td>
+  </tr>
+  <% end %>
+	</tbody>
+</table>
 
 <%= link_to 'Back to Account Management', manage_account_path %>
+</main>

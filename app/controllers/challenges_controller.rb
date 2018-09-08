@@ -15,18 +15,26 @@ class ChallengesController < ApplicationController
     @competition = Competition.current
     @challenge = Challenge.find(params[:id])
     @region = @challenge.region
-    @challenge_sponsorships = @challenge.challenge_sponsorships
-    passed_checkpoint_ids = @competition.passed_checkpoint_ids(@region.time_zone)
-    @entries = @challenge.entries.where(checkpoint_id: passed_checkpoint_ids)
-    @id_team_projects = Team.id_teams_projects(@entries.pluck(:team_id))
-    @checkpoints = @competition.checkpoints.order(:end_time)
     @data_sets = @challenge.data_sets
-    @user_eligible_teams = @challenge.eligible_teams & current_user.teams if user_signed_in?
+    @challenge_sponsorships = @challenge.challenge_sponsorships
+    challenge_show_entry_management
     return if @competition.started?(@region.time_zone) || (user_signed_in? && current_user.region_privileges?)
     redirect_to root_path
   end
 
   private
+
+  def challenge_show_entry_management
+    @user_eligible_teams = @challenge.eligible_teams & current_user.teams if user_signed_in?
+    passed_checkpoint_ids = if @region.national?
+                              @competition.passed_checkpoint_ids(LAST_TIME_ZONE)
+                            else
+                              @competition.passed_checkpoint_ids(@region.time_zone)
+                            end
+    @passed_public_checkpoints = @competition.checkpoints.all.where(id: passed_checkpoint_ids).order(:end_time)
+    @entries = @challenge.entries.where(checkpoint_id: passed_checkpoint_ids)
+    @id_team_projects = Team.id_teams_projects(@entries.pluck(:team_id))
+  end
 
   def challenge_entry_counts
     passed_checkpoint_ids = @competition.passed_checkpoint_ids(LAST_TIME_ZONE)

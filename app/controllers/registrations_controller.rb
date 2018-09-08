@@ -84,14 +84,14 @@ class RegistrationsController < ApplicationController
     @registration = @event.registrations.new(status: params[:status])
     @user = current_user
     @registration.assignment = @user.event_assignment
-    @registration.time_notified = Time.now
+    @registration.time_notified = Time.now.in_time_zone(COMP_TIME_ZONE)
   end
 
   def update_registration
     @registration = Registration.find(params[:id])
     @event = @registration.event
     @registration.update(registration_params)
-    @registration.update(time_notified: Time.now)
+    @registration.update(time_notified: Time.now.in_time_zone(COMP_TIME_ZONE))
     @user = current_user
   end
 

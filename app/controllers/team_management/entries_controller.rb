@@ -13,13 +13,21 @@ class TeamManagement::EntriesController < ApplicationController
   end
 
   def create
-    create_new_entry
-    if @entry.save
+    @entry = @team.entries.new(entry_params)
+    @challenge = Challenge.find(params[:challenge_id])
+    @entry.challenge = @challenge
+    @checkpoints = @team.available_checkpoints(@challenge)
+    checkpoint = Checkpoint.find(params[:entry][:checkpoint_id])
+    checkpoint_not_passed = @checkpoints.include?(checkpoint)
+    if checkpoint_not_passed && @entry.save
       flash[:notice] = 'Challenge Entered'
       redirect_to challenge_path(@entry.challenge)
     else
-      flash[:alert] = @entry.errors.full_messages.to_sentence
-      @checkpoints = @team.available_checkpoints(@challenge)
+      unless checkpoint_not_passed
+        flash[:alert] = "#{checkpoint.name} has passed."
+      else
+        flash[:alert] = @entry.errors.full_messages.to_sentence
+      end
       render :new
     end
   end
@@ -33,14 +41,19 @@ class TeamManagement::EntriesController < ApplicationController
 
   def update
     @entry = Entry.find(params[:id])
-    @team = @entry.team
-    if @entry.update(entry_params)
+    @challenge = @entry.challenge
+    @checkpoints = @team.available_checkpoints(@challenge)
+    checkpoint = Checkpoint.find(params[:entry][:checkpoint_id])
+    checkpoint_not_passed = @checkpoints.include?(checkpoint)
+    if checkpoint_not_passed && @entry.update(entry_params)
       flash[:notice] = 'Entry Updated Successfully'
       redirect_to team_management_team_entries_path(@team)
     else
-      @challenge = @entry.challenge
-      @checkpoints = @team.available_checkpoints(@challenge)
-      flash[:alert] = @entry.errors.full_messages.to_sentence
+      unless checkpoint_not_passed
+        flash[:alert] = "#{checkpoint.name} has passed."
+      else
+        flash[:alert] = @entry.errors.full_messages.to_sentence
+      end
       render :edit
     end
   end
@@ -56,12 +69,6 @@ class TeamManagement::EntriesController < ApplicationController
 
   def entry_params
     params.require(:entry).permit(:checkpoint_id, :justification, :challenge_id)
-  end
-
-  def create_new_entry
-    @entry = @team.entries.new(entry_params)
-    @challenge = Challenge.find(params[:challenge_id])
-    @entry.challenge = @challenge
   end
 
   def check_user_team_privileges!

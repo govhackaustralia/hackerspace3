@@ -55,6 +55,7 @@ ActiveSupport::TimeZone.country_zones('AU').each do |zone|
 end
 
 LAST_TIME_ZONE = 'Perth'
+COMP_TIME_ZONE = 'Sydney'
 
 # Assignment Permissions Framework Titles
 

@@ -1,3 +1,2 @@
 module Admin::EntriesHelper
-
 end
