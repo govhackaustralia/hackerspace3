@@ -5,6 +5,7 @@ class Challenge < ApplicationRecord
   has_many :entries, dependent: :destroy
   has_many :challenge_criteria, dependent: :destroy
   has_many :challenge_sponsorships, dependent: :destroy
+  has_many :sponsors, through: :challenge_sponsorships
   has_many :challenge_data_sets, dependent: :destroy
   has_many :data_sets, through: :challenge_data_sets
 
@@ -44,11 +45,20 @@ class Challenge < ApplicationRecord
   require 'csv'
 
   def self.to_csv(options = {})
-    desired_columns = %w[id region_id competition_id name short_desc long_desc eligibility video_url created_at updated_at]
+    id_regions = Region.id_regions(Region.all)
+    competition = Competition.current
+    desired_columns = %w[id region_name competition_year name short_desc long_desc eligibility video_url sponsors created_at updated_at]
     CSV.generate(options) do |csv|
       csv << desired_columns
       all.each do |challenge|
-        csv << challenge.attributes.values_at(*desired_columns)
+        values = []
+        values << challenge.id
+        values << id_regions[challenge.region_id].name
+        values << competition.year
+        values += [challenge.name, challenge.short_desc, challenge.long_desc, challenge.eligibility, challenge.video_url]
+        values << challenge.sponsors.pluck(:name)
+        values += [challenge.created_at, challenge.updated_at]
+        csv << values
       end
     end
   end
