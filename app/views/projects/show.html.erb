@@ -3,7 +3,7 @@
 
 <aside>
   <% if user_signed_in? && @user.in_team?(@team) %>
-  <p><%= link_to 'Managage this Team Project', team_management_team_path(@team) %></p>
+  <p><%= link_to 'Manage this Team Project', team_management_team_path(@team) %></p>
   <% end %>
   <% if @favourite.present? %>
     <p><%= link_to 'Unfavourite this Project', favourite_path(@favourite),
