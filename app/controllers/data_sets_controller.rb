@@ -14,7 +14,7 @@ class DataSetsController < ApplicationController
     @competition = Competition.current
     @data_set = DataSet.find(params[:id])
     @team_data_sets = TeamDataSet.where(url: @data_set.url)
-    @teams = Team.where(id: @team_data_sets.pluck(:team_id))
+    @teams = Team.where(id: @team_data_sets.pluck(:team_id), published: true)
     @id_teams_projects = Team.id_teams_projects(@teams)
   end
 end

@@ -11,15 +11,20 @@ class ProjectsController < ApplicationController
   end
 
   def show
-    @competition = Competition.current
     @current_project = Project.find_by(identifier: params[:identifier])
     @team = @current_project.team
-    @checkpoints = @competition.checkpoints.order(:end_time)
-    passed_checkpoint_ids = @competition.passed_checkpoint_ids(@team.time_zone)
-    @entries_to_display = Entry.where(checkpoint: passed_checkpoint_ids, team: @team)
-    @challenges = @team.challenges
-    @id_regions = Region.id_regions(Region.all)
-    user_signed_in_records if user_signed_in?
+    if @team.published
+      @competition = Competition.current
+      @checkpoints = @competition.checkpoints.order(:end_time)
+      passed_checkpoint_ids = @competition.passed_checkpoint_ids(@team.time_zone)
+      @entries_to_display = Entry.where(checkpoint: passed_checkpoint_ids, team: @team)
+      @challenges = @team.challenges
+      @id_regions = Region.id_regions(Region.all)
+      user_signed_in_records if user_signed_in?
+    else
+      flash[:alert] = 'This Team Project has not been published.'
+      redirect_to root_path
+    end
   end
 
   private

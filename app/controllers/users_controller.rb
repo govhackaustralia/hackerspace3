@@ -22,7 +22,7 @@ class UsersController < ApplicationController
     @sponsor_contact_assignments = @assignments.where(title: SPONSOR_CONTACT)
     @id_sponsors = Sponsor.id_sponsors(@sponsor_contact_assignments.pluck(:assignable_id))
 
-    @favourite_teams = @event_assignment.teams
+    @favourite_teams = @event_assignment.teams.where(published: true)
     @comp_teams = @user.teams
 
     @id_teams_projects = Team.id_teams_projects(@favourite_teams + @comp_teams)
