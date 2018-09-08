@@ -116,7 +116,13 @@
   <p>(ignoring checkpoints unlike public screen)</p>
 
   <%= render 'entries/national_challenge_entries' %>
+<% else %>
+  <h3>Regional Challenge Entries By Event</h3>
+  <p>(ignoring checkpoints unlike public screen)</p>
+
+  <%= render 'entries/regional_challenge_entries' %>
 <% end %>
+
 <% if (parent = @region.parent).present? && parent.admin_privileges?(current_user) %>
   <%= link_to "Back to #{parent.name} Region", admin_region_path(parent)  %><br>
 <% end %>

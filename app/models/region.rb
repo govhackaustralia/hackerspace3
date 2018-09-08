@@ -82,6 +82,29 @@ class Region < ApplicationRecord
     challenge_to_region_array
   end
 
+  def regional_challenges_event_counts(checkpoint_ids = nil)
+    challenge_to_event_array = {}
+    events = Competition.current.events.where(region: self, event_type: COMPETITION_EVENT)
+    event_to_entries = {}
+    events.each do |event|
+      event_to_entries[event] = if checkpoint_ids.nil?
+                                    self.entries
+                                  else
+                                    self.entries.where(checkpoint_id: checkpoint_ids)
+                                  end
+    end
+
+    challenges.each do |challenge|
+      challenge_entries = challenge.entries
+      challenge_to_event_array[challenge.name] = {}
+      events.each do |event|
+        entry_count = (challenge_entries & event_to_entries[event]).count
+        challenge_to_event_array[challenge.name][event.name] = entry_count
+      end
+    end
+    challenge_to_event_array
+  end
+
   def self.id_regions(regions)
     regions = where(id: regions.uniq) if regions.class == Array
     id_regions = {}

@@ -38,11 +38,16 @@ class Admin::RegionsController < ApplicationController
 
   def show
     @region = Region.find(params[:id])
-    return unless @region.national?
     @competition = Competition.current
-    @region_counts = Region.national_challenges_region_counts
-    @region_names = Region.where.not(parent_id: nil).order(:name).pluck(:name)
-    @challenge_names = Region.root.challenges.order(:name).pluck(:name)
+    if @region.national?
+      @region_counts = Region.national_challenges_region_counts
+      @region_names = Region.where.not(parent_id: nil).order(:name).pluck(:name)
+      @challenge_names = Region.root.challenges.order(:name).pluck(:name)
+    else
+      @event_counts = @region.regional_challenges_event_counts
+      @event_names = @competition.events.where(event_type: COMPETITION_EVENT, region: @region).order(:name).pluck(:name)
+      @challenge_names = @region.challenges.order(:name).pluck(:name)
+    end
   end
 
   private
