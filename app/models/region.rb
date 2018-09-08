@@ -74,11 +74,13 @@ class Region < ApplicationRecord
     Region.root.challenges.each do |challenge|
       challenge_entries = challenge.entries
       challenge_to_region_array[challenge.name] = {}
+      challenge_count = 0
       regions.each do |region|
         entry_count = (challenge_entries & region_to_entries[region]).count
         challenge_to_region_array[challenge.name][region.name] = entry_count
+        challenge_count += entry_count
       end
-      challenge_to_region_array[challenge.name][:total_entries] = challenge_entries.count
+      challenge_to_region_array[challenge.name][:total_entries] = challenge_count
     end
     challenge_to_region_array
   end
@@ -98,11 +100,13 @@ class Region < ApplicationRecord
     challenges.each do |challenge|
       challenge_entries = challenge.entries
       challenge_to_event_array[challenge.name] = {}
+      challenge_count = 0
       events.each do |event|
         entry_count = (challenge_entries & event_to_entries[event]).count
         challenge_to_event_array[challenge.name][event.name] = entry_count
+        challenge_count += entry_count
       end
-        challenge_to_event_array[challenge.name][:total_entries] = challenge_entries.count
+      challenge_to_event_array[challenge.name][:total_entries] = challenge_count
     end
     challenge_to_event_array
   end
