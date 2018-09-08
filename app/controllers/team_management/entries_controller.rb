@@ -36,13 +36,13 @@ class TeamManagement::EntriesController < ApplicationController
     @entry = Entry.find(params[:id])
     @team = @entry.team
     @challenge = @entry.challenge
-    @checkpoints = @team.available_checkpoints(@challenge)
+    @checkpoints = @team.available_checkpoints(@challenge) << @entry.checkpoint
   end
 
   def update
     @entry = Entry.find(params[:id])
     @challenge = @entry.challenge
-    @checkpoints = @team.available_checkpoints(@challenge)
+    @checkpoints = @team.available_checkpoints(@challenge) << @entry.checkpoint
     checkpoint = Checkpoint.find(params[:entry][:checkpoint_id])
     checkpoint_not_passed = @checkpoints.include?(checkpoint)
     if checkpoint_not_passed && @entry.update(entry_params)
