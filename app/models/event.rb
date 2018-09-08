@@ -7,6 +7,7 @@ class Event < ApplicationRecord
   has_one :event_partnership, dependent: :destroy
   has_one :event_partner, through: :event_partnership, source: :sponsor
   has_many :teams
+  has_many :entries, through: :teams
 
   validates :name, :capacity, presence: true
 
