@@ -5,6 +5,7 @@
     <% @region_names.each do |region_name| %>
       <th><%= region_name %></th>
     <% end %>
+    <th>Total Entries</th>
   </tr>
   <% @challenge_names.each do |challenge_name| %>
     <tr>
@@ -12,6 +13,7 @@
       <% @region_names.each do |region_name| %>
         <td><%= @region_counts[challenge_name][region_name] %></td>
       <% end %>
+      <td><%= @region_counts[challenge_name][:total_entries] %></td>
     </tr>
   <% end %>
 </table>

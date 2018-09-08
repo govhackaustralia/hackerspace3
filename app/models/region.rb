@@ -78,6 +78,7 @@ class Region < ApplicationRecord
         entry_count = (challenge_entries & region_to_entries[region]).count
         challenge_to_region_array[challenge.name][region.name] = entry_count
       end
+      challenge_to_region_array[challenge.name][:total_entries] = challenge_entries.count
     end
     challenge_to_region_array
   end
@@ -101,6 +102,7 @@ class Region < ApplicationRecord
         entry_count = (challenge_entries & event_to_entries[event]).count
         challenge_to_event_array[challenge.name][event.name] = entry_count
       end
+        challenge_to_event_array[challenge.name][:total_entries] = challenge_entries.count
     end
     challenge_to_event_array
   end
