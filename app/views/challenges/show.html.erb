@@ -101,17 +101,19 @@
 
 <% @passed_public_checkpoints.each do |checkpoint| %>
 
+	<h4><%= checkpoint.name %> Checkpoint</h4>
+
   <% if (teams = challenge_teams(checkpoint)).present? %>
 
-    <h4><%= checkpoint.name %> Checkpoint</h4>
-
-    <% teams.each do |team| %>
+	  <% teams.each do |team| %>
 			<% project = @id_team_projects[team.id][:current_project] %>
-      <h5><%= "#{project.team_name} - #{project.project_name}" %></h5>
-      <%= link_to 'Go to Team Project', project_path(project.identifier) %><br>
-    <% end %>
+	    <h5><%= "#{project.team_name} - #{project.project_name}" %></h5>
+	    <%= link_to 'Go to Team Project', project_path(project.identifier) %><br>
+	  <% end %>
 
-  <% end %>
+  <% else %>
+		<p>No team projects entered at this checkpoint.</p>
+	<% end %>
 
 <% end %>
 </section>
