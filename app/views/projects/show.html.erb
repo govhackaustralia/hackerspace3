@@ -2,7 +2,7 @@
 <h2><%= @current_project.project_name %></h2>
 
 <aside>
-  <% if user_signed_in? && @user.in_team?(@team) %>
+  <% if user_signed_in? && @user.in_team?(@team) && @competition.in_competition_window?(@team.time_zone) %>
   <p><%= link_to 'Manage this Team Project', team_management_team_path(@team) %></p>
   <% end %>
   <% if @favourite.present? %>

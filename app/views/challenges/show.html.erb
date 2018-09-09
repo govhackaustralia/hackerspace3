@@ -81,10 +81,14 @@
 	      </article>
 	      <% else %>
 					<% if team.all_checkpoints_passed? %>
-	        	All Checkpoints have passed.<br>
+						<% if @competition.in_competition_window?(LAST_TIME_ZONE) %>
+	        		All Checkpoints have passed.</br>
+						<% else %>
+						  No entries to this challenge for this team.</br>
+						<% end %>
 					<% else %>
 						All available checkpoint limits reached for
-						<%= @region.national? ? 'national' : 'regional' %> challenges.<br>
+						<%= @region.national? ? 'national' : 'regional' %> challenges.</br>
 					<% end %>
 	      <% end %>
 	    <% end %>

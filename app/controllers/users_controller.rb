@@ -28,6 +28,8 @@ class UsersController < ApplicationController
     @id_teams_projects = Team.id_teams_projects(@favourite_teams + @comp_teams)
 
     @id_events = Event.id_events(@registrations.pluck(:event_id))
+
+    @invited_teams = @user.invited_teams
   end
 
   def edit

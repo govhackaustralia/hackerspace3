@@ -10,7 +10,7 @@
   <% end %>
   <%= link_to 'Clear Search', projects_path %></br>
   <%= link_to 'Download CSV', projects_path(format: 'csv') %></br>
-  <% if user_signed_in? && @competition.not_finished? %>
+  <% if user_signed_in? && @competition.not_finished?(LAST_TIME_ZONE) %>
     <% if @attending_events.present? %>
       <aside><%= link_to 'Create New Team Project', new_team_path %></aside>
     <% else %>

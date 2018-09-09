@@ -1,25 +1,35 @@
 class TeamsController < ApplicationController
   def new
-    if user_signed_in?
-      @competition = Competition.current
+    @competition = Competition.current
+    if user_signed_in? && @competition.in_competition_window?(LAST_TIME_ZONE)
       @team = Team.new
       @events = current_user.competition_events_participating(@competition)
       if @events.empty?
         flash[:alert] = 'To create a new team, first register for a competition event.'
-        redirect_to root_path
+        redirect_to events_path
       end
+    elsif @competition.in_competition_window?(LAST_TIME_ZONE)
+      flash[:alert] = 'To create a new team, first sign in.'
+      redirect_to projects_path
     else
-      flash[:alert] = 'To create a now team, first sign in.'
-      redirect_to root_path
+      flash[:alert] = 'The competition is now closed.'
+      redirect_to projects_path
     end
   end
 
   def create
     @team = Team.new(team_params)
-    if @team.save
-      handle_team_save
+    @competition = @team.competition
+    @events = current_user.competition_events_participating(@competition)
+    if @competition.in_competition_window?(@team.time_zone)
+      if @team.save
+        handle_team_save
+      else
+        flash[:alert] = @team.errors.full_messages.to_sentence
+        render :new
+      end
     else
-      flash[:alert] = @team.errors.full_messages.to_sentence
+      flash[:alert] = "The competition has closed in event region #{@team.region.name}"
       render :new
     end
   end

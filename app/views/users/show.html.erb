@@ -45,18 +45,18 @@
 	</section>
 
 	<section>
-		<article>
-			<% if @sponsor_contact_assignments.present? %>
+		<% if @sponsor_contact_assignments.present? %>
+			<article>
 				<h3>My Sponsors</h3>
 				<% @sponsor_contact_assignments.each do |assignment| %>
 					<% sponsor = @id_sponsors[assignment.assignable_id] %>
 					<h4><%= sponsor.name %></h4>
 					<%= link_to 'Go to Sponsor', sponsorship_management_sponsor_path(sponsor) %>
 				<% end %>
-			<% end %>
-		</article>
-		<article>
+			</article>
+		<% end %>
 
+		<article>
 			<h3>My Events</h3>
 
 			<% if @registrations.present? %>
@@ -78,23 +78,34 @@
 
 			<% end %>
 		</article>
-		<article>
-			<% if (@competition.started? || current_user.region_privileges?) && (teams = @user.joined_teams).present? %>
+
+		<% if (@competition.started? || current_user.region_privileges?) && (teams = @user.joined_teams).present? %>
+			<article>
 				<h3>My Team Projects</h3>
 				<% teams.each do |team| %>
 				<% project = @id_teams_projects[team.id][:current_project] %>
 				<% event = @id_teams_projects[team.id][:event] %>
-					<h4><%= team.name %></h4>
+					<h4><%= project.team_name %> - <%= project.project_name %></h4>
 					Event: <%= event.name %><br>
-					<%= link_to "Go to #{team.name}", team_management_team_path(team) %><br>
+					<% if @competition.not_finished?(team.time_zone) %>
+						<%= link_to "Manage #{team.name}", team_management_team_path(team) %></br>
+					<% elsif team.published %>
+						<%= link_to "Go to #{team.name}", project_path(project.identifier) %></br>
+					<% else %>
+						<p>This project is yet to be published.</p>
+					<% end %>
 				<% end %>
-			<% end %>
-			<% if (@competition.started? || current_user.region_privileges?) && (teams = @user.invited_teams).present? %>
+			</article>
+		<% end %>
+
+		<% if (@competition.in_competition_window?(LAST_TIME_ZONE) || current_user.region_privileges?) && @invited_teams.present? %>
+			<article>
 				<h3>My Invitations</h3>
-				<% teams.each do |team| %>
-				<% project = @id_teams_projects[team.id][:current_project] %>
-				<% event = @id_teams_projects[team.id][:event] %>
-					<h4><%= "#{team.name} entered @ #{event.name}" %></h4>
+				<% @invited_teams.each do |team| %>
+					<% project = @id_teams_projects[team.id][:current_project] %>
+					<% event = @id_teams_projects[team.id][:event] %>
+					<h4><%= project.team_name %> - <%= project.project_name %></h4>
+					Event: <%= event.name %><br>
 					<% assignment = @team_id_assignments[team.id] %>
 
 					<%= link_to 'Accept Invitation and Go to Team',
@@ -104,8 +115,8 @@
 					<%= link_to 'Decline Invitation', user_assignment_path(@user, assignment), method: :delete,
 												data: { confirm: 'Are you sure?' } %><br>
 				<% end %>
-			<% end %>
-		</article>
+			</article>
+		<% end %>
 		<article>
 			<% if @competition.started? || current_user.region_privileges? %>
 				<h3>My Favourite Projects</h3>

@@ -89,8 +89,17 @@ class Competition < ApplicationRecord
     start_time.to_formatted_s(:number) < region_time
   end
 
-  def not_finished?
-    Time.now.to_formatted_s(:number) < end_time.to_formatted_s(:number)
+  def not_finished?(time_zone = nil)
+    region_time = if time_zone.present?
+                    Time.now.in_time_zone(time_zone).to_formatted_s(:number)
+                  else
+                    Time.now.in_time_zone(COMP_TIME_ZONE).to_formatted_s(:number)
+                  end
+    region_time < end_time.to_formatted_s(:number)
+  end
+
+  def in_competition_window?(time_zone = nil)
+    started?(time_zone) && not_finished?(time_zone)
   end
 
   def filter_data_sets(term)
