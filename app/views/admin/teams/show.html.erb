@@ -17,6 +17,17 @@ Project Version Count: <%= @projects.count %><br>
 Current Version Created At: <%= @project.created_at %><br>
 <%= link_to 'Project Management', admin_team_projects_path(@team) %>
 
+<h3>Team Participants</h3>
+
+<% @team.assignments.each do |assignment| %>
+  <% user = assignment.user %>
+  <div>
+    <strong>Name: <%= user.display_name %></strong></br>
+    Title: <%= assignment.title %></br>
+    Email: <%= user.email %></br>
+  </div>
+<% end %>
+
 <h3>Challenge Management<h3>
 
 <% @checkpoints.each do |checkpoint| %>
