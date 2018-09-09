@@ -11,8 +11,8 @@ class ProjectsController < ApplicationController
   end
 
   def show
-    @current_project = Project.find_by(identifier: params[:identifier])
-    @team = @current_project.team
+    @team = Project.find_by(identifier: params[:identifier]).team
+    @current_project = @team.current_project
     if @team.published
       @competition = Competition.current
       @checkpoints = @competition.checkpoints.order(:end_time)
