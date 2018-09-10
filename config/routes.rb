@@ -7,7 +7,7 @@ Rails.application.routes.draw do
     resources :assignments, controller: 'users/assignments'
   end
 
-  resources :data_sets, :teams, :peoples_scorecards, :favourites, :entries
+  resources :data_sets, :teams, :favourites, :entries
 
   resources :projects, param: :identifier
 
@@ -33,11 +33,11 @@ Rails.application.routes.draw do
 
   namespace :admin do
     resources :assignments, :sponsorship_types, :sponsors, :sponsorships,
-      :event_partnerships, :challenge_scorecards, :teams
+      :event_partnerships, :teams
 
     resources :competitions do
       resources :assignments, controller: 'competitions/assignments'
-      resources :checkpoints, :criteria, :peoples_scorecards
+      resources :checkpoints, :criteria
     end
 
     resources :sponsors do
@@ -52,8 +52,8 @@ Rails.application.routes.draw do
     end
 
     resources :challenges do
+      resources :challenge_sponsorships, :challenge_data_sets
       resources :assignments, controller: 'challenges/assignments'
-      resources :challenge_criteria, :challenge_sponsorships, :challenge_data_sets
       resources :entries, controller: 'challenges/entries'
     end
 

@@ -6,7 +6,6 @@ class Team < ApplicationRecord
   has_many :projects, dependent: :destroy
   has_many :team_data_sets, dependent: :destroy
   has_many :entries, dependent: :destroy
-  has_many :peoples_scorecards, dependent: :destroy
   has_many :challenges, through: :entries
   has_many :favourites, dependent: :destroy
 

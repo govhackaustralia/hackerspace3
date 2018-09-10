@@ -15,6 +15,5 @@ class ChallengeTest < ActiveSupport::TestCase
     assert(@challenge.region == @region)
     assert(@challenge.sponsorships.include?(@sponsorship))
     assert(@challenge.entries.include?(@entry))
-    assert(@challenge.challenge_criteria.include?(@challenge_criterion))
   end
 end

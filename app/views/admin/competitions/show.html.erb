@@ -54,9 +54,4 @@ Challenge Judging End: <%= @competition.challenge_judging_end %><br>
 <%= pluralize @competition.region_criteria.count, 'Regional Challenge Criterion' %> saved.<br>
 <%= pluralize @competition.peoples_criteria.count, 'People\'s Choice Criterion' %> saved.<br>
 
-<h3>People's Choice Judging</h3>
-
-<%= pluralize @competition.peoples_scorecards.count, 'scorecard' %> submitted.<br>
-<%= link_to 'Go To Judgements', admin_competition_peoples_scorecards_path(@competition) %><br>
-
 <%= link_to 'Competition Criteria', admin_competition_criteria_path(@competition) %>

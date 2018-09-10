@@ -3,7 +3,6 @@ class Challenge < ApplicationRecord
   belongs_to :competition
   belongs_to :region
   has_many :entries, dependent: :destroy
-  has_many :challenge_criteria, dependent: :destroy
   has_many :challenge_sponsorships, dependent: :destroy
   has_many :sponsors, through: :challenge_sponsorships
   has_many :challenge_data_sets, dependent: :destroy
@@ -15,11 +14,6 @@ class Challenge < ApplicationRecord
 
   validates :name, presence: true
   validates :name, uniqueness: true
-
-  def available_criteria
-    used_criteria = Criterion.where(id: challenge_criteria.pluck(:criterion_id))
-    competition.region_criteria - used_criteria
-  end
 
   def admin_assignments
     competition = Competition.current

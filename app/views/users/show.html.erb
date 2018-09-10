@@ -36,11 +36,6 @@
 				<h3>Competition Judging Criteria</h3>
 				<%= link_to 'Competiton Criteria Management', admin_competition_criteria_path(@competition) %><br>
 			<% end %>
-
-			<% if user_is_a_judge? && in_challenge_judging_window? %>
-				<h3>Challenge Judging</h3>
-				<%= link_to 'Challenge Scorecards', admin_challenge_scorecards_path %>
-			<% end %>
 		</article>
 	</section>
 

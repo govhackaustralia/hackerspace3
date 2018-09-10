@@ -7,7 +7,6 @@ class TeamTest < ActiveSupport::TestCase
     @event = Event.first
     @team_data_set = TeamDataSet.first
     @entry = Entry.first
-    @peoples_scorecard = PeoplesScorecard.first
     @favourite = Favourite.first
   end
 
@@ -16,7 +15,6 @@ class TeamTest < ActiveSupport::TestCase
     assert(@team.event == @event)
     assert(@team.team_data_sets.include?(@team_data_set))
     assert(@team.entries.include?(@entry))
-    assert(@team.peoples_scorecards.include?(@peoples_scorecard))
     assert(@team.favourites.include?(@favourite))
     @team.destroy
     assert(Project.find_by(team: @team).nil?)

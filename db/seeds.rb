@@ -173,12 +173,6 @@ Region.all.each do |region|
 
     end
 
-    comp.criteria.where(category: REGIONAL_CHALLENGE).each do |criterion|
-      challenge.challenge_criteria.create(criterion: criterion,
-        description: "Challenge #{challenge.id}, criterion #{criterion}, custom
-        description.")
-    end
-
     3.times do
       challenge.challenge_sponsorships.create(sponsor_id: random_sponsor_id)
     end

@@ -10,6 +10,5 @@ class CriterionTest < ActiveSupport::TestCase
 
   test 'criterion associations' do
     assert(@criterion.competition == @competition)
-    assert(@criterion.challenge_criteria.include?(@challenge_criterion))
   end
 end

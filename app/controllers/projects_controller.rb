@@ -31,7 +31,6 @@ class ProjectsController < ApplicationController
 
   def user_signed_in_records
     @user = current_user
-    @peoples_scorecard = PeoplesScorecard.find_by(assignment: @user.event_assignment, team: @team)
     @favourite = Favourite.find_by(assignment: @user.event_assignment, team: @team)
   end
 end
