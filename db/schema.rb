@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_09_06_052442) do
+ActiveRecord::Schema.define(version: 2018_09_10_043000) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -48,16 +48,6 @@ ActiveRecord::Schema.define(version: 2018_09_06_052442) do
     t.index ["user_id"], name: "index_assignments_on_user_id"
   end
 
-  create_table "challenge_criteria", force: :cascade do |t|
-    t.integer "challenge_id"
-    t.integer "criterion_id"
-    t.text "description"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["challenge_id"], name: "index_challenge_criteria_on_challenge_id"
-    t.index ["criterion_id"], name: "index_challenge_criteria_on_criterion_id"
-  end
-
   create_table "challenge_data_sets", force: :cascade do |t|
     t.integer "challenge_id"
     t.integer "data_set_id"
@@ -65,25 +55,6 @@ ActiveRecord::Schema.define(version: 2018_09_06_052442) do
     t.datetime "updated_at", null: false
     t.index ["challenge_id"], name: "index_challenge_data_sets_on_challenge_id"
     t.index ["data_set_id"], name: "index_challenge_data_sets_on_data_set_id"
-  end
-
-  create_table "challenge_judgements", force: :cascade do |t|
-    t.integer "challenge_criterion_id"
-    t.integer "score"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer "challenge_scorecard_id"
-    t.index ["challenge_criterion_id"], name: "index_challenge_judgements_on_challenge_criterion_id"
-    t.index ["challenge_scorecard_id"], name: "index_challenge_judgements_on_challenge_scorecard_id"
-  end
-
-  create_table "challenge_scorecards", force: :cascade do |t|
-    t.integer "entry_id"
-    t.integer "assignment_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["assignment_id"], name: "index_challenge_scorecards_on_assignment_id"
-    t.index ["entry_id"], name: "index_challenge_scorecards_on_entry_id"
   end
 
   create_table "challenge_sponsorships", force: :cascade do |t|
@@ -221,25 +192,6 @@ ActiveRecord::Schema.define(version: 2018_09_06_052442) do
     t.datetime "updated_at", null: false
     t.index ["assignment_id"], name: "index_favourites_on_assignment_id"
     t.index ["team_id"], name: "index_favourites_on_team_id"
-  end
-
-  create_table "peoples_judgements", force: :cascade do |t|
-    t.integer "criterion_id"
-    t.integer "score"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer "peoples_scorecard_id"
-    t.index ["criterion_id"], name: "index_peoples_judgements_on_criterion_id"
-    t.index ["peoples_scorecard_id"], name: "index_peoples_judgements_on_peoples_scorecard_id"
-  end
-
-  create_table "peoples_scorecards", force: :cascade do |t|
-    t.integer "team_id"
-    t.integer "assignment_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["assignment_id"], name: "index_peoples_scorecards_on_assignment_id"
-    t.index ["team_id"], name: "index_peoples_scorecards_on_team_id"
   end
 
   create_table "projects", force: :cascade do |t|
