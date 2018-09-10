@@ -4,6 +4,7 @@ class Assignment < ApplicationRecord
   has_many :registrations, dependent: :destroy
   has_many :favourites, dependent: :destroy
   has_many :teams, through: :favourites
+  has_many :scorecards, dependent: :destroy
 
   validates :title, inclusion: { in: VALID_ASSIGNMENT_TITLES }
 

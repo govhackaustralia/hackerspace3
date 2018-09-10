@@ -8,6 +8,7 @@ class Team < ApplicationRecord
   has_many :entries, dependent: :destroy
   has_many :challenges, through: :entries
   has_many :favourites, dependent: :destroy
+  has_many :scorecards, dependent: :destroy, as: :judgeable
 
   has_one_attached :thumbnail
   has_one_attached :high_res_image

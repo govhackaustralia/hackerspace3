@@ -12,8 +12,9 @@ class AssignmentTest < ActiveSupport::TestCase
 
     @judge = Assignment.find(7)
 
-    @participant = Assignment.find(6)
+    @participant = Assignment.find(4)
     @favourite = Favourite.first
+    @scorecard = Scorecard.second
   end
 
   test 'assignment associations' do
@@ -22,6 +23,7 @@ class AssignmentTest < ActiveSupport::TestCase
     assert(@region_assignment.assignable == @region)
     assert(@region_assignment.user == @user)
     assert(@participant.favourites.include?(@favourite))
+    assert(@participant.scorecards.include?(@scorecard))
   end
 
   test 'assignment validations' do

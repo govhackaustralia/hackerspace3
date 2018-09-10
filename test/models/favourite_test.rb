@@ -4,7 +4,7 @@ class FavouriteTest < ActiveSupport::TestCase
   setup do
     @favourite = Favourite.first
     @team = Team.first
-    @assignment = Assignment.find(6)
+    @assignment = Assignment.find(4)
   end
 
   test 'favourite associations' do

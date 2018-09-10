@@ -5,15 +5,14 @@ class ChallengeTest < ActiveSupport::TestCase
     @challenge = Challenge.first
     @competition = Competition.first
     @region = Region.first
-    @sponsorship = Sponsorship.third
+    @sponsorship = ChallengeSponsorship.first
     @entry = Entry.first
-    @challenge_criterion = ChallengeCriterion.first
   end
 
   test 'challenge associations' do
     assert(@challenge.competition == @competition)
     assert(@challenge.region == @region)
-    assert(@challenge.sponsorships.include?(@sponsorship))
+    assert(@challenge.challenge_sponsorships.include?(@sponsorship))
     assert(@challenge.entries.include?(@entry))
   end
 end

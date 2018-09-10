@@ -4,7 +4,6 @@ class CriterionTest < ActiveSupport::TestCase
   setup do
     @criterion = Criterion.first
     @competition = Competition.first
-    @challenge_criterion = ChallengeCriterion.first
     @entry = Entry.first
   end
 
