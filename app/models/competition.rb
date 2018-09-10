@@ -18,16 +18,12 @@ class Competition < ApplicationRecord
     "Competition #{year}"
   end
 
-  def region_criteria
-    criteria.where(category: REGIONAL_CHALLENGE)
+  def challenge_criteria
+    criteria.where(category: CHALLENGE)
   end
 
-  def peoples_criteria
-    criteria.where(category: PEOPLES_CHOICE)
-  end
-
-  def assignment_privileges(_action, _access)
-    assignments.where(title: [MANAGEMENT_TEAM, ADMIN, COMPETITION_DIRECTOR])
+  def project_criteria
+    criteria.where(category: PROJECT)
   end
 
   def self.current

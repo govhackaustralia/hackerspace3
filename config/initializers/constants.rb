@@ -184,10 +184,10 @@ NO_RESPONSE = '[no response recorded]'
 
 # Judgement Categories
 
-REGIONAL_CHALLENGE = 'Regional Challenge'
-PEOPLES_CHOICE = 'People\'s Choice'
+PROJECT = 'Project'
+CHALLENGE = 'Challenge'
 
-JUDGEMENT_CATEGORIES = [REGIONAL_CHALLENGE, PEOPLES_CHOICE]
+JUDGEMENT_CATEGORIES = [PROJECT, CHALLENGE]
 
 # Challenge Types
 

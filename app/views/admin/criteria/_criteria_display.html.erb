@@ -1,0 +1,16 @@
+<% type = locals[:type] %>
+<% criteria = locals[:criteria] %>
+
+<% if criteria.present? %>
+
+  <% criteria.each do |criterion| %>
+    <h4><%= criterion.name %></h4>
+    <%= criterion.description %></br>
+    <%= link_to 'Update Criteria', edit_admin_competition_criterion_path(@competition, criterion) %></br>
+  <% end %>
+
+<% else %>
+
+  No <%= type %> Criteria for this Competition recorded.</br>
+
+<% end %>

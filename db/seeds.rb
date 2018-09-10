@@ -59,11 +59,13 @@ comp.update(start_time: Time.now + 3.days, end_time: Time.now + 5.days,
                           name: "Checkpoint #{time}",
                           max_national_challenges: 1,
                           max_regional_challenges: 1)
-  comp.criteria.create(name: "Peoples Choice Criterion #{time}", description: "#{time} Description
-    to end all descriptions for Peoples Choice.", category: PEOPLES_CHOICE)
+  comp.criteria.create(name: "Project Criterion #{time}", description: "#{time} Description
+    to end all descriptions for Project Criterion.", category: PROJECT)
+end
 
-  comp.criteria.create(name: "Regional Challenge Criterion #{time}", description: "#{time} Description
-    to end all descriptions for Regional Challenge.", category: REGIONAL_CHALLENGE)
+2.times do |time|
+  comp.criteria.create(name: "Challenge Criterion #{time}", description: "#{time} Description
+    to end all descriptions for Challenge Criterion.", category: CHALLENGE)
 end
 
 comp.assignments.create(user_id: random_user_id, title: MANAGEMENT_TEAM)

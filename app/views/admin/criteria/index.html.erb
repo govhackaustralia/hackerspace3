@@ -1,36 +1,12 @@
 <h2>Criteria for <%= @competition.name%></h2>
 
-<h3>Regional Challenge</h3>
+<h3>Challenge Criteria</h3>
 
-<% if (region_criteria = @competition.region_criteria).present? %>
+<%= render 'criteria_display', locals: { type: CHALLENGE, criteria: @competition.challenge_criteria } %>
 
-  <% region_criteria.each do |criterion| %>
-    <h4><%= criterion.name %></h4>
-    <%= criterion.description %><br>
-    <%= link_to 'Update Criteria', edit_admin_competition_criterion_path(@competition, criterion) %><br>
-  <% end %>
+<h3>Project Criteria</h3>
 
-<% else %>
-
-  No Regional Challenge Criteria for this Competition recorded.<br>
-
-<% end %>
-
-<h3>People's Choice</h3>
-
-<% if (peoples_criteria = @competition.peoples_criteria).present? %>
-
-  <% peoples_criteria.each do |criterion| %>
-    <h4><%= criterion.name %></h4>
-    <%= criterion.description %><br>
-    <%= link_to 'Update Criterion', edit_admin_competition_criterion_path(@competition, criterion) %><br>
-  <% end %>
-
-<% else %>
-
-  No People's Choice Criteria for this Competition recorded.<br>
-
-<% end %>
+<%= render 'criteria_display', locals: { type: PROJECT, criteria: @competition.project_criteria } %>
 
 <%= link_to 'New Criterion', new_admin_competition_criterion_path(@competition) %><br>
 <% if current_user.admin_privileges? %>
