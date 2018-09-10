@@ -48,12 +48,12 @@ class TeamManagement::TeamDataSetsController < ApplicationController
     @team = Team.find(params[:team_id])
     @competition = @team.competition
     return if @team.permission?(current_user) && @competition.in_competition_window?(@team.time_zone)
-    unless @team.permission?(current_user)
-      flash[:notice] = 'You do not have access permissions for this team.'
-      redirect_to root_path
-    else
+    if @team.permission?(current_user)
       flash[:notice] = 'The competition has closed.'
       redirect_to project_path(@team.current_project.identifier)
+    else
+      flash[:notice] = 'You do not have access permissions for this team.'
+      redirect_to root_path
     end
   end
 

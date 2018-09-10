@@ -23,11 +23,11 @@ class TeamManagement::EntriesController < ApplicationController
       flash[:notice] = 'Challenge Entered'
       redirect_to challenge_path(@entry.challenge)
     else
-      unless checkpoint_not_passed
-        flash[:alert] = "#{checkpoint.name} has passed."
-      else
-        flash[:alert] = @entry.errors.full_messages.to_sentence
-      end
+      flash[:alert] = if checkpoint_not_passed
+                        @entry.errors.full_messages.to_sentence
+                      else
+                        "#{checkpoint.name} has passed."
+                      end
       render :new
     end
   end
@@ -49,11 +49,11 @@ class TeamManagement::EntriesController < ApplicationController
       flash[:notice] = 'Entry Updated Successfully'
       redirect_to team_management_team_entries_path(@team)
     else
-      unless checkpoint_not_passed
-        flash[:alert] = "#{checkpoint.name} has passed."
-      else
-        flash[:alert] = @entry.errors.full_messages.to_sentence
-      end
+      flash[:alert] = if checkpoint_not_passed
+                        @entry.errors.full_messages.to_sentence
+                      else
+                        "#{checkpoint.name} has passed."
+                      end
       render :edit
     end
   end
@@ -75,12 +75,12 @@ class TeamManagement::EntriesController < ApplicationController
     @team = Team.find(params[:team_id])
     @competition = @team.competition
     return if @team.permission?(current_user) && @competition.in_competition_window?(@team.time_zone)
-    unless @team.permission?(current_user)
-      flash[:notice] = 'You do not have access permissions for this team.'
-      redirect_to root_path
-    else
+    if @team.permission?(current_user)
       flash[:notice] = 'The competition has closed.'
       redirect_to project_path(@team.current_project.identifier)
+    else
+      flash[:notice] = 'You do not have access permissions for this team.'
+      redirect_to root_path
     end
   end
 end

@@ -76,11 +76,11 @@ class Team < ApplicationRecord
 
   def admin_available_checkpoints(challenge_type)
     valid_checkpoints = []
-    if challenge_type == REGIONAL
-      challenge_region = region
-    else
-      challenge_region = Region.root
-    end
+    challenge_region = if challenge_type == REGIONAL
+                         region
+                       else
+                         Region.root
+                       end
     competition.checkpoints.each do |checkpoint|
       next if checkpoint.limit_reached?(self, challenge_region)
       valid_checkpoints << checkpoint

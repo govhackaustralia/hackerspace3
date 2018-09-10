@@ -91,9 +91,9 @@ class Region < ApplicationRecord
     event_to_entries = {}
     events.each do |event|
       event_to_entries[event] = if checkpoint_ids.nil?
-                                    event.entries
-                                  else
-                                    event.entries.where(checkpoint_id: checkpoint_ids)
+                                  event.entries
+                                else
+                                  event.entries.where(checkpoint_id: checkpoint_ids)
                                   end
     end
 
