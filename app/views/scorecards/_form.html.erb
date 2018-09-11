@@ -11,3 +11,5 @@
   <% end %>
   <%= f.submit 'Save Scorecard' %>
 <% end %>
+
+<%= javascript_tag 'window.addEventListener("unload", function(event) { window.opener.location.reload();})' %>

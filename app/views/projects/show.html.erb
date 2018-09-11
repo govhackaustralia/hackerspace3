@@ -14,28 +14,21 @@
     <% end %>
     <% if @competition.in_judging_window? %>
       <% if @scorecard.present? %>
-        <%= link_to 'Edit Scorecard', edit_project_scorecard_path(@current_project.identifier, @scorecard) %></br>
+        <%= link_to 'Edit Scorecard', edit_project_scorecard_path(@current_project.identifier, @scorecard), id: 'open-scorecard' %>
+        <%= javascript_tag  "window._scorecard_path = '#{edit_project_scorecard_path(@current_project.identifier, @scorecard)}';" %>
       <% elsif @judgeable_assignment.present? %>
-        <%= link_to 'New Scorecard', new_project_scorecard_path(@current_project.identifier) %></br>
+        <%= link_to 'New Scorecard', new_project_scorecard_path(@current_project.identifier), id: 'open-scorecard' %>
+        <%= javascript_tag "window._scorecard_path = '#{new_project_scorecard_path(@current_project.identifier)}'" %>
+      <% end %>
+      <% if @scorecard.present? || @judgeable_assignment.present? %>
+        <%= javascript_tag "window._scorecard_title = 'Scorecard for #{@current_project.team_name} - #{@current_project.project_name}'" %>
       <% end %>
     <% end %>
+  <% elsif @competition.in_judging_window? %>
+    <p>Where you a participant or voluneteer in this year's competition?</p>
+    <p> Sign in to vote in the People's Choice Awards.</p>
   <% end %>
 </aside>
-
-<% if user_signed_in? %>
-  <% if @scorecard_assignment.present? %>
-    <% if @existing_scorecard.present? %>
-      <%= link_to 'Open Scorecard', edit_scorecard_path(@existing_scorecard), :id => 'open-scorecard' %>
-      <%= javascript_tag  "window._scorecard_path = '#{edit_scorecard_path(@existing_scorecard)}';" %>
-    <% else %>
-      <%= link_to 'New Scorecard', new_scorecard_path(@scorecard_assignment, judgeable_type: 'Team', judgeable_id: @team.id), :id => 'open-scorecard' %>
-      <%= javascript_tag "window._scorecard_path = #{new_scorecard_path(@scorecard_assignment, judgeable_type: 'Team', judgeable_id: @team.id)}" %>
-    <% end %>
-    <%= javascript_tag "window._scorecard_title = 'Scorecard for #{@current_project.team_name} - #{@current_project.project_name}'" %>
-  <% end %>
-<% else %>
-  <p>Where you a voluneteer or participant in this year's competition? Sign in to vote in the People's Choice Awards.</p>
-<% end %>
 
 <h3>Project Info</h3>
 
