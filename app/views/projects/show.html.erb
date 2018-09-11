@@ -14,11 +14,11 @@
     <% end %>
     <% if @competition.in_judging_window? %>
       <% if @scorecard.present? %>
-        <%= link_to 'Edit Scorecard', edit_project_scorecard_path(@current_project.identifier, @scorecard), id: 'open-scorecard' %>
-        <%= javascript_tag  "window._scorecard_path = '#{edit_project_scorecard_path(@current_project.identifier, @scorecard)}';" %>
+        <%= link_to 'Edit Scorecard', edit_project_scorecard_path(@current_project.identifier, @scorecard, popup: true), id: 'open-scorecard' %>
+        <%= javascript_tag  "window._scorecard_path = '#{edit_project_scorecard_path(@current_project.identifier, @scorecard, popup: true)}';" %>
       <% elsif @judgeable_assignment.present? %>
-        <%= link_to 'New Scorecard', new_project_scorecard_path(@current_project.identifier), id: 'open-scorecard' %>
-        <%= javascript_tag "window._scorecard_path = '#{new_project_scorecard_path(@current_project.identifier)}'" %>
+        <%= link_to 'New Scorecard', new_project_scorecard_path(@current_project.identifier, popup: true), id: 'open-scorecard' %>
+        <%= javascript_tag "window._scorecard_path = '#{new_project_scorecard_path(@current_project.identifier, popup: true)}'" %>
       <% end %>
       <% if @scorecard.present? || @judgeable_assignment.present? %>
         <%= javascript_tag "window._scorecard_title = 'Scorecard for #{@current_project.team_name} - #{@current_project.project_name}'" %>

@@ -25,11 +25,10 @@ class ScorecardsController < ApplicationController
     retrieve_update_vars
     if process_judgments
       flash[:notice] = 'Scorecard Saved'
-      redirect_to edit_project_scorecard_path(@team.current_project.identifier, @scorecard)
     else
       flash[:alert] = 'Error: One or more scores missing or out of range'
-      render :edit
     end
+    redirect_to edit_project_scorecard_path(@team.current_project.identifier, @scorecard, popup: true)
   end
 
   private
