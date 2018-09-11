@@ -100,10 +100,10 @@
 
 <h3>All Team Entries</h3>
 
-<% if @competition.in_competition_window? LAST_TIME_ZONE %>
-	<%= render 'team_checkpoint_display' %>
-<% else %>
+<% if @competition.in_judging_window? LAST_TIME_ZONE %>
 	<%= render 'team_judging_table' %>
+<% else %>
+	<%= render 'team_checkpoint_display' %>
 <% end %>
 
 </section>
