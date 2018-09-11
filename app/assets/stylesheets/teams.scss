@@ -104,7 +104,7 @@
 }
 
 .team_page section.evidence p {
-	width: 30%;
+	width: 20%;
 	padding: 1em;
 }
 
@@ -123,15 +123,11 @@
     text-decoration: none;
 }
 
-.team_page section.evidence p:nth-child(1) a {
-    background-color: #ca1e56;
-}
-
-.team_page section.evidence p:nth-child(2) a {
+.team_page section.evidence p a.evidence_video {
     background-color: #4c9ad2;
 }
 
-.team_page section.evidence p:nth-child(3) a {
+.team_page section.evidence p a.evidence_homepage {
     background-color: #717171;
 }
 

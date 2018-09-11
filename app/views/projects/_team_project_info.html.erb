@@ -1,4 +1,10 @@
 <section class="markdown">
+<% if @team.thumbnail.attached? %>
+  <img src="<%= url_for(@team.thumbnail) %>" alt="<%= "#{@team.name} thumbnail" %>" style="width: 150px; height: auto;"/>
+<% end %>
+</section>
+
+<section class="markdown">
 <% unless @current_project.description.blank? %>
   <h4 class="sectionHeading">Project Description</h4>
   <hr>
@@ -27,5 +33,9 @@
 
 <% unless @current_project.homepage_url.blank? %>
   <p><a href='<%= @current_project.homepage_url %>' target="_blank" class="evidence_homepage">Homepage</a></p>
+<% end %>
+
+<% if @team.high_res_image.attached? %>
+  <p><a href='<%= url_for(@team.high_res_image) %>' target="_blank" class="evidence_picture">High-Res Image</a></p>
 <% end %>
 </section>
