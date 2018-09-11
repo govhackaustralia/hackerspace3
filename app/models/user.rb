@@ -5,6 +5,7 @@ class User < ApplicationRecord
          :omniauthable
 
   has_many :assignments, dependent: :destroy
+  has_many :teams, through: :assignments, as: :assignable
   has_many :registrations, through: :assignments
 
   # Gravitar Gem
@@ -60,6 +61,12 @@ class User < ApplicationRecord
     assignment = Competition.current.assignments.find_by(user: self, title: VIP)
     return assignment unless assignment.nil?
     Competition.current.assignments.find_or_create_by(user: self, title: PARTICIPANT)
+  end
+
+  def judgeable_assignment
+    return event_assignment if teams.where(published: true).present?
+    return event_assignment if assignments.where(title: [VOLUNTEER, ADMIN, JUDGE]).present?
+    nil
   end
 
   def registrations

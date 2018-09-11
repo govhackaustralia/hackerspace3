@@ -96,6 +96,28 @@ class Competition < ApplicationRecord
     started?(time_zone) && not_finished?(time_zone)
   end
 
+  def in_judging_window?(time_zone = nil)
+    judging_started?(time_zone) && judging_not_finished?(time_zone)
+  end
+
+  def judging_started?(time_zone = nil)
+    region_time = if time_zone.present?
+                    Time.now.in_time_zone(time_zone).to_formatted_s(:number)
+                  else
+                    Time.now.in_time_zone(COMP_TIME_ZONE).to_formatted_s(:number)
+                  end
+    challenge_judging_start.to_formatted_s(:number) < region_time
+  end
+
+  def judging_not_finished?(time_zone = nil)
+    region_time = if time_zone.present?
+                    Time.now.in_time_zone(time_zone).to_formatted_s(:number)
+                  else
+                    Time.now.in_time_zone(COMP_TIME_ZONE).to_formatted_s(:number)
+                  end
+    region_time < challenge_judging_end.to_formatted_s(:number)
+  end
+
   def filter_data_sets(term)
     sets = data_sets.order(:name)
     id_regions = Region.id_regions(Region.all)
