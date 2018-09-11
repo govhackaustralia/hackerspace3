@@ -1,5 +1,6 @@
 class Team < ApplicationRecord
   has_many :assignments, as: :assignable
+  has_many :users, through: :assignments
   belongs_to :event
   has_one :competition, through: :event
   has_one :region, through: :event

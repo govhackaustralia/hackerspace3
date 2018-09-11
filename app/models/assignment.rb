@@ -41,6 +41,7 @@ class Assignment < ApplicationRecord
         team_id_to_scorecard[entry.team_id] = scorecard
       end
     else
+      user_team_ids = user.teams.pluck(:id)
       team_scorecards = scorecards.where(judgeable: teams)
       team_scorecards.each { |scorecard| team_id_to_scorecard[scorecard.judgeable_id] = scorecard }
     end
@@ -53,7 +54,9 @@ class Assignment < ApplicationRecord
 
     judgeable_scores = {}
     teams.each do |team|
-      verdict = if (scorecard = team_id_to_scorecard[team.id]).nil?
+      verdict = if title != JUDGE && user_team_ids.include?(team.id)
+                  'Your Team'
+                elsif (scorecard = team_id_to_scorecard[team.id]).nil?
                   'Not Marked'
                 elsif (scores = scorecard_id_to_scores[scorecard.id]).include? nil
                   'Incomplete'

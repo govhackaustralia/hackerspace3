@@ -1,0 +1,30 @@
+<% if user_signed_in? %>
+
+  <% if @user.in_team?(@team) && @competition.in_competition_window?(@team.time_zone) %>
+    <p><%= link_to 'Manage this Team Project', team_management_team_path(@team) %></p>
+  <% end %>
+
+  <% if @favourite.present? %>
+    <p><%= link_to 'Unfavourite this Project', favourite_path(@favourite),
+                  method: :delete %></p>
+  <% else %>
+    <p><%= link_to 'Favourite this Project', favourites_path(team_id: @team.id), method: :post %></p>
+  <% end %>
+
+  <% if @competition.in_judging_window? && (user_signed_in? && !@user.in_team?(@team) )%>
+    <% if @scorecard.present? %>
+      <%= link_to 'Edit Scorecard', edit_project_scorecard_path(@current_project.identifier, @scorecard, popup: true), id: 'open-scorecard' %>
+      <%= javascript_tag  "window._scorecard_path = '#{edit_project_scorecard_path(@current_project.identifier, @scorecard, popup: true)}';" %>
+    <% elsif @judgeable_assignment.present? %>
+      <%= link_to 'New Scorecard', new_project_scorecard_path(@current_project.identifier, popup: true), id: 'open-scorecard' %>
+      <%= javascript_tag "window._scorecard_path = '#{new_project_scorecard_path(@current_project.identifier, popup: true)}'" %>
+    <% end %>
+    <% if @scorecard.present? || @judgeable_assignment.present? %>
+      <%= javascript_tag "window._scorecard_title = 'Scorecard for #{@current_project.team_name} - #{@current_project.project_name}'" %>
+    <% end %>
+  <% end %>
+
+<% elsif @competition.in_judging_window? %>
+  <p>Where you a participant or voluneteer in this year's competition?</p>
+  <p> Sign in to vote in the People's Choice Awards.</p>
+<% end %>
