@@ -107,6 +107,13 @@ main.scorecard h3 {
 	margin-left: 1.5em;
 }
 
+.scorecard .justification {
+	padding: 0.5em;
+	border: 1px solid #ca1e56;
+	margin: 0.5em;
+	font-size: 0.85em;
+}
+
 .score-display {
 	display: flex;
 	width: 100%;

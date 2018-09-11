@@ -3,6 +3,7 @@
   <% @judgments.each do |judgment| %>
     <% if challenge_title_required?(judgment) %>
       <h3><%= @challenge_scorecard.judgeable.challenge.name %></h3>
+      <p class="justification"><strong>Justification</strong>:<br /> <em><%= @challenge_scorecard.judgeable.justification %></em></p>
     <% end %>
     <%= fields_for "judgments[]", judgment do |judgment_form| %>
     <div class="field">
