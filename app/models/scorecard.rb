@@ -6,7 +6,7 @@ class Scorecard < ApplicationRecord
   belongs_to :judgeable, polymorphic: true
 
   validate :only_one_scorecard_per_judgeable
-  
+
   def update_judgments
     category = if judgeable_type == 'Entry'
                 CHALLENGE
@@ -24,5 +24,20 @@ class Scorecard < ApplicationRecord
     if Scorecard.find_by(assignment: assignment, judgeable: judgeable).present?
       errors.add(:assignment_id, 'Only one scorecard allowed per judgeable entity')
     end
+  end
+
+  def total_score
+    score = 0
+    challenge_judgements.each do |judgement|
+      return nil if judgement.score.nil?
+      score += judgement.score
+    end
+    score
+  end
+
+  def display_score
+    score = total_score
+    return 'Scorecard Incomplete' if score.nil?
+    score
   end
 end
