@@ -1,7 +1,8 @@
 class Entry < ApplicationRecord
-  belongs_to :team
   belongs_to :checkpoint
   belongs_to :challenge
+  belongs_to :team
+  has_one :competition, through: :team
   has_many :scorecards, dependent: :destroy, as: :judgeable
 
   validates :justification, presence: true
