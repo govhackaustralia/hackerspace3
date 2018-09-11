@@ -1,7 +1,6 @@
 class ScorecardsController < ApplicationController
   before_action :authenticate_user!
-  layout false
-  
+
   def new
     @user = current_user
     @project = Project.find_by(identifier: params[:project_identifier])
