@@ -15,7 +15,7 @@
     <% if @competition.in_judging_window? %>
       <% if @scorecard.present? %>
         <%= link_to 'Edit Scorecard', edit_project_scorecard_path(@current_project.identifier, @scorecard) %></br>
-      <% else %>
+      <% elsif @judgeable_assignment.present? %>
         <%= link_to 'New Scorecard', new_project_scorecard_path(@current_project.identifier) %></br>
       <% end %>
     <% end %>

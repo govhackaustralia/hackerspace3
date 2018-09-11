@@ -5,18 +5,20 @@ class ScorecardsController < ApplicationController
     @user = current_user
     @project = Project.find_by(identifier: params[:project_identifier])
     @team = @project.team
-    @event_assignment = current_user.event_assignment
-    @scorecard = @team.scorecards.create(assignment: @event_assignment)
+    @judgeable_assignment = current_user.judgeable_assignment
+    @scorecard = @team.scorecards.find_or_create_by(assignment: @judgeable_assignment)
     @judgments = organise_judgments
   end
 
   def edit
     @user = current_user
-    @project = Project.find_by(identifier: params[:project_identifier])
-    @team = @project.team
     @scorecard = Scorecard.find(params[:id])
-    @judgments = organise_judgments
     @team = @scorecard.judgeable
+    @project = @team.current_project
+    @judgments = organise_judgments
+    return if @user == @scorecard.user
+    flash[:alert] = 'You do not have permission to edit this scorecard.'
+    redirect_to root_path
   end
 
   def update
@@ -67,7 +69,6 @@ class ScorecardsController < ApplicationController
     assignments.each { |assignment| all_judgments += organise_challenge_scorecard(assignment) }
     all_judgments
   end
-
 
   def organise_challenge_scorecard(assignment)
     entry = Entry.find_by(team: @team, challenge: assignment.assignable)
