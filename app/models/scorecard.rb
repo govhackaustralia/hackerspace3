@@ -8,16 +8,16 @@ class Scorecard < ApplicationRecord
   validate :only_one_scorecard_per_judgeable
 
   def update_judgments
-    category = if judgeable_type == 'Entry'
-                CHALLENGE
-              else
-                PROJECT
-              end
-    criteria_ids = Competition.current.criteria.where(category: category).pluck(:id)
+    criteria_ids = Competition.current.criteria.where(category: type).pluck(:id)
     score_card_criteria_ids = judgments.pluck(:criterion_id)
     (criteria_ids - score_card_criteria_ids).each do |criterion_id|
       judgments.create(criterion_id: criterion_id)
     end
+  end
+
+  def type
+    return CHALLENGE if judgeable_type == 'Entry'
+    PROJECT
   end
 
   def only_one_scorecard_per_judgeable

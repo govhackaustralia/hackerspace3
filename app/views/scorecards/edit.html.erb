@@ -2,4 +2,13 @@
 
 <%= render 'form' %>
 
+<% @scorecards.each do |scorecard| %>
+  <% if scorecard.type == PROJECT %>
+    <h3>Project Score</h3>
+  <% else %>
+    <h3><%= scorecard.judgeable.challenge.name %></h3>
+  <% end %>
+  <p><strong>Total Score:</strong><%= scorecard.display_score %></p>
+<% end %>
+
 <%= link_to 'Close', '#', id: 'close-scorecard' %>

@@ -62,6 +62,7 @@ class ScorecardsController < ApplicationController
   end
 
   def organise_judgments
+    @scorecards = [@scorecard]
     @scorecard.update_judgments
     assignments = Assignment.where(user: @user, title: JUDGE, assignable: @team.challenges)
     all_judgments = @scorecard.judgments.to_a
@@ -74,6 +75,7 @@ class ScorecardsController < ApplicationController
     entry = Entry.find_by(team: @team, challenge: assignment.assignable)
     scorecard = Scorecard.find_or_create_by(assignment: assignment, judgeable: entry)
     scorecard.update_judgments
+    @scorecards << scorecard
     scorecard.judgments.to_a
   end
 end
