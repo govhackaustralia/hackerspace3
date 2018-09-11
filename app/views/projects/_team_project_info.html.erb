@@ -16,16 +16,16 @@
 <% end %>
 </section>
 
-<section class="markdown">
+<section class="evidence">
 <% unless @current_project.source_code_url.blank? %>
-  <p><a href='<%= @current_project.source_code_url %>' target="_blank">Source Code</a></p>
+  <p><a href='<%= @current_project.source_code_url %>' target="_blank" class="evidence_work">Evidence of Work</a></p>
 <% end %>
 
 <% unless @current_project.video_url.blank? %>
-  <p><a href='<%= @current_project.video_url %>' target="_blank">Video</a></p>
+  <p><a href='<%= @current_project.video_url %>' target="_blank" class="evidence_video">Video</a></p>
 <% end %>
 
 <% unless @current_project.homepage_url.blank? %>
-  <p><a href='<%= @current_project.homepage_url %>' target="_blank">Homepage</a></p>
+  <p><a href='<%= @current_project.homepage_url %>' target="_blank" class="evidence_homepage">Homepage</a></p>
 <% end %>
 </section>

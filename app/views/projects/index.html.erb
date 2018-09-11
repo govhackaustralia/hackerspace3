@@ -25,7 +25,7 @@
 		<th>Team</th>
 		<th>Location</th>
     <% if @judgeable_assignment.present? %>
-      <th>Project Scorecard (/<%= @competition.score_total PROJECT %>)</th>
+      <th>Project Scorecard</th>
     <% end %>
 	</thead>
 	<tbody>
@@ -37,7 +37,14 @@
     <td><%= project.team_name %></td>
     <td><%= event.name %></td>
     <% if @judgeable_assignment.present? %>
-      <td><%= @project_judging[team.id][:display_score_status] %></td>
+      <% if @project_judging[team.id][:display_score_status].is_a? Integer %>
+    		<% score_value = ((@project_judging[team.id][:display_score_status].to_f / (@competition.score_total PROJECT).to_f) * 100).to_i %>
+			<% rgb_g =  (255 * score_value) / 100 %>
+			<% rgb_r =  (255 * (100 - score_value)) / 100 %>
+			<td style="background-color: rgb(<%= rgb_r %>,<%= rgb_g %>,0); color: white; text-align: center; font-weight: 700; font-size: 1.25;"><%= score_value %>%</td>
+    	<% else %>
+    		<td><%= @project_judging[team.id][:display_score_status] %></td>
+    	<% end %>
     <% end %>
   </tr>
   <% end %>

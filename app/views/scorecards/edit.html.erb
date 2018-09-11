@@ -12,10 +12,17 @@
   
   <div class="score-display">
 	  <p>Total Score</p>
-	  <% score_value = ((scorecard.display_score.to_f / scorecard.max_score.to_f) * 100).to_i %>
+	  
+	  <% if scorecard.display_score.is_a? Integer %>
+	  
+	  <% score_value = ((scorecard.display_score.to_f / (scorecard.max_score).to_f) * 100).to_i %>
 	  <% rgb_g =  (255 * score_value) / 100 %>
 	  <% rgb_r =  (255 * (100 - score_value)) / 100 %>
 	  <p style="background-color: rgb(<%= rgb_r %>,<%= rgb_g %>,0); color: white;"><%= score_value %>%</p>
+	  
+	  <% else %>
+	  	<p><%= scorecard.display_score %></p>
+	  <% end %>
   </div>
 <% end %>
 
