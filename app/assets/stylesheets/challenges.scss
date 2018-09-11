@@ -231,6 +231,37 @@
 	max-width: 100%;
 }
 
+.challenge_page table {
+	box-sizing: border-box;
+	margin-top: 2em;
+	margin-left: 2em;
+	padding: 2em 2em;
+	border-collapse: collapse
+}
+
+.challenge_page table {
+	width: 100%;
+}
+
+.challenge_page table, .challenge_page th, .challenge_page td {
+	border: 1px solid #ca1e56;
+	padding: 0.25em 1em;
+	box-sizing: border-box;
+}
+
+
+
+
+.challenge_page th {
+	background-color: #ca1e56;
+	color: #ddd;
+}
+
+.challenge_page table a {
+	text-decoration: none;
+	color:#4c9ad2;
+}
+
 @media only screen and (max-width: 800px) {
 	.challenge_page section {
 		flex-direction: column;

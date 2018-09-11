@@ -5,11 +5,17 @@
       <h3><%= @challenge_scorecard.judgeable.challenge.name %></h3>
     <% end %>
     <%= fields_for "judgments[]", judgment do |judgment_form| %>
-      <%= judgment_form.label :score, judgment.criterion.name %>
-      <%= judgment_form.number_field(:score, { value: judgment.score, in: MIN_SCORE..MAX_SCORE, step: 1 }) %></br>
+    <div class="field">
+	    <div>
+      <%= judgment_form.label :score, judgment.criterion.name %><br /><em><%= judgment.criterion.description %></em>
+	    </div>
+      <%= judgment_form.number_field(:score, { value: judgment.score, in: MIN_SCORE..MAX_SCORE, step: 1 }) %>
+    </div>
     <% end %>
   <% end %>
+  <div class="actions">
   <%= f.submit 'Save Scorecard' %>
+  </div>
 <% end %>
 
 <%= javascript_tag 'window.addEventListener("unload", function(event) { window.opener.location.reload();})' %>

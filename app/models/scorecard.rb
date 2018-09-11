@@ -47,4 +47,13 @@ class Scorecard < ApplicationRecord
     return 'Scorecard Incomplete' if score.nil?
     score
   end
+  
+  def max_score
+	score = 0
+	judgments.each do |judgment|
+      return nil if judgment.score.nil?
+      score += 10
+    end
+    score
+  end
 end

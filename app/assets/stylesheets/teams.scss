@@ -91,6 +91,37 @@
 	color: #ca1e56;
 }
 
+.team_page aside.fav_judge {
+	display: flex;
+	width: 50%;
+	justify-content: flex-end;
+}
+
+.team_page aside.fav_judge p {
+	width: 50%;
+	box-sizing: border-box;
+	padding: 0.5em 0.5em;
+}
+
+.team_page aside.fav_judge a {
+	box-sizing: border-box;
+	font-size: 1.0em;
+	padding: 0em 0em;
+	width: 100%;
+	display: block;
+	text-align: center;
+	margin-top: 0em;
+    background-color: #ca1e56;
+    color: #ddd;
+    font-weight: 700;
+    text-transform: uppercase;
+    text-decoration: none;
+}
+
+.team_page aside.fav_judge p:nth-child(2) a {
+    background-color: #4c9ad2;
+}
+
 .team_page aside {
 	float:right;
 }
