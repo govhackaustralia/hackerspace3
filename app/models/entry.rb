@@ -51,7 +51,7 @@ class Entry < ApplicationRecord
   end
 
   def average_score
-    cards = ChallengeScorecard.where(entry: self)
+    cards = Scorecard.where(judgeable: self)
     total_score = 0
     voted = 0
     cards.each do |card|
@@ -63,7 +63,7 @@ class Entry < ApplicationRecord
   end
 
   def judges_voted
-    cards = ChallengeScorecard.where(entry: self)
+    cards = Scorecard.where(judgeable: self)
     voted = 0
     cards.each do |card|
       next if card.total_score.nil?
