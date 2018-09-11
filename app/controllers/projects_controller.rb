@@ -4,6 +4,8 @@ class ProjectsController < ApplicationController
     @teams = @competition.teams.where(published: true)
     @id_teams_projects = Team.id_teams_projects(@teams)
     @attending_events = current_user.competition_events_participating(@competition) if user_signed_in?
+    @judgeable_assignment = current_user.judgeable_assignment if user_signed_in? && @competition.in_judging_window?(LAST_TIME_ZONE)
+    @project_judging = @judgeable_assignment.judgeable_scores(@teams) if @judgeable_assignment.present?
     respond_to do |format|
       format.html
       format.csv { send_data @teams.to_csv }

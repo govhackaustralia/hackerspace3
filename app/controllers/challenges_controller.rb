@@ -28,7 +28,7 @@ class ChallengesController < ApplicationController
     @user_eligible_teams = @challenge.eligible_teams & current_user.teams if user_signed_in?
     if @competition.in_competition_window? LAST_TIME_ZONE
       checkpoint_entry_view
-    else
+    elsif @competition.in_judging_window? LAST_TIME_ZONE
       judging_view
     end
   end
