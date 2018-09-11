@@ -1,0 +1,30 @@
+<table>
+	<thead>
+		<th>Project</th>
+		<th>Team</th>
+		<th>Location</th>
+    <% if @judgeable_assignment.present? %>
+      <th>Project Scorecard (/<%= @competition.score_total PROJECT %>)</th>
+    <% end %>
+    <% if @judge.present? %>
+      <th>Challenge Scorecard (/<%= @competition.score_total CHALLENGE %>)</th>
+    <% end %>
+	</thead>
+	<tbody>
+  <% @teams.each do |team| %>
+  <tr>
+    <% project = @id_teams_projects[team.id][:current_project] %>
+    <% event = @id_teams_projects[team.id][:event] %>
+    <td><%= link_to "#{project.project_name}", project_path(project.identifier) %></td>
+    <td><%= project.team_name %></td>
+    <td><%= event.name %></td>
+    <% if @judgeable_assignment.present? %>
+      <td><%= @project_judging[team.id][:display_score_status] %></td>
+    <% end %>
+    <% if @judge.present? %>
+      <td><%= @challenge_judging[team.id][:display_score_status] %></td>
+    <% end %>
+  </tr>
+  <% end %>
+	</tbody>
+</table>

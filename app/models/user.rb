@@ -69,6 +69,10 @@ class User < ApplicationRecord
     nil
   end
 
+  def judge_assignment(challenge)
+    Assignment.find_by(user: self, assignable: challenge, title: JUDGE)
+  end
+
   def registrations
     event_assignment.registrations
   end

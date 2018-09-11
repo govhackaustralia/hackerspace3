@@ -118,6 +118,10 @@ class Competition < ApplicationRecord
     region_time < challenge_judging_end.to_formatted_s(:number)
   end
 
+  def score_total(type)
+    criteria.where(category: type).count * MAX_SCORE
+  end
+
   def filter_data_sets(term)
     sets = data_sets.order(:name)
     id_regions = Region.id_regions(Region.all)

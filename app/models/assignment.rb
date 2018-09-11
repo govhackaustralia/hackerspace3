@@ -27,4 +27,41 @@ class Assignment < ApplicationRecord
       errors.add(:checkpoint_id, 'Register for a competition event to join or create a team.')
     end
   end
+
+  def judgeable_scores(teams)
+
+    team_id_to_scorecard = {}
+    if title == JUDGE
+      entries = Entry.where(team: teams, challenge: assignable)
+      team_scorecards = scorecards.where(judgeable: entries)
+      id_to_entry = {}
+      entries.each { |entry| id_to_entry[entry.id] = entry }
+      team_scorecards.each do |scorecard|
+        entry = id_to_entry[scorecard.judgeable_id]
+        team_id_to_scorecard[entry.team_id] = scorecard
+      end
+    else
+      team_scorecards = scorecards.where(judgeable: teams)
+      team_scorecards.each { |scorecard| team_id_to_scorecard[scorecard.judgeable_id] = scorecard }
+    end
+
+    scorecard_id_to_scores = {}
+    team_scorecards.each { |scorecard| scorecard_id_to_scores[scorecard.id] = [] }
+
+    judgments = Judgment.where(scorecard: team_scorecards)
+    judgments.each { |judgment| scorecard_id_to_scores[judgment.scorecard_id] << judgment.score }
+
+    judgeable_scores = {}
+    teams.each do |team|
+      verdict = if (scorecard = team_id_to_scorecard[team.id]).nil?
+                  'Not Marked'
+                elsif (scores = scorecard_id_to_scores[scorecard.id]).include? nil
+                  'Incomplete'
+                else
+                  scores.sum
+                end
+      judgeable_scores[team.id] = { display_score_status: verdict }
+    end
+    judgeable_scores
+  end
 end

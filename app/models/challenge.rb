@@ -3,6 +3,7 @@ class Challenge < ApplicationRecord
   belongs_to :competition
   belongs_to :region
   has_many :entries, dependent: :destroy
+  has_many :teams, through: :entries
   has_many :challenge_sponsorships, dependent: :destroy
   has_many :sponsors, through: :challenge_sponsorships
   has_many :challenge_data_sets, dependent: :destroy
