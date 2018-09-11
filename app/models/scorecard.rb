@@ -28,9 +28,9 @@ class Scorecard < ApplicationRecord
 
   def total_score
     score = 0
-    challenge_judgements.each do |judgement|
-      return nil if judgement.score.nil?
-      score += judgement.score
+    judgments.each do |judgment|
+      return nil if judgment.score.nil?
+      score += judgment.score
     end
     score
   end
