@@ -72,4 +72,11 @@ class Entry < ApplicationRecord
     end
     voted
   end
+
+  def self.team_id_entries(entries)
+    entries = where(id: entries.uniq) if entries.class == Array
+    id_entries = {}
+    entries.each { |entry| id_entries[entry.team_id] = entry }
+    id_entries
+  end
 end

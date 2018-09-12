@@ -1,5 +1,6 @@
 class Challenge < ApplicationRecord
   has_many :assignments, as: :assignable, dependent: :destroy
+  has_many :users, through: :assignments
   belongs_to :competition
   belongs_to :region
   has_many :entries, dependent: :destroy

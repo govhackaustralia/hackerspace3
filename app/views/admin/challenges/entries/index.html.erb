@@ -1,39 +1,11 @@
-<h2><%= @challenge.name %></h2>
+<main class="challenge_page">
+  <h2><%= @challenge.name %> Entries</h2>
 
-<% ordered_challenge_entries %>
+  <% if @entries.present? %>
+    <%= render 'judge_entry_table' %>
+  <% else %>
+    <p>No entries for this challenge currently</p>
+  <% end %>
 
-<h3>Eligible Entries -  Marks Allocated</h3>
-
-<% @entries_and_scores.each do |obj| %>
-
-  <h4><%= obj[:entry].team.name %></h4>
-  <%= "Average Score: #{obj[:score]} from #{obj[:entry].judges_voted}
-    of #{ pluralize @challenge.assignments.count, 'judge'}" %><br>
-
-<% end %>
-
-<h3>Eligible Entries - No Marks Allocated</h3>
-
-<% @nil_entries.each do |entry| %>
-
-  <%= render 'team_project_review', locals: { entry: entry } %>
-
-<% end %>
-
-<h3>Projects yet to be marked Eligible</h3>
-
-<% @nil_eligible_entries.each do |entry| %>
-
-  <%= render 'team_project_review', locals: { entry: entry } %>
-
-<% end %>
-
-<h3>Non Eligible Projects</h3>
-
-<% @non_eligible_entries.each do |entry| %>
-
-  <%= render 'team_project_review', locals: { entry: entry } %>
-
-<% end %>
-
-<%= link_to 'Back to Challenge', admin_region_challenge_path(@challenge.region, @challenge) %>
+  <%= link_to 'Back to Challenge', admin_region_challenge_path(@challenge.region, @challenge) %>
+</main>

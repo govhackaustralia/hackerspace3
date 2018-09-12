@@ -4,8 +4,10 @@ class Admin::Challenges::EntriesController < ApplicationController
 
   def index
     @challenge = Challenge.find(params[:challenge_id])
-    @entries = @challenge.entries
-    @id_team_projects = Team.id_teams_projects(@entries.pluck(:team_id))
+    @judges = @challenge.users
+    team_project_entries
+    project_judging
+    challenge_judging
   end
 
   def edit
@@ -29,6 +31,33 @@ class Admin::Challenges::EntriesController < ApplicationController
   end
 
   private
+
+  def team_project_entries
+    @entries =  @challenge.entries
+    @id_entries = Entry.team_id_entries(@entries)
+    @teams = Team.where(id: @entries.pluck(:team_id))
+    @id_team_projects = Team.id_teams_projects(@teams)
+    @projects = Team.projects_by_name(@id_team_projects)
+  end
+
+  def project_judging
+    @project_judging_total = @challenge.competition.score_total PROJECT
+    @judge_event_assignments = []
+    @judges.each { |judge| @judge_event_assignments << judge.event_assignment }
+    @judge_project_scores = {}
+    @judge_event_assignments.each do |judge_assignment|
+      @judge_project_scores[judge_assignment.user_id] = judge_assignment.judgeable_scores(@teams)
+    end
+  end
+
+  def challenge_judging
+    @challenge_judging_total = @challenge.competition.score_total CHALLENGE
+    @judge_assignments = @challenge.assignments
+    @judge_challenge_scores = {}
+    @judge_assignments.each do |judge_assignment|
+      @judge_challenge_scores[judge_assignment.user_id] = judge_assignment.judgeable_scores(@teams)
+    end
+  end
 
   def update_entry
     @entry = Entry.find(params[:id])
