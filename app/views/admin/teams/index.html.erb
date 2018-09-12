@@ -15,13 +15,12 @@
 		<th>Location</th>
 	</thead>
 	<tbody>
-  <% filter_teams(@teams, params[:term]).each do |team| %>
+  <% filter_projects(params[:term]).each do |project| %>
   <tr>
-    <% project = @id_teams_projects[team.id][:current_project] %>
-    <% event = @id_teams_projects[team.id][:event] %>
+    <% team = @id_teams_projects[project.team_id][:team] %>
     <td><%= link_to "#{project.project_name}", admin_team_path(team) %></td>
     <td><%= project.team_name %></td>
-    <td><%= event.name %></td>
+    <td><%= @id_teams_projects[project.team_id][:event].name %></td>
   </tr>
   <% end %>
 	</tbody>

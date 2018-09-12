@@ -40,6 +40,7 @@ class ChallengesController < ApplicationController
     @judge = current_user.judge_assignment(@challenge) if user_signed_in?
     @project_judging = @judgeable_assignment.judgeable_scores(@teams) if @judgeable_assignment.present?
     @challenge_judging = @judge.judgeable_scores(@teams) if @judge.present?
+    @projects = Team.projects_by_name(@id_teams_projects)
   end
 
   def checkpoint_entry_view

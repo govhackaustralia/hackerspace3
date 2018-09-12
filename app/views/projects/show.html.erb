@@ -26,16 +26,16 @@
 </section>
 <h3>Challenges</h3>
 <section class="markdown">
-  <% if passed_checkpoints.present? %>
+  <% if @passed_checkpoint_ids.present? %>
 
     <% if @entries_to_display.present? %>
 
       <% @entries_to_display.each do |entry| %>
         <% challenge = entry.challenge %>
         <section class="markdown">
-            <h4><%= challenge.name %></h4>
-            <p><strong>Region</strong>: <%= @id_regions[challenge.region_id].name %></p>
-            <%= link_to 'Challenge', challenge_path(challenge) %>
+          <h4><%= challenge.name %></h4>
+          <p><strong>Region</strong>: <%= @id_regions[challenge.region_id].name %></p>
+          <%= link_to 'Challenge', challenge_path(challenge) %>
         </section>
 
       <% end %>
@@ -56,4 +56,4 @@
 </section>
 
 <%= link_to 'Back to Projects', projects_path %>
-  </main>
+</main>

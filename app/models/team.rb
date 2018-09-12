@@ -160,4 +160,10 @@ class Team < ApplicationRecord
 
     id_team_projects
   end
+
+  def self.projects_by_name(id_teams_projects)
+    projects = []
+    id_teams_projects.each { |_team, obj| projects << obj[:current_project] }
+    projects.sort_by {|obj| obj.project_name }
+  end
 end

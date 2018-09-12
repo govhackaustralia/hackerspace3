@@ -6,6 +6,7 @@ class ProjectsController < ApplicationController
     @attending_events = current_user.competition_events_participating(@competition) if user_signed_in?
     @judgeable_assignment = current_user.judgeable_assignment if user_signed_in? && @competition.in_judging_window?(LAST_TIME_ZONE)
     @project_judging = @judgeable_assignment.judgeable_scores(@teams) if @judgeable_assignment.present?
+    @projects = Team.projects_by_name(@id_teams_projects)
     respond_to do |format|
       format.html
       format.csv { send_data @teams.to_csv }
@@ -18,8 +19,8 @@ class ProjectsController < ApplicationController
     if @team.published
       @competition = Competition.current
       @checkpoints = @competition.checkpoints.order(:end_time)
-      passed_checkpoint_ids = @competition.passed_checkpoint_ids(@team.time_zone)
-      @entries_to_display = Entry.where(checkpoint: passed_checkpoint_ids, team: @team)
+      @passed_checkpoint_ids = @competition.passed_checkpoint_ids(@team.time_zone)
+      @entries_to_display = Entry.where(checkpoint: @passed_checkpoint_ids, team: @team)
       @challenges = @team.challenges
       @id_regions = Region.id_regions(Region.all)
       user_signed_in_records if user_signed_in?

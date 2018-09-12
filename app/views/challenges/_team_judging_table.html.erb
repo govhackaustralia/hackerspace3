@@ -12,17 +12,15 @@
     <% end %>
 	</thead>
 	<tbody>
-  <% @teams.each do |team| %>
+  <% @projects.each do |project| %>
   <tr>
-    <% project = @id_teams_projects[team.id][:current_project] %>
-    <% event = @id_teams_projects[team.id][:event] %>
     <td><%= link_to "#{project.project_name}", project_path(project.identifier) %></td>
     <td><%= project.team_name %></td>
-    <td><%= event.name %></td>
     
     <% score_value_project = 0 %>
     <% score_value_challenge = 0 %>
     
+    <td><%= @id_teams_projects[project.team_id][:event].name %></td>
     <% if @judgeable_assignment.present? %>
     	<% if @project_judging[team.id][:display_score_status].is_a? Integer %>
     		<% score_value_project = ((@project_judging[team.id][:display_score_status].to_f / (@competition.score_total PROJECT).to_f) * 100).to_i %>
