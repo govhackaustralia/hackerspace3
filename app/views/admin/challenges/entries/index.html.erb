@@ -1,6 +1,10 @@
 <main class="challenge_page">
   <h2><%= @challenge.name %> Entries</h2>
 
+  <% unless @judges.present? %>
+    <h3>No judges assigned to this challenge.</h3>
+  <% end %>
+
   <% if @entries.present? %>
     <%= render 'judge_entry_table' %>
   <% else %>
