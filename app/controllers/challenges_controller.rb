@@ -36,11 +36,17 @@ class ChallengesController < ApplicationController
   def judging_view
     @teams = @challenge.teams.where(published: true)
     @id_teams_projects = Team.id_teams_projects(@teams)
-    @judgeable_assignment = current_user.judgeable_assignment if user_signed_in?
-    @judge = current_user.judge_assignment(@challenge) if user_signed_in?
-    @project_judging = @judgeable_assignment.judgeable_scores(@teams) if @judgeable_assignment.present?
-    @challenge_judging = @judge.judgeable_scores(@teams) if @judge.present?
     @projects = Team.projects_by_name(@id_teams_projects)
+    if user_signed_in?
+      if (@judgeable_assignment = current_user.judgeable_assignment).present?
+        @project_judging = @judgeable_assignment.judgeable_scores(@teams)
+        @project_judging_total = @competition.score_total PROJECT
+      end
+      if (@judge = current_user.judge_assignment(@challenge)).present?
+        @challenge_judging = @judge.judgeable_scores(@teams)
+        @challenge_judging_total = @competition.score_total CHALLENGE
+      end
+    end
   end
 
   def checkpoint_entry_view

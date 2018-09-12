@@ -16,40 +16,34 @@
   <tr>
     <td><%= link_to "#{project.project_name}", project_path(project.identifier) %></td>
     <td><%= project.team_name %></td>
-    
-    <% score_value_project = 0 %>
-    <% score_value_challenge = 0 %>
-    
     <td><%= @id_teams_projects[project.team_id][:event].name %></td>
+
     <% if @judgeable_assignment.present? %>
-    	<% if @project_judging[team.id][:display_score_status].is_a? Integer %>
-    		<% score_value_project = ((@project_judging[team.id][:display_score_status].to_f / (@competition.score_total PROJECT).to_f) * 100).to_i %>
-			<% rgb_g =  (255 * score_value_project) / 100 %>
-			<% rgb_r =  (255 * (100 - score_value_project)) / 100 %>
-			<td style="background-color: rgb(<%= rgb_r %>,<%= rgb_g %>,0); color: white; text-align: center; font-weight: 700; font-size: 1.25;"><%= score_value_project %>%</td>
+			<% score_value_project = 0 %>
+    	<% if (display_score = @project_judging[project.team_id][:display_score_status]).is_a? Integer %>
+				<% score_value_project = ((display_score.to_f / @project_judging_total.to_f) * 100).to_i %>
+				<%= render 'judging_cell', locals: { total: score_value_project } %>
     	<% else %>
-    		<td><%= @project_judging[team.id][:display_score_status] %></td>
+    		<td><%= display_score %></td>
     	<% end %>
     <% end %>
+
     <% if @judge.present? %>
-    	<% if @challenge_judging[team.id][:display_score_status].is_a? Integer %>
-    		<% score_value_challenge = ((@challenge_judging[team.id][:display_score_status].to_f / (@competition.score_total CHALLENGE).to_f) * 100).to_i %>
-			<% rgb_g =  (255 * score_value_challenge) / 100 %>
-			<% rgb_r =  (255 * (100 - score_value_challenge)) / 100 %>
-			<td style="background-color: rgb(<%= rgb_r %>,<%= rgb_g %>,0); color: white; text-align: center; font-weight: 700; font-size: 1.25;"><%= score_value_challenge %>%</td>
+			<% score_value_challenge = 0 %>
+    	<% if (display_score = @challenge_judging[project.team_id][:display_score_status]).is_a? Integer %>
+    		<% score_value_challenge = ((display_score.to_f / @challenge_judging_total.to_f) * 100).to_i %>
+				<%= render 'judging_cell', locals: { total: score_value_challenge } %>
     	<% else %>
-    		<td><%= @challenge_judging[team.id][:display_score_status] %></td>
+    		<td><%= display_score %></td>
     	<% end %>
-    	
-    	<% if score_value_project != 0 && score_value_challenge != 0 %>
-    		<% score_total = ((score_value_project + score_value_challenge).to_f / 2.to_f).to_i %>
-    		<% rgb_g =  (255 * score_total) / 100 %>
-			<% rgb_r =  (255 * (100 - score_total)) / 100 %>
-			<td style="background-color: rgb(<%= rgb_r %>,<%= rgb_g %>,0); color: white; text-align: center; font-weight: 700; font-size: 1.25;"><%= score_total %>%</td>
+
+    	<% if score_value_project.zero? || score_value_challenge.zero? %>
+				<td>Not all marked</td>
     	<% else %>
-    		<td>Not all marked</td>
+				<% score_total = ((score_value_project + score_value_challenge).to_f / 2.to_f).to_i %>
+				<%= render 'judging_cell', locals: { total: score_total } %>
     	<% end %>
-    	
+
     <% end %>
   </tr>
   <% end %>

@@ -35,13 +35,11 @@
     <td><%= project.team_name %></td>
     <td><%= @id_teams_projects[project.team_id][:event].name %></td>
     <% if @judgeable_assignment.present? %>
-      <% if @project_judging[team.id][:display_score_status].is_a? Integer %>
-    		<% score_value = ((@project_judging[team.id][:display_score_status].to_f / (@competition.score_total PROJECT).to_f) * 100).to_i %>
-			<% rgb_g =  (255 * score_value) / 100 %>
-			<% rgb_r =  (255 * (100 - score_value)) / 100 %>
-			<td style="background-color: rgb(<%= rgb_r %>,<%= rgb_g %>,0); color: white; text-align: center; font-weight: 700; font-size: 1.25;"><%= score_value %>%</td>
+      <% if (display_score = @project_judging[project.team_id][:display_score_status]).is_a? Integer %>
+    		<% score_value = ((display_score.to_f / @project_judging_total.to_f) * 100).to_i %>
+        <%= render 'challenges/judging_cell', locals: { total: score_value } %>
     	<% else %>
-    		<td><%= @project_judging[team.id][:display_score_status] %></td>
+    		<td><%= display_score %></td>
     	<% end %>
     <% end %>
   </tr>
