@@ -63,8 +63,8 @@ class ScorecardsController < ApplicationController
   def organise_judgments
     @scorecards = [@scorecard]
     @scorecard.update_judgments
-    assignments = Assignment.where(user: @user, title: JUDGE, assignable: @team.challenges)
-    all_judgments = @scorecard.judgments.to_a
+    assignments = Assignment.where(user: @user, title: JUDGE, assignable: @team.challenges).order(:id)
+    all_judgments = @scorecard.judgments.order(:criterion_id)
     return all_judgments unless assignments.present?
     assignments.each { |assignment| all_judgments += organise_challenge_scorecard(assignment) }
     all_judgments
@@ -75,6 +75,6 @@ class ScorecardsController < ApplicationController
     scorecard = Scorecard.find_or_create_by(assignment: assignment, judgeable: entry)
     scorecard.update_judgments
     @scorecards << scorecard
-    scorecard.judgments.to_a
+    scorecard.judgments.order(:criterion_id)
   end
 end
