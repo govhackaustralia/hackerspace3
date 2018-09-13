@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_09_10_080449) do
+ActiveRecord::Schema.define(version: 2018_09_13_111353) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -246,6 +246,7 @@ ActiveRecord::Schema.define(version: 2018_09_10_080449) do
     t.bigint "judgeable_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "included", default: true
     t.index ["judgeable_type", "judgeable_id"], name: "index_scorecards_on_judgeable_type_and_judgeable_id"
   end
 

@@ -51,6 +51,7 @@ Rails.application.routes.draw do
       resources :events, :challenges, :data_sets
       resources :assignments, controller: 'regions/assignments'
       resources :sponsorships, controller: 'regions/sponsorships'
+      resources :scorecards, controller: 'regions/scorecards'
     end
 
     resources :challenges do

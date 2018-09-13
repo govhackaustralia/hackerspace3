@@ -1,0 +1,47 @@
+<main class="project_index">
+<h2>People's Choice Voting in <%= @region.name %> for <%= @competition.name %></h2>
+
+<table>
+	<thead>
+		<th>Project</th>
+		<th>Team</th>
+    <th>Location</th>
+    <th>Scorecard Count</th>
+    <th>Mean</th>
+    <th>Mode</th>
+    <th>Median</th>
+    <th>Standard Deviation</th>
+	</thead>
+	<tbody>
+    <% @projects.each do |project| %>
+      <tr>
+        <td><%= link_to "#{project.project_name}", project_path(project.identifier) %></td>
+        <td><%= project.team_name %></td>
+        <td><%= @id_teams_projects[project.team_id][:event].name %></td>
+				<% scores = @team_id_scorecards[project.team_id][:scores] %>
+				<% total_card_count = @team_id_scorecards[project.team_id][:total_card_count] %>
+				<% if total_card_count == 0 %>
+					<td>No Scores for this Team Project Recorded</td>
+				<% elsif scores.empty? %>
+					<td>No Complete / Included Scorecards</td>
+				<% else %>
+					<td><%= link_to "#{scores.count}/#{total_card_count}", admin_team_scorecards_path(project.team_id) %></td>
+
+					<% mean_score = ((scores.mean / @project_judging_total.to_f) * 100).to_i %>
+					<%= render 'challenges/judging_cell', locals: { total: mean_score } %>
+
+					<% mode_score = ((scores.mode / @project_judging_total.to_f) * 100).to_i %>
+					<%= render 'challenges/judging_cell', locals: { total: mode_score } %>
+
+					<% median_score = ((scores.median / @project_judging_total.to_f) * 100).to_i %>
+					<%= render 'challenges/judging_cell', locals: { total: median_score } %>
+
+					<td><%= scores.standard_deviation %></td>
+				<% end %>
+      </tr>
+    <% end %>
+	</tbody>
+</table>
+
+<%= link_to "Back to #{@region.name} Region", admin_region_path(@region) %>
+</main>

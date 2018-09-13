@@ -48,17 +48,18 @@ end
 
 comp = Competition.current
 
-comp.update(start_time: Time.now + 3.days, end_time: Time.now + 5.days,
+comp.update(start_time: Time.now - 5.days, end_time: Time.now - 3.days,
             peoples_choice_start: Time.now + 6.days,
             peoples_choice_end: Time.now + 1.month,
-            challenge_judging_start: Time.now + 6.days,
+            challenge_judging_start: Time.now - 1.days,
             challenge_judging_end: Time.now + 1.month)
 
 5.times do |time|
-  comp.checkpoints.create(end_time: Time.now + time.days,
+  comp.checkpoints.create(end_time: Time.now - time.days,
                           name: "Checkpoint #{time}",
                           max_national_challenges: 1,
-                          max_regional_challenges: 1)
+                          max_regional_challenges: 1,
+                          )
   comp.criteria.create(name: "Project Criterion #{time}", description: "#{time} Description
     to end all descriptions for Project Criterion.", category: PROJECT)
 end
@@ -172,11 +173,14 @@ Region.all.each do |region|
   region.challenges.each do |challenge|
     5.times do
       challenge.challenge_data_sets.create(data_set_id: random_data_set_id(region))
-
     end
 
     3.times do
       challenge.challenge_sponsorships.create(sponsor_id: random_sponsor_id)
+    end
+
+    3.times do
+      challenge.assignments.create(title: JUDGE, user_id: random_user_id)
     end
   end
 
@@ -243,6 +247,15 @@ Region.all.each do |region|
             justification: 'We think we would do excellently in this challenge.')
         end
       end
+    end
+  end
+end
+
+comp.teams.all.each do |team|
+  Assignment.where(title: PARTICIPANT).take(20).each do |assignment|
+    scorecard = Scorecard.create(judgeable: team, assignment: assignment, included: (assignment.id % 5 != 0))
+    comp.criteria.where(category: PROJECT).each do |criterion|
+      Judgment.create(criterion: criterion, scorecard: scorecard, score: Random.rand(11) )
     end
   end
 end

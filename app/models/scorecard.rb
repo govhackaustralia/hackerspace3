@@ -51,4 +51,39 @@ class Scorecard < ApplicationRecord
   def max_score
     judgeable.competition.score_total type
   end
+
+  def self.team_id_scorecards(teams, type)
+    scorecards = Scorecard.where(judgeable: teams)
+    team_id_scorecards = {}
+    teams.each do |team|
+      team_id_scorecards[team.id] = { scorecards: [], scores: [] }
+    end
+
+    scorecards.each do |scorecard|
+      team_id_scorecards[scorecard.judgeable_id][:scorecards] << scorecard.id
+    end
+
+    scorecards.each do |scorecard|
+      scorecard_count = team_id_scorecards[scorecard.judgeable_id][:scorecards].count
+      team_id_scorecards[scorecard.judgeable_id][:total_card_count] = scorecard_count
+    end
+
+    judgments = Judgment.where(scorecard: scorecards)
+    id_scorecard_scores = {}
+    scorecards.each { |scorecard| id_scorecard_scores[scorecard.id] = [] }
+    judgments.each do |judgment|
+      id_scorecard_scores[judgment.scorecard_id] << judgment.score
+    end
+
+    correct_score_count = Competition.current.criteria.where(category: type).count
+    scorecards.each do |scorecard|
+      scores = id_scorecard_scores[scorecard.id]
+      next unless scores.count == correct_score_count
+      next if scores.include? nil
+      next unless scorecard.included
+      team_id_scorecards[scorecard.judgeable_id][:scores] << scores.mean
+    end
+    puts "TEAM_ID_SCORECARDS #{team_id_scorecards}"
+    team_id_scorecards
+  end
 end
