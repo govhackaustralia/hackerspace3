@@ -164,6 +164,6 @@ class Team < ApplicationRecord
   def self.projects_by_name(id_teams_projects)
     projects = []
     id_teams_projects.each { |_team, obj| projects << obj[:current_project] }
-    projects.sort_by {|obj| obj.project_name }
+    projects.sort_by(&:project_name)
   end
 end

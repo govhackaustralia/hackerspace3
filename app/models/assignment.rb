@@ -29,7 +29,6 @@ class Assignment < ApplicationRecord
   end
 
   def judgeable_scores(teams)
-
     team_id_to_scorecard = {}
     if title == JUDGE
       entries = Entry.where(team: teams, challenge: assignable)
