@@ -62,18 +62,20 @@ class ChallengesController < ApplicationController
   end
 
   def challenge_entry_counts
-    entries = []
+    all_entries = []
     Region.all.each do |region|
       passed_checkpoint_ids = if region.national?
                                 @competition.passed_checkpoint_ids(LAST_TIME_ZONE)
                               else
                                 @competition.passed_checkpoint_ids(region.time_zone)
                               end
-      entries += region.entries.where(checkpoint_id: passed_checkpoint_ids).to_a
+      all_entries += region.entries.where(checkpoint_id: passed_checkpoint_ids).to_a
     end
+    unpublished_entries = Entry.where(team: Team.where(published: false)).to_a
+    published_entries = all_entries - unpublished_entries
     @challenge_id_to_entry_count = {}
     @challenges.each { |challenge| @challenge_id_to_entry_count[challenge.id] = 0 }
-    entries.each { |entry| @challenge_id_to_entry_count[entry.challenge_id] += 1 }
+    published_entries.each { |entry| @challenge_id_to_entry_count[entry.challenge_id] += 1 }
   end
 
   def filter_challenges

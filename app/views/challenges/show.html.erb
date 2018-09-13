@@ -101,7 +101,11 @@
 <h3>All Team Entries</h3>
 
 <% if @competition.in_judging_window? LAST_TIME_ZONE %>
-	<%= render 'team_judging_table' %>
+	<% if @teams.present? %>
+		<%= render 'team_judging_table' %>
+	<% else %>
+		<p>No team entries to display for this challenge.</p>
+	<% end %>
 <% else %>
 	<%= render 'team_checkpoint_display' %>
 <% end %>
