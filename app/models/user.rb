@@ -152,4 +152,17 @@ class User < ApplicationRecord
     return unless user.full_name.blank?
     user.update(full_name: data['name'])
   end
+
+  require 'csv'
+
+  def self.to_csv(options = {})
+    user_columns = %w[id email full_name preferred_name dietary_requirements tshirt_size twitter mailing_list challenge_sponsor_contact_place challenge_sponsor_contact_enter my_project_sponsor_contact me_govhack_contact phone_number how_did_you_hear accepted_terms_and_conditions registration_type parent_guardian request_not_photographed data_cruncher coder creative facilitator]
+    user_ids = Assignment.where(title: [TEAM_MEMBER, TEAM_LEADER, INVITEE], assignable: Team.where(published: true)).pluck(:user_id).uniq
+    CSV.generate(options) do |csv|
+      csv << user_columns
+      where(id: user_ids).each do |user|
+        csv << user.attributes.values_at(*user_columns)
+      end
+    end
+  end
 end

@@ -7,6 +7,10 @@ class Admin::TeamsController < ApplicationController
     @teams = @competition.teams
     @id_teams_projects = Team.id_teams_projects(@teams)
     @projects = Team.projects_by_name(@id_teams_projects)
+    respond_to do |format|
+      format.html
+      format.csv { send_data User.to_csv }
+    end
   end
 
   def show
