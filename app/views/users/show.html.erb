@@ -6,35 +6,35 @@
 		<article>
 			<% if false %>
 				<%= render 'user_profile_pic'%>
-				<%= link_to 'Change Profile Pic', update_personal_details_path(profile_pic: true) %><br>
+				<%= link_to 'Change Profile Pic', update_personal_details_path(profile_pic: true) %></br>
 			<% end %>
 			<%= render 'user_contact', locals: { user: @user } %>
-			<%= link_to 'Update Personal Details' , update_personal_details_path %><br>
-			<%= link_to 'Change Email and Password' , edit_user_registration_path %><br>
+			<%= link_to 'Update Personal Details' , update_personal_details_path %></br>
+			<%= link_to 'Change Email and Password' , edit_user_registration_path %></br>
 		</article>
 		<article>
 			<% if user_has_admin_privilieges? %>
 				<h3>Admin</h3>
-				<%= link_to 'Region Management', admin_regions_path %><br>
-				<%= link_to 'User Management', admin_users_path %><br>
-				<%= link_to 'Competiton Management', admin_competition_path(@competition) %><br>
-				<%= link_to 'Region Management', admin_regions_path %><br>
-				<%= link_to 'Team Management', admin_teams_path %><br>
+				<%= link_to 'Region Management', admin_regions_path %></br>
+				<%= link_to 'User Management', admin_users_path %></br>
+				<%= link_to 'Competiton Management', admin_competition_path(@competition) %></br>
+				<%= link_to 'Region Management', admin_regions_path %></br>
+				<%= link_to 'Team Management', admin_teams_path %></br>
 			<% end %>
 
 			<% if user_has_event_privileges? %>
-				<%= link_to 'Event Management', admin_events_path %><br>
+				<%= link_to 'Event Management', admin_events_path %></br>
 			<% end %>
 
 			<% if user_has_sponsor_privileges? %>
 				<h3>Sponsor Managmement</h3>
-				<%= link_to 'Sponsor Management', admin_sponsors_path %><br>
-				<%= link_to 'Sponsorship Type Management', admin_sponsorship_types_path %><br>
+				<%= link_to 'Sponsor Management', admin_sponsors_path %></br>
+				<%= link_to 'Sponsorship Type Management', admin_sponsorship_types_path %></br>
 			<% end %>
 
 			<% if user_is_chief_judge? %>
 				<h3>Competition Judging Criteria</h3>
-				<%= link_to 'Competiton Criteria Management', admin_competition_criteria_path(@competition) %><br>
+				<%= link_to 'Competiton Criteria Management', admin_competition_criteria_path(@competition) %></br>
 			<% end %>
 		</article>
 	</section>
@@ -59,11 +59,11 @@
 				<% @registrations.each do |registration| %>
 					<% event = @id_events[registration.event_id] %>
 					<h4><%= event.name %> -  <%= @id_regions[event.region_id].name %></h4>
-
-					You are registered as: <%= registration.status %><br>
-
-					<%= link_to 'Go to Event Page', event_path(event.identifier) %><br>
-					<%= link_to 'Update Registration', edit_event_registration_path(event.identifier, registration) %><br>
+					<% unless event.registration_type == CLOSED %>
+						You are registered as: <%= registration.status %></br>
+						<%= link_to 'Update Registration', edit_event_registration_path(event.identifier, registration) %></br>
+					<% end %>
+					<%= link_to 'Go to Event Page', event_path(event.identifier) %></br>
 				<% end %>
 
 			<% else %>
@@ -81,7 +81,7 @@
 				<% project = @id_teams_projects[team.id][:current_project] %>
 				<% event = @id_teams_projects[team.id][:event] %>
 					<h4><%= project.team_name %> - <%= project.project_name %></h4>
-					Event: <%= event.name %><br>
+					Event: <%= event.name %></br>
 					<% if @competition.not_finished?(team.time_zone) %>
 						<%= link_to "Manage #{team.name}", team_management_team_path(team) %></br>
 					<% elsif team.published %>
@@ -100,15 +100,15 @@
 					<% project = @id_teams_projects[team.id][:current_project] %>
 					<% event = @id_teams_projects[team.id][:event] %>
 					<h4><%= project.team_name %> - <%= project.project_name %></h4>
-					Event: <%= event.name %><br>
+					Event: <%= event.name %></br>
 					<% assignment = @team_id_assignments[team.id] %>
 
 					<%= link_to 'Accept Invitation and Go to Team',
 							team_management_team_assignment_path(
-								team, assignment, title: TEAM_MEMBER), method: :patch %><br>
+								team, assignment, title: TEAM_MEMBER), method: :patch %></br>
 
 					<%= link_to 'Decline Invitation', user_assignment_path(@user, assignment), method: :delete,
-												data: { confirm: 'Are you sure?' } %><br>
+												data: { confirm: 'Are you sure?' } %></br>
 				<% end %>
 			</article>
 		<% end %>
@@ -120,8 +120,8 @@
 						<% project = @id_teams_projects[team.id][:current_project] %>
 						<% event = @id_teams_projects[team.id][:event] %>
 						<h4><%= "#{project.team_name} - #{project.project_name}" %></h4>
-						Event: <%= event.name %><br>
-						<%= link_to "Go to Team Project", project_path(project.identifier) %><br>
+						Event: <%= event.name %></br>
+						<%= link_to "Go to Team Project", project_path(project.identifier) %></br>
 					<% end %>
 				<% else %>
 					<p>Projects that you favourite will appear here.</p>
