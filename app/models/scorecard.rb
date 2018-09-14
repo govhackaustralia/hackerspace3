@@ -21,7 +21,8 @@ class Scorecard < ApplicationRecord
   end
 
   def only_one_scorecard_per_judgeable
-    if Scorecard.find_by(assignment: assignment, judgeable: judgeable).present?
+    existing = Scorecard.find_by(assignment: assignment, judgeable: judgeable)
+    if existing.present? && existing != self
       errors.add(:assignment_id, 'Only one scorecard allowed per judgeable entity')
     end
   end
@@ -52,20 +53,20 @@ class Scorecard < ApplicationRecord
     judgeable.competition.score_total type
   end
 
-  def self.team_id_scorecards(teams, type)
+  def self.region_scorecard_helper(teams, type)
     scorecards = Scorecard.where(judgeable: teams)
-    team_id_scorecards = {}
+    region_scorecard_helper = {}
     teams.each do |team|
-      team_id_scorecards[team.id] = { scorecards: [], scores: [] }
+      region_scorecard_helper[team.id] = { scorecards: [], scores: [] }
     end
 
     scorecards.each do |scorecard|
-      team_id_scorecards[scorecard.judgeable_id][:scorecards] << scorecard.id
+      region_scorecard_helper[scorecard.judgeable_id][:scorecards] << scorecard.id
     end
 
     scorecards.each do |scorecard|
-      scorecard_count = team_id_scorecards[scorecard.judgeable_id][:scorecards].count
-      team_id_scorecards[scorecard.judgeable_id][:total_card_count] = scorecard_count
+      scorecard_count = region_scorecard_helper[scorecard.judgeable_id][:scorecards].count
+      region_scorecard_helper[scorecard.judgeable_id][:total_card_count] = scorecard_count
     end
 
     judgments = Judgment.where(scorecard: scorecards)
@@ -81,9 +82,40 @@ class Scorecard < ApplicationRecord
       next unless scores.count == correct_score_count
       next if scores.include? nil
       next unless scorecard.included
-      team_id_scorecards[scorecard.judgeable_id][:scores] << scores.mean
+      region_scorecard_helper[scorecard.judgeable_id][:scores] << scores.mean
     end
-    puts "TEAM_ID_SCORECARDS #{team_id_scorecards}"
-    team_id_scorecards
+    region_scorecard_helper
+  end
+
+  def self.team_scorecard_helper(scorecards)
+    judgments = Judgment.where(scorecard: scorecards).order(:criterion_id)
+    team_scorecard_helper = {}
+    scorecards.each do |scorecard|
+      team_scorecard_helper[scorecard.id] = { scores: [] }
+    end
+    judgments.each do |judgment|
+      team_scorecard_helper[judgment.scorecard_id][:scores] << judgment.score
+    end
+    team_scorecard_helper
+  end
+
+  def self.assignment_scorecard_helper(assignments)
+    assignment_scorecard_helper = {}
+    assignments.each do |assignment|
+      assignment_scorecard_helper[assignment.id] = { all_scores: [], scorecards: [] }
+    end
+
+    scorecards = Scorecard.where(assignment: assignments)
+    id_scorecards = {}
+    scorecards.each do |scorecard|
+      assignment_scorecard_helper[scorecard.assignment_id][:scorecards] << scorecard.id
+      id_scorecards[scorecard.id] = scorecard
+    end
+
+    Judgment.where(scorecard: scorecards).each do |judgment|
+      assignment_id = id_scorecards[judgment.scorecard_id].assignment_id
+      assignment_scorecard_helper[assignment_id][:all_scores] << judgment.score
+    end
+    assignment_scorecard_helper
   end
 end

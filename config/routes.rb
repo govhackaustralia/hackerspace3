@@ -68,6 +68,7 @@ Rails.application.routes.draw do
     resources :teams do
       resources :projects
       resources :entries, controller: 'teams/entries'
+      resources :scorecards, controller: 'teams/scorecards'
     end
 
     resources :users do

@@ -18,22 +18,22 @@
         <td><%= link_to "#{project.project_name}", project_path(project.identifier) %></td>
         <td><%= project.team_name %></td>
         <td><%= @id_teams_projects[project.team_id][:event].name %></td>
-				<% scores = @team_id_scorecards[project.team_id][:scores] %>
-				<% total_card_count = @team_id_scorecards[project.team_id][:total_card_count] %>
+				<% scores = @region_scorecard_helper[project.team_id][:scores] %>
+				<% total_card_count = @region_scorecard_helper[project.team_id][:total_card_count] %>
 				<% if total_card_count == 0 %>
 					<td>No Scores for this Team Project Recorded</td>
 				<% elsif scores.empty? %>
 					<td>No Complete / Included Scorecards</td>
 				<% else %>
-					<td><%= link_to "#{scores.count}/#{total_card_count}", admin_team_scorecards_path(project.team_id) %></td>
+					<td><%= link_to "#{scores.count}/#{total_card_count}", admin_team_scorecards_path(project.team_id) %>
 
-					<% mean_score = ((scores.mean / @project_judging_total.to_f) * 100).to_i %>
+					<% mean_score = ((scores.mean / MAX_SCORE.to_f) * 100).to_i %>
 					<%= render 'challenges/judging_cell', locals: { total: mean_score } %>
 
-					<% mode_score = ((scores.mode / @project_judging_total.to_f) * 100).to_i %>
+					<% mode_score = ((scores.mode / MAX_SCORE.to_f) * 100).to_i %>
 					<%= render 'challenges/judging_cell', locals: { total: mode_score } %>
 
-					<% median_score = ((scores.median / @project_judging_total.to_f) * 100).to_i %>
+					<% median_score = ((scores.median / MAX_SCORE.to_f) * 100).to_i %>
 					<%= render 'challenges/judging_cell', locals: { total: median_score } %>
 
 					<td><%= scores.standard_deviation %></td>

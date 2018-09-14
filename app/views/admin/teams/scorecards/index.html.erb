@@ -1,0 +1,44 @@
+<main class="project_index">
+<h2>Scorecards for <%= @project.team_name %> - <%= @project.project_name %></h2>
+
+  <table>
+  	<thead>
+      <th>Status</th>
+      <th>Action</th>
+      <% @project_criteria.each do |criterion| %>
+        <th><%= criterion.name %></th>
+      <% end %>
+      <th>Score</th>
+      <th>Average Score</th>
+      <th>Scorecard Count</th>
+  	</thead>
+  	<tbody>
+      <% @scorecards.each do |scorecard| %>
+        <tr>
+          <% scores = @team_scorecard_helper[scorecard.id][:scores] %>
+          <% if scores.include? nil %>
+            <td>Incomplete</td>
+            <td><%= link_to 'Delete Scorecard', admin_team_scorecard_path(@team, scorecard), data: { confirm: "Are you sure?" }, method: :delete %></td>
+          <% elsif scorecard.included %>
+            <td>Included</td>
+            <td><%= link_to 'Exclude Scorecard', admin_team_scorecard_path(@team, scorecard), method: :patch %></td>
+          <% else %>
+            <td>Excluded</td>
+            <td><%= link_to 'Include Scorecard', admin_team_scorecard_path(@team, scorecard), method: :patch %></td>
+          <% end %>
+          <% scores.each do |score| %>
+            <td><%= score %></td>
+          <% end %>
+          <% mean_score = ((scores.mean / MAX_SCORE.to_f) * 100).to_i %>
+					<%= render 'challenges/judging_cell', locals: { total: mean_score } %>
+          <% all_scores_mean = @assignment_scorecard_helper[scorecard.assignment_id][:all_scores].mean %>
+          <% mean_score = ((all_scores_mean / MAX_SCORE.to_f) * 100).to_i %>
+					<%= render 'challenges/judging_cell', locals: { total: mean_score } %>
+          <td><%= @assignment_scorecard_helper[scorecard.assignment_id][:scorecards].count %></td>
+        </tr>
+      <% end %>
+  	</tbody>
+  </table>
+
+<%= link_to 'Back to Region Scorecards', admin_region_scorecards_path(@region) %>
+</main>

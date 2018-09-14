@@ -11,7 +11,7 @@ class Admin::Regions::ScorecardsController < ApplicationController
     @teams = @region.teams.where(published: true)
     @id_teams_projects = Team.id_teams_projects(@teams)
     @projects = Team.projects_by_name(@id_teams_projects)
-    @team_id_scorecards = Scorecard.team_id_scorecards(@teams, PROJECT)
+    @region_scorecard_helper = Scorecard.region_scorecard_helper(@teams, PROJECT)
   end
 
   private
