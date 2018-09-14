@@ -35,7 +35,7 @@
         <section class="markdown">
           <h4><%= challenge.name %></h4>
           <p><strong>Region</strong>: <%= @id_regions[challenge.region_id].name %></p>
-          <%= link_to 'Challenge', challenge_path(challenge) %>
+          <%= link_to 'Challenge', challenge_path(challenge.identifier) %>
         </section>
 
       <% end %>

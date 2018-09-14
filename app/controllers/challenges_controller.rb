@@ -13,7 +13,8 @@ class ChallengesController < ApplicationController
 
   def show
     @competition = Competition.current
-    @challenge = Challenge.find(params[:id])
+    @challenge = Challenge.find_by(identifier: params[:identifier])
+    @challenge = Challenge.find(params[:identifier]) if @challenge.nil?
     @region = @challenge.region
     @data_sets = @challenge.data_sets
     @challenge_sponsorships = @challenge.challenge_sponsorships

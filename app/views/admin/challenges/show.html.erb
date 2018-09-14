@@ -39,7 +39,7 @@
 <% unless @challenge.approved %>
   <strong>This challenge is yet to be approved.</strong><br>
 <% end %>
-<%= link_to 'Go to Challenge Page', challenge_path(@challenge) %><br>
+<%= link_to 'Go to Challenge Page', challenge_path(@challenge.identifier) %><br>
 <%= link_to "Update Challenge", edit_admin_region_challenge_path(@region, @challenge) %><br>
 
 <h3>Teams Competing</h3>

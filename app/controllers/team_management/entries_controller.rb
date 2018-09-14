@@ -21,7 +21,7 @@ class TeamManagement::EntriesController < ApplicationController
     checkpoint_not_passed = @checkpoints.include?(checkpoint)
     if checkpoint_not_passed && @entry.save
       flash[:notice] = 'Challenge Entered'
-      redirect_to challenge_path(@entry.challenge)
+      redirect_to challenge_path(@entry.challenge.identifier)
     else
       flash[:alert] = if checkpoint_not_passed
                         @entry.errors.full_messages.to_sentence

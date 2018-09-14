@@ -17,6 +17,8 @@ class Challenge < ApplicationRecord
   validates :name, presence: true
   validates :name, uniqueness: true
 
+  after_save :update_identifier
+
   def admin_assignments
     competition = Competition.current
     collected = competition.admin_assignments
@@ -57,5 +59,29 @@ class Challenge < ApplicationRecord
         csv << values
       end
     end
+  end
+
+  def update_identifier
+    new_identifier = uri_pritty(name)
+    if already_there?(new_identifier)
+      new_identifier = uri_pritty("#{name}-#{id}")
+    end
+    update_columns(identifier: new_identifier)
+  end
+
+  private
+
+  def already_there?(new_identifier)
+    challenge = Challenge.find_by(identifier: new_identifier)
+    return false if challenge.nil?
+    return false if challenge == self
+    true
+  end
+
+  def uri_pritty(string)
+    array = string.split(/\W/)
+    words = array - ['']
+    new_name = words.join('_')
+    CGI.escape(new_name.downcase)
   end
 end
