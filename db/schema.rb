@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_09_14_123845) do
+ActiveRecord::Schema.define(version: 2018_09_14_130751) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -202,6 +202,8 @@ ActiveRecord::Schema.define(version: 2018_09_14_123845) do
     t.integer "score"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["criterion_id"], name: "index_judgments_on_criterion_id"
+    t.index ["scorecard_id"], name: "index_judgments_on_scorecard_id"
   end
 
   create_table "projects", force: :cascade do |t|
@@ -217,6 +219,7 @@ ActiveRecord::Schema.define(version: 2018_09_14_123845) do
     t.integer "user_id"
     t.string "project_name"
     t.string "identifier"
+    t.index ["identifier"], name: "index_projects_on_identifier"
     t.index ["team_id"], name: "index_projects_on_team_id"
     t.index ["user_id"], name: "index_projects_on_user_id"
   end
@@ -249,6 +252,8 @@ ActiveRecord::Schema.define(version: 2018_09_14_123845) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "included", default: true
+    t.index ["assignment_id"], name: "index_scorecards_on_assignment_id"
+    t.index ["included"], name: "index_scorecards_on_included"
     t.index ["judgeable_type", "judgeable_id"], name: "index_scorecards_on_judgeable_type_and_judgeable_id"
   end
 
