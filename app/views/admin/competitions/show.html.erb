@@ -1,15 +1,19 @@
 <h2>Competition <%= @competition.year %></h2>
 
-Start Time: <%= @competition.start_time %><br>
-End Time: <%= @competition.end_time %><br>
+Start Time: <%= @competition.start_time %></br>
+End Time: <%= @competition.end_time %></br>
 
-People's Choice Start: <%= @competition.peoples_choice_start %><br>
-People's Choice End: <%= @competition.peoples_choice_end %><br>
+People's Choice Start: <%= @competition.peoples_choice_start %></br>
+People's Choice End: <%= @competition.peoples_choice_end %></br>
 
-Challenge Judging Start: <%= @competition.challenge_judging_start %><br>
-Challenge Judging End: <%= @competition.challenge_judging_end %><br>
+Challenge Judging Start: <%= @competition.challenge_judging_start %></br>
+Challenge Judging End: <%= @competition.challenge_judging_end %></br>
 
-<%= link_to 'Update Competition Times', edit_admin_competition_path(@competition) %><br>
+<%= link_to 'Update Competition Times', edit_admin_competition_path(@competition) %></br>
+
+<h3>People's Choice Judging</h3>
+
+<%= link_to 'Competition Judging', admin_competition_scorecards_path(@competition) %>
 
 <h3>Competition Assignments</h3>
 
@@ -18,7 +22,7 @@ Challenge Judging End: <%= @competition.challenge_judging_end %><br>
 <% if (director = @competition.director).present? %>
   <%= render 'admin/shared/user_contact', locals: { user: director } %>
 <% else %>
-  This competition does not currently have a director.<br>
+  This competition does not currently have a director.</br>
 <% end %>
 
 <h4>Site Admins</h4>
@@ -28,7 +32,7 @@ Challenge Judging End: <%= @competition.challenge_judging_end %><br>
     <%= render 'admin/shared/user_contact', locals: { user: site_admin } %>
   <% end %>
 <% else %>
-  This competition does not currently have any site admins.<br>
+  This competition does not currently have any site admins.</br>
 <% end %>
 
 <h4>GovHack Management Team</h4>
@@ -38,20 +42,20 @@ Challenge Judging End: <%= @competition.challenge_judging_end %><br>
     <%= render 'admin/shared/user_contact', locals: { user: member } %>
   <% end %>
 <% else %>
-  This competition does not currently have any management team members.<br>
+  This competition does not currently have any management team members.</br>
 <% end %>
 
-<%= link_to 'Assignments Management', admin_competition_assignments_path(@competition) %><br>
+<%= link_to 'Assignments Management', admin_competition_assignments_path(@competition) %></br>
 
 <h3>CheckPoints</h3>
 
-<%= pluralize @checkpoints.count, 'checkpoint' %> saved.<br>
+<%= pluralize @checkpoints.count, 'checkpoint' %> saved.</br>
 
-<%= link_to 'Competition Checkpoints', admin_competition_checkpoints_path(@competition) %><br>
+<%= link_to 'Competition Checkpoints', admin_competition_checkpoints_path(@competition) %></br>
 
 <h3>Criteria</h3>
 
-<%= pluralize @competition.challenge_criteria.count, 'Challenge Criterion' %> saved.<br>
-<%= pluralize @competition.project_criteria.count, 'Project Criterion' %> saved.<br>
+<%= pluralize @competition.challenge_criteria.count, 'Challenge Criterion' %> saved.</br>
+<%= pluralize @competition.project_criteria.count, 'Project Criterion' %> saved.</br>
 
 <%= link_to 'Competition Criteria', admin_competition_criteria_path(@competition) %>

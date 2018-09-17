@@ -1,0 +1,7 @@
+<main class="project_index">
+  <h2>People's Choice Voting for <%= @competition.name %></h2>
+
+  <%= render 'admin/teams/scorecards/team_scorecards' %>
+
+  <%= link_to "Back to #{@competition.name}", admin_competition_path(@competition) %>
+</main>

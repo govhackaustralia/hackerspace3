@@ -39,6 +39,7 @@ Rails.application.routes.draw do
 
     resources :competitions do
       resources :assignments, controller: 'competitions/assignments'
+      resources :scorecards, controller: 'competitions/scorecards'
       resources :checkpoints, :criteria
     end
 

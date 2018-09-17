@@ -17,14 +17,14 @@ class Admin::Teams::ScorecardsController < ApplicationController
   def update
     @scorecard = Scorecard.find(params[:id])
     @scorecard.update(included: !@scorecard.included)
-    redirect_to admin_team_scorecards_path(@scorecard.judgeable)
+    redirect_to admin_team_scorecards_path(@scorecard.judgeable, popup: true)
   end
 
   def destroy
     @scorecard = Scorecard.find(params[:id])
     @scorecard.destroy
     flash[:notice] = 'Scorecard Deleted'
-    redirect_to admin_team_scorecards_path(@scorecard.judgeable)
+    redirect_to admin_team_scorecards_path(@scorecard.judgeable, popup: true)
   end
 
   private
