@@ -1,24 +1,24 @@
 <h2><%= @region.name %></h2>
 
 <% if @region.time_zone %>
-  Time Zone: <%= @region.time_zone %></br>
+  Time Zone: <%= @region.time_zone %><//br>
 <% end %>
 
-<%= link_to 'Update Region Info', edit_admin_region_path(@region) %><br>
+<%= link_to 'Update Region Info', edit_admin_region_path(@region) %></br>
 
 <h3>Region Director</h3>
 
 <% if (director = @region.director).present? %>
   <%= render 'admin/shared/user_contact', locals: { user: director } %>
 <% else %>
-  This region does not currently have a director.<br>
-  <%= link_to "New #{REGION_DIRECTOR} Assignment", new_admin_region_assignment_path(@region, title: REGION_DIRECTOR) %><br>
+  This region does not currently have a director.</br>
+  <%= link_to "New #{REGION_DIRECTOR} Assignment", new_admin_region_assignment_path(@region, title: REGION_DIRECTOR) %></br>
 <% end %>
 
 <h3>Region Support</h3>
 
 <% if @region.supports.present? %>
-  <%= pluralize @region.supports.count, 'region support' %> currently assigned to event.<br>
+  <%= pluralize @region.supports.count, 'region support' %> currently assigned to event.</br>
 <% end %>
 
 <%= link_to "Manage #{@region.name} Assignments", admin_region_assignments_path(@region) %>
@@ -55,7 +55,7 @@
 
   <% sponsorships.each do |sponsorship| %>
     <%= render 'admin/sponsors/sponsor', locals: { sponsor: sponsorship.sponsor } %>
-    Sponsorship Type: <%= sponsorship.sponsorship_type.name %><br>
+    Sponsorship Type: <%= sponsorship.sponsorship_type.name %></br>
   <% end %>
 
 <% else %>
@@ -64,18 +64,21 @@
 
 <% end %>
 
-<%= link_to 'Add Sponsorship', new_admin_region_sponsorship_path(@region) %><br>
+<%= link_to 'Add Sponsorship', new_admin_region_sponsorship_path(@region) %></br>
 
 <h3>Challenges</h3>
 
 <% if (challenges = @region.challenges).present? %>
 
   <% challenges.each do |challenge| %>
-    Name: <%= challenge.name %><br>
+    Name: <%= challenge.name %></br>
     <% unless challenge.short_desc.blank? %>
-      Short Description: <%= challenge.short_desc %><br>
+      Short Description: <%= challenge.short_desc %></br>
     <% end %>
-    <%= link_to 'Go to Challenge', admin_region_challenge_path(@region, challenge) %><br>
+    <% scorecards =  %>
+    <p><%= pluralize Scorecard.where(judgeable: challenge.entries).count, 'scorecard'%>
+      from <%= pluralize challenge.assignments.count, 'judge' %></p>
+    <%= link_to 'Go to Challenge', admin_region_challenge_path(@region, challenge) %></br>
   <% end %>
 
 <% else %>
@@ -84,21 +87,21 @@
 
 <% end %>
 
-<%= link_to "Create New Challenge for #{@region.name}", new_admin_region_challenge_path(@region) %><br>
+<%= link_to "Create New Challenge for #{@region.name}", new_admin_region_challenge_path(@region) %></br>
 
 <h3>Data Sets</h3>
 
 <% if (data_sets = @region.data_sets).present? %>
 
   <% data_sets.each do |data_set| %>
-    Name: <%= data_set.name %><br>
+    Name: <%= data_set.name %></br>
     <% unless data_set.description.blank? %>
-      Description: <%= data_set.description %><br>
+      Description: <%= data_set.description %></br>
     <% end %>
     <% unless data_set.url.blank? %>
-      URL: <%= data_set.url %><br>
+      URL: <%= data_set.url %></br>
     <% end %>
-    <%= link_to 'Update to Data Set', edit_admin_region_data_set_path(@region, data_set) %><br>
+    <%= link_to 'Update to Data Set', edit_admin_region_data_set_path(@region, data_set) %></br>
   <% end %>
 
 <% else %>
@@ -107,7 +110,7 @@
 
 <% end %>
 
-<%= link_to "Create New Data Set for #{@region.name}", new_admin_region_data_set_path(@region) %><br>
+<%= link_to "Create New Data Set for #{@region.name}", new_admin_region_data_set_path(@region) %></br>
 
 <% if @region.national? %>
   <h3>National Challenge Entries By Region</h3>
@@ -122,9 +125,9 @@
 <% end %>
 
 <% if (parent = @region.parent).present? && parent.admin_privileges?(current_user) %>
-  <%= link_to "Back to #{parent.name} Region", admin_region_path(parent)  %><br>
+  <%= link_to "Back to #{parent.name} Region", admin_region_path(parent)  %></br>
 <% end %>
 
 <% if current_user.admin_privileges? %>
-  <%= link_to 'Back to Regions', admin_regions_path %><br>
+  <%= link_to 'Back to Regions', admin_regions_path %></br>
 <% end %>
