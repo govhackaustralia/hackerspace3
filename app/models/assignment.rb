@@ -28,6 +28,13 @@ class Assignment < ApplicationRecord
     end
   end
 
+  def self.id_assignments(assignments)
+    assignments = where(id: assignments.uniq) if assignments.class == Array
+    id_assignments = {}
+    assignments.each { |assignment| id_assignments[assignment.id] = assignment }
+    id_assignments
+  end
+
   def judgeable_scores(teams)
     team_id_to_scorecard = {}
     if title == JUDGE

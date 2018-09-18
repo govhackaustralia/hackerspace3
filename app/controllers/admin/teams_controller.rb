@@ -9,7 +9,7 @@ class Admin::TeamsController < ApplicationController
     @projects = Team.projects_by_name(@id_teams_projects)
     respond_to do |format|
       format.html
-      format.csv { send_data User.to_csv }
+      format.csv { send_data User.published_teams_to_csv }
     end
   end
 

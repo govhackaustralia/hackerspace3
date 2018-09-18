@@ -111,8 +111,8 @@ class Event < ApplicationRecord
     end
   end
 
-  def self.id_events(event_ids)
-    events = where(id: event_ids.uniq)
+  def self.id_events(events)
+    events = where(id: events.uniq) if events.class == Array
     id_events = {}
     events.each { |event| id_events[event.id] = event }
     id_events
