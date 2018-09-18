@@ -1,19 +1,27 @@
 <h2>Events</h2>
 
-<h3>Competition Events</h3>
+<h3>Connection Events</h3>
 
-<%= pluralize @competition_registrations.count, 'attending registration' %>.<br>
-
-<% @competition_events.each do |event| %>
-  <%= render 'admin/events/event_single', locals: { event: event } %>
-<% end %>
-
-<h3>Connection Event</h3>
-
-<%= pluralize @connections_registrations.count, 'attending registration' %>.<br>
+<p><%= pluralize @connections_registrations.count, 'attending registration' %>.</p>
 
 <% @connections.each do |event| %>
-  <%= render 'admin/events/event_single', locals: { event: event } %>
+  <%= render 'admin/regions/events/event_single', locals: { event: event } %>
+<% end %>
+
+<h3>Competition Events</h3>
+
+<p><%= pluralize @competition_registrations.count, 'attending registration' %>.</p>
+
+<% @competition_events.each do |event| %>
+  <%= render 'admin/regions/events/event_single', locals: { event: event } %>
+<% end %>
+
+<h3>Award Events</h3>
+
+<p><%= pluralize @award_registrations.count, 'attending registration' %>.</p>
+
+<% @award_events.each do |event| %>
+  <%= render 'admin/regions/events/event_single', locals: { event: event } %>
 <% end %>
 
 <%= link_to "Back", :back %>

@@ -1,0 +1,28 @@
+<h2>Events for Region <%= @region.name %></h2>
+<%= link_to "Create New Event", new_admin_region_event_path(@region) %>
+
+<% if (events = @region.events.where(competition: Competition.current)).present? %>
+
+  <h4>Connection Events</h4>
+
+  <% @connection_events.each do |event| %>
+    <%= render 'event_single', locals: { event: event } %>
+  <% end %>
+
+  <h4>Competition Events</h4>
+
+  <% @competition_events.each do |event| %>
+    <%= render 'event_single', locals: { event: event } %>
+  <% end %>
+
+  <h4>Awards Events</h4>
+
+  <% @award_events.each do |event| %>
+    <%= render 'event_single', locals: { event: event } %>
+  <% end %>
+
+<% else %>
+  <p>There are currently no events planned for the current Competitition.</p>
+<% end %>
+
+<%= link_to 'Back to Region', admin_region_path(@region) %>
