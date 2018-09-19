@@ -107,7 +107,7 @@ class Team < ApplicationRecord
 
   def member_competition_events
     user_ids = assignments.where(title: [TEAM_LEADER, TEAM_MEMBER]).pluck(:user_id)
-    assignment_ids = Assignment.where(user_id: user_ids, title: [PARTICIPANT, VIP]).pluck(:id)
+    assignment_ids = Assignment.where(user_id: user_ids, title: EVENT_ASSIGNMENTS).pluck(:id)
     event_ids = Registration.where(assignment_id: assignment_ids).pluck(:event_id)
     Event.where(id: event_ids.uniq, event_type: COMPETITION_EVENT)
   end

@@ -53,8 +53,17 @@ class Scorecard < ApplicationRecord
     judgeable.competition.score_total type
   end
 
+  def self.participant_scorecards(teams)
+    all_scorecards = Scorecard.where(judgeable: teams).order(:assignment_id)
+    judge_user_ids = Assignment.where(title: JUDGE).pluck(:user_id)
+    judge_assignment_ids = Assignment.where(title: EVENT_ASSIGNMENTS, user_id: judge_user_ids).pluck(:id)
+    judge_scorecards = Scorecard.where(assignment_id: judge_assignment_ids)
+    all_scorecards - judge_scorecards
+  end
+
   def self.region_scorecard_helper(teams, type)
-    scorecards = Scorecard.where(judgeable: teams)
+    scorecards = participant_scorecards(teams)
+
     region_scorecard_helper = {}
     teams.each do |team|
       region_scorecard_helper[team.id] = { scorecards: [], scores: [] }

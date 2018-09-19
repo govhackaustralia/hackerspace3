@@ -255,7 +255,9 @@ comp.teams.all.each do |team|
   Assignment.where(title: PARTICIPANT).take(20).each do |assignment|
     scorecard = Scorecard.create(judgeable: team, assignment: assignment, included: (assignment.id % 5 != 0))
     comp.criteria.where(category: PROJECT).each do |criterion|
-      Judgment.create(criterion: criterion, scorecard: scorecard, score: Random.rand(11) )
+      score = Random.rand(11)
+      score = nil if score.zero?
+      Judgment.create(criterion: criterion, scorecard: scorecard, score: score)
     end
   end
 end

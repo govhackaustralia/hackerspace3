@@ -7,7 +7,7 @@ class Admin::Teams::ScorecardsController < ApplicationController
     @project = @team.current_project
     @region = @team.region
     @competition = @team.competition
-    @scorecards = Scorecard.where(judgeable: @team).order(:assignment_id)
+    @scorecards = Scorecard.participant_scorecards(@team)
     @project_criteria = @competition.criteria.where(category: PROJECT).order(:id)
     @team_scorecard_helper = Scorecard.team_scorecard_helper(@scorecards)
     assignments = Assignment.where(id: @scorecards.pluck(:assignment_id))
