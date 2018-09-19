@@ -1,4 +1,10 @@
 class Admin::Regions::SponsorshipsController < Admin::SponsorshipsController
+
+  def index
+    @region = Region.find(params[:region_id])
+    @sponsorships = @region.sponsorships
+  end
+
   private
 
   def new_sponsorship
@@ -14,7 +20,7 @@ class Admin::Regions::SponsorshipsController < Admin::SponsorshipsController
   end
 
   def redirect_to_sponsorable
-    redirect_to admin_region_path(@sponsorable)
+    redirect_to admin_region_sponsorships_path(@sponsorable)
   end
 
   def redirect_to_post_destroy_path

@@ -32,18 +32,15 @@
 <% else %>
     <p>There are currently no events planned for the current Competitition.</p>
 <% end %>
-<%= link_to "Manage Region Events", admin_region_events_path(@region) %>
+<%= link_to 'Manage Events', admin_region_events_path(@region) %>
 
 <h3>Sponsorships</h3>
-<% if (sponsorships = @region.sponsorships).present? %>
-  <% sponsorships.each do |sponsorship| %>
-    <%= render 'admin/sponsors/sponsor', locals: { sponsor: sponsorship.sponsor } %>
-    Sponsorship Type: <%= sponsorship.sponsorship_type.name %></br>
-  <% end %>
+<% if @sponsorships.present? %>
+  <p><%= pluralize @sponsorships.count, 'sponsorship' %> recorded for this region.</p>
 <% else %>
-  <div>There are currently no sponsorships for this region in the current competition.</div>
+  <p>There are currently no sponsorships for this region in the current competition.</p>
 <% end %>
-<%= link_to 'Add Sponsorship', new_admin_region_sponsorship_path(@region) %>
+<%= link_to 'Manage Sponsorships', admin_region_sponsorships_path(@region) %>
 
 <h3>Data Sets</h3>
 <% if @data_sets.present? %>
