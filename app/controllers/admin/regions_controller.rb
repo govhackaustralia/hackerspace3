@@ -40,6 +40,7 @@ class Admin::RegionsController < ApplicationController
     @region = Region.find(params[:id])
     @competition = Competition.current
     @challenges = @region.challenges
+    @data_sets = @region.data_sets
     if @region.national?
       @region_counts = Region.national_challenges_region_counts
       @region_names = Region.where.not(parent_id: nil).order(:name).pluck(:name)

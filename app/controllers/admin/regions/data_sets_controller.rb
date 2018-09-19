@@ -1,6 +1,11 @@
-class Admin::DataSetsController < ApplicationController
+class Admin::Regions::DataSetsController < ApplicationController
   before_action :authenticate_user!
   before_action :check_for_privileges
+
+  def index
+    @region = Region.find(params[:region_id])
+    @data_sets = @region.data_sets
+  end
 
   def show
     @region = Region.find(params[:region_id])
@@ -21,7 +26,7 @@ class Admin::DataSetsController < ApplicationController
     create_new_data_set
     if @data_set.save
       flash[:notice] = 'New Data Set Created'
-      redirect_to admin_region_path(@region)
+      redirect_to admin_region_data_sets_path(@region)
     else
       flash[:alert] = @data_set.errors.full_messages.to_sentence
       render :new
@@ -32,7 +37,7 @@ class Admin::DataSetsController < ApplicationController
     update_data_set
     if @data_set.update(data_set_params)
       flash[:notice] = 'Data Set Updated'
-      redirect_to admin_region_path(@region)
+      redirect_to admin_region_data_sets_path(@region)
     else
       flash[:alert] = @data_set.errors.full_messages.to_sentence
       render :edit

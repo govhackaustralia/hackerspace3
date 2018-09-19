@@ -49,7 +49,7 @@ Rails.application.routes.draw do
     end
 
     resources :regions do
-      resources :data_sets
+      resources :data_sets, controller: 'regions/data_sets'
       resources :assignments, controller: 'regions/assignments'
       resources :sponsorships, controller: 'regions/sponsorships'
       resources :scorecards, controller: 'regions/scorecards'
