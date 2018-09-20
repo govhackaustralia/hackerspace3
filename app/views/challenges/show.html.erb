@@ -50,56 +50,57 @@
 			  </a>
 			<% end %>
 		</aside>
-		</section>
-			<% if @challenge.image.attached? %>
-			  <img src="<%= url_for(@challenge.image) %>" alt="<%= @challenge.name %> image" /><br>
-			<% end %>
-		<section>
-			<% if user_signed_in? %>
-				<% unless @user_eligible_teams.empty? %>
-					<h3>Your Team Entries</h3>
-				  <% @user_eligible_teams.each do |team| %>
-						<% project = team.current_project %>
-				    <h4><%= "#{project.team_name} - #{project.project_name}" %></h4>
-				    <% if (entry = Entry.find_by(team: team, challenge: @challenge)).present? %>
-				      Team entered into this challenge for <%= entry.checkpoint.name %> Checkpoint.<br>
-				    <% else %>
-				      <% if team.available_checkpoints(@challenge).present? %>
-					      <article>
-					        <p class="challenge_enter"><%= link_to 'Enter Challenge', new_team_management_team_entry_path(team, challenge_id: @challenge.id) %></p>
-					      </article>
-				      <% else %>
-								<% if team.all_checkpoints_passed? %>
-									<% if @competition.in_competition_window?(LAST_TIME_ZONE) %>
-				        		All Checkpoints have passed.</br>
-									<% else %>
-									  No entries to this challenge for this team.</br>
-									<% end %>
-								<% else %>
-									All available checkpoint limits reached for
-									<%= @region.national? ? 'national' : 'regional' %> challenges.</br>
-								<% end %>
-				      <% end %>
-				    <% end %>
-				  <% end %>
-				<% end %>
-			<% else %>
-			  Sign in to enter your team into this challenge.<br>
-			<% end %>
-
-			<h3>All Team Entries</h3>
-
-			<% if @competition.in_challenge_judging_window?(LAST_TIME_ZONE) || @competition.in_peoples_judging_window?(LAST_TIME_ZONE) %>
-				<% if @teams.present? %>
-					<%= render 'team_judging_table' %>
-				<% else %>
-					<p>No team entries to display for this challenge.</p>
-				<% end %>
-			<% else %>
-				<%= render 'team_checkpoint_display' %>
-			<% end %>
-
-		</section>
 	</section>
-	<%= link_to 'Back to Challenges', challenges_path %>
+	<% if @challenge.image.attached? %>
+	  <img src="<%= url_for(@challenge.image) %>" alt="<%= @challenge.name %> image" /><br>
+	<% end %>
+	<section>
+		<% if user_signed_in? %>
+			<% unless @user_eligible_teams.empty? %>
+				<h3>Your Team Entries</h3>
+			  <% @user_eligible_teams.each do |team| %>
+					<% project = team.current_project %>
+			    <h4><%= "#{project.team_name} - #{project.project_name}" %></h4>
+			    <% if (entry = Entry.find_by(team: team, challenge: @challenge)).present? %>
+			      Team entered into this challenge for <%= entry.checkpoint.name %> Checkpoint.<br>
+			    <% else %>
+			      <% if team.available_checkpoints(@challenge).present? %>
+				      <article>
+				        <p class="challenge_enter"><%= link_to 'Enter Challenge', new_team_management_team_entry_path(team, challenge_id: @challenge.id) %></p>
+				      </article>
+			      <% else %>
+							<% if team.all_checkpoints_passed? %>
+								<% if @competition.in_competition_window?(LAST_TIME_ZONE) %>
+			        		All Checkpoints have passed.</br>
+								<% else %>
+								  No entries to this challenge for this team.</br>
+								<% end %>
+							<% else %>
+								All available checkpoint limits reached for
+								<%= @region.national? ? 'national' : 'regional' %> challenges.</br>
+							<% end %>
+			      <% end %>
+			    <% end %>
+			  <% end %>
+			<% end %>
+		<% else %>
+		  Sign in to enter your team into this challenge.<br>
+		<% end %>
+
+		<h3>All Team Entries</h3>
+
+		<% if @competition.in_challenge_judging_window?(LAST_TIME_ZONE) || @competition.in_peoples_judging_window?(LAST_TIME_ZONE) %>
+			<% if @teams.present? %>
+				<%= render 'team_judging_table' %>
+			<% else %>
+				<p>No team entries to display for this challenge.</p>
+			<% end %>
+		<% else %>
+			<%= render 'team_checkpoint_display' %>
+		<% end %>
+
+	</section>
+	<section class="ie-push">
+		<%= link_to 'Back to Challenges', challenges_path %>
+	</section>
 </main>
