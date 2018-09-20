@@ -35,7 +35,8 @@ class ProjectsController < ApplicationController
       @attending_events = current_user.competition_events_participating(@competition)
     end
     if @competition.in_peoples_judging_window?(LAST_TIME_ZONE)
-      if (@judgeable_assignment = current_user.judgeable_assignment).present?
+      if (@peoples_assignment = current_user.peoples_assignment).present?
+        @judgeable_assignment = current_user.judgeable_assignment
         @project_judging = @judgeable_assignment.judgeable_scores(@teams)
         @project_judging_total = @competition.score_total PROJECT
       end
@@ -49,6 +50,6 @@ class ProjectsController < ApplicationController
     @judgeable_assignment = @user.judgeable_assignment
     @peoples_assignment = @user.peoples_assignment
     @judge = @user.judge_assignment(@team.challenges)
-    @not_own_team = !@user.in_team?(@team)
+    @users_team = @user.in_team?(@team)
   end
 end

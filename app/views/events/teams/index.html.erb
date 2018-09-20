@@ -1,37 +1,37 @@
 <main class="project_index">
-<h2>Participating Team Projects for Event <%= @event.name %></h2>
+  <h2>Participating Team Projects for Event <%= @event.name %></h2>
 
-<%= form_tag event_teams_path(@event.identifier), method: :get do %>
-  <%= text_field_tag :term, params[:term] %>
-  <%= submit_tag 'Search' %>
-<% end %>
-<%= link_to 'Clear Search', event_teams_path(@event.identifier) %></br>
-
-<table>
-	<thead>
-		<th>Project</th>
-		<th>Team</th>
-    <% if (@peoples_assignment.present? && @competition.in_peoples_judging_window?(LAST_TIME_ZONE)) || (@judge.present? &&  @competition.in_challenge_judging_window?(LAST_TIME_ZONE)) %>
-      <th>Project Scorecard</th>
-    <% end %>
-	</thead>
-	<tbody>
-  <% filter_projects(params[:term]).each do |project| %>
-  <tr>
-    <td><%= link_to "#{project.project_name}", project_path(project.identifier) %></td>
-    <td><%= project.team_name %></td>
-    <% if (@peoples_assignment.present? && @competition.in_peoples_judging_window?(LAST_TIME_ZONE)) || (@judge.present? &&  @competition.in_challenge_judging_window?(LAST_TIME_ZONE)) &&  %>
-      <% if (display_score = @project_judging[project.team_id][:display_score_status]).is_a? Integer %>
-    		<% score_value = ((display_score.to_f / @project_judging_total.to_f) * 100).to_i %>
-        <%= render 'challenges/judging_cell', locals: { total: score_value } %>
-    	<% else %>
-    		<td><%= display_score %></td>
-    	<% end %>
-    <% end %>
-  </tr>
+  <%= form_tag event_teams_path(@event.identifier), method: :get do %>
+    <%= text_field_tag :term, params[:term] %>
+    <%= submit_tag 'Search' %>
   <% end %>
-	</tbody>
-</table>
+  <%= link_to 'Clear Search', event_teams_path(@event.identifier) %></br>
 
-<%= link_to "Back to #{@event.name}", event_path(@event.identifier) %>
+  <table>
+  	<thead>
+  		<th>Project</th>
+  		<th>Team</th>
+      <% if show_peoples_choice_stuff? %>
+        <th>Project Scorecard</th>
+      <% end %>
+  	</thead>
+  	<tbody>
+      <% filter_projects(params[:term]).each do |project| %>
+        <tr>
+          <td><%= link_to "#{project.project_name}", project_path(project.identifier) %></td>
+          <td><%= project.team_name %></td>
+          <% if show_peoples_choice_stuff? %>
+            <% if (display_score = @project_judging[project.team_id][:display_score_status]).is_a? Integer %>
+          		<% score_value = ((display_score.to_f / @project_judging_total.to_f) * 100).to_i %>
+              <%= render 'challenges/judging_cell', locals: { total: score_value } %>
+          	<% else %>
+          		<td><%= display_score %></td>
+          	<% end %>
+          <% end %>
+        </tr>
+      <% end %>
+  	</tbody>
+  </table>
+
+  <%= link_to "Back to #{@event.name}", event_path(@event.identifier) %>
 </main>
