@@ -11,7 +11,7 @@
 	<thead>
 		<th>Project</th>
 		<th>Team</th>
-    <% if @judgeable_assignment.present? %>
+    <% if (@peoples_assignment.present? && @competition.in_peoples_judging_window?(LAST_TIME_ZONE)) || (@judge.present? &&  @competition.in_challenge_judging_window?(LAST_TIME_ZONE)) %>
       <th>Project Scorecard</th>
     <% end %>
 	</thead>
@@ -20,7 +20,7 @@
   <tr>
     <td><%= link_to "#{project.project_name}", project_path(project.identifier) %></td>
     <td><%= project.team_name %></td>
-    <% if @judgeable_assignment.present? %>
+    <% if (@peoples_assignment.present? && @competition.in_peoples_judging_window?(LAST_TIME_ZONE)) || (@judge.present? &&  @competition.in_challenge_judging_window?(LAST_TIME_ZONE)) &&  %>
       <% if (display_score = @project_judging[project.team_id][:display_score_status]).is_a? Integer %>
     		<% score_value = ((display_score.to_f / @project_judging_total.to_f) * 100).to_i %>
         <%= render 'challenges/judging_cell', locals: { total: score_value } %>

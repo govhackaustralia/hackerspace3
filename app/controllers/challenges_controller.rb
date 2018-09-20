@@ -27,7 +27,8 @@ class ChallengesController < ApplicationController
 
   def challenge_show_entry_management
     @user_eligible_teams = @challenge.eligible_teams & current_user.teams if user_signed_in?
-    if @competition.in_judging_window? LAST_TIME_ZONE
+    if @competition.in_challenge_judging_window?(LAST_TIME_ZONE) ||
+        @competition.in_peoples_judging_window?(LAST_TIME_ZONE)
       judging_view
     elsif
       checkpoint_entry_view
@@ -40,6 +41,7 @@ class ChallengesController < ApplicationController
     @projects = Team.projects_by_name(@id_teams_projects)
     if user_signed_in?
       if (@judgeable_assignment = current_user.judgeable_assignment).present?
+        @peoples_assignment = current_user.peoples_assignment
         @project_judging = @judgeable_assignment.judgeable_scores(@teams)
         @project_judging_total = @competition.score_total PROJECT
       end

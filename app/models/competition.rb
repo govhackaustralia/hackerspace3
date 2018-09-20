@@ -75,47 +75,23 @@ class Competition < ApplicationRecord
   end
 
   def started?(time_zone = nil)
-    region_time = if time_zone.present?
-                    Time.now.in_time_zone(time_zone).to_formatted_s(:number)
-                  else
-                    Time.now.in_time_zone(COMP_TIME_ZONE).to_formatted_s(:number)
-                  end
-    start_time.to_formatted_s(:number) < region_time
+    start_time.to_formatted_s(:number) < region_time(time_zone)
   end
 
   def not_finished?(time_zone = nil)
-    region_time = if time_zone.present?
-                    Time.now.in_time_zone(time_zone).to_formatted_s(:number)
-                  else
-                    Time.now.in_time_zone(COMP_TIME_ZONE).to_formatted_s(:number)
-                  end
-    region_time < end_time.to_formatted_s(:number)
+    region_time(time_zone) < end_time.to_formatted_s(:number)
   end
 
   def in_competition_window?(time_zone = nil)
     started?(time_zone) && not_finished?(time_zone)
   end
 
-  def in_judging_window?(time_zone = nil)
-    judging_started?(time_zone) && judging_not_finished?(time_zone)
+  def in_challenge_judging_window?(time_zone = nil)
+    in_window?(time_zone, challenge_judging_start, challenge_judging_end)
   end
 
-  def judging_started?(time_zone = nil)
-    region_time = if time_zone.present?
-                    Time.now.in_time_zone(time_zone).to_formatted_s(:number)
-                  else
-                    Time.now.in_time_zone(COMP_TIME_ZONE).to_formatted_s(:number)
-                  end
-    challenge_judging_start.to_formatted_s(:number) < region_time
-  end
-
-  def judging_not_finished?(time_zone = nil)
-    region_time = if time_zone.present?
-                    Time.now.in_time_zone(time_zone).to_formatted_s(:number)
-                  else
-                    Time.now.in_time_zone(COMP_TIME_ZONE).to_formatted_s(:number)
-                  end
-    region_time < challenge_judging_end.to_formatted_s(:number)
+  def in_peoples_judging_window?(time_zone = nil)
+    in_window?(time_zone, peoples_choice_start, peoples_choice_end)
   end
 
   def score_total(type)
@@ -162,5 +138,22 @@ class Competition < ApplicationRecord
       passed_checkpoint_ids << checkpoint.id if checkpoint.passed?(time_zone)
     end
     passed_checkpoint_ids
+  end
+
+  private
+
+  def in_window?(time_zone, start_time, end_time)
+    time = region_time(time_zone)
+    started = start_time.to_formatted_s(:number) < time
+    not_finished = time < end_time.to_formatted_s(:number)
+    started && not_finished
+  end
+
+  def region_time(time_zone)
+    if time_zone.present?
+      Time.now.in_time_zone(time_zone).to_formatted_s(:number)
+    else
+      Time.now.in_time_zone(COMP_TIME_ZONE).to_formatted_s(:number)
+    end
   end
 end
