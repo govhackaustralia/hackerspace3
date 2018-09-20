@@ -7,8 +7,8 @@
 			<section class="events">
 			<% @events.each do |event| %>
 				<% unless event.end_time.blank? %>
-				<% if event.event_type == CONNECTION_EVENT && event.end_time > DateTime.now %>
-				<%= link_to (render partial: "events/event_single", locals: { event: event } ), event_path(event.identifier) %>
+					<% if event.event_type == CONNECTION_EVENT && DateTime.now.in_time_zone(COMP_TIME_ZONE) < event.end_time %>
+					<%= link_to (render partial: "events/event_single", locals: { event: event } ), event_path(event.identifier) %>
 				<% end %>
 				<% end %>
 			<% end %>
@@ -23,7 +23,7 @@
 				<% end %>
 			<% end %>
 		</section>
-		
+
 		<h3>
 				Remote '<em>Kitchen Table</em>' Competition Events
 			</h3>
@@ -34,16 +34,16 @@
 				<% end %>
 			<% end %>
 		</section>
-		
+
 		<h3>
 				Previous Connection Events
 			</h3>
 			<section class="events">
 			<% @events.each do |event| %>
 				<% unless event.end_time.blank? %>
-				<% if event.event_type == CONNECTION_EVENT && event.end_time < DateTime.now %>
-				<%= link_to (render partial: "events/event_single", locals: { event: event } ), event_path(event.identifier) %>
-				<% end %>
+					<% if event.event_type == CONNECTION_EVENT && event.end_time < DateTime.now.in_time_zone(COMP_TIME_ZONE) %>
+						<%= link_to (render partial: "events/event_single", locals: { event: event } ), event_path(event.identifier) %>
+					<% end %>
 				<% end %>
 			<% end %>
 
