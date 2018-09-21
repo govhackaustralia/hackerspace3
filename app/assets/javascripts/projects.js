@@ -7,7 +7,7 @@ $( document ).on('ready turbolinks:load', function() {
   var strWindowFeatures = "menubar=no,location=no,resizable=yes,scrollbars=yes,status=no,width=500,height=800";
 
   function openRequestedPopup() {
-    windowObjectReference = window.open(_scorecard_path, _scorecard_title, strWindowFeatures);
+    windowObjectReference = window.open(_scorecard_path, 'Scorecard', strWindowFeatures);
   }
 
   function refreshParent() {

@@ -20,9 +20,6 @@
       <p><%= link_to 'New Scorecard', new_project_scorecard_path(@current_project.identifier, popup: true), id: 'open-scorecard' %>
       <%= javascript_tag "window._scorecard_path = '#{new_project_scorecard_path(@current_project.identifier, popup: true)}'" %></p>
     <% end %>
-    <% if @scorecard.present? || @judgeable_assignment.present? %>
-      <%= javascript_tag "window._scorecard_title = 'Scorecard for #{@current_project.team_name} - #{@current_project.project_name}'" %>
-    <% end %>
   <% end %>
 
 <% elsif @competition.in_judging_window? %>
