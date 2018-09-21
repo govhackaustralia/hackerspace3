@@ -6,16 +6,16 @@ class ScorecardsController < ApplicationController
     @project = Project.find_by(identifier: params[:project_identifier])
     @team = @project.team
     @judgeable_assignment = current_user.judgeable_assignment
-    @scorecard = @team.scorecards.find_or_create_by(assignment: @judgeable_assignment)
-    @judgments = organise_judgments
+    Scorecard.transaction do
+      Judgment.transaction do
+        @scorecard = @team.scorecards.find_or_create_by(assignment: @judgeable_assignment)
+        @judgments = organise_judgments
+      end
+    end
   end
 
   def edit
-    @user = current_user
-    @scorecard = Scorecard.find(params[:id])
-    @team = @scorecard.judgeable
-    @project = @team.current_project
-    @judgments = organise_judgments
+    retrieve_update_vars
     return if @user == @scorecard.user
     flash[:alert] = 'You do not have permission to edit this scorecard.'
     redirect_to root_path
@@ -31,10 +31,14 @@ class ScorecardsController < ApplicationController
 
   def retrieve_update_vars
     @user = current_user
-    @scorecard = Scorecard.find(params[:id])
-    @team = @scorecard.judgeable
-    @project = @team.current_project
-    @judgments = organise_judgments
+    Scorecard.transaction do
+      Judgment.transaction do
+        @scorecard = Scorecard.find(params[:id])
+        @team = @scorecard.judgeable
+        @project = @team.current_project
+        @judgments = organise_judgments
+      end
+    end
   end
 
   def process_judgments
