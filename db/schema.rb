@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_09_23_033339) do
+ActiveRecord::Schema.define(version: 2018_09_23_105938) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -46,6 +46,16 @@ ActiveRecord::Schema.define(version: 2018_09_23_033339) do
     t.index ["assignable_type", "assignable_id"], name: "index_assignments_on_assignable_type_and_assignable_id"
     t.index ["title"], name: "index_assignments_on_title"
     t.index ["user_id"], name: "index_assignments_on_user_id"
+  end
+
+  create_table "bulk_mails", force: :cascade do |t|
+    t.integer "region_id"
+    t.integer "user_id"
+    t.text "body"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["region_id"], name: "index_bulk_mails_on_region_id"
+    t.index ["user_id"], name: "index_bulk_mails_on_user_id"
   end
 
   create_table "challenge_data_sets", force: :cascade do |t|

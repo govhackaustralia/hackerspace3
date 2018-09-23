@@ -1,0 +1,2 @@
+class BulkMail < ApplicationRecord
+end
