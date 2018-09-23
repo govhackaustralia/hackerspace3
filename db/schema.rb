@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_09_23_105938) do
+ActiveRecord::Schema.define(version: 2018_09_23_110711) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -214,6 +214,17 @@ ActiveRecord::Schema.define(version: 2018_09_23_105938) do
     t.datetime "updated_at", null: false
     t.index ["criterion_id"], name: "index_judgments_on_criterion_id"
     t.index ["scorecard_id"], name: "index_judgments_on_scorecard_id"
+  end
+
+  create_table "mail_orders", force: :cascade do |t|
+    t.integer "bulk_mail_id"
+    t.integer "team_id"
+    t.string "request_type"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["bulk_mail_id"], name: "index_mail_orders_on_bulk_mail_id"
+    t.index ["request_type"], name: "index_mail_orders_on_request_type"
+    t.index ["team_id"], name: "index_mail_orders_on_team_id"
   end
 
   create_table "projects", force: :cascade do |t|
