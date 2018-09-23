@@ -60,7 +60,7 @@ class Admin::Regions::EventsController < ApplicationController
                                   :accessibility, :youth_support, :parking,
                                   :public_transport, :operation_hours,
                                   :catering, :video_id, :start_time, :end_time,
-                                  :place_id, :description)
+                                  :place_id, :description, :published)
   end
 
   def create_new_event

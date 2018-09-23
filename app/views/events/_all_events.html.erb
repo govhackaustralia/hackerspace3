@@ -1,44 +1,33 @@
 <main class="events_page">
 	<section>
-			<h2>Events</h2>
-			<!--<h3>
-				Upcoming Connection Events
-			</h3>-->
-			<section class="events">
+		<h2>Events</h2>
+		<section class="events">
 			<% @events.each do |event| %>
 				<% unless event.end_time.blank? %>
 					<% if event.event_type == CONNECTION_EVENT && DateTime.now.in_time_zone(COMP_TIME_ZONE) < event.end_time %>
-					<%= link_to (render partial: "events/event_single", locals: { event: event } ), event_path(event.identifier) %>
-				<% end %>
+						<%= link_to (render partial: "events/event_single", locals: { event: event } ), event_path(event.identifier) %>
+					<% end %>
 				<% end %>
 			<% end %>
-			</section>
-			<h3>
-				Competition Events
-			</h3>
-			<section class="events">
+		</section>
+		<h3>Competition Events</h3>
+		<section class="events">
 			<% @events.each do |event| %>
 				<% if event.event_type == COMPETITION_EVENT && event.name.starts_with?("Remote") == false %>
 				<%= link_to (render partial: "events/event_single", locals: { event: event } ), event_path(event.identifier) %>
 				<% end %>
 			<% end %>
 		</section>
-
-		<h3>
-				Remote '<em>Kitchen Table</em>' Competition Events
-			</h3>
-			<section class="events">
+		<h3>Remote '<em>Kitchen Table</em>' Competition Events</h3>
+		<section class="events">
 			<% @events.each do |event| %>
 				<% if event.event_type == COMPETITION_EVENT && event.name.starts_with?("Remote") %>
-				<%= link_to (render partial: "events/event_single", locals: { event: event } ), event_path(event.identifier) %>
+					<%= link_to (render partial: "events/event_single", locals: { event: event } ), event_path(event.identifier) %>
 				<% end %>
 			<% end %>
 		</section>
-
-		<h3>
-				Previous Connection Events
-			</h3>
-			<section class="events">
+		<h3>Previous Connection Events</h3>
+		<section class="events">
 			<% @events.each do |event| %>
 				<% unless event.end_time.blank? %>
 					<% if event.event_type == CONNECTION_EVENT && event.end_time < DateTime.now.in_time_zone(COMP_TIME_ZONE) %>
@@ -46,6 +35,6 @@
 					<% end %>
 				<% end %>
 			<% end %>
-
+		</section>
 	</section>
 </main>

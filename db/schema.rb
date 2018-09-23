@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_09_14_130751) do
+ActiveRecord::Schema.define(version: 2018_09_23_033339) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -174,16 +174,16 @@ ActiveRecord::Schema.define(version: 2018_09_14_130751) do
     t.string "video_id"
     t.datetime "start_time"
     t.datetime "end_time"
-    t.boolean "approval"
+    t.boolean "published", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "place_id"
     t.string "identifier"
     t.string "event_type"
     t.text "description"
-    t.index ["approval"], name: "index_events_on_approval"
     t.index ["competition_id"], name: "index_events_on_competition_id"
     t.index ["identifier"], name: "index_events_on_identifier"
+    t.index ["published"], name: "index_events_on_published"
     t.index ["region_id"], name: "index_events_on_region_id"
   end
 

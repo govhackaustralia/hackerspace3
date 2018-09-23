@@ -8,7 +8,13 @@ Registration Type: <%= @event.registration_type %></br>
 Event Capacity: <%= @event.capacity %></br>
 
 <%= link_to "Edit #{@event.name} Event", edit_admin_region_event_path(@region, @event) %></br>
-<%= link_to 'Go to Event Page', event_path(@event.identifier) %></br>
+<% if @event.published? %>
+  <p>This event has been published and is in public view.</p>
+  <%= link_to 'Go to Event Page', event_path(@event.identifier) %>
+<% else %>
+  <p>This event has not been published and can only be viewed by admin.</p>
+  <%= link_to 'Go to Event Page (Admin Only)', event_path(@event.identifier) %>
+<% end %>
 
 <h3>Event Assignments</h3>
 
