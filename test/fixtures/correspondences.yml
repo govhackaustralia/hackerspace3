@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  mail_order_id: 1
+  user_id: 1
+  status: MyString
+
+two:
+  mail_order_id: 1
+  user_id: 1
+  status: MyString
