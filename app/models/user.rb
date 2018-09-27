@@ -66,7 +66,11 @@ class User < ApplicationRecord
   def judgeable_assignment
     return event_assignment if teams.where(published: true).present?
     return event_assignment if assignments.where(title: [VOLUNTEER, ADMIN, JUDGE]).present?
-    nil
+  end
+
+  def peoples_assignment
+    return event_assignment if teams.where(published: true).present?
+    return event_assignment if assignments.where(title: VOLUNTEER).present?
   end
 
   def judge_assignment(challenge)

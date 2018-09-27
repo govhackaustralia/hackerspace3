@@ -1,11 +1,9 @@
 class ScorecardsController < ApplicationController
   before_action :authenticate_user!
+  before_action :check_for_privileges
 
   def new
-    @user = current_user
-    @project = Project.find_by(identifier: params[:project_identifier])
-    @team = @project.team
-    @judgeable_assignment = current_user.judgeable_assignment
+    @judgeable_assignment = @user.judgeable_assignment
     Scorecard.transaction do
       Judgment.transaction do
         @scorecard = @team.scorecards.find_or_create_by(assignment: @judgeable_assignment)
@@ -15,30 +13,47 @@ class ScorecardsController < ApplicationController
   end
 
   def edit
-    retrieve_update_vars
+    @scorecard = Scorecard.find(params[:id])
+    Scorecard.transaction do
+      Judgment.transaction do
+        @judgments = organise_judgments
+      end
+    end
     return if @user == @scorecard.user
     flash[:alert] = 'You do not have permission to edit this scorecard.'
     redirect_to root_path
   end
 
   def update
-    retrieve_update_vars
-    process_judgments
-    redirect_to edit_project_scorecard_path(@team.current_project.identifier, @scorecard, popup: true)
+    @scorecard = Scorecard.find(params[:id])
+    if @user == @scorecard.user
+      Scorecard.transaction do
+        Judgment.transaction do
+          @judgments = organise_judgments
+        end
+      end
+      process_judgments
+      redirect_to edit_project_scorecard_path(@team.current_project.identifier, @scorecard, popup: true)
+    else
+      flash[:alert] = 'You do not have permission to edit this scorecard.'
+      redirect_to root_path
+    end
   end
 
   private
 
-  def retrieve_update_vars
+  def check_for_privileges
     @user = current_user
-    Scorecard.transaction do
-      Judgment.transaction do
-        @scorecard = Scorecard.find(params[:id])
-        @team = @scorecard.judgeable
-        @project = @team.current_project
-        @judgments = organise_judgments
-      end
-    end
+    @project = Project.find_by(identifier: params[:project_identifier])
+    @project = Project.find(params[:project_identifier]) if @project.nil?
+    @team = @project.team
+    @competition = @team.competition
+    @peoples_assignment = @user.peoples_assignment
+    @judge = @user.judge_assignment(@team.challenges)
+    return if @peoples_assignment.present? && @competition.in_peoples_judging_window?(LAST_TIME_ZONE)
+    return if @judge.present? && @competition.in_challenge_judging_window?(LAST_TIME_ZONE)
+    flash[:alert] = 'Scorecards are not available at this time.'
+    redirect_to root_path
   end
 
   def process_judgments
