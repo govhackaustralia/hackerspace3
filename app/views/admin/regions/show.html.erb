@@ -59,7 +59,7 @@
 <%= link_to 'Manage Challenges', admin_region_challenges_path(@region) %>
 
 <h3>Bulk Mails</h3>
-
+<p><%= pluralize @bulk_mails.count, 'bulk mail' %> created for this region.</p>
 <%= link_to 'Bulk Mails', admin_region_bulk_mails_path(@region) %>
 
 <% if @region.national? %>
