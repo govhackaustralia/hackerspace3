@@ -3,11 +3,34 @@
     <% @mail_orders.each do |mail_order| %>
       <% team = @id_team_projects[mail_order.team_id][:team] %>
       <% project = @id_team_projects[team.id][:current_project] %>
+      <% leaders = @id_team_participants[team.id][:leaders] %>
+      <% members = @id_team_participants[team.id][:members] %>
       <h3><%= project.team_name %> | <%= project.project_name %></h3>
       <%= fields_for "mail_orders[]", mail_order do |mail_order_form| %>
         <div class="field">
           <%= mail_order_form.select(:request_type, options_for_select(MAIL_ORDER_REQUEST_TYPES, mail_order.request_type)) %>
         </div>
+        <table>
+          <tr>
+            <th>Title</th>
+            <th>Display Name</th>
+            <th>GovHack Can Contact</th>
+          </tr>
+          <% leaders.each do |leader| %>
+            <tr>
+              <td>Team Leader</td>
+              <td><%= leader.display_name %></td>
+              <td><%= leader.me_govhack_contact ? 'Can Contact' : 'Cannot Contact' %></td>
+            </tr>
+          <% end %>
+          <% members.each do |member| %>
+            <tr>
+              <td>Team Member</td>
+              <td><%= member.display_name %></td>
+              <td><%= member.me_govhack_contact ? 'Can Contact' : 'Cannot Contact' %></td>
+            </tr>
+          <% end %>
+        </table>
       <% end %>
     <% end %>
   </div>

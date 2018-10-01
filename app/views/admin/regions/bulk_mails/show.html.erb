@@ -28,6 +28,11 @@
       <p>Whole Team mail ordered.</p>
     <% end %>
     <table>
+      <tr>
+        <th>Title</th>
+        <th>Display Name</th>
+        <th>GovHack Can Contact</th>
+      </tr>
       <% if mail_order.request_type == ALL || mail_order.request_type == LEADER_ONLY %>
         <% leaders.each do |leader| %>
           <tr>

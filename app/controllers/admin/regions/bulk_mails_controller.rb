@@ -27,6 +27,7 @@ class Admin::Regions::BulkMailsController < ApplicationController
     @mail_orders = @bulk_mail.mail_orders
     @teams = @region.teams
     @id_team_projects = Team.id_teams_projects(@teams)
+    @id_team_participants = Team.id_team_participants(@teams)
   end
 
   def create
