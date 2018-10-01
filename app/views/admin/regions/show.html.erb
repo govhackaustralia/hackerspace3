@@ -58,6 +58,10 @@
 <% end %>
 <%= link_to 'Manage Challenges', admin_region_challenges_path(@region) %>
 
+<h3>Bulk Mails</h3>
+
+<%= link_to 'Bulk Mails', admin_region_bulk_mails_path(@region) %>
+
 <% if @region.national? %>
   <h3>National Challenge Entries By Region</h3>
   <p>(ignoring checkpoints unlike public screen)</p>

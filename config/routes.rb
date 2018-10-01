@@ -55,6 +55,7 @@ Rails.application.routes.draw do
       resources :scorecards, controller: 'regions/scorecards'
       resources :events, controller: 'regions/events'
       resources :challenges, controller: 'regions/challenges'
+      resources :bulk_mails, controller: 'regions/bulk_mails'
     end
 
     resources :challenges do

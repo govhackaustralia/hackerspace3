@@ -1,0 +1,45 @@
+<h2>Bulk Mail Order <%= @bulk_mail.name %> for <%= @region.name %></h2>
+
+<p>Created At <%= @bulk_mail.created_at %></p>
+
+<%= link_to 'Edit Bulk Mail', edit_admin_region_bulk_mail_path(@region, @bulk_mail) %>
+<%= link_to 'Edit Mail Orders', edit_admin_region_bulk_mail_path(@region, @bulk_mail, mail_orders: true) %>
+
+<% @mail_orders.each do |mail_order| %>
+  <% team = @id_team_projects[mail_order.team_id][:team] %>
+  <% project = @id_team_projects[team.id][:current_project] %>
+  <% leaders = @id_team_participants[team.id][:leaders] %>
+  <% members = @id_team_participants[team.id][:members] %>
+  <h3><%= project.team_name %> | <%= project.project_name %></h3>
+  <% if mail_order.request_type == NONE %>
+    <p>No Emails ordered to be sent to participants in this team.</p>
+  <% else %>
+    <% if mail_order.request_type == LEADER_ONLY %>
+      <p>Only team leader mail ordered.</p>
+    <% elsif mail_order.request_type == ALL %>
+      <p>Whole Team mail ordered.</p>
+    <% end %>
+    <table>
+      <% if mail_order.request_type == ALL || mail_order.request_type == LEADER_ONLY %>
+        <% leaders.each do |leader| %>
+          <tr>
+            <td>Team Leader</td>
+            <td><%= leader.display_name %></td>
+            <td><%= leader.me_govhack_contact ? 'Can Contact' : 'Cannot Contact' %></td>
+          </tr>
+        <% end %>
+      <% end %>
+      <% if mail_order.request_type == ALL %>
+        <% members.each do |member| %>
+          <tr>
+            <td>Team Member</td>
+            <td><%= member.display_name %></td>
+            <td><%= member.me_govhack_contact ? 'Can Contact' : 'Cannot Contact' %></td>
+          </tr>
+        <% end %>
+      <% end %>
+    </table>
+  <% end %>
+<% end %>
+
+<%= link_to 'Back to Bulk Mails', admin_region_bulk_mails_path(@region) %>

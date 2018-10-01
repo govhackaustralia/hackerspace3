@@ -1,0 +1,17 @@
+<%= form_for [:admin, @region, @bulk_mail] do |form| %>
+  <div>
+    <% @mail_orders.each do |mail_order| %>
+      <% team = @id_team_projects[mail_order.team_id][:team] %>
+      <% project = @id_team_projects[team.id][:current_project] %>
+      <h3><%= project.team_name %> | <%= project.project_name %></h3>
+      <%= fields_for "mail_orders[]", mail_order do |mail_order_form| %>
+        <div class="field">
+          <%= mail_order_form.select(:request_type, options_for_select(MAIL_ORDER_REQUEST_TYPES, mail_order.request_type)) %>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
