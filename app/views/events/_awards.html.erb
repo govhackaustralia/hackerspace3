@@ -1,0 +1,36 @@
+<main class="events_page">
+  <section class="info">
+  <h2>Award Events</h2>
+
+    <%= render 'award_description' %>
+
+  </section>
+
+  <!--<h3>Upcoming Award Events </h3>-->
+  <section class="events connections">
+
+    <% @events.each do |event| %>
+      <% unless event.end_time.blank? %>
+      	<% if DateTime.now.in_time_zone(COMP_TIME_ZONE) < event.end_time %>
+          <%= link_to (render partial: "events/event_single", locals: { event: event } ), event_path(event.identifier) %>
+        <% end %>
+      <% end %>
+    <% end %>
+
+  </section>
+
+  <h3>Previous Award Events</h3>
+  <section class="events connections">
+
+    <% @events.each do |event| %>
+      <% unless event.end_time.blank? %>
+      	<% if event.end_time < DateTime.now.in_time_zone(COMP_TIME_ZONE) %>
+          <%= link_to (render partial: "events/event_single", locals: { event: event } ), event_path(event.identifier) %>
+        <% end %>
+      <% end %>
+    <% end %>
+
+  </section>
+
+  <%= link_to 'All Events', events_path %>
+<main>
