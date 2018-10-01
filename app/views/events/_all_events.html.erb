@@ -1,6 +1,14 @@
 <main class="events_page">
 	<section>
 		<h2>Events</h2>
+		<h3>Awards</h3>
+		<section class="events">
+			<% @events.each do |event| %>
+				<% if event.event_type == AWARD_EVENT %>
+				<%= link_to (render partial: "events/event_single", locals: { event: event } ), event_path(event.identifier) %>
+				<% end %>
+			<% end %>
+		</section>
 		<section class="events">
 			<% @events.each do |event| %>
 				<% unless event.end_time.blank? %>

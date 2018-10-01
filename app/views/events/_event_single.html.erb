@@ -2,14 +2,14 @@
 	<div>
 	<h3><%= event.name %></h3>
 	<h4><%= @id_regions[event.region_id].name %></h4>
-	<% if event.event_type == CONNECTION_EVENT %>
+	<% if event.event_type == CONNECTION_EVENT || event.event_type == AWARD_EVENT %>
 	<% unless event.start_time.blank? %>
 		<h4><%= event.start_time.strftime("%e %B %Y") %></h4>
 	<% end %>
 	<% unless event.end_time.blank? %>
 		<h4><%= event.start_time.strftime("%I.%M %p") %></h4>
 	<% end %>
-		<p>Connection Event</p>
+		<p><%= event.event_type  %> Event</p>
 	<% end %>
 	</div>
 </article>

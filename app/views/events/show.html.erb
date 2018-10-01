@@ -8,10 +8,12 @@
 		<section class="info">
 			<% if @event.description.present? %>
 				<% @event.description.split(/\r\n/).each do |paragraph| %>
-					<p><%= paragraph %></p>
+					<p><%= simple_format(paragraph) %></p>
 				<% end %>
 			<% elsif @event.event_type == CONNECTION_EVENT %>
 				<%= render 'connection_description' %>
+			<% elsif @event.event_type == AWARD_EVENT %>
+				<%= render 'award_description' %>
 			<% else %>
 				<%= render 'competition_event_description' %>
 			<% end %>
