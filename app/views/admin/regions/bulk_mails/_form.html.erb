@@ -3,6 +3,16 @@
     <%= form.label :name %>
     <%= form.text_field :name %>
   </div>
+  <div class="field">
+    <ul>
+      <li>{ display_name } to insert a Participants Preferred name.</li>
+      <li>{ team_name } to insert a Participants team name.</li>
+      <li>{ project_name } to insert a Participants project name.</li>
+    </ul>
+
+    <p><%= form.label :body %></p>
+    <%= form.text_area :body %>
+  </div>
   <div class="actions">
     <%= form.submit %>
   </div>

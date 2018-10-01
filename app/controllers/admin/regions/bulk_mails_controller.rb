@@ -61,7 +61,7 @@ class Admin::Regions::BulkMailsController < ApplicationController
   private
 
   def bulk_mail_params
-    params.require(:bulk_mail).permit(:name)
+    params.require(:bulk_mail).permit(:name, :body)
   end
 
   def process_mail_orders

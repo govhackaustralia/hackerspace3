@@ -2,8 +2,16 @@
 
 <p>Created At <%= @bulk_mail.created_at %></p>
 
-<%= link_to 'Edit Bulk Mail', edit_admin_region_bulk_mail_path(@region, @bulk_mail) %>
-<%= link_to 'Edit Mail Orders', edit_admin_region_bulk_mail_path(@region, @bulk_mail, mail_orders: true) %>
+<div>
+<p>>>>></p>
+
+<%= markdown(@bulk_mail.body) unless @bulk_mail.body.nil? %>
+
+<p>>>>></p>
+</div>
+
+<p><%= link_to 'Edit Bulk Mail', edit_admin_region_bulk_mail_path(@region, @bulk_mail) %></p>
+<p><%= link_to 'Edit Mail Orders', edit_admin_region_bulk_mail_path(@region, @bulk_mail, mail_orders: true) %></p>
 
 <% @mail_orders.each do |mail_order| %>
   <% team = @id_team_projects[mail_order.team_id][:team] %>
