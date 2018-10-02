@@ -3,49 +3,48 @@
 		<th>Project</th>
 		<th>Team</th>
 		<th>Location</th>
-    <% if @judgeable_assignment.present? %>
+    <% if show_peoples_choice_stuff? || show_challenge_judgment_stuff? %>
       <th>Project Scorecard</th>
     <% end %>
-    <% if @judge.present? %>
+    <% if show_challenge_judgment_stuff? %>
       <th>Challenge Scorecard</th>
       <th>Total Scorecard</th>
     <% end %>
 	</thead>
 	<tbody>
-  <% @projects.each do |project| %>
-  <tr>
-    <td><%= link_to "#{project.project_name}", project_path(project.identifier) %></td>
-    <td><%= project.team_name %></td>
-    <td><%= @id_teams_projects[project.team_id][:event].name %></td>
+	  <% @projects.each do |project| %>
+		  <tr>
+		    <td><%= link_to "#{project.project_name}", project_path(project.identifier) %></td>
+		    <td><%= project.team_name %></td>
+		    <td><%= @id_teams_projects[project.team_id][:event].name %></td>
 
-    <% if @judgeable_assignment.present? %>
-			<% score_value_project = 0 %>
-    	<% if (display_score = @project_judging[project.team_id][:display_score_status]).is_a? Integer %>
-				<% score_value_project = ((display_score.to_f / @project_judging_total.to_f) * 100).to_i %>
-				<%= render 'judging_cell', locals: { total: score_value_project } %>
-    	<% else %>
-    		<td><%= display_score %></td>
-    	<% end %>
-    <% end %>
+		    <% if show_peoples_choice_stuff? || show_challenge_judgment_stuff? %>
+					<% score_value_project = 0 %>
+		    	<% if (display_score = @project_judging[project.team_id][:display_score_status]).is_a? Integer %>
+						<% score_value_project = ((display_score.to_f / @project_judging_total.to_f) * 100).to_i %>
+						<%= render 'judging_cell', locals: { total: score_value_project } %>
+		    	<% else %>
+		    		<td><%= display_score %></td>
+		    	<% end %>
+		    <% end %>
 
-    <% if @judge.present? %>
-			<% score_value_challenge = 0 %>
-    	<% if (display_score = @challenge_judging[project.team_id][:display_score_status]).is_a? Integer %>
-    		<% score_value_challenge = ((display_score.to_f / @challenge_judging_total.to_f) * 100).to_i %>
-				<%= render 'judging_cell', locals: { total: score_value_challenge } %>
-    	<% else %>
-    		<td><%= display_score %></td>
-    	<% end %>
+		    <% if show_challenge_judgment_stuff? %>
+					<% score_value_challenge = 0 %>
+		    	<% if (display_score = @challenge_judging[project.team_id][:display_score_status]).is_a? Integer %>
+		    		<% score_value_challenge = ((display_score.to_f / @challenge_judging_total.to_f) * 100).to_i %>
+						<%= render 'judging_cell', locals: { total: score_value_challenge } %>
+		    	<% else %>
+		    		<td><%= display_score %></td>
+		    	<% end %>
 
-    	<% if score_value_project.zero? || score_value_challenge.zero? %>
-				<td>Not all marked</td>
-    	<% else %>
-				<% score_total = ((score_value_project + score_value_challenge).to_f / 2.to_f).to_i %>
-				<%= render 'judging_cell', locals: { total: score_total } %>
-    	<% end %>
-
-    <% end %>
-  </tr>
-  <% end %>
+		    	<% if score_value_project.zero? || score_value_challenge.zero? %>
+						<td>Not all marked</td>
+		    	<% else %>
+						<% score_total = ((score_value_project + score_value_challenge).to_f / 2.to_f).to_i %>
+						<%= render 'judging_cell', locals: { total: score_total } %>
+		    	<% end %>
+		    <% end %>
+		  </tr>
+	  <% end %>
 	</tbody>
 </table>

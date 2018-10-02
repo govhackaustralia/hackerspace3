@@ -10,12 +10,11 @@ class Event < ApplicationRecord
   has_many :entries, through: :teams
 
   validates :name, :capacity, presence: true
-
   validates :registration_type, inclusion: { in: EVENT_REGISTRATION_TYPES }
-
   validates :event_type, inclusion: { in: EVENT_TYPES }
 
   after_save :update_identifier
+  after_update :check_for_newly_freed_space
 
   # Event Administration
 
@@ -116,6 +115,16 @@ class Event < ApplicationRecord
     id_events = {}
     events.each { |event| id_events[event.id] = event }
     id_events
+  end
+
+  def check_for_newly_freed_space
+    ActiveRecord::Base.transaction do
+      return unless below_capacity?
+      waitlist_registrations = registrations.where(status: WAITLIST).order(time_notified: :asc)
+      return unless (new_attendee = waitlist_registrations.first).present?
+      new_attendee.update(status: ATTENDING)
+      RegistrationMailer.attendance_email(new_attendee).deliver_now
+    end
   end
 
   private

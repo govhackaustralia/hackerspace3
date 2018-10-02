@@ -237,7 +237,7 @@ Region.all.each do |region|
             "#{team.name} dataset #{team_time + time}",
             description: 'Best dataset evaaaaaa',
             description_of_use: 'We achieved a full variance analysis',
-            url: 'https://data.gov.au/dataset/city-of-gold-coast-road-closures'
+            url: 'https://data.gov.au/dataset/wyndham-smart-bin-fill-level'
           )
         end
 

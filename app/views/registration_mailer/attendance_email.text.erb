@@ -1,10 +1,15 @@
 Looking forward to seeing you!
 ===============================================
 
+Hello <%= @user.display_name %>!
+
 A space has opened up for the event <%= @event.name %> <%= @region.name %>.
 
+You are now registered as attending.
 
+If you no longer wish to attend, or need to update dietary requirements and
+other personal information, please visit the event page (link below).
 
-All the best.
+<%= event_url(@event.identifier) %>
 
 The Govhack Management Team

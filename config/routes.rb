@@ -92,5 +92,7 @@ Rails.application.routes.draw do
 
   get 'competition_events', to: 'events#index', event_type: COMPETITION_EVENT
 
+  get 'awards', to: 'events#index', event_type: AWARD_EVENT
+
   root 'competitions#index'
 end
