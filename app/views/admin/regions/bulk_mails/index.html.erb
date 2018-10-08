@@ -6,6 +6,7 @@
   <% @bulk_mails.each do |bulk_mail| %>
     <h3><%= bulk_mail.name %></h3>
     <p>Created At: <%= bulk_mail.created_at %></p>
+    <p>Status: <%= bulk_mail.status %></p>
     <p><%= link_to 'Go to Bulk Mail', admin_region_bulk_mail_path(@region, bulk_mail) %></p>
   <% end %>
 <% else %>

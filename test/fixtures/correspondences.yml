@@ -1,11 +1,15 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
+  id: 1
   mail_order_id: 1
   user_id: 1
-  status: MyString
+  status: PENDING
+  body: 'Hello Luke \n You were part of team Blah \n and made project Blah.'
 
 two:
-  mail_order_id: 1
+  id: 2
+  mail_order_id: 2
   user_id: 1
-  status: MyString
+  status: SENT
+  body: 'Hello Luke \n You were part of team Blah \n and made project Blah.'

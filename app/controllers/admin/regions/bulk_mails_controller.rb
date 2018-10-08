@@ -14,6 +14,11 @@ class Admin::Regions::BulkMailsController < ApplicationController
     @teams = @region.teams
     @id_team_projects = Team.id_teams_projects(@teams)
     @id_team_participants = Team.id_team_participants(@teams)
+    @participant_count = 0
+    @example_user = User.first
+    @example_project = Project.first
+    return unless @bulk_mail.status == PROCESSED
+    @id_user_correspondences = Correspondence.id_user_correspondences(@bulk_mail)
   end
 
   def new
@@ -34,6 +39,7 @@ class Admin::Regions::BulkMailsController < ApplicationController
     @region = Region.find(params[:region_id])
     @bulk_mail = @region.bulk_mails.new(bulk_mail_params)
     @bulk_mail.user = current_user
+    @bulk_mail.status = DRAFT
     if @bulk_mail.save
       @bulk_mail.create_mail_orders
       flash[:notice] = 'New Bulk Mail Order Created'
@@ -48,8 +54,9 @@ class Admin::Regions::BulkMailsController < ApplicationController
     @bulk_mail = BulkMail.find(params[:id])
     @region = @bulk_mail.region
     @mail_orders = @bulk_mail.mail_orders
-    process_mail_orders unless params[:mail_orders].nil?
+    update_mail_orders unless params[:mail_orders].nil?
     @bulk_mail.update(bulk_mail_params) unless params[:bulk_mail].nil?
+    process_mail_orders unless params[:process].nil?
     if @bulk_mail.save
       flash[:notice] = 'Bulk Mail Updated'
       redirect_to admin_region_bulk_mail_path(@region, @bulk_mail)
@@ -62,14 +69,19 @@ class Admin::Regions::BulkMailsController < ApplicationController
   private
 
   def bulk_mail_params
-    params.require(:bulk_mail).permit(:name, :body)
+    params.require(:bulk_mail).permit(:name, :from_email, :subject, :body)
   end
 
-  def process_mail_orders
+  def update_mail_orders
     @mail_orders.each do |mail_order|
       new_type = params[:mail_orders][mail_order.id.to_s][:request_type]
       mail_order.update(request_type: new_type)
     end
+  end
+
+  def process_mail_orders
+    @bulk_mail.update(status: PROCESS)
+    BulkMailOutJob.perform_later(@bulk_mail)
   end
 
   def check_for_privileges

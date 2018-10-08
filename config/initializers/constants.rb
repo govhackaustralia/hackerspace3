@@ -195,10 +195,26 @@ JUDGEMENT_CATEGORIES = [PROJECT, CHALLENGE]
 REGIONAL = 'Regional'
 NATIONAL = 'National'
 
-# Region Mailer Request Types
+# Bulk Mail Statuses
+
+DRAFT = 'Draft'
+PROCESS = 'Process'
+PROCESSED = 'Processed'
+
+BULK_MAIL_STATUS_TYPES = [DRAFT, PROCESS, PROCESSED]
+
+# Mail Order Request Types
 
 ALL = 'All'
 NONE = 'None'
 LEADER_ONLY = 'Leader Only'
 
 MAIL_ORDER_REQUEST_TYPES = [ALL, NONE, LEADER_ONLY]
+
+# Correspondence Statuses
+
+PENDING = 'Pending'
+SENT = 'Sent'
+ERROR = 'Error'
+
+CORRESPONDENCE_STATUS_TYPES = [PENDING, SENT, ERROR]

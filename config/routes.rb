@@ -58,6 +58,10 @@ Rails.application.routes.draw do
       resources :bulk_mails, controller: 'regions/bulk_mails'
     end
 
+    resources :bulk_mails do
+      resources :correspondences, controller: 'bulk_mails/correspondences'
+    end
+
     resources :challenges do
       resources :challenge_sponsorships, :challenge_data_sets
       resources :assignments, controller: 'challenges/assignments'
