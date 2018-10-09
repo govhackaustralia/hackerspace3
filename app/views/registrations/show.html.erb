@@ -4,29 +4,29 @@
 
 	<section>
 		<article>
-			<% if @event.attending? @event_assignment %>
+			<% if @event.attending? @assignment %>
 
 				<p>You are registered to attend the event.</p>
 
 				<p>If you no longer wish to attend, please update your registration below.</p>
 
-			<% elsif @event.waitlisted? @event_assignment %>
+				<% unless @registration.category == REGULAR %>
+					<%= render 'flight_options' %>
+				<% end %>
+
+			<% elsif @event.waitlisted? @assignment %>
 
 			  <p>You are on the waitlist, you will be notified should a space become available.</p>
 
 			  <p>If you no longer wish to attend, please update your registration below.</p>
 
-			<% elsif @event.not_attending? @event_assignment %>
+			<% elsif @event.not_attending? @assignment %>
 
 			  <p>You are registered as not attending.</p>
 
 			  <p>Please update your registration below if you wish to attend.</p>
 
 			<% end %>
-
-			<div class="actions">
-			  <%= link_to 'Update Registration', edit_event_registration_path(@registration) %><br>
-			</div>
 
 			<h3>Dietary Requirements</h3>
 
@@ -41,9 +41,10 @@
 			<% end %>
 
 			<div class="actions">
-				<%= link_to 'Update Dietary Requirements', update_personal_details_path, :class=>"update-button" %>
+				<%= link_to 'Update Registration', edit_event_registration_path(@registration) %><br>
 			</div>
-			<p><%= link_to 'Back to Event', event_path(@event.identifier) %></p>
+			<p><%= link_to 'Go to Event Page', event_path(@event.identifier) %></p>
+			<p><%= link_to 'Go to Account Management', manage_account_path %></p>
 		</article>
 	</section>
 

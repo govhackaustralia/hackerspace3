@@ -7,6 +7,10 @@ Rails.application.routes.draw do
     resources :assignments, controller: 'users/assignments'
   end
 
+  resources :registrations do
+    resources :registration_flights, controller: 'registrations/registration_flights'
+  end
+
   resources :data_sets, :teams, :favourites, :entries
 
   resources :projects, param: :identifier do

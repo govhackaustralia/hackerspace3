@@ -10,10 +10,13 @@ class RegistrationsController < ApplicationController
 
   def show
     @user = current_user
-    @event_assignment = @user.event_assignment
     @registration = Registration.find(params[:id])
+    @assignment = @registration.assignment
     @event = @registration.event
     @region = @event.region
+    return if @registration.category == REGULAR
+    @inbound_flight = @registration.inbound_flight
+    @outbound_flight = @registration.outbound_flight
   end
 
   def edit

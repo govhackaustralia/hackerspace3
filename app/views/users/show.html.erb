@@ -60,7 +60,11 @@
 					<h4><%= event.name %> -  <%= @id_regions[event.region_id].name %></h4>
 					<% unless event.registration_type == CLOSED %>
 						<p>You are registered as: <%= registration.status %></p>
-						<p><%= link_to 'Update Registration', edit_event_registration_path(event.identifier, registration) %></p>
+						<% if registration.status == INVITED %>
+							<p><%= link_to 'Respond to Invitation', edit_event_registration_path(event.identifier, registration) %></p>
+						<% else %>
+							<p><%= link_to 'View Registration', event_registration_path(event.identifier, registration) %></p>
+						<% end %>
 					<% end %>
 					<%= link_to 'Go to Event Page', event_path(event.identifier) %></br>
 				<% end %>
