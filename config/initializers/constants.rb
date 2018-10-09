@@ -227,3 +227,10 @@ INDIVIDUAL_GOLDEN = 'Individual Golden Ticket'
 GROUP_GOLDEN = 'Group Golden Ticket'
 STAFF = 'Staff Ticket'
 REGULAR = 'Regular Ticket'
+
+# Event Flight Directions
+
+INBOUND = 'Inbound'
+OUTBOUND = 'Outbound'
+
+FLIGHT_DIRECTIONS = [INBOUND, OUTBOUND]

@@ -71,6 +71,7 @@ Rails.application.routes.draw do
     resources :events do
       resources :registrations, :event_partnerships
       resources :assignments, controller: 'events/assignments'
+      resources :flights, controller: 'events/flights'
     end
 
     resources :teams do
