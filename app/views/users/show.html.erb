@@ -59,8 +59,8 @@
 					<% event = @id_events[registration.event_id] %>
 					<h4><%= event.name %> -  <%= @id_regions[event.region_id].name %></h4>
 					<% unless event.registration_type == CLOSED %>
-						You are registered as: <%= registration.status %></br>
-						<%= link_to 'Update Registration', edit_event_registration_path(event.identifier, registration) %></br>
+						<p>You are registered as: <%= registration.status %></p>
+						<p><%= link_to 'Update Registration', edit_event_registration_path(event.identifier, registration) %></p>
 					<% end %>
 					<%= link_to 'Go to Event Page', event_path(event.identifier) %></br>
 				<% end %>
