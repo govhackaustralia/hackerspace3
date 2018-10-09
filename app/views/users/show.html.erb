@@ -62,6 +62,9 @@
 						<p>You are registered as: <%= registration.status %></p>
 						<% if registration.status == INVITED %>
 							<p><%= link_to 'Respond to Invitation', edit_event_registration_path(event.identifier, registration) %></p>
+							<% if registration.category == GROUP_GOLDEN %>
+								<p><%= link_to 'Transfer Group Golden Ticket to another team member', edit_event_registration_path(event.identifier, registration, task: GROUP_GOLDEN) %></p>
+							<% end %>
 						<% else %>
 							<p><%= link_to 'View Registration', event_registration_path(event.identifier, registration) %></p>
 						<% end %>
