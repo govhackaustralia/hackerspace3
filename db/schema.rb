@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_09_073628) do
+ActiveRecord::Schema.define(version: 2018_10_09_093010) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -276,6 +276,13 @@ ActiveRecord::Schema.define(version: 2018_10_09_073628) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["parent_id"], name: "index_regions_on_parent_id"
+  end
+
+  create_table "registration_flights", force: :cascade do |t|
+    t.integer "registration_id"
+    t.integer "flight_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "registrations", force: :cascade do |t|

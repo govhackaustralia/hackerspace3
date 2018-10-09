@@ -1,0 +1,2 @@
+class RegistrationFlight < ApplicationRecord
+end
