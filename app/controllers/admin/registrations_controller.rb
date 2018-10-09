@@ -4,6 +4,7 @@ class Admin::RegistrationsController < ApplicationController
 
   def index
     @event = Event.find(params[:event_id])
+    @region = @event.region
     respond_to do |format|
       format.html
       format.csv { send_data @event.registrations_to_csv }
@@ -13,9 +14,21 @@ class Admin::RegistrationsController < ApplicationController
   def new
     new_registration
     return if params[:term].blank?
-    @user = User.find_by_email(params[:term])
-    user_found if @user.present?
-    search_other_fields unless @user.present?
+    if params[:type] == GROUP_GOLDEN
+      @team = Team.find(params[:term]) unless params[:term].to_i.zero?
+      team_found if @team.present?
+      search_other_fields_team unless @team.present?
+    elsif params[:type] == STAFF
+      @assignment = Assignment.find(params[:term]) unless params[:term].to_i.zero?
+      @user = @assignment.user unless @assignment.nil?
+      search_other_fields unless @user.present?
+      staff_found if @user.present?
+      @user_id_assignments = Assignment.user_id_assignments(@users) if @users.present?
+    else
+      @user = User.find_by_email(params[:term])
+      user_found if @user.present?
+      search_other_fields unless @user.present?
+    end
   end
 
   def edit
@@ -68,10 +81,23 @@ class Admin::RegistrationsController < ApplicationController
 
   def create_new_registration
     @event = Event.find(params[:event_id])
-    @assignment = Assignment.find(params[:assignment_id])
-    @registration = @event.registrations.new(registration_params)
+    if params[:type] == INDIVIDUAL_GOLDEN
+      user = User.find(params[:user_id])
+      @assignment = Assignment.find_or_create_by(user: user, title: GOLDEN_TICKET, assignable: Competition.current)
+      @registration = @event.registrations.new(status: INVITED)
+    elsif params[:type] == GROUP_GOLDEN
+      @team = Team.find(params[:team_id])
+      @assignment = @team.assignments.where(title: TEAM_LEADER).first
+      @registration = @event.registrations.new(status: INVITED)
+    elsif params[:type] == STAFF
+      @assignment = Assignment.find(params[:assignment_id])
+      @registration = @event.registrations.new(status: INVITED)
+    else
+      @assignment = Assignment.find(params[:assignment_id])
+      @registration = @event.registrations.new(registration_params)
+    end
     @registration.update(assignment: @assignment)
-    @registration.update(time_notified: params)
+    @registration.update(time_notified: DateTime.now.in_time_zone(COMP_TIME_ZONE))
   end
 
   def user_found
@@ -79,8 +105,25 @@ class Admin::RegistrationsController < ApplicationController
     @event_assignment = @user.event_assignment
   end
 
+  def team_found
+    @project = @team.current_project
+    assignment = @team.assignments.where(title: TEAM_LEADER).first
+    @leader = assignment.user unless assignment.nil?
+    @existing_registration = @event.registrations.where(assignment: @team.assignments).first
+    @user = @existing_registration.user unless @existing_registration.nil?
+  end
+
+  def staff_found
+    @existing_registration = Registration.find_by(assignment: @assignment, event: @event)
+  end
+
   def search_other_fields
     @users = User.search(params[:term])
+  end
+
+  def search_other_fields_team
+    @teams = Team.search(params[:term])
+    @id_teams_projects = Team.id_teams_projects(@teams) unless @teams.nil?
   end
 
   def update_registration

@@ -192,4 +192,17 @@ class Team < ApplicationRecord
     id_teams_projects.each { |_team, obj| projects << obj[:current_project] }
     projects.sort_by(&:project_name)
   end
+
+  def self.search(term)
+    team_ids = []
+    Project.all.each do |project|
+      team_name = project.team_name
+      project_name = project.project_name
+      team_string = "#{team_name} #{project_name}".downcase
+      next unless team_string.include? term.downcase
+      team_ids << project.team_id
+    end
+    return nil if team_ids.empty?
+    Team.where(id: team_ids.uniq)
+  end
 end

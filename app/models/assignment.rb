@@ -73,4 +73,14 @@ class Assignment < ApplicationRecord
     end
     judgeable_scores
   end
+
+  def self.user_id_assignments(users)
+    user_id_assignments = {}
+    users.each { |user| user_id_assignments[user.id] = [] }
+    assignments = Assignment.where(user_id: user_id_assignments.keys)
+    assignments.each do |assignment|
+      user_id_assignments[assignment.user_id] << assignment
+    end
+    user_id_assignments
+  end
 end
