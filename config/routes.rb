@@ -85,13 +85,17 @@ Rails.application.routes.draw do
 
   get 'update_personal_details', to: 'users#edit'
 
-  get 'terms_and_conditions', to: 'users#edit'
+  get 'review_terms_and_conditions', to: 'users#edit'
 
   get 'connections', to: 'events#index', event_type: CONNECTION_EVENT
 
   get 'competition_events', to: 'events#index', event_type: COMPETITION_EVENT
 
   get 'awards', to: 'events#index', event_type: AWARD_EVENT
+
+  get 'terms_and_conditions', to: 'static_pages#terms_and_conditions'
+
+  get 'code_of_conduct', to: 'static_pages#code_of_conduct'
 
   root 'competitions#index'
 end
