@@ -7,6 +7,7 @@
 <% end %>
 <%= link_to 'Clear Search', admin_teams_path %></br>
 <%= link_to 'Download CSV (Users who are members of a published team)', admin_teams_path(format: 'csv') %></br>
+<%= link_to 'Download CSV (Every Team Member)', admin_teams_path(format: 'csv', category: 'members') %></br>
 
 <table>
 	<thead>

@@ -9,7 +9,11 @@ class Admin::TeamsController < ApplicationController
     @projects = Team.projects_by_name(@id_teams_projects)
     respond_to do |format|
       format.html
-      format.csv { send_data User.published_teams_to_csv }
+      if params[:category] == 'members'
+        format.csv { send_data User.all_members_to_csv }
+      else
+        format.csv { send_data User.published_teams_to_csv }
+      end
     end
   end
 
