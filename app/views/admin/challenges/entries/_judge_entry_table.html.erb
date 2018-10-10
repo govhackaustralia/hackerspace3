@@ -11,6 +11,7 @@
 			<% if @judges.present? %>
 	    	<th rowspan="2">Total Average</th>
 			<% end %>
+			<th rowspan="2">Award</th>
 		</tr>
 		<tr>
 			<% @judges.each do |judge| %>
@@ -69,6 +70,7 @@
 						<%= render 'challenges/judging_cell', locals: { total: average_score, rowspan: 2 } %>
 	      	<% end %>
 				<% end %>
+				<td rowspan="2"><%= entry.award %></td>
       </tr>
 
 			<tr>

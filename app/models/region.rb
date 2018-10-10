@@ -59,6 +59,10 @@ class Region < ApplicationRecord
     parent_id.nil?
   end
 
+  def awards_released?
+    award_release.to_formatted_s(:number) < Time.now.in_time_zone(COMP_TIME_ZONE).to_formatted_s(:number)
+  end
+
   def self.national_challenges_region_counts(checkpoint_ids = nil)
     challenge_to_region_array = {}
     regions = Region.where.not(parent_id: nil)

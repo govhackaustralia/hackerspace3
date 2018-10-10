@@ -66,7 +66,7 @@ class Admin::Challenges::EntriesController < ApplicationController
   end
 
   def entry_params
-    params.require(:entry).permit(:eligible)
+    params.require(:entry).permit(:eligible, :award)
   end
 
   def check_for_privileges

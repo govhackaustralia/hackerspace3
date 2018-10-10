@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_09_23_033339) do
+ActiveRecord::Schema.define(version: 2018_10_10_020149) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -139,6 +139,8 @@ ActiveRecord::Schema.define(version: 2018_09_23_033339) do
     t.boolean "eligible"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "award"
+    t.index ["award"], name: "index_entries_on_award"
     t.index ["challenge_id"], name: "index_entries_on_challenge_id"
     t.index ["checkpoint_id"], name: "index_entries_on_checkpoint_id"
     t.index ["eligible"], name: "index_entries_on_eligible"
@@ -230,6 +232,7 @@ ActiveRecord::Schema.define(version: 2018_09_23_033339) do
     t.integer "parent_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "award_release"
     t.index ["parent_id"], name: "index_regions_on_parent_id"
   end
 
@@ -356,6 +359,10 @@ ActiveRecord::Schema.define(version: 2018_09_23_033339) do
     t.boolean "coder", default: false
     t.boolean "creative", default: false
     t.boolean "facilitator", default: false
+    t.string "bsb"
+    t.string "acc_number"
+    t.string "acc_name"
+    t.string "branch_name"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true

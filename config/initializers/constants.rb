@@ -194,3 +194,11 @@ JUDGEMENT_CATEGORIES = [PROJECT, CHALLENGE]
 
 REGIONAL = 'Regional'
 NATIONAL = 'National'
+
+# Awards Given at Challeges
+
+WINNER =  'Winner'
+RUNNERUP = 'Runner-up'
+HONOURABLE = 'Honourable Mentions'
+
+AWARD_NAMES = [WINNER, RUNNERUP, HONOURABLE]

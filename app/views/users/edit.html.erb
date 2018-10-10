@@ -9,6 +9,12 @@
     <% elsif params[:profile_pic].present? %>
       <h2>Update Profile Picture</h2>
       <%= render 'edit_profile_pic' %><br>
+    <% elsif params[:banking].present? %>
+    <h2>Update Banking Details</h2>
+    <section>
+      <%= render 'edit_banking' %>
+      <%= link_to 'Back to Account', manage_account_path %>
+    </section>
     <% else %>
       <h2>Update Personal Details</h2>
       <section>

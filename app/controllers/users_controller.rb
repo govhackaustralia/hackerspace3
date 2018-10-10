@@ -30,6 +30,8 @@ class UsersController < ApplicationController
     @id_events = Event.id_events(@registrations.pluck(:event_id))
 
     @invited_teams = @user.invited_teams
+
+    @public_winning_entries = @user.public_winning_entries?
   end
 
   def edit
@@ -63,7 +65,8 @@ class UsersController < ApplicationController
                                  :me_govhack_contact, :dietary_requirements,
                                  :organisation_name,
                                  :how_did_you_hear, :govhack_img,
-                                 :accepted_terms_and_conditions)
+                                 :accepted_terms_and_conditions, :bsb,
+                                 :acc_number, :acc_name, :branch_name)
   end
 
   def account_update_successfully
@@ -75,6 +78,9 @@ class UsersController < ApplicationController
     elsif params[:user][:govhack_img].present?
       flash[:notice] = 'GovHack Profile Uploaded'
       render :edit, profile_pic: true
+    elsif params[:banking].present?
+      flash[:notice] = 'Your banking details have been updated.'
+      redirect_to manage_account_path
     else
       flash[:notice] = 'Your personal details have been updated.'
       redirect_to manage_account_path

@@ -2,6 +2,9 @@
 <% if @region.time_zone %>
   <p>Time Zone: <%= @region.time_zone %></p>
 <% end %>
+<% if @region.award_release %>
+  <p>Award Release: <%= @region.award_release %></p>
+<% end %>
 <%= link_to 'Update Region Info', edit_admin_region_path(@region) %>
 
 <h3>Region Director</h3>

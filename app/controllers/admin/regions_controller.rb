@@ -56,7 +56,7 @@ class Admin::RegionsController < ApplicationController
   private
 
   def region_params
-    params.require(:region).permit(:time_zone, :name)
+    params.require(:region).permit(:time_zone, :name, :award_release)
   end
 
   def check_for_privileges

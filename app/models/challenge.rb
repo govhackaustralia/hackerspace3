@@ -69,6 +69,12 @@ class Challenge < ApplicationRecord
     update_columns(identifier: new_identifier)
   end
 
+  def self.id_challenges(challenges)
+    id_challenges = {}
+    challenges.each { |challenge| id_challenges[challenge.id] = challenge }
+    id_challenges
+  end
+
   private
 
   def already_there?(new_identifier)

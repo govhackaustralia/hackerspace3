@@ -1,0 +1,26 @@
+<%= form_for current_user do |form| %>
+
+  <div class="field">
+    <%= form.label :bsb, 'BSB:' %>
+    <%= form.text_field :bsb %>
+  </div>
+
+  <div class="field">
+    <%= form.label :acc_number, 'Account Number:' %>
+    <%= form.text_field :acc_number %>
+  </div>
+
+  <div class="field">
+    <%= form.label :acc_name, 'Account Name:' %>
+    <%= form.text_field :acc_name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :branch_name, 'Branch Name:' %>
+    <%= form.text_field :branch_name %>
+  </div>
+  <%= hidden_field_tag :banking, true %>
+  <div class="actions">
+    <%= form.submit 'Update Banking Details' %>
+  </div>
+<% end %>
