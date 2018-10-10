@@ -24,6 +24,7 @@ wiki](https://github.com/cassar/hackerspace3/wiki).
 - AWS_SES_KEY
 - AWS_SES_SERVER
 - DEFAULT_FROM_EMAIL
+- FINANCE_EMAIL
 
 ### For AWS File
 - AWS_ACCESS_ID

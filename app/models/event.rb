@@ -123,7 +123,7 @@ class Event < ApplicationRecord
       waitlist_registrations = registrations.where(status: WAITLIST).order(time_notified: :asc)
       return unless (new_attendee = waitlist_registrations.first).present?
       new_attendee.update(status: ATTENDING)
-      RegistrationMailer.attendance_email(new_attendee).deliver_now
+      RegistrationMailer.attendance_email(new_attendee).deliver_later
     end
   end
 

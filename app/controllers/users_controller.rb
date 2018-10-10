@@ -79,6 +79,7 @@ class UsersController < ApplicationController
       flash[:notice] = 'GovHack Profile Uploaded'
       render :edit, profile_pic: true
     elsif params[:banking].present?
+      BankMailer.notify_finance(@user).deliver_later
       flash[:notice] = 'Your banking details have been updated.'
       redirect_to manage_account_path
     else
