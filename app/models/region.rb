@@ -60,6 +60,7 @@ class Region < ApplicationRecord
   end
 
   def awards_released?
+    return false if award_release.nil?
     award_release.to_formatted_s(:number) < Time.now.in_time_zone(COMP_TIME_ZONE).to_formatted_s(:number)
   end
 
