@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_09_093010) do
+ActiveRecord::Schema.define(version: 2018_10_09_231116) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -49,7 +49,6 @@ ActiveRecord::Schema.define(version: 2018_10_09_093010) do
   end
 
   create_table "bulk_mails", force: :cascade do |t|
-    t.integer "region_id"
     t.integer "user_id"
     t.text "body"
     t.datetime "created_at", null: false
@@ -58,7 +57,9 @@ ActiveRecord::Schema.define(version: 2018_10_09_093010) do
     t.string "status"
     t.string "from_email"
     t.string "subject"
-    t.index ["region_id"], name: "index_bulk_mails_on_region_id"
+    t.string "mailable_type"
+    t.integer "mailable_id"
+    t.index ["mailable_type", "mailable_id"], name: "index_bulk_mails_on_mailable_type_and_mailable_id"
     t.index ["user_id"], name: "index_bulk_mails_on_user_id"
   end
 
@@ -124,13 +125,14 @@ ActiveRecord::Schema.define(version: 2018_10_09_093010) do
   end
 
   create_table "correspondences", force: :cascade do |t|
-    t.integer "mail_order_id"
     t.integer "user_id"
     t.string "status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "body"
-    t.index ["mail_order_id"], name: "index_correspondences_on_mail_order_id"
+    t.string "orderable_type"
+    t.integer "orderable_id"
+    t.index ["orderable_type", "orderable_id"], name: "index_correspondences_on_orderable_type_and_orderable_id"
     t.index ["status"], name: "index_correspondences_on_status"
     t.index ["user_id"], name: "index_correspondences_on_user_id"
   end
@@ -240,17 +242,6 @@ ActiveRecord::Schema.define(version: 2018_10_09_093010) do
     t.index ["scorecard_id"], name: "index_judgments_on_scorecard_id"
   end
 
-  create_table "mail_orders", force: :cascade do |t|
-    t.integer "bulk_mail_id"
-    t.integer "team_id"
-    t.string "request_type"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["bulk_mail_id"], name: "index_mail_orders_on_bulk_mail_id"
-    t.index ["request_type"], name: "index_mail_orders_on_request_type"
-    t.index ["team_id"], name: "index_mail_orders_on_team_id"
-  end
-
   create_table "projects", force: :cascade do |t|
     t.integer "team_id"
     t.string "team_name"
@@ -353,6 +344,17 @@ ActiveRecord::Schema.define(version: 2018_10_09_093010) do
     t.index ["team_id"], name: "index_team_data_sets_on_team_id"
   end
 
+  create_table "team_orders", force: :cascade do |t|
+    t.integer "bulk_mail_id"
+    t.integer "team_id"
+    t.string "request_type"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["bulk_mail_id"], name: "index_team_orders_on_bulk_mail_id"
+    t.index ["request_type"], name: "index_team_orders_on_request_type"
+    t.index ["team_id"], name: "index_team_orders_on_team_id"
+  end
+
   create_table "teams", force: :cascade do |t|
     t.integer "event_id"
     t.integer "project_id"
@@ -363,6 +365,15 @@ ActiveRecord::Schema.define(version: 2018_10_09_093010) do
     t.index ["event_id"], name: "index_teams_on_event_id"
     t.index ["project_id"], name: "index_teams_on_project_id"
     t.index ["published"], name: "index_teams_on_published"
+  end
+
+  create_table "user_orders", force: :cascade do |t|
+    t.integer "bulk_mail_id"
+    t.string "request_type"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["bulk_mail_id"], name: "index_user_orders_on_bulk_mail_id"
+    t.index ["request_type"], name: "index_user_orders_on_request_type"
   end
 
   create_table "users", force: :cascade do |t|

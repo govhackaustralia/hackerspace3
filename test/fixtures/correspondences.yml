@@ -2,14 +2,16 @@
 
 one:
   id: 1
-  mail_order_id: 1
+  orderable_id: '1'
+  orderable_type: TeamOrder
   user_id: 1
   status: PENDING
   body: 'Hello Luke \n You were part of team Blah \n and made project Blah.'
 
 two:
   id: 2
-  mail_order_id: 2
+  orderable_id: '2'
+  orderable_type: TeamOrder
   user_id: 1
   status: SENT
   body: 'Hello Luke \n You were part of team Blah \n and made project Blah.'

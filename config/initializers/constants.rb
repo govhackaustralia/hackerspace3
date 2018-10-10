@@ -211,7 +211,7 @@ ALL = 'All'
 NONE = 'None'
 LEADER_ONLY = 'Leader Only'
 
-MAIL_ORDER_REQUEST_TYPES = [ALL, NONE, LEADER_ONLY]
+TEAM_ORDER_REQUEST_TYPES = [ALL, NONE, LEADER_ONLY]
 
 # Correspondence Statuses
 

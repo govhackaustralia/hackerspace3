@@ -9,6 +9,7 @@ class Event < ApplicationRecord
   has_many :teams
   has_many :entries, through: :teams
   has_many :flights
+  has_many :bulk_mails, as: :mailable, dependent: :destroy
 
   validates :name, :capacity, presence: true
   validates :registration_type, inclusion: { in: EVENT_REGISTRATION_TYPES }

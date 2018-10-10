@@ -1,6 +1,6 @@
-<% if params[:mail_orders] %>
+<% if params[:team_orders] %>
   <h2>Edit Mail Orders for Bulk Mail <%= @bulk_mail.name %></h2>
-  <%= render 'mail_order_form' %>
+  <%= render 'team_order_form' %>
 <% else %>
   <h2>Edit Bulk Mail <%= @bulk_mail.name %></h2>
   <%= render 'form' %>

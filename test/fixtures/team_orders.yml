@@ -4,10 +4,10 @@ one:
   id: 1
   bulk_mail_id: 1
   team_id: 1
-  request_type: MyString
+  request_type: ALL
 
 two:
   id: 2
   bulk_mail_id: 1
   team_id: 1
-  request_type: MyString
+  request_type: ALL

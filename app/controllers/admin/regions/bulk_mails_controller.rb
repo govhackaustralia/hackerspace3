@@ -9,8 +9,8 @@ class Admin::Regions::BulkMailsController < ApplicationController
 
   def show
     @bulk_mail = BulkMail.find(params[:id])
-    @mail_orders = @bulk_mail.mail_orders
-    @region = @bulk_mail.region
+    @team_orders = @bulk_mail.team_orders
+    @region = @bulk_mail.mailable
     @teams = @region.teams
     @id_team_projects = Team.id_teams_projects(@teams)
     @id_team_participants = Team.id_team_participants(@teams)
@@ -28,8 +28,8 @@ class Admin::Regions::BulkMailsController < ApplicationController
 
   def edit
     @bulk_mail = BulkMail.find(params[:id])
-    @region = @bulk_mail.region
-    @mail_orders = @bulk_mail.mail_orders
+    @region = @bulk_mail.mailable
+    @team_orders = @bulk_mail.team_orders
     @teams = @region.teams
     @id_team_projects = Team.id_teams_projects(@teams)
     @id_team_participants = Team.id_team_participants(@teams)
@@ -41,7 +41,7 @@ class Admin::Regions::BulkMailsController < ApplicationController
     @bulk_mail.user = current_user
     @bulk_mail.status = DRAFT
     if @bulk_mail.save
-      @bulk_mail.create_mail_orders
+      @bulk_mail.create_team_orders
       flash[:notice] = 'New Bulk Mail Order Created'
       redirect_to admin_region_bulk_mail_path(@region, @bulk_mail)
     else
@@ -52,11 +52,11 @@ class Admin::Regions::BulkMailsController < ApplicationController
 
   def update
     @bulk_mail = BulkMail.find(params[:id])
-    @region = @bulk_mail.region
-    @mail_orders = @bulk_mail.mail_orders
-    update_mail_orders unless params[:mail_orders].nil?
+    @region = @bulk_mail.mailable
+    @team_orders = @bulk_mail.team_orders
+    update_team_orders unless params[:team_orders].nil?
     @bulk_mail.update(bulk_mail_params) unless params[:bulk_mail].nil?
-    process_mail_orders unless params[:process].nil?
+    process_team_orders unless params[:process].nil?
     if @bulk_mail.save
       flash[:notice] = 'Bulk Mail Updated'
       redirect_to admin_region_bulk_mail_path(@region, @bulk_mail)
@@ -72,14 +72,14 @@ class Admin::Regions::BulkMailsController < ApplicationController
     params.require(:bulk_mail).permit(:name, :from_email, :subject, :body)
   end
 
-  def update_mail_orders
-    @mail_orders.each do |mail_order|
-      new_type = params[:mail_orders][mail_order.id.to_s][:request_type]
-      mail_order.update(request_type: new_type)
+  def update_team_orders
+    @team_orders.each do |team_order|
+      new_type = params[:team_orders][team_order.id.to_s][:request_type]
+      team_order.update(request_type: new_type)
     end
   end
 
-  def process_mail_orders
+  def process_team_orders
     @bulk_mail.update(status: PROCESS)
     BulkMailOutJob.perform_later(@bulk_mail)
   end

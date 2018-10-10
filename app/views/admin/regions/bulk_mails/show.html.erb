@@ -12,7 +12,7 @@
 
 <% unless @bulk_mail.status == PROCESSED %>
   <p><%= link_to 'Edit Bulk Mail', edit_admin_region_bulk_mail_path(@region, @bulk_mail) %></p>
-  <p><%= link_to 'Edit Mail Orders', edit_admin_region_bulk_mail_path(@region, @bulk_mail, mail_orders: true) %></p>
+  <p><%= link_to 'Edit Mail Orders', edit_admin_region_bulk_mail_path(@region, @bulk_mail, team_orders: true) %></p>
 <% end %>
 
 <table>
@@ -25,12 +25,12 @@
       <th>Email Status</th>
     <% end %>
   </tr>
-  <% @mail_orders.each do |mail_order| %>
-    <% team = @id_team_projects[mail_order.team_id][:team] %>
+  <% @team_orders.each do |team_order| %>
+    <% team = @id_team_projects[team_order.team_id][:team] %>
     <% project = @id_team_projects[team.id][:current_project] %>
     <% leaders = @id_team_participants[team.id][:leaders] %>
     <% members = @id_team_participants[team.id][:members] %>
-    <% next if mail_order.request_type == NONE %>
+    <% next if team_order.request_type == NONE %>
     <% leaders.each do |leader| %>
       <% next unless leader.me_govhack_contact %>
       <tr>
@@ -45,7 +45,7 @@
         <% end %>
       </tr>
     <% end %>
-    <% next if mail_order.request_type == LEADER_ONLY %>
+    <% next if team_order.request_type == LEADER_ONLY %>
     <% members.each do |member| %>
       <% next unless member.me_govhack_contact %>
       <tr>

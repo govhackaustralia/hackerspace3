@@ -4,9 +4,9 @@ class Admin::BulkMails::CorrespondencesController < ApplicationController
 
   def show
     @correspondence = Correspondence.find(params[:id])
-    @bulk_mail = @correspondence.bulk_mail
+    @bulk_mail = @correspondence.orderable.bulk_mail
     @user = @correspondence.user
-    @region = @bulk_mail.region
+    @region = @bulk_mail.mailable
   end
 
   private
