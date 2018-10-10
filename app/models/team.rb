@@ -121,16 +121,28 @@ class Team < ApplicationRecord
     id_team_projects = Team.id_teams_projects(all)
     team_member_counts = {}
     Assignment.where(assignable_type: 'Team').each do |assignment|
-      if team_member_counts[assignment.assignable_id].nil?
-        team_member_counts[assignment.assignable_id] = 0
-      end
+      team_member_counts[assignment.assignable_id] ||= 0
       team_member_counts[assignment.assignable_id] += 1
     end
+
+    team_data_sets = {}
+    TeamDataSet.all.each do |team_data_set|
+      team_data_sets[team_data_set.team_id] ||= []
+      team_data_sets[team_data_set.team_id] << team_data_set.url
+    end
+
+    team_challenge_names = {}
+    id_challenges = Challenge.id_challenges(Challenge.all)
+    Entry.all.where(eligible: true).each do |entry|
+      team_challenge_names[entry.team_id] ||= []
+      team_challenge_names[entry.team_id] << id_challenges[entry.challenge_id].name
+    end
+
     CSV.generate(options) do |csv|
-      csv << project_columns + ['member_count']
-      all.each do |team|
+      csv << project_columns + %w[member_count data_sets challenge_names]
+      all.where(published: true).each do |team|
         project = id_team_projects[team.id][:current_project]
-        csv << project.attributes.values_at(*project_columns) + [team_member_counts[team.id]]
+        csv << project.attributes.values_at(*project_columns) + [team_member_counts[team.id], team_data_sets[team.id], team_challenge_names[team.id]]
       end
     end
   end
