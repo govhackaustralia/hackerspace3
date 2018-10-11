@@ -13,7 +13,8 @@ Challenge Judging End: <%= @competition.challenge_judging_end %></br>
 
 <h3>People's Choice Judging</h3>
 
-<%= link_to 'Competition Judging', admin_competition_scorecards_path(@competition) %>
+<p><%= link_to 'Competition Judging', admin_competition_scorecards_path(@competition, include_judges: false) %></p>
+<p><%= link_to 'Competition Judging (with Judges)', admin_competition_scorecards_path(@competition, include_judges: true) %></p>
 
 <h3>Competition Assignments</h3>
 

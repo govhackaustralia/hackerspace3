@@ -1,4 +1,4 @@
-<h2>Scorecards for <%= @project.team_name %> - <%= @project.project_name %></h2>
+<h2>Scorecards for <%= @project.team_name %> - <%= @project.project_name %> <%= '(with Judges)' if params[:include_judges] == 'true' %></h2>
 
   <table>
   	<thead>
@@ -17,13 +17,13 @@
           <% scores = @team_scorecard_helper[scorecard.id][:scores] %>
           <% if scores.include? nil %>
             <td>Incomplete</td>
-            <td><%= link_to 'Delete Scorecard', admin_team_scorecard_path(@team, scorecard), data: { confirm: "Are you sure?" }, method: :delete %></td>
+            <td><%= link_to 'Delete Scorecard', admin_team_scorecard_path(@team, scorecard, include_judges: params[:include_judges]), data: { confirm: "Are you sure?" }, method: :delete %></td>
           <% elsif scorecard.included %>
             <td>Included</td>
-            <td><%= link_to 'Exclude Scorecard', admin_team_scorecard_path(@team, scorecard), method: :patch %></td>
+            <td><%= link_to 'Exclude Scorecard', admin_team_scorecard_path(@team, scorecard, include_judges: params[:include_judges]), method: :patch %></td>
           <% else %>
             <td>Excluded</td>
-            <td><%= link_to 'Include Scorecard', admin_team_scorecard_path(@team, scorecard), method: :patch %></td>
+            <td><%= link_to 'Include Scorecard', admin_team_scorecard_path(@team, scorecard, include_judges: params[:include_judges]), method: :patch %></td>
           <% end %>
           <% scores.each do |score| %>
             <td><%= score %></td>

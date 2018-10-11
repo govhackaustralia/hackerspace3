@@ -22,7 +22,12 @@
 <%= link_to 'Manage Assignments', admin_region_assignments_path(@region) %>
 
 <h3>People's Choice Judging</h3>
-<%= link_to 'Regional Judging', admin_region_scorecards_path(@region) %>
+<% if @region.national? %>
+  <p>See Competition Dashboard</p>
+<% else %>
+  <p><%= link_to 'Regional Judging', admin_region_scorecards_path(@region, include_judges: false) %></p>
+  <p><%= link_to 'Regional Judging (with Judges)', admin_region_scorecards_path(@region, include_judges: true) %></p>
+<% end %>
 
 <h3>Events</h3>
 <% if (events = @region.events.where(competition: Competition.current)).present? %>

@@ -17,7 +17,8 @@ $( document ).on('ready turbolinks:load', function() {
   $('.open-team-scorecards').click(function (event) {
     event.preventDefault();
     var scorecard_id = $(this).data("id");
-    openRequestedPopup(_admin_teams_path + '/' + scorecard_id + '/scorecards?popup=true');
+    var include_judges =$(this).data("include-judges");
+    openRequestedPopup(_admin_teams_path + '/' + scorecard_id + '/scorecards?include_judges='+ include_judges +'&popup=true');
   });
 
   $('#close-team-scorecards').click(function (event) {

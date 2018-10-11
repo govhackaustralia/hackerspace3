@@ -20,7 +20,7 @@
 				<% if total_card_count == 0 %>
 					<td>No Scores for this Team Project Recorded</td>
 				<% else %>
-					<td><%= link_to "#{scores.count}/#{total_card_count}", admin_team_scorecards_path(project.team_id, popup: true), { class: 'open-team-scorecards', data: { id: project.team_id }} %>
+					<td><%= link_to "#{scores.count}/#{total_card_count}", admin_team_scorecards_path(project.team_id, popup: true, include_judges: params[:include_judges]), { class: 'open-team-scorecards', data: { id: project.team_id, include_judges: params[:include_judges] }} %>
 
 					<% unless scores.empty? %>
 						<% mean_score = ((scores.mean / MAX_SCORE.to_f) * 100).to_i %>
