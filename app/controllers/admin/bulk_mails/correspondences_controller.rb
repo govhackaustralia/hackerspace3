@@ -6,7 +6,7 @@ class Admin::BulkMails::CorrespondencesController < ApplicationController
     @correspondence = Correspondence.find(params[:id])
     @bulk_mail = @correspondence.orderable.bulk_mail
     @user = @correspondence.user
-    @region = @bulk_mail.mailable
+    @mailable = @bulk_mail.mailable
   end
 
   private

@@ -134,6 +134,12 @@ INVITED = 'Invited'
 
 VALID_ATTENDANCE_STATUSES = [ATTENDING, NON_ATTENDING, WAITLIST, INVITED]
 
+# Additional User Order Queries
+
+INVITED_AND_ATTENDING = 'Invited and Attending'
+
+USER_ORDER_QUERIES = [ATTENDING, INVITED, INVITED_AND_ATTENDING]
+
 # Images Preferences
 
 GOVHACK = 'govhack_img'

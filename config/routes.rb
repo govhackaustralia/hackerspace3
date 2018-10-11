@@ -64,6 +64,7 @@ Rails.application.routes.draw do
 
     resources :bulk_mails do
       resources :correspondences, controller: 'bulk_mails/correspondences'
+      resources :user_orders, controller: 'bulk_mails/user_orders'
     end
 
     resources :challenges do
@@ -76,6 +77,7 @@ Rails.application.routes.draw do
       resources :registrations, :event_partnerships
       resources :assignments, controller: 'events/assignments'
       resources :flights, controller: 'events/flights'
+      resources :bulk_mails, controller: 'events/bulk_mails'
     end
 
     resources :teams do
