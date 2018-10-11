@@ -1,0 +1,26 @@
+<%= form_for [:admin, @region, @bulk_mail] do |form| %>
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name %>
+  </div>
+  <div class="field">
+    <p>
+      <%= form.label :from_email %>
+      <%= form.email_field :from_email %>
+    </p>
+    <p>
+      <%= form.label :subject %>
+      <%= form.text_field :subject %>
+    </p>
+    <p><%= form.label :body %></p>
+    <%= form.text_area :body %>
+    <ul>
+      <li>{ display_name } - To insert a Participant's Preferred Name.</li>
+      <li>{ team_name } - To insert a Participant's Team Name.</li>
+      <li>{ project_name } - To insert a Participant's Project Name.</li>
+    </ul>
+  </div>
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

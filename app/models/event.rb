@@ -8,6 +8,8 @@ class Event < ApplicationRecord
   has_one :event_partner, through: :event_partnership, source: :sponsor
   has_many :teams
   has_many :entries, through: :teams
+  has_many :flights
+  has_many :bulk_mails, as: :mailable, dependent: :destroy
 
   validates :name, :capacity, presence: true
   validates :registration_type, inclusion: { in: EVENT_REGISTRATION_TYPES }
@@ -125,6 +127,14 @@ class Event < ApplicationRecord
       new_attendee.update(status: ATTENDING)
       RegistrationMailer.attendance_email(new_attendee).deliver_later
     end
+  end
+
+  def inbound_flights
+    flights.where(direction: INBOUND)
+  end
+
+  def outbound_flights
+    flights.where(direction: OUTBOUND)
   end
 
   private

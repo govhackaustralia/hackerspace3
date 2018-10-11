@@ -1,0 +1,16 @@
+<h2>Bulk Mails for <%= @region.name %></h2>
+
+<%= link_to 'New Bulk Mail', new_admin_region_bulk_mail_path(@region) %>
+
+<% if @bulk_mails.present? %>
+  <% @bulk_mails.each do |bulk_mail| %>
+    <h3><%= bulk_mail.name %></h3>
+    <p>Created At: <%= bulk_mail.created_at %></p>
+    <p>Status: <%= bulk_mail.status %></p>
+    <p><%= link_to 'Go to Bulk Mail', admin_region_bulk_mail_path(@region, bulk_mail) %></p>
+  <% end %>
+<% else %>
+  <p>There are no bulk mails for this region.</p>
+<% end %>
+
+<%= link_to "Back to #{@region.name} Region", admin_region_path(@region) %>

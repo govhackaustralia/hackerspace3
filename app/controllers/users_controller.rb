@@ -17,7 +17,7 @@ class UsersController < ApplicationController
     @id_regions = Region.id_regions(Region.all)
 
     @event_assignment = @user.event_assignment
-    @registrations = @event_assignment.registrations
+    @registrations = Registration.where(assignment: @assignments)
 
     @sponsor_contact_assignments = @assignments.where(title: SPONSOR_CONTACT)
     @id_sponsors = Sponsor.id_sponsors(@sponsor_contact_assignments.pluck(:assignable_id))

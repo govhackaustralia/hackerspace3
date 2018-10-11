@@ -7,6 +7,10 @@ Rails.application.routes.draw do
     resources :assignments, controller: 'users/assignments'
   end
 
+  resources :registrations do
+    resources :registration_flights, controller: 'registrations/registration_flights'
+  end
+
   resources :data_sets, :teams, :favourites, :entries
 
   resources :projects, param: :identifier do
@@ -55,6 +59,12 @@ Rails.application.routes.draw do
       resources :scorecards, controller: 'regions/scorecards'
       resources :events, controller: 'regions/events'
       resources :challenges, controller: 'regions/challenges'
+      resources :bulk_mails, controller: 'regions/bulk_mails'
+    end
+
+    resources :bulk_mails do
+      resources :correspondences, controller: 'bulk_mails/correspondences'
+      resources :user_orders, controller: 'bulk_mails/user_orders'
     end
 
     resources :challenges do
@@ -66,6 +76,8 @@ Rails.application.routes.draw do
     resources :events do
       resources :registrations, :event_partnerships
       resources :assignments, controller: 'events/assignments'
+      resources :flights, controller: 'events/flights'
+      resources :bulk_mails, controller: 'events/bulk_mails'
     end
 
     resources :teams do

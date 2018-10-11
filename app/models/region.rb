@@ -7,6 +7,7 @@ class Region < ApplicationRecord
   has_many :sponsorship_types, through: :sponsorships
   has_many :challenges, dependent: :destroy
   has_many :data_sets, dependent: :destroy
+  has_many :bulk_mails, as: :mailable, dependent: :destroy
 
   validates :name, presence: true
   validates :name, uniqueness: true

@@ -48,6 +48,21 @@ ActiveRecord::Schema.define(version: 2018_10_10_020149) do
     t.index ["user_id"], name: "index_assignments_on_user_id"
   end
 
+  create_table "bulk_mails", force: :cascade do |t|
+    t.integer "user_id"
+    t.text "body"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "name"
+    t.string "status"
+    t.string "from_email"
+    t.string "subject"
+    t.string "mailable_type"
+    t.integer "mailable_id"
+    t.index ["mailable_type", "mailable_id"], name: "index_bulk_mails_on_mailable_type_and_mailable_id"
+    t.index ["user_id"], name: "index_bulk_mails_on_user_id"
+  end
+
   create_table "challenge_data_sets", force: :cascade do |t|
     t.integer "challenge_id"
     t.integer "data_set_id"
@@ -107,6 +122,19 @@ ActiveRecord::Schema.define(version: 2018_10_10_020149) do
     t.datetime "challenge_judging_start"
     t.datetime "challenge_judging_end"
     t.index ["year"], name: "index_competitions_on_year"
+  end
+
+  create_table "correspondences", force: :cascade do |t|
+    t.integer "user_id"
+    t.string "status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "body"
+    t.string "orderable_type"
+    t.integer "orderable_id"
+    t.index ["orderable_type", "orderable_id"], name: "index_correspondences_on_orderable_type_and_orderable_id"
+    t.index ["status"], name: "index_correspondences_on_status"
+    t.index ["user_id"], name: "index_correspondences_on_user_id"
   end
 
   create_table "criteria", force: :cascade do |t|
@@ -198,6 +226,14 @@ ActiveRecord::Schema.define(version: 2018_10_10_020149) do
     t.index ["team_id"], name: "index_favourites_on_team_id"
   end
 
+  create_table "flights", force: :cascade do |t|
+    t.integer "event_id"
+    t.string "description"
+    t.string "direction"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "judgments", force: :cascade do |t|
     t.integer "scorecard_id"
     t.integer "criterion_id"
@@ -234,6 +270,13 @@ ActiveRecord::Schema.define(version: 2018_10_10_020149) do
     t.datetime "updated_at", null: false
     t.datetime "award_release"
     t.index ["parent_id"], name: "index_regions_on_parent_id"
+  end
+
+  create_table "registration_flights", force: :cascade do |t|
+    t.integer "registration_id"
+    t.integer "flight_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "registrations", force: :cascade do |t|
@@ -304,6 +347,17 @@ ActiveRecord::Schema.define(version: 2018_10_10_020149) do
     t.index ["team_id"], name: "index_team_data_sets_on_team_id"
   end
 
+  create_table "team_orders", force: :cascade do |t|
+    t.integer "bulk_mail_id"
+    t.integer "team_id"
+    t.string "request_type"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["bulk_mail_id"], name: "index_team_orders_on_bulk_mail_id"
+    t.index ["request_type"], name: "index_team_orders_on_request_type"
+    t.index ["team_id"], name: "index_team_orders_on_team_id"
+  end
+
   create_table "teams", force: :cascade do |t|
     t.integer "event_id"
     t.integer "project_id"
@@ -314,6 +368,15 @@ ActiveRecord::Schema.define(version: 2018_10_10_020149) do
     t.index ["event_id"], name: "index_teams_on_event_id"
     t.index ["project_id"], name: "index_teams_on_project_id"
     t.index ["published"], name: "index_teams_on_published"
+  end
+
+  create_table "user_orders", force: :cascade do |t|
+    t.integer "bulk_mail_id"
+    t.string "request_type"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["bulk_mail_id"], name: "index_user_orders_on_bulk_mail_id"
+    t.index ["request_type"], name: "index_user_orders_on_request_type"
   end
 
   create_table "users", force: :cascade do |t|

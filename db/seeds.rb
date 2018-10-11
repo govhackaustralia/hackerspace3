@@ -18,7 +18,7 @@ user.update(accepted_terms_and_conditions: true, how_did_you_hear: 'jas')
       dietary_requirements: 'vegetables', tshirt_size: 'Small',
       twitter: "@tommo#{number}", mailing_list: false, challenge_sponsor_contact_place: false,
       challenge_sponsor_contact_enter: false, my_project_sponsor_contact: false,
-      me_govhack_contact: false, created_at: "2018-07-24 21:32:29",
+      me_govhack_contact: (number % 2 == 0), created_at: "2018-07-24 21:32:29",
       updated_at: "2018-07-24 21:32:29", organisation_name: nil,
       phone_number: nil, how_did_you_hear: nil,
       accepted_terms_and_conditions: false,
@@ -28,7 +28,7 @@ user.update(accepted_terms_and_conditions: true, how_did_you_hear: 'jas')
       preferred_img: nil, google_img: nil, dietary_requirements: nil,
       tshirt_size: 'Large', twitter: "@sally#{number}", mailing_list: false,
       challenge_sponsor_contact_place: false, challenge_sponsor_contact_enter: false,
-      my_project_sponsor_contact: false, me_govhack_contact: false,
+      my_project_sponsor_contact: false, me_govhack_contact: (number % 2 == 0),
       created_at: "2018-07-24 21:36:57", updated_at: "2018-07-24 21:36:57",
       organisation_name: nil, phone_number: nil, how_did_you_hear: nil,
       accepted_terms_and_conditions: false, password: Devise.friendly_token[0, 20])

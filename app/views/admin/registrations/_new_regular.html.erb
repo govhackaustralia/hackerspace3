@@ -1,0 +1,45 @@
+<h2>Add New Regular Registration</h2>
+
+<%= form_tag(new_admin_event_registration_path, method: :get) do %>
+  <%= text_field_tag :term, params[:term] %>
+  <%= submit_tag 'Search' %>
+<% end %><br>
+
+<% if @user.present? # User found show registration options. %>
+
+  <%= render 'admin/shared/user_contact', locals: { user: @user } %>
+  Event Assignment: <%= @event_assignment.title %><br>
+  <%= link_to 'Update Event Assignment', admin_user_path(@user) %><br>
+
+  <% unless @existing_registration.present? # check for existing registration %>
+
+    <% if @event_assignment.title == VIP || @event.below_capacity?%>
+      <%= render 'form', locals: { options: [ATTENDING, NON_ATTENDING] } %>
+    <% else %>
+      <strong>This event is at capacity</strong><br>
+      All future participant registrations will be added to the waiting list.<br>
+      <%= render 'form', locals: { options: [WAITLIST, NON_ATTENDING] } %>
+    <% end %>
+
+  <% else %>
+    Registration for <%= @user.full_name %> already exists.<br>
+    <%= link_to 'Update Registration', edit_admin_event_registration_path(@event, @existing_registration) %><br>
+  <% end %>
+
+<% elsif @users.present? # Review search results %>
+
+  <% @users.each do |user| %>
+    <%= render 'admin/shared/user_contact', locals: { user: user } %>
+    Event Assignment: <%= (event_assignment = user.event_assignment).title %><br>
+    <%= link_to 'Select', new_admin_event_registration_path(@event, term: user.email) %><br>
+  <% end %>
+
+<% elsif params[:term].present? # Could not find anything. %>
+
+  Apologies, no name matching search term '<%= params[:term] %>'<br>
+
+<% else # No search term entered / first visit to page %>
+
+  Please enter an email address or name to search for a user.<br>
+
+<% end %>

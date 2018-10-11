@@ -10,10 +10,13 @@ class RegistrationsController < ApplicationController
 
   def show
     @user = current_user
-    @event_assignment = @user.event_assignment
     @registration = Registration.find(params[:id])
+    @assignment = @registration.assignment
     @event = @registration.event
     @region = @event.region
+    return if @registration.category == REGULAR
+    @inbound_flight = @registration.inbound_flight
+    @outbound_flight = @registration.outbound_flight
   end
 
   def edit
@@ -21,12 +24,24 @@ class RegistrationsController < ApplicationController
     @event = @registration.event
     @region = @event.region
     @user = current_user
+    return unless params[:task] == GROUP_GOLDEN
+    @assignment = @registration.assignment
+    @team = @assignment.assignable
+    @project = @team.current_project
+    @other_members = @team.assignments.where.not(user: @user)
   end
 
   def update
-    update_registration
-    update_user_preferences
-    handle_update
+    if params[:task] == GROUP_GOLDEN
+      @registration = Registration.find(params[:id])
+      @registration.update(assignment_id: params[:assignment_id])
+      flash[:notice] = 'Group Golden Ticket Transfered'
+      redirect_to manage_account_path
+    else
+      update_registration
+      update_user_preferences
+      handle_update
+    end
   end
 
   def create

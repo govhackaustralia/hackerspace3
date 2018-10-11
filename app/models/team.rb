@@ -182,9 +182,48 @@ class Team < ApplicationRecord
     id_team_projects
   end
 
+  def self.id_team_participants(teams)
+    assignments = Assignment.where(assignable: teams.to_a)
+    id_team_assignments = {}
+    teams.each { |team| id_team_assignments[team.id] = [] }
+    assignments.each do |assignment|
+      id_team_assignments[assignment.assignable_id] << assignment
+    end
+    users = User.where(id: assignments.pluck(:user_id))
+    id_users = {}
+    users.each { |user| id_users[user.id] = user }
+    id_team_participants = {}
+    teams.each do |team|
+      leaders = []
+      members = []
+      id_team_assignments[team.id].each do |assignment|
+        if assignment.title == TEAM_LEADER
+          leaders << id_users[assignment.user_id]
+        else
+          members << id_users[assignment.user_id]
+        end
+      end
+      id_team_participants[team.id] = { leaders: leaders, members: members }
+    end
+    id_team_participants
+  end
+
   def self.projects_by_name(id_teams_projects)
     projects = []
     id_teams_projects.each { |_team, obj| projects << obj[:current_project] }
     projects.sort_by(&:project_name)
+  end
+
+  def self.search(term)
+    team_ids = []
+    Project.all.each do |project|
+      team_name = project.team_name
+      project_name = project.project_name
+      team_string = "#{team_name} #{project_name}".downcase
+      next unless team_string.include? term.downcase
+      team_ids << project.team_id
+    end
+    return nil if team_ids.empty?
+    Team.where(id: team_ids.uniq)
   end
 end

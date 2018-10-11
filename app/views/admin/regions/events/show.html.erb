@@ -2,10 +2,10 @@
 
 <h3>Event Information</h3>
 
-Region: <%= @region.name %></br>
-Event Category: <%= @event.event_type %></br>
-Registration Type: <%= @event.registration_type %></br>
-Event Capacity: <%= @event.capacity %></br>
+<p>Region: <%= @region.name %></p>
+<p>Event Category: <%= @event.event_type %></p>
+<p>Registration Type: <%= @event.registration_type %></p>
+<p>Event Capacity: <%= @event.capacity %></p>
 
 <%= link_to "Edit #{@event.name} Event", edit_admin_region_event_path(@region, @event) %></br>
 <% if @event.published? %>
@@ -56,6 +56,17 @@ Event Capacity: <%= @event.capacity %></br>
   <%= render 'admin/sponsors/sponsor', locals: { sponsor: event_partnership.sponsor } %>
 <% else %>
   <%= link_to 'Add Event Partner', new_admin_event_event_partnership_path(@event) %></br>
+<% end %>
+
+<% if @region.national? && @event.event_type == AWARD_EVENT %>
+  <h3>Flights</h3>
+  <p><%= pluralize @inbound_flights.count, 'inbound flight' %> saved.</p>
+  <p><%= pluralize @outbound_flights.count, 'outbound flight' %> saved.</p>
+  <p><%= link_to 'Manage Event Flights', admin_event_flights_path(@event) %></p>
+
+  <h3>Bulk Mails</h3>
+  <p><%= pluralize @bulk_mails.count, 'bulk mail' %> created for this event.</p>
+  <%= link_to 'Bulk Mails', admin_event_bulk_mails_path(@event) %>
 <% end %>
 
 <% if @region.admin_privileges?(current_user) %>

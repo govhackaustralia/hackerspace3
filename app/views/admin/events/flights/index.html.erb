@@ -1,0 +1,29 @@
+<h2>Flights for <%= @event.name %></h2>
+
+<p><%= link_to 'New Flight', new_admin_event_flight_path(@event) %></p>
+
+<h3>Inbound Flights</h3>
+
+<% if @inbound_flights.present? %>
+  <% @inbound_flights.each do |flight| %>
+    <p></strong><%= flight.description %></strong></p>
+    <p><%= link_to 'Edit Flight', edit_admin_event_flight_path(@event, flight) %> |
+      <%= link_to 'Destroy Flight', admin_event_flights_path(@event, flight), data: { confirm: "Are you sure?" }, method: :delete %></p>
+  <% end %>
+<% else %>
+  <p>No inbound flights currently saved for this event.</p>
+<% end %>
+
+<h3>Outbound Flights</h3>
+
+<% if @outbound_flights.present? %>
+  <% @outbound_flights.each do |flight| %>
+    <p></strong><%= flight.description %></strong></p>
+    <p><%= link_to 'Edit Flight', edit_admin_event_flight_path(@event, flight) %> |
+      <%= link_to 'Destroy Flight', admin_event_flights_path(@event, flight), data: { confirm: "Are you sure?" }, method: :delete %></p>
+  <% end %>
+<% else %>
+  <p>No outbound flights currently saved for this event.</p>
+<% end %>
+
+<p><%= link_to 'Back to Event', admin_region_event_path(@region, @event) %></p>

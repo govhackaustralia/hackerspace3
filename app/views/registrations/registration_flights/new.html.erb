@@ -1,0 +1,13 @@
+<% if params[:direction] == INBOUND %>
+  <h2>Choose Inbound Flight</h2>
+<% else %>
+  <h2>Choose Outbound Flight</h2>
+<% end %>
+<%= form_for [@registration, @registration_flight] do |f| %>
+  <%= f.label :flight_id %><br>
+  <%= f.select(:flight_id, options_from_collection_for_select(@flights, :id, :description, @registration_flight.flight)) %><br>
+  <%= hidden_field_tag :direction, params[:direction] %>
+  <p><strong>Be sure to choose the correct flight, amendments will have to fixed manually by contacting help@govhack.org</strong></p>
+  <%= f.submit 'Confirm Flight' %>
+<% end %>
+<p><%= link_to 'Back to Registration', event_registration_path(@event.identifier, @registration) %></p>

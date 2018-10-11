@@ -42,6 +42,7 @@ class Admin::RegionsController < ApplicationController
     @challenges = @region.challenges
     @data_sets = @region.data_sets
     @sponsorships = @region.sponsorships
+    @bulk_mails = @region.bulk_mails
     if @region.national?
       @region_counts = Region.national_challenges_region_counts
       @region_names = Region.where.not(parent_id: nil).order(:name).pluck(:name)

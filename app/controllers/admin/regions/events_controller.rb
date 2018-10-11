@@ -29,6 +29,10 @@ class Admin::Regions::EventsController < ApplicationController
     @region = Region.find(params[:region_id])
     @event = Event.find(params[:id])
     @registration = Registration.new
+    return unless @region.national? && @event.event_type == AWARD_EVENT
+    @inbound_flights = @event.inbound_flights
+    @outbound_flights = @event.outbound_flights
+    @bulk_mails = @event.bulk_mails
   end
 
   def edit
