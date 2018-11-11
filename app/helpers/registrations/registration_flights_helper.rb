@@ -1,2 +1,0 @@
-module Registrations::RegistrationFlightsHelper
-end

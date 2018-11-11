@@ -1,4 +1,4 @@
-class Registrations::RegistrationFlightsController < ApplicationController
+class Flights::Registrations::RegistrationFlightsController < ApplicationController
   before_action :authenticate_user!
   before_action :check_for_privileges
 
