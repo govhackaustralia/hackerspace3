@@ -19,7 +19,7 @@ class DataSet < ApplicationRecord
     team_ids = team_data_sets.pluck(:team_id)
     id_teams_projects = Team.id_teams_projects(team_ids)
     url_to_project_names = {}
-    data_set_urls.each {|url| url_to_project_names[url] = [] }
+    data_set_urls.each { |url| url_to_project_names[url] = [] }
     team_data_sets.each do |team_data_set|
       project = id_teams_projects[team_data_set.team_id][:current_project]
       url_to_project_names[team_data_set.url] << project.project_name

@@ -8,10 +8,10 @@ class Admin::UsersController < ApplicationController
              else
                User.search(params[:term])
              end
-     respond_to do |format|
-       format.html
-       format.csv { send_data User.user_event_rego_to_csv }
-     end
+    respond_to do |format|
+      format.html
+      format.csv { send_data User.user_event_rego_to_csv }
+    end
   end
 
   def new

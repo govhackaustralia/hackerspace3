@@ -37,9 +37,9 @@ class Flights::Registrations::RegistrationFlightsController < ApplicationControl
 
   def flight_options
     @flights = if params[:direction] == INBOUND
-                @event.inbound_flights
+                 @event.inbound_flights
                else
-                @event.outbound_flights
+                 @event.outbound_flights
                end
   end
 end

@@ -29,7 +29,7 @@ class ChallengesController < ApplicationController
   def challenge_show_entry_management
     @user_eligible_teams = @challenge.eligible_teams & current_user.teams if user_signed_in?
     if @competition.in_challenge_judging_window?(LAST_TIME_ZONE) ||
-        @competition.in_peoples_judging_window?(LAST_TIME_ZONE)
+       @competition.in_peoples_judging_window?(LAST_TIME_ZONE)
       judging_view
     elsif
       checkpoint_entry_view
