@@ -20,6 +20,7 @@ class ChallengesController < ApplicationController
     @challenge_sponsorships = @challenge.challenge_sponsorships
     challenge_show_entry_management
     return if @competition.started?(@region.time_zone) || (user_signed_in? && current_user.region_privileges?)
+
     redirect_to root_path
   end
 

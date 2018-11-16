@@ -35,6 +35,7 @@ class TeamManagement::ProjectsController < ApplicationController
     @team = Team.find(params[:team_id])
     @competition = @team.competition
     return if @team.permission?(current_user) && @competition.in_competition_window?(@team.time_zone)
+
     if @team.permission?(current_user)
       flash[:notice] = 'The competition has closed.'
       redirect_to project_path(@team.current_project.identifier)

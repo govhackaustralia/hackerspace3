@@ -23,6 +23,7 @@ class Event < ApplicationRecord
   def host_user
     assignment = Assignment.find_by(title: EVENT_HOST, assignable: self)
     return nil if assignment.nil?
+
     assignment.user
   end
 
@@ -122,8 +123,10 @@ class Event < ApplicationRecord
   def check_for_newly_freed_space
     ActiveRecord::Base.transaction do
       return unless below_capacity?
+
       waitlist_registrations = registrations.where(status: WAITLIST).order(time_notified: :asc)
       return unless (new_attendee = waitlist_registrations.first).present?
+
       new_attendee.update(status: ATTENDING)
       RegistrationMailer.attendance_email(new_attendee).deliver_later
     end
@@ -143,6 +146,7 @@ class Event < ApplicationRecord
     event = Event.find_by(identifier: new_identifier)
     return false if event.nil?
     return false if event == self
+
     true
   end
 

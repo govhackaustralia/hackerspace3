@@ -59,6 +59,7 @@ class Admin::Events::BulkMailsController < ApplicationController
     @id_assignments = Assignment.id_assignments(assignments)
     @id_users = User.id_users(User.where(id: assignments.pluck(:user_id)))
     return unless @bulk_mail.status == PROCESSED
+
     @id_user_correspondences = Correspondence.id_user_correspondences(@bulk_mail)
   end
 
@@ -70,6 +71,7 @@ class Admin::Events::BulkMailsController < ApplicationController
 
   def check_for_privileges
     return if current_user.event_privileges?
+
     flash[:alert] = 'You must have valid assignments to access this section.'
     redirect_to root_path
   end

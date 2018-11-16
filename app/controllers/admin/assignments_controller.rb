@@ -5,6 +5,7 @@ class Admin::AssignmentsController < ApplicationController
 
   def handle_index
     return if current_user.privilege? @assignable.admin_assignments
+
     redirect_no_privilege
   end
 
@@ -20,6 +21,7 @@ class Admin::AssignmentsController < ApplicationController
     @assignment = @assignable.assignments.new
     @title = params[:title]
     return if params[:term].blank?
+
     @user = User.find_by_email(params[:term])
     user_found if @user.present?
     search_other_fields unless @user.present?

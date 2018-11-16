@@ -14,6 +14,7 @@ class Admin::RegistrationsController < ApplicationController
   def new
     new_registration
     return if params[:term].blank?
+
     if params[:type] == GROUP_GOLDEN
       @team = Team.find(params[:term]) unless params[:term].to_i.zero?
       team_found if @team.present?
@@ -70,6 +71,7 @@ class Admin::RegistrationsController < ApplicationController
 
   def check_for_privileges
     return if current_user.event_privileges?
+
     flash[:alert] = 'You must have valid assignments to access this section.'
     redirect_to root_path
   end

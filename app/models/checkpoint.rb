@@ -14,6 +14,7 @@ class Checkpoint < ApplicationRecord
       entry_count = team.regional_challenges(self).count
     end
     return false if entry_count < max
+
     true
   end
 

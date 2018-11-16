@@ -7,6 +7,7 @@ class TeamManagement::Teams::AssignmentsController < ApplicationController
   def new
     new_assignment
     return if params[:term].blank?
+
     @user = User.find_by_email(params[:term])
     search_user_competition_event if @user.present?
     search_for_existing_assignment if @user.present?
@@ -56,6 +57,7 @@ class TeamManagement::Teams::AssignmentsController < ApplicationController
     @team = Team.find(params[:team_id])
     @competition = @team.competition
     return if @team.permission?(current_user) && @competition.in_competition_window?(@team.time_zone)
+
     if @team.permission?(current_user)
       flash[:notice] = 'The competition has closed.'
       redirect_to project_path(@team.current_project.identifier)

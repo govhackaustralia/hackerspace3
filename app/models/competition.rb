@@ -33,36 +33,42 @@ class Competition < ApplicationRecord
   def director
     assignment = assignments.where(title: COMPETITION_DIRECTOR).first
     return nil if assignment.nil?
+
     assignment.user
   end
 
   def sponsorship_director
     assignment = assignments.where(title: SPONSORSHIP_DIRECTOR).first
     return nil if assignment.nil?
+
     assignment.user
   end
 
   def chief_judge
     assignment = assignments.where(title: CHIEF_JUDGE).first
     return nil if assignment.nil?
+
     assignment.user
   end
 
   def site_admins
     assignment_user_ids = assignments.where(title: ADMIN).pluck(:user_id)
     return nil if assignment_user_ids.empty?
+
     User.where(id: assignment_user_ids)
   end
 
   def management_team
     assignment_user_ids = assignments.where(title: MANAGEMENT_TEAM).pluck(:user_id)
     return nil if assignment_user_ids.empty?
+
     User.where(id: assignment_user_ids)
   end
 
   def volunteers
     assignment_user_ids = assignments.where(title: VOLUNTEER).pluck(:user_id)
     return nil if assignment_user_ids.empty?
+
     User.where(id: assignment_user_ids)
   end
 
@@ -127,6 +133,7 @@ class Competition < ApplicationRecord
     checkpoints.each do |checkpoint|
       next if checkpoint.passed?(team_time_zone)
       next if checkpoint.limit_reached?(team, region)
+
       valid_checkpoints << checkpoint
     end
     valid_checkpoints

@@ -17,6 +17,7 @@ class Scorecard < ApplicationRecord
 
   def type
     return CHALLENGE if judgeable_type == 'Entry'
+
     PROJECT
   end
 
@@ -38,6 +39,7 @@ class Scorecard < ApplicationRecord
     score = 0
     judgments.each do |judgment|
       return nil if judgment.score.nil?
+
       score += judgment.score
     end
     score
@@ -46,6 +48,7 @@ class Scorecard < ApplicationRecord
   def display_score
     score = total_score
     return 'Scorecard Incomplete' if score.nil?
+
     score
   end
 
@@ -56,6 +59,7 @@ class Scorecard < ApplicationRecord
   def self.participant_scorecards(teams, include_judges)
     all_scorecards = Scorecard.where(judgeable: teams).order(:assignment_id)
     return all_scorecards if include_judges
+
     judge_user_ids = Assignment.where(title: JUDGE).pluck(:user_id)
     judge_assignment_ids = Assignment.where(title: EVENT_ASSIGNMENTS, user_id: judge_user_ids).pluck(:id)
     judge_scorecards = Scorecard.where(assignment_id: judge_assignment_ids)
@@ -92,6 +96,7 @@ class Scorecard < ApplicationRecord
       next unless scores.count == correct_score_count
       next if scores.include? nil
       next unless scorecard.included
+
       region_scorecard_helper[scorecard.judgeable_id][:scores] << scores.mean
     end
     region_scorecard_helper

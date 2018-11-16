@@ -30,6 +30,7 @@ class Flights::Registrations::RegistrationFlightsController < ApplicationControl
   def check_for_privileges
     @registration = Registration.find(params[:registration_id])
     return if @registration.user == current_user
+
     flash[:alert] = 'You are not able to add flghts to this registration.'
     redirect_to root_path
   end

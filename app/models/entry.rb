@@ -27,6 +27,7 @@ class Entry < ApplicationRecord
 
   def entries_must_not_exceed_max_regional_allowed_for_checkpoint
     return if challenge.region.national?
+
     current_count = team.regional_challenges(checkpoint).count
     max_allowed = checkpoint.max_regional_challenges
     if current_count >= max_allowed
@@ -36,6 +37,7 @@ class Entry < ApplicationRecord
 
   def entries_must_not_exceed_max_national_allowed_for_checkpoint
     return unless challenge.region.national?
+
     current_count = team.national_challenges(checkpoint).count
     max_allowed = checkpoint.max_national_challenges
     if current_count >= max_allowed
@@ -57,6 +59,7 @@ class Entry < ApplicationRecord
     voted = 0
     cards.each do |card|
       next if (score = card.total_score).nil?
+
       total_score += score
       voted += 1
     end
@@ -68,6 +71,7 @@ class Entry < ApplicationRecord
     voted = 0
     cards.each do |card|
       next if card.total_score.nil?
+
       voted += 1
     end
     voted

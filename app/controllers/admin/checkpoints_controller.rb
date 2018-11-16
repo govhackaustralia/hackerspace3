@@ -43,6 +43,7 @@ class Admin::CheckpointsController < ApplicationController
 
   def check_for_privileges
     return if current_user.admin_privileges?
+
     flash[:alert] = 'You must have valid assignments to access this section.'
     redirect_to root_path
   end

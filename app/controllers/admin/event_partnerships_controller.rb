@@ -5,6 +5,7 @@ class Admin::EventPartnershipsController < ApplicationController
   def new
     new_event_partnership
     return if params[:term].blank?
+
     @sponsor = Sponsor.find_by_name(params[:term])
     @sponsors = Sponsor.search(params[:term]) unless @sponsor.present?
   end
@@ -32,6 +33,7 @@ class Admin::EventPartnershipsController < ApplicationController
 
   def check_for_privileges
     return if current_user.admin_privileges?
+
     flash[:alert] = 'You must have valid assignments to access this section.'
     redirect_to root_path
   end

@@ -7,6 +7,7 @@ class SponsorshipType < ApplicationRecord
     all.order(order: :asc).each do |type|
       next if type.order < placeholder
       break if type.order != placeholder
+
       type.update(order: placeholder += 1)
     end
   end

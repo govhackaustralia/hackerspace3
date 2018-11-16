@@ -35,12 +35,14 @@ class Region < ApplicationRecord
   def director
     assignment = assignments.where(title: REGION_DIRECTOR).first
     return assignment if assignment.nil?
+
     assignment.user
   end
 
   def supports
     user_ids = assignments.where(title: REGION_SUPPORT).pluck(:user_id)
     return nil if user_ids.empty?
+
     User.where(id: user_ids)
   end
 
@@ -53,6 +55,7 @@ class Region < ApplicationRecord
     collected << assignments.where(title: REGION_ADMIN).to_a
     collected << Competition.current.admin_assignments
     return collected.flatten if parent_id.nil?
+
     parent.admin_assignments(collected).flatten
   end
 
@@ -62,6 +65,7 @@ class Region < ApplicationRecord
 
   def awards_released?
     return false if award_release.nil?
+
     award_release.to_formatted_s(:number) < Time.now.in_time_zone(COMP_TIME_ZONE).to_formatted_s(:number)
   end
 

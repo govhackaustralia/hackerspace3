@@ -20,6 +20,7 @@ class ScorecardsController < ApplicationController
       end
     end
     return if @user == @scorecard.user
+
     flash[:alert] = 'You do not have permission to edit this scorecard.'
     redirect_to root_path
   end
@@ -52,6 +53,7 @@ class ScorecardsController < ApplicationController
     @judge = @user.judge_assignment(@team.challenges)
     return if @peoples_assignment.present? && @competition.in_peoples_judging_window?(LAST_TIME_ZONE)
     return if @judge.present? && @competition.in_challenge_judging_window?(LAST_TIME_ZONE)
+
     flash[:alert] = 'Scorecards are not available at this time.'
     redirect_to root_path
   end
@@ -72,6 +74,7 @@ class ScorecardsController < ApplicationController
   def validate_new_score(new_score)
     return false if new_score.blank?
     return false unless (MIN_SCORE..MAX_SCORE).cover?(new_score)
+
     true
   end
 
@@ -81,6 +84,7 @@ class ScorecardsController < ApplicationController
     assignments = Assignment.where(user: @user, title: JUDGE, assignable: @team.challenges).order(:id)
     all_judgments = @scorecard.judgments.order(:criterion_id)
     return all_judgments unless assignments.present?
+
     assignments.each { |assignment| all_judgments += organise_challenge_scorecard(assignment) }
     all_judgments
   end

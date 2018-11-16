@@ -4,12 +4,14 @@ class SponsorshipManagement::SponsorsController < ApplicationController
   def show
     @sponsor = Sponsor.find(params[:id])
     return if @sponsor.show_privileges?(current_user)
+
     redirect_no_privileges
   end
 
   def edit
     @sponsor = Sponsor.find(params[:id])
     return if @sponsor.show_privileges?(current_user)
+
     redirect_no_privileges
   end
 

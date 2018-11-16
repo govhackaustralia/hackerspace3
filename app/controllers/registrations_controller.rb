@@ -15,6 +15,7 @@ class RegistrationsController < ApplicationController
     @event = @registration.event
     @region = @event.region
     return if @registration.category == REGULAR
+
     @inbound_flight = @registration.inbound_flight
     @outbound_flight = @registration.outbound_flight
   end
@@ -25,6 +26,7 @@ class RegistrationsController < ApplicationController
     @region = @event.region
     @user = current_user
     return unless params[:task] == GROUP_GOLDEN
+
     @assignment = @registration.assignment
     @team = @assignment.assignable
     @project = @team.current_project
@@ -113,6 +115,7 @@ class RegistrationsController < ApplicationController
   def update_user_preferences
     update_standard_event_attrs
     return unless @event.event_type == COMPETITION_EVENT
+
     update_competition_event_attrs
     update_skills_attrs
   end

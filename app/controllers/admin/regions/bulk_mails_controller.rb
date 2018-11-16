@@ -18,6 +18,7 @@ class Admin::Regions::BulkMailsController < ApplicationController
     @example_user = User.first
     @example_project = Project.first
     return unless @bulk_mail.status == PROCESSED
+
     @id_user_correspondences = Correspondence.id_user_correspondences(@bulk_mail)
   end
 
@@ -86,6 +87,7 @@ class Admin::Regions::BulkMailsController < ApplicationController
 
   def check_for_privileges
     return if current_user.region_privileges?
+
     flash[:alert] = 'You must have valid assignments to access this section.'
     redirect_to root_path
   end

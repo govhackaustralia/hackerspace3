@@ -6,6 +6,7 @@ class Admin::ChallengeSponsorshipsController < ApplicationController
     @challenge = Challenge.find(params[:challenge_id])
     @challenge_sponsorship = @challenge.challenge_sponsorships.new
     return if params[:term].blank?
+
     search_sponsors
   end
 
@@ -34,6 +35,7 @@ class Admin::ChallengeSponsorshipsController < ApplicationController
 
   def check_for_privileges
     return if current_user.region_privileges?
+
     flash[:alert] = 'You must have valid assignments to access this section.'
     redirect_to root_path
   end

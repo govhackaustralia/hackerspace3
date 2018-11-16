@@ -30,6 +30,7 @@ class Project < ApplicationRecord
     project = Project.find_by(identifier: new_identifier)
     return false if project.nil?
     return false if project == self
+
     true
   end
 

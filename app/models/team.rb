@@ -17,6 +17,7 @@ class Team < ApplicationRecord
   def team_leader
     assignment = Assignment.find_by(assignable: self, title: TEAM_LEADER)
     return if assignment.nil?
+
     assignment.user
   end
 
@@ -27,17 +28,20 @@ class Team < ApplicationRecord
   def team_members
     ids = assignments.where(title: TEAM_MEMBER).pluck(:user_id)
     return if ids.empty?
+
     User.where(id: ids)
   end
 
   def invitees
     ids = assignments.where(title: INVITEE).pluck(:user_id)
     return if ids.empty?
+
     User.where(id: ids)
   end
 
   def current_project
     return Project.find(project_id) unless project_id.nil?
+
     projects.order(created_at: :desc).first
   end
 
@@ -51,6 +55,7 @@ class Team < ApplicationRecord
     national_region_id = Region.root.id
     Challenge.where(id: challenge_ids).each do |challenge|
       next if challenge.region_id == national_region_id
+
       regional_challenges << challenge
     end
     regional_challenges
@@ -62,6 +67,7 @@ class Team < ApplicationRecord
     national_region_id = Region.root.id
     Challenge.where(id: challenge_ids).each do |challenge|
       next unless challenge.region_id == national_region_id
+
       national_challenges << challenge
     end
     national_challenges
@@ -84,6 +90,7 @@ class Team < ApplicationRecord
                        end
     competition.checkpoints.each do |checkpoint|
       next if checkpoint.limit_reached?(self, challenge_region)
+
       valid_checkpoints << checkpoint
     end
     valid_checkpoints
@@ -221,9 +228,11 @@ class Team < ApplicationRecord
       project_name = project.project_name
       team_string = "#{team_name} #{project_name}".downcase
       next unless team_string.include? term.downcase
+
       team_ids << project.team_id
     end
     return nil if team_ids.empty?
+
     Team.where(id: team_ids.uniq)
   end
 end

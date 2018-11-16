@@ -6,6 +6,7 @@ class Admin::ChallengeDataSetsController < ApplicationController
     @challenge = Challenge.find(params[:challenge_id])
     @challenge_data_set = @challenge.challenge_data_sets.new
     return if params[:term].blank?
+
     search_data_sets
   end
 
@@ -34,6 +35,7 @@ class Admin::ChallengeDataSetsController < ApplicationController
 
   def check_for_privileges
     return if current_user.region_privileges?
+
     flash[:alert] = 'You must have valid assignments to access this section.'
     redirect_to root_path
   end

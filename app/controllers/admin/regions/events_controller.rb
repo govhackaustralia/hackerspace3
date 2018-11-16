@@ -30,6 +30,7 @@ class Admin::Regions::EventsController < ApplicationController
     @event = Event.find(params[:id])
     @registration = Registration.new
     return unless @region.national? && @event.event_type == AWARD_EVENT
+
     @inbound_flights = @event.inbound_flights
     @outbound_flights = @event.outbound_flights
     @bulk_mails = @event.bulk_mails
@@ -54,6 +55,7 @@ class Admin::Regions::EventsController < ApplicationController
 
   def check_for_privileges
     return if current_user.region_privileges?
+
     flash[:alert] = 'You must have valid assignments to access this section.'
     redirect_to root_path
   end

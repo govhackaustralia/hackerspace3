@@ -11,6 +11,7 @@ class UsersController < ApplicationController
     @team_id_assignments = {}
     @assignments.each do |assignment|
       next unless assignment.assignable_type == 'Team'
+
       @team_id_assignments[assignment.assignable_id] = assignment
     end
 

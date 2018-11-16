@@ -1,6 +1,7 @@
 module ProjectsHelper
   def filter_projects(term)
     return @projects if term.nil?
+
     filtered_projects = []
     @projects.each do |project|
       team_obj = @id_teams_projects[project.team_id]

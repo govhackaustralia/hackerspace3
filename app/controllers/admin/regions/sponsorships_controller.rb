@@ -1,5 +1,4 @@
 class Admin::Regions::SponsorshipsController < Admin::SponsorshipsController
-
   def index
     @region = Region.find(params[:region_id])
     @sponsorships = @region.sponsorships

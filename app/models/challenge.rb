@@ -37,6 +37,7 @@ class Challenge < ApplicationRecord
 
   def type
     return NATIONAL if region.national?
+
     REGIONAL
   end
 
@@ -81,6 +82,7 @@ class Challenge < ApplicationRecord
     challenge = Challenge.find_by(identifier: new_identifier)
     return false if challenge.nil?
     return false if challenge == self
+
     true
   end
 

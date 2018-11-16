@@ -20,6 +20,7 @@ class Admin::Challenges::AssignmentsController < Admin::AssignmentsController
 
   def check_for_privileges
     return if current_user.region_privileges?
+
     flash[:alert] = 'You must have valid assignments to access this section.'
     redirect_to root_path
   end
