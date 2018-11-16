@@ -31,9 +31,7 @@ class ProjectsController < ApplicationController
   private
 
   def user_records_index
-    if @competition.not_finished?(LAST_TIME_ZONE)
-      @attending_events = current_user.competition_events_participating(@competition)
-    end
+    @attending_events = current_user.competition_events_participating(@competition) if @competition.not_finished?(LAST_TIME_ZONE)
     if @competition.in_peoples_judging_window?(LAST_TIME_ZONE)
       if (@peoples_assignment = current_user.peoples_assignment).present?
         @judgeable_assignment = current_user.judgeable_assignment

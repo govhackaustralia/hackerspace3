@@ -64,9 +64,7 @@ class Challenge < ApplicationRecord
 
   def update_identifier
     new_identifier = uri_pritty(name)
-    if already_there?(new_identifier)
-      new_identifier = uri_pritty("#{name}-#{id}")
-    end
+    new_identifier = uri_pritty("#{name}-#{id}") if already_there?(new_identifier)
     update_columns(identifier: new_identifier)
   end
 

@@ -119,9 +119,7 @@ class Competition < ApplicationRecord
       sets.each do |data_set|
         string = "#{data_set.name} #{data_set.description}" +
                  id_regions[data_set.region_id].name.to_s.downcase
-        if string.include? term.downcase
-          region_sets[data_set.region_id] << data_set
-        end
+        region_sets[data_set.region_id] << data_set if string.include? term.downcase
       end
     end
     region_sets

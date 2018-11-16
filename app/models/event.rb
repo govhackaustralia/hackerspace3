@@ -81,9 +81,7 @@ class Event < ApplicationRecord
 
   def update_identifier
     new_identifier = uri_pritty("#{name}-#{region.name}")
-    if already_there?(new_identifier)
-      new_identifier = uri_pritty("#{name}-#{region.name}-#{id}")
-    end
+    new_identifier = uri_pritty("#{name}-#{region.name}-#{id}") if already_there?(new_identifier)
     update_columns(identifier: new_identifier)
   end
 

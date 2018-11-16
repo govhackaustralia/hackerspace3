@@ -18,9 +18,7 @@ class Project < ApplicationRecord
 
   def update_identifier
     new_identifier = uri_pritty(project_name)
-    if already_there?(new_identifier)
-      new_identifier = uri_pritty("#{project_name}-#{team.id}")
-    end
+    new_identifier = uri_pritty("#{project_name}-#{team.id}") if already_there?(new_identifier)
     update_columns(identifier: new_identifier)
   end
 

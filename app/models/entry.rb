@@ -30,9 +30,7 @@ class Entry < ApplicationRecord
 
     current_count = team.regional_challenges(checkpoint).count
     max_allowed = checkpoint.max_regional_challenges
-    if current_count >= max_allowed
-      errors.add(:checkpoint_id, 'Maximum Regional Challenges already entered for this Checkpoint')
-    end
+    errors.add(:checkpoint_id, 'Maximum Regional Challenges already entered for this Checkpoint') if current_count >= max_allowed
   end
 
   def entries_must_not_exceed_max_national_allowed_for_checkpoint
@@ -40,17 +38,14 @@ class Entry < ApplicationRecord
 
     current_count = team.national_challenges(checkpoint).count
     max_allowed = checkpoint.max_national_challenges
-    if current_count >= max_allowed
-      errors.add(:checkpoint_id, 'Maximum National Challenges already entered for this Checkpoint')
-    end
+    errors.add(:checkpoint_id, 'Maximum National Challenges already entered for this Checkpoint') if current_count >= max_allowed
   end
 
   def teams_cannot_enter_regional_challenges_from_regions_other_than_their_own
     challenge_region = challenge.region
     return if challenge_region.national?
-    if team.region != challenge_region
-      errors.add(:checkpoint_id, 'Teams are not able to enter Challenges in Regions other than their own')
-    end
+
+    errors.add(:checkpoint_id, 'Teams are not able to enter Challenges in Regions other than their own') if team.region != challenge_region
   end
 
   def average_score

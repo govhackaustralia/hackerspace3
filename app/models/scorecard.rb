@@ -23,16 +23,13 @@ class Scorecard < ApplicationRecord
 
   def only_one_scorecard_per_judgeable
     existing = Scorecard.find_by(assignment: assignment, judgeable: judgeable)
-    if existing.present? && existing != self
-      errors.add(:assignment_id, 'Only one scorecard allowed per judgeable entity')
-    end
+    errors.add(:assignment_id, 'Only one scorecard allowed per judgeable entity') if existing.present? && existing != self
   end
 
   def cannot_judge_your_own_team
     return if judgeable_type == 'Entry'
-    if judgeable.users.include? user
-      errors.add(:assignment_id, 'Participants are not permitted to vote for a team they are a member in.')
-    end
+
+    errors.add(:assignment_id, 'Participants are not permitted to vote for a team they are a member in.') if judgeable.users.include? user
   end
 
   def total_score

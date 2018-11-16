@@ -169,9 +169,7 @@ class Team < ApplicationRecord
 
     team_id_to_projects = {}
     projects.each do |project|
-      if team_id_to_projects[project.team_id].nil?
-        team_id_to_projects[project.team_id] = []
-      end
+      team_id_to_projects[project.team_id] = [] if team_id_to_projects[project.team_id].nil?
       team_id_to_projects[project.team_id] << project
     end
 

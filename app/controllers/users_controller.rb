@@ -90,9 +90,7 @@ class UsersController < ApplicationController
   end
 
   def handle_end_of_registration
-    if @user.how_did_you_hear.empty?
-      current_user.update(how_did_you_hear: NO_RESPONSE)
-    end
+    current_user.update(how_did_you_hear: NO_RESPONSE) if @user.how_did_you_hear.empty?
     flash[:notice] = 'Your account has been created.'
     redirect_to manage_account_path
   end
