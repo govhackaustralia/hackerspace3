@@ -1,12 +1,14 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
+  id: 1
   mailable_id: 1
   mailable_type: Region
   user_id: 1
   body: MyText
 
 two:
+  id: 2
   mailable_id: 1
   mailable_type: Region
   user_id: 1
