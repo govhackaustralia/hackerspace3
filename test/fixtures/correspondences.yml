@@ -2,7 +2,7 @@
 
 one:
   id: 1
-  orderable_id: '1'
+  orderable_id: 1
   orderable_type: TeamOrder
   user_id: 1
   status: PENDING
@@ -10,8 +10,8 @@ one:
 
 two:
   id: 2
-  orderable_id: '2'
-  orderable_type: TeamOrder
+  orderable_id: 1
+  orderable_type: UserOrder
   user_id: 1
   status: SENT
   body: 'Hello Luke \n You were part of team Blah \n and made project Blah.'
