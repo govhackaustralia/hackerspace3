@@ -10,30 +10,27 @@ user.save
 user.make_site_admin
 user.update(accepted_terms_and_conditions: true, how_did_you_hear: 'jas')
 
+first_names = ['Tim', 'Kate', 'Watson', 'Zhang', 'Maria', 'Omar', 'Ezara']
+
+last_names = ['Kumar', 'Huang', 'Zammit', 'Tyrel', 'Conner', 'Drizen']
+
 100.times do |number|
   user = nil
-  if number % 2 == 0
-    user = User.new(email: "tommo#{number}@example.com", full_name: "Tommo#{number}",
-      preferred_name: "Tom#{number}", preferred_img: nil, google_img: nil,
-      dietary_requirements: 'vegetables', tshirt_size: 'Small',
-      twitter: "@tommo#{number}", mailing_list: false, challenge_sponsor_contact_place: false,
-      challenge_sponsor_contact_enter: false, my_project_sponsor_contact: false,
-      me_govhack_contact: (number % 2 == 0), created_at: "2018-07-24 21:32:29",
-      updated_at: "2018-07-24 21:32:29", organisation_name: nil,
-      phone_number: nil, how_did_you_hear: nil,
-      accepted_terms_and_conditions: false,
-      password: Devise.friendly_token[0, 20])
-  else
-    user = User.new(email: "sally#{number}@email.com", full_name: "Sandra Key#{number}", preferred_name: "Sally#{number}",
-      preferred_img: nil, google_img: nil, dietary_requirements: nil,
-      tshirt_size: 'Large', twitter: "@sally#{number}", mailing_list: false,
-      challenge_sponsor_contact_place: false, challenge_sponsor_contact_enter: false,
-      my_project_sponsor_contact: false, me_govhack_contact: (number % 2 == 0),
-      created_at: "2018-07-24 21:36:57", updated_at: "2018-07-24 21:36:57",
-      organisation_name: nil, phone_number: nil, how_did_you_hear: nil,
-      accepted_terms_and_conditions: false, password: Devise.friendly_token[0, 20])
-  end
+  first_name = first_names.sample
+  last_name = last_names.sample
+  user = User.new(email: "#{first_name}_#{last_name}#{number}@example.com",
+    full_name: "#{first_name} #{last_name}",
+    preferred_name: first_name, preferred_img: nil,
+    google_img: nil, dietary_requirements: 'vegetables',
+    tshirt_size: 'Small', twitter: "@#{first_name}#{number}",
+    mailing_list: false, challenge_sponsor_contact_place: false,
+    challenge_sponsor_contact_enter: false, my_project_sponsor_contact: false,
+    me_govhack_contact: (number % 2 == 0), organisation_name: nil,
+    phone_number: nil, how_did_you_hear: nil,
+    accepted_terms_and_conditions: false,
+    password: Devise.friendly_token[0, 20])
   user.skip_confirmation_notification!
+  user.skip_reconfirmation!
   user.confirm
   user.save
 end
@@ -201,7 +198,7 @@ Region.all.each do |region|
       catering: 'Lots of food, vego available.',
       place_id: 'ChIJ15yzA3lakWsRdtSXdwYk7uQ', video_id: '0Mv48ZM7gu4',
       start_time: '2018-09-10 19:20:33 +1000',
-      end_time: '2018-09-10 19:20:33 +1000')
+      end_time: '2018-09-10 19:20:33 +1000', published: true)
 
     EventPartnership.create(event: event, sponsor_id: random_sponsor_id)
 
