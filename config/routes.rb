@@ -26,7 +26,7 @@ Rails.application.routes.draw do
     resources :teams, controller: 'events/teams'
   end
 
-  resources :challenges, param: :identifier do
+  resources :challenges, param: :identifier, only: [:index, :show] do
     resources :entries
   end
 
