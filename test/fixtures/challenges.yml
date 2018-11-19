@@ -4,20 +4,22 @@ one:
   id: 1
   region_id: 1
   competition_id: 1
-  name: MyString
+  name: Australia Challenge 0
   short_desc: MyText
   long_desc: MyText
   eligibility: MyText
   video_url: MyString
-  approved: false
+  approved: true
+  identifier: australia_challenge_0
 
 two:
   id: 2
   region_id: 1
   competition_id: 1
-  name: MyString
+  name: Australia Challenge 1
   short_desc: MyText
   long_desc: MyText
   eligibility: MyText
   video_url: MyString
-  approved: false
+  approved: true
+  identifier: australia_challenge_1
