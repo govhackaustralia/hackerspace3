@@ -7,7 +7,6 @@ class Assignment < ApplicationRecord
   has_many :scorecards, dependent: :destroy
 
   validates :title, inclusion: { in: VALID_ASSIGNMENT_TITLES }
-
   validate :can_only_join_team_if_registered_for_a_competition_event
 
   after_save :only_one_team_leader
