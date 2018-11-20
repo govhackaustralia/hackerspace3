@@ -5,6 +5,8 @@ user = User.new(email: ENV['SEED_EMAIL'], full_name: ENV['SEED_NAME'],
   password: Devise.friendly_token[0, 20])
 
 user.skip_confirmation_notification!
+user.skip_reconfirmation!
+user.confirm
 user.save
 
 user.make_site_admin
@@ -115,6 +117,54 @@ def random_challenge_id
   random_id
 end
 
+def create_event(event_type, comp, event_name, region)
+  region.events.create(event_type: event_type, competition: comp,
+    name: event_name, registration_type: OPEN, capacity: 50,
+    email: "#{event_name}@mail.com", twitter: '@qld',
+    address: "Eagle Stree, #{region.name} QLD, 4217",
+    accessibility: 'Access through the stairs',
+    youth_support: 'Always here.', parking: 'None, on street.',
+    public_transport: 'Trains near by.', operation_hours: '9-5',
+    catering: 'Lots of food, vego available.',
+    place_id: 'ChIJ15yzA3lakWsRdtSXdwYk7uQ', video_id: '0Mv48ZM7gu4',
+    start_time: '2018-09-10 19:20:33 +1000',
+    end_time: '2018-09-10 19:20:33 +1000', published: true)
+end
+
+def fill_out_comp_event(event)
+  10.times do |team_time|
+    team = event.teams.create
+
+    team.assign_leader(User.find(random_user_id))
+
+    8.times do |time|
+      team.assignments.create(title: TEAM_MEMBER, user_id: random_user_id)
+    end
+
+    team.projects.create(team_name: "#{event.name} team #{team_time}",
+    description: 'Best team evaaaaaa!', project_name: "#{event.name} project #{team_time}",
+    data_story: 'We will be taking a big data approach.',
+    source_code_url: 'https://github.com/tenderlove/allocation_sampler',
+    video_url: 'https://www.youtube.com/embed/kqcrEFkA8g0',
+    homepage_url: 'https://www.govhack.org/', user: team.assignments.first.user)
+
+    5.times do |time|
+      team.team_data_sets.create(name:
+        "#{team.name} dataset #{team_time + time}",
+        description: 'Best dataset evaaaaaa',
+        description_of_use: 'We achieved a full variance analysis',
+        url: 'https://data.gov.au/dataset/wyndham-smart-bin-fill-level'
+      )
+    end
+
+    Checkpoint.all.each do |checkpoint|
+      team.entries.create(checkpoint: checkpoint,
+        challenge_id: random_challenge_id,
+        justification: 'We think we would do excellently in this challenge.')
+    end
+  end
+end
+
 Region.create(name: 'New South Wales', time_zone: 'Sydney', parent_id: Region.root.id)
 
 Region.create(name: 'Victoria', time_zone: 'Melbourne', parent_id: Region.root.id)
@@ -188,17 +238,7 @@ Region.all.each do |region|
 
     next if event_name == 'Australia' && event_type == COMPETITION_EVENT
 
-    event = region.events.create(event_type: event_type, competition: comp,
-      name: event_name, registration_type: OPEN, capacity: 50,
-      email: "#{event_name}@mail.com", twitter: '@qld',
-      address: "Eagle Stree, #{region.name} QLD, 4217",
-      accessibility: 'Access through the stairs',
-      youth_support: 'Always here.', parking: 'None, on street.',
-      public_transport: 'Trains near by.', operation_hours: '9-5',
-      catering: 'Lots of food, vego available.',
-      place_id: 'ChIJ15yzA3lakWsRdtSXdwYk7uQ', video_id: '0Mv48ZM7gu4',
-      start_time: '2018-09-10 19:20:33 +1000',
-      end_time: '2018-09-10 19:20:33 +1000', published: true)
+    event = create_event(event_type, comp, event_name, region)
 
     EventPartnership.create(event: event, sponsor_id: random_sponsor_id)
 
@@ -213,37 +253,9 @@ Region.all.each do |region|
     end
 
     if event_type == COMPETITION_EVENT
-      10.times do |team_time|
-        team = event.teams.create
-
-        team.assign_leader(User.find(random_user_id))
-
-        8.times do |time|
-          team.assignments.create(title: TEAM_MEMBER, user_id: random_user_id)
-        end
-
-        team.projects.create(team_name: "#{event.name} team #{team_time}",
-        description: 'Best team evaaaaaa!', project_name: "#{event.name} project #{team_time}",
-        data_story: 'We will be taking a big data approach.',
-        source_code_url: 'https://github.com/tenderlove/allocation_sampler',
-        video_url: 'https://www.youtube.com/embed/kqcrEFkA8g0',
-        homepage_url: 'https://www.govhack.org/', user: team.assignments.first.user)
-
-        5.times do |time|
-          team.team_data_sets.create(name:
-            "#{team.name} dataset #{team_time + time}",
-            description: 'Best dataset evaaaaaa',
-            description_of_use: 'We achieved a full variance analysis',
-            url: 'https://data.gov.au/dataset/wyndham-smart-bin-fill-level'
-          )
-        end
-
-        Checkpoint.all.each do |checkpoint|
-          team.entries.create(checkpoint: checkpoint,
-            challenge_id: random_challenge_id,
-            justification: 'We think we would do excellently in this challenge.')
-        end
-      end
+      fill_out_comp_event(event)
+      event = create_event(event_type, comp, "Remote #{region.name}", region)
+      fill_out_comp_event(event)
     end
   end
 end
