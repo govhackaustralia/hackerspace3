@@ -15,7 +15,7 @@ Rails.application.routes.draw do
 
   resources :data_sets, only: [:index, :show]
 
-  resources :teams, :favourites, :entries
+  resources :teams, :favourites
 
   resources :projects, param: :identifier do
     resources :scorecards
