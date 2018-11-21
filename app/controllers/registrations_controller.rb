@@ -27,18 +27,12 @@ class RegistrationsController < ApplicationController
     @user = current_user
     return unless params[:task] == GROUP_GOLDEN
 
-    @assignment = @registration.assignment
-    @team = @assignment.assignable
-    @project = @team.current_project
-    @other_members = @team.assignments.where.not(user: @user)
+    edit_group_golden
   end
 
   def update
     if params[:task] == GROUP_GOLDEN
-      @registration = Registration.find(params[:id])
-      @registration.update(assignment_id: params[:assignment_id])
-      flash[:notice] = 'Group Golden Ticket Transfered'
-      redirect_to manage_account_path
+      update_group_golden
     else
       update_registration
       update_user_preferences
@@ -130,5 +124,19 @@ class RegistrationsController < ApplicationController
 
   def update_skills_attrs
     @user.update(data_cruncher: params[:data_cruncher], coder: params[:coder], creative: params[:creative], facilitator: params[:facilitator])
+  end
+
+  def update_group_golden
+    @registration = Registration.find(params[:id])
+    @registration.update(assignment_id: params[:assignment_id])
+    flash[:notice] = 'Group Golden Ticket Transferred'
+    redirect_to __account_path
+  end
+
+  def edit_group_golden
+    @assignment = @registration.assignment
+    @team = @assignment.assignable
+    @project = @team.current_project
+    @other_members = @team.assignments.where.not(user: @user)
   end
 end

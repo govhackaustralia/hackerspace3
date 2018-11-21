@@ -4,13 +4,19 @@ module ProjectsHelper
 
     filtered_projects = []
     @projects.each do |project|
-      team_obj = @id_teams_projects[project.team_id]
-      team_name = project.team_name
-      project_name = project.project_name
-      event_name = team_obj[:event].name
-      team_string = "#{team_name} #{project_name} #{event_name}".downcase
-      filtered_projects << project if team_string.include? term.downcase
+      next unless search_match(project, term)
+
+      filtered_projects << project
     end
     filtered_projects
+  end
+
+  def search_match(project, term)
+    team_obj = @id_teams_projects[project.team_id]
+    team_name = project.team_name
+    project_name = project.project_name
+    event_name = team_obj[:event].name
+    team_string = "#{team_name} #{project_name} #{event_name}".downcase
+    team_string.include?(term.downcase) ? true : false
   end
 end
