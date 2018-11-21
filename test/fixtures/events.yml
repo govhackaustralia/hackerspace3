@@ -13,6 +13,7 @@ one:
   event_type: Connection
   registration_type: Open
   identifier: connection_brisbane
+  published: true
 
 two:
   id: 2
@@ -23,3 +24,4 @@ two:
   event_type: Competition
   registration_type: Open
   identifier: competition_brisbane
+  published: true

@@ -21,7 +21,7 @@ Rails.application.routes.draw do
     resources :scorecards
   end
 
-  resources :events, param: :identifier do
+  resources :events, param: :identifier, only: [:index, :show] do
     resources :registrations
     resources :teams, controller: 'events/teams'
   end

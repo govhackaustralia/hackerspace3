@@ -4,5 +4,17 @@ class EventsControllerTest < ActionDispatch::IntegrationTest
   test 'should get index' do
     get events_url
     assert_response :success
+    get connections_url
+    assert_response :success
+    get competition_events_url
+    assert_response :success
+    get awards_url
+    assert_response :success
+  end
+
+  test 'should get show' do
+    event = events(:one)
+    get event_url(event.identifier)
+    assert_response :success
   end
 end
