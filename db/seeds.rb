@@ -8,12 +8,10 @@ user.skip_confirmation_notification!
 user.skip_reconfirmation!
 user.confirm
 user.save
-
 user.make_site_admin
 user.update(accepted_terms_and_conditions: true, how_did_you_hear: 'jas')
 
 first_names = ['Tim', 'Kate', 'Watson', 'Zhang', 'Maria', 'Omar', 'Ezara']
-
 last_names = ['Kumar', 'Huang', 'Zammit', 'Tyrel', 'Conner', 'Drizen']
 
 100.times do |number|
@@ -45,21 +43,37 @@ def random_user_id
   random_id
 end
 
+if ENV['STAGE'] == 'PRE_CONNECTION'
+  comp_start = Time.now + 2.months
+elsif ENV['STAGE'] == 'MID_COMPETITION'
+  comp_start = Time.now - 1.days
+elsif ENV['STAGE'] == 'POST_COMPETITION'
+  comp_start = Time.now - 4.days
+else
+  comp_start = Time.now
+end
+
+comp_end = comp_start + 3.days
+peoples_start = comp_start + 1.weeks
+peoples_end = peoples_start + 2.weeks
+judging_start = comp_start + 1.weeks
+judging_end = judging_start + 3.weeks
+
 comp = Competition.current
 
-comp.update(start_time: Time.now - 5.days, end_time: Time.now - 3.days,
-            peoples_choice_start: Time.now + 6.days,
-            peoples_choice_end: Time.now + 1.month,
-            challenge_judging_start: Time.now - 1.days,
-            challenge_judging_end: Time.now + 1.month)
+comp.update(start_time: comp_start, end_time: comp_end,
+            peoples_choice_start: peoples_start,
+            peoples_choice_end: peoples_end,
+            challenge_judging_start: judging_start,
+            challenge_judging_end: judging_end)
 
 5.times do |time|
-  comp.checkpoints.create(end_time: Time.now - time.days,
+  comp.checkpoints.create(end_time: comp_start + (time* 6).days,
                           name: "Checkpoint #{time}",
                           max_national_challenges: 1,
-                          max_regional_challenges: 1,
-                          )
-  comp.criteria.create(name: "Project Criterion #{time}", description: "#{time} Description
+                          max_regional_challenges: 1)
+  comp.criteria.create(name: "Project Criterion #{time}",
+                       description: "#{time} Description
     to end all descriptions for Project Criterion.", category: PROJECT)
 end
 
@@ -68,19 +82,14 @@ end
     to end all descriptions for Challenge Criterion.", category: CHALLENGE)
 end
 
-comp.assignments.create(user_id: random_user_id, title: MANAGEMENT_TEAM)
-
-comp.assignments.create(user_id: random_user_id, title: MANAGEMENT_TEAM)
-
-comp.assignments.create(user_id: random_user_id, title: MANAGEMENT_TEAM)
-
-comp.assignments.create(user_id: random_user_id, title: MANAGEMENT_TEAM)
+4.times do
+  comp.assignments.create(user_id: random_user_id, title: MANAGEMENT_TEAM)
+end
 
 comp.assignments.create(user_id: random_user_id, title: COMPETITION_DIRECTOR)
-
 comp.assignments.create(user_id: random_user_id, title: SPONSORSHIP_DIRECTOR)
 
-10.times do |time|
+10.times do
   comp.assignments.create(user_id: random_user_id, title: VOLUNTEER)
 end
 
@@ -117,7 +126,7 @@ def random_challenge_id
   random_id
 end
 
-def create_event(event_type, comp, event_name, region)
+def create_event(event_type, comp, event_name, region, event_start)
   region.events.create(event_type: event_type, competition: comp,
     name: event_name, registration_type: OPEN, capacity: 50,
     email: "#{event_name}@mail.com", twitter: '@qld',
@@ -127,8 +136,8 @@ def create_event(event_type, comp, event_name, region)
     public_transport: 'Trains near by.', operation_hours: '9-5',
     catering: 'Lots of food, vego available.',
     place_id: 'ChIJ15yzA3lakWsRdtSXdwYk7uQ', video_id: '0Mv48ZM7gu4',
-    start_time: '2018-09-10 19:20:33 +1000',
-    end_time: '2018-09-10 19:20:33 +1000', published: true)
+    start_time: event_start,
+    end_time: event_start + 2.hours, published: true)
 end
 
 def fill_out_comp_event(event)
@@ -166,30 +175,22 @@ def fill_out_comp_event(event)
 end
 
 Region.create(name: 'New South Wales', time_zone: 'Sydney', parent_id: Region.root.id)
-
 Region.create(name: 'Victoria', time_zone: 'Melbourne', parent_id: Region.root.id)
-
 Region.create(name: 'South Australia', time_zone: 'Adelaide', parent_id: Region.root.id)
-
 Region.create(name: 'Western Australia', time_zone: 'Perth', parent_id: Region.root.id)
-
 Region.create(name: 'Tasmania', time_zone: 'Hobart', parent_id: Region.root.id)
-
 Region.create(name: 'ACT', time_zone: 'Canberra', parent_id: Region.root.id)
-
 Region.create(name: 'Queensland', time_zone: 'Brisbane', parent_id: Region.root.id)
 
 Region.all.each do |region|
 
   region.assignments.create(user_id: random_user_id, title: REGION_DIRECTOR)
 
-  region.assignments.create(user_id: random_user_id, title: REGION_SUPPORT)
+  3.times do
+    region.assignments.create(user_id: random_user_id, title: REGION_SUPPORT)
+  end
 
-  region.assignments.create(user_id: random_user_id, title: REGION_SUPPORT)
-
-  region.assignments.create(user_id: random_user_id, title: REGION_SUPPORT)
-
-  3.times do |time|
+  3.times do
     region.sponsorships.create(sponsor_id: random_sponsor_id,
     sponsorship_type_id: random_sponsorship_type_id)
   end
@@ -238,24 +239,24 @@ Region.all.each do |region|
 
     next if event_name == 'Australia' && event_type == COMPETITION_EVENT
 
-    event = create_event(event_type, comp, event_name, region)
+    if event_type == COMPETITION_EVENT
+      event = create_event(event_type, comp, "Remote #{region.name}", region, comp_start)
+      fill_out_comp_event(event)
+      event = create_event(event_type, comp, event_name, region, comp_start)
+      fill_out_comp_event(event)
+    elsif event_type == CONNECTION_EVENT
+      event = create_event(event_type, comp, event_name, region, comp_start - 1.months)
+    elsif event_type == AWARD_EVENT
+      event = create_event(event_type, comp, event_name, region, comp_start + 1.months)
+    end
 
     EventPartnership.create(event: event, sponsor_id: random_sponsor_id)
-
     event.assignments.create(user_id: random_user_id, title: EVENT_HOST)
-
     event.assignments.create(user_id: random_user_id, title: EVENT_SUPPORT)
-
     event.assignments.create(user_id: random_user_id, title: EVENT_SUPPORT)
 
     Assignment.where(title: PARTICIPANT).take(20).each do |particiant|
       event.registrations.create(status: ATTENDING, assignment: particiant)
-    end
-
-    if event_type == COMPETITION_EVENT
-      fill_out_comp_event(event)
-      event = create_event(event_type, comp, "Remote #{region.name}", region)
-      fill_out_comp_event(event)
     end
   end
 end
