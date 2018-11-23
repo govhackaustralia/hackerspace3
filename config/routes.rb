@@ -17,7 +17,7 @@ Rails.application.routes.draw do
 
   resources :teams, :favourites
 
-  resources :projects, param: :identifier do
+  resources :projects, param: :identifier, only: [:index, :show] do
     resources :scorecards
   end
 
