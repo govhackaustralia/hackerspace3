@@ -1,15 +1,15 @@
 # This file should contain all the record creation needed to seed the database with its default values.
 # The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
 
-user = User.new(email: ENV['SEED_EMAIL'], full_name: ENV['SEED_NAME'],
+admin = User.new(email: ENV['SEED_EMAIL'], full_name: ENV['SEED_NAME'],
   password: Devise.friendly_token[0, 20])
 
-user.skip_confirmation_notification!
-user.skip_reconfirmation!
-user.confirm
-user.save
-user.make_site_admin
-user.update(accepted_terms_and_conditions: true, how_did_you_hear: 'jas')
+admin.skip_confirmation_notification!
+admin.skip_reconfirmation!
+admin.confirm
+admin.save
+admin.make_site_admin
+admin.update(accepted_terms_and_conditions: true, how_did_you_hear: 'jas')
 
 first_names = ['Tim', 'Kate', 'Watson', 'Zhang', 'Maria', 'Omar', 'Ezara']
 last_names = ['Kumar', 'Huang', 'Zammit', 'Tyrel', 'Conner', 'Drizen']
@@ -36,11 +36,10 @@ last_names = ['Kumar', 'Huang', 'Zammit', 'Tyrel', 'Conner', 'Drizen']
 end
 
 @counter = 0
-def random_user_id
-  @counter += 1
-  random_id = @counter % User.count
-  random_id = 1 if random_id.zero?
-  random_id
+
+def random_model_id(model)
+  random_id = (@counter += 1) % model.count
+  random_id.zero? ? 1 : random_id
 end
 
 if ENV['STAGE'] == 'PRE_CONNECTION'
@@ -83,14 +82,14 @@ end
 end
 
 4.times do
-  comp.assignments.create(user_id: random_user_id, title: MANAGEMENT_TEAM)
+  comp.assignments.create(user_id: random_model_id(User), title: MANAGEMENT_TEAM)
 end
 
-comp.assignments.create(user_id: random_user_id, title: COMPETITION_DIRECTOR)
-comp.assignments.create(user_id: random_user_id, title: SPONSORSHIP_DIRECTOR)
+comp.assignments.create(user_id: random_model_id(User), title: COMPETITION_DIRECTOR)
+comp.assignments.create(user_id: random_model_id(User), title: SPONSORSHIP_DIRECTOR)
 
 10.times do
-  comp.assignments.create(user_id: random_user_id, title: VOLUNTEER)
+  comp.assignments.create(user_id: random_model_id(User), title: VOLUNTEER)
 end
 
 20.times do |time|
@@ -101,29 +100,8 @@ end
     updated_at: "2018-07-26 23:01:28")
 end
 
-def random_sponsor_id
-  @counter += 1
-  random_id = @counter % Sponsor.count
-  random_id = 1 if random_id.zero?
-  random_id
-end
-
 10.times do |time|
   comp.sponsorship_types.create(name: "Tier #{time + 1}", order: time + 1)
-end
-
-def random_sponsorship_type_id
-  @counter += 1
-  random_id = @counter % SponsorshipType.count
-  random_id = 1 if random_id.zero?
-  random_id
-end
-
-def random_challenge_id
-  @counter += 1
-  random_id = @counter % Challenge.count
-  random_id = 1 if random_id.zero?
-  random_id
 end
 
 def create_event(event_type, comp, event_name, region, event_start)
@@ -144,10 +122,10 @@ def fill_out_comp_event(event)
   10.times do |team_time|
     team = event.teams.create
 
-    team.assign_leader(User.find(random_user_id))
+    team.assign_leader(User.find(random_model_id(User)))
 
     8.times do |time|
-      team.assignments.create(title: TEAM_MEMBER, user_id: random_user_id)
+      team.assignments.create(title: TEAM_MEMBER, user_id: random_model_id(User))
     end
 
     team.projects.create(team_name: "#{event.name} team #{team_time}",
@@ -168,7 +146,7 @@ def fill_out_comp_event(event)
 
     Checkpoint.all.each do |checkpoint|
       team.entries.create(checkpoint: checkpoint,
-        challenge_id: random_challenge_id,
+        challenge_id: random_model_id(Challenge),
         justification: 'We think we would do excellently in this challenge.')
     end
   end
@@ -184,15 +162,15 @@ Region.create(name: 'Queensland', time_zone: 'Brisbane', parent_id: Region.root.
 
 Region.all.each do |region|
 
-  region.assignments.create(user_id: random_user_id, title: REGION_DIRECTOR)
+  region.assignments.create(user_id: random_model_id(User), title: REGION_DIRECTOR)
 
   3.times do
-    region.assignments.create(user_id: random_user_id, title: REGION_SUPPORT)
+    region.assignments.create(user_id: random_model_id(User), title: REGION_SUPPORT)
   end
 
   3.times do
-    region.sponsorships.create(sponsor_id: random_sponsor_id,
-    sponsorship_type_id: random_sponsorship_type_id)
+    region.sponsorships.create(sponsor_id: random_model_id(Sponsor),
+    sponsorship_type_id: random_model_id(SponsorshipType))
   end
 
   5.times do |time|
@@ -211,24 +189,17 @@ Region.all.each do |region|
       description: 'Random dataset that was taken from data.gov.')
   end
 
-  def random_data_set_id(region)
-    @counter += 1
-    random_id = @counter % region.data_sets.count
-    random_id = 1 if random_id.zero?
-    random_id
-  end
-
   region.challenges.each do |challenge|
     5.times do
-      challenge.challenge_data_sets.create(data_set_id: random_data_set_id(region))
+      challenge.challenge_data_sets.create(data_set_id: random_model_id(region.data_sets))
     end
 
     3.times do
-      challenge.challenge_sponsorships.create(sponsor_id: random_sponsor_id)
+      challenge.challenge_sponsorships.create(sponsor_id: random_model_id(Sponsor))
     end
 
     3.times do
-      challenge.assignments.create(title: JUDGE, user_id: random_user_id)
+      challenge.assignments.create(title: JUDGE, user_id: random_model_id(User))
     end
   end
 
@@ -250,10 +221,10 @@ Region.all.each do |region|
       event = create_event(event_type, comp, event_name, region, comp_start + 1.months)
     end
 
-    EventPartnership.create(event: event, sponsor_id: random_sponsor_id)
-    event.assignments.create(user_id: random_user_id, title: EVENT_HOST)
-    event.assignments.create(user_id: random_user_id, title: EVENT_SUPPORT)
-    event.assignments.create(user_id: random_user_id, title: EVENT_SUPPORT)
+    EventPartnership.create(event: event, sponsor_id: random_model_id(Sponsor))
+    event.assignments.create(user_id: random_model_id(User), title: EVENT_HOST)
+    event.assignments.create(user_id: random_model_id(User), title: EVENT_SUPPORT)
+    event.assignments.create(user_id: random_model_id(User), title: EVENT_SUPPORT)
 
     Assignment.where(title: PARTICIPANT).take(20).each do |particiant|
       event.registrations.create(status: ATTENDING, assignment: particiant)
@@ -269,5 +240,12 @@ comp.teams.all.each do |team|
       score = nil if score.zero?
       Judgment.create(criterion: criterion, scorecard: scorecard, score: score)
     end
+  end
+end
+
+User.all.each do |user|
+  event_assignment = user.event_assignment
+  6.times do
+    Favourite.create(assignment: event_assignment, team_id: random_model_id(Team))
   end
 end
