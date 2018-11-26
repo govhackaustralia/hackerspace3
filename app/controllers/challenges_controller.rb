@@ -1,8 +1,6 @@
 class ChallengesController < ApplicationController
   def index
-    @competition = Competition.current
-    @challenges = @competition.challenges.where(approved: true).order(:name)
-    @regions = ([Region.root] << Region.where.not(parent_id: nil).order(:name)).flatten
+    index_variables
     challenge_entry_counts
     filter_challenges
     respond_to do |format|
@@ -12,12 +10,7 @@ class ChallengesController < ApplicationController
   end
 
   def show
-    @competition = Competition.current
-    @challenge = Challenge.find_by(identifier: params[:identifier])
-    @challenge = Challenge.find(params[:identifier]) if @challenge.nil?
-    @region = @challenge.region
-    @data_sets = @challenge.data_sets
-    @challenge_sponsorships = @challenge.challenge_sponsorships
+    show_variables
     challenge_show_entry_management
     return if @competition.started?(@region.time_zone) || (user_signed_in? && current_user.region_privileges?)
 
@@ -26,12 +19,27 @@ class ChallengesController < ApplicationController
 
   private
 
+  def index_variables
+    @competition = Competition.current
+    @challenges = @competition.challenges.where(approved: true).order(:name)
+    @regions = ([Region.root] << Region.where.not(parent_id: nil).order(:name)).flatten
+  end
+
+  def show_variables
+    @competition = Competition.current
+    @challenge = Challenge.find_by(identifier: params[:identifier])
+    @challenge = Challenge.find(params[:identifier]) if @challenge.nil?
+    @region = @challenge.region
+    @data_sets = @challenge.data_sets
+    @challenge_sponsorships = @challenge.challenge_sponsorships
+  end
+
   def challenge_show_entry_management
     @user_eligible_teams = @challenge.eligible_teams & current_user.teams if user_signed_in?
     if @competition.in_challenge_judging_window?(LAST_TIME_ZONE) ||
        @competition.in_peoples_judging_window?(LAST_TIME_ZONE)
       judging_view
-    elsif
+    else
       checkpoint_entry_view
     end
   end
@@ -40,17 +48,21 @@ class ChallengesController < ApplicationController
     @teams = @challenge.teams.where(published: true)
     @id_teams_projects = Team.id_teams_projects(@teams)
     @projects = Team.projects_by_name(@id_teams_projects)
-    if user_signed_in?
-      if (@judgeable_assignment = current_user.judgeable_assignment).present?
-        @peoples_assignment = current_user.peoples_assignment
-        @project_judging = @judgeable_assignment.judgeable_scores(@teams)
-        @project_judging_total = @competition.score_total PROJECT
-      end
-      if (@judge = current_user.judge_assignment(@challenge)).present?
-        @challenge_judging = @judge.judgeable_scores(@teams)
-        @challenge_judging_total = @competition.score_total CHALLENGE
-      end
+    return unless user_signed_in?
+
+    user_judging
+  end
+
+  def user_judging
+    if (@judgeable_assignment = current_user.judgeable_assignment).present?
+      @peoples_assignment = current_user.peoples_assignment
+      @project_judging = @judgeable_assignment.judgeable_scores(@teams)
+      @project_judging_total = @competition.score_total PROJECT
     end
+    return unless (@judge = current_user.judge_assignment(@challenge)).present?
+
+    @challenge_judging = @judge.judgeable_scores(@teams)
+    @challenge_judging_total = @competition.score_total CHALLENGE
   end
 
   def checkpoint_entry_view
@@ -66,6 +78,15 @@ class ChallengesController < ApplicationController
   end
 
   def challenge_entry_counts
+    all_entries = all_region_entries
+    unpublished_entries = Entry.where(team: Team.where(published: false)).to_a
+    published_entries = all_entries - unpublished_entries
+    @challenge_id_to_entry_count = {}
+    @challenges.each { |challenge| @challenge_id_to_entry_count[challenge.id] = 0 }
+    published_entries.each { |entry| @challenge_id_to_entry_count[entry.challenge_id] += 1 }
+  end
+
+  def all_region_entries
     all_entries = []
     Region.all.each do |region|
       passed_checkpoint_ids = if region.national?
@@ -75,11 +96,7 @@ class ChallengesController < ApplicationController
                               end
       all_entries += region.entries.where(checkpoint_id: passed_checkpoint_ids).to_a
     end
-    unpublished_entries = Entry.where(team: Team.where(published: false)).to_a
-    published_entries = all_entries - unpublished_entries
-    @challenge_id_to_entry_count = {}
-    @challenges.each { |challenge| @challenge_id_to_entry_count[challenge.id] = 0 }
-    published_entries.each { |entry| @challenge_id_to_entry_count[entry.challenge_id] += 1 }
+    all_entries
   end
 
   def filter_challenges

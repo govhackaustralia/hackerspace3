@@ -35,7 +35,7 @@ class ChallengeTest < ActiveSupport::TestCase
 
   test 'challenge validations' do
     assert_not @challenge.update(name: nil)
-    challenge_2 = Challenge.second
-    assert_not @challenge.update(name: challenge_2.name)
+    challenge2 = Challenge.second
+    assert_not @challenge.update(name: challenge2.name)
   end
 end
