@@ -1,8 +1,8 @@
 class Challenge < ApplicationRecord
-  has_many :assignments, as: :assignable, dependent: :destroy
-  has_many :users, through: :assignments
   belongs_to :competition
   belongs_to :region
+  has_many :assignments, as: :assignable, dependent: :destroy
+  has_many :users, through: :assignments
   has_many :entries, dependent: :destroy
   has_many :teams, through: :entries
   has_many :challenge_sponsorships, dependent: :destroy
@@ -14,8 +14,7 @@ class Challenge < ApplicationRecord
   has_one_attached :pdf
   has_one_attached :pdf_preview
 
-  validates :name, presence: true
-  validates :name, uniqueness: true
+  validates :name, presence: true, uniqueness: true
 
   after_save :update_identifier
 
