@@ -3,6 +3,10 @@ Rails.application.routes.draw do
 
   devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
 
+  resources :data_sets, only: [:index, :show]
+  resources :teams, only: [:new, :create]
+  resources :favourites, only: [:create, :destroy]
+
   resources :users do
     resources :assignments, controller: 'users/assignments'
   end
@@ -12,10 +16,6 @@ Rails.application.routes.draw do
       resources :registration_flights, controller: 'registrations/registration_flights'
     end
   end
-
-  resources :data_sets, only: [:index, :show]
-
-  resources :teams, :favourites
 
   resources :projects, param: :identifier, only: [:index, :show] do
     resources :scorecards
