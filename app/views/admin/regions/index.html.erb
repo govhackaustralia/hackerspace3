@@ -1,9 +1,11 @@
-<h2>Region Management</h2>
+<main class="team_page">
+  <h2>Region Management</h2>
 
-<%= link_to 'Create new Region', new_admin_region_path %>
+  <%= link_to 'Create new Region', new_admin_region_path %>
 
-<%= render "region_modal", locals: { region: @region} %>
+  <%= render "region_modal", locals: { region: @region} %>
 
-<% @region.sub_regions.each do |region| %>
-  <%= render 'region_modal', locals: { region: region } %>
-<% end %>
+  <% @region.sub_regions.each do |region| %>
+    <%= render 'region_modal', locals: { region: region } %>
+  <% end %>
+</main>
