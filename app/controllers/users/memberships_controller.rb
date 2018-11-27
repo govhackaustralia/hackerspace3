@@ -13,6 +13,7 @@ class Users::MembershipsController < ApplicationController
   def user_is_owner
     @assignment = Assignment.find(params[:id])
     return if @assignment.user_id == current_user.id
+
     flash[:alert] = 'You do not have permission to modify this assignment'
     redirect_to root_path
   end

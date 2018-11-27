@@ -15,13 +15,7 @@ class ProjectsController < ApplicationController
     @team = Project.find_by(identifier: params[:identifier]).team
     @current_project = @team.current_project
     if @team.published
-      @competition = Competition.current
-      @checkpoints = @competition.checkpoints.order(:end_time)
-      @passed_checkpoint_ids = @competition.passed_checkpoint_ids(@team.time_zone)
-      @entries_to_display = Entry.where(checkpoint: @passed_checkpoint_ids, team: @team)
-      @challenges = @team.challenges
-      @id_regions = Region.id_regions(Region.all)
-      user_records_show if user_signed_in?
+      show_published
     else
       flash[:alert] = 'This Team Project has not been published.'
       redirect_to root_path
@@ -30,15 +24,24 @@ class ProjectsController < ApplicationController
 
   private
 
+  def show_published
+    @competition = Competition.current
+    @checkpoints = @competition.checkpoints.order(:end_time)
+    @passed_checkpoint_ids = @competition.passed_checkpoint_ids(@team.time_zone)
+    @entries_to_display = Entry.where(checkpoint: @passed_checkpoint_ids, team: @team)
+    @challenges = @team.challenges
+    @id_regions = Region.id_regions(Region.all)
+    user_records_show if user_signed_in?
+  end
+
   def user_records_index
     @attending_events = current_user.competition_events_participating(@competition) if @competition.not_finished?(LAST_TIME_ZONE)
-    if @competition.in_peoples_judging_window?(LAST_TIME_ZONE)
-      if (@peoples_assignment = current_user.peoples_assignment).present?
-        @judgeable_assignment = current_user.judgeable_assignment
-        @project_judging = @judgeable_assignment.judgeable_scores(@teams)
-        @project_judging_total = @competition.score_total PROJECT
-      end
-    end
+    return unless @competition.in_peoples_judging_window?(LAST_TIME_ZONE)
+    return unless (@peoples_assignment = current_user.peoples_assignment).present?
+
+    @judgeable_assignment = current_user.judgeable_assignment
+    @project_judging = @judgeable_assignment.judgeable_scores(@teams)
+    @project_judging_total = @competition.score_total PROJECT
   end
 
   def user_records_show
