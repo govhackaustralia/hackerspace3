@@ -2,7 +2,7 @@ class Registration < ApplicationRecord
   belongs_to :assignment
   has_one :user, through: :assignment
   belongs_to :event
-  has_many :registration_flights
+  has_many :registration_flights, dependent: :destroy
   has_many :flights, through: :registration_flights
 
   after_update :check_for_newly_freed_space

@@ -44,6 +44,14 @@ class Admin::Events::FlightsController < ApplicationController
     end
   end
 
+  def destroy
+    @flight = Flight.find(params[:id])
+    @event = @flight.event
+    @flight.destroy
+    flash[:notice] = 'Flight removed.'
+    redirect_to admin_event_flights_path(@event)
+  end
+
   private
 
   def flight_params
