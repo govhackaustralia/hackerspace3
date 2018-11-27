@@ -1,74 +1,76 @@
-<h2><%= @event.name %> Event</h2>
+<main class="team_page">
+  <h2><%= @event.name %> Event</h2>
 
-<h3>Event Information</h3>
+  <h3>Event Information</h3>
 
-<p>Region: <%= @region.name %></p>
-<p>Event Category: <%= @event.event_type %></p>
-<p>Registration Type: <%= @event.registration_type %></p>
-<p>Event Capacity: <%= @event.capacity %></p>
+  <p>Region: <%= @region.name %></p>
+  <p>Event Category: <%= @event.event_type %></p>
+  <p>Registration Type: <%= @event.registration_type %></p>
+  <p>Event Capacity: <%= @event.capacity %></p>
 
-<%= link_to "Edit #{@event.name} Event", edit_admin_region_event_path(@region, @event) %></br>
-<% if @event.published? %>
-  <p>This event has been published and is in public view.</p>
-  <%= link_to 'Go to Event Page', event_path(@event.identifier) %>
-<% else %>
-  <p>This event has not been published and can only be viewed by admin.</p>
-  <%= link_to 'Go to Event Page (Admin Only)', event_path(@event.identifier) %>
-<% end %>
+  <%= link_to "Edit #{@event.name} Event", edit_admin_region_event_path(@region, @event) %></br>
+  <% if @event.published? %>
+    <p>This event has been published and is in public view.</p>
+    <%= link_to 'Go to Event Page', event_path(@event.identifier) %>
+  <% else %>
+    <p>This event has not been published and can only be viewed by admin.</p>
+    <%= link_to 'Go to Event Page (Admin Only)', event_path(@event.identifier) %>
+  <% end %>
 
-<h3>Event Assignments</h3>
+  <h3>Event Assignments</h3>
 
-<h4>Event Host</h4>
+  <h4>Event Host</h4>
 
-<% if (host = @event.host_user).present? %>
-  <%= render 'admin/shared/user_contact', locals: { user: host } %>
-<% else %>
-  This event does not currently have a host.</br>
-  <%= link_to "New #{EVENT_HOST} Assignment", new_admin_event_assignment_path(@event, title: EVENT_HOST) %></br>
-<% end %>
+  <% if (host = @event.host_user).present? %>
+    <%= render 'admin/shared/user_contact', locals: { user: host } %>
+  <% else %>
+    This event does not currently have a host.</br>
+    <%= link_to "New #{EVENT_HOST} Assignment", new_admin_event_assignment_path(@event, title: EVENT_HOST) %></br>
+  <% end %>
 
-<h4>Event Support</h4>
+  <h4>Event Support</h4>
 
-<%= pluralize @event.support_users.count, 'event support' %> currently assigned to event.</br>
+  <%= pluralize @event.support_users.count, 'event support' %> currently assigned to event.</br>
 
-<%= link_to "Manage #{@event.name} Assignments", admin_event_assignments_path(@event) %>
+  <%= link_to "Manage #{@event.name} Assignments", admin_event_assignments_path(@event) %>
 
-<h3>Event Registrations</h3>
+  <h3>Event Registrations</h3>
 
-<% if @event.at_capacity? %>
-  <strong>This event is at capacity</strong></br>
-  All future participant registrations will be added to the waiting list.</br>
-<% end %>
+  <% if @event.at_capacity? %>
+    <strong>This event is at capacity</strong></br>
+    All future participant registrations will be added to the waiting list.</br>
+  <% end %>
 
-<%= pluralize @event.registrations.where(status: ATTENDING).count, 'guest' %> attending
-(<%= pluralize @event.attending_participants_count, 'participant' %> and
-<%= pluralize @event.registration_assignments.where(title: VIP).count, 'vip' %>).</br>
-<% if @event.waitlist? %>
-  <%= pluralize @event.registrations.where(status: WAITLIST).count, 'participant' %> on the wait list.</br>
-<% end %>
-<%= pluralize @event.registrations.where(status: NON_ATTENDING).count, 'guest' %> registered not attending.</br>
+  <%= pluralize @event.registrations.where(status: ATTENDING).count, 'guest' %> attending
+  (<%= pluralize @event.attending_participants_count, 'participant' %> and
+  <%= pluralize @event.registration_assignments.where(title: VIP).count, 'vip' %>).</br>
+  <% if @event.waitlist? %>
+    <%= pluralize @event.registrations.where(status: WAITLIST).count, 'participant' %> on the wait list.</br>
+  <% end %>
+  <%= pluralize @event.registrations.where(status: NON_ATTENDING).count, 'guest' %> registered not attending.</br>
 
-<%= link_to "Manage #{@event.name} Registrations", admin_event_registrations_path(@event) %>
+  <%= link_to "Manage #{@event.name} Registrations", admin_event_registrations_path(@event) %>
 
-<h3>Event Partner</h3>
+  <h3>Event Partner</h3>
 
-<% if (event_partnership = @event.event_partnership).present? %>
-  <%= render 'admin/sponsors/sponsor', locals: { sponsor: event_partnership.sponsor } %>
-<% else %>
-  <%= link_to 'Add Event Partner', new_admin_event_event_partnership_path(@event) %></br>
-<% end %>
+  <% if (event_partnership = @event.event_partnership).present? %>
+    <%= render 'admin/sponsors/sponsor', locals: { sponsor: event_partnership.sponsor } %>
+  <% else %>
+    <%= link_to 'Add Event Partner', new_admin_event_event_partnership_path(@event) %></br>
+  <% end %>
 
-<% if @region.national? && @event.event_type == AWARD_EVENT %>
-  <h3>Flights</h3>
-  <p><%= pluralize @inbound_flights.count, 'inbound flight' %> saved.</p>
-  <p><%= pluralize @outbound_flights.count, 'outbound flight' %> saved.</p>
-  <p><%= link_to 'Manage Event Flights', admin_event_flights_path(@event) %></p>
+  <% if @region.national? && @event.event_type == AWARD_EVENT %>
+    <h3>Flights</h3>
+    <p><%= pluralize @inbound_flights.count, 'inbound flight' %> saved.</p>
+    <p><%= pluralize @outbound_flights.count, 'outbound flight' %> saved.</p>
+    <p><%= link_to 'Manage Event Flights', admin_event_flights_path(@event) %></p>
 
-  <h3>Bulk Mails</h3>
-  <p><%= pluralize @bulk_mails.count, 'bulk mail' %> created for this event.</p>
-  <%= link_to 'Bulk Mails', admin_event_bulk_mails_path(@event) %>
-<% end %>
+    <h3>Bulk Mails</h3>
+    <p><%= pluralize @bulk_mails.count, 'bulk mail' %> created for this event.</p>
+    <p><%= link_to 'Bulk Mails', admin_event_bulk_mails_path(@event) %></p>
+  <% end %>
 
-<% if @region.admin_privileges?(current_user) %>
-  <%= link_to "Go back to #{@region.name} Events", admin_region_events_path(@region) %>
-<% end %>
+  <% if @region.admin_privileges?(current_user) %>
+    <p><%= link_to "Go back to #{@region.name} Events", admin_region_events_path(@region) %></p>
+  <% end %>
+</main>

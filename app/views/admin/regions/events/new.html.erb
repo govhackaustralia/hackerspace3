@@ -1,5 +1,7 @@
-<h2>Create New Event for Region: <%= @region.name %></h2>
+<main class="team_page">
+  <h2>Create New Event for Region: <%= @region.name %></h2>
 
-<%= render 'form' %>
+  <%= render 'form' %>
 
-<%= link_to 'Back to Region Events', admin_region_events_path(@region) %>
+  <%= link_to 'Back to Region Events', admin_region_events_path(@region) %>
+</main>

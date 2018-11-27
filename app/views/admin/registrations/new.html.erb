@@ -1,11 +1,13 @@
-<% if params[:type] == INDIVIDUAL_GOLDEN %>
-  <%= render 'new_individual_golden' %>
-<% elsif params[:type] == GROUP_GOLDEN %>
-  <%= render 'new_group_golden' %>
-<% elsif params[:type] == STAFF %>
-  <%= render 'new_staff' %>
-<% else %>
-  <%= render 'new_regular' %>
-<% end %>
+<main class="team_page">
+  <% if params[:type] == INDIVIDUAL_GOLDEN %>
+    <%= render 'new_individual_golden' %>
+  <% elsif params[:type] == GROUP_GOLDEN %>
+    <%= render 'new_group_golden' %>
+  <% elsif params[:type] == STAFF %>
+    <%= render 'new_staff' %>
+  <% else %>
+    <%= render 'new_regular' %>
+  <% end %>
 
-<%= link_to "Back to #{@event.name} Registrations", admin_event_registrations_path(@event) %>
+  <%= link_to "Back to #{@event.name} Registrations", admin_event_registrations_path(@event) %>
+</main>
