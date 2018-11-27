@@ -7,8 +7,9 @@ Rails.application.routes.draw do
   resources :teams, only: [:new, :create]
   resources :favourites, only: [:create, :destroy]
 
-  resources :users do
-    resources :assignments, controller: 'users/assignments'
+  namespace :users do
+    resources :invitations, only: [:update, :destroy]
+    resources :memberships, only: [:destroy]
   end
 
   namespace :flights do

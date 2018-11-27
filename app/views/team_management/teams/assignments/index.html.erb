@@ -17,7 +17,7 @@
     <%= render 'users/user_contact', locals: { user: team_member } %>
     <% if team_member == current_user %>
       <% assignment = Assignment.find_by(assignable: @team, user: current_user) %>
-      <%= link_to 'Leave Team', user_assignment_path(current_user, assignment),
+      <%= link_to 'Leave Team', users_membership_path(assignment),
       method: :delete, data: { confirm: 'Are you sure?' } %>
     <% elsif @team.team_leader == current_user || team_leader.nil? %>
       <% assignment = Assignment.find_by(assignable: @team, user: team_member) %>

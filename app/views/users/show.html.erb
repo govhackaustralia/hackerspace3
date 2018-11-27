@@ -109,15 +109,15 @@
 					<% project = @id_teams_projects[team.id][:current_project] %>
 					<% event = @id_teams_projects[team.id][:event] %>
 					<h4><%= project.team_name %> - <%= project.project_name %></h4>
-					Event: <%= event.name %></br>
+					<p>Event: <%= event.name %></p>
 					<% assignment = @team_id_assignments[team.id] %>
 
-					<%= link_to 'Accept Invitation and Go to Team',
-							team_management_team_assignment_path(
-								team, assignment, title: TEAM_MEMBER), method: :patch %></br>
+					<p><%= link_to 'Accept Invitation and Go to Team',
+							users_invitation_path(assignment), method: :patch %></p>
 
-					<%= link_to 'Decline Invitation', user_assignment_path(@user, assignment), method: :delete,
-												data: { confirm: 'Are you sure?' } %></br>
+					<p><%= link_to 'Decline Invitation',
+							users_invitation_path(assignment), method: :delete,
+							data: { confirm: 'Are you sure?' } %></p>
 				<% end %>
 			</article>
 		<% end %>
