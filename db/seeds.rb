@@ -1,6 +1,9 @@
 # This file should contain all the record creation needed to seed the database with its default values.
 # The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
 
+# TODO: BulkMail Seeds
+# TODO: Project Seeds (Multiple for a team)
+
 admin = User.new(email: ENV['SEED_EMAIL'], full_name: ENV['SEED_NAME'],
   password: Devise.friendly_token[0, 20])
 
@@ -219,6 +222,11 @@ Region.all.each do |region|
       event = create_event(event_type, comp, event_name, region, comp_start - 1.months)
     elsif event_type == AWARD_EVENT
       event = create_event(event_type, comp, event_name, region, comp_start + 1.months)
+      if event_name == 'Australia'
+        8.times do
+          event.flights.create(description: 'Timbuktu', direction: FLIGHT_DIRECTIONS.sample)
+        end
+      end
     end
 
     EventPartnership.create(event: event, sponsor_id: random_model_id(Sponsor))
