@@ -11,6 +11,8 @@ class Assignment < ApplicationRecord
 
   after_save :only_one_team_leader
 
+  # Callback to ensure that there is only one team leader per team.
+  # Will remove longest serving Team Leader and change to Team Member.
   def only_one_team_leader
     return unless title == TEAM_LEADER
 
@@ -20,6 +22,8 @@ class Assignment < ApplicationRecord
     leader_assignments.first.update(title: TEAM_MEMBER)
   end
 
+  # A validation to ensure there only participants registered for a competition
+  # event is able to join a team in any position.
   def can_only_join_team_if_registered_for_a_competition_event
     return unless [TEAM_MEMBER, TEAM_LEADER, INVITEE].include? title
 
@@ -28,6 +32,9 @@ class Assignment < ApplicationRecord
     errors.add(:checkpoint_id, 'Register for a competition event to join or create a team.') if (registration_event_ids & competition_event_ids).empty?
   end
 
+  # Class method to organise methods into key value pairs.
+  # ENHANCEMENT: Common method, find standard alternative.
+  # ENHANCEMENT: This should be in the helpers.
   def self.id_assignments(assignments)
     assignments = where(id: assignments.uniq) if assignments.class == Array
     id_assignments = {}
@@ -35,6 +42,9 @@ class Assignment < ApplicationRecord
     id_assignments
   end
 
+  # Returns object for a particular judgeable assignment showing the status of
+  # each of the potential teams to be judged.
+  # ENHANCEMENT: This should be in the helpers.
   def judgeable_scores(teams)
     team_id_to_scorecard = {}
     if title == JUDGE
@@ -58,7 +68,7 @@ class Assignment < ApplicationRecord
     judgments = Judgment.where(scorecard: team_scorecards)
     judgments.each { |judgment| scorecard_id_to_scores[judgment.scorecard_id] << judgment.score }
 
-    judgeable_scores = {}
+    judgeable_scores_obj = {}
     teams.each do |team|
       verdict = if title != JUDGE && user_team_ids.include?(team.id)
                   'Your Team'
@@ -69,11 +79,13 @@ class Assignment < ApplicationRecord
                 else
                   scores.sum
                 end
-      judgeable_scores[team.id] = { display_score_status: verdict }
+      judgeable_scores_obj[team.id] = { display_score_status: verdict }
     end
-    judgeable_scores
+    judgeable_scores_obj
   end
 
+  # Returns an object of assignments belonging to particular user.
+  # ENHANCEMENT: This should be in the helpers.
   def self.user_id_assignments(users)
     user_id_assignments = {}
     users.each { |user| user_id_assignments[user.id] = [] }
