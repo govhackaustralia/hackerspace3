@@ -24,11 +24,16 @@ class TeamManagement::TeamsController < ApplicationController
 
   private
 
+  # IMPROVEMENT - Multiple move up to ApplicationController
   def check_user_team_privileges!
     @team = Team.find(params[:id])
     @competition = @team.competition
     return if @team.permission?(current_user) && @competition.in_competition_window?(@team.time_zone)
 
+    check_team_permission
+  end
+
+  def check_team_permission
     if @team.permission?(current_user)
       flash[:notice] = 'The competition has closed.'
       redirect_to project_path(@team.current_project.identifier)

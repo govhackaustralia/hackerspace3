@@ -11,8 +11,7 @@ class TeamManagement::ProjectsController < ApplicationController
   end
 
   def update
-    @project = @team.projects.new(project_params)
-    @project.user = current_user
+    update_project
     if @project.save
       @team.update(project_id: @project.id)
       flash[:notice] = 'Team Project Saved'
@@ -31,11 +30,21 @@ class TeamManagement::ProjectsController < ApplicationController
                                     :project_name)
   end
 
+  def update_project
+    @project = @team.projects.new(project_params)
+    @project.user = current_user
+  end
+
+  # IMPROVEMENT - Multiple move up to ApplicationController
   def check_user_team_privileges!
     @team = Team.find(params[:team_id])
     @competition = @team.competition
     return if @team.permission?(current_user) && @competition.in_competition_window?(@team.time_zone)
 
+    check_team_permission
+  end
+
+  def check_team_permission
     if @team.permission?(current_user)
       flash[:notice] = 'The competition has closed.'
       redirect_to project_path(@team.current_project.identifier)

@@ -8,7 +8,7 @@ class CompetitionTest < ActiveSupport::TestCase
     @sponsorship_type = SponsorshipType.first
     @event = Event.first
     @team = Team.first
-    @project =  Project.first
+    @project = Project.first
     @challenge = Challenge.first
     @checkpoint = Checkpoint.first
     @data_set = DataSet.first
