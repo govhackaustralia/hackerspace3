@@ -13,13 +13,13 @@ Rails.application.routes.draw do
   end
 
   namespace :flights do
-    resources :registrations do
-      resources :registration_flights, controller: 'registrations/registration_flights'
+    resources :registrations do # FIX: This resource not needed, find alternative. Scope? Namespace?
+      resources :registration_flights, only: [:new, :create], controller: 'registrations/registration_flights'
     end
   end
 
   resources :projects, param: :identifier, only: [:index, :show] do
-    resources :scorecards
+    resources :scorecards, only: [:new, :edit, :update]
   end
 
   resources :events, param: :identifier, only: [:index, :show] do
