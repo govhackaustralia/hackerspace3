@@ -1,9 +1,11 @@
-<% if params[:team_orders] %>
-  <h2>Edit Mail Orders for Bulk Mail <%= @bulk_mail.name %></h2>
-  <%= render 'team_order_form' %>
-<% else %>
-  <h2>Edit Bulk Mail <%= @bulk_mail.name %></h2>
-  <%= render 'form' %>
-<% end %>
+<main class="team_page">
+  <% if params[:team_orders] %>
+    <h2>Edit Mail Orders for Bulk Mail <%= @bulk_mail.name %></h2>
+    <%= render 'team_order_form' %>
+  <% else %>
+    <h2>Edit Bulk Mail <%= @bulk_mail.name %></h2>
+    <%= render 'form' %>
+  <% end %>
 
-<%= link_to 'Back to Bulk Mail', admin_region_bulk_mail_path(@region, @bulk_mail) %>
+  <%= link_to 'Back to Bulk Mail', admin_region_bulk_mail_path(@region, @bulk_mail) %>
+</main>

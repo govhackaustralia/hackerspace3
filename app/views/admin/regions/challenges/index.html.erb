@@ -1,24 +1,26 @@
-<h2>Challenges for <%= @region.name %> Region</h2>
+<main class="team_page">
+  <h2>Challenges for <%= @region.name %> Region</h2>
 
-<%= link_to "Create New Challenge for #{@region.name}", new_admin_region_challenge_path(@region) %></br>
+  <%= link_to "Create New Challenge for #{@region.name}", new_admin_region_challenge_path(@region) %></br>
 
-<% if (@challenges).present? %>
+  <% if (@challenges).present? %>
 
-  <% @challenges.each do |challenge| %>
-    Name: <%= challenge.name %></br>
-    <% unless challenge.short_desc.blank? %>
-      Short Description: <%= challenge.short_desc %></br>
+    <% @challenges.each do |challenge| %>
+      <h3><%= challenge.name %></h3>
+      <% unless challenge.short_desc.blank? %>
+        Short Description: <%= challenge.short_desc %></br>
+      <% end %>
+      <% scorecards =  %>
+      <p><%= pluralize Scorecard.where(judgeable: challenge.entries).count, 'scorecard'%>
+        from <%= pluralize challenge.assignments.count, 'judge' %></p>
+      <%= link_to 'Go to Challenge', admin_region_challenge_path(@region, challenge) %></br>
     <% end %>
-    <% scorecards =  %>
-    <p><%= pluralize Scorecard.where(judgeable: challenge.entries).count, 'scorecard'%>
-      from <%= pluralize challenge.assignments.count, 'judge' %></p>
-    <%= link_to 'Go to Challenge', admin_region_challenge_path(@region, challenge) %></br>
+
+  <% else %>
+
+    <div>There are currently no challenges for this region in the current competition.</div>
+
   <% end %>
 
-<% else %>
-
-  <div>There are currently no challenges for this region in the current competition.</div>
-
-<% end %>
-
-<%= link_to "Back to #{@region.name} Region", admin_region_path(@region) %>
+  <%= link_to "Back to #{@region.name} Region", admin_region_path(@region) %>
+</main>
