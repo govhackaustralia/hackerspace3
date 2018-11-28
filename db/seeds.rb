@@ -2,7 +2,7 @@
 # The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
 
 # TODO: BulkMail Seeds
-# TODO: Project Seeds (Multiple for a team)
+# TODO: Members for Teams (Not being filled because of comp event constraint.)
 
 admin = User.new(email: ENV['SEED_EMAIL'], full_name: ENV['SEED_NAME'],
   password: Devise.friendly_token[0, 20])
@@ -131,12 +131,16 @@ def fill_out_comp_event(event)
       team.assignments.create(title: TEAM_MEMBER, user_id: random_model_id(User))
     end
 
-    team.projects.create(team_name: "#{event.name} team #{team_time}",
-    description: 'Best team evaaaaaa!', project_name: "#{event.name} project #{team_time}",
-    data_story: 'We will be taking a big data approach.',
-    source_code_url: 'https://github.com/tenderlove/allocation_sampler',
-    video_url: 'https://www.youtube.com/embed/kqcrEFkA8g0',
-    homepage_url: 'https://www.govhack.org/', user: team.assignments.first.user)
+    (1 + rand(20)).times do |time|
+      team.projects.create(team_name: "#{event.name} team #{team_time}",
+      description: "Best team evaaaaaa! version #{time}",
+      project_name: "#{event.name} project #{team_time}",
+      data_story: 'We will be taking a big data approach.',
+      source_code_url: 'https://github.com/tenderlove/allocation_sampler',
+      video_url: 'https://www.youtube.com/embed/kqcrEFkA8g0',
+      homepage_url: 'https://www.govhack.org/',
+      user: team.assignments.first.user)
+    end
 
     5.times do |time|
       team.team_data_sets.create(name:
