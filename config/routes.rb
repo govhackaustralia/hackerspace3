@@ -23,8 +23,8 @@ Rails.application.routes.draw do
   end
 
   resources :events, param: :identifier, only: [:index, :show] do
-    resources :registrations
-    resources :teams, controller: 'events/teams'
+    resources :registrations, except: [:index, :destroy]
+    resources :teams, controller: 'events/teams', only: :index
   end
 
   resources :challenges, param: :identifier, only: [:index, :show] do

@@ -5,10 +5,8 @@ class CorrespondenceTest < ActiveSupport::TestCase
     @team_correspondence = Correspondence.first
     @correspondence = Correspondence.first
     @team_order = TeamOrder.first
-
     @user_correspondence = Correspondence.second
     @user_order = UserOrder.first
-
     @user = User.first
   end
 
