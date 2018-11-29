@@ -1,62 +1,64 @@
-<h2>Competition <%= @competition.year %></h2>
+<main class="team_page">
+  <h2>Competition <%= @competition.year %></h2>
 
-Start Time: <%= @competition.start_time %></br>
-End Time: <%= @competition.end_time %></br>
+  <p>Start Time: <%= @competition.start_time %></p>
+  <p>End Time: <%= @competition.end_time %></p>
 
-People's Choice Start: <%= @competition.peoples_choice_start %></br>
-People's Choice End: <%= @competition.peoples_choice_end %></br>
+  <p>People's Choice Start: <%= @competition.peoples_choice_start %></p>
+  <p>People's Choice End: <%= @competition.peoples_choice_end %></p>
 
-Challenge Judging Start: <%= @competition.challenge_judging_start %></br>
-Challenge Judging End: <%= @competition.challenge_judging_end %></br>
+  <p>Challenge Judging Start: <%= @competition.challenge_judging_start %></p>
+  <p>Challenge Judging End: <%= @competition.challenge_judging_end %></p>
 
-<%= link_to 'Update Competition Times', edit_admin_competition_path(@competition) %></br>
+  <p><%= link_to 'Update Competition Times', edit_admin_competition_path(@competition) %></p>
 
-<h3>People's Choice Judging</h3>
+  <h3>People's Choice Judging</h3>
 
-<p><%= link_to 'Competition Judging', admin_competition_scorecards_path(@competition, include_judges: false) %></p>
-<p><%= link_to 'Competition Judging (with Judges)', admin_competition_scorecards_path(@competition, include_judges: true) %></p>
+  <p><%= link_to 'Competition Judging', admin_competition_scorecards_path(@competition, include_judges: false) %></p>
+  <p><%= link_to 'Competition Judging (with Judges)', admin_competition_scorecards_path(@competition, include_judges: true) %></p>
 
-<h3>Competition Assignments</h3>
+  <h3>Competition Assignments</h3>
 
-<h4>Competition Director</h4>
+  <h4>Competition Director</h4>
 
-<% if (director = @competition.director).present? %>
-  <%= render 'admin/shared/user_contact', locals: { user: director } %>
-<% else %>
-  This competition does not currently have a director.</br>
-<% end %>
-
-<h4>Site Admins</h4>
-
-<% if (site_admins = @competition.site_admins).present? %>
-  <% site_admins.each do |site_admin| %>
-    <%= render 'admin/shared/user_contact', locals: { user: site_admin } %>
+  <% if (director = @competition.director).present? %>
+    <%= render 'admin/shared/user_contact', locals: { user: director } %>
+  <% else %>
+    <p>This competition does not currently have a director.</p>
   <% end %>
-<% else %>
-  This competition does not currently have any site admins.</br>
-<% end %>
 
-<h4>GovHack Management Team</h4>
+  <h4>Site Admins</h4>
 
-<% if (members = @competition.management_team).present? %>
-  <% members.each do |member| %>
-    <%= render 'admin/shared/user_contact', locals: { user: member } %>
+  <% if (site_admins = @competition.site_admins).present? %>
+    <% site_admins.each do |site_admin| %>
+      <%= render 'admin/shared/user_contact', locals: { user: site_admin } %>
+    <% end %>
+  <% else %>
+    <p>This competition does not currently have any site admins.</p>
   <% end %>
-<% else %>
-  This competition does not currently have any management team members.</br>
-<% end %>
 
-<%= link_to 'Assignments Management', admin_competition_assignments_path(@competition) %></br>
+  <h4>GovHack Management Team</h4>
 
-<h3>CheckPoints</h3>
+  <% if (members = @competition.management_team).present? %>
+    <% members.each do |member| %>
+      <%= render 'admin/shared/user_contact', locals: { user: member } %>
+    <% end %>
+  <% else %>
+    <p>This competition does not currently have any management team members.</p>
+  <% end %>
 
-<%= pluralize @checkpoints.count, 'checkpoint' %> saved.</br>
+  <p><%= link_to 'Assignments Management', admin_competition_assignments_path(@competition) %></p>
 
-<%= link_to 'Competition Checkpoints', admin_competition_checkpoints_path(@competition) %></br>
+  <h3>CheckPoints</h3>
 
-<h3>Criteria</h3>
+  <p><%= pluralize @checkpoints.count, 'checkpoint' %> saved.</p>
 
-<%= pluralize @competition.challenge_criteria.count, 'Challenge Criterion' %> saved.</br>
-<%= pluralize @competition.project_criteria.count, 'Project Criterion' %> saved.</br>
+  <p><%= link_to 'Competition Checkpoints', admin_competition_checkpoints_path(@competition) %></p>
 
-<%= link_to 'Competition Criteria', admin_competition_criteria_path(@competition) %>
+  <h3>Criteria</h3>
+
+  <p><%= pluralize @competition.challenge_criteria.count, 'Challenge Criterion' %> saved.</p>
+  <p><%= pluralize @competition.project_criteria.count, 'Project Criterion' %> saved.</p>
+
+  <p><%= link_to 'Competition Criteria', admin_competition_criteria_path(@competition) %></p>
+</main>

@@ -1,27 +1,29 @@
-<h2>Update Competition <%= @competition.year %></h2>
+<main class="team_page">
+  <h2>Update Competition <%= @competition.year %></h2>
 
-<%= form_for [:admin, @competition] do |form|  %>
+  <%= form_for [:admin, @competition] do |form|  %>
 
-  <%= form.label :start_time %><br>
-  <%= form.datetime_local_field :start_time %><br>
+    <%= form.label :start_time %><br>
+    <%= form.datetime_local_field :start_time %><br>
 
-  <%= form.label :end_time %><br>
-  <%= form.datetime_local_field :end_time %><br>
+    <%= form.label :end_time %><br>
+    <%= form.datetime_local_field :end_time %><br>
 
-  <%= form.label :peoples_choice_start %><br>
-  <%= form.datetime_local_field :peoples_choice_start %><br>
+    <%= form.label :peoples_choice_start %><br>
+    <%= form.datetime_local_field :peoples_choice_start %><br>
 
-  <%= form.label :peoples_choice_end %><br>
-  <%= form.datetime_local_field :peoples_choice_end %><br>
+    <%= form.label :peoples_choice_end %><br>
+    <%= form.datetime_local_field :peoples_choice_end %><br>
 
-  <%= form.label :challenge_judging_start %><br>
-  <%= form.datetime_local_field :challenge_judging_start %><br>
+    <%= form.label :challenge_judging_start %><br>
+    <%= form.datetime_local_field :challenge_judging_start %><br>
 
-  <%= form.label :challenge_judging_end %><br>
-  <%= form.datetime_local_field :challenge_judging_end %><br>
+    <%= form.label :challenge_judging_end %><br>
+    <%= form.datetime_local_field :challenge_judging_end %><br>
 
-  <%= form.submit %>
+    <%= form.submit %>
 
-<% end %>
+  <% end %>
 
-<%= link_to 'Back to Competition', admin_competition_path(@competition) %>
+  <%= link_to 'Back to Competition', admin_competition_path(@competition) %>
+</main>

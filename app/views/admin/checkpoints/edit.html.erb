@@ -1,5 +1,7 @@
-<h2><%= "Edit Checkpoint for Competition #{@competition.year}" %></h2>
+<main class="team_page">
+  <h2><%= "Edit Checkpoint for Competition #{@competition.year}" %></h2>
 
-<%= render 'form' %>
+  <%= render 'form' %>
 
-<%= link_to 'Back to Competition Checkpoints', admin_competition_checkpoints_path(@competition) %>
+  <p><%= link_to 'Back to Competition Checkpoints', admin_competition_checkpoints_path(@competition) %></p>
+</main>

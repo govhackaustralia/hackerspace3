@@ -1,14 +1,16 @@
-<h2>Criteria for <%= @competition.name%></h2>
+<main class="team_page">
+  <h2>Criteria for <%= @competition.name%></h2>
 
-<h3>Challenge Criteria</h3>
+  <h3>Challenge Criteria</h3>
 
-<%= render 'criteria_display', locals: { type: CHALLENGE, criteria: @competition.challenge_criteria } %>
+  <%= render 'criteria_display', locals: { type: CHALLENGE, criteria: @competition.challenge_criteria } %>
 
-<h3>Project Criteria</h3>
+  <h3>Project Criteria</h3>
 
-<%= render 'criteria_display', locals: { type: PROJECT, criteria: @competition.project_criteria } %>
+  <%= render 'criteria_display', locals: { type: PROJECT, criteria: @competition.project_criteria } %>
 
-<%= link_to 'New Criterion', new_admin_competition_criterion_path(@competition) %><br>
-<% if current_user.admin_privileges? %>
-  <%= link_to 'Back to Competition', admin_competition_path(@competition) %>
-<% end %>
+  <p><%= link_to 'New Criterion', new_admin_competition_criterion_path(@competition) %></p>
+  <% if current_user.admin_privileges? %>
+    <p><%= link_to 'Back to Competition', admin_competition_path(@competition) %></p>
+  <% end %>
+</main>

@@ -3,6 +3,7 @@
 
 # TODO: BulkMail Seeds
 # TODO: Members for Teams (Not being filled because of comp event constraint.)
+# TODO: More Scorecards for People's choice and judgeing.
 
 admin = User.new(email: ENV['SEED_EMAIL'], full_name: ENV['SEED_NAME'],
   password: Devise.friendly_token[0, 20])
