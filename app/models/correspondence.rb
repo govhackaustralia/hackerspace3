@@ -4,6 +4,7 @@ class Correspondence < ApplicationRecord
 
   validates :status, inclusion: { in: CORRESPONDENCE_STATUS_TYPES }
 
+  # ENHANCEMENT: Add to Helper.
   def self.id_user_correspondences(bulk_mail)
     id_user_correspondences = {}
     bulk_mail.correspondences.each do |correspondence|
