@@ -2,7 +2,7 @@
 # The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
 
 # TODO: BulkMail Seeds
-# TODO: admin needs to be apart of a few teams.
+# TODO: Admin needs to be apart of a few teams.
 # TODO: More Scorecards for People's choice and judgeing.
 
 admin = User.new(email: ENV['SEED_EMAIL'], full_name: ENV['SEED_NAME'],
@@ -147,7 +147,7 @@ def fill_out_comp_event(event)
     team = event.teams.create
 
     team.assign_leader(competitors.sample)
-    8.times do
+    (1 + rand(8)).times do
       team.assignments.create(title: TEAM_MEMBER, user: competitors.sample)
     end
 
