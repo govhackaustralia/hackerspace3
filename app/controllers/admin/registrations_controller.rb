@@ -16,19 +16,11 @@ class Admin::RegistrationsController < ApplicationController
     return if params[:term].blank?
 
     if params[:type] == GROUP_GOLDEN
-      @team = Team.find(params[:term]) unless params[:term].to_i.zero?
-      team_found if @team.present?
-      search_other_fields_team unless @team.present?
+      new_golden_group
     elsif params[:type] == STAFF
-      @assignment = Assignment.find(params[:term]) unless params[:term].to_i.zero?
-      @user = @assignment.user unless @assignment.nil?
-      search_other_fields unless @user.present?
-      staff_found if @user.present?
-      @user_id_assignments = Assignment.user_id_assignments(@users) if @users.present?
+      new_staff
     else
-      @user = User.find_by_email(params[:term])
-      user_found if @user.present?
-      search_other_fields unless @user.present?
+      new_normal
     end
   end
 
@@ -52,14 +44,13 @@ class Admin::RegistrationsController < ApplicationController
   end
 
   def create
+    @event = Event.find(params[:event_id])
     create_new_registration
     if @registration.save
       flash[:notice] = 'New Registration Added.'
       redirect_to admin_event_registrations_path(@event)
     else
-      flash.now[:alert] = @registration.errors.full_messages.to_sentence
-      @user = @assignment.user
-      render :new
+      create_error
     end
   end
 
@@ -67,6 +58,30 @@ class Admin::RegistrationsController < ApplicationController
 
   def registration_params
     params.require(:registration).permit(:status)
+  end
+
+  def create_error
+    flash.now[:alert] = @registration.errors.full_messages.to_sentence
+    @user = @assignment.user
+    render :new
+  end
+
+  def new_golden_group
+    @team = Team.find(params[:term]) unless params[:term].to_i.zero?
+    team_found if @team.present?
+    search_other_fields_team unless @team.present?
+  end
+
+  def new_staff
+    @assignment = Assignment.find(params[:term]) unless params[:term].to_i.zero?
+    @user = @assignment.user unless @assignment.nil?
+    complete_new_staff
+  end
+
+  def complete_new_staff
+    search_other_fields unless @user.present?
+    staff_found if @user.present?
+    @user_id_assignments = Assignment.user_id_assignments(@users) if @users.present?
   end
 
   def check_for_privileges
@@ -81,25 +96,50 @@ class Admin::RegistrationsController < ApplicationController
     @registration = @event.registrations.new
   end
 
+  def new_normal
+    @user = User.find_by_email(params[:term])
+    user_found if @user.present?
+    search_other_fields unless @user.present?
+  end
+
   def create_new_registration
-    @event = Event.find(params[:event_id])
     if params[:type] == INDIVIDUAL_GOLDEN
-      user = User.find(params[:user_id])
-      @assignment = Assignment.find_or_create_by(user: user, title: GOLDEN_TICKET, assignable: Competition.current)
-      @registration = @event.registrations.new(status: INVITED)
+      create_individual_golden
     elsif params[:type] == GROUP_GOLDEN
-      @team = Team.find(params[:team_id])
-      @assignment = @team.assignments.where(title: TEAM_LEADER).first
-      @registration = @event.registrations.new(status: INVITED)
+      create_group_golden
     elsif params[:type] == STAFF
-      @assignment = Assignment.find(params[:assignment_id])
-      @registration = @event.registrations.new(status: INVITED)
+      create_staff
     else
-      @assignment = Assignment.find(params[:assignment_id])
-      @registration = @event.registrations.new(registration_params)
+      create_normal
     end
+    finish_create
+  end
+
+  def create_individual_golden
+    user = User.find(params[:user_id])
+    @assignment = Assignment.find_or_create_by(user: user, title: GOLDEN_TICKET, assignable: Competition.current)
+    @registration = @event.registrations.new(status: INVITED)
+  end
+
+  def create_group_golden
+    @team = Team.find(params[:team_id])
+    @assignment = @team.assignments.where(title: TEAM_LEADER).first
+    @registration = @event.registrations.new(status: INVITED)
+  end
+
+  def create_staff
+    @assignment = Assignment.find(params[:assignment_id])
+    @registration = @event.registrations.new(status: INVITED)
+  end
+
+  def create_normal
+    @assignment = Assignment.find(params[:assignment_id])
+    @registration = @event.registrations.new(registration_params)
+  end
+
+  def finish_create
     @registration.update(assignment: @assignment)
-    @registration.update(time_notified: DateTime.now.in_time_zone(COMP_TIME_ZONE))
+    @registration.update(time_notified: Time.now.in_time_zone(COMP_TIME_ZONE))
   end
 
   def user_found
