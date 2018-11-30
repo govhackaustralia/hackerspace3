@@ -1,18 +1,21 @@
-<h2>Competition <%= @competition.year %> Sponsorship Types</h2>
+<main class="team_page">
+  <h2>Competition <%= @competition.year %> Sponsorship Types</h2>
 
-<table>
-  <tr>
-    <th>Order</th>
-    <th>Name</th>
-    <th>Edit</th>
-  </tr>
-  <% @sponsorship_types.each do |sponsorship_type| %>
+  <table>
     <tr>
-      <td><%= sponsorship_type.order %></td>
-      <td><%= sponsorship_type.name %></td>
-      <td><%= link_to 'Edit', edit_admin_sponsorship_type_path(sponsorship_type) %></td>
+      <th>Order</th>
+      <th>Name</th>
+      <th>Edit</th>
     </tr>
-  <% end %>
-</table>
+    <% @sponsorship_types.each do |sponsorship_type| %>
+      <tr>
+        <td><%= sponsorship_type.order %></td>
+        <td><%= sponsorship_type.name %></td>
+        <td><%= link_to 'Edit', edit_admin_sponsorship_type_path(sponsorship_type) %></td>
+      </tr>
+    <% end %>
+  </table>
 
-<%= link_to 'New Sponsorship Type', new_admin_sponsorship_type_path %>
+  <p><%= link_to 'New Sponsorship Type', new_admin_sponsorship_type_path %></p>
+  <p><%= link_to 'Back to Account Management', manage_account_path %></p>
+</main>

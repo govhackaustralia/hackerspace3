@@ -1,9 +1,7 @@
-<h2>Edit Sponsorship Type: <%= @sponsorship_type.name %></h2>
+<main class="team_page">
+  <h2>Edit Sponsorship Type: <%= @sponsorship_type.name %></h2>
 
-<%= form_for [:admin, @sponsorship_type] do |f| %>
-  <%= f.label :name %>
-  <%= f.text_field :name  %>
-  <%= f.label :order %>
-  <%= f.number_field :order, min: 1  %>
-  <%= f.submit %>
-<% end %>
+  <%= render 'form' %>
+
+  <p><%= link_to 'Back to Sponsorship Types', admin_sponsorship_types_path %></p>
+</main>
