@@ -2,6 +2,7 @@ class TeamManagement::Teams::AssignmentsController < ApplicationController
   before_action :authenticate_user!
   before_action :check_user_team_privileges!
 
+  # IMPROVEMENT: Move DB calls into the controller.
   def index; end
 
   def new

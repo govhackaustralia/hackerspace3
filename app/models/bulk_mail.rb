@@ -9,22 +9,30 @@ class BulkMail < ApplicationRecord
   validates :name, :from_email, :subject, presence: true
   validates :status, inclusion: { in: BULK_MAIL_STATUS_TYPES }
 
+  # Creates Team Orders for all teams associated with a mailable (an event or
+  # region)
+  # ENHANCEMENT: Should be moved else where.
   def create_team_orders
     mailable.teams.each do |team|
       TeamOrder.create(bulk_mail: self, team: team, request_type: NONE)
     end
   end
 
+  # Returns an array of correspondences associated with a bulk mail.
   def correspondences
     team_correspondences + user_correspondences
   end
 
+  # Processes a bulkmail out whether for team based order or user based order.
+  # ENHANCEMENT: Should be moved else where.
   def process
     team_process
     user_process
     update(status: PROCESSED)
   end
 
+  # Fill in specific attributes of email body and return string.
+  # ENHANCEMENT: Should be moved else where.
   def self.correspondence_body(template, user, project = nil)
     body = template.gsub(/\{ display_name \}/, user.display_name)
     return body if project.nil?
@@ -35,6 +43,8 @@ class BulkMail < ApplicationRecord
 
   private
 
+  # Process Team Orders (if there ar any)
+  # ENHANCEMENT: Should be moved else where.
   def team_process
     teams = mailable.teams
     return if teams.empty?
@@ -52,6 +62,8 @@ class BulkMail < ApplicationRecord
     end
   end
 
+  # Process User Orders (If there are any)
+  # ENHANCEMENT: Should be moved else where.
   def user_process
     user_order = UserOrder.find_by(bulk_mail: self)
     return if user_order.nil?
@@ -72,6 +84,8 @@ class BulkMail < ApplicationRecord
     end
   end
 
+  # Send emails for team orders.
+  # ENHANCEMENT: Should be moved else where.
   def prepare_and_send(users, project, team_order)
     users.each do |user|
       next unless user.me_govhack_contact
