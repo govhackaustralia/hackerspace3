@@ -5,11 +5,11 @@ one:
   competition_id: 1
   name: MyName
   description: MyText
-  category: Regional Challenge
+  category: Project
 
 two:
   id: 2
   competition_id: 1
   name: MyName
   description: MyText
-  category: People's Choice
+  category: Challenge
