@@ -2,7 +2,7 @@
 # The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
 
 # TODO: BulkMail Seeds
-# TODO: Members for Teams (Not being filled because of comp event constraint.)
+# TODO: admin needs to be apart of a few teams.
 # TODO: More Scorecards for People's choice and judgeing.
 
 admin = User.new(email: ENV['SEED_EMAIL'], full_name: ENV['SEED_NAME'],
@@ -37,6 +37,7 @@ last_names = ['Kumar', 'Huang', 'Zammit', 'Tyrel', 'Conner', 'Drizen']
   user.skip_reconfirmation!
   user.confirm
   user.save
+  user.event_assignment
 end
 
 @counter = 0
@@ -122,14 +123,36 @@ def create_event(event_type, comp, event_name, region, event_start)
     end_time: event_start + 2.hours, published: true)
 end
 
+def assign_participants(event)
+  Assignment.where(title: PARTICIPANT).take(20).each do |participant|
+    event.registrations.create(status: ATTENDING, assignment: participant)
+  end
+end
+
+def assign_event_supports_and_partnership(event)
+  EventPartnership.create(event: event, sponsor_id: random_model_id(Sponsor))
+  event.assignments.create(user_id: random_model_id(User), title: EVENT_HOST)
+  event.assignments.create(user_id: random_model_id(User), title: EVENT_SUPPORT)
+  event.assignments.create(user_id: random_model_id(User), title: EVENT_SUPPORT)
+end
+
 def fill_out_comp_event(event)
+
+  events = Event.where(event_type: COMPETITION_EVENT).all
+  assignment_ids = Registration.where(event: events).pluck(:assignment_id)
+  user_ids = Assignment.where(id: assignment_ids).pluck(:user_id)
+  competitors = User.where(id: user_ids)
+
   10.times do |team_time|
     team = event.teams.create
 
-    team.assign_leader(User.find(random_model_id(User)))
+    team.assign_leader(competitors.sample)
+    8.times do
+      team.assignments.create(title: TEAM_MEMBER, user: competitors.sample)
+    end
 
-    8.times do |time|
-      team.assignments.create(title: TEAM_MEMBER, user_id: random_model_id(User))
+    2.times do
+      team.assignments.create(title: INVITEE, user: competitors.sample)
     end
 
     (1 + rand(20)).times do |time|
@@ -220,32 +243,32 @@ Region.all.each do |region|
 
     if event_type == COMPETITION_EVENT
       event = create_event(event_type, comp, "Remote #{region.name}", region, comp_start)
+      assign_participants(event)
       fill_out_comp_event(event)
+      assign_event_supports_and_partnership(event)
       event = create_event(event_type, comp, event_name, region, comp_start)
+      assign_participants(event)
       fill_out_comp_event(event)
+      assign_event_supports_and_partnership(event)
     elsif event_type == CONNECTION_EVENT
       event = create_event(event_type, comp, event_name, region, comp_start - 1.months)
+      assign_participants(event)
+      assign_event_supports_and_partnership(event)
     elsif event_type == AWARD_EVENT
       event = create_event(event_type, comp, event_name, region, comp_start + 1.months)
+      assign_participants(event)
+      assign_event_supports_and_partnership(event)
       if event_name == 'Australia'
         8.times do
           event.flights.create(description: 'Timbuktu', direction: FLIGHT_DIRECTIONS.sample)
         end
       end
     end
-
-    EventPartnership.create(event: event, sponsor_id: random_model_id(Sponsor))
-    event.assignments.create(user_id: random_model_id(User), title: EVENT_HOST)
-    event.assignments.create(user_id: random_model_id(User), title: EVENT_SUPPORT)
-    event.assignments.create(user_id: random_model_id(User), title: EVENT_SUPPORT)
-
-    Assignment.where(title: PARTICIPANT).take(20).each do |particiant|
-      event.registrations.create(status: ATTENDING, assignment: particiant)
-    end
   end
 end
 
 comp.teams.all.each do |team|
+
   Assignment.where(title: PARTICIPANT).take(20).each do |assignment|
     scorecard = Scorecard.create(judgeable: team, assignment: assignment, included: (assignment.id % 5 != 0))
     comp.criteria.where(category: PROJECT).each do |criterion|
