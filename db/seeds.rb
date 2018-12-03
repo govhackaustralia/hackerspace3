@@ -1,9 +1,17 @@
 # This file should contain all the record creation needed to seed the database with its default values.
 # The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
 
+# To set to a particular a point in the competition run db:setup with the below
+# STAGE variables set.
+
+# PRE_CONNECTION - For before the connection events.
+# MID_COMPETITION - For mid way through the competition.
+# POST_COMPETITION - For After the competition.
+
+# Example $ rails db:setup STAGE=PRE_CONNECTION
+
 # TODO: BulkMail Seeds
 # TODO: Admin needs to be apart of a few teams.
-# TODO: More Scorecards for People's choice and judgeing.
 
 admin = User.new(email: ENV['SEED_EMAIL'], full_name: ENV['SEED_NAME'],
   password: Devise.friendly_token[0, 20])
@@ -268,10 +276,20 @@ Region.all.each do |region|
 end
 
 comp.teams.all.each do |team|
-
   Assignment.where(title: PARTICIPANT).take(20).each do |assignment|
     scorecard = Scorecard.create(judgeable: team, assignment: assignment, included: (assignment.id % 5 != 0))
     comp.criteria.where(category: PROJECT).each do |criterion|
+      score = Random.rand(11)
+      score = nil if score.zero?
+      Judgment.create(criterion: criterion, scorecard: scorecard, score: score)
+    end
+  end
+end
+
+Entry.all.each do |entry|
+  Assignment.where(title: JUDGE, assignable_id: entry.challenge_id).each do |assignment|
+    scorecard = Scorecard.create(judgeable: entry, assignment: assignment, included: (assignment.id % 5 != 0))
+    comp.criteria.where(category: CHALLENGE).each do |criterion|
       score = Random.rand(11)
       score = nil if score.zero?
       Judgment.create(criterion: criterion, scorecard: scorecard, score: score)
