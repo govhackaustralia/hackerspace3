@@ -14,13 +14,7 @@ class Admin::ChallengeDataSetsController < ApplicationController
     @challenge = Challenge.find(params[:challenge_id])
     @data_set = DataSet.find(params[:data_set_id])
     @challenge_data_set = @challenge.challenge_data_sets.new(data_set: @data_set)
-    if @challenge_data_set.save
-      flash[:notice] = 'New Challenge Data Set Added'
-      redirect_to admin_region_challenge_path(@challenge.region_id, @challenge)
-    else
-      flash[:alert] = @challenge_data_set.errors.full_messages.to_sentence
-      render :new
-    end
+    handle_create_save
   end
 
   def destroy
@@ -38,6 +32,16 @@ class Admin::ChallengeDataSetsController < ApplicationController
 
     flash[:alert] = 'You must have valid assignments to access this section.'
     redirect_to root_path
+  end
+
+  def handle_create_save
+    if @challenge_data_set.save
+      flash[:notice] = 'New Challenge Data Set Added'
+      redirect_to admin_region_challenge_path(@challenge.region_id, @challenge)
+    else
+      flash[:alert] = @challenge_data_set.errors.full_messages.to_sentence
+      render :new
+    end
   end
 
   def search_data_sets

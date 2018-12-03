@@ -18,14 +18,7 @@ class Admin::Events::BulkMailsController < ApplicationController
     @bulk_mail = @event.bulk_mails.new(bulk_mail_params)
     @bulk_mail.user = current_user
     @bulk_mail.status = DRAFT
-    if @bulk_mail.save
-      @bulk_mail.user_orders.create
-      flash[:notice] = 'New Bulk Mail Order Created'
-      redirect_to admin_event_bulk_mail_path(@event, @bulk_mail)
-    else
-      flash[:alert] = @bulk_mail.errors.full_messages.to_sentence
-      render :new
-    end
+    handle_create
   end
 
   def edit
@@ -36,28 +29,14 @@ class Admin::Events::BulkMailsController < ApplicationController
   def update
     @bulk_mail = BulkMail.find(params[:id])
     @event = Event.find(params[:event_id])
-    @bulk_mail.update(bulk_mail_params) unless params[:bulk_mail].nil?
-    process_team_orders unless params[:process].nil?
-    if @bulk_mail.save
-      flash[:notice] = 'Bulk Mail Updated'
-      redirect_to admin_event_bulk_mail_path(@event, @bulk_mail)
-    else
-      flash[:alert] = @bulk_mail.errors.full_messages.to_sentence
-      render :edit
-    end
+    handle_processing
+    handle_update
   end
 
   def show
     @bulk_mail = BulkMail.find(params[:id])
     @event = @bulk_mail.mailable
-    @participant_count = 0
-    @example_user = User.first
-    @example_project = Project.first
-    @user_order = UserOrder.find_by(bulk_mail: @bulk_mail)
-    @registrations = @user_order.registrations(@event)
-    assignments = Assignment.where(id: @registrations.pluck(:assignment_id))
-    @id_assignments = Assignment.id_assignments(assignments)
-    @id_users = User.id_users(User.where(id: assignments.pluck(:user_id)))
+    show_helpers
     return unless @bulk_mail.status == PROCESSED
 
     @id_user_correspondences = Correspondence.id_user_correspondences(@bulk_mail)
@@ -67,6 +46,43 @@ class Admin::Events::BulkMailsController < ApplicationController
 
   def bulk_mail_params
     params.require(:bulk_mail).permit(:name, :from_email, :subject, :body)
+  end
+
+  def show_helpers
+    @participant_count = 0
+    @example_user = User.first
+    @example_project = Project.first
+    @user_order = UserOrder.find_by(bulk_mail: @bulk_mail)
+    @registrations = @user_order.registrations(@event)
+    assignments = Assignment.where(id: @registrations.pluck(:assignment_id))
+    @id_assignments = Assignment.id_assignments(assignments)
+    @id_users = User.id_users(User.where(id: assignments.pluck(:user_id)))
+  end
+
+  def handle_processing
+    @bulk_mail.update(bulk_mail_params) unless params[:bulk_mail].nil?
+    process_team_orders unless params[:process].nil?
+  end
+
+  def handle_update
+    if @bulk_mail.save
+      flash[:notice] = 'Bulk Mail Updated'
+      redirect_to admin_event_bulk_mail_path(@event, @bulk_mail)
+    else
+      flash[:alert] = @bulk_mail.errors.full_messages.to_sentence
+      render :edit
+    end
+  end
+
+  def handle_create
+    if @bulk_mail.save
+      @bulk_mail.user_orders.create
+      flash[:notice] = 'New Bulk Mail Order Created'
+      redirect_to admin_event_bulk_mail_path(@event, @bulk_mail)
+    else
+      flash[:alert] = @bulk_mail.errors.full_messages.to_sentence
+      render :new
+    end
   end
 
   def check_for_privileges
