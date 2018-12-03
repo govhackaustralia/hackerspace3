@@ -18,6 +18,9 @@ class Challenge < ApplicationRecord
 
   after_save :update_identifier
 
+  # Returns an array of all admin assignments associated with challenges in
+  # particular competition.
+  # ENHANCEMENT: This should probably be in a controller.
   def admin_assignments
     competition = Competition.current
     collected = competition.admin_assignments
@@ -26,6 +29,7 @@ class Challenge < ApplicationRecord
     collected.flatten
   end
 
+  # Returns a query object of the teams that are able to join a competition.
   def eligible_teams
     if region.national?
       competition.teams
@@ -34,14 +38,15 @@ class Challenge < ApplicationRecord
     end
   end
 
+  # Returns the type of region that a challenge is associated with.
   def type
-    return NATIONAL if region.national?
-
-    REGIONAL
+    region.national? ? NATIONAL : REGIONAL
   end
 
   require 'csv'
 
+  # Compiles a CSV file of all challenges.
+  # ENHANCEMENT: This should be in a helper object somewhere.
   def self.to_csv(options = {})
     id_regions = Region.id_regions(Region.all)
     competition = Competition.current
@@ -61,12 +66,16 @@ class Challenge < ApplicationRecord
     end
   end
 
+  # Finds a unique name to update the identifier field.
+  # ENHANCEMENT: This should be in the ApplicationRecord model.
   def update_identifier
     new_identifier = uri_pritty(name)
     new_identifier = uri_pritty("#{name}-#{id}") if already_there?(new_identifier)
     update_columns(identifier: new_identifier)
   end
 
+  # Assorts challenges in a key value pair object.
+  # ENHANCEMENT: This should be in a Helper.
   def self.id_challenges(challenges)
     id_challenges = {}
     challenges.each { |challenge| id_challenges[challenge.id] = challenge }
@@ -75,6 +84,8 @@ class Challenge < ApplicationRecord
 
   private
 
+  # Determines if an identifier is already in use.
+  # ENHANCEMENT: This should be in the ApplicationRecord model.
   def already_there?(new_identifier)
     challenge = Challenge.find_by(identifier: new_identifier)
     return false if challenge.nil?
@@ -83,6 +94,8 @@ class Challenge < ApplicationRecord
     true
   end
 
+  # Converts a string into a uri friendly identifier.
+  # ENHANCEMENT: This should be in the ApplicationRecord model.
   def uri_pritty(string)
     array = string.split(/\W/)
     words = array - ['']
