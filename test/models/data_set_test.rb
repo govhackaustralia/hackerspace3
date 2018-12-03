@@ -8,7 +8,11 @@ class DataSetTest < ActiveSupport::TestCase
   end
 
   test 'data set associations' do
-    assert(@data_set.region == @region)
-    assert(@data_set.competition == @competition)
+    assert @data_set.region == @region
+    assert @data_set.competition == @competition
+  end
+
+  test 'data set validations' do
+    assert_not @data_set.update(name: nil)
   end
 end
