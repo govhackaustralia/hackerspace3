@@ -1,10 +1,12 @@
-<h2>Create New User</h2>
+<main class="team_page">
+  <h2>Create New User</h2>
 
-<%= form_for [:admin, @user] do |f| %>
-  <%= f.label(:full_name, "Full name:") %>
-  <%= f.text_field(:full_name) %><br>
-  <%= f.label(:email, "Email:") %>
-  <%= f.text_field(:email) %><br>
-  <%= f.submit "Create User" %>
-<% end %>
-<%= link_to 'Back to Users', admin_users_path %>
+  <%= form_for [:admin, @user] do |f| %>
+    <%= f.label(:full_name, "Full name:") %>
+    <%= f.text_field(:full_name) %><br>
+    <%= f.label(:email, "Email:") %>
+    <%= f.text_field(:email) %><br>
+    <%= f.submit "Create User" %>
+  <% end %>
+  <p><%= link_to 'Back to Users', admin_users_path %></p>
+</main>

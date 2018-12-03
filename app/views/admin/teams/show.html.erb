@@ -1,57 +1,57 @@
 <main class="team_page">
-<h2><%= @project.team_name %></h2>
+  <h2><%= @project.team_name %></h2>
 
-Event: <%= @event.name %><br>
-Region: <%= @region.name %><br>
+  <p>Event: <%= @event.name %></p>
+  <p>Region: <%= @region.name %></p>
 
-<% if @team.published %>
-  <p>Team Project is Published.</p>
-  <%= link_to 'Unpublish Team Project', admin_team_path(@team, published: false), method: :patch %><br>
-<% else %>
-  <p>Team Project is not Published.</p>
-  <%= link_to 'Publish Team Project', admin_team_path(@team, published: true), method: :patch %><br>
-<% end %>
+  <% if @team.published %>
+    <p>Team Project is Published.</p>
+    <%= link_to 'Unpublish Team Project', admin_team_path(@team, published: false), method: :patch %><br>
+  <% else %>
+    <p>Team Project is not Published.</p>
+    <%= link_to 'Publish Team Project', admin_team_path(@team, published: true), method: :patch %><br>
+  <% end %>
 
-<h3>Project Version Management</h3>
-Project Version Count: <%= @projects.count %><br>
-Current Version Created At: <%= @project.created_at %><br>
-<%= link_to 'Project Management', admin_team_projects_path(@team) %>
+  <h3>Project Version Management</h3>
+  Project Version Count: <%= @projects.count %><br>
+  Current Version Created At: <%= @project.created_at %><br>
+  <%= link_to 'Project Management', admin_team_projects_path(@team) %>
 
-<h3>Team Participants</h3>
+  <h3>Team Participants</h3>
 
-<% @team.assignments.each do |assignment| %>
-  <% user = assignment.user %>
-  <div>
-    <strong>Name: <%= user.display_name %></strong></br>
-    Title: <%= assignment.title %></br>
-    Email: <%= user.email %></br>
-  </div>
-<% end %>
+  <% @team.assignments.each do |assignment| %>
+    <% user = assignment.user %>
+    <div>
+      <p><strong>Name: <%= user.display_name %></strong></p>
+      <p>Title: <%= assignment.title %></p>
+      <p>Email: <%= user.email %></p>
+    </div>
+  <% end %>
 
-<h3>Challenge Management<h3>
+  <h3>Challenge Management<h3>
 
-<% @checkpoints.each do |checkpoint| %>
-  <h4><%= checkpoint.name %> Checkpoint</h4>
+  <% @checkpoints.each do |checkpoint| %>
+    <h4><%= checkpoint.name %> Checkpoint</h4>
 
-  <h4>National Challenges</h4>
-  <%= render 'challenge_category', locals:
-   { checkpoint: checkpoint,
-     type: NATIONAL,
-     max_challenges: checkpoint.max_national_challenges,
-     challenges: @team.national_challenges(checkpoint),
-     available_challenges: @available_national_challenges }
-  %>
+    <h4>National Challenges</h4>
+    <%= render 'challenge_category', locals:
+     { checkpoint: checkpoint,
+       type: NATIONAL,
+       max_challenges: checkpoint.max_national_challenges,
+       challenges: @team.national_challenges(checkpoint),
+       available_challenges: @available_national_challenges }
+    %>
 
-  <h4>Regional Challenges</h4>
-  <%= render 'challenge_category', locals:
-    { checkpoint: checkpoint,
-      type: REGIONAL,
-      max_challenges: checkpoint.max_regional_challenges,
-      challenges: @team.regional_challenges(checkpoint),
-      available_challenges: @available_regional_challenges }
-  %>
+    <h4>Regional Challenges</h4>
+    <%= render 'challenge_category', locals:
+      { checkpoint: checkpoint,
+        type: REGIONAL,
+        max_challenges: checkpoint.max_regional_challenges,
+        challenges: @team.regional_challenges(checkpoint),
+        available_challenges: @available_regional_challenges }
+    %>
 
-<% end %>
+  <% end %>
 
-<%= link_to 'Back to Team Management', admin_teams_path %>
+  <%= link_to 'Back to Team Management', admin_teams_path %>
 </main>
