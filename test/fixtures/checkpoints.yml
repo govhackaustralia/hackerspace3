@@ -4,8 +4,12 @@ one:
   id: 1
   competition_id: 1
   end_time: 2018-08-09 17:08:15
+  max_regional_challenges: 2
+  max_national_challenges: 2
 
 two:
   id: 2
   competition_id: 1
   end_time: 2018-08-09 17:08:15
+  max_regional_challenges: 2
+  max_national_challenges: 2

@@ -11,7 +11,7 @@ one:
 two:
   id: 2
   team_id: 1
-  challenge_id: 1
+  challenge_id: 2
   checkpoint_id: 1
   justification: MyText
   eligible: false
