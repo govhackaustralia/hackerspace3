@@ -43,15 +43,7 @@ class Admin::RegionsController < ApplicationController
     @data_sets = @region.data_sets
     @sponsorships = @region.sponsorships
     @bulk_mails = @region.bulk_mails
-    if @region.national?
-      @region_counts = Region.national_challenges_region_counts
-      @region_names = Region.where.not(parent_id: nil).order(:name).pluck(:name)
-      @challenge_names = Region.root.challenges.order(:name).pluck(:name)
-    else
-      @event_counts = @region.regional_challenges_event_counts
-      @event_names = @competition.events.where(event_type: COMPETITION_EVENT, region: @region).order(:name).pluck(:name)
-      @challenge_names = @region.challenges.order(:name).pluck(:name)
-    end
+    retrieve_counts
   end
 
   private
@@ -70,5 +62,21 @@ class Admin::RegionsController < ApplicationController
   def create_new_region
     @region = Region.new(region_params)
     @region.update(parent_id: Region.root.id)
+  end
+
+  def retrieve_counts
+    if @region.national?
+      retrieve_national_counts
+    else
+      @event_counts = @region.regional_challenges_event_counts
+      @event_names = @competition.events.where(event_type: COMPETITION_EVENT, region: @region).order(:name).pluck(:name)
+      @challenge_names = @region.challenges.order(:name).pluck(:name)
+    end
+  end
+
+  def retrieve_national_counts
+    @region_counts = Region.national_challenges_region_counts
+    @region_names = Region.where.not(parent_id: nil).order(:name).pluck(:name)
+    @challenge_names = Region.root.challenges.order(:name).pluck(:name)
   end
 end

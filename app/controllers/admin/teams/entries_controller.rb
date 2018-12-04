@@ -20,27 +20,14 @@ class Admin::Teams::EntriesController < ApplicationController
     @challenge = @entry.challenge
     @team = @entry.team
     @checkpoints = (@team.admin_available_checkpoints(@challenge.type) << @entry.checkpoint).uniq
-    if @entry.update(entry_params)
-      flash[:notice] = 'Entry Updated Successfully'
-      redirect_to admin_team_path(@team)
-    else
-      flash[:alert] = @entry.errors.full_messages.to_sentence
-      render :edit
-    end
+    handle_update
   end
 
   def create
     @team = Team.find(params[:team_id])
     @entry = @team.entries.new(entry_params)
     @entry.checkpoint_id = params[:checkpoint_id]
-    if @entry.save
-      flash[:notice] = 'New Challenge Entry Created'
-      redirect_to admin_team_path(@team)
-    else
-      @challenges = @team.available_challenges(params[:challenge_type])
-      flash[:alert] = @entry.errors.full_messages.to_sentence
-      render :new, challenge_type: params[:challenge_type], checkpoint_id: params[:checkpoint_id]
-    end
+    handle_create
   end
 
   def destroy
@@ -62,5 +49,30 @@ class Admin::Teams::EntriesController < ApplicationController
 
     flash[:alert] = 'You must have valid assignments to access this section.'
     redirect_to root_path
+  end
+
+  def handle_create
+    if @entry.save
+      flash[:notice] = 'New Challenge Entry Created'
+      redirect_to admin_team_path(@team)
+    else
+      handle_create_fail
+    end
+  end
+
+  def handle_create_fail
+    @challenges = @team.available_challenges(params[:challenge_type])
+    flash[:alert] = @entry.errors.full_messages.to_sentence
+    render :new, challenge_type: params[:challenge_type], checkpoint_id: params[:checkpoint_id]
+  end
+
+  def handle_update
+    if @entry.update(entry_params)
+      flash[:notice] = 'Entry Updated Successfully'
+      redirect_to admin_team_path(@team)
+    else
+      flash[:alert] = @entry.errors.full_messages.to_sentence
+      render :edit
+    end
   end
 end

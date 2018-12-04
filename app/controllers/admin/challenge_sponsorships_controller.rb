@@ -14,13 +14,7 @@ class Admin::ChallengeSponsorshipsController < ApplicationController
     @challenge = Challenge.find(params[:challenge_id])
     @sponsor = Sponsor.find(params[:sponsor_id])
     @challenge_sponsorship = @challenge.challenge_sponsorships.new(sponsor: @sponsor)
-    if @challenge_sponsorship.save
-      flash[:notice] = 'New challenge sponsorship created'
-      redirect_to admin_region_challenge_path(@challenge.region_id, @challenge)
-    else
-      flash.now[:alert] = @challenge_sponsorship.errors.full_messages.to_sentence
-      render :new
-    end
+    handle_create
   end
 
   def destroy
@@ -46,6 +40,16 @@ class Admin::ChallengeSponsorshipsController < ApplicationController
       @existing_sponsorship = ChallengeSponsorship.find_by(sponsor: @sponsor, challenge: @challenge)
     else
       @sponsors = Sponsor.search(params[:term])
+    end
+  end
+
+  def handle_create
+    if @challenge_sponsorship.save
+      flash[:notice] = 'New challenge sponsorship created'
+      redirect_to admin_region_challenge_path(@challenge.region_id, @challenge)
+    else
+      flash.now[:alert] = @challenge_sponsorship.errors.full_messages.to_sentence
+      render :new
     end
   end
 end

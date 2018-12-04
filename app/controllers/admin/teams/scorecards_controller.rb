@@ -7,11 +7,7 @@ class Admin::Teams::ScorecardsController < ApplicationController
     @project = @team.current_project
     @region = @team.region
     @competition = @team.competition
-    @scorecards = Scorecard.participant_scorecards(@team, params[:include_judges] == true.to_s)
-    @project_criteria = @competition.criteria.where(category: PROJECT).order(:id)
-    @team_scorecard_helper = Scorecard.team_scorecard_helper(@scorecards)
-    assignments = Assignment.where(id: @scorecards.pluck(:assignment_id))
-    @assignment_scorecard_helper = Scorecard.assignment_scorecard_helper(assignments)
+    retrieve_scorecard_info
   end
 
   def update
@@ -34,5 +30,13 @@ class Admin::Teams::ScorecardsController < ApplicationController
 
     flash[:alert] = 'You must have valid assignments to access this section.'
     redirect_to root_path
+  end
+
+  def retrieve_scorecard_info
+    @scorecards = Scorecard.participant_scorecards(@team, params[:include_judges] == true.to_s)
+    @project_criteria = @competition.criteria.where(category: PROJECT).order(:id)
+    @team_scorecard_helper = Scorecard.team_scorecard_helper(@scorecards)
+    assignments = Assignment.where(id: @scorecards.pluck(:assignment_id))
+    @assignment_scorecard_helper = Scorecard.assignment_scorecard_helper(assignments)
   end
 end

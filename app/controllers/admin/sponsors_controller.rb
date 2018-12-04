@@ -40,18 +40,7 @@ class Admin::SponsorsController < ApplicationController
   def update
     @sponsor = Sponsor.find(params[:id])
     @sponsor.update(sponsor_params) if params[:sponsor].present?
-    if @sponsor.save
-      if params[:logo].present?
-        flash[:notice] = 'Logo Uploaded'
-        render :edit, logo: true
-      else
-        flash[:notice] = 'Sponsor Updated'
-        redirect_to admin_sponsor_path(@sponsor)
-      end
-    else
-      flash[:alert] = @sponsor.errors.full_messages.to_sentence
-      render :edit
-    end
+    handle_update
   end
 
   private
@@ -65,5 +54,24 @@ class Admin::SponsorsController < ApplicationController
 
     flash[:alert] = 'You must have valid assignments to access this section.'
     redirect_to root_path
+  end
+
+  def handle_update
+    if @sponsor.save
+      handle_update_success
+    else
+      flash[:alert] = @sponsor.errors.full_messages.to_sentence
+      render :edit
+    end
+  end
+
+  def handle_update_success
+    if params[:logo].present?
+      flash[:notice] = 'Logo Uploaded'
+      render :edit, logo: true
+    else
+      flash[:notice] = 'Sponsor Updated'
+      redirect_to admin_sponsor_path(@sponsor)
+    end
   end
 end

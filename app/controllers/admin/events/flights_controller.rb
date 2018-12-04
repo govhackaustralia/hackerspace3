@@ -23,25 +23,13 @@ class Admin::Events::FlightsController < ApplicationController
     @flight = Flight.find(params[:id])
     @event = @flight.event
     @flight.update(flight_params)
-    if @flight.save
-      flash[:notice] = 'Flight Update'
-      redirect_to admin_event_flights_path(@event)
-    else
-      flash[:alert] = @flight.errors.full_messages.to_sentence
-      render :edit
-    end
+    handle_update
   end
 
   def create
     @event = Event.find(params[:event_id])
     @flight = @event.flights.new(flight_params)
-    if @flight.save
-      flash[:notice] = 'New Flight Created'
-      redirect_to admin_event_flights_path(@event)
-    else
-      flash[:alert] = @flight.errors.full_messages.to_sentence
-      render :new
-    end
+    handle_create
   end
 
   def destroy
@@ -63,5 +51,25 @@ class Admin::Events::FlightsController < ApplicationController
 
     flash[:alert] = 'You must have valid assignments to access this section.'
     redirect_to root_path
+  end
+
+  def handle_create
+    if @flight.save
+      flash[:notice] = 'New Flight Created'
+      redirect_to admin_event_flights_path(@event)
+    else
+      flash[:alert] = @flight.errors.full_messages.to_sentence
+      render :new
+    end
+  end
+
+  def handle_update
+    if @flight.save
+      flash[:notice] = 'Flight Update'
+      redirect_to admin_event_flights_path(@event)
+    else
+      flash[:alert] = @flight.errors.full_messages.to_sentence
+      render :edit
+    end
   end
 end
