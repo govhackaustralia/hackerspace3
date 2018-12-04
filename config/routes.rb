@@ -41,8 +41,10 @@ Rails.application.routes.draw do
   end
 
   namespace :admin do
-    resources :assignments, :sponsorship_types, :sponsors, :sponsorships,
-      :event_partnerships, :teams
+    resources :sponsors
+    resources :sponsorship_types, except: [:show, :destroy]
+    resources :sponsorships, :event_partnerships, only: [:new, :create, :destroy]
+    resources :teams, only: [:index, :show, :update]
 
     resources :competitions do
       resources :assignments, controller: 'competitions/assignments'
