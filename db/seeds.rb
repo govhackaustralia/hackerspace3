@@ -10,7 +10,7 @@
 
 # Example $ rails db:setup STAGE=PRE_CONNECTION
 
-# TODO: BulkMail Seeds
+# TODO: BulkMail Seeds for Regions
 # TODO: Admin needs to be apart of a few teams.
 
 admin = User.new(email: ENV['SEED_EMAIL'], full_name: ENV['SEED_NAME'],
@@ -250,7 +250,8 @@ Region.all.each do |region|
     next if event_name == 'Australia' && event_type == COMPETITION_EVENT
 
     if event_type == COMPETITION_EVENT
-      event = create_event(event_type, comp, "Remote #{region.name}", region, comp_start)
+      event = create_event(event_type, comp, "Remote #{region.name}",
+        region, comp_start)
       assign_participants(event)
       fill_out_comp_event(event)
       assign_event_supports_and_partnership(event)
@@ -259,16 +260,26 @@ Region.all.each do |region|
       fill_out_comp_event(event)
       assign_event_supports_and_partnership(event)
     elsif event_type == CONNECTION_EVENT
-      event = create_event(event_type, comp, event_name, region, comp_start - 1.months)
+      event = create_event(event_type, comp, event_name, region,
+        comp_start - 1.months)
       assign_participants(event)
       assign_event_supports_and_partnership(event)
     elsif event_type == AWARD_EVENT
-      event = create_event(event_type, comp, event_name, region, comp_start + 1.months)
+      event = create_event(event_type, comp, event_name, region,
+        comp_start + 1.months)
       assign_participants(event)
       assign_event_supports_and_partnership(event)
       if event_name == 'Australia'
         8.times do
-          event.flights.create(description: 'Timbuktu', direction: FLIGHT_DIRECTIONS.sample)
+          event.flights.create(description: 'Timbuktu',
+            direction: FLIGHT_DIRECTIONS.sample)
+        end
+        3.times do |time|
+          bulk_mail = event.bulk_mails.create(user_id: 1,
+            name: "Bulk Mail #{time}", status: DRAFT,
+            from_email: ENV['SEED_EMAIL'], subject: 'Greetings',
+            body: 'Hello { display_name }, How are you?')
+          bulk_mail.user_orders.create(request_type: USER_ORDER_QUERIES.sample)
         end
       end
     end
@@ -277,7 +288,8 @@ end
 
 comp.teams.all.each do |team|
   Assignment.where(title: PARTICIPANT).take(20).each do |assignment|
-    scorecard = Scorecard.create(judgeable: team, assignment: assignment, included: (assignment.id % 5 != 0))
+    scorecard = Scorecard.create(judgeable: team, assignment: assignment,
+      included: (assignment.id % 5 != 0))
     comp.criteria.where(category: PROJECT).each do |criterion|
       score = Random.rand(11)
       score = nil if score.zero?
@@ -288,7 +300,8 @@ end
 
 Entry.all.each do |entry|
   Assignment.where(title: JUDGE, assignable_id: entry.challenge_id).each do |assignment|
-    scorecard = Scorecard.create(judgeable: entry, assignment: assignment, included: (assignment.id % 5 != 0))
+    scorecard = Scorecard.create(judgeable: entry, assignment: assignment,
+      included: (assignment.id % 5 != 0))
     comp.criteria.where(category: CHALLENGE).each do |criterion|
       score = Random.rand(11)
       score = nil if score.zero?
