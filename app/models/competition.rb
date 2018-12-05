@@ -9,19 +9,13 @@ class Competition < ApplicationRecord
   has_many :checkpoints
   has_many :data_sets
   has_many :criteria
+  has_many :project_criteria, -> { where category: PROJECT }, class_name: 'Criterion'
+  has_many :challenge_criteria, -> { where category: CHALLENGE }, class_name: 'Criterion'
 
   validates :year, presence: true
 
   def name
     "Competition #{year}"
-  end
-
-  def challenge_criteria
-    criteria.where(category: CHALLENGE)
-  end
-
-  def project_criteria
-    criteria.where(category: PROJECT)
   end
 
   def self.current

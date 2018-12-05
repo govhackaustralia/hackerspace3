@@ -290,7 +290,7 @@ comp.teams.all.each do |team|
   Assignment.where(title: PARTICIPANT).take(20).each do |assignment|
     scorecard = Scorecard.create(judgeable: team, assignment: assignment,
       included: (assignment.id % 5 != 0))
-    comp.criteria.where(category: PROJECT).each do |criterion|
+    comp.project_criteria.each do |criterion|
       score = Random.rand(11)
       score = nil if score.zero?
       Judgment.create(criterion: criterion, scorecard: scorecard, score: score)
@@ -302,7 +302,7 @@ Entry.all.each do |entry|
   Assignment.where(title: JUDGE, assignable_id: entry.challenge_id).each do |assignment|
     scorecard = Scorecard.create(judgeable: entry, assignment: assignment,
       included: (assignment.id % 5 != 0))
-    comp.criteria.where(category: CHALLENGE).each do |criterion|
+    comp.challenge_criteria.each do |criterion|
       score = Random.rand(11)
       score = nil if score.zero?
       Judgment.create(criterion: criterion, scorecard: scorecard, score: score)
