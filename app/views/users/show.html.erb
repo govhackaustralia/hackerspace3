@@ -6,7 +6,7 @@
 		<article>
 			<% if false %>
 				<%= render 'user_profile_pic'%>
-				<%= link_to 'Change Profile Pic', update_personal_details_path(profile_pic: true) %></br>
+				<p><%= link_to 'Change Profile Pic', update_personal_details_path(profile_pic: true) %></p>
 			<% end %>
 			<%= render 'user_contact', locals: { user: @user } %>
 			<p><%= link_to 'Update Personal Details' , update_personal_details_path %></p>
@@ -18,25 +18,25 @@
 		<article>
 			<% if user_has_admin_privilieges? %>
 				<h3>Admin</h3>
-				<%= link_to 'User Management', admin_users_path %></br>
-				<%= link_to 'Competiton Management', admin_competition_path(@competition) %></br>
-				<%= link_to 'Region Management', admin_regions_path %></br>
-				<%= link_to 'Team Management', admin_teams_path %></br>
+				<p><%= link_to 'User Management', admin_users_path %></p>
+				<p><%= link_to 'Competiton Management', admin_competition_path(@competition) %></p>
+				<p><%= link_to 'Region Management', admin_regions_path %></p>
+				<p><%= link_to 'Team Management', admin_teams_path %></p>
 			<% end %>
 
 			<% if user_has_event_privileges? %>
-				<%= link_to 'Event Management', admin_events_path %></br>
+				<p><%= link_to 'Event Management', admin_events_path %></p>
 			<% end %>
 
 			<% if user_has_sponsor_privileges? %>
 				<h3>Sponsor Managmement</h3>
-				<%= link_to 'Sponsor Management', admin_sponsors_path %></br>
-				<%= link_to 'Sponsorship Type Management', admin_sponsorship_types_path %></br>
+				<p><%= link_to 'Sponsor Management', admin_sponsors_path %></p>
+				<p><%= link_to 'Sponsorship Type Management', admin_sponsorship_types_path %></p>
 			<% end %>
 
 			<% if user_is_chief_judge? %>
 				<h3>Competition Judging Criteria</h3>
-				<%= link_to 'Competiton Criteria Management', admin_competition_criteria_path(@competition) %></br>
+				<p><%= link_to 'Competiton Criteria Management', admin_competition_criteria_path(@competition) %></p>
 			<% end %>
 		</article>
 	</section>
@@ -72,7 +72,7 @@
 							<p><%= link_to 'View Registration', event_registration_path(event.identifier, registration) %></p>
 						<% end %>
 					<% end %>
-					<%= link_to 'Go to Event Page', event_path(event.identifier) %></br>
+					<p><%= link_to 'Go to Event Page', event_path(event.identifier) %></p>
 				<% end %>
 
 			<% else %>
@@ -90,10 +90,11 @@
 				<% project = @id_teams_projects[team.id][:current_project] %>
 				<% event = @id_teams_projects[team.id][:event] %>
 					<h4><%= project.team_name %> - <%= project.project_name %></h4>
+					<p>Event: <%= event.name %></p>
 					<% if @competition.not_finished?(team.time_zone) %>
-						<%= link_to "Manage #{team.name}", team_management_team_path(team) %></br>
+						<p><%= link_to "Manage #{team.name}", team_management_team_path(team) %></p>
 					<% elsif team.published %>
-						<%= link_to "Go to #{team.name}", project_path(project.identifier) %></br>
+						<p><%= link_to "Go to #{team.name}", project_path(project.identifier) %></p>
 					<% else %>
 						<p>This project is yet to be published.</p>
 					<% end %>
@@ -128,8 +129,8 @@
 						<% project = @id_teams_projects[team.id][:current_project] %>
 						<% event = @id_teams_projects[team.id][:event] %>
 						<h4><%= "#{project.team_name} - #{project.project_name}" %></h4>
-						Event: <%= event.name %></br>
-						<%= link_to "Go to Team Project", project_path(project.identifier) %></br>
+						<p>Event: <%= event.name %></p>
+						<p><%= link_to "Go to Team Project", project_path(project.identifier) %></p>
 					<% end %>
 				<% else %>
 					<p>Projects that you favourite will appear here.</p>

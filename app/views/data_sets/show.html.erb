@@ -1,25 +1,25 @@
 <main class="project_index">
-<h2><%= @data_set.name %></h2>
+  <h2><%= @data_set.name %></h2>
 
-<p>Region: <%= @data_set.region.name %></p>
-<p>Description: <%= @data_set.description %></p>
-<p><a href="<%= @data_set.url %>" target="_blank">URL</a></p>
+  <p>Region: <%= @data_set.region.name %></p>
+  <p>Description: <%= @data_set.description %></p>
+  <p><a href="<%= @data_set.url %>" target="_blank">URL</a></p>
 
-<h3>Team Projects Utilising <%= @data_set.name %></h3>
+  <h3>Team Projects Utilising <%= @data_set.name %></h3>
 
-  <% if @team_data_sets.present? %>
-    <% @teams.each do |team| %>
-      <% project = @id_teams_projects[team.id][:current_project] %>
-      <h4><%= "#{ project.team_name } - #{ project.project_name }" %></h4>
-      <%= link_to 'Go to Team Project', project_path(project.identifier) %><br>
   <% if competition_started? %>
+    <% if @team_data_sets.present? %>
+      <% @teams.each do |team| %>
+        <% project = @id_teams_projects[team.id][:current_project] %>
+        <h4><%= "#{ project.team_name } - #{ project.project_name }" %></h4>
+        <%= link_to 'Go to Team Project', project_path(project.identifier) %><br>
+      <% end %>
+    <% else %>
+      <p>No team projects utilising this data set currently.</p>
     <% end %>
   <% else %>
-    <p>No team projects utilising this data set currently.</p>
+    <p>Check back here at the start of the competition to see which team projects
+        are utilising this data set.</p>
   <% end %>
-<% else %>
-  <p>Check back here at the start of the competition to see which team projects
-      are utilising this data set.</p>
-<% end %>
-<p><%= link_to 'Back to Data Sets', data_sets_path %></p>
+  <p><%= link_to 'Back to Data Sets', data_sets_path %></p>
 </main>

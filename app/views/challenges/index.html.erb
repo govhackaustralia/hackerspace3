@@ -8,7 +8,8 @@
     <%= text_field_tag :term, params[:term] %>
     <%= submit_tag 'Search' %>
   <% end %>
-  <%= link_to 'Download CSV', challenges_path(format: 'csv') %></br>
+  <p><%= link_to 'Clear Search', challenges_path %></p>
+  <p><%= link_to 'Download CSV', challenges_path(format: 'csv') %></p>
 
   <% @regions.each do |region| %>
     <% next unless competition_started?(region.time_zone) %>

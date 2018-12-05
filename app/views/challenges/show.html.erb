@@ -70,20 +70,21 @@
 				      </article>
 			      <% else %>
 							<% if team.all_checkpoints_passed? %>
-			        		All Checkpoints have passed.</br>
 								<% if in_competition_window?(LAST_TIME_ZONE) %>
+			        		<p>All Checkpoints have passed.</p>
 								<% else %>
+								  <p>No entries to this challenge for this team.</p>
 								<% end %>
 							<% else %>
-								All available checkpoint limits reached for
-								<%= @region.national? ? 'national' : 'regional' %> challenges.</br>
+								<p>All available checkpoint limits reached for
+								<%= @region.national? ? 'national' : 'regional' %> challenges.</p>
 							<% end %>
 			      <% end %>
 			    <% end %>
 			  <% end %>
 			<% end %>
 		<% else %>
-		  Sign in to enter your team into this challenge.<br>
+		  <p>Sign in to enter your team into this challenge.</p>
 		<% end %>
 
 		<h3>All Team Entries</h3>
@@ -100,6 +101,6 @@
 
 	</section>
 	<section class="ie-push">
-		<%= link_to 'Back to Challenges', challenges_path %>
+		<p><%= link_to 'Back to Challenges', challenges_path %></p>
 	</section>
 </main>

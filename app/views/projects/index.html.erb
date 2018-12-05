@@ -5,8 +5,7 @@
       <%= text_field_tag :term, params[:term] %>
       <%= submit_tag 'Search' %>
     <% end %>
-    <%= link_to 'Clear Search', projects_path %></br>
-    <%= link_to 'Download CSV', projects_path(format: 'csv') %></br>
+    <p><%= link_to 'Clear Search', projects_path %></p>
     <p><%= link_to 'Download CSV', projects_path(format: 'csv') %></p>
     <% if user_signed_in? && competition_not_finished?(LAST_TIME_ZONE) %>
       <% if @attending_events.present? %>
