@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   resources :teams, only: [:new, :create]
   resources :favourites, only: [:create, :destroy]
   resources :challenges, param: :identifier, only: [:index, :show]
+  resources :users, only: :update
 
   namespace :users do
     resources :invitations, only: [:update, :destroy]

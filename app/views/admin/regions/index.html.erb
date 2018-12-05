@@ -8,4 +8,5 @@
   <% @region.sub_regions.each do |region| %>
     <%= render 'region_modal', locals: { region: region } %>
   <% end %>
+  <p><%= link_to 'Back to Account Management', manage_account_path %></p>
 </main>
