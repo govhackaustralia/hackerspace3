@@ -70,10 +70,9 @@
 				      </article>
 			      <% else %>
 							<% if team.all_checkpoints_passed? %>
-								<% if @competition.in_competition_window?(LAST_TIME_ZONE) %>
 			        		All Checkpoints have passed.</br>
+								<% if in_competition_window?(LAST_TIME_ZONE) %>
 								<% else %>
-								  No entries to this challenge for this team.</br>
 								<% end %>
 							<% else %>
 								All available checkpoint limits reached for
@@ -89,7 +88,7 @@
 
 		<h3>All Team Entries</h3>
 
-		<% if @competition.in_challenge_judging_window?(LAST_TIME_ZONE) || @competition.in_peoples_judging_window?(LAST_TIME_ZONE) %>
+		<% if in_either_judging_window?(LAST_TIME_ZONE) %>
 			<% if @teams.present? %>
 				<%= render 'team_judging_table' %>
 			<% else %>

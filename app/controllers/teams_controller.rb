@@ -1,14 +1,14 @@
 class TeamsController < ApplicationController
   def new
     @competition = Competition.current
-    if user_signed_in? && @competition.in_competition_window?(LAST_TIME_ZONE)
+    if user_signed_in? && helpers.in_competition_window?(LAST_TIME_ZONE)
       @team = Team.new
       @events = current_user.competition_events_participating(@competition)
       if @events.empty?
         flash[:alert] = 'To create a new team, first register for a competition event.'
         redirect_to events_path
       end
-    elsif @competition.in_competition_window?(LAST_TIME_ZONE)
+    elsif helpers.in_competition_window?(LAST_TIME_ZONE)
       flash[:alert] = 'To create a new team, first sign in.'
       redirect_to projects_path
     else
@@ -21,7 +21,7 @@ class TeamsController < ApplicationController
     @team = Team.new(team_params)
     @competition = @team.competition
     @events = current_user.competition_events_participating(@competition)
-    if @competition.in_competition_window?(@team.time_zone)
+    if helpers.in_competition_window?(@team.time_zone)
       if @team.save
         handle_team_save
       else

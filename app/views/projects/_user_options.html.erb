@@ -1,7 +1,7 @@
 
 <% if user_signed_in? %>
 
-  <% if @users_team && @competition.in_competition_window?(@team.time_zone) %>
+  <% if @users_team && in_competition_window?(@team.time_zone) %>
     <p><%= link_to 'Manage this Team Project', team_management_team_path(@team) %></p>
   <% end %>
 
@@ -21,7 +21,7 @@
     <% end %>
   <% end %>
 
-<% elsif @competition.in_peoples_judging_window?(LAST_TIME_ZONE) %>
+<% elsif in_peoples_judging_window?(LAST_TIME_ZONE) %>
 	<div>
     <p><strong>Were you a participant in this year's competition?</strong></p>
     <p><strong>Sign in to vote in the People's Choice Awards.</strong></p>

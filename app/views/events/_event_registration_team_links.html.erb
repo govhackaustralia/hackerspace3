@@ -14,6 +14,6 @@
 
 <% end %>
 
-<% if @event.competition_event? && @competition.started? && @event.teams.where(published: true).present? %>
+<% if @event.competition_event? && competition_started? && @event.teams.where(published: true).present? %>
   <%= link_to 'See Participating Teams', event_teams_path(@event.identifier) %>
 <% end %>

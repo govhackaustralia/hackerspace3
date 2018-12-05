@@ -51,8 +51,8 @@ class ScorecardsController < ApplicationController
     @competition = @team.competition
     @peoples_assignment = @user.peoples_assignment
     @judge = @user.judge_assignment(@team.challenges)
-    return if @peoples_assignment.present? && @competition.in_peoples_judging_window?(LAST_TIME_ZONE)
-    return if @judge.present? && @competition.in_challenge_judging_window?(LAST_TIME_ZONE)
+    return if @peoples_assignment.present? && helpers.in_peoples_judging_window?(LAST_TIME_ZONE)
+    return if @judge.present? && helpers.in_challenge_judging_window?(LAST_TIME_ZONE)
 
     flash[:alert] = 'Scorecards are not available at this time.'
     redirect_to root_path

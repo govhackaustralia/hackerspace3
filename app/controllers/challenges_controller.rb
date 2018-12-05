@@ -12,7 +12,7 @@ class ChallengesController < ApplicationController
   def show
     show_variables
     challenge_show_entry_management
-    return if @competition.started?(@region.time_zone) || (user_signed_in? && current_user.region_privileges?)
+    return if helpers.competition_started?(@region.time_zone) || (user_signed_in? && current_user.region_privileges?)
 
     redirect_to root_path
   end
@@ -36,8 +36,7 @@ class ChallengesController < ApplicationController
 
   def challenge_show_entry_management
     @user_eligible_teams = @challenge.eligible_teams & current_user.teams if user_signed_in?
-    if @competition.in_challenge_judging_window?(LAST_TIME_ZONE) ||
-       @competition.in_peoples_judging_window?(LAST_TIME_ZONE)
+    if helpers.in_either_judging_window(LAST_TIME_ZONE)
       judging_view
     else
       checkpoint_entry_view

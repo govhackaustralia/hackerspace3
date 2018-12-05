@@ -1,13 +1,14 @@
 <main class="project_index">
   <h2>Team Projects for Competition <%= @competition.year %></h2>
-  <% if @competition.started? || (user_signed_in? && current_user.region_privileges?) %>
+  <% if competition_started? || (user_signed_in? && current_user.region_privileges?) %>
     <%= form_tag projects_path, method: :get do %>
       <%= text_field_tag :term, params[:term] %>
       <%= submit_tag 'Search' %>
     <% end %>
     <%= link_to 'Clear Search', projects_path %></br>
     <%= link_to 'Download CSV', projects_path(format: 'csv') %></br>
-    <% if user_signed_in? && @competition.not_finished?(LAST_TIME_ZONE) %>
+    <p><%= link_to 'Download CSV', projects_path(format: 'csv') %></p>
+    <% if user_signed_in? && competition_not_finished?(LAST_TIME_ZONE) %>
       <% if @attending_events.present? %>
         <aside><%= link_to 'Create New Team Project', new_team_path %></aside>
       <% else %>
