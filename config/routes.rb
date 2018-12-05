@@ -54,8 +54,8 @@ Rails.application.routes.draw do
     end
 
     resources :sponsors do
-      resources :sponsorships, controller: 'sponsors/sponsorships'
-      resources :assignments, controller: 'sponsors/assignments'
+      resources :sponsorships, only: [:new, :create, :destroy], controller: 'sponsors/sponsorships'
+      resources :assignments, only: [:new, :create], controller: 'sponsors/assignments'
     end
 
     resources :regions do
