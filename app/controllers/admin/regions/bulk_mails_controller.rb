@@ -12,14 +12,7 @@ class Admin::Regions::BulkMailsController < ApplicationController
     @team_orders = @bulk_mail.team_orders
     @region = @bulk_mail.mailable
     @teams = @region.teams
-    @id_team_projects = Team.id_teams_projects(@teams)
-    @id_team_participants = Team.id_team_participants(@teams)
-    @participant_count = 0
-    @example_user = User.first
-    @example_project = Project.first
-    return unless @bulk_mail.status == PROCESSED
-
-    @id_user_correspondences = Correspondence.id_user_correspondences(@bulk_mail)
+    retrieve_team_helpers
   end
 
   def new
@@ -41,30 +34,14 @@ class Admin::Regions::BulkMailsController < ApplicationController
     @bulk_mail = @region.bulk_mails.new(bulk_mail_params)
     @bulk_mail.user = current_user
     @bulk_mail.status = DRAFT
-    if @bulk_mail.save
-      @bulk_mail.create_team_orders
-      flash[:notice] = 'New Bulk Mail Order Created'
-      redirect_to admin_region_bulk_mail_path(@region, @bulk_mail)
-    else
-      flash[:alert] = @bulk_mail.errors.full_messages.to_sentence
-      render :new
-    end
+    handle_create
   end
 
   def update
     @bulk_mail = BulkMail.find(params[:id])
     @region = @bulk_mail.mailable
-    @team_orders = @bulk_mail.team_orders
-    update_team_orders unless params[:team_orders].nil?
-    @bulk_mail.update(bulk_mail_params) unless params[:bulk_mail].nil?
-    process_team_orders unless params[:process].nil?
-    if @bulk_mail.save
-      flash[:notice] = 'Bulk Mail Updated'
-      redirect_to admin_region_bulk_mail_path(@region, @bulk_mail)
-    else
-      flash[:alert] = @bulk_mail.errors.full_messages.to_sentence
-      render :edit
-    end
+    perform_update_operations
+    handle_update
   end
 
   private
@@ -90,5 +67,44 @@ class Admin::Regions::BulkMailsController < ApplicationController
 
     flash[:alert] = 'You must have valid assignments to access this section.'
     redirect_to root_path
+  end
+
+  def perform_update_operations
+    @team_orders = @bulk_mail.team_orders
+    update_team_orders unless params[:team_orders].nil?
+    @bulk_mail.update(bulk_mail_params) unless params[:bulk_mail].nil?
+    process_team_orders unless params[:process].nil?
+  end
+
+  def retrieve_team_helpers
+    @id_team_projects = Team.id_teams_projects(@teams)
+    @id_team_participants = Team.id_team_participants(@teams)
+    @participant_count = 0
+    @example_user = User.first
+    @example_project = Project.first
+    return unless @bulk_mail.status == PROCESSED
+
+    @id_user_correspondences = Correspondence.id_user_correspondences(@bulk_mail)
+  end
+
+  def handle_create
+    if @bulk_mail.save
+      @bulk_mail.create_team_orders
+      flash[:notice] = 'New Bulk Mail Order Created'
+      redirect_to admin_region_bulk_mail_path(@region, @bulk_mail)
+    else
+      flash[:alert] = @bulk_mail.errors.full_messages.to_sentence
+      render :new
+    end
+  end
+
+  def handle_update
+    if @bulk_mail.save
+      flash[:notice] = 'Bulk Mail Updated'
+      redirect_to admin_region_bulk_mail_path(@region, @bulk_mail)
+    else
+      flash[:alert] = @bulk_mail.errors.full_messages.to_sentence
+      render :edit
+    end
   end
 end

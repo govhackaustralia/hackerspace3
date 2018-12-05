@@ -8,10 +8,7 @@ class Admin::Regions::ScorecardsController < ApplicationController
     @competition = Competition.current
     @project_judging_total = @competition.score_total PROJECT
     @region = Region.find(params[:region_id])
-    @teams = @region.teams.where(published: true)
-    @id_teams_projects = Team.id_teams_projects(@teams)
-    @projects = Team.projects_by_name(@id_teams_projects)
-    @region_scorecard_helper = Scorecard.region_scorecard_helper(@teams, PROJECT, params[:include_judges] == true.to_s)
+    retrieve_helpers
   end
 
   private
@@ -21,5 +18,12 @@ class Admin::Regions::ScorecardsController < ApplicationController
 
     flash[:alert] = 'You must have valid assignments to access this section.'
     redirect_to root_path
+  end
+
+  def retrieve_helpers
+    @teams = @region.teams.where(published: true)
+    @id_teams_projects = Team.id_teams_projects(@teams)
+    @projects = Team.projects_by_name(@id_teams_projects)
+    @region_scorecard_helper = Scorecard.region_scorecard_helper(@teams, PROJECT, params[:include_judges] == true.to_s)
   end
 end

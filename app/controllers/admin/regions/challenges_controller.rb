@@ -50,18 +50,34 @@ class Admin::Regions::ChallengesController < ApplicationController
 
   def handle_update_redirect
     if params[:image].present?
-      flash[:notice] = 'Challenge Image Updated'
-      render :edit, image: true
+      updated_image
     elsif params[:pdf].present?
-      flash[:notice] = 'Challenge PDF Updated'
-      render :edit, pdf: true
+      updated_pdf
     elsif params[:pdf_preview].present?
-      flash[:notice] = 'Challenge PDF Preview Updated'
-      render :edit, pdf_preview: true
+      updated_pdf_preview
     else
-      flash[:notice] = 'Challenge Updated'
-      redirect_to admin_region_challenge_path(@region, @challenge)
+      updated_challenge
     end
+  end
+
+  def updated_image
+    flash[:notice] = 'Challenge Image Updated'
+    render :edit, image: true
+  end
+
+  def updated_pdf
+    flash[:notice] = 'Challenge PDF Updated'
+    render :edit, pdf: true
+  end
+
+  def updated_pdf_preview
+    flash[:notice] = 'Challenge PDF Preview Updated'
+    render :edit, pdf_preview: true
+  end
+
+  def updated_challenge
+    flash[:notice] = 'Challenge Updated'
+    redirect_to admin_region_challenge_path(@region, @challenge)
   end
 
   def check_for_privileges
