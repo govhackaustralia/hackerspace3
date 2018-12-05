@@ -5,29 +5,47 @@ class EventTest < ActiveSupport::TestCase
     @event = Event.first
     @region = Region.second
     @competition = Competition.first
+    @event_partnership = EventPartnership.first
+    @event_partner = Sponsor.first
     @assignment = Assignment.third
-    @registration = Registration.find(1)
-    @user = User.first
+    @registration = Registration.first
+    @registration_assignment = Assignment.find(4)
     @team = Team.first
+    @entry = Entry.first
+    @user = User.first
+    @flight = Flight.first
+    @bulk_mail = BulkMail.second
   end
 
   test 'event associations' do
-    assert(@event.region == @region)
-    assert(@event.competition == @competition)
-    assert(@event.assignments.include?(@assignment))
-    assert(@event.registrations.include?(@registration))
-    assert(@event.registration_assignments.include?(@registration.assignment))
-    assert(@event.teams.include?(@team))
+    assert @event.region == @region
+    assert @event.competition == @competition
+    assert @event.event_partnership == @event_partnership
+    assert @event.event_partner == @event_partner
+    assert @event.assignments.include? @assignment
+    assert @event.registrations.include? @registration
+    assert @event.registration_assignments.include? @registration_assignment
+    assert @event.teams.include? @team
+    assert @event.entries.include? @entry
+    assert @event.flights.include? @flight
+    assert @event.bulk_mails.include? @bulk_mail
+    @event.destroy
+    assert_raises(ActiveRecord::RecordNotFound) { @event_partnership.reload }
+    assert_raises(ActiveRecord::RecordNotFound) { @assignment.reload }
+    assert_raises(ActiveRecord::RecordNotFound) { @registration.reload }
+    assert_raises(ActiveRecord::RecordNotFound) { @bulk_mail.reload }
   end
 
   test 'event validations' do
-    # No name
-    assert_not(Event.create(name: nil).persisted?)
-    # Duplicate Name
-    assert_not(Event.create(name: @event.name).persisted?)
+    assert_not @event.update capacity: nil
+    assert @event.update capacity: 10
+    assert_not @event.update registration_type: 'Test'
+    assert @event.update registration_type: EVENT_REGISTRATION_TYPES.sample
+    assert_not @event.update event_type: 'Test'
+    assert @event.update event_type: EVENT_TYPES.sample
   end
 
   test 'attending method' do
-    assert(@event.attending?(@user.event_assignment))
+    assert @event.attending? @user.event_assignment
   end
 end

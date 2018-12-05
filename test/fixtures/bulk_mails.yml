@@ -10,6 +10,6 @@ one:
 two:
   id: 2
   mailable_id: 1
-  mailable_type: Region
+  mailable_type: Event
   user_id: 1
   body: MyText
