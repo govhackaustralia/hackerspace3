@@ -2,10 +2,6 @@ class Admin::CompetitionsController < ApplicationController
   before_action :authenticate_user!
   before_action :check_for_privileges
 
-  def index
-    @competition = Competition.current
-  end
-
   def show
     @competition = Competition.find(params[:id])
     @checkpoints = @competition.checkpoints

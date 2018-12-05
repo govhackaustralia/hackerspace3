@@ -46,10 +46,10 @@ Rails.application.routes.draw do
     resources :sponsorships, :event_partnerships, only: [:new, :create, :destroy]
     resources :teams, only: [:index, :show, :update]
 
-    resources :competitions do
-      resources :assignments, controller: 'competitions/assignments'
-      resources :scorecards, controller: 'competitions/scorecards'
-      resources :checkpoints, :criteria
+    resources :competitions, only: [:show, :edit, :update] do
+      resources :assignments, only: [:index, :new, :create], controller: 'competitions/assignments'
+      resources :scorecards, only: :index, controller: 'competitions/scorecards'
+      resources :checkpoints, :criteria, except: [:show, :destroy]
     end
 
     resources :sponsors do
