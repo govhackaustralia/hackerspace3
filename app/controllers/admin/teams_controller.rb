@@ -7,14 +7,7 @@ class Admin::TeamsController < ApplicationController
     @teams = @competition.teams
     @id_teams_projects = Team.id_teams_projects(@teams)
     @projects = Team.projects_by_name(@id_teams_projects)
-    respond_to do |format|
-      format.html
-      if params[:category] == 'members'
-        format.csv { send_data User.all_members_to_csv }
-      else
-        format.csv { send_data User.published_teams_to_csv }
-      end
-    end
+    handle_index
   end
 
   def show
@@ -32,14 +25,9 @@ class Admin::TeamsController < ApplicationController
   def update
     @team = Team.find(params[:id])
     if params[:project_id].present?
-      @project = Project.find(params[:project_id])
-      @team.update(project_id: @project.id)
-      flash[:notice] = 'Current Project Updated'
-      redirect_to admin_team_project_path(@team, @project)
+      handle_update_project
     elsif params[:published].present?
-      @team.update(published: params[:published])
-      flash[:notice] = 'Team Updated'
-      redirect_to admin_team_path(@team)
+      handle_update_published
     end
   end
 
@@ -50,5 +38,29 @@ class Admin::TeamsController < ApplicationController
 
     flash[:alert] = 'You must have valid assignments to access this section.'
     redirect_to root_path
+  end
+
+  def handle_index
+    respond_to do |format|
+      format.html
+      if params[:category] == 'members'
+        format.csv { send_data User.all_members_to_csv }
+      else
+        format.csv { send_data User.published_teams_to_csv }
+      end
+    end
+  end
+
+  def handle_update_project
+    @project = Project.find(params[:project_id])
+    @team.update(project_id: @project.id)
+    flash[:notice] = 'Current Project Updated'
+    redirect_to admin_team_project_path(@team, @project)
+  end
+
+  def handle_update_published
+    @team.update(published: params[:published])
+    flash[:notice] = 'Team Updated'
+    redirect_to admin_team_path(@team)
   end
 end

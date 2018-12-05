@@ -12,13 +12,7 @@ class Flights::Registrations::RegistrationFlightsController < ApplicationControl
     @registration_flight = @registration.registration_flights.new(registration_flight_params)
     @event = @registration.event
     flight_options
-    if @registration_flight.save
-      flash[:notice] = 'Flight Saved'
-      redirect_to event_registration_path(@event.identifier, @registration)
-    else
-      flash[:alert] = @registration_flight.errors.full_messages.to_sentence
-      render :new
-    end
+    handle_create
   end
 
   private
@@ -33,6 +27,16 @@ class Flights::Registrations::RegistrationFlightsController < ApplicationControl
 
     flash[:alert] = 'You are not able to add flghts to this registration.'
     redirect_to root_path
+  end
+
+  def handle_create
+    if @registration_flight.save
+      flash[:notice] = 'Flight Saved'
+      redirect_to event_registration_path(@event.identifier, @registration)
+    else
+      flash[:alert] = @registration_flight.errors.full_messages.to_sentence
+      render :new
+    end
   end
 
   def flight_options

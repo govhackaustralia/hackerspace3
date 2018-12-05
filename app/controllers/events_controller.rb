@@ -11,11 +11,7 @@ class EventsController < ApplicationController
   def show
     @event = Event.find_by(identifier: params[:identifier])
     if @event.published || (user_signed_in? && current_user.event_privileges?)
-      @competition = @event.competition
-      @event_partner = @event.event_partner
-      @region = @event.region
-      @sponsorship_types = @region.sponsorship_types.distinct.order(order: :asc)
-      set_signed_in_user_vars if user_signed_in?
+      show_event
     else
       flash[:alert] = 'This event has not been published.'
       redirect_to root_path
@@ -30,6 +26,14 @@ class EventsController < ApplicationController
     else
       Competition.current.events.where(published: true).order(start_time: :asc, name: :asc)
     end
+  end
+
+  def show_event
+    @competition = @event.competition
+    @event_partner = @event.event_partner
+    @region = @event.region
+    @sponsorship_types = @region.sponsorship_types.distinct.order(order: :asc)
+    set_signed_in_user_vars if user_signed_in?
   end
 
   def set_signed_in_user_vars

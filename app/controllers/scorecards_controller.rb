@@ -28,11 +28,7 @@ class ScorecardsController < ApplicationController
   def update
     @scorecard = Scorecard.find(params[:id])
     if @user == @scorecard.user
-      Scorecard.transaction do
-        Judgment.transaction do
-          @judgments = organise_judgments
-        end
-      end
+      update_scorecard
       process_judgments
       redirect_to edit_project_scorecard_path(@team.current_project.identifier, @scorecard, popup: true)
     else
@@ -49,6 +45,18 @@ class ScorecardsController < ApplicationController
     @project = Project.find(params[:project_identifier]) if @project.nil?
     @team = @project.team
     @competition = @team.competition
+    evaluate_access
+  end
+
+  def update_scorecard
+    Scorecard.transaction do
+      Judgment.transaction do
+        @judgments = organise_judgments
+      end
+    end
+  end
+
+  def evaluate_access
     @peoples_assignment = @user.peoples_assignment
     @judge = @user.judge_assignment(@team.challenges)
     return if @peoples_assignment.present? && helpers.in_peoples_judging_window?(LAST_TIME_ZONE)
@@ -73,9 +81,8 @@ class ScorecardsController < ApplicationController
 
   def validate_new_score(new_score)
     return false if new_score.blank?
-    return false unless (MIN_SCORE..MAX_SCORE).cover?(new_score)
 
-    true
+    (MIN_SCORE..MAX_SCORE).cover?(new_score)
   end
 
   def organise_judgments

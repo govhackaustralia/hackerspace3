@@ -19,7 +19,7 @@ module CompetitionsHelper
     in_window?(time_zone, @competition.peoples_choice_start, @competition.peoples_choice_end)
   end
 
-  def is_either_judging_window_open?(time_zone = nil)
+  def either_judging_window_open?(time_zone = nil)
     in_challenge_judging_window?(time_zone) || in_peoples_judging_window?(time_zone)
   end
 
