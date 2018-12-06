@@ -12,6 +12,7 @@ class Admin::Regions::BulkMailsController < ApplicationController
     @team_orders = @bulk_mail.team_orders
     @region = @bulk_mail.mailable
     @teams = @region.teams
+    @bulk_mail.update_team_orders
     retrieve_team_helpers
   end
 
@@ -25,6 +26,7 @@ class Admin::Regions::BulkMailsController < ApplicationController
     @region = @bulk_mail.mailable
     @team_orders = @bulk_mail.team_orders
     @teams = @region.teams
+    @bulk_mail.update_team_orders
     @id_team_projects = Team.id_teams_projects(@teams)
     @id_team_participants = Team.id_team_participants(@teams)
   end

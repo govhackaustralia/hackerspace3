@@ -3,6 +3,7 @@ class BulkMail < ApplicationRecord
   belongs_to :user
   has_many :team_orders, dependent: :destroy
   has_many :team_correspondences, through: :team_orders, source: :correspondences
+  has_many :teams, through: :team_orders
   has_many :user_orders, dependent: :destroy
   has_many :user_correspondences, through: :user_orders, source: :correspondences
 
@@ -11,9 +12,17 @@ class BulkMail < ApplicationRecord
 
   # Creates Team Orders for all teams associated with a mailable (an event or
   # region)
-  # ENHANCEMENT: Should be moved else where.
+  # ENHANCEMENT: Should be moved else where?
   def create_team_orders
     mailable.teams.each do |team|
+      TeamOrder.create(bulk_mail: self, team: team, request_type: NONE)
+    end
+  end
+
+  # Updates Team Orders to add teams that were created after first create.
+  # ENHANCEMENT: Should be moved else where?
+  def update_team_orders
+    (mailable.teams.to_a - teams.to_a).each do |team|
       TeamOrder.create(bulk_mail: self, team: team, request_type: NONE)
     end
   end

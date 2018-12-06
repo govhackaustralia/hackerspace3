@@ -9,6 +9,7 @@ class BulkMailTest < ActiveSupport::TestCase
     @user_order = UserOrder.first
     @team_correspondence = Correspondence.first
     @user_correspondence = Correspondence.second
+    @team = Team.first
   end
 
   test 'bulkmail associations' do
@@ -18,6 +19,7 @@ class BulkMailTest < ActiveSupport::TestCase
     assert @bulk_mail.user_orders.include? @user_order
     assert @bulk_mail.team_correspondences.include? @team_correspondence
     assert @bulk_mail.user_correspondences.include? @user_correspondence
+    assert @bulk_mail.teams.include? @team
     @bulk_mail.destroy
     assert_raises(ActiveRecord::RecordNotFound) { @team_order.reload }
     assert_raises(ActiveRecord::RecordNotFound) { @user_order.reload }
