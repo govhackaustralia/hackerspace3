@@ -4,6 +4,8 @@ class DataSet < ApplicationRecord
 
   validates :name, presence: true
 
+  # Returns an array of all data sets matching a specific term.
+  # ENHANCEMENT: Should go elsewhere?
   def self.search(term)
     results = []
     DataSet.all.each do |data_set|
@@ -13,6 +15,9 @@ class DataSet < ApplicationRecord
     results
   end
 
+  # Compiles a hash of projects associated with a particular data set URL of
+  # the form... { data_set_url : [project_name, ... ]}
+  # ENHANCEMENT: Should go elsewhere?
   def self.data_set_project_helper
     data_set_urls = all.pluck(:url)
     team_data_sets = TeamDataSet.where(url: data_set_urls)
@@ -29,6 +34,7 @@ class DataSet < ApplicationRecord
 
   require 'csv'
 
+  # Outputs a CSV file of Data Set attributes.
   def self.to_csv(options = {})
     data_set_columns = %w[name url description]
     combined = data_set_columns + ['projects']
