@@ -10,11 +10,10 @@
 
 # Example $ rails db:setup STAGE=PRE_CONNECTION
 
-# TODO: BulkMail Seeds for Regions
 # TODO: Admin needs to be apart of a few teams.
 
 admin = User.new(email: ENV['SEED_EMAIL'], full_name: ENV['SEED_NAME'],
-  password: Devise.friendly_token[0, 20])
+  password: 'password', password_confirmation: 'password')
 
 admin.skip_confirmation_notification!
 admin.skip_reconfirmation!
@@ -226,6 +225,12 @@ Region.all.each do |region|
       name: "#{region.name} Data Set #{time}",
       url: 'https://data.gov.au/dataset/wyndham-smart-bin-fill-level',
       description: 'Random dataset that was taken from data.gov.')
+  end
+
+  3.times do |time|
+    region.bulk_mails.create(user_id: 1,  name: "Bulk Mail #{time}",
+      status: DRAFT, from_email: ENV['SEED_EMAIL'], subject: 'Greetings',
+      body: 'Hello { display_name }, How is { team_name } going with { project_name } ?')
   end
 
   region.challenges.each do |challenge|
