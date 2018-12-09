@@ -1,4 +1,6 @@
 class Region < ApplicationRecord
+  belongs_to :parent, class_name: 'Region', optional: true
+  has_many :sub_regions, class_name: 'Region', foreign_key: 'parent_id'
   has_many :assignments, as: :assignable, dependent: :destroy
   has_many :events
   has_many :teams, through: :events
@@ -16,20 +18,8 @@ class Region < ApplicationRecord
   # time_zone; eg Australia.
   validates :time_zone, inclusion: { in: VALID_TIME_ZONES << nil }
 
-  def sub_regions
-    Region.where(parent_id: id)
-  end
-
-  def parent
-    Region.where(id: parent_id).first
-  end
-
   def self.root
     Region.find_or_create_by(parent_id: nil, name: ROOT_REGION_NAME)
-  end
-
-  def parent_root?
-    return true if Region.root == parent
   end
 
   def director
