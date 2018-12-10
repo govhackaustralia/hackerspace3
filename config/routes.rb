@@ -58,14 +58,14 @@ Rails.application.routes.draw do
       resources :assignments, only: [:new, :create], controller: 'sponsors/assignments'
     end
 
-    resources :regions do
-      resources :data_sets, controller: 'regions/data_sets'
-      resources :assignments, controller: 'regions/assignments'
-      resources :sponsorships, controller: 'regions/sponsorships'
-      resources :scorecards, controller: 'regions/scorecards'
-      resources :events, controller: 'regions/events'
-      resources :challenges, controller: 'regions/challenges'
-      resources :bulk_mails, controller: 'regions/bulk_mails'
+    resources :regions, except: :destroy do
+      resources :data_sets, except: :destroy, controller: 'regions/data_sets'
+      resources :assignments, only: [:index, :new, :create], controller: 'regions/assignments'
+      resources :sponsorships, only: :index, controller: 'regions/sponsorships'
+      resources :scorecards, only: :index, controller: 'regions/scorecards'
+      resources :events, only: [:index, :new, :create], controller: 'regions/events'
+      resources :challenges, except: :destroy, controller: 'regions/challenges'
+      resources :bulk_mails, except: :destroy, controller: 'regions/bulk_mails'
     end
 
     resources :bulk_mails do
