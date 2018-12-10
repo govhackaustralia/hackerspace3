@@ -4,7 +4,7 @@
   <section>
     <% @sub_regions.each do |region| %>
       <h3>Regional Challenge Entry Counts for <%= region.name %> </h3>
-      <% event_counts = region.regional_challenges_event_counts(@competition.passed_checkpoint_ids(region.time_zone)) %>
+      <% event_counts = challenges_event_counts(region, @competition.passed_checkpoint_ids(region.time_zone)) %>
       <% event_names = @competition.events.where(event_type: COMPETITION_EVENT, region: region).order(:name).pluck(:name) %>
       <% challenge_names = region.challenges.order(:name).pluck(:name) %>
       <table>

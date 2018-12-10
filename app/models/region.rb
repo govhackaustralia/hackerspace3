@@ -59,62 +59,6 @@ class Region < ApplicationRecord
     award_release.to_formatted_s(:number) < Time.now.in_time_zone(COMP_TIME_ZONE).to_formatted_s(:number)
   end
 
-  def self.national_challenges_region_counts(checkpoint_ids = nil)
-    challenge_to_region_array = {}
-    regions = Region.where.not(parent_id: nil)
-    region_to_entries = {}
-    regions.each do |region|
-      region_to_entries[region] = if checkpoint_ids.nil?
-                                    region.entries
-                                  else
-                                    region.entries.where(checkpoint_id: checkpoint_ids)
-                                  end
-    end
-
-    unpublished_entries = Entry.where(team: Team.where(published: false))
-
-    Region.root.challenges.each do |challenge|
-      challenge_entries = challenge.entries
-      challenge_to_region_array[challenge.name] = {}
-      challenge_count = 0
-      regions.each do |region|
-        entry_count = ((challenge_entries - unpublished_entries) & region_to_entries[region]).count
-        challenge_to_region_array[challenge.name][region.name] = entry_count
-        challenge_count += entry_count
-      end
-      challenge_to_region_array[challenge.name][:total_entries] = challenge_count
-    end
-    challenge_to_region_array
-  end
-
-  def regional_challenges_event_counts(checkpoint_ids = nil)
-    challenge_to_event_array = {}
-    events = Competition.current.events.where(region: self, event_type: COMPETITION_EVENT)
-    event_to_entries = {}
-    events.each do |event|
-      event_to_entries[event] = if checkpoint_ids.nil?
-                                  event.entries
-                                else
-                                  event.entries.where(checkpoint_id: checkpoint_ids)
-                                  end
-    end
-
-    unpublished_entries = Entry.where(team: Team.where(published: false))
-
-    challenges.each do |challenge|
-      challenge_entries = challenge.entries
-      challenge_to_event_array[challenge.name] = {}
-      challenge_count = 0
-      events.each do |event|
-        entry_count = ((challenge_entries - unpublished_entries) & event_to_entries[event]).count
-        challenge_to_event_array[challenge.name][event.name] = entry_count
-        challenge_count += entry_count
-      end
-      challenge_to_event_array[challenge.name][:total_entries] = challenge_count
-    end
-    challenge_to_event_array
-  end
-
   def self.id_regions(regions)
     regions = where(id: regions.uniq) if regions.class == Array
     id_regions = {}

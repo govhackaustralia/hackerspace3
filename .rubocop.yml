@@ -32,3 +32,6 @@ Lint/UselessAssignment:
 
 Metrics/ClassLength:
   Enabled: false
+
+Metrics/ParameterLists:
+  Enabled: false

@@ -68,14 +68,14 @@ class Admin::RegionsController < ApplicationController
     if @region.national?
       retrieve_national_counts
     else
-      @event_counts = @region.regional_challenges_event_counts
+      @event_counts = helpers.challenges_event_counts(@region)
       @event_names = @competition.events.where(event_type: COMPETITION_EVENT, region: @region).order(:name).pluck(:name)
       @challenge_names = @region.challenges.order(:name).pluck(:name)
     end
   end
 
   def retrieve_national_counts
-    @region_counts = Region.national_challenges_region_counts
+    @region_counts = helpers.challenges_region_counts
     @region_names = Region.where.not(parent_id: nil).order(:name).pluck(:name)
     @challenge_names = Region.root.challenges.order(:name).pluck(:name)
   end
