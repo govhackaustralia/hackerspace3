@@ -12,29 +12,37 @@ class Registration < ApplicationRecord
   validates :assignment_id, uniqueness: { scope: :event_id,
                                           message: 'Registration already exists' }
 
+  # Returns the category of a registration for the purpose of allocating
+  # different event ticket types.
   def category
     reg_assignment = assignment
     if reg_assignment.title == VIP || assignment.title == PARTICIPANT
-      return REGULAR
+      REGULAR
     elsif reg_assignment.assignable_type == 'Team'
-      return GROUP_GOLDEN
+      GROUP_GOLDEN
     elsif reg_assignment.title == GOLDEN_TICKET
-      return INDIVIDUAL_GOLDEN
+      INDIVIDUAL_GOLDEN
     else
-      return STAFF
+      STAFF
     end
   end
 
+  # Return the inbound flight chosen by a registraton.
+  # ENHANCEMENT: Move into rails associations
   def inbound_flight
     flights.find_by(direction: INBOUND)
   end
 
+  # Return the outbound flight chosen by a registraton.
+  # ENHANCEMENT: Move into rails associations
   def outbound_flight
     flights.find_by(direction: OUTBOUND)
   end
 
   private
 
+  # Triggers call back to check for space in an event, usually for someone else.
+  # ENHANCEMENT: Probably bad practice.
   def check_for_newly_freed_space
     event.check_for_newly_freed_space
   end

@@ -8,12 +8,16 @@ class RegistrationTest < ActiveSupport::TestCase
     @user = User.first
     @waitlister = User.second
     @wait_ass = Assignment.find(6)
+    @inbound_flight = Flight.first
+    @outbound_flight = Flight.second
   end
 
   test 'registration associations' do
-    assert(@registration.assignment == @assignment)
-    assert(@registration.event == @event)
-    assert(@registration.user == @user)
+    assert @registration.assignment == @assignment
+    assert @registration.event == @event
+    assert @registration.user == @user
+    assert @registration.inbound_flight == @inbound_flight
+    assert @registration.outbound_flight == @outbound_flight
   end
 
   test 'registration validations' do

@@ -4,10 +4,10 @@ one:
   id: 1
   event_id: 1
   description: MyString
-  direction: MyString
+  direction: Inbound
 
 two:
   id: 2
   event_id: 1
   description: MyString
-  direction: MyString
+  direction: Outbound
