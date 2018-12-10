@@ -94,17 +94,6 @@ class User < ApplicationRecord
     Team.where(id: assignment_ids)
   end
 
-  def invited_teams
-    assignment_ids = assignments.where(assignable_type: 'Team', title: INVITEE).pluck(:assignable_id)
-    return if assignment_ids.nil?
-    invited_teams = []
-    competition = Competition.current
-    Team.where(id: assignment_ids).each do |team|
-      invited_teams << team if competition.in_competition_window?(team.time_zone)
-    end
-    return invited_teams unless invited_teams.empty?
-  end
-
   def public_winning_entries?
     leader_assignments = assignments.where(title: TEAM_LEADER)
     return false if leader_assignments.empty?

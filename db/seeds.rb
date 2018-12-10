@@ -10,7 +10,7 @@
 
 # Example $ rails db:setup STAGE=PRE_CONNECTION
 
-# TODO: Admin needs to be apart of a few teams.
+# TODO: vary the team and event assignments a bit.
 
 admin = User.new(email: ENV['SEED_EMAIL'], full_name: ENV['SEED_NAME'],
   password: 'password', password_confirmation: 'password')
@@ -19,6 +19,7 @@ admin.skip_confirmation_notification!
 admin.skip_reconfirmation!
 admin.confirm
 admin.save
+admin.event_assignment
 admin.make_site_admin
 admin.update(accepted_terms_and_conditions: true, how_did_you_hear: 'jas')
 
@@ -54,11 +55,12 @@ def random_model_id(model)
   random_id.zero? ? 1 : random_id
 end
 
-if ENV['STAGE'] == 'PRE_CONNECTION'
+case ENV['STAGE']
+when 'PRE_CONNECTION'
   comp_start = Time.now + 2.months
-elsif ENV['STAGE'] == 'MID_COMPETITION'
+when 'MID_COMPETITION'
   comp_start = Time.now - 1.days
-elsif ENV['STAGE'] == 'POST_COMPETITION'
+when 'POST_COMPETITION'
   comp_start = Time.now - 4.days
 else
   comp_start = Time.now

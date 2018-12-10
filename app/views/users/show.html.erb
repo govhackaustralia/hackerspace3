@@ -91,7 +91,7 @@
 				<% event = @id_teams_projects[team.id][:event] %>
 					<h4><%= project.team_name %> - <%= project.project_name %></h4>
 					<p>Event: <%= event.name %></p>
-					<% if @competition.not_finished?(team.time_zone) %>
+					<% if competition_not_finished?(team.time_zone) %>
 						<p><%= link_to "Manage #{team.name}", team_management_team_path(team) %></p>
 					<% elsif team.published %>
 						<p><%= link_to "Go to #{team.name}", project_path(project.identifier) %></p>

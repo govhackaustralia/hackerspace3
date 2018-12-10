@@ -30,7 +30,7 @@ class UsersController < ApplicationController
 
     @id_events = Event.id_events(@registrations.pluck(:event_id))
 
-    @invited_teams = @user.invited_teams
+    @invited_teams = helpers.user_invited_teams
 
     @public_winning_entries = @user.public_winning_entries?
   end

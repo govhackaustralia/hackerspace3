@@ -63,7 +63,7 @@ Rails.application.routes.draw do
       resources :assignments, only: [:index, :new, :create], controller: 'regions/assignments'
       resources :sponsorships, only: :index, controller: 'regions/sponsorships'
       resources :scorecards, only: :index, controller: 'regions/scorecards'
-      resources :events, only: [:index, :new, :create], controller: 'regions/events'
+      resources :events, except: :destroy, controller: 'regions/events'
       resources :challenges, except: :destroy, controller: 'regions/challenges'
       resources :bulk_mails, except: :destroy, controller: 'regions/bulk_mails'
     end
