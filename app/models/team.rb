@@ -9,6 +9,7 @@ class Team < ApplicationRecord
   has_one :competition, through: :event
   has_one :region, through: :event
   has_many :projects, dependent: :destroy
+  belongs_to :current_project, class_name: 'Project', foreign_key: 'project_id', optional: true
   has_many :team_data_sets, dependent: :destroy
   has_many :entries, dependent: :destroy
   has_many :challenges, through: :entries
@@ -41,12 +42,6 @@ class Team < ApplicationRecord
     return if ids.empty?
 
     User.where(id: ids)
-  end
-
-  def current_project
-    return Project.find(project_id) unless project_id.nil?
-
-    projects.order(created_at: :desc).first
   end
 
   def name

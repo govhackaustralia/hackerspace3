@@ -53,7 +53,7 @@ class Admin::TeamsController < ApplicationController
 
   def handle_update_project
     @project = Project.find(params[:project_id])
-    @team.update(project_id: @project.id)
+    @team.update(current_project: @project)
     flash[:notice] = 'Current Project Updated'
     redirect_to admin_team_project_path(@team, @project)
   end
