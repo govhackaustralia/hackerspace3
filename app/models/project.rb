@@ -6,6 +6,8 @@ class Project < ApplicationRecord
 
   after_save :update_entries_eligible, :update_identifier
 
+  after_create :update_team_current_project
+
   def update_entries_eligible
     team.entries.each { |entry| entry.update_eligible(self) }
   end
@@ -23,6 +25,10 @@ class Project < ApplicationRecord
   end
 
   private
+
+  def update_team_current_project
+    team.update(current_project: self)
+  end
 
   def already_there?(new_identifier)
     project = Project.find_by(identifier: new_identifier)

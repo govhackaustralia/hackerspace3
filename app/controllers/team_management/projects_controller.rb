@@ -13,7 +13,6 @@ class TeamManagement::ProjectsController < ApplicationController
   def update
     update_project
     if @project.save
-      @team.update(project_id: @project.id)
       flash[:notice] = 'Team Project Saved'
       redirect_to edit_team_management_team_project_path(@project.team, @project)
     else
