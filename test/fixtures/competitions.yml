@@ -7,6 +7,12 @@
 one:
   id: 1
   year: 2018
+  start_time: Thu, 06 Dec 2018 19:36:56 AEDT +11:00
+  end_time: Sun, 09 Dec 2018 19:36:56 AEDT +11:00
+  peoples_choice_start: 2018-12-13 08:36:56
+  peoples_choice_end: 2018-12-27 08:36:56
+  challenge_judging_start: 2018-12-13 08:36:56
+  challenge_judging_end: 2019-01-03 08:36:56
 
 two: {}
 # column: value
