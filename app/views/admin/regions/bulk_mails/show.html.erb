@@ -29,10 +29,8 @@
     <% @team_orders.each do |team_order| %>
       <% team = @id_team_projects[team_order.team_id][:team] %>
       <% project = @id_team_projects[team.id][:current_project] %>
-      <% leaders = @id_team_participants[team.id][:leaders] %>
-      <% members = @id_team_participants[team.id][:members] %>
       <% next if team_order.request_type == NONE %>
-      <% leaders.each do |leader| %>
+      <% team.leaders.each do |leader| %>
         <% next unless leader.me_govhack_contact %>
         <tr>
           <td><%= project.team_name %></td>
@@ -47,7 +45,7 @@
         </tr>
       <% end %>
       <% next if team_order.request_type == LEADER_ONLY %>
-      <% members.each do |member| %>
+      <% team.members.each do |member| %>
         <% next unless member.me_govhack_contact %>
         <tr>
           <td><%= project.team_name %></td>

@@ -1,6 +1,10 @@
 class Team < ApplicationRecord
   has_many :assignments, as: :assignable
   has_many :users, through: :assignments
+  has_many :member_assignments, -> { where(title: TEAM_MEMBER) }, as: :assignable, class_name: 'Assignment'
+  has_many :members, through: :member_assignments, source: :user
+  has_many :leader_assignments, -> { where(title: TEAM_LEADER) }, as: :assignable, class_name: 'Assignment'
+  has_many :leaders, through: :leader_assignments, source: :user
   belongs_to :event
   has_one :competition, through: :event
   has_one :region, through: :event
@@ -185,32 +189,6 @@ class Team < ApplicationRecord
     end
 
     id_team_projects
-  end
-
-  def self.id_team_participants(teams)
-    assignments = Assignment.where(assignable: teams.to_a)
-    id_team_assignments = {}
-    teams.each { |team| id_team_assignments[team.id] = [] }
-    assignments.each do |assignment|
-      id_team_assignments[assignment.assignable_id] << assignment
-    end
-    users = User.where(id: assignments.pluck(:user_id))
-    id_users = {}
-    users.each { |user| id_users[user.id] = user }
-    id_team_participants = {}
-    teams.each do |team|
-      leaders = []
-      members = []
-      id_team_assignments[team.id].each do |assignment|
-        if assignment.title == TEAM_LEADER
-          leaders << id_users[assignment.user_id]
-        else
-          members << id_users[assignment.user_id]
-        end
-      end
-      id_team_participants[team.id] = { leaders: leaders, members: members }
-    end
-    id_team_participants
   end
 
   def self.projects_by_name(id_teams_projects)

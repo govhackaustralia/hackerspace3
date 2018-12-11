@@ -3,8 +3,6 @@
     <% @team_orders.each do |team_order| %>
       <% team = @id_team_projects[team_order.team_id][:team] %>
       <% project = @id_team_projects[team.id][:current_project] %>
-      <% leaders = @id_team_participants[team.id][:leaders] %>
-      <% members = @id_team_participants[team.id][:members] %>
       <h3><%= project.team_name %> | <%= project.project_name %></h3>
       <%= fields_for "team_orders[]", team_order do |team_order_form| %>
         <div class="field">
@@ -16,14 +14,14 @@
             <th>Display Name</th>
             <th>GovHack Can Contact</th>
           </tr>
-          <% leaders.each do |leader| %>
+          <% team.leaders.each do |leader| %>
             <tr>
               <td>Team Leader</td>
               <td><%= leader.display_name %></td>
               <td><%= leader.me_govhack_contact ? 'Can Contact' : 'Cannot Contact' %></td>
             </tr>
           <% end %>
-          <% members.each do |member| %>
+          <% team.members.each do |member| %>
             <tr>
               <td>Team Member</td>
               <td><%= member.display_name %></td>
