@@ -68,9 +68,9 @@ Rails.application.routes.draw do
       resources :bulk_mails, except: :destroy, controller: 'regions/bulk_mails'
     end
 
-    resources :bulk_mails do
-      resources :correspondences, controller: 'bulk_mails/correspondences'
-      resources :user_orders, controller: 'bulk_mails/user_orders'
+    resources :bulk_mails do  # FIX: This resource not needed, find alternative. Scope? Namespace?
+      resources :correspondences, only: :show, controller: 'bulk_mails/correspondences'
+      resources :user_orders, only: :update, controller: 'bulk_mails/user_orders'
     end
 
     resources :challenges do
