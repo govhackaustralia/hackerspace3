@@ -77,31 +77,6 @@ class Competition < ApplicationRecord
     criteria.where(category: type).count * MAX_SCORE
   end
 
-  # Sorts data sets by their region, filtered by a given search term and
-  # returns an object of the form...
-  # { region_id: [data_set, data_set] }
-  # ENHANCEMENT: This should be somewhere else.
-  def filter_data_sets(term)
-    sets = data_sets.order(:name)
-    id_regions = Region.id_regions(Region.all)
-    region_sets = {}
-    id_regions.keys.each do |region_id|
-      region_sets[region_id] = []
-    end
-    if term.nil?
-      sets.each do |data_set|
-        region_sets[data_set.region_id] << data_set
-      end
-    else
-      sets.each do |data_set|
-        string = "#{data_set.name} #{data_set.description}" +
-                 id_regions[data_set.region_id].name.to_s.downcase
-        region_sets[data_set.region_id] << data_set if string.include? term.downcase
-      end
-    end
-    region_sets
-  end
-
   # Returns an array containing all the available checkpoints for a team in a
   # particular region.
   # ENHANCEMENT: This should be somewhere else.
