@@ -11,4 +11,8 @@ class JudgmentTest < ActiveSupport::TestCase
     assert @judgment.scorecard == @scorecard
     assert @judgment.criterion == @criterion
   end
+
+  test 'judgment validation' do
+    assert_not @judgment.update(criterion_id: 2)
+  end
 end

@@ -9,5 +9,5 @@ one:
 two:
   id: 2
   scorecard_id: 1
-  criterion_id: 1
+  criterion_id: 2
   score: 1
