@@ -10,7 +10,7 @@
 
 # Example $ rails db:setup STAGE=PRE_CONNECTION
 
-# TODO: vary the team and event assignments a bit.
+# TODO: Implement Faker Gem
 
 admin = User.new(email: ENV['SEED_EMAIL'], full_name: ENV['SEED_NAME'],
   password: 'password', password_confirmation: 'password')
@@ -133,8 +133,9 @@ def create_event(event_type, comp, event_name, region, event_start)
 end
 
 def assign_participants(event)
-  Assignment.where(title: PARTICIPANT).take(20).each do |participant|
-    event.registrations.create(status: ATTENDING, assignment: participant)
+  participants = Assignment.where(title: PARTICIPANT)
+  20.times do
+    event.registrations.create(status: ATTENDING, assignment: participants.sample)
   end
 end
 
@@ -192,13 +193,15 @@ def fill_out_comp_event(event)
   end
 end
 
-Region.create(name: 'New South Wales', time_zone: 'Sydney', parent_id: Region.root.id)
-Region.create(name: 'Victoria', time_zone: 'Melbourne', parent_id: Region.root.id)
-Region.create(name: 'South Australia', time_zone: 'Adelaide', parent_id: Region.root.id)
-Region.create(name: 'Western Australia', time_zone: 'Perth', parent_id: Region.root.id)
-Region.create(name: 'Tasmania', time_zone: 'Hobart', parent_id: Region.root.id)
-Region.create(name: 'ACT', time_zone: 'Canberra', parent_id: Region.root.id)
-Region.create(name: 'Queensland', time_zone: 'Brisbane', parent_id: Region.root.id)
+root_region_id = Region.root.id
+
+Region.create(name: 'New South Wales', time_zone: 'Sydney', parent_id: root_region_id)
+Region.create(name: 'Victoria', time_zone: 'Melbourne', parent_id: root_region_id)
+Region.create(name: 'South Australia', time_zone: 'Adelaide', parent_id: root_region_id)
+Region.create(name: 'Western Australia', time_zone: 'Perth', parent_id: root_region_id)
+Region.create(name: 'Tasmania', time_zone: 'Hobart', parent_id: root_region_id)
+Region.create(name: 'ACT', time_zone: 'Canberra', parent_id: root_region_id)
+Region.create(name: 'Queensland', time_zone: 'Brisbane', parent_id: root_region_id)
 
 Region.all.each do |region|
 
@@ -294,7 +297,9 @@ Region.all.each do |region|
 end
 
 comp.teams.all.each do |team|
-  Assignment.where(title: PARTICIPANT).take(20).each do |assignment|
+  participants = Assignment.where(title: PARTICIPANT)
+  20.times do
+    assignment = participants.sample
     scorecard = Scorecard.create(judgeable: team, assignment: assignment,
       included: (assignment.id % 5 != 0))
     comp.project_criteria.each do |criterion|
