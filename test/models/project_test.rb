@@ -5,11 +5,13 @@ class ProjectTest < ActiveSupport::TestCase
     @project = Project.first
     @team = Team.first
     @user = User.first
+    @event = Event.first
   end
 
   test 'project associations' do
     assert @project.team == @team
     assert @project.user == @user
+    assert @project.event == @event
   end
 
   test 'project validations' do

@@ -35,9 +35,8 @@ class Admin::Challenges::EntriesController < ApplicationController
   def team_project_entries
     @entries =  @challenge.entries
     @id_entries = Entry.team_id_entries(@entries)
-    @teams = Team.where(id: @entries.pluck(:team_id), published: true)
-    @id_team_projects = Team.id_teams_projects(@teams)
-    @projects = @challenge.published_projects_by_name
+    @teams = @challenge.published_teams
+    @projects = @challenge.published_projects_by_name.preload(:event)
   end
 
   def project_judging

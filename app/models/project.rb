@@ -1,5 +1,6 @@
 class Project < ApplicationRecord
   belongs_to :team
+  has_one :event, through: :team
   belongs_to :user
 
   validates :team_name, :project_name, presence: true
