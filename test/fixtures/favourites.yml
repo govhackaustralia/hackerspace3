@@ -4,8 +4,3 @@ one:
   id: 1
   assignment_id: 4
   team_id: 1
-
-two:
-  id: 2
-  assignment_id: 1
-  team_id: 1

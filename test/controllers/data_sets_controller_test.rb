@@ -1,10 +1,6 @@
 require 'test_helper'
 
 class DataSetsControllerTest < ActionDispatch::IntegrationTest
-  setup do
-    Competition.first.update(start_time: Time.now, end_time: Time.now)
-  end
-
   test 'should get index' do
     get data_sets_url
     assert_response :success
