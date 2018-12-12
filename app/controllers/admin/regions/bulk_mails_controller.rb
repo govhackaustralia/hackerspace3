@@ -9,9 +9,8 @@ class Admin::Regions::BulkMailsController < ApplicationController
 
   def show
     @bulk_mail = BulkMail.find(params[:id])
-    @team_orders = @bulk_mail.team_orders
+    @team_orders = @bulk_mail.team_orders.preload(team: [:current_project, :leaders, :members])
     @region = @bulk_mail.mailable
-    @teams = @region.teams.preload(:leaders, :members)
     @bulk_mail.update_team_orders
     retrieve_team_helpers
   end
@@ -24,10 +23,8 @@ class Admin::Regions::BulkMailsController < ApplicationController
   def edit
     @bulk_mail = BulkMail.find(params[:id])
     @region = @bulk_mail.mailable
-    @team_orders = @bulk_mail.team_orders
-    @teams = @region.teams.preload(:leaders, :members)
+    @team_orders = @bulk_mail.team_orders.preload(team: [:current_project, :leaders, :members])
     @bulk_mail.update_team_orders
-    @id_team_projects = Team.id_teams_projects(@teams)
   end
 
   def create
@@ -78,7 +75,6 @@ class Admin::Regions::BulkMailsController < ApplicationController
   end
 
   def retrieve_team_helpers
-    @id_team_projects = Team.id_teams_projects(@teams)
     @participant_count = 0
     @example_user = User.first
     @example_project = Project.first

@@ -27,14 +27,12 @@
       <% end %>
     </tr>
     <% @team_orders.each do |team_order| %>
-      <% team = @id_team_projects[team_order.team_id][:team] %>
-      <% project = @id_team_projects[team.id][:current_project] %>
       <% next if team_order.request_type == NONE %>
-      <% team.leaders.each do |leader| %>
+      <% team_order.team.leaders.each do |leader| %>
         <% next unless leader.me_govhack_contact %>
         <tr>
-          <td><%= project.team_name %></td>
-          <td><%= project.project_name %></td>
+          <td><%= team_order.team.current_project.team_name %></td>
+          <td><%= team_order.team.current_project.project_name %></td>
           <td>Team Leader</td>
           <td><%= leader.display_name %></td>
           <% @participant_count += 1 %>
@@ -45,11 +43,11 @@
         </tr>
       <% end %>
       <% next if team_order.request_type == LEADER_ONLY %>
-      <% team.members.each do |member| %>
+      <% team_order.team.members.each do |member| %>
         <% next unless member.me_govhack_contact %>
         <tr>
-          <td><%= project.team_name %></td>
-          <td><%= project.project_name %></td>
+          <td><%= team_order.team.current_project.team_name %></td>
+          <td><%= team_order.team.current_project.project_name %></td>
           <td>Team Member</td>
           <td><%= member.display_name %></td>
           <% @participant_count += 1 %>
