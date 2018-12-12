@@ -13,6 +13,6 @@ class JudgmentTest < ActiveSupport::TestCase
   end
 
   test 'judgment validation' do
-    assert_not @judgment.update(criterion_id: 2)
+    assert_not @judgment.update criterion_id: 2
   end
 end
