@@ -16,8 +16,7 @@
 		  <tr>
 		    <td><%= link_to "#{project.project_name}", project_path(project.identifier) %></td>
 		    <td><%= project.team_name %></td>
-		    <td><%= @id_teams_projects[project.team_id][:event].name %></td>
-
+		    <td><%= project.event.name %></td>
 		    <% if show_peoples_choice_stuff? || show_challenge_judgment_stuff? %>
 					<% score_value_project = 0 %>
 		    	<% if (display_score = @project_judging[project.team_id][:display_score_status]).is_a? Integer %>

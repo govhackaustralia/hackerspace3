@@ -45,8 +45,7 @@ class ChallengesController < ApplicationController
 
   def judging_view
     @teams = @challenge.teams.where(published: true)
-    @id_teams_projects = Team.id_teams_projects(@teams)
-    @projects = @challenge.published_projects_by_name
+    @projects = @challenge.published_projects_by_name.preload(:event)
     return unless user_signed_in?
 
     user_judging
@@ -73,7 +72,6 @@ class ChallengesController < ApplicationController
     @passed_public_checkpoints = @competition.checkpoints.where(id: passed_checkpoint_ids).order(:end_time)
     team_ids = @challenge.entries.where(checkpoint_id: passed_checkpoint_ids).pluck(:team_id)
     @teams = Team.where(id: team_ids, published: true)
-    @id_team_projects = Team.id_teams_projects(@teams)
   end
 
   def challenge_entry_counts
