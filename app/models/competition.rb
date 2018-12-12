@@ -4,6 +4,8 @@ class Competition < ApplicationRecord
   has_many :sponsorship_types
   has_many :events
   has_many :teams, through: :events
+  has_many :projects_by_name, through: :events
+  has_many :published_projects_by_name, through: :events
   has_many :projects, through: :teams
   has_many :challenges
   has_many :checkpoints

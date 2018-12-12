@@ -46,7 +46,7 @@ class ChallengesController < ApplicationController
   def judging_view
     @teams = @challenge.teams.where(published: true)
     @id_teams_projects = Team.id_teams_projects(@teams)
-    @projects = Team.projects_by_name(@id_teams_projects)
+    @projects = @challenge.published_projects_by_name
     return unless user_signed_in?
 
     user_judging

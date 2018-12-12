@@ -3,7 +3,7 @@ class ProjectsController < ApplicationController
     @competition = Competition.current
     @teams = @competition.teams.where(published: true)
     @id_teams_projects = Team.id_teams_projects(@teams)
-    @projects = Team.projects_by_name(@id_teams_projects)
+    @projects = @competition.published_projects_by_name
     user_records_index if user_signed_in?
     respond_to do |format|
       format.html

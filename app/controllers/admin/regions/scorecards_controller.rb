@@ -23,7 +23,7 @@ class Admin::Regions::ScorecardsController < ApplicationController
   def retrieve_helpers
     @teams = @region.teams.where(published: true)
     @id_teams_projects = Team.id_teams_projects(@teams)
-    @projects = Team.projects_by_name(@id_teams_projects)
+    @projects = @region.published_projects_by_name
     @region_scorecard_helper = Scorecard.region_scorecard_helper(@teams, PROJECT, params[:include_judges] == true.to_s)
   end
 end

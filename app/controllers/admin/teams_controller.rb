@@ -6,7 +6,7 @@ class Admin::TeamsController < ApplicationController
     @competition = Competition.current
     @teams = @competition.teams
     @id_teams_projects = Team.id_teams_projects(@teams)
-    @projects = Team.projects_by_name(@id_teams_projects)
+    @projects = @competition.projects_by_name
     handle_index
   end
 

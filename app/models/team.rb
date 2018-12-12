@@ -19,6 +19,8 @@ class Team < ApplicationRecord
   has_one_attached :thumbnail
   has_one_attached :high_res_image
 
+  scope :published, -> { where(published: true) }
+
   def team_leader
     assignment = Assignment.find_by(assignable: self, title: TEAM_LEADER)
     return if assignment.nil?
@@ -184,12 +186,6 @@ class Team < ApplicationRecord
     end
 
     id_team_projects
-  end
-
-  def self.projects_by_name(id_teams_projects)
-    projects = []
-    id_teams_projects.each { |_team, obj| projects << obj[:current_project] }
-    projects.sort_by(&:project_name)
   end
 
   def self.search(term)

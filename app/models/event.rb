@@ -7,6 +7,9 @@ class Event < ApplicationRecord
   has_many :registrations, dependent: :destroy
   has_many :registration_assignments, through: :registrations, source: :assignment
   has_many :teams
+  has_many :projects_by_name, -> { order(:project_name) }, through: :teams, source: :current_project
+  has_many :published_teams, -> { published }, class_name: 'Team'
+  has_many :published_projects_by_name, -> { order(:project_name) }, through: :published_teams, source: :current_project
   has_many :entries, through: :teams
   has_many :flights
   has_many :bulk_mails, as: :mailable, dependent: :destroy
