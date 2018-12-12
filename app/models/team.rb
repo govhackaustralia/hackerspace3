@@ -126,7 +126,6 @@ class Team < ApplicationRecord
 
   def self.to_csv(options = {})
     project_columns = %w[team_name project_name source_code_url video_url homepage_url created_at updated_at identifier]
-    id_team_projects = Team.id_teams_projects(all)
     team_member_counts = {}
     Assignment.where(assignable_type: 'Team').each do |assignment|
       team_member_counts[assignment.assignable_id] ||= 0
@@ -148,9 +147,8 @@ class Team < ApplicationRecord
 
     CSV.generate(options) do |csv|
       csv << project_columns + %w[member_count data_sets challenge_names]
-      all.where(published: true).each do |team|
-        project = id_team_projects[team.id][:current_project]
-        csv << project.attributes.values_at(*project_columns) + [team_member_counts[team.id], team_data_sets[team.id], team_challenge_names[team.id]]
+      all.published.preload(:current_project).each do |team|
+        csv << team.current_project.attributes.values_at(*project_columns) + [team_member_counts[team.id], team_data_sets[team.id], team_challenge_names[team.id]]
       end
     end
   end
