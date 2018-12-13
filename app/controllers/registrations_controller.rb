@@ -40,6 +40,8 @@ class RegistrationsController < ApplicationController
     end
   end
 
+  # Hard to check Create Method when it is so long.
+  # ENHANCEMENT: Break up method across controllers.
   def create
     create_new_registration
     update_user_preferences
