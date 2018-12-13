@@ -10,9 +10,8 @@
   <% if competition_started? %>
     <% if @team_data_sets.present? %>
       <% @teams.each do |team| %>
-        <% project = @id_teams_projects[team.id][:current_project] %>
-        <h4><%= "#{ project.team_name } - #{ project.project_name }" %></h4>
-        <%= link_to 'Go to Team Project', project_path(project.identifier) %><br>
+        <h4><%= "#{ team.current_project.team_name } - #{ team.current_project.project_name }" %></h4>
+        <%= link_to 'Go to Team Project', project_path(team.current_project.identifier) %><br>
       <% end %>
     <% else %>
       <p>No team projects utilising this data set currently.</p>
