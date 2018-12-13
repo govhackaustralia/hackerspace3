@@ -21,9 +21,8 @@ class Admin::Regions::ScorecardsController < ApplicationController
   end
 
   def retrieve_helpers
-    @teams = @region.teams.where(published: true)
-    @id_teams_projects = Team.id_teams_projects(@teams)
-    @projects = @region.published_projects_by_name
+    @teams = @region.teams.published
+    @projects = @region.published_projects_by_name.preload(:event)
     @region_scorecard_helper = Scorecard.region_scorecard_helper(@teams, PROJECT, params[:include_judges] == true.to_s)
   end
 end

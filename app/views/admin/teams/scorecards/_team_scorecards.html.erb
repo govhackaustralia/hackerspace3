@@ -14,7 +14,7 @@
       <tr>
         <td><%= link_to "#{project.project_name}", project_path(project.identifier) %></td>
         <td><%= project.team_name %></td>
-        <td><%= @id_teams_projects[project.team_id][:event].name %></td>
+        <td><%= project.event.name %></td>
 				<% scores = @region_scorecard_helper[project.team_id][:scores] %>
 				<% total_card_count = @region_scorecard_helper[project.team_id][:total_card_count] %>
 				<% if total_card_count == 0 %>
