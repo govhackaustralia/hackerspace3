@@ -79,11 +79,12 @@ Rails.application.routes.draw do
       resources :entries, only: [:index, :edit, :update], controller: 'challenges/entries'
     end
 
-    resources :events do
-      resources :registrations, :event_partnerships
-      resources :assignments, controller: 'events/assignments'
-      resources :flights, controller: 'events/flights'
-      resources :bulk_mails, controller: 'events/bulk_mails'
+    resources :events, only: :index do
+      resources :registrations, except: [:show, :destroy]
+      resources :event_partnerships, only: [:new, :create, :destroy]
+      resources :assignments, only: [:index, :new, :create], controller: 'events/assignments'
+      resources :flights, except: :show, controller: 'events/flights'
+      resources :bulk_mails, except: :destroy, controller: 'events/bulk_mails'
     end
 
     resources :teams do
