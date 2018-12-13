@@ -1,9 +1,8 @@
 class ProjectsController < ApplicationController
   def index
     @competition = Competition.current
-    @teams = @competition.teams.where(published: true)
-    @id_teams_projects = Team.id_teams_projects(@teams)
-    @projects = @competition.published_projects_by_name
+    @teams = @competition.teams.published
+    @projects = @competition.published_projects_by_name.preload(:event)
     user_records_index if user_signed_in?
     respond_to do |format|
       format.html
