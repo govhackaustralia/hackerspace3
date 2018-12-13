@@ -23,14 +23,12 @@ class UsersController < ApplicationController
     @sponsor_contact_assignments = @assignments.where(title: SPONSOR_CONTACT)
     @id_sponsors = Sponsor.id_sponsors(@sponsor_contact_assignments.pluck(:assignable_id))
 
-    @favourite_teams = @event_assignment.teams.where(published: true)
-    @comp_teams = @user.teams
-
-    @id_teams_projects = Team.id_teams_projects(@favourite_teams + @comp_teams)
+    @favourite_teams = @event_assignment.teams.published.preload(:event, :current_project)
 
     @id_events = Event.id_events(@registrations.pluck(:event_id))
 
-    @invited_teams = helpers.user_invited_teams
+    @joined_teams = @user.joined_teams.preload(:event, :current_project)
+    @invited_teams = @user.invited_teams.preload(:event, :current_project)
 
     @public_winning_entries = @user.public_winning_entries?
   end

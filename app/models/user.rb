@@ -6,6 +6,10 @@ class User < ApplicationRecord
 
   has_many :assignments, dependent: :destroy
   has_many :teams, through: :assignments, as: :assignable
+  has_many :joined_team_assignments, -> { where(title: [TEAM_MEMBER, TEAM_LEADER]) }, class_name: 'Assignment'
+  has_many :joined_teams, through: :joined_team_assignments, source: :assignable, source_type: 'Team'
+  has_many :invited_team_assignments, -> { where(title: INVITEE) }, class_name: 'Assignment'
+  has_many :invited_teams, through: :invited_team_assignments, source: :assignable, source_type: 'Team'
   has_many :registrations, through: :assignments
 
   # Gravitar Gem
@@ -85,12 +89,6 @@ class User < ApplicationRecord
     assignment_ids = assignments.where(assignable_type: 'Team').pluck(:assignable_id)
     return if assignment_ids.nil?
     return Team.where(id: assignment_ids, event: event) unless event.nil?
-    Team.where(id: assignment_ids)
-  end
-
-  def joined_teams
-    assignment_ids = assignments.where(assignable_type: 'Team', title: [TEAM_MEMBER, TEAM_LEADER]).pluck(:assignable_id)
-    return if assignment_ids.nil?
     Team.where(id: assignment_ids)
   end
 

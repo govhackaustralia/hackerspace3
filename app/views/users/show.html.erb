@@ -83,18 +83,16 @@
 			<% end %>
 		</article>
 
-		<% if (competition_started? || current_user.region_privileges?) && (teams = @user.joined_teams).present? %>
+		<% if (competition_started? || current_user.region_privileges?) && @joined_teams.present? %>
 			<article>
 				<h3>My Team Projects</h3>
-				<% teams.each do |team| %>
-				<% project = @id_teams_projects[team.id][:current_project] %>
-				<% event = @id_teams_projects[team.id][:event] %>
-					<h4><%= project.team_name %> - <%= project.project_name %></h4>
-					<p>Event: <%= event.name %></p>
+				<% @joined_teams.each do |team| %>
+					<h4><%= team.current_project.team_name %> - <%= team.current_project.project_name %></h4>
+					<p>Event: <%= team.event.name %></p>
 					<% if competition_not_finished?(team.time_zone) %>
 						<p><%= link_to "Manage #{team.name}", team_management_team_path(team) %></p>
 					<% elsif team.published %>
-						<p><%= link_to "Go to #{team.name}", project_path(project.identifier) %></p>
+						<p><%= link_to "Go to #{team.name}", project_path(team.current_project.identifier) %></p>
 					<% else %>
 						<p>This project is yet to be published.</p>
 					<% end %>
@@ -106,10 +104,8 @@
 			<article>
 				<h3>My Invitations</h3>
 				<% @invited_teams.each do |team| %>
-					<% project = @id_teams_projects[team.id][:current_project] %>
-					<% event = @id_teams_projects[team.id][:event] %>
-					<h4><%= project.team_name %> - <%= project.project_name %></h4>
-					<p>Event: <%= event.name %></p>
+					<h4><%= team.current_project.team_name %> - <%= team.current_project.project_name %></h4>
+					<p>Event: <%= team.event.name %></p>
 					<% assignment = @team_id_assignments[team.id] %>
 
 					<p><%= link_to 'Accept Invitation and Go to Team',
@@ -126,11 +122,9 @@
 				<h3>My Favourite Projects</h3>
 				<% if @favourite_teams.present? %>
 					<% @favourite_teams.each do |team| %>
-						<% project = @id_teams_projects[team.id][:current_project] %>
-						<% event = @id_teams_projects[team.id][:event] %>
-						<h4><%= "#{project.team_name} - #{project.project_name}" %></h4>
-						<p>Event: <%= event.name %></p>
-						<p><%= link_to "Go to Team Project", project_path(project.identifier) %></p>
+						<h4><%= "#{team.current_project.team_name} - #{team.current_project.project_name}" %></h4>
+						<p>Event: <%= team.event.name %></p>
+						<p><%= link_to "Go to Team Project", project_path(team.current_project.identifier) %></p>
 					<% end %>
 				<% else %>
 					<p>Projects that you favourite will appear here.</p>
