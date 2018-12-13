@@ -19,10 +19,13 @@ class Region < ApplicationRecord
   # time_zone; eg Australia.
   validates :time_zone, inclusion: { in: VALID_TIME_ZONES << nil }
 
+  # Retruns the root region.
   def self.root
     Region.find_or_create_by(parent_id: nil, name: ROOT_REGION_NAME)
   end
 
+  # Returns the user record for the Director of a region.
+  # ENHANCEMENT: Move into active record associations.
   def director
     assignment = assignments.where(title: REGION_DIRECTOR).first
     return assignment if assignment.nil?
@@ -30,6 +33,8 @@ class Region < ApplicationRecord
     assignment.user
   end
 
+  # Returns the user records for all the region supports of a region.
+  # ENHANCEMENT: Move into active record associations.
   def supports
     user_ids = assignments.where(title: REGION_SUPPORT).pluck(:user_id)
     return nil if user_ids.empty?
@@ -37,6 +42,7 @@ class Region < ApplicationRecord
     User.where(id: user_ids)
   end
 
+  # Returns a boolean for whether a user as admin privileges for a region.
   def admin_privileges?(user)
     (admin_assignments & user.assignments).present?
   end
@@ -50,16 +56,21 @@ class Region < ApplicationRecord
     parent.admin_assignments(collected).flatten
   end
 
+  # Returns a boolean whether a region is the national/root region.
   def national?
     parent_id.nil?
   end
 
+  # Returns a boolean for whether the awards for a region have been released or
+  # not.
   def awards_released?
     return false if award_release.nil?
 
     award_release.to_formatted_s(:number) < Time.now.in_time_zone(COMP_TIME_ZONE).to_formatted_s(:number)
   end
 
+  # Returns a hash of form { region_id: region }
+  # ENHANCEMENT: Remove, put into active record associations
   def self.id_regions(regions)
     regions = where(id: regions.uniq) if regions.class == Array
     id_regions = {}
