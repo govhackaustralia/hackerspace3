@@ -5,9 +5,9 @@
   <%= text_field_tag :term, params[:term] %>
   <%= submit_tag 'Search' %>
 <% end %>
-<%= link_to 'Clear Search', admin_teams_path %></br>
-<%= link_to 'Download CSV (Users who are members of a published team)', admin_teams_path(format: 'csv') %></br>
-<%= link_to 'Download CSV (Every Team Member)', admin_teams_path(format: 'csv', category: 'members') %></br>
+<p><%= link_to 'Clear Search', admin_teams_path %></p>
+<p><%= link_to 'Download CSV (Users who are members of a published team)', admin_teams_path(format: 'csv') %></p>
+<p><%= link_to 'Download CSV (Every Team Member)', admin_teams_path(format: 'csv', category: 'members') %></p>
 
 <table>
 	<thead>
@@ -18,10 +18,9 @@
 	<tbody>
   <% filter_projects(params[:term]).each do |project| %>
   <tr>
-    <% team = @id_teams_projects[project.team_id][:team] %>
-    <td><%= link_to "#{project.project_name}", admin_team_path(team) %></td>
+    <td><%= link_to "#{project.project_name}", admin_team_path(project.team) %></td>
     <td><%= project.team_name %></td>
-    <td><%= @id_teams_projects[project.team_id][:event].name %></td>
+    <td><%= project.event.name %></td>
   </tr>
   <% end %>
 	</tbody>

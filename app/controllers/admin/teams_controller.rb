@@ -4,9 +4,7 @@ class Admin::TeamsController < ApplicationController
 
   def index
     @competition = Competition.current
-    @teams = @competition.teams
-    @id_teams_projects = Team.id_teams_projects(@teams)
-    @projects = @competition.projects_by_name
+    @projects = @competition.projects_by_name.preload(:event, :team)
     handle_index
   end
 
