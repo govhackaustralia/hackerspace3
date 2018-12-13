@@ -10,7 +10,9 @@
 
 # Example $ rails db:setup STAGE=PRE_CONNECTION
 
-# TODO: Implement Faker Gem
+# TODO: Continue to Intergrate Faker Gem.
+
+require 'faker'
 
 admin = User.new(email: ENV['SEED_EMAIL'], full_name: ENV['SEED_NAME'],
   password: 'password', password_confirmation: 'password')
@@ -23,17 +25,14 @@ admin.event_assignment
 admin.make_site_admin
 admin.update(accepted_terms_and_conditions: true, how_did_you_hear: 'jas')
 
-first_names = ['Tim', 'Kate', 'Watson', 'Zhang', 'Maria', 'Omar', 'Ezara']
-last_names = ['Kumar', 'Huang', 'Zammit', 'Tyrel', 'Conner', 'Drizen']
-
 100.times do |number|
   user = nil
-  first_name = first_names.sample
-  last_name = last_names.sample
+  first_name = Faker::Name.first_name
+  last_name = Faker::Name.last_name
   user = User.new(email: "#{first_name}_#{last_name}#{number}@example.com",
     full_name: "#{first_name} #{last_name}",
     preferred_name: first_name, preferred_img: nil,
-    google_img: nil, dietary_requirements: 'vegetables',
+    google_img: nil, dietary_requirements: "No #{Faker::Food.dish}",
     tshirt_size: 'Small', twitter: "@#{first_name}#{number}",
     mailing_list: false, challenge_sponsor_contact_place: false,
     challenge_sponsor_contact_enter: false, my_project_sponsor_contact: false,
@@ -86,13 +85,12 @@ comp.update(start_time: comp_start, end_time: comp_end,
                           max_national_challenges: 1,
                           max_regional_challenges: 1)
   comp.criteria.create(name: "Project Criterion #{time}",
-                       description: "#{time} Description
-    to end all descriptions for Project Criterion.", category: PROJECT)
+                       description: Faker::Lorem.paragraph, category: PROJECT)
 end
 
 2.times do |time|
-  comp.criteria.create(name: "Challenge Criterion #{time}", description: "#{time} Description
-    to end all descriptions for Challenge Criterion.", category: CHALLENGE)
+  comp.criteria.create(name: "Challenge Criterion #{time}",
+    description: Faker::Lorem.paragraph, category: CHALLENGE)
 end
 
 4.times do
@@ -107,8 +105,8 @@ comp.assignments.create(user_id: random_model_id(User), title: SPONSORSHIP_DIREC
 end
 
 20.times do |time|
-  comp.sponsors.create(name: "Vandelay  Industries #{time}",
-    description: "Worldwide leader in latex products",
+  comp.sponsors.create(name: Faker::Company.name,
+    description: Faker::Lorem.paragraph,
     website: 'http://seinfeld.wikia.com/wiki/Vandelay_Industries',
     created_at: "2018-07-26 23:01:28",
     updated_at: "2018-07-26 23:01:28")
@@ -120,7 +118,7 @@ end
 
 def create_event(event_type, comp, event_name, region, event_start)
   region.events.create(event_type: event_type, competition: comp,
-    name: event_name, registration_type: OPEN, capacity: 50,
+    name: Faker::GameOfThrones.city, registration_type: OPEN, capacity: 50,
     email: "#{event_name}@mail.com", twitter: '@qld',
     address: "Eagle Stree, #{region.name} QLD, 4217",
     accessibility: 'Access through the stairs',
@@ -167,7 +165,7 @@ def fill_out_comp_event(event)
 
     (1 + rand(20)).times do |time|
       team.projects.create(team_name: "#{event.name} team #{team_time}",
-      description: "Best team evaaaaaa! version #{time}",
+      description: Faker::Lorem.paragraph,
       project_name: "#{event.name} project #{team_time}",
       data_story: 'We will be taking a big data approach.',
       source_code_url: 'https://github.com/tenderlove/allocation_sampler',
@@ -179,8 +177,8 @@ def fill_out_comp_event(event)
     5.times do |time|
       team.team_data_sets.create(name:
         "#{team.name} dataset #{team_time + time}",
-        description: 'Best dataset evaaaaaa',
-        description_of_use: 'We achieved a full variance analysis',
+        description: Faker::Lorem.paragraph,
+        description_of_use: Faker::Lorem.paragraph,
         url: 'https://data.gov.au/dataset/wyndham-smart-bin-fill-level'
       )
     end
@@ -218,9 +216,9 @@ Region.all.each do |region|
 
   5.times do |time|
     region.challenges.create(competition: comp,
-      name: "#{region.name} Challenge #{time}",
-      short_desc: 'A really good challenge', approved: true,
-      long_desc: 'This challenge incorporates multiple data sets.',
+      name: "#{region.name} #{Faker::Pokemon.name}",
+      short_desc: Faker::Lorem.sentence, approved: true,
+      long_desc: Faker::Lorem.paragraph,
       eligibility: 'You must be this tall to go on this ride.',
       video_url: 'https://www.youtube.com/embed/kqcrEFkA8g0')
   end
@@ -229,7 +227,7 @@ Region.all.each do |region|
     region.data_sets.create(competition: comp,
       name: "#{region.name} Data Set #{time}",
       url: 'https://data.gov.au/dataset/wyndham-smart-bin-fill-level',
-      description: 'Random dataset that was taken from data.gov.')
+      description: Faker::Lorem.paragraph)
   end
 
   3.times do |time|
