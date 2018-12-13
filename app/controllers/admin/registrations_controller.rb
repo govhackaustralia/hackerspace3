@@ -164,8 +164,7 @@ class Admin::RegistrationsController < ApplicationController
   end
 
   def search_other_fields_team
-    @teams = Team.search(params[:term])
-    @id_teams_projects = Team.id_teams_projects(@teams) unless @teams.nil?
+    @teams = Team.search(params[:term]).preload(:current_project)
   end
 
   def update_registration

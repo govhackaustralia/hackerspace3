@@ -24,8 +24,7 @@
 <% elsif @teams.present? # Review search results %>
 
   <% @teams.each do |team| %>
-    <% project = @id_teams_projects[team.id][:current_project] %>
-    <h3><%= project.team_name %> | <%= project.project_name %></h3>
+    <h3><%= team.current_project.team_name %> | <%= team.current_project.project_name %></h3>
     <%= link_to 'Select', new_admin_event_registration_path(@event, term: project.team_id, type: GROUP_GOLDEN) %><br>
   <% end %>
 
