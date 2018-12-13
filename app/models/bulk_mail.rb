@@ -58,11 +58,10 @@ class BulkMail < ApplicationRecord
     teams = mailable.teams
     return if teams.empty?
 
-    id_team_projects = Team.id_teams_projects(teams)
-    team_orders.preload(team: %i[leaders members]).each do |team_order|
+    team_orders.preload(team: %i[leaders members current_project]).each do |team_order|
       next if team_order.request_type == NONE
 
-      project = id_team_projects[team_order.team_id][:current_project]
+      project = team_order.team.current_project
       prepare_and_send(team_order.team.leaders, project, team_order)
       next if team_order.request_type == LEADER_ONLY
 
