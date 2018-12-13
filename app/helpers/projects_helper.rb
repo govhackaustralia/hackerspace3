@@ -12,10 +12,9 @@ module ProjectsHelper
   end
 
   def search_match(project, term)
-    team_obj = @id_teams_projects[project.team_id]
     team_name = project.team_name
     project_name = project.project_name
-    event_name = team_obj[:event].name
+    event_name = project.event.name
     team_string = "#{team_name} #{project_name} #{event_name}".downcase
     team_string.include?(term.downcase) ? true : false
   end

@@ -2,9 +2,8 @@ class Events::TeamsController < ApplicationController
   def index
     @event = Event.find_by(identifier: params[:event_identifier])
     @competition = @event.competition
-    @teams = @event.teams.where(published: true)
-    @id_teams_projects = Team.id_teams_projects(@teams)
-    @projects = @event.published_projects_by_name
+    @teams = @event.published_teams
+    @projects = @event.published_projects_by_name.preload(:event)
     user_judging if user_signed_in?
   end
 

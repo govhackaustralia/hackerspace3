@@ -5,7 +5,7 @@
     <%= text_field_tag :term, params[:term] %>
     <%= submit_tag 'Search' %>
   <% end %>
-  <%= link_to 'Clear Search', event_teams_path(@event.identifier) %></br>
+  <p><%= link_to 'Clear Search', event_teams_path(@event.identifier) %></p>
 
   <table>
   	<thead>
