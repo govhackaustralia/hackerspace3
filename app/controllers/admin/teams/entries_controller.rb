@@ -12,14 +12,14 @@ class Admin::Teams::EntriesController < ApplicationController
     @entry = Entry.find(params[:id])
     @team = @entry.team
     @challenge = @entry.challenge
-    @checkpoints = (@team.admin_available_checkpoints(@challenge.type) << @entry.checkpoint).uniq
+    @checkpoints = (@team.admin_available_checkpoints(@challenge) << @entry.checkpoint).uniq
   end
 
   def update
     @entry = Entry.find(params[:id])
     @challenge = @entry.challenge
     @team = @entry.team
-    @checkpoints = (@team.admin_available_checkpoints(@challenge.type) << @entry.checkpoint).uniq
+    @checkpoints = (@team.admin_available_checkpoints(@challenge) << @entry.checkpoint).uniq
     handle_update
   end
 
