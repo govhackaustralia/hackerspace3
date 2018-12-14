@@ -87,14 +87,14 @@ Rails.application.routes.draw do
       resources :bulk_mails, except: :destroy, controller: 'events/bulk_mails'
     end
 
-    resources :teams do
-      resources :projects
-      resources :entries, controller: 'teams/entries'
-      resources :scorecards, controller: 'teams/scorecards'
+    resources :teams, only: [:index, :show, :update] do
+      resources :projects, only: [:index, :show]
+      resources :entries, except: [:index, :show], controller: 'teams/entries'
+      resources :scorecards, only: [:index, :update, :destroy], controller: 'teams/scorecards'
     end
 
-    resources :users do
-      resources :assignments, controller: 'users/assignments'
+    resources :users, except: [:destroy, :edit, :update] do
+      resources :assignments, only: [:edit, :update, :destroy], controller: 'users/assignments'
     end
   end
 
