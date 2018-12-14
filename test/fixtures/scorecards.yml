@@ -11,3 +11,9 @@ two:
   assignment_id: 4
   judgeable_type: Team
   judgeable_id: 1
+
+three:
+  id: 3
+  assignment_id: 8
+  judgeable_type: Team
+  judgeable_id: 1

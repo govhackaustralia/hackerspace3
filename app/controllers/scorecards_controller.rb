@@ -25,6 +25,7 @@ class ScorecardsController < ApplicationController
     redirect_to root_path
   end
 
+  # ENHANCEMENT: Hard to test, shape to REST.
   def update
     @scorecard = Scorecard.find(params[:id])
     if @user == @scorecard.user

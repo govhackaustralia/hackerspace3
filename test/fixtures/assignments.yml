@@ -52,3 +52,10 @@ seven:
   assignable_id: 1
   assignable_type: 'Challenge'
   title: Judge
+
+eight:
+  id: 8
+  user_id: 1
+  assignable_id: 1
+  assignable_type: 'Competition'
+  title: GovHack Volunteer
