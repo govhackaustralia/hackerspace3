@@ -20,14 +20,11 @@ class DataSet < ApplicationRecord
   # ENHANCEMENT: Should go elsewhere?
   def self.data_set_project_helper
     data_set_urls = all.pluck(:url)
-    team_data_sets = TeamDataSet.where(url: data_set_urls)
-    team_ids = team_data_sets.pluck(:team_id)
-    id_teams_projects = Team.id_teams_projects(team_ids)
+    team_data_sets = TeamDataSet.where(url: data_set_urls).preload(:current_project)
     url_to_project_names = {}
     data_set_urls.each { |url| url_to_project_names[url] = [] }
     team_data_sets.each do |team_data_set|
-      project = id_teams_projects[team_data_set.team_id][:current_project]
-      url_to_project_names[team_data_set.url] << project.project_name
+      url_to_project_names[team_data_set.url] << team_data_set.current_project.project_name
     end
     url_to_project_names
   end
