@@ -192,14 +192,13 @@ class User < ApplicationRecord
 
   def self.all_members_to_csv(options = {})
     columns = %w[team_name project_name full_name email title]
-    assignments = Assignment.where(title: [TEAM_MEMBER, TEAM_LEADER, INVITEE])
-    id_team_projects = Team.id_teams_projects(Team.all)
+    assignments = Assignment.where(title: [TEAM_MEMBER, TEAM_LEADER, INVITEE]).preload(assignable: [:current_project])
     id_users = {}
     User.all.each {|user| id_users[user.id] = user }
     CSV.generate(options) do |csv|
       csv << columns
       assignments.each do |assignment|
-        project = id_team_projects[assignment.assignable_id][:current_project]
+        project = assignment.assignable.current_project
         user = id_users[assignment.user_id]
         csv << [project.team_name, project.project_name, user.full_name, user.email, assignment.title]
       end
