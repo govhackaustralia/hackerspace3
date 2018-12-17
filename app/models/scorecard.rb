@@ -1,9 +1,12 @@
 class Scorecard < ApplicationRecord
-  has_many :judgments, dependent: :destroy
-
-  belongs_to :assignment
-  has_one :user, through: :assignment
   belongs_to :judgeable, polymorphic: true
+  belongs_to :assignment
+
+  has_one :user, through: :assignment
+
+  has_many :judgments, dependent: :destroy
+  has_many :assignment_scorecards, through: :assignment, source: :scorecards
+  has_many :assignment_judgments, through: :assignment_scorecards, source: :judgments
 
   validate :only_one_scorecard_per_judgeable, :cannot_judge_your_own_team
 
@@ -109,25 +112,5 @@ class Scorecard < ApplicationRecord
       team_scorecard_helper[judgment.scorecard_id][:scores] << judgment.score
     end
     team_scorecard_helper
-  end
-
-  def self.assignment_scorecard_helper(assignments)
-    assignment_scorecard_helper = {}
-    assignments.each do |assignment|
-      assignment_scorecard_helper[assignment.id] = { all_scores: [], scorecards: [] }
-    end
-
-    scorecards = Scorecard.where(assignment: assignments)
-    id_scorecards = {}
-    scorecards.each do |scorecard|
-      assignment_scorecard_helper[scorecard.assignment_id][:scorecards] << scorecard.id
-      id_scorecards[scorecard.id] = scorecard
-    end
-
-    Judgment.where(scorecard: scorecards).each do |judgment|
-      assignment_id = id_scorecards[judgment.scorecard_id].assignment_id
-      assignment_scorecard_helper[assignment_id][:all_scores] << judgment.score
-    end
-    assignment_scorecard_helper
   end
 end

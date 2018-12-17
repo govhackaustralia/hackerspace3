@@ -33,10 +33,22 @@ class Admin::Teams::ScorecardsController < ApplicationController
   end
 
   def retrieve_scorecard_info
-    @scorecards = Scorecard.participant_scorecards(@team, params[:include_judges] == true.to_s)
+    @scorecards = participant_scorecards
     @project_criteria = @competition.project_criteria.order(:id)
     @team_scorecard_helper = Scorecard.team_scorecard_helper(@scorecards)
-    assignments = Assignment.where(id: @scorecards.pluck(:assignment_id))
-    @assignment_scorecard_helper = Scorecard.assignment_scorecard_helper(assignments)
+  end
+
+  # Retrieves all a team's scorecards and removes those of the judges if
+  # params require.
+  # ENHANCEMENT: Move judge move logic in active record associations.
+  # Only need to find judges for that team.
+  def participant_scorecards
+    all_scorecards = @team.scorecards.order(:assignment_id).preload(:assignment_scorecards, :assignment_judgments)
+    return all_scorecards if params[:include_judges] == true.to_s
+
+    judge_user_ids = Assignment.where(title: JUDGE).pluck(:user_id)
+    judge_assignment_ids = Assignment.where(title: EVENT_ASSIGNMENTS, user_id: judge_user_ids).pluck(:id)
+    judge_scorecards = Scorecard.where(assignment_id: judge_assignment_ids)
+    all_scorecards - judge_scorecards
   end
 end

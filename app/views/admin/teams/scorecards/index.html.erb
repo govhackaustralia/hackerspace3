@@ -30,10 +30,10 @@
           <% end %>
           <% mean_score = ((scores.mean / MAX_SCORE.to_f) * 100).to_i %>
 					<%= render 'challenges/judging_cell', locals: { total: mean_score } %>
-          <% all_scores_mean = @assignment_scorecard_helper[scorecard.assignment_id][:all_scores].mean %>
+          <% all_scores_mean = scorecard.assignment_judgments.pluck(:score).mean %>
           <% mean_score = ((all_scores_mean / MAX_SCORE.to_f) * 100).to_i %>
 					<%= render 'challenges/judging_cell', locals: { total: mean_score } %>
-          <td><%= @assignment_scorecard_helper[scorecard.assignment_id][:scorecards].count %></td>
+          <td><%= scorecard.assignment_scorecards.length %></td>
         </tr>
       <% end %>
   	</tbody>

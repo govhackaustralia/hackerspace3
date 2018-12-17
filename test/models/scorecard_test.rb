@@ -11,9 +11,11 @@ class ScorecardTest < ActiveSupport::TestCase
   end
 
   test 'scorecard associations' do
-    assert @scorecard.judgments.include?(@judgment)
+    assert @scorecard.judgments.include? @judgment
     assert @challenge_scorecard.judgeable == @entry
     assert @peoples_scorecard.judgeable == @team
+    assert @scorecard.assignment_scorecards.include? @scorecard
+    assert @scorecard.assignment_judgments.include? @judgment
     assert @peoples_scorecard.assignment == @particpiant
   end
 end
