@@ -11,6 +11,7 @@
 # Example $ rails db:setup STAGE=PRE_CONNECTION
 
 # TODO: Continue to Intergrate Faker Gem.
+# TODO: More Competiton STAGE options.
 
 require 'faker'
 
