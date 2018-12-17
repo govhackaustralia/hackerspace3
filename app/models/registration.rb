@@ -16,7 +16,7 @@ class Registration < ApplicationRecord
   # different event ticket types.
   def category
     reg_assignment = assignment
-    if reg_assignment.title == VIP || assignment.title == PARTICIPANT
+    if [PARTICIPANT, VIP].include? reg_assignment
       REGULAR
     elsif reg_assignment.assignable_type == 'Team'
       GROUP_GOLDEN
@@ -30,13 +30,13 @@ class Registration < ApplicationRecord
   # Return the inbound flight chosen by a registraton.
   # ENHANCEMENT: Move into rails associations
   def inbound_flight
-    flights.find_by(direction: INBOUND)
+    flights.inbound
   end
 
   # Return the outbound flight chosen by a registraton.
   # ENHANCEMENT: Move into rails associations
   def outbound_flight
-    flights.find_by(direction: OUTBOUND)
+    flights.outbound
   end
 
   private

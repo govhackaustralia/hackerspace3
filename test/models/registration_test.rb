@@ -2,10 +2,12 @@ require 'test_helper'
 
 class RegistrationTest < ActiveSupport::TestCase
   setup do
+    @registration = Registration.first
     @assignment = Assignment.find(4)
-    @registration = Registration.find(1)
-    @event = Event.find(1)
     @user = User.first
+    @event = Event.first
+    @registration_flight = RegistrationFlight.first
+    @flight = Flight.first
     @waitlister = User.second
     @wait_ass = Assignment.find(6)
     @inbound_flight = Flight.first
@@ -14,10 +16,14 @@ class RegistrationTest < ActiveSupport::TestCase
 
   test 'registration associations' do
     assert @registration.assignment == @assignment
-    assert @registration.event == @event
     assert @registration.user == @user
+    assert @registration.event == @event
+    assert @registration.registration_flights.include? @registration_flight
+    assert @registration.flights.include? @flight
     assert @registration.inbound_flight == @inbound_flight
     assert @registration.outbound_flight == @outbound_flight
+    @registration.destroy
+    assert_raises(ActiveRecord::RecordNotFound) { @registration_flight.reload }
   end
 
   test 'registration validations' do
