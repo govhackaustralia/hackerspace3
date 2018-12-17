@@ -2,8 +2,9 @@ require 'test_helper'
 
 class UserTest < ActiveSupport::TestCase
   setup do
-    @user = User.find(1)
-    @assignment = Assignment.find(1)
+    @user = User.first
+    @assignment = Assignment.first
+    @scorecard = Scorecard.second
   end
 
   test 'user_validations' do
@@ -15,7 +16,8 @@ class UserTest < ActiveSupport::TestCase
   end
 
   test 'user associations' do
-    assert(@user.assignments.include?(@assignment))
+    assert @user.assignments.include? @assignment
+    assert @user.scorecards.include? @scorecard
     # Dependent Destroy
     id = @user.id
     @user.destroy

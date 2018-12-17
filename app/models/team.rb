@@ -13,6 +13,9 @@ class Team < ApplicationRecord
   has_many :team_data_sets, dependent: :destroy
   has_many :entries, dependent: :destroy
   has_many :challenges, through: :entries
+  has_many :judges, through: :challenges, source: :users
+  has_many :judge_scorecards, through: :judges, source: :scorecards
+
   has_many :favourites, dependent: :destroy
   has_many :scorecards, dependent: :destroy, as: :judgeable
 
