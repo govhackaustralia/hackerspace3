@@ -5,8 +5,7 @@ class ScorecardsControllerTest < ActionDispatch::IntegrationTest
     sign_in users(:one)
     @project = Project.first
     @scorecard = Scorecard.third
-    competition = Competition.current
-    competition.update(peoples_choice_start: Time.now.yesterday, peoples_choice_end: Time.now.tomorrow)
+    Competition.current.update(peoples_choice_start: Time.now.yesterday, peoples_choice_end: Time.now.tomorrow)
   end
 
   test 'should get new' do
