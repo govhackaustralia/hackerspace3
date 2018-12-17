@@ -49,6 +49,7 @@ class AssignmentTest < ActiveSupport::TestCase
   end
 
   test 'team validations' do
+    Registration.third.destroy
     # can_only_join_team_if_registered_for_a_competition_event
     assignment = @team.assignments.create user: @user, title: TEAM_LEADER
     assert_not assignment.persisted?
