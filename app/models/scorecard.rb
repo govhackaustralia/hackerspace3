@@ -57,18 +57,28 @@ class Scorecard < ApplicationRecord
   end
 
   def self.participant_scorecards(teams, include_judges)
+    # Returns all project based judging scorecards.
     all_scorecards = Scorecard.included.where(judgeable: teams).order(:assignment_id).preload(:judgments)
     return all_scorecards if include_judges
 
+    # if include judges false finds all the project scorecard associated
+    # with judges and removes them from the set.
     judge_user_ids = Assignment.where(title: JUDGE).pluck(:user_id)
     judge_assignment_ids = Assignment.where(title: EVENT_ASSIGNMENTS, user_id: judge_user_ids).pluck(:id)
     judge_scorecards = Scorecard.included.where(assignment_id: judge_assignment_ids)
     all_scorecards - judge_scorecards
   end
 
+  # Compiles statistics on a team's (practically) project scorecards.
+  # Returns an object of type { team_id: { scorecards: [:id, ...],
+  # scores: [:mean_score, ...], total_card_count: :count }, ... }
   def self.region_scorecard_helper(teams, type, include_judges)
+    # Retrieves the relevant scorecards, all off them unless include judges is
+    # false then removes those.
     scorecards = participant_scorecards(teams, include_judges)
 
+    # Creates an object for every published team so with field scorecards,
+    # scores.
     region_scorecard_helper = {}
     teams.each do |team|
       region_scorecard_helper[team.id] = { scorecards: [], scores: [] }
@@ -83,6 +93,8 @@ class Scorecard < ApplicationRecord
       region_scorecard_helper[scorecard.judgeable_id][:total_card_count] = scorecard_count
     end
 
+    # Will not 'scores' (a scorecards judgments) that have fewer entries than
+    # they are supposed to, have entries that are incomplete
     correct_score_count = Competition.current.criteria.where(category: type).count
     scorecards.each do |scorecard|
       scores = scorecard.judgments.pluck(:score)
