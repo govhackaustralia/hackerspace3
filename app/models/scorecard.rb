@@ -8,7 +8,10 @@ class Scorecard < ApplicationRecord
   has_many :assignment_scorecards, through: :assignment, source: :scorecards
   has_many :assignment_judgments, through: :assignment_scorecards, source: :judgments
 
-  validate :only_one_scorecard_per_judgeable, :cannot_judge_your_own_team
+  validates :assignment, uniqueness: { scope: :judgeable,
+                                       message: 'Only one scorecard allowed per judgeable entity' }
+
+  validate :cannot_judge_your_own_team
 
   def update_judgments
     criteria_ids = Competition.current.criteria.where(category: type).pluck(:id)
@@ -24,15 +27,10 @@ class Scorecard < ApplicationRecord
     PROJECT
   end
 
-  def only_one_scorecard_per_judgeable
-    existing = Scorecard.find_by(assignment: assignment, judgeable: judgeable)
-    errors.add(:assignment_id, 'Only one scorecard allowed per judgeable entity') if existing.present? && existing != self
-  end
-
   def cannot_judge_your_own_team
-    return if judgeable_type == 'Entry'
+    return if judgeable_type == 'Entry' || judgeable.users.exclude?(user)
 
-    errors.add(:assignment_id, 'Participants are not permitted to vote for a team they are a member in.') if judgeable.users.include? user
+    errors.add(:assignment_id, 'Participants are not permitted to vote for a team they are a member of.')
   end
 
   def total_score

@@ -59,3 +59,10 @@ eight:
   assignable_id: 1
   assignable_type: 'Competition'
   title: GovHack Volunteer
+
+nine:
+  id: 9
+  user_id: 2
+  assignable_id: 1
+  assignable_type: 'Team'
+  title: Team Member
