@@ -83,16 +83,9 @@ class Scorecard < ApplicationRecord
       region_scorecard_helper[scorecard.judgeable_id][:total_card_count] = scorecard_count
     end
 
-    judgments = Judgment.where(scorecard: scorecards)
-    id_scorecard_scores = {}
-    scorecards.each { |scorecard| id_scorecard_scores[scorecard.id] = [] }
-    judgments.each do |judgment|
-      id_scorecard_scores[judgment.scorecard_id] << judgment.score
-    end
-
     correct_score_count = Competition.current.criteria.where(category: type).count
     scorecards.each do |scorecard|
-      scores = id_scorecard_scores[scorecard.id]
+      scores = scorecard.judgments.pluck(:score)
       next unless scores.count == correct_score_count
       next if scores.include? nil
 
