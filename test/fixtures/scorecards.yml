@@ -5,12 +5,14 @@ one:
   assignment_id: 7
   judgeable_type: Entry
   judgeable_id: 1
+  included: true
 
 two:
   id: 2
   assignment_id: 4
   judgeable_type: Team
   judgeable_id: 1
+  included: false
 
 three:
   id: 3
