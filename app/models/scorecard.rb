@@ -13,6 +13,8 @@ class Scorecard < ApplicationRecord
 
   validate :cannot_judge_your_own_team
 
+  scope :included, -> { where(included: true) }
+
   def update_judgments
     criteria_ids = Competition.current.criteria.where(category: type).pluck(:id)
     score_card_criteria_ids = judgments.pluck(:criterion_id)

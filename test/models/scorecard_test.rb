@@ -29,4 +29,9 @@ class ScorecardTest < ActiveSupport::TestCase
   test 'cannot_judge_your_own_team' do
     assert_not Scorecard.create(assignment: @team_user.event_assignment, judgeable: @team).persisted?
   end
+
+  test 'included scope' do
+    assert Scorecard.included.include? @challenge_scorecard
+    assert Scorecard.included.exclude? @peoples_scorecard
+  end
 end
