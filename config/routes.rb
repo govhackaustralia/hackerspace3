@@ -15,7 +15,7 @@ Rails.application.routes.draw do
   end
 
   namespace :flights do
-    resources :registrations do # FIX: This resource not needed, find alternative. Scope? Namespace?
+    resources :registrations, only: [] do
       resources :registration_flights, only: [:new, :create], controller: 'registrations/registration_flights'
     end
   end
@@ -68,12 +68,12 @@ Rails.application.routes.draw do
       resources :bulk_mails, except: :destroy, controller: 'regions/bulk_mails'
     end
 
-    resources :bulk_mails do # FIX: This resource not needed, find alternative. Scope? Namespace?
+    resources :bulk_mails, only: [] do
       resources :correspondences, only: :show, controller: 'bulk_mails/correspondences'
       resources :user_orders, only: :update, controller: 'bulk_mails/user_orders'
     end
 
-    resources :challenges do # FIX: This resource not needed, find alternative. Scope? Namespace?
+    resources :challenges, only: [] do
       resources :challenge_sponsorships, :challenge_data_sets, only: [:new, :create, :destroy]
       resources :assignments, only: [:new, :create], controller: 'challenges/assignments'
       resources :entries, only: [:index, :edit, :update], controller: 'challenges/entries'
