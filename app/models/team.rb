@@ -1,23 +1,27 @@
 class Team < ApplicationRecord
+  belongs_to :event
+  has_one :competition, through: :event
+  has_one :region, through: :event
+
+  belongs_to :current_project, class_name: 'Project', foreign_key: 'project_id', optional: true
+
   has_many :assignments, as: :assignable
   has_many :users, through: :assignments
+
   has_many :member_assignments, -> { where(title: TEAM_MEMBER) }, as: :assignable, class_name: 'Assignment'
   has_many :members, through: :member_assignments, source: :user
   has_many :leader_assignments, -> { where(title: TEAM_LEADER) }, as: :assignable, class_name: 'Assignment'
   has_many :leaders, through: :leader_assignments, source: :user
-  belongs_to :event
-  has_one :competition, through: :event
-  has_one :region, through: :event
+
   has_many :projects, dependent: :destroy
-  belongs_to :current_project, class_name: 'Project', foreign_key: 'project_id', optional: true
   has_many :team_data_sets, dependent: :destroy
   has_many :entries, dependent: :destroy
+  has_many :favourites, dependent: :destroy
+  has_many :scorecards, dependent: :destroy, as: :judgeable
+
   has_many :challenges, through: :entries
   has_many :judges, through: :challenges, source: :users
   has_many :judge_scorecards, through: :judges, source: :scorecards
-
-  has_many :favourites, dependent: :destroy
-  has_many :scorecards, dependent: :destroy, as: :judgeable
 
   has_one_attached :thumbnail
   has_one_attached :high_res_image
