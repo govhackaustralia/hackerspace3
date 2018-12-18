@@ -57,12 +57,12 @@ class Scorecard < ApplicationRecord
   end
 
   def self.participant_scorecards(teams, include_judges)
-    all_scorecards = Scorecard.where(judgeable: teams).order(:assignment_id)
+    all_scorecards = Scorecard.included.where(judgeable: teams).order(:assignment_id).preload(:judgments)
     return all_scorecards if include_judges
 
     judge_user_ids = Assignment.where(title: JUDGE).pluck(:user_id)
     judge_assignment_ids = Assignment.where(title: EVENT_ASSIGNMENTS, user_id: judge_user_ids).pluck(:id)
-    judge_scorecards = Scorecard.where(assignment_id: judge_assignment_ids)
+    judge_scorecards = Scorecard.included.where(assignment_id: judge_assignment_ids)
     all_scorecards - judge_scorecards
   end
 
@@ -95,7 +95,6 @@ class Scorecard < ApplicationRecord
       scores = id_scorecard_scores[scorecard.id]
       next unless scores.count == correct_score_count
       next if scores.include? nil
-      next unless scorecard.included
 
       region_scorecard_helper[scorecard.judgeable_id][:scores] << scores.mean
     end
