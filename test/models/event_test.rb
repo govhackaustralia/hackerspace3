@@ -9,12 +9,12 @@ class EventTest < ActiveSupport::TestCase
     @event_partner = Sponsor.first
     @assignment = Assignment.third
     @registration = Registration.first
-    @registration_assignment = Assignment.find(4)
     @team = Team.first
     @entry = Entry.first
     @user = User.first
     @flight = Flight.first
     @bulk_mail = BulkMail.second
+    @vip_registration = Registration.second
   end
 
   test 'event associations' do
@@ -24,11 +24,15 @@ class EventTest < ActiveSupport::TestCase
     assert @event.event_partner == @event_partner
     assert @event.assignments.include? @assignment
     assert @event.registrations.include? @registration
-    assert @event.registration_assignments.include? @registration_assignment
     assert @event.teams.include? @team
     assert @event.entries.include? @entry
     assert @event.flights.include? @flight
     assert @event.bulk_mails.include? @bulk_mail
+    assert @event.host_assignments.include? @assignment
+    assert @event.event_hosts.include? @user
+    assert @event.event_supports.include? @user
+    assert @event.participant_registrations.include? @registration
+    assert @event.vip_registrations.include? @vip_registration
     @event.destroy
     assert_raises(ActiveRecord::RecordNotFound) { @event_partnership.reload }
     assert_raises(ActiveRecord::RecordNotFound) { @assignment.reload }

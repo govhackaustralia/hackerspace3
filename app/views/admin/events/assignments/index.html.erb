@@ -3,7 +3,7 @@
 
   <h3>Event Host</h3>
 
-  <% if (host = @assignable.host_user).present? %>
+  <% if (host = @assignable.event_host).present? %>
     <%= render 'admin/shared/user_contact', locals: { user: host } %>
   <% else %>
     This event does not currently have a host.<br>
@@ -12,7 +12,7 @@
 
   <h3>Event Support</h3>
 
-  <% if (supports = @assignable.support_users).present? %>
+  <% if (supports = @assignable.event_supports).present? %>
     <% supports.each do |support| %>
       <%= render 'admin/shared/user_contact', locals: { user: support } %>
     <% end %>

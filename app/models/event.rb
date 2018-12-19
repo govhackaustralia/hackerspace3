@@ -1,40 +1,55 @@
 class Event < ApplicationRecord
   belongs_to :region
   belongs_to :competition
-  has_one :event_partnership, dependent: :destroy
-  has_one :event_partner, through: :event_partnership, source: :sponsor
+
   has_many :assignments, as: :assignable, dependent: :destroy
+
+  has_many :host_assignments, -> { event_hosts }, class_name: 'Assignment', as: :assignable
+  has_many :event_hosts, through: :host_assignments, source: :user
+
+  has_many :support_assignments, -> { event_supports }, class_name: 'Assignment', as: :assignable
+  has_many :event_supports, through: :support_assignments, source: :user
+
   has_many :registrations, dependent: :destroy
-  has_many :registration_assignments, through: :registrations, source: :assignment
+
+  has_many :participant_registrations, -> { participants }, class_name: 'Registration'
+  has_many :vip_registrations, -> { vips }, class_name: 'Registration'
+
   has_many :teams
+  has_many :entries, through: :teams
   has_many :projects_by_name, -> { order(:project_name) }, through: :teams, source: :current_project
+
   has_many :published_teams, -> { published }, class_name: 'Team'
   has_many :published_projects_by_name, -> { order(:project_name) }, through: :published_teams, source: :current_project
-  has_many :entries, through: :teams
-  has_many :flights
+
   has_many :bulk_mails, as: :mailable, dependent: :destroy
+
+  has_one :event_partnership, dependent: :destroy
+  has_one :event_partner, through: :event_partnership, source: :sponsor
+
+  has_many :flights, dependent: :destroy
+  has_many :inbound_flights, -> { inbound }, class_name: 'Flight'
+  has_many :outbound_flights, -> { outbound }, class_name: 'Flight'
 
   validates :name, :capacity, presence: true
   validates :registration_type, inclusion: { in: EVENT_REGISTRATION_TYPES }
   validates :event_type, inclusion: { in: EVENT_TYPES }
 
   after_save :update_identifier
+
   after_update :check_for_newly_freed_space
 
   # Event Administration
 
-  def host_user
-    assignment = Assignment.find_by(title: EVENT_HOST, assignable: self)
-    return nil if assignment.nil?
-
-    assignment.user
+  # Returns the user record associated with the Event Host.
+  # ENHANCEMENT: Remove and enforce single event host with validation.
+  def event_host
+    event_hosts.first
   end
 
-  def support_users
-    support_ids = assignments.where(title: EVENT_SUPPORT).pluck(:user_id)
-    User.where(id: support_ids)
-  end
-
+  # Returns all the admin assignments allowed to modify this record.
+  # ENHANCEMENT: Perhaps can be moved into single DB query?
+  # ENHANCEMENT: Move to Helper
   def admin_assignments
     collected = assignments.where(title: EVENT_ADMIN).to_a
     collected << region.admin_assignments
@@ -42,56 +57,82 @@ class Event < ApplicationRecord
     collected.flatten
   end
 
+  # Returns true if a given user has an assignment that is able to edit the
+  # event record. False otherwise.
+  # ENHANCEMENT: Move to Helper
   def admin_privileges?(user)
     (admin_assignments & user.assignments).present?
   end
 
   # Event Registrations
 
+  # Returns true if a given event assignment is attending the event, false
+  # otherwise.
+  # ENHANCEMENT: Move to Helper
   def attending?(event_assignment)
-    Registration.find_by(assignment: event_assignment, status: ATTENDING, event: self).present?
+    registrations.attending.find_by(assignment: event_assignment).present?
   end
 
+  # Returns true if a given event assignment is waitlisted for the event, false
+  # otherwise
+  # ENHANCEMENT: Move to Helper
   def waitlisted?(event_assignment)
-    Registration.find_by(assignment: event_assignment, status: WAITLIST, event: self).present?
+    registrations.waitlist.find_by(assignment: event_assignment).present?
   end
 
+  # Returns true if a given event assignment is not attending the event, false
+  # otherwise
+  # ENHANCEMENT: Move to Helper
   def not_attending?(event_assignment)
-    Registration.find_by(assignment: event_assignment, status: NON_ATTENDING, event: self).present?
+    registrations.non_attending.find_by(assignment: event_assignment).present?
   end
 
+  # Returns true if the attending registrations (minus VIPs) for an event are
+  # greater than or equal to the capacity of the event. False otherwise.
+  # ENHANCEMENT: Move to Helper
   def at_capacity?
     attending_participants_count >= capacity
   end
 
+  # Returns true if the attending registrations (minus VIPs) for an event are
+  # less than the capacity of the event. False otherwise.
+  # ENHANCEMENT: Move to Helper
   def below_capacity?
     attending_participants_count < capacity
   end
 
+  # Returns true if the event has a waitlist, false otherwise.
+  # ENHANCEMENT: Move to Helper
   def waitlist?
-    Registration.find_by(status: WAITLIST, event: self).present?
+    registrations.waitlist.present?
   end
 
+  # Returns the number of registrations belongs to non VIPs registered as
+  # attending.
+  # ENHANCEMENT: Move to Helper
   def attending_participants_count
-    attending_ids = registrations.where(status: ATTENDING).pluck(:assignment_id)
-    vip_ids = registration_assignments.where(title: VIP).pluck(:id)
-    (attending_ids - vip_ids).count
+    participant_registrations.attending.count
   end
 
+  # Returns true if an event has registration type 'closed', false otherwise.
   def closed?
     registration_type == CLOSED
   end
 
+  # Returns true of an event has registration type 'competition', false
+  # otherwise
+  def competition_event?
+    event_type == COMPETITION_EVENT
+  end
+
+  # Updates the identifier column with a unique identifier.
   def update_identifier
     new_identifier = uri_pritty("#{name}-#{region.name}")
     new_identifier = uri_pritty("#{name}-#{region.name}-#{id}") if already_there?(new_identifier)
     update_columns(identifier: new_identifier)
   end
 
-  def competition_event?
-    event_type == COMPETITION_EVENT
-  end
-
+  # Return a CSV file of event attributes.
   def self.to_csv(options = {})
     desired_columns = %w[id name capacity email twitter address accessibility youth_support parking public_transport operation_hours catering video_id start_time end_time created_at updated_at place_id identifier event_type]
     CSV.generate(options) do |csv|
@@ -102,6 +143,7 @@ class Event < ApplicationRecord
     end
   end
 
+  # Returns a CSV file of Registrations associated with an event.
   def registrations_to_csv(options = {})
     user_columns = %w[full_name preferred_name organisation_name dietary_requirements registration_type parent_guardian request_not_photographed data_cruncher coder creative facilitator]
     combined = user_columns + ['status']
@@ -114,13 +156,8 @@ class Event < ApplicationRecord
     end
   end
 
-  def self.id_events(events)
-    events = where(id: events.uniq) if events.class == Array
-    id_events = {}
-    events.each { |event| id_events[event.id] = event }
-    id_events
-  end
-
+  # Checks if the event is under capacity and if so, will take registrations
+  # off the waiting list.
   def check_for_newly_freed_space
     ActiveRecord::Base.transaction do
       return unless below_capacity?
@@ -133,16 +170,10 @@ class Event < ApplicationRecord
     end
   end
 
-  def inbound_flights
-    flights.where(direction: INBOUND)
-  end
-
-  def outbound_flights
-    flights.where(direction: OUTBOUND)
-  end
-
   private
 
+  # Checks to see if an event identifier is already present before saving it.
+  # ENHANCEMENT: Move to Active Record validations and catch exception.
   def already_there?(new_identifier)
     event = Event.find_by(identifier: new_identifier)
     return false if event.nil?
@@ -151,6 +182,8 @@ class Event < ApplicationRecord
     true
   end
 
+  # Converts a string to uri friendly string.
+  # ENHANCEMENT: Check for already implemented solution.
   def uri_pritty(string)
     array = string.split(/\W/)
     words = array - ['']

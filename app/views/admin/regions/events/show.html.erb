@@ -8,7 +8,7 @@
   <p>Registration Type: <%= @event.registration_type %></p>
   <p>Event Capacity: <%= @event.capacity %></p>
 
-  <%= link_to "Edit #{@event.name} Event", edit_admin_region_event_path(@region, @event) %></br>
+  <p><%= link_to "Edit #{@event.name} Event", edit_admin_region_event_path(@region, @event) %></p>
   <% if @event.published? %>
     <p>This event has been published and is in public view.</p>
     <%= link_to 'Go to Event Page', event_path(@event.identifier) %>
@@ -21,42 +21,42 @@
 
   <h4>Event Host</h4>
 
-  <% if (host = @event.host_user).present? %>
+  <% if (host = @event.event_host).present? %>
     <%= render 'admin/shared/user_contact', locals: { user: host } %>
   <% else %>
-    This event does not currently have a host.</br>
-    <%= link_to "New #{EVENT_HOST} Assignment", new_admin_event_assignment_path(@event, title: EVENT_HOST) %></br>
+    <p>This event does not currently have a host.</p>
+    <p><%= link_to "New #{EVENT_HOST} Assignment", new_admin_event_assignment_path(@event, title: EVENT_HOST) %></p>
   <% end %>
 
   <h4>Event Support</h4>
 
-  <%= pluralize @event.support_users.count, 'event support' %> currently assigned to event.</br>
+  <p><%= pluralize @event.event_supports.count, 'event support' %> currently assigned to event.</p>
 
-  <%= link_to "Manage #{@event.name} Assignments", admin_event_assignments_path(@event) %>
+  <p><%= link_to "Manage #{@event.name} Assignments", admin_event_assignments_path(@event) %></p>
 
   <h3>Event Registrations</h3>
 
   <% if @event.at_capacity? %>
-    <strong>This event is at capacity</strong></br>
-    All future participant registrations will be added to the waiting list.</br>
+    <strong>This event is at capacity</strong></p>
+    <p>All future participant registrations will be added to the waiting list.</p>
   <% end %>
 
-  <%= pluralize @event.registrations.where(status: ATTENDING).count, 'guest' %> attending
-  (<%= pluralize @event.attending_participants_count, 'participant' %> and
-  <%= pluralize @event.registration_assignments.where(title: VIP).count, 'vip' %>).</br>
+  <p><%= pluralize @event.registrations.attending.count, 'guest' %> attending
+  (<%= pluralize @event.participant_registrations.attending.count, 'participant' %> and
+  <%= pluralize @event.vip_registrations.attending.count, 'vip' %>).</p>
   <% if @event.waitlist? %>
-    <%= pluralize @event.registrations.where(status: WAITLIST).count, 'participant' %> on the wait list.</br>
+    <p><%= pluralize @event.registrations.waitlist.count, 'participant' %> on the wait list.</p>
   <% end %>
-  <%= pluralize @event.registrations.where(status: NON_ATTENDING).count, 'guest' %> registered not attending.</br>
+  <p><%= pluralize @event.registrations.non_attending.count, 'guest' %> registered not attending.</p>
 
-  <%= link_to "Manage #{@event.name} Registrations", admin_event_registrations_path(@event) %>
+  <p><%= link_to "Manage #{@event.name} Registrations", admin_event_registrations_path(@event) %></p>
 
   <h3>Event Partner</h3>
 
   <% if (event_partnership = @event.event_partnership).present? %>
-    <%= render 'admin/sponsors/sponsor', locals: { sponsor: event_partnership.sponsor } %>
+    <p><%= render 'admin/sponsors/sponsor', locals: { sponsor: event_partnership.sponsor } %></p>
   <% else %>
-    <%= link_to 'Add Event Partner', new_admin_event_event_partnership_path(@event) %></br>
+    <p><%= link_to 'Add Event Partner', new_admin_event_event_partnership_path(@event) %></p>
   <% end %>
 
   <% if @region.national? && @event.event_type == AWARD_EVENT %>

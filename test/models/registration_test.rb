@@ -42,14 +42,11 @@ class RegistrationTest < ActiveSupport::TestCase
   test 'registration validations' do
     @registration.destroy
     # Must have status
-    new_registration = @event.registrations.create(assignment: @assignment, status: nil)
-    assert_not(new_registration.persisted?)
+    assert_not @event.registrations.create(assignment: @assignment, status: nil).persisted?
     # non valid status
-    new_registration = @event.registrations.create(assignment: @assignment, status: 'Maybe')
-    assert_not(new_registration.persisted?)
+    assert_not @event.registrations.create(assignment: @assignment, status: 'Maybe').persisted?
     # valid status
-    new_registration = @event.registrations.create(assignment: @assignment, status: VALID_ATTENDANCE_STATUSES.first)
-    assert(new_registration.persisted?)
+    assert @event.registrations.create(assignment: @assignment, status: VALID_ATTENDANCE_STATUSES.sample).persisted?
     @assignment.destroy
     assert_not @registration.persisted?
   end
