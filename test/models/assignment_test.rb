@@ -14,6 +14,8 @@ class AssignmentTest < ActiveSupport::TestCase
     @scorecard = Scorecard.second
     @registration = Registration.first
     @competition_event = Event.second
+    @event_host = Assignment.third
+    @event_support = Assignment.find(10)
   end
 
   test 'assignment associations' do
@@ -46,6 +48,11 @@ class AssignmentTest < ActiveSupport::TestCase
     @user.assignments.destroy_all
     assignment = @competition.assignments.create user: @user, title: PARTICIPANT
     assert assignment.persisted?
+  end
+
+  test 'assignment scopes' do
+    assert Assignment.event_hosts.include? @event_host
+    assert Assignment.event_supports.include? @event_support
   end
 
   test 'team validations' do
