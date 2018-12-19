@@ -24,3 +24,10 @@ three:
   assignment_id: 4
   time_notified: 2018-07-22 12:34:03
   status: Attending
+
+four:
+  id: 4
+  event_id: 2
+  assignment_id: 6
+  time_notified: 2018-07-22 12:34:03
+  status: Non Attending

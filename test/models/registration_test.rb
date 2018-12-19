@@ -12,6 +12,8 @@ class RegistrationTest < ActiveSupport::TestCase
     @wait_ass = Assignment.find(6)
     @inbound_flight = Flight.first
     @outbound_flight = Flight.second
+    @waitlist_registration = Registration.second
+    @non_attending_registration = Registration.fourth
   end
 
   test 'registration associations' do
@@ -24,6 +26,12 @@ class RegistrationTest < ActiveSupport::TestCase
     assert @registration.outbound_flight == @outbound_flight
     @registration.destroy
     assert_raises(ActiveRecord::RecordNotFound) { @registration_flight.reload }
+  end
+
+  test 'registration scopes' do
+    assert Registration.attending.include? @registration
+    assert Registration.waitlist.include? @waitlist_registration
+    assert Registration.non_attending.include? @non_attending_registration
   end
 
   test 'registration validations' do

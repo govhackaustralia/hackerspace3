@@ -1,9 +1,15 @@
 class Registration < ApplicationRecord
   belongs_to :assignment
-  has_one :user, through: :assignment
   belongs_to :event
+
+  has_one :user, through: :assignment
+
   has_many :registration_flights, dependent: :destroy
   has_many :flights, through: :registration_flights
+
+  scope :attending, -> { where(status: ATTENDING) }
+  scope :waitlist, -> { where(status: WAITLIST) }
+  scope :non_attending, -> { where(status: NON_ATTENDING) }
 
   after_update :check_for_newly_freed_space
 
