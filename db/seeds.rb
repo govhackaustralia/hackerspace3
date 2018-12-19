@@ -12,6 +12,7 @@
 
 # TODO: Continue to Intergrate Faker Gem.
 # TODO: More Competiton STAGE options.
+# TODO: Add Roles (not just admin)
 
 require 'faker'
 
@@ -62,6 +63,8 @@ when 'MID_COMPETITION'
   comp_start = Time.now - 1.days
 when 'POST_COMPETITION'
   comp_start = Time.now - 4.days
+when 'MID_JUDGING'
+  comp_start = Time.now - 1.weeks - 4.days
 else
   comp_start = Time.now
 end
@@ -121,11 +124,11 @@ def create_event(event_type, comp, event_name, region, event_start)
   region.events.create(event_type: event_type, competition: comp,
     name: Faker::GameOfThrones.city, registration_type: OPEN, capacity: 50,
     email: "#{event_name}@mail.com", twitter: '@qld',
-    address: "Eagle Stree, #{region.name} QLD, 4217",
-    accessibility: 'Access through the stairs',
-    youth_support: 'Always here.', parking: 'None, on street.',
-    public_transport: 'Trains near by.', operation_hours: '9-5',
-    catering: 'Lots of food, vego available.',
+    address: "#{Faker::Address.street_address }, #{region.name}, #{Faker::Address.building_number}",
+    accessibility: Faker::Lorem.paragraph,
+    youth_support: Faker::Lorem.paragraph, parking: Faker::Lorem.paragraph,
+    public_transport: Faker::Lorem.paragraph , operation_hours: '9-5',
+    catering: Faker::Lorem.paragraph ,
     place_id: 'ChIJ15yzA3lakWsRdtSXdwYk7uQ', video_id: '0Mv48ZM7gu4',
     start_time: event_start,
     end_time: event_start + 2.hours, published: true)
