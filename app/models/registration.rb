@@ -11,6 +11,8 @@ class Registration < ApplicationRecord
   scope :waitlist, -> { where(status: WAITLIST) }
   scope :non_attending, -> { where(status: NON_ATTENDING) }
 
+  scope :participants, -> { joins(:assignment).where(assignments: { title: PARTICIPANT }) }
+
   after_update :check_for_newly_freed_space
 
   validates :status, presence: true

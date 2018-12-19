@@ -44,7 +44,7 @@ six:
   user_id: 2
   assignable_id: 1
   assignable_type: 'Competition'
-  title: Participant
+  title: VIP
 
 seven:
   id: 7
