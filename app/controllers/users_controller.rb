@@ -15,17 +15,13 @@ class UsersController < ApplicationController
       @team_id_assignments[assignment.assignable_id] = assignment
     end
 
-    @id_regions = Region.id_regions(Region.all)
-
     @event_assignment = @user.event_assignment
-    @registrations = Registration.where(assignment: @assignments)
+    @registrations = Registration.where(assignment: @assignments).preload(event: :region)
 
     @sponsor_contact_assignments = @assignments.where(title: SPONSOR_CONTACT)
     @id_sponsors = Sponsor.id_sponsors(@sponsor_contact_assignments.pluck(:assignable_id))
 
     @favourite_teams = @event_assignment.teams.published.preload(:event, :current_project)
-
-    @id_events = Event.id_events(@registrations.pluck(:event_id))
 
     @joined_teams = @user.joined_teams.preload(:event, :current_project)
     @invited_teams = @user.invited_teams.preload(:event, :current_project)
