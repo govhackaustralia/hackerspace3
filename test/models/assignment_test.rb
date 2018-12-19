@@ -53,6 +53,7 @@ class AssignmentTest < ActiveSupport::TestCase
   test 'assignment scopes' do
     assert Assignment.event_hosts.include? @event_host
     assert Assignment.event_supports.include? @event_support
+    assert Assignment.participants.include? @participant
   end
 
   test 'team validations' do
@@ -60,6 +61,8 @@ class AssignmentTest < ActiveSupport::TestCase
     # can_only_join_team_if_registered_for_a_competition_event
     assignment = @team.assignments.create user: @user, title: TEAM_LEADER
     assert_not assignment.persisted?
+    # Fix: Something wrong with this test/method, will fail when another
+    # registration for @user is made as Not Attending.
     @participant.registrations.create event: @competition_event, status: ATTENDING
     assignment = @team.assignments.create user: @user, title: TEAM_LEADER
     assert assignment.persisted?
