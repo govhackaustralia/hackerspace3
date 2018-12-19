@@ -35,6 +35,8 @@ class RegistrationTest < ActiveSupport::TestCase
     assert Registration.non_attending.include? @non_attending_registration
     assert Registration.participants.include? @registration
     assert Registration.participants.exclude? @vip_registration
+    assert Registration.vips.include? @vip_registration
+    assert Registration.vips.exclude? @registration
   end
 
   test 'registration validations' do

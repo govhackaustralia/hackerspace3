@@ -12,6 +12,7 @@ class Registration < ApplicationRecord
   scope :non_attending, -> { where(status: NON_ATTENDING) }
 
   scope :participants, -> { joins(:assignment).where(assignments: { title: PARTICIPANT }) }
+  scope :vips, -> { joins(:assignment).where(assignments: { title: VIP }) }
 
   after_update :check_for_newly_freed_space
 
