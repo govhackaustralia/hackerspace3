@@ -12,7 +12,7 @@ class User < ApplicationRecord
   has_many :invited_team_assignments, -> { where(title: INVITEE) }, class_name: 'Assignment'
   has_many :invited_teams, through: :invited_team_assignments, source: :assignable, source_type: 'Team'
   has_many :registrations, through: :assignments
-  
+
   # Gravitar Gem
   include Gravtastic
   has_gravatar
@@ -210,12 +210,10 @@ class User < ApplicationRecord
     user_id_to_event = {}
     all.each { |user| user_id_to_event[user.id] = [] }
     registrations = Registration.all.where(status: [ATTENDING, WAITLIST])
-    id_events = Event.id_events(Event.all)
     id_assignments = Assignment.id_assignments(registrations.pluck(:assignment_id))
-    registrations.each do |registration|
+    registrations.preload(:event).each do |registration|
       assignment = id_assignments[registration.assignment_id]
-      event = id_events[registration.event_id]
-      user_id_to_event[assignment.user_id] << event.name
+      user_id_to_event[assignment.user_id] << registration.event.name
     end
     user_id_to_event
   end
