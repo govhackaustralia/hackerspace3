@@ -1,4 +1,4 @@
-class Admin::ChallengeDataSetsController < ApplicationController
+class Admin::Challenges::ChallengeDataSetsController < ApplicationController
   before_action :authenticate_user!
   before_action :check_for_privileges
 
