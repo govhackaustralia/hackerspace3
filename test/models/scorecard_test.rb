@@ -4,11 +4,11 @@ class ScorecardTest < ActiveSupport::TestCase
   setup do
     @challenge_scorecard = @scorecard = Scorecard.first
     @peoples_scorecard = Scorecard.second
-    @entry = Entry.first
-    @team = Team.first
     @particpiant = Assignment.fourth
     @user = User.first
     @judgment = Judgment.first
+    @entry = Entry.first
+    @team = Team.first
     @team_user = User.second
   end
 
