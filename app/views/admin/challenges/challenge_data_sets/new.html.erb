@@ -11,7 +11,7 @@
   <p>Data URL: <%= @data_set.url %></p>
   <% unless @existing_challenge_data_set.present? %>
 
-    <p><%= link_to "Create new Challenge Data Set with #{@data_set.name}", admin_challenge_challenge_data_sets_path(@challenge), params: { challenge_data_set: { data_set_id: @data_set.id } } %></p>
+    <p><%= link_to "Create new Challenge Data Set with #{@data_set.name}", admin_challenge_challenge_data_sets_path(@challenge, challenge_data_set: { data_set_id: @data_set.id }), method: :post %></p>
 
   <% else %>
 
