@@ -13,6 +13,7 @@
 # TODO: Continue to Intergrate Faker Gem.
 # TODO: More Competiton STAGE options.
 # TODO: Add Roles (not just admin)
+# TODO: File breaks occasionaly on create.
 
 require 'faker'
 
@@ -65,6 +66,8 @@ when 'POST_COMPETITION'
   comp_start = Time.now - 4.days
 when 'MID_JUDGING'
   comp_start = Time.now - 1.weeks - 4.days
+when 'POST_JUDGING'
+  comp_start = Time.now - 5.weeks
 else
   comp_start = Time.now
 end
@@ -183,7 +186,7 @@ def fill_out_comp_event(event)
         "#{team.name} dataset #{team_time + time}",
         description: Faker::Lorem.paragraph,
         description_of_use: Faker::Lorem.paragraph,
-        url: 'https://data.gov.au/dataset/wyndham-smart-bin-fill-level'
+        url: "https://data.gov.au/dataset/#{Faker::LordOfTheRings.character}"
       )
     end
 
@@ -230,7 +233,7 @@ Region.all.each do |region|
   10.times do |time|
     region.data_sets.create(competition: comp,
       name: "#{region.name} Data Set #{time}",
-      url: 'https://data.gov.au/dataset/wyndham-smart-bin-fill-level',
+      url: "https://data.gov.au/dataset/#{Faker::HarryPotter.character}",
       description: Faker::Lorem.paragraph)
   end
 
