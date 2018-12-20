@@ -12,8 +12,7 @@ class Admin::Challenges::ChallengeDataSetsController < ApplicationController
 
   def create
     @challenge = Challenge.find(params[:challenge_id])
-    @data_set = DataSet.find(params[:data_set_id])
-    @challenge_data_set = @challenge.challenge_data_sets.new(data_set: @data_set)
+    @challenge_data_set = @challenge.challenge_data_sets.new(challenge_data_set_params)
     handle_create_save
   end
 
@@ -26,6 +25,10 @@ class Admin::Challenges::ChallengeDataSetsController < ApplicationController
   end
 
   private
+
+  def challenge_data_set_params
+    params.require(:challenge_data_set).permit(:data_set_id)
+  end
 
   def check_for_privileges
     return if current_user.region_privileges?
