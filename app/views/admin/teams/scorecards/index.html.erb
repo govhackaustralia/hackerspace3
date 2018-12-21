@@ -14,7 +14,7 @@
   	<tbody>
       <% @scorecards.each do |scorecard| %>
         <tr>
-          <% scores = @team_scorecard_helper[scorecard.id][:scores] %>
+          <% scores = scorecard.judgments.pluck(:score) %>
           <% if scores.include? nil %>
             <td>Incomplete</td>
             <td><%= link_to 'Delete Scorecard', admin_team_scorecard_path(@team, scorecard, include_judges: params[:include_judges]), data: { confirm: "Are you sure?" }, method: :delete %></td>

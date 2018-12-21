@@ -35,13 +35,12 @@ class Admin::Teams::ScorecardsController < ApplicationController
   def retrieve_scorecard_info
     @scorecards = participant_scorecards
     @project_criteria = @competition.project_criteria.order(:id)
-    @team_scorecard_helper = Scorecard.team_scorecard_helper(@scorecards)
   end
 
   # Retrieves all a team's scorecards and removes those of the judges if
   # params require.
   def participant_scorecards
-    all_scorecards = @team.scorecards.order(:assignment_id).preload(:assignment_scorecards, :assignment_judgments)
+    all_scorecards = @team.scorecards.order(:assignment_id).preload(:assignment_scorecards, :assignment_judgments, :judgments)
     return all_scorecards if params[:include_judges] == true.to_s
 
     all_scorecards - @team.judge_scorecards.where(judgeable: @team)

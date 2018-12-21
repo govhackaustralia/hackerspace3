@@ -105,16 +105,4 @@ class Scorecard < ApplicationRecord
     end
     region_scorecard_helper
   end
-
-  def self.team_scorecard_helper(scorecards)
-    judgments = Judgment.where(scorecard: scorecards).order(:criterion_id)
-    team_scorecard_helper = {}
-    scorecards.each do |scorecard|
-      team_scorecard_helper[scorecard.id] = { scores: [] }
-    end
-    judgments.each do |judgment|
-      team_scorecard_helper[judgment.scorecard_id][:scores] << judgment.score
-    end
-    team_scorecard_helper
-  end
 end
