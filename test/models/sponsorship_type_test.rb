@@ -8,7 +8,7 @@ class SponsorshipTypeTest < ActiveSupport::TestCase
   end
 
   test 'sponsor associations' do
-    assert(@sponsorship_type.competition == @competition)
-    assert(@sponsorship_type.sponsorships.include?(@sponsorship))
+    assert @sponsorship_type.competition == @competition
+    assert @sponsorship_type.sponsorships.include? @sponsorship
   end
 end
