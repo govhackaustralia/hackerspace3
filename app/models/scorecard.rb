@@ -8,50 +8,56 @@ class Scorecard < ApplicationRecord
   has_many :assignment_scorecards, through: :assignment, source: :scorecards
   has_many :assignment_judgments, through: :assignment_scorecards, source: :judgments
 
-  validates :assignment, uniqueness: { scope: :judgeable,
-                                       message: 'Only one scorecard allowed per judgeable entity' }
+  validates :assignment, uniqueness: { scope: :judgeable, message: 'Only one scorecard allowed per judgeable entity' }
 
   validate :cannot_judge_your_own_team
 
   scope :included, -> { where(included: true) }
 
+  # Check thats a scorecard judgements are consistent with most recent
+  # competition criteria.
+  # ENHANCEMENT: Move the responsibility of making sure the scorecards
+  # conform to the correct amount of criteria, to the Criteria and make the
+  # process of creating judgments more RESTful.
   def update_judgments
-    criteria_ids = Competition.current.criteria.where(category: type).pluck(:id)
+    criteria_ids = judgeable.competition.criteria.where(category: type).pluck(:id)
     score_card_criteria_ids = judgments.pluck(:criterion_id)
     (criteria_ids - score_card_criteria_ids).each do |criterion_id|
       judgments.create(criterion_id: criterion_id)
     end
   end
 
+  # Returns whether a scorecard is attached to an Entry and is therefore a
+  # a challenge scorecard or attached to a Team and is therfore a Team/Project/
+  # scorecard.
   def type
-    return CHALLENGE if judgeable_type == 'Entry'
-
-    PROJECT
+    judgeable_type == 'Entry' ? CHALLENGE : PROJECT
   end
 
+  # Ensure that a scorecard is note created where by a team member is not
+  # able to judge their own team.
   def cannot_judge_your_own_team
     return if judgeable_type == 'Entry' || judgeable.users.exclude?(user)
 
     errors.add(:assignment_id, 'Participants are not permitted to vote for a team they are a member of.')
   end
 
+  # Returns the total score of all a scorecard's judgments, or nil if any one
+  # of the judgments has a nil value for score.
   def total_score
-    score = 0
-    judgments.each do |judgment|
-      return nil if judgment.score.nil?
-
-      score += judgment.score
-    end
-    score
+    judgments.pluck(:score).sum
+  rescue
+    nil
   end
 
+  # Returns a view friendly score.
+  # ENHANCEMENT: Move to a helper.
   def display_score
-    score = total_score
-    return 'Scorecard Incomplete' if score.nil?
-
-    score
+    (score = total_score).nil? ? 'Scorecard Incomplete' : score
   end
 
+  # Returns the maximum possible score that can be obtained from all a
+  # competition's criteria in given judgment type.
   def max_score
     judgeable.competition.score_total type
   end
