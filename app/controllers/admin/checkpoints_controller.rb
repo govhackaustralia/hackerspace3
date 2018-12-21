@@ -35,7 +35,7 @@ class Admin::CheckpointsController < ApplicationController
       redirect_to admin_competition_checkpoints_path(@competition)
     else
       flash[:alert] = @checkpoint.errors.full_messages.to_sentence
-      render :new
+      render :edit
     end
   end
 
