@@ -96,14 +96,10 @@ class User < ApplicationRecord
   def public_winning_entries?
     leader_assignments = assignments.where(title: TEAM_LEADER)
     return false if leader_assignments.empty?
-    winning_entries = Entry.where(team_id: leader_assignments.pluck(:assignable_id), award: WINNER)
+    winning_entries = Entry.where(team_id: leader_assignments.pluck(:assignable_id), award: WINNER).preload(challenge: :region)
     return false if winning_entries.empty?
-    id_regions = Region.id_regions(Region.all)
-    id_challenges = Challenge.id_challenges(Challenge.where(id: winning_entries.pluck(:challenge_id)))
     winning_entries.each do |entry|
-      challenge = id_challenges[entry.challenge_id]
-      region = id_regions[challenge.region_id]
-      return true if region.awards_released?
+      return true if entry.challenge.region.awards_released?
     end
     false
   end
