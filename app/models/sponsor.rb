@@ -11,6 +11,8 @@ class Sponsor < ApplicationRecord
   validates :name, uniqueness: true
   validates :name, presence: true
 
+  # Returns an array of sponsors matching a given term.
+  # ENHANCEMENT: Move into helper.
   def self.search(term)
     results = []
     Sponsor.all.each do |sponsor|
@@ -20,21 +22,18 @@ class Sponsor < ApplicationRecord
     results
   end
 
+  # Returns true if a user is able to see a sponsor's settings.
+  # ENHANCEMENT: Move to Controller.
   def show_privileges?(user)
     (user.assignments.pluck(:title) & [SPONSOR_CONTACT]).present?
   end
 
+  # Returns all the assignments able to modify and interact with a sponsor.
+  # ENHANCEMENT: Move to Controller.
   def admin_assignments
     collected = assignments.where(title: SPONSOR_ADMIN).to_a
     collected << competition.admin_assignments
     collected << Assignment.where(title: REGION_ADMIN).to_a
     collected.flatten
-  end
-
-  def self.id_sponsors(sponsor_ids)
-    sponsors = where(id: sponsor_ids.uniq)
-    id_sponsors = {}
-    sponsors.each { |sponsor| id_sponsors[sponsor.id] = sponsor }
-    id_sponsors
   end
 end
