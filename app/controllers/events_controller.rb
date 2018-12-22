@@ -1,7 +1,6 @@
 class EventsController < ApplicationController
   def index
     @events = retrieve_events
-    @id_regions = Region.id_regions(@events.pluck(:region_id))
     respond_to do |format|
       format.html
       format.csv { send_data @events.to_csv }
@@ -22,9 +21,9 @@ class EventsController < ApplicationController
 
   def retrieve_events
     if params[:event_type].present?
-      Competition.current.events.where(event_type: params[:event_type], published: true).order(start_time: :asc, name: :asc)
+      Competition.current.events.published.where(event_type: params[:event_type]).order(start_time: :asc, name: :asc).preload(:region)
     else
-      Competition.current.events.where(published: true).order(start_time: :asc, name: :asc)
+      Competition.current.events.published.order(start_time: :asc, name: :asc).preload(:region)
     end
   end
 
