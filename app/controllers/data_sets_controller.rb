@@ -2,8 +2,7 @@ class DataSetsController < ApplicationController
   def index
     @competition = Competition.current
     @regions = Region.all
-    @id_regions = Region.id_regions(@regions)
-    @data_sets = @competition.data_sets
+    @data_sets = @competition.data_sets.preload(:region)
     respond_to do |format|
       format.html
       format.csv { send_data @data_sets.to_csv }
