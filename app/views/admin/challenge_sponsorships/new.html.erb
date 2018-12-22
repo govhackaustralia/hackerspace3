@@ -1,7 +1,7 @@
 <h2>Create New Sponsorship for <%= @challenge.name %></h2>
 
 <%= form_tag(new_admin_challenge_challenge_sponsorship_path, method: :get) do %>
-  <%= text_field_tag :term, params[:term] %>
+  <%= search_field_tag :term, params[:term] %>
   <%= submit_tag 'Search' %>
 <% end %><br>
 

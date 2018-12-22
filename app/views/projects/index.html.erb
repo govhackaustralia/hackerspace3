@@ -2,7 +2,7 @@
   <h2>Team Projects for Competition <%= @competition.year %></h2>
   <% if competition_started? || (user_signed_in? && current_user.region_privileges?) %>
     <%= form_tag projects_path, method: :get do %>
-      <%= text_field_tag :term, params[:term] %>
+      <%= search_field_tag :term, params[:term] %>
       <%= submit_tag 'Search' %>
     <% end %>
     <p><%= link_to 'Clear Search', projects_path %></p>

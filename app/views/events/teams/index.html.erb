@@ -2,7 +2,7 @@
   <h2>Participating Team Projects for Event <%= @event.name %></h2>
 
   <%= form_tag event_teams_path(@event.identifier), method: :get do %>
-    <%= text_field_tag :term, params[:term] %>
+    <%= search_field_tag :term, params[:term] %>
     <%= submit_tag 'Search' %>
   <% end %>
   <p><%= link_to 'Clear Search', event_teams_path(@event.identifier) %></p>

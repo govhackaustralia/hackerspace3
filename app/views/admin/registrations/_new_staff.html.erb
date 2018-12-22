@@ -1,7 +1,7 @@
 <h2>Add New Staff Flight Registration</h2>
 
 <%= form_tag(new_admin_event_registration_path, method: :get) do %>
-  <%= text_field_tag :term, params[:term] %>
+  <%= search_field_tag :term, params[:term] %>
   <%= hidden_field_tag :type, STAFF %>
   <%= submit_tag 'Search' %>
 <% end %>

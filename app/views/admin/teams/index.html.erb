@@ -2,7 +2,7 @@
 <h2>Teams for <%= @competition.name %></h2>
 
 <%= form_tag admin_teams_path, method: :get do %>
-  <%= text_field_tag :term, params[:term] %>
+  <%= search_field_tag :term, params[:term] %>
   <%= submit_tag 'Search' %>
 <% end %>
 <p><%= link_to 'Clear Search', admin_teams_path %></p>

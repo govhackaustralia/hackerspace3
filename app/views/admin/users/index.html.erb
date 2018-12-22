@@ -2,7 +2,7 @@
   <h2>User Management</h2>
 
   <%= form_tag(admin_users_path, method: :get) do %>
-    <%= text_field_tag :term, params[:term] %>
+    <%= search_field_tag :term, params[:term] %>
     <%= submit_tag 'Search' %>
   <% end %>
   <p><%= link_to 'Download CSV (All users and what events they registered for)', admin_users_path(format: 'csv') %></p>
