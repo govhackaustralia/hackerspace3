@@ -20,11 +20,9 @@ class EventsController < ApplicationController
   private
 
   def retrieve_events
-    if params[:event_type].present?
-      Competition.current.events.published.where(event_type: params[:event_type]).order(start_time: :asc, name: :asc).preload(:region)
-    else
-      Competition.current.events.published.order(start_time: :asc, name: :asc).preload(:region)
-    end
+    events = Competition.current.events.published.preload(:region).order(start_time: :asc, name: :asc)
+    events = events.where(event_type: params[:event_type]) if params[:event_type].present?
+    events
   end
 
   def show_event
