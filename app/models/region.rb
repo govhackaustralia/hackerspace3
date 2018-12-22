@@ -71,13 +71,4 @@ class Region < ApplicationRecord
 
     award_release.to_formatted_s(:number) < Time.now.in_time_zone(COMP_TIME_ZONE).to_formatted_s(:number)
   end
-
-  # Returns a hash of form { region_id: region }
-  # ENHANCEMENT: Remove, put into active record associations
-  def self.id_regions(regions)
-    regions = where(id: regions.uniq) if regions.class == Array
-    id_regions = {}
-    regions.each { |region| id_regions[region.id] = region }
-    id_regions
-  end
 end
