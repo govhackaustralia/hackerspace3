@@ -53,15 +53,14 @@ class Challenge < ApplicationRecord
   # Compiles a CSV file of all challenges.
   # ENHANCEMENT: This should be in a helper object somewhere.
   def self.to_csv(options = {})
-    id_regions = Region.id_regions(Region.all)
     competition = Competition.current
     desired_columns = %w[id region_name competition_year name short_desc long_desc eligibility video_url sponsors created_at updated_at]
     CSV.generate(options) do |csv|
       csv << desired_columns
-      all.each do |challenge|
+      all.preload(:region, :sponsors).each do |challenge|
         values = []
         values << challenge.id
-        values << id_regions[challenge.region_id].name
+        values << challenge.region.name
         values << competition.year
         values += [challenge.name, challenge.short_desc, challenge.long_desc, challenge.eligibility, challenge.video_url]
         values << challenge.sponsors.pluck(:name)
