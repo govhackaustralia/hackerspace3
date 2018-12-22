@@ -33,6 +33,12 @@ class ChallengeTest < ActiveSupport::TestCase
     assert_raises(ActiveRecord::RecordNotFound) { @challenge_data_set.reload }
   end
 
+  test 'challenge scopes' do
+    assert Challenge.approved.include? @challenge
+    @challenge.update approved: false
+    assert Challenge.approved.exclude? @challenge
+  end
+
   test 'challenge validations' do
     assert_not @challenge.update(name: nil)
     challenge2 = Challenge.second

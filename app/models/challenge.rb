@@ -1,6 +1,7 @@
 class Challenge < ApplicationRecord
   belongs_to :competition
   belongs_to :region
+
   has_many :assignments, as: :assignable, dependent: :destroy
   has_many :users, through: :assignments
   has_many :entries, dependent: :destroy
@@ -15,6 +16,8 @@ class Challenge < ApplicationRecord
   has_one_attached :image
   has_one_attached :pdf
   has_one_attached :pdf_preview
+
+  scope :approved, -> { where(approved: true) }
 
   validates :name, presence: true, uniqueness: true
 
