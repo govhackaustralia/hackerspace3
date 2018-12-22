@@ -31,6 +31,11 @@ class RegionTest < ActiveSupport::TestCase
     assert @parent_region.bulk_mails.include? @bulk_mail
   end
 
+  test 'region scopes' do
+    assert Region.sub_regions.include? @child_region
+    assert Region.sub_regions.exclude? @parent_region
+  end
+
   test 'region validations' do
     # No name given
     assert_not Region.create.persisted?

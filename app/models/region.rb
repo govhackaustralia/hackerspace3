@@ -1,5 +1,6 @@
 class Region < ApplicationRecord
   belongs_to :parent, class_name: 'Region', optional: true
+
   has_many :sub_regions, class_name: 'Region', foreign_key: 'parent_id'
   has_many :assignments, as: :assignable, dependent: :destroy
   has_many :events
@@ -11,6 +12,8 @@ class Region < ApplicationRecord
   has_many :challenges, dependent: :destroy
   has_many :data_sets, dependent: :destroy
   has_many :bulk_mails, as: :mailable, dependent: :destroy
+
+  scope :sub_regions, -> { where.not(parent_id: nil) }
 
   validates :name, presence: true
   validates :name, uniqueness: true
