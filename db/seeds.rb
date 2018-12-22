@@ -125,7 +125,7 @@ end
 
 def create_event(event_type, comp, event_name, region, event_start)
   region.events.create(event_type: event_type, competition: comp,
-    name: Faker::GameOfThrones.city, registration_type: OPEN, capacity: 50,
+    name: event_name, registration_type: OPEN, capacity: 50,
     email: "#{event_name}@mail.com", twitter: '@qld',
     address: "#{Faker::Address.street_address }, #{region.name}, #{Faker::Address.building_number}",
     accessibility: Faker::Lorem.paragraph,
@@ -257,7 +257,7 @@ Region.all.each do |region|
     end
   end
 
-  event_name = region.time_zone
+  event_name = Faker::GameOfThrones.city unless region.time_zone.nil?
   event_name ||= 'Australia'
 
   EVENT_TYPES.each do |event_type|
