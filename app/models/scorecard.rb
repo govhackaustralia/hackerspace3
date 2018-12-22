@@ -46,7 +46,7 @@ class Scorecard < ApplicationRecord
   # of the judgments has a nil value for score.
   def total_score
     judgments.pluck(:score).sum
-  rescue
+  rescue StandardError
     nil
   end
 
