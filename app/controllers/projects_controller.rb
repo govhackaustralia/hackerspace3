@@ -27,9 +27,7 @@ class ProjectsController < ApplicationController
     @competition = Competition.current
     @checkpoints = @competition.checkpoints.order(:end_time)
     @passed_checkpoint_ids = @competition.passed_checkpoint_ids(@team.time_zone)
-    @entries_to_display = Entry.where(checkpoint: @passed_checkpoint_ids, team: @team)
-    @challenges = @team.challenges
-    @id_regions = Region.id_regions(Region.all)
+    @entries_to_display = @team.entries.where(checkpoint: @passed_checkpoint_ids).preload(challenge: :region)
     user_records_show if user_signed_in?
   end
 

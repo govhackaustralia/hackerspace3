@@ -1,59 +1,59 @@
 <main class="team_page">
-<h2><%= @current_project.project_name %></h2>
+  <h2><%= @current_project.project_name %></h2>
 
-<aside class="fav_judge">
-  <%= render 'user_options' %>
-</aside>
+  <aside class="fav_judge">
+    <%= render 'user_options' %>
+  </aside>
 
-<h3>Project Info</h3>
+  <h3>Project Info</h3>
 
-<%= render 'team_project_info' %>
+  <%= render 'team_project_info' %>
 
-<h3>Team DataSets</h3>
+  <h3>Team DataSets</h3>
 
-<section class="markdown">
+  <section class="markdown">
 
-<% if (team_data_sets = @team.team_data_sets).present? %>
+  <% if (team_data_sets = @team.team_data_sets).present? %>
 
-  <% team_data_sets.each do |team_data_set| %>
-    <%= render 'team_data_set', locals: { data_set: team_data_set } %>
+    <% team_data_sets.each do |team_data_set| %>
+      <%= render 'team_data_set', locals: { data_set: team_data_set } %>
+    <% end %>
+
+  <% else %>
+    <div>This team does not currently have any datasets.</div>
   <% end %>
 
-<% else %>
-  <div>This team does not currently have any datasets.</div>
-<% end %>
+  </section>
+  <h3>Challenges</h3>
+  <section class="markdown">
+    <% if @passed_checkpoint_ids.present? %>
 
-</section>
-<h3>Challenges</h3>
-<section class="markdown">
-  <% if @passed_checkpoint_ids.present? %>
+      <% if @entries_to_display.present? %>
 
-    <% if @entries_to_display.present? %>
+        <% @entries_to_display.each do |entry| %>
 
-      <% @entries_to_display.each do |entry| %>
-        <% challenge = entry.challenge %>
-        <section class="markdown">
-          <h4><%= challenge.name %></h4>
-          <p><strong>Region</strong>: <%= @id_regions[challenge.region_id].name %></p>
-          <%= link_to 'Challenge', challenge_path(challenge.identifier) %>
-        </section>
+          <section class="markdown">
+            <h4><%= entry.challenge.name %></h4>
+            <p><strong>Region</strong>: <%= entry.challenge.region.name %></p>
+            <%= link_to 'Challenge', challenge_path(entry.challenge.identifier) %>
+          </section>
+
+        <% end %>
+
+      <% else %>
+
+        <p>There are no challenges to display for this team as yet.</p>
 
       <% end %>
 
     <% else %>
 
-      <p>There are no challenges to display for this team as yet.</p>
+      <p>Check back here once the first checkpoint passes to see the challenges
+        this team has entered.</p>
 
     <% end %>
 
-  <% else %>
+  </section>
 
-    <p>Check back here once the first checkpoint passes to see the challenges
-      this team has entered.</p>
-
-  <% end %>
-
-</section>
-
-<%= link_to 'Back to Projects', projects_path %>
+  <%= link_to 'Back to Projects', projects_path %>
 </main>
