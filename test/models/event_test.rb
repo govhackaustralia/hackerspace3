@@ -40,6 +40,12 @@ class EventTest < ActiveSupport::TestCase
     assert_raises(ActiveRecord::RecordNotFound) { @bulk_mail.reload }
   end
 
+  test 'event scopes' do
+    assert Event.published.include? @event
+    @event.update published: false
+    assert Event.published.exclude? @event
+  end
+
   test 'event validations' do
     assert_not @event.update capacity: nil
     assert @event.update capacity: 10
