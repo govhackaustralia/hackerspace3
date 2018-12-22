@@ -18,8 +18,7 @@ class UsersController < ApplicationController
     @event_assignment = @user.event_assignment
     @registrations = Registration.where(assignment: @assignments).preload(event: :region)
 
-    @sponsor_contact_assignments = @assignments.where(title: SPONSOR_CONTACT)
-    @id_sponsors = Sponsor.id_sponsors(@sponsor_contact_assignments.pluck(:assignable_id))
+    @sponsor_contact_assignments = @assignments.where(title: SPONSOR_CONTACT).preload(:assignable)
 
     @favourite_teams = @event_assignment.teams.published.preload(:event, :current_project)
 

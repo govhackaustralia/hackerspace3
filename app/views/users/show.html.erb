@@ -46,9 +46,8 @@
 			<article>
 				<h3>My Sponsors</h3>
 				<% @sponsor_contact_assignments.each do |assignment| %>
-					<% sponsor = @id_sponsors[assignment.assignable_id] %>
-					<h4><%= sponsor.name %></h4>
-					<%= link_to 'Go to Sponsor', sponsorship_management_sponsor_path(sponsor) %>
+					<h4><%= assignment.assignable.name %></h4>
+					<%= link_to 'Go to Sponsor', sponsorship_management_sponsor_path(assignment.assignable) %>
 				<% end %>
 			</article>
 		<% end %>
