@@ -21,8 +21,8 @@ class ChallengesController < ApplicationController
 
   def index_variables
     @competition = Competition.current
-    @challenges = @competition.challenges.where(approved: true).order(:name)
-    @regions = ([Region.root] << Region.where.not(parent_id: nil).order(:name)).flatten
+    @challenges = @competition.challenges.approved.order(:name).preload(:region)
+    @regions = ([Region.root] << Region.sub_regions.order(:name)).flatten
   end
 
   def show_variables
@@ -100,7 +100,6 @@ class ChallengesController < ApplicationController
     @region_challenges = {}
     @regions.each { |r| @region_challenges[r.id] = [] }
     if params[:term].present?
-      @id_regions = Region.id_regions(@regions)
       @challenges.each { |challenge| search_challenge_string(challenge, params[:term]) }
     else
       @challenges.each { |challenge| @region_challenges[challenge.region_id] << challenge }
@@ -108,7 +107,7 @@ class ChallengesController < ApplicationController
   end
 
   def search_challenge_string(challenge, term)
-    challenge_string = "#{challenge.name} #{challenge.short_desc} #{@id_regions[challenge.region_id].name}".downcase
+    challenge_string = "#{challenge.name} #{challenge.short_desc} #{challenge.region.name}".downcase
     @region_challenges[challenge.region_id] << challenge if challenge_string.include? term.downcase
   end
 end
