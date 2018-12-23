@@ -3,6 +3,10 @@ class SponsorshipType < ApplicationRecord
 
   has_many :sponsorships, dependent: :destroy
 
+  # Reorders the Sponsorship types that have been displaced when the order
+  # attribute is changed.
+  # ENHANCEMENT: Add to a callback?
+  # ENHANCEMENT: Add a validation to inforce?
   def self.reorder_from(from)
     placeholder = from
     all.order(order: :asc).each do |type|
