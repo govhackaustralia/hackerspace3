@@ -3,24 +3,58 @@ require 'test_helper'
 class TeamTest < ActiveSupport::TestCase
   setup do
     @team = Team.first
-    @project = Project.first
     @event = Event.first
+    @project = Project.first
+    @competition = Competition.first
+    @region = Region.second
+    @team_member_assignment = Assignment.find 9
+    @team_member = User.second
+    @team_leader_assignment = Assignment.find 11
+    @team_leader = User.first
     @team_data_set = TeamDataSet.first
-    @entry = Entry.first
     @favourite = Favourite.first
-    @user = User.second
     @scorecard = Scorecard.fourth
+    @entry = Entry.first
+    @challenge = Challenge.first
+    @user = User.second
   end
 
   test 'team associations' do
-    assert @team.current_project == @project
     assert @team.event == @event
+    assert @team.current_project == @project
+    assert @team.competition == @competition
+    assert @team.region == @region
+    assert @team.assignments.include? @team_member_assignment
+    assert @team.users.include? @team_member
+    assert @team.member_assignments.include? @team_member_assignment
+    assert @team.members.include? @team_member
+    assert @team.leader_assignments.include? @team_leader_assignment
+    assert @team.leaders.include? @team_leader
+    assert @team.projects.include? @project
     assert @team.team_data_sets.include? @team_data_set
-    assert @team.entries.include? @entry
     assert @team.favourites.include? @favourite
+    assert @team.scorecards.include? @scorecard
+    assert @team.entries.include? @entry
+    assert @team.challenges.include? @challenge
     assert @team.judges.include? @user
     assert @team.judge_scorecards.include? @scorecard
+  end
+
+  test 'dependent destroy' do
     @team.destroy
-    assert Project.find_by(team: @team).nil?
+    assert_raises ActiveRecord::RecordNotFound do
+      @team_member_assignment.reload
+      @project.reload
+      @team_data_set.reload
+      @favourite.reload
+      @scorecard.reload
+      @entry.reload
+    end
+  end
+
+  test 'team scopes' do
+    assert Team.published.include? @team
+    @team.update published: false
+    assert_not Team.published.include? @team
   end
 end

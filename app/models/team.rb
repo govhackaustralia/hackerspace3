@@ -1,11 +1,11 @@
 class Team < ApplicationRecord
   belongs_to :event
+  belongs_to :current_project, class_name: 'Project', foreign_key: 'project_id', optional: true
+
   has_one :competition, through: :event
   has_one :region, through: :event
 
-  belongs_to :current_project, class_name: 'Project', foreign_key: 'project_id', optional: true
-
-  has_many :assignments, as: :assignable
+  has_many :assignments, as: :assignable, dependent: :destroy
   has_many :users, through: :assignments
 
   has_many :member_assignments, -> { where(title: TEAM_MEMBER) }, as: :assignable, class_name: 'Assignment'
@@ -15,10 +15,10 @@ class Team < ApplicationRecord
 
   has_many :projects, dependent: :destroy
   has_many :team_data_sets, dependent: :destroy
-  has_many :entries, dependent: :destroy
   has_many :favourites, dependent: :destroy
   has_many :scorecards, dependent: :destroy, as: :judgeable
 
+  has_many :entries, dependent: :destroy
   has_many :challenges, through: :entries
   has_many :judges, through: :challenges, source: :users
   has_many :judge_scorecards, through: :judges, source: :scorecards

@@ -8,68 +8,75 @@ one:
   id: 1
   user_id: 1
   assignable_id: 1
-  assignable_type: 'Competition'
+  assignable_type: Competition
   title: GovHack Management Team
 
 two:
   id: 2
   user_id: 1
   assignable_id: 1
-  assignable_type: 'Region'
+  assignable_type: Region
   title: Region Director
 
 three:
   id: 3
   user_id: 1
   assignable_id: 1
-  assignable_type: 'Event'
+  assignable_type: Event
   title: Event Host
 
 four:
   id: 4
   user_id: 1
   assignable_id: 1
-  assignable_type: 'Competition'
+  assignable_type: Competition
   title: Participant
 
 five:
   id: 5
   user_id: 1
   assignable_id: 1
-  assignable_type: 'Sponsor'
+  assignable_type: Sponsor
   title: Sponsor Contact
 
 six:
   id: 6
   user_id: 2
   assignable_id: 1
-  assignable_type: 'Competition'
+  assignable_type: Competition
   title: VIP
 
 seven:
   id: 7
   user_id: 2
   assignable_id: 1
-  assignable_type: 'Challenge'
+  assignable_type: Challenge
   title: Judge
 
 eight:
   id: 8
   user_id: 1
   assignable_id: 1
-  assignable_type: 'Competition'
+  assignable_type: Competition
   title: GovHack Volunteer
 
 nine:
   id: 9
   user_id: 2
   assignable_id: 1
-  assignable_type: 'Team'
+  assignable_type: Team
   title: Team Member
 
 ten:
   id: 10
   user_id: 1
   assignable_id: 1
-  assignable_type: 'Event'
+  assignable_type: Event
   title: Event Support
+
+eleven:
+  id: 11
+  user_id: 1
+  assignable_id: 1
+  assignable_type: Team
+  title: Team Leader
