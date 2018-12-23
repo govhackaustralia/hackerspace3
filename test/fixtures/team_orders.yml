@@ -9,5 +9,5 @@ one:
 two:
   id: 2
   bulk_mail_id: 1
-  team_id: 1
+  team_id: 2
   request_type: ALL
