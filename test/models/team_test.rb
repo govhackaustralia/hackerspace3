@@ -59,14 +59,12 @@ class TeamTest < ActiveSupport::TestCase
 
   test 'dependent destroy' do
     @team.destroy
-    assert_raises ActiveRecord::RecordNotFound do
-      @team_member_assignment.reload
-      @project.reload
-      @team_data_set.reload
-      @favourite.reload
-      @scorecard.reload
-      @entry.reload
-    end
+    assert_raises(ActiveRecord::RecordNotFound) { @team_member_assignment.reload }
+    assert_raises(ActiveRecord::RecordNotFound) { @project.reload }
+    assert_raises(ActiveRecord::RecordNotFound) { @team_data_set.reload }
+    assert_raises(ActiveRecord::RecordNotFound) { @favourite.reload }
+    assert_raises(ActiveRecord::RecordNotFound) { @scorecard.reload }
+    assert_raises(ActiveRecord::RecordNotFound) { @entry.reload }
   end
 
   test 'team scopes' do
