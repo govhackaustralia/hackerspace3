@@ -8,10 +8,14 @@ class Team < ApplicationRecord
   has_many :assignments, as: :assignable, dependent: :destroy
   has_many :users, through: :assignments
 
-  has_many :member_assignments, -> { where(title: TEAM_MEMBER) }, as: :assignable, class_name: 'Assignment'
+  has_many :member_assignments, -> { team_members }, as: :assignable, class_name: 'Assignment'
   has_many :members, through: :member_assignments, source: :user
-  has_many :leader_assignments, -> { where(title: TEAM_LEADER) }, as: :assignable, class_name: 'Assignment'
+  has_many :leader_assignments, -> { team_leaders }, as: :assignable, class_name: 'Assignment'
   has_many :leaders, through: :leader_assignments, source: :user
+  has_many :invitee_assignments, -> { team_invitees }, as: :assignable, class_name: 'Assignment'
+  has_many :invitees, through: :invitee_assignments, source: :user
+  has_many :confirmed_assignments, -> { team_confirmed }, as: :assignable, class_name: 'Assignment'
+  has_many :confirmed_members, through: :confirmed_assignments, source: :user
 
   has_many :projects, dependent: :destroy
   has_many :team_data_sets, dependent: :destroy
