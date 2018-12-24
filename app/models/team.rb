@@ -26,6 +26,8 @@ class Team < ApplicationRecord
   has_many :challenges, through: :entries
   has_many :judges, through: :challenges, source: :users
   has_many :judge_scorecards, through: :judges, source: :scorecards
+  has_many :regional_entries, -> { regional }, class_name: 'Entry'
+  has_many :national_entries, -> { national }, class_name: 'Entry'
 
   has_one_attached :thumbnail
   has_one_attached :high_res_image

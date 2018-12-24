@@ -19,6 +19,8 @@ class TeamTest < ActiveSupport::TestCase
     @entry = Entry.first
     @challenge = Challenge.first
     @user = User.second
+    @regional_entry = Entry.third
+    @national_entry = @entry
   end
 
   test 'team associations' do
@@ -40,6 +42,10 @@ class TeamTest < ActiveSupport::TestCase
     assert @team.challenges.include? @challenge
     assert @team.judges.include? @user
     assert @team.judge_scorecards.include? @scorecard
+    assert @team.regional_entries.include? @regional_entry
+    assert @team.regional_entries.exclude? @national_entry
+    assert @team.national_entries.include? @national_entry
+    assert @team.national_entries.exclude? @regional_entry
   end
 
   test 'team assignment user associations' do
