@@ -34,67 +34,62 @@ class Team < ApplicationRecord
 
   scope :published, -> { where(published: true) }
 
+  # Returns the user record for the team leader.
+  # ENHANCEMENT: Should not be needed.
   def team_leader
-    assignment = Assignment.find_by(assignable: self, title: TEAM_LEADER)
-    return if assignment.nil?
-
-    assignment.user
+    leaders.first
   end
 
+  # Assigns a leader to the team.
+  # ENHANCEMENT: Should not be needed.
   def assign_leader(user)
-    assignments.create(title: TEAM_LEADER, user: user)
+    leader_assignments.create user: user
   end
 
-  def team_members
-    ids = assignments.where(title: TEAM_MEMBER).pluck(:user_id)
-    return if ids.empty?
-
-    User.where(id: ids)
-  end
-
-  def invitees
-    ids = assignments.where(title: INVITEE).pluck(:user_id)
-    return if ids.empty?
-
-    User.where(id: ids)
-  end
-
+  # Returns the team_name from the latest project.
+  # ENHANCEMENT: Move to Helper.
   def name
     current_project.team_name
   end
 
-  def regional_challenges(checkpoint)
-    challenge_ids = entries.where(checkpoint: checkpoint).pluck(:challenge_id)
-    regional_challenges = []
-    national_region_id = Region.root.id
-    Challenge.where(id: challenge_ids).each do |challenge|
-      next if challenge.region_id == national_region_id
-
-      regional_challenges << challenge
-    end
-    regional_challenges
-  end
-
-  def national_challenges(checkpoint)
-    challenge_ids = entries.where(checkpoint: checkpoint).pluck(:challenge_id)
-    national_challenges = []
-    national_region_id = Region.root.id
-    Challenge.where(id: challenge_ids).each do |challenge|
-      next unless challenge.region_id == national_region_id
-
-      national_challenges << challenge
-    end
-    national_challenges
-  end
-
+  # Returns the time_zone from the parent region.
+  # ENHANCEMENT: Move to Helper.
   def time_zone
     region.time_zone
   end
 
+  # Returns true if a given user has an assignment attached to the team.
+  # ENHANCEMENT: Move to Helper/Controller
+  def permission?(user)
+    assignments.where(user: user).present?
+  end
+
+  # Returns all the regional challenges that a team has entered at a particular
+  # checkpoint
+  # ENHANCEMENT: Move everything into active record query
+  def regional_challenges(checkpoint)
+    challenge_ids = regional_entries.where(checkpoint: checkpoint).pluck(:challenge_id)
+    Challenge.where(id: challenge_ids)
+  end
+
+  # Returns all the national challenges that a team has entered at a particular
+  # checkpoint
+  # ENHANCEMENT: Move everything into active record query
+  def national_challenges(checkpoint)
+    challenge_ids = national_entries.where(checkpoint: checkpoint).pluck(:challenge_id)
+    Challenge.where(id: challenge_ids)
+  end
+
+  # Returns all the available checkpoints left in a given challenge for a team
+  # taking into account time_zone and challenges already entered.
+  # ENHANCEMENT: Move to controller or helper.
   def available_checkpoints(challenge)
     competition.available_checkpoints(self, challenge.region)
   end
 
+  # Returns all the available checkpoints left in a given challenge for a team
+  # taking into only challenges already entered.
+  # ENHANCEMENT: Move to controller or helper.
   def admin_available_checkpoints(challenge)
     valid_checkpoints = []
     challenge_region = challenge.region
@@ -106,6 +101,9 @@ class Team < ApplicationRecord
     valid_checkpoints
   end
 
+  # Returns true if all the checkpoints have passed for a given team. false
+  # otherwise.
+  # ENHANCEMENT: Move to controller or helper.
   def all_checkpoints_passed?
     team_time_zone = time_zone
     competition.checkpoints.each do |checkpoint|
@@ -114,25 +112,29 @@ class Team < ApplicationRecord
     true
   end
 
+  # Given a challenge type, returns all the approved challenges that a team has not yet
+  # entered.
+  # ENHANCEMENT: Move to controller or helper.
   def available_challenges(challenge_type)
     if challenge_type == REGIONAL
-      region.challenges.where.not(id: entries.pluck(:challenge_id), approved: false)
+      region.challenges.where.not(id: regional_entries.pluck(:challenge_id), approved: false)
     else
-      Region.root.challenges.where.not(id: entries.pluck(:challenge_id), approved: false)
+      Region.root.challenges.where.not(id: national_entries.pluck(:challenge_id), approved: false)
     end
   end
 
+  # Returns all the competition events that a confirmed member is registered
+  # for.
+  # ENHANCEMENT: Move to active record query.
   def member_competition_events
-    user_ids = assignments.where(title: [TEAM_LEADER, TEAM_MEMBER]).pluck(:user_id)
+    user_ids = confirmed_members.pluck(:id)
     assignment_ids = Assignment.where(user_id: user_ids, title: EVENT_ASSIGNMENTS).pluck(:id)
-    event_ids = Registration.where(assignment_id: assignment_ids).pluck(:event_id)
+    event_ids = Registration.where(assignment_id: assignment_ids, status: [ATTENDING, WAITLIST]).pluck(:event_id)
     Event.where(id: event_ids.uniq, event_type: COMPETITION_EVENT)
   end
 
-  def permission?(user)
-    assignments.where(user: user).present?
-  end
-
+  # Returns a CSV file with information on the team.
+  # ENHANCEMENT: move to controller.
   def self.to_csv(options = {})
     project_columns = %w[team_name project_name source_code_url video_url homepage_url created_at updated_at identifier]
     CSV.generate(options) do |csv|
@@ -141,12 +143,16 @@ class Team < ApplicationRecord
     end
   end
 
+  # Inserts a set of attributes into a csv file.
+  # ENHANCEMENT: move to controller.
   def self.compile_csv(csv, project_columns)
     all.published.preload(:current_project, :team_data_sets, :challenges, :assignments).each do |team|
       csv << team.current_project.attributes.values_at(*project_columns) + [team.assignments.length, team.team_data_sets.pluck(:url), team.challenges.pluck(:name)]
     end
   end
 
+  # Search for teams based on a given term.
+  # ENHANCEMENT: move to helpers.
   def self.search(term)
     team_ids = []
     Project.all.each do |project|

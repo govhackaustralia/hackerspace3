@@ -9,7 +9,7 @@
     <strong>No team leader assigned for this team.</strong>
   <% end %>
   </section>
-  <% if (team_members = @team.team_members).present? %>
+  <% if (team_members = @team.members).present? %>
     <h3>Team Members</h3>
     <% team_members.each do |team_member| %>
       <section>

@@ -41,7 +41,7 @@
   <p><strong>No team leader assigned for this team.</strong></p>
 <% end %>
 
-<% if (team_members = @team.team_members).present? %>
+<% if (team_members = @team.members).present? %>
   <p><strong>+ <%= pluralize team_members.count, 'other team member' %>.</strong></p>
 <% end %>
 <% if (invitees = @team.invitees).present? %>
