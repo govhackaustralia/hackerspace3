@@ -15,16 +15,19 @@ class AssignmentTest < ActiveSupport::TestCase
     @registration = Registration.first
     @competition_event = Event.second
     @event_host = Assignment.third
-    @event_support = Assignment.find(10)
+    @event_support = Assignment.find 10
+    @team_leader = Assignment.find 11
+    @team_invitee = Assignment.find 12
+    @team_member = Assignment.find 9
   end
 
   test 'assignment associations' do
-    # Belongs to
+    # Belongs To
     assert @comp_assignment.assignable == @competition
     assert @comp_assignment.user == @user
     assert @region_assignment.assignable == @region
     assert @region_assignment.user == @user
-    # Has many
+    # Has Many
     assert @participant.favourites.include? @favourite
     assert @participant.teams.include? @team
     assert @participant.scorecards.include? @scorecard
@@ -54,6 +57,11 @@ class AssignmentTest < ActiveSupport::TestCase
     assert Assignment.event_hosts.include? @event_host
     assert Assignment.event_supports.include? @event_support
     assert Assignment.participants.include? @participant
+    assert Assignment.team_members.include? @team_member
+    assert Assignment.team_leaders.include? @team_leader
+    assert Assignment.team_invitees.include? @team_invitee
+    assert Assignment.team_confirmed.include? @team_member
+    assert Assignment.team_confirmed.include? @team_leader
   end
 
   test 'team validations' do

@@ -80,3 +80,10 @@ eleven:
   assignable_id: 1
   assignable_type: Team
   title: Team Leader
+
+twelve:
+  id: 12
+  user_id: 3
+  assignable_id: 1
+  assignable_type: Team
+  title: Invitee
