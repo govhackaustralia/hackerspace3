@@ -9,8 +9,8 @@ class EntryTest < ActiveSupport::TestCase
     @competition = Competition.first
     @region = Region.first
     @scorecard = Scorecard.first
-    @regional_challenge = Entry.third
-    @national_challenge = @entry
+    @regional_entry = Entry.third
+    @national_entry = @entry
   end
 
   test 'entry associations' do
@@ -25,10 +25,10 @@ class EntryTest < ActiveSupport::TestCase
   end
 
   test 'entry scopes' do
-    assert Entry.regional.include? @regional_challenge
-    assert Entry.regional.exclude? @national_challenge
-    assert Entry.national.include? @national_challenge
-    assert Entry.national.exclude? @regional_challenge
+    assert Entry.regional.include? @regional_entry
+    assert Entry.regional.exclude? @national_entry
+    assert Entry.national.include? @national_entry
+    assert Entry.national.exclude? @regional_entry
   end
 
   test 'entry validations' do
