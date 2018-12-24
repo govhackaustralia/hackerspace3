@@ -15,3 +15,11 @@ two:
   checkpoint_id: 1
   justification: MyText
   eligible: false
+
+three:
+  id: 3
+  team_id: 1
+  challenge_id: 3
+  checkpoint_id: 1
+  justification: MyText
+  eligible: true

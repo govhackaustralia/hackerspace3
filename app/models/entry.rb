@@ -4,6 +4,7 @@ class Entry < ApplicationRecord
   belongs_to :team
 
   has_one :competition, through: :team
+  has_one :region, through: :challenge
 
   has_many :scorecards, dependent: :destroy, as: :judgeable
 
@@ -14,6 +15,9 @@ class Entry < ApplicationRecord
            :teams_cannot_enter_regional_challenges_from_regions_other_than_their_own, on: :create
 
   after_create :update_eligible
+
+  scope :regional, -> { joins(:region).where.not(regions: { parent_id: nil }) }
+  scope :national, -> { joins(:region).where(regions: { parent_id: nil }) }
 
   # Checks that a project has enough information entered for the entry to be
   # marked eligible, and then marks accordingly.

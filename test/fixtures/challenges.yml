@@ -23,3 +23,15 @@ two:
   video_url: MyString
   approved: true
   identifier: australia_challenge_1
+
+three:
+  id: 3
+  region_id: 2
+  competition_id: 1
+  name: Queensland Challenge 1
+  short_desc: MyText
+  long_desc: MyText
+  eligibility: MyText
+  video_url: MyString
+  approved: true
+  identifier: queensland_challenge_1
