@@ -16,3 +16,8 @@ two:
   id: 2
   email: user2@example.com
   full_name: User Number Two
+
+three:
+  id: 3
+  email: user3@example.com
+  full_name: User Number Three

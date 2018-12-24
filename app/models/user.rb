@@ -7,9 +7,9 @@ class User < ApplicationRecord
   has_many :assignments, dependent: :destroy
   has_many :teams, through: :assignments, as: :assignable
   has_many :scorecards, through: :assignments
-  has_many :joined_team_assignments, -> { where(title: [TEAM_MEMBER, TEAM_LEADER]) }, class_name: 'Assignment'
+  has_many :joined_team_assignments, -> { team_confirmed }, class_name: 'Assignment'
   has_many :joined_teams, through: :joined_team_assignments, source: :assignable, source_type: 'Team'
-  has_many :invited_team_assignments, -> { where(title: INVITEE) }, class_name: 'Assignment'
+  has_many :invited_team_assignments, -> { team_invitees }, class_name: 'Assignment'
   has_many :invited_teams, through: :invited_team_assignments, source: :assignable, source_type: 'Team'
   has_many :registrations, through: :assignments
 
