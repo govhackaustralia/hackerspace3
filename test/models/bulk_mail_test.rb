@@ -2,7 +2,8 @@ require 'test_helper'
 
 class BulkMailTest < ActiveSupport::TestCase
   setup do
-    @bulk_mail = BulkMail.first
+    @region_bulk_mail = BulkMail.first
+    @event_bulk_mail = BulkMail.second
     @user = User.first
     @region = Region.first
     @team_order = TeamOrder.first
@@ -13,15 +14,16 @@ class BulkMailTest < ActiveSupport::TestCase
   end
 
   test 'bulkmail associations' do
-    assert @bulk_mail.user == @user
-    assert @bulk_mail.mailable == @region
-    assert @bulk_mail.team_orders.include? @team_order
-    assert @bulk_mail.user_orders.include? @user_order
-    assert @bulk_mail.team_correspondences.include? @team_correspondence
-    assert @bulk_mail.user_correspondences.include? @user_correspondence
-    assert @bulk_mail.teams.include? @team
-    @bulk_mail.destroy
+    assert @region_bulk_mail.user == @user
+    assert @region_bulk_mail.mailable == @region
+    assert @region_bulk_mail.team_orders.include? @team_order
+    assert @event_bulk_mail.user_orders.include? @user_order
+    assert @region_bulk_mail.team_correspondences.include? @team_correspondence
+    assert @event_bulk_mail.user_correspondences.include? @user_correspondence
+    assert @region_bulk_mail.teams.include? @team
+    @region_bulk_mail.destroy
     assert_raises(ActiveRecord::RecordNotFound) { @team_order.reload }
+    @event_bulk_mail.destroy
     assert_raises(ActiveRecord::RecordNotFound) { @user_order.reload }
   end
 
