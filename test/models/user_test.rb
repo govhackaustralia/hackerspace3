@@ -7,7 +7,7 @@ class UserTest < ActiveSupport::TestCase
     @scorecard = Scorecard.second
   end
 
-  test 'user_validations' do
+  test 'user validations' do
     # no email don't save
     assert_not(User.create(email: nil).save)
 
