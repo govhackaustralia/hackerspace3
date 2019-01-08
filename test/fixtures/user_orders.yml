@@ -2,10 +2,5 @@
 
 one:
   id: 1
-  bulk_mail_id: 1
-  request_type: MyString
-
-two:
-  id: 2
-  bulk_mail_id: 1
+  bulk_mail_id: 2
   request_type: MyString
