@@ -10,6 +10,7 @@ class Admin::EventPartnershipsController < ApplicationController
     @sponsors = Sponsor.search(params[:term]) unless @sponsor.present?
   end
 
+  # ENHANCEMENT: Filter parameters.
   def create
     create_new_event_partnership
     if @event_partnership.save
