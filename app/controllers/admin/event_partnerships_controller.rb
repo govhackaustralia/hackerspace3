@@ -10,7 +10,6 @@ class Admin::EventPartnershipsController < ApplicationController
     @sponsors = Sponsor.search(params[:term]) unless @sponsor.present?
   end
 
-  # ENHANCEMENT: Filter parameters.
   def create
     create_new_event_partnership
     if @event_partnership.save
@@ -32,6 +31,10 @@ class Admin::EventPartnershipsController < ApplicationController
 
   private
 
+  def event_partnership_params
+    params.require(:event_partnership).permit(:sponsor_id)
+  end
+
   def check_for_privileges
     return if current_user.admin_privileges?
 
@@ -46,7 +49,7 @@ class Admin::EventPartnershipsController < ApplicationController
 
   def create_new_event_partnership
     @event = Event.find(params[:event_id])
-    @sponsor = Sponsor.find(params[:sponsor_id])
-    @event_partnership = EventPartnership.new(event: @event, sponsor: @sponsor)
+    @event_partnership = EventPartnership.new(event_partnership_params)
+    @event_partnership.event = @event
   end
 end
