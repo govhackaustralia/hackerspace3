@@ -1,6 +1,7 @@
 module ChallengesHelper
+  # ENHANCEMENT: DB queries made, this should be in the controller.
   def challenge_teams(checkpoint)
-    team_ids = checkpoint.entries.where(challenge: @challenge).pluck(:team_id)
-    Team.where(id: team_ids, published: true).preload(:current_project)
+    team_ids = @challenge.entries_at(checkpoint).pluck(:team_id)
+    Team.published.where(id: team_ids).preload(:current_project)
   end
 end
