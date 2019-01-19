@@ -23,6 +23,13 @@ class Challenge < ApplicationRecord
 
   after_save :update_identifier
 
+  # ENHANCEMENT: This should be in active record relation but can't pass
+  # parameter. eg
+  # has_many entries_at, -> (checkpoint) { where('checkpoint_id = ?', checkpoint.id) }
+  def entries_at(checkpoint)
+    entries.where(checkpoint: checkpoint)
+  end
+
   # Returns an array of all admin assignments associated with challenges in
   # particular competition.
   # ENHANCEMENT: This should probably be in a controller.

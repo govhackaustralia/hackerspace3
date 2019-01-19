@@ -8,6 +8,7 @@ class ChallengeTest < ActiveSupport::TestCase
     @assignment = Assignment.find(7)
     @user = User.second
     @entry = Entry.first
+    @checkpoint = Checkpoint.first
     @team = Team.first
     @challenge_sponsorship = ChallengeSponsorship.first
     @sponsor = Sponsor.first
@@ -21,6 +22,7 @@ class ChallengeTest < ActiveSupport::TestCase
     assert @challenge.assignments.include? @assignment
     assert @challenge.users.include? @user
     assert @challenge.entries.include? @entry
+    assert @challenge.entries_at(@checkpoint).include? @entry
     assert @challenge.teams.include? @team
     assert @challenge.challenge_sponsorships.include? @challenge_sponsorship
     assert @challenge.sponsors.include? @sponsor
