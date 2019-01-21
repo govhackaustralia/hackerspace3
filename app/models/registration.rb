@@ -39,13 +39,13 @@ class Registration < ApplicationRecord
   # Return the inbound flight chosen by a registraton.
   # ENHANCEMENT: Move into rails associations
   def inbound_flight
-    flights.inbound
+    flights.inbound.first
   end
 
   # Return the outbound flight chosen by a registraton.
   # ENHANCEMENT: Move into rails associations
   def outbound_flight
-    flights.outbound
+    flights.outbound.first
   end
 
   private

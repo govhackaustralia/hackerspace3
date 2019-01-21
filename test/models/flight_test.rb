@@ -15,8 +15,8 @@ class FlightTest < ActiveSupport::TestCase
   end
 
   test 'flight scopes' do
-    assert Flight.inbound == @inbound
-    assert Flight.outbound == @outbound
+    assert Flight.inbound.include? @inbound
+    assert Flight.outbound.include? @outbound
   end
 
   test 'flight validations' do
