@@ -12,11 +12,11 @@ module CompetitionsHelper
   end
 
   def in_challenge_judging_window?(time_zone = nil)
-    in_window?(time_zone, @competition.challenge_judging_start, @competition.challenge_judging_end)
+    in_window? time_zone, @competition.challenge_judging_start, @competition.challenge_judging_end
   end
 
   def in_peoples_judging_window?(time_zone = nil)
-    in_window?(time_zone, @competition.peoples_choice_start, @competition.peoples_choice_end)
+    in_window? time_zone, @competition.peoples_choice_start, @competition.peoples_choice_end
   end
 
   def either_judging_window_open?(time_zone = nil)
