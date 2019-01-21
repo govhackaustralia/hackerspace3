@@ -75,18 +75,13 @@ class BulkMail < ApplicationRecord
     user_order = UserOrder.find_by(bulk_mail: self)
     return if user_order.nil?
 
-    registrations = user_order.registrations(mailable)
-    assignments = Assignment.where(id: registrations.pluck(:assignment_id))
-    id_assignments = Assignment.id_assignments(assignments)
-    id_users = User.id_users(User.where(id: assignments.pluck(:user_id)))
+    registrations = user_order.registrations(mailable).preload(:user)
     registrations.each do |registration|
-      assignment = id_assignments[registration.assignment_id]
-      user = id_users[assignment.user_id]
-      next unless user.me_govhack_contact
+      next unless registration.user.me_govhack_contact
 
-      email_body = BulkMail.correspondence_body(body, user)
-      correspondence = user_order.correspondences.create(user: user, body: email_body, status: PENDING)
-      BulkMailer.participant_email(self, correspondence, user).deliver_now
+      email_body = BulkMail.correspondence_body(body, registration.user)
+      correspondence = user_order.correspondences.create(user: registration.user, body: email_body, status: PENDING)
+      BulkMailer.participant_email(self, correspondence, registration.user).deliver_now
       correspondence.update(status: SENT)
     end
   end
