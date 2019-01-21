@@ -40,16 +40,6 @@ class Assignment < ApplicationRecord
     errors.add(:checkpoint_id, 'Register for a competition event to join or create a team.') if (registration_event_ids & competition_event_ids).empty?
   end
 
-  # Class method to organise methods into key value pairs.
-  # ENHANCEMENT: Common method, find standard alternative.
-  # ENHANCEMENT: This should be in the helpers.
-  def self.id_assignments(assignments)
-    assignments = where(id: assignments.uniq) if assignments.class == Array
-    id_assignments = {}
-    assignments.each { |assignment| id_assignments[assignment.id] = assignment }
-    id_assignments
-  end
-
   # Returns object for a particular judgeable assignment showing the status of
   # each of the potential teams to be judged.
   # ENHANCEMENT: This should be in the helpers.
