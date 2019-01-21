@@ -207,11 +207,9 @@ class User < ApplicationRecord
   def self.event_helper
     user_id_to_event = {}
     all.each { |user| user_id_to_event[user.id] = [] }
-    registrations = Registration.all.where(status: [ATTENDING, WAITLIST])
-    id_assignments = Assignment.id_assignments(registrations.pluck(:assignment_id))
+    registrations = Registration.all.where(status: [ATTENDING, WAITLIST]).preload(:assignment)
     registrations.preload(:event).each do |registration|
-      assignment = id_assignments[registration.assignment_id]
-      user_id_to_event[assignment.user_id] << registration.event.name
+      user_id_to_event[registration.assignment.user_id] << registration.event.name
     end
     user_id_to_event
   end
