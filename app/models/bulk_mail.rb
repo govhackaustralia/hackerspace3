@@ -75,8 +75,7 @@ class BulkMail < ApplicationRecord
     user_order = UserOrder.find_by(bulk_mail: self)
     return if user_order.nil?
 
-    registrations = user_order.registrations(mailable).preload(:user)
-    registrations.each do |registration|
+    user_order.registrations(mailable).preload(:user).each do |registration|
       next unless registration.user.me_govhack_contact
 
       email_body = BulkMail.correspondence_body(body, registration.user)
