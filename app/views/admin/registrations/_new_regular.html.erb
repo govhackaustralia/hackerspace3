@@ -5,41 +5,41 @@
   <%= submit_tag 'Search' %>
 <% end %><br>
 
-<% if @user.present? # User found show registration options. %>
+<% if @user.present? %>
 
   <%= render 'admin/shared/user_contact', locals: { user: @user } %>
-  Event Assignment: <%= @event_assignment.title %><br>
-  <%= link_to 'Update Event Assignment', admin_user_path(@user) %><br>
+  <p>Event Assignment: <%= @event_assignment.title %></p>
+  <p><%= link_to 'Update Event Assignment', admin_user_path(@user) %></p>
 
-  <% unless @existing_registration.present? # check for existing registration %>
+  <% unless @existing_registration.present? %>
 
     <% if @event_assignment.title == VIP || @event.below_capacity?%>
       <%= render 'form', locals: { options: [ATTENDING, NON_ATTENDING] } %>
     <% else %>
       <strong>This event is at capacity</strong><br>
-      All future participant registrations will be added to the waiting list.<br>
+      <p>All future participant registrations will be added to the waiting list.</p>
       <%= render 'form', locals: { options: [WAITLIST, NON_ATTENDING] } %>
     <% end %>
 
   <% else %>
-    Registration for <%= @user.full_name %> already exists.<br>
-    <%= link_to 'Update Registration', edit_admin_event_registration_path(@event, @existing_registration) %><br>
+    <p>Registration for <%= @user.full_name %> already exists.</p>
+    <p><%= link_to 'Update Registration', edit_admin_event_registration_path(@event, @existing_registration) %></p>
   <% end %>
 
-<% elsif @users.present? # Review search results %>
+<% elsif @users.present? %>
 
   <% @users.each do |user| %>
     <%= render 'admin/shared/user_contact', locals: { user: user } %>
-    Event Assignment: <%= (event_assignment = user.event_assignment).title %><br>
-    <%= link_to 'Select', new_admin_event_registration_path(@event, term: user.email) %><br>
+    <p>Event Assignment: <%= (event_assignment = user.event_assignment).title %></p>
+    <p><%= link_to 'Select', new_admin_event_registration_path(@event, term: user.email) %></p>
   <% end %>
 
-<% elsif params[:term].present? # Could not find anything. %>
+<% elsif params[:term].present? %>
 
-  Apologies, no name matching search term '<%= params[:term] %>'<br>
+  <p>Apologies, no name matching search term '<%= params[:term] %>'</p>
 
-<% else # No search term entered / first visit to page %>
+<% else %>
 
-  Please enter an email address or name to search for a user.<br>
+  <p>Please enter an email address or name to search for a user.</p>
 
 <% end %>

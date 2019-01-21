@@ -6,12 +6,12 @@
   <%= submit_tag 'Search' %>
 <% end %>
 
-<% if @team.present? # User found show registration options. %>
+<% if @team.present? %>
 
   <h3><%= @project.team_name %> | <%= @project.project_name %></h3>
   <% if @leader.present? %>
     <p>Team Leader: <%= @leader.display_name %></p>
-    <% if @existing_registration.present? # check for existing registration %>
+    <% if @existing_registration.present? %>
       <p>Golden Ticket Registration for <%= @user.full_name %> already exists for <%= @project.team_name %>.</p>
       <p><%= link_to 'Update Registration', edit_admin_event_registration_path(@event, @existing_registration) %></p>
     <% else %>
@@ -21,18 +21,18 @@
     <p>No team leader assigned for this team.</p>
   <% end %>
 
-<% elsif @teams.present? # Review search results %>
+<% elsif @teams.present? %>
 
   <% @teams.each do |team| %>
     <h3><%= team.current_project.team_name %> | <%= team.current_project.project_name %></h3>
-    <%= link_to 'Select', new_admin_event_registration_path(@event, term: project.team_id, type: GROUP_GOLDEN) %><br>
+    <p><%= link_to 'Select', new_admin_event_registration_path(@event, term: project.team_id, type: GROUP_GOLDEN) %></p>
   <% end %>
 
-<% elsif params[:term].present? # Could not find anything. %>
+<% elsif params[:term].present? %>
 
   <p>Apologies, no team project name matching search term '<%= params[:term] %>'</p>
 
-<% else # No search term entered / first visit to page %>
+<% else %>
 
   <p>Please enter a team or project name to search.</p>
 

@@ -6,6 +6,6 @@
       options = {checked: @registration.status == status}) %>
     <%= f.label(:status, status) %>
   <% end %>
-  <%= hidden_field_tag(:assignment_id, @event_assignment.id) %>
+  <%= hidden_field_tag :assignment_id, @event_assignment.id %>
   <%= f.submit %>
 <% end %>
