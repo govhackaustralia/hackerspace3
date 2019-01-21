@@ -6,12 +6,18 @@ class Admin::RegionsController < ApplicationController
     @region = Region.root
   end
 
-  def new
-    @region = Region.new if @region.nil?
+  def show
+    @region = Region.find(params[:id])
+    @competition = Competition.current
+    @challenges = @region.challenges
+    @data_sets = @region.data_sets
+    @sponsorships = @region.sponsorships
+    @bulk_mails = @region.bulk_mails
+    retrieve_counts
   end
 
-  def edit
-    @region = Region.find(params[:id])
+  def new
+    @region = Region.new if @region.nil?
   end
 
   def create
@@ -25,25 +31,19 @@ class Admin::RegionsController < ApplicationController
     end
   end
 
+  def edit
+    @region = Region.find(params[:id])
+  end
+
   def update
     @region = Region.find(params[:id])
     if @region.update(region_params)
       flash[:notice] = 'Region Updated'
-      redirect_to admin_region_path(@region)
+      redirect_to admin_region_path @region
     else
       flash.now[:alert] = @region.errors.full_messages.to_sentence
       render :edit
     end
-  end
-
-  def show
-    @region = Region.find(params[:id])
-    @competition = Competition.current
-    @challenges = @region.challenges
-    @data_sets = @region.data_sets
-    @sponsorships = @region.sponsorships
-    @bulk_mails = @region.bulk_mails
-    retrieve_counts
   end
 
   private
