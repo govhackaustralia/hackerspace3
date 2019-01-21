@@ -52,11 +52,9 @@ class Admin::Events::BulkMailsController < ApplicationController
     @participant_count = 0
     @example_user = User.first
     @example_project = Project.first
-    @user_order = UserOrder.find_by(bulk_mail: @bulk_mail)
-    @registrations = @user_order.registrations(@event)
-    assignments = Assignment.where(id: @registrations.pluck(:assignment_id))
-    @id_assignments = Assignment.id_assignments(assignments)
-    @id_users = User.id_users(User.where(id: assignments.pluck(:user_id)))
+    @user_order = UserOrder.find_by bulk_mail: @bulk_mail
+    @registrations = @user_order.registrations @event
+    @registrations.preload(:user) unless @registrations.empty?
   end
 
   def handle_processing

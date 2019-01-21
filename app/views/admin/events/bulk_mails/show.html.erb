@@ -29,15 +29,13 @@
       <% end %>
     </tr>
     <% @registrations.each do |registration| %>
-      <% assignment = @id_assignments[registration.assignment_id] %>
-      <% user = @id_users[assignment.user_id] %>
-      <% next unless user.me_govhack_contact %>
+      <% next unless registration.user.me_govhack_contact %>
       <tr>
         <td><%= registration.status %></td>
-        <td><%= user.display_name %></td>
+        <td><%= registration.user.display_name %></td>
         <% @participant_count += 1 %>
         <% if @bulk_mail.status == PROCESSED %>
-          <% correspondence = @id_user_correspondences[user.id] %>
+          <% correspondence = @id_user_correspondences[registration.user.id] %>
           <td><%= link_to correspondence.status, admin_bulk_mail_correspondence_path(@bulk_mail, correspondence) %></td>
         <% end %>
       </tr>
