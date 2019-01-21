@@ -24,6 +24,17 @@ class Admin::RegistrationsController < ApplicationController
     end
   end
 
+  def create
+    @event = Event.find params[:event_id]
+    create_new_registration
+    if @registration.save
+      flash[:notice] = 'New Registration Added.'
+      redirect_to admin_event_registrations_path @event
+    else
+      create_error
+    end
+  end
+
   def edit
     @event = Event.find(params[:event_id])
     @region = @event.region
@@ -36,26 +47,15 @@ class Admin::RegistrationsController < ApplicationController
     update_registration
     if @registration.update(registration_params)
       flash[:notice] = 'Registration Updated.'
-      redirect_to admin_event_registrations_path(@event)
+      redirect_to admin_event_registrations_path @event
     else
-      flash.now[:alert] = @registration.errors.full_messages.to_sentence
-      render :edit
-    end
-  end
-
-  def create
-    @event = Event.find(params[:event_id])
-    create_new_registration
-    if @registration.save
-      flash[:notice] = 'New Registration Added.'
-      redirect_to admin_event_registrations_path(@event)
-    else
-      create_error
+      update_error
     end
   end
 
   private
 
+  # ENHANCEMENT: Add assignment_id to registration_params
   def registration_params
     params.require(:registration).permit(:status)
   end
@@ -63,7 +63,17 @@ class Admin::RegistrationsController < ApplicationController
   def create_error
     flash.now[:alert] = @registration.errors.full_messages.to_sentence
     @user = @assignment.user
+    @event_assignment = @user.event_assignment
     render :new
+  end
+
+  def update_error
+    flash.now[:alert] = @registration.errors.full_messages.to_sentence
+    @user = @registration.user
+    @event_assignment = @user.event_assignment
+    @event = @registration.event
+    @region = @event.region
+    render :edit
   end
 
   def new_golden_group
@@ -102,6 +112,7 @@ class Admin::RegistrationsController < ApplicationController
     search_other_fields unless @user.present?
   end
 
+  # ENHANCEMENT: Break into seperate controllers.
   def create_new_registration
     if params[:type] == INDIVIDUAL_GOLDEN
       create_individual_golden
