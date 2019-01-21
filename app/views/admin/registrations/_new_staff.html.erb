@@ -22,7 +22,7 @@
 
   <% @users.each do |user| %>
     <%= render 'admin/shared/user_contact', locals: { user: user } %>
-    <% @user_id_assignments[user.id].each do |assignment| %>
+    <% user.assignments.each do |assignment| %>
       <% next if assignment.assignable_type == 'Team' %>
       <% next if [PARTICIPANT, VIP].include? assignment.title %>
       <p><%= link_to "Select as #{assignment.title} at #{assignment.assignable.name}", new_admin_event_registration_path(@event, term: assignment.id, type: STAFF) %></p>

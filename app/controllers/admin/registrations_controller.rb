@@ -91,7 +91,6 @@ class Admin::RegistrationsController < ApplicationController
   def complete_new_staff
     search_other_fields unless @user.present?
     staff_found if @user.present?
-    @user_id_assignments = Assignment.user_id_assignments(@users) if @users.present?
   end
 
   def check_for_privileges
@@ -171,15 +170,15 @@ class Admin::RegistrationsController < ApplicationController
   end
 
   def search_other_fields
-    @users = User.search(params[:term])
+    @users = User.search(params[:term]).preload :assignments
   end
 
   def search_other_fields_team
-    @teams = Team.search(params[:term]).preload(:current_project)
+    @teams = Team.search(params[:term]).preload :current_project
   end
 
   def update_registration
-    @event = Event.find(params[:event_id])
-    @registration = Registration.find(params[:id])
+    @event = Event.find params[:event_id]
+    @registration = Registration.find params[:id]
   end
 end

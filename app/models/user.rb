@@ -112,12 +112,12 @@ class User < ApplicationRecord
   end
 
   def self.search(term)
-    results = []
+    user_ids = []
     User.all.each do |user|
       user_string = "#{user.full_name} #{user.email} #{user.preferred_name}".downcase
-      results << user if user_string.include? term.downcase
+      user_ids << user.id if user_string.include? term.downcase
     end
-    results
+    User.where(id: user_ids)
   end
 
   def self.from_omniauth(access_token)
