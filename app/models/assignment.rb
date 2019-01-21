@@ -81,16 +81,4 @@ class Assignment < ApplicationRecord
     end
     judgeable_scores_obj
   end
-
-  # Returns an object of assignments belonging to particular user.
-  # ENHANCEMENT: This should be in the helpers.
-  def self.user_id_assignments(users)
-    user_id_assignments = {}
-    users.each { |user| user_id_assignments[user.id] = [] }
-    assignments = Assignment.where(user_id: user_id_assignments.keys)
-    assignments.each do |assignment|
-      user_id_assignments[assignment.user_id] << assignment
-    end
-    user_id_assignments
-  end
 end
