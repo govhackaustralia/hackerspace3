@@ -38,7 +38,8 @@ class Assignment < ApplicationRecord
 
     registration_event_ids = user.registrations.where(status: [ATTENDING, WAITLIST]).pluck(:event_id)
     competition_event_ids = Competition.current.events.where(event_type: COMPETITION_EVENT).pluck(:id)
-    errors.add(:checkpoint_id, 'Register for a competition event to join or create a team.') if (registration_event_ids & competition_event_ids).empty?
+    return unless (registration_event_ids & competition_event_ids).empty?
+    errors.add(:checkpoint_id, 'Register for a competition event to join or create a team.')
   end
 
   # Returns object for a particular judgeable assignment showing the status of

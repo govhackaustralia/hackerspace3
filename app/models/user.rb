@@ -83,10 +83,6 @@ class User < ApplicationRecord
     Assignment.find_by(user: self, assignable: challenge, title: JUDGE)
   end
 
-  def registrations
-    event_assignment.registrations
-  end
-
   def teams(event = nil)
     assignment_ids = assignments.where(assignable_type: 'Team').pluck(:assignable_id)
     return if assignment_ids.nil?
