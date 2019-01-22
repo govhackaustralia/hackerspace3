@@ -87,17 +87,6 @@ class User < ApplicationRecord
     assignments.judges.find_by assignable: challenge
   end
 
-  def public_winning_entries?
-    leader_assignments = assignments.where(title: TEAM_LEADER)
-    return false if leader_assignments.empty?
-    winning_entries = Entry.where(team_id: leader_assignments.pluck(:assignable_id), award: WINNER).preload(challenge: :region)
-    return false if winning_entries.empty?
-    winning_entries.each do |entry|
-      return true if entry.challenge.region.awards_released?
-    end
-    false
-  end
-
   def in_team?(team)
     return true if assignments.where(assignable: team).present?
     false

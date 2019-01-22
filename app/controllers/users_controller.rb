@@ -25,7 +25,7 @@ class UsersController < ApplicationController
     @joined_teams = @user.joined_teams.preload(:event, :current_project)
     @invited_teams = @user.invited_teams.preload(:event, :current_project)
 
-    @public_winning_entries = @user.public_winning_entries?
+    @public_winning_entries = has_public_winning_entries?
   end
 
   def edit
@@ -101,5 +101,12 @@ class UsersController < ApplicationController
   def handle_personal_details
     flash[:notice] = 'Your personal details have been updated.'
     redirect_to manage_account_path
+  end
+
+  def has_public_winning_entries?
+    @user.winning_entries.preload(challenge: :region).each do |entry|
+      return true if entry.challenge.region.awards_released?
+    end
+    false
   end
 end
