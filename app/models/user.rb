@@ -127,12 +127,11 @@ class User < ApplicationRecord
 
   def self.user_event_rego_to_csv(options = {})
     user_columns = %w[id email full_name preferred_name dietary_requirements tshirt_size twitter mailing_list challenge_sponsor_contact_place challenge_sponsor_contact_enter my_project_sponsor_contact me_govhack_contact phone_number how_did_you_hear accepted_terms_and_conditions registration_type parent_guardian request_not_photographed data_cruncher coder creative facilitator]
-    user_event_helper = event_helper
     combined = user_columns + ['events']
     CSV.generate(options) do |csv|
       csv << combined
-      all.each do |user|
-        csv << (user.attributes.values_at(*user_columns) << user_event_helper[user.id])
+      all.preload(:participating_events).each do |user|
+        csv << (user.attributes.values_at(*user_columns) << user.participating_events.pluck(:name))
       end
     end
   end
@@ -150,15 +149,5 @@ class User < ApplicationRecord
         csv << [project.team_name, project.project_name, user.full_name, user.email, assignment.title]
       end
     end
-  end
-
-  def self.event_helper
-    user_id_to_event = {}
-    all.each { |user| user_id_to_event[user.id] = [] }
-    registrations = Registration.all.where(status: [ATTENDING, WAITLIST]).preload(:assignment)
-    registrations.preload(:event).each do |registration|
-      user_id_to_event[registration.assignment.user_id] << registration.event.name
-    end
-    user_id_to_event
   end
 end
