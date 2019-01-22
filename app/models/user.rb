@@ -22,6 +22,9 @@ class User < ApplicationRecord
   has_many :leader_teams, through: :leader_assignments, source: :assignable, source_type: 'Team'
   has_many :winning_entries, -> { winners }, through: :leader_teams, source: :entries
 
+  has_many :participating_registrations, -> { attending_or_waitlist }, through: :assignments, source: :registrations
+  has_many :participating_competition_events, -> { competitions }, through: :participating_registrations, source: :event
+
   # Gravitar Gem
   include Gravtastic
   has_gravatar
