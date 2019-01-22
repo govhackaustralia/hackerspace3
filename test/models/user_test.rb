@@ -51,4 +51,9 @@ class UserTest < ActiveSupport::TestCase
     @assignment.destroy
     assert_not @user.admin_privileges?
   end
+
+  test 'judge_assignment' do
+    assert @judge.judge_assignment(@challenge) == @judge_assignment
+    assert_nil @user.judge_assignment @challenge
+  end
 end

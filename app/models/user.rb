@@ -80,7 +80,7 @@ class User < ApplicationRecord
   end
 
   def judge_assignment(challenge)
-    Assignment.find_by(user: self, assignable: challenge, title: JUDGE)
+    assignments.judges.find_by assignable: challenge
   end
 
   def teams(event = nil)
