@@ -11,7 +11,6 @@ AllCops:
     - 'Rakefile'
     - 'bin/*'
     - 'db/**/*'
-    - 'app/models/user.rb'
     - 'app/helpers/application_helper.rb'
     - 'app/controllers/users_controller.rb'
     - 'app/models/scorecard.rb'

@@ -91,6 +91,7 @@ class User < ApplicationRecord
   def display_name
     return preferred_name unless preferred_name.blank?
     return full_name unless full_name.blank?
+
     email
   end
 
@@ -100,6 +101,7 @@ class User < ApplicationRecord
   def event_assignment
     assignment = Competition.current.assignments.find_by(user: self, title: VIP)
     return assignment unless assignment.nil?
+
     Competition.current.assignments.find_or_create_by(user: self, title: PARTICIPANT)
   end
 
