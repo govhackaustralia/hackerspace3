@@ -63,6 +63,7 @@ class AssignmentTest < ActiveSupport::TestCase
     assert Assignment.team_invitees.include? @team_invitee
     assert Assignment.team_confirmed.include? @team_member
     assert Assignment.team_confirmed.include? @team_leader
+    assert Assignment.team_participants.include? @team_leader
     assert Assignment.judges.include? @judge
   end
 

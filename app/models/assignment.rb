@@ -18,6 +18,7 @@ class Assignment < ApplicationRecord
   scope :team_leaders, -> { where title: TEAM_LEADER }
   scope :team_invitees, -> { where title: INVITEE }
   scope :team_confirmed, -> { where title: [TEAM_LEADER, TEAM_MEMBER] }
+  scope :team_participants, -> { where title: [TEAM_LEADER, TEAM_MEMBER, INVITEE] }
   scope :judges, -> { where title: JUDGE }
 
   # Callback to ensure that there is only one team leader per team.
