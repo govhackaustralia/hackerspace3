@@ -116,7 +116,7 @@ class User < ApplicationRecord
 
   def self.published_teams_to_csv(options = {})
     user_columns = %w[id email full_name preferred_name dietary_requirements tshirt_size twitter mailing_list challenge_sponsor_contact_place challenge_sponsor_contact_enter my_project_sponsor_contact me_govhack_contact phone_number how_did_you_hear accepted_terms_and_conditions registration_type parent_guardian request_not_photographed data_cruncher coder creative facilitator]
-    user_ids = Assignment.where(title: [TEAM_MEMBER, TEAM_LEADER, INVITEE], assignable: Team.where(published: true)).pluck(:user_id).uniq
+    user_ids = Assignment.participants.where(assignable: Team.published).pluck(:user_id).uniq
     CSV.generate(options) do |csv|
       csv << user_columns
       where(id: user_ids).each do |user|
@@ -138,14 +138,11 @@ class User < ApplicationRecord
 
   def self.all_members_to_csv(options = {})
     columns = %w[team_name project_name full_name email title]
-    assignments = Assignment.where(title: [TEAM_MEMBER, TEAM_LEADER, INVITEE]).preload(assignable: [:current_project])
-    id_users = {}
-    User.all.each {|user| id_users[user.id] = user }
     CSV.generate(options) do |csv|
       csv << columns
-      assignments.each do |assignment|
+      Assignment.participants.preload(:user, assignable: [:current_project]).each do |assignment|
         project = assignment.assignable.current_project
-        user = id_users[assignment.user_id]
+        user = assignment.user
         csv << [project.team_name, project.project_name, user.full_name, user.email, assignment.title]
       end
     end
