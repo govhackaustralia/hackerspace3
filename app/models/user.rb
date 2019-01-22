@@ -96,12 +96,6 @@ class User < ApplicationRecord
     User.where(id: user_ids)
   end
 
-  def self.id_users(users)
-    id_users = {}
-    users.each { |user| id_users[user.id] = user }
-    id_users
-  end
-
   def no_dietary_requirements?
     dietary_requirements.blank?
   end
