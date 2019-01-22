@@ -11,13 +11,14 @@ class Assignment < ApplicationRecord
 
   after_save :only_one_team_leader
 
-  scope :event_hosts, -> { where(title: EVENT_HOST) }
-  scope :event_supports, -> { where(title: EVENT_SUPPORT) }
-  scope :participants, -> { where(title: PARTICIPANT) }
-  scope :team_members, -> { where(title: TEAM_MEMBER) }
-  scope :team_leaders, -> { where(title: TEAM_LEADER) }
-  scope :team_invitees, -> { where(title: INVITEE) }
-  scope :team_confirmed, -> { where(title: [TEAM_LEADER, TEAM_MEMBER]) }
+  scope :event_hosts, -> { where title: EVENT_HOST }
+  scope :event_supports, -> { where title: EVENT_SUPPORT }
+  scope :participants, -> { where title: PARTICIPANT }
+  scope :team_members, -> { where title: TEAM_MEMBER }
+  scope :team_leaders, -> { where title: TEAM_LEADER }
+  scope :team_invitees, -> { where title: INVITEE }
+  scope :team_confirmed, -> { where title: [TEAM_LEADER, TEAM_MEMBER] }
+  scope :judges, -> { where title: JUDGE }
 
   # Callback to ensure that there is only one team leader per team.
   # Will remove longest serving Team Leader and change to Team Member.

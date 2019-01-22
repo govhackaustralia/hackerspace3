@@ -19,6 +19,7 @@ class AssignmentTest < ActiveSupport::TestCase
     @team_leader = Assignment.find 11
     @team_invitee = Assignment.find 12
     @team_member = Assignment.find 9
+    @judge = Assignment.find 7
   end
 
   test 'assignment associations' do
@@ -62,6 +63,7 @@ class AssignmentTest < ActiveSupport::TestCase
     assert Assignment.team_invitees.include? @team_invitee
     assert Assignment.team_confirmed.include? @team_member
     assert Assignment.team_confirmed.include? @team_leader
+    assert Assignment.judges.include? @judge
   end
 
   test 'team validations' do
