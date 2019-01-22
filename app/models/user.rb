@@ -33,89 +33,129 @@ class User < ApplicationRecord
   # Active Storage prifel image.
   has_one_attached :govhack_img
 
+  # Returns true if a user has any of the privileges (assignments) passed
+  # through the parameters.
+  # ENHANCEMENT: Move to Controller.
   def privilege?(privileges)
     (privileges & assignments).present?
   end
 
+  # Returns true if a user has any competition admin titles.
+  # ENHANCEMENT: Move to Controller.
+  # ENHANCEMENT: Check against assignments not titles.
   def admin_privileges?
     (assignments.pluck(:title) & COMP_ADMIN).present?
   end
 
+  # Returns true if a user has any region admin titles.
+  # ENHANCEMENT: Move to Controller.
+  # ENHANCEMENT: Check against assignments not titles.
   def region_privileges?
     (assignments.pluck(:title) & REGION_PRIVILEGES).present?
   end
 
+  # Returns true if a user has any event admin titles.
+  # ENHANCEMENT: Move to Controller.
+  # ENHANCEMENT: Check against assignments not titles.
   def event_privileges?
     (assignments.pluck(:title) & EVENT_PRIVILEGES).present?
   end
 
+  # Returns true if a user has any sponsor admin titles.
+  # ENHANCEMENT: Move to Controller.
+  # ENHANCEMENT: Check against assignments not titles.
   def sponsor_privileges?
     (assignments.pluck(:title) & SPONSOR_PRIVILEGES).present?
   end
 
+  # Returns true if a user has any criterion admin titles.
+  # ENHANCEMENT: Move to Controller.
+  # ENHANCEMENT: Check against assignments not titles.
   def criterion_privileges?
     (assignments.pluck(:title) & CRITERION_PRIVILEGES).present?
   end
 
+  # Returns true if a user has any admin titles.
+  # ENHANCEMENT: Move to Controller.
+  # ENHANCEMENT: Check against assignments not titles.
   def admin_assignments
     assignments.where(title: ADMIN_TITLES)
   end
 
+  # Assigns a user the assignment of site admin.
   def make_site_admin
     Competition.current.assignments.find_or_create_by(user: self, title: ADMIN)
   end
 
+  # Returns a display name in order of system preference.
   def display_name
     return preferred_name unless preferred_name.blank?
     return full_name unless full_name.blank?
     email
   end
 
+  # Returns the event assignment of a particular user.
+  # This is the assignment to the competition that is used to register for
+  # events (among other things).
   def event_assignment
     assignment = Competition.current.assignments.find_by(user: self, title: VIP)
     return assignment unless assignment.nil?
     Competition.current.assignments.find_or_create_by(user: self, title: PARTICIPANT)
   end
 
+  # Returns a user's event_assignment if they have permission to vote.
   def judgeable_assignment
     return event_assignment if teams.where(published: true).present?
     return event_assignment if assignments.where(title: [VOLUNTEER, ADMIN, JUDGE]).present?
   end
 
+  # Returns a user's event_assignment if they have premission to vote in the
+  # people's choice awards.
   def peoples_assignment
     return event_assignment if teams.where(published: true).present?
     return event_assignment if assignments.where(title: VOLUNTEER).present?
   end
 
+  # Returns a user's challenge judging assignment given a challenge.
   def judge_assignment(challenge)
     assignments.judges.find_by assignable: challenge
   end
 
+  # Searches for a user given a string term.
+  # ENHANCEMENT: Very inefficient.
   def self.search(term)
     user_ids = []
     User.all.each do |user|
       user_string = "#{user.full_name} #{user.email} #{user.preferred_name}".downcase
       user_ids << user.id if user_string.include? term.downcase
     end
-    User.where(id: user_ids)
+    User.where id: user_ids
   end
 
+  # Returns true if a user has no set dietary requirements.
   def no_dietary_requirements?
     dietary_requirements.blank?
   end
 
+  # Returns true if a user is in the process of registering an account.
+  # After an account has been created if the how_did_you_hear section is not
+  # filled out, a placeholder will be set.
   def registering_account?
     how_did_you_hear.blank?
   end
 
+  # Returns true if an user is participating in a competition event.
   def competition_event_participant?
     participating_competition_events.where(competition: Competition.current).present?
   end
 
   require 'csv'
 
+  # Generates a CSV file for published teams and their selected attributes.
+  # ENHANCEMENT: move to Controller or other model.
   def self.published_teams_to_csv(options = {})
     user_columns = %w[id email full_name preferred_name dietary_requirements tshirt_size twitter mailing_list challenge_sponsor_contact_place challenge_sponsor_contact_enter my_project_sponsor_contact me_govhack_contact phone_number how_did_you_hear accepted_terms_and_conditions registration_type parent_guardian request_not_photographed data_cruncher coder creative facilitator]
+    # ENHANCEMENT: Create a scope for the below.
     user_ids = Assignment.participants.where(assignable: Team.published).pluck(:user_id).uniq
     CSV.generate(options) do |csv|
       csv << user_columns
@@ -125,6 +165,9 @@ class User < ApplicationRecord
     end
   end
 
+  # Generates a CSV file of user attributes and the events they are registered
+  # for as participating.
+  # ENHANCEMENT: move to Controller or other model.
   def self.user_event_rego_to_csv(options = {})
     user_columns = %w[id email full_name preferred_name dietary_requirements tshirt_size twitter mailing_list challenge_sponsor_contact_place challenge_sponsor_contact_enter my_project_sponsor_contact me_govhack_contact phone_number how_did_you_hear accepted_terms_and_conditions registration_type parent_guardian request_not_photographed data_cruncher coder creative facilitator]
     combined = user_columns + ['events']
@@ -136,6 +179,8 @@ class User < ApplicationRecord
     end
   end
 
+  # Generates a CSV file for all participating team members and their
+  # attributes.
   def self.all_members_to_csv(options = {})
     columns = %w[team_name project_name full_name email title]
     CSV.generate(options) do |csv|
