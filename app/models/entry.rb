@@ -18,6 +18,7 @@ class Entry < ApplicationRecord
 
   scope :regional, -> { joins(:region).where.not(regions: { parent_id: nil }) }
   scope :national, -> { joins(:region).where(regions: { parent_id: nil }) }
+  scope :winners, -> { where award: WINNER }
 
   # Checks that a project has enough information entered for the entry to be
   # marked eligible, and then marks accordingly.

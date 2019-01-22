@@ -29,6 +29,8 @@ class EntryTest < ActiveSupport::TestCase
     assert Entry.regional.exclude? @national_entry
     assert Entry.national.include? @national_entry
     assert Entry.national.exclude? @regional_entry
+    assert Entry.winners.include? @regional_entry
+    assert Entry.winners.exclude? @national_entry
   end
 
   test 'entry validations' do

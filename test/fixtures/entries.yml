@@ -23,3 +23,4 @@ three:
   checkpoint_id: 1
   justification: MyText
   eligible: true
+  award: Winner
