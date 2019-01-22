@@ -83,13 +83,6 @@ class User < ApplicationRecord
     assignments.judges.find_by assignable: challenge
   end
 
-  def teams(event = nil)
-    assignment_ids = assignments.where(assignable_type: 'Team').pluck(:assignable_id)
-    return if assignment_ids.nil?
-    return Team.where(id: assignment_ids, event: event) unless event.nil?
-    Team.where(id: assignment_ids)
-  end
-
   def public_winning_entries?
     leader_assignments = assignments.where(title: TEAM_LEADER)
     return false if leader_assignments.empty?
