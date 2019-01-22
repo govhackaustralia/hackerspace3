@@ -23,6 +23,7 @@ class User < ApplicationRecord
   has_many :winning_entries, -> { winners }, through: :leader_teams, source: :entries
 
   has_many :participating_registrations, -> { participating }, through: :assignments, source: :registrations
+  has_many :participating_events, through: :participating_registrations, source: :event
   has_many :participating_competition_events, -> { competitions }, through: :participating_registrations, source: :event
 
   # Gravitar Gem

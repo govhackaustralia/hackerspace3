@@ -18,6 +18,7 @@ class UserTest < ActiveSupport::TestCase
     @leader_assignment = @joined_team_assignment
     @winning_entry = Entry.third
     @competition_registration = Registration.third
+    @participating_event = Event.first
     @competition_event = Event.second
   end
 
@@ -41,6 +42,7 @@ class UserTest < ActiveSupport::TestCase
     assert @user.winning_entries.include? @winning_entry
 
     assert @user.participating_registrations.include? @competition_registration
+    assert @user.participating_events.include? @participating_event
     assert @user.participating_competition_events.include? @competition_event
 
     @user.destroy
