@@ -18,6 +18,10 @@ class User < ApplicationRecord
   has_many :judge_assignments, -> { judges }, class_name: 'Assignment'
   has_many :challenges_judging, through: :judge_assignments, source: :assignable, source_type: 'Challenge'
 
+  has_many :leader_assignments, -> { team_leaders }, class_name: 'Assignment'
+  has_many :leader_teams, through: :leader_assignments, source: :assignable, source_type: 'Team'
+  has_many :winning_entries, -> { winners }, through: :leader_teams, source: :entries
+
   # Gravitar Gem
   include Gravtastic
   has_gravatar
