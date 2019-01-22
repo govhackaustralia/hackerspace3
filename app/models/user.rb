@@ -96,15 +96,6 @@ class User < ApplicationRecord
     User.where(id: user_ids)
   end
 
-  def self.from_omniauth(access_token)
-    data = access_token.info
-    user = User.find_by_email(data['email'])
-    user ||= new_user_from_google(data)
-    update_user_info_from_google(user, data)
-    user.save
-    user
-  end
-
   def self.id_users(users)
     id_users = {}
     users.each { |user| id_users[user.id] = user }
@@ -126,18 +117,6 @@ class User < ApplicationRecord
 
   def competition_event_participant?
     competition_events_participating(Competition.current).present?
-  end
-
-  def self.new_user_from_google(data)
-    User.new(full_name: data['name'],
-             email: data['email'],
-             password: Devise.friendly_token[0, 20])
-  end
-
-  def self.update_user_info_from_google(user, data)
-    user.update(google_img: data['image'])
-    return unless user.full_name.blank?
-    user.update(full_name: data['name'])
   end
 
   require 'csv'
