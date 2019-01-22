@@ -87,11 +87,6 @@ class User < ApplicationRecord
     assignments.judges.find_by assignable: challenge
   end
 
-  def in_team?(team)
-    return true if assignments.where(assignable: team).present?
-    false
-  end
-
   def self.search(term)
     user_ids = []
     User.all.each do |user|

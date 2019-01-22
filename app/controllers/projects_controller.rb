@@ -48,6 +48,6 @@ class ProjectsController < ApplicationController
     @judgeable_assignment = @user.judgeable_assignment
     @peoples_assignment = @user.peoples_assignment
     @judge = @user.judge_assignment(@team.challenges)
-    @users_team = @user.in_team?(@team)
+    @users_team = @user.teams.include? @team
   end
 end
