@@ -33,6 +33,9 @@ class RegistrationTest < ActiveSupport::TestCase
     assert Registration.attending.include? @registration
     assert Registration.waitlist.include? @waitlist_registration
     assert Registration.non_attending.include? @non_attending_registration
+    assert Registration.attending_or_waitlist.include? @registration
+    assert Registration.attending_or_waitlist.include? @waitlist_registration
+    assert Registration.attending_or_waitlist.exclude? @non_attending_registration
     assert Registration.participants.include? @registration
     assert Registration.participants.exclude? @vip_registration
     assert Registration.vips.include? @vip_registration
