@@ -15,6 +15,9 @@ class User < ApplicationRecord
   has_many :invited_team_assignments, -> { team_invitees }, class_name: 'Assignment'
   has_many :invited_teams, through: :invited_team_assignments, source: :assignable, source_type: 'Team'
 
+  has_many :judge_assignments, -> { judges }, class_name: 'Assignment'
+  has_many :challenges_judging, through: :judge_assignments, source: :assignable, source_type: 'Challenge'
+
   # Gravitar Gem
   include Gravtastic
   has_gravatar
@@ -48,10 +51,6 @@ class User < ApplicationRecord
 
   def admin_assignments
     assignments.where(title: ADMIN_TITLES)
-  end
-
-  def challenges_judging
-    Challenge.where(id: assignments.where(title: JUDGE).pluck(:assignable_id))
   end
 
   def make_site_admin

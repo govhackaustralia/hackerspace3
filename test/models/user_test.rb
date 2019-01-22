@@ -12,6 +12,9 @@ class UserTest < ActiveSupport::TestCase
     @invitee = User.third
     @invited_team_assignments = Assignment.find 12
     @invited_team = @team
+    @judge = User.second
+    @judge_assignment = Assignment.find 7
+    @challenge = Challenge.first
   end
 
   test 'user associations' do
@@ -25,6 +28,9 @@ class UserTest < ActiveSupport::TestCase
 
     assert @invitee.invited_team_assignments.include? @invited_team_assignments
     assert @invitee.invited_teams.include? @invited_team
+
+    assert @judge.judge_assignments.include? @judge_assignment
+    assert @judge.challenges_judging.include? @challenge
 
     @user.destroy
     assert_raises(ActiveRecord::RecordNotFound) { @assignment.reload }
