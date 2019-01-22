@@ -32,6 +32,7 @@ class Event < ApplicationRecord
   has_many :outbound_flights, -> { outbound }, class_name: 'Flight'
 
   scope :published, -> { where published: true }
+  scope :competitions, -> { where event_type: COMPETITION_EVENT }
 
   validates :name, :capacity, presence: true
   validates :registration_type, inclusion: { in: EVENT_REGISTRATION_TYPES }

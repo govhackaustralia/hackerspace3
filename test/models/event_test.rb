@@ -15,6 +15,7 @@ class EventTest < ActiveSupport::TestCase
     @flight = Flight.first
     @bulk_mail = BulkMail.second
     @vip_registration = Registration.second
+    @competition_event = Event.second
   end
 
   test 'event associations' do
@@ -44,6 +45,7 @@ class EventTest < ActiveSupport::TestCase
     assert Event.published.include? @event
     @event.update published: false
     assert Event.published.exclude? @event
+    assert Event.competitions.include? @competition_event
   end
 
   test 'event validations' do
