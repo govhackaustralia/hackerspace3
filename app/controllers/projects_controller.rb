@@ -32,13 +32,19 @@ class ProjectsController < ApplicationController
   end
 
   def user_records_index
-    @attending_events = current_user.competition_events_participating(@competition) if helpers.competition_not_finished?(LAST_TIME_ZONE)
+    retrieve_attending_events
     return unless helpers.in_peoples_judging_window?(LAST_TIME_ZONE)
     return unless (@peoples_assignment = current_user.peoples_assignment).present?
 
     @judgeable_assignment = current_user.judgeable_assignment
     @project_judging = @judgeable_assignment.judgeable_scores(@teams)
     @project_judging_total = @competition.score_total PROJECT
+  end
+
+  def retrieve_attending_events
+    return unless helpers.competition_not_finished? LAST_TIME_ZONE
+
+    @attending_events = current_user.participating_competition_events.where(competition: @competition)
   end
 
   def user_records_show

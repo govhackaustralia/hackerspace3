@@ -107,13 +107,8 @@ class User < ApplicationRecord
     how_did_you_hear.blank?
   end
 
-  def competition_events_participating(competition)
-    event_ids = registrations.where(status: [ATTENDING, WAITLIST]).pluck(:event_id)
-    Event.where(id: event_ids, competition: competition, event_type: COMPETITION_EVENT)
-  end
-
   def competition_event_participant?
-    competition_events_participating(Competition.current).present?
+    participating_competition_events.where(competition: Competition.current).present?
   end
 
   require 'csv'

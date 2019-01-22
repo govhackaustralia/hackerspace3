@@ -15,7 +15,7 @@ class TeamsController < ApplicationController
   def create
     @team = Team.new(team_params)
     @competition = @team.competition
-    @events = current_user.competition_events_participating(@competition)
+    @events = current_user.participating_competition_events.where(competition: @competition)
     if helpers.in_competition_window?(@team.time_zone)
       create_team
     else
@@ -32,7 +32,7 @@ class TeamsController < ApplicationController
 
   def handle_new
     @team = Team.new
-    @events = current_user.competition_events_participating(@competition)
+    @events = current_user.participating_competition_events.where(competition: @competition)
     return unless @events.empty?
 
     flash[:alert] = 'To create a new team, first register for a competition event.'
