@@ -10,11 +10,6 @@
 
 # Example $ rails db:setup STAGE=PRE_CONNECTION
 
-# TODO: Continue to Intergrate Faker Gem.
-# TODO: More Competiton STAGE options.
-# TODO: Add Roles (not just admin)
-# TODO: File breaks occasionaly on create.
-
 require 'faker'
 
 admin = User.new(email: ENV['SEED_EMAIL'], full_name: ENV['SEED_NAME'],
