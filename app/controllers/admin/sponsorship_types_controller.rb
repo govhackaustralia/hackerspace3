@@ -12,10 +12,6 @@ class Admin::SponsorshipTypesController < ApplicationController
     @sponsorship_type = @competition.sponsorship_types.new
   end
 
-  def edit
-    @sponsorship_type = SponsorshipType.find params[:id]
-  end
-
   def create
     create_new_sponsorship_type
     if @sponsorship_type.save
@@ -25,6 +21,10 @@ class Admin::SponsorshipTypesController < ApplicationController
       flash[:alert] = 'Could not save sponsorship type'
       render :new
     end
+  end
+
+  def edit
+    @sponsorship_type = SponsorshipType.find params[:id]
   end
 
   def update
