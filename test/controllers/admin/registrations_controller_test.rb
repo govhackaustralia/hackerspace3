@@ -39,7 +39,7 @@ class Admin::RegistrationsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'should patch update success' do
-    new_status = VALID_ATTENDANCE_STATUSES.sample
+    new_status = ATTENDING
     patch admin_event_registration_url @event, @registration, params: { registration: { status: new_status } }
     assert_redirected_to admin_event_registrations_url @event
     @registration.reload
