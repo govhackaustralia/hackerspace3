@@ -7,8 +7,13 @@ class SponsorshipTypeTest < ActiveSupport::TestCase
     @sponsorship = Sponsorship.first
   end
 
-  test 'sponsor associations' do
+  test 'sponsorship type associations' do
     assert @sponsorship_type.competition == @competition
     assert @sponsorship_type.sponsorships.include? @sponsorship
+  end
+
+  test 'sponsorship type validations' do
+    assert_not SponsorshipType.new(name: 'example', order: nil).save
+    assert_not SponsorshipType.new(name: nil, order: 1).save
   end
 end

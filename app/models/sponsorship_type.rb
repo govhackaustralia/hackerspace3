@@ -3,6 +3,8 @@ class SponsorshipType < ApplicationRecord
 
   has_many :sponsorships, dependent: :destroy
 
+  validates :name, :order, presence: true
+
   # Reorders the Sponsorship types that have been displaced when the order
   # attribute is changed.
   # ENHANCEMENT: Add to a callback?
