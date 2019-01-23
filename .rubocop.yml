@@ -16,7 +16,6 @@ AllCops:
     - 'app/models/scorecard.rb'
     - 'app/models/bulk_mail.rb'
     - 'app/models/assignment.rb'
-    - 'app/models/challenge.rb'
 
 Style/Documentation:
   Enabled: false

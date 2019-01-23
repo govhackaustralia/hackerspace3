@@ -58,23 +58,24 @@ class Challenge < ApplicationRecord
   require 'csv'
 
   # Compiles a CSV file of all challenges.
-  # ENHANCEMENT: This should be in a helper object somewhere.
+  # ENHANCEMENT: This should be in a helper object or own model.
   def self.to_csv(options = {})
     competition = Competition.current
-    desired_columns = %w[id region_name competition_year name short_desc long_desc eligibility video_url sponsors created_at updated_at]
+    challenge_columns = %w[id name short_desc long_desc eligibility video_url created_at updated_at]
     CSV.generate(options) do |csv|
-      csv << desired_columns
+      csv << (%w[region_name competition_year] + challenge_columns + %w[sponsors])
       all.preload(:region, :sponsors).each do |challenge|
-        values = []
-        values << challenge.id
-        values << challenge.region.name
-        values << competition.year
-        values += [challenge.name, challenge.short_desc, challenge.long_desc, challenge.eligibility, challenge.video_url]
-        values << challenge.sponsors.pluck(:name)
-        values += [challenge.created_at, challenge.updated_at]
-        csv << values
+        csv << challenge_csv_line(challenge, competition, challenge_columns)
       end
     end
+  end
+
+  # Compiles a single entry for the CSV file.
+  # ENHANCEMENT: This should be in a helper object or own model.
+  def self.challenge_csv_line(challenge, competition, challenge_columns)
+    values = [challenge.region.name, competition.year]
+    values += challenge.attributes.values_at(*challenge_columns)
+    values << challenge.sponsors.pluck(:name)
   end
 
   # Assorts challenges in a key value pair object.
@@ -90,9 +91,7 @@ class Challenge < ApplicationRecord
   # Generates a unique name and updates the identifier field.
   def update_identifier
     new_identifier = uri_pritty name
-    if already_there? Challenge, new_identifier, self
-      new_identifier = uri_pritty "#{name}-#{id}"
-    end
+    new_identifier = uri_pritty "#{name}-#{id}" if already_there? Challenge, new_identifier, self
     update_columns identifier: new_identifier
   end
 end
