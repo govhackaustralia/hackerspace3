@@ -128,13 +128,6 @@ class Event < ApplicationRecord
     event_type == COMPETITION_EVENT
   end
 
-  # Updates the identifier column with a unique identifier.
-  def update_identifier
-    new_identifier = uri_pritty("#{name}-#{region.name}")
-    new_identifier = uri_pritty("#{name}-#{region.name}-#{id}") if already_there?(new_identifier)
-    update_columns(identifier: new_identifier)
-  end
-
   # Return a CSV file of event attributes.
   def self.to_csv(options = {})
     desired_columns = %w[id name capacity email twitter address accessibility youth_support parking public_transport operation_hours catering video_id start_time end_time created_at updated_at place_id identifier event_type]
@@ -175,22 +168,10 @@ class Event < ApplicationRecord
 
   private
 
-  # Checks to see if an event identifier is already present before saving it.
-  # ENHANCEMENT: Move to Active Record validations and catch exception.
-  def already_there?(new_identifier)
-    event = Event.find_by(identifier: new_identifier)
-    return false if event.nil?
-    return false if event == self
-
-    true
-  end
-
-  # Converts a string to uri friendly string.
-  # ENHANCEMENT: Check for already implemented solution.
-  def uri_pritty(string)
-    array = string.split(/\W/)
-    words = array - ['']
-    new_name = words.join('_')
-    CGI.escape(new_name.downcase)
+  # Generates a unique name and updates the identifier field.
+  def update_identifier
+    new_identifier = uri_pritty "#{name}-#{region.name}"
+    new_identifier = uri_pritty "#{name}-#{region.name}-#{id}" if already_there? Event, new_identifier, self
+    update_columns identifier: new_identifier
   end
 end

@@ -77,16 +77,8 @@ class Challenge < ApplicationRecord
     end
   end
 
-  # Finds a unique name to update the identifier field.
-  # ENHANCEMENT: This should be in the ApplicationRecord model.
-  def update_identifier
-    new_identifier = uri_pritty(name)
-    new_identifier = uri_pritty("#{name}-#{id}") if already_there?(new_identifier)
-    update_columns(identifier: new_identifier)
-  end
-
   # Assorts challenges in a key value pair object.
-  # ENHANCEMENT: This should be in a Helper.
+  # ENHANCEMENT: Remove and replace with preload()
   def self.id_challenges(challenges)
     id_challenges = {}
     challenges.each { |challenge| id_challenges[challenge.id] = challenge }
@@ -95,22 +87,12 @@ class Challenge < ApplicationRecord
 
   private
 
-  # Determines if an identifier is already in use.
-  # ENHANCEMENT: This should be in the ApplicationRecord model.
-  def already_there?(new_identifier)
-    challenge = Challenge.find_by(identifier: new_identifier)
-    return false if challenge.nil?
-    return false if challenge == self
-
-    true
-  end
-
-  # Converts a string into a uri friendly identifier.
-  # ENHANCEMENT: This should be in the ApplicationRecord model.
-  def uri_pritty(string)
-    array = string.split(/\W/)
-    words = array - ['']
-    new_name = words.join('_')
-    CGI.escape(new_name.downcase)
+  # Generates a unique name and updates the identifier field.
+  def update_identifier
+    new_identifier = uri_pritty name
+    if already_there? Challenge, new_identifier, self
+      new_identifier = uri_pritty "#{name}-#{id}"
+    end
+    update_columns identifier: new_identifier
   end
 end

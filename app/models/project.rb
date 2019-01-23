@@ -16,14 +16,6 @@ class Project < ApplicationRecord
     team.entries.each { |entry| entry.update_eligible(self) }
   end
 
-  # Updates the Project Identifier and checks for uniqueness.
-  # ENHANCEMENT: Should be moved to Team object.
-  def update_identifier
-    new_identifier = uri_pritty(project_name)
-    new_identifier = uri_pritty("#{project_name}-#{team.id}") if already_there?(new_identifier)
-    update_columns(identifier: new_identifier)
-  end
-
   private
 
   # Make the latest proect created the current project.
@@ -31,22 +23,11 @@ class Project < ApplicationRecord
     team.update(current_project: self)
   end
 
-  # Checks to see if an identifier has been taken.
-  # ENHANCEMENT: Move to active record validations.
-  def already_there?(new_identifier)
-    project = Project.find_by(identifier: new_identifier)
-    return false if project.nil?
-    return false if project == self
-
-    true
-  end
-
-  # Remove non URI complient strings.
-  # ENHANCEMENT: Search for standard library.
-  def uri_pritty(string)
-    array = string.split(/\W/)
-    words = array - ['']
-    new_name = words.join('_')
-    CGI.escape(new_name.downcase)
+  # Generates a unique name and updates the identifier field.
+  # ENHANCEMENT: Should be moved to Team object.
+  def update_identifier
+    new_identifier = uri_pritty project_name
+    new_identifier = uri_pritty "#{project_name}-#{team.id}" if already_there? Project, new_identifier, self
+    update_columns identifier: new_identifier
   end
 end
