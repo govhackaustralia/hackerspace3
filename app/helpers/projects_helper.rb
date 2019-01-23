@@ -11,6 +11,8 @@ module ProjectsHelper
     filtered_projects
   end
 
+  private
+
   def search_match(project, term)
     team_name = project.team_name
     project_name = project.project_name
