@@ -1,4 +1,5 @@
 module ApplicationHelper
+  # Convert markdown to HTML.
   def markdown(text)
     options = {
       filter_html: true,
