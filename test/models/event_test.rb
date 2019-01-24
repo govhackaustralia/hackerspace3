@@ -45,7 +45,13 @@ class EventTest < ActiveSupport::TestCase
     assert Event.published.include? @event
     @event.update published: false
     assert Event.published.exclude? @event
+    assert Event.connections.include? @event
     assert Event.competitions.include? @competition_event
+    @event.update event_type: AWARD_EVENT
+    assert Event.awards.include? @event
+    assert Event.locations.include? @competition_event
+    @competition_event.update name: 'Remote Location'
+    assert Event.remotes.include? @competition_event
   end
 
   test 'event validations' do

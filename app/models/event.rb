@@ -32,7 +32,11 @@ class Event < ApplicationRecord
   has_many :outbound_flights, -> { outbound }, class_name: 'Flight'
 
   scope :published, -> { where published: true }
+  scope :connections, -> { where event_type: CONNECTION_EVENT }
   scope :competitions, -> { where event_type: COMPETITION_EVENT }
+  scope :awards, -> { where event_type: AWARD_EVENT }
+  scope :locations, -> { where 'name NOT LIKE ? AND event_type = ?', '%Remote%', COMPETITION_EVENT }
+  scope :remotes, -> { where 'name LIKE ? AND event_type = ?', '%Remote%', COMPETITION_EVENT }
 
   validates :name, :capacity, presence: true
   validates :registration_type, inclusion: { in: EVENT_REGISTRATION_TYPES }
