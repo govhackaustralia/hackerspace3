@@ -3,46 +3,37 @@
 		<h2>Events</h2>
 		<h3>Awards</h3>
 		<section class="events">
-			<% @events.each do |event| %>
-				<% if event.event_type == AWARD_EVENT %>
-				<%= link_to (render partial: "events/event_single", locals: { event: event } ), event_path(event.identifier) %>
-				<% end %>
-			<% end %>
-		</section>
-		<section class="events">
-			<% @events.each do |event| %>
-				<% unless event.end_time.blank? %>
-					<% if event.event_type == CONNECTION_EVENT && DateTime.now.in_time_zone(COMP_TIME_ZONE) < event.end_time %>
-						<%= link_to (render partial: "events/event_single", locals: { event: event } ), event_path(event.identifier) %>
-					<% end %>
+			<% @awards.each do |event| %>
+				<% unless event.end_time.blank? || event.finished? %>
+					<%= link_to (render partial: "events/event_single", locals: { event: event } ), event_path(event.identifier) %>
 				<% end %>
 			<% end %>
 		</section>
 		<h3>Competition Events</h3>
 		<section class="events">
-			<% @events.each do |event| %>
-				<% if event.event_type == COMPETITION_EVENT && event.name.starts_with?("Remote") == false %>
-				<%= link_to (render partial: "events/event_single", locals: { event: event } ), event_path(event.identifier) %>
+			<% @locations.each do |event| %>
+				<% unless event.end_time.blank? || event.finished? %>
+					<%= link_to (render partial: "events/event_single", locals: { event: event } ), event_path(event.identifier) %>
 				<% end %>
 			<% end %>
 		</section>
 		<h3>Remote '<em>Kitchen Table</em>' Competition Events</h3>
 		<section class="events">
-			<% @events.each do |event| %>
-				<% if event.event_type == COMPETITION_EVENT && event.name.starts_with?("Remote") %>
+			<% @remotes.each do |event| %>
+				<% unless event.end_time.blank? || event.finished? %>
 					<%= link_to (render partial: "events/event_single", locals: { event: event } ), event_path(event.identifier) %>
 				<% end %>
 			<% end %>
 		</section>
-		<h3>Previous Connection Events</h3>
+		<h3>Connection Events</h3>
 		<section class="events">
-			<% @events.each do |event| %>
-				<% unless event.end_time.blank? %>
-					<% if event.event_type == CONNECTION_EVENT && event.end_time < DateTime.now.in_time_zone(COMP_TIME_ZONE) %>
+			<section class="events">
+				<% @connections.each do |event| %>
+					<% unless event.end_time.blank? || event.finished? %>
 						<%= link_to (render partial: "events/event_single", locals: { event: event } ), event_path(event.identifier) %>
 					<% end %>
 				<% end %>
-			<% end %>
+			</section>
 		</section>
 	</section>
 </main>

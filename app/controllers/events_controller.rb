@@ -1,6 +1,6 @@
 class EventsController < ApplicationController
   def index
-    @events = retrieve_events
+    retrieve_events
     respond_to do |format|
       format.html
       format.csv { send_data @events.to_csv }
@@ -20,9 +20,19 @@ class EventsController < ApplicationController
   private
 
   def retrieve_events
-    events = Competition.current.events.published.preload(:region).order(start_time: :asc, name: :asc)
-    events = events.where(event_type: params[:event_type]) if params[:event_type].present?
-    events
+    all = Competition.current.events.published.preload(:region).order(start_time: :asc, name: :asc)
+    if params[:event_type].present?
+      @events = all.where(event_type: params[:event_type])
+    else
+      retrieve_all_events(all)
+    end
+  end
+
+  def retrieve_all_events(all)
+    @connections = all.connections
+    @locations = all.locations
+    @remotes = all.remotes
+    @awards = all.awards
   end
 
   def show_event
