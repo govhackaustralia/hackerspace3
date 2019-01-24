@@ -38,4 +38,51 @@ class CompetitionTest < ActiveSupport::TestCase
     competition = Competition.create(year: nil)
     assert_not competition.persisted?
   end
+
+  test 'started?' do
+    @competition.update start_time: Time.now - 1.day
+    assert @competition.started?
+    @competition.update start_time: Time.now + 1.day
+    assert_not @competition.started?
+  end
+
+  test 'not_finished?' do
+    @competition.update end_time: Time.now - 1.day
+    assert_not @competition.not_finished?
+    @competition.update end_time: Time.now + 1.day
+    assert @competition.not_finished?
+  end
+
+  test 'in_window?' do
+    @competition.update start_time: Time.now - 1.day, end_time: Time.now + 1.day
+    assert @competition.in_window?
+    @competition.update end_time: Time.now - 1.hour
+    assert_not @competition.in_window?
+  end
+
+  test 'in_challenge_judging_window?' do
+    @competition.update challenge_judging_start: Time.now - 1.day,
+                        challenge_judging_end: Time.now + 1.day
+    assert @competition.in_challenge_judging_window?
+    @competition.update challenge_judging_end: Time.now - 1.hour
+    assert_not @competition.in_challenge_judging_window?
+  end
+
+  test 'in_peoples_judging_window?' do
+    @competition.update peoples_choice_start: Time.now - 1.day,
+                        peoples_choice_end: Time.now + 1.day
+    assert @competition.in_peoples_judging_window?
+    @competition.update peoples_choice_end: Time.now - 1.hour
+    assert_not @competition.in_peoples_judging_window?
+  end
+
+  test 'either_judging_window_open?' do
+    @competition.update peoples_choice_start: Time.now - 1.day,
+                        peoples_choice_end: Time.now + 1.day,
+                        challenge_judging_start: Time.now - 1.day,
+                        challenge_judging_end: Time.now - 1.hour
+    assert @competition.either_judging_window_open?
+    @competition.update peoples_choice_end: Time.now - 1.hour
+    assert_not @competition.either_judging_window_open?
+  end
 end

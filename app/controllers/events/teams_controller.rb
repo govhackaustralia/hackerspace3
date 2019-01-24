@@ -11,7 +11,7 @@ class Events::TeamsController < ApplicationController
 
   def user_judging
     @peoples_assignment = current_user.peoples_assignment
-    return unless @peoples_assignment.present? && helpers.in_peoples_judging_window?(LAST_TIME_ZONE)
+    return unless @peoples_assignment.present? && @competition.in_peoples_judging_window?(LAST_TIME_ZONE)
     return unless (@judgeable_assignment = current_user.judgeable_assignment).present?
 
     @project_judging = @judgeable_assignment.judgeable_scores(@teams)

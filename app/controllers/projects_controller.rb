@@ -1,8 +1,6 @@
 class ProjectsController < ApplicationController
   def index
-    @competition = Competition.current
-    @teams = @competition.teams.published
-    @projects = @competition.published_projects_by_name.preload(:event)
+    index_variables
     user_records_index if user_signed_in?
     respond_to do |format|
       format.html
@@ -23,6 +21,13 @@ class ProjectsController < ApplicationController
 
   private
 
+  def index_variables
+    @competition = Competition.current
+    @teams = @competition.teams.published
+    @projects = @competition.published_projects_by_name.preload(:event)
+    @region_privileges = user_signed_in? && current_user.region_privileges?
+  end
+
   def show_published
     @competition = Competition.current
     @checkpoints = @competition.checkpoints.order(:end_time)
@@ -33,7 +38,7 @@ class ProjectsController < ApplicationController
 
   def user_records_index
     retrieve_attending_events
-    return unless helpers.in_peoples_judging_window?(LAST_TIME_ZONE)
+    return unless @competition.in_peoples_judging_window? LAST_TIME_ZONE
     return unless (@peoples_assignment = current_user.peoples_assignment).present?
 
     @judgeable_assignment = current_user.judgeable_assignment
@@ -42,7 +47,7 @@ class ProjectsController < ApplicationController
   end
 
   def retrieve_attending_events
-    return unless helpers.competition_not_finished? LAST_TIME_ZONE
+    return unless @competition.not_finished? LAST_TIME_ZONE
 
     @attending_events = current_user.participating_competition_events.where(competition: @competition)
   end

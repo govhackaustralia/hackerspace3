@@ -70,7 +70,7 @@
 				      </article>
 			      <% else %>
 							<% if team.all_checkpoints_passed? %>
-								<% if in_competition_window?(LAST_TIME_ZONE) %>
+								<% if @competition.in_window? LAST_TIME_ZONE %>
 			        		<p>All Checkpoints have passed.</p>
 								<% else %>
 								  <p>No entries to this challenge for this team.</p>
@@ -89,7 +89,7 @@
 
 		<h3>All Team Entries</h3>
 
-		<% if either_judging_window_open?(LAST_TIME_ZONE) %>
+		<% if @competition.either_judging_window_open? LAST_TIME_ZONE %>
 			<% if @teams.present? %>
 				<%= render 'team_judging_table' %>
 			<% else %>

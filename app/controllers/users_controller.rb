@@ -26,6 +26,7 @@ class UsersController < ApplicationController
     @invited_teams = @user.invited_teams.preload(:event, :current_project)
 
     @public_winning_entries = has_public_winning_entries?
+    @region_privileges = user_signed_in? && current_user.region_privileges?
   end
 
   def edit

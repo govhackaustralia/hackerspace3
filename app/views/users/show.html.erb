@@ -81,13 +81,13 @@
 			<% end %>
 		</article>
 
-		<% if (competition_started? || current_user.region_privileges?) && @joined_teams.present? %>
+		<% if competition_started_or_region_privileges? && @joined_teams.present? %>
 			<article>
 				<h3>My Team Projects</h3>
 				<% @joined_teams.each do |team| %>
 					<h4><%= team.current_project.team_name %> - <%= team.current_project.project_name %></h4>
 					<p>Event: <%= team.event.name %></p>
-					<% if competition_not_finished?(team.time_zone) %>
+					<% if @competition.not_finished? team.time_zone %>
 						<p><%= link_to "Manage #{team.name}", team_management_team_path(team) %></p>
 					<% elsif team.published %>
 						<p><%= link_to "Go to #{team.name}", project_path(team.current_project.identifier) %></p>
@@ -98,7 +98,7 @@
 			</article>
 		<% end %>
 
-		<% if (in_competition_window?(LAST_TIME_ZONE) || current_user.region_privileges?) && @invited_teams.present? %>
+		<% if in_competition_window_or_region_privileges?(LAST_TIME_ZONE) && @invited_teams.present? %>
 			<article>
 				<h3>My Invitations</h3>
 				<% @invited_teams.each do |team| %>
@@ -116,7 +116,7 @@
 			</article>
 		<% end %>
 		<article>
-			<% if competition_started? || current_user.region_privileges? %>
+			<% if competition_started_or_region_privileges? %>
 				<h3>My Favourite Projects</h3>
 				<% if @favourite_teams.present? %>
 					<% @favourite_teams.each do |team| %>
