@@ -80,7 +80,7 @@ class Admin::Regions::BulkMailsController < ApplicationController
     @example_project = Project.first
     return unless @bulk_mail.status == PROCESSED
 
-    @id_user_correspondences = Correspondence.id_user_correspondences(@bulk_mail)
+    @correspondences = @bulk_mail.correspondences
   end
 
   def handle_create

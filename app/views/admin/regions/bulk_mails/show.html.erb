@@ -37,7 +37,7 @@
           <td><%= leader.display_name %></td>
           <% @participant_count += 1 %>
           <% if @bulk_mail.status == PROCESSED %>
-            <% correspondence = @id_user_correspondences[leader.id] %>
+            <% correspondence = correspondence_with(leader.id) %>
             <td><%= link_to correspondence.status, admin_bulk_mail_correspondence_path(@bulk_mail, correspondence) %></td>
           <% end %>
         </tr>
@@ -52,7 +52,7 @@
           <td><%= member.display_name %></td>
           <% @participant_count += 1 %>
           <% if @bulk_mail.status == PROCESSED %>
-            <% correspondence = @id_user_correspondences[member.id] %>
+            <% correspondence = correspondence_with(member.id) %>
             <td><%= link_to correspondence.status, admin_bulk_mail_correspondence_path(@bulk_mail, correspondence) %></td>
           <% end %>
         </tr>

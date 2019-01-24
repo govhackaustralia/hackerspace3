@@ -39,7 +39,7 @@ class Admin::Events::BulkMailsController < ApplicationController
     show_helpers
     return unless @bulk_mail.status == PROCESSED
 
-    @id_user_correspondences = Correspondence.id_user_correspondences(@bulk_mail)
+    @correspondences = @bulk_mail.correspondences
   end
 
   private

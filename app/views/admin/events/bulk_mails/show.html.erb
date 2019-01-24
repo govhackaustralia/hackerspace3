@@ -35,7 +35,7 @@
         <td><%= registration.user.display_name %></td>
         <% @participant_count += 1 %>
         <% if @bulk_mail.status == PROCESSED %>
-          <% correspondence = @id_user_correspondences[registration.user.id] %>
+          <% correspondence = correspondence_with(registration.user.id) %>
           <td><%= link_to correspondence.status, admin_bulk_mail_correspondence_path(@bulk_mail, correspondence) %></td>
         <% end %>
       </tr>
