@@ -78,14 +78,6 @@ class Challenge < ApplicationRecord
     values << challenge.sponsors.pluck(:name)
   end
 
-  # Assorts challenges in a key value pair object.
-  # ENHANCEMENT: Remove and replace with preload()
-  def self.id_challenges(challenges)
-    id_challenges = {}
-    challenges.each { |challenge| id_challenges[challenge.id] = challenge }
-    id_challenges
-  end
-
   private
 
   # Generates a unique name and updates the identifier field.
