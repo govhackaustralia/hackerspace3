@@ -1,4 +1,4 @@
-class Admin::Regions::SponsorshipsController < Admin::SponsorshipsController
+class Admin::Regions::SponsorshipsController < ApplicationController
   before_action :authenticate_user!
   before_action :check_for_privileges
 
