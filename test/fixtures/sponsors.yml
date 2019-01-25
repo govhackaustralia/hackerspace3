@@ -8,6 +8,7 @@ one:
   id: 1
   competition_id: 1
   name: Vandelay Industries
+  description: xzzx
 
 #
 two:

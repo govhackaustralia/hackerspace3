@@ -11,16 +11,7 @@ class Sponsor < ApplicationRecord
   validates :name, uniqueness: true
   validates :name, presence: true
 
-  # Returns an array of sponsors matching a given term.
-  # ENHANCEMENT: Move into helper.
-  def self.search(term)
-    results = []
-    Sponsor.all.each do |sponsor|
-      sponsor_string = "#{sponsor.name} #{sponsor.description}".downcase
-      results << sponsor if sponsor_string.include? term.downcase
-    end
-    results
-  end
+  scope :search, ->(term) { where 'name ILIKE ? OR description ILIKE ?', "%#{term}%", "%#{term}%" }
 
   # Returns true if a user is able to see a sponsor's settings.
   # ENHANCEMENT: Move to Controller.

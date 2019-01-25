@@ -24,4 +24,9 @@ class SponsorTest < ActiveSupport::TestCase
     assert_not @sponsor.update name: nil
     assert_not @sponsor.update name: Sponsor.second.name
   end
+
+  test 'sponsor scopes' do
+    assert Sponsor.search(@sponsor.name[0]).include? @sponsor
+    assert Sponsor.search(@sponsor.description[0]).include? @sponsor
+  end
 end
