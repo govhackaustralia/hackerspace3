@@ -13,14 +13,14 @@ class Admin::EventPartnershipsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-  test 'should post create success' do
+  test 'should post create' do
     assert_difference 'EventPartnership.count' do
       post admin_event_event_partnerships_url @event, params: { event_partnership: { sponsor_id: 1 } }
     end
     assert_redirected_to admin_region_event_url @event.region_id, @event
   end
 
-  test 'should post destroy success' do
+  test 'should delete destroy' do
     assert_difference 'EventPartnership.count', -1 do
       delete admin_event_event_partnership_url @event, @event_partnership
     end
