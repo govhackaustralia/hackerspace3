@@ -78,4 +78,9 @@ class TeamTest < ActiveSupport::TestCase
     @team.update published: false
     assert_not Team.published.include? @team
   end
+
+  test 'search' do
+    Team.search('A').include? @team
+    Team.search('x').include? @team
+  end
 end

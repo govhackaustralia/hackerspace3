@@ -152,19 +152,8 @@ class Team < ApplicationRecord
   end
 
   # Search for teams based on a given term.
-  # ENHANCEMENT: move to helpers.
   def self.search(term)
-    team_ids = []
-    Project.all.each do |project|
-      team_name = project.team_name
-      project_name = project.project_name
-      team_string = "#{team_name} #{project_name}".downcase
-      next unless team_string.include? term.downcase
-
-      team_ids << project.team_id
-    end
-    return nil if team_ids.empty?
-
+    team_ids = Project.search(term).pluck(:team_id).uniq
     Team.where(id: team_ids.uniq)
   end
 end
