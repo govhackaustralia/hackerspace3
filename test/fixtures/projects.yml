@@ -8,6 +8,7 @@ one:
   id: 1
   team_id: 1
   team_name: Open Data Team
+  project_name: xxx
   description: An awesome team full of people who work well together.
   data_story: This data tells a story.
   source_code_url:
@@ -20,6 +21,7 @@ two:
   id: 2
   team_id: 1
   team_name: Open Data Team
+  project_name: xxx
   description: An awesome team full of people who work well together. version 2
   data_story: This data tells a story.
   source_code_url:

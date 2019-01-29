@@ -4,6 +4,8 @@ class Project < ApplicationRecord
 
   has_one :event, through: :team
 
+  scope :search, ->(term) { where 'team_name ILIKE ? OR project_name ILIKE ?', "%#{term}%", "%#{term}%" }
+
   validates :team_name, :project_name, presence: true
 
   after_save :update_entries_eligible, :update_identifier
@@ -13,14 +15,14 @@ class Project < ApplicationRecord
   # Updates each of the entries that a team has entered and determines if the
   # team is eligible or ineligible.
   def update_entries_eligible
-    team.entries.each { |entry| entry.update_eligible(self) }
+    team.entries.each { |entry| entry.update_eligible self }
   end
 
   private
 
   # Make the latest proect created the current project.
   def update_team_current_project
-    team.update(current_project: self)
+    team.update current_project: self
   end
 
   # Generates a unique name and updates the identifier field.
