@@ -53,7 +53,7 @@ class Team < ApplicationRecord
   end
 
   # Returns the time_zone from the parent region.
-  # ENHANCEMENT: Move to Helper.
+  # ENHANCEMENT: Remove and replace with preload region.
   def time_zone
     region.time_zone
   end

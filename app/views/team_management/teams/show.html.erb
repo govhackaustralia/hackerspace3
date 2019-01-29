@@ -1,59 +1,59 @@
 <main class="team_page">
+  <h2><%= @current_project.project_name %></h2>
+  <p><strong>Team Name</strong>: <%= @current_project.team_name %></p>
+  <p><strong>Competition Event</strong>: <%= @event.name %></p>
+  <p><strong>Region</strong>: <%= @region.name %></p>
+  <% if @team.published %>
+    <p><%= link_to 'Go to Team Page', project_path(@current_project.identifier) %></p>
+  <% else %>
+    <p>This Project is yet to be published.</p>
+  <% end %>
 
-<h2><%= @current_project.project_name %></h2>
+  <aside>
+    <p><%= link_to 'Update Team Details', edit_team_management_team_path(@team) %></p>
+    <p><%= link_to 'Update Thumbnail', edit_team_management_team_path(@team, thumbnail: true) %></p>
+    <p><%= link_to 'Update High Resolution Image', edit_team_management_team_path(@team, high_res_image: true) %></p>
+  </aside>
 
-<p><strong>Team Name</strong>: <%= @current_project.team_name %></p>
-<p><strong>Competition Event</strong>: <%= @event.name %></p>
-<p><strong>Region</strong>: <%= @region.name %></p>
-<% if @team.published %>
-  <p><%= link_to 'Go to Team Page', project_path(@current_project.identifier) %></p>
-<% else %>
-  This Project is yet to be published.<br>
-<% end %>
+  <h3>Team Project Info</h3>
+  <%= render 'projects/team_project_info' %>
+  <aside>
+    <p><%= link_to 'Update Project Details', edit_team_management_team_project_path(@team, @current_project) %></p>
+  </aside>
 
-<% if competition_closed? %>
-  <strong>Competition Closed No More Edits Possible</strong><br>
-<% else %>
-  <aside><p><%= link_to 'Update Team Details', edit_team_management_team_path(@team) %></p></aside>
-  <p><%= link_to 'Update Thumbnail', edit_team_management_team_path(@team, thumbnail: true) %></p>
-  <p><%= link_to 'Update High Resolution Image', edit_team_management_team_path(@team, high_res_image: true) %></p>
-<% end %>
+  <h3>Team Data Sets</h3>
+  <section>
+    <p>This team currently has <%= pluralize @team.team_data_sets.count, 'data set' %>.</p>
+  </section>
+  <aside>
+    <p><%= link_to 'Manage Team Data Sets', team_management_team_team_data_sets_path(@team) %></p>
+  </aside>
 
-<h3>Team Project Info</h3>
+  <h3>Team Members</h3>
+  <section>
+    <h4>Team Leader</h4>
+    <% if (team_leader = @team.team_leader).present? %>
+      <%= render 'users/user_contact', locals: { user: team_leader } %>
+    <% else %>
+      <p><strong>No team leader assigned for this team.</strong></p>
+    <% end %>
 
-<%= render 'projects/team_project_info' %>
-<aside>
-  <p><%= link_to 'Update Project Details', edit_team_management_team_project_path(@team, @current_project) %></p>
-</aside>
+    <% if (team_members = @team.members).present? %>
+      <p><strong>+ <%= pluralize team_members.count, 'other team member' %>.</strong></p>
+    <% end %>
+    <% if (invitees = @team.invitees).present? %>
+      <p><strong><%= pluralize invitees.count, 'invitee' %>.</strong></p>
+    <% end %>
+  </section>
+  <aside>
+    <p><%= link_to 'Manage Team Members', team_management_team_assignments_path(@team) %></p>
+  </aside>
 
-<h3>Team Data Sets</h3>
-<section>
-<p>This team currently has <%= pluralize @team.team_data_sets.count, 'data set' %>.</p>
-</section>
-<aside><%= link_to 'Manage Team Data Sets', team_management_team_team_data_sets_path(@team) %></aside>
-
-<h3>Team Members</h3>
-<section>
-<h4>Team Leader</h4>
-<% if (team_leader = @team.team_leader).present? %>
-  <%= render 'users/user_contact', locals: { user: team_leader } %>
-<% else %>
-  <p><strong>No team leader assigned for this team.</strong></p>
-<% end %>
-
-<% if (team_members = @team.members).present? %>
-  <p><strong>+ <%= pluralize team_members.count, 'other team member' %>.</strong></p>
-<% end %>
-<% if (invitees = @team.invitees).present? %>
-  <p><strong><%= pluralize invitees.count, 'invitee' %>.</strong></p>
-<% end %>
-</section>
-<aside><p><%= link_to 'Manage Team Members', team_management_team_assignments_path(@team) %></p></aside>
-
-<h3>Challenge Entries</h3><aside>
-  <p><%= link_to 'Manage Team Challenge Entries', team_management_team_entries_path(@team) %></p>
-</aside>
-<section>
-<p><%= pluralize @team.challenges.count, 'challenge' %> entered.</p>
-</section>
+  <h3>Challenge Entries</h3>
+  <aside>
+    <p><%= link_to 'Manage Team Challenge Entries', team_management_team_entries_path(@team) %></p>
+  </aside>
+  <section>
+    <p><%= pluralize @team.challenges.count, 'challenge' %> entered.</p>
+  </section>
 </main>
