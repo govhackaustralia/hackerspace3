@@ -9,7 +9,7 @@ class Admin::TeamsController < ApplicationController
   end
 
   def show
-    @team = Team.find(params[:id])
+    @team = Team.find params[:id]
     @project = @team.current_project
     @projects = @team.projects
     @event = @team.event
@@ -20,8 +20,10 @@ class Admin::TeamsController < ApplicationController
     @available_national_challenges = @team.available_challenges(NATIONAL)
   end
 
+  # ENHANCEMENT: Split into seperate controller.
+  # ENHANCEMENT: Introduce filter params.
   def update
-    @team = Team.find(params[:id])
+    @team = Team.find params[:id]
     if params[:project_id].present?
       handle_update_project
     elsif params[:published].present?
@@ -50,15 +52,15 @@ class Admin::TeamsController < ApplicationController
   end
 
   def handle_update_project
-    @project = Project.find(params[:project_id])
-    @team.update(current_project: @project)
+    @project = Project.find params[:project_id]
+    @team.update current_project: @project
     flash[:notice] = 'Current Project Updated'
-    redirect_to admin_team_project_path(@team, @project)
+    redirect_to admin_team_project_path @team, @project
   end
 
   def handle_update_published
-    @team.update(published: params[:published])
+    @team.update published: params[:published]
     flash[:notice] = 'Team Updated'
-    redirect_to admin_team_path(@team)
+    redirect_to admin_team_path @team
   end
 end
