@@ -4,9 +4,9 @@ class Admin::UsersController < ApplicationController
 
   def index
     @users = if params[:term].blank?
-               User.take(10)
+               User.take 10
              else
-               User.search(params[:term])
+               User.search params[:term]
              end
     respond_to do |format|
       format.html
@@ -14,23 +14,23 @@ class Admin::UsersController < ApplicationController
     end
   end
 
-  def new
-    @user = User.new
+  def show
+    @user = User.find params[:id]
+    @event_assignment = @user.event_assignment
   end
 
-  def show
-    @user = User.find(params[:id])
-    @event_assignment = @user.event_assignment
+  def new
+    @user = User.new
   end
 
   def create
     create_new_unauthed_user
     if @user.save
       flash[:notice] = 'New user saved'
-      redirect_to admin_user_path(@user)
+      redirect_to admin_user_path @user
     else
       flash[:alert] = @user.errors.full_messages.to_sentence
-      render new_admin_user_path(@user)
+      render :new
     end
   end
 
@@ -44,11 +44,12 @@ class Admin::UsersController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:full_name, :email)
+    params.require(:user).permit :full_name, :email
   end
 
+  # ENHANCEMENT: Redo when user auth seperated.
   def create_new_unauthed_user
-    @user = User.new(user_params)
+    @user = User.new user_params
     @user.password = Devise.friendly_token[0, 20]
     @user.skip_confirmation_notification!
   end
