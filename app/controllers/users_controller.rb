@@ -22,7 +22,7 @@ class UsersController < ApplicationController
 
     @favourite_teams = @event_assignment.teams.published.preload(:event, :current_project)
 
-    @joined_teams = @user.joined_teams.preload(:event, :current_project)
+    @joined_teams = @user.joined_teams.preload(:event, :current_project, :region)
     @invited_teams = @user.invited_teams.preload(:event, :current_project)
 
     @public_winning_entries = has_public_winning_entries?

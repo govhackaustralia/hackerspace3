@@ -87,7 +87,7 @@
 				<% @joined_teams.each do |team| %>
 					<h4><%= team.current_project.team_name %> - <%= team.current_project.project_name %></h4>
 					<p>Event: <%= team.event.name %></p>
-					<% if @competition.not_finished? team.time_zone %>
+					<% if @competition.not_finished? team.region.time_zone %>
 						<p><%= link_to "Manage #{team.name}", team_management_team_path(team) %></p>
 					<% elsif team.published %>
 						<p><%= link_to "Go to #{team.name}", project_path(team.current_project.identifier) %></p>
