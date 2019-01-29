@@ -26,12 +26,16 @@ class User < ApplicationRecord
   has_many :participating_events, through: :participating_registrations, source: :event
   has_many :participating_competition_events, -> { competitions }, through: :participating_registrations, source: :event
 
+  scope :search, ->(term) { where 'full_name ILIKE ? OR email ILIKE ? OR preferred_name ILIKE ?', "%#{term}%", "%#{term}%", "%#{term}%" }
+
   # Gravitar Gem
   include Gravtastic
   has_gravatar
 
   # Active Storage prifel image.
   has_one_attached :govhack_img
+
+  # ENHANCEMENT: Need validation to make sure email is fully formed.
 
   # Returns true if a user has any of the privileges (assignments) passed
   # through the parameters.
@@ -121,17 +125,6 @@ class User < ApplicationRecord
   # Returns a user's challenge judging assignment given a challenge.
   def judge_assignment(challenge)
     assignments.judges.find_by assignable: challenge
-  end
-
-  # Searches for a user given a string term.
-  # ENHANCEMENT: Very inefficient.
-  def self.search(term)
-    user_ids = []
-    User.all.each do |user|
-      user_string = "#{user.full_name} #{user.email} #{user.preferred_name}".downcase
-      user_ids << user.id if user_string.include? term.downcase
-    end
-    User.where id: user_ids
   end
 
   # Returns true if a user has no set dietary requirements.

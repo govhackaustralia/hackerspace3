@@ -49,6 +49,10 @@ class UserTest < ActiveSupport::TestCase
     assert_raises(ActiveRecord::RecordNotFound) { @assignment.reload }
   end
 
+  test 'scopes' do
+    assert User.search('one').include? @user
+  end
+
   test 'user validations' do
     # no email don't save
     assert_not User.create(email: nil).save
