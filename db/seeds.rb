@@ -10,6 +10,8 @@
 
 # Example $ rails db:setup STAGE=PRE_CONNECTION
 
+# ENHANCEMENT: Alternate values for user model.
+
 require 'faker'
 
 admin = User.new(email: ENV['SEED_EMAIL'], full_name: ENV['SEED_NAME'],

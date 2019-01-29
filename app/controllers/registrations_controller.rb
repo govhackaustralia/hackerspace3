@@ -20,6 +20,7 @@ class RegistrationsController < ApplicationController
     @outbound_flight = @registration.outbound_flight
   end
 
+  # ENHANCEMENT: Split Group Golden into seperate controller.
   def edit
     @registration = Registration.find(params[:id])
     @event = @registration.event
@@ -30,6 +31,7 @@ class RegistrationsController < ApplicationController
     edit_group_golden
   end
 
+  # ENHANCEMENT: Split Group Golden into seperate controller.
   def update
     if params[:task] == GROUP_GOLDEN
       update_group_golden
