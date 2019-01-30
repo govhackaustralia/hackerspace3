@@ -1,15 +1,11 @@
 class Assignment < ApplicationRecord
   belongs_to :assignable, polymorphic: true
   belongs_to :user
+
   has_many :registrations, dependent: :destroy
   has_many :favourites, dependent: :destroy
   has_many :teams, through: :favourites
   has_many :scorecards, dependent: :destroy
-
-  validates :title, inclusion: { in: VALID_ASSIGNMENT_TITLES }
-  validate :can_only_join_team_if_registered_for_a_competition_event
-
-  after_save :only_one_team_leader
 
   scope :event_hosts, -> { where title: EVENT_HOST }
   scope :event_supports, -> { where title: EVENT_SUPPORT }
@@ -20,6 +16,12 @@ class Assignment < ApplicationRecord
   scope :team_confirmed, -> { where title: [TEAM_LEADER, TEAM_MEMBER] }
   scope :team_participants, -> { where title: [TEAM_LEADER, TEAM_MEMBER, INVITEE] }
   scope :judges, -> { where title: JUDGE }
+  scope :staff, -> { where.not title: [PARTICIPANT, VIP, TEAM_LEADER, TEAM_MEMBER, INVITEE] }
+
+  validates :title, inclusion: { in: VALID_ASSIGNMENT_TITLES }
+  validate :can_only_join_team_if_registered_for_a_competition_event
+
+  after_save :only_one_team_leader
 
   # Callback to ensure that there is only one team leader per team.
   # Will remove longest serving Team Leader and change to Team Member.

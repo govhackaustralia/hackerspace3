@@ -40,6 +40,21 @@ class AssignmentTest < ActiveSupport::TestCase
     assert_raises(ActiveRecord::RecordNotFound) { @registration.reload }
   end
 
+  test 'assignment scopes' do
+    assert Assignment.event_hosts.include? @event_host
+    assert Assignment.event_supports.include? @event_support
+    assert Assignment.participants.include? @participant
+    assert Assignment.team_members.include? @team_member
+    assert Assignment.team_leaders.include? @team_leader
+    assert Assignment.team_invitees.include? @team_invitee
+    assert Assignment.team_confirmed.include? @team_member
+    assert Assignment.team_confirmed.include? @team_leader
+    assert Assignment.team_participants.include? @team_leader
+    assert Assignment.judges.include? @judge
+    assert Assignment.staff.include? @judge
+    assert Assignment.staff.exclude? @team_invitee
+  end
+
   test 'assignment validations' do
     @comp_assignment.destroy
     # No Title
@@ -52,19 +67,6 @@ class AssignmentTest < ActiveSupport::TestCase
     @user.assignments.destroy_all
     assignment = @competition.assignments.create user: @user, title: PARTICIPANT
     assert assignment.persisted?
-  end
-
-  test 'assignment scopes' do
-    assert Assignment.event_hosts.include? @event_host
-    assert Assignment.event_supports.include? @event_support
-    assert Assignment.participants.include? @participant
-    assert Assignment.team_members.include? @team_member
-    assert Assignment.team_leaders.include? @team_leader
-    assert Assignment.team_invitees.include? @team_invitee
-    assert Assignment.team_confirmed.include? @team_member
-    assert Assignment.team_confirmed.include? @team_leader
-    assert Assignment.team_participants.include? @team_leader
-    assert Assignment.judges.include? @judge
   end
 
   test 'team validations' do
