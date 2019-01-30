@@ -31,10 +31,12 @@
   <% if (invitees = @team.invitees).present? %>
     <h3>Invitees</h3>
     <% invitees.each do |invitee| %>
-      <%= render 'users/user_contact', locals: { user: invitee } %>
-      <% assignment = Assignment.find_by(assignable: @team, user: invitee) %>
-      <%= link_to 'Remove Invitee', team_management_team_assignment_path(@team, assignment),
-       method: :delete, data: { confirm: 'Are you sure?' } %>
+      <section>
+        <%= render 'users/user_contact', locals: { user: invitee } %>
+        <% assignment = Assignment.find_by(assignable: @team, user: invitee) %>
+        <%= link_to 'Remove Invitee', team_management_team_assignment_path(@team, assignment),
+         method: :delete, data: { confirm: 'Are you sure?' } %>
+       </section>
     <% end %>
   <% end %>
 
