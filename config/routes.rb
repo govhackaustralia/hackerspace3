@@ -87,6 +87,7 @@ Rails.application.routes.draw do
       resources :flights, except: :show, controller: 'events/flights'
       resources :bulk_mails, except: :destroy, controller: 'events/bulk_mails'
       resources :group_golden_tickets, only: [:new, :create], controller: 'events/group_golden_tickets'
+      resources :staff_flights, only: [:new, :create], controller: 'events/staff_flights'
     end
 
     resources :teams, only: [:index, :show, :update] do

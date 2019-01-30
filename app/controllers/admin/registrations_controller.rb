@@ -12,14 +12,9 @@ class Admin::RegistrationsController < ApplicationController
   end
 
   def new
-    new_registration
-    return if params[:term].blank?
-
-    if params[:type] == STAFF
-      new_staff
-    else
-      new_normal
-    end
+    @event = Event.find(params[:event_id])
+    @registration = @event.registrations.new
+    search_for_users unless params[:term].blank?
   end
 
   def create
@@ -60,6 +55,12 @@ class Admin::RegistrationsController < ApplicationController
     params.require(:registration).permit(:status)
   end
 
+  def search_for_users
+    @user = User.find_by_email(params[:term])
+    user_found if @user.present?
+    search_other_fields unless @user.present?
+  end
+
   def create_error
     flash.now[:alert] = @registration.errors.full_messages.to_sentence
     @user = @assignment.user
@@ -76,17 +77,6 @@ class Admin::RegistrationsController < ApplicationController
     render :edit
   end
 
-  def new_staff
-    @assignment = Assignment.find(params[:term]) unless params[:term].to_i.zero?
-    @user = @assignment.user unless @assignment.nil?
-    complete_new_staff
-  end
-
-  def complete_new_staff
-    search_other_fields unless @user.present?
-    staff_found if @user.present?
-  end
-
   def check_for_privileges
     return if current_user.event_privileges?
 
@@ -94,23 +84,10 @@ class Admin::RegistrationsController < ApplicationController
     redirect_to root_path
   end
 
-  def new_registration
-    @event = Event.find(params[:event_id])
-    @registration = @event.registrations.new
-  end
-
-  def new_normal
-    @user = User.find_by_email(params[:term])
-    user_found if @user.present?
-    search_other_fields unless @user.present?
-  end
-
   # ENHANCEMENT: Break into seperate controllers.
   def create_new_registration
     if params[:type] == INDIVIDUAL_GOLDEN
       create_individual_golden
-    elsif params[:type] == STAFF
-      create_staff
     else
       create_normal
     end
@@ -120,11 +97,6 @@ class Admin::RegistrationsController < ApplicationController
   def create_individual_golden
     user = User.find(params[:user_id])
     @assignment = Assignment.find_or_create_by(user: user, title: GOLDEN_TICKET, assignable: Competition.current)
-    @registration = @event.registrations.new(status: INVITED)
-  end
-
-  def create_staff
-    @assignment = Assignment.find(params[:assignment_id])
     @registration = @event.registrations.new(status: INVITED)
   end
 
@@ -141,10 +113,6 @@ class Admin::RegistrationsController < ApplicationController
   def user_found
     @existing_registration = @user.registrations.find_by(event: @event)
     @event_assignment = @user.event_assignment
-  end
-
-  def staff_found
-    @existing_registration = Registration.find_by(assignment: @assignment, event: @event)
   end
 
   def search_other_fields
