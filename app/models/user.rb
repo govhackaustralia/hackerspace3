@@ -26,6 +26,8 @@ class User < ApplicationRecord
   has_many :participating_events, through: :participating_registrations, source: :event
   has_many :participating_competition_events, -> { competitions }, through: :participating_registrations, source: :event
 
+  has_many :staff_assignments, -> { staff }, class_name: 'Assignment'
+
   scope :search, ->(term) { where 'full_name ILIKE ? OR email ILIKE ? OR preferred_name ILIKE ?', "%#{term}%", "%#{term}%", "%#{term}%" }
 
   # Gravitar Gem

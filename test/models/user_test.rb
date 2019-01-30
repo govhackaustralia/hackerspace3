@@ -20,6 +20,8 @@ class UserTest < ActiveSupport::TestCase
     @competition_registration = Registration.third
     @participating_event = Event.first
     @competition_event = Event.second
+    @staff_assignment = @assignment
+    @participant_assignment = Assignment.fourth
   end
 
   test 'user associations' do
@@ -44,6 +46,9 @@ class UserTest < ActiveSupport::TestCase
     assert @user.participating_registrations.include? @competition_registration
     assert @user.participating_events.include? @participating_event
     assert @user.participating_competition_events.include? @competition_event
+
+    assert @user.staff_assignments.include? @staff_assignment
+    assert @user.staff_assignments.exclude? @participant_assignment
 
     @user.destroy
     assert_raises(ActiveRecord::RecordNotFound) { @assignment.reload }
