@@ -15,7 +15,6 @@ AllCops:
     - 'app/controllers/users_controller.rb'
     - 'app/models/scorecard.rb'
     - 'app/models/bulk_mail.rb'
-    - 'app/models/assignment.rb'
 
 Style/Documentation:
   Enabled: false

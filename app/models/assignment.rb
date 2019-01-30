@@ -48,43 +48,8 @@ class Assignment < ApplicationRecord
 
   # Returns object for a particular judgeable assignment showing the status of
   # each of the potential teams to be judged.
-  # ENHANCEMENT: This should be in the helpers.
+  # ENHANCEMENT: One line, remove to where it is called.
   def judgeable_scores(teams)
-    team_id_to_scorecard = {}
-    if title == JUDGE
-      entries = Entry.where(team: teams, challenge: assignable)
-      team_scorecards = scorecards.where(judgeable: entries)
-      id_to_entry = {}
-      entries.each { |entry| id_to_entry[entry.id] = entry }
-      team_scorecards.each do |scorecard|
-        entry = id_to_entry[scorecard.judgeable_id]
-        team_id_to_scorecard[entry.team_id] = scorecard
-      end
-    else
-      user_team_ids = user.teams.pluck(:id)
-      team_scorecards = scorecards.where(judgeable: teams)
-      team_scorecards.each { |scorecard| team_id_to_scorecard[scorecard.judgeable_id] = scorecard }
-    end
-
-    scorecard_id_to_scores = {}
-    team_scorecards.each { |scorecard| scorecard_id_to_scores[scorecard.id] = [] }
-
-    judgments = Judgment.where(scorecard: team_scorecards)
-    judgments.each { |judgment| scorecard_id_to_scores[judgment.scorecard_id] << judgment.score }
-
-    judgeable_scores_obj = {}
-    teams.each do |team|
-      verdict = if title != JUDGE && user_team_ids.include?(team.id)
-                  'Your Team'
-                elsif (scorecard = team_id_to_scorecard[team.id]).nil?
-                  'Not Marked'
-                elsif (scores = scorecard_id_to_scores[scorecard.id]).include? nil
-                  'Incomplete'
-                else
-                  scores.sum
-                end
-      judgeable_scores_obj[team.id] = { display_score_status: verdict }
-    end
-    judgeable_scores_obj
+    JudgeableScores.new(self, teams).compile
   end
 end
