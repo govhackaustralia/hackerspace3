@@ -59,14 +59,19 @@ class BulkMail < ApplicationRecord
     return if teams.empty?
 
     team_orders.preload(team: %i[leaders members current_project]).each do |team_order|
-      next if team_order.request_type == NONE
-
-      project = team_order.team.current_project
-      prepare_and_send(team_order.team.leaders, project, team_order)
-      next if team_order.request_type == LEADER_ONLY
-
-      prepare_and_send(team_order.team.members, project, team_order)
+      team_prepare_and_send(team_order)
     end
+  end
+
+  # Prepare and send e-mails for team orders.
+  def team_prepare_and_send(team_order)
+    return if team_order.request_type == NONE
+
+    project = team_order.team.current_project
+    prepare_and_send(team_order.team.leaders, project, team_order)
+    return if team_order.request_type == LEADER_ONLY
+
+    prepare_and_send(team_order.team.members, project, team_order)
   end
 
   # Process User Orders (If there are any)
@@ -76,16 +81,21 @@ class BulkMail < ApplicationRecord
     return if user_order.nil?
 
     user_order.registrations(mailable).preload(:user).each do |registration|
-      next unless registration.user.me_govhack_contact
-
-      email_body = BulkMail.correspondence_body(body, registration.user)
-      correspondence = user_order.correspondences.create(user: registration.user, body: email_body, status: PENDING)
-      BulkMailer.participant_email(self, correspondence, registration.user).deliver_now
-      correspondence.update(status: SENT)
+      user_prepare_and_send(registration)
     end
   end
 
-  # Send emails for team orders.
+  # Prepare and send e-mails for user orders.
+  def user_prepare_and_send(registration)
+    return unless registration.user.me_govhack_contact
+
+    email_body = BulkMail.correspondence_body(body, registration.user)
+    correspondence = user_order.correspondences.create(user: registration.user, body: email_body, status: PENDING)
+    BulkMailer.participant_email(self, correspondence, registration.user).deliver_now
+    correspondence.update(status: SENT)
+  end
+
+  # Send emails for orders.
   # ENHANCEMENT: Should be moved else where.
   def prepare_and_send(users, project, team_order)
     users.each do |user|

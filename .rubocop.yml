@@ -14,7 +14,6 @@ AllCops:
     - 'app/helpers/application_helper.rb'
     - 'app/controllers/users_controller.rb'
     - 'app/models/scorecard.rb'
-    - 'app/models/bulk_mail.rb'
 
 Style/Documentation:
   Enabled: false
