@@ -84,28 +84,9 @@ class Admin::RegistrationsController < ApplicationController
     redirect_to root_path
   end
 
-  # ENHANCEMENT: Break into seperate controllers.
   def create_new_registration
-    if params[:type] == INDIVIDUAL_GOLDEN
-      create_individual_golden
-    else
-      create_normal
-    end
-    finish_create
-  end
-
-  def create_individual_golden
-    user = User.find(params[:user_id])
-    @assignment = Assignment.find_or_create_by(user: user, title: GOLDEN_TICKET, assignable: Competition.current)
-    @registration = @event.registrations.new(status: INVITED)
-  end
-
-  def create_normal
     @assignment = Assignment.find(params[:assignment_id])
     @registration = @event.registrations.new(registration_params)
-  end
-
-  def finish_create
     @registration.update(assignment: @assignment)
     @registration.update(time_notified: Time.now.in_time_zone(COMP_TIME_ZONE))
   end
