@@ -62,7 +62,7 @@
 <p><%= link_to 'New Registration', new_admin_event_registration_path(@event) %></p>
 <% if @region.national? && @event.event_type == AWARD_EVENT %>
 	<p><%= link_to 'New Individual Golden Ticket', new_admin_event_individual_golden_path(@event) %></p>
-	<p><%= link_to 'New Group Golden Ticket', new_admin_event_group_golden_ticket_path(@event) %></p>
+	<p><%= link_to 'New Group Golden Ticket', new_admin_event_group_golden_path(@event) %></p>
 	<p><%= link_to 'New Staff Flight Registration', new_admin_event_staff_flight_path(@event) %></p>
 <% end %>
 <p><%= link_to "Back to #{@event.name} Event", admin_region_event_path(@region, @event) %></p>

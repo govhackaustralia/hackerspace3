@@ -1,17 +1,17 @@
-class Admin::Events::GroupGoldenTicketsController < ApplicationController
+class Admin::Events::GroupGoldensController < ApplicationController
   before_action :authenticate_user!
   before_action :check_for_privileges
 
   def new
     @event = Event.find params[:event_id]
-    @team = Team.find_by(id: params[:term])
+    @team = Team.find_by id: params[:term]
     team_found if @team.present?
     search_other_fields_team unless @team.present?
   end
 
   def create
     @event = Event.find params[:event_id]
-    @registration = @event.registrations.new(registration_params)
+    @registration = @event.registrations.new registration_params
     @registration.status = INVITED
     @registration.time_notified = Time.now.in_time_zone COMP_TIME_ZONE
     if @registration.save

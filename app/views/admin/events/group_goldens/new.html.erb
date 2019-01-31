@@ -1,7 +1,7 @@
 <main class="team_page">
   <h2>Add New Group Golden Ticket Registration</h2>
 
-  <%= form_tag new_admin_event_group_golden_ticket_path, method: :get do %>
+  <%= form_tag new_admin_event_group_golden_path, method: :get do %>
     <%= search_field_tag :term, params[:term] %>
     <%= submit_tag 'Search' %>
   <% end %>
@@ -15,7 +15,7 @@
         <p>Golden Ticket Registration for <%= @user.full_name %> already exists for <%= @project.team_name %>.</p>
         <p><%= link_to 'Update Registration', edit_admin_event_registration_path(@event, @existing_registration) %></p>
       <% else %>
-        <p><%= link_to 'Assign Group Golden Ticket', admin_event_group_golden_tickets_path(@event, registration: { assignment_id: @leader_assignment.id }), method: :post %></p>
+        <p><%= link_to 'Assign Group Golden Ticket', admin_event_group_goldens_path(@event, registration: { assignment_id: @leader_assignment.id }), method: :post %></p>
       <% end %>
     <% else %>
       <p>No team leader assigned for this team.</p>
@@ -25,7 +25,7 @@
 
     <% @teams.each do |team| %>
       <h3><%= team.current_project.team_name %> | <%= team.current_project.project_name %></h3>
-      <p><%= link_to 'Select', new_admin_event_group_golden_ticket_path(@event, term: team.id) %></p>
+      <p><%= link_to 'Select', new_admin_event_group_golden_path(@event, term: team.id) %></p>
     <% end %>
 
   <% elsif params[:term].present? %>
