@@ -2,6 +2,7 @@ class Admin::RegistrationsController < ApplicationController
   before_action :authenticate_user!
   before_action :check_for_privileges
 
+  # ENHANCEMENT: Rearrange columns in table.
   def index
     @event = Event.find params[:event_id]
     @region = @event.region
@@ -12,7 +13,7 @@ class Admin::RegistrationsController < ApplicationController
   end
 
   def new
-    @event = Event.find(params[:event_id])
+    @event = Event.find params[:event_id]
     @registration = @event.registrations.new
     search_for_users unless params[:term].blank?
   end
@@ -50,19 +51,23 @@ class Admin::RegistrationsController < ApplicationController
 
   private
 
-  # ENHANCEMENT: Add assignment_id to registration_params
   def registration_params
-    params.require(:registration).permit(:status)
+    params.require(:registration).permit :status, :assignment_id
   end
 
   def search_for_users
-    @user = User.find_by_email(params[:term])
-    user_found if @user.present?
-    search_other_fields unless @user.present?
+    @user = User.find_by_email params[:term]
+    if @user.present?
+      @existing_registration = @user.registrations.find_by event: @event
+      @event_assignment = @user.event_assignment
+    else
+      @users = User.search(params[:term]).preload :assignments
+    end
   end
 
   def create_error
     flash.now[:alert] = @registration.errors.full_messages.to_sentence
+    @assignment = @registration.assignment
     @user = @assignment.user
     @event_assignment = @user.event_assignment
     render :new
@@ -85,19 +90,8 @@ class Admin::RegistrationsController < ApplicationController
   end
 
   def create_new_registration
-    @assignment = Assignment.find(params[:assignment_id])
-    @registration = @event.registrations.new(registration_params)
-    @registration.update(assignment: @assignment)
-    @registration.update(time_notified: Time.now.in_time_zone(COMP_TIME_ZONE))
-  end
-
-  def user_found
-    @existing_registration = @user.registrations.find_by(event: @event)
-    @event_assignment = @user.event_assignment
-  end
-
-  def search_other_fields
-    @users = User.search(params[:term]).preload :assignments
+    @registration = @event.registrations.new registration_params
+    @registration.time_notified = Time.now.in_time_zone COMP_TIME_ZONE
   end
 
   def update_registration

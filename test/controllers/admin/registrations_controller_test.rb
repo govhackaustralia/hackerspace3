@@ -5,6 +5,7 @@ class Admin::RegistrationsControllerTest < ActionDispatch::IntegrationTest
     sign_in users(:one)
     @event = Event.first
     @registration = Registration.first
+    @user = User.first
   end
 
   test 'should get index' do
@@ -15,12 +16,18 @@ class Admin::RegistrationsControllerTest < ActionDispatch::IntegrationTest
   test 'should get new' do
     get new_admin_event_registration_url @event
     assert_response :success
+    get new_admin_event_registration_url @event, term: 'x'
+    assert_response :success
+    get new_admin_event_registration_url @event, term: 'open'
+    assert_response :success
+    get new_admin_event_registration_url @event, term: @user.email
+    assert_response :success
   end
 
   test 'should post create success' do
     Registration.destroy_all
     assert_difference 'Registration.count' do
-      post admin_event_registrations_url @event, params: { registration: { status: VALID_ATTENDANCE_STATUSES.sample }, assignment_id: 4 }
+      post admin_event_registrations_url @event, params: { registration: { status: VALID_ATTENDANCE_STATUSES.sample, assignment_id: 4 } }
     end
     assert_redirected_to admin_event_registrations_url @event
   end
@@ -28,7 +35,7 @@ class Admin::RegistrationsControllerTest < ActionDispatch::IntegrationTest
   test 'should post create fail' do
     Registration.destroy_all
     assert_no_difference 'Registration.count' do
-      post admin_event_registrations_url @event, params: { registration: { status: 'test' }, assignment_id: 4 }
+      post admin_event_registrations_url @event, params: { registration: { status: 'test', assignment_id: 4 } }
     end
     assert_response :success
   end
