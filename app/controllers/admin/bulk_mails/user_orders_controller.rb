@@ -6,7 +6,7 @@ class Admin::BulkMails::UserOrdersController < ApplicationController
     @user_order = UserOrder.find(params[:id])
     @bulk_mail = @user_order.bulk_mail
     @mailable =  @bulk_mail.mailable
-    @user_order.update(user_order_params)
+    @user_order.update user_order_params
     if @user_order.save
       flash[:notice] = 'Order Updated'
     else
@@ -18,7 +18,7 @@ class Admin::BulkMails::UserOrdersController < ApplicationController
   private
 
   def user_order_params
-    params.require(:user_order).permit(:request_type)
+    params.require(:user_order).permit :request_type
   end
 
   def check_for_privileges
