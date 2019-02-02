@@ -3,7 +3,9 @@ class Challenge < ApplicationRecord
   belongs_to :region
 
   has_many :assignments, as: :assignable, dependent: :destroy
+  # ENHANCEMENT: Remove either users or judges association.
   has_many :users, through: :assignments
+  has_many :judges, through: :assignments, source: :user
   has_many :entries, dependent: :destroy
   has_many :teams, through: :entries
   has_many :published_teams, -> { published }, through: :entries, source: :team
@@ -17,7 +19,7 @@ class Challenge < ApplicationRecord
   has_one_attached :pdf
   has_one_attached :pdf_preview
 
-  scope :approved, -> { where(approved: true) }
+  scope :approved, -> { where approved: true }
 
   validates :name, presence: true, uniqueness: true
 
