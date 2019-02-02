@@ -21,6 +21,8 @@ class Assignment < ApplicationRecord
   validates :title, inclusion: { in: VALID_ASSIGNMENT_TITLES }
   validate :can_only_join_team_if_registered_for_a_competition_event
 
+  # ENHANCEMENT: Validation to prevent assignment duplicates.
+
   after_save :only_one_team_leader
 
   # Callback to ensure that there is only one team leader per team.

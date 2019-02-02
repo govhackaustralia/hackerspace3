@@ -76,7 +76,7 @@ Rails.application.routes.draw do
     resources :challenges, only: [] do
       resources :challenge_sponsorships, only: [:new, :create, :destroy]
       resources :challenge_data_sets, only: [:new, :create, :destroy], controller: 'challenges/challenge_data_sets'
-      resources :assignments, only: [:new, :create], controller: 'challenges/assignments'
+      resources :judges, only: [:new, :create], controller: 'challenges/judges'
       resources :entries, only: [:index, :edit, :update], controller: 'challenges/entries'
     end
 

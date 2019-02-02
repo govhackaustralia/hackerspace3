@@ -3,24 +3,25 @@ class Admin::Regions::ChallengesController < ApplicationController
   before_action :check_for_privileges
 
   def index
-    @region = Region.find(params[:region_id])
+    @region = Region.find params[:region_id]
     @challenges = @region.challenges
   end
 
   def show
-    @region = Region.find(params[:region_id])
-    @challenge = Challenge.find(params[:id])
+    @region = Region.find params[:region_id]
+    @challenge = Challenge.find params[:id]
     @challenge_sponsorships = @challenge.challenge_sponsorships
     @challenge_data_sets = @challenge.challenge_data_sets
+    @judges = @challenge.judges
   end
 
   def new
-    @region = Region.find(params[:region_id])
+    @region = Region.find params[:region_id]
     @challenge = @region.challenges.new
   end
 
   def edit
-    @region = Region.find(params[:region_id])
+    @region = Region.find params[:region_id]
     @challenge = Challenge.find(params[:id])
   end
 
