@@ -1,0 +1,19 @@
+<main class="team_page">
+  <h2>Update <%= @sponsor.name %> Logo</h2>
+  <%= form_for @sponsor, url: admin_sponsor_logo_path(@sponsor) do |form| %>
+    <% if @sponsor.logo.attached? %>
+      <img src="<%= url_for(@sponsor.logo) %>" alt="<%= "#{@sponsor.name} logo" %>" /><br>
+    <% else %>
+      <%= image_tag "default_profile_pic.png" %><br>
+    <% end %>
+
+    <%= form.label :logo, 'Upload a New Logo (only png/gif/jpeg/jpg)' %><br>
+    <%= form.file_field :logo, accept: 'image/png,image/gif,image/jpeg' %><br>
+    <% if @sponsor.logo.attached? %>
+      <%= form.submit 'Replace Logo' %>
+    <% else %>
+      <%= form.submit 'Upload Logo' %>
+    <% end %>
+  <% end %>
+  <p><%= link_to 'Back to Sponsor', admin_sponsor_path(@sponsor) %></p>
+</main>

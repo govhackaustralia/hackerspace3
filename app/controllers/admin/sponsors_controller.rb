@@ -27,12 +27,12 @@ class Admin::SponsorsController < ApplicationController
   end
 
   def edit
-    @sponsor = Sponsor.find(params[:id])
+    @sponsor = Sponsor.find params[:id]
   end
 
   def update
-    @sponsor = Sponsor.find(params[:id])
-    @sponsor.update(sponsor_params) if params[:sponsor].present?
+    @sponsor = Sponsor.find params[:id]
+    @sponsor.update(sponsor_params)
     handle_update
   end
 
@@ -46,7 +46,7 @@ class Admin::SponsorsController < ApplicationController
   private
 
   def sponsor_params
-    params.require(:sponsor).permit(:name, :description, :logo, :website)
+    params.require(:sponsor).permit :name, :description, :website
   end
 
   def check_for_privileges
@@ -58,21 +58,11 @@ class Admin::SponsorsController < ApplicationController
 
   def handle_update
     if @sponsor.save
-      handle_update_success
+      flash[:notice] = 'Sponsor Updated'
+      redirect_to admin_sponsor_path @sponsor
     else
       flash[:alert] = @sponsor.errors.full_messages.to_sentence
       render :edit
-    end
-  end
-
-  # ENHANCEMENT: Break this up into separate controllers.
-  def handle_update_success
-    if params[:logo].present?
-      flash[:notice] = 'Logo Uploaded'
-      render :edit, logo: true
-    else
-      flash[:notice] = 'Sponsor Updated'
-      redirect_to admin_sponsor_path @sponsor
     end
   end
 end

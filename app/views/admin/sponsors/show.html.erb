@@ -1,11 +1,11 @@
 <main class="team_page">
   <h2><%= @sponsor.name %></h2>
   <% if @sponsor.logo.attached? %>
-    <img src="<%= url_for(@sponsor.logo) %>" alt="<%= @sponsor.name %> logo" /><br>
+    <img src="<%= url_for @sponsor.logo %>" alt="<%= @sponsor.name %> logo" /><br>
   <% else %>
     <%= image_tag "default_profile_pic.png" %><br>
   <% end %>
-  <%= link_to 'Change Logo', edit_admin_sponsor_path(@sponsor, logo: true) %><br>
+  <p><%= link_to 'Change Logo', edit_admin_sponsor_logo_path(@sponsor) %></p>
 
   <% if current_user.sponsor_privileges? %>
     <%= link_to 'Destroy Sponsor', admin_sponsor_path(@sponsor),

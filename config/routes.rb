@@ -42,7 +42,7 @@ Rails.application.routes.draw do
   end
 
   namespace :admin do
-    resources :sponsors
+    resources :sponsor_logos, only: [:edit, :update]
     resources :sponsorship_types, except: [:show, :destroy]
     resources :event_partnerships, only: [:new, :create, :destroy]
     resources :teams, only: [:index, :show, :update]
