@@ -45,6 +45,14 @@ class EventTest < ActiveSupport::TestCase
     assert Event.published.include? @event
     @event.update published: false
     assert Event.published.exclude? @event
+    @event.update start_time: Time.now.in_time_zone(COMP_TIME_ZONE) - 1.week,
+                  end_time: Time.now.in_time_zone(COMP_TIME_ZONE) - 1.week
+    assert Event.past.include? @event
+    assert Event.future.exclude? @event
+    @event.update start_time: Time.now.in_time_zone(COMP_TIME_ZONE) + 1.week,
+                  end_time: Time.now.in_time_zone(COMP_TIME_ZONE) + 1.week
+    assert Event.future.include? @event
+    assert Event.past.exclude? @event
     assert Event.connections.include? @event
     assert Event.competitions.include? @competition_event
     @event.update event_type: AWARD_EVENT

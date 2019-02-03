@@ -32,6 +32,8 @@ class Event < ApplicationRecord
   has_many :outbound_flights, -> { outbound }, class_name: 'Flight'
 
   scope :published, -> { where published: true }
+  scope :past, -> { where 'end_time < ?', Time.now.in_time_zone(COMP_TIME_ZONE) }
+  scope :future, -> { where 'start_time > ?', Time.now.in_time_zone(COMP_TIME_ZONE) }
   scope :connections, -> { where event_type: CONNECTION_EVENT }
   scope :competitions, -> { where event_type: COMPETITION_EVENT }
   scope :awards, -> { where event_type: AWARD_EVENT }
