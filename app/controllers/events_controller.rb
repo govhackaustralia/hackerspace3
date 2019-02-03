@@ -1,4 +1,5 @@
 class EventsController < ApplicationController
+  # ENHANCEMENT: Reduce duplication in view.
   def index
     retrieve_events
     respond_to do |format|
@@ -19,20 +20,28 @@ class EventsController < ApplicationController
 
   private
 
+  # ENHANCEMENT: Split into other controllers.
   def retrieve_events
     all = Competition.current.events.published.preload(:region).order(start_time: :asc, name: :asc)
     if params[:event_type].present?
       @events = all.where(event_type: params[:event_type])
     else
-      retrieve_all_events(all)
+      retrieve_all_future_events(all)
+      retrive_all_past_events(all)
     end
   end
 
-  def retrieve_all_events(all)
-    @connections = all.connections
-    @locations = all.locations
-    @remotes = all.remotes
-    @awards = all.awards
+  def retrieve_all_future_events(all)
+    @future_connections = all.connections.future
+    @future_locations = all.locations.future
+    @future_remotes = all.remotes.future
+    @future_awards = all.awards.future
+  end
+
+  def retrive_all_past_events(all)
+    @past_connections = all.connections.past
+    @past_competitions = all.competitions.past
+    @past_awards = all.awards.past
   end
 
   def show_event
