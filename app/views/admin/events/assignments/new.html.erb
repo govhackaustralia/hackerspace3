@@ -1,17 +1,17 @@
 <main class="team_page">
   <h2>Add New Assignment to <%= @assignable.name %> <%= @assignable.class.to_s %></h2>
 
-  <%= form_tag(new_admin_event_assignment_path, method: :get) do %>
+  <%= form_tag new_admin_event_assignment_path, method: :get do %>
     <%= search_field_tag :term, params[:term] %>
-    <%= hidden_field_tag(:title, @title) %>
+    <%= hidden_field_tag :title, @title %>
     <%= submit_tag 'Search' %>
-  <% end %><br>
+  <% end %>
 
-  <% if @user.present? # User found show create new assignment for %>
+  <% if @user.present? %>
 
     <%= render 'admin/shared/user_contact', locals: { user: @user } %>
 
-    <% unless @existing_registration.present? # check for existing registration %>
+    <% unless @existing_registration.present? %>
 
       <%= form_for [:admin, @assignable, @assignment] do |f| %>
         <%= hidden_field_tag(:user_id, @user.id) %>
@@ -20,25 +20,25 @@
       <% end %>
 
     <% else %>
-      Assignment for <%= @user.full_name %> to <%= @assignable.name %> as <%= @title %> already exists.<br>
+      <p>Assignment for <%= @user.full_name %> to <%= @assignable.name %> as <%= @title %> already exists.</p>
     <% end %>
 
-  <% elsif @users.present? # Review search results %>
+  <% elsif @users.present? %>
 
     <% @users.each do |user| %>
       <%= render 'admin/shared/user_contact', locals: { user: user } %>
-      <%= link_to 'Select', new_admin_event_assignment_path(@assignable, title: @title, term: user.email) %><br>
+      <p><%= link_to 'Select', new_admin_event_assignment_path(@assignable, title: @title, term: user.email) %></p>
     <% end %>
 
-  <% elsif params[:term].present? # Could not find anything. %>
+  <% elsif params[:term].present? %>
 
-    Apologies, no name matching search term '<%= params[:term] %>'<br>
+    <p>Apologies, no name matching search term '<%= params[:term] %>'</p>
 
-  <% else # No search term entered / first visit to page %>
+  <% else %>
 
-    Please enter an email address or name to search for a user.<br>
+    <p>Please enter an email address or name to search for a user.</p>
 
   <% end %>
 
-  <%= link_to "Back to #{@assignable.name} #{@assignable.class.to_s} Assignments", admin_event_assignments_path(@assignable) %>
+  <p><%= link_to "Back to #{@assignable.name} #{@assignable.class.to_s} Assignments", admin_event_assignments_path(@assignable) %></p>
 </main>
