@@ -1,7 +1,13 @@
 require 'test_helper'
 
 class Admin::Competitions::ScorecardsControllerTest < ActionDispatch::IntegrationTest
-  # test "the truth" do
-  #   assert true
-  # end
+  setup do
+    sign_in users :one
+    @competition = Competition.first
+  end
+
+  test 'should get index' do
+    get admin_competition_scorecards_url @competition
+    assert_response :success
+  end
 end
