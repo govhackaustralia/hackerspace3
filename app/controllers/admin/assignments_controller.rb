@@ -47,17 +47,17 @@ class Admin::AssignmentsController < ApplicationController
   end
 
   def create_new_assignment
-    @user = User.find(params[:user_id])
+    @user = User.find_by id: params[:user_id]
     @title = params[:title]
-    @assignment = @assignable.assignments.new(user: @user, title: @title)
+    @assignment = @assignable.assignments.new user: @user, title: @title
   end
 
   def user_found
-    @existing_assignment = @user.assignments.find_by(assignable: @assignable, title: @title)
+    @existing_assignment = @user.assignments.find_by assignable: @assignable, title: @title
   end
 
   def search_other_fields
-    @users = User.search(params[:term])
+    @users = User.search params[:term]
   end
 
   def redirect_no_privilege
