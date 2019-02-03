@@ -7,10 +7,13 @@
 # PRE_CONNECTION - For before the connection events.
 # MID_COMPETITION - For mid way through the competition.
 # POST_COMPETITION - For After the competition.
+# MID_JUDGING - For during competition judging.
+# POST_JUDGING - For after competition judging.
 
 # Example $ rails db:setup STAGE=PRE_CONNECTION
 
 # ENHANCEMENT: Alternate values for user model.
+# ENHANCEMENT: Alternate values for awards for entres.
 
 require 'faker'
 
