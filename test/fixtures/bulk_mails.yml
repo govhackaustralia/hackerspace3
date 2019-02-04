@@ -5,6 +5,10 @@ one:
   mailable_id: 1
   mailable_type: Region
   user_id: 1
+  name: MyText
+  from_email: test@example.com
+  status: Draft
+  subject: MyText
   body: MyText
 
 two:
@@ -12,4 +16,8 @@ two:
   mailable_id: 1
   mailable_type: Event
   user_id: 1
+  name: MyText
+  from_email: test@example.com
+  status: Draft
+  subject: MyText
   body: MyText

@@ -12,7 +12,7 @@ class UserOrder < ApplicationRecord
       event.registrations.where(status: ATTENDING)
     when INVITED_AND_ATTENDING
       event.registrations.where(status: [INVITED, ATTENDING])
-    when nil
+    else
       []
     end
   end
