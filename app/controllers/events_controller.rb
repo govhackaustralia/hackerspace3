@@ -1,5 +1,4 @@
 class EventsController < ApplicationController
-  # ENHANCEMENT: Reduce duplication in view.
   def index
     retrieve_events
     respond_to do |format|
@@ -9,7 +8,7 @@ class EventsController < ApplicationController
   end
 
   def show
-    @event = Event.find_by(identifier: params[:identifier])
+    @event = Event.find_by identifier: params[:identifier]
     if @event.published || (user_signed_in? && current_user.event_privileges?)
       show_event
     else
@@ -20,15 +19,10 @@ class EventsController < ApplicationController
 
   private
 
-  # ENHANCEMENT: Split into other controllers.
   def retrieve_events
-    all = Competition.current.events.published.preload(:region).order(start_time: :asc, name: :asc)
-    if params[:event_type].present?
-      @events = all.where(event_type: params[:event_type])
-    else
-      retrieve_all_future_events(all)
-      retrive_all_past_events(all)
-    end
+    all = Competition.current.events.published.preload(:region).order start_time: :asc, name: :asc
+    retrieve_all_future_events all
+    retrive_all_past_events all
   end
 
   def retrieve_all_future_events(all)
@@ -48,13 +42,14 @@ class EventsController < ApplicationController
     @competition = @event.competition
     @event_partner = @event.event_partner
     @region = @event.region
-    @sponsorship_types = @region.sponsorship_types.distinct.order(order: :asc)
+    @sponsorship_types = @region.sponsorship_types.distinct.order order: :asc
     set_signed_in_user_vars if user_signed_in?
   end
 
   def set_signed_in_user_vars
     @user = current_user
-    @registration = Registration.find_by(event: @event, assignment: @user.event_assignment)
+    @registration = Registration.find_by event: @event,
+                                         assignment: @user.event_assignment
     @team = @event.teams.new
   end
 end

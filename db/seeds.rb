@@ -13,6 +13,8 @@
 
 # Example $ rails db:setup STAGE=PRE_CONNECTION
 
+# ENHANCEMENT: Vary event start times.
+
 require 'faker'
 
 admin = User.new(email: ENV['SEED_EMAIL'], full_name: ENV['SEED_NAME'],

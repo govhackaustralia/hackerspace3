@@ -13,7 +13,7 @@
 			<% elsif @event.event_type == CONNECTION_EVENT %>
 				<%= render 'connections/connection_description' %>
 			<% elsif @event.event_type == AWARD_EVENT %>
-				<%= render 'award_description' %>
+				<%= render 'awards/award_description' %>
 			<% else %>
 				<%= render 'competition_events/competition_event_description' %>
 			<% end %>
@@ -68,13 +68,11 @@
 			    <% end %>
 			  </div>
 			<% end %>
-		<% end %><br>
-
-		<% if user_signed_in? && @event.admin_privileges?(current_user) %>
-		  <%= link_to 'Manage this Event', admin_region_event_path(@region, @event) %><br>
 		<% end %>
 
-		<%= link_to 'Back to Events', events_path %><br>
-
+		<% if user_signed_in? && @event.admin_privileges?(current_user) %>
+		  <p><%= link_to 'Manage this Event', admin_region_event_path(@region, @event) %></p>
+		<% end %>
+		<p><%= link_to 'Back to Events', events_path %></p>
 	</section>
 </main>

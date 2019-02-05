@@ -1,6 +1,13 @@
-<% if params[:event_type] == AWARD_EVENT %>
-  <%= render 'awards' %>
-<% else %>
-  <%= render 'all_events' %>
-<% end %>
-<%= link_to 'Download CSV', events_path(format: 'csv') %></br>
+<main class="events_page">
+	<section>
+		<h2>Events</h2>
+		<%= render partial: 'events/event_collection', locals: { events: @future_connections, title: 'Upcoming Connection Events' } %>
+		<%= render partial: 'events/event_collection', locals: { events: @future_locations, title: 'Upcoming Competition Events' } %>
+		<%= render partial: 'events/event_collection', locals: { events: @future_remotes, title: "Upcoming Remote Kitchen Table Competition Events" } %>
+		<%= render partial: 'events/event_collection', locals: { events: @future_awards, title: 'Upcoming Awards Events' } %>
+		<%= render partial: 'events/event_collection', locals: { events: @past_connections, title: 'Past Connection Events' } %>
+		<%= render partial: 'events/event_collection', locals: { events: @past_competitions, title: 'Past Competition Events' } %>
+		<%= render partial: 'events/event_collection', locals: { events: @past_awards, title: 'Past Award Events' } %>
+	</section>
+</main>
+<p><%= link_to 'Download CSV', events_path(format: 'csv') %></p>

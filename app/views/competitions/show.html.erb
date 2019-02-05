@@ -3,13 +3,13 @@
 	<nav>
 		<section>
 			<% if @competition_events.present? %>
-				<div><%= link_to 'Connection Events', connections_path %></div>
+				<div><%= link_to 'Connections Events', connections_path %></div>
 			<% end %>
 			<% if @competition_events.present? %>
 				<div><%= link_to 'Competition Events', competition_events_path %></div>
 			<% end %>
 			<% if @awards.present? %>
-				<div><%= link_to 'Award Events', awards_path %></div>
+				<div><%= link_to 'Awards Events', awards_path %></div>
 			<% end %>
 			<% if @challenges.present? %>
 				<div><%= link_to 'Challenges', challenges_path %></div>
