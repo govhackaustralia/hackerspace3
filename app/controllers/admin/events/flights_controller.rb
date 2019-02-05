@@ -3,37 +3,37 @@ class Admin::Events::FlightsController < ApplicationController
   before_action :check_for_privileges
 
   def index
-    @event = Event.find(params[:event_id])
+    @event = Event.find params[:event_id]
     @region = @event.region
     @inbound_flights = @event.inbound_flights
     @outbound_flights = @event.outbound_flights
   end
 
   def new
-    @event = Event.find(params[:event_id])
+    @event = Event.find params[:event_id]
     @flight = @event.flights.new
   end
 
+  def create
+    @event = Event.find params[:event_id]
+    @flight = @event.flights.new flight_params
+    handle_create
+  end
+
   def edit
-    @flight = Flight.find(params[:id])
+    @flight = Flight.find params[:id]
     @event = @flight.event
   end
 
   def update
-    @flight = Flight.find(params[:id])
+    @flight = Flight.find params[:id]
     @event = @flight.event
-    @flight.update(flight_params)
+    @flight.update flight_params
     handle_update
   end
 
-  def create
-    @event = Event.find(params[:event_id])
-    @flight = @event.flights.new(flight_params)
-    handle_create
-  end
-
   def destroy
-    @flight = Flight.find(params[:id])
+    @flight = Flight.find params[:id]
     @event = @flight.event
     @flight.destroy
     flash[:notice] = 'Flight removed.'
@@ -43,7 +43,7 @@ class Admin::Events::FlightsController < ApplicationController
   private
 
   def flight_params
-    params.require(:flight).permit(:direction, :description)
+    params.require(:flight).permit :direction, :description
   end
 
   def check_for_privileges
@@ -56,7 +56,7 @@ class Admin::Events::FlightsController < ApplicationController
   def handle_create
     if @flight.save
       flash[:notice] = 'New Flight Created'
-      redirect_to admin_event_flights_path(@event)
+      redirect_to admin_event_flights_path @event
     else
       flash[:alert] = @flight.errors.full_messages.to_sentence
       render :new
@@ -66,7 +66,7 @@ class Admin::Events::FlightsController < ApplicationController
   def handle_update
     if @flight.save
       flash[:notice] = 'Flight Update'
-      redirect_to admin_event_flights_path(@event)
+      redirect_to admin_event_flights_path @event
     else
       flash[:alert] = @flight.errors.full_messages.to_sentence
       render :edit
