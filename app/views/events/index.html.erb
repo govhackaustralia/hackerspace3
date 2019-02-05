@@ -1,6 +1,4 @@
-<% if params[:event_type] == COMPETITION_EVENT %>
-  <%= render 'competition_events' %>
-<% elsif params[:event_type] == AWARD_EVENT %>
+<% if params[:event_type] == AWARD_EVENT %>
   <%= render 'awards' %>
 <% else %>
   <%= render 'all_events' %>
