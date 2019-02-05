@@ -11,7 +11,7 @@
 					<p><%= simple_format(paragraph) %></p>
 				<% end %>
 			<% elsif @event.event_type == CONNECTION_EVENT %>
-				<%= render 'connection_description' %>
+				<%= render 'connections/connection_description' %>
 			<% elsif @event.event_type == AWARD_EVENT %>
 				<%= render 'award_description' %>
 			<% else %>

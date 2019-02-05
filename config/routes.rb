@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   resources :favourites, only: [:create, :destroy]
   resources :challenges, param: :identifier, only: [:index, :show]
   resources :users, only: :update
+  resources :connections, only: :index
 
   namespace :users do
     resources :invitations, only: [:update, :destroy]
@@ -107,7 +108,6 @@ Rails.application.routes.draw do
   get 'complete_registration', to: 'users#edit'
   get 'update_personal_details', to: 'users#edit'
   get 'review_terms_and_conditions', to: 'users#edit'
-  get 'connections', to: 'events#index', event_type: CONNECTION_EVENT
   get 'competition_events', to: 'events#index', event_type: COMPETITION_EVENT
   get 'awards', to: 'events#index', event_type: AWARD_EVENT
   get 'terms_and_conditions', to: 'static_pages#terms_and_conditions'
