@@ -2,7 +2,7 @@ require 'test_helper'
 
 class Admin::Events::GroupGoldensControllerTest < ActionDispatch::IntegrationTest
   setup do
-    sign_in users(:one)
+    sign_in users :one
     @event = Event.first
     @team = Team.first
     @leader_assignment = Assignment.find 11

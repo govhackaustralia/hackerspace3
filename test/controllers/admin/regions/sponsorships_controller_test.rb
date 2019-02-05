@@ -2,7 +2,7 @@ require 'test_helper'
 
 class Admin::Regions::SponsorshipsControllerTest < ActionDispatch::IntegrationTest
   setup do
-    sign_in users(:one)
+    sign_in users :one
     @region = Region.first
   end
 

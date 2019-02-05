@@ -11,7 +11,7 @@ class Events::TeamsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'should get index authenticated user' do
-    sign_in users(:one)
+    sign_in users :one
     get event_teams_url(@event.identifier)
     assert_response :success
   end

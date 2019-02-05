@@ -2,7 +2,7 @@ require 'test_helper'
 
 class Admin::CriteriaControllerTest < ActionDispatch::IntegrationTest
   setup do
-    sign_in users(:one)
+    sign_in users :one
     @competition = Competition.first
     @criterion = Criterion.first
   end

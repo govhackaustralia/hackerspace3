@@ -2,7 +2,7 @@ require 'test_helper'
 
 class ScorecardsControllerTest < ActionDispatch::IntegrationTest
   setup do
-    sign_in users(:one)
+    sign_in users :one
     @project = Project.first
     @scorecard = Scorecard.third
     Competition.current.update(peoples_choice_start: Time.now.yesterday, peoples_choice_end: Time.now.tomorrow)

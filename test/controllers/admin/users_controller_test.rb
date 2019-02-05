@@ -3,7 +3,7 @@ require 'test_helper'
 class Admin::UsersControllerTest < ActionDispatch::IntegrationTest
   setup do
     @user = User.first
-    sign_in users(:one)
+    sign_in users :one
   end
 
   test 'should get index' do
