@@ -9,11 +9,9 @@
 # POST_COMPETITION - For After the competition.
 # MID_JUDGING - For during competition judging.
 # POST_JUDGING - For after competition judging.
+# POST_AWARDS - For after awards events.
 
 # Example $ rails db:setup STAGE=PRE_CONNECTION
-
-# ENHANCEMENT: Alternate values for user model.
-# ENHANCEMENT: Alternate values for awards for entres.
 
 require 'faker'
 
@@ -28,6 +26,10 @@ admin.event_assignment
 admin.make_site_admin
 admin.update(accepted_terms_and_conditions: true, how_did_you_hear: 'jas')
 
+def random_boolean
+  [true, false].sample
+end
+
 100.times do |number|
   user = nil
   first_name = Faker::Name.first_name
@@ -37,12 +39,24 @@ admin.update(accepted_terms_and_conditions: true, how_did_you_hear: 'jas')
     preferred_name: first_name, preferred_img: nil,
     google_img: nil, dietary_requirements: "No #{Faker::Food.dish}",
     tshirt_size: 'Small', twitter: "@#{first_name}#{number}",
-    mailing_list: false, challenge_sponsor_contact_place: false,
-    challenge_sponsor_contact_enter: false, my_project_sponsor_contact: false,
-    me_govhack_contact: (number % 2 == 0), organisation_name: nil,
+    mailing_list: random_boolean,
+    challenge_sponsor_contact_place: random_boolean,
+    challenge_sponsor_contact_enter: random_boolean,
+    my_project_sponsor_contact: random_boolean,
+    me_govhack_contact: random_boolean,
+    organisation_name: (Faker::Company.name if number % 5 == 0),
     phone_number: nil, how_did_you_hear: nil,
     accepted_terms_and_conditions: false,
-    password: Devise.friendly_token[0, 20])
+    password: Devise.friendly_token[0, 20],
+    request_not_photographed: random_boolean, data_cruncher: random_boolean,
+    coder: random_boolean, creative: random_boolean,
+    facilitator: random_boolean,
+    registration_type: USER_REGISTRATION_TYPES.sample)
+
+  if user.registration_type == YOUTH_COMPETITOR
+    user.parent_guardian = Faker::Name.name
+  end
+
   user.skip_confirmation_notification!
   user.skip_reconfirmation!
   user.confirm
@@ -67,16 +81,21 @@ when 'POST_COMPETITION'
 when 'MID_JUDGING'
   comp_start = Time.now - 1.weeks - 4.days
 when 'POST_JUDGING'
+  comp_start = Time.now - 4.weeks
+when 'POST_AWARDS'
   comp_start = Time.now - 5.weeks
 else
   comp_start = Time.now
 end
 
 comp_end = comp_start + 3.days
+connection_start = comp_start - 1.months
 peoples_start = comp_start + 1.weeks
-peoples_end = peoples_start + 2.weeks
+peoples_end = peoples_start + 1.weeks
 judging_start = comp_start + 1.weeks
-judging_end = judging_start + 3.weeks
+judging_end = judging_start + 1.weeks
+award_start = comp_start + 3.weeks
+award_release = award_start
 
 comp = Competition.current
 
@@ -190,23 +209,24 @@ def fill_out_comp_event(event)
       )
     end
 
-    Checkpoint.all.each do |checkpoint|
-      team.entries.create(checkpoint: checkpoint,
+    Checkpoint.all.each_with_index do |checkpoint, index|
+      team.entries.create checkpoint: checkpoint,
         challenge_id: random_model_id(Challenge),
-        justification: 'We think we would do excellently in this challenge.')
+        justification: 'We think we would do excellently in this challenge.',
+        award: (AWARD_NAMES + [nil, nil, nil, nil, nil, nil, nil, nil]).sample
     end
   end
 end
 
 root_region_id = Region.root.id
 
-Region.create(name: 'New South Wales', time_zone: 'Sydney', parent_id: root_region_id)
-Region.create(name: 'Victoria', time_zone: 'Melbourne', parent_id: root_region_id)
-Region.create(name: 'South Australia', time_zone: 'Adelaide', parent_id: root_region_id)
-Region.create(name: 'Western Australia', time_zone: 'Perth', parent_id: root_region_id)
-Region.create(name: 'Tasmania', time_zone: 'Hobart', parent_id: root_region_id)
-Region.create(name: 'ACT', time_zone: 'Canberra', parent_id: root_region_id)
-Region.create(name: 'Queensland', time_zone: 'Brisbane', parent_id: root_region_id)
+Region.create(name: 'New South Wales', time_zone: 'Sydney', parent_id: root_region_id, award_release: award_release)
+Region.create(name: 'Victoria', time_zone: 'Melbourne', parent_id: root_region_id, award_release: award_release)
+Region.create(name: 'South Australia', time_zone: 'Adelaide', parent_id: root_region_id, award_release: award_release)
+Region.create(name: 'Western Australia', time_zone: 'Perth', parent_id: root_region_id, award_release: award_release)
+Region.create(name: 'Tasmania', time_zone: 'Hobart', parent_id: root_region_id, award_release: award_release)
+Region.create(name: 'ACT', time_zone: 'Canberra', parent_id: root_region_id, award_release: award_release)
+Region.create(name: 'Queensland', time_zone: 'Brisbane', parent_id: root_region_id, award_release: award_release)
 
 Region.all.each do |region|
 
@@ -276,12 +296,11 @@ Region.all.each do |region|
       assign_event_supports_and_partnership(event)
     elsif event_type == CONNECTION_EVENT
       event = create_event(event_type, comp, event_name, region,
-        comp_start - 1.months)
+      connection_start)
       assign_participants(event)
       assign_event_supports_and_partnership(event)
     elsif event_type == AWARD_EVENT
-      event = create_event(event_type, comp, event_name, region,
-        comp_start + 1.months)
+      event = create_event(event_type, comp, event_name, region, award_start)
       assign_participants(event)
       assign_event_supports_and_partnership(event)
       if event_name == 'Australia'
