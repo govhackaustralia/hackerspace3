@@ -20,20 +20,20 @@ class Admin::Regions::ChallengesController < ApplicationController
     @challenge = @region.challenges.new
   end
 
-  def edit
-    @region = Region.find params[:region_id]
-    @challenge = Challenge.find(params[:id])
-  end
-
   def create
     create_new_challenge
     if @challenge.save
       flash[:notice] = 'New Challenge Created'
-      redirect_to admin_region_challenge_path(@region, @challenge)
+      redirect_to admin_region_challenge_path @region, @challenge
     else
       flash[:alert] = @challenge.errors.full_messages.to_sentence
       render :new
     end
+  end
+
+  def edit
+    @region = Region.find params[:region_id]
+    @challenge = Challenge.find params[:id]
   end
 
   def update
@@ -49,6 +49,7 @@ class Admin::Regions::ChallengesController < ApplicationController
 
   private
 
+  # ENHANCEMENT: Break into seperate methods or controllers.
   def handle_update_redirect
     if params[:image].present?
       updated_image
@@ -78,7 +79,7 @@ class Admin::Regions::ChallengesController < ApplicationController
 
   def updated_challenge
     flash[:notice] = 'Challenge Updated'
-    redirect_to admin_region_challenge_path(@region, @challenge)
+    redirect_to admin_region_challenge_path @region, @challenge
   end
 
   def check_for_privileges
@@ -95,13 +96,13 @@ class Admin::Regions::ChallengesController < ApplicationController
   end
 
   def update_challenge
-    @region = Region.find(params[:region_id])
-    @challenge = Challenge.find(params[:id])
+    @region = Region.find params[:region_id]
+    @challenge = Challenge.find params[:id]
   end
 
   def create_new_challenge
-    @region = Region.find(params[:region_id])
-    @challenge = @region.challenges.new(challenge_params)
+    @region = Region.find params[:region_id]
+    @challenge = @region.challenges.new challenge_params
     @challenge.competition = Competition.current
   end
 end
