@@ -14,7 +14,9 @@ class Competition < ApplicationRecord
   has_many :project_criteria, -> { where category: PROJECT }, class_name: 'Criterion'
   has_many :challenge_criteria, -> { where category: CHALLENGE }, class_name: 'Criterion'
 
-  validates :year, presence: true
+  validates :year, :start_time, :end_time, :peoples_choice_start,
+            :peoples_choice_end, :challenge_judging_start,
+            :challenge_judging_end, presence: true
 
   # Returns the name of a competiton.
   def name
