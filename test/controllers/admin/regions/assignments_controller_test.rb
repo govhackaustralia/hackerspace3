@@ -3,7 +3,7 @@ require 'test_helper'
 class Admin::Regions::AssignmentsControllerTest < ActionDispatch::IntegrationTest
   setup do
     sign_in users :one
-    @region = Event.first
+    @region = Region.first
     @user = User.first
   end
 
