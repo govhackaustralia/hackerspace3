@@ -9,3 +9,9 @@ one:
   event_id: 1
   project_id: 1
   published: true
+
+two:
+  id: 2
+  event_id: 1
+  project_id: 1
+  published: true
