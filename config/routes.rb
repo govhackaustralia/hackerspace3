@@ -60,7 +60,7 @@ Rails.application.routes.draw do
     end
 
     resources :regions, except: :destroy do
-      resources :data_sets, except: :destroy, controller: 'regions/data_sets'
+      resources :data_sets, except: [:show, :destroy], controller: 'regions/data_sets'
       resources :assignments, only: [:index, :new, :create], controller: 'regions/assignments'
       resources :sponsorships, only: [:index, :new, :create], controller: 'regions/sponsorships'
       resources :scorecards, only: :index, controller: 'regions/scorecards'
