@@ -7,7 +7,7 @@ class Admin::Regions::ScorecardsController < ApplicationController
   def index
     @competition = Competition.current
     @project_judging_total = @competition.score_total PROJECT
-    @region = Region.find(params[:region_id])
+    @region = Region.find params[:region_id]
     retrieve_helpers
   end
 
