@@ -12,6 +12,11 @@ class DataSetTest < ActiveSupport::TestCase
     assert @data_set.competition == @competition
   end
 
+  test 'data set scopes' do
+    assert DataSet.search('m').include? @data_set
+    assert_not DataSet.search('z').include? @data_set
+  end
+
   test 'data set validations' do
     assert_not @data_set.update(name: nil)
   end
