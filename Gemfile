@@ -39,6 +39,8 @@ gem "rails_autolink", "~> 1.1"
 gem 'descriptive_statistics', '~> 2.4.0', :require => 'descriptive_statistics/safe'
 # Pretend Data
 gem 'faker'
+# HAML
+gem 'hamlit'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
