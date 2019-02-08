@@ -13,6 +13,5 @@
   <% else %>
     <p>There are no bulk mails for this event.</p>
   <% end %>
-
-  <%= link_to "Back to #{@event.name}", admin_region_event_path(@region, @event) %>
 </main>
+<%= link_to "Back to #{@event.name}", admin_region_event_path(@region, @event) %>

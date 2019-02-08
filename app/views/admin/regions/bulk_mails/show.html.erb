@@ -1,4 +1,4 @@
-<main class="team_page">
+<main class="registrations_list">
   <h2>Bulk Mail Order <%= @bulk_mail.name %> for <%= @region.name %></h2>
   <p>Status: <%= @bulk_mail.status %></p>
   <p>From Email: <%= @bulk_mail.from_email %></p>
@@ -68,5 +68,5 @@
   <% elsif @bulk_mail.status == PROCESS %>
     <p>This Bulk Mail is currently being processed check back shortly.</p>
   <% end %>
-  <%= link_to 'Back to Bulk Mails', admin_region_bulk_mails_path(@region) %>
 </main>
+<%= link_to 'Back to Bulk Mails', admin_region_bulk_mails_path(@region) %>
