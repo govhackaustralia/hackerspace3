@@ -17,6 +17,46 @@
 
 require 'faker'
 
+@counter = 0
+
+def random_model_id(model)
+  random_id = (@counter += 1) % model.count
+  random_id.zero? ? 1 : random_id
+end
+
+case ENV['STAGE']
+when 'PRE_CONNECTION'
+  comp_start = Time.now + 2.months
+when 'MID_COMPETITION'
+  comp_start = Time.now - 1.days
+when 'POST_COMPETITION'
+  comp_start = Time.now - 4.days
+when 'MID_JUDGING'
+  comp_start = Time.now - 1.weeks - 4.days
+when 'POST_JUDGING'
+  comp_start = Time.now - 4.weeks
+when 'POST_AWARDS'
+  comp_start = Time.now - 5.weeks
+else
+  comp_start = Time.now
+end
+
+comp_end = comp_start + 3.days
+connection_start = comp_start - 1.months
+peoples_start = comp_start + 1.weeks
+peoples_end = peoples_start + 1.weeks
+judging_start = comp_start + 1.weeks
+judging_end = judging_start + 1.weeks
+award_start = comp_start + 3.weeks
+award_release = award_start
+
+comp = Competition.create! start_time: comp_start, end_time: comp_end,
+                           peoples_choice_start: peoples_start,
+                           peoples_choice_end: peoples_end,
+                           challenge_judging_start: judging_start,
+                           challenge_judging_end: judging_end,
+                           year: Time.current.year, current: true
+
 admin = User.new(email: ENV['SEED_EMAIL'], full_name: ENV['SEED_NAME'],
   password: 'password', password_confirmation: 'password')
 
@@ -26,7 +66,7 @@ admin.confirm
 admin.save
 admin.event_assignment
 admin.make_site_admin
-admin.update(accepted_terms_and_conditions: true, how_did_you_hear: 'jas')
+admin.update accepted_terms_and_conditions: true, how_did_you_hear: 'jas'
 
 def random_boolean
   [true, false].sample
@@ -66,46 +106,6 @@ end
   user.event_assignment
 end
 
-@counter = 0
-
-def random_model_id(model)
-  random_id = (@counter += 1) % model.count
-  random_id.zero? ? 1 : random_id
-end
-
-case ENV['STAGE']
-when 'PRE_CONNECTION'
-  comp_start = Time.now + 2.months
-when 'MID_COMPETITION'
-  comp_start = Time.now - 1.days
-when 'POST_COMPETITION'
-  comp_start = Time.now - 4.days
-when 'MID_JUDGING'
-  comp_start = Time.now - 1.weeks - 4.days
-when 'POST_JUDGING'
-  comp_start = Time.now - 4.weeks
-when 'POST_AWARDS'
-  comp_start = Time.now - 5.weeks
-else
-  comp_start = Time.now
-end
-
-comp_end = comp_start + 3.days
-connection_start = comp_start - 1.months
-peoples_start = comp_start + 1.weeks
-peoples_end = peoples_start + 1.weeks
-judging_start = comp_start + 1.weeks
-judging_end = judging_start + 1.weeks
-award_start = comp_start + 3.weeks
-award_release = award_start
-
-comp = Competition.current
-
-comp.update(start_time: comp_start, end_time: comp_end,
-            peoples_choice_start: peoples_start,
-            peoples_choice_end: peoples_end,
-            challenge_judging_start: judging_start,
-            challenge_judging_end: judging_end)
 
 5.times do |time|
   comp.checkpoints.create(end_time: comp_start + (time* 6).days,

@@ -18,6 +18,10 @@ class Competition < ApplicationRecord
             :peoples_choice_end, :challenge_judging_start,
             :challenge_judging_end, presence: true
 
+  validates :year, uniqueness: true
+
+  after_save :only_one_current
+
   # Returns the name of a competiton.
   def name
     "Competition #{year}"
@@ -25,7 +29,7 @@ class Competition < ApplicationRecord
 
   # Returns the competiton for the current year.
   def self.current
-    find_or_create_by(year: Time.current.year)
+    find_by current: true
   end
 
   # Returns the User of the current Competiton Director, if any
@@ -157,5 +161,11 @@ class Competition < ApplicationRecord
     else
       Time.now.in_time_zone(COMP_TIME_ZONE).to_formatted_s(:number)
     end
+  end
+
+  def only_one_current
+    return unless current
+
+    Competition.where.not(id: id).update_all current: false
   end
 end

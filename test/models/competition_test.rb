@@ -15,6 +15,8 @@ class CompetitionTest < ActiveSupport::TestCase
     @criterion = Criterion.first
     @project_criterion = Criterion.first
     @challenge_criterion = Criterion.second
+    @old_competition = @competition
+    @new_competition = Competition.second
   end
 
   test 'competition associations' do
@@ -37,6 +39,11 @@ class CompetitionTest < ActiveSupport::TestCase
     # No year
     competition = Competition.create(year: nil)
     assert_not competition.persisted?
+  end
+
+  test 'competition callbacks' do
+    @new_competition.update current: true
+    assert_not @old_competition.reload.current
   end
 
   test 'started?' do

@@ -16,6 +16,31 @@ class Admin::CompetitionsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
+  test 'should get new' do
+    get new_admin_competition_url
+    assert_response :success
+  end
+
+  test 'should post create success' do
+    Competition.destroy_all
+    assert_difference 'Competition.count' do
+      post admin_competitions_url params: { competition: {
+        year: Time.current.year, start_time: Time.current,
+        end_time: Time.current, peoples_choice_start: Time.current,
+        peoples_choice_end: Time.current, challenge_judging_start: Time.current,
+        challenge_judging_end: Time.current
+      } }
+    end
+    assert_redirected_to admin_competition_url Competition.last
+  end
+
+  test 'should post create fail' do
+    assert_no_difference 'Competition.count' do
+      post admin_competitions_url params: { competition: { year: nil } }
+    end
+    assert_response :success
+  end
+
   test 'should get edit' do
     get edit_admin_competition_url @competition
     assert_response :success

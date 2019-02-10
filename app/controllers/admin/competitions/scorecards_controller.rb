@@ -5,7 +5,7 @@ class Admin::Competitions::ScorecardsController < ApplicationController
   require 'descriptive_statistics'
 
   def index
-    @competition = Competition.current
+    @competition = Competition.find params[:competition_id]
     @project_judging_total = @competition.score_total PROJECT
     @teams = @competition.teams.published
     @projects = @competition.published_projects_by_name.preload(:event)

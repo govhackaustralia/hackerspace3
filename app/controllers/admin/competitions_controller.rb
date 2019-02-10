@@ -11,6 +11,21 @@ class Admin::CompetitionsController < ApplicationController
     @checkpoints = @competition.checkpoints
   end
 
+  def new
+    @competition = Competition.new
+  end
+
+  def create
+    @competition = Competition.new competition_params
+    if @competition.save
+      flash[:notice] = 'New competition created.'
+      redirect_to admin_competition_path @competition
+    else
+      flash[:alert] = @competition.errors.full_messages.to_sentence
+      render :new
+    end
+  end
+
   def edit
     @competition = Competition.find params[:id]
   end
@@ -29,11 +44,11 @@ class Admin::CompetitionsController < ApplicationController
   private
 
   def competition_params
-    params.require(:competition).permit :end_time, :start_time,
+    params.require(:competition).permit :end_time, :start_time, :year,
                                         :peoples_choice_start,
                                         :peoples_choice_end,
                                         :challenge_judging_start,
-                                        :challenge_judging_end
+                                        :challenge_judging_end, :current
   end
 
   def check_for_privileges

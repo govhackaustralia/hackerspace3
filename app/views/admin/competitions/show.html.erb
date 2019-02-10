@@ -1,6 +1,8 @@
 <main class="team_page">
   <h2>Competition <%= @competition.year %></h2>
-
+  <% if @competition.current %>
+    <p><strong>Current Competition</strong></p>
+  <% end %>
   <p>Start Time: <%= time_tag @competition.start_time %></p>
   <p>End Time: <%= time_tag @competition.end_time %></p>
 
@@ -10,7 +12,9 @@
   <p>Challenge Judging Start: <%= time_tag @competition.challenge_judging_start %></p>
   <p>Challenge Judging End: <%= time_tag @competition.challenge_judging_end %></p>
 
-  <p><%= link_to 'Update Competition Times', edit_admin_competition_path(@competition) %></p>
+
+
+  <p><%= link_to 'Update Competition', edit_admin_competition_path(@competition) %></p>
 
   <h3>People's Choice Judging</h3>
 
