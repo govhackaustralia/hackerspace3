@@ -11,3 +11,21 @@ two:
   scorecard_id: 1
   criterion_id: 2
   score: 1
+
+three:
+  id: 3
+  scorecard_id: 2
+  criterion_id: 1
+  score: 1
+
+four:
+  id: 4
+  scorecard_id: 3
+  criterion_id: 2
+  score: 1
+
+five:
+  id: 5
+  scorecard_id: 4
+  criterion_id: 1
+  score: 1
