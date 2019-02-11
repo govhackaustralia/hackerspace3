@@ -20,7 +20,7 @@ class Admin::Challenges::EntriesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'should patch update success' do
-    award = AWARD_NAMES.sample
+    award = WINNER
     patch admin_challenge_entry_url @challenge, @entry, params: { entry: { award: award } }
     assert_redirected_to admin_challenge_entries_path @challenge
     @entry.reload
