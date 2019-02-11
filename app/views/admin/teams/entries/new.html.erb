@@ -1,19 +1,18 @@
 <main class="team_page">
-<h2><%= @team.name %></h2>
+  <h2><%= @team.name %></h2>
 
-<%= form_for [:admin, @team, @entry] do |form| %>
+  <%= form_for [:admin, @team, @entry] do |form| %>
+    <%= hidden_field_tag :challenge_type, params[:challenge_type] %>
 
-  <%= hidden_field_tag(:checkpoint_id, params[:checkpoint_id]) %>
-  <%= hidden_field_tag(:challenge_type, params[:challenge_type]) %>
+    <%= form.hidden_field :checkpoint_id, value: params[:checkpoint_id] %>
 
-  <%= form.label :challenge_id %><br>
-  <%= form.select(:challenge_id, options_from_collection_for_select(@challenges, :id, :name)) %><br>
+    <%= form.label :challenge_id %><br>
+    <%= form.select :challenge_id, options_from_collection_for_select(@challenges, :id, :name) %><br>
 
-  <%= form.label :justification %><br>
-  <%= form.text_area :justification %><br>
+    <%= form.label :justification %><br>
+    <%= form.text_area :justification %><br>
 
-  <%= form.submit %>
-<% end %>
-
-<%= link_to 'Back To Team', admin_team_path(@team) %>
+    <%= form.submit %>
+  <% end %>
 </main>
+<p><%= link_to 'Back To Team', admin_team_path(@team) %></p>
