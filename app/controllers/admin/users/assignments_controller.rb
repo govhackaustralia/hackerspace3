@@ -11,22 +11,22 @@ class Admin::Users::AssignmentsController < ApplicationController
     if params[:assignment][:title] == PARTICIPANT && @assignment.title == VIP
       cannot_demote_vip
     else
-      @assignment.update(assignment_params)
+      @assignment.update assignment_params
       flash[:notice] = 'User event assignment has been updated'
-      redirect_to admin_user_path(@user)
+      redirect_to admin_user_path @user
     end
   end
 
   def destroy
     existing_user_and_assignment
     @assignment.destroy
-    redirect_to admin_user_path(@user)
+    redirect_to admin_user_path @user
   end
 
   private
 
   def assignment_params
-    params.require(:assignment).permit(:title)
+    params.require(:assignment).permit :title
   end
 
   def check_for_privileges
@@ -37,10 +37,11 @@ class Admin::Users::AssignmentsController < ApplicationController
   end
 
   def existing_user_and_assignment
-    @user = User.find(params[:user_id])
-    @assignment = Assignment.find(params[:id])
+    @user = User.find params[:user_id]
+    @assignment = Assignment.find params[:id]
   end
 
+  # ENHANCEMENT: Move this to Active record validation.
   def cannot_demote_vip
     flash.now[:notice] = 'Apologies, event assignments cannot be reverted to Particpant'
     render :edit
