@@ -9,7 +9,7 @@ class Flights::Registrations::RegistrationFlightsController < ApplicationControl
   end
 
   def create
-    @registration_flight = @registration.registration_flights.new(registration_flight_params)
+    @registration_flight = @registration.registration_flights.new registration_flight_params
     @event = @registration.event
     flight_options
     handle_create
@@ -18,11 +18,11 @@ class Flights::Registrations::RegistrationFlightsController < ApplicationControl
   private
 
   def registration_flight_params
-    params.require(:registration_flight).permit(:flight_id)
+    params.require(:registration_flight).permit :flight_id
   end
 
   def check_for_privileges
-    @registration = Registration.find(params[:registration_id])
+    @registration = Registration.find params[:registration_id]
     return if @registration.user == current_user
 
     flash[:alert] = 'You are not able to add flghts to this registration.'
@@ -32,7 +32,7 @@ class Flights::Registrations::RegistrationFlightsController < ApplicationControl
   def handle_create
     if @registration_flight.save
       flash[:notice] = 'Flight Saved'
-      redirect_to event_registration_path(@event.identifier, @registration)
+      redirect_to event_registration_path @event.identifier, @registration
     else
       flash[:alert] = @registration_flight.errors.full_messages.to_sentence
       render :new
