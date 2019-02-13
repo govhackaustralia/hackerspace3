@@ -44,6 +44,7 @@ class SponsorshipManagement::SponsorsController < ApplicationController
     end
   end
 
+  # ENHANCEMENT: Break this method up into seperate public methods.
   def handle_update_success
     if params[:logo]
       flash[:notice] = 'Sponsor Logo Updated'
