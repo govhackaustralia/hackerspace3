@@ -1,9 +1,9 @@
 <main class="team_page">
 
-<h2><%= "Enter #{@challenge.name} Challenge for Team #{@team.name}" %></h2>
+  <h2><%= "Enter #{@challenge.name} Challenge for Team #{@team.name}" %></h2>
 
-<%= render 'form' %>
+  <%= render 'form' %>
 
-<%= link_to 'Back to Challenge', challenge_path(@challenge.identifier) %>
+  <%= link_to 'Back to Challenge', challenge_path(@challenge.identifier) %>
 
 </main>

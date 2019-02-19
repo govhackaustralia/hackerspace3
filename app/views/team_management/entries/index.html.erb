@@ -1,7 +1,7 @@
 <main class="team_page">
 <h2><%= @team.name %> Challenge Entries</h2>
 
-<% @competition.checkpoints.order(:end_time).each do |checkpoint| %>
+<% @checkpoints.each do |checkpoint| %>
 
   <h3><%= checkpoint.name %> Checkpoint</h3>
 

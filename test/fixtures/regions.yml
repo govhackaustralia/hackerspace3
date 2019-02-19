@@ -4,7 +4,7 @@ one:
   id: 1
   name: Australia
   parent_id:
-  time_zone:
+  time_zone: Sydney
 
 two:
   id: 2

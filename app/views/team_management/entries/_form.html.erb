@@ -8,7 +8,7 @@
   <%= form.text_area :justification %>
 </div>
 <div class="actions">
-  <%= hidden_field_tag(:challenge_id, @challenge.id) %>
+  <%= form.hidden_field(:challenge_id, value: @challenge.id) %>
   <%= form.submit %>
 </div>
 <% end %>
