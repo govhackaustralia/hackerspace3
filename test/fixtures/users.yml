@@ -9,13 +9,16 @@ one:
   email: user1@example.com
   full_name: User Number One
   accepted_terms_and_conditions: true
-  confirmed_at: Mon, 10 Dec 2018 19:36:40 AEDT +11:00
+  confirmed_at: <%= Time.current - 1.year %>
   how_did_you_hear: [no response recorded]
 
 two:
   id: 2
   email: user2@example.com
   full_name: User Number Two
+  accepted_terms_and_conditions: true
+  confirmed_at: <%= Time.current - 1.year %>
+  how_did_you_hear: [no response recorded]
 
 three:
   id: 3
