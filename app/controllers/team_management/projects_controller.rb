@@ -10,6 +10,8 @@ class TeamManagement::ProjectsController < ApplicationController
     @project = Project.find(params[:id])
   end
 
+  # ENHANCEMENT: This is not a update method but rather a create new method.
+  # consider moving.
   def update
     update_project
     if @project.save
