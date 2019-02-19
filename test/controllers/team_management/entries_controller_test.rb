@@ -41,6 +41,11 @@ class TeamManagement::EntriesControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
+  test 'should get edit' do
+    get edit_team_management_team_entry_url @team, @entry
+    assert_response :success
+  end
+
   test 'should patch update success' do
     patch team_management_team_entry_url @team, @entry, params: { entry: {
       justification: 'Updated', checkpoint_id: @checkpoint.id
