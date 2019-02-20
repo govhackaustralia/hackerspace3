@@ -17,8 +17,9 @@ class TeamManagement::TeamsController < ApplicationController
     if @team.save
       handle_update_redirect
     else
+      @events = @team.member_competition_events
       flash[:alert] = @team.errors.full_messages.to_sentence
-      render :new
+      render :edit
     end
   end
 
@@ -43,6 +44,7 @@ class TeamManagement::TeamsController < ApplicationController
     end
   end
 
+  # IMPROVEMENT: Break up into separate public controller methods.
   def handle_update_redirect
     if params[:thumbnail].present?
       flash[:notice] = 'Thumbnail Updated'

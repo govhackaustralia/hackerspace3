@@ -9,6 +9,7 @@ one:
   event_id: 1
   project_id: 1
   published: true
+  youth_team: false
 
 two:
   id: 2
