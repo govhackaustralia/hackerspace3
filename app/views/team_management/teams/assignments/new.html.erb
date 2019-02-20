@@ -1,46 +1,44 @@
 <main class="team_page">
-<h2>Add New Team Member to <%= @team.name %></h2>
-<section>
-<%= form_tag(new_team_management_team_assignment_path, method: :get) do %>
-  <%= search_field_tag :term, params[:term] %>
-  <%= hidden_field_tag(:title, @title) %>
-  <%= submit_tag 'Search' %>
-<% end %>
-<%= link_to 'Clear Search', new_team_management_team_assignment_path(@team, title: INVITEE) %>
-</section>
-<% if @user.present? # User found show create new assignment for %>
-<section>
-  <%= render 'admin/shared/user_contact', locals: { user: @user } %>
+  <h2>Add New Team Member to <%= @team.name %></h2>
+  <section>
+  <%= form_tag(new_team_management_team_assignment_path, method: :get) do %>
+    <%= search_field_tag :term, params[:term] %>
+    <%= hidden_field_tag(:title, @title) %>
+    <%= submit_tag 'Search' %>
+  <% end %>
+  <p><%= link_to 'Clear Search', new_team_management_team_assignment_path(@team, title: INVITEE) %></p>
+  </section>
+  <% if @user.present? %>
+    <section>
+      <%= render 'admin/shared/user_contact', locals: { user: @user } %>
 
-  <% if @participating_events.empty? %>
+      <% if @participating_events.empty? %>
 
-    <p><strong>This participant is not registered for a competition event.</strong></p>
+        <p><strong>This participant is not registered for a competition event.</strong></p>
 
-  <% elsif @existing_assignment.present? # check for existing registration %>
-    Assignment for <%= @user.display_name %> to <%= @team.name %> as <%= @existing_assignment.title %> already exists.
+      <% elsif @existing_assignment.present? %>
+        <p>Assignment for <%= @user.display_name %> to <%= @team.name %> as <%= @existing_assignment.title %> already exists.</p>
+      <% else %>
+        <p><%= link_to "Add #{@user.display_name} to #{@team.name}",
+          team_management_team_assignments_path(@team, assignment: {
+            user_id: @user.id }), method: :post %></p>
+      <% end %>
+    </section>
+  <% elsif @users.present? %>
+    <section>
+      <% @users.each do |user| %>
+        <%= render 'shared/user_public_contact', locals: { user: user } %>
+        <p><%= link_to 'Select', new_team_management_team_assignment_path(@team, title: @title, term: user.id) %></p>
+      <% end %>
+    </section>
+  <% elsif params[:term].present? %>
+    <section>
+      <p>Apologies, no name matching search term '<%= params[:term] %>'</p>
+    </section>
   <% else %>
-    <%= link_to "Add #{@user.display_name} to #{@team.name}",
-      team_management_team_assignments_path(@team,
-        title: INVITEE, assignable_id: @team.id, assignable_type: 'Team',
-        user_id: @user.id), method: :post %>
+    <section>
+      <p>Please enter an email address or name to search for a participant.</p>
+    </section>
   <% end %>
-</section>
-<% elsif @users.present? # Review search results %>
-<section>
-  <% @users.each do |user| %>
-    <%= render 'admin/shared/user_public_contact', locals: { user: user } %>
-    <%= link_to 'Select', new_team_management_team_assignment_path(@team, title: @title, term: user.email) %>
-  <% end %>
-</section>
-<% elsif params[:term].present? # Could not find anything. %>
-<section>
-  <p>Apologies, no name matching search term '<%= params[:term] %>'</p>
-</section>
-<% else # No search term entered / first visit to page %>
-<section>
-  <p>Please enter an email address or name to search for a participant.</p>
-</section>
-<% end %>
-
-<%= link_to 'Back to Team Assignments', team_management_team_assignments_path(@team) %>
 </main>
+<p><%= link_to 'Back to Team Assignments', team_management_team_assignments_path(@team) %></p>

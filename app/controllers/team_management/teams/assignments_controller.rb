@@ -6,13 +6,8 @@ class TeamManagement::Teams::AssignmentsController < ApplicationController
   def index; end
 
   def new
-    new_assignment
-    return if params[:term].blank?
-
-    @user = User.find_by_email(params[:term])
-    search_user_competition_event if @user.present?
-    search_for_existing_assignment if @user.present?
-    search_other_fields unless @user.present?
+    @team = Team.find(params[:team_id])
+    search_for_user unless params[:term].blank?
   end
 
   def create
@@ -54,6 +49,13 @@ class TeamManagement::Teams::AssignmentsController < ApplicationController
     check_team_permission
   end
 
+  def search_for_user
+    @user = User.find_by_id(params[:term])
+    search_user_competition_event if @user.present?
+    search_for_existing_assignment if @user.present?
+    search_other_fields unless @user.present?
+  end
+
   def check_team_permission
     if @team.permission?(current_user)
       flash[:notice] = 'The competition has closed.'
@@ -64,15 +66,9 @@ class TeamManagement::Teams::AssignmentsController < ApplicationController
     end
   end
 
-  def new_assignment
-    @team = Team.find(params[:team_id])
-    @assignment = @team.assignments.new
-    @title = params[:title]
-  end
-
   def create_new_assignment
-    @user = User.find(params[:user_id])
-    @assignment = @team.assignments.new(user: @user, title: INVITEE)
+    @assignment = @team.assignments.new(assignment_params)
+    @assignment.title = INVITEE
   end
 
   def search_other_fields
@@ -86,5 +82,9 @@ class TeamManagement::Teams::AssignmentsController < ApplicationController
   def search_user_competition_event
     event_ids = Registration.where(status: [ATTENDING, WAITLIST], assignment: @user.event_assignment).pluck(:event_id)
     @participating_events = Event.where(event_type: COMPETITION_EVENT, id: event_ids)
+  end
+
+  def assignment_params
+    params.require(:assignment).permit(:user_id)
   end
 end
