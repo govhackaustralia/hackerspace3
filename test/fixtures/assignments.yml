@@ -87,3 +87,10 @@ twelve:
   assignable_id: 1
   assignable_type: Team
   title: Invitee
+
+thirteen:
+  id: 13
+  user_id: 3
+  assignable_id: 1
+  assignable_type: Competition
+  title: Participant

@@ -24,3 +24,6 @@ three:
   id: 3
   email: user3@example.com
   full_name: User Number Three
+  accepted_terms_and_conditions: true
+  confirmed_at: <%= Time.current - 1.year %>
+  how_did_you_hear: [no response recorded]
