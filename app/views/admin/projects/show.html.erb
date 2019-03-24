@@ -1,27 +1,28 @@
-<h2>Project Create At <%= @project.created_at %></h2>
+<main class="project_index">
+  <h2>Project Create At <%= @project.created_at %></h2>
 
-<% if @project == @current_project %>
-  <strong>This is the current project version.</strong><br>
-<% else %>
-  <%= link_to 'Make this the current version', admin_team_path(@team, project_id: @project.id),
-                    method: :patch,
-                    data: { confirm: 'Are you sure?' } %><br>
-<% end %>
+  <% if @project == @current_project %>
+    <strong>This is the current project version.</strong><br>
+  <% else %>
+    <%= link_to 'Make this the current version', admin_team_path(@team, project_id: @project.id),
+                      method: :patch,
+                      data: { confirm: 'Are you sure?' } %><br>
+  <% end %>
 
-Created At: <%= @project.created_at %><br>
-<% if @user.present? %>
-  User: <%= @user.display_name %><br>
-<% else %>
-  User: User no longer in system.<br>
-<% end %>
+  Created At: <%= @project.created_at %><br>
+  <% if @user.present? %>
+    User: <%= @user.display_name %><br>
+  <% else %>
+    User: User no longer in system.<br>
+  <% end %>
 
-Team Name: <%= @project.team_name %><br>
-Project Name: <%= @project.project_name %><br>
-Video URL: <%= @project.created_at %><br>
-Homepage URL: <%= @project.homepage_url %><br>
-<h3>Description</h3>
-<%= @project.description %>
-<h3>Data Story</h3>
-<%= @project.data_story %><br>
-
+  Team Name: <%= @project.team_name %><br>
+  Project Name: <%= @project.project_name %><br>
+  Video URL: <%= @project.created_at %><br>
+  Homepage URL: <%= @project.homepage_url %><br>
+  <h3>Description</h3>
+  <%= @project.description %>
+  <h3>Data Story</h3>
+  <%= @project.data_story %><br>
+</main>
 <%= link_to 'Back to All Project Versions', admin_team_projects_path(@team) %>
