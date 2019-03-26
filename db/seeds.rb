@@ -207,7 +207,7 @@ def fill_out_comp_event(event)
         "#{team.name} dataset #{team_time + time}",
         description: Faker::Lorem.paragraph,
         description_of_use: Faker::Lorem.paragraph,
-        url: "https://data.gov.au/dataset/#{Faker::LordOfTheRings.character}"
+        url: "https://data.gov.au/dataset/#{Faker::Movies::LordOfTheRings.character}"
       )
     end
 
@@ -245,7 +245,7 @@ Region.all.each do |region|
 
   5.times do |time|
     region.challenges.create(competition: comp,
-      name: "#{region.name} #{Faker::Pokemon.name}",
+      name: "#{region.name} #{Faker::Games::Pokemon.name}",
       short_desc: Faker::Lorem.sentence, approved: true,
       long_desc: Faker::Lorem.paragraph,
       eligibility: 'You must be this tall to go on this ride.',
@@ -255,7 +255,7 @@ Region.all.each do |region|
   10.times do |time|
     region.data_sets.create(competition: comp,
       name: "#{region.name} Data Set #{time}",
-      url: "https://data.gov.au/dataset/#{Faker::HarryPotter.character}",
+      url: "https://data.gov.au/dataset/#{Faker::Movies::HarryPotter.character}",
       description: Faker::Lorem.paragraph)
   end
 
@@ -279,7 +279,7 @@ Region.all.each do |region|
     end
   end
 
-  event_name = Faker::GameOfThrones.city unless region.time_zone.nil?
+  event_name = Faker::TvShows::GameOfThrones.city unless region.time_zone.nil?
   event_name ||= 'Australia'
 
   EVENT_TYPES.each do |event_type|
