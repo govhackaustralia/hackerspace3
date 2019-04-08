@@ -7,6 +7,7 @@ class Assignment < ApplicationRecord
   has_many :teams, through: :favourites
   has_many :scorecards, dependent: :destroy
 
+  scope :region_supports, -> { where title: REGION_SUPPORT }
   scope :event_hosts, -> { where title: EVENT_HOST }
   scope :event_supports, -> { where title: EVENT_SUPPORT }
   scope :participants, -> { where title: PARTICIPANT }

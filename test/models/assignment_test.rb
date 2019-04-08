@@ -14,6 +14,7 @@ class AssignmentTest < ActiveSupport::TestCase
     @scorecard = Scorecard.second
     @registration = Registration.first
     @competition_event = Event.second
+    @region_support = Assignment.find 14
     @event_host = Assignment.third
     @event_support = Assignment.find 10
     @team_leader = Assignment.find 11
@@ -41,6 +42,7 @@ class AssignmentTest < ActiveSupport::TestCase
   end
 
   test 'assignment scopes' do
+    assert Assignment.region_supports.include? @region_support
     assert Assignment.event_hosts.include? @event_host
     assert Assignment.event_supports.include? @event_support
     assert Assignment.participants.include? @participant

@@ -94,3 +94,10 @@ thirteen:
   assignable_id: 1
   assignable_type: Competition
   title: Participant
+
+fourteen:
+  id: 14
+  user_id: 1
+  assignable_id: 1
+  assignable_type: Region
+  title: Region Support
