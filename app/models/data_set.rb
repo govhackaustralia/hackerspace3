@@ -1,6 +1,6 @@
 class DataSet < ApplicationRecord
   belongs_to :region
-  belongs_to :competition
+  has_one :competition, through: :region
 
   scope :search, ->(term) { where 'name ILIKE ? OR url ILIKE ? OR description ILIKE ?', "%#{term}%", "%#{term}%", "%#{term}%" }
 

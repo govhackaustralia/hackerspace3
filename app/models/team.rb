@@ -119,7 +119,7 @@ class Team < ApplicationRecord
     if challenge_type == REGIONAL
       region.challenges.where.not(id: regional_entries.pluck(:challenge_id), approved: false)
     else
-      Region.root.challenges.where.not(id: national_entries.pluck(:challenge_id), approved: false)
+      Region.root(competition).challenges.where.not(id: national_entries.pluck(:challenge_id), approved: false)
     end
   end
 

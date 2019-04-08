@@ -3,6 +3,7 @@ class Admin::Regions::AssignmentsController < Admin::AssignmentsController
 
   def index
     @assignable = Region.find(params[:region_id])
+    @competition = @assignable.competition
     handle_index
   end
 

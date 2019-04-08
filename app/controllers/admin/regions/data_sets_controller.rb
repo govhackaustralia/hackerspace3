@@ -5,6 +5,7 @@ class Admin::Regions::DataSetsController < ApplicationController
   def index
     @region = Region.find params[:region_id]
     @data_sets = @region.data_sets
+    @competition = @region.competition
   end
 
   def new

@@ -31,7 +31,7 @@ class TeamsController < ApplicationController
 
   def handle_new
     @team = Team.new
-    @events = current_user.participating_competition_events.where(competition: @competition)
+    @events = current_user.participating_competition_events & Competition.current.events.competitions
     return unless @events.empty?
 
     flash[:alert] = 'To create a new team, first register for a competition event.'

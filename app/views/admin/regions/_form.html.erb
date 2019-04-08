@@ -1,4 +1,4 @@
-<%= form_for [:admin, @region] do |f| %>
+<%= form_for [:admin, @competition, @region] do |f| %>
   <%= f.label :name, "Region name:" %><br>
   <%= f.text_field :name %><br>
   <%= f.label :time_zone, "Time zone:" %><br>

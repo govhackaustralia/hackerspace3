@@ -19,6 +19,6 @@
   <% else %>
     This region does not currently have any supports.<br>
   <% end %>
-  <%= link_to "New #{REGION_SUPPORT} Assignment", new_admin_region_assignment_path(@assignable, title: REGION_SUPPORT) %><br>
-  <%= link_to "Back to #{@assignable.name} Region", admin_region_path(@assignable) %>
+  <p><%= link_to "New #{REGION_SUPPORT} Assignment", new_admin_region_assignment_path(@assignable, title: REGION_SUPPORT) %></p>
 </main>
+<p><%= link_to "Back to #{@assignable.name} Region", admin_competition_region_path(@competition, @assignable) %></p>

@@ -1,5 +1,6 @@
 class Region < ApplicationRecord
   belongs_to :parent, class_name: 'Region', optional: true
+  belongs_to :competition
 
   has_many :sub_regions, class_name: 'Region', foreign_key: 'parent_id'
   has_many :assignments, as: :assignable, dependent: :destroy
@@ -12,8 +13,6 @@ class Region < ApplicationRecord
   has_many :challenges, dependent: :destroy
   has_many :data_sets, dependent: :destroy
   has_many :bulk_mails, as: :mailable, dependent: :destroy
-
-  scope :sub_regions, -> { where.not(parent_id: nil) }
   has_many :support_assignments, -> { region_supports }, class_name: 'Assignment', as: :assignable
   has_many :supports, through: :support_assignments, source: :user
 
@@ -24,8 +23,8 @@ class Region < ApplicationRecord
   validates :time_zone, inclusion: { in: VALID_TIME_ZONES << nil }
 
   # Retruns the root region.
-  def self.root
-    Region.find_or_create_by(parent_id: nil, name: ROOT_REGION_NAME)
+  def self.root(competition)
+    Region.find_or_create_by(parent_id: nil, name: ROOT_REGION_NAME, competition: competition)
   end
 
   # Returns the user record for the Director of a region.

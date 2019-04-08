@@ -8,6 +8,7 @@ class Admin::Challenges::EntriesController < ApplicationController
     team_project_entries
     project_judging
     challenge_judging
+    @region = @challenge.region
   end
 
   def edit

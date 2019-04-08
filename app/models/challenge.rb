@@ -1,6 +1,6 @@
 class Challenge < ApplicationRecord
-  belongs_to :competition
   belongs_to :region
+  has_one :competition, through: :region
 
   has_many :assignments, as: :assignable, dependent: :destroy
   # ENHANCEMENT: Remove either users or judges association.

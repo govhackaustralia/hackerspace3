@@ -3,28 +3,31 @@ class Admin::RegionsController < ApplicationController
   before_action :check_for_privileges
 
   def index
-    @region = Region.root
+    @competition = Competition.find params[:competition_id]
+    @region = Region.root @competition
   end
 
   def show
     @region = Region.find(params[:id])
-    @competition = Competition.current
-    @challenges = @region.challenges
-    @data_sets = @region.data_sets
-    @sponsorships = @region.sponsorships
-    @bulk_mails = @region.bulk_mails
+    @competition = @region.competition
+    @parent = @region.parent
+    @director = @region.director
+    @supports_count = @region.supports.count
+    retrieve_events_and_counts
+    retrieve_children_counts
     retrieve_counts
   end
 
   def new
-    @region = Region.new if @region.nil?
+    @competition = Competition.find params[:competition_id]
+    @region = Region.new
   end
 
   def create
     create_new_region
     if @region.save
       flash[:notice] = "New Region '#{@region.name}' added."
-      redirect_to admin_regions_path
+      redirect_to admin_competition_region_path @competition, @region
     else
       flash.now[:alert] = @region.errors.full_messages.to_sentence
       render :new
@@ -32,14 +35,15 @@ class Admin::RegionsController < ApplicationController
   end
 
   def edit
-    @region = Region.find(params[:id])
+    @region = Region.find params[:id]
+    @competition = @region.competition
   end
 
   def update
-    @region = Region.find(params[:id])
-    if @region.update(region_params)
+    retrieve_region_and_comp
+    if @region.update region_params
       flash[:notice] = 'Region Updated'
-      redirect_to admin_region_path @region
+      redirect_to admin_competition_region_path @competition, @region
     else
       flash.now[:alert] = @region.errors.full_messages.to_sentence
       render :edit
@@ -59,9 +63,15 @@ class Admin::RegionsController < ApplicationController
     redirect_to root_path
   end
 
+  def retrieve_region_and_comp
+    @region = Region.find params[:id]
+    @competition = @region.competition
+  end
+
   def create_new_region
-    @region = Region.new(region_params)
-    @region.update(parent_id: Region.root.id)
+    @competition = Competition.find params[:competition_id]
+    @region = @competition.regions.new region_params
+    @region.parent = Region.root @competition
   end
 
   def retrieve_counts
@@ -74,9 +84,23 @@ class Admin::RegionsController < ApplicationController
     end
   end
 
+  def retrieve_events_and_counts
+    @events = @region.events
+    @connections_count = @events.connections.count
+    @competitions_count = @events.competitions.count
+    @awards_count = @events.awards.count
+  end
+
+  def retrieve_children_counts
+    @sponsorships_count = @region.sponsorships.count
+    @data_sets_count = @region.data_sets.count
+    @challenges_count = @region.challenges.count
+    @bulk_mails_count = @region.bulk_mails.count
+  end
+
   def retrieve_national_counts
     @region_counts = helpers.challenges_region_counts
     @region_names = Region.where.not(parent_id: nil).order(:name).pluck(:name)
-    @challenge_names = Region.root.challenges.order(:name).pluck(:name)
+    @challenge_names = Region.root(@competition).challenges.order(:name).pluck(:name)
   end
 end

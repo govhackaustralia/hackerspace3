@@ -5,6 +5,7 @@ class Admin::Regions::ChallengesController < ApplicationController
   def index
     @region = Region.find params[:region_id]
     @challenges = @region.challenges
+    @competition = @region.competition
   end
 
   def show

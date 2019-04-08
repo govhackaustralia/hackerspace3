@@ -3,7 +3,6 @@
 one:
   id: 1
   region_id: 1
-  competition_id: 1
   name: MyString
   url: MyString
   description: MyText
@@ -11,7 +10,6 @@ one:
 two:
   id: 2
   region_id: 1
-  competition_id: 1
   name: MyString
   url: MyString
   description: MyText

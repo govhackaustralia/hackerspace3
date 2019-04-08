@@ -1,6 +1,6 @@
 class Event < ApplicationRecord
   belongs_to :region
-  belongs_to :competition
+  has_one :competition, through: :region
 
   has_many :assignments, as: :assignable, dependent: :destroy
 

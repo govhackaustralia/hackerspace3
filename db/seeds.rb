@@ -144,8 +144,8 @@ end
   comp.sponsorship_types.create(name: "Tier #{time + 1}", order: time + 1)
 end
 
-def create_event(event_type, comp, event_name, region, event_start)
-  region.events.create(event_type: event_type, competition: comp,
+def create_event(event_type, event_name, region, event_start)
+  region.events.create(event_type: event_type,
     name: event_name, registration_type: OPEN, capacity: 50,
     email: "#{event_name}@mail.com", twitter: '@qld',
     address: "#{Faker::Address.street_address }, #{region.name}, #{Faker::Address.building_number}",
@@ -220,15 +220,15 @@ def fill_out_comp_event(event)
   end
 end
 
-root_region_id = Region.root.id
+root_region_id = Region.root(comp).id
 
-Region.create(name: 'New South Wales', time_zone: 'Sydney', parent_id: root_region_id, award_release: award_release)
-Region.create(name: 'Victoria', time_zone: 'Melbourne', parent_id: root_region_id, award_release: award_release)
-Region.create(name: 'South Australia', time_zone: 'Adelaide', parent_id: root_region_id, award_release: award_release)
-Region.create(name: 'Western Australia', time_zone: 'Perth', parent_id: root_region_id, award_release: award_release)
-Region.create(name: 'Tasmania', time_zone: 'Hobart', parent_id: root_region_id, award_release: award_release)
-Region.create(name: 'ACT', time_zone: 'Canberra', parent_id: root_region_id, award_release: award_release)
-Region.create(name: 'Queensland', time_zone: 'Brisbane', parent_id: root_region_id, award_release: award_release)
+Region.create(name: 'New South Wales', time_zone: 'Sydney', parent_id: root_region_id, award_release: award_release, competition: comp)
+Region.create(name: 'Victoria', time_zone: 'Melbourne', parent_id: root_region_id, award_release: award_release, competition: comp)
+Region.create(name: 'South Australia', time_zone: 'Adelaide', parent_id: root_region_id, award_release: award_release, competition: comp)
+Region.create(name: 'Western Australia', time_zone: 'Perth', parent_id: root_region_id, award_release: award_release, competition: comp)
+Region.create(name: 'Tasmania', time_zone: 'Hobart', parent_id: root_region_id, award_release: award_release, competition: comp)
+Region.create(name: 'ACT', time_zone: 'Canberra', parent_id: root_region_id, award_release: award_release, competition: comp)
+Region.create(name: 'Queensland', time_zone: 'Brisbane', parent_id: root_region_id, award_release: award_release, competition: comp)
 
 Region.all.each do |region|
 
@@ -244,8 +244,7 @@ Region.all.each do |region|
   end
 
   5.times do |time|
-    region.challenges.create(competition: comp,
-      name: "#{region.name} #{Faker::Games::Pokemon.name}",
+    region.challenges.create(name: "#{region.name} #{Faker::Games::Pokemon.name}",
       short_desc: Faker::Lorem.sentence, approved: true,
       long_desc: Faker::Lorem.paragraph,
       eligibility: 'You must be this tall to go on this ride.',
@@ -253,8 +252,7 @@ Region.all.each do |region|
   end
 
   10.times do |time|
-    region.data_sets.create(competition: comp,
-      name: "#{region.name} Data Set #{time}",
+    region.data_sets.create(name: "#{region.name} Data Set #{time}",
       url: "https://data.gov.au/dataset/#{Faker::Movies::HarryPotter.character}",
       description: Faker::Lorem.paragraph)
   end
@@ -287,22 +285,21 @@ Region.all.each do |region|
     next if event_name == 'Australia' && event_type == COMPETITION_EVENT
 
     if event_type == COMPETITION_EVENT
-      event = create_event(event_type, comp, "Remote #{region.name}",
-        region, comp_start)
+      event = create_event(event_type, "Remote #{region.name}", region, comp_start)
       assign_participants(event)
       fill_out_comp_event(event)
       assign_event_supports_and_partnership(event)
-      event = create_event(event_type, comp, event_name, region, comp_start)
+      event = create_event(event_type, event_name, region, comp_start)
       assign_participants(event)
       fill_out_comp_event(event)
       assign_event_supports_and_partnership(event)
     elsif event_type == CONNECTION_EVENT
-      event = create_event(event_type, comp, event_name, region,
+      event = create_event(event_type, event_name, region,
       connection_start)
       assign_participants(event)
       assign_event_supports_and_partnership(event)
     elsif event_type == AWARD_EVENT
-      event = create_event(event_type, comp, event_name, region, award_start)
+      event = create_event(event_type, event_name, region, award_start)
       assign_participants(event)
       assign_event_supports_and_partnership(event)
       if event_name == 'Australia'

@@ -8,6 +8,7 @@ class Admin::Regions::EventsController < ApplicationController
     @connection_events = @events.connections
     @competition_events = @events.competitions
     @award_events = @events.awards
+    @competition = @region.competition
   end
 
   def show

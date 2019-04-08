@@ -23,7 +23,8 @@ class ChallengesController < ApplicationController
   def index_variables
     @competition = Competition.current
     @challenges = @competition.challenges.approved.order(:name).preload(:region)
-    @regions = ([Region.root] << Region.sub_regions.order(:name)).flatten
+    root_region = Region.root @competition
+    @regions = ([root_region] << root_region.sub_regions.order(:name)).flatten
     @region_privileges = user_signed_in? && current_user.region_privileges?
   end
 

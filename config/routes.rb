@@ -52,6 +52,7 @@ Rails.application.routes.draw do
       resources :assignments, only: [:index, :new, :create], controller: 'competitions/assignments'
       resources :scorecards, only: :index, controller: 'competitions/scorecards'
       resources :checkpoints, :criteria, except: [:show, :destroy]
+      resources :regions, except: :destroy
     end
 
     resources :sponsors do
@@ -59,7 +60,7 @@ Rails.application.routes.draw do
       resources :assignments, only: [:new, :create], controller: 'sponsors/assignments'
     end
 
-    resources :regions, except: :destroy do
+    resources :regions, only: [] do
       resources :data_sets, except: [:show, :destroy], controller: 'regions/data_sets'
       resources :assignments, only: [:index, :new, :create], controller: 'regions/assignments'
       resources :sponsorships, only: [:index, :new, :create], controller: 'regions/sponsorships'

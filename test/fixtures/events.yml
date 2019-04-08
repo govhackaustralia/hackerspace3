@@ -8,7 +8,6 @@ one:
   id: 1
   name: Brisbane
   region_id: 2
-  competition_id: 1
   capacity: 1
   event_type: Connection
   registration_type: Open
@@ -19,7 +18,6 @@ two:
   id: 2
   name: Brisbane
   region_id: 2
-  competition_id: 1
   capacity: 1
   event_type: Competition
   registration_type: Open

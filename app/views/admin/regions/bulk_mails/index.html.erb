@@ -1,8 +1,6 @@
 <main class="team_page">
   <h2>Bulk Mails for <%= @region.name %></h2>
-
   <%= link_to 'New Bulk Mail', new_admin_region_bulk_mail_path(@region) %>
-
   <% if @bulk_mails.present? %>
     <% @bulk_mails.each do |bulk_mail| %>
       <h3><%= bulk_mail.name %></h3>
@@ -14,4 +12,4 @@
     <p>There are no bulk mails for this region.</p>
   <% end %>
 </main>
-<%= link_to "Back to #{@region.name} Region", admin_region_path(@region) %>
+<p><%= link_to "Back to #{@region.name} Region", admin_competition_region_path(@competition, @region) %></p>

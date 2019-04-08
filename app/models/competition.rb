@@ -1,15 +1,16 @@
 class Competition < ApplicationRecord
   has_many :assignments, as: :assignable
+  has_many :regions
   has_many :sponsors
   has_many :sponsorship_types
-  has_many :events
+  has_many :events, through: :regions
   has_many :teams, through: :events
   has_many :projects_by_name, through: :events
   has_many :published_projects_by_name, through: :events
   has_many :projects, through: :teams
-  has_many :challenges
+  has_many :challenges, through: :regions
   has_many :checkpoints
-  has_many :data_sets
+  has_many :data_sets, through: :regions
   has_many :criteria
   has_many :project_criteria, -> { where category: PROJECT }, class_name: 'Criterion'
   has_many :challenge_criteria, -> { where category: CHALLENGE }, class_name: 'Criterion'

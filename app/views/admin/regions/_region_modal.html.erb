@@ -3,11 +3,11 @@
 <h3><%= region.name %></h3>
 
 <% if region.time_zone %>
-  Time Zone: <%= region.time_zone %></br>
+  <p>Time Zone: <%= region.time_zone %></p>
 <% end %>
 <% if (director = region.director).present? %>
   <h4> Region Director</h4>
   <%= render 'admin/shared/user_contact', locals: { user: director } %>
 <% end %>
 
-<%= link_to "Manage #{region.name} Region", admin_region_path(region) %><br>
+<p><%= link_to "Manage #{region.name} Region", admin_competition_region_path(@competition, region) %></p>

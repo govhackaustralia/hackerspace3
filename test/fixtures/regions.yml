@@ -5,9 +5,11 @@ one:
   name: Australia
   parent_id:
   time_zone: Sydney
+  competition_id: 1
 
 two:
   id: 2
   name: Queensland
   parent_id: 1
   time_zone: Brisbane
+  competition_id: 1

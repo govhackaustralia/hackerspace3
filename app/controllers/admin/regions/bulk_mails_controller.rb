@@ -5,6 +5,7 @@ class Admin::Regions::BulkMailsController < ApplicationController
   def index
     @region = Region.find params[:region_id]
     @bulk_mails = @region.bulk_mails
+    @competition = @region.competition
   end
 
   def show

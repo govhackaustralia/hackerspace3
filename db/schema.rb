@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_07_021141) do
+ActiveRecord::Schema.define(version: 2019_04_01_073253) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -84,7 +84,6 @@ ActiveRecord::Schema.define(version: 2019_02_07_021141) do
 
   create_table "challenges", force: :cascade do |t|
     t.integer "region_id"
-    t.integer "competition_id"
     t.string "name"
     t.text "short_desc"
     t.text "long_desc"
@@ -95,7 +94,6 @@ ActiveRecord::Schema.define(version: 2019_02_07_021141) do
     t.datetime "updated_at", null: false
     t.string "identifier"
     t.index ["approved"], name: "index_challenges_on_approved"
-    t.index ["competition_id"], name: "index_challenges_on_competition_id"
     t.index ["identifier"], name: "index_challenges_on_identifier"
     t.index ["region_id"], name: "index_challenges_on_region_id"
   end
@@ -151,13 +149,11 @@ ActiveRecord::Schema.define(version: 2019_02_07_021141) do
 
   create_table "data_sets", force: :cascade do |t|
     t.integer "region_id"
-    t.integer "competition_id"
     t.string "name"
     t.string "url"
     t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["competition_id"], name: "index_data_sets_on_competition_id"
     t.index ["region_id"], name: "index_data_sets_on_region_id"
   end
 
@@ -190,7 +186,6 @@ ActiveRecord::Schema.define(version: 2019_02_07_021141) do
 
   create_table "events", force: :cascade do |t|
     t.integer "region_id"
-    t.integer "competition_id"
     t.string "name"
     t.string "registration_type"
     t.integer "capacity"
@@ -213,7 +208,6 @@ ActiveRecord::Schema.define(version: 2019_02_07_021141) do
     t.string "identifier"
     t.string "event_type"
     t.text "description"
-    t.index ["competition_id"], name: "index_events_on_competition_id"
     t.index ["identifier"], name: "index_events_on_identifier"
     t.index ["published"], name: "index_events_on_published"
     t.index ["region_id"], name: "index_events_on_region_id"
@@ -271,6 +265,8 @@ ActiveRecord::Schema.define(version: 2019_02_07_021141) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.datetime "award_release"
+    t.integer "competition_id"
+    t.index ["competition_id"], name: "index_regions_on_competition_id"
     t.index ["parent_id"], name: "index_regions_on_parent_id"
   end
 
