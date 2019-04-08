@@ -4,9 +4,10 @@ class Admin::Regions::EventsController < ApplicationController
 
   def index
     @region = Region.find params[:region_id]
-    @connection_events = @region.events.connections
-    @competition_events = @region.events.competitions
-    @award_events = @region.events.awards
+    @events = @region.events
+    @connection_events = @events.connections
+    @competition_events = @events.competitions
+    @award_events = @events.awards
   end
 
   def show

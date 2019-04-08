@@ -2,7 +2,7 @@
   <h2>Events for Region <%= @region.name %></h2>
   <%= link_to "Create New Event", new_admin_region_event_path(@region) %>
 
-  <% if (events = @region.events.where(competition: Competition.current)).present? %>
+  <% if @events.present? %>
 
     <h3>Connection Events</h3>
 
@@ -25,6 +25,5 @@
   <% else %>
     <p>There are currently no events planned for the current Competitition.</p>
   <% end %>
-
-  <%= link_to 'Back to Region', admin_region_path(@region) %>
 </main>
+<p><%= link_to 'Back to Region', admin_competition_region_path(@competition, @region) %></p>
