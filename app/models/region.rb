@@ -15,8 +15,7 @@ class Region < ApplicationRecord
 
   scope :sub_regions, -> { where.not(parent_id: nil) }
 
-  validates :name, presence: true
-  validates :name, uniqueness: true
+  validates :name, presence: true, uniqueness: true
 
   # Note 'nil' added to VALID_TIME_ZONES so that a region does not require a
   # time_zone; eg Australia.
