@@ -12,9 +12,12 @@
   <p>Challenge Judging Start: <%= time_tag @competition.challenge_judging_start %></p>
   <p>Challenge Judging End: <%= time_tag @competition.challenge_judging_end %></p>
 
-
-
   <p><%= link_to 'Update Competition', edit_admin_competition_path(@competition) %></p>
+
+  <h3>Regions</h3>
+
+  <p><%= pluralize @regions_count, 'region' %> set for this competition.</p>
+
 
   <h3>People's Choice Judging</h3>
 
@@ -25,16 +28,16 @@
 
   <h4>Competition Director</h4>
 
-  <% if (director = @competition.director).present? %>
-    <%= render 'admin/shared/user_contact', locals: { user: director } %>
+  <% if @director.present? %>
+    <%= render 'admin/shared/user_contact', locals: { user: @director } %>
   <% else %>
     <p>This competition does not currently have a director.</p>
   <% end %>
 
   <h4>Site Admins</h4>
 
-  <% if (site_admins = @competition.site_admins).present? %>
-    <% site_admins.each do |site_admin| %>
+  <% if @site_admins.present? %>
+    <% @site_admins.each do |site_admin| %>
       <%= render 'admin/shared/user_contact', locals: { user: site_admin } %>
     <% end %>
   <% else %>
@@ -43,8 +46,8 @@
 
   <h4>GovHack Management Team</h4>
 
-  <% if (members = @competition.management_team).present? %>
-    <% members.each do |member| %>
+  <% if @management_team.present? %>
+    <% @management_team.each do |member| %>
       <%= render 'admin/shared/user_contact', locals: { user: member } %>
     <% end %>
   <% else %>
@@ -61,8 +64,8 @@
 
   <h3>Criteria</h3>
 
-  <p><%= pluralize @competition.challenge_criteria.count, 'Challenge Criterion' %> saved.</p>
-  <p><%= pluralize @competition.project_criteria.count, 'Project Criterion' %> saved.</p>
+  <p><%= pluralize @challenge_criteria_count, 'Challenge Criterion' %> saved.</p>
+  <p><%= pluralize @project_criteria_count, 'Project Criterion' %> saved.</p>
 
   <p><%= link_to 'Competition Criteria', admin_competition_criteria_path(@competition) %></p>
 </main>

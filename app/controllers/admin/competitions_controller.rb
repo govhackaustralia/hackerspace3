@@ -8,7 +8,11 @@ class Admin::CompetitionsController < ApplicationController
 
   def show
     @competition = Competition.find params[:id]
+    @director = @competition.director
+    @site_admins = @competition.site_admins
+    @management_team = @competition.management_team
     @checkpoints = @competition.checkpoints
+    retrieve_counts
   end
 
   def new
@@ -56,5 +60,11 @@ class Admin::CompetitionsController < ApplicationController
 
     flash[:alert] = 'You must have valid assignments to access this section.'
     redirect_to root_path
+  end
+
+  def retrieve_counts
+    @regions_count = @competition.regions.count
+    @challenge_criteria_count = @competition.challenge_criteria.count
+    @project_criteria_count = @competition.project_criteria.count
   end
 end
