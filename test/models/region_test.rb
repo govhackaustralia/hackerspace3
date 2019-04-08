@@ -14,6 +14,8 @@ class RegionTest < ActiveSupport::TestCase
     @challenge = Challenge.first
     @data_set = DataSet.first
     @bulk_mail = BulkMail.first
+    @support_assignment = Assignment.find 14
+    @support = User.first
   end
 
   test 'region associations' do
@@ -34,6 +36,8 @@ class RegionTest < ActiveSupport::TestCase
   test 'region scopes' do
     assert Region.sub_regions.include? @child_region
     assert Region.sub_regions.exclude? @parent_region
+    assert @parent_region.support_assignments.include? @support_assignment
+    assert @parent_region.supports.include? @support
   end
 
   test 'region validations' do

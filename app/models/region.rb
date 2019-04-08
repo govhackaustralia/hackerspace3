@@ -14,6 +14,8 @@ class Region < ApplicationRecord
   has_many :bulk_mails, as: :mailable, dependent: :destroy
 
   scope :sub_regions, -> { where.not(parent_id: nil) }
+  has_many :support_assignments, -> { region_supports }, class_name: 'Assignment', as: :assignable
+  has_many :supports, through: :support_assignments, source: :user
 
   validates :name, presence: true, uniqueness: true
 
@@ -33,15 +35,6 @@ class Region < ApplicationRecord
     return assignment if assignment.nil?
 
     assignment.user
-  end
-
-  # Returns the user records for all the region supports of a region.
-  # ENHANCEMENT: Move into active record associations.
-  def supports
-    user_ids = assignments.where(title: REGION_SUPPORT).pluck(:user_id)
-    return nil if user_ids.empty?
-
-    User.where(id: user_ids)
   end
 
   # Returns a boolean for whether a user as admin privileges for a region.
