@@ -1,11 +1,10 @@
 class TeamsController < ApplicationController
+  before_action :authenticate_user!
+
   def new
     @competition = Competition.current
-    if user_signed_in? && @competition.in_window?(LAST_TIME_ZONE)
+    if @competition.in_window? LAST_TIME_ZONE
       handle_new
-    elsif @competition.in_window? LAST_TIME_ZONE
-      flash[:alert] = 'To create a new team, first sign in.'
-      redirect_to projects_path
     else
       flash[:alert] = 'The competition is now closed.'
       redirect_to projects_path
@@ -13,13 +12,13 @@ class TeamsController < ApplicationController
   end
 
   def create
-    @team = Team.new(team_params)
+    @team = Team.new team_params
     @competition = @team.competition
-    @events = current_user.participating_competition_events.where(competition: @competition)
+    @events = current_user.participating_competition_events.where competition: @competition
     if @competition.in_window? @team.time_zone
       create_team
     else
-      flash[:alert] = "The competition has closed in event region #{@team.region.name}"
+      flash[:alert] = "The competition has closed in region #{@team.region.name}"
       render :new
     end
   end
@@ -27,7 +26,7 @@ class TeamsController < ApplicationController
   private
 
   def team_params
-    params.require(:team).permit(:event_id, :youth_team)
+    params.require(:team).permit :event_id, :youth_team
   end
 
   def handle_new
@@ -36,7 +35,7 @@ class TeamsController < ApplicationController
     return unless @events.empty?
 
     flash[:alert] = 'To create a new team, first register for a competition event.'
-    redirect_to events_path
+    redirect_to competition_events_path
   end
 
   def create_team

@@ -3,12 +3,25 @@ require 'test_helper'
 class TeamsControllerTest < ActionDispatch::IntegrationTest
   setup do
     sign_in users :one
-    Competition.current.update(start_time: Time.now.yesterday, end_time: Time.now.tomorrow)
+    Competition.current.update start_time: Time.now.yesterday,
+                               end_time: Time.now.tomorrow
   end
 
   test 'should get new' do
     get new_team_url
     assert_response :success
+  end
+
+  test 'should redirect to projects if competition closed' do
+    Competition.current.update end_time: Time.now.yesterday
+    get new_team_url
+    assert_redirected_to projects_url
+  end
+
+  test 'should redirect to competition events if not registered for one' do
+    User.first.event_assignment.destroy
+    get new_team_url
+    assert_redirected_to competition_events_url
   end
 
   test 'should post create' do
