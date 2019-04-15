@@ -97,13 +97,12 @@
 			</article>
 		<% end %>
 
-		<% if in_competition_window_or_region_privileges?(LAST_TIME_ZONE) && @invited_teams.present? %>
+		<% if in_competition_window_or_region_privileges?(LAST_TIME_ZONE) && @invited_team_assignments.present? %>
 			<article>
 				<h3>My Invitations</h3>
-				<% @invited_teams.each do |team| %>
-					<h4><%= team.current_project.team_name %> - <%= team.current_project.project_name %></h4>
-					<p>Event: <%= team.event.name %></p>
-					<% assignment = @team_id_assignments[team.id] %>
+				<% @invited_team_assignments.each do |assignment| %>
+					<h4><%= assignment.assignable.current_project.team_name %> - <%= assignment.assignable.current_project.project_name %></h4>
+					<p>Event: <%= assignment.assignable.event.name %></p>
 
 					<p><%= link_to 'Accept Invitation and Go to Team',
 							users_invitation_path(assignment), method: :patch %></p>

@@ -6,27 +6,20 @@ class UsersController < ApplicationController
     @competition = Competition.current
 
     @assignments = @user.assignments
-    @assignment_titles = @assignments.pluck(:title)
-
-    @team_id_assignments = {}
-    @assignments.each do |assignment|
-      next unless assignment.assignable_type == 'Team'
-
-      @team_id_assignments[assignment.assignable_id] = assignment
-    end
+    @assignment_titles = @assignments.pluck :title
 
     @event_assignment = @user.event_assignment
-    @registrations = Registration.where(assignment: @assignments).preload(event: :region)
+    @registrations = @user.registrations.preload event: :region
 
-    @sponsor_contact_assignments = @assignments.where(title: SPONSOR_CONTACT).preload(:assignable)
+    @sponsor_contact_assignments = @assignments.sponsor_contacts.preload :assignable
 
-    @favourite_teams = @event_assignment.teams.published.preload(:event, :current_project)
+    @favourite_teams = @event_assignment.teams.published.preload :event, :current_project
 
-    @joined_teams = @user.joined_teams.preload(:event, :current_project, :region)
-    @invited_teams = @user.invited_teams.preload(:event, :current_project)
+    @joined_teams = @user.joined_teams.preload :event, :current_project, :region
+    @invited_team_assignments = @user.invited_team_assignments.preload assignable: [:event, :current_project]
 
     @public_winning_entries = has_public_winning_entries?
-    @region_privileges = user_signed_in? && current_user.region_privileges?
+    @region_privileges = @user.region_privileges?
   end
 
   def edit
@@ -46,16 +39,20 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:full_name, :preferred_name, :preferred_img,
-                                 :tshirt_size, :twitter, :phone_number, :mailing_list,
-                                 :challenge_sponsor_contact_place, :challenge_sponsor_contact_enter,
-                                 :my_project_sponsor_contact, :me_govhack_contact, :dietary_requirements,
-                                 :organisation_name, :how_did_you_hear, :govhack_img,
-                                 :accepted_terms_and_conditions, :bsb, :acc_number, :acc_name, :branch_name)
+    params.require(:user).permit :full_name, :preferred_name, :preferred_img,
+                                 :tshirt_size, :twitter, :phone_number,
+                                 :mailing_list,
+                                 :challenge_sponsor_contact_place,
+                                 :challenge_sponsor_contact_enter,
+                                 :my_project_sponsor_contact,
+                                 :me_govhack_contact, :dietary_requirements,
+                                 :organisation_name, :how_did_you_hear,
+                                 :govhack_img, :accepted_terms_and_conditions,
+                                 :bsb, :acc_number, :acc_name, :branch_name
   end
 
   def handle_update_user
-    @user.update(user_params) unless params.nil?
+    @user.update user_params unless params.nil?
     if @user.save
       account_update_successfully
     else
