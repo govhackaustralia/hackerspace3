@@ -244,7 +244,7 @@ Region.all.each do |region|
   end
 
   5.times do |time|
-    region.challenges.create(name: "#{region.name} #{Faker::Games::Pokemon.name}",
+    region.challenges.create(name: "#{region.name} #{Faker::Games::Pokemon.unique.name} Challenge",
       short_desc: Faker::Lorem.sentence, approved: true,
       long_desc: Faker::Lorem.paragraph,
       eligibility: 'You must be this tall to go on this ride.',
