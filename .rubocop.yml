@@ -1,6 +1,7 @@
 # This is the configuration used to check the rubocop source code.
 # For list of cops 'https://github.com/bbatsov/rubocop/tree/master/config'
 
+require: rubocop-performance
 
 AllCops:
   Exclude:
