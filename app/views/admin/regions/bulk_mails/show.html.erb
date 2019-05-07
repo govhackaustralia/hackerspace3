@@ -1,9 +1,9 @@
 <main class="registrations_list">
   <h2>Bulk Mail Order <%= @bulk_mail.name %> for <%= @region.name %></h2>
-  <p>Status: <%= @bulk_mail.status %></p>
-  <p>From Email: <%= @bulk_mail.from_email %></p>
-  <p>Subject: <%= @bulk_mail.subject %></p>
-  <p>Created At: <%= @bulk_mail.created_at %></p>
+  <p><strong>Status:</strong> <%= @bulk_mail.status %></p>
+  <p><strong>From Email:</strong> <%= @bulk_mail.from_email %></p>
+  <p><strong>Subject:</strong> <%= @bulk_mail.subject %></p>
+  <p><strong>Created At:</strong> <%= @bulk_mail.created_at %></p>
 
   <div>
     <p>>>>></p>
@@ -13,52 +13,55 @@
 
   <% unless @bulk_mail.status == PROCESSED %>
     <p><%= link_to 'Edit Bulk Mail', edit_admin_region_bulk_mail_path(@region, @bulk_mail) %></p>
-    <p><%= link_to 'Edit Mail Orders', edit_admin_region_bulk_mail_path(@region, @bulk_mail, team_orders: true) %></p>
+    <p><%= link_to 'Configure Mail Orders', edit_admin_region_bulk_mail_path(@region, @bulk_mail, team_orders: true) %></p>
   <% end %>
-
-  <table>
-    <tr>
-      <th>Team Name</th>
-      <th>Project Name</th>
-      <th>Title</th>
-      <th>Display Name</th>
-      <% if @bulk_mail.status == PROCESSED %>
-        <th>Email Status</th>
+  <% if @team_orders.present? && @team_orders.where(request_type: NONE).count != @team_orders.count %>
+    <table>
+      <tr>
+        <th>Team Name</th>
+        <th>Project Name</th>
+        <th>Title</th>
+        <th>Display Name</th>
+        <% if @bulk_mail.status == PROCESSED %>
+          <th>Email Status</th>
+        <% end %>
+      </tr>
+      <% @team_orders.each do |team_order| %>
+        <% next if team_order.request_type == NONE %>
+        <% team_order.team.leaders.each do |leader| %>
+          <% next unless leader.me_govhack_contact %>
+          <tr>
+            <td><%= team_order.team.current_project.team_name %></td>
+            <td><%= team_order.team.current_project.project_name %></td>
+            <td>Team Leader</td>
+            <td><%= leader.display_name %></td>
+            <% @participant_count += 1 %>
+            <% if @bulk_mail.status == PROCESSED %>
+              <% correspondence = correspondence_with(leader.id) %>
+              <td><%= link_to correspondence.status, admin_bulk_mail_correspondence_path(@bulk_mail, correspondence) %></td>
+            <% end %>
+          </tr>
+        <% end %>
+        <% next if team_order.request_type == LEADER_ONLY %>
+        <% team_order.team.members.each do |member| %>
+          <% next unless member.me_govhack_contact %>
+          <tr>
+            <td><%= team_order.team.current_project.team_name %></td>
+            <td><%= team_order.team.current_project.project_name %></td>
+            <td>Team Member</td>
+            <td><%= member.display_name %></td>
+            <% @participant_count += 1 %>
+            <% if @bulk_mail.status == PROCESSED %>
+              <% correspondence = correspondence_with(member.id) %>
+              <td><%= link_to correspondence.status, admin_bulk_mail_correspondence_path(@bulk_mail, correspondence) %></td>
+            <% end %>
+          </tr>
+        <% end %>
       <% end %>
-    </tr>
-    <% @team_orders.each do |team_order| %>
-      <% next if team_order.request_type == NONE %>
-      <% team_order.team.leaders.each do |leader| %>
-        <% next unless leader.me_govhack_contact %>
-        <tr>
-          <td><%= team_order.team.current_project.team_name %></td>
-          <td><%= team_order.team.current_project.project_name %></td>
-          <td>Team Leader</td>
-          <td><%= leader.display_name %></td>
-          <% @participant_count += 1 %>
-          <% if @bulk_mail.status == PROCESSED %>
-            <% correspondence = correspondence_with(leader.id) %>
-            <td><%= link_to correspondence.status, admin_bulk_mail_correspondence_path(@bulk_mail, correspondence) %></td>
-          <% end %>
-        </tr>
-      <% end %>
-      <% next if team_order.request_type == LEADER_ONLY %>
-      <% team_order.team.members.each do |member| %>
-        <% next unless member.me_govhack_contact %>
-        <tr>
-          <td><%= team_order.team.current_project.team_name %></td>
-          <td><%= team_order.team.current_project.project_name %></td>
-          <td>Team Member</td>
-          <td><%= member.display_name %></td>
-          <% @participant_count += 1 %>
-          <% if @bulk_mail.status == PROCESSED %>
-            <% correspondence = correspondence_with(member.id) %>
-            <td><%= link_to correspondence.status, admin_bulk_mail_correspondence_path(@bulk_mail, correspondence) %></td>
-          <% end %>
-        </tr>
-      <% end %>
-    <% end %>
-  </table>
+    </table>
+  <% else %>
+    <p><strong>No mail orders configured at this time.</strong></p>
+  <% end %>
   <% if @bulk_mail.status == DRAFT %>
   <p><%=
     link_to "Process Mail Orders for #{ pluralize @participant_count, 'Participant'}",
