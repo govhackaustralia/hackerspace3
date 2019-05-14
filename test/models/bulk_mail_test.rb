@@ -33,4 +33,13 @@ class BulkMailTest < ActiveSupport::TestCase
     bulk_mail = @region.bulk_mails.create(name: 'test', from_email: 'test@example.com', subject: 'test', user: @user, status: BULK_MAIL_STATUS_TYPES.sample)
     assert bulk_mail.persisted?
   end
+
+  test 'bulkmail public methods' do
+    @region_bulk_mail.correspondences.each do |correspondence|
+      assert @team_order.correspondences.include? correspondence
+    end
+    @event_bulk_mail.correspondences.each do |correspondence|
+      assert @user_order.correspondences.include? correspondence
+    end
+  end
 end

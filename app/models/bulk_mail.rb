@@ -27,9 +27,11 @@ class BulkMail < ApplicationRecord
     end
   end
 
-  # Returns an array of correspondences associated with a bulk mail.
+  # Returns a collection of correspondences associated with a bulk mail.
   def correspondences
-    team_correspondences + user_correspondences
+    return team_correspondences if mailable_type == 'Region'
+
+    user_correspondences
   end
 
   # Processes a bulkmail out whether for team based order or user based order.
@@ -37,7 +39,7 @@ class BulkMail < ApplicationRecord
   def process
     team_process
     user_process
-    update(status: PROCESSED)
+    update status: PROCESSED
   end
 
   # Fill in specific attributes of email body and return string.
