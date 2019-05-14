@@ -43,6 +43,8 @@ gem 'faker'
 gem 'hamlit'
 # Use Redis adapter to run Action Cable in production
 gem 'redis', '~> 4.0'
+# CoffeeScript adapter for the Rails asset pipeline
+gem 'coffee-rails'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
