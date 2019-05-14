@@ -112,5 +112,7 @@ Rails.application.routes.draw do
   get 'terms_and_conditions', to: 'static_pages#terms_and_conditions'
   get 'code_of_conduct', to: 'static_pages#code_of_conduct'
 
+  mount ActionCable.server => '/cable'
+
   root 'competitions#show'
 end
