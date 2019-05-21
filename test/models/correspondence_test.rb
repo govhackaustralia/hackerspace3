@@ -20,4 +20,9 @@ class CorrespondenceTest < ActiveSupport::TestCase
     assert_not @correspondence.update(status: 'Test')
     assert @correspondence.update(status: CORRESPONDENCE_STATUS_TYPES.sample)
   end
+
+  test 'bulk mail method' do
+    assert @team_correspondence.bulk_mail == @team_order.bulk_mail
+    assert @user_correspondence.bulk_mail == @user_order.bulk_mail
+  end
 end
