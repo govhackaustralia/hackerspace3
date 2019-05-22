@@ -56,11 +56,6 @@ class Admin::Regions::BulkMailsController < ApplicationController
     end
   end
 
-  def process_team_orders
-    @bulk_mail.update status: PROCESS
-    BulkMailOutJob.perform_later @bulk_mail
-  end
-
   def check_for_privileges
     return if current_user.region_privileges?
 
@@ -72,15 +67,12 @@ class Admin::Regions::BulkMailsController < ApplicationController
     @team_orders = @bulk_mail.team_orders
     update_team_orders unless params[:team_orders].nil?
     @bulk_mail.update(bulk_mail_params) unless params[:bulk_mail].nil?
-    process_team_orders unless params[:process].nil?
   end
 
   def retrieve_team_helpers
     @participant_count = 0
     @example_user = User.first
     @example_project = Project.first
-    return unless @bulk_mail.status == PROCESSED
-
     @correspondences = @bulk_mail.correspondences
   end
 

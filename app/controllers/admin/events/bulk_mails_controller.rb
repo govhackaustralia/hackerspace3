@@ -12,8 +12,6 @@ class Admin::Events::BulkMailsController < ApplicationController
     @bulk_mail = BulkMail.find params[:id]
     @event = @bulk_mail.mailable
     show_helpers
-    return unless @bulk_mail.status == PROCESSED
-
     @correspondences = @bulk_mail.correspondences
   end
 
@@ -38,7 +36,7 @@ class Admin::Events::BulkMailsController < ApplicationController
   def update
     @bulk_mail = BulkMail.find params[:id]
     @event = Event.find params[:event_id]
-    handle_processing
+    @bulk_mail.update bulk_mail_params
     handle_update
   end
 
@@ -55,12 +53,6 @@ class Admin::Events::BulkMailsController < ApplicationController
     @user_order = UserOrder.find_by bulk_mail: @bulk_mail
     @registrations = @user_order.registrations @event
     @registrations.preload(:user) unless @registrations.empty?
-  end
-
-  # ENHANCEMENT: Separate out into separate controller.
-  def handle_processing
-    @bulk_mail.update bulk_mail_params unless params[:bulk_mail].nil?
-    process_team_orders unless params[:process].nil?
   end
 
   def handle_update
@@ -89,10 +81,5 @@ class Admin::Events::BulkMailsController < ApplicationController
 
     flash[:alert] = 'You must have valid assignments to access this section.'
     redirect_to root_path
-  end
-
-  def process_team_orders
-    @bulk_mail.update status: PROCESS
-    BulkMailOutJob.perform_later @bulk_mail
   end
 end
