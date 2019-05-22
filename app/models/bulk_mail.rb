@@ -71,24 +71,13 @@ class BulkMail < ApplicationRecord
     prepare_and_send(team_order.team.members, project, team_order)
   end
 
-  # Process User Orders (If there are any)
+  # Process User Orders
   def user_process
     user_order = UserOrder.find_by(bulk_mail: self)
     return if user_order.nil?
 
     user_order.registrations(mailable).preload(:user).each do |registration|
-      user_prepare_and_send(registration)
     end
-  end
-
-  # Prepare and send e-mails for user orders.
-  def user_prepare_and_send(registration)
-    return unless registration.user.me_govhack_contact
-
-    email_body = BulkMail.correspondence_body(body, registration.user)
-    correspondence = user_order.correspondences.create(user: registration.user, body: email_body, status: PENDING)
-    BulkMailer.participant_email(self, correspondence, registration.user).deliver_now
-    correspondence.update(status: SENT)
   end
 
   # Send emails for orders.
@@ -101,6 +90,7 @@ class BulkMail < ApplicationRecord
       correspondence = team_order.correspondences.create(user: user, body: email_body, status: PENDING)
       BulkMailer.participant_email(self, correspondence, user).deliver_now
       correspondence.update(status: SENT)
+      user_order.process(registration, self)
     end
   end
 end
