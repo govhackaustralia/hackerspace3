@@ -1,10 +1,12 @@
-<h2>Correspondence to <%= @user.display_name %> from Bulk Mail <%= @bulk_mail.name %></h2>
+<main class="team_page">
+  <h2>Correspondence to <%= @user.display_name %> from Bulk Mail <%= @bulk_mail.name %></h2>
 
-<p>Sent At: <%= @correspondence.created_at %></p>
-<p>From: <%= @bulk_mail.from_email %></p>
-<p>To: <%= @user.email %></p>
-<p>Subject: <%= @bulk_mail.subject %></p>
->>>>
-  <%= markdown @correspondence.body %>
->>>>
+  <p><strong>Sent At:</strong> <%= @correspondence.created_at %></p>
+  <p><strong>From:</strong> <%= @bulk_mail.from_email %></p>
+  <p><strong>To:</strong> <%= @user.email %></p>
+  <p><strong>Subject:</strong> <%= @bulk_mail.subject %></p>
+  >>>>
+    <%= markdown @correspondence.body %>
+  >>>>
+</main>
 <p><%= link_to 'Back to Bulk Mail', [:admin, @mailable, @bulk_mail] %></p>
