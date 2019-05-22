@@ -7,11 +7,11 @@ class UserOrder < ApplicationRecord
   def registrations(event)
     case request_type
     when INVITED
-      event.registrations.where(status: INVITED)
+      event.registrations.where status: INVITED
     when ATTENDING
-      event.registrations.where(status: ATTENDING)
+      event.registrations.where status: ATTENDING
     when INVITED_AND_ATTENDING
-      event.registrations.where(status: [INVITED, ATTENDING])
+      event.registrations.where status: [INVITED, ATTENDING]
     else
       []
     end
