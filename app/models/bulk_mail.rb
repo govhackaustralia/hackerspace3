@@ -50,25 +50,14 @@ class BulkMail < ApplicationRecord
 
   private
 
-  # Process Team Orders (if there ar any)
+  # Process Team Orders
   def team_process
     teams = mailable.teams
     return if teams.empty?
 
-    team_orders.preload(team: %i[leaders members current_project]).each do |team_order|
-      team_prepare_and_send(team_order)
-    end
-  end
-
-  # Prepare and send e-mails for team orders.
-  def team_prepare_and_send(team_order)
-    return if team_order.request_type == NONE
-
-    project = team_order.team.current_project
-    prepare_and_send(team_order.team.leaders, project, team_order)
-    return if team_order.request_type == LEADER_ONLY
-
-    prepare_and_send(team_order.team.members, project, team_order)
+    team_orders.preload(
+      team: %i[leaders members current_project]
+    ).each(&:process)
   end
 
   # Process User Orders
@@ -77,19 +66,6 @@ class BulkMail < ApplicationRecord
     return if user_order.nil?
 
     user_order.registrations(mailable).preload(:user).each do |registration|
-    end
-  end
-
-  # Send emails for orders.
-  # ENHANCEMENT: Should be moved else where.
-  def prepare_and_send(users, project, team_order)
-    users.each do |user|
-      next unless user.me_govhack_contact
-
-      email_body = BulkMail.correspondence_body(body, user, project)
-      correspondence = team_order.correspondences.create(user: user, body: email_body, status: PENDING)
-      BulkMailer.participant_email(self, correspondence, user).deliver_now
-      correspondence.update(status: SENT)
       user_order.process(registration, self)
     end
   end

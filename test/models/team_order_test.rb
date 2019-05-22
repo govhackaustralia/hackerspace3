@@ -19,4 +19,10 @@ class TeamOrderTest < ActiveSupport::TestCase
     assert_not @team_order.update request_type: 'TEST'
     assert_not @team_order.update team_id: 2
   end
+
+  test 'team order process' do
+    @team_order.correspondences.destroy_all
+    @team_order.process
+    assert_not @team_order.correspondences.empty?
+  end
 end
