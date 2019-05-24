@@ -1,0 +1,25 @@
+%main.dataset_page
+  %h2
+    Data for Competition #{@competition.year}
+  %h3 Data Portals
+  %section.dataportals
+    - @data_portals.each do |data_portal|
+      = render 'data_set_tile', locals: data_portal
+  %h3 Dataset Highlight
+  = link_to 'Download CSV', data_sets_path(format: 'csv')
+  %table#dataset_table
+    %thead
+      %tr
+        %th Name
+        %th Description
+        %th Dataset URL
+        %th Jurisdiction
+    %tbody
+      - @data_sets.order(:name).each do |data_set|
+        %tr
+          %td= link_to data_set.name, data_set_path(data_set)
+          %td= markdown data_set.description
+          %td= link_to data_set.url, data_set.url, {:class => 'dataseturl'}
+          %td= data_set.region.name
+  %script{:src => "https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js", :type => "text/javascript"}
+  %link{:href => "https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css", :rel => "stylesheet"}/

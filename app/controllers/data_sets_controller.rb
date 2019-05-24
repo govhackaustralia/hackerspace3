@@ -1,6 +1,7 @@
 class DataSetsController < ApplicationController
   def index
     @competition = Competition.current
+    @data_portals = YAML.load_file 'app/views/data_sets/data_portals.yml'
     @data_sets = @competition.data_sets.preload(:region)
     respond_to do |format|
       format.html

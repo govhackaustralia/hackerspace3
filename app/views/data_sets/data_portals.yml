@@ -1,0 +1,99 @@
+- url: https://data.gov.au/
+  name: Australia
+  short_url: data.gov.au
+
+- url: http://stat.data.abs.gov.au/
+  name: Australian Bureau of Statistics
+  short_url: ABS.Stat
+
+- url: http://data.aad.gov.au/
+  name: Australian Antarctic Data Centre
+  short_url: data.aad.gov.au
+
+- url: http://www.aihw.gov.au/data/
+  name: Australian Institute of Health and Welfare
+  short_url: www.aihw.gov.au/data
+
+- url: https://data.aurin.org.au/
+  name: AURIN
+  short_url: data.aurin.org.a
+
+- url: http://govhack.bom.gov.au/
+  name: Bureau of Meteorology
+  short_url: govhack.bom.gov.au
+
+- url: https://data.csiro.au/dap/
+  name: CSIRO Data Access Portal
+  short_url: data.csiro.au/dap
+
+- url: https://www.ga.gov.au/data-pubs/
+  name: Geoscience Australia
+  short_url: www.ga.gov.au/data-pubs
+
+- url: http://portal.tern.org.au/
+  name: TERN Data Discovery Portal
+  short_url: portal.tern.org.au
+
+- url: https://trove.nla.gov.au/
+  name: Trove
+  short_url: trove.nla.gov.au
+
+- url: https://www.data.act.gov.au/
+  name: Australian Capital Territory
+  short_url: data.act.gov.au
+
+- url: http://actmapi-actgov.opendata.arcgis.com/
+  name: Australian Capital Territory Geospatial Data
+  short_url: actmapi-actgov.opendata.arcgis.com
+
+- url: https://data.nsw.gov.au/
+  name: New South Wales
+  short_url: data.nsw.gov.au
+
+- url: https://data.qld.gov.au/
+  name: Queensland
+  short_url: data.qld.gov.au
+
+- url: http://qldspatial.information.qld.gov.au/catalogue/
+  name: Queensland Qspatial
+  short_url: qldspatial.information.qld.gov.au
+
+- url: https://data.sa.gov.au/
+  name: South Australia
+  short_url: data.sa.gov.au
+
+- url: https://www.thelist.tas.gov.au/app/content/home
+  name: Tasmania
+  short_url: www.thelist.tas.gov.au
+
+- url: https://www.data.vic.gov.au/
+  name: Victoria
+  short_url: www.data.vic.gov.au
+
+- url: http://vicroadsopendata.vicroadsmaps.opendata.arcgis.com/
+  name: VicRoads
+  short_url: vicroadsopendata-vicroadsmaps.opendata.arcgis.com
+
+- url: https://data.wa.gov.au/
+  name: Western Australia
+  short_url: data.wa.gov.au
+
+- url: https://data.brisbane.qld.gov.au/
+  name: Brisbane City Council
+  short_url: data.brisbane.qld.gov.au
+
+- url: http://open-darwin.opendata.arcgis.com/
+  name: City of Darwin
+  short_url: open-darwin.opendata.arcgis.com
+
+- url: http://data-logancity.opendata.arcgis.com/
+  name: Logan City Council
+  short_url: data-logancity.opendata.arcgis.com
+
+- url: https://data.sunshinecoast.qld.gov.au/
+  name: Sunshine Coast Council
+  short_url: data.sunshinecoast.qld.gov.au
+
+- url: https://data.melbourne.vic.gov.au/
+  name: City of Melbourne
+  short_url: data.melbourne.vic.gov.au
