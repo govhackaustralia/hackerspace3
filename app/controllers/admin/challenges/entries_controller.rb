@@ -5,10 +5,11 @@ class Admin::Challenges::EntriesController < ApplicationController
   def index
     @challenge = Challenge.find params[:challenge_id]
     @judges = @challenge.users
+    @region = @challenge.region
+    @competition = @region.competition
     team_project_entries
     project_judging
     challenge_judging
-    @region = @challenge.region
   end
 
   def edit
@@ -52,7 +53,7 @@ class Admin::Challenges::EntriesController < ApplicationController
   end
 
   def project_judging
-    @project_judging_total = @challenge.competition.score_total PROJECT
+    @project_judging_total = @competition.score_total PROJECT
     @judge_event_assignments = []
     @judges.each { |judge| @judge_event_assignments << judge.event_assignment }
     @judge_project_scores = {}
@@ -62,7 +63,7 @@ class Admin::Challenges::EntriesController < ApplicationController
   end
 
   def challenge_judging
-    @challenge_judging_total = @challenge.competition.score_total CHALLENGE
+    @challenge_judging_total = @competition.score_total CHALLENGE
     @judge_assignments = @challenge.assignments
     @judge_challenge_scores = {}
     @judge_assignments.each do |judge_assignment|
