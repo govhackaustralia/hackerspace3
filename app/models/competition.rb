@@ -33,6 +33,11 @@ class Competition < ApplicationRecord
     find_by current: true
   end
 
+  # Returns the parent region of all the competition's regions
+  def root_region
+    regions.roots.first
+  end
+
   # Returns the User of the current Competiton Director, if any
   # ENHANCEMENT: create a validation to make sure there is only ever one
   # director.

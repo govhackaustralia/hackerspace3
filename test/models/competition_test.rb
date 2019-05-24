@@ -48,6 +48,10 @@ class CompetitionTest < ActiveSupport::TestCase
     assert_not @old_competition.reload.current
   end
 
+  test 'root region' do
+    assert @competition.root_region == @region
+  end
+
   test 'started?' do
     @competition.update start_time: Time.now - 1.day
     assert @competition.started?
