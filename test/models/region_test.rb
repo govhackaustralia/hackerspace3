@@ -2,9 +2,9 @@ require 'test_helper'
 
 class RegionTest < ActiveSupport::TestCase
   setup do
-    @parent_region = Region.first
+    @parent = Region.first
     @competition = Competition.first
-    @child_region = Region.second
+    @child = Region.second
     @assignment = Assignment.second
     @event = Event.first
     @team = Team.first
@@ -20,45 +20,45 @@ class RegionTest < ActiveSupport::TestCase
   end
 
   test 'region associations' do
-    assert @child_region.parent == @parent_region
-    assert @parent_region.competition == @competition
-    assert @parent_region.sub_regions.include? @child_region
-    assert @parent_region.assignments.include? @assignment
-    assert @child_region.events.include? @event
-    assert @child_region.teams.include? @team
-    assert @child_region.published_projects_by_name.include? @published_project
-    assert @child_region.entries.include? @entry
-    assert @parent_region.sponsorships.include? @sponsorship
-    assert @parent_region.sponsorship_types.include? @sponsorship_type
-    assert @parent_region.challenges.include? @challenge
-    assert @parent_region.data_sets.include? @data_set
-    assert @parent_region.bulk_mails.include? @bulk_mail
-    assert @parent_region.support_assignments.include? @support_assignment
-    assert @parent_region.supports.include? @support
+    assert @child.parent == @parent
+    assert @parent.competition == @competition
+    assert @parent.sub_regions.include? @child
+    assert @parent.assignments.include? @assignment
+    assert @child.events.include? @event
+    assert @child.teams.include? @team
+    assert @child.published_projects_by_name.include? @published_project
+    assert @child.entries.include? @entry
+    assert @parent.sponsorships.include? @sponsorship
+    assert @parent.sponsorship_types.include? @sponsorship_type
+    assert @parent.challenges.include? @challenge
+    assert @parent.data_sets.include? @data_set
+    assert @parent.bulk_mails.include? @bulk_mail
+    assert @parent.support_assignments.include? @support_assignment
+    assert @parent.supports.include? @support
   end
 
   test 'region scopes' do
-    assert Region.subs.include? @child_region
-    assert Region.subs.exclude? @parent_region
-    assert Region.roots.include? @parent_region
-    assert Region.roots.exclude? @child_region
+    assert Region.subs.include? @child
+    assert Region.subs.exclude? @parent
+    assert Region.roots.include? @parent
+    assert Region.roots.exclude? @child
   end
 
   test 'region validations' do
     # No name given
     assert_not @competition.regions.create.persisted?
     # Duplicate name
-    assert_not @competition.regions.create(name: @parent_region.name).persisted?
+    assert_not @competition.regions.create(name: @parent.name).persisted?
     # Time zone not required
-    assert @competition.regions.create(name: 'y').persisted?
+    assert @competition.regions.create!(name: 'y', parent: @parent).persisted?
     # Incorrect Region
     assert_not @competition.regions.create(name: 'x', time_zone: 'Timbuktu').persisted?
     # Correct Region
-    assert @competition.regions.create(name: 'x', time_zone: 'Brisbane').persisted?
+    assert @competition.regions.create!(name: 'x', time_zone: 'Brisbane', parent: @parent).persisted?
   end
 
   test 'region director' do
     # Retrievs Director
-    assert @assignment.user == @parent_region.director
+    assert @assignment.user == @parent.director
   end
 end
