@@ -220,7 +220,7 @@ def fill_out_comp_event(event)
   end
 end
 
-root_region_id = Region.root(comp).id
+root_region_id = comp.root_region.id
 
 Region.create(name: 'New South Wales', time_zone: 'Sydney', parent_id: root_region_id, award_release: award_release, competition: comp)
 Region.create(name: 'Victoria', time_zone: 'Melbourne', parent_id: root_region_id, award_release: award_release, competition: comp)

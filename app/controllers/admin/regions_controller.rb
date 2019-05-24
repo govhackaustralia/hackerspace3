@@ -4,7 +4,7 @@ class Admin::RegionsController < ApplicationController
 
   def index
     @competition = Competition.find params[:competition_id]
-    @region = Region.root @competition
+    @region = @competition.root_region
   end
 
   def show
@@ -71,7 +71,7 @@ class Admin::RegionsController < ApplicationController
   def create_new_region
     @competition = Competition.find params[:competition_id]
     @region = @competition.regions.new region_params
-    @region.parent = Region.root @competition
+    @region.parent = @competition.root_region
   end
 
   def retrieve_counts
@@ -101,6 +101,6 @@ class Admin::RegionsController < ApplicationController
   def retrieve_national_counts
     @region_counts = helpers.challenges_region_counts
     @region_names = Region.where.not(parent_id: nil).order(:name).pluck(:name)
-    @challenge_names = Region.root(@competition).challenges.order(:name).pluck(:name)
+    @challenge_names = @competition.root_region.challenges.order(:name).pluck(:name)
   end
 end

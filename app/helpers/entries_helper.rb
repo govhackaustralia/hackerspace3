@@ -11,7 +11,7 @@ module EntriesHelper
     regions = Region.where.not(parent_id: nil)
     region_to_entries = populate_entity_to_entries(regions, checkpoint_ids)
     unpublished_entries = Entry.where(team: Team.where(published: false))
-    challenges = Region.root(Competition.current).challenges
+    challenges = Competition.current.root_region.challenges
     populate_challenge_to_entity(challenges, regions, unpublished_entries, region_to_entries)
   end
 
