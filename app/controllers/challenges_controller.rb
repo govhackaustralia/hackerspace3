@@ -88,7 +88,7 @@ class ChallengesController < ApplicationController
 
   def all_region_entries
     all_entries = []
-    Region.all.each do |region|
+    @competition.regions.all.each do |region|
       passed_checkpoint_ids = if region.national?
                                 @competition.passed_checkpoint_ids(LAST_TIME_ZONE)
                               else

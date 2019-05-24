@@ -1,7 +1,6 @@
 class DataSetsController < ApplicationController
   def index
     @competition = Competition.current
-    @regions = Region.all
     @data_sets = @competition.data_sets.preload(:region)
     respond_to do |format|
       format.html
