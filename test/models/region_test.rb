@@ -37,6 +37,13 @@ class RegionTest < ActiveSupport::TestCase
     assert @parent_region.supports.include? @support
   end
 
+  test 'region scopes' do
+    assert Region.subs.include? @child_region
+    assert Region.subs.exclude? @parent_region
+    assert Region.roots.include? @parent_region
+    assert Region.roots.exclude? @child_region
+  end
+
   test 'region validations' do
     # No name given
     assert_not @competition.regions.create.persisted?

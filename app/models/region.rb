@@ -16,6 +16,9 @@ class Region < ApplicationRecord
   has_many :support_assignments, -> { region_supports }, class_name: 'Assignment', as: :assignable
   has_many :supports, through: :support_assignments, source: :user
 
+  scope :subs, -> { where.not parent_id: nil }
+  scope :roots, -> { where parent_id: nil }
+
   validates :name, presence: true, uniqueness: true
 
   # Note 'nil' added to VALID_TIME_ZONES so that a region does not require a
