@@ -61,4 +61,8 @@ class RegionTest < ActiveSupport::TestCase
     # Retrievs Director
     assert @assignment.user == @parent.director
   end
+
+  test 'only_one_root_per_competition' do
+    assert_not @competition.regions.create(name: 'Second Root').persisted?
+  end
 end

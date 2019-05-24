@@ -21,6 +21,8 @@ class Region < ApplicationRecord
 
   validates :name, presence: true, uniqueness: true
 
+  validate :only_one_root_per_competition
+
   # Note 'nil' added to VALID_TIME_ZONES so that a region does not require a
   # time_zone; eg Australia.
   validates :time_zone, inclusion: { in: VALID_TIME_ZONES << nil }
@@ -64,5 +66,15 @@ class Region < ApplicationRecord
     return false if award_release.nil?
 
     award_release.to_formatted_s(:number) < Time.now.in_time_zone(COMP_TIME_ZONE).to_formatted_s(:number)
+  end
+
+  # Ensures only one root region is assigned to a competition
+  def only_one_root_per_competition
+    return unless parent_id.nil?
+
+    roots = competition.regions.roots
+    return unless roots.exclude?(self) && roots.count.positive?
+
+    errors.add :competition, 'Only one root region per competition.'
   end
 end
