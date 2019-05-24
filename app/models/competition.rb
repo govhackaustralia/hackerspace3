@@ -35,7 +35,11 @@ class Competition < ApplicationRecord
 
   # Returns the parent region of all the competition's regions
   def root_region
-    regions.roots.first
+    Region.find_or_create_by(
+      parent_id: nil,
+      name: ROOT_REGION_NAME,
+      competition: self
+    )
   end
 
   # Returns the User of the current Competiton Director, if any

@@ -27,11 +27,6 @@ class Region < ApplicationRecord
   # time_zone; eg Australia.
   validates :time_zone, inclusion: { in: VALID_TIME_ZONES << nil }
 
-  # Retruns the root region.
-  def self.root(competition)
-    Region.find_or_create_by(parent_id: nil, name: ROOT_REGION_NAME, competition: competition)
-  end
-
   # Returns the user record for the Director of a region.
   # ENHANCEMENT: Move into active record associations.
   def director
