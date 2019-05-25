@@ -32,7 +32,7 @@ class Team < ApplicationRecord
   has_one_attached :thumbnail
   has_one_attached :high_res_image
 
-  scope :published, -> { where(published: true) }
+  scope :published, -> { where published: true }
 
   # Returns the user record for the team leader.
   # ENHANCEMENT: Should not be needed.
