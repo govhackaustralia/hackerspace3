@@ -1,0 +1,21 @@
+%main.team_page
+  %h2= @user.display_name
+  %p
+    Email: #{@user.email}
+  - @event_assignments.each do |event_assignment|
+    %h3= event_assignment.assignable.name
+    %h4 Event Assignment
+    %p
+      Event Assignment Title: #{event_assignment.title}
+    = link_to 'Update Event Assignment', edit_admin_user_assignment_path(@user, event_assignment)
+    %h4 All Other Assignments
+    - @user.assignments.each do |assignment|
+      - next if assignment == event_assignment
+      %h5
+        %strong
+          Title: #{assignment.assignable.class.name} - #{assignment.title}
+      %p
+        Assigned To: #{assignment.assignable.name}
+      %p= link_to 'Remove Assignment', admin_user_assignment_path(@user, assignment), method: :delete, data: { confirm: 'Are you sure?' }
+      %br
+%p= link_to 'Back to Users', admin_users_path

@@ -16,7 +16,7 @@ class Admin::UsersController < ApplicationController
 
   def show
     @user = User.find params[:id]
-    @event_assignment = @user.event_assignment
+    @event_assignments = @user.event_assignments
   end
 
   def new
