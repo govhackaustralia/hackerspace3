@@ -111,6 +111,11 @@ class User < ApplicationRecord
     Competition.current.assignments.find_or_create_by(user: self, title: PARTICIPANT)
   end
 
+  # Returns all event assignments for user across all competitions
+  def event_assignments
+    assignments.where title: [VIP, PARTICIPANT]
+  end
+
   # Returns a user's event_assignment if they have permission to vote.
   def judgeable_assignment
     return event_assignment if teams.where(published: true).present?

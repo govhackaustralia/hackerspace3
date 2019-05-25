@@ -66,6 +66,10 @@ class UserTest < ActiveSupport::TestCase
     assert_not User.create(preferred_name: nil).save
   end
 
+  test 'event_assignments' do
+    assert @user.event_assignments.include? @participant_assignment
+  end
+
   test 'admin_privileges' do
     # Does have.
     assert @user.admin_privileges?
