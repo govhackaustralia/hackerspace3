@@ -55,8 +55,8 @@ class ChallengesController < ApplicationController
   end
 
   def user_judging
-    if (@judgeable_assignment = current_user.judgeable_assignment).present?
-      @peoples_assignment = current_user.peoples_assignment
+    if (@judgeable_assignment = current_user.judgeable_assignment @competition).present?
+      @peoples_assignment = current_user.peoples_assignment @competition
       @project_judging = @judgeable_assignment.judgeable_scores(@teams)
       @project_judging_total = @competition.score_total PROJECT
     end

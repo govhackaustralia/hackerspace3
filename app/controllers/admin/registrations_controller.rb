@@ -16,6 +16,7 @@ class Admin::RegistrationsController < ApplicationController
     @event = Event.find(params[:event_id])
     @region = @event.region
     @registration = @event.registrations.new
+    @competition = @event.competition
     search_for_users unless params[:term].blank?
   end
 
@@ -60,7 +61,7 @@ class Admin::RegistrationsController < ApplicationController
     @user = User.find_by_email params[:term]
     if @user.present?
       @existing_registration = @user.registrations.find_by event: @event
-      @event_assignment = @user.event_assignment
+      @event_assignment = @user.event_assignment @competition
     else
       @users = User.search(params[:term]).preload :assignments
     end
@@ -70,16 +71,16 @@ class Admin::RegistrationsController < ApplicationController
     flash.now[:alert] = @registration.errors.full_messages.to_sentence
     @assignment = @registration.assignment
     @user = @assignment.user
-    @event_assignment = @user.event_assignment
+    @event_assignment = @user.event_assignment @event.competition
     render :new
   end
 
   def update_error
     flash.now[:alert] = @registration.errors.full_messages.to_sentence
     @user = @registration.user
-    @event_assignment = @user.event_assignment
     @event = @registration.event
     @region = @event.region
+    @event_assignment = @user.event_assignment @region.competition
     render :edit
   end
 

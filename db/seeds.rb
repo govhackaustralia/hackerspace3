@@ -64,7 +64,7 @@ admin.skip_confirmation_notification!
 admin.skip_reconfirmation!
 admin.confirm
 admin.save
-admin.event_assignment
+admin.event_assignment comp
 admin.make_site_admin
 admin.update accepted_terms_and_conditions: true, how_did_you_hear: 'jas'
 
@@ -103,7 +103,7 @@ end
   user.skip_reconfirmation!
   user.confirm
   user.save
-  user.event_assignment
+  user.event_assignment comp
 end
 
 
@@ -346,7 +346,7 @@ Entry.all.each do |entry|
 end
 
 User.all.each do |user|
-  event_assignment = user.event_assignment
+  event_assignment = user.event_assignment comp
   6.times do
     Favourite.create(assignment: event_assignment, team_id: random_model_id(Team))
   end

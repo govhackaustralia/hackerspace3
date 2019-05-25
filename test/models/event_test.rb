@@ -72,6 +72,6 @@ class EventTest < ActiveSupport::TestCase
   end
 
   test 'attending method' do
-    assert @event.attending? @user.event_assignment
+    assert @event.attending? @user.event_assignment @competition
   end
 end

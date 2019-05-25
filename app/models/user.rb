@@ -103,12 +103,12 @@ class User < ApplicationRecord
 
   # Returns the event assignment of a particular user.
   # This is the assignment to the competition that is used to register for
-  # events (among other things).
-  def event_assignment
-    assignment = Competition.current.assignments.find_by(user: self, title: VIP)
+  # events (among other things), in a given competition.
+  def event_assignment(competition)
+    assignment = competition.assignments.find_by(user: self, title: VIP)
     return assignment unless assignment.nil?
 
-    Competition.current.assignments.find_or_create_by(user: self, title: PARTICIPANT)
+    competition.assignments.find_or_create_by(user: self, title: PARTICIPANT)
   end
 
   # Returns all event assignments for user across all competitions
@@ -117,16 +117,16 @@ class User < ApplicationRecord
   end
 
   # Returns a user's event_assignment if they have permission to vote.
-  def judgeable_assignment
-    event_assignment if
+  def judgeable_assignment(competition)
+    event_assignment competition if
       teams.published.present? ||
       assignments.judgeables.present?
   end
 
   # Returns a user's event_assignment if they have permission to vote in the
   # people's choice awards.
-  def peoples_assignment
-    event_assignment if
+  def peoples_assignment(competition)
+    event_assignment competition if
       teams.published.present? ||
       assignments.volunteers.present?
   end

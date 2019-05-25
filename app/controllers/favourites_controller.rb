@@ -2,8 +2,11 @@ class FavouritesController < ApplicationController
   before_action :authenticate_user!
 
   def create
-    @favourite = Favourite.create(team: @team, assignment: current_user.event_assignment)
     team = Team.find params[:team_id]
+    favourite = Favourite.create(
+      team: team,
+      assignment: current_user.event_assignment(team.competition)
+    )
     handle_create favourite, team
   end
 

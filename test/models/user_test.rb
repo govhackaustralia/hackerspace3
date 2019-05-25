@@ -22,6 +22,7 @@ class UserTest < ActiveSupport::TestCase
     @competition_event = Event.second
     @staff_assignment = @assignment
     @participant_assignment = Assignment.fourth
+    @competition = Competition.first
   end
 
   test 'user associations' do
@@ -66,6 +67,10 @@ class UserTest < ActiveSupport::TestCase
     assert_not User.create(preferred_name: nil).save
   end
 
+  test 'event_assignment' do
+    assert @user.event_assignment(@competition) == @participant_assignment
+  end
+
   test 'event_assignments' do
     assert @user.event_assignments.include? @participant_assignment
   end
@@ -76,6 +81,16 @@ class UserTest < ActiveSupport::TestCase
     # Does not have.
     @assignment.destroy
     assert_not @user.admin_privileges?
+  end
+
+  test 'judgeable_assignment' do
+    assert @user.judgeable_assignment(@competition).present?
+    assert_not @invitee.judgeable_assignment(@competition).present?
+  end
+
+  test 'peoples_assignment' do
+    assert @user.peoples_assignment(@competition).present?
+    assert_not @judge.peoples_assignment(@competition).present?
   end
 
   test 'judge_assignment' do

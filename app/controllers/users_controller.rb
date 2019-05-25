@@ -8,7 +8,7 @@ class UsersController < ApplicationController
     @assignments = @user.assignments
     @assignment_titles = @assignments.pluck :title
 
-    @event_assignment = @user.event_assignment
+    @event_assignment = @user.event_assignment(@competition)
     @registrations = @user.registrations.preload event: :region
 
     @sponsor_contact_assignments = @assignments.sponsor_contacts.preload :assignable

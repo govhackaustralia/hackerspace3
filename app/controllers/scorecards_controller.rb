@@ -3,7 +3,7 @@ class ScorecardsController < ApplicationController
   before_action :check_for_privileges
 
   def new
-    @judgeable_assignment = @user.judgeable_assignment
+    @judgeable_assignment = @user.judgeable_assignment @competition
     Scorecard.transaction do
       Judgment.transaction do
         @scorecard = @team.scorecards.find_or_create_by(assignment: @judgeable_assignment)
@@ -58,7 +58,7 @@ class ScorecardsController < ApplicationController
   end
 
   def evaluate_access
-    @peoples_assignment = @user.peoples_assignment
+    @peoples_assignment = @user.peoples_assignment @competition
     @judge = @user.judge_assignment(@team.challenges)
     return if @peoples_assignment.present? && @competition.in_peoples_judging_window?(LAST_TIME_ZONE)
     return if @judge.present? && @competition.in_challenge_judging_window?(LAST_TIME_ZONE)

@@ -39,9 +39,9 @@ class ProjectsController < ApplicationController
   def user_records_index
     retrieve_attending_events
     return unless @competition.in_peoples_judging_window? LAST_TIME_ZONE
-    return unless (@peoples_assignment = current_user.peoples_assignment).present?
+    return unless (@peoples_assignment = current_user.peoples_assignment(@competition)).present?
 
-    @judgeable_assignment = current_user.judgeable_assignment
+    @judgeable_assignment = current_user.judgeable_assignment @competition
     @project_judging = @judgeable_assignment.judgeable_scores(@teams)
     @project_judging_total = @competition.score_total PROJECT
   end
@@ -54,10 +54,10 @@ class ProjectsController < ApplicationController
 
   def user_records_show
     @user = current_user
-    @favourite = Favourite.find_by(assignment: @user.event_assignment, team: @team)
-    @scorecard = Scorecard.find_by(assignment: @user.event_assignment, judgeable: @team)
-    @judgeable_assignment = @user.judgeable_assignment
-    @peoples_assignment = @user.peoples_assignment
+    @favourite = Favourite.find_by(assignment: @user.event_assignment(@competition), team: @team)
+    @scorecard = Scorecard.find_by(assignment: @user.event_assignment(@competition), judgeable: @team)
+    @judgeable_assignment = @user.judgeable_assignment @competition
+    @peoples_assignment = @user.peoples_assignment @competition
     @judge = @user.judge_assignment(@team.challenges)
     @users_team = @user.teams.include? @team
   end

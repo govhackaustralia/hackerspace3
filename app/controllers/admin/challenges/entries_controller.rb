@@ -55,7 +55,7 @@ class Admin::Challenges::EntriesController < ApplicationController
   def project_judging
     @project_judging_total = @competition.score_total PROJECT
     @judge_event_assignments = []
-    @judges.each { |judge| @judge_event_assignments << judge.event_assignment }
+    @judges.each { |judge| @judge_event_assignments << judge.event_assignment(@competition) }
     @judge_project_scores = {}
     @judge_event_assignments.each do |judge_assignment|
       @judge_project_scores[judge_assignment.user_id] = judge_assignment.judgeable_scores(@teams)

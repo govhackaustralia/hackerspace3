@@ -31,7 +31,7 @@
 
     <% @users.each do |user| %>
       <%= render 'admin/shared/user_contact', locals: { user: user } %>
-      <p>Event Assignment: <%= (event_assignment = user.event_assignment).title %></p>
+      <p>Event Assignment: <%= (event_assignment = user.event_assignment(@competition)).title %></p>
       <p><%= link_to 'Select', new_admin_event_registration_path(@event, term: user.email) %></p>
     <% end %>
 

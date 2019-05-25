@@ -82,7 +82,7 @@ class TeamManagement::Teams::AssignmentsController < ApplicationController
   def search_user_competition_event
     event_ids = Registration.where(
       status: [ATTENDING, WAITLIST],
-      assignment: @user.event_assignment
+      assignment: @user.event_assignment(@team.competition)
     ).pluck(:event_id)
     @participating_events = Event.where(event_type: COMPETITION_EVENT, id: event_ids)
   end
