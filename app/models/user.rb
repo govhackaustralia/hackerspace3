@@ -118,15 +118,17 @@ class User < ApplicationRecord
 
   # Returns a user's event_assignment if they have permission to vote.
   def judgeable_assignment
-    return event_assignment if teams.where(published: true).present?
-    return event_assignment if assignments.where(title: [VOLUNTEER, ADMIN, JUDGE]).present?
+    event_assignment if
+      teams.published.present? ||
+      assignments.judgeables.present?
   end
 
-  # Returns a user's event_assignment if they have premission to vote in the
+  # Returns a user's event_assignment if they have permission to vote in the
   # people's choice awards.
   def peoples_assignment
-    return event_assignment if teams.where(published: true).present?
-    return event_assignment if assignments.where(title: VOLUNTEER).present?
+    event_assignment if
+      teams.published.present? ||
+      assignments.volunteers.present?
   end
 
   # Returns a user's challenge judging assignment given a challenge.
