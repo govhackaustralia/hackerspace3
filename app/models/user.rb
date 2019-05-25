@@ -5,7 +5,7 @@ class User < ApplicationRecord
          :omniauthable
 
   has_many :assignments, dependent: :destroy
-  has_many :teams, through: :assignments, as: :assignable
+  has_many :favourite_teams, through: :assignments, as: :assignable
   has_many :scorecards, through: :assignments
   has_many :registrations, through: :assignments
 
@@ -119,7 +119,7 @@ class User < ApplicationRecord
   # Returns a user's event_assignment if they have permission to vote.
   def judgeable_assignment(competition)
     event_assignment competition if
-      teams.published.present? ||
+      joined_teams.published.present? ||
       assignments.judgeables.present?
   end
 
@@ -127,7 +127,7 @@ class User < ApplicationRecord
   # people's choice awards.
   def peoples_assignment(competition)
     event_assignment competition if
-      teams.published.present? ||
+      joined_teams.published.present? ||
       assignments.volunteers.present?
   end
 

@@ -32,8 +32,7 @@ class AssignmentTest < ActiveSupport::TestCase
     assert @region_assignment.assignable == @region
     assert @region_assignment.user == @user
     # Has Many
-    assert @participant.favourites.include? @favourite
-    assert @participant.teams.include? @team
+    assert @participant.favourite_teams.include? @team
     assert @participant.scorecards.include? @scorecard
     assert @participant.registrations.include? @registration
     # Dependent destroy

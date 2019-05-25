@@ -13,7 +13,7 @@ class UsersController < ApplicationController
 
     @sponsor_contact_assignments = @assignments.sponsor_contacts.preload :assignable
 
-    @favourite_teams = @event_assignment.teams.published.preload :event, :current_project
+    @favourite_teams = @event_assignment.favourite_teams.published.preload :event, :current_project
 
     @joined_teams = @user.joined_teams.preload :event, :current_project, :region
     @invited_team_assignments = @user.invited_team_assignments.preload assignable: [:event, :current_project]

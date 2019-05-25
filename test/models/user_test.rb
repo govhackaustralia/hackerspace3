@@ -27,7 +27,7 @@ class UserTest < ActiveSupport::TestCase
 
   test 'user associations' do
     assert @user.assignments.include? @assignment
-    assert @user.teams.include? @team
+    assert @user.favourite_teams.include? @team
     assert @user.scorecards.include? @scorecard
     assert @user.registrations.include? @registration
 

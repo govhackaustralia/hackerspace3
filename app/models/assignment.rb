@@ -4,7 +4,7 @@ class Assignment < ApplicationRecord
 
   has_many :registrations, dependent: :destroy
   has_many :favourites, dependent: :destroy
-  has_many :teams, through: :favourites
+  has_many :favourite_teams, through: :favourites, source: :team
   has_many :scorecards, dependent: :destroy
 
   scope :region_supports, -> { where title: REGION_SUPPORT }
