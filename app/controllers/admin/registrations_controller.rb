@@ -13,7 +13,8 @@ class Admin::RegistrationsController < ApplicationController
   end
 
   def new
-    @event = Event.find params[:event_id]
+    @event = Event.find(params[:event_id])
+    @region = @event.region
     @registration = @event.registrations.new
     search_for_users unless params[:term].blank?
   end
