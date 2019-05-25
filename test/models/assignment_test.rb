@@ -22,6 +22,7 @@ class AssignmentTest < ActiveSupport::TestCase
     @team_member = Assignment.find 9
     @judge = Assignment.find 7
     @contact = Assignment.find 5
+    @volunteer = Assignment.find 8
   end
 
   test 'assignment associations' do
@@ -57,6 +58,9 @@ class AssignmentTest < ActiveSupport::TestCase
     assert Assignment.staff.include? @judge
     assert Assignment.staff.exclude? @team_invitee
     assert Assignment.sponsor_contacts.include? @contact
+    assert Assignment.volunteers.include? @volunteer
+    assert Assignment.judgeables.include? @judge
+    assert Assignment.judgeables.include? @volunteer
   end
 
   test 'assignment validations' do

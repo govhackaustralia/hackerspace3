@@ -19,6 +19,8 @@ class Assignment < ApplicationRecord
   scope :judges, -> { where title: JUDGE }
   scope :staff, -> { where.not title: [PARTICIPANT, VIP, TEAM_LEADER, TEAM_MEMBER, INVITEE] }
   scope :sponsor_contacts, -> { where title: SPONSOR_CONTACT }
+  scope :volunteers, -> { where title: VOLUNTEER }
+  scope :judgeables, -> { where title: [VOLUNTEER, ADMIN, JUDGE] }
 
   validates :title, inclusion: { in: VALID_ASSIGNMENT_TITLES }
   validate :can_only_join_team_if_registered_for_a_competition_event
