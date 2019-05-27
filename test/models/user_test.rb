@@ -90,7 +90,7 @@ class UserTest < ActiveSupport::TestCase
 
   test 'peoples_assignment' do
     assert @user.peoples_assignment(@competition).present?
-    assert_not @judge.peoples_assignment(@competition).present?
+    assert_not User.find(3).peoples_assignment(@competition).present?
   end
 
   test 'judge_assignment' do
