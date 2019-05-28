@@ -13,6 +13,7 @@ class RegistrationTest < ActiveSupport::TestCase
     @inbound_flight = Flight.first
     @outbound_flight = Flight.second
     @waitlist_registration = Registration.second
+    @competition_event_registration = Registration.third
     @non_attending_registration = Registration.fourth
     @vip_registration = @non_attending_registration
   end
@@ -40,6 +41,8 @@ class RegistrationTest < ActiveSupport::TestCase
     assert Registration.participants.exclude? @vip_registration
     assert Registration.vips.include? @vip_registration
     assert Registration.vips.exclude? @registration
+    assert Registration.competition_events.include? @competition_event_registration
+    assert Registration.competition_events.exclude? @waitlist_registration
   end
 
   test 'registration validations' do

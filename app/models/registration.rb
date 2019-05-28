@@ -15,6 +15,8 @@ class Registration < ApplicationRecord
   scope :participants, -> { joins(:assignment).where(assignments: { title: PARTICIPANT }) }
   scope :vips, -> { joins(:assignment).where(assignments: { title: VIP }) }
 
+  scope :competition_events, -> { joins(:event).where(events: { event_type: COMPETITION_EVENT }) }
+
   after_update :check_for_newly_freed_space
 
   validates :status, presence: true
