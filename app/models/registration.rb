@@ -3,6 +3,7 @@ class Registration < ApplicationRecord
   belongs_to :event
 
   has_one :user, through: :assignment
+  has_one :competition, through: :assignment
 
   has_many :registration_flights, dependent: :destroy
   has_many :flights, through: :registration_flights

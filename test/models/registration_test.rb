@@ -4,6 +4,7 @@ class RegistrationTest < ActiveSupport::TestCase
   setup do
     @registration = Registration.first
     @assignment = Assignment.fourth
+    @competition = Competition.first
     @user = User.first
     @event = Event.first
     @registration_flight = RegistrationFlight.first
@@ -20,6 +21,7 @@ class RegistrationTest < ActiveSupport::TestCase
 
   test 'registration associations' do
     assert @registration.assignment == @assignment
+    assert @registration.competition == @competition
     assert @registration.user == @user
     assert @registration.event == @event
     assert @registration.registration_flights.include? @registration_flight
