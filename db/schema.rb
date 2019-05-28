@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_04_01_073253) do
+ActiveRecord::Schema.define(version: 2019_05_28_104413) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -43,7 +43,9 @@ ActiveRecord::Schema.define(version: 2019_04_01_073253) do
     t.string "title"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "competition_id"
     t.index ["assignable_type", "assignable_id"], name: "index_assignments_on_assignable_type_and_assignable_id"
+    t.index ["competition_id"], name: "index_assignments_on_competition_id"
     t.index ["title"], name: "index_assignments_on_title"
     t.index ["user_id"], name: "index_assignments_on_user_id"
   end

@@ -1,6 +1,7 @@
 class Assignment < ApplicationRecord
   belongs_to :assignable, polymorphic: true
   belongs_to :user
+  belongs_to :competition
 
   has_many :registrations, dependent: :destroy
   has_many :favourites, dependent: :destroy
@@ -22,8 +23,11 @@ class Assignment < ApplicationRecord
   scope :volunteers, -> { where title: VOLUNTEER }
   scope :judgeables, -> { where title: [VOLUNTEER, ADMIN, JUDGE] }
 
+  before_validation :check_competition
+
   validates :title, inclusion: { in: VALID_ASSIGNMENT_TITLES }
   validate :can_only_join_team_if_registered_for_a_competition_event
+  validate :correct_competition
 
   # ENHANCEMENT: Validation to prevent assignment duplicates.
 
@@ -57,5 +61,29 @@ class Assignment < ApplicationRecord
   # ENHANCEMENT: One line, remove to where it is called.
   def judgeable_scores(teams)
     JudgeableScores.new(self, teams).compile
+  end
+
+  private
+
+  # Will fill in the competition_id if none has been entered
+  def check_competition
+    return unless competition_id.nil?
+
+    self.competition_id = correct_competition_id
+  end
+
+  # A validation to check that the competition that was attached to the
+  # assignment was the correct one as per the assignable entity
+  def correct_competition
+    return unless correct_competition_id != competition_id
+
+    errors.add :competiton, 'The Competition is not correct'
+  end
+
+  # Return the correct competition id for an assignment
+  def correct_competition_id
+    return assignable_id if assignable_type == 'Competition'
+
+    assignable.competition.id
   end
 end

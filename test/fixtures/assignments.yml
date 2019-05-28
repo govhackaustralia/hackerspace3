@@ -10,6 +10,7 @@ one:
   assignable_id: 1
   assignable_type: Competition
   title: GovHack Management Team
+  competition_id: 1
 
 two:
   id: 2
@@ -17,6 +18,7 @@ two:
   assignable_id: 1
   assignable_type: Region
   title: Region Director
+  competition_id: 1
 
 three:
   id: 3
@@ -24,6 +26,7 @@ three:
   assignable_id: 1
   assignable_type: Event
   title: Event Host
+  competition_id: 1
 
 four:
   id: 4
@@ -31,6 +34,7 @@ four:
   assignable_id: 1
   assignable_type: Competition
   title: Participant
+  competition_id: 1
 
 five:
   id: 5
@@ -38,6 +42,7 @@ five:
   assignable_id: 1
   assignable_type: Sponsor
   title: Sponsor Contact
+  competition_id: 1
 
 six:
   id: 6
@@ -45,6 +50,7 @@ six:
   assignable_id: 1
   assignable_type: Competition
   title: VIP
+  competition_id: 1
 
 seven:
   id: 7
@@ -52,6 +58,7 @@ seven:
   assignable_id: 1
   assignable_type: Challenge
   title: Judge
+  competition_id: 1
 
 eight:
   id: 8
@@ -59,6 +66,7 @@ eight:
   assignable_id: 1
   assignable_type: Competition
   title: GovHack Volunteer
+  competition_id: 1
 
 nine:
   id: 9
@@ -66,6 +74,7 @@ nine:
   assignable_id: 1
   assignable_type: Team
   title: Team Member
+  competition_id: 1
 
 ten:
   id: 10
@@ -73,6 +82,7 @@ ten:
   assignable_id: 1
   assignable_type: Event
   title: Event Support
+  competition_id: 1
 
 eleven:
   id: 11
@@ -80,6 +90,7 @@ eleven:
   assignable_id: 1
   assignable_type: Team
   title: Team Leader
+  competition_id: 1
 
 twelve:
   id: 12
@@ -87,6 +98,7 @@ twelve:
   assignable_id: 1
   assignable_type: Team
   title: Invitee
+  competition_id: 1
 
 thirteen:
   id: 13
@@ -94,6 +106,7 @@ thirteen:
   assignable_id: 1
   assignable_type: Competition
   title: Participant
+  competition_id: 1
 
 fourteen:
   id: 14
@@ -101,3 +114,4 @@ fourteen:
   assignable_id: 1
   assignable_type: Region
   title: Region Support
+  competition_id: 1
