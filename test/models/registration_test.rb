@@ -3,7 +3,7 @@ require 'test_helper'
 class RegistrationTest < ActiveSupport::TestCase
   setup do
     @registration = Registration.first
-    @assignment = Assignment.find(4)
+    @assignment = Assignment.fourth
     @user = User.first
     @event = Event.first
     @registration_flight = RegistrationFlight.first
