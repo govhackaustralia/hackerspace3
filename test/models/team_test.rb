@@ -77,6 +77,7 @@ class TeamTest < ActiveSupport::TestCase
     assert Team.published.include? @team
     @team.update published: false
     assert_not Team.published.include? @team
+    assert Team.competition(@competition).include? @team
   end
 
   test 'search' do

@@ -33,6 +33,9 @@ class Team < ApplicationRecord
   has_one_attached :high_res_image
 
   scope :published, -> { where published: true }
+  scope :competition, lambda { |competition|
+    joins(event: :region).where(regions: { competition: competition })
+  }
 
   # Returns the user record for the team leader.
   # ENHANCEMENT: Should not be needed.
