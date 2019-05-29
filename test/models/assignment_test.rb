@@ -43,6 +43,7 @@ class AssignmentTest < ActiveSupport::TestCase
   end
 
   test 'assignment scopes' do
+    assert Assignment.event_assignments.include? @participant
     assert Assignment.region_supports.include? @region_support
     assert Assignment.event_hosts.include? @event_host
     assert Assignment.event_supports.include? @event_support
