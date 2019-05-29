@@ -9,6 +9,8 @@ class User < ApplicationRecord
   has_many :scorecards, through: :assignments
   has_many :registrations, through: :assignments
 
+  has_many :event_assignments, -> { event_assignments }, class_name: 'Assignment'
+
   has_many :joined_team_assignments, -> { team_confirmed }, class_name: 'Assignment'
   has_many :joined_teams, through: :joined_team_assignments, source: :assignable, source_type: 'Team'
 
@@ -109,11 +111,6 @@ class User < ApplicationRecord
     return assignment unless assignment.nil?
 
     competition.assignments.find_or_create_by(user: self, title: PARTICIPANT)
-  end
-
-  # Returns all event assignments for user across all competitions
-  def event_assignments
-    assignments.where title: [VIP, PARTICIPANT]
   end
 
   # Returns a user's event_assignment if they have permission to vote.

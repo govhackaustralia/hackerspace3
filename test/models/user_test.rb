@@ -31,6 +31,8 @@ class UserTest < ActiveSupport::TestCase
     assert @user.scorecards.include? @scorecard
     assert @user.registrations.include? @registration
 
+    assert @user.event_assignments.include? @participant_assignment
+
     assert @user.joined_team_assignments.include? @joined_team_assignment
     assert @user.joined_teams.include? @joined_team
 
@@ -69,10 +71,6 @@ class UserTest < ActiveSupport::TestCase
 
   test 'event_assignment' do
     assert @user.event_assignment(@competition) == @participant_assignment
-  end
-
-  test 'event_assignments' do
-    assert @user.event_assignments.include? @participant_assignment
   end
 
   test 'admin_privileges' do
