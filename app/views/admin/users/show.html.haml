@@ -3,19 +3,16 @@
   %p
     Email: #{@user.email}
   - @event_assignments.each do |event_assignment|
-    %h3= event_assignment.assignable.name
+    %h3= event_assignment.competition.name
     %h4 Event Assignment
-    %p
-      Event Assignment Title: #{event_assignment.title}
-    = link_to 'Update Event Assignment', edit_admin_user_assignment_path(@user, event_assignment)
+    %p Title: #{event_assignment.title}
+    %p= link_to 'Update Event Assignment', edit_admin_user_assignment_path(@user, event_assignment)
+    %br
     %h4 All Other Assignments
-    - @user.assignments.each do |assignment|
-      - next if assignment == event_assignment
-      %h5
-        %strong
-          Title: #{assignment.assignable.class.name} - #{assignment.title}
-      %p
-        Assigned To: #{assignment.assignable.name}
+    - @user.assignments.where(competition: event_assignment.competition).where.not(title: EVENT_ASSIGNMENT_TITLES).each do |assignment|
+      %h5= assignment.assignable.name
+      %p Assignment type: #{assignment.assignable.class.name}
+      %p Title: #{assignment.title}
       %p= link_to 'Remove Assignment', admin_user_assignment_path(@user, assignment), method: :delete, data: { confirm: 'Are you sure?' }
       %br
 %p= link_to 'Back to Users', admin_users_path

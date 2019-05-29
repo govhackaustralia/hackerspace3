@@ -16,7 +16,7 @@ class Admin::UsersController < ApplicationController
 
   def show
     @user = User.find params[:id]
-    @event_assignments = @user.event_assignments
+    @event_assignments = @user.event_assignments.order(competition_id: :desc).preload :competition
   end
 
   def new
