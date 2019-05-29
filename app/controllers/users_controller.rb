@@ -5,18 +5,18 @@ class UsersController < ApplicationController
     @user = current_user
     @competition = Competition.current
 
-    @assignments = @user.assignments
+    @assignments = @user.assignments.where competition: @competition
     @assignment_titles = @assignments.pluck :title
 
-    @event_assignment = @user.event_assignment(@competition)
-    @registrations = @user.registrations.preload event: :region
+    @event_assignment = @user.event_assignment @competition
+    @registrations = @event_assignment.registrations.preload event: :region
 
     @sponsor_contact_assignments = @assignments.sponsor_contacts.preload :assignable
 
     @favourite_teams = @event_assignment.favourite_teams.published.preload :event, :current_project
 
-    @joined_teams = @user.joined_teams.preload :event, :current_project, :region
-    @invited_team_assignments = @user.invited_team_assignments.preload assignable: [:event, :current_project]
+    @joined_teams = @user.joined_teams.competition(@competition).preload :event, :current_project, :region
+    @invited_team_assignments = @user.invited_team_assignments.where(competition: @competiton).preload assignable: [:event, :current_project]
 
     @public_winning_entries = has_public_winning_entries?
     @region_privileges = @user.region_privileges?
