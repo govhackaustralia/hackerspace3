@@ -148,11 +148,6 @@ class User < ApplicationRecord
     how_did_you_hear.blank?
   end
 
-  # Returns true if an user is participating in a competition event.
-  def competition_event_participant?
-    participating_competition_events.where(competition: Competition.current).present?
-  end
-
   require 'csv'
 
   # Generates a CSV file for published teams and their selected attributes.
