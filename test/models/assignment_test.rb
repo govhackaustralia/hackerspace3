@@ -17,9 +17,9 @@ class AssignmentTest < ActiveSupport::TestCase
     @region_support = Assignment.find 14
     @event_host = Assignment.third
     @event_support = Assignment.find 10
-    @team_leader = Assignment.find 11
+    @team_leader_assignment = Assignment.find 11
     @team_invitee = Assignment.find 12
-    @team_member = Assignment.find 9
+    @team_member_assignment = Assignment.find 9
     @judge = Assignment.find 7
     @contact = Assignment.find 5
     @volunteer = Assignment.find 8
@@ -47,12 +47,12 @@ class AssignmentTest < ActiveSupport::TestCase
     assert Assignment.event_hosts.include? @event_host
     assert Assignment.event_supports.include? @event_support
     assert Assignment.participants.include? @participant
-    assert Assignment.team_members.include? @team_member
-    assert Assignment.team_leaders.include? @team_leader
+    assert Assignment.team_members.include? @team_member_assignment
+    assert Assignment.team_leaders.include? @team_leader_assignment
     assert Assignment.team_invitees.include? @team_invitee
-    assert Assignment.team_confirmed.include? @team_member
-    assert Assignment.team_confirmed.include? @team_leader
-    assert Assignment.team_participants.include? @team_leader
+    assert Assignment.team_confirmed.include? @team_member_assignment
+    assert Assignment.team_confirmed.include? @team_leader_assignment
+    assert Assignment.team_participants.include? @team_leader_assignment
     assert Assignment.judges.include? @judge
     assert Assignment.staff.include? @judge
     assert Assignment.staff.exclude? @team_invitee
@@ -76,9 +76,15 @@ class AssignmentTest < ActiveSupport::TestCase
     assert assignment.persisted?
   end
 
-  test 'team validations' do
+  test 'only_one_team_leader_assignment' do
+    Registration.fourth.update status: ATTENDING
+    @team_member_assignment.update! title: TEAM_LEADER
+
+    assert @team_leader_assignment.reload.title == TEAM_MEMBER
+  end
+
+  test 'team can_only_join_team_if_registered_for_a_competition_event' do
     Registration.third.destroy
-    # can_only_join_team_if_registered_for_a_competition_event
     assignment = @team.assignments.create user: @user, title: TEAM_LEADER
     assert_not assignment.persisted?
     # Fix: Something wrong with this test/method, will fail when another

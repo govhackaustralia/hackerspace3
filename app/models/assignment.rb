@@ -38,22 +38,20 @@ class Assignment < ApplicationRecord
   def only_one_team_leader
     return unless title == TEAM_LEADER
 
-    leader_assignments = Assignment.where(assignable: assignable, title: TEAM_LEADER).order(updated_at: :asc)
+    leader_assignments = assignable.leader_assignments.order updated_at: :asc
     return unless leader_assignments.count > 1
 
-    leader_assignments.first.update(title: TEAM_MEMBER)
+    leader_assignments.first.update title: TEAM_MEMBER
   end
 
   # A validation to ensure there only participants registered for a competition
   # event is able to join a team in any position.
   def can_only_join_team_if_registered_for_a_competition_event
-    return unless [TEAM_MEMBER, TEAM_LEADER, INVITEE].include? title
+    return unless TEAM_ADMIN.include? title
 
-    registration_event_ids = user.registrations.where(status: [ATTENDING, WAITLIST]).pluck(:event_id)
-    competition_event_ids = Competition.current.events.where(event_type: COMPETITION_EVENT).pluck(:id)
-    return unless (registration_event_ids & competition_event_ids).empty?
+    return unless user.event_assignment(competition).registrations.participating.competition_events.empty?
 
-    errors.add(:checkpoint_id, 'Register for a competition event to join or create a team.')
+    errors.add :checkpoiUnt_id, 'Register for a competition event to join or create a team.'
   end
 
   # Returns object for a particular judgeable assignment showing the status of
