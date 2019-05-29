@@ -2,7 +2,7 @@
   <h2>Update event assignment for <%= @user.full_name %></h2>
 
   <%= form_for [:admin, @user, @assignment] do |f| %>
-  <% EVENT_ASSIGNMENTS.each do |title| %>
+  <% EVENT_ASSIGNMENT_TITLES.each do |title| %>
     <%= f.radio_button(:title, title,
       options = {checked: @assignment.title == title}) %>
     <%= f.label(:title, title) %><br>

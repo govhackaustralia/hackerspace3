@@ -131,7 +131,7 @@ class Team < ApplicationRecord
   # ENHANCEMENT: Move to active record query.
   def member_competition_events
     user_ids = confirmed_members.pluck(:id)
-    assignment_ids = Assignment.where(user_id: user_ids, title: EVENT_ASSIGNMENTS).pluck(:id)
+    assignment_ids = Assignment.where(user_id: user_ids, title: EVENT_ASSIGNMENT_TITLES).pluck(:id)
     event_ids = Registration.where(assignment_id: assignment_ids, status: [ATTENDING, WAITLIST]).pluck(:event_id)
     Event.where(id: event_ids.uniq, event_type: COMPETITION_EVENT)
   end
