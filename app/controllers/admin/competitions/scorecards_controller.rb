@@ -1,6 +1,5 @@
 class Admin::Competitions::ScorecardsController < ApplicationController
-  before_action :authenticate_user!
-  before_action :check_for_privileges
+  before_action :authenticate_user!, :check_for_privileges
 
   require 'descriptive_statistics'
 
@@ -8,8 +7,10 @@ class Admin::Competitions::ScorecardsController < ApplicationController
     @competition = Competition.find params[:competition_id]
     @project_judging_total = @competition.score_total PROJECT
     @teams = @competition.teams.published
-    @projects = @competition.published_projects_by_name.preload(:event)
-    @region_scorecard_helper = Scorecard.region_scorecard_helper(@teams, PROJECT, params[:include_judges] == true.to_s)
+    @projects = @competition.published_projects_by_name.preload :event
+    @region_scorecard_helper = Scorecard.region_scorecard_helper(
+      @teams, PROJECT, params[:include_judges] == true.to_s
+    )
   end
 
   private
