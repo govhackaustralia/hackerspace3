@@ -1,0 +1,54 @@
+%main.team_page
+  %h2
+    Competition #{@competition.year}
+  - if @competition.current
+    %p
+      %strong Current Competition
+  %p Start Time: #{time_tag @competition.start_time}
+  %p End Time: #{time_tag @competition.end_time}
+  %p People's Choice Start: #{time_tag @competition.peoples_choice_start}
+  %p People's Choice End: #{time_tag @competition.peoples_choice_end}
+  %p Challenge Judging Start: #{time_tag @competition.challenge_judging_start}
+  %p Challenge Judging End: #{time_tag @competition.challenge_judging_end}
+  %p= link_to 'Update Competition', edit_admin_competition_path(@competition)
+  %h3 Regions
+  %p
+    = pluralize @regions_count, 'region'
+    set for this competition.
+  %p= link_to 'Manage Regions', admin_competition_regions_path(@competition)
+  %h3 People's Choice Judging
+  %p= link_to 'Competition Judging', admin_competition_scorecards_path(@competition, include_judges: false)
+  %p= link_to 'Competition Judging (with Judges)', admin_competition_scorecards_path(@competition, include_judges: true)
+  %h3 Competition Assignments
+  %h4 Competition Director
+  - if @director.present?
+    = render 'admin/shared/user_contact', locals: { user: @director }
+  - else
+    %p This competition does not currently have a director.
+  %h4 Site Admins
+  - if @site_admins.present?
+    - @site_admins.each do |site_admin|
+      = render 'admin/shared/user_contact', locals: { user: site_admin }
+  - else
+    %p This competition does not currently have any site admins.
+  %h4 GovHack Management Team
+  - if @management_team.present?
+    - @management_team.each do |member|
+      = render 'admin/shared/user_contact', locals: { user: member }
+  - else
+    %p This competition does not currently have any management team members.
+  %p= link_to 'Assignments Management', admin_competition_assignments_path(@competition)
+  %h3 CheckPoints
+  %p
+    = pluralize @checkpoints.count, 'checkpoint'
+    saved.
+  %p= link_to 'Competition Checkpoints', admin_competition_checkpoints_path(@competition)
+  %h3 Criteria
+  %p
+    = pluralize @challenge_criteria_count, 'Challenge Criterion'
+    saved.
+  %p
+    = pluralize @project_criteria_count, 'Project Criterion'
+    saved.
+  %p= link_to 'Competition Criteria', admin_competition_criteria_path(@competition)
+%p= link_to 'Back to Competitions', admin_competitions_path
