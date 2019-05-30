@@ -87,12 +87,12 @@ class User < ApplicationRecord
   # ENHANCEMENT: Move to Controller.
   # ENHANCEMENT: Check against assignments not titles.
   def admin_assignments
-    assignments.where(title: ADMIN_TITLES)
+    assignments.where title: ADMIN_TITLES
   end
 
   # Assigns a user the assignment of site admin.
   def make_site_admin
-    Competition.current.assignments.find_or_create_by(user: self, title: ADMIN)
+    Competition.current.assignments.find_or_create_by user: self, title: ADMIN
   end
 
   # Returns a display name in order of system preference.
@@ -107,10 +107,10 @@ class User < ApplicationRecord
   # This is the assignment to the competition that is used to register for
   # events (among other things), in a given competition.
   def event_assignment(competition)
-    assignment = competition.assignments.find_by(user: self, title: VIP)
+    assignment = competition.assignments.find_by user: self, title: VIP
     return assignment unless assignment.nil?
 
-    competition.assignments.find_or_create_by(user: self, title: PARTICIPANT)
+    competition.assignments.find_or_create_by user: self, title: PARTICIPANT
   end
 
   # Returns a user's event_assignment if they have permission to vote.
