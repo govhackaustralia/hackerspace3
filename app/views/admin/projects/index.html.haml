@@ -1,0 +1,18 @@
+%main.project_index
+  %h2
+    Projects for #{@current_project.team_name}
+  %h3 All Projects
+  - @projects.each do |project|
+    %h4
+      = project.team_name
+      - if project == @current_project
+        %strong (Current Project)
+        %br/
+    Created At: #{project.created_at}
+    %br/
+    - if (user = project.user).present?
+      User: #{user.display_name}
+      %br/
+    = link_to 'Go to project', admin_team_project_path(@team, project)
+    %br/
+= link_to 'Back to Team Management', admin_team_path(@team)
