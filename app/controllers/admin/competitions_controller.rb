@@ -1,6 +1,5 @@
 class Admin::CompetitionsController < ApplicationController
-  before_action :authenticate_user!
-  before_action :check_for_privileges
+  before_action :authenticate_user!, :check_for_privileges
 
   def index
     @competitions = Competition.all
@@ -48,11 +47,16 @@ class Admin::CompetitionsController < ApplicationController
   private
 
   def competition_params
-    params.require(:competition).permit :end_time, :start_time, :year,
-                                        :peoples_choice_start,
-                                        :peoples_choice_end,
-                                        :challenge_judging_start,
-                                        :challenge_judging_end, :current
+    params.require(:competition).permit(
+      :end_time,
+      :start_time,
+      :year,
+      :peoples_choice_start,
+      :peoples_choice_end,
+      :challenge_judging_start,
+      :challenge_judging_end,
+      :current
+    )
   end
 
   def check_for_privileges

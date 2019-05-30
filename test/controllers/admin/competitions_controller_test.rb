@@ -22,10 +22,9 @@ class Admin::CompetitionsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'should post create success' do
-    Competition.destroy_all
     assert_difference 'Competition.count' do
       post admin_competitions_url params: { competition: {
-        year: Time.current.year, start_time: Time.current,
+        year: Time.current.year - 1, start_time: Time.current,
         end_time: Time.current, peoples_choice_start: Time.current,
         peoples_choice_end: Time.current, challenge_judging_start: Time.current,
         challenge_judging_end: Time.current
