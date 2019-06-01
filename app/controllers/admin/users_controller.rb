@@ -1,6 +1,5 @@
 class Admin::UsersController < ApplicationController
-  before_action :authenticate_user!
-  before_action :check_for_privileges
+  before_action :authenticate_user!, :check_for_privileges
 
   def index
     @users = if params[:term].blank?
@@ -37,7 +36,7 @@ class Admin::UsersController < ApplicationController
   private
 
   def check_for_privileges
-    return if current_user.admin_privileges?
+    return if current_user.admin_privileges? Competition.all
 
     flash[:alert] = 'You must have valid assignments to access this section.'
     redirect_to root_path

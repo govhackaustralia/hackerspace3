@@ -51,4 +51,9 @@
     = pluralize @project_criteria_count, 'Project Criterion'
     saved.
   %p= link_to 'Competition Criteria', admin_competition_criteria_path(@competition)
+  %h3 Teams
+  %p
+  = pluralize @teams_count, 'Team'
+  created for this competition.
+  %p= link_to 'Competition Teams', admin_competition_teams_path(@competition)
 %p= link_to 'Back to Competitions', admin_competitions_path

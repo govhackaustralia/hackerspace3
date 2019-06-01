@@ -91,6 +91,6 @@
 <% if @parent.present? && @parent.admin_privileges?(current_user) %>
   <p><%= link_to "Back to #{@parent.name} Region", admin_competition_region_path(@competition, @parent) %></p>
 <% end %>
-<% if current_user.admin_privileges? %>
+<% if current_user.admin_privileges?(@competition) %>
   <p><%= link_to 'Back to Competition Regions', admin_competition_regions_path(@competition) %></p>
 <% end %>

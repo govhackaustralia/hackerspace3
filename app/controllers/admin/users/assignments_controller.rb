@@ -1,6 +1,5 @@
 class Admin::Users::AssignmentsController < ApplicationController
-  before_action :authenticate_user!
-  before_action :check_for_privileges
+  before_action :authenticate_user!, :check_for_privileges
 
   def edit
     existing_user_and_assignment
@@ -30,7 +29,7 @@ class Admin::Users::AssignmentsController < ApplicationController
   end
 
   def check_for_privileges
-    return if current_user.admin_privileges?
+    return if current_user.admin_privileges? Competition.all
 
     flash[:alert] = 'You must have valid assignments to access this section.'
     redirect_to root_path

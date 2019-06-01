@@ -4,7 +4,6 @@ class Admin::Competitions::ScorecardsController < ApplicationController
   require 'descriptive_statistics'
 
   def index
-    @competition = Competition.find params[:competition_id]
     @project_judging_total = @competition.score_total PROJECT
     @teams = @competition.teams.published
     @projects = @competition.published_projects_by_name.preload :event
@@ -16,7 +15,8 @@ class Admin::Competitions::ScorecardsController < ApplicationController
   private
 
   def check_for_privileges
-    return if current_user.admin_privileges?
+    @competition = Competition.find params[:competition_id]
+    return if current_user.admin_privileges? @competition
 
     flash[:alert] = 'You must have valid assignments to access this section.'
     redirect_to root_path

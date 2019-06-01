@@ -60,7 +60,7 @@ class Admin::CompetitionsController < ApplicationController
   end
 
   def check_for_privileges
-    return if current_user.admin_privileges?
+    return if current_user.admin_privileges? Competition.all
 
     flash[:alert] = 'You must have valid assignments to access this section.'
     redirect_to root_path
@@ -70,5 +70,6 @@ class Admin::CompetitionsController < ApplicationController
     @regions_count = @competition.regions.count
     @challenge_criteria_count = @competition.challenge_criteria.count
     @project_criteria_count = @competition.project_criteria.count
+    @teams_count = @competition.teams.count
   end
 end

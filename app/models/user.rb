@@ -51,8 +51,8 @@ class User < ApplicationRecord
   # Returns true if a user has any competition admin titles.
   # ENHANCEMENT: Move to Controller.
   # ENHANCEMENT: Check against assignments not titles.
-  def admin_privileges?
-    (assignments.pluck(:title) & COMP_ADMIN).present?
+  def admin_privileges?(competition)
+    assignments.where(competition: competition, title: COMP_ADMIN).any?
   end
 
   # Returns true if a user has any region admin titles.

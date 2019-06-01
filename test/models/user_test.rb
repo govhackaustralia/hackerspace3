@@ -75,10 +75,10 @@ class UserTest < ActiveSupport::TestCase
 
   test 'admin_privileges' do
     # Does have.
-    assert @user.admin_privileges?
+    assert @user.admin_privileges? @competition
     # Does not have.
     @assignment.destroy
-    assert_not @user.admin_privileges?
+    assert_not @user.admin_privileges? @competition
   end
 
   test 'judgeable_assignment' do

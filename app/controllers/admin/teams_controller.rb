@@ -3,7 +3,6 @@ class Admin::TeamsController < ApplicationController
   before_action :check_for_privileges
 
   def index
-    @competition = Competition.current
     @projects = @competition.projects_by_name.preload(:event, :team)
     handle_index
   end
@@ -14,7 +13,6 @@ class Admin::TeamsController < ApplicationController
     @projects = @team.projects
     @event = @team.event
     @region = @team.region
-    @competition = @team.competition
     @checkpoints = @competition.checkpoints.order(:end_time)
     @available_regional_challenges = @team.available_challenges(REGIONAL)
     @available_national_challenges = @team.available_challenges(NATIONAL)
@@ -34,7 +32,8 @@ class Admin::TeamsController < ApplicationController
   private
 
   def check_for_privileges
-    return if current_user.admin_privileges?
+    @competition = Competition.find params[:competition_id]
+    return if current_user.admin_privileges? @competition
 
     flash[:alert] = 'You must have valid assignments to access this section.'
     redirect_to root_path
@@ -61,6 +60,6 @@ class Admin::TeamsController < ApplicationController
   def handle_update_published
     @team.update published: params[:published]
     flash[:notice] = 'Team Updated'
-    redirect_to admin_team_path @team
+    redirect_to admin_competition_team_path @competition, @team
   end
 end

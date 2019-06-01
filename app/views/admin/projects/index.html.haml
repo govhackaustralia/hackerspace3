@@ -8,11 +8,11 @@
       - if project == @current_project
         %strong (Current Project)
         %br/
-    Created At: #{project.created_at}
+    %p Created At: #{project.created_at}
     %br/
     - if (user = project.user).present?
       User: #{user.display_name}
       %br/
-    = link_to 'Go to project', admin_team_project_path(@team, project)
+    %p= link_to 'Go to project', admin_team_project_path(@team, project)
     %br/
-= link_to 'Back to Team Management', admin_team_path(@team)
+%p= link_to 'Back to Team Management', admin_competition_team_path(@team.competition, @team)

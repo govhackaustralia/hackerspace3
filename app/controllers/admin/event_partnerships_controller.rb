@@ -36,8 +36,8 @@ class Admin::EventPartnershipsController < ApplicationController
   end
 
   def check_for_privileges
-    return if current_user.admin_privileges?
     @event = Event.find params[:event_id]
+    return if current_user.admin_privileges? @event.competition
 
     flash[:alert] = 'You must have valid assignments to access this section.'
     redirect_to root_path

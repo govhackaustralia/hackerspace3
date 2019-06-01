@@ -1,14 +1,11 @@
 class Admin::Teams::ScorecardsController < ApplicationController
-  before_action :authenticate_user!
-  before_action :check_for_privileges
+  before_action :authenticate_user!, :check_for_privileges
 
   require 'descriptive_statistics'
 
   def index
-    @team = Team.find params[:team_id]
     @project = @team.current_project
     @region = @team.region
-    @competition = @team.competition
     retrieve_scorecard_info
   end
 
@@ -28,7 +25,8 @@ class Admin::Teams::ScorecardsController < ApplicationController
   private
 
   def check_for_privileges
-    return if current_user.admin_privileges?
+    @team = Team.find params[:team_id]
+    return if current_user.admin_privileges?(@competition = @team.competition)
 
     flash[:alert] = 'You must have valid assignments to access this section.'
     redirect_to root_path

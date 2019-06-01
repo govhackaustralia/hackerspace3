@@ -1,15 +1,12 @@
 class Admin::Teams::EntriesController < ApplicationController
-  before_action :authenticate_user!
-  before_action :check_for_privileges
+  before_action :authenticate_user!, :check_for_privileges
 
   def new
-    @team = Team.find params[:team_id]
     @entry = @team.entries.new
     @challenges = @team.available_challenges params[:challenge_type]
   end
 
   def create
-    @team = Team.find params[:team_id]
     @entry = @team.entries.new entry_params
     if @entry.save
       flash[:notice] = 'New Challenge Entry Created'
@@ -21,7 +18,6 @@ class Admin::Teams::EntriesController < ApplicationController
 
   def edit
     @entry = Entry.find params[:id]
-    @team = @entry.team
     @challenge = @entry.challenge
     @checkpoints = (@team.admin_available_checkpoints(@challenge) << @entry.checkpoint).uniq
   end
@@ -29,13 +25,11 @@ class Admin::Teams::EntriesController < ApplicationController
   def update
     @entry = Entry.find params[:id]
     @challenge = @entry.challenge
-    @team = @entry.team
     @checkpoints = (@team.admin_available_checkpoints(@challenge) << @entry.checkpoint).uniq
     handle_update
   end
 
   def destroy
-    @team = Team.find params[:team_id]
     @entry = Entry.find params[:id]
     @entry.destroy
     flash[:notice] = 'Challenge Entry Removed'
@@ -49,7 +43,8 @@ class Admin::Teams::EntriesController < ApplicationController
   end
 
   def check_for_privileges
-    return if current_user.admin_privileges?
+    @team = Team.find params[:team_id]
+    return if current_user.admin_privileges? @team.competition
 
     flash[:alert] = 'You must have valid assignments to access this section.'
     redirect_to root_path

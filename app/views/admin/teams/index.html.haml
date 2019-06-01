@@ -1,12 +1,11 @@
 %main.project_index
-  %h2
-    Teams for #{@competition.name}
-  = form_tag admin_teams_path, method: :get do
+  %h2 Teams for #{@competition.name}
+  = form_tag admin_competition_teams_path(@competition), method: :get do
     = search_field_tag :term, params[:term]
     = submit_tag 'Search'
-  %p= link_to 'Clear Search', admin_teams_path
-  %p= link_to 'Download CSV (Users who are members of a published team)', admin_teams_path(format: 'csv')
-  %p= link_to 'Download CSV (Every Team Member)', admin_teams_path(format: 'csv', category: 'members')
+  %p= link_to 'Clear Search', admin_competition_teams_path(@competition)
+  %p= link_to 'Download CSV (Users who are members of a published team)', admin_competition_teams_path(@competition, format: 'csv')
+  %p= link_to 'Download CSV (Every Team Member)', admin_competition_teams_path(@competition, format: 'csv', category: 'members')
   %table
     %thead
       %th Project
@@ -15,7 +14,7 @@
     %tbody
       - filter_projects(params[:term]).each do |project|
         %tr
-          %td= link_to "#{project.project_name}", admin_team_path(project.team)
+          %td= link_to "#{project.project_name}", admin_competition_team_path(@competition, project.team)
           %td= project.team_name
           %td= project.event.name
 %p= link_to 'Back to Account Management', manage_account_path
