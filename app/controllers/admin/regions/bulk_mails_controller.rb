@@ -1,29 +1,25 @@
 class Admin::Regions::BulkMailsController < ApplicationController
-  before_action :authenticate_user!
-  before_action :check_for_privileges
+  before_action :authenticate_user!, :check_for_privileges
 
   def index
-    @region = Region.find params[:region_id]
     @bulk_mails = @region.bulk_mails
-    @competition = @region.competition
   end
 
   def show
     @bulk_mail = BulkMail.find params[:id]
-    @team_orders = @bulk_mail.team_orders.preload(team: %i[current_project leaders members])
-    @region = @bulk_mail.mailable
+    @team_orders = @bulk_mail.team_orders.preload(
+      team: %i[current_project leaders members]
+    )
     @bulk_mail.update_team_orders
     retrieve_team_helpers
   end
 
   def new
-    @region = Region.find params[:region_id]
     @bulk_mail = @region.bulk_mails.new
   end
 
   def create
-    @region = Region.find params[:region_id]
-    @bulk_mail = @region.bulk_mails.new(bulk_mail_params)
+    @bulk_mail = @region.bulk_mails.new bulk_mail_params
     @bulk_mail.user = current_user
     @bulk_mail.status = DRAFT
     handle_create
@@ -31,14 +27,14 @@ class Admin::Regions::BulkMailsController < ApplicationController
 
   def edit
     @bulk_mail = BulkMail.find params[:id]
-    @region = @bulk_mail.mailable
-    @team_orders = @bulk_mail.team_orders.preload(team: %i[current_project leaders members])
+    @team_orders = @bulk_mail.team_orders.preload(
+      team: %i[current_project leaders members]
+    )
     @bulk_mail.update_team_orders
   end
 
   def update
     @bulk_mail = BulkMail.find params[:id]
-    @region = @bulk_mail.mailable
     perform_update_operations
     handle_update
   end
@@ -46,7 +42,7 @@ class Admin::Regions::BulkMailsController < ApplicationController
   private
 
   def bulk_mail_params
-    params.require(:bulk_mail).permit(:name, :from_email, :subject, :body)
+    params.require(:bulk_mail).permit :name, :from_email, :subject, :body
   end
 
   def update_team_orders
@@ -57,7 +53,9 @@ class Admin::Regions::BulkMailsController < ApplicationController
   end
 
   def check_for_privileges
-    return if current_user.region_privileges?
+    @region = Region.find params[:region_id]
+    @competition = @region.competition
+    return if current_user.region_privileges? @competition
 
     flash[:alert] = 'You must have valid assignments to access this section.'
     redirect_to root_path

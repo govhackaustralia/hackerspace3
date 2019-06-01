@@ -12,7 +12,7 @@ class ChallengesController < ApplicationController
   def show
     show_variables
     challenge_show_entry_management
-    @region_privileges = user_signed_in? && current_user.region_privileges?
+    @region_privileges = user_signed_in? && current_user.region_privileges?(@region)
     return if helpers.competition_started_or_region_privileges? @region.time_zone
 
     redirect_to root_path
@@ -22,15 +22,15 @@ class ChallengesController < ApplicationController
 
   def index_variables
     @competition = Competition.current
-    @challenges = @competition.challenges.approved.order(:name).preload(:region)
+    @challenges = @competition.challenges.approved.order(:name).preload :region
     root_region = @competition.root_region
     @regions = ([root_region] << root_region.sub_regions.order(:name)).flatten
-    @region_privileges = user_signed_in? && current_user.region_privileges?
+    @region_privileges = user_signed_in? && current_user.region_privileges?(@competition)
   end
 
   def show_variables
     @competition = Competition.current
-    @challenge = Challenge.find_by(identifier: params[:identifier])
+    @challenge = Challenge.find_by identifier: params[:identifier]
     @challenge = Challenge.find(params[:identifier]) if @challenge.nil?
     @region = @challenge.region
     @data_sets = @challenge.data_sets
@@ -47,8 +47,8 @@ class ChallengesController < ApplicationController
   end
 
   def judging_view
-    @teams = @challenge.teams.where(published: true)
-    @projects = @challenge.published_projects_by_name.preload(:event)
+    @teams = @challenge.teams.published
+    @projects = @challenge.published_projects_by_name.preload :event
     return unless user_signed_in?
 
     user_judging
@@ -57,12 +57,12 @@ class ChallengesController < ApplicationController
   def user_judging
     if (@judgeable_assignment = current_user.judgeable_assignment @competition).present?
       @peoples_assignment = current_user.peoples_assignment @competition
-      @project_judging = @judgeable_assignment.judgeable_scores(@teams)
+      @project_judging = @judgeable_assignment.judgeable_scores @teams
       @project_judging_total = @competition.score_total PROJECT
     end
     return unless (@judge = current_user.judge_assignment(@challenge)).present?
 
-    @challenge_judging = @judge.judgeable_scores(@teams)
+    @challenge_judging = @judge.judgeable_scores @teams
     @challenge_judging_total = @competition.score_total CHALLENGE
   end
 

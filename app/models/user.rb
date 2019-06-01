@@ -58,8 +58,8 @@ class User < ApplicationRecord
   # Returns true if a user has any region admin titles.
   # ENHANCEMENT: Move to Controller.
   # ENHANCEMENT: Check against assignments not titles.
-  def region_privileges?
-    (assignments.pluck(:title) & REGION_PRIVILEGES).present?
+  def region_privileges?(competition)
+    assignments.where(competition: competition, title: REGION_PRIVILEGES).any?
   end
 
   # Returns true if a user has any event admin titles.

@@ -1,9 +1,7 @@
 class Admin::Challenges::JudgesController < ApplicationController
-  before_action :authenticate_user!
-  before_action :check_for_privileges
+  before_action :authenticate_user!, :check_for_privileges
 
   def new
-    @challenge = Challenge.find params[:challenge_id]
     @title = JUDGE
     return if params[:term].blank?
 
@@ -11,7 +9,6 @@ class Admin::Challenges::JudgesController < ApplicationController
   end
 
   def create
-    @challenge = Challenge.find params[:challenge_id]
     @judge = @challenge.assignments.judges.new assignment_params
     save_new_judge
   end
@@ -23,7 +20,8 @@ class Admin::Challenges::JudgesController < ApplicationController
   end
 
   def check_for_privileges
-    return if current_user.region_privileges?
+    @challenge = Challenge.find params[:challenge_id]
+    return if current_user.region_privileges? @challenge.competition
 
     flash[:alert] = 'You must have valid assignments to access this section.'
     redirect_to root_path

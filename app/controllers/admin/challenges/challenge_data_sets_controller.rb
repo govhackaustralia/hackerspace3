@@ -1,9 +1,7 @@
 class Admin::Challenges::ChallengeDataSetsController < ApplicationController
-  before_action :authenticate_user!
-  before_action :check_for_privileges
+  before_action :authenticate_user!, :check_for_privileges
 
   def new
-    @challenge = Challenge.find(params[:challenge_id])
     @challenge_data_set = @challenge.challenge_data_sets.new
     return if params[:term].blank?
 
@@ -11,27 +9,28 @@ class Admin::Challenges::ChallengeDataSetsController < ApplicationController
   end
 
   def create
-    @challenge = Challenge.find(params[:challenge_id])
-    @challenge_data_set = @challenge.challenge_data_sets.new(challenge_data_set_params)
+    @challenge_data_set = @challenge.challenge_data_sets.new(
+      challenge_data_set_params
+    )
     handle_create_save
   end
 
   def destroy
-    @challenge_data_set = ChallengeDataSet.find(params[:id])
+    @challenge_data_set = ChallengeDataSet.find params[:id]
     @challenge_data_set.destroy
-    @challenge = @challenge_data_set.challenge
     flash[:notice] = 'Challenge Data Set Destroyed'
-    redirect_to admin_region_challenge_path(@challenge.region_id, @challenge)
+    redirect_to admin_region_challenge_path @challenge.region_id, @challenge
   end
 
   private
 
   def challenge_data_set_params
-    params.require(:challenge_data_set).permit(:data_set_id)
+    params.require(:challenge_data_set).permit :data_set_id
   end
 
   def check_for_privileges
-    return if current_user.region_privileges?
+    @challenge = Challenge.find params[:challenge_id]
+    return if current_user.region_privileges? @challenge.competition
 
     flash[:alert] = 'You must have valid assignments to access this section.'
     redirect_to root_path
@@ -48,11 +47,13 @@ class Admin::Challenges::ChallengeDataSetsController < ApplicationController
   end
 
   def search_data_sets
-    @data_set = DataSet.find_by_url(params[:term])
+    @data_set = DataSet.find_by_url params[:term]
     if @data_set.present?
-      @existing_challenge_data_set = ChallengeDataSet.find_by(data_set: @data_set, challenge: @challenge)
+      @existing_challenge_data_set = ChallengeDataSet.find_by(
+        data_set: @data_set, challenge: @challenge
+      )
     else
-      @data_sets = DataSet.search(params[:term])
+      @data_sets = DataSet.search params[:term]
     end
   end
 end

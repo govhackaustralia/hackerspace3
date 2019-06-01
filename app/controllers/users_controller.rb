@@ -19,7 +19,7 @@ class UsersController < ApplicationController
     @invited_team_assignments = @user.invited_team_assignments.where(competition: @competiton).preload assignable: [:event, :current_project]
 
     @public_winning_entries = has_public_winning_entries?
-    @region_privileges = @user.region_privileges?
+    @region_privileges = @user.region_privileges?(@competition)
   end
 
   def edit

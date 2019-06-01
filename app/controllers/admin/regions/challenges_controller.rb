@@ -1,15 +1,11 @@
 class Admin::Regions::ChallengesController < ApplicationController
-  before_action :authenticate_user!
-  before_action :check_for_privileges
+  before_action :authenticate_user!, :check_for_privileges
 
   def index
-    @region = Region.find params[:region_id]
     @challenges = @region.challenges
-    @competition = @region.competition
   end
 
   def show
-    @region = Region.find params[:region_id]
     @challenge = Challenge.find params[:id]
     @challenge_sponsorships = @challenge.challenge_sponsorships
     @challenge_data_sets = @challenge.challenge_data_sets
@@ -17,12 +13,11 @@ class Admin::Regions::ChallengesController < ApplicationController
   end
 
   def new
-    @region = Region.find params[:region_id]
     @challenge = @region.challenges.new
   end
 
   def create
-    create_new_challenge
+    @challenge = @region.challenges.new challenge_params
     if @challenge.save
       flash[:notice] = 'New Challenge Created'
       redirect_to admin_region_challenge_path @region, @challenge
@@ -33,19 +28,13 @@ class Admin::Regions::ChallengesController < ApplicationController
   end
 
   def edit
-    @region = Region.find params[:region_id]
     @challenge = Challenge.find params[:id]
   end
 
   def update
-    update_challenge
+    @challenge = Challenge.find params[:id]
     @challenge.update(challenge_params) unless params[:challenge].blank?
-    if @challenge.save
-      handle_update_redirect
-    else
-      flash[:alert] = @challenge.errors.full_messages.to_sentence
-      render :edit
-    end
+    handle_update
   end
 
   private
@@ -83,27 +72,28 @@ class Admin::Regions::ChallengesController < ApplicationController
     redirect_to admin_region_challenge_path @region, @challenge
   end
 
+  def handle_update
+    if @challenge.save
+      handle_update_redirect
+    else
+      flash[:alert] = @challenge.errors.full_messages.to_sentence
+      render :edit
+    end
+  end
+
   def check_for_privileges
-    return if current_user.region_privileges?
+    @region = Region.find params[:region_id]
+    @competition = @region.competition
+    return if current_user.region_privileges? @competition
 
     flash[:alert] = 'You must have valid assignments to access this section.'
     redirect_to root_path
   end
 
   def challenge_params
-    params.require(:challenge).permit(:name, :short_desc, :long_desc,
-                                      :eligibility, :video_url, :approved,
-                                      :image, :pdf, :pdf_preview)
-  end
-
-  def update_challenge
-    @region = Region.find params[:region_id]
-    @challenge = Challenge.find params[:id]
-  end
-
-  def create_new_challenge
-    @region = Region.find params[:region_id]
-    @challenge = @region.challenges.new challenge_params
-    @challenge.competition = Competition.current
+    params.require(:challenge).permit(
+      :name, :short_desc, :long_desc, :eligibility, :video_url, :approved,
+      :image, :pdf, :pdf_preview
+    )
   end
 end

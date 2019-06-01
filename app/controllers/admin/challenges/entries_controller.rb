@@ -1,12 +1,9 @@
 class Admin::Challenges::EntriesController < ApplicationController
-  before_action :authenticate_user!
-  before_action :check_for_privileges
+  before_action :authenticate_user!, :check_for_privileges
 
   def index
-    @challenge = Challenge.find params[:challenge_id]
     @judges = @challenge.users
     @region = @challenge.region
-    @competition = @region.competition
     team_project_entries
     project_judging
     challenge_judging
@@ -16,7 +13,6 @@ class Admin::Challenges::EntriesController < ApplicationController
     @entry = Entry.find params[:id]
     @team = @entry.team
     @checkpoint = @entry.checkpoint
-    @challenge = @entry.challenge
   end
 
   def update
@@ -39,7 +35,9 @@ class Admin::Challenges::EntriesController < ApplicationController
   end
 
   def check_for_privileges
-    return if current_user.region_privileges?
+    @challenge = Challenge.find params[:challenge_id]
+    @competition = @challenge.competition
+    return if current_user.region_privileges? @competition
 
     flash[:alert] = 'You must have valid assignments to access this section.'
     redirect_to root_path
@@ -73,7 +71,6 @@ class Admin::Challenges::EntriesController < ApplicationController
 
   def update_entry
     @entry = Entry.find params[:id]
-    @challenge = @entry.challenge
     @entry.update(entry_params) if params[:entry].present?
   end
 end

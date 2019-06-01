@@ -25,7 +25,7 @@ class ProjectsController < ApplicationController
     @competition = Competition.current
     @teams = @competition.teams.published
     @projects = @competition.published_projects_by_name.preload(:event)
-    @region_privileges = user_signed_in? && current_user.region_privileges?
+    @region_privileges = user_signed_in? && current_user.region_privileges?(@competition)
   end
 
   def show_published

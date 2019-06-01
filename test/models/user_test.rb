@@ -74,11 +74,15 @@ class UserTest < ActiveSupport::TestCase
   end
 
   test 'admin_privileges' do
-    # Does have.
     assert @user.admin_privileges? @competition
-    # Does not have.
     @assignment.destroy
     assert_not @user.admin_privileges? @competition
+  end
+
+  test 'region_privileges' do
+    assert @user.region_privileges? @competition
+    @user.assignments.destroy_all
+    assert_not @user.region_privileges? @competition
   end
 
   test 'judgeable_assignment' do

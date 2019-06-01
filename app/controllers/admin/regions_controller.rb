@@ -1,15 +1,12 @@
 class Admin::RegionsController < ApplicationController
-  before_action :authenticate_user!
-  before_action :check_for_privileges
+  before_action :authenticate_user!, :check_for_privileges
 
   def index
-    @competition = Competition.find params[:competition_id]
     @region = @competition.root_region
   end
 
   def show
-    @region = Region.find(params[:id])
-    @competition = @region.competition
+    @region = Region.find params[:id]
     @parent = @region.parent
     @director = @region.director
     @supports_count = @region.supports.count
@@ -19,7 +16,6 @@ class Admin::RegionsController < ApplicationController
   end
 
   def new
-    @competition = Competition.find params[:competition_id]
     @region = Region.new
   end
 
@@ -36,7 +32,6 @@ class Admin::RegionsController < ApplicationController
 
   def edit
     @region = Region.find params[:id]
-    @competition = @region.competition
   end
 
   def update
@@ -53,11 +48,12 @@ class Admin::RegionsController < ApplicationController
   private
 
   def region_params
-    params.require(:region).permit(:time_zone, :name, :award_release)
+    params.require(:region).permit :time_zone, :name, :award_release
   end
 
   def check_for_privileges
-    return if current_user.region_privileges?
+    @competition = Competition.find params[:competition_id]
+    return if current_user.region_privileges? @competition
 
     flash[:alert] = 'You must have valid assignments to access this section.'
     redirect_to root_path
@@ -78,9 +74,9 @@ class Admin::RegionsController < ApplicationController
     if @region.national?
       retrieve_national_counts
     else
-      @event_counts = helpers.challenges_event_counts(@region)
-      @event_names = @competition.events.where(event_type: COMPETITION_EVENT, region: @region).order(:name).pluck(:name)
-      @challenge_names = @region.challenges.order(:name).pluck(:name)
+      @event_counts = helpers.challenges_event_counts @region
+      @event_names = @region.events.competitions.order(:name).pluck :name
+      @challenge_names = @region.challenges.order(:name).pluck :name
     end
   end
 

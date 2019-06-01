@@ -1,9 +1,7 @@
 class Admin::ChallengeSponsorshipsController < ApplicationController
-  before_action :authenticate_user!
-  before_action :check_for_privileges
+  before_action :authenticate_user!, :check_for_privileges
 
   def new
-    @challenge = Challenge.find(params[:challenge_id])
     @challenge_sponsorship = @challenge.challenge_sponsorships.new
     return if params[:term].blank?
 
@@ -11,24 +9,23 @@ class Admin::ChallengeSponsorshipsController < ApplicationController
   end
 
   def create
-    @challenge = Challenge.find(params[:challenge_id])
-    @sponsor = Sponsor.find(params[:sponsor_id])
-    @challenge_sponsorship = @challenge.challenge_sponsorships.new(sponsor: @sponsor)
+    @sponsor = Sponsor.find params[:sponsor_id]
+    @challenge_sponsorship = @challenge.challenge_sponsorships.new sponsor: @sponsor
     handle_create
   end
 
   def destroy
-    @sponsorship = ChallengeSponsorship.find(params[:id])
+    @sponsorship = ChallengeSponsorship.find params[:id]
     @sponsorship.destroy
-    @challenge = @sponsorship.challenge
     flash[:notice] = 'Challenge Sponsorship Destroyed'
-    redirect_to admin_region_challenge_path(@challenge.region_id, @challenge)
+    redirect_to admin_region_challenge_path @challenge.region_id, @challenge
   end
 
   private
 
   def check_for_privileges
-    return if current_user.region_privileges?
+    @challenge = Challenge.find params[:challenge_id]
+    return if current_user.region_privileges? @challenge.competition
 
     flash[:alert] = 'You must have valid assignments to access this section.'
     redirect_to root_path
