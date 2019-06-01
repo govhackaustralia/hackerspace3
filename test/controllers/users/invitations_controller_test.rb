@@ -3,7 +3,7 @@ require 'test_helper'
 class Users::InvitationsControllerTest < ActionDispatch::IntegrationTest
   setup do
     sign_in users :three
-    @invitation = Assignment.find(12)
+    @invitation = Assignment.find 12
   end
 
   test 'should patch update' do

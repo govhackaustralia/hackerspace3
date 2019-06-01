@@ -3,10 +3,10 @@ class Users::InvitationsController < ApplicationController
   before_action :user_is_owner
 
   def update
-    @assignment.update(title: TEAM_MEMBER)
+    @assignment.update title: TEAM_MEMBER
     @team = @assignment.assignable
     flash[:notice] = "Welcome to #{@team.name}"
-    redirect_to team_management_team_path(@team)
+    redirect_to team_management_team_path @team
   end
 
   def destroy
@@ -18,7 +18,7 @@ class Users::InvitationsController < ApplicationController
   private
 
   def user_is_owner
-    @assignment = Assignment.find(params[:id])
+    @assignment = Assignment.find params[:id]
     return if @assignment.user_id == current_user.id
 
     flash[:alert] = 'You do not have permission to modify this assignment'
