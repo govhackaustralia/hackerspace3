@@ -10,22 +10,32 @@ class Admin::Sponsors::AssignmentsControllerTest < ActionDispatch::IntegrationTe
   test 'should get new' do
     get new_admin_sponsor_assignment_url @sponsor, title: SPONSOR_CONTACT
     assert_response :success
-    get new_admin_sponsor_assignment_url @sponsor, title: SPONSOR_CONTACT, term: 'x'
+    get new_admin_sponsor_assignment_url(
+      @sponsor, title: SPONSOR_CONTACT, term: 'x'
+    )
     assert_response :success
-    get new_admin_sponsor_assignment_url @sponsor, title: SPONSOR_CONTACT, term: 'a'
+    get new_admin_sponsor_assignment_url(
+      @sponsor, title: SPONSOR_CONTACT, term: 'a'
+    )
     assert_response :success
   end
 
   test 'should post create success' do
     assert_difference 'Assignment.count' do
-      post admin_sponsor_assignments_url @sponsor, params: { title: SPONSOR_CONTACT, user_id: @user }
+      post admin_sponsor_assignments_url @sponsor, params: {
+        title: SPONSOR_CONTACT, user_id: @user
+      }
     end
-    assert_redirected_to admin_sponsor_url @sponsor
+    assert_redirected_to admin_competition_sponsor_url(
+      @sponsor.competition_id, @sponsor
+    )
   end
 
   test 'should post create fail' do
     assert_no_difference 'Assignment.count' do
-      post admin_sponsor_assignments_url @sponsor, params: { title: SPONSOR_CONTACT, user_id: nil }
+      post admin_sponsor_assignments_url @sponsor, params: {
+        title: SPONSOR_CONTACT, user_id: nil
+      }
     end
     assert_response :success
   end

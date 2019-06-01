@@ -44,19 +44,19 @@ Rails.application.routes.draw do
 
   namespace :admin do
     resources :sponsor_logos, only: [:edit, :update]
-    resources :sponsorship_types, except: [:show, :destroy]
     resources :event_partnerships, only: [:new, :create, :destroy]
 
     resources :competitions, except: :destroy do
       resources :assignments, only: [:index, :new, :create], controller: 'competitions/assignments'
       resources :scorecards, only: :index, controller: 'competitions/scorecards'
-      resources :checkpoints, :criteria, except: [:show, :destroy]
+      resources :checkpoints, :criteria, :sponsorship_types, except: [:show, :destroy]
       resources :regions, except: :destroy
       resources :teams, only: [:index, :show, :update]
       resources :events, only: :index
+      resources :sponsors
     end
 
-    resources :sponsors do
+    resources :sponsors, only: [] do
       resources :sponsorships, only: :destroy, controller: 'sponsors/sponsorships'
       resources :assignments, only: [:new, :create], controller: 'sponsors/assignments'
     end

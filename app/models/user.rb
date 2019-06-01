@@ -72,8 +72,8 @@ class User < ApplicationRecord
   # Returns true if a user has any sponsor admin titles.
   # ENHANCEMENT: Move to Controller.
   # ENHANCEMENT: Check against assignments not titles.
-  def sponsor_privileges?
-    (assignments.pluck(:title) & SPONSOR_PRIVILEGES).present?
+  def sponsor_privileges?(competition)
+    assignments.where(competition: competition, title: SPONSOR_PRIVILEGES).any?
   end
 
   # Returns true if a user has any criterion admin titles.

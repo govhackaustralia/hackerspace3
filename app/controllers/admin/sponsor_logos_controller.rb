@@ -1,13 +1,9 @@
 class Admin::SponsorLogosController < ApplicationController
-  before_action :authenticate_user!
-  before_action :check_for_privileges
+  before_action :authenticate_user!, :check_for_privileges
 
-  def edit
-    @sponsor = Sponsor.find params[:id]
-  end
+  def edit; end
 
   def update
-    @sponsor = Sponsor.find params[:id]
     if params[:sponsor].present?
       update_logo
     else
@@ -23,15 +19,15 @@ class Admin::SponsorLogosController < ApplicationController
   end
 
   def check_for_privileges
-    return if current_user.sponsor_privileges?
+    @sponsor = Sponsor.find params[:id]
+    return if current_user.sponsor_privileges? @sponsor.competition
 
     flash[:alert] = 'You must have valid assignments to access this section.'
     redirect_to root_path
   end
 
   def update_logo
-    @sponsor.update sponsor_params
-    if @sponsor.save
+    if @sponsor.update sponsor_params
       flash[:notice] = 'Logo Updated'
     else
       flash[:alert] = @sponsor.errors.full_messages.to_sentence

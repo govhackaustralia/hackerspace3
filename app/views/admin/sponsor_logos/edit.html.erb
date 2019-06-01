@@ -15,5 +15,5 @@
       <%= form.submit 'Upload Logo' %>
     <% end %>
   <% end %>
-  <p><%= link_to 'Back to Sponsor', admin_sponsor_path(@sponsor) %></p>
+  <p><%= link_to 'Back to Sponsor', admin_competition_sponsor_path(@sponsor.competition_id, @sponsor) %></p>
 </main>

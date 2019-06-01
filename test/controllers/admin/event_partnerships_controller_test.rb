@@ -24,6 +24,6 @@ class Admin::EventPartnershipsControllerTest < ActionDispatch::IntegrationTest
     assert_difference 'EventPartnership.count', -1 do
       delete admin_event_event_partnership_url @event, @event_partnership
     end
-    assert_redirected_to admin_sponsor_url @sponsor
+    assert_redirected_to admin_competition_sponsor_url @sponsor.competition_id, @sponsor
   end
 end

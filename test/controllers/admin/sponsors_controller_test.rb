@@ -4,51 +4,60 @@ class Admin::SponsorsControllerTest < ActionDispatch::IntegrationTest
   setup do
     sign_in users :one
     @sponsor = Sponsor.first
+    @competition = Competition.first
   end
 
   test 'should get index' do
-    get admin_sponsors_url
+    get admin_competition_sponsors_url @competition
     assert_response :success
   end
 
   test 'should get show' do
-    get admin_sponsor_url @sponsor
+    get admin_competition_sponsor_url @competition, @sponsor
     assert_response :success
   end
 
   test 'should get new' do
-    get new_admin_sponsor_url
+    get new_admin_competition_sponsor_url @competition
     assert_response :success
   end
 
   test 'should post create success' do
     assert_difference 'Sponsor.count' do
-      post admin_sponsors_url params: { sponsor: { name: 'Example', description: 'Example' } }
+      post admin_competition_sponsors_url @competition, params: {
+        sponsor: { name: 'Example', description: 'Example' }
+      }
     end
-    assert_redirected_to admin_sponsor_url Sponsor.last
+    assert_redirected_to admin_competition_sponsor_url @competition, Sponsor.last
   end
 
   test 'should post create fail' do
     assert_no_difference 'Sponsor.count' do
-      post admin_sponsors_url params: { sponsor: { description: 'Example' } }
+      post admin_competition_sponsors_url @competition, params: {
+        sponsor: { description: 'Example' }
+      }
     end
     assert_response :success
   end
 
   test 'should get edit' do
-    get edit_admin_sponsor_url @sponsor
+    get edit_admin_competition_sponsor_url @competition, @sponsor
     assert_response :success
   end
 
   test 'should patch update success' do
-    patch admin_sponsor_url @sponsor, params: { sponsor: { description: 'Updated' } }
-    assert_redirected_to admin_sponsor_url @sponsor
+    patch admin_competition_sponsor_url @competition, @sponsor, params: {
+      sponsor: { description: 'Updated' }
+    }
+    assert_redirected_to admin_competition_sponsor_url @competition, @sponsor
     @sponsor.reload
     assert @sponsor.description == 'Updated'
   end
 
   test 'should patch update fail' do
-    patch admin_sponsor_url @sponsor, params: { sponsor: { name: nil } }
+    patch admin_competition_sponsor_url @competition, @sponsor, params: {
+      sponsor: { name: nil }
+    }
     assert_response :success
     @sponsor.reload
     assert_not @sponsor.name.nil?
@@ -56,8 +65,8 @@ class Admin::SponsorsControllerTest < ActionDispatch::IntegrationTest
 
   test 'should delete destroy' do
     assert_difference 'Sponsor.count', -1 do
-      delete admin_sponsor_url @sponsor
+      delete admin_competition_sponsor_url @competition, @sponsor
     end
-    assert_redirected_to admin_sponsors_url
+    assert_redirected_to admin_competition_sponsors_url @competition
   end
 end

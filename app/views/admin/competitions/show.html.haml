@@ -20,7 +20,16 @@
   %p
     = pluralize @events_count, 'event'
     set for this competition
-  %p= link_to 'Manage Events', admin_competition_events_path(@competition)
+  %h3 Sponsors
+  %p
+    = pluralize @sponsors_count, 'sponsor'
+    set for this competition
+  %p= link_to 'Manage Sponsors', admin_competition_sponsors_path(@competition)
+  %h3 Sponsorship Types
+  %p
+    = pluralize @sponsorship_types_count, 'sponsorship type'
+    set for this competition
+  %p= link_to 'Manage Sponsorship Types', admin_competition_sponsorship_types_path(@competition)
   %h3 People's Choice Judging
   %p= link_to 'Competition Judging', admin_competition_scorecards_path(@competition, include_judges: false)
   %p= link_to 'Competition Judging (with Judges)', admin_competition_scorecards_path(@competition, include_judges: true)

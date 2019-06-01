@@ -1,0 +1,17 @@
+%main.team_page
+  %h2
+    Competition #{@competition.year} Sponsorship Types
+  %p= link_to 'New Sponsorship Type', new_admin_competition_sponsorship_type_path(@competition)
+  %table
+    %tr
+      %th Order
+      %th Name
+      %th Edit
+    - @sponsorship_types.each do |sponsorship_type|
+      %tr
+        %td= sponsorship_type.order
+        %td= sponsorship_type.name
+        %td= link_to 'Edit', edit_admin_competition_sponsorship_type_path(@competition, sponsorship_type)
+%p= link_to 'Back to Account Management', manage_account_path
+- if @admin_privileges
+  %p= link_to 'Back to Competition Management', admin_competition_path(@competition)

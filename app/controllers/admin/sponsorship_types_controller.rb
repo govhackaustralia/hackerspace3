@@ -1,14 +1,12 @@
 class Admin::SponsorshipTypesController < ApplicationController
-  before_action :authenticate_user!
-  before_action :check_for_privileges
+  before_action :authenticate_user!, :check_for_privileges
 
   def index
-    @competition = Competition.current
-    @sponsorship_types = @competition.sponsorship_types.order(order: :asc)
+    @sponsorship_types = @competition.sponsorship_types.order order: :asc
+    @admin_privileges = current_user.admin_privileges? @competition
   end
 
   def new
-    @competition = Competition.current
     @sponsorship_type = @competition.sponsorship_types.new
   end
 
@@ -16,7 +14,7 @@ class Admin::SponsorshipTypesController < ApplicationController
     create_new_sponsorship_type
     if @sponsorship_type.save
       flash[:notice] = 'New Sponsorship Type Created'
-      redirect_to admin_sponsorship_types_path
+      redirect_to admin_competition_sponsorship_types_path @competition
     else
       flash[:alert] = 'Could not save sponsorship type'
       render :new
@@ -29,9 +27,9 @@ class Admin::SponsorshipTypesController < ApplicationController
 
   def update
     update_sponsorship_type
-    if @sponsorship_type.update(sponsorship_type_params)
+    if @sponsorship_type.update sponsorship_type_params
       flash[:notice] = 'Sponsorship Type Updated'
-      redirect_to admin_sponsorship_types_path
+      redirect_to admin_competition_sponsorship_types_path @competition
     else
       flash[:alert] = @sponsorship_type.errors.full_messages.to_sentence
       render :edit
@@ -41,23 +39,26 @@ class Admin::SponsorshipTypesController < ApplicationController
   private
 
   def sponsorship_type_params
-    params.require(:sponsorship_type).permit(:name, :order)
+    params.require(:sponsorship_type).permit :name, :order
   end
 
   def check_for_privileges
-    return if current_user.sponsor_privileges?
+    @competition = Competition.find params[:competition_id]
+    return if current_user.sponsor_privileges? @competition
 
     flash[:alert] = 'You must have valid assignments to access this section.'
     redirect_to root_path
   end
 
   def create_new_sponsorship_type
-    SponsorshipType.reorder_from(params[:sponsorship_type][:order].to_i)
-    @sponsorship_type = Competition.current.sponsorship_types.new(sponsorship_type_params)
+    SponsorshipType.reorder_from params[:sponsorship_type][:order].to_i
+    @sponsorship_type = @competition.sponsorship_types.new(
+      sponsorship_type_params
+    )
   end
 
   def update_sponsorship_type
-    SponsorshipType.reorder_from(params[:sponsorship_type][:order].to_i)
-    @sponsorship_type = SponsorshipType.find(params[:id])
+    SponsorshipType.reorder_from params[:sponsorship_type][:order].to_i
+    @sponsorship_type = SponsorshipType.find params[:id]
   end
 end

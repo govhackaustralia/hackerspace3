@@ -1,4 +1,4 @@
-<%= form_for [:admin, @sponsorship_type] do |f| %>
+<%= form_for [:admin, @competition, @sponsorship_type] do |f| %>
   <%= f.label :name %>
   <%= f.text_field :name  %><br>
   <%= f.label :order %>

@@ -26,7 +26,7 @@ class Admin::EventPartnershipsController < ApplicationController
     @sponsor = @event_partnership.sponsor
     @event_partnership.destroy
     flash[:notice] = 'Event Partnership Destroyed'
-    redirect_to admin_sponsor_path @sponsor
+    redirect_to admin_competition_sponsor_path @competition, @sponsor
   end
 
   private
@@ -37,7 +37,8 @@ class Admin::EventPartnershipsController < ApplicationController
 
   def check_for_privileges
     @event = Event.find params[:event_id]
-    return if current_user.admin_privileges? @event.competition
+    @competition = @event.competition
+    return if current_user.admin_privileges? @competition
 
     flash[:alert] = 'You must have valid assignments to access this section.'
     redirect_to root_path

@@ -1,15 +1,12 @@
 class Admin::Regions::SponsorshipsController < ApplicationController
-  before_action :authenticate_user!
-  before_action :check_for_privileges
+  before_action :authenticate_user!, :check_for_privileges
 
   def index
-    @region = Region.find params[:region_id]
     @sponsorships = @region.sponsorships
-    @competition = @region.competition
   end
 
   def new
-    @sponsorable = Region.find params[:region_id]
+    @sponsorable = @region
     @sponsorship = Sponsorship.new
     search_sponsors unless params[:term].blank?
   end
@@ -28,16 +25,18 @@ class Admin::Regions::SponsorshipsController < ApplicationController
   private
 
   def sponsorship_params
-    params.require(:sponsorship).permit(:sponsorship_type_id, :sponsor_id)
+    params.require(:sponsorship).permit :sponsorship_type_id, :sponsor_id
   end
 
   def create_new_sponsorship
-    @sponsorable = Region.find params[:region_id]
+    @sponsorable = @region
     @sponsorship = @sponsorable.sponsorships.new sponsorship_params
   end
 
   def check_for_privileges
-    return if current_user.sponsor_privileges?
+    @region = Region.find params[:region_id]
+    @competition = @region.competition
+    return if current_user.sponsor_privileges? @competition
 
     flash[:alert] = 'You must have valid assignments to access this section.'
     redirect_to root_path
@@ -46,8 +45,9 @@ class Admin::Regions::SponsorshipsController < ApplicationController
   def search_sponsors
     @sponsor = Sponsor.find_by_name params[:term]
     if @sponsor.present?
-      @existing_sponsorship = Sponsorship.find_by sponsor: @sponsor,
-                                                  sponsorable: @sponsorable
+      @existing_sponsorship = Sponsorship.find_by(
+        sponsor: @sponsor, sponsorable: @sponsorable
+      )
     else
       @sponsors = Sponsor.search params[:term]
     end

@@ -19,8 +19,8 @@
         %p= link_to 'Event Management', admin_competition_events_path(@competition)
       - if user_has_sponsor_privileges?
         %h3 Sponsor Managmement
-        %p= link_to 'Sponsor Management', admin_sponsors_path
-        %p= link_to 'Sponsorship Type Management', admin_sponsorship_types_path
+        %p= link_to 'Sponsor Management', admin_competition_sponsors_path(@competition)
+        %p= link_to 'Sponsorship Type Management', admin_competition_sponsorship_types_path(@competition)
       - if user_is_chief_judge?
         %h3 Competition Judging Criteria
         %p= link_to 'Competiton Criteria Management', admin_competition_criteria_path(@competition)

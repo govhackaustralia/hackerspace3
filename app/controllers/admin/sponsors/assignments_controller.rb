@@ -14,6 +14,8 @@ class Admin::Sponsors::AssignmentsController < Admin::AssignmentsController
   private
 
   def redirect_to_index
-    redirect_to admin_sponsor_path @assignable
+    redirect_to admin_competition_sponsor_path(
+      @assignable.competition, @assignable
+    )
   end
 end
