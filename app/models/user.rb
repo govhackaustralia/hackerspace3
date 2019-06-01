@@ -79,8 +79,8 @@ class User < ApplicationRecord
   # Returns true if a user has any criterion admin titles.
   # ENHANCEMENT: Move to Controller.
   # ENHANCEMENT: Check against assignments not titles.
-  def criterion_privileges?
-    (assignments.pluck(:title) & CRITERION_PRIVILEGES).present?
+  def criterion_privileges?(competition)
+    assignments.where(competition: competition, title: CRITERION_PRIVILEGES).any?
   end
 
   # Returns true if a user has any admin titles.

@@ -97,6 +97,12 @@ class UserTest < ActiveSupport::TestCase
     assert_not @user.sponsor_privileges? @competition
   end
 
+  test 'criterion_privileges' do
+    assert @user.criterion_privileges? @competition
+    @user.assignments.destroy_all
+    assert_not @user.criterion_privileges? @competition
+  end
+
   test 'judgeable_assignment' do
     assert @user.judgeable_assignment(@competition).present?
     assert_not @invitee.judgeable_assignment(@competition).present?
