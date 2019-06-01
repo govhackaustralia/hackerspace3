@@ -45,3 +45,10 @@ five:
   assignment_id: 13
   time_notified: 2018-07-22 12:34:03
   status: Attending
+
+six:
+  id: 6
+  event_id: 3
+  assignment_id: 13
+  time_notified: 2018-07-22 12:34:03
+  status: Attending

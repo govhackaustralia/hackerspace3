@@ -8,6 +8,12 @@ class CompetitionTest < ActiveSupport::TestCase
     @sponsor = Sponsor.first
     @sponsorship_type = SponsorshipType.first
     @event = Event.first
+    @connection_event = @event
+    @connection_registration = Registration.first
+    @competition_event = Event.second
+    @competition_registration = Registration.third
+    @award_event = Event.third
+    @award_registration = Registration.fifth
     @team = Team.first
     @project = Project.first
     @challenge = Challenge.first
@@ -26,6 +32,12 @@ class CompetitionTest < ActiveSupport::TestCase
     assert @competition.sponsors.include? @sponsor
     assert @competition.sponsorship_types.include? @sponsorship_type
     assert @competition.events.include? @event
+    assert @competition.connection_events.include? @connection_event
+    assert @competition.connection_registrations.include? @connection_registration
+    assert @competition.competition_events.include? @competition_event
+    assert @competition.competition_registrations.include? @competition_registration
+    assert @competition.award_events.include? @award_event
+    assert @competition.award_registrations.include? @award_registration
     assert @competition.teams.include? @team
     assert @competition.projects.include? @project
     assert @competition.challenges.include? @challenge

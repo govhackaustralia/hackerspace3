@@ -3,7 +3,15 @@ class Competition < ApplicationRecord
   has_many :regions
   has_many :sponsors
   has_many :sponsorship_types
+
   has_many :events, through: :regions
+  has_many :connection_events, -> { connections }, through: :regions, source: :events
+  has_many :connection_registrations, through: :connection_events, source: :registrations
+  has_many :competition_events, -> { competitions }, through: :regions, source: :events
+  has_many :competition_registrations, through: :competition_events, source: :registrations
+  has_many :award_events, -> { awards }, through: :regions, source: :events
+  has_many :award_registrations, through: :award_events, source: :registrations
+
   has_many :teams, through: :events
   has_many :projects_by_name, through: :events
   has_many :published_projects_by_name, through: :events
@@ -11,6 +19,7 @@ class Competition < ApplicationRecord
   has_many :challenges, through: :regions
   has_many :checkpoints
   has_many :data_sets, through: :regions
+
   has_many :criteria
   has_many :project_criteria, -> { where category: PROJECT }, class_name: 'Criterion'
   has_many :challenge_criteria, -> { where category: CHALLENGE }, class_name: 'Criterion'
