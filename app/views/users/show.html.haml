@@ -16,7 +16,7 @@
         %p= link_to 'User Management', admin_users_path
         %p= link_to 'Competiton Management', admin_competitions_path
       - if user_has_event_privileges?
-        %p= link_to 'Event Management', admin_events_path
+        %p= link_to 'Event Management', admin_competition_events_path(@competition)
       - if user_has_sponsor_privileges?
         %h3 Sponsor Managmement
         %p= link_to 'Sponsor Management', admin_sponsors_path

@@ -3,10 +3,11 @@ require 'test_helper'
 class Admin::EventsControllerTest < ActionDispatch::IntegrationTest
   setup do
     sign_in users :one
+    @competition = Competition.first
   end
 
   test 'should get index' do
-    get admin_events_url
+    get admin_competition_events_url @competition
     assert_response :success
   end
 end

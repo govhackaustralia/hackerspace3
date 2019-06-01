@@ -53,6 +53,7 @@ Rails.application.routes.draw do
       resources :checkpoints, :criteria, except: [:show, :destroy]
       resources :regions, except: :destroy
       resources :teams, only: [:index, :show, :update]
+      resources :events, only: :index
     end
 
     resources :sponsors do
@@ -82,7 +83,7 @@ Rails.application.routes.draw do
       resources :entries, only: [:index, :edit, :update], controller: 'challenges/entries'
     end
 
-    resources :events, only: :index do
+    resources :events, only: [] do
       resources :registrations, except: [:show, :destroy]
       resources :event_partnerships, only: [:new, :create, :destroy]
       resources :assignments, only: [:index, :new, :create], controller: 'events/assignments'

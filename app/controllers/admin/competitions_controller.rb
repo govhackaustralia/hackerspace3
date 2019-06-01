@@ -68,6 +68,7 @@ class Admin::CompetitionsController < ApplicationController
 
   def retrieve_counts
     @regions_count = @competition.regions.count
+    @events_count = @competition.events.count
     @challenge_criteria_count = @competition.challenge_criteria.count
     @project_criteria_count = @competition.project_criteria.count
     @teams_count = @competition.teams.count

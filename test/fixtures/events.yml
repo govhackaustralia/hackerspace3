@@ -23,3 +23,13 @@ two:
   registration_type: Open
   identifier: competition_brisbane
   published: true
+
+three:
+  id: 3
+  name: Brisbane
+  region_id: 2
+  capacity: 1
+  event_type: Award
+  registration_type: Open
+  identifier: award_brisbane
+  published: true

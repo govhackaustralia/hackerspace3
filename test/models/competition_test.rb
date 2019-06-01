@@ -13,7 +13,7 @@ class CompetitionTest < ActiveSupport::TestCase
     @competition_event = Event.second
     @competition_registration = Registration.third
     @award_event = Event.third
-    @award_registration = Registration.fifth
+    @award_registration = Registration.find 6
     @team = Team.first
     @project = Project.first
     @challenge = Challenge.first

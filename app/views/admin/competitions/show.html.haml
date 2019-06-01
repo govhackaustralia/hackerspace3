@@ -16,6 +16,11 @@
     = pluralize @regions_count, 'region'
     set for this competition.
   %p= link_to 'Manage Regions', admin_competition_regions_path(@competition)
+  %h3 Events
+  %p
+    = pluralize @events_count, 'event'
+    set for this competition
+  %p= link_to 'Manage Events', admin_competition_events_path(@competition)
   %h3 People's Choice Judging
   %p= link_to 'Competition Judging', admin_competition_scorecards_path(@competition, include_judges: false)
   %p= link_to 'Competition Judging (with Judges)', admin_competition_scorecards_path(@competition, include_judges: true)
@@ -53,7 +58,7 @@
   %p= link_to 'Competition Criteria', admin_competition_criteria_path(@competition)
   %h3 Teams
   %p
-  = pluralize @teams_count, 'Team'
-  created for this competition.
+    = pluralize @teams_count, 'Team'
+    created for this competition.
   %p= link_to 'Competition Teams', admin_competition_teams_path(@competition)
 %p= link_to 'Back to Competitions', admin_competitions_path

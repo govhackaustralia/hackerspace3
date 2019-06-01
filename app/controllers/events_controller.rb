@@ -9,7 +9,8 @@ class EventsController < ApplicationController
 
   def show
     @event = Event.find_by identifier: params[:identifier]
-    if @event.published || (user_signed_in? && current_user.event_privileges?)
+    @competition = @event.competition
+    if @event.published || (user_signed_in? && current_user.event_privileges?(@competition))
       show_event
     else
       flash[:alert] = 'This event has not been published.'
@@ -39,7 +40,6 @@ class EventsController < ApplicationController
   end
 
   def show_event
-    @competition = @event.competition
     @event_partner = @event.event_partner
     @region = @event.region
     @sponsorship_types = @region.sponsorship_types.distinct.order order: :asc

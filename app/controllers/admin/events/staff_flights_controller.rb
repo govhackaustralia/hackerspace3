@@ -1,15 +1,12 @@
 class Admin::Events::StaffFlightsController < ApplicationController
-  before_action :authenticate_user!
-  before_action :check_for_privileges
+  before_action :authenticate_user!, :check_for_privileges
 
   def new
-    @event = Event.find params[:event_id]
     @registration = @event.registrations.new
     search_for_staff unless params[:term].blank?
   end
 
   def create
-    @event = Event.find params[:event_id]
     new_registration
     if @registration.save
       flash[:notice] = 'New Registration Added.'
@@ -26,7 +23,8 @@ class Admin::Events::StaffFlightsController < ApplicationController
   end
 
   def check_for_privileges
-    return if current_user.event_privileges?
+    @event = Event.find params[:event_id]
+    return if current_user.event_privileges? @event.competition
 
     flash[:alert] = 'You must have valid assignments to access this section.'
     redirect_to root_path

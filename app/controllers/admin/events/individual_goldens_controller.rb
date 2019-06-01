@@ -1,14 +1,11 @@
 class Admin::Events::IndividualGoldensController < ApplicationController
-  before_action :authenticate_user!
-  before_action :check_for_privileges
+  before_action :authenticate_user!, :check_for_privileges
 
   def new
-    @event = Event.find(params[:event_id])
     search_for_users unless params[:term].blank?
   end
 
   def create
-    @event = Event.find params[:event_id]
     create_new
     if @registration.save
       flash[:notice] = 'New Registration Added.'
@@ -22,7 +19,8 @@ class Admin::Events::IndividualGoldensController < ApplicationController
   private
 
   def check_for_privileges
-    return if current_user.event_privileges?
+    @event = Event.find(params[:event_id])
+    return if current_user.event_privileges? @event.competition
 
     flash[:alert] = 'You must have valid assignments to access this section.'
     redirect_to root_path

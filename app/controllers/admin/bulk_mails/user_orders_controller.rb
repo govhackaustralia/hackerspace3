@@ -1,11 +1,8 @@
 class Admin::BulkMails::UserOrdersController < ApplicationController
-  before_action :authenticate_user!
-  before_action :check_for_privileges
+  before_action :authenticate_user!, :check_for_privileges
 
   def update
-    @user_order = UserOrder.find(params[:id])
-    @bulk_mail = @user_order.bulk_mail
-    @mailable =  @bulk_mail.mailable
+    @user_order = UserOrder.find params[:id]
     @user_order.update user_order_params
     if @user_order.save
       flash[:notice] = 'Order Updated'
@@ -22,7 +19,9 @@ class Admin::BulkMails::UserOrdersController < ApplicationController
   end
 
   def check_for_privileges
-    return if current_user.event_privileges?
+    @bulk_mail = BulkMail.find params[:bulk_mail_id]
+    @mailable =  @bulk_mail.mailable
+    return if current_user.event_privileges? @mailable.competition
 
     flash[:alert] = 'You must have valid assignments to access this section.'
     redirect_to root_path

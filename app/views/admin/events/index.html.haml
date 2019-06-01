@@ -1,0 +1,15 @@
+%main.team_page
+  %h2 Events
+  %h3 Connection Events
+  %p= pluralize @attending_connection_registrations_count, 'attending registration'
+  - @connections.each do |event|
+    = render 'admin/regions/events/event_single', locals: { event: event }
+  %h3 Competition Events
+  %p= pluralize @attending_competition_registrations_count, 'attending registration'
+  - @competition_events.each do |event|
+    = render 'admin/regions/events/event_single', locals: { event: event }
+  %h3 Award Events
+  %p= pluralize @attending_awards_registrations_count, 'attending registration'
+  - @award_events.each do |event|
+    = render 'admin/regions/events/event_single', locals: { event: event }
+%p= link_to "Back", :back
