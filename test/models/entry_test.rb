@@ -11,6 +11,7 @@ class EntryTest < ActiveSupport::TestCase
     @scorecard = Scorecard.first
     @regional_entry = Entry.third
     @national_entry = @entry
+    @next_competition = Competition.second
   end
 
   test 'entry associations' do
@@ -31,6 +32,8 @@ class EntryTest < ActiveSupport::TestCase
     assert Entry.national.exclude? @regional_entry
     assert Entry.winners.include? @regional_entry
     assert Entry.winners.exclude? @national_entry
+    assert Entry.competition(@competition).include? @entry
+    assert Entry.competition(@next_competition).exclude? @entry
   end
 
   test 'entry validations' do
