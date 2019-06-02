@@ -19,7 +19,7 @@ class Admin::Events::IndividualGoldensController < ApplicationController
   private
 
   def check_for_privileges
-    @event = Event.find(params[:event_id])
+    @event = Event.find params[:event_id]
     return if current_user.event_privileges? @event.competition
 
     flash[:alert] = 'You must have valid assignments to access this section.'
@@ -27,7 +27,7 @@ class Admin::Events::IndividualGoldensController < ApplicationController
   end
 
   def search_for_users
-    @user = User.find_by_email(params[:term])
+    @user = User.find_by_email params[:term]
     if @user.present?
       @existing_registration = @user.registrations.find_by event: @event
     else
@@ -36,7 +36,7 @@ class Admin::Events::IndividualGoldensController < ApplicationController
   end
 
   def create_new
-    @registration = @event.registrations.new status: INVITED
+    @registration = @event.registrations.invited.new
     user = User.find_by id: params[:user_id]
     return if user.nil?
 
