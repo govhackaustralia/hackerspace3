@@ -11,7 +11,7 @@ class TeamManagement::Teams::AssignmentsController < ApplicationController
   end
 
   def create
-    create_new_assignment
+    new_invitee_assignment
     if @assignment.save
       flash[:notice] = "New #{params[:title]} Assignment Added."
       redirect_to team_management_team_assignments_path(@team)
@@ -22,17 +22,17 @@ class TeamManagement::Teams::AssignmentsController < ApplicationController
   end
 
   def update
-    @assignment = Assignment.find(params[:id])
-    if @assignment.update(title: TEAM_LEADER)
+    @assignment = Assignment.find params[:id]
+    if @assignment.update title: TEAM_LEADER
       flash[:notice] = 'New Team Leader Assigned'
     else
       flash[:alert] = @assignment.errors.full_messages.to_sentence
     end
-    redirect_to team_management_team_assignments_path(@team)
+    redirect_to team_management_team_assignments_path @team
   end
 
   def destroy
-    @assignment = Assignment.find(params[:id])
+    @assignment = Assignment.find params[:id]
     @assignment.destroy
     flash[:notice] = 'Assignment Removed'
     redirect_to team_management_team_assignments_path(@team)
@@ -42,7 +42,7 @@ class TeamManagement::Teams::AssignmentsController < ApplicationController
 
   # IMPROVEMENT - Multiple move up to ApplicationController
   def check_user_team_privileges!
-    @team = Team.find(params[:team_id])
+    @team = Team.find params[:team_id]
     @competition = @team.competition
     return if @team.permission?(current_user) && @competition.in_window?(@team.time_zone)
 
@@ -50,14 +50,14 @@ class TeamManagement::Teams::AssignmentsController < ApplicationController
   end
 
   def search_for_user
-    @user = User.find_by_id(params[:term])
+    @user = User.find_by_id params[:term]
     search_user_competition_event if @user.present?
     search_for_existing_assignment if @user.present?
-    search_other_fields unless @user.present?
+    @users = User.search(params[:term]) unless @user.present?
   end
 
   def check_team_permission
-    if @team.permission?(current_user)
+    if @team.permission? current_user
       flash[:notice] = 'The competition has closed.'
       redirect_to project_path(@team.current_project.identifier)
     else
@@ -66,13 +66,8 @@ class TeamManagement::Teams::AssignmentsController < ApplicationController
     end
   end
 
-  def create_new_assignment
-    @assignment = @team.assignments.new(assignment_params)
-    @assignment.title = INVITEE
-  end
-
-  def search_other_fields
-    @users = User.search(params[:term])
+  def new_invitee_assignment
+    @assignment = @team.assignments.team_invitees.new assignment_params
   end
 
   def search_for_existing_assignment
@@ -80,14 +75,13 @@ class TeamManagement::Teams::AssignmentsController < ApplicationController
   end
 
   def search_user_competition_event
-    event_ids = Registration.where(
-      status: [ATTENDING, WAITLIST],
+    event_ids = Registration.participating.where(
       assignment: @user.event_assignment(@team.competition)
     ).pluck(:event_id)
-    @participating_events = Event.where(event_type: COMPETITION_EVENT, id: event_ids)
+    @participating_events = Event.competitions.where id: event_ids
   end
 
   def assignment_params
-    params.require(:assignment).permit(:user_id)
+    params.require(:assignment).permit :user_id
   end
 end
