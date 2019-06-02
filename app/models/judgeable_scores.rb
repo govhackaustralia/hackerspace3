@@ -40,7 +40,9 @@ class JudgeableScores
   end
 
   def compile_participant_objects
-    @user_team_ids += @assignment.user.joined_teams.pluck :id
+    @user_team_ids += @assignment.user.joined_teams.where(
+      competition: @assignment.competition
+    ).pluck :id
     @team_scorecards = @assignment.scorecards.where judgeable: @teams
     @team_scorecards.each do |scorecard|
       @team_id_to_scorecard[scorecard.judgeable_id] = scorecard
