@@ -115,3 +115,11 @@ fourteen:
   assignable_type: Region
   title: Region Support
   competition_id: 1
+
+fifteen:
+  id: 15
+  user_id: 1
+  assignable_id: 1
+  assignable_type: Competition
+  title: Chief Judge
+  competition_id: 1

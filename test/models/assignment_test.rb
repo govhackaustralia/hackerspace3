@@ -21,6 +21,7 @@ class AssignmentTest < ActiveSupport::TestCase
     @team_invitee = Assignment.find 12
     @team_member_assignment = Assignment.find 9
     @judge = Assignment.find 7
+    @chief_judge = Assignment.find 15
     @contact = Assignment.find 5
     @volunteer = Assignment.find 8
   end
@@ -54,6 +55,7 @@ class AssignmentTest < ActiveSupport::TestCase
     assert Assignment.team_confirmed.include? @team_member_assignment
     assert Assignment.team_confirmed.include? @team_leader_assignment
     assert Assignment.team_participants.include? @team_leader_assignment
+    assert Assignment.chief_judges.include? @chief_judge
     assert Assignment.judges.include? @judge
     assert Assignment.staff.include? @judge
     assert Assignment.staff.exclude? @team_invitee

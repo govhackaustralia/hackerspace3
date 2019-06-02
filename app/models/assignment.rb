@@ -18,6 +18,7 @@ class Assignment < ApplicationRecord
   scope :team_invitees, -> { where title: INVITEE }
   scope :team_confirmed, -> { where title: [TEAM_LEADER, TEAM_MEMBER] }
   scope :team_participants, -> { where title: [TEAM_LEADER, TEAM_MEMBER, INVITEE] }
+  scope :chief_judges, -> { where title: CHIEF_JUDGE }
   scope :judges, -> { where title: JUDGE }
   scope :staff, -> { where.not title: [PARTICIPANT, VIP, TEAM_LEADER, TEAM_MEMBER, INVITEE] }
   scope :sponsor_contacts, -> { where title: SPONSOR_CONTACT }
