@@ -53,7 +53,9 @@ class Admin::AssignmentsController < ApplicationController
   end
 
   def user_found
-    @existing_assignment = @user.assignments.find_by assignable: @assignable, title: @title
+    @existing_assignment = @user.assignments.find_by(
+      assignable: @assignable, title: @title, competition: @competition
+    )
   end
 
   def search_other_fields

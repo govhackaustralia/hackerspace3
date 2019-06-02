@@ -71,7 +71,9 @@ class TeamManagement::Teams::AssignmentsController < ApplicationController
   end
 
   def search_for_existing_assignment
-    @existing_assignment = @user.assignments.find_by(assignable: @team, title: [TEAM_LEADER, TEAM_MEMBER, INVITEE])
+    @existing_assignment = @user.assignments.team_participants.find_by(
+      assignable: @team, competition: @competition
+    )
   end
 
   def search_user_competition_event

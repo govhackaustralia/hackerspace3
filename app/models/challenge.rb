@@ -36,9 +36,8 @@ class Challenge < ApplicationRecord
   # particular competition.
   # ENHANCEMENT: This should probably be in a controller.
   def admin_assignments
-    competition = Competition.current
     collected = competition.admin_assignments
-    collected << competition.assignments.where(title: CHIEF_JUDGE).to_a
+    collected << competition.assignments.chief_judges.to_a
     collected << region.admin_assignments
     collected.flatten
   end
