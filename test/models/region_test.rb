@@ -17,6 +17,7 @@ class RegionTest < ActiveSupport::TestCase
     @bulk_mail = BulkMail.first
     @support_assignment = Assignment.find 14
     @support = User.first
+    @next_competition = Competition.second
   end
 
   test 'region associations' do
@@ -50,11 +51,23 @@ class RegionTest < ActiveSupport::TestCase
     # Duplicate name
     assert_not @competition.regions.create(name: @parent.name).persisted?
     # Time zone not required
-    assert @competition.regions.create!(name: 'y', parent: @parent).persisted?
+    assert @competition.regions.create(name: 'y', parent: @parent).persisted?
     # Incorrect Region
-    assert_not @competition.regions.create(name: 'x', time_zone: 'Timbuktu').persisted?
+    assert_not @competition.regions.create(
+      name: 'x', time_zone: 'Timbuktu'
+    ).persisted?
     # Correct Region
-    assert @competition.regions.create!(name: 'x', time_zone: 'Brisbane', parent: @parent).persisted?
+    assert @competition.regions.create(
+      name: 'x', time_zone: 'Brisbane', parent: @parent
+    ).persisted?
+    # Same Name Same Competition
+    assert_not @competition.regions.create(
+      name: 'x', time_zone: 'Brisbane', parent: @parent
+    ).persisted?
+    # Same Name Different Competition
+    assert @next_competition.regions.create(
+      name: 'x', time_zone: 'Brisbane', parent: @next_competition.root_region
+    ).persisted?
   end
 
   test 'region director' do

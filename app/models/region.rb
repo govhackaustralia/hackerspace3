@@ -19,7 +19,10 @@ class Region < ApplicationRecord
   scope :subs, -> { where.not parent_id: nil }
   scope :roots, -> { where parent_id: nil }
 
-  validates :name, presence: true, uniqueness: true
+  validates :name, uniqueness: {
+    scope: :competition_id,
+    message: 'Region name already taken in this competition'
+  }
 
   validate :only_one_root_per_competition
 
