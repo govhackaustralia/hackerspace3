@@ -16,6 +16,7 @@ class RegistrationTest < ActiveSupport::TestCase
     @waitlist_registration = Registration.second
     @competition_event_registration = Registration.third
     @non_attending_registration = Registration.fourth
+    @invited = Registration.find 7
     @vip_registration = @non_attending_registration
   end
 
@@ -36,6 +37,7 @@ class RegistrationTest < ActiveSupport::TestCase
     assert Registration.attending.include? @registration
     assert Registration.waitlist.include? @waitlist_registration
     assert Registration.non_attending.include? @non_attending_registration
+    assert Registration.invited.include? @invited
     assert Registration.participating.include? @registration
     assert Registration.participating.include? @waitlist_registration
     assert Registration.participating.exclude? @non_attending_registration

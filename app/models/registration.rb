@@ -11,6 +11,7 @@ class Registration < ApplicationRecord
   scope :attending, -> { where status: ATTENDING }
   scope :waitlist, -> { where status: WAITLIST }
   scope :non_attending, -> { where status: NON_ATTENDING }
+  scope :invited, -> { where status: INVITED }
   scope :participating, -> { where status: [ATTENDING, WAITLIST] }
 
   scope :participants, -> { joins(:assignment).where(assignments: { title: PARTICIPANT }) }
