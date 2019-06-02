@@ -83,13 +83,6 @@ class User < ApplicationRecord
     assignments.where(competition: competition, title: CRITERION_PRIVILEGES).any?
   end
 
-  # Returns true if a user has any admin titles.
-  # ENHANCEMENT: Move to Controller.
-  # ENHANCEMENT: Check against assignments not titles.
-  def admin_assignments
-    assignments.where title: ADMIN_TITLES
-  end
-
   # Assigns a user the assignment of site admin.
   def make_site_admin
     Competition.current.assignments.find_or_create_by user: self, title: ADMIN
