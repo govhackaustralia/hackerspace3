@@ -1,10 +1,14 @@
 %main.team_page
   %h2 Competitions
-  %p= link_to 'Create new competition', new_admin_competition_path
+  - if @admin_user
+    %p= link_to 'Create new competition', new_admin_competition_path
   - @competitions.each do |competition|
     %h3= competition.year
     - if competition.current
       %p
         %strong Current Competition
-    %p= link_to 'Go to Competition', admin_competition_path(competition)
+    - if current_user.admin_privileges? competition
+      %p= link_to 'Go to Competition', admin_competition_path(competition)
+    - else
+      %p You have not yet been granted access to manage this competition.
 %p= link_to 'Back to Account Management', manage_account_path

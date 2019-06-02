@@ -1,12 +1,13 @@
 class Admin::CompetitionsController < ApplicationController
-  before_action :authenticate_user!, :check_for_privileges
+  before_action :authenticate_user!
+  before_action :check_for_manegement_privileges, except: %i[new create]
+  before_action :check_for_admin_privileges, only: %i[new create]
 
   def index
-    @competitions = Competition.all
+    @admin_user = current_user.assignments.where(title: ADMIN).any?
   end
 
   def show
-    @competition = Competition.find params[:id]
     @director = @competition.director
     @site_admins = @competition.site_admins
     @management_team = @competition.management_team
@@ -22,6 +23,7 @@ class Admin::CompetitionsController < ApplicationController
     @competition = Competition.new competition_params
     if @competition.save
       flash[:notice] = 'New competition created.'
+      current_user.make_site_admin @competition
       redirect_to admin_competition_path @competition
     else
       flash[:alert] = @competition.errors.full_messages.to_sentence
@@ -29,12 +31,9 @@ class Admin::CompetitionsController < ApplicationController
     end
   end
 
-  def edit
-    @competition = Competition.find params[:id]
-  end
+  def edit; end
 
   def update
-    @competition = Competition.find params[:id]
     if @competition.update competition_params
       flash[:notice] = 'Competition Times update.'
       redirect_to admin_competition_path @competition
@@ -59,8 +58,17 @@ class Admin::CompetitionsController < ApplicationController
     )
   end
 
-  def check_for_privileges
-    return if current_user.admin_privileges? Competition.all
+  def check_for_manegement_privileges
+    @competition = Competition.find params[:id] if params[:id].present?
+    @competitions = Competition.all if @competition.nil?
+    return if current_user.admin_privileges?(@competition || @competitions)
+
+    flash[:alert] = 'You must have valid assignments to access this section.'
+    redirect_to root_path
+  end
+
+  def check_for_admin_privileges
+    return if current_user.assignments.where(title: ADMIN).any?
 
     flash[:alert] = 'You must have valid assignments to access this section.'
     redirect_to root_path

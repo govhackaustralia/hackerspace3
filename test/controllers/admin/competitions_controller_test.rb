@@ -4,6 +4,7 @@ class Admin::CompetitionsControllerTest < ActionDispatch::IntegrationTest
   setup do
     sign_in users :one
     @competition = Competition.first
+    User.first.make_site_admin @competition
   end
 
   test 'should get index' do
@@ -30,7 +31,8 @@ class Admin::CompetitionsControllerTest < ActionDispatch::IntegrationTest
         challenge_judging_end: Time.current
       } }
     end
-    assert_redirected_to admin_competition_url Competition.last
+    assert_redirected_to admin_competition_url(new_comp = Competition.last)
+    assert User.first.assignments.where(assignable: new_comp, title: ADMIN).any?
   end
 
   test 'should post create fail' do
