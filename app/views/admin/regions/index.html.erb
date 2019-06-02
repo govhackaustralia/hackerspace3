@@ -3,9 +3,9 @@
 
   <%= link_to 'Create new Region', new_admin_competition_region_path %>
 
-  <%= render "region_modal", locals: { region: @region} %>
+  <%= render "region_modal", locals: { region: @root_region} %>
 
-  <% @region.sub_regions.each do |region| %>
+  <% @sub_regions.each do |region| %>
     <%= render 'region_modal', locals: { region: region } %>
   <% end %>
 </main>

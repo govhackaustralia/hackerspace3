@@ -2,7 +2,8 @@ class Admin::RegionsController < ApplicationController
   before_action :authenticate_user!, :check_for_privileges
 
   def index
-    @region = @competition.root_region
+    @root_region = @competition.root_region
+    @sub_regions = @root_region.sub_regions
   end
 
   def show
@@ -65,7 +66,6 @@ class Admin::RegionsController < ApplicationController
   end
 
   def create_new_region
-    @competition = Competition.find params[:competition_id]
     @region = @competition.regions.new region_params
     @region.parent = @competition.root_region
   end
