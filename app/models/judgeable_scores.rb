@@ -3,6 +3,7 @@
 class JudgeableScores
   def initialize(assignment, teams)
     @assignment = assignment
+    @competition = assignment.competition
     @teams = teams
     @team_id_to_scorecard = {}
     @user_team_ids = []
@@ -40,9 +41,7 @@ class JudgeableScores
   end
 
   def compile_participant_objects
-    @user_team_ids += @assignment.user.joined_teams.where(
-      competition: @assignment.competition
-    ).pluck :id
+    @user_team_ids += @assignment.user.joined_teams.competition(@competition).pluck :id
     @team_scorecards = @assignment.scorecards.where judgeable: @teams
     @team_scorecards.each do |scorecard|
       @team_id_to_scorecard[scorecard.judgeable_id] = scorecard

@@ -112,7 +112,7 @@ class User < ApplicationRecord
   def judgeable_assignment(competition)
     event_assignment competition if
       assignments.judgeables.present?
-      joined_teams.where(competition: competition).published.present? ||
+      joined_teams.competition(competition).published.present? ||
   end
 
   # Returns a user's event_assignment if they have permission to vote in the
@@ -120,7 +120,7 @@ class User < ApplicationRecord
   def peoples_assignment(competition)
     event_assignment competition if
       assignments.volunteers.present?
-      joined_teams.published.where(competition: competition).present? ||
+      joined_teams.published.competition(competition).present? ||
   end
 
   # Returns a user's challenge judging assignment given a challenge.
