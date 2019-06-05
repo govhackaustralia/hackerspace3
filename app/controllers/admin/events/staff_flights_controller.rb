@@ -47,8 +47,7 @@ class Admin::Events::StaffFlightsController < ApplicationController
   end
 
   def new_registration
-    @registration = @event.registrations.new registration_params
-    @registration.status = INVITED
+    @registration = @event.registrations.invited.new registration_params
     @registration.time_notified = Time.now.in_time_zone COMP_TIME_ZONE
   end
 
