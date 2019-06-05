@@ -1,0 +1,66 @@
+%main.team_page
+  %h2
+    = @challenge.name
+    Challenge #{@region.name} Region
+  - if @challenge.image.attached?
+    %img{:alt => "#{@challenge.name} image", :src => "#{url_for(@challenge.image)}"}
+  - else
+    = image_tag "default_profile_pic.png"
+  %p= link_to 'Update Image', edit_admin_region_challenge_path(@region, @challenge, image: true)
+  - unless @challenge.short_desc.blank?
+    %p Short Description: #{@challenge.short_desc}
+  - unless @challenge.long_desc.blank?
+    %p Long Description: #{@challenge.long_desc}
+  - unless @challenge.eligibility.blank?
+    %p Eligibility: #{@challenge.eligibility}
+  - unless @challenge.video_url.blank?
+    %p
+      %a{:href => "#{@challenge.video_url}", :target => "_blank"} Video
+  - if @challenge.pdf.attached? && @challenge.pdf_preview.attached?
+    %a{:href => "#{url_for(@challenge.pdf)}", :target => "_blank"}
+      %img{:alt => "#{@challenge.name} pdf_preview", :src => "#{url_for(@challenge.pdf_preview)}", :title => "Govhack Hackerspace"}
+  - unless @challenge.pdf.attached?
+    %p This Challenge does not have a PDF.
+  - unless @challenge.pdf_preview.attached?
+    %p This Challenge does not have a PDF Preview.
+  %p= link_to 'Update PDF Preview', edit_admin_region_challenge_path(@region, @challenge, pdf_preview: true)
+  %p= link_to 'Update PDF', edit_admin_region_challenge_path(@region, @challenge, pdf: true)
+  - unless @challenge.approved
+    %p
+      %strong This challenge is yet to be approved.
+  %p= link_to 'Go to Challenge Page', challenge_path(@challenge.identifier)
+  %p= link_to "Update Challenge", edit_admin_region_challenge_path(@region, @challenge)
+  %h3 Teams Competing
+  %p #{ pluralize(@challenge.entries.count, 'team')} entered challenge.
+  %p= link_to 'Go to Challenge Entries', admin_challenge_entries_path(@challenge)
+  %h3 Judges
+  - if @judges.present?
+    - @judges.each do |judge|
+      = render 'admin/shared/user_contact', locals: { user: judge }
+  - else
+    %p This challenge does not currently have any judges assigned.
+  %p= link_to "New #{JUDGE} Assignment", new_admin_challenge_judge_path(@challenge)
+  %h3 Challenge Sponsorships
+  %p= link_to 'Add Sponsorship', new_admin_challenge_challenge_sponsorship_path(@challenge)
+  - if @challenge_sponsorships.present?
+    - @challenge_sponsorships.each do |sponsorship|
+      = render 'admin/sponsors/sponsor', locals: { sponsor: sponsorship.sponsor }
+      %p= link_to 'Destroy Challenge Sponsorship', admin_challenge_challenge_sponsorship_path(@challenge, sponsorship), |
+          method: :delete,                                                                                              |
+          data: { confirm: 'Are you sure?' }                                                                            |
+  - else
+    %p There are currently no sponsorships for this challenge in the current competition.
+  %h3 Challenge Data Sets
+  %p= link_to 'Add Data Set', new_admin_challenge_challenge_data_set_path(@challenge)
+  - if @challenge_data_sets.present?
+    - @challenge_data_sets.each do |challenge_data_set|
+      - data_set = challenge_data_set.data_set
+      %h4= data_set.name
+      = data_set.url
+
+      %p= link_to 'Destroy Challenge Data Set', admin_challenge_challenge_data_set_path(@challenge, challenge_data_set), |
+        method: :delete,                                                                                               |
+        data: { confirm: 'Are you sure?' }                                                                             |
+  - else
+    %div There are currently no data sets for this challenge in the current competition.
+%p= link_to 'Back to Challenges', admin_region_challenges_path(@region)
