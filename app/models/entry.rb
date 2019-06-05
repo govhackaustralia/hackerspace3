@@ -9,7 +9,10 @@ class Entry < ApplicationRecord
   has_many :scorecards, dependent: :destroy, as: :judgeable
 
   validates :justification, presence: true
-  validates :team_id, uniqueness: { scope: :challenge_id, message: 'Teams are not able to enter the same Challenge twice.' }
+  validates :team_id, uniqueness: {
+    scope: :challenge_id,
+    message: 'Teams are not able to enter the same Challenge twice.'
+  }
   validates :award, inclusion: { in: AWARD_NAMES << nil }
   validate :entries_must_not_exceed_max_regional_allowed_for_checkpoint,
            :entries_must_not_exceed_max_national_allowed_for_checkpoint,

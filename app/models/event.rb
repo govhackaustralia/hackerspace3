@@ -32,13 +32,26 @@ class Event < ApplicationRecord
   has_many :outbound_flights, -> { outbound }, class_name: 'Flight'
 
   scope :published, -> { where published: true }
-  scope :past, -> { where 'end_time < ?', Time.now.in_time_zone(COMP_TIME_ZONE) }
-  scope :future, -> { where 'start_time > ?', Time.now.in_time_zone(COMP_TIME_ZONE) }
+
+  scope :past, lambda {
+    where 'end_time < ?', Time.now.in_time_zone(COMP_TIME_ZONE)
+  }
+  scope :future, lambda {
+    where 'start_time > ?', Time.now.in_time_zone(COMP_TIME_ZONE)
+  }
+
   scope :connections, -> { where event_type: CONNECTION_EVENT }
   scope :competitions, -> { where event_type: COMPETITION_EVENT }
   scope :awards, -> { where event_type: AWARD_EVENT }
-  scope :locations, -> { where 'events.name NOT LIKE ? AND event_type = ?', '%Remote%', COMPETITION_EVENT }
-  scope :remotes, -> { where 'events.name LIKE ? AND event_type = ?', '%Remote%', COMPETITION_EVENT }
+
+  scope :locations, lambda {
+    where 'events.name NOT LIKE ? AND event_type = ?',
+          '%Remote%', COMPETITION_EVENT
+  }
+  scope :remotes, lambda {
+    where 'events.name LIKE ? AND event_type = ?',
+          '%Remote%', COMPETITION_EVENT
+  }
 
   validates :name, :capacity, presence: true
   validates :registration_type, inclusion: { in: EVENT_REGISTRATION_TYPES }

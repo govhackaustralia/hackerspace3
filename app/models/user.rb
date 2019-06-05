@@ -29,7 +29,10 @@ class User < ApplicationRecord
 
   has_many :staff_assignments, -> { staff }, class_name: 'Assignment'
 
-  scope :search, ->(term) { where 'full_name ILIKE ? OR email ILIKE ? OR preferred_name ILIKE ?', "%#{term}%", "%#{term}%", "%#{term}%" }
+  scope :search, lambda { |term|
+    where 'full_name ILIKE ? OR email ILIKE ? OR preferred_name ILIKE ?',
+          "%#{term}%", "%#{term}%", "%#{term}%"
+  }
 
   # Gravitar Gem
   include Gravtastic
