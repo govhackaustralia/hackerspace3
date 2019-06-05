@@ -53,6 +53,10 @@ class Event < ApplicationRecord
           '%Remote%', COMPETITION_EVENT
   }
 
+  scope :competition, lambda { |competition|
+    joins(:region).where(regions: { competition: competition })
+  }
+
   validates :name, :capacity, presence: true
   validates :registration_type, inclusion: { in: EVENT_REGISTRATION_TYPES }
   validates :event_type, inclusion: { in: EVENT_TYPES }

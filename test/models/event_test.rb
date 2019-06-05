@@ -60,6 +60,7 @@ class EventTest < ActiveSupport::TestCase
     assert Event.locations.include? @competition_event
     @competition_event.update name: 'Remote Location'
     assert Event.remotes.include? @competition_event
+    assert Event.competition(@competition).include? @event
   end
 
   test 'event validations' do
