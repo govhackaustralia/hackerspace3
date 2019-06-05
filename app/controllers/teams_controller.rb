@@ -48,11 +48,13 @@ class TeamsController < ApplicationController
   end
 
   def handle_team_save
-    @team.assign_leader(current_user)
-    @team.projects.create(team_name: "Team #{@team.id}",
-                          project_name: "Project #{@team.id}",
-                          user: current_user)
+    @team.assign_leader current_user
+    @team.projects.create(
+      team_name: "Team #{@team.id}",
+      project_name: "Project #{@team.id}",
+      user: current_user
+    )
     flash[:notice] = 'New Team Project Created'
-    redirect_to team_management_team_path(@team)
+    redirect_to team_management_team_path @team
   end
 end
