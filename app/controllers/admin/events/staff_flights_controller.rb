@@ -3,6 +3,7 @@ class Admin::Events::StaffFlightsController < ApplicationController
 
   def new
     @registration = @event.registrations.new
+    @competition = @event.competition
     search_for_staff unless params[:term].blank?
   end
 

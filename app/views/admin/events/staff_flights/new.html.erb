@@ -22,8 +22,8 @@
 
     <% @users.each do |user| %>
       <%= render 'admin/shared/user_contact', locals: { user: user } %>
-      <% if user.staff_assignments.present? %>
-        <% user.staff_assignments.each do |assignment| %>
+      <% if (staff_assignments = user.staff_assignments.where(competition: @competition)).any? %>
+        <% staff_assignments.each do |assignment| %>
           <p><%= link_to "Select as #{assignment.title} at #{assignment.assignable.name}", new_admin_event_staff_flight_path(@event, term: assignment.id) %></p>
         <% end %>
       <% else %>
