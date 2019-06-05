@@ -49,7 +49,7 @@ class ProjectsController < ApplicationController
   def retrieve_attending_events
     return unless @competition.not_finished? LAST_TIME_ZONE
 
-    @attending_events = current_user.participating_competition_events.where(competition: @competition)
+    @attending_events = current_user.participating_competition_events.competition(@competition)
   end
 
   def user_records_show
