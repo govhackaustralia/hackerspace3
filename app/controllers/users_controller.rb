@@ -16,10 +16,10 @@ class UsersController < ApplicationController
     @favourite_teams = @event_assignment.favourite_teams.published.preload :event, :current_project
 
     @joined_teams = @user.joined_teams.competition(@competition).preload :event, :current_project, :region
-    @invited_team_assignments = @user.invited_team_assignments.where(competition: @competiton).preload assignable: [:event, :current_project]
+    @invited_teams = @user.invited_teams.competition(@competition).preload :event, :current_project
 
-    @public_winning_entries = has_public_winning_entries?
-    @region_privileges = @user.region_privileges?(@competition)
+    @public_winning_entries = has_public_winning_entries? @competition
+    @region_privileges = @user.region_privileges? @competition
   end
 
   def edit
@@ -101,8 +101,8 @@ class UsersController < ApplicationController
     redirect_to manage_account_path
   end
 
-  def has_public_winning_entries?
-    @user.winning_entries.preload(challenge: :region).each do |entry|
+  def has_public_winning_entries?(competition)
+    @user.winning_entries.competition(competition).preload(challenge: :region).each do |entry|
       return true if entry.challenge.region.awards_released?
     end
     false

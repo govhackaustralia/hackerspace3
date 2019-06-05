@@ -69,12 +69,9 @@
     - if in_competition_window_or_region_privileges?(LAST_TIME_ZONE) && @invited_team_assignments.present?
       %article
         %h3 My Invitations
-        - @invited_team_assignments.each do |assignment|
-          %h4
-            = assignment.assignable.current_project.team_name
-            \- #{assignment.assignable.current_project.project_name}
-          %p
-            Event: #{assignment.assignable.event.name}
+        - @invited_teams.each do |team|
+          %h4 #{team.current_project.team_name} - #{team.current_project.project_name}
+          %p Event: #{assignment.assignable.event.name}
           %p= link_to 'Accept Invitation and Go to Team', users_invitation_path(assignment), method: :patch
           %p= link_to 'Decline Invitation', users_invitation_path(assignment), method: :delete, data: { confirm: 'Are you sure?' }
     %article
@@ -82,9 +79,8 @@
         %h3 My Favourite Projects
         - if @favourite_teams.present?
           - @favourite_teams.each do |team|
-            %h4= "#{team.current_project.team_name} - #{team.current_project.project_name}"
-            %p
-              Event: #{team.event.name}
+            %h4 #{team.current_project.team_name} - #{team.current_project.project_name}
+            %p Event: #{team.event.name}
             %p= link_to "Go to Team Project", project_path(team.current_project.identifier)
         - else
           %p Projects that you favourite will appear here.
