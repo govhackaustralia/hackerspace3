@@ -111,16 +111,16 @@ class User < ApplicationRecord
   # Returns a user's event_assignment if they have permission to vote.
   def judgeable_assignment(competition)
     event_assignment competition if
-      assignments.judgeables.present?
       joined_teams.competition(competition).published.present? ||
+      assignments.judgeables.where(competition: competition).present?
   end
 
   # Returns a user's event_assignment if they have permission to vote in the
   # people's choice awards.
   def peoples_assignment(competition)
     event_assignment competition if
-      assignments.volunteers.present?
       joined_teams.published.competition(competition).present? ||
+      assignments.volunteers.where(competition: competition).present?
   end
 
   # Returns a user's challenge judging assignment given a challenge.
