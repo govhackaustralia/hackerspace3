@@ -1,8 +1,0 @@
-<% user = locals[:user] %>
-<div>
-  <strong>Name: <%= user.display_name %></strong><br>
-  <% if user.preferred_name.present? %>
-    Preferred name: <%= user.preferred_name %><br>
-  <% end %>
-  Email: <%= user.email %><br>
-</div>

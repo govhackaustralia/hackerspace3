@@ -1,0 +1,7 @@
+- user = locals[:user]
+%section
+  %p
+    %strong Name: #{user.display_name}
+  - if user.preferred_name.present?
+    %p Preferred name: #{user.preferred_name}
+  %p Email: #{user.email}
