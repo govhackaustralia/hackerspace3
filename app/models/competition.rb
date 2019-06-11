@@ -3,6 +3,7 @@ class Competition < ApplicationRecord
   has_many :regions
   has_many :sponsors
   has_many :sponsorship_types
+  has_many :competition_assignments, class_name: 'Assignment'
 
   has_many :events, through: :regions
   has_many :connection_events, -> { connections }, through: :regions, source: :events

@@ -46,6 +46,7 @@ class CompetitionTest < ActiveSupport::TestCase
     assert @competition.criteria.include? @criterion
     assert @competition.project_criteria.include? @project_criterion
     assert @competition.challenge_criteria.include? @challenge_criterion
+    assert @competition.competition_assignments.include? @assignment
   end
 
   test 'competition validations' do
