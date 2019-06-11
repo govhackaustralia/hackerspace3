@@ -12,7 +12,7 @@
       <%= form_for [:admin, @sponsorable, @sponsorship] do |f| %>
         <%= f.hidden_field :sponsor_id, value: @sponsor.id %>
         <%= f.label :sponsorship_type_id %><br>
-        <%= f.select :sponsorship_type_id, options_from_collection_for_select(SponsorshipType.all, :id, :name, @sponsorship.sponsorship_type) %><br>
+        <%= f.select :sponsorship_type_id, options_from_collection_for_select(@competition.sponsorship_types, :id, :name, @sponsorship.sponsorship_type) %><br>
         <%= f.submit "Create new Region Sponsorship with #{@sponsor.name}" %>
       <% end %>
     <% else %>
