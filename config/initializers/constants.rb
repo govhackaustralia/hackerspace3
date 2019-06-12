@@ -42,10 +42,6 @@ PHONE_NUMBER_LENGTH = 10
 
 MAX_DECISION_TIME = 2.minutes
 
-# The default name for the root/national region.
-
-ROOT_REGION_NAME = 'Australia'
-
 # Australian Time Zones
 
 VALID_TIME_ZONES = []
