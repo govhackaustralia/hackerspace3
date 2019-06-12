@@ -59,6 +59,6 @@ class ProjectsController < ApplicationController
     @judgeable_assignment = @user.judgeable_assignment @competition
     @peoples_assignment = @user.peoples_assignment @competition
     @judge = @user.judge_assignment(@team.challenges)
-    @users_team = @user.teams.include? @team
+    @users_team = @user.joined_teams.include? @team
   end
 end
