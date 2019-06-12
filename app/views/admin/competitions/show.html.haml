@@ -20,6 +20,7 @@
   %p
     = pluralize @events_count, 'event'
     set for this competition
+  %p= link_to 'Manage Events', admin_competition_events_path(@competition)
   %h3 Sponsors
   %p
     = pluralize @sponsors_count, 'sponsor'
