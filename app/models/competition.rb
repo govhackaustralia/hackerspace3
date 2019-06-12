@@ -172,11 +172,7 @@ class Competition < ApplicationRecord
 
   # Returns the time in a particular region.
   def region_time(time_zone)
-    if time_zone.present?
-      Time.now.in_time_zone(time_zone).to_formatted_s(:number)
-    else
-      Time.now.in_time_zone(COMP_TIME_ZONE).to_formatted_s(:number)
-    end
+    Time.now.in_time_zone(time_zone || COMP_TIME_ZONE).to_formatted_s(:number)
   end
 
   def only_one_current
