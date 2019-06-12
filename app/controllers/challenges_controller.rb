@@ -74,7 +74,7 @@ class ChallengesController < ApplicationController
                             end
     @passed_public_checkpoints = @competition.checkpoints.where(id: passed_checkpoint_ids).order(:end_time)
     team_ids = @challenge.entries.where(checkpoint_id: passed_checkpoint_ids).pluck(:team_id)
-    @teams = Team.where(id: team_ids, published: true)
+    @teams = Team.published.where(id: team_ids)
   end
 
   def challenge_entry_counts
