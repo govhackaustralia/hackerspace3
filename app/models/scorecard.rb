@@ -73,8 +73,8 @@ class Scorecard < ApplicationRecord
 
     # if include judges false finds all the project scorecard associated
     # with judges and removes them from the set.
-    judge_assignment_ids = Assignment.where(title: EVENT_ASSIGNMENT_TITLES, user_id: judge_user_ids).pluck(:id)
     judge_user_ids = competition.assignments.judges.pluck(:user_id)
+    judge_assignment_ids = Assignment.event_assignments.where(user_id: judge_user_ids).pluck(:id)
     judge_scorecards = Scorecard.included.where(assignment_id: judge_assignment_ids)
     all_scorecards - judge_scorecards
   end
