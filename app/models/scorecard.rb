@@ -6,13 +6,17 @@ class Scorecard < ApplicationRecord
 
   has_many :judgments, dependent: :destroy
   has_many :assignment_scorecards, through: :assignment, source: :scorecards
-  has_many :assignment_judgments, through: :assignment_scorecards, source: :judgments
+  has_many :assignment_judgments, through: :assignment_scorecards,
+    source: :judgments
 
-  validates :assignment, uniqueness: { scope: :judgeable, message: 'Only one scorecard allowed per judgeable entity' }
+  validates :assignment, uniqueness: {
+    scope: :judgeable,
+    message: 'Only one scorecard allowed per judgeable entity'
+  }
 
   validate :cannot_judge_your_own_team
 
-  scope :included, -> { where(included: true) }
+  scope :included, -> { where included: true }
 
   # Check thats a scorecard judgements are consistent with most recent
   # competition criteria.
