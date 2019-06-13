@@ -1,17 +1,17 @@
 module EntriesHelper
   def challenges_event_counts(region, checkpoint_ids = nil)
-    events = Competition.current.events.where(region: region, event_type: COMPETITION_EVENT)
+    events = region.events.competitions
     event_to_entries = populate_entity_to_entries(events, checkpoint_ids)
-    unpublished_entries = Entry.where(team: Team.where(published: false))
+    unpublished_entries = Entry.where(team: region.teams.unpublished)
     challenges = region.challenges
     populate_challenge_to_entity(challenges, events, unpublished_entries, event_to_entries)
   end
 
-  def challenges_region_counts(checkpoint_ids = nil)
-    regions = Region.where.not(parent_id: nil)
+  def challenges_region_counts(competition, checkpoint_ids = nil)
+    regions = competition.regions.subs
     region_to_entries = populate_entity_to_entries(regions, checkpoint_ids)
-    unpublished_entries = Entry.where(team: Team.where(published: false))
-    challenges = Competition.current.root_region.challenges
+    unpublished_entries = Entry.where(team: competition.teams.unpublished)
+    challenges = competition.root_region.challenges
     populate_challenge_to_entity(challenges, regions, unpublished_entries, region_to_entries)
   end
 
