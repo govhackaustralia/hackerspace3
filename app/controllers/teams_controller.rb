@@ -2,7 +2,6 @@ class TeamsController < ApplicationController
   before_action :authenticate_user!
 
   def new
-    @competition = Competition.current
     if @competition.in_window? LAST_TIME_ZONE
       handle_new
     else
@@ -31,7 +30,7 @@ class TeamsController < ApplicationController
 
   def handle_new
     @team = Team.new
-    @events = current_user.participating_competition_events.competition(Competition.current)
+    @events = current_user.participating_competition_events.competition(@competition)
     return unless @events.empty?
 
     flash[:alert] = 'To create a new team, first register for a competition event.'

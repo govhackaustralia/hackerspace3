@@ -1,6 +1,5 @@
 class CompetitionsController < ApplicationController
   def show
-    @competition = Competition.current
     retrieve_events
     @challenges = @competition.challenges.approved
     @teams = @competition.teams.published

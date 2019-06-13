@@ -60,12 +60,11 @@ class Challenge < ApplicationRecord
 
   # Compiles a CSV file of all challenges.
   # ENHANCEMENT: This should be in a helper object or own model.
-  def self.to_csv(options = {})
-    competition = Competition.current
+  def self.to_csv(competition, options = {})
     challenge_columns = %w[id name short_desc long_desc eligibility video_url created_at updated_at]
     CSV.generate(options) do |csv|
       csv << (%w[region_name competition_year] + challenge_columns + %w[sponsors])
-      all.preload(:region, :sponsors).each do |challenge|
+      competition.challenges.preload(:region, :sponsors).each do |challenge|
         csv << challenge_csv_line(challenge, competition, challenge_columns)
       end
     end

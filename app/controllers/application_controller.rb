@@ -1,8 +1,13 @@
 class ApplicationController < ActionController::Base
-  before_action :accept_terms_and_conditions
-  before_action :fill_in_required_fields
+  before_action :competition, :accept_terms_and_conditions,
+                :fill_in_required_fields
 
   private
+
+  def competition
+    @competition = Competition.find_by_year request.subdomain
+    @competition ||= Competition.current
+  end
 
   def accept_terms_and_conditions
     return unless ts_and_cs_conditions_not_met

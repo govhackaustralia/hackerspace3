@@ -21,7 +21,7 @@ class EventsController < ApplicationController
   private
 
   def retrieve_events
-    all = Competition.current.events.published.preload(:region).order start_time: :asc, name: :asc
+    all = @competition.events.published.preload(:region).order start_time: :asc, name: :asc
     retrieve_all_future_events all
     retrive_all_past_events all
   end

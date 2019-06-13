@@ -59,6 +59,7 @@ class Admin::CompetitionsController < ApplicationController
   end
 
   def check_for_manegement_privileges
+    @competition = nil
     @competition = Competition.find params[:id] if params[:id].present?
     @competitions = Competition.all if @competition.nil?
     return if current_user.admin_privileges?(@competition || @competitions)

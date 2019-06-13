@@ -3,7 +3,6 @@ class UsersController < ApplicationController
 
   def show
     @user = current_user
-    @competition = Competition.current
 
     @assignments = @user.assignments.where competition: @competition
     @assignment_titles = @assignments.pluck :title

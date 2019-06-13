@@ -1,6 +1,5 @@
 class DataSetsController < ApplicationController
   def index
-    @competition = Competition.current
     @data_portals = YAML.load_file 'app/views/data_sets/data_portals.yml'
     @data_sets = @competition.data_sets.preload(:region)
     respond_to do |format|
@@ -10,7 +9,6 @@ class DataSetsController < ApplicationController
   end
 
   def show
-    @competition = Competition.current
     @data_set = DataSet.find(params[:id])
     @team_data_sets = TeamDataSet.where(url: @data_set.url)
     @teams = Team.published.where(id: @team_data_sets.pluck(:team_id)).preload(:current_project)

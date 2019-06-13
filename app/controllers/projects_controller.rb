@@ -22,14 +22,12 @@ class ProjectsController < ApplicationController
   private
 
   def index_variables
-    @competition = Competition.current
     @teams = @competition.teams.published
     @projects = @competition.published_projects_by_name.preload(:event)
     @region_privileges = user_signed_in? && current_user.region_privileges?(@competition)
   end
 
   def show_published
-    @competition = Competition.current
     @checkpoints = @competition.checkpoints.order(:end_time)
     @passed_checkpoint_ids = @competition.passed_checkpoint_ids(@team.time_zone)
     @entries_to_display = @team.entries.where(checkpoint: @passed_checkpoint_ids).preload(challenge: :region)

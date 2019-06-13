@@ -5,7 +5,7 @@ class ChallengesController < ApplicationController
     filter_challenges
     respond_to do |format|
       format.html
-      format.csv { send_data @challenges.to_csv }
+      format.csv { send_data @challenges.to_csv @competition }
     end
   end
 
@@ -21,7 +21,6 @@ class ChallengesController < ApplicationController
   private
 
   def index_variables
-    @competition = Competition.current
     @challenges = @competition.challenges.approved.order(:name).preload :region
     root_region = @competition.root_region
     @regions = ([root_region] << root_region.sub_regions.order(:name)).flatten
@@ -29,7 +28,6 @@ class ChallengesController < ApplicationController
   end
 
   def show_variables
-    @competition = Competition.current
     @challenge = Challenge.find_by identifier: params[:identifier]
     @challenge = Challenge.find(params[:identifier]) if @challenge.nil?
     @region = @challenge.region
@@ -79,7 +77,7 @@ class ChallengesController < ApplicationController
 
   def challenge_entry_counts
     all_entries = all_region_entries
-    unpublished_entries = Entry.where(team: Team.where(published: false)).to_a
+    unpublished_entries = Entry.where(team: @competition.teams.unpublished).to_a
     published_entries = all_entries - unpublished_entries
     @challenge_id_to_entry_count = {}
     @challenges.each { |challenge| @challenge_id_to_entry_count[challenge.id] = 0 }
