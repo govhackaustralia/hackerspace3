@@ -17,7 +17,7 @@ class Admin::RegionsController < ApplicationController
   end
 
   def new
-    @region = Region.new
+    @region = @competition.regions.new
   end
 
   def create
@@ -95,8 +95,8 @@ class Admin::RegionsController < ApplicationController
   end
 
   def retrieve_national_counts
-    @region_names = Region.where.not(parent_id: nil).order(:name).pluck(:name)
     @region_counts = helpers.challenges_region_counts @competition
+    @region_names = @competition.regions.subs.order(:name).pluck(:name)
     @challenge_names = @competition.root_region.challenges.order(:name).pluck(:name)
   end
 end
