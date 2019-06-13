@@ -33,6 +33,8 @@ class Team < ApplicationRecord
   has_one_attached :high_res_image
 
   scope :published, -> { where published: true }
+  scope :unpublished, -> { where published: false }
+
   scope :competition, lambda { |competition|
     joins(event: :region).where(regions: { competition: competition })
   }

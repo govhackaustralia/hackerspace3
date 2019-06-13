@@ -75,8 +75,10 @@ class TeamTest < ActiveSupport::TestCase
 
   test 'team scopes' do
     assert Team.published.include? @team
+    assert Team.unpublished.exclude? @team
     @team.update published: false
-    assert_not Team.published.include? @team
+    assert Team.published.exclude? @team
+    assert Team.unpublished.include? @team
     assert Team.competition(@competition).include? @team
   end
 
