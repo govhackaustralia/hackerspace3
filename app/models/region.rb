@@ -54,7 +54,7 @@ class Region < ApplicationRecord
   end
 
   # Returns a boolean whether a region is the national/root region.
-  def national?
+  def root?
     parent_id.nil?
   end
 

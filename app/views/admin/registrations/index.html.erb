@@ -6,7 +6,7 @@
 <table>
 	<thead>
 		<tr>
-			<% if @region.national? && @event.event_type == AWARD_EVENT %>
+			<% if @region.root? && @event.event_type == AWARD_EVENT %>
 				<th>Ticket Type</th>
 			<% end %>
 			<th>Full Name</th>
@@ -28,7 +28,7 @@
 <% @event.registrations.each do |registration| %>
 	<% user = registration.assignment.user %>
 	<tr>
-		<% if @region.national? && @event.event_type == AWARD_EVENT %>
+		<% if @region.root? && @event.event_type == AWARD_EVENT %>
 			<% assignment = registration.assignment %>
 			<% if assignment.title == VIP || assignment.title == PARTICIPANT %>
 				<td>Regular</td>
@@ -60,7 +60,7 @@
 
 <p><%= link_to 'Download CSV', admin_event_registrations_path(@event, format: 'csv') %></p>
 <p><%= link_to 'New Registration', new_admin_event_registration_path(@event) %></p>
-<% if @region.national? && @event.event_type == AWARD_EVENT %>
+<% if @region.root? && @event.event_type == AWARD_EVENT %>
 	<p><%= link_to 'New Individual Golden Ticket', new_admin_event_individual_golden_path(@event) %></p>
 	<p><%= link_to 'New Group Golden Ticket', new_admin_event_group_golden_path(@event) %></p>
 	<p><%= link_to 'New Staff Flight Registration', new_admin_event_staff_flight_path(@event) %></p>

@@ -59,7 +59,7 @@
     <p><%= link_to 'Add Event Partner', new_admin_event_event_partnership_path(@event) %></p>
   <% end %>
 
-  <% if @region.national? && @event.event_type == AWARD_EVENT %>
+  <% if @region.root? && @event.event_type == AWARD_EVENT %>
     <h3>Flights</h3>
     <p><%= pluralize @inbound_flights.count, 'inbound flight' %> saved.</p>
     <p><%= pluralize @outbound_flights.count, 'outbound flight' %> saved.</p>

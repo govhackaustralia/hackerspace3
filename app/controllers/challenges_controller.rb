@@ -65,7 +65,7 @@ class ChallengesController < ApplicationController
   end
 
   def checkpoint_entry_view
-    passed_checkpoint_ids = if @region.national?
+    passed_checkpoint_ids = if @region.root?
                               @competition.passed_checkpoint_ids(LAST_TIME_ZONE)
                             else
                               @competition.passed_checkpoint_ids(@region.time_zone)
@@ -87,7 +87,7 @@ class ChallengesController < ApplicationController
   def all_region_entries
     all_entries = []
     @competition.regions.each do |region|
-      passed_checkpoint_ids = if region.national?
+      passed_checkpoint_ids = if region.root?
                                 @competition.passed_checkpoint_ids(LAST_TIME_ZONE)
                               else
                                 @competition.passed_checkpoint_ids(region.time_zone)

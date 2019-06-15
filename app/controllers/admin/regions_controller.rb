@@ -71,7 +71,7 @@ class Admin::RegionsController < ApplicationController
   end
 
   def retrieve_counts
-    if @region.national?
+    if @region.root?
       retrieve_national_counts
     else
       @event_counts = helpers.challenges_event_counts @region

@@ -41,7 +41,7 @@ class Entry < ApplicationRecord
   # Checks that a team has not entered the maximum number of regional challenges
   # at a given checkpoint.
   def entries_must_not_exceed_max_regional_allowed_for_checkpoint
-    return if challenge.region.national?
+    return if challenge.region.root?
 
     current_count = team.regional_challenges(checkpoint).count
     max_allowed = checkpoint.max_regional_challenges
@@ -51,7 +51,7 @@ class Entry < ApplicationRecord
   # Checks that a team has not entered the maximum number of national challenges
   # at a given checkpoint.
   def entries_must_not_exceed_max_national_allowed_for_checkpoint
-    return unless challenge.region.national?
+    return unless challenge.region.root?
 
     current_count = team.national_challenges(checkpoint).count
     max_allowed = checkpoint.max_national_challenges
@@ -62,7 +62,7 @@ class Entry < ApplicationRecord
   # region.
   def teams_cannot_enter_regional_challenges_from_regions_other_than_their_own
     challenge_region = challenge.region
-    return if challenge_region.national?
+    return if challenge_region.root?
 
     errors.add(:checkpoint_id, 'Teams are not able to enter Challenges in Regions other than their own') if team.region != challenge_region
   end

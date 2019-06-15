@@ -77,7 +77,7 @@
 								<% end %>
 							<% else %>
 								<p>All available checkpoint limits reached for
-								<%= @region.national? ? 'national' : 'regional' %> challenges.</p>
+								<%= @region.root? ? 'national' : 'regional' %> challenges.</p>
 							<% end %>
 			      <% end %>
 			    <% end %>
