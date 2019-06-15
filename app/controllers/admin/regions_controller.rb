@@ -3,7 +3,7 @@ class Admin::RegionsController < ApplicationController
 
   def index
     @root_region = @competition.root_region
-    @sub_regions = @root_region.sub_regions
+    @sub_regions = @competition.regions.subs
   end
 
   def show
@@ -20,6 +20,10 @@ class Admin::RegionsController < ApplicationController
     @region = @competition.regions.new
   end
 
+  def new_root
+    new
+  end
+
   def create
     create_new_region
     if @region.save
@@ -33,6 +37,10 @@ class Admin::RegionsController < ApplicationController
 
   def edit
     @region = Region.find params[:id]
+  end
+
+  def edit_root
+    edit
   end
 
   def update

@@ -1,0 +1,9 @@
+- region = locals[:region]
+%h4= region.name
+- if region.time_zone
+  %p
+    Time Zone: #{region.time_zone}
+- if (director = region.director).present?
+  %h5 Region Director
+  = render 'admin/shared/user_contact', locals: { user: director }
+%p= link_to "Manage #{region.name} Region", admin_competition_region_path(@competition, region)

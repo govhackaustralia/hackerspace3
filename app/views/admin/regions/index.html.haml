@@ -1,0 +1,20 @@
+%main.team_page
+  %h2 Region Management
+  %h3 Root Region
+  - if @root_region.nil?
+    %p= link_to 'Create New Root Region', new_root_admin_competition_regions_path(@competition)
+  - else
+    = render "region_modal", locals: { region: @root_region}
+
+  %h3 Sub Regions
+  - if @root_region.present?
+    %p= link_to 'Create new Sub Region', new_admin_competition_region_path
+    - if @sub_regions.present?
+      - @sub_regions.each do |region|
+        = render 'region_modal', locals: { region: region }
+    - else
+      %p No Sub Regions saved.
+  - else
+    %p A Root Region is required to create Sub Regions.
+
+%p= link_to 'Back to Competition', admin_competition_path(@competition)
