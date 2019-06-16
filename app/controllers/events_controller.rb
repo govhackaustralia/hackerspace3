@@ -3,7 +3,7 @@ class EventsController < ApplicationController
     retrieve_events
     respond_to do |format|
       format.html
-      format.csv { send_data @events.to_csv }
+      format.csv { send_data @events.to_csv @competition }
     end
   end
 
@@ -21,22 +21,22 @@ class EventsController < ApplicationController
   private
 
   def retrieve_events
-    all = @competition.events.published.preload(:region).order start_time: :asc, name: :asc
-    retrieve_all_future_events all
-    retrive_all_past_events all
+    @events = @competition.events.published.preload(:region).order start_time: :asc, name: :asc
+    retrieve_future_events
+    retrive_past_events
   end
 
-  def retrieve_all_future_events(all)
-    @future_connections = all.connections.future
-    @future_locations = all.locations.future
-    @future_remotes = all.remotes.future
-    @future_awards = all.awards.future
+  def retrieve_future_events
+    @future_connections = @events.connections.future
+    @future_locations = @events.locations.future
+    @future_remotes = @events.remotes.future
+    @future_awards = @events.awards.future
   end
 
-  def retrive_all_past_events(all)
-    @past_connections = all.connections.past
-    @past_competitions = all.competitions.past
-    @past_awards = all.awards.past
+  def retrive_past_events
+    @past_connections = @events.connections.past
+    @past_competitions = @events.competitions.past
+    @past_awards = @events.awards.past
   end
 
   def show_event
