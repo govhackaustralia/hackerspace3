@@ -11,7 +11,6 @@ class RegionSeeder < Seeder
     sponsors = comp.sponsors
     sponsorship_types = comp.sponsorship_types
     participant_assignments = comp.competition_assignments.participants
-    challenges = comp.challenges
 
     root_region = comp.regions.create(
       name: 'Australia' + ' ' + comp.year.to_s
@@ -111,6 +110,9 @@ class RegionSeeder < Seeder
                     Faker::TvShows::GameOfThrones.city
                    end
 
+      # ENHANCEMENT: Split into National and Regional challenges to assign
+      # teams to both.
+      challenges = comp.root_region&.challenges + region.challenges
       EVENT_TYPES.each do |event_type|
 
         next if event_name == root_region.name && event_type == COMPETITION_EVENT
