@@ -1,0 +1,39 @@
+%main.project_index
+  %h2
+    Team Projects for Competition #{@competition.year}
+  - if competition_started_or_region_privileges?
+    = form_tag projects_path, method: :get do
+      = search_field_tag :term, params[:term]
+      = submit_tag 'Search'
+    %p= link_to 'Clear Search', projects_path
+    %p= link_to 'Download CSV', projects_path(format: 'csv')
+    - if user_signed_in? && @competition.not_finished?(LAST_TIME_ZONE)
+      - if @attending_events.present?
+        %aside= link_to 'Create New Team Project', new_team_path
+      - else
+        %p
+          %strong Please register for a competition event to create a team.
+        %p= link_to 'Competition Events', competition_events_path
+    %table
+      %thead
+        %th Project
+        %th Team
+        %th Location
+        - if show_peoples_choice_stuff?
+          %th Project Scorecard
+      %tbody
+        - filter_projects(params[:term]).each do |project|
+          %tr
+            %td= link_to "#{project.project_name}", project_path(project.identifier)
+            %td= project.team_name
+            %td= project.event.name
+            - if show_peoples_choice_stuff?
+              - if (display_score = @project_judging[project.team_id][:display_score_status]).is_a? Integer
+                - score_value = ((display_score.to_f / @project_judging_total.to_f) * 100).to_i
+                = render 'challenges/judging_cell', locals: { total: score_value }
+              - else
+                %td= display_score
+  - else
+    %section.later
+      %strong
+        Check back here at the commencement of the competition at #{@competition.start_time.strftime("%I.%M %p %e %B %Y")}
