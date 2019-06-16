@@ -61,16 +61,19 @@ class Admin::CompetitionsController < ApplicationController
   def check_for_manegement_privileges
     @competition = nil
     @competition = Competition.find params[:id] if params[:id].present?
-    @competitions = Competition.all if @competition.nil?
+    @competitions = Competition.all.order(:year) if @competition.nil?
     return if current_user.admin_privileges?(@competition || @competitions)
 
-    flash[:alert] = 'You must have valid assignments to access this section.'
-    redirect_to root_path
+    redirect_invalid_assignments
   end
 
   def check_for_admin_privileges
     return if current_user.assignments.where(title: ADMIN).any?
 
+    redirect_invalid_assignments
+  end
+
+  def redirect_invalid_assignments
     flash[:alert] = 'You must have valid assignments to access this section.'
     redirect_to root_path
   end
