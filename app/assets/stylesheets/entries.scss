@@ -6,9 +6,14 @@
 	padding: 2em 5em;
 }
 
+.entries_page section.later {
+	padding: 1.5em 1.5em;
+}
+
 .entries_page h2 {
 	color: #4c9ad2;
 	font-size: 2em;
+	margin-bottom: 1em;
 }
 
 .entries_page table {
@@ -16,7 +21,8 @@
 	margin-top: 2em;
 	margin-left: 2em;
 	padding: 2em 2em;
-	border-collapse: collapse
+	border-collapse: collapse;
+	margin-bottom: 2em;
 }
 
 .entries_page table, .entries_page th, .entries_page td {
