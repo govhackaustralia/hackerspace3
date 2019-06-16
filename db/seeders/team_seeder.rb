@@ -12,15 +12,12 @@ class TeamSeeder < Seeder
 
       team.assign_leader(competitors.sample)
       [*1..8].sample.times do
-        team.assignments.create(
-          title: TEAM_MEMBER,
+        team.assignments.team_members.create(
           user: competitors.sample
         )
       end
-
       2.times do
-        team.assignments.create(
-          title: INVITEE,
+        team.assignments.team_invitees.create(
           user: competitors.sample
         )
       end
@@ -38,7 +35,7 @@ class TeamSeeder < Seeder
         )
       end
 
-      5.times do |time|
+      [*1..5].sample.times do |time|
         team.team_data_sets.create(
           name: "#{team.name} dataset #{team_time + time} #{comp.year}",
           description: Faker::Lorem.paragraph,
