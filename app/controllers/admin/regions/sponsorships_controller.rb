@@ -46,7 +46,8 @@ class Admin::Regions::SponsorshipsController < ApplicationController
     @sponsor = Sponsor.find_by_name params[:term]
     if @sponsor.present?
       @existing_sponsorship = Sponsorship.find_by(
-        sponsor: @sponsor, sponsorable: @sponsorable
+        sponsor: @sponsor,
+        sponsorable: @sponsorable
       )
     else
       @sponsors = Sponsor.search params[:term]
