@@ -16,6 +16,7 @@ AllCops:
     - 'app/controllers/users_controller.rb'
     - 'app/models/scorecard.rb'
     - 'app/models/data_set.rb'
+    - 'app/models/user.rb'
 
 Style/Documentation:
   Enabled: false

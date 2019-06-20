@@ -43,7 +43,7 @@ class Admin::TeamsController < ApplicationController
     respond_to do |format|
       format.html
       if params[:category] == 'members'
-        format.csv { send_data User.all_members_to_csv }
+        format.csv { send_data User.all_members_to_csv @competition }
       else
         format.csv { send_data User.published_teams_to_csv }
       end
