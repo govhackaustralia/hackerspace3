@@ -5,8 +5,8 @@ class Admin::EventPartnershipsController < ApplicationController
     @event_partnership = EventPartnership.new
     return if params[:term].blank?
 
-    @sponsor = Sponsor.find_by_name params[:term]
-    @sponsors = Sponsor.search(params[:term]) unless @sponsor.present?
+    @sponsor = @competition.sponsors.find_by_name params[:term]
+    @sponsors = @competition.sponsors.search(params[:term]) unless @sponsor.present?
   end
 
   def create

@@ -39,7 +39,7 @@ class Admin::ChallengeSponsorshipsController < ApplicationController
         challenge: @challenge
       )
     else
-      @sponsors = Sponsor.search(params[:term])
+      @sponsors = @competition.sponsors.search params[:term]
     end
   end
 

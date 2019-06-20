@@ -53,7 +53,7 @@ class Admin::Challenges::ChallengeDataSetsController < ApplicationController
         data_set: @data_set, challenge: @challenge
       )
     else
-      @data_sets = DataSet.search params[:term]
+      @data_sets = @competition.data_sets.search params[:term]
     end
   end
 end

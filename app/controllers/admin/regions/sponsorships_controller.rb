@@ -50,7 +50,7 @@ class Admin::Regions::SponsorshipsController < ApplicationController
         sponsorable: @sponsorable
       )
     else
-      @sponsors = Sponsor.search params[:term]
+      @sponsors = @competition.sponsors.search params[:term]
     end
   end
 end
