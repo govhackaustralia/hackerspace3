@@ -45,4 +45,23 @@ class EntryTest < ActiveSupport::TestCase
     # No duplicate entries by Team into Challenge.
     assert_not Entry.second.update challenge: @challenge
   end
+
+  test 'update eligible' do
+    Entry.destroy_all
+    entry = @team.entries.create(
+      checkpoint: @checkpoint,
+      challenge: @challenge,
+      justification: 'Test'
+    )
+    assert_not entry.eligible
+    @team.projects.create(
+      user: User.first,
+      team_name: 'test',
+      project_name: 'test',
+      data_story: 'test',
+      video_url: 'test',
+      source_code_url: 'test'
+    )
+    assert entry.eligible
+  end
 end

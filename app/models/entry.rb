@@ -31,11 +31,11 @@ class Entry < ApplicationRecord
   # marked eligible, and then marks accordingly.
   def update_eligible(project = nil)
     project = team.current_project if project.nil?
-    if project.data_story.present? && project.video_url.present? && project.source_code_url.present?
-      update(eligible: true)
-    else
-      update(eligible: false)
-    end
+    update(
+      eligible: project.data_story.present? &&
+      project.video_url.present? &&
+      project.source_code_url.present?
+    )
   end
 
   # Checks that a team has not entered the maximum number of regional challenges
