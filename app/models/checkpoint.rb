@@ -9,13 +9,10 @@ class Checkpoint < ApplicationRecord
   # number of challenges for a particular region.
   def limit_reached?(team, region)
     if region.root?
-      max = max_national_challenges
-      entry_count = team.national_challenges(self).count
+      team.national_challenges(self).count >= max_national_challenges
     else
-      max = max_regional_challenges
-      entry_count = team.regional_challenges(self).count
+      team.regional_challenges(self).count >= max_regional_challenges
     end
-    entry_count >= max
   end
 
   # Returns a boolean based on whether a checkpoint has passed in a given
