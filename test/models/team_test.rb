@@ -83,7 +83,7 @@ class TeamTest < ActiveSupport::TestCase
   end
 
   test 'search' do
-    Team.search('A').include? @team
-    Team.search('x').include? @team
+    Team.search(@competition, 'A').include? @team
+    Team.search(@competition, 'x').include? @team
   end
 end

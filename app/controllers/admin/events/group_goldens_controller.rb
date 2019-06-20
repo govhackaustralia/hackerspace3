@@ -36,7 +36,7 @@ class Admin::Events::GroupGoldensController < ApplicationController
   def search_other_fields_team
     return if params[:term].blank?
 
-    @teams = Team.search(params[:term]).preload :current_project
+    @teams = Team.search(@competition, params[:term]).preload :current_project
   end
 
   def team_found

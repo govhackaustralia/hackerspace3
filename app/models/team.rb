@@ -157,8 +157,8 @@ class Team < ApplicationRecord
   end
 
   # Search for teams based on a given term.
-  def self.search(term)
-    team_ids = Project.search(term).pluck(:team_id).uniq
+  def self.search(competition, term)
+    team_ids = competition.projects.search(term).pluck(:team_id).uniq
     Team.where(id: team_ids.uniq)
   end
 end
