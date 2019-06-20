@@ -140,18 +140,18 @@ class Team < ApplicationRecord
 
   # Returns a CSV file with information on the team.
   # ENHANCEMENT: move to controller.
-  def self.to_csv(options = {})
+  def self.to_csv(competition, options = {})
     project_columns = %w[team_name project_name source_code_url video_url homepage_url created_at updated_at identifier]
     CSV.generate(options) do |csv|
       csv << project_columns + %w[member_count data_sets challenge_names]
-      compile_csv(csv, project_columns)
+      compile_csv(competition, csv, project_columns)
     end
   end
 
   # Inserts a set of attributes into a csv file.
   # ENHANCEMENT: move to controller.
-  def self.compile_csv(csv, project_columns)
-    all.published.preload(:current_project, :team_data_sets, :challenges, :assignments).each do |team|
+  def self.compile_csv(competition, csv, project_columns)
+    competition.published.preload(:current_project, :team_data_sets, :challenges, :assignments).each do |team|
       csv << team.current_project.attributes.values_at(*project_columns) + [team.assignments.length, team.team_data_sets.pluck(:url), team.challenges.pluck(:name)]
     end
   end

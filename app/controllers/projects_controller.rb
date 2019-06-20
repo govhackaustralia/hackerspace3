@@ -4,7 +4,7 @@ class ProjectsController < ApplicationController
     user_records_index if user_signed_in?
     respond_to do |format|
       format.html
-      format.csv { send_data @teams.to_csv }
+      format.csv { send_data @teams.to_csv @competition }
     end
   end
 
