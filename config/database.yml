@@ -29,7 +29,7 @@ development:
   # To create additional roles in postgres see `$ createuser --help`.
   # When left blank, postgres will use the default role. This is
   # the same name as the operating system user that initialized the database.
-  username: hackerspace3
+  username: hackerspace
 
   # The password associated with the postgres role (username).
   #password:
@@ -82,5 +82,5 @@ test:
 production:
   <<: *default
   database: hackerspace3_production
-  username: hackerspace3
-# password: <%= ENV['DATABASE_URL'] %>
+  username: hackerspace
+#   password: <%= ENV['DATABASE_URL'] %>
