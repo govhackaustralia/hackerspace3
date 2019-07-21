@@ -40,4 +40,9 @@ class Admin::UsersControllerTest < ActionDispatch::IntegrationTest
     assert @user.confirmed?
     assert_redirected_to admin_user_url @user
   end
+
+  test 'should get unconfirmed' do
+    get unconfirmed_admin_users_path
+    assert_response :success
+  end
 end

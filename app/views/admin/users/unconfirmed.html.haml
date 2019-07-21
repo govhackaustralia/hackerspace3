@@ -1,0 +1,11 @@
+- content_for :title, 'Unconfirmed Users'
+%main.team_page
+  %h2= yield :title
+  - if @users.present?
+    - @users.each do |user|
+      = render 'admin/shared/user_contact', locals: { user: user }
+      %p= link_to 'See User', admin_user_path(user)
+  - else
+    %p
+      No unconfirmed users.
+%p= link_to 'Back to User Management', admin_users_path

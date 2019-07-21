@@ -39,6 +39,10 @@ class Admin::UsersController < ApplicationController
     redirect_to admin_user_path @user
   end
 
+  def unconfirmed
+    @users = User.all.where confirmed_at: nil
+  end
+
   private
 
   def check_for_privileges
