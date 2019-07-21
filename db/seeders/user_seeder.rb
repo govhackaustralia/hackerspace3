@@ -60,7 +60,7 @@ class UserSeeder < Seeder
 
       user.skip_confirmation_notification!
       user.skip_reconfirmation!
-      user.confirm
+      user.confirm if number % 20 == 0
       user.save
     end
   end

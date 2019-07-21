@@ -33,6 +33,12 @@ class Admin::UsersController < ApplicationController
     end
   end
 
+  def confirm
+    @user = User.find params[:id]
+    @user.confirm
+    redirect_to admin_user_path @user
+  end
+
   private
 
   def check_for_privileges

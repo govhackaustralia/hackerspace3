@@ -2,6 +2,11 @@
   %h2= @user.display_name
   %p
     Email: #{@user.email}
+  - if @user.confirmed?
+    %p
+      %strong Confirmed
+  - else
+    %p= link_to 'Confirm User', confirm_admin_user_path(@user), method: :post
   - @event_assignments.each do |event_assignment|
     %h3= event_assignment.competition.name
     %h4 Event Assignment

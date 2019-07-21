@@ -104,6 +104,7 @@ Rails.application.routes.draw do
     end
 
     resources :users, except: [:destroy, :edit, :update] do
+      member { post 'confirm' }
       resources :assignments, only: [:edit, :update, :destroy], controller: 'users/assignments'
     end
   end

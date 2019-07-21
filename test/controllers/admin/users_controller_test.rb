@@ -34,4 +34,10 @@ class Admin::UsersControllerTest < ActionDispatch::IntegrationTest
     end
     assert_response :success
   end
+
+  test 'should post confirm' do
+    post confirm_admin_user_path @user
+    assert @user.confirmed?
+    assert_redirected_to admin_user_url @user
+  end
 end
