@@ -1,5 +1,5 @@
 %main.registration.signin
-  %h2 Log in
+  %h2 Sign in
   %section
     = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
       .field
@@ -15,7 +15,7 @@
           = f.label :remember_me
           = f.check_box :remember_me
       .actions
-        = f.submit "Log in"
+        = f.submit 'Sign in'
       = render "devise/shared/links"
     %aside
       = link_to (render "devise/shared/google"), user_google_omniauth_authorize_path
