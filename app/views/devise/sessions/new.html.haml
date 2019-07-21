@@ -18,4 +18,5 @@
         = f.submit 'Sign in'
       = render "devise/shared/links"
     %aside
-      = link_to (render "devise/shared/google"), user_google_omniauth_authorize_path
+      -# TODO: remove once https://github.com/omniauth/omniauth/pull/809 is resolved  
+      = link_to (render "devise/shared/google"), user_google_omniauth_authorize_path, method: :post

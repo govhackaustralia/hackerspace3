@@ -22,7 +22,8 @@
         %div
           = form.label(:preferred_img, 'Google')
           - if current_user.google_img.nil?
-            = link_to 'Connect Google Account', user_google_omniauth_authorize_path
+            -# TODO: remove once https://github.com/omniauth/omniauth/pull/809 is resolved
+            = link_to 'Connect Google Account', user_google_omniauth_authorize_path, method: :post
           - else
             %img{:alt => "Google Profile Picture", :src => "#{@user.google_img}"}/
       .field
