@@ -45,6 +45,10 @@ gem 'hamlit'
 gem 'redis', '~> 4.0'
 # CoffeeScript adapter for the Rails asset pipeline
 gem 'coffee-rails'
+# Patch-level verification for bundler.
+gem 'bundler-audit'
+# This gem provides a mitigation against CVE-2015-9284
+gem 'omniauth-rails_csrf_protection'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
