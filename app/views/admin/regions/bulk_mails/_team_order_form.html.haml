@@ -1,0 +1,26 @@
+= form_for [:admin, @region, @bulk_mail] do |form|
+  %div
+    - @team_orders.each do |team_order|
+      %h3
+        = team_order.team.current_project.team_name
+        | #{team_order.team.current_project.project_name}
+      = fields_for "team_orders[]", team_order do |team_order_form|
+        .field
+          = team_order_form.select(:request_type, options_for_select(TEAM_ORDER_REQUEST_TYPES, team_order.request_type))
+        %table
+          %tr
+            %th Title
+            %th Display Name
+            %th GovHack Can Contact
+          - team_order.team.leaders.each do |leader|
+            %tr
+              %td Team Leader
+              %td= leader.display_name
+              %td= leader.me_govhack_contact ? 'Can Contact' : 'Cannot Contact'
+          - team_order.team.members.each do |member|
+            %tr
+              %td Team Member
+              %td= member.display_name
+              %td= member.me_govhack_contact ? 'Can Contact' : 'Cannot Contact'
+  .actions
+    = form.submit

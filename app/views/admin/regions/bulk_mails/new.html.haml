@@ -1,0 +1,5 @@
+%main.team_page
+  %h2
+    New Mail Order for #{@region.name} Region
+  = render 'form'
+= link_to "Back to #{@region.name} Mail Orders", admin_region_bulk_mails_path(@region)

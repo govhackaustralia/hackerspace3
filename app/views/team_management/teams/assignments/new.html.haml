@@ -1,0 +1,35 @@
+%main.team_page
+  %h2
+    Add New Team Member to #{@team.name}
+  %section
+    = form_tag(new_team_management_team_assignment_path, method: :get) do
+      = search_field_tag :term, params[:term]
+      = hidden_field_tag(:title, @title)
+      = submit_tag 'Search'
+    %p= link_to 'Clear Search', new_team_management_team_assignment_path(@team, title: INVITEE)
+  - if @user.present?
+    %section
+      = render 'admin/shared/user_contact', locals: { user: @user }
+      - if @participating_events.empty?
+        %p
+          %strong This participant is not registered for a competition event.
+      - elsif @existing_assignment.present?
+        %p
+          Assignment for #{@user.display_name} to #{@team.name} as #{@existing_assignment.title} already exists.
+      - else
+        %p= link_to "Add #{@user.display_name} to #{@team.name}",      |
+            team_management_team_assignments_path(@team, assignment: { |
+            user_id: @user.id }), method: :post                        |
+  - elsif @users.present?
+    %section
+      - @users.each do |user|
+        = render 'shared/user_public_contact', locals: { user: user }
+        %p= link_to 'Select', new_team_management_team_assignment_path(@team, title: @title, term: user.id)
+  - elsif params[:term].present?
+    %section
+      %p
+        Apologies, no name matching search term '#{params[:term]}'
+  - else
+    %section
+      %p Please enter an email address or name to search for a participant.
+%p= link_to 'Back to Team Assignments', team_management_team_assignments_path(@team)

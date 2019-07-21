@@ -1,0 +1,22 @@
+= form_for [:admin, @region, @challenge] do |form|
+  .field
+    = form.label :name
+    = form.text_field :name
+  .field
+    = form.label :short_desc
+    = form.text_area :short_desc
+  .field
+    = form.label :long_desc
+    = form.text_area :long_desc
+  .field
+    = form.label :eligibility
+    = form.text_area :eligibility
+  .field
+    = form.label :video_url
+    = form.url_field :video_url
+  - if current_user.admin_privileges?(@region.competition)
+    .field
+      = form.label :approved
+      = form.check_box :approved, { checked: @challenge.approved }
+  .actions
+    = form.submit

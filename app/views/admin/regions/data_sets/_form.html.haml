@@ -1,0 +1,13 @@
+= form_for [:admin, @region, @data_set] do |form|
+  #hiddendescription
+  .field
+    = form.label :url
+    = form.url_field :url
+  .field
+    = form.label :name
+    = form.text_field :name
+  .field
+    = form.label :description
+    = form.text_area :description
+  .actions
+    = form.submit

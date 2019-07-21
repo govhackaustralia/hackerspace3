@@ -1,0 +1,13 @@
+- unless @event.closed?
+  - if user_signed_in?
+    - if @registration.present?
+      = link_to 'Manage your Event Registration', event_registration_path(@event.identifier, @registration)
+      %br/
+    - else
+      = link_to 'Register to Attend this Event', new_event_registration_path(@event.identifier)
+      %br/
+  - else
+    = link_to 'Sign in to register', new_user_session_path
+    %br/
+- if @event.competition_event? && @competition.started? && @event.teams.published.present?
+  = link_to 'See Participating Teams', event_teams_path(@event.identifier)

@@ -1,0 +1,15 @@
+%main.team_page
+  %h2 User Management
+  = form_tag(admin_users_path, method: :get) do
+    = search_field_tag :term, params[:term]
+    = submit_tag 'Search'
+  %p= link_to 'Download CSV (All users and what events they registered for)', admin_users_path(format: 'csv')
+  - if @users.present?
+    - @users.each do |user|
+      = render 'admin/shared/user_contact', locals: { user: user }
+      %p= link_to 'See User', admin_user_path(user)
+  - else
+    %p
+      No users matching search term, '#{params[:term]}'
+  %p= link_to 'Create New User',  new_admin_user_path
+  %p= link_to 'Back to Account Management', manage_account_path

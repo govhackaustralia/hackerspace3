@@ -1,0 +1,16 @@
+= form_for [:team_management, @team, @team_data_set] do |form|
+  #hiddendescription
+  .field
+    = form.label :url
+    = form.url_field :url
+  .field
+    = form.label :name
+    = form.text_field :name
+  .field
+    = form.label :description
+    = form.text_area :description
+  .field
+    = form.label :description_of_use
+    = form.text_area :description_of_use
+  .actions
+    = form.submit

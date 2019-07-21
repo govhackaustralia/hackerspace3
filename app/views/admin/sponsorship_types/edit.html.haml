@@ -1,0 +1,5 @@
+%main.team_page
+  %h2
+    Edit Sponsorship Type: #{@sponsorship_type.name}
+  = render 'form'
+  %p= link_to 'Back to Sponsorship Types', admin_competition_sponsorship_types_path(@competition)

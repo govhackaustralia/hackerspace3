@@ -1,0 +1,20 @@
+%main.scorecard
+  %h2 Edit Scorecard
+  = render 'form'
+  - @scorecards.each do |scorecard|
+    - if scorecard.type == PROJECT
+      %h3 Project Score
+    - else
+      %h3= scorecard.judgeable.challenge.name
+    .score-display
+      %p Total Score
+      - if scorecard.display_score.is_a? Integer
+        - score_value = ((scorecard.display_score.to_f / (scorecard.max_score).to_f) * 100).to_i
+        - rgb_g =  (255 * score_value) / 100
+        - rgb_r =  (255 * (100 - score_value)) / 100
+        %p{:style => "background-color: rgb(#{rgb_r},#{rgb_g},0); color: white;"}
+          = score_value
+          \%
+      - else
+        %p= scorecard.display_score
+  = link_to 'Close', project_path(@project.identifier), id: 'close-scorecard'

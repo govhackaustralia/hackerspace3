@@ -1,0 +1,50 @@
+%main.events_page.single-event
+  %h2
+    = @event.name
+    \- #{@region.name}
+  %section
+    %h3 Event Information
+    %section.info
+      - if @event.description.present?
+        - @event.description.split(/\r\n/).each do |paragraph|
+          %p= simple_format(paragraph)
+      - elsif @event.event_type == CONNECTION_EVENT
+        = render 'connections/connection_description'
+      - elsif @event.event_type == AWARD_EVENT
+        = render 'awards/award_description'
+      - else
+        = render 'competition_events/competition_event_description'
+    %section
+      %article
+        .event-info
+          %h4 Registration Type:
+          %p
+            = @event.registration_type
+        = render 'event_text_information'
+      %aside
+        = render 'event_map_video'
+        = render 'event_registration_team_links'
+        - if @event_partner.present?
+          %h3 Event Partner
+          %figure
+            %a{:href => "#{@event_partner.website}", :target => "_blank"}
+              - if @event_partner.logo.attached?
+                = image_tag url_for(@event_partner.logo)
+              - else
+                = image_tag 'default_profile_pic.png'
+    - if @sponsorship_types.present?
+      %h3 State Sponsors
+      - @sponsorship_types.each do |sponsorship_type|
+        %h4= sponsorship_type.name
+        .sponsors
+          - sponsorship_type.sponsorships.where(sponsorable: @region).order(:created_at).each do |sponsorship|
+            - sponsor = sponsorship.sponsor
+            %figure
+              %a{:href => "#{sponsor.website}", :target => "_blank"}
+                - if sponsor.logo.attached?
+                  = image_tag url_for(sponsor.logo)
+                - else
+                  = image_tag 'default_profile_pic.png'
+    - if user_signed_in? && @event.admin_privileges?(current_user)
+      %p= link_to 'Manage this Event', admin_region_event_path(@region, @event)
+    %p= link_to 'Back to Events', events_path

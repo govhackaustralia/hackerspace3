@@ -1,8 +1,0 @@
-<% if params[:thumbnail].present? %>
-  <%= render 'edit_thumbnail' %>
-<% elsif params[:high_res_image].present? %>
-  <%= render 'edit_high_res_image' %>
-<% else %>
-  <%= render 'edit_team_details' %>
-<% end %>
-<%= link_to 'Back to Team', team_management_team_path(@team) %>

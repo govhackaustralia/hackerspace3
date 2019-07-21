@@ -1,0 +1,17 @@
+%main.index_page
+  %h2
+    Welcome to GovHack #{@competition.year} Hackerspace
+  %nav
+    %section
+      - if @competition_events.present?
+        %div= link_to 'Connections Events', connections_path
+      - if @competition_events.present?
+        %div= link_to 'Competition Events', competition_events_path
+      - if @awards.present?
+        %div= link_to 'Awards Events', awards_path
+      - if @challenges.present?
+        %div= link_to 'Challenges', challenges_path
+      - if @teams.present?
+        %div= link_to 'Projects', projects_path
+      - if @data_sets.present?
+        %div= link_to 'Datasets', data_sets_path

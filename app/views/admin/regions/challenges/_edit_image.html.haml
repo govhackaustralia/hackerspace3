@@ -1,0 +1,16 @@
+= form_for [:admin, @region, @challenge] do |form|
+  - if @challenge.image.attached?
+    %img{:alt => "#{@challenge.name} image", :src => "#{url_for(@challenge.image)}"}/
+    %br/
+  - else
+    = image_tag "default_profile_pic.png"
+    %br/
+  = form.label :image, 'Upload a New Image (only png/gif/jpeg/jpg)'
+  %br/
+  = form.file_field :image, accept: 'image/png,image/gif,image/jpeg'
+  %br/
+  = hidden_field_tag(:image, true)
+  - if @challenge.image.attached?
+    = form.submit 'Replace Image'
+  - else
+    = form.submit 'Upload Image'

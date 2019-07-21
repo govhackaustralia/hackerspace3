@@ -1,0 +1,5 @@
+%main.team_page
+  %h2
+    New Mail Order for #{@event.name}
+  = render 'form'
+= link_to "Back to #{@event.name} Mail Orders", admin_event_bulk_mails_path(@event)

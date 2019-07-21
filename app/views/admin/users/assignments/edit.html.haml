@@ -1,0 +1,11 @@
+%main.team_page
+  %h2
+    Update event assignment for #{@user.full_name}
+  = form_for [:admin, @user, @assignment] do |f|
+    - EVENT_ASSIGNMENT_TITLES.each do |title|
+      = f.radio_button(:title, title,                    |
+        options = {checked: @assignment.title == title}) |
+      = f.label(:title, title)
+      %br/
+    = f.submit
+  = link_to 'Back to User', admin_user_path(@user)

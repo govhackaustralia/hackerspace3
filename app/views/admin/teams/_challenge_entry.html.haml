@@ -1,0 +1,14 @@
+- checkpoint = locals[:checkpoint]
+- challenge = locals[:challenge]
+- entry = Entry.find_by(team: @team, challenge: challenge, checkpoint: checkpoint)
+%h5= challenge.name
+Eligibility:
+- if entry.eligible
+  This team has been marked eligible to enter this competition.
+- elsif entry.eligible == false
+  This team has been mareked not eligible to enter this challenge.
+- else
+  This team has yet to be marked eligible to enter this challenge.
+%br/
+= link_to 'Update Entry', edit_admin_team_entry_path(@team, entry)
+| #{link_to 'Remove Challenge', admin_team_entry_path(@team, entry), method: :delete, data: { confirm: 'Are you sure?' }}

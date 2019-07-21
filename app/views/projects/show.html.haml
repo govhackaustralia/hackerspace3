@@ -1,0 +1,31 @@
+%main.team_page
+  %h2= @current_project.project_name
+  %aside.fav_judge
+    = render 'user_options'
+  %h3 Project Info
+  = render 'team_project_info'
+  %h3 Team DataSets
+  %section.markdown
+    - if (team_data_sets = @team.team_data_sets).present?
+      - team_data_sets.each do |team_data_set|
+        = render 'team_data_set', locals: { data_set: team_data_set }
+    - else
+      %div This team does not currently have any datasets.
+  %h3 Challenges
+  %section.markdown
+    - if @passed_checkpoint_ids.present?
+      - if @entries_to_display.present?
+        - @entries_to_display.each do |entry|
+          %section.markdown
+            %h4= entry.challenge.name
+            %p
+              %strong> Region
+              \: #{entry.challenge.region.name}
+            = link_to 'Challenge', challenge_path(entry.challenge.identifier)
+      - else
+        %p There are no challenges to display for this team as yet.
+    - else
+      %p
+        Check back here once the first checkpoint passes to see the challenges
+        this team has entered.
+  = link_to 'Back to Projects', projects_path

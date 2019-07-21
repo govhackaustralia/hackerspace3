@@ -1,0 +1,56 @@
+%main.registrations_list
+  %section
+    %h2
+      Registrations for #{@event.name} Event
+    %table
+      %thead
+        %tr
+          - if @region.root? && @event.event_type == AWARD_EVENT
+            %th Ticket Type
+          %th Full Name
+          %th Preferred Name
+          %th Organisation
+          %th Dietary
+          %th Status
+          %th Registration Type
+          %th Parent/Guardian
+          %th No Photos
+          %th Data Cruncher
+          %th Coder
+          %th Creative
+          %th Facilitator
+          %th Edit
+      %tbody
+        - @event.registrations.each do |registration|
+          - user = registration.assignment.user
+          %tr
+            - if @region.root? && @event.event_type == AWARD_EVENT
+              - assignment = registration.assignment
+              - if assignment.title == VIP || assignment.title == PARTICIPANT
+                %td Regular
+              - elsif assignment.assignable_type == 'Team'
+                %td Team Golden Ticket
+              - elsif assignment.title == GOLDEN_TICKET
+                %td Individual Golden Ticket
+              - else
+                %td Staff Invitation
+            %td= user.full_name
+            %td= user.preferred_name
+            %td= user.organisation_name
+            %td= user.dietary_requirements
+            %td= registration.status
+            %td= user.registration_type
+            %td= user.parent_guardian
+            %td= user.request_not_photographed
+            %td= user.data_cruncher
+            %td= user.coder
+            %td= user.creative
+            %td= user.facilitator
+            %td= link_to 'Edit', edit_admin_event_registration_path(@event, registration)
+    %p= link_to 'Download CSV', admin_event_registrations_path(@event, format: 'csv')
+    %p= link_to 'New Registration', new_admin_event_registration_path(@event)
+    - if @region.root? && @event.event_type == AWARD_EVENT
+      %p= link_to 'New Individual Golden Ticket', new_admin_event_individual_golden_path(@event)
+      %p= link_to 'New Group Golden Ticket', new_admin_event_group_golden_path(@event)
+      %p= link_to 'New Staff Flight Registration', new_admin_event_staff_flight_path(@event)
+    %p= link_to "Back to #{@event.name} Event", admin_region_event_path(@region, @event)

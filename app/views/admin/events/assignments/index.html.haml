@@ -1,0 +1,22 @@
+%main.team_page
+  %h2
+    = @assignable.name
+    Event Assignments
+  %h3 Event Host
+  - if (host = @assignable.event_host).present?
+    = render 'admin/shared/user_contact', locals: { user: host }
+  - else
+    This event does not currently have a host.
+    %br/
+    = link_to "New #{EVENT_HOST} Assignment", new_admin_event_assignment_path(@assignable, title: EVENT_HOST)
+    %br/
+  %h3 Event Support
+  - if (supports = @assignable.event_supports).present?
+    - supports.each do |support|
+      = render 'admin/shared/user_contact', locals: { user: support }
+  - else
+    This event does not currently have any supports.
+    %br/
+  = link_to "New #{EVENT_SUPPORT} Assignment", new_admin_event_assignment_path(@assignable, title: EVENT_SUPPORT)
+  %br/
+  = link_to "Back to #{@assignable.name} Event", admin_region_event_path(@assignable.region, @assignable)

@@ -1,0 +1,13 @@
+- if @user.preferred_img == GRAVITAR
+  = image_tag @user.gravatar_url
+- elsif @user.preferred_img == GOVHACK
+  - if @user.govhack_img.attached?
+    = image_tag url_for(@user.govhack_img)
+  - else
+    = image_tag 'default_profile_pic.png'
+- else
+  - if @user.google_img
+    = image_tag @user.google_img
+  - else
+    = image_tag 'default_profile_pic.png'
+%br/

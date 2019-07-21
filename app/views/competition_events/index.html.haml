@@ -1,0 +1,9 @@
+%main.events_page
+  %section.info
+    %h2 Competition Events
+    = render 'competition_event_description'
+  = render partial: 'events/event_collection', locals: { events: @future_locations, title: 'Upcoming Competition Events' }
+  = render partial: 'events/event_collection', locals: { events: @future_remotes, title: "Upcoming Remote Kitchen Table Competition Events" }
+  = render partial: 'events/event_collection', locals: { events: @past_competitions, title: 'Past Competition Events' }
+  %p= link_to 'All Events', events_path
+  %main

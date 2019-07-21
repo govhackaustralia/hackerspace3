@@ -1,0 +1,13 @@
+%table
+  %tr
+    %th Challenges
+    - @event_names.each do |event_name|
+      %th= event_name
+    %th Total Entries
+  - @challenge_names.each do |challenge_name|
+    %tr
+      %th= challenge_name
+      - @event_names.each do |event_name|
+        %td= @event_counts[challenge_name][event_name]
+      %td= @event_counts[challenge_name][:total_entries]
+= javascript_tag  "window._region_counts = #{@event_counts.to_json}"

@@ -1,0 +1,10 @@
+%main.team_page
+  %h2
+    Criteria for #{@competition.name}
+  %h3 Challenge Criteria
+  = render 'criteria_display', locals: { type: CHALLENGE, criteria: @competition.challenge_criteria }
+  %h3 Project Criteria
+  = render 'criteria_display', locals: { type: PROJECT, criteria: @competition.project_criteria }
+  %p= link_to 'New Criterion', new_admin_competition_criterion_path(@competition)
+  - if current_user.admin_privileges?(@competition)
+    %p= link_to 'Back to Competition', admin_competition_path(@competition)

@@ -1,0 +1,23 @@
+- if current_user.accepted_terms_and_conditions
+  %main.registration.single-col.edit-account
+    - if @user.registering_account?
+      %h2 Complete Account Registration
+      %section
+        = render 'full_form'
+        = link_to 'Back to Account Management', manage_account_path
+    - elsif params[:profile_pic].present?
+      %h2 Update Profile Picture
+      = render 'edit_profile_pic'
+      %br/
+    - elsif params[:banking].present?
+      %h2 Update Banking Details
+      %section
+        = render 'edit_banking'
+        = link_to 'Back to Account Management', manage_account_path
+    - else
+      %h2 Update Personal Details
+      %section
+        = render 'full_form'
+        = link_to 'Back to Account Management', manage_account_path
+- else
+  = render 'terms_and_conditions'

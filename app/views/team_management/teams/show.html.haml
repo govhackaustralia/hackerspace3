@@ -1,0 +1,55 @@
+%main.team_page
+  %h2= @current_project.project_name
+  %p
+    %strong> Team Name
+    \: #{@current_project.team_name}
+  %p
+    %strong> Competition Event
+    \: #{@event.name}
+  %p
+    %strong> Region
+    \: #{@region.name}
+  - if @team.published
+    %p= link_to 'Go to Team Page', project_path(@current_project.identifier)
+  - else
+    %p This Project is yet to be published.
+  %aside
+    %p= link_to 'Update Team Details', edit_team_management_team_path(@team)
+    %p= link_to 'Update Thumbnail', edit_team_management_team_path(@team, thumbnail: true)
+    %p= link_to 'Update High Resolution Image', edit_team_management_team_path(@team, high_res_image: true)
+  %h3 Team Project Info
+  = render 'projects/team_project_info'
+  %aside
+    %p= link_to 'Update Project Details', edit_team_management_team_project_path(@team, @current_project)
+  %h3 Team Data Sets
+  %section
+    %p
+      This team currently has #{pluralize @team.team_data_sets.count, 'data set'}.
+  %aside
+    %p= link_to 'Manage Team Data Sets', team_management_team_team_data_sets_path(@team)
+  %h3 Team Members
+  %section
+    %h4 Team Leader
+    - if (team_leader = @team.team_leader).present?
+      = render 'users/user_contact', locals: { user: team_leader }
+    - else
+      %p
+        %strong No team leader assigned for this team.
+    - if (team_members = @team.members).present?
+      %p
+        %strong
+          + #{pluralize team_members.count, 'other team member'}.
+    - if (invitees = @team.invitees).present?
+      %p
+        %strong
+          = pluralize invitees.count, 'invitee'
+          \.
+  %aside
+    %p= link_to 'Manage Team Members', team_management_team_assignments_path(@team)
+  %h3 Challenge Entries
+  %aside
+    %p= link_to 'Manage Team Challenge Entries', team_management_team_entries_path(@team)
+  %section
+    %p
+      = pluralize @team.challenges.count, 'challenge'
+      entered.

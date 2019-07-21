@@ -1,0 +1,71 @@
+%main.team_page
+  %h2
+    = @event.name
+    Event
+  %h3 Event Information
+  %p
+    Region: #{@region.name}
+  %p
+    Event Category: #{@event.event_type}
+  %p
+    Registration Type: #{@event.registration_type}
+  %p
+    Event Capacity: #{@event.capacity}
+  %p= link_to "Edit #{@event.name} Event", edit_admin_region_event_path(@region, @event)
+  - if @event.published?
+    %p This event has been published and is in public view.
+    = link_to 'Go to Event Page', event_path(@event.identifier)
+  - else
+    %p This event has not been published and can only be viewed by admin.
+    = link_to 'Go to Event Page (Admin Only)', event_path(@event.identifier)
+  %h3 Event Assignments
+  %h4 Event Host
+  - if (host = @event.event_host).present?
+    = render 'admin/shared/user_contact', locals: { user: host }
+  - else
+    %p This event does not currently have a host.
+    %p= link_to "New #{EVENT_HOST} Assignment", new_admin_event_assignment_path(@event, title: EVENT_HOST)
+  %h4 Event Support
+  %p
+    = pluralize @event.event_supports.count, 'event support'
+    currently assigned to event.
+  %p= link_to "Manage #{@event.name} Assignments", admin_event_assignments_path(@event)
+  %h3 Event Registrations
+  - if @event.at_capacity?
+    %p
+      %strong This event is at capacity
+    %p All future participant registrations will be added to the waiting list.
+  %p
+    = pluralize @event.registrations.attending.count, 'guest'
+    attending
+    (#{pluralize @event.participant_registrations.attending.count, 'participant'} and
+    \#{pluralize @event.vip_registrations.attending.count, 'vip'}).
+  - if @event.waitlist?
+    %p
+      = pluralize @event.registrations.waitlist.count, 'participant'
+      on the wait list.
+  %p
+    = pluralize @event.registrations.non_attending.count, 'guest'
+    registered not attending.
+  %p= link_to "Manage #{@event.name} Registrations", admin_event_registrations_path(@event)
+  %h3 Event Partner
+  - if (event_partnership = @event.event_partnership).present?
+    %p= render 'admin/sponsors/sponsor', locals: { sponsor: event_partnership.sponsor }
+  - else
+    %p= link_to 'Add Event Partner', new_admin_event_event_partnership_path(@event)
+  - if @region.root? && @event.event_type == AWARD_EVENT
+    %h3 Flights
+    %p
+      = pluralize @inbound_flights.count, 'inbound flight'
+      saved.
+    %p
+      = pluralize @outbound_flights.count, 'outbound flight'
+      saved.
+    %p= link_to 'Manage Event Flights', admin_event_flights_path(@event)
+    %h3 Bulk Mails
+    %p
+      = pluralize @bulk_mails.count, 'bulk mail'
+      created for this event.
+    %p= link_to 'Bulk Mails', admin_event_bulk_mails_path(@event)
+- if @region.admin_privileges?(current_user)
+  %p= link_to "Back to #{@region.name} Events", admin_region_events_path(@region)

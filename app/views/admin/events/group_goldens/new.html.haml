@@ -1,0 +1,32 @@
+%main.team_page
+  %h2 Add New Group Golden Ticket Registration
+  = form_tag new_admin_event_group_golden_path, method: :get do
+    = search_field_tag :term, params[:term]
+    = submit_tag 'Search'
+  - if @team.present?
+    %h3
+      = @project.team_name
+      | #{@project.project_name}
+    - if @leader.present?
+      %p
+        Team Leader: #{@leader.display_name}
+      - if @existing_registration.present?
+        %p
+          Golden Ticket Registration for #{@user.full_name} already exists for #{@project.team_name}.
+        %p= link_to 'Update Registration', edit_admin_event_registration_path(@event, @existing_registration)
+      - else
+        %p= link_to 'Assign Group Golden Ticket', admin_event_group_goldens_path(@event, registration: { assignment_id: @leader_assignment.id }), method: :post
+    - else
+      %p No team leader assigned for this team.
+  - elsif @teams.present?
+    - @teams.each do |team|
+      %h3
+        = team.current_project.team_name
+        | #{team.current_project.project_name}
+      %p= link_to 'Select', new_admin_event_group_golden_path(@event, term: team.id)
+  - elsif params[:term].present?
+    %p
+      Apologies, no team project name matching search term '#{params[:term]}'
+  - else
+    %p Please enter a team or project name to search.
+  = link_to "Back to #{@event.name} Registrations", admin_event_registrations_path(@event)

@@ -1,0 +1,34 @@
+%h2
+  Scorecards for #{@project.team_name} - #{@project.project_name} #{'(with Judges)' if params[:include_judges] == 'true'}
+%table
+  %thead
+    %th Status
+    %th Action
+    - @project_criteria.each do |criterion|
+      %th= criterion.name
+    %th Score
+    %th Average Score
+    %th Scorecard Count
+  %tbody
+    - @scorecards.each do |scorecard|
+      %tr
+        - scores = scorecard.judgments.pluck(:score)
+        - if scores.include? nil
+          %td Incomplete
+          %td= link_to 'Delete Scorecard', admin_team_scorecard_path(@team, scorecard, include_judges: params[:include_judges]), data: { confirm: "Are you sure?" }, method: :delete
+        - elsif scorecard.included
+          %td Included
+          %td= link_to 'Exclude Scorecard', admin_team_scorecard_path(@team, scorecard, include_judges: params[:include_judges]), method: :patch
+        - else
+          %td Excluded
+          %td= link_to 'Include Scorecard', admin_team_scorecard_path(@team, scorecard, include_judges: params[:include_judges]), method: :patch
+        - scores.each do |score|
+          %td= score
+        - mean_score = ((scores.mean / MAX_SCORE.to_f) * 100).to_i
+        = render 'challenges/judging_cell', locals: { total: mean_score }
+        - all_scores_mean = scorecard.assignment_judgments.pluck(:score).mean
+        - mean_score = ((all_scores_mean / MAX_SCORE.to_f) * 100).to_i
+        = render 'challenges/judging_cell', locals: { total: mean_score }
+        %td= scorecard.assignment_scorecards.length
+= link_to 'Close', root_path, id: 'close-team-scorecards'
+= javascript_tag 'window.addEventListener("unload", function(event) { window.opener.location.reload();})'

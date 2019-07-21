@@ -1,0 +1,5 @@
+%main.team_page
+  %h2
+    Update Competition #{@competition.year}
+  = render 'form'
+%p= link_to 'Back to Competition', admin_competition_path(@competition)

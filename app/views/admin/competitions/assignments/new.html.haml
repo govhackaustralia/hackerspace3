@@ -1,0 +1,27 @@
+%main.team_page
+  %h2
+    Add New Assignment to #{@assignable.class.to_s} #{@assignable.year}
+  = form_tag new_admin_competition_assignment_path, method: :get do
+    = search_field_tag :term, params[:term]
+    = hidden_field_tag :title, @title
+    = submit_tag 'Search'
+  - if @user.present?
+    = render 'admin/shared/user_contact', locals: { user: @user }
+    - unless @existing_registration.present?
+      = form_for [:admin, @assignable, @assignment] do |f|
+        = hidden_field_tag :user_id, @user.id
+        = hidden_field_tag :title, @title
+        = f.submit "Create #{@title} Assignment for #{@user.full_name}"
+    - else
+      %p
+        Assignment for #{@user.full_name} to #{@assignable.name} as #{@title} already exists.
+  - elsif @users.present?
+    - @users.each do |user|
+      = render 'admin/shared/user_contact', locals: { user: user }
+      = link_to 'Select', new_admin_competition_assignment_path(@assignable, title: @title, term: user.email)
+  - elsif params[:term].present?
+    %p
+      Apologies, no name matching search term '#{params[:term]}'
+  - else
+    %p Please enter an email address or name to search for a user.
+  %p= link_to "Back to #{@assignable.class.to_s} #{@assignable.year} Assignments", admin_competition_assignments_path(@assignable)

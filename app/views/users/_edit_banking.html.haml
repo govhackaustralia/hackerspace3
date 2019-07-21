@@ -1,0 +1,16 @@
+= form_for current_user do |form|
+  .field
+    = form.label :bsb, 'BSB:'
+    = form.text_field :bsb
+  .field
+    = form.label :acc_number, 'Account Number:'
+    = form.text_field :acc_number
+  .field
+    = form.label :acc_name, 'Account Name:'
+    = form.text_field :acc_name
+  .field
+    = form.label :branch_name, 'Branch Name:'
+    = form.text_field :branch_name
+  = hidden_field_tag :banking, true
+  .actions
+    = form.submit 'Update Banking Details'

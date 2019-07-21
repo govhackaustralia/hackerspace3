@@ -1,0 +1,10 @@
+= form_for [:team_management, @team, @entry] do |form|
+  .field
+    = form.label :checkpoint_id
+    = form.select :checkpoint_id, options_from_collection_for_select(@checkpoints, :id, :name, @entry.checkpoint_id.to_s)
+  .field
+    = form.label :justification
+    = form.text_area :justification
+  .actions
+    = form.hidden_field(:challenge_id, value: @challenge.id)
+    = form.submit

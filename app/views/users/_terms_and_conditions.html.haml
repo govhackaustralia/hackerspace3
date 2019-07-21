@@ -1,0 +1,67 @@
+%main.registration.single-col.toc
+  %h2 GovHack Hackerspace Terms and Conditions
+  %section
+    %article
+      %h3 Introduction
+      %p
+        The Terms of Use of the GovHack Hackerspace website include these Terms and Conditions, the Privacy Policy and any other terms and conditions that appear in or are linked to the GovHack website.
+      %h3 Website content and access
+      %p
+        While GovHack Australia Limited endeavours to take reasonable care in preparing and maintaining the information on this website we do not warrant the accuracy, reliability, adequacy or completeness of any of the website content. You acknowledge and accept that the website content may include technical inaccuracies and typographical errors. The website content is subject to change at any time without notice and may not necessarily be up to date or accurate at the time you view it.
+      %p
+        It is your responsibility to enquire with us directly to ensure the accuracy and currency of the material or information you seek to rely upon. To the extent permitted by law, including the Competition and Consumer Act 2010 (Cth), GovHack Australia Limited disclaims all liability for loss directly or indirectly arising from your use of or reliance on the website and the website content.
+      %p
+        GovHack Australia Limited does not guarantee that access to the GovHack Hackerspace website will be uninterrupted or that the website is free from viruses or anything else which may damage any computer which accesses the GovHack Hackerspace website or any data on such a computer.
+      %h3 Limitation of liability
+      %p
+        To the maximum extent permitted by law GovHack Australia Limited excludes all liability for any loss or damage of any kind (including special, indirect or consequential loss and including loss of business profits) arising out of or in connection with the website content and the use or performance of the GovHack Hackerspace website except to the extent that the loss or damage is directly caused by GovHack Australia Limited’s fraud or wilful misconduct.
+      %h3 Intellectual property
+      %p
+        GovHack and the GovHack Logo are registered trademarks of GovHack Australia Limited.
+      %p
+        Sponsor logos and names are the property of their respective organisation. They are projected by copyright, trade mark and other intellectual property laws.
+      %h3 Submissions
+      %p
+        Any material you send to use on or via the GovHack Hackerspace website will be deemed to be non-confidential and non-proprietary, unless it is indicated to be otherwise. This includes, data, descriptions, comments, ideas, or other information. We will be entitled to use any such material which has not been indicated to be confidential or proprietary for any the purposes, non limited to but including storing, displaying, promoting, judging the content and for promotion of the GovHack competition.
+      %p
+        Intellectual property for submissions is retained by the previous owner(s).
+      %h3 Third party websites
+      %p
+        The GovHack Hackerspace Website may contain links to other websites operated, controlled or produced by third parties. Unless otherwise indicated, GovHack Hackerspace does not control, endorse, sponsor or approve any such third party websites or their content nor does GovHack Australia Limited provide any warranty or take any responsibility whatsoever for any aspect of those websites or their content.
+      %h3 Interference with website
+      %p
+        You must not attempt to deface, hack or otherwise interfere with this website or any material or content displayed on the GovHack Hackerspace website.
+      %h3 Information collected
+      %p
+        When you browse this web site, our system automatically makes a record of your visit and logs the following information for statistical purposes:
+      %ul
+        %li your server address;
+        %li top level domain name (e.g.: .com, .net, .gov, .au, etc);
+        %li the type of browser and operating system you used;
+        %li date and time of your visit;
+        %li the previous site visited;
+        %li which pages are accessed;
+        %li the time spent on individual pages and the site overall;
+        %li which files were downloaded.
+      %p
+        This information is analysed to determine this web site’s usage statistics.
+      %p
+        However, no attempt will be made to identify individual users or their browsing activities except, in the event of an investigation, where a law enforcement agency (e.g. the Australian Federal Police) exercises a warrant to inspect our service provider’s log files.
+      %h3 Use of personal information collected
+      %p
+        Any personal information you choose to provide will only be used for the purpose for which it was provided and will not be disclosed to other persons or organisations without your prior consent or if required by law.
+      %p
+        The Internet is an insecure medium and users should be aware that there are inherent risks transmitting information across the Internet. Information submitted unencrypted via electronic mail or web forms may be at risk of being intercepted, read or modified.
+      %h3 Cookies
+      %p
+        This website uses Google Analytics, a web analytics service provided by Google Inc. (Google). Google Analytics uses cookies and JavaScript code to enable analysis on usage of this website. The data collected about your use of this website, (including your IP address) will be transmitted to and stored on Google’s servers. Google will use this data for the purpose of compiling reports on website activity for us and providing other services relating to website activity and internet usage.
+      %p
+        Google will not collect personal information about you and the reports provided by Google to us will only contain aggregate non personal data about your use of this website. (These reports may contain data relating to pages viewed, files downloaded or the completion of online subscriptions). We will use the data collected by Google Analytics to improve how this website functions. For example we can use the data to check whether customers are having problems finding information and make access to information as easy as we can.
+      %p
+        Google may transfer this data to third parties where required to do so by law, or where third parties process this data on Google’s behalf. Google will not associate your IP address with any personal information you may have previously provided to Google. You may refuse the use of cookies by selecting the appropriate settings on your browser. Please note that if you do this, you may not be able to fully use this website. By using this website, you consent to the processing of data about you by Google in the manner and for the purposes set out above.
+    = form_for current_user do |f|
+      .field
+        = f.label(:accepted_terms_and_conditions, 'I accept GovHack Terms and Conditions')
+        = f.check_box(:accepted_terms_and_conditions)
+      .actions
+        = f.submit 'Continue'

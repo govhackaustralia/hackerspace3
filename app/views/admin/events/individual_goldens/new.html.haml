@@ -1,0 +1,23 @@
+%main.team_page
+  %h2 Add New Individual Golden Ticket Registration
+  = form_tag new_admin_event_individual_golden_path, method: :get do
+    = search_field_tag :term, params[:term]
+    = submit_tag 'Search'
+  - if @user.present?
+    = render 'admin/shared/user_contact', locals: { user: @user }
+    - if @existing_registration.present?
+      %p
+        Registration for #{@user.full_name} already exists.
+      %p= link_to 'Update Registration', edit_admin_event_registration_path(@event, @existing_registration)
+    - else
+      %p= link_to 'Assign Golden Ticket', admin_event_individual_goldens_path(@event, user_id: @user.id), method: :post
+  - elsif @users.present?
+    - @users.each do |user|
+      = render 'admin/shared/user_contact', locals: { user: user }
+      %p= link_to 'Select', new_admin_event_individual_golden_path(@event, term: user.email)
+  - elsif params[:term].present?
+    %p
+      Apologies, no name matching search term '#{params[:term]}'
+  - else
+    %p Please enter an email address or name to search for a user.
+  %p= link_to "Back to #{@event.name} Registrations", admin_event_registrations_path(@event)
