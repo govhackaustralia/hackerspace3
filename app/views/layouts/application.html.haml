@@ -4,7 +4,12 @@
     %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
     = csrf_meta_tags
     = csp_meta_tag
-    %title GovHack | Hackerspace
+    %title
+      - if yield(:title).present?
+        = yield(:title)
+      - else
+        GovHack
+      | Hackerspace
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
     = render 'application/favicon'
