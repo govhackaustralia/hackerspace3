@@ -1,5 +1,6 @@
+- content_for :title, @user.display_name
 %main.team_page
-  %h2= @user.display_name
+  %h2= yield :title
   %p
     Email: #{@user.email}
   - if @user.confirmed?
