@@ -49,6 +49,8 @@ class Registration < ApplicationRecord
   validate :check_for_existing_competition_registrations,
            :check_for_team_assignments
 
+  validate :check_code_of_conduct
+
   # Returns the category of a registration for the purpose of allocating
   # different event ticket types.
   def category
@@ -113,5 +115,12 @@ class Registration < ApplicationRecord
 
   def user_has_team_assignments_for_this_competition?
     user.assignments.team_participants.where(competition: competition).present?
+  end
+
+  # Checks if the Registration's User has accepted the code of conduct.
+  def check_code_of_conduct
+    return if assignment_id.nil? || user.accepted_code_of_conduct
+
+    errors.add :user, 'The Code of Conduct must be agreed to.'
   end
 end

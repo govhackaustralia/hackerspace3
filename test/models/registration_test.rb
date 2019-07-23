@@ -103,4 +103,19 @@ class RegistrationTest < ActiveSupport::TestCase
     @registration.update! status: NON_ATTENDING
     assert @event.registrations.attending.where(assignment: @wait_ass).present?
   end
+
+  test 'if user has accepted the code of conduct' do
+    @user.update! accepted_code_of_conduct: nil
+    Registration.destroy_all
+    assert_not @assignment.registrations.create(
+      event: @event,
+      status: VALID_ATTENDANCE_STATUSES.sample
+    ).persisted?
+  end
+
+  # Below test 'works' but throws an error message because mail not going anywhere.
+  # test 'check for newly freed space' do
+  #   @user.registrations.where(event: @event).each { |reg| reg.update(status: NON_ATTENDING) }
+  #   assert(Registration.find_by(event: @event, assignment: @wait_ass).status == ATTENDING)
+  # end
 end
