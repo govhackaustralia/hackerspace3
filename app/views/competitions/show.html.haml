@@ -3,7 +3,7 @@
     Welcome to GovHack #{@competition.year} Hackerspace
   %nav
     %section
-      - if @competition_events.present?
+      - if @connections.present?
         %div= link_to 'Connections Events', connections_path
       - if @competition_events.present?
         %div= link_to 'Competition Events', competition_events_path
