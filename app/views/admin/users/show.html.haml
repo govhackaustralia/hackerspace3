@@ -3,6 +3,15 @@
   %h2= yield :title
   %p
     Email: #{@user.email}
+  - if @user.accepted_code_of_conduct
+    %p
+      %strong
+        Agreed to code of conduct on:
+      = @user.accepted_code_of_conduct.to_datetime
+  - else
+    %p
+      %strong
+        Has not agreed to code of conduct.
   - if @user.confirmed?
     %p
       %strong
