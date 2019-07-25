@@ -5,10 +5,10 @@
   - if @event.below_capacity?
     = render 'new_form', locals: { status: ATTENDING, label: 'Register to Attend Event' }
   - else
-    This event is at capacity.
-    %br/
-    If you add yourself to the waitlist below, you will be emailed should a space
-    become available.
-    %br/
+    %p
+      This event is at capacity.
+    %p
+      If you add yourself to the waitlist below, you will be emailed should a space
+      become available.
     = render 'new_form', locals: { status: WAITLIST, label: 'Add to Waitlist' }
 %p= link_to 'Back to Event', event_path(@event.identifier)
