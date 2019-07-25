@@ -120,15 +120,28 @@ class RegistrationsController < ApplicationController
   end
 
   def update_standard_event_attrs
-    @user.update(preferred_name: params[:preferred_name], organisation_name: params[:organisation_name], dietary_requirements: params[:dietary_requirements])
+    @user.update(
+      preferred_name: params[:preferred_name],
+      organisation_name: params[:organisation_name],
+      dietary_requirements: params[:dietary_requirements]
+    )
   end
 
   def update_competition_event_attrs
-    @user.update(registration_type: params[:registration_type], parent_guardian: params[:parent_guardian], request_not_photographed: params[:request_not_photographed])
+    @user.update(
+      registration_type: params[:registration_type],
+      parent_guardian: params[:parent_guardian],
+      request_not_photographed: params[:request_not_photographed]
+    )
   end
 
   def update_skills_attrs
-    @user.update(data_cruncher: params[:data_cruncher], coder: params[:coder], creative: params[:creative], facilitator: params[:facilitator])
+    @user.update(
+      data_cruncher: params[:data_cruncher],
+      coder: params[:coder],
+      creative: params[:creative],
+      facilitator: params[:facilitator]
+    )
   end
 
   def update_group_golden
