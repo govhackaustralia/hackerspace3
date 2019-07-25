@@ -5,9 +5,14 @@
     Email: #{@user.email}
   - if @user.confirmed?
     %p
-      %strong Confirmed
+      %strong
+        Confirmed account on:
+      = @user.confirmed_at
   - else
-    %p= link_to 'Confirm User', confirm_admin_user_path(@user), method: :post
+    %p
+      %strong
+        User not confirmed, 
+      = link_to 'Confirm User?', confirm_admin_user_path(@user), method: :post
   - @event_assignments.each do |event_assignment|
     %h3= event_assignment.competition.name
     %h4 Event Assignment
