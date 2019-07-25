@@ -22,4 +22,4 @@
               = render 'challenges/judging_cell', locals: { total: score_value }
             - else
               %td= display_score
-  = link_to "Back to #{@event.name}", event_path(@event.identifier)
+= link_to "Back to #{@event.name}", event_path(@event.identifier)
