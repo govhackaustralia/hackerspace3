@@ -1,0 +1,10 @@
+.section
+  - if @user.accepted_code_of_conduct
+    %p
+      You have already accepted the Govhack
+      = link_to 'Code of Conduct', CODE_OF_CONDUCT_URL, target: '_blank'
+      \.
+  - else
+    .field
+      = label_tag :accepted_code_of_conduct, "I agree to the GovHack #{link_to('Code of Conduct', CODE_OF_CONDUCT_URL, target: '_blank')}".html_safe
+      = check_box_tag :accepted_code_of_conduct, 'true', @user.accepted_code_of_conduct

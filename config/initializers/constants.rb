@@ -42,6 +42,10 @@ PHONE_NUMBER_LENGTH = 10
 
 MAX_DECISION_TIME = 2.minutes
 
+# Govhack Code of Conduct Page
+
+CODE_OF_CONDUCT_URL = 'https://govhack.org/competition/code-of-conduct/'
+
 LAST_TIME_ZONE = 'Perth'
 COMP_TIME_ZONE = 'Sydney'
 

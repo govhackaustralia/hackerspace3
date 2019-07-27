@@ -36,6 +36,7 @@ class RegistrationsController < ApplicationController
 
   # ENHANCEMENT: Split Group Golden into seperate controller.
   def update
+    check_code_of_conduct
     if params[:task] == GROUP_GOLDEN
       update_group_golden
     else
@@ -48,6 +49,7 @@ class RegistrationsController < ApplicationController
   # Hard to check Create Method when it is so long.
   # ENHANCEMENT: Break up method across controllers.
   def create
+    check_code_of_conduct
     create_new_registration
     update_user_preferences
     handle_create
@@ -128,9 +130,16 @@ class RegistrationsController < ApplicationController
   def update_registration
     @registration = Registration.find(params[:id])
     @event = @registration.event
+    @region = @event.region
     @registration.update(registration_params)
     @registration.update(time_notified: Time.now.in_time_zone(COMP_TIME_ZONE))
     @user = current_user
+  end
+
+  def check_code_of_conduct
+    return unless params[:accepted_code_of_conduct] == 'true'
+
+    current_user.update accepted_code_of_conduct: Time.now.in_time_zone(COMP_TIME_ZONE)
   end
 
   def update_user_preferences
