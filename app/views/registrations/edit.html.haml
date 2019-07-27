@@ -1,3 +1,4 @@
+- content_for :title, "Registration for #{@event.name}"
 %main.register
   - if params[:task] == GROUP_GOLDEN
     %h2
@@ -21,10 +22,10 @@
       = render 'edit_form', locals: { options: [WAITLIST, NON_ATTENDING] }
     - elsif @event.waitlisted? @event_assignment
       You are on the waitlist and will be emailed should a space become available.
-      
+
       \#{render 'form', locals: { options: [WAITLIST, NON_ATTENDING] }}
     - else
       You are registered as attending.
-      
+
       \#{render 'edit_form', locals: { options: [ATTENDING, NON_ATTENDING] }}
   = link_to "Back", :back

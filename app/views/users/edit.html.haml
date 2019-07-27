@@ -15,7 +15,8 @@
         = render 'edit_banking'
         = link_to 'Back to Account Management', manage_account_path
     - else
-      %h2 Update Personal Details
+      - content_for :title, 'Update Personal Details'
+      %h2= yield :title
       %section
         = render 'full_form'
         = link_to 'Back to Account Management', manage_account_path
