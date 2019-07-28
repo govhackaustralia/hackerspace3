@@ -15,17 +15,19 @@
   - else
     %h2
       Update Registration for #{@event.name} #{@event.region.name}
-    - if @event.not_attending?(@event_assignment) && @event.at_capacity?
-      This event is at capacity. Please add yourself to the waitlist below and you
-      will be emailed should a space become available.
-      %br/
+    - if @event.not_attending?(@assignment) && @event.at_capacity?
+      %p
+        This event is at capacity. Please add yourself to the waitlist below and you
+        will be emailed should a space become available.
       = render 'edit_form', locals: { options: [WAITLIST, NON_ATTENDING] }
-    - elsif @event.waitlisted? @event_assignment
-      You are on the waitlist and will be emailed should a space become available.
+    - elsif @event.waitlisted? @assignment
+      %p
+        You are on the waitlist and will be emailed should a space become available.
 
-      \#{render 'form', locals: { options: [WAITLIST, NON_ATTENDING] }}
+      = render 'edit_form', locals: { options: [WAITLIST, NON_ATTENDING] }
     - else
-      You are registered as attending.
+      %p
+        You are registered as attending.
 
-      \#{render 'edit_form', locals: { options: [ATTENDING, NON_ATTENDING] }}
-  = link_to "Back", :back
+      = render 'edit_form', locals: { options: [ATTENDING, NON_ATTENDING] }
+= link_to "Back", :back

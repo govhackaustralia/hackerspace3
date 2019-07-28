@@ -26,6 +26,7 @@ class RegistrationsController < ApplicationController
     @event = @registration.event
     @region = @event.region
     @user = current_user
+    @assignment = @registration.assignment
     return unless params[:task] == GROUP_GOLDEN
 
     edit_group_golden
