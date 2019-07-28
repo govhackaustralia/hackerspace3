@@ -30,7 +30,7 @@ class Registration < ApplicationRecord
   # different event ticket types.
   def category
     reg_assignment = assignment
-    if [PARTICIPANT, VIP].include? reg_assignment
+    if [PARTICIPANT, VIP].include? reg_assignment.title
       REGULAR
     elsif reg_assignment.assignable_type == 'Team'
       GROUP_GOLDEN
