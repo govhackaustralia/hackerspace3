@@ -4,6 +4,7 @@ class Admin::RegistrationsController < ApplicationController
   # ENHANCEMENT: Rearrange columns in table.
   def index
     @region = @event.region
+    @registrations = @event.registrations.preload assignment: :user
     respond_to do |format|
       format.html
       format.csv { send_data @event.registrations_to_csv }
