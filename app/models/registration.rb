@@ -28,8 +28,10 @@ class Registration < ApplicationRecord
 
   validates :status, presence: true
   validates :status, inclusion: { in: VALID_ATTENDANCE_STATUSES }
-  validates :assignment_id, uniqueness: { scope: :event_id,
-                                          message: 'Registration already exists' }
+  validates :assignment_id, uniqueness: {
+    scope: :event_id,
+    message: 'Registration already exists'
+  }
 
   # Returns the category of a registration for the purpose of allocating
   # different event ticket types.
