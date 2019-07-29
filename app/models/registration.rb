@@ -14,10 +14,15 @@ class Registration < ApplicationRecord
   scope :invited, -> { where status: INVITED }
   scope :participating, -> { where status: [ATTENDING, WAITLIST] }
 
-  scope :participants, -> { joins(:assignment).where(assignments: { title: PARTICIPANT }) }
-  scope :vips, -> { joins(:assignment).where(assignments: { title: VIP }) }
-
-  scope :competition_events, -> { joins(:event).where(events: { event_type: COMPETITION_EVENT }) }
+  scope :participants, lambda {
+    joins(:assignment).where(assignments: { title: PARTICIPANT })
+  }
+  scope :vips, lambda {
+    joins(:assignment).where(assignments: { title: VIP })
+  }
+  scope :competition_events, lambda {
+    joins(:event).where(events: { event_type: COMPETITION_EVENT })
+  }
 
   after_update :check_for_newly_freed_space
 
