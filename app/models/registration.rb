@@ -23,6 +23,9 @@ class Registration < ApplicationRecord
   scope :competition_events, lambda {
     joins(:event).where(events: { event_type: COMPETITION_EVENT })
   }
+  scope :competition, lambda { |competition|
+    joins(:assignment).where(assignments: { competition_id: competition.id })
+  }
 
   after_update :check_for_newly_freed_space
 

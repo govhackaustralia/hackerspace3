@@ -47,6 +47,7 @@ class RegistrationTest < ActiveSupport::TestCase
     assert Registration.vips.exclude? @registration
     assert Registration.competition_events.include? @competition_event_registration
     assert Registration.competition_events.exclude? @waitlist_registration
+    assert Registration.competition(@competition).include? @registration
   end
 
   test 'registration validations' do
