@@ -1,11 +1,11 @@
 %p
   %em GovHack
-  is an annual Open Data competition held across Australia. In 2018 it will be held on the weekend of
+  is an annual Open Data competition held across Australia. In #{@competition.year} it will be held on the weekend of
   = succeed "." do
-    %strong 7 - 9 September
+    %strong #{@competition.start_time.day.ordinalize} - #{@competition.end_time.day.ordinalize} #{@competition.start_time.strftime("%B")}
 %p In 46 hours teams create a project page, proof of concept and a video that tells the story of how government data can be reused.
 %p
-  Doors generally open at 6pm local time Friday 7th September
+  Doors generally open at 6pm local time #{@competition.start_time.strftime("%A")} #{@competition.start_time.day.ordinalize} #{@competition.start_time.strftime("%B")}
   = succeed "." do
     %em (confirm with event times below)
 %p Some venues will keep the doors open all 46 hours! However good ideas need sleep, so many will close late and reopen in the morning.
