@@ -46,6 +46,6 @@
                   = image_tag url_for(sponsor.logo)
                 - else
                   = image_tag 'default_profile_pic.png'
-    - if user_signed_in? && @event.admin_privileges?(current_user)
-      %p= link_to 'Manage this Event', admin_region_event_path(@region, @event)
-    %p= link_to 'Back to Events', events_path
+- if user_signed_in? && @event.admin_privileges?(current_user)
+  %p= link_to 'Manage this Event', admin_region_event_path(@region, @event)
+%p= link_to 'Back to Events', events_path
