@@ -50,16 +50,27 @@ class RegistrationTest < ActiveSupport::TestCase
     assert Registration.competition(@competition).include? @registration
   end
 
+  # ENHANCEMENT: Break into separate test cases
   test 'registration validations' do
-    @registration.destroy
+    Registration.destroy_all
     # Must have status
-    assert_not @event.registrations.create(assignment: @assignment, status: nil).persisted?
-    # non valid status
-    assert_not @event.registrations.create(assignment: @assignment, status: 'Maybe').persisted?
-    # valid status
-    assert @event.registrations.create(assignment: @assignment, status: VALID_ATTENDANCE_STATUSES.sample).persisted?
+    assert_not @event.registrations.create(
+      assignment: @assignment,
+      status: nil
+    ).persisted?
+    # Non valid status
+    assert_not @event.registrations.create(
+      assignment: @assignment,
+      status: 'Maybe'
+    ).persisted?
+    # Valid status
+    assert @event.registrations.create(
+      assignment: @assignment,
+      status: VALID_ATTENDANCE_STATUSES.sample
+    ).persisted?
     @assignment.destroy
-    assert_not @registration.persisted?
+    # Dependant destroy
+    assert Registration.count.zero?
   end
 
   test 'check for newly freed space' do
