@@ -27,7 +27,12 @@ class Admin::RegistrationsControllerTest < ActionDispatch::IntegrationTest
   test 'should post create success' do
     Registration.destroy_all
     assert_difference 'Registration.count' do
-      post admin_event_registrations_url @event, params: { registration: { status: VALID_ATTENDANCE_STATUSES.sample, assignment_id: 4 } }
+      post admin_event_registrations_url @event, params: {
+        registration: {
+          status: VALID_ATTENDANCE_STATUSES.sample,
+          assignment_id: 4
+        }
+      }
     end
     assert_redirected_to admin_event_registrations_url @event
   end
@@ -35,7 +40,12 @@ class Admin::RegistrationsControllerTest < ActionDispatch::IntegrationTest
   test 'should post create fail' do
     Registration.destroy_all
     assert_no_difference 'Registration.count' do
-      post admin_event_registrations_url @event, params: { registration: { status: 'test', assignment_id: 4 } }
+      post admin_event_registrations_url @event, params: {
+        registration: {
+          status: 'test',
+          assignment_id: 4
+        }
+      }
     end
     assert_response :success
   end
@@ -46,7 +56,9 @@ class Admin::RegistrationsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'should patch update success' do
-    patch admin_event_registration_url @event, @registration, params: { registration: { status: ATTENDING } }
+    patch admin_event_registration_url @event, @registration, params: {
+      registration: { status: ATTENDING }
+    }
     assert_redirected_to admin_event_registrations_url @event
     @registration.reload
     assert @registration.status == ATTENDING
@@ -54,7 +66,9 @@ class Admin::RegistrationsControllerTest < ActionDispatch::IntegrationTest
 
   test 'should patch update fail' do
     new_status = 'test'
-    patch admin_event_registration_url @event, @registration, params: { registration: { status: new_status } }
+    patch admin_event_registration_url @event, @registration, params: {
+      registration: { status: new_status }
+    }
     assert_response :success
     @registration.reload
     assert_not @registration.status == new_status
