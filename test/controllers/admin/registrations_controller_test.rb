@@ -57,11 +57,11 @@ class Admin::RegistrationsControllerTest < ActionDispatch::IntegrationTest
 
   test 'should patch update success' do
     patch admin_event_registration_url @event, @registration, params: {
-      registration: { status: ATTENDING }
+      registration: { status: NON_ATTENDING }
     }
     assert_redirected_to admin_event_registrations_url @event
     @registration.reload
-    assert @registration.status == ATTENDING
+    assert @registration.status == NON_ATTENDING
   end
 
   test 'should patch update fail' do
