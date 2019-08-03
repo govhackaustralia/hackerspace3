@@ -90,14 +90,26 @@ h1, h2, h3, h4, h5, h6 {
 	text-transform: uppercase;
 	color: #424242;
 	font-size: 2em;
-	padding: 0.5em 0.5em;
-	margin: 0 0.25em;
-	border-radius: 10px;
+	margin: 0.5em 0.5em;
+	padding: 0.5em 0;
+	border-radius: 0;
+	border-style: solid;
+	border-color: transparent;
+	border-width: 2px;
 	transition: all 0.4s ease;
 }
 
 #main-menu section article a:hover {
-	transform: scale(1.15, 1.15);
+	border-radius: 0;
+	border-bottom-style: solid;
+}
+
+#main-menu section article a:nth-child(odd):hover {
+	border-bottom-color: #ca1e56;
+}
+
+#main-menu section article a:nth-child(even):hover {
+	border-bottom-color: #4c9ad2;
 }
 
 #main-menu a:nth-child(odd):hover {
