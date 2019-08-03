@@ -189,6 +189,8 @@ class Event < ApplicationRecord
       return unless (new_attendee = waitlist_registrations.first).present?
 
       new_attendee.update(status: ATTENDING)
+      return if %w[development test].include? ENV['RAILS_ENV']
+
       RegistrationMailer.attendance_email(new_attendee).deliver_later
     end
   end

@@ -62,9 +62,9 @@ class RegistrationTest < ActiveSupport::TestCase
     assert_not @registration.persisted?
   end
 
-  # Below test 'works' but throws an error message because mail not going anywhere.
-  # test 'check for newly freed space' do
-  #   @user.registrations.where(event: @event).each { |reg| reg.update(status: NON_ATTENDING) }
-  #   assert(Registration.find_by(event: @event, assignment: @wait_ass).status == ATTENDING)
-  # end
+  test 'check for newly freed space' do
+    @wait_ass.update title: PARTICIPANT
+    @registration.update! status: NON_ATTENDING
+    assert @event.registrations.attending.where(assignment: @wait_ass).present?
+  end
 end

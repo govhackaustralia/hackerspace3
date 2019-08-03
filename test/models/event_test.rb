@@ -16,6 +16,7 @@ class EventTest < ActiveSupport::TestCase
     @bulk_mail = BulkMail.second
     @vip_registration = Registration.second
     @competition_event = Event.second
+    @wait_ass = Assignment.find 6
   end
 
   test 'event associations' do
@@ -74,5 +75,11 @@ class EventTest < ActiveSupport::TestCase
 
   test 'attending method' do
     assert @event.attending? @user.event_assignment @competition
+  end
+
+  test 'check for newly freed space' do
+    @wait_ass.update title: PARTICIPANT
+    @event.update capacity: 2
+    assert @event.registrations.attending.where(assignment: @wait_ass).present?
   end
 end
