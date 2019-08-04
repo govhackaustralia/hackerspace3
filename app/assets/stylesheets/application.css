@@ -170,6 +170,21 @@ h1, h2, h3, h4, h5, h6 {
 	border-color: black;
 }
 
+.download-csv {
+    box-sizing: border-box;
+    font-size: 1.5em;
+    padding: 0.5em 1.5em;
+    width: 250px;
+    display: block;
+    text-align: center;
+    margin-top: 1em;
+    background-color: #ca1e56;
+    color: #ddd;
+    font-weight: 700;
+    text-transform: uppercase;
+    text-decoration: none;
+}
+
 footer {
 	display: flex;
 	flex-direction: column;

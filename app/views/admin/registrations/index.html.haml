@@ -3,7 +3,7 @@
     %h2
       Registrations for #{@event.name} Event
     %p= link_to 'New Registration', new_admin_event_registration_path(@event)
-    %p= link_to 'Download CSV', admin_event_registrations_path(@event, format: 'csv')
+    %p= link_to 'Download CSV', admin_event_registrations_path(@event, format: 'csv'), class: 'download-csv'
     %table
       %thead
         %tr

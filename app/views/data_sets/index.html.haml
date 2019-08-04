@@ -8,7 +8,7 @@
       = render 'data_set_tile', locals: data_portal
   %h3 Data Set Highlight
   - if @data_sets.present?
-    = link_to 'Download CSV', data_sets_path(format: 'csv')
+    = link_to 'Download CSV', data_sets_path(format: 'csv'), class: 'download-csv'
     %table#dataset_table
       %thead
         %tr
