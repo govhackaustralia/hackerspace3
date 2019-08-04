@@ -36,6 +36,8 @@ class Registration < ApplicationRecord
     message: 'Registration already exists'
   }
 
+  validate :check_for_existing_competition_registrations
+
   # Returns the category of a registration for the purpose of allocating
   # different event ticket types.
   def category
@@ -69,5 +71,16 @@ class Registration < ApplicationRecord
   # ENHANCEMENT: Probably bad practice.
   def check_for_newly_freed_space
     event.check_for_newly_freed_space
+  end
+
+  # Check to see if a user is already participating in a competition event for
+  # the current competition.
+  def check_for_existing_competition_registrations
+    return if status == NON_ATTENDING || assignment_id.nil? || event.event_type != COMPETITION_EVENT
+
+    comp_events = assignment.registrations.competition_events.participating
+    return if (comp_events - [self]).empty?
+
+    errors.add(:user, 'already registered for a competition event')
   end
 end

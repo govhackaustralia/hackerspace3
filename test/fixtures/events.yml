@@ -33,3 +33,13 @@ three:
   registration_type: Open
   identifier: award_brisbane
   published: true
+
+four:
+  id: 4
+  name: Sydney
+  region_id: 2
+  capacity: 5
+  event_type: Competition
+  registration_type: Open
+  identifier: competition_sydney
+  published: true

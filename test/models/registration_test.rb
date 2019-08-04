@@ -73,6 +73,18 @@ class RegistrationTest < ActiveSupport::TestCase
     assert Registration.count.zero?
   end
 
+  test 'validate single competition event registration' do
+    exception = assert_raises(ActiveRecord::RecordInvalid) do
+      Event.fourth.registrations.create!(
+        assignment: @assignment,
+        status: ATTENDING
+      )
+    end
+    assert exception.message.include?(
+      'Validation failed: User already registered for a competition event'
+    )
+  end
+
   test 'check for newly freed space' do
     @wait_ass.update title: PARTICIPANT
     @registration.update! status: NON_ATTENDING
