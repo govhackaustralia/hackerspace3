@@ -24,6 +24,7 @@ class CompetitionTest < ActiveSupport::TestCase
     @challenge_criterion = Criterion.second
     @old_competition = @competition
     @new_competition = Competition.second
+    @event_assignment = Assignment.fourth
   end
 
   test 'competition associations' do
@@ -110,5 +111,9 @@ class CompetitionTest < ActiveSupport::TestCase
     assert @competition.either_judging_window_open?
     @competition.update peoples_choice_end: Time.now - 1.hour
     assert_not @competition.either_judging_window_open?
+  end
+
+  test 'already_participating_in_a_competition_event?' do
+    assert @competition.already_participating_in_a_competition_event? @event_assignment
   end
 end

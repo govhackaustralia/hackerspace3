@@ -160,6 +160,10 @@ class Competition < ApplicationRecord
       in_peoples_judging_window?(time_zone)
   end
 
+  def already_participating_in_a_competition_event?(event_assignment)
+    competition_registrations.where(assignment: event_assignment).present?
+  end
+
   private
 
   # Returns true if a time is within a window for a particular region.
