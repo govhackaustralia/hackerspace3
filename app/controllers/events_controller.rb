@@ -48,9 +48,10 @@ class EventsController < ApplicationController
 
   def set_signed_in_user_vars
     @user = current_user
+    @event_assignment = @user.event_assignment(@competition)
     @registration = Registration.find_by(
       event: @event,
-      assignment: @user.event_assignment(@competition)
+      assignment: @event_assignment
     )
     @team = @event.teams.new
   end

@@ -3,7 +3,7 @@
     - if @registration.present?
       = link_to 'Manage your Event Registration', event_registration_path(@event.identifier, @registration)
       %br/
-    - else
+    - elsif participant_able_to_enter?
       = link_to 'Register to Attend this Event', new_event_registration_path(@event.identifier)
       %br/
   - else

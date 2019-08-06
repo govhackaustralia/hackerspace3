@@ -6,6 +6,8 @@ class RegistrationsController < ApplicationController
     @region = @event.region
     @registration = @event.registrations.new
     @user = current_user
+    @event_assignment = @user.event_assignment(@competition)
+    check_for_existing_competition_event
   end
 
   def show
@@ -57,6 +59,13 @@ class RegistrationsController < ApplicationController
     params.require(:registration).permit(:status)
   end
 
+  def check_for_existing_competition_event
+    return if helpers.participant_able_to_enter?
+
+    flash[:alert] = 'Already registered for a Competition Event'
+    redirect_to event_path(@event.identifier)
+  end
+
   def handle_create
     if parent_guardian_missing_and_needed?
       flash[:alert] = 'Parent/Guardian name must be filled in for Youth Competitor'
@@ -97,6 +106,7 @@ class RegistrationsController < ApplicationController
 
   def create_new_registration
     @event = Event.find(params[:event_identifier])
+    @region = @event.region
     @registration = @event.registrations.new(status: params[:status])
     @user = current_user
     @registration.assignment = @user.event_assignment @event.competition
