@@ -18,6 +18,7 @@ class RegistrationTest < ActiveSupport::TestCase
     @non_attending_registration = Registration.fourth
     @invited = Registration.find 7
     @vip_registration = @non_attending_registration
+    @award_registration = Registration.find(6)
   end
 
   test 'registration associations' do
@@ -45,7 +46,9 @@ class RegistrationTest < ActiveSupport::TestCase
     assert Registration.participants.exclude? @vip_registration
     assert Registration.vips.include? @vip_registration
     assert Registration.vips.exclude? @registration
+    assert Registration.connection_events.include? @registration
     assert Registration.competition_events.include? @competition_event_registration
+    assert Registration.award_events.include? @award_registration
     assert Registration.competition_events.exclude? @waitlist_registration
     assert Registration.competition(@competition).include? @registration
   end

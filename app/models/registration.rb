@@ -20,8 +20,14 @@ class Registration < ApplicationRecord
   scope :vips, lambda {
     joins(:assignment).where(assignments: { title: VIP })
   }
+  scope :connection_events, lambda {
+    joins(:event).where(events: { event_type: CONNECTION_EVENT })
+  }
   scope :competition_events, lambda {
     joins(:event).where(events: { event_type: COMPETITION_EVENT })
+  }
+  scope :award_events, lambda {
+    joins(:event).where(events: { event_type: AWARD_EVENT })
   }
   scope :competition, lambda { |competition|
     joins(:assignment).where(assignments: { competition_id: competition.id })
