@@ -34,24 +34,22 @@
           = link_to 'Go to Sponsor', sponsorship_management_sponsor_path(assignment.assignable)
     %article
       %h3 My Events
-      - if @registrations.present?
-        - @registrations.each do |registration|
-          %h4
-            = registration.event.name
-            \-  #{registration.event.region.name}
-          - unless registration.event.registration_type == CLOSED
-            %p
-              You are registered as: #{registration.status}
-            - if registration.status == INVITED
-              %p= link_to 'Respond to Invitation', edit_event_registration_path(registration.event.identifier, registration)
-              - if registration.category == GROUP_GOLDEN
-                %p= link_to 'Transfer Group Golden Ticket to another team member', edit_event_registration_path(registration.event.identifier, registration, task: GROUP_GOLDEN)
-            - else
-              %p= link_to 'View Registration', event_registration_path(registration.event.identifier, registration)
-          %p= link_to 'Go to Event Page', event_path(registration.event.identifier)
+      - if @connection_registrations.present? || @competition_registrations.present? || @award_registrations.present?
+        - if @connection_registrations.present?
+          %h4 Connection Events
+          - @connection_registrations.each do |registration|
+            = render 'registration_management', locals: { registration: registration }
+        - if @competition_registrations.present?
+          %h4 Competition Events
+          - @competition_registrations.each do |registration|
+            = render 'registration_management', locals: { registration: registration }
+        - if @award_registrations.present?
+          %h4 Award Events
+          - @award_registrations.each do |registration|
+            = render 'registration_management', locals: { registration: registration }
       - else
         %div You are not currently registered for any events.
-        = link_to 'Find events', events_path
+        %p= link_to 'Find events', events_path
     - if competition_started_or_region_privileges? && @joined_teams.present?
       %article
         %h3 My Team Projects
