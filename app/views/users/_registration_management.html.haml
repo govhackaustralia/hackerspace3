@@ -9,5 +9,6 @@
     - if registration.category == GROUP_GOLDEN
       %p= link_to 'Transfer Group Golden Ticket to another team member', edit_event_registration_path(event.identifier, registration, task: GROUP_GOLDEN)
   - else
-    %p= link_to 'View Registration', event_registration_path(event.identifier, registration)
-%p= link_to 'Go to Event Page', event_path(event.identifier)
+    %span= link_to 'View Registration', event_registration_path(event.identifier, registration)
+    |
+%span= link_to 'Go to Event Page', event_path(event.identifier)
