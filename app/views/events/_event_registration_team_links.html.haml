@@ -6,6 +6,8 @@
     - elsif participant_able_to_enter?
       = link_to 'Register to Attend this Event', new_event_registration_path(@event.identifier)
       %br/
+    - else
+      = link_to 'Competition Event Registration Limit Reached', limit_reached_event_registrations_path(@event.identifier)
   - else
     = link_to 'Sign in to register', new_user_session_path
     %br/

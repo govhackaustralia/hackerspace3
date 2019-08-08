@@ -53,6 +53,18 @@ class RegistrationsController < ApplicationController
     handle_create
   end
 
+  def limit_reached
+    @event = Event.find_by identifier: params[:event_identifier]
+    @competition = @event.competition
+    @registration = current_user.event_assignment(@competition).competition_event_registration
+    if @registration.present?
+      @current_event = @registration.event
+    else
+      flash[:alert] = "Your limit has not been reached for #{@competition.year}"
+      redirect_to event_path(@event.identifier)
+    end
+  end
+
   private
 
   def registration_params

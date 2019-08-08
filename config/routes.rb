@@ -26,7 +26,9 @@ Rails.application.routes.draw do
   end
 
   resources :events, param: :identifier, only: [:index, :show] do
-    resources :registrations, except: [:index, :destroy]
+    resources :registrations, except: [:index, :destroy] do
+      collection { get 'limit_reached' }
+    end
     resources :teams, controller: 'events/teams', only: :index
   end
 
