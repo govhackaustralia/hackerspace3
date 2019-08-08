@@ -97,4 +97,8 @@ class AssignmentTest < ActiveSupport::TestCase
     assignment = @team.assignments.create user: @user, title: TEAM_LEADER
     assert assignment.persisted?
   end
+
+  test 'competition_event_registration' do
+    assert @participant.competition_event_registration == @participating_comp_registration
+  end
 end

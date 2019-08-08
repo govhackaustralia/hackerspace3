@@ -63,6 +63,12 @@ class Assignment < ApplicationRecord
     JudgeableScores.new(self, teams).compile
   end
 
+  # Will return the registrtation for the Competition Event a participant is
+  # registered for
+  def competition_event_registration
+    registrations.competition_events.participating.first
+  end
+
   private
 
   # Will fill in the competition_id if none has been entered
