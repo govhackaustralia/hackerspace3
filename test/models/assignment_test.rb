@@ -24,6 +24,7 @@ class AssignmentTest < ActiveSupport::TestCase
     @chief_judge = Assignment.find 15
     @contact = Assignment.find 5
     @volunteer = Assignment.find 8
+    @participating_comp_registration = Registration.third
   end
 
   test 'assignment associations' do
@@ -87,7 +88,7 @@ class AssignmentTest < ActiveSupport::TestCase
   end
 
   test 'team can_only_join_team_if_registered_for_a_competition_event' do
-    Registration.third.destroy
+    @participating_comp_registration.destroy
     assignment = @team.assignments.create user: @user, title: TEAM_LEADER
     assert_not assignment.persisted?
     # Fix: Something wrong with this test/method, will fail when another
