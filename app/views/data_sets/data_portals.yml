@@ -22,9 +22,9 @@
   name: Bureau of Meteorology
   short_url: govhack.bom.gov.au
 
-- url: https://data.csiro.au/dap/
+- url: https://data.csiro.au/
   name: CSIRO Data Access Portal
-  short_url: data.csiro.au/dap
+  short_url: data.csiro.au
 
 - url: https://www.ga.gov.au/data-pubs/
   name: Geoscience Australia
