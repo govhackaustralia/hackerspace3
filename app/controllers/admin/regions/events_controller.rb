@@ -54,7 +54,7 @@ class Admin::Regions::EventsController < ApplicationController
   def check_for_privileges
     @region = Region.find params[:region_id]
     @competition = @region.competition
-    return if current_user.region_privileges? @competition
+    return if current_user.event_privileges? @competition
 
     flash[:alert] = 'You must have valid assignments to access this section.'
     redirect_to root_path
