@@ -69,3 +69,5 @@
     %p= link_to 'Bulk Mails', admin_event_bulk_mails_path(@event)
 - if @region.admin_privileges?(current_user)
   %p= link_to "Back to #{@region.name} Events", admin_region_events_path(@region)
+- if current_user.event_privileges? @competition
+  %p= link_to "Back to Event Mangement", admin_competition_events_path(@competition)
