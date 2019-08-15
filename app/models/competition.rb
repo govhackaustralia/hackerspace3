@@ -161,7 +161,7 @@ class Competition < ApplicationRecord
   end
 
   def already_participating_in_a_competition_event?(event_assignment)
-    competition_registrations.where(assignment: event_assignment).present?
+    competition_registrations.participating.where(assignment: event_assignment).present?
   end
 
   private
