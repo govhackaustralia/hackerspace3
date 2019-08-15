@@ -1,11 +1,12 @@
 - content_for :title, 'Limit Reached'
-%section.project_index
+%main.register
   %h2 Limit Reached for #{@competition.name}
+  %section
+    %article
+      %p Participants are only permitted to register for a single Competition Event.
 
-  %p Participants are only permitted to register for a single Competition Event.
+      %p To enter #{@event.name}, first cancel your registration to #{@current_event.name}.
 
-  %p To enter #{@event.name}, first cancel your registration to #{@current_event.name}.
-
-  %p= link_to "Amend Registration for #{@current_event.name}", event_registration_path(@current_event.identifier, @registration)
+      %p= link_to "Amend Registration for #{@current_event.name}", event_registration_path(@current_event.identifier, @registration)
 
 %p= link_to "Back to #{@event.name}", event_path(@event.identifier)
