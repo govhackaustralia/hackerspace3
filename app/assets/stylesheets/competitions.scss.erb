@@ -24,7 +24,7 @@
 
 .index_page nav section {
 	display: flex;
-	justify-content: space-around;
+	justify-content: center;
 	align-items: stretch;
 	align-content: stretch;
 	padding: 0 10em;
@@ -35,7 +35,7 @@
 	background-image: url(<%= asset_path 'cta.png' %>);
 	background-size: cover;
 	background-position: center center;
-	transition: all 1s ease;
+	transition: all 0.4s ease;
 	padding: 0;
 	display: flex;
 	align-content: stretch;
@@ -50,9 +50,9 @@
 	font-size: 1.5em;
 	text-align: center;
 	line-height: 1.2em;
-	width: 200px;
-	padding: 1.5em 0.5em;
-	transition: all 1s ease;
+	width: 300px;
+	padding: 2.5em 0.5em;
+	transition: all 0.4s ease;
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -68,6 +68,13 @@
 	border-bottom: 1em solid #4c9ad2;
 }
 
-.index_page nav section div a:hover {
-	transform:scale(1.1);
+.index_page nav section div:nth-of-type(even) a:hover {
+	background-color: rgba(253, 37, 107, 0.5);
+	border-bottom: 1em solid #fd266c;
+}
+
+
+.index_page nav section div:nth-of-type(odd) a:hover {
+	background-color: rgba(94, 191, 261, 0.5);
+	border-bottom: 1em solid #6dbff9;
 }

@@ -140,7 +140,7 @@
 	padding: 2em 2em;
 	display: flex;
 	flex-wrap: wrap;
-	justify-content: space-around;
+	justify-content: center;
 	align-content: center;
 	align-items: center;
 }
@@ -163,7 +163,8 @@
 	padding: 2.5em 0.5em;
 	width: 100%;
 	height: 100%;
-	transition: all 1s ease;
+	min-height: 250px;
+	transition: all 0.4s ease;
 }
 
 .events_page section.events a:nth-of-type(3n+0) div {
@@ -199,9 +200,20 @@
 	display: none;
 }
 
-.events_page section.events article div:hover {
-	transform: scale(1.1, 1.1);
+.events_page section.events a:nth-of-type(3n+0) div:hover {
+	background-color: rgba(253, 37, 107, 0.5);
+	border-bottom: 1em solid #fd266c;
 }
+
+.events_page section.events a:nth-of-type(3n+1) div:hover {
+	background-color: rgba(94, 191, 261, 0.5);
+	border-bottom: 1em solid #6dbff9;
+}
+
+.events_page section.events a:nth-of-type(3n+2) div:hover {
+	background-color: rgba(161, 161, 161, 0.5);
+    border-bottom: 1em solid #a0a0a0;
+}    
 
 .event-info {
 	padding: 0.5em;

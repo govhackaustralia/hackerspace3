@@ -8,7 +8,7 @@
       = render 'data_set_tile', locals: data_portal
   %h3 Data Set Highlight
   - if @data_sets.present?
-    = link_to 'Download CSV', data_sets_path(format: 'csv')
+    = link_to 'Download CSV', data_sets_path(format: 'csv'), class: 'download-csv'
     %table#dataset_table
       %thead
         %tr
@@ -20,11 +20,9 @@
         - @data_sets.each do |data_set|
           %tr
             %td= link_to data_set.name, data_set_path(data_set)
-            %td= markdown data_set.description
-            %td= link_to data_set.url, data_set.url, {:class => 'dataseturl'}
+            %td= markdown truncate(data_set.description, length: 100, omission: '... ')
+            %td= link_to data_set.url, data_set.url, class: 'dataseturl'
             %td= data_set.region.name
   - else
     %p
       %strong No Data Set Highlights saved for #{@competition.name} at this time.
-  %script{:src => "https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js", :type => "text/javascript"}
-  %link{:href => "https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css", :rel => "stylesheet"}/

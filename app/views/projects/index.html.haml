@@ -3,11 +3,7 @@
   %h2
     Team Projects for Competition #{@competition.year}
   - if competition_started_or_region_privileges?
-    = form_tag projects_path, method: :get do
-      = search_field_tag :term, params[:term]
-      = submit_tag 'Search'
-    %p= link_to 'Clear Search', projects_path
-    %p= link_to 'Download CSV', projects_path(format: 'csv')
+    %p= link_to 'Download CSV', projects_path(format: 'csv'), class: 'download-csv'
     - if user_signed_in? && @competition.not_finished?(LAST_TIME_ZONE)
       - if @attending_events.present?
         %aside= link_to 'Create New Team Project', new_team_path
@@ -15,7 +11,7 @@
         %p
           %strong Please register for a competition event to create a team.
         %p= link_to 'Competition Events', competition_events_path
-    %table
+    %table#projects_table
       %thead
         %th Project
         %th Team

@@ -3,7 +3,7 @@
   %section
     %h2 Events for #{@competition.name}
     - if @events.present?
-      %p= link_to 'Download CSV', events_path(format: 'csv')
+      %p= link_to 'Download CSV', events_path(format: 'csv'), class: 'download-csv'
       = render partial: 'events/event_collection', locals: { events: @future_connections, title: 'Upcoming Connection Events' }
       = render partial: 'events/event_collection', locals: { events: @future_locations, title: 'Upcoming Competition Events' }
       = render partial: 'events/event_collection', locals: { events: @future_remotes, title: "Upcoming Remote Kitchen Table Competition Events" }
