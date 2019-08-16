@@ -15,6 +15,7 @@
 //= require turbolinks
 //= require jquery
 //= require cable
+//= require datatable
 //= require_tree .
 
 

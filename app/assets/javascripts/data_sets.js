@@ -1,6 +1,11 @@
 // // Place all the behaviors and hooks related to the matching controller here.
 // // All this logic will automatically be available in application.js.
-//
+$( document ).on('turbolinks:load', function() {
+  $('#dataset_table').DataTable({
+    scrollY: 500,
+    scrollX: '100%'
+  });
+});
 // $( document ).on('ready turbolinks:load', function() {
 // 	$("#data_set_url").blur(function() {
 // 		var url = $("#data_set_url").val();
