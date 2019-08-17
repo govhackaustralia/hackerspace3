@@ -21,6 +21,7 @@ two:
   confirmed_at: <%= Time.current - 1.year %>
   how_did_you_hear: [no response recorded]
   me_govhack_contact: true
+  aws_credits_requested: true
 
 three:
   id: 3

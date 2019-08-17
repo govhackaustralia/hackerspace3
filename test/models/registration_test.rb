@@ -51,6 +51,7 @@ class RegistrationTest < ActiveSupport::TestCase
     assert Registration.award_events.include? @award_registration
     assert Registration.competition_events.exclude? @waitlist_registration
     assert Registration.competition(@competition).include? @registration
+    assert Registration.aws_credits_requested.include? @waitlist_registration
   end
 
   # ENHANCEMENT: Break into separate test cases

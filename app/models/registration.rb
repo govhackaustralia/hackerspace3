@@ -33,6 +33,10 @@ class Registration < ApplicationRecord
     joins(:assignment).where(assignments: { competition_id: competition.id })
   }
 
+  scope :aws_credits_requested, lambda {
+    joins(:user).where(users: { aws_credits_requested: true })
+  }
+
   after_update :check_for_newly_freed_space
 
   validates :status, presence: true
