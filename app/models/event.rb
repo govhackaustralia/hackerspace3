@@ -149,7 +149,7 @@ class Event < ApplicationRecord
     Time.now.in_time_zone(COMP_TIME_ZONE) > end_time
   end
 
-  # Returns true of an event has registration type 'competition', false
+  # Returns true if an event has registration type 'competition', false
   # otherwise
   def competition_event?
     event_type == COMPETITION_EVENT
