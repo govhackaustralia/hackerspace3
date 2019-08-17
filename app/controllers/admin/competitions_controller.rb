@@ -43,6 +43,11 @@ class Admin::CompetitionsController < ApplicationController
     end
   end
 
+  def aws_credits_requested
+    @report = AwsCreditsRequestedReport.new @competition
+    @regions = @competition.regions.preload :events
+  end
+
   private
 
   def competition_params
@@ -90,5 +95,6 @@ class Admin::CompetitionsController < ApplicationController
   def sponsor_like_counts
     @sponsors_count = @competition.sponsors.count
     @sponsorship_types_count = @competition.sponsorship_types.count
+    @credits_count = @competition.competition_registrations.aws_credits_requested.count
   end
 end

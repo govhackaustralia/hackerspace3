@@ -59,6 +59,7 @@ Rails.application.routes.draw do
       resources :teams, only: [:index, :show, :update]
       resources :events, only: :index
       resources :sponsors
+      member { get 'aws_credits_requested' }
     end
 
     resources :sponsors, only: [] do

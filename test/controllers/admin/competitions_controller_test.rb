@@ -64,4 +64,9 @@ class Admin::CompetitionsControllerTest < ActionDispatch::IntegrationTest
     @competition.reload
     assert @competition.end_time == old_time
   end
+
+  test 'should get aws credits requested' do
+    get aws_credits_requested_admin_competition_url @competition
+    assert_response :success
+  end
 end

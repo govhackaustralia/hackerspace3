@@ -71,4 +71,9 @@
     = pluralize @teams_count, 'Team'
     created for this competition.
   %p= link_to 'Competition Teams', admin_competition_teams_path(@competition)
+  %h3 AWS Credits Requested
+  %p
+    = pluralize @credits_count, 'AWS credit'
+    requested for this competition.
+  %p= link_to 'AWS Credits Requsted', aws_credits_requested_admin_competition_path(@competition)
 %p= link_to 'Back to Competitions', admin_competitions_path
