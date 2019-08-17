@@ -30,4 +30,4 @@
         You are registered as attending.
 
       = render 'edit_form', locals: { options: [ATTENDING, NON_ATTENDING] }
-%p= link_to 'Back to Registration', event_registration_path(@event, @registration)
+%p= link_to 'Back to Registration', event_registration_path(@event.identifier, @registration)
