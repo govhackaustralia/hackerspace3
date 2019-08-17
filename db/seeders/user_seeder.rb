@@ -47,6 +47,7 @@ class UserSeeder < Seeder
         accepted_terms_and_conditions: false,
         password: Devise.friendly_token[0, 20],
         request_not_photographed: random_boolean,
+        aws_credits_requested: number % 4 == 0,
         data_cruncher: random_boolean,
         coder: random_boolean,
         creative: random_boolean,
