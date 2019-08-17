@@ -155,6 +155,11 @@ class Event < ApplicationRecord
     event_type == COMPETITION_EVENT
   end
 
+  # Return true if an event is not a remote event, false otherwise
+  def not_remote_event?
+    name.exclude? 'Remote'
+  end
+
   # Return a CSV file of event attributes.
   def self.to_csv(competition, options = {})
     desired_columns = %w[id name capacity email twitter address accessibility youth_support parking public_transport operation_hours catering video_id start_time end_time created_at updated_at place_id identifier event_type]

@@ -82,4 +82,10 @@ class EventTest < ActiveSupport::TestCase
     @event.update capacity: 2
     assert @event.registrations.attending.where(assignment: @wait_ass).present?
   end
+
+  test 'not_remote_event?' do
+    assert @event.not_remote_event?
+    @event.update! name: 'Test Remote Event'
+    assert_not @event.not_remote_event?
+  end
 end
