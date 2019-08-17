@@ -154,7 +154,7 @@ class RegistrationsController < ApplicationController
       registration_type: params[:registration_type],
       parent_guardian: params[:parent_guardian],
       request_not_photographed: params[:request_not_photographed],
-      aws_credits_requested: params[:aws_credits_requested],
+      aws_credits_requested: params[:aws_credits_requested]
     )
   end
 
