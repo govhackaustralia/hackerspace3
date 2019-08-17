@@ -42,14 +42,6 @@ PHONE_NUMBER_LENGTH = 10
 
 MAX_DECISION_TIME = 2.minutes
 
-# Australian Time Zones
-
-VALID_TIME_ZONES = []
-
-ActiveSupport::TimeZone.country_zones('AU').each do |zone|
-  VALID_TIME_ZONES << zone.name
-end
-
 LAST_TIME_ZONE = 'Perth'
 COMP_TIME_ZONE = 'Sydney'
 

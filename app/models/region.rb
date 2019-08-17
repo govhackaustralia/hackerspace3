@@ -1,4 +1,11 @@
 class Region < ApplicationRecord
+  # Australian/New Zealand Time Zones
+  VALID_TIME_ZONES =
+    ActiveSupport::TimeZone.country_zones('AU') +
+    ActiveSupport::TimeZone.country_zones('NZ')
+
+  attr_reader :valid_time_zones
+
   belongs_to :parent, class_name: 'Region', optional: true
   belongs_to :competition
 
@@ -26,9 +33,9 @@ class Region < ApplicationRecord
 
   validate :only_one_root_per_competition
 
-  # Note 'nil' added to VALID_TIME_ZONES so that a region does not require a
-  # time_zone; eg Australia.
-  validates :time_zone, inclusion: { in: VALID_TIME_ZONES << nil }
+  validates :time_zone, allow_nil: true, inclusion: {
+    in: VALID_TIME_ZONES.map(&:name)
+  }
 
   # Returns the user record for the Director of a region.
   # ENHANCEMENT: Move into active record associations.

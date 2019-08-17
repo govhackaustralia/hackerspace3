@@ -5,7 +5,7 @@
   - unless action_name.include? 'root'
     .field
       = f.label :time_zone, "Time zone:"
-      = f.select :time_zone, options_from_collection_for_select(ActiveSupport::TimeZone.country_zones('AU'), :name, :name, @region.time_zone)
+      = f.select :time_zone, options_from_collection_for_select(Region::VALID_TIME_ZONES, :name, :name, @region.time_zone)
   .field
     = f.label :award_release, 'Award Release: (Times are saved as Sydney time)'
     = f.datetime_local_field :award_release
