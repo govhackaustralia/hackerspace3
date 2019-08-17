@@ -91,5 +91,5 @@
     %p
       %em Ignoring Checkpoints Unlike Public Screen
     = render 'entries/regional_challenge_entries'
-- if current_user.admin_privileges?(@competition)
+- if current_user.region_privileges?(@competition)
   %p= link_to 'Back to Competition Regions', admin_competition_regions_path(@competition)

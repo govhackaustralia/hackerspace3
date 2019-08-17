@@ -16,5 +16,6 @@
       %p No Sub Regions saved.
   - else
     %p A Root Region is required to create Sub Regions.
-
-%p= link_to 'Back to Competition', admin_competition_path(@competition)
+- if current_user.admin_privileges?(@competition)
+  %p= link_to 'Back to Competition', admin_competition_path(@competition)
+%p= link_to 'Back to Account Management', manage_account_path
