@@ -1,5 +1,5 @@
 module UsersHelper
-  def user_has_admin_privilieges?
+  def user_has_admin_privileges?
     (@assignment_titles & COMP_ADMIN).present?
   end
 

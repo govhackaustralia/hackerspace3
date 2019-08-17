@@ -6,7 +6,7 @@ class UsersHelperTest < ActionView::TestCase
   end
 
   test 'permission methods' do
-    assert user_has_admin_privilieges?
+    assert user_has_admin_privileges?
     assert user_has_event_privileges?
     assert user_has_sponsor_privileges?
     assert user_is_chief_judge?
