@@ -49,7 +49,9 @@ class Admin::CompetitionsControllerTest < ActionDispatch::IntegrationTest
 
   test 'should patch update success' do
     old_time = @competition.end_time
-    patch admin_competition_url @competition, params: { competition: { end_time: Time.now + 1.week } }
+    patch admin_competition_url @competition, params: {
+      competition: { end_time: Time.now + 1.week }
+    }
     assert_redirected_to admin_competition_url @competition
     @competition.reload
     assert_not @competition.end_time == old_time
