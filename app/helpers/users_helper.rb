@@ -3,6 +3,10 @@ module UsersHelper
     (@assignment_titles & COMP_ADMIN).present?
   end
 
+  def user_has_region_privileges?
+    (@assignment_titles & REGION_PRIVILEGES).present?
+  end
+
   def user_has_event_privileges?
     (@assignment_titles & EVENT_PRIVILEGES).present?
   end
