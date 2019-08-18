@@ -145,6 +145,18 @@ class Competition < ApplicationRecord
     started?(time_zone) && not_finished?(time_zone)
   end
 
+  # Returns true if the competition is in the team form stage or has started,
+  # false otherwise.
+  def in_form_or_comp_started?(time_zone = nil)
+    in_team_form_window?(time_zone) || started?(time_zone)
+  end
+
+  # Returns true if the competition is running or if the competition is in the
+  # team form period, false oherwise
+  def in_form_or_comp_window?(time_zone = nil)
+    in_team_form_window?(time_zone) || in_comp_window?(time_zone)
+  end
+
   # Returns true if the competition is in the judging period, false oherwise.
   def in_challenge_judging_window?(time_zone = nil)
     in_region_window? time_zone, challenge_judging_start, challenge_judging_end
@@ -168,6 +180,11 @@ class Competition < ApplicationRecord
   end
 
   private
+
+  # Returns true if the competition is in the team form period, false oherwise.
+  def in_team_form_window?(time_zone = nil)
+    in_region_window? time_zone, team_form_start, team_form_end
+  end
 
   # Returns true if a time is within a window for a particular region.
   def in_region_window?(time_zone, start_time, end_time)
