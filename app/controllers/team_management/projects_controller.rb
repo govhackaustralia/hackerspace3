@@ -7,7 +7,7 @@ class TeamManagement::ProjectsController < ApplicationController
   end
 
   def edit
-    @project = Project.find(params[:id])
+    @project = Project.find params[:id]
   end
 
   # ENHANCEMENT: This is not a update method but rather a create new method.
@@ -16,7 +16,7 @@ class TeamManagement::ProjectsController < ApplicationController
     update_project
     if @project.save
       flash[:notice] = 'Team Project Saved'
-      redirect_to edit_team_management_team_project_path(@project.team, @project)
+      redirect_to edit_team_management_team_project_path @project.team, @project
     else
       flash[:alert] = @project.errors.full_messages.to_sentence
       render :edit
@@ -38,13 +38,13 @@ class TeamManagement::ProjectsController < ApplicationController
   end
 
   def update_project
-    @project = @team.projects.new(project_params)
+    @project = @team.projects.new project_params
     @project.user = current_user
   end
 
   # IMPROVEMENT - Multiple move up to ApplicationController
   def check_user_team_privileges!
-    @team = Team.find(params[:team_id])
+    @team = Team.find params[:team_id]
     @competition = @team.competition
     return if @team.permission?(current_user) && @competition.in_window?(@team.time_zone)
 
@@ -52,9 +52,9 @@ class TeamManagement::ProjectsController < ApplicationController
   end
 
   def check_team_permission
-    if @team.permission?(current_user)
       flash[:notice] = 'The competition has closed.'
-      redirect_to project_path(@team.current_project.identifier)
+    if @team.permission? current_user
+      redirect_to project_path @team.current_project.identifier
     else
       flash[:notice] = 'You do not have access permissions for this team.'
       redirect_to root_path

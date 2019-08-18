@@ -7,20 +7,20 @@ class TeamManagement::EntriesController < ApplicationController
 
   # ENHANCEMENT: Reduce amount of calls made in the views
   def index
-    @checkpoints = @competition.checkpoints.order(:end_time)
+    @checkpoints = @competition.checkpoints.order :end_time
   end
 
   def new
-    @challenge = Challenge.find(params[:challenge_id])
+    @challenge = Challenge.find params[:challenge_id]
     @entry = @team.entries.new
-    @checkpoints = @team.available_checkpoints(@challenge)
+    @checkpoints = @team.available_checkpoints @challenge
   end
 
   def create
     create_variables
     checkpoint = @entry.checkpoint
-    checkpoint_not_passed = @checkpoints.include?(checkpoint)
-    handle_create(checkpoint_not_passed, checkpoint)
+    checkpoint_not_passed = @checkpoints.include? checkpoint
+    handle_create checkpoint_not_passed, checkpoint
   end
 
   def edit
@@ -56,13 +56,13 @@ class TeamManagement::EntriesController < ApplicationController
   end
 
   def create_variables
-    @entry = @team.entries.new(entry_params)
+    @entry = @team.entries.new entry_params
     @challenge = @entry.challenge
     @checkpoints = @team.available_checkpoints(@challenge)
   end
 
   def update_variables
-    @entry = Entry.find(params[:id])
+    @entry = Entry.find params[:id]
     @challenge = @entry.challenge
     @checkpoints = (@team.available_checkpoints(@challenge) << @entry.checkpoint).uniq
   end
@@ -72,7 +72,7 @@ class TeamManagement::EntriesController < ApplicationController
       flash[:notice] = 'Challenge Entered'
       redirect_to challenge_path(@entry.challenge.identifier)
     else
-      flash_alert(checkpoint_not_passed, checkpoint)
+      flash_alert checkpoint_not_passed, checkpoint
       render :new
     end
   end
@@ -80,9 +80,9 @@ class TeamManagement::EntriesController < ApplicationController
   def handle_update(checkpoint_not_passed, checkpoint)
     if checkpoint_not_passed && @entry.update(entry_params)
       flash[:notice] = 'Entry Updated Successfully'
-      redirect_to team_management_team_entries_path(@team)
+      redirect_to team_management_team_entries_path @team
     else
-      flash_alert(checkpoint_not_passed, checkpoint)
+      flash_alert checkpoint_not_passed, checkpoint
       render :edit
     end
   end
@@ -97,7 +97,7 @@ class TeamManagement::EntriesController < ApplicationController
 
   # IMPROVEMENT - Multiple move up to ApplicationController
   def check_user_team_privileges!
-    @team = Team.find(params[:team_id])
+    @team = Team.find params[:team_id]
     @competition = @team.competition
     return if @team.permission?(current_user) && @competition.in_window?(@team.time_zone)
 
@@ -107,7 +107,7 @@ class TeamManagement::EntriesController < ApplicationController
   def alert_team_permission
     if @team.permission?(current_user)
       flash[:alert] = 'The competition has closed.'
-      redirect_to project_path(@team.current_project.identifier)
+      redirect_to project_path @team.current_project.identifier
     else
       flash[:alert] = 'You do not have access permissions for this team.'
       redirect_to root_path

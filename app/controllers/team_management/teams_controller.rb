@@ -27,7 +27,7 @@ class TeamManagement::TeamsController < ApplicationController
 
   # IMPROVEMENT - Multiple move up to ApplicationController
   def check_user_team_privileges!
-    @team = Team.find(params[:id])
+    @team = Team.find params[:id]
     @competition = @team.competition
     return if @team.permission?(current_user) && @competition.in_window?(@team.time_zone)
 
@@ -54,7 +54,7 @@ class TeamManagement::TeamsController < ApplicationController
       render :edit, high_res_image: true
     else
       flash[:notice] = 'Team Details Upated'
-      redirect_to team_management_team_path(@team)
+      redirect_to team_management_team_path @team
     end
   end
 

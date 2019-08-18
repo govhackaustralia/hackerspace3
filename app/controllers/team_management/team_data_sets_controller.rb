@@ -14,7 +14,7 @@ class TeamManagement::TeamDataSetsController < ApplicationController
     @team_data_set = @team.team_data_sets.new(team_data_set_params)
     if @team_data_set.save
       flash[:notice] = 'New Team Data Set Created'
-      redirect_to team_management_team_team_data_sets_path(@team)
+      redirect_to team_management_team_team_data_sets_path @team
     else
       flash[:alert] = @team_data_set.errors.full_messages.to_sentence
       render :new
@@ -22,14 +22,14 @@ class TeamManagement::TeamDataSetsController < ApplicationController
   end
 
   def edit
-    @team_data_set = TeamDataSet.find(params[:id])
+    @team_data_set = TeamDataSet.find params[:id]
   end
 
   def update
-    @team_data_set = TeamDataSet.find(params[:id])
-    if @team_data_set.update(team_data_set_params)
+    @team_data_set = TeamDataSet.find params[:id]
+    if @team_data_set.update team_data_set_params
       flash[:notice] = 'New Team Data Set Updated'
-      redirect_to team_management_team_team_data_sets_path(@team)
+      redirect_to team_management_team_team_data_sets_path @team
     else
       flash[:alert] = @team_data_set.errors.full_messages.to_sentence
       render :edit
@@ -37,16 +37,16 @@ class TeamManagement::TeamDataSetsController < ApplicationController
   end
 
   def destroy
-    @team_data_set = TeamDataSet.find(params[:id])
+    @team_data_set = TeamDataSet.find params[:id]
     @team_data_set.destroy
-    redirect_to team_management_team_team_data_sets_path(@team)
+    redirect_to team_management_team_team_data_sets_path @team
   end
 
   private
 
   # IMPROVEMENT - Multiple move up to ApplicationController
   def check_user_team_privileges!
-    @team = Team.find(params[:team_id])
+    @team = Team.find params[:team_id]
     @competition = @team.competition
     return if @team.permission?(current_user) && @competition.in_window?(@team.time_zone)
 
@@ -54,9 +54,9 @@ class TeamManagement::TeamDataSetsController < ApplicationController
   end
 
   def check_team_permission
-    if @team.permission?(current_user)
       flash[:notice] = 'The competition has closed.'
-      redirect_to project_path(@team.current_project.identifier)
+    if @team.permission? current_user
+      redirect_to project_path @team.current_project.identifier
     else
       flash[:notice] = 'You do not have access permissions for this team.'
       redirect_to root_path

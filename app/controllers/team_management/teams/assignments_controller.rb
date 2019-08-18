@@ -6,7 +6,7 @@ class TeamManagement::Teams::AssignmentsController < ApplicationController
   def index; end
 
   def new
-    @team = Team.find(params[:team_id])
+    @team = Team.find params[:team_id]
     search_for_user unless params[:term].blank?
   end
 
@@ -14,7 +14,7 @@ class TeamManagement::Teams::AssignmentsController < ApplicationController
     new_invitee_assignment
     if @assignment.save
       flash[:notice] = "New #{params[:title]} Assignment Added."
-      redirect_to team_management_team_assignments_path(@team)
+      redirect_to team_management_team_assignments_path @team
     else
       flash.now[:alert] = @assignment.errors.full_messages.to_sentence
       render :new
@@ -59,7 +59,7 @@ class TeamManagement::Teams::AssignmentsController < ApplicationController
   def check_team_permission
     if @team.permission? current_user
       flash[:notice] = 'The competition has closed.'
-      redirect_to project_path(@team.current_project.identifier)
+      redirect_to project_path @team.current_project.identifier
     else
       flash[:notice] = 'You do not have access permissions for this team.'
       redirect_to root_path
