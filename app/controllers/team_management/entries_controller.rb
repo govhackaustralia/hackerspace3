@@ -48,7 +48,11 @@ class TeamManagement::EntriesController < ApplicationController
   private
 
   def entry_params
-    params.require(:entry).permit(:checkpoint_id, :justification, :challenge_id)
+    params.require(:entry).permit(
+      :checkpoint_id,
+      :justification,
+      :challenge_id
+    )
   end
 
   def create_variables

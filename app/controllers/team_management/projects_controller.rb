@@ -26,9 +26,15 @@ class TeamManagement::ProjectsController < ApplicationController
   private
 
   def project_params
-    params.require(:project).permit(:team_name, :description, :data_story,
-                                    :source_code_url, :video_url, :homepage_url,
-                                    :project_name)
+    params.require(:project).permit(
+      :team_name,
+      :description,
+      :data_story,
+      :source_code_url,
+      :video_url,
+      :homepage_url,
+      :project_name
+    )
   end
 
   def update_project

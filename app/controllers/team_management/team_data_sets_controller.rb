@@ -64,7 +64,11 @@ class TeamManagement::TeamDataSetsController < ApplicationController
   end
 
   def team_data_set_params
-    params.require(:team_data_set).permit(:name, :description,
-                                          :description_of_use, :url)
+    params.require(:team_data_set).permit(
+      :name,
+      :description,
+      :description_of_use,
+      :url
+    )
   end
 end
