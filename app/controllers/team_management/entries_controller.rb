@@ -106,7 +106,7 @@ class TeamManagement::EntriesController < ApplicationController
 
   def alert_team_permission
     if @team.permission?(current_user)
-      flash[:alert] = 'The competition has closed.'
+      flash[:alert] = 'No team editing at this time.'
       redirect_to project_path @team.current_project.identifier
     else
       flash[:alert] = 'You do not have access permissions for this team.'

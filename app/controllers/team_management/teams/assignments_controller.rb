@@ -58,7 +58,7 @@ class TeamManagement::Teams::AssignmentsController < ApplicationController
 
   def check_team_permission
     if @team.permission? current_user
-      flash[:notice] = 'The competition has closed.'
+      flash[:notice] = 'No team editing at this time.'
       redirect_to project_path @team.current_project.identifier
     else
       flash[:notice] = 'You do not have access permissions for this team.'
