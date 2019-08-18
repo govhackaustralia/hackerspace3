@@ -128,14 +128,16 @@ class Team < ApplicationRecord
     end
   end
 
-  # Returns all the competition events that a confirmed member is registered
+  # Returns all the competition events that confirmed members are registered
   # for.
   # ENHANCEMENT: Move to active record query.
   def member_competition_events
-    user_ids = confirmed_members.pluck(:id)
-    assignment_ids = Assignment.where(user_id: user_ids, title: EVENT_ASSIGNMENT_TITLES).pluck(:id)
-    event_ids = Registration.where(assignment_id: assignment_ids, status: [ATTENDING, WAITLIST]).pluck(:event_id)
-    Event.where(id: event_ids.uniq, event_type: COMPETITION_EVENT)
+    events = []
+    comp = competition
+    confirmed_members.each do |user|
+      events << user.participating_competition_event(comp)
+    end
+    events.uniq
   end
 
   # Returns a CSV file with information on the team.

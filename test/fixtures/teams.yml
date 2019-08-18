@@ -6,7 +6,7 @@
 #
 one:
   id: 1
-  event_id: 1
+  event_id: 2
   project_id: 1
   published: true
   youth_team: false

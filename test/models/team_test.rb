@@ -3,7 +3,7 @@ require 'test_helper'
 class TeamTest < ActiveSupport::TestCase
   setup do
     @team = Team.first
-    @event = Event.first
+    @event = Event.second
     @project = Project.first
     @competition = Competition.first
     @region = Region.second
@@ -80,6 +80,10 @@ class TeamTest < ActiveSupport::TestCase
     assert Team.published.exclude? @team
     assert Team.unpublished.include? @team
     assert Team.competition(@competition).include? @team
+  end
+
+  test 'member_competition_events' do
+    assert @team.member_competition_events.include? @event
   end
 
   test 'search' do
