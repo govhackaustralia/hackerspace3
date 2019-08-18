@@ -7,6 +7,8 @@
 one:
   id: 1
   year: <%= Time.current.year %>
+  team_form_start: <%= Time.current - 1.day %>
+  team_form_end: <%= Time.current + 1.day %>
   start_time: <%= Time.current - 1.day %>
   end_time: <%= Time.current + 1.day %>
   peoples_choice_start: 2018-12-13 08:36:56
@@ -18,6 +20,8 @@ one:
 two:
   id: 2
   year: <%= Time.current.year + 1 %>
+  team_form_start: Thu, 06 Dec 2018 19:36:56 AEDT +11:00
+  team_form_end: Sun, 09 Dec 2018 19:36:56 AEDT +11:00
   start_time: Thu, 06 Dec 2018 19:36:56 AEDT +11:00
   end_time: Sun, 09 Dec 2018 19:36:56 AEDT +11:00
   peoples_choice_start: 2018-12-13 08:36:56

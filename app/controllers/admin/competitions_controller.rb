@@ -52,13 +52,11 @@ class Admin::CompetitionsController < ApplicationController
 
   def competition_params
     params.require(:competition).permit(
-      :end_time,
-      :start_time,
       :year,
-      :peoples_choice_start,
-      :peoples_choice_end,
-      :challenge_judging_start,
-      :challenge_judging_end,
+      :team_form_start, :team_form_end,
+      :end_time, :start_time,
+      :peoples_choice_start, :peoples_choice_end,
+      :challenge_judging_start, :challenge_judging_end,
       :current
     )
   end

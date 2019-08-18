@@ -4,6 +4,8 @@
   - if @competition.current
     %p
       %strong Current Competition
+  %p Team Form Start: #{time_tag @competition.team_form_start}
+  %p Team Form End: #{time_tag @competition.team_form_end}
   %p Start Time: #{time_tag @competition.start_time}
   %p End Time: #{time_tag @competition.end_time}
   %p People's Choice Start: #{time_tag @competition.peoples_choice_start}

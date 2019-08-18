@@ -7,6 +7,8 @@ class CompetitionSeeder < Seeder
     year = Time.current.year + offset
     comp_start = Seeder.comp_start + offset.years
     comp_end = comp_start + 3.days
+    team_form_start = comp_start - 1.weeks
+    team_form_end = comp_end
     peoples_start = comp_start + 1.weeks
     peoples_end = peoples_start + 1.weeks
     judging_start = comp_start + 1.weeks
@@ -14,6 +16,8 @@ class CompetitionSeeder < Seeder
     users = User.all
 
     comp = Competition.create!(
+      team_form_start: team_form_start,
+      team_form_end: team_form_end,
       start_time: comp_start,
       end_time: comp_end,
       peoples_choice_start: peoples_start,
