@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_17_134848) do
+ActiveRecord::Schema.define(version: 2019_08_18_001208) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -122,6 +122,8 @@ ActiveRecord::Schema.define(version: 2019_08_17_134848) do
     t.datetime "challenge_judging_start"
     t.datetime "challenge_judging_end"
     t.boolean "current"
+    t.datetime "team_form_start"
+    t.datetime "team_form_end"
     t.index ["current"], name: "index_competitions_on_current"
     t.index ["year"], name: "index_competitions_on_year"
   end
