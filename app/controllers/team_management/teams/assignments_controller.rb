@@ -72,7 +72,8 @@ class TeamManagement::Teams::AssignmentsController < ApplicationController
 
   def search_for_existing_assignment
     @existing_assignment = @user.assignments.team_participants.find_by(
-      assignable: @team, competition: @competition
+      assignable: @team,
+      competition: @competition
     )
   end
 
