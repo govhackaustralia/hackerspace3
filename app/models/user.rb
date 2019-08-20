@@ -140,6 +140,10 @@ class User < ApplicationRecord
     how_did_you_hear.blank?
   end
 
+  def participating_competition_event(competition)
+    participating_competition_events.competition(competition).first
+  end
+
   require 'csv'
 
   # Generates a CSV file for published teams and their selected attributes.

@@ -116,4 +116,8 @@ class UserTest < ActiveSupport::TestCase
     assert @judge.judge_assignment(@challenge) == @judge_assignment
     assert_nil @user.judge_assignment @challenge
   end
+
+  test 'participating_competition_event' do
+    assert @user.participating_competition_event(@competition) == @competition_event
+  end
 end
