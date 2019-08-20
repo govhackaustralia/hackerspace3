@@ -33,4 +33,24 @@ class TeamManagement::TeamsControllerTest < ActionDispatch::IntegrationTest
     @team.reload
     assert_not @team.event_id.nil?
   end
+
+  test 'should get edit thumbnail' do
+    get edit_thumbnail_team_management_team_url @team
+    assert_response :success
+  end
+
+  test 'should patch update thumbnail' do
+    patch update_thumbnail_team_management_team_url @team
+    assert_redirected_to edit_thumbnail_team_management_team_url @team
+  end
+
+  test 'should get edit image' do
+    get edit_image_team_management_team_url @team
+    assert_response :success
+  end
+
+  test 'should patch update image' do
+    patch update_image_team_management_team_url @team
+    assert_redirected_to edit_image_team_management_team_url @team
+  end
 end

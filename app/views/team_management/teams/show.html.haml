@@ -15,8 +15,9 @@
     %p This Project is yet to be published.
   %aside
     %p= link_to 'Update Team Details', edit_team_management_team_path(@team)
-    %p= link_to 'Update Thumbnail', edit_team_management_team_path(@team, thumbnail: true)
-    %p= link_to 'Update High Resolution Image', edit_team_management_team_path(@team, high_res_image: true)
+    - if @competition.in_window?(@time_zone)
+      %p= link_to 'Update Thumbnail', edit_thumbnail_team_management_team_path(@team)
+      %p= link_to 'Update High Resolution Image', edit_image_team_management_team_path(@team)
   %h3 Team Project Info
   = render 'projects/team_project_info'
   %aside

@@ -1,7 +1,8 @@
+- content_for :title, 'Update High Res Image'
 %main.team_page
   %h2
     Update #{@team.name} High Resolution Image
-  = form_for [:team_management, @team] do |form|
+  = form_for [:team_management, @team], url: update_image_team_management_team_path(@team) do |form|
     .field
       - if @team.high_res_image.attached?
         %img{:alt => "#{@team.name} High Resolution Image", :src => "#{url_for(@team.high_res_image)}"}/
@@ -16,3 +17,4 @@
         = form.submit 'Replace High Res Image'
       - else
         = form.submit 'Upload High Res Image'
+= link_to 'Back to Team', team_management_team_path(@team)

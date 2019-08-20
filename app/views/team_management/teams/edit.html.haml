@@ -1,7 +1,13 @@
-- if params[:thumbnail].present?
-  = render 'edit_thumbnail'
-- elsif params[:high_res_image].present?
-  = render 'edit_high_res_image'
-- else
-  = render 'edit_team_details'
+- content_for :title, 'Update Team Details'
+%main.team_page
+  %h2 Update Details for #{@team.name}
+  = form_for [:team_management, @team] do |form|
+    .field
+      = form.label :event_id
+      = form.select :event_id, options_from_collection_for_select(@events, :id, :name, @team.event_id.to_s)
+    .field
+      = form.label :youth_team, 'Is your team a youth team (made up by at least 75% people aged under 18 years old)?'
+      = form.check_box :youth_team
+    .actions
+      = form.submit
 = link_to 'Back to Team', team_management_team_path(@team)

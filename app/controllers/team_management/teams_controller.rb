@@ -13,14 +13,39 @@ class TeamManagement::TeamsController < ApplicationController
   end
 
   def update
-    @team.update(team_params) unless params[:team].blank?
+    @events = @team.member_competition_events
+    @team.update team_params
     if @team.save
-      handle_update_redirect
+      flash[:notice] = 'Team Details Updated'
+      redirect_to team_management_team_path @team
     else
-      @events = @team.member_competition_events
       flash[:alert] = @team.errors.full_messages.to_sentence
       render :edit
     end
+  end
+
+  def edit_thumbnail; end
+
+  def update_thumbnail
+    @team.update(team_params) unless params[:team].blank?
+    if @team.save
+      flash[:notice] = 'Thumbnail Updated'
+    else
+      flash[:alert] = @team.errors.full_messages.to_sentence
+    end
+    redirect_to action: :edit_thumbnail
+  end
+
+  def edit_image; end
+
+  def update_image
+    @team.update(team_params) unless params[:team].blank?
+    if @team.save
+      flash[:notice] = 'High Resolution Image Updated'
+    else
+      flash[:alert] = @team.errors.full_messages.to_sentence
+    end
+    redirect_to action: :edit_image
   end
 
   private
@@ -41,20 +66,6 @@ class TeamManagement::TeamsController < ApplicationController
     else
       flash[:notice] = 'You do not have access permissions for this team.'
       redirect_to root_path
-    end
-  end
-
-  # IMPROVEMENT: Break up into separate public controller methods.
-  def handle_update_redirect
-    if params[:thumbnail].present?
-      flash[:notice] = 'Thumbnail Updated'
-      render :edit, thumbnail: true
-    elsif params[:high_res_image].present?
-      flash[:notice] = 'High Resolution Image Updated'
-      render :edit, high_res_image: true
-    else
-      flash[:notice] = 'Team Details Upated'
-      redirect_to team_management_team_path @team
     end
   end
 

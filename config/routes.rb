@@ -34,6 +34,10 @@ Rails.application.routes.draw do
 
   namespace :team_management do
     resources :teams, only: [:show, :edit, :update] do
+      member do
+        get :edit_thumbnail, :edit_image
+        patch :update_thumbnail, :update_image
+      end
       resources :assignments, except: [:show, :edit], controller: 'teams/assignments'
       resources :projects, only: [:create, :edit, :update]
       resources :entries, :team_data_sets, except: :show
