@@ -18,10 +18,11 @@
       %em Markdown supported
     = project_form.text_area :data_story
   .field
-    = project_form.label :source_code_url
-    %br/
-    %em Or evidence of work
-  = project_form.url_field :source_code_url
+    %div
+      = project_form.label :source_code_url
+      %br/
+      %em Or evidence of work
+    = project_form.url_field :source_code_url
   .field
     = project_form.label :video_url
     = project_form.url_field :video_url
