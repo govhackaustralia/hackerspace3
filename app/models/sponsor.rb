@@ -8,8 +8,12 @@ class Sponsor < ApplicationRecord
 
   has_one_attached :logo
 
-  validates :name, uniqueness: true
   validates :name, presence: true
+
+  validates :name, uniqueness: {
+    scope: :competition_id,
+    message: 'Sponsor name already taken in this competition'
+  }
 
   scope :search, lambda { |term|
     where 'name ILIKE ? OR description ILIKE ?', "%#{term}%", "%#{term}%"
