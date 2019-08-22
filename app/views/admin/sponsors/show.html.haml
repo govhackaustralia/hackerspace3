@@ -39,10 +39,8 @@
       %h4
         = sponsorship.sponsorable_type
         \: #{sponsorship.sponsorable.name}
-      Sponsorship type: #{sponsorship.sponsorship_type.name}
-      %br/
-      = link_to 'Destroy Sponsorship', admin_sponsor_sponsorship_path(@sponsor, sponsorship), method: :delete, data: { confirm: 'Are you sure?' }
-      %br/
+      %p Sponsorship type: #{sponsorship.sponsorship_type.name}
+      %p= link_to 'Destroy Sponsorship', admin_sponsor_sponsorship_path(@sponsor, sponsorship), method: :delete, data: { confirm: 'Are you sure?' }
   %h3 Event Partnerships
   %div Please go to individual events to add event parter.
   - if (event_partnerships = @sponsor.event_partnerships).empty?
@@ -53,5 +51,4 @@
       %h4
         Event: #{event_partnership.event.name}
       %p= link_to 'Destroy Event Partnership', admin_event_partnership_path(event_partnership), method: :delete, data: { confirm: 'Are you sure?' }
-      %br/
 %p= link_to 'Back to Sponsors', admin_competition_sponsors_path(@competition)
