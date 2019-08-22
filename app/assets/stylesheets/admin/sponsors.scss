@@ -1,3 +1,22 @@
 // Place all the styles related to the admin/sponsors controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.admin-sponsors figure {
+	display: flex;
+	flex-direction: column;
+	align-content: center;
+	align-items: center;
+	padding: 1em 2em;
+	border: 1px solid #dde4e6;
+	transition: all 0.4s ease;
+	cursor: pointer;
+	width: 30%;
+	box-sizing: border-box;
+	height: calc(125px + 2em);
+	justify-content: center;
+}
+
+.sponsors figure:hover {
+	background-color: #fff;
+}

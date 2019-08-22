@@ -1,10 +1,10 @@
-%main.team_page
+%main.team_page.admin-sponsors
   %h2= @sponsor.name
-  - if @sponsor.logo.attached?
-    %img{:alt => "#{@sponsor.name} logo", :src => "#{url_for @sponsor.logo}"}/
-    %br/
-  - else
-    = image_tag "default_profile_pic.png"
+  %figure
+    - if @sponsor.logo.attached?
+      %img{:alt => "#{@sponsor.name} logo", :src => "#{url_for @sponsor.logo}"}/
+    - else
+      = image_tag "default_profile_pic.png"
     %br/
   %p= link_to 'Change Logo', edit_admin_sponsor_logo_path(@sponsor)
   %p= link_to 'Destroy Sponsor', admin_competition_sponsor_path(@competition, @sponsor), method: :delete, data: { confirm: 'Are you sure?' }
