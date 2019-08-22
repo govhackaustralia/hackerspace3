@@ -1,8 +1,9 @@
 = form_for [:admin, @competition, @sponsorship_type] do |f|
-  = f.label :name
-  = f.text_field :name
-  %br/
-  = f.label :order
-  = f.number_field :order, min: 1
-  %br/
-  = f.submit
+  .field
+    = f.label :name
+    = f.text_field :name
+  .field
+    = f.label :order
+    = f.number_field :order, min: 1
+  .actions
+    = f.submit
