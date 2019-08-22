@@ -24,8 +24,8 @@ class Event < ApplicationRecord
 
   has_many :bulk_mails, as: :mailable, dependent: :destroy
 
-  has_one :event_partnership, dependent: :destroy
-  has_one :event_partner, through: :event_partnership, source: :sponsor
+  has_many :event_partnerships, dependent: :destroy
+  has_many :event_partners, through: :event_partnerships, source: :sponsor
 
   has_many :flights, dependent: :destroy
   has_many :inbound_flights, -> { inbound }, class_name: 'Flight'

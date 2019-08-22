@@ -25,14 +25,15 @@
       %aside
         = render 'event_map_video'
         = render 'event_registration_team_links'
-        - if @event_partner.present?
-          %h3 Event Partner
-          %figure
-            %a{:href => "#{@event_partner.website}", :target => "_blank"}
-              - if @event_partner.logo.attached?
-                = image_tag url_for(@event_partner.logo)
-              - else
-                = image_tag 'default_profile_pic.png'
+        - if @event_partners.present?
+          %h3= @event_partners.count > 1 ? 'Event Partners' : 'Event Partner'
+          - @event_partners.each do |event_partner|
+            %figure
+              %a{:href => "#{event_partner.website}", :target => "_blank"}
+                - if event_partner.logo.attached?
+                  = image_tag url_for(event_partner.logo)
+                - else
+                  = image_tag 'default_profile_pic.png'
     - if @sponsorship_types.present?
       %h3 State Sponsors
       - @sponsorship_types.each do |sponsorship_type|

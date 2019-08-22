@@ -22,8 +22,8 @@ class EventTest < ActiveSupport::TestCase
   test 'event associations' do
     assert @event.region == @region
     assert @event.competition == @competition
-    assert @event.event_partnership == @event_partnership
-    assert @event.event_partner == @event_partner
+    assert @event.event_partnerships.include? @event_partnership
+    assert @event.event_partners.include? @event_partner
     assert @event.assignments.include? @assignment
     assert @event.registrations.include? @registration
     assert @event.teams.include? @team

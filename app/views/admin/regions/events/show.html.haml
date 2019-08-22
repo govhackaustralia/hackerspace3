@@ -48,11 +48,11 @@
     = pluralize @event.registrations.non_attending.count, 'guest'
     registered not attending.
   %p= link_to "Manage #{@event.name} Registrations", admin_event_registrations_path(@event)
-  %h3 Event Partner
-  - if (event_partnership = @event.event_partnership).present?
-    %p= render 'admin/sponsors/sponsor', locals: { sponsor: event_partnership.sponsor }
-  - else
-    %p= link_to 'Add Event Partner', new_admin_event_event_partnership_path(@event)
+  %h3 Event Partners
+  - if (event_partnerships = @event.event_partnerships).present?
+    - event_partnerships.each do |event_partnership|
+      %p= render 'admin/sponsors/sponsor', locals: { sponsor: event_partnership.sponsor }
+  %p= link_to 'Add Event Partner', new_admin_event_event_partnership_path(@event)
   - if @region.root? && @event.event_type == AWARD_EVENT
     %h3 Flights
     %p
