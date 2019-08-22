@@ -1,5 +1,7 @@
 class Admin::EventPartnershipsController < ApplicationController
-  before_action :authenticate_user!, :check_for_privileges
+  before_action :authenticate_user!
+  before_action :check_for_privileges_from_event!, except: :destroy
+  before_action :check_for_privileges_from_sponsor!, only: :destroy
 
   def new
     @event_partnership = EventPartnership.new
@@ -22,8 +24,6 @@ class Admin::EventPartnershipsController < ApplicationController
   end
 
   def destroy
-    @event_partnership = EventPartnership.find params[:id]
-    @sponsor = @event_partnership.sponsor
     @event_partnership.destroy
     flash[:notice] = 'Event Partnership Destroyed'
     redirect_to admin_competition_sponsor_path @competition, @sponsor
@@ -35,9 +35,20 @@ class Admin::EventPartnershipsController < ApplicationController
     params.require(:event_partnership).permit :sponsor_id
   end
 
-  def check_for_privileges
+  def check_for_privileges_from_event!
     @event = Event.find params[:event_id]
     @competition = @event.competition
+    check_for_redirect
+  end
+
+  def check_for_privileges_from_sponsor!
+    @event_partnership = EventPartnership.find params[:id]
+    @sponsor = @event_partnership.sponsor
+    @competition = @sponsor.competition
+    check_for_redirect
+  end
+
+  def check_for_redirect
     return if current_user.admin_privileges? @competition
 
     flash[:alert] = 'You must have valid assignments to access this section.'
