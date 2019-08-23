@@ -59,7 +59,7 @@
                 %p.challenge_enter= link_to 'Enter Challenge', new_team_management_team_entry_path(team, challenge_id: @challenge.id)
             - else
               - if team.all_checkpoints_passed?
-                - if @competition.in_window? LAST_TIME_ZONE
+                - if @competition.in_comp_window? LAST_TIME_ZONE
                   %p All Checkpoints have passed.
                 - else
                   %p No entries to this challenge for this team.

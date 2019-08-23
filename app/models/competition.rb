@@ -141,7 +141,7 @@ class Competition < ApplicationRecord
   end
 
   # Returns true if the competition is running, false otherwise.
-  def in_window?(time_zone = nil)
+  def in_comp_window?(time_zone = nil)
     started?(time_zone) && not_finished?(time_zone)
   end
 

@@ -80,11 +80,11 @@ class CompetitionTest < ActiveSupport::TestCase
     assert @competition.not_finished?
   end
 
-  test 'in_window?' do
+  test 'in_comp_window?' do
     @competition.update start_time: Time.now - 1.day, end_time: Time.now + 1.day
-    assert @competition.in_window?
+    assert @competition.in_comp_window?
     @competition.update end_time: Time.now - 1.hour
-    assert_not @competition.in_window?
+    assert_not @competition.in_comp_window?
   end
 
   test 'in_form_or_comp_started?' do
