@@ -42,7 +42,7 @@
       %p Sponsorship type: #{sponsorship.sponsorship_type.name}
       %p= link_to 'Destroy Sponsorship', admin_sponsor_sponsorship_path(@sponsor, sponsorship), method: :delete, data: { confirm: 'Are you sure?' }
   %h3 Event Partnerships
-  %div Please go to individual events to add event parter.
+  %div Please go to individual events to add event parters.
   - if (event_partnerships = @sponsor.event_partnerships).empty?
     %div
       No event partnerships for #{@sponsor.name}
