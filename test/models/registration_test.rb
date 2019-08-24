@@ -89,6 +89,15 @@ class RegistrationTest < ActiveSupport::TestCase
     )
   end
 
+  test 'validate check_for_team_assignments' do
+    exception = assert_raises(ActiveRecord::RecordInvalid) do
+      @competition_event_registration.update! status: NON_ATTENDING
+    end
+    assert exception.message.include?(
+      'leave teams or decline team invites to amend registration'
+    )
+  end
+
   test 'check for newly freed space' do
     @wait_ass.update title: PARTICIPANT
     @registration.update! status: NON_ATTENDING

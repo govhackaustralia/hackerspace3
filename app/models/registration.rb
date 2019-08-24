@@ -46,7 +46,8 @@ class Registration < ApplicationRecord
     message: 'Registration already exists'
   }
 
-  validate :check_for_existing_competition_registrations
+  validate :check_for_existing_competition_registrations,
+           :check_for_team_assignments
 
   # Returns the category of a registration for the purpose of allocating
   # different event ticket types.
@@ -91,6 +92,26 @@ class Registration < ApplicationRecord
     comp_events = assignment.registrations.competition_events.participating
     return if (comp_events - [self]).empty?
 
-    errors.add(:user, 'already registered for a competition event')
+    errors.add :user, 'already registered for a competition event'
+  end
+
+  # Check to see if a user is has an assignment to team in the relelevent
+  # competition
+  def check_for_team_assignments
+    return if status == ATTENDING || assignment_id.nil?
+
+    return unless user_is_trying_to_edit_their_competition_event_registration?
+
+    return unless user_has_team_assignments_for_this_competition?
+
+    errors.add :user, 'leave teams or decline team invites to amend registration'
+  end
+
+  def user_is_trying_to_edit_their_competition_event_registration?
+    user.participating_competition_events.competition(competition).include? event
+  end
+
+  def user_has_team_assignments_for_this_competition?
+    user.assignments.team_participants.where(competition: competition).present?
   end
 end
