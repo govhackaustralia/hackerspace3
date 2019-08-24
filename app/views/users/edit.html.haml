@@ -1,7 +1,8 @@
 - if current_user.accepted_terms_and_conditions
   %main.registration.single-col.edit-account
     - if @user.registering_account?
-      %h2 Complete Account Registration
+      - content_for :title, 'Complete Account Registration'
+      %h2= yield :title 
       %section
         = render 'full_form'
         = link_to 'Back to Account Management', manage_account_path

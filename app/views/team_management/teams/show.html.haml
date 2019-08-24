@@ -1,3 +1,4 @@
+- content_for :title, @current_project.project_name
 %main.team_page
   %h2= yield :title
   %section
@@ -53,7 +54,7 @@
   %h3 Challenge Entries
   - if @competition.in_comp_window?(@time_zone)
     %aside
-      %p= link_to 'Manage Team Challenge Entries', team_management_team_entries_path(@team)
+      %p= link_to 'Manage Challenge Entries', team_management_team_entries_path(@team)
   %section
     %p
       = pluralize @team.challenges.count, 'challenge'

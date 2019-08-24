@@ -1,7 +1,8 @@
+- content_for :title, 'Challenge Entries'
 %main.team_page
   %h2
     = @team.name
-    Challenge Entries
+    = yield :title
   - @checkpoints.each do |checkpoint|
     %h3
       = checkpoint.name
@@ -18,4 +19,4 @@
     %br/
     - regional_challenges.each do |challenge|
       = render 'challenge_entry', locals: { checkpoint: checkpoint, challenge: challenge }
-  = link_to 'Back to Team', team_management_team_path(@team)
+= link_to 'Back to Team', team_management_team_path(@team)

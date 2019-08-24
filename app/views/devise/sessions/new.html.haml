@@ -1,5 +1,6 @@
+- content_for :title, 'Sign In'
 %main.registration.signin
-  %h2 Sign in
+  %h2= yield :title
   %section
     = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
       .field

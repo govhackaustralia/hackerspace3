@@ -1,5 +1,6 @@
+- content_for :title, 'Sign Up'
 %main.registration.signup
-  %h2 Sign up
+  %h2 Sign Up
   %section
     = form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
       = render 'devise/shared/error_messages', resource: resource
