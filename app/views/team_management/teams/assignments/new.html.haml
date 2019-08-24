@@ -10,7 +10,7 @@
     %p= link_to 'Clear Search', new_team_management_team_assignment_path(@team, title: INVITEE)
   - if @user.present?
     %section
-      = render 'admin/shared/user_contact', locals: { user: @user }
+      = render 'users/user_contact', locals: { user: @user }
       - if @participating_events.empty?
         %p
           %strong This participant is not registered for a competition event.
@@ -32,5 +32,5 @@
         Apologies, no name matching search term '#{params[:term]}'
   - else
     %section
-      %p Please enter an email address or name to search for a participant.
+      %p Please enter a name or email address to search for a participant.
 %p= link_to 'Back to Team Assignments', team_management_team_assignments_path(@team)
