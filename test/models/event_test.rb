@@ -17,6 +17,7 @@ class EventTest < ActiveSupport::TestCase
     @vip_registration = Registration.second
     @competition_event = Event.second
     @wait_ass = Assignment.find 6
+    @comp_event = Event.second
   end
 
   test 'event associations' do
@@ -26,8 +27,8 @@ class EventTest < ActiveSupport::TestCase
     assert @event.event_partners.include? @event_partner
     assert @event.assignments.include? @assignment
     assert @event.registrations.include? @registration
-    assert @event.teams.include? @team
-    assert @event.entries.include? @entry
+    assert @comp_event.teams.include? @team
+    assert @comp_event.entries.include? @entry
     assert @event.flights.include? @flight
     assert @event.bulk_mails.include? @bulk_mail
     assert @event.host_assignments.include? @assignment

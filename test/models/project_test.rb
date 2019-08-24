@@ -5,7 +5,7 @@ class ProjectTest < ActiveSupport::TestCase
     @project = Project.first
     @team = Team.first
     @user = User.first
-    @event = Event.first
+    @event = Event.second
   end
 
   test 'project associations' do
