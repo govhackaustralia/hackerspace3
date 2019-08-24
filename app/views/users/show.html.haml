@@ -70,9 +70,10 @@
     - if in_form_or_comp_started_or_region_privileges?(LAST_TIME_ZONE) && @invited_team_assignments.present?
       %article
         %h3 My Invitations
-        - @invited_teams.each do |team|
+        - @invited_team_assignments.each do |assignment|
+          - team = assignment.assignable
           %h4 #{team.current_project.team_name} - #{team.current_project.project_name}
-          %p Event: #{assignment.assignable.event.name}
+          %p Event: #{team.event.name}
           %p= link_to 'Accept Invitation and Go to Team', users_invitation_path(assignment), method: :patch
           %p= link_to 'Decline Invitation', users_invitation_path(assignment), method: :delete, data: { confirm: 'Are you sure?' }
     %article
