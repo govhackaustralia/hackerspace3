@@ -10,7 +10,11 @@ class CompetitionsHelperTest < ActionView::TestCase
     assert competition_started_or_region_privileges?
   end
 
-  test 'in_competition_window_or_region_privileges?' do
-    assert in_competition_window_or_region_privileges?
+  test 'in_form_or_comp_started_or_region_privileges?' do
+    assert in_form_or_comp_started_or_region_privileges?
+  end
+
+  test 'in_form_or_comp_window_or_region_privileges?' do
+    assert in_form_or_comp_window_or_region_privileges?
   end
 end

@@ -52,7 +52,7 @@
       - else
         %div You are not currently registered for any events.
         %p= link_to 'Find events', events_path
-    - if competition_started_or_region_privileges? && @joined_teams.present?
+    - if in_form_or_comp_started_or_region_privileges? && @joined_teams.present?
       %article
         %h3 My Team Projects
         - @joined_teams.each do |team|
@@ -67,7 +67,7 @@
             %p= link_to "Go to #{team.name}", project_path(team.current_project.identifier)
           - else
             %p This project is yet to be published.
-    - if in_competition_window_or_region_privileges?(LAST_TIME_ZONE) && @invited_team_assignments.present?
+    - if in_form_or_comp_started_or_region_privileges?(LAST_TIME_ZONE) && @invited_team_assignments.present?
       %article
         %h3 My Invitations
         - @invited_teams.each do |team|
