@@ -15,8 +15,11 @@ class TeamsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-  test 'should redirect to projects if competition closed' do
-    @competition.update end_time: Time.now.yesterday
+  test 'should redirect to projects if team form closed' do
+    @competition.update(
+      team_form_end: Time.now.yesterday,
+      end_time: Time.now.yesterday
+    )
     get new_team_url
     assert_redirected_to projects_url
   end

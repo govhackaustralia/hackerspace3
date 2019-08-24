@@ -1,6 +1,5 @@
-class TeamManagement::TeamDataSetsController < ApplicationController
-  before_action :authenticate_user!
-  before_action :check_user_team_privileges!
+class TeamManagement::TeamDataSetsController < TeamManagement::TeamsController
+  before_action :check_in_comp_window!
 
   def index
     @team_data_sets = @team.team_data_sets
@@ -43,26 +42,6 @@ class TeamManagement::TeamDataSetsController < ApplicationController
   end
 
   private
-
-  # IMPROVEMENT - Multiple move up to ApplicationController
-  def check_user_team_privileges!
-    @team = Team.find params[:team_id]
-    @competition = @team.competition
-    return if @team.permission?(current_user) &&
-              @competition.in_comp_window?(@team.time_zone)
-
-    check_team_permission
-  end
-
-  def check_team_permission
-    if @team.permission? current_user
-      flash[:notice] = 'No team editing at this time.'
-      redirect_to project_path @team.current_project.identifier
-    else
-      flash[:notice] = 'You do not have access permissions for this team.'
-      redirect_to root_path
-    end
-  end
 
   def team_data_set_params
     params.require(:team_data_set).permit(

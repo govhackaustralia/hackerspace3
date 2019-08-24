@@ -2,32 +2,33 @@
   .field
     = project_form.label :team_name
     = project_form.text_field :team_name
-  .field
-    = project_form.label :project_name
-    = project_form.text_field :project_name
-  .field
-    %div
-      = project_form.label :description
-      %br/
-      %em Markdown supported
-    = project_form.text_area :description
-  .field
-    %div
-      = project_form.label :data_story
-      %br/
-      %em Markdown supported
-    = project_form.text_area :data_story
-  .field
-    %div
-      = project_form.label :source_code_url
-      %br/
-      %em Or evidence of work
-    = project_form.url_field :source_code_url
-  .field
-    = project_form.label :video_url
-    = project_form.url_field :video_url
-  .field
-    = project_form.label :homepage_url
-    = project_form.url_field :homepage_url
+  - if @competition.in_comp_window? @time_zone
+    .field
+      = project_form.label :project_name
+      = project_form.text_field :project_name
+    .field
+      %div
+        = project_form.label :description
+        %br/
+        %em Markdown supported
+      = project_form.text_area :description
+    .field
+      %div
+        = project_form.label :data_story
+        %br/
+        %em Markdown supported
+      = project_form.text_area :data_story
+    .field
+      %div
+        = project_form.label :source_code_url
+        %br/
+        %em Or evidence of work
+      = project_form.url_field :source_code_url
+    .field
+      = project_form.label :video_url
+      = project_form.url_field :video_url
+    .field
+      = project_form.label :homepage_url
+      = project_form.url_field :homepage_url
   .actions
     = project_form.submit 'Save'

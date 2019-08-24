@@ -5,6 +5,11 @@ class TeamManagement::ProjectsControllerTest < ActionDispatch::IntegrationTest
     sign_in users :one
     @team = Team.first
     @project = Project.first
+    competition = @team.competition
+    competition.update(
+      start_time: Time.now - 1.day,
+      end_time: Time.now + 1.day
+    )
   end
 
   test 'should post create success' do

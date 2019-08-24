@@ -45,9 +45,9 @@ class ProjectsController < ApplicationController
   end
 
   def retrieve_attending_events
-    return unless @competition.not_finished? LAST_TIME_ZONE
+    return unless @competition.in_form_or_comp_window? LAST_TIME_ZONE
 
-    @attending_events = current_user.participating_competition_events.competition(@competition)
+    @participating_competition_events = current_user.participating_competition_events.competition(@competition)
   end
 
   def user_records_show

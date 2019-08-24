@@ -1,6 +1,5 @@
-class TeamManagement::EntriesController < ApplicationController
-  before_action :authenticate_user!
-  before_action :check_user_team_privileges!
+class TeamManagement::EntriesController < TeamManagement::TeamsController
+  before_action :check_in_comp_window!
 
   # ENHANCEMENT: Redo, too much logic in this controller that needs to be
   # pushed down into a model.
@@ -93,25 +92,5 @@ class TeamManagement::EntriesController < ApplicationController
                     else
                       "#{checkpoint.name} has passed."
                     end
-  end
-
-  # IMPROVEMENT - Multiple move up to ApplicationController
-  def check_user_team_privileges!
-    @team = Team.find params[:team_id]
-    @competition = @team.competition
-    return if @team.permission?(current_user) &&
-              @competition.in_comp_window?(@team.time_zone)
-
-    alert_team_permission
-  end
-
-  def alert_team_permission
-    if @team.permission?(current_user)
-      flash[:alert] = 'No team editing at this time.'
-      redirect_to project_path @team.current_project.identifier
-    else
-      flash[:alert] = 'You do not have access permissions for this team.'
-      redirect_to root_path
-    end
   end
 end

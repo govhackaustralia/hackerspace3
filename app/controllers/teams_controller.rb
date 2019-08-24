@@ -1,20 +1,16 @@
 class TeamsController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!,
+                :check_participating!,
+                :check_in_form_or_comp_window!
 
   def new
-    if @competition.in_window? LAST_TIME_ZONE
-      handle_new
-    else
-      flash[:alert] = 'The competition is now closed.'
-      redirect_to projects_path
-    end
+    @team = Team.new
   end
 
   def create
     @team = Team.new team_params
-    @competition = @team.competition
-    @events = current_user.participating_competition_events.competition @competition
-    if @competition.in_window? @team.time_zone
+    @team.event = @participating_competition_event
+    if @competition.in_form_or_comp_window? @team.time_zone
       create_team
     else
       flash[:alert] = "The competition has closed in region #{@team.region.name}"
@@ -28,12 +24,18 @@ class TeamsController < ApplicationController
     params.require(:team).permit :event_id, :youth_team
   end
 
-  def handle_new
-    @team = Team.new
-    @events = current_user.participating_competition_events.competition(@competition)
-    return unless @events.empty?
+  def check_in_form_or_comp_window!
+    return if @competition.in_form_or_comp_window? LAST_TIME_ZONE
 
-    flash[:alert] = 'To create a new team, first register for a competition event.'
+    flash[:alert] = 'Team formation is not available at this time.'
+    redirect_to projects_path
+  end
+
+  def check_participating!
+    @participating_competition_event = current_user.participating_competition_event @competition
+    return if @participating_competition_event.present?
+
+    flash[:alert] = 'You must first be registered for a Competition Event.'
     redirect_to competition_events_path
   end
 

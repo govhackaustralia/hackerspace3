@@ -61,7 +61,7 @@
             \- #{team.current_project.project_name}
           %p
             Event: #{team.event.name}
-          - if @competition.not_finished? team.region.time_zone
+          - if @competition.in_form_or_comp_window?(team.region.time_zone)
             %p= link_to "Manage #{team.name}", team_management_team_path(team)
           - elsif team.published
             %p= link_to "Go to #{team.name}", project_path(team.current_project.identifier)

@@ -4,6 +4,7 @@ class TeamManagement::TeamsControllerTest < ActionDispatch::IntegrationTest
   setup do
     sign_in users :one
     @team = Team.first
+    Registration.fourth.update status: ATTENDING
   end
 
   test 'should get show' do

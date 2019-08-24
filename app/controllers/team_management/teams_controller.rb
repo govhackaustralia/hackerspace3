@@ -1,6 +1,16 @@
 class TeamManagement::TeamsController < ApplicationController
-  before_action :authenticate_user!
-  before_action :check_user_team_privileges!
+  before_action :authenticate_user!, :authorise_user!
+  before_action :check_in_form_or_comp_window!, only: %i[
+    show
+    edit
+    update
+  ]
+  before_action :check_in_comp_window!, only: %i[
+    edit_thumbnail
+    update_thumbnail
+    edit_image
+    update_image
+  ]
 
   def show
     @current_project = @team.current_project
@@ -50,25 +60,6 @@ class TeamManagement::TeamsController < ApplicationController
 
   private
 
-  # IMPROVEMENT - Multiple move up to ApplicationController
-  def check_user_team_privileges!
-    @team = Team.find params[:id]
-    @competition = @team.competition
-    return if @team.permission?(current_user) && @competition.in_window?(@team.time_zone)
-
-    check_team_permission
-  end
-
-  def check_team_permission
-    if @team.permission?(current_user)
-      flash[:notice] = 'No team editing at this time.'
-      redirect_to project_path(@team.current_project.identifier)
-    else
-      flash[:notice] = 'You do not have access permissions for this team.'
-      redirect_to root_path
-    end
-  end
-
   def team_params
     params.require(:team).permit(
       :event_id,
@@ -76,5 +67,36 @@ class TeamManagement::TeamsController < ApplicationController
       :high_res_image,
       :youth_team
     )
+  end
+
+  def authorise_user!
+    @team = Team.find params[:team_id] || params[:id]
+    @time_zone = @team.time_zone
+    @competition = @team.competition
+    return if @team.permission? current_user
+
+    flash[:alert] = 'You do not have access permissions for this team.'
+    redirect_to root_path
+  end
+
+  def check_in_comp_window!
+    return if @competition.in_comp_window? @time_zone
+
+    alert_and_redirect_out
+  end
+
+  def check_in_form_or_comp_window!
+    return if @competition.in_form_or_comp_window? @time_zone
+
+    alert_and_redirect_out
+  end
+
+  def alert_and_redirect_out
+    flash[:alert] = 'No team editing at this time.'
+    if @team.published?
+      redirect_to project_path @team.current_project.identifier
+    else
+      redirect_to projects_path
+    end
   end
 end
