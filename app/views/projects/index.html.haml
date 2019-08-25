@@ -3,6 +3,8 @@
   %h2
     Team Projects for Competition #{@competition.year}
   - if competition_started_or_region_privileges?
+    - if @region_privileges && !@competition.started?(LAST_TIME_ZONE)
+      - flash[:notice] = 'You are seeing this page because you have region privileges'
     %p= link_to 'Download CSV', projects_path(format: 'csv'), class: 'download-csv'
     - if user_signed_in? && @competition.in_form_or_comp_window?(LAST_TIME_ZONE)
       - if @participating_competition_events.present?

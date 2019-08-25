@@ -78,6 +78,9 @@
           %p= link_to 'Decline Invitation', users_invitation_path(assignment), method: :delete, data: { confirm: 'Are you sure?' }
     %article
       - if competition_started_or_region_privileges?
+        - if @region_privileges && !@competition.started?(LAST_TIME_ZONE)
+          %p
+            %strong You are seeing the favourites because you have region privileges.
         %h3 My Favourite Projects
         - if @favourite_teams.present?
           - @favourite_teams.each do |team|
