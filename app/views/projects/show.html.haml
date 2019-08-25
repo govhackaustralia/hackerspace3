@@ -29,4 +29,6 @@
       %p
         Check back here once the first checkpoint passes to see the challenges
         this team has entered.
-  = link_to 'Back to Projects', projects_path
+  - if @team.permission?(@user) && @competition.in_form_or_comp_window?(@time_zone)
+    %p= link_to "Manage #{@current_project.team_name}", team_management_team_path(@team)
+  %p= link_to 'Back to Projects', projects_path

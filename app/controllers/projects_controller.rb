@@ -28,9 +28,12 @@ class ProjectsController < ApplicationController
   end
 
   def show_published
-    @checkpoints = @competition.checkpoints.order(:end_time)
-    @passed_checkpoint_ids = @competition.passed_checkpoint_ids(@team.time_zone)
-    @entries_to_display = @team.entries.where(checkpoint: @passed_checkpoint_ids).preload(challenge: :region)
+    @time_zone = @team.time_zone
+    @checkpoints = @competition.checkpoints.order :end_time
+    @passed_checkpoint_ids = @competition.passed_checkpoint_ids @time_zone
+    @entries_to_display = @team.entries.where(
+      checkpoint: @passed_checkpoint_ids
+    ).preload challenge: :region
     user_records_show if user_signed_in?
   end
 
