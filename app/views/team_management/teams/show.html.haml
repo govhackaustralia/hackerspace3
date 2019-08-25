@@ -11,17 +11,23 @@
     %p
       %strong> Region
       \: #{@region.name}
-    - if @team.published
+    - if @team.published && @competition.started?(@time_zone)
       %p= link_to 'Go to Team Page', project_path(@current_project.identifier)
-    - else
+    - elsif @competition.started?(@time_zone)
       %p This Project is yet to be published.
+    - else
+      %p Team projects will become public at the start of the competition.
   %aside
     %p= link_to 'Update Team Details', edit_team_management_team_path(@team)
     - if @competition.in_comp_window?(@time_zone)
       %p= link_to 'Update Thumbnail', edit_thumbnail_team_management_team_path(@team)
       %p= link_to 'Update High Resolution Image', edit_image_team_management_team_path(@team)
   %h3 Team Project Info
-  = render 'projects/team_project_info'
+  - if @competition.in_comp_window?(@time_zone)
+    = render 'projects/team_project_info'
+  - else
+    %section
+      %p Team project information will be displayed here.
   - if @competition.in_form_or_comp_window?(@time_zone)
     %aside
       %p= link_to 'Update Project Details', edit_team_management_team_project_path(@team, @current_project)

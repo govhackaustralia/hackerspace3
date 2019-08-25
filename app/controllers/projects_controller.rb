@@ -1,4 +1,6 @@
 class ProjectsController < ApplicationController
+  before_action :check_competition_started!, only: :show
+
   def index
     index_variables
     user_records_index if user_signed_in?
@@ -9,7 +11,6 @@ class ProjectsController < ApplicationController
   end
 
   def show
-    @team = Project.find_by(identifier: params[:identifier]).team
     @current_project = @team.current_project
     if @team.published
       show_published
@@ -28,7 +29,6 @@ class ProjectsController < ApplicationController
   end
 
   def show_published
-    @time_zone = @team.time_zone
     @checkpoints = @competition.checkpoints.order :end_time
     @passed_checkpoint_ids = @competition.passed_checkpoint_ids @time_zone
     @entries_to_display = @team.entries.where(
@@ -61,5 +61,14 @@ class ProjectsController < ApplicationController
     @peoples_assignment = @user.peoples_assignment @competition
     @judge = @user.judge_assignment(@team.challenges)
     @users_team = @user.joined_teams.include? @team
+  end
+
+  def check_competition_started!
+    @team = Project.find_by(identifier: params[:identifier]).team
+    @time_zone = @team.time_zone
+    return if @competition.started? @time_zone
+
+    flash[:alert] = 'Teams will become visible at the start of the competition'
+    redirect_to projects_path
   end
 end
