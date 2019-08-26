@@ -77,15 +77,11 @@
           %p= link_to 'Accept Invitation and Go to Team', users_invitation_path(assignment), method: :patch
           %p= link_to 'Decline Invitation', users_invitation_path(assignment), method: :delete, data: { confirm: 'Are you sure?' }
     %article
-      - if competition_started_or_region_privileges?
-        - if @region_privileges && !@competition.started?(LAST_TIME_ZONE)
-          %p
-            %strong You are seeing the favourites because you have region privileges.
-        %h3 My Favourite Projects
-        - if @favourite_teams.present?
-          - @favourite_teams.each do |team|
-            %h4 #{team.current_project.team_name} - #{team.current_project.project_name}
-            %p Event: #{team.event.name}
-            %p= link_to "Go to Team Project", project_path(team.current_project.identifier)
-        - else
-          %p Projects that you favourite will appear here.
+      %h3 My Favourite Projects
+      - if @competition.started? && @favourite_teams.present?
+        - @favourite_teams.each do |team|
+          %h4 #{team.current_project.team_name} - #{team.current_project.project_name}
+          %p Event: #{team.event.name}
+          %p= link_to 'Go to Team Project', project_path(team.current_project.identifier)
+      - else
+        %p Projects that you favourite will appear here.
