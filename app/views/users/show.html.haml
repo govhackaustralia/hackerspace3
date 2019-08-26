@@ -52,21 +52,24 @@
       - else
         %div You are not currently registered for any events.
         %p= link_to 'Find events', events_path
-    - if in_form_or_comp_started_or_region_privileges? && @joined_teams.present?
+    - if @competition.in_form_or_comp_started?
       %article
         %h3 My Team Projects
-        - @joined_teams.each do |team|
-          %h4
-            = team.current_project.team_name
-            \- #{team.current_project.project_name}
-          %p
-            Event: #{team.event.name}
-          - if @competition.in_form_or_comp_window?(team.region.time_zone)
-            %p= link_to "Manage #{team.name}", team_management_team_path(team)
-          - elsif team.published
-            %p= link_to "Go to #{team.name}", project_path(team.current_project.identifier)
-          - else
-            %p This project is yet to be published.
+        - if @joined_teams.present?
+          - @joined_teams.each do |team|
+            %h4
+              = team.current_project.team_name
+              \- #{team.current_project.project_name}
+            %p
+              Event: #{team.event.name}
+            - if @competition.in_form_or_comp_window?(team.region.time_zone)
+              %p= link_to "Manage #{team.name}", team_management_team_path(team)
+            - elsif team.published
+              %p= link_to "Go to #{team.name}", project_path(team.current_project.identifier)
+            - else
+              %p This project is yet to be published.
+        - else
+          %p Your team project memberships will appear here.
     - if @competition.in_form_or_comp_started?(LAST_TIME_ZONE)
       %article
         %h3 My Invitations
