@@ -97,3 +97,7 @@
 - url: https://data.melbourne.vic.gov.au/
   name: City of Melbourne
   short_url: data.melbourne.vic.gov.au
+
+- url: https://www.ala.org.au/govhack/
+  name: Atlas of Living Australia
+  short_url: www.ala.org.au/govhack
