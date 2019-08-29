@@ -173,7 +173,7 @@ class Event < ApplicationRecord
 
   # Returns a CSV file of Registrations associated with an event.
   def registrations_to_csv(options = {})
-    user_columns = %w[full_name preferred_name organisation_name dietary_requirements registration_type parent_guardian request_not_photographed data_cruncher coder creative facilitator]
+    user_columns = %w[full_name email preferred_name organisation_name dietary_requirements registration_type parent_guardian request_not_photographed data_cruncher coder creative facilitator]
     combined = user_columns + ['status']
     CSV.generate(options) do |csv|
       csv << combined
