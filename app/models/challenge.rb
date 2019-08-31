@@ -52,6 +52,8 @@ class Challenge < ApplicationRecord
   end
 
   # Returns the type of region that a challenge is associated with.
+  # ENHANCEMENT: This needs to split up into methods 'national?' 'regional?'
+  # ENHANCEMENT: 'National' no longer makes sense.
   def type
     region.root? ? NATIONAL : REGIONAL
   end
