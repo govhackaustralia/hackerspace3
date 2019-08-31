@@ -20,6 +20,8 @@ class RegionTest < ActiveSupport::TestCase
     @next_competition = Competition.second
     @international = Region.third
     @region_limit = RegionLimit.first
+    @regionalless_national = Region.fourth
+    @national_team = Team.second
   end
 
   test 'region associations' do
@@ -104,6 +106,13 @@ class RegionTest < ActiveSupport::TestCase
     assert @national.limit(checkpoint) == @region_limit
     assert @regional.limit(checkpoint) == @region_limit
     assert @international.limit(checkpoint).nil?
+  end
+
+  test 'competing_teams' do
+    assert @international.competing_teams.include? @team
+    assert @regionalless_national.competing_teams.include? @national_team
+    assert @regional.competing_teams.include? @team
+    assert @national.competing_teams.include? @team
   end
 
   test 'only_one_international_per_competition' do

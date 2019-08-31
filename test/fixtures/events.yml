@@ -36,10 +36,10 @@ three:
 
 four:
   id: 4
-  name: Sydney
-  region_id: 2
+  name: New Zealand
+  region_id: 4
   capacity: 5
   event_type: Competition
   registration_type: Open
-  identifier: competition_sydney
+  identifier: competition_new_zealand
   published: true

@@ -105,6 +105,13 @@ class Region < ApplicationRecord
     region_limits.find_by(checkpoint: checkpoint) || parent&.limit(checkpoint)
   end
 
+  # Returns teams registered to events in a region or any children regions.
+  def competing_teams
+    return competition.teams if international?
+
+    teams.presence || sub_region_teams
+  end
+
   private
 
   # Ensures only one root region is assigned to a competition

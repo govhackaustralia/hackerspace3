@@ -23,3 +23,11 @@ three:
   time_zone:
   competition_id: 1
   category: International
+
+four:
+  id: 4
+  name: New Zealand
+  parent_id: 3
+  time_zone: Wellington
+  competition_id: 1
+  category: National
