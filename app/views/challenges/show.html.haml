@@ -76,5 +76,7 @@
         %p No team entries to display for this challenge.
     - else
       = render 'team_checkpoint_display'
-  %section.ie-push
-    %p= link_to 'Back to Challenges', challenges_path
+%section.ie-push
+  - if current_user.present? && current_user.region_privileges?(@competition)
+    %p= link_to 'Manage this Challenge', admin_region_challenge_path(@region, @challenge)
+  %p= link_to 'Back to Challenges', challenges_path
