@@ -51,8 +51,7 @@
           - project = team.current_project
           %h4= "#{project.team_name} - #{project.project_name}"
           - if (entry = Entry.find_by(team: team, challenge: @challenge)).present?
-            Team entered into this challenge for #{entry.checkpoint.name} Checkpoint.
-            %br/
+            %p Team entered into this challenge for #{entry.checkpoint.name} Checkpoint.
           - else
             - if team.available_checkpoints(@challenge).present?
               %article
