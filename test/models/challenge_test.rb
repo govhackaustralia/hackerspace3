@@ -47,4 +47,13 @@ class ChallengeTest < ActiveSupport::TestCase
     challenge2 = Challenge.second
     assert_not @challenge.update(name: challenge2.name)
   end
+
+  test 'only_regional_challenges_can_be_marked_nation_wide' do
+    assert_raises(ActiveRecord::RecordInvalid) do
+      @challenge.update! nation_wide: true
+    end
+    @challenge = Challenge.third
+    @challenge.update nation_wide: true
+    assert @challenge.reload.nation_wide
+  end
 end

@@ -23,6 +23,8 @@ class Challenge < ApplicationRecord
 
   validates :name, presence: true, uniqueness: true
 
+  validate :only_regional_challenges_can_be_marked_nation_wide
+
   after_save :update_identifier
 
   # ENHANCEMENT: This should be in active record relation but can't pass
@@ -55,7 +57,7 @@ class Challenge < ApplicationRecord
   # ENHANCEMENT: This needs to split up into methods 'national?' 'regional?'
   # ENHANCEMENT: 'National' no longer makes sense.
   def type
-    region.international? ? NATIONAL : REGIONAL
+    region.international? || region.national? ? NATIONAL : REGIONAL
   end
 
   require 'csv'
@@ -81,6 +83,12 @@ class Challenge < ApplicationRecord
   end
 
   private
+
+  def only_regional_challenges_can_be_marked_nation_wide
+    return unless nation_wide && type == NATIONAL
+
+    errors.add :region, 'only regional challenges can be marked nation wide'
+  end
 
   # Generates a unique name and updates the identifier field.
   def update_identifier
