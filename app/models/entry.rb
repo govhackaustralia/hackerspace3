@@ -15,7 +15,7 @@ class Entry < ApplicationRecord
   validates :award, allow_nil: true, inclusion: { in: AWARD_NAMES }
   validate :entries_must_not_exceed_max_regional_allowed_for_checkpoint,
            :entries_must_not_exceed_max_national_allowed_for_checkpoint,
-           :teams_cannot_enter_regional_challenges_from_regions_other_than_their_own,
+           :teams_cannot_enter_challenges_they_are_not_eligible_for,
            on: :create
 
   after_create :update_eligible
@@ -76,11 +76,10 @@ class Entry < ApplicationRecord
 
   # Checks if the regional challenge a team is entering is a challenge in their
   # region.
-  def teams_cannot_enter_regional_challenges_from_regions_other_than_their_own
-    challenge_region = challenge.region
-    return if challenge_region.international?
+  def teams_cannot_enter_challenges_they_are_not_eligible_for
+    return if challenge.eligible_teams.include? team
 
-    errors.add(:checkpoint_id, 'Teams are not able to enter Challenges in Regions other than their own') if team.region != challenge_region
+    errors.add :challenge, 'Team not eligible to enter this challenge'
   end
 
   # Returns the average score obtained across judges of a challenge.

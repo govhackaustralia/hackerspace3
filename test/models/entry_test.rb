@@ -62,4 +62,23 @@ class EntryTest < ActiveSupport::TestCase
     )
     assert entry.eligible
   end
+
+  test 'teams_cannot_enter_challenges_they_are_not_eligible_for' do
+    Entry.destroy_all
+    exception = assert_raises(ActiveRecord::RecordInvalid) do
+      Entry.create!(
+        challenge: Challenge.first,
+        team: Team.second,
+        checkpoint: Checkpoint.first
+      )
+    end
+    assert exception.message.include?(
+      'Challenge Team not eligible to enter this challenge'
+    )
+    assert Entry.create!(
+      challenge: Challenge.first,
+      team: Team.first,
+      checkpoint: Checkpoint.first
+    ).persisted?
+  end
 end

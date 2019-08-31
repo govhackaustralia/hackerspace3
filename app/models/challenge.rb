@@ -46,11 +46,9 @@ class Challenge < ApplicationRecord
 
   # Returns a query object of the teams that are eligible to join a challenge.
   def eligible_teams
-    if region.international?
-      competition.teams
-    else
-      region.teams
-    end
+    return region.parent.competing_teams if nation_wide
+
+    region.competing_teams
   end
 
   # Returns the type of region that a challenge is associated with.
