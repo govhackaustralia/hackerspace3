@@ -1,19 +1,19 @@
-- if params[:image].present?
-  %h2
-    Update #{@challenge.name} Image
-  = render 'edit_image'
-- elsif params[:pdf].present?
-  %h2
-    Update #{@challenge.name} PDF
-  = render 'edit_pdf'
-- elsif params[:pdf_preview].present?
-  %h2
-    Update #{@challenge.name} PDF Preview
-  = render 'edit_pdf_preview'
-- else
-  %h2
-    Update Challenge #{@challenge.name}
-  = render 'form'
-= link_to 'Back to Challenge', admin_region_challenge_path(@region, @challenge)
-%br/
 -# ENHANCEMENT: This needs to be split up into multiple controller actions.
+%main.challenge_admin
+  - if params[:image].present?
+    %h2
+      Update #{@challenge.name} Image
+    = render 'edit_image'
+  - elsif params[:pdf].present?
+    %h2
+      Update #{@challenge.name} PDF
+    = render 'edit_pdf'
+  - elsif params[:pdf_preview].present?
+    %h2
+      Update #{@challenge.name} PDF Preview
+    = render 'edit_pdf_preview'
+  - else
+    %h2
+      Update Challenge #{@challenge.name}
+    = render 'form'
+%p= link_to 'Back to Challenge', admin_region_challenge_path(@region, @challenge)
