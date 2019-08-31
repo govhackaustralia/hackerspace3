@@ -8,7 +8,6 @@ class Entry < ApplicationRecord
 
   has_many :scorecards, dependent: :destroy, as: :judgeable
 
-  validates :justification, presence: true
   validates :team_id, uniqueness: {
     scope: :challenge_id,
     message: 'Teams are not able to enter the same Challenge twice.'

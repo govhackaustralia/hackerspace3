@@ -53,7 +53,7 @@ class Admin::Teams::EntriesControllerTest < ActionDispatch::IntegrationTest
 
   test 'should patch update fail' do
     patch admin_team_entry_url @team, @entry, params: { entry: {
-      justification: nil
+      checkpoint_id: nil
     } }
     assert_response :success
     @entry.reload

@@ -40,8 +40,6 @@ class EntryTest < ActiveSupport::TestCase
     # Only certain award types.
     assert @entry.update! award: AWARD_NAMES.sample
     assert_not @entry.update award: 'Test'
-    # Justification cannot be nil
-    assert_not @entry.update justification: nil
     # No duplicate entries by Team into Challenge.
     assert_not Entry.second.update challenge: @challenge
   end

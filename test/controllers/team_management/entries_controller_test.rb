@@ -7,6 +7,7 @@ class TeamManagement::EntriesControllerTest < ActionDispatch::IntegrationTest
     @challenge = Challenge.third
     @checkpoint = Checkpoint.first
     @entry = Entry.first
+    @competition = Competition.first
   end
 
   test 'should get index' do
@@ -32,10 +33,10 @@ class TeamManagement::EntriesControllerTest < ActionDispatch::IntegrationTest
 
   test 'should post create fail' do
     Entry.destroy_all
+    @checkpoint.update end_time: Time.now.yesterday
     assert_no_difference 'Entry.count' do
       post team_management_team_entries_url @team, params: { entry: {
-        checkpoint_id: @checkpoint.id, challenge_id: @challenge.id,
-        justification: nil
+        checkpoint_id: @checkpoint.id, challenge_id: @challenge.id
       } }
     end
     assert_response :success
@@ -56,8 +57,10 @@ class TeamManagement::EntriesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'should patch update fail' do
+    checkpoint = Checkpoint.second
+    checkpoint.update end_time: Time.now.yesterday
     patch team_management_team_entry_url @team, @entry, params: { entry: {
-      justification: nil, checkpoint_id: @checkpoint.id
+      checkpoint_id: checkpoint.id
     } }
     assert_response :success
     @entry.reload
