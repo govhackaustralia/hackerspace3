@@ -17,6 +17,7 @@ class Region < ApplicationRecord
   belongs_to :competition
 
   has_many :sub_regions, class_name: 'Region', foreign_key: 'parent_id'
+  has_many :sub_region_teams, through: :sub_regions, source: :teams
   has_many :assignments, as: :assignable, dependent: :destroy
   has_many :events
   has_many :teams, through: :events

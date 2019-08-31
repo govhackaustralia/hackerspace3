@@ -24,6 +24,7 @@ class RegionTest < ActiveSupport::TestCase
 
   test 'region associations' do
     assert @international.sub_regions.include? @national
+    assert @national.sub_region_teams.include? @team
     assert @regional.parent == @national
     assert @national.competition == @competition
     assert @national.assignments.include? @assignment
