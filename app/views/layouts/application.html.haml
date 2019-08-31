@@ -1,7 +1,10 @@
 !!!
 %html
   %head
-    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Security-Policy", "content" => "upgrade-insecure-requests"}/
+    - if ENV['RAILS_ENV'] == 'development'
+      %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    - else
+      %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Security-Policy", "content" => "upgrade-insecure-requests"}/
     = csrf_meta_tags
     = csp_meta_tag
     %title
