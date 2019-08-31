@@ -24,7 +24,8 @@ class RegionSeeder < Seeder
       {name: 'Tasmania', time_zone: 'Hobart'},
       {name: 'Tasmania', time_zone: 'Hobart'},
       {name: 'ACT', time_zone: 'Canberra'},
-      {name: 'Queensland', time_zone: 'Brisbane'}
+      {name: 'Queensland', time_zone: 'Brisbane'},
+      {name: 'New Zealand', time_zone: 'Wellington'}
     ].each do |name_and_time_zone|
       comp.regions.create name_and_time_zone.merge(
         name: name_and_time_zone[:name] + ' ' + comp.year.to_s,
