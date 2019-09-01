@@ -87,10 +87,10 @@ class Admin::CompetitionsController < ApplicationController
     @challenge_criteria_count = @competition.challenge_criteria.count
     @project_criteria_count = @competition.project_criteria.count
     @teams_count = @competition.teams.count
-    sponsor_like_counts
+    sponsoresk_counts
   end
 
-  def sponsor_like_counts
+  def sponsoresk_counts
     @sponsors_count = @competition.sponsors.count
     @sponsorship_types_count = @competition.sponsorship_types.count
     @credits_count = @competition.competition_registrations.aws_credits_requested.count
