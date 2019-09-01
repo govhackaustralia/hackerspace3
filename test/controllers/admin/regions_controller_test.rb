@@ -25,8 +25,10 @@ class Admin::RegionsControllerTest < ActionDispatch::IntegrationTest
   test 'should post create success' do
     assert_difference 'Region.count' do
       post admin_competition_regions_url @competition, params: { region: {
-        name: 'Test Region', award_release: Time.now,
-        time_zone: 'Sydney', competition: @competition
+        name: 'Test Region',
+        award_release: Time.now,
+        time_zone: 'Sydney',
+        competition: @competition,
       } }
     end
     assert_redirected_to admin_competition_region_url @competition, Region.last
