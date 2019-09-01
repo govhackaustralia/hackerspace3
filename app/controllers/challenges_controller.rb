@@ -65,13 +65,8 @@ class ChallengesController < ApplicationController
   end
 
   def checkpoint_entry_view
-    passed_checkpoint_ids = if @region.root?
-                              @competition.passed_checkpoint_ids(LAST_TIME_ZONE)
-                            else
-                              @competition.passed_checkpoint_ids(@region.time_zone)
-                            end
-    @passed_public_checkpoints = @competition.checkpoints.where(id: passed_checkpoint_ids).order(:end_time)
-    team_ids = @challenge.entries.where(checkpoint_id: passed_checkpoint_ids).pluck(:team_id)
+    @passed_public_checkpoints = @competition.checkpoints.where(id: passed_checkpoint_ids(@region)).order(:end_time)
+    team_ids = @challenge.entries.where(checkpoint_id: passed_checkpoint_ids(@region)).pluck(:team_id)
     @teams = Team.published.where(id: team_ids)
   end
 
@@ -87,14 +82,19 @@ class ChallengesController < ApplicationController
   def all_region_entries
     all_entries = []
     @competition.regions.each do |region|
-      passed_checkpoint_ids = if region.root?
-                                @competition.passed_checkpoint_ids(LAST_TIME_ZONE)
-                              else
-                                @competition.passed_checkpoint_ids(region.time_zone)
-                              end
-      all_entries += region.entries.where(checkpoint_id: passed_checkpoint_ids).to_a
+      all_entries += region.entries.where(
+        checkpoint_id: passed_checkpoint_ids(region)
+      ).to_a
     end
     all_entries
+  end
+
+  def passed_checkpoint_ids(region)
+    if region.international?
+      @competition.passed_checkpoint_ids(LAST_TIME_ZONE)
+    else
+      @competition.passed_checkpoint_ids(region.time_zone)
+    end
   end
 
   def filter_challenges
