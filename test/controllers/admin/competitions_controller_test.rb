@@ -64,7 +64,9 @@ class Admin::CompetitionsControllerTest < ActionDispatch::IntegrationTest
 
   test 'should patch update fail' do
     old_time = @competition.end_time
-    patch admin_competition_url @competition, params: { competition: { end_time: nil } }
+    patch admin_competition_url @competition, params: {
+      competition: { end_time: nil }
+    }
     assert_response :success
     @competition.reload
     assert @competition.end_time == old_time
