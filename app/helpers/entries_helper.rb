@@ -8,10 +8,10 @@ module EntriesHelper
   end
 
   def challenges_region_counts(competition, checkpoint_ids = nil)
-    regions = competition.regions.subs
+    regions = competition.regions.lows
     region_to_entries = populate_entity_to_entries(regions, checkpoint_ids)
     unpublished_entries = Entry.where(team: competition.teams.unpublished)
-    challenges = competition.root_region.challenges
+    challenges = competition.international_region.challenges
     populate_challenge_to_entity(challenges, regions, unpublished_entries, region_to_entries)
   end
 

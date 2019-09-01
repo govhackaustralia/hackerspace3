@@ -44,7 +44,7 @@ class Challenge < ApplicationRecord
 
   # Returns a query object of the teams that are able to join a competition.
   def eligible_teams
-    if region.root?
+    if region.international?
       competition.teams
     else
       region.teams
@@ -55,7 +55,7 @@ class Challenge < ApplicationRecord
   # ENHANCEMENT: This needs to split up into methods 'national?' 'regional?'
   # ENHANCEMENT: 'National' no longer makes sense.
   def type
-    region.root? ? NATIONAL : REGIONAL
+    region.international? ? NATIONAL : REGIONAL
   end
 
   require 'csv'

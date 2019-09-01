@@ -38,6 +38,7 @@ class Admin::CompetitionsControllerTest < ActionDispatch::IntegrationTest
     end
     assert_redirected_to admin_competition_url(new_comp = Competition.last)
     assert User.first.assignments.where(assignable: new_comp, title: ADMIN).any?
+    assert Competition.last.international_region == Region.last
   end
 
   test 'should post create fail' do

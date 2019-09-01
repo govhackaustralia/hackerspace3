@@ -10,7 +10,7 @@ class Admin::Regions::EventsController < ApplicationController
 
   def show
     @event = Event.find params[:id]
-    return unless @region.root? && @event.event_type == AWARD_EVENT
+    return unless @region.international? && @event.event_type == AWARD_EVENT
 
     @inbound_flights = @event.inbound_flights
     @outbound_flights = @event.outbound_flights

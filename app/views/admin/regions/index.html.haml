@@ -1,21 +1,24 @@
 %main.team_page
   %h2 Region Management
-  %h3 Root Region
-  - if @root_region.nil?
-    %p= link_to 'Create New Root Region', new_root_admin_competition_regions_path(@competition)
+  %p= link_to 'Create Region', new_admin_competition_region_path
+  %h3 #{Region::INTERNATIONAL} Region
+  - if @internationals.present?
+    - @internationals.each do |region|
+      = render 'region_modal', locals: { region: region }
   - else
-    = render "region_modal", locals: { region: @root_region}
-
-  %h3 Sub Regions
-  - if @root_region.present?
-    %p= link_to 'Create new Sub Region', new_admin_competition_region_path
-    - if @sub_regions.present?
-      - @sub_regions.each do |region|
-        = render 'region_modal', locals: { region: region }
-    - else
-      %p No Sub Regions saved.
+    %p No International Region saved.
+  %h3 #{Region::NATIONAL} Regions
+  - if @nationals.present?
+    - @nationals.each do |region|
+      = render 'region_modal', locals: { region: region }
   - else
-    %p A Root Region is required to create Sub Regions.
+    %p No National Regions saved.
+  %h3 #{Region::REGIONAL} Regions
+  - if @regionals.present?
+    - @regionals.each do |region|
+      = render 'region_modal', locals: { region: region }
+  - else
+    %p No Regional Regions saved.
 - if current_user.admin_privileges?(@competition)
   %p= link_to 'Back to Competition Management', admin_competition_path(@competition)
 %p= link_to 'Back to Account Management', manage_account_path

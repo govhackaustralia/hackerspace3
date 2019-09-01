@@ -6,7 +6,7 @@ class CheckpointTest < ActiveSupport::TestCase
     @competition = Competition.first
     @entry = Entry.first
     @team = Team.first
-    @root_region = Region.first
+    @international_region = Region.first
     @sub_region = Region.second
   end
 
@@ -25,7 +25,7 @@ class CheckpointTest < ActiveSupport::TestCase
   end
 
   test 'limit reached' do
-    assert @checkpoint.limit_reached? @team, @root_region
+    assert @checkpoint.limit_reached? @team, @international_region
     assert_not @checkpoint.limit_reached? @team, @sub_region
   end
 end

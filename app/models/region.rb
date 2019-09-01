@@ -1,4 +1,11 @@
 class Region < ApplicationRecord
+  # Region Categories
+  INTERNATIONAL = 'International'.freeze
+  NATIONAL = 'National'.freeze
+  REGIONAL = 'Regional'.freeze
+
+  CATEGORIES = [INTERNATIONAL, NATIONAL, REGIONAL].freeze
+
   # Australian/New Zealand Time Zones
   VALID_TIME_ZONES =
     ActiveSupport::TimeZone.country_zones('AU') +
@@ -23,17 +30,24 @@ class Region < ApplicationRecord
   has_many :support_assignments, -> { region_supports }, class_name: 'Assignment', as: :assignable
   has_many :supports, through: :support_assignments, source: :user
 
-  scope :subs, -> { where.not parent_id: nil }
-  scope :roots, -> { where parent_id: nil }
+  scope :regionals, -> { where category: REGIONAL }
+  scope :nationals, -> { where category: NATIONAL }
+  scope :internationals, -> { where category: INTERNATIONAL }
+  scope :lows, -> { where category: [NATIONAL, REGIONAL] }
+  scope :highs, -> { where category: [NATIONAL, INTERNATIONAL] }
 
   validates :name, uniqueness: {
     scope: :competition_id,
     message: 'Region name already taken in this competition'
   }
 
-  validate :only_one_root_per_competition
+  validates :category, inclusion: { in: CATEGORIES }
 
-  validates :time_zone, allow_nil: true, inclusion: {
+  validate :only_one_international_per_competition,
+           :only_international_can_be_parent_of_national,
+           :only_national_can_be_parent_of_regional
+
+  validates :time_zone, allow_blank: true, inclusion: {
     in: VALID_TIME_ZONES.map(&:name)
   }
 
@@ -61,8 +75,16 @@ class Region < ApplicationRecord
   end
 
   # Returns a boolean whether a region is the national/root region.
-  def root?
-    parent_id.nil?
+  def international?
+    category == INTERNATIONAL
+  end
+
+  def national?
+    category == NATIONAL
+  end
+
+  def regional?
+    category == REGIONAL
   end
 
   # Returns a boolean for whether the awards for a region have been released or
@@ -73,13 +95,35 @@ class Region < ApplicationRecord
     award_release.to_formatted_s(:number) < Time.now.in_time_zone(COMP_TIME_ZONE).to_formatted_s(:number)
   end
 
+  private
+
   # Ensures only one root region is assigned to a competition
-  def only_one_root_per_competition
+  def only_one_international_per_competition
     return unless parent_id.nil?
 
-    roots = competition.regions.roots
-    return unless roots.exclude?(self) && roots.count.positive?
+    internationals = competition.regions.internationals
+    return unless internationals.exclude?(self) && internationals.count.positive?
 
-    errors.add :competition, 'Only one root region per competition.'
+    errors.add :competition, 'Only one international region per competition'
+  end
+
+  def only_international_can_be_parent_of_national
+    return if [category, parent_id].include? nil
+
+    return unless national?
+
+    return if parent.international?
+
+    errors.add :parent, 'Only root can be parent of national'
+  end
+
+  def only_national_can_be_parent_of_regional
+    return if [category, parent_id].include? nil
+
+    return unless regional?
+
+    return if parent.national?
+
+    errors.add :parent, 'Only national can be parent of regional'
   end
 end

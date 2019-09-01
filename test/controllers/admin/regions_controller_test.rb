@@ -29,6 +29,8 @@ class Admin::RegionsControllerTest < ActionDispatch::IntegrationTest
         award_release: Time.now,
         time_zone: 'Sydney',
         competition: @competition,
+        category: Region::REGIONAL,
+        parent_id: Region.first.id
       } }
     end
     assert_redirected_to admin_competition_region_url @competition, Region.last

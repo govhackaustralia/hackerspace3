@@ -8,7 +8,7 @@
     = @report.competition_count
   %h3 Regions
   - @regions.each do |region|
-    - next if region.root?
+    - next if region.international?
     %h4 #{region.name}: #{@report.region_count(region)}
     - region.events.each do |event|
       - next unless event.competition_event?

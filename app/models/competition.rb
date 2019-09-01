@@ -47,8 +47,8 @@ class Competition < ApplicationRecord
   end
 
   # Returns the parent region of all the competition's regions
-  def root_region
-    regions.roots.first
+  def international_region
+    regions.internationals.first
   end
 
   # Returns the User of the current Competiton Director, if any
@@ -196,7 +196,9 @@ class Competition < ApplicationRecord
 
   # Returns the time in a particular region.
   def region_time(time_zone)
-    Time.now.in_time_zone(time_zone || COMP_TIME_ZONE).to_formatted_s(:number)
+    Time.now.in_time_zone(
+      time_zone.presence || COMP_TIME_ZONE
+    ).to_formatted_s(:number)
   end
 
   def only_one_current

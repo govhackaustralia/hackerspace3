@@ -1,16 +1,16 @@
 %main.team_page
   %h2= @region.name
-  - if @region.root?
+  - if @region.international?
     %p
       %strong Root Region
   - if @region.time_zone
     %p Time Zone: #{@region.time_zone}
   - if @region.award_release
     %p Award Release: #{@region.award_release}
-  - if @region.root?
-    %p= link_to 'Update Root Region Info', edit_root_admin_competition_region_path(@competition, @region)
-  - else
-    %p= link_to 'Update Region Info', edit_admin_competition_region_path(@competition, @region)
+  %p Region Category: #{@region.category}
+  - if @parent
+    %p Parent: #{@parent.name}
+  %p= link_to 'Update Region Info', edit_admin_competition_region_path(@competition, @region)
   %h3 Assignments
   %h4 Region Director
   - if @director.present?
@@ -27,7 +27,7 @@
       currently assigned to this region.
   %p= link_to 'Manage Assignments', admin_region_assignments_path(@region)
   %h3 People's Choice Judging
-  - if @region.root?
+  - if @region.international?
     %p See Competition Dashboard
   - else
     %p= link_to 'Regional Judging', admin_region_scorecards_path(@region, include_judges: false)
@@ -81,7 +81,7 @@
       = pluralize @bulk_mails_count, 'bulk mail'
       created for this region.
   %p= link_to 'Bulk Mails', admin_region_bulk_mails_path(@region)
-  - if @region.root?
+  - if @region.international?
     %h3 National Challenge Entries By Region
     %p
       %em Ignoring Checkpoints Unlike Public Screen

@@ -1,9 +1,11 @@
 class Admin::RegionsController < ApplicationController
   before_action :authenticate_user!, :check_for_privileges
+  before_action :retrieve_parent_regions, except: %i[index show]
 
   def index
-    @root_region = @competition.root_region
-    @sub_regions = @competition.regions.subs
+    @internationals = @competition.regions.internationals
+    @nationals = @competition.regions.nationals
+    @regionals = @competition.regions.regionals
   end
 
   def show
@@ -20,12 +22,8 @@ class Admin::RegionsController < ApplicationController
     @region = @competition.regions.new
   end
 
-  def new_root
-    new
-  end
-
   def create
-    create_new_region
+    @region = @competition.regions.new region_params
     if @region.save
       flash[:notice] = "New Region '#{@region.name}' added."
       redirect_to admin_competition_region_path @competition, @region
@@ -37,10 +35,6 @@ class Admin::RegionsController < ApplicationController
 
   def edit
     @region = Region.find params[:id]
-  end
-
-  def edit_root
-    edit
   end
 
   def update
@@ -57,7 +51,13 @@ class Admin::RegionsController < ApplicationController
   private
 
   def region_params
-    params.require(:region).permit :time_zone, :name, :award_release
+    params.require(:region).permit(
+      :time_zone,
+      :name,
+      :award_release,
+      :category,
+      :parent_id
+    )
   end
 
   def check_for_privileges
@@ -73,13 +73,12 @@ class Admin::RegionsController < ApplicationController
     @competition = @region.competition
   end
 
-  def create_new_region
-    @region = @competition.regions.new region_params
-    @region.parent = @competition.root_region
+  def retrieve_parent_regions
+    @parent_regions = @competition.regions.highs
   end
 
   def retrieve_counts
-    if @region.root?
+    if @region.international?
       retrieve_national_counts
     else
       @event_counts = helpers.challenges_event_counts @region
@@ -104,7 +103,7 @@ class Admin::RegionsController < ApplicationController
 
   def retrieve_national_counts
     @region_counts = helpers.challenges_region_counts @competition
-    @region_names = @competition.regions.subs.order(:name).pluck(:name)
-    @challenge_names = @competition.root_region.challenges.order(:name).pluck(:name)
+    @region_names = @competition.regions.lows.order(:name).pluck(:name)
+    @challenge_names = @competition.international_region.challenges.order(:name).pluck(:name)
   end
 end

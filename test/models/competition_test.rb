@@ -3,7 +3,7 @@ require 'test_helper'
 class CompetitionTest < ActiveSupport::TestCase
   setup do
     @competition = Competition.first
-    @region = Region.first
+    @region = Region.third
     @assignment = Assignment.first
     @sponsor = Sponsor.first
     @sponsorship_type = SponsorshipType.first
@@ -63,7 +63,7 @@ class CompetitionTest < ActiveSupport::TestCase
   end
 
   test 'root region' do
-    assert @competition.root_region == @region
+    assert @competition.international_region == @region
   end
 
   test 'started?' do

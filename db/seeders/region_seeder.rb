@@ -12,8 +12,22 @@ class RegionSeeder < Seeder
     sponsorship_types = comp.sponsorship_types
     participant_assignments = comp.competition_assignments.participants
 
-    root_region = comp.regions.create(
-      name: 'Australia' + ' ' + comp.year.to_s
+    international_region = comp.regions.create(
+      name: 'International' + ' ' + comp.year.to_s,
+      category: Region::INTERNATIONAL
+    )
+
+    australia_national = comp.regions.create(
+      name: 'Australia' + comp.year.to_s,
+      category: Region::NATIONAL,
+      parent: international_region
+    )
+
+    comp.regions.create(
+      name: 'New Zealand' + comp.year.to_s,
+      category: Region::NATIONAL,
+      parent: international_region,
+      time_zone: 'Wellington'
     )
 
     [
@@ -24,13 +38,13 @@ class RegionSeeder < Seeder
       {name: 'Tasmania', time_zone: 'Hobart'},
       {name: 'Tasmania', time_zone: 'Hobart'},
       {name: 'ACT', time_zone: 'Canberra'},
-      {name: 'Queensland', time_zone: 'Brisbane'},
-      {name: 'New Zealand', time_zone: 'Wellington'}
+      {name: 'Queensland', time_zone: 'Brisbane'}
     ].each do |name_and_time_zone|
       comp.regions.create name_and_time_zone.merge(
         name: name_and_time_zone[:name] + ' ' + comp.year.to_s,
-        parent: root_region,
-        award_release: award_release
+        parent: australia_national,
+        award_release: award_release,
+        category: Region::REGIONAL
       )
     end
 
@@ -106,17 +120,17 @@ class RegionSeeder < Seeder
       end
 
       event_name = if region.time_zone.nil?
-                    root_region.name
+                    international_region.name
                    else
                     Faker::TvShows::GameOfThrones.city
                    end
 
       # ENHANCEMENT: Split into National and Regional challenges to assign
       # teams to both.
-      challenges = comp.root_region&.challenges + region.challenges
+      challenges = comp.international_region&.challenges + region.challenges
       EVENT_TYPES.each do |event_type|
 
-        next if event_name == root_region.name && event_type == COMPETITION_EVENT
+        next if event_name == international_region.name && event_type == COMPETITION_EVENT
 
         comp_start = comp.start_time
         if event_type == COMPETITION_EVENT
@@ -128,7 +142,7 @@ class RegionSeeder < Seeder
           event = EventSeeder.create(event_type, event_name, region, connection_start, comp, sponsors, users, participant_assignments)
         elsif event_type == AWARD_EVENT
           event = EventSeeder.create(event_type, event_name, region, award_start, comp, sponsors, users, participant_assignments)
-          if event_name == root_region.name
+          if event_name == international_region.name
             EventSeeder.create_national_awards(event, comp)
           end
         end

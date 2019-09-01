@@ -56,10 +56,7 @@ Rails.application.routes.draw do
       resources :assignments, only: [:index, :new, :create], controller: 'competitions/assignments'
       resources :scorecards, only: :index, controller: 'competitions/scorecards'
       resources :checkpoints, :criteria, :sponsorship_types, except: [:show, :destroy]
-      resources :regions, except: :destroy do
-        collection { get 'new_root' }
-        member { get 'edit_root' }
-      end
+      resources :regions, except: :destroy
       resources :teams, only: [:index, :show, :update]
       resources :events, only: :index
       resources :sponsors

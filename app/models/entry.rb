@@ -21,8 +21,14 @@ class Entry < ApplicationRecord
 
   after_create :update_eligible
 
-  scope :regional, -> { joins(:region).where.not(regions: { parent_id: nil }) }
-  scope :national, -> { joins(:region).where(regions: { parent_id: nil }) }
+  scope :regional, lambda {
+    joins(:region).where(regions: { category: Region::REGIONAL })
+  }
+  scope :national, lambda {
+    joins(:region).where(
+      regions: { category: [Region::INTERNATIONAL, Region::NATIONAL] }
+    )
+  }
   scope :winners, -> { where award: WINNER }
   scope :competition, lambda { |competition|
     joins(challenge: :region).where(regions: { competition: competition })
@@ -42,7 +48,7 @@ class Entry < ApplicationRecord
   # Checks that a team has not entered the maximum number of regional challenges
   # at a given checkpoint.
   def entries_must_not_exceed_max_regional_allowed_for_checkpoint
-    return if challenge.region.root?
+    return if challenge.region.international?
 
     current_count = team.regional_challenges(checkpoint).count
     max_allowed = checkpoint.max_regional_challenges
@@ -57,7 +63,7 @@ class Entry < ApplicationRecord
   # Checks that a team has not entered the maximum number of national challenges
   # at a given checkpoint.
   def entries_must_not_exceed_max_national_allowed_for_checkpoint
-    return unless challenge.region.root?
+    return unless challenge.region.international?
 
     current_count = team.national_challenges(checkpoint).count
     max_allowed = checkpoint.max_national_challenges
@@ -73,7 +79,7 @@ class Entry < ApplicationRecord
   # region.
   def teams_cannot_enter_regional_challenges_from_regions_other_than_their_own
     challenge_region = challenge.region
-    return if challenge_region.root?
+    return if challenge_region.international?
 
     errors.add(:checkpoint_id, 'Teams are not able to enter Challenges in Regions other than their own') if team.region != challenge_region
   end

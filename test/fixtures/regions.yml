@@ -3,9 +3,10 @@
 one:
   id: 1
   name: Australia
-  parent_id:
-  time_zone: Sydney
+  parent_id: 3
+  time_zone: ''
   competition_id: 1
+  category: National
 
 two:
   id: 2
@@ -13,3 +14,12 @@ two:
   parent_id: 1
   time_zone: Brisbane
   competition_id: 1
+  category: Regional
+
+three:
+  id: 3
+  name: International
+  parent_id:
+  time_zone:
+  competition_id: 1
+  category: International

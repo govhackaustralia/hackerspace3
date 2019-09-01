@@ -53,7 +53,7 @@
     - event_partnerships.each do |event_partnership|
       %p= render 'admin/sponsors/sponsor', locals: { sponsor: event_partnership.sponsor }
   %p= link_to 'Add Event Partner', new_admin_event_event_partnership_path(@event)
-  - if @region.root? && @event.event_type == AWARD_EVENT
+  - if @region.international? && @event.event_type == AWARD_EVENT
     %h3 Flights
     %p
       = pluralize @inbound_flights.count, 'inbound flight'

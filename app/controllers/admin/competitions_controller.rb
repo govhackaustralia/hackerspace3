@@ -23,7 +23,7 @@ class Admin::CompetitionsController < ApplicationController
     @competition = Competition.new competition_params
     if @competition.save
       flash[:notice] = 'New competition created.'
-      current_user.make_site_admin @competition
+      post_create_tasks
       redirect_to admin_competition_path @competition
     else
       flash[:alert] = @competition.errors.full_messages.to_sentence
@@ -94,5 +94,13 @@ class Admin::CompetitionsController < ApplicationController
     @sponsors_count = @competition.sponsors.count
     @sponsorship_types_count = @competition.sponsorship_types.count
     @credits_count = @competition.competition_registrations.aws_credits_requested.count
+  end
+
+  def post_create_tasks
+    @competition.regions.internationals.create(
+      name: Region::INTERNATIONAL,
+      category: Region::INTERNATIONAL
+    )
+    current_user.make_site_admin @competition
   end
 end

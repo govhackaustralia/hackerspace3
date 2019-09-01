@@ -7,7 +7,7 @@
     %table
       %thead
         %tr
-          - if @region.root? && @event.event_type == AWARD_EVENT
+          - if @region.international? && @event.event_type == AWARD_EVENT
             %th Ticket Type
           %th Full Name
           %th Email
@@ -28,7 +28,7 @@
           - assignment = registration.assignment
           - user = assignment.user
           %tr
-            - if @region.root? && @event.event_type == AWARD_EVENT
+            - if @region.international? && @event.event_type == AWARD_EVENT
               - if assignment.title == VIP || assignment.title == PARTICIPANT
                 %td Regular
               - elsif assignment.assignable_type == 'Team'
@@ -51,7 +51,7 @@
             %td= user.creative
             %td= user.facilitator
             %td= link_to 'Edit', edit_admin_event_registration_path(@event, registration)
-    - if @region.root? && @event.event_type == AWARD_EVENT
+    - if @region.international? && @event.event_type == AWARD_EVENT
       %p= link_to 'New Individual Golden Ticket', new_admin_event_individual_golden_path(@event)
       %p= link_to 'New Group Golden Ticket', new_admin_event_group_golden_path(@event)
       %p= link_to 'New Staff Flight Registration', new_admin_event_staff_flight_path(@event)
