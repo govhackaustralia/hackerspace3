@@ -8,7 +8,8 @@ class AddCategoryToRegions < ActiveRecord::Migration[5.2]
       elsif region.name.include? 'International'
         category = Region::INTERNATIONAL
       end
-      region.update! category: category
+      region.category = category
+      region.save validate: false
     end
   end
 end
