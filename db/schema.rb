@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_31_122648) do
+ActiveRecord::Schema.define(version: 2019_09_02_112006) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -260,6 +260,17 @@ ActiveRecord::Schema.define(version: 2019_08_31_122648) do
     t.index ["identifier"], name: "index_projects_on_identifier"
     t.index ["team_id"], name: "index_projects_on_team_id"
     t.index ["user_id"], name: "index_projects_on_user_id"
+  end
+
+  create_table "region_limits", force: :cascade do |t|
+    t.integer "region_id"
+    t.integer "checkpoint_id"
+    t.integer "max_regional_challenges"
+    t.integer "max_national_challenges"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["checkpoint_id"], name: "index_region_limits_on_checkpoint_id"
+    t.index ["region_id"], name: "index_region_limits_on_region_id"
   end
 
   create_table "regions", force: :cascade do |t|
