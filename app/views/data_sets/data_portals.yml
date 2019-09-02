@@ -2,6 +2,10 @@
   name: Australia
   short_url: data.gov.au
 
+- url: https://data.govt.nz
+  name: New Zealand
+  short_url: data.govt.nz
+
 - url: http://stat.data.abs.gov.au/
   name: Australian Bureau of Statistics
   short_url: ABS.Stat
@@ -101,3 +105,7 @@
 - url: https://www.ala.org.au/govhack/
   name: Atlas of Living Australia
   short_url: www.ala.org.au/govhack
+
+- url: http://data-1-hobartcc.opendata.arcgis.com
+  name: City of Hobart Open Data Portal
+  short_url: data-1-hobartcc.opendata.arcgis.com
