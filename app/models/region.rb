@@ -74,15 +74,17 @@ class Region < ApplicationRecord
     parent.admin_assignments(collected).flatten
   end
 
-  # Returns a boolean whether a region is the national/root region.
+  # Returns a true if a region is the international region, false otherwise
   def international?
     category == INTERNATIONAL
   end
 
+  # Returns a true if a region is a national region, false otherwise
   def national?
     category == NATIONAL
   end
 
+  # Returns a true if a region is a regional region, false otherwise
   def regional?
     category == REGIONAL
   end
