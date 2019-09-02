@@ -16,6 +16,8 @@
 
 # Example $ rails db:setup STAGE=PRE_CONNECTION
 
+# ENHANCEMENT: Add RegionLimit and Correspondence data
+
 require_relative 'seeders/competition_seeder'
 require_relative 'seeders/user_seeder'
 
