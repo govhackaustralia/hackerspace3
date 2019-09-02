@@ -29,6 +29,7 @@ class Region < ApplicationRecord
   has_many :bulk_mails, as: :mailable, dependent: :destroy
   has_many :support_assignments, -> { region_supports }, class_name: 'Assignment', as: :assignable
   has_many :supports, through: :support_assignments, source: :user
+  has_many :region_limits
 
   scope :regionals, -> { where category: REGIONAL }
   scope :nationals, -> { where category: NATIONAL }
@@ -95,6 +96,12 @@ class Region < ApplicationRecord
     return false if award_release.nil?
 
     award_release.to_formatted_s(:number) < Time.now.in_time_zone(COMP_TIME_ZONE).to_formatted_s(:number)
+  end
+
+  # Returns a custom region checkpoint challenge limit either of this region
+  # or of a parent, nil if no such region limit exists
+  def limit(checkpoint)
+    region_limits.find_by(checkpoint: checkpoint) || parent&.limit(checkpoint)
   end
 
   private

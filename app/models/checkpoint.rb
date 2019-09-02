@@ -1,6 +1,7 @@
 class Checkpoint < ApplicationRecord
   belongs_to :competition
   has_many :entries, dependent: :destroy
+  has_many :region_limits
 
   validates :name, :end_time, :max_national_challenges,
             :max_regional_challenges, presence: true
@@ -9,9 +10,9 @@ class Checkpoint < ApplicationRecord
   # number of challenges for a particular region.
   def limit_reached?(team, region)
     if region.international? || region.national?
-      team.national_challenges(self).count >= max_national_challenges
+      team.national_challenges(self).count >= max_national(region)
     else
-      team.regional_challenges(self).count >= max_regional_challenges
+      team.regional_challenges(self).count >= max_regional(region)
     end
   end
 
@@ -21,5 +22,15 @@ class Checkpoint < ApplicationRecord
     end_time.to_formatted_s(:number) < Time.now.in_time_zone(
       time_zone.presence || COMP_TIME_ZONE
     ).to_formatted_s(:number)
+  end
+
+  private
+
+  def max_national(region)
+    region.limit(self)&.max_national_challenges || max_national_challenges
+  end
+
+  def max_regional(region)
+    region.limit(self)&.max_regional_challenges || max_regional_challenges
   end
 end

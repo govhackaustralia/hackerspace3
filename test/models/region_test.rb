@@ -19,6 +19,7 @@ class RegionTest < ActiveSupport::TestCase
     @support = User.first
     @next_competition = Competition.second
     @international = Region.third
+    @region_limit = RegionLimit.first
   end
 
   test 'region associations' do
@@ -37,6 +38,7 @@ class RegionTest < ActiveSupport::TestCase
     assert @national.bulk_mails.include? @bulk_mail
     assert @national.support_assignments.include? @support_assignment
     assert @national.supports.include? @support
+    assert @national.region_limits.include? @region_limit
   end
 
   test 'region scopes' do
@@ -94,6 +96,13 @@ class RegionTest < ActiveSupport::TestCase
   test 'region director' do
     # Retrievs Director
     assert @assignment.user == @national.director
+  end
+
+  test 'limit' do
+    checkpoint = Checkpoint.first
+    assert @national.limit(checkpoint) == @region_limit
+    assert @regional.limit(checkpoint) == @region_limit
+    assert @international.limit(checkpoint).nil?
   end
 
   test 'only_one_international_per_competition' do
