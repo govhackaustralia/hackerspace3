@@ -2,7 +2,7 @@ class Admin::CheckpointsController < ApplicationController
   before_action :authenticate_user!, :check_for_privileges
 
   def index
-    @checkpoints = @competition.checkpoints
+    @checkpoints = @competition.checkpoints.preload region_limits: :region
   end
 
   def new

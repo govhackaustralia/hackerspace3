@@ -63,6 +63,10 @@ Rails.application.routes.draw do
       member { get 'aws_credits_requested' }
     end
 
+    resources :checkpoints, only: [] do
+      resources :region_limits, except: [:show, :index, :destroy]
+    end
+
     resources :sponsors, only: [] do
       resources :sponsorships, only: :destroy, controller: 'sponsors/sponsorships'
       resources :assignments, only: [:new, :create], controller: 'sponsors/assignments'
