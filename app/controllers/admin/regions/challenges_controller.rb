@@ -93,7 +93,7 @@ class Admin::Regions::ChallengesController < ApplicationController
   def challenge_params
     params.require(:challenge).permit(
       :name, :short_desc, :long_desc, :eligibility, :video_url, :approved,
-      :image, :pdf, :pdf_preview
+      :image, :pdf, :pdf_preview, :nation_wide
     )
   end
 end

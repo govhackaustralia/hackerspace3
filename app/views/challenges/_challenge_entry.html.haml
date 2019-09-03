@@ -1,0 +1,8 @@
+- if @region.international?
+  Challenge entry is avilable to all teams in #{@competition.name}.
+- elsif @region.national?
+  Challenge entry is avilable to all teams in #{@region.name}.
+- elsif @challenge.nation_wide
+  Challenge entry is avilable to all teams in #{@region.parent.name}.
+- else
+  Challenge entry is only available to teams in #{@region.name}.

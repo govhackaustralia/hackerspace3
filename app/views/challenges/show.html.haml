@@ -25,6 +25,9 @@
         %p
           %strong> Eligibility
           \: #{@challenge.eligibility}
+      %p
+        %strong Entry:
+        = render 'challenge_entry'
       - if @data_sets.present?
         %h5 Dataset Highlight
         - @data_sets.each do |data_set|

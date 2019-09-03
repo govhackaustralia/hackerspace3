@@ -13,6 +13,9 @@
     %p Long Description: #{@challenge.long_desc}
   - unless @challenge.eligibility.blank?
     %p Eligibility: #{@challenge.eligibility}
+  %p
+    Entry:
+    = render 'challenges/challenge_entry'
   - unless @challenge.video_url.blank?
     %p
       %a{:href => "#{@challenge.video_url}", :target => "_blank"} Video

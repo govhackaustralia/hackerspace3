@@ -18,5 +18,12 @@
     .field
       = form.label :approved
       = form.check_box :approved, { checked: @challenge.approved }
+    - if @challenge.type == REGIONAL
+      %p
+        Nation wide: This option makes this Regional Challenge available
+        to any team in #{@region.parent.name}.
+      .field
+        = form.label :nation_wide
+        = form.check_box :nation_wide, { checked: @challenge.nation_wide }
   .actions
     = form.submit
