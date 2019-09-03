@@ -5,7 +5,7 @@
     %strong This is the current project version.
     %br/
   - else
-    = link_to 'Make this the current version', admin_team_path(@team, project_id: @project.id), |
+    = link_to 'Make this the current version', admin_competition_team_path(@competition, @team, project_id: @project.id), |
       method: :patch,                                                                           |
       data: { confirm: 'Are you sure?' }                                                        |
     %br/

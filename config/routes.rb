@@ -105,7 +105,7 @@ Rails.application.routes.draw do
       resources :individual_goldens, only: [:new, :create], controller: 'events/individual_goldens'
     end
 
-    resources :teams, only: [:index, :show, :update] do
+    resources :teams, only: [] do
       resources :projects, only: [:index, :show]
       resources :entries, except: [:index, :show], controller: 'teams/entries'
       resources :scorecards, only: [:index, :update, :destroy], controller: 'teams/scorecards'

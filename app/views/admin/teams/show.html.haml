@@ -4,12 +4,10 @@
   %p Region: #{@region.name}
   - if @team.published
     %p Team Project is Published.
-    = link_to 'Unpublish Team Project', admin_competition_team_path(@competition, @team, published: false), method: :patch
-    %br/
+    %p= link_to 'Unpublish Team Project', admin_competition_team_path(@competition, @team, published: false), method: :patch
   - else
     %p Team Project is not Published.
-    = link_to 'Publish Team Project', admin_competition_team_path(@competition, @team, published: true), method: :patch
-    %br/
+    %p= link_to 'Publish Team Project', admin_competition_team_path(@competition, @team, published: true), method: :patch
   %h3 Project Version Management
   Project Version Count: #{@projects.count}
   %br/

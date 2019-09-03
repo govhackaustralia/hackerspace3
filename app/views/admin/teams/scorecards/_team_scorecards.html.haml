@@ -29,4 +29,4 @@
               - median_score = ((scores.median / MAX_SCORE.to_f) * 100).to_i
               = render 'challenges/judging_cell', locals: { total: median_score }
               %td= scores.standard_deviation
-= javascript_tag "window._admin_teams_path = '#{admin_teams_path}';"
+= javascript_tag "window._admin_teams_path = '#{admin_competition_teams_path(@competition)}';"

@@ -10,7 +10,7 @@ class Admin::Teams::EntriesController < ApplicationController
     @entry = @team.entries.new entry_params
     if @entry.save
       flash[:notice] = 'New Challenge Entry Created'
-      redirect_to admin_team_path @team
+      redirect_to admin_competition_team_path @competition, @team
     else
       handle_create_fail
     end
@@ -33,7 +33,7 @@ class Admin::Teams::EntriesController < ApplicationController
     @entry = Entry.find params[:id]
     @entry.destroy
     flash[:notice] = 'Challenge Entry Removed'
-    redirect_to admin_team_path @team
+    redirect_to admin_competition_team_path @competition, @team
   end
 
   private
@@ -59,7 +59,7 @@ class Admin::Teams::EntriesController < ApplicationController
   def handle_update
     if @entry.update entry_params
       flash[:notice] = 'Entry Updated Successfully'
-      redirect_to admin_team_path @team
+      redirect_to admin_competition_team_path @competition, @team
     else
       flash[:alert] = @entry.errors.full_messages.to_sentence
       render :edit

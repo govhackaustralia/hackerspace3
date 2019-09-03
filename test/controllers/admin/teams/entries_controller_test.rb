@@ -7,6 +7,7 @@ class Admin::Teams::EntriesControllerTest < ActionDispatch::IntegrationTest
     @entry = Entry.first
     @challenge = Challenge.third
     @checkpoint = Checkpoint.first
+    @competition = @team.competition
   end
 
   test 'should get new' do
@@ -23,7 +24,7 @@ class Admin::Teams::EntriesControllerTest < ActionDispatch::IntegrationTest
         justification: 'Test'
       } }
     end
-    assert_redirected_to admin_team_url @team
+    assert_redirected_to admin_competition_team_url @competition, @team
   end
 
   test 'should post create fail' do
@@ -46,7 +47,7 @@ class Admin::Teams::EntriesControllerTest < ActionDispatch::IntegrationTest
     patch admin_team_entry_url @team, @entry, params: { entry: {
       justification: 'Updated'
     } }
-    assert_redirected_to admin_team_url @team
+    assert_redirected_to admin_competition_team_url @competition, @team
     @entry.reload
     assert @entry.justification == 'Updated'
   end
@@ -64,6 +65,6 @@ class Admin::Teams::EntriesControllerTest < ActionDispatch::IntegrationTest
     assert_difference 'Entry.count', -1 do
       delete admin_team_entry_url @team, @entry
     end
-    assert_redirected_to admin_team_url @team
+    assert_redirected_to admin_competition_team_url @competition, @team
   end
 end

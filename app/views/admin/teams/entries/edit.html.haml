@@ -9,4 +9,4 @@
       = form.text_area :justification
     .actions
       = form.submit
-  = link_to 'Back To Team', admin_team_path(@team)
+%p= link_to 'Back To Team', admin_competition_team_path(@competition, @team)
