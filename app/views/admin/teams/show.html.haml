@@ -36,14 +36,14 @@
         = render 'challenge_category', locals:                   |
           { checkpoint: checkpoint,                              |
           type: NATIONAL,                                        |
-          max_challenges: checkpoint.max_national_challenges,    |
+          max_challenges: checkpoint.max_national(@region),      |
           challenges: @team.national_challenges(checkpoint),     |
           available_challenges: @available_national_challenges } |
         %h4 Regional Challenges
         = render 'challenge_category', locals:                   |
           { checkpoint: checkpoint,                              |
           type: REGIONAL,                                        |
-          max_challenges: checkpoint.max_regional_challenges,    |
+          max_challenges: checkpoint.max_regional(@region),      |
           challenges: @team.regional_challenges(checkpoint),     |
           available_challenges: @available_regional_challenges } |
 = link_to 'Back to Team Management', admin_competition_teams_path(@competition)

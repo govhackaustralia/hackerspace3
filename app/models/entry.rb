@@ -50,7 +50,7 @@ class Entry < ApplicationRecord
     return if challenge.region.international?
 
     current_count = team.regional_challenges(checkpoint).count
-    max_allowed = checkpoint.max_regional_challenges
+    max_allowed = checkpoint.max_regional(region)
     return unless current_count >= max_allowed
 
     errors.add(
@@ -65,7 +65,7 @@ class Entry < ApplicationRecord
     return unless challenge.region.international?
 
     current_count = team.national_challenges(checkpoint).count
-    max_allowed = checkpoint.max_national_challenges
+    max_allowed = checkpoint.max_national(region)
     return unless current_count >= max_allowed
 
     errors.add(

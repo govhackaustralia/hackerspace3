@@ -24,12 +24,14 @@ class Checkpoint < ApplicationRecord
     ).to_formatted_s(:number)
   end
 
-  private
-
+  # Returns the maximum number of national callenges a team can enter taking
+  # into account regional customisations.
   def max_national(region)
     region.limit(self)&.max_national_challenges || max_national_challenges
   end
 
+  # Returns the maximum number of regional callenges a team can enter taking
+  # into account regional customisations.
   def max_regional(region)
     region.limit(self)&.max_regional_challenges || max_regional_challenges
   end

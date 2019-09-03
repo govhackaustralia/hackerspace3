@@ -7,6 +7,7 @@ class TeamManagement::EntriesController < TeamManagement::TeamsController
   # ENHANCEMENT: Reduce amount of calls made in the views
   def index
     @checkpoints = @competition.checkpoints.order :end_time
+    @region = @team.region
   end
 
   def new

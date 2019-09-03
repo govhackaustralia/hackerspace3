@@ -3,8 +3,10 @@
 - type = locals[:type]
 - max_challenges = locals[:max_challenges]
 - available_challenges = locals[:available_challenges]
-= "#{challenges.count} of #{pluralize checkpoint.max_national_challenges, "#{type} challenge"} entered"
-%br/
+- if type == NATIONAL
+  %p= "#{challenges.count} of #{pluralize checkpoint.max_national(@region), "#{type} challenge"} entered"
+- else
+  %p= "#{challenges.count} of #{pluralize checkpoint.max_regional(@region), "#{type} challenge"} entered"
 - challenges.each do |challenge|
   = render 'challenge_entry', locals: { checkpoint: checkpoint, challenge: challenge }
 - if challenges.count < max_challenges && available_challenges.present?

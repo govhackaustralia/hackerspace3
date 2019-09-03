@@ -9,14 +9,12 @@
       Checkpoint
     - national_challenges = @team.national_challenges(checkpoint)
     %h4 National Challenges
-    = "#{national_challenges.count} of #{pluralize checkpoint.max_national_challenges, 'national challenge'} entered"
-    %br/
+    %p= "#{national_challenges.count} of #{pluralize checkpoint.max_national(@region), 'national challenge'} entered"
     - national_challenges.each do |challenge|
       = render 'challenge_entry', locals: { checkpoint: checkpoint, challenge: challenge }
     - regional_challenges = @team.regional_challenges(checkpoint)
     %h4 Regional Challenges
-    = "#{regional_challenges.count} of #{pluralize checkpoint.max_regional_challenges, 'regional challenge'} entered"
-    %br/
+    %p= "#{regional_challenges.count} of #{pluralize checkpoint.max_regional(@region), 'regional challenge'} entered"
     - regional_challenges.each do |challenge|
       = render 'challenge_entry', locals: { checkpoint: checkpoint, challenge: challenge }
 = link_to 'Back to Team', team_management_team_path(@team)
