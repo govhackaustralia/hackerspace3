@@ -9,11 +9,9 @@
     %p Team Project is not Published.
     %p= link_to 'Publish Team Project', admin_competition_team_path(@competition, @team, published: true), method: :patch
   %h3 Project Version Management
-  Project Version Count: #{@projects.count}
-  %br/
-  Current Version Created At: #{@project.created_at}
-  %br/
-  = link_to 'Project Management', admin_team_projects_path(@team)
+  %p Project Version Count: #{@projects.count}
+  %p Current Version Created At: #{@project.created_at}
+  %p= link_to 'Project Management', admin_team_projects_path(@team)
   %h3 Team Participants
   - @team.assignments.each do |assignment|
     - user = assignment.user
@@ -46,4 +44,4 @@
           max_challenges: checkpoint.max_regional(@region),      |
           challenges: @team.regional_challenges(checkpoint),     |
           available_challenges: @available_regional_challenges } |
-= link_to 'Back to Team Management', admin_competition_teams_path(@competition)
+%p= link_to 'Back to Team Management', admin_competition_teams_path(@competition)
