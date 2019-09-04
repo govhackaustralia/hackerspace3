@@ -109,3 +109,31 @@
 - url: http://data-1-hobartcc.opendata.arcgis.com
   name: City of Hobart Open Data Portal
   short_url: data-1-hobartcc.opendata.arcgis.com
+
+- url: https://data-wcc.opendata.arcgis.com
+  name: Wellington City Council
+  short_url: data-wcc.opendata.arcgis.com
+
+- url: https://data-aucklandcouncil.opendata.arcgis.com
+  name: Auckland Council
+  short_url: data-aucklandcouncil.opendata.arcgis.com
+
+- url: https://hbrcopendata-hbrc.opendata.arcgis.com
+  name: Hawke's Bay Regional Council
+  short_url: hbrcopendata-hbrc.opendata.arcgis.com
+
+- url: https://www.stats.govt.nz/about-us/what-we-do/govhack-possible-data-sources
+  name: Statistics New Zealand
+  short_url: www.stats.govt.nz
+
+- url: http://wdc.whanganui.govt.nz/odata/xml/
+  name: Whanganui District Council
+  short_url: wdc.whanganui.govt.nz
+
+- url: https://data-nrcgis.opendata.arcgis.com
+  name: Northland Regional Council
+  short_url: data-nrcgis.opendata.arcgis.com
+
+- url:  https://data-waikatolass.opendata.arcgis.com
+  name: Waikato Local Authority Shared Services
+  short_url: data-waikatolass.opendata.arcgis.com
