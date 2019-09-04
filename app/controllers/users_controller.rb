@@ -43,7 +43,7 @@ class UsersController < ApplicationController
   def user_params
     params.require(:user).permit :full_name, :preferred_name, :preferred_img,
                                  :tshirt_size, :twitter, :phone_number,
-                                 :mailing_list,
+                                 :mailing_list, :slack,
                                  :challenge_sponsor_contact_place,
                                  :challenge_sponsor_contact_enter,
                                  :my_project_sponsor_contact,
