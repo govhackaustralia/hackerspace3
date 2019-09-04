@@ -46,6 +46,7 @@ class UserSeeder < Seeder
         phone_number: nil,
         how_did_you_hear: nil,
         accepted_terms_and_conditions: false,
+        accepted_code_of_conduct: (Time.now unless number % 10 == 0),
         password: Devise.friendly_token[0, 20],
         request_not_photographed: random_boolean,
         aws_credits_requested: number % 4 == 0,
@@ -53,7 +54,8 @@ class UserSeeder < Seeder
         coder: random_boolean,
         creative: random_boolean,
         facilitator: random_boolean,
-        registration_type: USER_REGISTRATION_TYPES.sample
+        registration_type: USER_REGISTRATION_TYPES.sample,
+
       )
 
       if user.registration_type == YOUTH_COMPETITOR

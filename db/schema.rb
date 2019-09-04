@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_04_115707) do
+ActiveRecord::Schema.define(version: 2019_09_04_130157) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -444,6 +444,7 @@ ActiveRecord::Schema.define(version: 2019_09_04_115707) do
     t.string "branch_name"
     t.boolean "aws_credits_requested"
     t.string "slack"
+    t.datetime "accepted_code_of_conduct"
     t.index ["aws_credits_requested"], name: "index_users_on_aws_credits_requested"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
