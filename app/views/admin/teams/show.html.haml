@@ -12,7 +12,7 @@
   %p Project Version Count: #{@projects.count}
   %p Current Version Created At: #{@project.created_at}
   %p= link_to 'Project Management', admin_team_projects_path(@team)
-  %h3 Team Participants
+  %h3 Team Members
   - @team.assignments.each do |assignment|
     - user = assignment.user
     %div
@@ -23,6 +23,10 @@
         Title: #{assignment.title}
       %p
         Email: #{user.email}
+      - if user.twitter
+        %p Twitter: #{user.twitter}
+      - if user.slack
+        %p Slack: #{user.slack}
   %h3
     Challenge Management
     %h3
