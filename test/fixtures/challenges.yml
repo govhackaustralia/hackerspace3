@@ -32,3 +32,4 @@ three:
   video_url: MyString
   approved: true
   identifier: queensland_challenge_1
+  nation_wide: true

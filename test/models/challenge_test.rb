@@ -41,6 +41,8 @@ class ChallengeTest < ActiveSupport::TestCase
     assert Challenge.approved.include? @challenge
     @challenge.update approved: false
     assert Challenge.approved.exclude? @challenge
+    assert Challenge.nation_wides.include? @regional_challenge
+    assert Challenge.nation_wides.exclude? @challenge
   end
 
   test 'challenge validations' do
