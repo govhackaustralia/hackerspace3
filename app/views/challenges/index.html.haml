@@ -2,7 +2,7 @@
 %main.challenge_index
   %h2
     Challenges for Competition #{@competition.year}
-  - if @competition.started?
+  - if @competition.started? FIRST_TIME_ZONE
     = form_tag challenges_path, method: :get do
       = search_field_tag :term, params[:term]
       = submit_tag 'Search'
