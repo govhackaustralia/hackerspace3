@@ -45,14 +45,17 @@ class RegionTest < ActiveSupport::TestCase
   end
 
   test 'region scopes' do
-    assert Region.lows.include? @regional
-    assert Region.lows.exclude? @international
     assert Region.regionals.include? @regional
     assert Region.regionals.exclude? @national
     assert Region.nationals.include? @national
     assert Region.nationals.exclude? @regional
     assert Region.internationals.include? @international
     assert Region.internationals.exclude? @regional
+    assert Region.lows.include? @regional
+    assert Region.lows.exclude? @international
+    assert Region.highs.include? @national
+    assert Region.highs.include? @international
+    assert Region.highs.exclude? @regional
   end
 
   test 'region validations' do
