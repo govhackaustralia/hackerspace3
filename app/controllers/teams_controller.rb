@@ -25,7 +25,7 @@ class TeamsController < ApplicationController
   end
 
   def check_in_form_or_comp_window!
-    return if @competition.in_form_or_comp_window? LAST_TIME_ZONE
+    return if @competition.in_form_or_comp_window? @participating_competition_event.region.time_zone
 
     flash[:alert] = 'Team formation is not available at this time.'
     redirect_to projects_path

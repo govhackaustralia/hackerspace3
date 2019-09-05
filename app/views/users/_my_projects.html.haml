@@ -1,0 +1,17 @@
+%h3 My Team Projects
+- if @competition.in_form_or_comp_window? @time_zone
+  %p= link_to 'Create New Team Project', new_team_path
+- if @joined_teams.present?
+  - @joined_teams.each do |team|
+    %h4 #{team.current_project.team_name} - #{team.current_project.project_name}
+    %p
+      Event: #{team.event.name}
+    - if @competition.in_form_or_comp_window?(team.region.time_zone)
+      %p= link_to "Manage #{team.name}", team_management_team_path(team)
+    - elsif team.published
+      %p= link_to "Go to #{team.name}", project_path(team.current_project.identifier)
+    - else
+      %p This project is yet to be published.
+- else
+  - if @competition.not_finished? @time_zone
+    %p Your team project memberships will appear here.
