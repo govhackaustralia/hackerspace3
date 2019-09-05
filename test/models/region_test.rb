@@ -145,4 +145,11 @@ class RegionTest < ActiveSupport::TestCase
       parent: @national
     ).persisted?
   end
+
+  test 'eligible_challenges' do
+    Challenge.first.update region: Region.third
+    assert @international.eligible_challenges.present?
+    assert @national.eligible_challenges.present?
+    assert @regional.eligible_challenges.present?
+  end
 end

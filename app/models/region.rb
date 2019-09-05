@@ -113,6 +113,15 @@ class Region < ApplicationRecord
     teams.presence || sub_region_teams
   end
 
+  # Return an array of the challenges a team 'under' the region can enter
+  def eligible_challenges
+    [
+      challenges +
+        sub_region_challenges.nation_wides +
+        [parent&.eligible_challenges]
+    ].flatten.uniq.compact
+  end
+
   private
 
   # Ensures only one root region is assigned to a competition
