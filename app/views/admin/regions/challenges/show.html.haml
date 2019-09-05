@@ -28,11 +28,14 @@
     %p This Challenge does not have a PDF Preview.
   %p= link_to 'Update PDF Preview', edit_admin_region_challenge_path(@region, @challenge, pdf_preview: true)
   %p= link_to 'Update PDF', edit_admin_region_challenge_path(@region, @challenge, pdf: true)
+  %p= link_to "Update Challenge", edit_admin_region_challenge_path(@region, @challenge)
   - unless @challenge.approved
     %p
       %strong This challenge is yet to be approved.
-  %p= link_to 'Go to Challenge Page', challenge_path(@challenge.identifier)
-  %p= link_to "Update Challenge", edit_admin_region_challenge_path(@region, @challenge)
+  - if @competition.started? @region.time_zone
+    %p= link_to 'Go to Challenge Page', challenge_path(@challenge.identifier)
+  - else
+    %p= link_to 'Go to Challenge Preview Page', preview_admin_region_challenge_path(@region, @challenge)
   %h3 Teams Competing
   %p #{ pluralize(@challenge.entries.count, 'team')} entered challenge.
   %p= link_to 'Go to Challenge Entries', admin_challenge_entries_path(@challenge)

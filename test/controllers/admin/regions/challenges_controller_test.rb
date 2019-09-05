@@ -54,4 +54,10 @@ class Admin::Regions::ChallengesControllerTest < ActionDispatch::IntegrationTest
     @challenge.reload
     assert_not @challenge.name == 'Updated'
   end
+
+  test 'should get preview' do
+    @region.competition.update start_time: Time.now.tomorrow
+    get preview_admin_region_challenge_path @region, @challenge
+    assert_response :success
+  end
 end

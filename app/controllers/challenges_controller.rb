@@ -1,4 +1,6 @@
 class ChallengesController < ApplicationController
+  before_action :check_competition_start!, only: :show
+
   def index
     index_variables
     challenge_entry_counts
@@ -10,28 +12,27 @@ class ChallengesController < ApplicationController
   end
 
   def show
-    show_variables
+    @data_sets = @challenge.data_sets
+    @challenge_sponsorships = @challenge.challenge_sponsorships
     challenge_show_entry_management
-    @region_privileges = user_signed_in? && current_user.region_privileges?(@region)
-    return if helpers.competition_started_or_region_privileges? @region.time_zone
-
-    redirect_to root_path
   end
 
   private
+
+  def check_competition_start!
+    @challenge = Challenge.find_by identifier: params[:identifier]
+    @challenge = Challenge.find(params[:identifier]) if @challenge.nil?
+    @region = @challenge.region
+    return if @competition.started? @region.time_zone
+
+    flash[:alert] = 'Challenges will become visible at the start of the competition'
+    redirect_to root_path
+  end
 
   def index_variables
     @challenges = @competition.challenges.approved.order(:name).preload :region
     @regions = @competition.regions.order(:category).order(:name)
     @region_privileges = user_signed_in? && current_user.region_privileges?(@competition)
-  end
-
-  def show_variables
-    @challenge = Challenge.find_by identifier: params[:identifier]
-    @challenge = Challenge.find(params[:identifier]) if @challenge.nil?
-    @region = @challenge.region
-    @data_sets = @challenge.data_sets
-    @challenge_sponsorships = @challenge.challenge_sponsorships
   end
 
   def challenge_show_entry_management

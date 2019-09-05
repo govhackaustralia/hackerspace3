@@ -1,5 +1,6 @@
 class Admin::Regions::ChallengesController < ApplicationController
   before_action :authenticate_user!, :check_for_privileges
+  before_action :check_for_competition_start!, only: :preview
 
   def index
     @challenges = @region.challenges
@@ -10,6 +11,13 @@ class Admin::Regions::ChallengesController < ApplicationController
     @challenge_sponsorships = @challenge.challenge_sponsorships
     @challenge_data_sets = @challenge.challenge_data_sets
     @judges = @challenge.judges
+  end
+
+  def preview
+    @data_sets = @challenge.data_sets
+    @challenge_sponsorships = @challenge.challenge_sponsorships
+    @user_eligible_teams = []
+    render 'challenges/show'
   end
 
   def new
@@ -38,6 +46,14 @@ class Admin::Regions::ChallengesController < ApplicationController
   end
 
   private
+
+  def check_for_competition_start!
+    @challenge = Challenge.find params[:id]
+    return unless @competition.started? @region.time_zone
+
+    flash[:alert] = 'Competition has started, no need for challenge preview'
+    redirect_to challenge_path @challenge.identifier
+  end
 
   # ENHANCEMENT: Break into seperate methods or controllers.
   def handle_update_redirect
