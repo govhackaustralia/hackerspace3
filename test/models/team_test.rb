@@ -90,4 +90,14 @@ class TeamTest < ActiveSupport::TestCase
     Team.search(@competition, 'A').include? @team
     Team.search(@competition, 'x').include? @team
   end
+
+  test 'check_for_ineligible_challenge_entries' do
+    exception = assert_raises(ActiveRecord::RecordInvalid) do
+      @team.update! event: Event.fourth
+    end
+    assert exception.message.include?(
+      'some challenge entries will not be eligible'
+    )
+    assert Team.second.update event: @event
+  end
 end

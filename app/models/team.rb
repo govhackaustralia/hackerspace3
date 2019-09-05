@@ -39,6 +39,8 @@ class Team < ApplicationRecord
     joins(event: :region).where(regions: { competition: competition })
   }
 
+  validate :check_for_ineligible_challenge_entries
+
   # Returns the user record for the team leader.
   # ENHANCEMENT: Should not be needed.
   def team_leader
@@ -162,5 +164,17 @@ class Team < ApplicationRecord
   def self.search(competition, term)
     team_ids = competition.projects.search(term).pluck(:team_id).uniq
     Team.where(id: team_ids.uniq)
+  end
+
+  private
+
+  # Will check to see that all challenges are still eligible if team event
+  # is amended
+  def check_for_ineligible_challenge_entries
+    return if event_id.nil?
+
+    return if (challenges - region.eligible_challenges).empty?
+
+    errors.add :entries, 'some challenge entries will not be eligible if team event is changed'
   end
 end
