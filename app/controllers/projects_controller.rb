@@ -2,7 +2,8 @@ class ProjectsController < ApplicationController
   before_action :check_competition_started!, only: :show
 
   def index
-    index_variables
+    @teams = @competition.teams.published
+    @projects = @competition.published_projects_by_name.preload :event
     user_records_index if user_signed_in?
     respond_to do |format|
       format.html
@@ -21,12 +22,6 @@ class ProjectsController < ApplicationController
   end
 
   private
-
-  def index_variables
-    @teams = @competition.teams.published
-    @projects = @competition.published_projects_by_name.preload(:event)
-    @region_privileges = user_signed_in? && current_user.region_privileges?(@competition)
-  end
 
   def show_published
     @checkpoints = @competition.checkpoints.order :end_time
