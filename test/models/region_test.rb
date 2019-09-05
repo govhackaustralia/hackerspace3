@@ -22,11 +22,13 @@ class RegionTest < ActiveSupport::TestCase
     @region_limit = RegionLimit.first
     @regionalless_national = Region.fourth
     @national_team = Team.second
+    @regional_challenge = Challenge.third
   end
 
   test 'region associations' do
     assert @international.sub_regions.include? @national
     assert @national.sub_region_teams.include? @team
+    assert @national.sub_region_challenges.include? @regional_challenge
     assert @regional.parent == @national
     assert @national.competition == @competition
     assert @national.assignments.include? @assignment
