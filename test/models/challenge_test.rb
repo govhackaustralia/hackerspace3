@@ -14,6 +14,7 @@ class ChallengeTest < ActiveSupport::TestCase
     @sponsor = Sponsor.first
     @challenge_data_set = ChallengeDataSet.first
     @data_set = DataSet.first
+    @regional_challenge = Challenge.third
   end
 
   test 'challenge associations' do
@@ -52,8 +53,7 @@ class ChallengeTest < ActiveSupport::TestCase
     assert_raises(ActiveRecord::RecordInvalid) do
       @challenge.update! nation_wide: true
     end
-    @challenge = Challenge.third
-    @challenge.update nation_wide: true
-    assert @challenge.reload.nation_wide
+    @regional_challenge.update nation_wide: true
+    assert @regional_challenge.reload.nation_wide
   end
 end
