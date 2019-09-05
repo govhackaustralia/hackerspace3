@@ -2,7 +2,8 @@ class ChallengesController < ApplicationController
   before_action :check_competition_start!, only: :show
 
   def index
-    index_variables
+    @challenges = @competition.challenges.approved.order(:name).preload :region
+    @regions = @competition.regions.order(:category).order :name
     challenge_entry_counts
     filter_challenges
     # respond_to do |format|
@@ -27,12 +28,6 @@ class ChallengesController < ApplicationController
 
     flash[:alert] = 'Challenges will become visible at the start of the competition'
     redirect_to root_path
-  end
-
-  def index_variables
-    @challenges = @competition.challenges.approved.order(:name).preload :region
-    @regions = @competition.regions.order(:category).order(:name)
-    @region_privileges = user_signed_in? && current_user.region_privileges?(@competition)
   end
 
   def challenge_show_entry_management
