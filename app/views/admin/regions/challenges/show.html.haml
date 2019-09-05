@@ -5,7 +5,7 @@
   - if @challenge.image.attached?
     %img{:alt => "#{@challenge.name} image", :src => "#{url_for(@challenge.image)}"}
   - else
-    = image_tag "default_profile_pic.png"
+    = image_tag 'default_profile_pic.png'
   %p= link_to 'Update Image', edit_admin_region_challenge_path(@region, @challenge, image: true)
   - unless @challenge.short_desc.blank?
     %p Short Description: #{@challenge.short_desc}
@@ -18,17 +18,17 @@
     = render 'challenges/challenge_entry'
   - unless @challenge.video_url.blank?
     %p
-      %a{:href => "#{@challenge.video_url}", :target => "_blank"} Video
+      %a{href: "#{@challenge.video_url}", target: '_blank'} Video
   - if @challenge.pdf.attached? && @challenge.pdf_preview.attached?
-    %a{:href => "#{url_for(@challenge.pdf)}", :target => "_blank"}
-      %img{:alt => "#{@challenge.name} pdf_preview", :src => "#{url_for(@challenge.pdf_preview)}", :title => "Govhack Hackerspace"}
+    %a{href: "#{url_for(@challenge.pdf)}", target: '_blank'}
+      %img{alt: "#{@challenge.name} pdf_preview", src: "#{url_for(@challenge.pdf_preview)}", title: "Govhack Hackerspace"}
   - unless @challenge.pdf.attached?
     %p This Challenge does not have a PDF.
   - unless @challenge.pdf_preview.attached?
     %p This Challenge does not have a PDF Preview.
   %p= link_to 'Update PDF Preview', edit_admin_region_challenge_path(@region, @challenge, pdf_preview: true)
   %p= link_to 'Update PDF', edit_admin_region_challenge_path(@region, @challenge, pdf: true)
-  %p= link_to "Update Challenge", edit_admin_region_challenge_path(@region, @challenge)
+  %p= link_to 'Update Challenge', edit_admin_region_challenge_path(@region, @challenge)
   - unless @challenge.approved
     %p
       %strong This challenge is yet to be approved.
