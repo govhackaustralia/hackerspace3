@@ -54,6 +54,10 @@
   name: New South Wales
   short_url: data.nsw.gov.au
 
+- url:  https://data.nt.gov.au/
+  name: Northern Territory
+  short_url: data.nt.gov.au
+
 - url: https://data.qld.gov.au/
   name: Queensland
   short_url: data.qld.gov.au
