@@ -47,9 +47,8 @@ class Registration < ApplicationRecord
   }
 
   validate :check_for_existing_competition_registrations,
-           :check_for_team_assignments
-
-  validate :check_code_of_conduct
+           :check_for_team_assignments,
+           :check_code_of_conduct
 
   # Returns the category of a registration for the purpose of allocating
   # different event ticket types.
