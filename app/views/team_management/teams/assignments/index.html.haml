@@ -10,6 +10,9 @@
   %section
     - if (team_leader = @team.team_leader).present?
       = render 'users/user_contact', locals: { user: team_leader }
+      - if (assignment =  @team.leader_assignments.first).present?
+        %p= link_to 'Leave Team', users_membership_path(assignment), |
+            method: :delete, data: { confirm: 'Are you sure?' }      |
     - else
       %strong No team leader assigned for this team.
   - if (team_members = @team.members).present?
