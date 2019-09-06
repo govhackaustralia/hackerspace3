@@ -43,7 +43,7 @@ class ChallengesController < ApplicationController
   end
 
   def landing_page?
-    return false unless @competition.not_finished? LAST_TIME_ZONE
+    return false if @competition.started? LAST_TIME_ZONE
 
     return false if user_signed_in? &&
                     (@event = current_user.participating_competition_event(@competition)).present? &&
