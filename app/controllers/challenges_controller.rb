@@ -1,5 +1,7 @@
 class ChallengesController < ApplicationController
   before_action :check_competition_start!, only: :show
+  before_action :check_competition_index_landing_page!, only: :index
+  before_action :check_competition_landing_page_index!, only: :landing_page
 
   def index
     @challenges = @competition.challenges.approved.order(:name).preload :region
@@ -12,6 +14,12 @@ class ChallengesController < ApplicationController
     # end
   end
 
+  def landing_page
+    return unless (@started = @competition.started?(FIRST_TIME_ZONE))
+
+    @regions = @competition.regions
+  end
+
   def show
     @data_sets = @challenge.data_sets
     @challenge_sponsorships = @challenge.challenge_sponsorships
@@ -19,6 +27,28 @@ class ChallengesController < ApplicationController
   end
 
   private
+
+  def check_competition_index_landing_page!
+    return unless landing_page?
+
+    redirect_to landing_page_challenges_path
+  end
+
+  def check_competition_landing_page_index!
+    return if landing_page?
+
+    redirect_to challenges_path
+  end
+
+  def landing_page?
+    return false unless @competition.not_finished? LAST_TIME_ZONE
+
+    return false if user_signed_in? &&
+                    (@event = current_user.participating_competition_event(@competition)).present? &&
+                    @competition.started?(@event.region.time_zone)
+
+    true
+  end
 
   def check_competition_start!
     @challenge = Challenge.find_by identifier: params[:identifier]

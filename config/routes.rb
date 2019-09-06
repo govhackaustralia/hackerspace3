@@ -6,7 +6,9 @@ Rails.application.routes.draw do
   resources :data_sets, only: [:index, :show]
   resources :teams, only: [:new, :create]
   resources :favourites, only: [:create, :destroy]
-  resources :challenges, param: :identifier, only: [:index, :show]
+  resources :challenges, param: :identifier, only: [:index, :show] do
+    collection { get 'landing_page' }
+  end
   resources :users, only: :update
   resources :connections, :competition_events, :awards, only: :index
 
