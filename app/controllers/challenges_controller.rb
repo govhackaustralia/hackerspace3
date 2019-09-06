@@ -10,10 +10,10 @@ class ChallengesController < ApplicationController
     @regions = @competition.regions.order(:category).order :name
     challenge_entry_counts
     filter_challenges
-    respond_to do |format|
-      format.html
-      format.csv { send_data @challenges.to_csv @competition }
-    end
+    # respond_to do |format|
+    #   format.html
+    #   format.csv { send_data @challenges.to_csv @competition }
+    # end
   end
 
   def landing_page
