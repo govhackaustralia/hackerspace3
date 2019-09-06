@@ -4,7 +4,9 @@ class ChallengesController < ApplicationController
   before_action :check_competition_landing_page_index!, only: :landing_page
 
   def index
-    @challenges = @competition.challenges.approved.order(:name).preload :region
+    @challenges = @competition.challenges.approved.order(:name).preload(
+      challenge_sponsorships: :sponsor
+    )
     @regions = @competition.regions.order(:category).order :name
     challenge_entry_counts
     filter_challenges
@@ -54,7 +56,7 @@ class ChallengesController < ApplicationController
     @challenge = Challenge.find_by identifier: params[:identifier]
     @challenge = Challenge.find(params[:identifier]) if @challenge.nil?
     @region = @challenge.region
-    return if @competition.started? @region.time_zone
+    return if @competition.started?(@region.time_zone) || @region.international?
 
     flash[:alert] = 'Challenges will become visible at the start of the competition'
     redirect_to root_path

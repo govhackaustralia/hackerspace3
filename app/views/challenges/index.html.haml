@@ -7,7 +7,7 @@
   %p= link_to 'Clear Search', challenges_path
   %p= link_to 'Download CSV', challenges_path(format: 'csv'), class: 'download-csv'
   - @regions.each do |region|
-    - next unless @competition.started?(region.time_zone)
+    - next unless @competition.started?(region.time_zone) || region.international?
     - next if (challenges = @region_challenges[region.id]).empty?
     %h3= region.name
     - challenges.each do |challenge|
@@ -16,19 +16,15 @@
           %h4= challenge.name
           - unless challenge.short_desc.blank?
             %h5= challenge.short_desc
-          - entry_count = @challenge_id_to_entry_count[challenge.id]
           %p
+            - entry_count = @challenge_id_to_entry_count[challenge.id]
             = link_to 'Go to Challenge', challenge_path(challenge.identifier)
-            |
-            \#{pluralize entry_count , 'team'}
-            \#{entry_count == 1 ? 'has' : 'have'} entered into this challenge across all checkpoints that have passed.
+            | #{pluralize entry_count , 'team'}
+            #{entry_count == 1 ? 'has' : 'have'} entered into this challenge
+            across all checkpoints that have passed.
         %aside.sponsors
           - if challenge.challenge_sponsorships.present?
             - challenge.challenge_sponsorships.each do |sponsorship|
-              - sponsor = sponsorship.sponsor
               %figure
-                %a{:href => "#{sponsor.website}", :target => "_blank"}
-                  - if sponsor.logo.attached?
-                    = image_tag url_for(sponsor.logo)
-                  - else
-                    = image_tag 'default_profile_pic.png'
+                - sponsor = sponsorship.sponsor
+                = link_to (image_tag(sponsor.logo.attached? ? url_for(sponsor.logo) : 'default_profile_pic.png')), sponsor.website, target: '_blank'
