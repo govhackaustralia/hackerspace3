@@ -2,6 +2,12 @@
   .field
     = form.label :checkpoint_id
     = form.select :checkpoint_id, options_from_collection_for_select(@checkpoints, :id, :name, @entry.checkpoint_id.to_s)
+  %p{style: 'text-align: center;'}
+    Please justify why your project is eligible for this challenge with a
+    short description.
+  %p{style: 'text-align: center;'}
+    %strong
+      This will need to be completed by the end of the Competition.
   .field
     = form.label :justification
     = form.text_area :justification
