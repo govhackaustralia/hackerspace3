@@ -44,7 +44,7 @@
           %img.pdf_preview{:alt => "#{@challenge.name} pdf_preview", :src => "#{url_for(@challenge.pdf_preview)}", :title => "Govhack Hackerspace"}/
           %br/
   - if @challenge.image.attached?
-    - image_tag url_for(@challenge.image), alt: "#{@challenge.name} image", class: 'challenge_image'
+    %img.challenge_image{alt:"#{@challenge.name} image", src: "#{url_for(@challenge.image)}"}/
     %br/
   %section
     - if user_signed_in?
