@@ -47,7 +47,7 @@ class Entry < ApplicationRecord
   # Checks that a team has not entered the maximum number of regional challenges
   # at a given checkpoint.
   def entries_must_not_exceed_max_regional_allowed_for_checkpoint
-    return if challenge.region.international?
+    return unless challenge.region.regional?
 
     current_count = team.regional_challenges(checkpoint).count
     max_allowed = checkpoint.max_regional(region)
@@ -62,7 +62,7 @@ class Entry < ApplicationRecord
   # Checks that a team has not entered the maximum number of national challenges
   # at a given checkpoint.
   def entries_must_not_exceed_max_national_allowed_for_checkpoint
-    return unless challenge.region.international?
+    return if challenge.region.regional?
 
     current_count = team.national_challenges(checkpoint).count
     max_allowed = checkpoint.max_national(region)
