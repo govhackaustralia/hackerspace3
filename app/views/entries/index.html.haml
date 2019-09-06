@@ -1,6 +1,6 @@
 - content_for :title, 'Stats'
 %main.entries_page
-  - if @competition.started?
+  - if false
     %h2 Challenge Entry Counts for #{@competition.name}
     %h3= @root_region.name
     = render 'national_challenge_entries'
@@ -27,4 +27,4 @@
     %section.later
       %p
         %strong
-          Check back here at the commencement of the competition at #{@competition.start_time.strftime("%I.%M %p %e %B %Y")}
+          Coming Soon
