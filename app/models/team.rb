@@ -101,7 +101,8 @@ class Team < ApplicationRecord
     valid_checkpoints = []
     challenge_region = challenge.region
     competition.checkpoints.each do |checkpoint|
-      next if checkpoint.limit_reached?(self, challenge_region)
+      # ERROR: Not working correctly at the moment
+      # next if checkpoint.limit_reached?(self, challenge_region)
 
       valid_checkpoints << checkpoint
     end

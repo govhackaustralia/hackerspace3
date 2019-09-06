@@ -107,12 +107,14 @@ class Competition < ApplicationRecord
   # Returns an array containing all the available checkpoints for a team in a
   # particular region.
   # ENHANCEMENT: This should be somewhere else.
-  def available_checkpoints(team, region)
+  def available_checkpoints(team, _region)
     valid_checkpoints = []
     team_time_zone = team.time_zone
     checkpoints.each do |checkpoint|
       next if checkpoint.passed?(team_time_zone)
-      next if checkpoint.limit_reached?(team, region)
+
+      # ERROR: Not working correctly at the moment
+      # next if checkpoint.limit_reached?(team, region)
 
       valid_checkpoints << checkpoint
     end

@@ -8,6 +8,7 @@ class Checkpoint < ApplicationRecord
 
   # Returns a boolean based on whether a team has reached the maximum
   # number of challenges for a particular region.
+  # ERROR: Not working correctly at the moment
   def limit_reached?(team, region)
     if region.international? || region.national?
       team.national_challenges(self).count >= max_national(region)
