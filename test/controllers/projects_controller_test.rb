@@ -1,14 +1,26 @@
 require 'test_helper'
 
 class ProjectsControllerTest < ActionDispatch::IntegrationTest
+  setup do
+    @project = Project.first
+    @competition = Competition.first
+    @team = @project.team
+  end
+
   test 'should get index' do
     get projects_url
     assert_response :success
   end
 
   test 'should get show' do
-    project = projects(:one)
-    get project_url(project.identifier)
+    get project_url @project.identifier
     assert_response :success
+    @competition.update start_time: Time.now.tomorrow, end_time: Time.now.tomorrow
+    get project_url @project.identifier
+    assert_redirected_to projects_path
+    @team.update published: false
+    @competition.update start_time: Time.now.yesterday, end_time: Time.now.yesterday
+    get project_url @project.identifier
+    assert_redirected_to projects_path
   end
 end

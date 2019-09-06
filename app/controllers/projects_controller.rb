@@ -1,5 +1,5 @@
 class ProjectsController < ApplicationController
-  before_action :check_competition_started!, only: :show
+  before_action :check_competition_started!, :check_team_published!, only: :show
 
   def index
     @teams = @competition.teams.published
@@ -13,17 +13,6 @@ class ProjectsController < ApplicationController
 
   def show
     @current_project = @team.current_project
-    if @team.published
-      show_published
-    else
-      flash[:alert] = 'This Team Project has not been published.'
-      redirect_to root_path
-    end
-  end
-
-  private
-
-  def show_published
     @checkpoints = @competition.checkpoints.order :end_time
     @passed_checkpoint_ids = @competition.passed_checkpoint_ids @time_zone
     @entries_to_display = @team.entries.where(
@@ -31,6 +20,8 @@ class ProjectsController < ApplicationController
     ).preload challenge: :region
     user_records_show if user_signed_in?
   end
+
+  private
 
   def user_records_index
     retrieve_attending_events
@@ -50,12 +41,22 @@ class ProjectsController < ApplicationController
 
   def user_records_show
     @user = current_user
-    @favourite = Favourite.find_by(assignment: @user.event_assignment(@competition), team: @team)
-    @scorecard = Scorecard.find_by(assignment: @user.event_assignment(@competition), judgeable: @team)
+    retrieve_favourite_and_scorecard
     @judgeable_assignment = @user.judgeable_assignment @competition
     @peoples_assignment = @user.peoples_assignment @competition
     @judge = @user.judge_assignment(@team.challenges)
     @users_team = @user.joined_teams.include? @team
+  end
+
+  def retrieve_favourite_and_scorecard
+    @favourite = Favourite.find_by(
+      assignment: @user.event_assignment(@competition),
+      team: @team
+    )
+    @scorecard = Scorecard.find_by(
+      assignment: @user.event_assignment(@competition),
+      judgeable: @team
+    )
   end
 
   def check_competition_started!
@@ -64,6 +65,13 @@ class ProjectsController < ApplicationController
     return if @competition.started? @time_zone
 
     flash[:alert] = 'Teams will become visible at the start of the competition'
+    redirect_to projects_path
+  end
+
+  def check_team_published!
+    return if @team.published
+
+    flash[:alert] = 'This Team Project has not been published.'
     redirect_to projects_path
   end
 end
