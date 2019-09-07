@@ -18,10 +18,6 @@
             %h5= challenge.short_desc
           %p
             = link_to 'Go to Challenge', challenge_path(challenge.identifier)
-            - entry_count = @challenge_id_to_entry_count[challenge.id]
-            | #{pluralize entry_count , 'team'}
-            #{entry_count == 1 ? 'has' : 'have'} entered into this challenge
-            across all checkpoints that have passed.
         %aside.sponsors
           - if challenge.challenge_sponsorships.present?
             - challenge.challenge_sponsorships.each do |sponsorship|
