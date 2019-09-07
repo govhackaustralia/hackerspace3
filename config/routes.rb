@@ -122,7 +122,7 @@ Rails.application.routes.draw do
     end
   end
 
-  get 'stats', to: 'entries#index'
+  # get 'stats', to: 'entries#index'
   get 'manage_account', to: 'users#show'
   get 'complete_registration', to: 'users#edit'
   get 'update_personal_details', to: 'users#edit'
