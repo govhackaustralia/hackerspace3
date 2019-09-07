@@ -3,7 +3,7 @@
   %h2
     Team Projects for Competition #{@competition.year}
   - if @competition.started? FIRST_TIME_ZONE
-    -# %p= link_to 'Download CSV', projects_path(format: 'csv'), class: 'download-csv'
+    %p= link_to 'Download CSV', projects_path(format: 'csv'), class: 'download-csv'
     - if user_signed_in? && @competition.in_form_or_comp_window?(LAST_TIME_ZONE)
       - if @participating_competition_events.present?
         %aside= link_to 'Create New Team Project', new_team_path
