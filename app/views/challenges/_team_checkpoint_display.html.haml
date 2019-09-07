@@ -1,7 +1,9 @@
 %section.teams
-  = pluralize @teams.count, 'team'
-  = @teams.count == 1 ? 'has' : 'have'
-  entered into this challenge across all checkpoints that have passed.
+  - entry_count = @challenge_id_to_entry_count[@challenge.id]
+  = pluralize entry_count, 'team'
+  = entry_count == 1 ? 'has' : 'have'
+  entered into this challenge across all checkpoints that have passed in the
+  relevant team's region.
   - @passed_public_checkpoints.each do |checkpoint|
     %h4 #{checkpoint.name} Checkpoint
     - if (teams = challenge_teams(checkpoint)).present?

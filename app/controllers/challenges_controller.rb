@@ -25,7 +25,9 @@ class ChallengesController < ApplicationController
   def show
     @data_sets = @challenge.data_sets
     @challenge_sponsorships = @challenge.challenge_sponsorships
+    @challenges = @competition.challenges.approved
     challenge_show_entry_management
+    challenge_entry_counts
   end
 
   private
