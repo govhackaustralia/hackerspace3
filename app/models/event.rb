@@ -188,15 +188,14 @@ class Event < ApplicationRecord
   # off the waiting list.
   def check_for_newly_freed_space
     ActiveRecord::Base.transaction do
-      return unless below_capacity?
+      registrations.waitlist.order(time_notified: :asc).each do |registration|
+        break unless below_capacity?
 
-      waitlist_registrations = registrations.where(status: WAITLIST).order(time_notified: :asc)
-      return unless (new_attendee = waitlist_registrations.first).present?
+        registration.update status: ATTENDING
+        next if %w[development test].include? ENV['RAILS_ENV']
 
-      new_attendee.update(status: ATTENDING)
-      return if %w[development test].include? ENV['RAILS_ENV']
-
-      RegistrationMailer.attendance_email(new_attendee).deliver_later
+        RegistrationMailer.attendance_email(registration).deliver_later
+      end
     end
   end
 
