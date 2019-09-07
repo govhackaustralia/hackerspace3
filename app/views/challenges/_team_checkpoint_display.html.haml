@@ -5,6 +5,10 @@
     = entry_count == 1 ? 'has' : 'have'
     entered into this challenge across all checkpoints that have passed in the
     relevant team's region.
+  %p
+    %strong
+      Teams Projects will appear below when the relevant checkpoint has passed
+      in #{@region.time_zone} time.
   - @passed_public_checkpoints.each do |checkpoint|
     %h4 #{checkpoint.name} Checkpoint
     - if (teams = challenge_teams(checkpoint)).present?
