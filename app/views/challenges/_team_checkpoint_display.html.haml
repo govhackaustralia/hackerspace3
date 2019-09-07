@@ -2,13 +2,12 @@
   %p
     %strong
       Team Projects will appear below when the relevant checkpoint has passed
-      in #{@region.time_zone} time.
+      (#{@region.time_zone} time)
   - @passed_public_checkpoints.each do |checkpoint|
     %h4 #{checkpoint.name} Checkpoint
     - if (teams = challenge_teams(checkpoint)).present?
       - teams.each do |team|
         %h5= "#{team.current_project.team_name} - #{team.current_project.project_name}"
-        = link_to 'Go to Team Project', project_path(team.current_project.identifier)
-        %br/
+        %p= link_to 'Go to Team Project', project_path(team.current_project.identifier)
     - else
       %p No team projects entered at this checkpoint.
