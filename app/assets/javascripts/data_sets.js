@@ -2,7 +2,7 @@
 // // All this logic will automatically be available in application.js.
 $( document ).on('turbolinks:load', function() {
   $('#dataset_table').DataTable({
-    scrollY: 500
+    scrollY: 750
   });
 });
 // $( document ).on('ready turbolinks:load', function() {
