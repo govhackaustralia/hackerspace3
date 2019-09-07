@@ -106,6 +106,7 @@ class ChallengesController < ApplicationController
     published_entries.each do |entry|
       challenge_array = @challenge_id_to_entry_count[entry.challenge_id]
       next if challenge_array.nil?
+
       challenge_array += 1
     end
   end
