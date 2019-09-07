@@ -105,7 +105,11 @@ class ChallengesController < ApplicationController
     published_entries = all_entries - unpublished_entries
     @challenge_id_to_entry_count = {}
     @challenges.each { |challenge| @challenge_id_to_entry_count[challenge.id] = 0 }
-    published_entries.each { |entry| @challenge_id_to_entry_count[entry.challenge_id] += 1 }
+    published_entries.each do |entry|
+      challenge_array = @challenge_id_to_entry_count[entry.challenge_id]
+      next if challenge_array.nil?
+      challenge_array += 1
+    end
   end
 
   def all_region_entries
