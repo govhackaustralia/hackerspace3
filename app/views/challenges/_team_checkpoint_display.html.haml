@@ -3,9 +3,7 @@
   = @teams.count == 1 ? 'has' : 'have'
   entered into this challenge across all checkpoints that have passed.
   - @passed_public_checkpoints.each do |checkpoint|
-    %h4
-      = checkpoint.name
-      Checkpoint
+    %h4 #{checkpoint.name} Checkpoint
     - if (teams = challenge_teams(checkpoint)).present?
       - teams.each do |team|
         %h5= "#{team.current_project.team_name} - #{team.current_project.project_name}"
