@@ -8,6 +8,7 @@ class ChallengesController < ApplicationController
       challenge_sponsorships: :sponsor
     )
     @regions = @competition.regions.order(:category).order :name
+    @counter = PublishedEntryCounter.new @competition
     filter_challenges
     respond_to do |format|
       format.html

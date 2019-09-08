@@ -18,6 +18,8 @@
             %h5= challenge.short_desc
           %p
             = link_to 'Go to Challenge', challenge_path(challenge.identifier)
+            | #{pluralize @counter.count(challenge), 'team' } have entred this
+            challenge across all checkpoints that have passed.
         %aside.sponsors
           - if challenge.challenge_sponsorships.present?
             - challenge.challenge_sponsorships.each do |sponsorship|
