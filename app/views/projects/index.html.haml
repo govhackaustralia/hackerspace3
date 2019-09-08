@@ -4,13 +4,20 @@
     Team Projects for Competition #{@competition.year}
   - if @competition.started? FIRST_TIME_ZONE
     %p= link_to 'Download CSV', projects_path(format: 'csv'), class: 'download-csv'
-    - if user_signed_in? && @competition.in_form_or_comp_window?(LAST_TIME_ZONE)
-      - if @participating_competition_events.present?
-        %aside= link_to 'Create New Team Project', new_team_path
+    - if @competition.in_form_or_comp_window?(LAST_TIME_ZONE)
+      - if user_signed_in?
+        - if @participating_competition_event.present?
+          - if @competition.in_form_or_comp_window?(@time_zone)
+            %aside= link_to 'Create New Team Project', new_team_path
+        - else
+          %p
+            %strong Please register for a competition event to create a team.
+          %p= link_to 'Competition Events', competition_events_path
       - else
         %p
-          %strong Please register for a competition event to create a team.
-        %p= link_to 'Competition Events', competition_events_path
+          %strong
+            Sign in to the Hackerspace and register for a competition event
+            to create a team.
     %table#projects_table
       %thead
         %th Project
