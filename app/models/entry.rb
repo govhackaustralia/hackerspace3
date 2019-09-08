@@ -33,6 +33,8 @@ class Entry < ApplicationRecord
     joins(challenge: :region).where(regions: { competition: competition })
   }
 
+  scope :published, -> { joins(:team).where(teams: { published: true }) }
+
   # Checks that a project has enough information entered for the entry to be
   # marked eligible, and then marks accordingly.
   def update_eligible(project = nil)
