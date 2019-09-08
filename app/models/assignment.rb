@@ -53,7 +53,7 @@ class Assignment < ApplicationRecord
 
     return unless user.event_assignment(competition).registrations.participating.competition_events.empty?
 
-    errors.add :checkpoiUnt_id, 'Register for a competition event to join or create a team.'
+    errors.add :event, 'Register for a competition event to join or create a team.'
   end
 
   # Returns object for a particular judgeable assignment showing the status of
