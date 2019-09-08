@@ -24,6 +24,7 @@ class ChallengeTest < ActiveSupport::TestCase
     assert @challenge.users.include? @user
     assert @challenge.judges.include? @user
     assert @challenge.entries.include? @entry
+    assert @challenge.published_entries.include? @entry
     assert @challenge.entries_at(@checkpoint).include? @entry
     assert @challenge.teams.include? @team
     assert @challenge.challenge_sponsorships.include? @challenge_sponsorship

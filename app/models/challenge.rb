@@ -7,6 +7,7 @@ class Challenge < ApplicationRecord
   has_many :users, through: :assignments
   has_many :judges, through: :assignments, source: :user
   has_many :entries, dependent: :destroy
+  has_many :published_entries, -> { published }, class_name: 'Entry'
   has_many :teams, through: :entries
   has_many :published_teams, -> { published }, through: :entries, source: :team
   has_many :published_projects_by_name, -> { order(:project_name) }, through: :published_teams, source: :current_project
