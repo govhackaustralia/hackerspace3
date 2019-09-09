@@ -1,21 +1,20 @@
-%h2 Review Entry
-Team: #{@team.name}
-%br/
-Challenge: #{@challenge.name}
-%br/
-Checkpoint: #{@checkpoint.name}
-%br/
-Justification: #{@entry.justification}
-%br/
-= form_for [:admin, @challenge, @entry] do |form|
-  = form.label :eligible, 'Mark Eligible'
-  = form.radio_button :eligible, true, options = {checked: @entry.eligible == true}
-  = form.label :eligible, 'Mark Ineligible'
-  = form.radio_button :eligible, false, options = {checked: @entry.eligible == false}
-  %br/
-  = form.label :award
-  = form.select :award, options_for_select([nil] + AWARD_NAMES, @entry.award)
-  = form.submit
-= link_to 'Go to Team Project', project_path(@team.current_project.identifier), target: '_blank'
-%br/
-= link_to 'Back to Entries', admin_challenge_entries_path(@challenge)
+%main.team_page
+  %h2 Review Entry
+  %p Team: #{@team.name}
+  %p Challenge: #{@challenge.name}
+  %p Checkpoint: #{@checkpoint.name}
+  %p Justification: #{@entry.justification}
+  = form_for [:admin, @challenge, @entry] do |form|
+    .field
+      = form.label :eligible, 'Mark Eligible'
+      = form.radio_button :eligible, true, options = {checked: @entry.eligible == true}
+    .field
+      = form.label :eligible, 'Mark Ineligible'
+      = form.radio_button :eligible, false, options = {checked: @entry.eligible == false}
+    .field
+      = form.label :award
+      = form.select :award, options_for_select([nil] + AWARD_NAMES, @entry.award)
+    .actions
+      = form.submit
+%p= link_to 'Go to Team Project', project_path(@team.current_project.identifier), target: '_blank'
+%p= link_to 'Back to Entries', admin_challenge_entries_path(@challenge)
