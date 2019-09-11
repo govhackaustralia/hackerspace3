@@ -3,7 +3,7 @@ class Admin::ProjectsController < ApplicationController
 
   def index
     @current_project = @team.current_project
-    @projects = @team.projects.order created_at: :desc
+    @projects = @team.projects.order(created_at: :desc).preload :user
   end
 
   def show
