@@ -112,7 +112,7 @@ Rails.application.routes.draw do
     end
 
     resources :teams, only: [] do
-      resources :projects, only: [:index, :show]
+      resources :projects, only: [:index, :show, :edit, :update]
       resources :entries, except: [:index, :show], controller: 'teams/entries'
       resources :scorecards, only: [:index, :update, :destroy], controller: 'teams/scorecards'
     end

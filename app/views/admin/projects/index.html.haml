@@ -1,5 +1,6 @@
 %main.project_index
   %h2 Projects for #{@current_project.team_name}
+  %p= link_to 'Update Team Project', edit_admin_team_project_path(@team, @current_project)
   - @projects.each do |project|
     %h3= project.team_name
     - if project == @current_project
