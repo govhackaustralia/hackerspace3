@@ -41,3 +41,5 @@
       challenges: @team.regional_challenges(checkpoint),                       |
       available_challenges: @available_regional_challenges }                   |
 %p= link_to 'Back to Team Management', admin_competition_teams_path(@competition)
+- if @team.published?
+  %p= link_to 'Back to Project Page', project_path(@project.identifier)
