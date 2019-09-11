@@ -10,7 +10,7 @@
         ), method: :patch, data: { confirm: 'Are you sure?' }                  |
   %p Created At: #{@project.created_at}
   - if @user.present?
-    %p User: #{@user.display_name}
+    %p Created By: #{@user.display_name}
   - else
     %p User: User no longer in system.
   %p Team Name: #{@project.team_name}
