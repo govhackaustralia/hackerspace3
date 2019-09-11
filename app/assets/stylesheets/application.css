@@ -37,6 +37,10 @@ h1, h2, h3, h4, h5, h6 {
 	color: #424242;
 }
 
+h2 {
+	margin-bottom: 1%;
+}
+
 .contacts {
 	margin: 1%;
 }
