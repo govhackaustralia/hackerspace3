@@ -61,6 +61,7 @@ Rails.application.routes.draw do
       resources :regions, except: :destroy
       resources :teams, only: [:index, :show] do
         member { patch :update_version, :update_published }
+        resources :scorecards, only: [:index, :update, :destroy], controller: 'teams/scorecards'
       end
       resources :events, only: :index
       resources :sponsors
