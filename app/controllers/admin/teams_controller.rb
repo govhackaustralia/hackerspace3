@@ -1,6 +1,5 @@
 class Admin::TeamsController < ApplicationController
-  before_action :authenticate_user!
-  before_action :check_for_privileges
+  before_action :authenticate_user!, :check_for_privileges!
   before_action :retrieve_team, except: :index
 
   def index
@@ -13,9 +12,9 @@ class Admin::TeamsController < ApplicationController
     @projects = @team.projects
     @event = @team.event
     @region = @team.region
-    @checkpoints = @competition.checkpoints.order(:end_time)
-    @available_regional_challenges = @team.available_challenges(REGIONAL)
-    @available_national_challenges = @team.available_challenges(NATIONAL)
+    @checkpoints = @competition.checkpoints.order :end_time
+    @available_regional_challenges = @team.available_challenges REGIONAL
+    @available_national_challenges = @team.available_challenges NATIONAL
   end
 
   def update_version
@@ -33,7 +32,7 @@ class Admin::TeamsController < ApplicationController
 
   private
 
-  def check_for_privileges
+  def check_for_privileges!
     @competition = Competition.find params[:competition_id]
     return if current_user.admin_privileges? @competition
 

@@ -1,34 +1,24 @@
 %main.project_index
-  %h2
-    Project Create At #{@project.created_at}
+  %h2 Project Create At #{@project.created_at}
   - if @project == @current_project
-    %strong This is the current project version.
-    %br/
+    %p
+      %strong This is the current project version.
   - else
-    %br/
-  Created At: #{@project.created_at}
-  %br/
     %p= link_to 'Make this the current version',                               |
         update_version_admin_competition_team_path(                            |
           @competition, @team, project_id: @project.id                         |
         ), method: :patch, data: { confirm: 'Are you sure?' }                  |
+  %p Created At: #{@project.created_at}
   - if @user.present?
-    User: #{@user.display_name}
-    %br/
+    %p User: #{@user.display_name}
   - else
-    User: User no longer in system.
-    %br/
-  Team Name: #{@project.team_name}
-  %br/
-  Project Name: #{@project.project_name}
-  %br/
-  Video URL: #{@project.created_at}
-  %br/
-  Homepage URL: #{@project.homepage_url}
-  %br/
+    %p User: User no longer in system.
+  %p Team Name: #{@project.team_name}
+  %p Project Name: #{@project.project_name}
+  %p Video URL: #{@project.created_at}
+  %p Homepage URL: #{@project.homepage_url}
   %h3 Description
-  = @project.description
+  %p= @project.description
   %h3 Data Story
-  = @project.data_story
-  %br/
-= link_to 'Back to All Project Versions', admin_team_projects_path(@team)
+  %p= @project.data_story
+%p= link_to 'Back to All Project Versions', admin_team_projects_path(@team)

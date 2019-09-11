@@ -16,35 +16,28 @@
     - user = assignment.user
     %div
       %p
-        %strong
-          Name: #{user.display_name}
-      %p
-        Title: #{assignment.title}
-      %p
-        Email: #{user.email}
+        %strong Name: #{user.display_name}
+      %p Title: #{assignment.title}
+      %p Email: #{user.email}
       - if user.twitter
         %p Twitter: #{user.twitter}
       - if user.slack
         %p Slack: #{user.slack}
-  %h3
-    Challenge Management
-    %h3
-      - @checkpoints.each do |checkpoint|
-        %h4
-          = checkpoint.name
-          Checkpoint
-        %h4 National Challenges
-        = render 'challenge_category', locals:                   |
-          { checkpoint: checkpoint,                              |
-          type: NATIONAL,                                        |
-          max_challenges: checkpoint.max_national(@region),      |
-          challenges: @team.national_challenges(checkpoint),     |
-          available_challenges: @available_national_challenges } |
-        %h4 Regional Challenges
-        = render 'challenge_category', locals:                   |
-          { checkpoint: checkpoint,                              |
-          type: REGIONAL,                                        |
-          max_challenges: checkpoint.max_regional(@region),      |
-          challenges: @team.regional_challenges(checkpoint),     |
-          available_challenges: @available_regional_challenges } |
+  %h3 Challenge Management
+  - @checkpoints.each do |checkpoint|
+    %h4 #{checkpoint.name} Checkpoint
+    %h5 National Challenges
+    = render 'challenge_category', locals:                                     |
+      { checkpoint: checkpoint,                                                |
+      type: NATIONAL,                                                          |
+      max_challenges: checkpoint.max_national(@region),                        |
+      challenges: @team.national_challenges(checkpoint),                       |
+      available_challenges: @available_national_challenges }                   |
+    %h5 Regional Challenges
+    = render 'challenge_category', locals:                                     |
+      { checkpoint: checkpoint,                                                |
+      type: REGIONAL,                                                          |
+      max_challenges: checkpoint.max_regional(@region),                        |
+      challenges: @team.regional_challenges(checkpoint),                       |
+      available_challenges: @available_regional_challenges }                   |
 %p= link_to 'Back to Team Management', admin_competition_teams_path(@competition)
