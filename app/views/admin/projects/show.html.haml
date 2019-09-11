@@ -5,12 +5,13 @@
     %strong This is the current project version.
     %br/
   - else
-    = link_to 'Make this the current version', admin_competition_team_path(@competition, @team, project_id: @project.id), |
-      method: :patch,                                                                           |
-      data: { confirm: 'Are you sure?' }                                                        |
     %br/
   Created At: #{@project.created_at}
   %br/
+    %p= link_to 'Make this the current version',                               |
+        update_version_admin_competition_team_path(                            |
+          @competition, @team, project_id: @project.id                         |
+        ), method: :patch, data: { confirm: 'Are you sure?' }                  |
   - if @user.present?
     User: #{@user.display_name}
     %br/

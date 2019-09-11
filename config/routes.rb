@@ -59,7 +59,9 @@ Rails.application.routes.draw do
       resources :scorecards, only: :index, controller: 'competitions/scorecards'
       resources :checkpoints, :criteria, :sponsorship_types, except: [:show, :destroy]
       resources :regions, except: :destroy
-      resources :teams, only: [:index, :show, :update]
+      resources :teams, only: [:index, :show] do
+        member { patch :update_version, :update_published }
+      end
       resources :events, only: :index
       resources :sponsors
       member { get 'aws_credits_requested' }

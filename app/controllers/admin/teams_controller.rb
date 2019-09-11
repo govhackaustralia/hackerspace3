@@ -1,6 +1,7 @@
 class Admin::TeamsController < ApplicationController
   before_action :authenticate_user!
   before_action :check_for_privileges
+  before_action :retrieve_team, except: :index
 
   def index
     @projects = @competition.projects_by_name.preload(:event, :team)
@@ -8,7 +9,6 @@ class Admin::TeamsController < ApplicationController
   end
 
   def show
-    @team = Team.find params[:id]
     @project = @team.current_project
     @projects = @team.projects
     @event = @team.event
@@ -18,15 +18,17 @@ class Admin::TeamsController < ApplicationController
     @available_national_challenges = @team.available_challenges(NATIONAL)
   end
 
-  # ENHANCEMENT: Split into seperate controller.
-  # ENHANCEMENT: Introduce filter params.
-  def update
-    @team = Team.find params[:id]
-    if params[:project_id].present?
-      handle_update_project
-    elsif params[:published].present?
-      handle_update_published
-    end
+  def update_version
+    @project = Project.find params[:project_id]
+    @team.update current_project: @project
+    flash[:notice] = 'Current Project Version Updated'
+    redirect_to admin_team_project_path @team, @project
+  end
+
+  def update_published
+    @team.update published: params[:published]
+    flash[:notice] = 'Team ' + (@team.published ? 'published' : 'unpublished')
+    redirect_to admin_competition_team_path @competition, @team
   end
 
   private
@@ -39,6 +41,10 @@ class Admin::TeamsController < ApplicationController
     redirect_to root_path
   end
 
+  def retrieve_team
+    @team = Team.find params[:id]
+  end
+
   def handle_index
     respond_to do |format|
       format.html
@@ -48,18 +54,5 @@ class Admin::TeamsController < ApplicationController
         format.csv { send_data User.published_teams_to_csv @competition }
       end
     end
-  end
-
-  def handle_update_project
-    @project = Project.find params[:project_id]
-    @team.update current_project: @project
-    flash[:notice] = 'Current Project Updated'
-    redirect_to admin_team_project_path @team, @project
-  end
-
-  def handle_update_published
-    @team.update published: params[:published]
-    flash[:notice] = 'Team Updated'
-    redirect_to admin_competition_team_path @competition, @team
   end
 end
