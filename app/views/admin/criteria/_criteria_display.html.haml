@@ -3,7 +3,7 @@
 - if criteria.present?
   - criteria.each do |criterion|
     %h4= criterion.name
-    = criterion.description
-    = link_to 'Update Criteria', edit_admin_competition_criterion_path(@competition, criterion)
+    %p= criterion.description
+    %p= link_to 'Update Criteria', edit_admin_competition_criterion_path(@competition, criterion)
 - else
-  No #{type} Criteria for this Competition recorded.
+  %p No #{type} Criteria for this Competition recorded.
