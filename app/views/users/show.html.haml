@@ -33,7 +33,14 @@
         %h3 My Sponsors
         - @sponsor_contact_assignments.each do |assignment|
           %h4= assignment.assignable.name
-          = link_to 'Go to Sponsor', sponsorship_management_sponsor_path(assignment.assignable)
+          %p= link_to 'Go to Sponsor', sponsorship_management_sponsor_path(assignment.assignable)
+    - if @competition.in_challenge_judging_window?(LAST_TIME_ZONE) && @judging_assignments.present?
+      %article
+        %h3 Challenge Judging
+        - @judging_assignments.each do |assignment|
+          - challenge = assignment.assignable
+          %h4= challenge.name
+          %p= link_to 'Go to Challenge', challenge_path(challenge.identifier)
     %article
       %h3 My Events
       - if @connection_registrations.present? || @competition_registrations.present? || @award_registrations.present?
