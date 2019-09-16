@@ -55,8 +55,9 @@
     - if @participating_competition_event
       %article
         = render 'my_projects'
-      %article
-        = render 'my_invitations'
+      - if @competition.in_form_or_comp_window? LAST_TIME_ZONE
+        %article
+          = render 'my_invitations'
     - elsif @competition.in_form_or_comp_window? LAST_TIME_ZONE
       %article
         %h3 My Team Projects
