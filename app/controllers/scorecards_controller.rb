@@ -99,7 +99,7 @@ class ScorecardsController < ApplicationController
 
   def organise_challenge_scorecard(assignment)
     entry = Entry.find_by(team: @team, challenge: assignment.assignable)
-    scorecard = Scorecard.find_or_create_by(assignment: assignment, judgeable: entry)
+    scorecard = Scorecard.find_or_create_by!(assignment: assignment, judgeable: entry)
     scorecard.update_judgments
     @scorecards << scorecard
     scorecard.judgments.order(:criterion_id)

@@ -27,7 +27,7 @@ class Scorecard < ApplicationRecord
     criteria_ids = judgeable.competition.criteria.where(category: type).pluck(:id)
     score_card_criteria_ids = judgments.pluck(:criterion_id)
     (criteria_ids - score_card_criteria_ids).each do |criterion_id|
-      judgments.create(criterion_id: criterion_id)
+      judgments.create! criterion_id: criterion_id
     end
   end
 
