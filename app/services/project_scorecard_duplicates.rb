@@ -35,8 +35,10 @@ class ProjectScorecardDuplicates
 
     def remove_duplicates!(scorecards)
       if (candidates = retrieve_duplicate_canditates(scorecards)).present?
-        candidates.each(&:destroy!)
-        @messages << "Scorcard: #{candidate.id}, DESTROYED"
+        candidates.each do |scorecard|
+          scorecard.destroy!
+          @messages << "Scorcard: #{scorecard.id}, DESTROYED"
+        end
       else
         scorecards.each { |s| @messages << "Scorecard: #{s.id}, CONFLICT" }
       end
