@@ -18,6 +18,7 @@ class Competition < ApplicationRecord
   has_many :published_projects_by_name, through: :events
   has_many :projects, through: :teams
   has_many :challenges, through: :regions
+  has_many :entries, through: :challenges
   has_many :checkpoints
   has_many :data_sets, through: :regions
 

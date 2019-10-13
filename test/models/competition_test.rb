@@ -17,6 +17,7 @@ class CompetitionTest < ActiveSupport::TestCase
     @team = Team.first
     @project = Project.first
     @challenge = Challenge.first
+    @entry = Entry.first
     @checkpoint = Checkpoint.first
     @data_set = DataSet.first
     @criterion = Criterion.first
@@ -42,6 +43,7 @@ class CompetitionTest < ActiveSupport::TestCase
     assert @competition.teams.include? @team
     assert @competition.projects.include? @project
     assert @competition.challenges.include? @challenge
+    assert @competition.entries.include? @entry
     assert @competition.checkpoints.include? @checkpoint
     assert @competition.data_sets.include? @data_set
     assert @competition.criteria.include? @criterion
