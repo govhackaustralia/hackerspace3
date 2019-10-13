@@ -4,6 +4,7 @@ class Entry < ApplicationRecord
   belongs_to :team
 
   has_one :competition, through: :team
+  has_one :project, through: :team, source: :current_project
   has_one :region, through: :challenge
 
   has_many :scorecards, dependent: :destroy, as: :judgeable

@@ -6,6 +6,7 @@ class EntryTest < ActiveSupport::TestCase
     @checkpoint = Checkpoint.first
     @challenge = Challenge.first
     @team = Team.first
+    @project = @team.current_project
     @competition = Competition.first
     @region = Region.first
     @scorecard = Scorecard.first
@@ -19,6 +20,7 @@ class EntryTest < ActiveSupport::TestCase
     assert @entry.challenge == @challenge
     assert @entry.team == @team
     assert @entry.competition == @competition
+    assert @entry.project == @project
     assert @entry.region == @region
     assert @entry.scorecards.include? @scorecard
     @entry.destroy
