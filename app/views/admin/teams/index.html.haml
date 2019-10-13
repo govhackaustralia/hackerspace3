@@ -6,6 +6,8 @@
   %p= link_to 'Clear Search', admin_competition_teams_path(@competition)
   %p= link_to 'Download CSV (Users who are members of a published team)', admin_competition_teams_path(@competition, format: 'csv'), class: 'download-csv'
   %p= link_to 'Download CSV (Every Team Member)', admin_competition_teams_path(@competition, format: 'csv', category: 'members'), class: 'download-csv'
+  - if current_user.is_site_admin?(@competition)
+    %p= link_to 'Download CSV (Team Entries)', admin_competition_teams_path(@competition, format: 'csv', category: 'entries'), class: 'download-csv'
   %table
     %thead
       %th Project
