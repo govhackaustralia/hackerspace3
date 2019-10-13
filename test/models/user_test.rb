@@ -120,4 +120,10 @@ class UserTest < ActiveSupport::TestCase
   test 'participating_competition_event' do
     assert @user.participating_competition_event(@competition) == @competition_event
   end
+
+  test 'is_site_admin?' do
+    assert_not @user.is_site_admin? @competition
+    @user.assignments.create assignable: @competition, title: ADMIN
+    assert @user.is_site_admin? @competition
+  end
 end

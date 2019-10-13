@@ -144,6 +144,10 @@ class User < ApplicationRecord
     participating_competition_events.competition(competition).first
   end
 
+  def is_site_admin?(competition)
+    assignments.where(competition: competition, title: ADMIN).present?
+  end
+
   require 'csv'
 
   # Generates a CSV file for published teams and their selected attributes.
