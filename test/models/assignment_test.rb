@@ -12,6 +12,7 @@ class AssignmentTest < ActiveSupport::TestCase
     @favourite = Favourite.first
     @team = Team.first
     @scorecard = Scorecard.second
+    @judgment = Judgment.third
     @registration = Registration.first
     @competition_event = Event.second
     @region_support = Assignment.find 14
@@ -36,6 +37,7 @@ class AssignmentTest < ActiveSupport::TestCase
     # Has Many
     assert @participant.favourite_teams.include? @team
     assert @participant.scorecards.include? @scorecard
+    assert @participant.judgments.include? @judgment
     assert @participant.registrations.include? @registration
     # Dependent destroy
     @participant.destroy
