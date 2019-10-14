@@ -10,4 +10,9 @@ class Admin::Competitions::ScorecardsControllerTest < ActionDispatch::Integratio
     get admin_competition_scorecards_url @competition
     assert_response :success
   end
+
+  test 'should get peoples judges report csv' do
+    get admin_competition_scorecards_url @competition, format: :csv
+    assert_response :success
+  end
 end
