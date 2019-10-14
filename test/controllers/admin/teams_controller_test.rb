@@ -13,6 +13,21 @@ class Admin::TeamsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
+  test 'should get all members to csv' do
+    get admin_competition_teams_url @competition, format: :csv, category: :members
+    assert_response :success
+  end
+
+  test 'should get teams entry report csv' do
+    get admin_competition_teams_url @competition, format: :csv, category: :entries
+    assert_response :success
+  end
+
+  test 'should get published teams to csv' do
+    get admin_competition_teams_url @competition, format: :csv
+    assert_response :success
+  end
+
   test 'should get show' do
     get admin_competition_team_url @competition, @team
     assert_response :success
