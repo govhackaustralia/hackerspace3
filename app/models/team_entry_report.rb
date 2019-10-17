@@ -21,6 +21,7 @@ class TeamEntryReport
       project_name
       team_name
       challenge_name
+      time_zone
       entered_at
       checkpoint_name
       eligible
@@ -28,7 +29,7 @@ class TeamEntryReport
   end
 
   def preload_entities
-    %i[challenge checkpoint project]
+    %i[challenge checkpoint project team_region]
   end
 
   def row_values(entry)
@@ -36,7 +37,8 @@ class TeamEntryReport
       entry.project.project_name,
       entry.project.team_name,
       entry.challenge.name,
-      entry.created_at,
+      (time_zone = entry.team_region.time_zone),
+      entry.created_at.in_time_zone(time_zone),
       entry.checkpoint.name,
       entry.eligible
     ]
