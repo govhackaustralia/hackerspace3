@@ -1,9 +1,10 @@
 class ProjectScorecardReport
-  attr_reader :project_criteria, :challenge_criteria
+  attr_reader :competition, :project_criteria, :challenge_criteria
   attr_accessor :messages
 
   def initialize(competition)
     @messages = []
+    @competition = competition
     @project_criteria = competition.project_criteria
     @challenge_criteria = competition.challenge_criteria
   end
@@ -11,7 +12,8 @@ class ProjectScorecardReport
   def report
     @messages = []
     Scorecard.where(
-      judgeable_type: 'Team'
+      judgeable_type: 'Team',
+      judgeable_id: competition.teams.pluck(:id)
     ).preload(:judgments, :judgeable, assignment: :user).each do |team_scorecard|
       check_for_duplicates team_scorecard
       challenge_scorecards = check_for_missing_scorecards(team_scorecard)
