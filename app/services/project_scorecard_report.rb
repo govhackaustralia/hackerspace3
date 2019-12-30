@@ -47,7 +47,7 @@ class ProjectScorecardReport
   def check_for_missing_judgments(scorecard, criteria)
     if scorecard.judgments.empty?
       messages << "scorecard: #{scorecard.id}, EMPTY"
-    elsif (scorecard.judgments.pluck(:criterion_id) - criteria.pluck(:id)).present?
+    elsif (criteria.pluck(:id) - scorecard.judgments.pluck(:criterion_id)).present?
       messages << "scorecard: #{scorecard.id}, INCOMPLETE"
     end
   end
