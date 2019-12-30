@@ -5,7 +5,7 @@ class ProjectScorecardDuplicates
       Scorecard.all.preload(:judgeable, :assignment).each do |scorecard|
         check_for_duplicates scorecard
       end
-      puts @messages.join
+      puts @messages.join unless Rails.env.test?
     end
 
     def clean_up!
@@ -13,7 +13,7 @@ class ProjectScorecardDuplicates
       Scorecard.all.preload(
         :judgeable, :assignment, :judgments
       ).each { |scorecard| check_for_duplicates! scorecard }
-      puts @messages.join
+      puts @messages.join unless Rails.env.test?
     end
 
     private

@@ -7,6 +7,6 @@ class ProjectScorecardCleanup
       scorecard.destroy!
       @counter += 1
     end
-    puts "#{@counter} Scorecards destroyed"
+    puts "#{@counter} Scorecards destroyed" unless Rails.env.test?
   end
 end
