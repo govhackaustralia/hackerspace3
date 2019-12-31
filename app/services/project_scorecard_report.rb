@@ -35,7 +35,8 @@ class ProjectScorecardReport
     team = team_scorecard.judgeable
     judge_assignments = team_scorecard.user.judge_assignments.where(assignable: team.challenges)
     challenge_scorecards = Scorecard.where(assignment: judge_assignments, judgeable: team.entries)
-    messages << "team_scorecard: #{team_scorecard.id}, MISSING CHALLENGE" if (judge_assignments.pluck(:id) - challenge_scorecards.pluck(:assignment_id)).present?
+    missing_assignment_ids = judge_assignments.pluck(:id) - challenge_scorecards.pluck(:assignment_id)
+    messages << "team_scorecard: #{team_scorecard.id}, MISSING CHALLENGE missing_assignment_ids #{missing_assignment_ids}" if missing_assignment_ids.present?
     challenge_scorecards
   end
 
