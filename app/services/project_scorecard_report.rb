@@ -25,7 +25,7 @@ class ProjectScorecardReport
   private
 
   def check_for_duplicates(scorecard)
-    messages << "scorecard: #{scorecard.id}, DUPLICATE" if Scorecard.where(
+    messages << "scorecard: #{scorecard.id}, DUPLICATE, Scores: #{scorecard.judgments.order(:criterion_id).pluck(:score)}" if Scorecard.where(
       judgeable: scorecard.judgeable,
       assignment: scorecard.assignment
     ).count != 1
