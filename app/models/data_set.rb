@@ -2,6 +2,10 @@ class DataSet < ApplicationRecord
   belongs_to :region
   has_one :competition, through: :region
 
+  has_many :challenge_data_sets
+  has_many :challenges, through: :challenge_data_sets
+  has_many :sponsors, through: :challenges
+
   scope :search, ->(term) { where 'data_sets.name ILIKE ? OR url ILIKE ? OR description ILIKE ?', "%#{term}%", "%#{term}%", "%#{term}%" }
 
   validates :name, presence: true
