@@ -2,6 +2,12 @@
 %main.project_index
   %h2
     #{yield :title} for #{@competition.year}
+  %p
+    %strong
+      = @unaccounted_team_data_set_count
+      team data sets unaccounted for in the below output.
+  %p= link_to 'Download CSV', sponsor_data_set_report_admin_competition_path(@competition, format: 'csv'), class: 'download-csv'
+
   %table
     %thead
       %th Data Set
@@ -10,7 +16,7 @@
       %th Team Data Sets
       %th Teams
     %tbody
-      - @report_rows.each do |row|
+      - @report.each do |row|
         %tr
           %td= row[:data_set_name]
           %td= row[:challenges].join ', '

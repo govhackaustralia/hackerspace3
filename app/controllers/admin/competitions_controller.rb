@@ -49,7 +49,14 @@ class Admin::CompetitionsController < ApplicationController
   end
 
   def sponsor_data_set_report
-    @report_rows = SponsorDataSetReport.new(@competition).report
+    sponsor_data_set = SponsorDataSetReport.new(@competition)
+    respond_to do |format|
+      format.html do
+        @report = sponsor_data_set.report
+        @unaccounted_team_data_set_count = sponsor_data_set.unaccounted_team_data_set_count
+      end
+      format.csv { send_data sponsor_data_set.to_csv }
+    end
   end
 
   private

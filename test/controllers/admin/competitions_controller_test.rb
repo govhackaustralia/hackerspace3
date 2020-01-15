@@ -82,4 +82,9 @@ class Admin::CompetitionsControllerTest < ActionDispatch::IntegrationTest
     get sponsor_data_set_report_admin_competition_url @competition
     assert_response :success
   end
+
+  test 'should get sponsor data set report as csv' do
+    get sponsor_data_set_report_admin_competition_url @competition, format: :csv
+    assert_response :success
+  end
 end
