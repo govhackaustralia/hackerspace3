@@ -27,7 +27,7 @@ Style/FrozenStringLiteralComment:
 Style/ClassAndModuleChildren:
   Enabled: false
 
-Metrics/LineLength:
+Layout:
   Enabled: false
 
 Lint/UselessAssignment:
