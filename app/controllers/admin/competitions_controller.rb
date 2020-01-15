@@ -48,6 +48,10 @@ class Admin::CompetitionsController < ApplicationController
     @regions = @competition.regions.preload :events
   end
 
+  def sponsor_data_set_report
+    @report_rows = SponsorDataSetReport.new(@competition).report
+  end
+
   private
 
   def competition_params

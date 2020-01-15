@@ -1,0 +1,21 @@
+- content_for :title, 'Sponsor Data Set Report'
+%main.project_index
+  %h2
+    #{yield :title} for #{@competition.year}
+  %table
+    %thead
+      %th Data Set
+      %th Challenges
+      %th Sponsors
+      %th Team Data Sets
+      %th Teams
+    %tbody
+      - @report_rows.each do |row|
+        %tr
+          %td= row[:data_set_name]
+          %td= row[:challenges].join ', '
+          %td= row[:sponsors].join ', '
+          %td= row[:team_data_sets_count]
+          %td= row[:teams_count]
+
+%p= link_to 'Back to Competition', admin_competition_path(@competition)

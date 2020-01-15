@@ -65,7 +65,10 @@ Rails.application.routes.draw do
       end
       resources :events, only: :index
       resources :sponsors
-      member { get 'aws_credits_requested' }
+      member do
+        get 'aws_credits_requested'
+        get 'sponsor_data_set_report'
+      end
     end
 
     resources :checkpoints, only: [] do

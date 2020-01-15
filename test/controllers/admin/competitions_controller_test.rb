@@ -77,4 +77,9 @@ class Admin::CompetitionsControllerTest < ActionDispatch::IntegrationTest
     get aws_credits_requested_admin_competition_url @competition
     assert_response :success
   end
+
+  test 'should get sponsor data set report' do
+    get sponsor_data_set_report_admin_competition_url @competition
+    assert_response :success
+  end
 end
