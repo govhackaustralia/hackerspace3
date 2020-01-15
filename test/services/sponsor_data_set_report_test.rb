@@ -9,4 +9,8 @@ class SponsorDataSetReportTest < ActiveSupport::TestCase
   test 'report' do
     assert @sponsor_dataset_report.report.class == Array
   end
+
+  test 'to_csv' do
+    assert @sponsor_dataset_report.to_csv.class == String
+  end
 end
