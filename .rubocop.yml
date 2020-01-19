@@ -17,6 +17,7 @@ AllCops:
     - 'app/models/scorecard.rb'
     - 'app/models/data_set.rb'
     - 'app/models/user.rb'
+    - 'app/services/team_csv_reporter.rb'
 
 Style/Documentation:
   Enabled: false

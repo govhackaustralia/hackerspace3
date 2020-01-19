@@ -53,7 +53,7 @@ class Admin::TeamsController < ApplicationController
 
   def handle_csv(format)
     if params[:category] == 'members'
-      format.csv { send_data User.all_members_to_csv @competition }
+      format.csv { send_data TeamCsvReporter.all_members_to_csv @competition }
     elsif params[:category] == 'entries'
       format.csv { send_data TeamEntryReport.new(@competition).to_csv }
     else
