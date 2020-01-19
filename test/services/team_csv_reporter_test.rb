@@ -6,6 +6,6 @@ class TeamCsvReporterTest < ActiveSupport::TestCase
   end
 
   test 'all_members_to_csv' do
-    TeamCsvReporter.all_members_to_csv(@competition).class == String
+    TeamCsvReporter.new(@competition).members_to_csv.class == String
   end
 end
