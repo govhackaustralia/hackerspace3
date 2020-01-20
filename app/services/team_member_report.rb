@@ -1,13 +1,13 @@
-class TeamCsvReporter
+class TeamMemberReport
   attr_accessor :competition
-  
+
   # Generates a CSV file for all participating team members and their
   # attributes.
   def initialize(competition)
     @competition = competition
   end
 
-  def members_to_csv
+  def to_csv
     CSV.generate do |csv|
       csv << header_names
       competition.competition_assignments.team_participants.preload(
