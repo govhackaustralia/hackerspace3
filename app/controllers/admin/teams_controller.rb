@@ -57,7 +57,7 @@ class Admin::TeamsController < ApplicationController
     elsif params[:category] == 'entries'
       TeamEntryReport.new(@competition).to_csv
     else
-      User.published_teams_to_csv @competition
+      PublishedTeamMemberReport.new(@competition).to_csv
     end
     format.csv { send_data output }
   end
