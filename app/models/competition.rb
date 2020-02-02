@@ -38,12 +38,12 @@ class Competition < ApplicationRecord
 
   after_save :only_one_current
 
-  # Returns the name of a competiton.
+  # Returns the name of a competition.
   def name
     "Competition #{year}"
   end
 
-  # Returns the competiton for the current year.
+  # Returns the competition for the current year.
   def self.current
     find_by current: true
   end
@@ -172,7 +172,7 @@ class Competition < ApplicationRecord
     in_region_window? time_zone, peoples_choice_start, peoples_choice_end
   end
 
-  # Returns true if the competiton is in either the challenge judging window
+  # Returns true if the competition is in either the challenge judging window
   # or the competition judging window.
   def either_judging_window_open?(time_zone = nil)
     in_challenge_judging_window?(time_zone) ||

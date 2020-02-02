@@ -84,7 +84,7 @@ class Assignment < ApplicationRecord
   def correct_competition
     return unless correct_competition_id != competition_id
 
-    errors.add :competiton, 'The Competition is not correct'
+    errors.add :competition, 'The Competition is not correct'
   end
 
   # Return the correct competition id for an assignment
