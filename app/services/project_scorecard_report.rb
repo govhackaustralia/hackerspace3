@@ -19,7 +19,7 @@ class ProjectScorecardReport
       challenge_scorecards = check_for_missing_scorecards(team_scorecard)
       check_for_all_missing_judgments team_scorecard, challenge_scorecards
     end
-    puts messages.join("\n") unless Rails.env.test?
+    puts messages.join "\n" unless Rails.env.test?
   end
 
   private
