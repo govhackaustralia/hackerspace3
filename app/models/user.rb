@@ -147,20 +147,4 @@ class User < ApplicationRecord
   def site_admin?(competition)
     assignments.where(competition: competition, title: ADMIN).present?
   end
-
-  require 'csv'
-
-  # Generates a CSV file of user attributes and the events they are registered
-  # for as participating.
-  # ENHANCEMENT: move to Controller or other model.
-  def self.user_event_rego_to_csv(competition, options = {})
-    user_columns = %w[id email full_name preferred_name dietary_requirements tshirt_size twitter slack mailing_list challenge_sponsor_contact_place challenge_sponsor_contact_enter my_project_sponsor_contact me_govhack_contact phone_number how_did_you_hear accepted_terms_and_conditions registration_type parent_guardian request_not_photographed data_cruncher coder creative facilitator]
-    combined = user_columns + ['events']
-    CSV.generate(options) do |csv|
-      csv << combined
-      all.preload(:participating_events).each do |user|
-        csv << (user.attributes.values_at(*user_columns) << user.participating_events.competition(competition).pluck(:name))
-      end
-    end
-  end
 end

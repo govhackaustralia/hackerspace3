@@ -9,7 +9,7 @@ class Admin::UsersController < ApplicationController
              end
     respond_to do |format|
       format.html
-      format.csv { send_data User.user_event_rego_to_csv @competition }
+      format.csv { send_data UserRegistrationReport.report @competition }
     end
   end
 
