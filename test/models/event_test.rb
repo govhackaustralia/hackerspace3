@@ -9,6 +9,7 @@ class EventTest < ActiveSupport::TestCase
     @event_partner = Sponsor.first
     @assignment = Assignment.third
     @registration = Registration.first
+    @user = @registration.user
     @team = Team.first
     @entry = Entry.first
     @user = User.first
@@ -27,6 +28,7 @@ class EventTest < ActiveSupport::TestCase
     assert @event.event_partners.include? @event_partner
     assert @event.assignments.include? @assignment
     assert @event.registrations.include? @registration
+    assert @event.users.include? @user
     assert @comp_event.teams.include? @team
     assert @comp_event.entries.include? @entry
     assert @event.flights.include? @flight

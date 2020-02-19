@@ -11,6 +11,7 @@ class Event < ApplicationRecord
   has_many :event_supports, through: :support_assignments, source: :user
 
   has_many :registrations, dependent: :destroy
+  has_many :users, through: :registrations
 
   has_many :participant_registrations, -> { participants }, class_name: 'Registration'
   has_many :vip_registrations, -> { vips }, class_name: 'Registration'
