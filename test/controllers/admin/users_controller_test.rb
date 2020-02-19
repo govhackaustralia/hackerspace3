@@ -11,6 +11,11 @@ class Admin::UsersControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
+  test 'should get user registration report' do
+    get admin_users_url format: :csv
+    assert_response :success
+  end
+
   test 'should get mailing_list_export' do
     get mailing_list_export_admin_users_url format: :csv
     assert_response :success
