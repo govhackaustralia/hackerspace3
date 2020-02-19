@@ -13,6 +13,7 @@ one:
   how_did_you_hear: [no response recorded]
   me_govhack_contact: true
   accepted_code_of_conduct: <%= Time.now %>
+  mailing_list: true
 
 two:
   id: 2

@@ -58,6 +58,8 @@ class UserTest < ActiveSupport::TestCase
 
   test 'scopes' do
     assert User.search('one').include? @user
+    assert User.mailing_list.include? @user
+    assert User.mailing_list.exclude? @judge
   end
 
   test 'user validations' do

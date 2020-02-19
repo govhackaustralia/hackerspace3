@@ -33,6 +33,7 @@ class User < ApplicationRecord
     where 'full_name ILIKE ? OR email ILIKE ? OR preferred_name ILIKE ?',
           "%#{term}%", "%#{term}%", "%#{term}%"
   }
+  scope :mailing_list, -> { where mailing_list: true }
 
   # Gravitar Gem
   include Gravtastic
