@@ -13,6 +13,12 @@ class Admin::UsersController < ApplicationController
     end
   end
 
+  def mailing_list_export
+    respond_to do |format|
+      format.csv { send_data MailingListExport.new(@competition).to_csv }
+    end
+  end
+
   def show
     @user = User.find params[:id]
     @event_assignments = @user.event_assignments.order(competition_id: :desc).preload :competition

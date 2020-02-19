@@ -123,7 +123,10 @@ Rails.application.routes.draw do
 
     resources :users, except: [:destroy, :edit, :update] do
       member { post 'confirm' }
-      collection { get 'unconfirmed' }
+      collection do
+        get 'unconfirmed'
+        get 'mailing_list_export'
+      end
       resources :assignments, only: [:edit, :update, :destroy], controller: 'users/assignments'
     end
   end
