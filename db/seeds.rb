@@ -22,10 +22,8 @@ require_relative 'seeders/competition_seeder'
 require_relative 'seeders/user_seeder'
 
 UserSeeder.create_tester
-# Creating Last Year's Competition
-UserSeeder.create_users 100
-CompetitionSeeder.create -1
-
-# Creating This Year's Competition
-UserSeeder.create_users 100
-CompetitionSeeder.create
+# Create Competitions for all years since 2018
+(2018-Time.now.year..0).each do |offset|
+  UserSeeder.create_users 100/(offset.abs + 1)
+  CompetitionSeeder.create offset
+end
