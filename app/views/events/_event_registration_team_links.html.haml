@@ -9,7 +9,7 @@
     - else
       = link_to 'Competition Event Registration Limit Reached', limit_reached_event_registrations_path(@event.identifier)
   - else
-    = link_to 'Sign in to register', new_user_session_path
+    = link_to 'Register to Attend this Event', new_event_registration_path(@event.identifier)
     %br/
 - if @event.competition_event? && @competition.started? && @event.teams.published.present?
   = link_to 'See Participating Teams', event_teams_path(@event.identifier)

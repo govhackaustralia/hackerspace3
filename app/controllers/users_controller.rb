@@ -89,7 +89,7 @@ class UsersController < ApplicationController
   def handle_end_of_registration
     current_user.update(how_did_you_hear: NO_RESPONSE) if @user.how_did_you_hear.empty?
     flash[:notice] = 'Your account has been created.'
-    redirect_to manage_account_path
+    redirect_to session[:user_return_to] || manage_account_path
   end
 
   def handle_profile_img
