@@ -33,7 +33,7 @@ class TeamOrder < ApplicationRecord
       correspondence = correspondences.create(
         user: user, body: email_body, status: PENDING
       )
-      BulkMailer.participant_email(self, correspondence, user).deliver_now unless %w[development test].include? ENV['RAILS_ENV']
+      BulkMailer.participant_email(self, correspondence, user).deliver_now unless Rails.env.test?
       correspondence.update status: SENT
     end
   end

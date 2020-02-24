@@ -73,6 +73,8 @@ group :development do
   gem 'guard-rubocop'
   gem 'guard-minitest'
   gem 'guard-bundler'
+  # Preview mail in the browser instead of sending
+  gem 'letter_opener'
 end
 
 group :test do

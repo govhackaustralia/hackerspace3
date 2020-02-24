@@ -39,14 +39,10 @@ Rails.application.configure do
 
   config.action_mailer.asset_host = "http://#{ENV['DOMAIN']}:3000"
 
-  config.action_mailer.smtp_settings = {
-    :address => ENV['AWS_SES_SERVER'],
-    :port => 587,
-    :user_name => ENV['AWS_SES_ID'],
-    :password => ENV['AWS_SES_KEY'],
-    :authentication => :login,
-    :enable_starttls_auto => true
-  }
+  config.action_mailer.delivery_method = :letter_opener
+
+  config.action_mailer.perform_deliveries = true
+  
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log
 
