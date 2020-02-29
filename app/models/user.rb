@@ -35,6 +35,8 @@ class User < ApplicationRecord
   }
   scope :mailing_list, -> { where mailing_list: true }
 
+  validates :accepted_terms_and_conditions, acceptance: true
+
   # Gravitar Gem
   include Gravtastic
   has_gravatar

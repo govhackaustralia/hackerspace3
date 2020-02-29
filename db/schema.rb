@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_04_130157) do
+ActiveRecord::Schema.define(version: 2020_02_29_032404) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -430,7 +430,7 @@ ActiveRecord::Schema.define(version: 2019_09_04_130157) do
     t.string "organisation_name"
     t.string "phone_number"
     t.text "how_did_you_hear"
-    t.boolean "accepted_terms_and_conditions", default: false
+    t.boolean "accepted_terms_and_conditions"
     t.string "registration_type"
     t.string "parent_guardian"
     t.boolean "request_not_photographed", default: false

@@ -71,6 +71,12 @@ class UserTest < ActiveSupport::TestCase
       email: 'name@example.com',
       full_name: nil
     ).save
+
+    assert_not User.create(
+      email: 'name@example.com',
+      full_name: 'Full Name',
+      accepted_terms_and_conditions: false
+    ).save
   end
 
   test 'event_assignment' do
