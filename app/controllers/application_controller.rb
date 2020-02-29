@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
   before_action :competition, :accepted_terms_and_conditions,
-                :fill_in_required_fields
+                :filled_in_required_fields
 
   private
 
@@ -25,7 +25,7 @@ class ApplicationController < ActionController::Base
     true
   end
 
-  def fill_in_required_fields
+  def filled_in_required_fields
     return unless required_conditions_not_met
 
     flash[:notice] = 'Please complete the required fields.'
