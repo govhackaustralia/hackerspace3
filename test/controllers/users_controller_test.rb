@@ -51,4 +51,27 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     @user.reload
     assert @user.accepted_terms_and_conditions.nil?
   end
+
+  test 'should get complete_registration' do
+    get complete_registration_url
+    assert_response :success
+  end
+
+  test 'should patch complete_registration_update success' do
+    patch complete_registration_update_users_url, params: { user: {
+      full_name: 'Full Name'
+    }}
+    assert_redirected_to manage_account_url
+    @user.reload
+    assert @user.full_name = 'Full Name'
+  end
+
+  test 'should patch complete_registration_update fail' do
+    patch complete_registration_update_users_url, params: { user: {
+      full_name: ''
+    }}
+    assert_redirected_to complete_registration_url
+    @user.reload
+    assert @user.full_name.empty?
+  end
 end

@@ -180,10 +180,6 @@ SPONSOR_VIP_MEDIA = 'Sponsor / VIP / Media'
 USER_REGISTRATION_TYPES = [COMPETITOR, YOUTH_COMPETITOR, GUARDIAN_OBSERVER,
                            SPONSOR_VIP_MEDIA]
 
-# How did you hear about us no response placeholder
-
-NO_RESPONSE = '[no response recorded]'
-
 # Judgement Categories
 
 PROJECT = 'Project'

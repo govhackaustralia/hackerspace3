@@ -136,13 +136,6 @@ class User < ApplicationRecord
     dietary_requirements.blank?
   end
 
-  # Returns true if a user is in the process of registering an account.
-  # After an account has been created if the how_did_you_hear section is not
-  # filled out, a placeholder will be set.
-  def registering_account?
-    how_did_you_hear.blank?
-  end
-
   def participating_competition_event(competition)
     participating_competition_events.competition(competition).first
   end

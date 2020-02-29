@@ -39,13 +39,5 @@
   .field
     = form.label :me_govhack_contact
     = form.check_box :me_govhack_contact, { checked: @user.me_govhack_contact }
-  - if @user.registering_account?
-    .field
-      = form.label :how_did_you_hear
-      = form.text_field :how_did_you_hear
-      = hidden_field_tag(:account_registration, true)
-    .actions
-      = form.submit 'Complete Registration'
-  - else
-    .actions
-      = form.submit 'Update Details'
+  .actions
+    = form.submit 'Update Details'

@@ -49,9 +49,24 @@ class UsersController < ApplicationController
     end
   end
 
+  def complete_registration_edit
+    @user = current_user
+  end
+
+  def complete_registration_update
+    @user = current_user
+    @user.update complete_registration_params
+    if @user.save && @user.full_name.present?
+      flash[:notice] = 'Your account has been created.'
+      redirect_to session[:user_return_to] || manage_account_path
+    else
+      flash[:alert] = 'Plese enter your Full name before proceeding'
+      redirect_to complete_registration_path
+    end
+  end
+
   def update
     @user = current_user
-    @account_registration = @user.registering_account?
     if params[:user].nil?
       redirect_to root_path
     else
@@ -65,6 +80,16 @@ class UsersController < ApplicationController
     params.require(:user).permit :accepted_terms_and_conditions
   end
 
+  def complete_registration_params
+    params.require(:user).permit :full_name, :preferred_name,
+                                 :organisation_name, :phone_number, :twitter,
+                                 :slack, :mailing_list,
+                                 :challenge_sponsor_contact_place,
+                                 :challenge_sponsor_contact_enter,
+                                 :my_project_sponsor_contact, :me_govhack_contact,
+                                 :how_did_you_hear
+  end
+
   def user_params
     params.require(:user).permit :full_name, :preferred_name, :preferred_img,
                                  :tshirt_size, :twitter, :phone_number,
@@ -73,8 +98,7 @@ class UsersController < ApplicationController
                                  :challenge_sponsor_contact_enter,
                                  :my_project_sponsor_contact,
                                  :me_govhack_contact, :dietary_requirements,
-                                 :organisation_name, :how_did_you_hear,
-                                 :govhack_img,
+                                 :organisation_name, :govhack_img,
                                  :bsb, :acc_number, :acc_name, :branch_name
   end
 
@@ -88,21 +112,13 @@ class UsersController < ApplicationController
   end
 
   def account_update_successfully
-    if @account_registration
-      handle_end_of_registration
-    elsif params[:user][:govhack_img].present?
+    if params[:user][:govhack_img].present?
       handle_profile_img
     elsif params[:banking].present?
       handle_bank_update
     else
       handle_personal_details
     end
-  end
-
-  def handle_end_of_registration
-    current_user.update(how_did_you_hear: NO_RESPONSE) if @user.how_did_you_hear.empty?
-    flash[:notice] = 'Your account has been created.'
-    redirect_to session[:user_return_to] || manage_account_path
   end
 
   def handle_profile_img

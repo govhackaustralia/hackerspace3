@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   end
   resources :users, only: :update do
     collection do
-      patch :accept_terms_and_conditions
+      patch :accept_terms_and_conditions, :complete_registration_update
     end
   end
   resources :connections, :competition_events, :awards, only: :index
@@ -137,7 +137,7 @@ Rails.application.routes.draw do
 
   # get 'stats', to: 'entries#index'
   get 'manage_account', to: 'users#show'
-  get 'complete_registration', to: 'users#edit'
+  get 'complete_registration', to: 'users#complete_registration_edit'
   get 'update_personal_details', to: 'users#edit'
   get 'review_terms_and_conditions', to: 'users#review_terms_and_conditions'
   get 'terms_and_conditions', to: 'static_pages#terms_and_conditions'

@@ -12,6 +12,7 @@ class ApplicationController < ActionController::Base
   def accepted_terms_and_conditions
     return unless ts_and_cs_conditions_not_met
 
+    session[:user_return_to] = request.url
     flash[:notice] = 'Please accept our terms and conditions'
     redirect_to review_terms_and_conditions_path
   end
@@ -52,6 +53,8 @@ class ApplicationController < ActionController::Base
       update
       review_terms_and_conditions
       accept_terms_and_conditions
+      complete_registration_edit
+      complete_registration_update
     ].include?(action_name)
     return if controller_name == 'sessions' && ['destroy'].include?(action_name)
 
