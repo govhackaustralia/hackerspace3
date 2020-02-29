@@ -1,0 +1,12 @@
+- content_for :title, 'Review Terms and Conditions'
+%main.registration.single-col.toc
+  %h2 GovHack Hackerspace Terms and Conditions
+  %section
+    %article
+      = render 'static_pages/terms_and_conditions_text'
+      = form_with model: @user, url: accept_terms_and_conditions_users_path, method: :patch do |f|
+        .field
+          = f.label(:accepted_terms_and_conditions, 'I accept GovHack Terms and Conditions')
+          = f.check_box(:accepted_terms_and_conditions)
+        .actions
+          = f.submit 'Continue'

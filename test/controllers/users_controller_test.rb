@@ -27,4 +27,28 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     @user.reload
     assert @user.full_name == 'updated'
   end
+
+  test 'should get review_terms_and_conditions' do
+    get review_terms_and_conditions_url
+    assert_response :success
+  end
+
+  test 'should patch accept_terms_and_conditions success' do
+    patch accept_terms_and_conditions_users_url, params: { user: {
+      accepted_terms_and_conditions: true
+    }}
+    assert_redirected_to complete_registration_path
+    @user.reload
+    assert @user.accepted_terms_and_conditions
+  end
+
+  test 'should patch accept_terms_and_conditions fail' do
+    @user.update! accepted_terms_and_conditions: nil
+    patch accept_terms_and_conditions_users_url, params: { user: {
+      accepted_terms_and_conditions: false
+    }}
+    assert_redirected_to review_terms_and_conditions_url
+    @user.reload
+    assert @user.accepted_terms_and_conditions.nil?
+  end
 end

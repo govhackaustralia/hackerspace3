@@ -33,6 +33,22 @@ class UsersController < ApplicationController
     @user = current_user
   end
 
+  def review_terms_and_conditions
+    @user = current_user
+  end
+
+  def accept_terms_and_conditions
+    @user = current_user
+    @user.update accept_terms_params
+    if @user.save && @user.accepted_terms_and_conditions
+      flash[:notice] = 'Welcome! Please complete your registration.'
+      redirect_to complete_registration_path
+    else
+      flash[:alert] = 'Please accept our terms and conditions before continuing'
+      redirect_to review_terms_and_conditions_path
+    end
+  end
+
   def update
     @user = current_user
     @account_registration = @user.registering_account?
@@ -45,6 +61,10 @@ class UsersController < ApplicationController
 
   private
 
+  def accept_terms_params
+    params.require(:user).permit :accepted_terms_and_conditions
+  end
+
   def user_params
     params.require(:user).permit :full_name, :preferred_name, :preferred_img,
                                  :tshirt_size, :twitter, :phone_number,
@@ -54,7 +74,7 @@ class UsersController < ApplicationController
                                  :my_project_sponsor_contact,
                                  :me_govhack_contact, :dietary_requirements,
                                  :organisation_name, :how_did_you_hear,
-                                 :govhack_img, :accepted_terms_and_conditions,
+                                 :govhack_img,
                                  :bsb, :acc_number, :acc_name, :branch_name
   end
 
@@ -68,9 +88,7 @@ class UsersController < ApplicationController
   end
 
   def account_update_successfully
-    if params[:user][:accepted_terms_and_conditions]
-      handle_complete_registration
-    elsif @account_registration
+    if @account_registration
       handle_end_of_registration
     elsif params[:user][:govhack_img].present?
       handle_profile_img
@@ -79,11 +97,6 @@ class UsersController < ApplicationController
     else
       handle_personal_details
     end
-  end
-
-  def handle_complete_registration
-    flash[:notice] = 'Welcome! Please complete your registration.'
-    redirect_to complete_registration_path
   end
 
   def handle_end_of_registration

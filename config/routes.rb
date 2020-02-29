@@ -9,7 +9,11 @@ Rails.application.routes.draw do
   resources :challenges, param: :identifier, only: [:index, :show] do
     collection { get 'landing_page' }
   end
-  resources :users, only: :update
+  resources :users, only: :update do
+    collection do
+      patch :accept_terms_and_conditions
+    end
+  end
   resources :connections, :competition_events, :awards, only: :index
 
   namespace :users do
@@ -135,7 +139,7 @@ Rails.application.routes.draw do
   get 'manage_account', to: 'users#show'
   get 'complete_registration', to: 'users#edit'
   get 'update_personal_details', to: 'users#edit'
-  get 'review_terms_and_conditions', to: 'users#edit'
+  get 'review_terms_and_conditions', to: 'users#review_terms_and_conditions'
   get 'terms_and_conditions', to: 'static_pages#terms_and_conditions'
   get 'code_of_conduct', to: 'static_pages#code_of_conduct'
 

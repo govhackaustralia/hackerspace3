@@ -47,7 +47,12 @@ class ApplicationController < ActionController::Base
   end
 
   def user_not_editing_updating_account
-    return if controller_name == 'users' && %w[edit update].include?(action_name)
+    return if controller_name == 'users' && %w[
+      edit
+      update
+      review_terms_and_conditions
+      accept_terms_and_conditions
+    ].include?(action_name)
     return if controller_name == 'sessions' && ['destroy'].include?(action_name)
 
     true
