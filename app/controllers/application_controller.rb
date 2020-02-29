@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
-  before_action :competition, :accept_terms_and_conditions,
+  before_action :competition, :accepted_terms_and_conditions,
                 :fill_in_required_fields
 
   private
@@ -9,7 +9,7 @@ class ApplicationController < ActionController::Base
     @competition ||= Competition.current
   end
 
-  def accept_terms_and_conditions
+  def accepted_terms_and_conditions
     return unless ts_and_cs_conditions_not_met
 
     flash[:notice] = 'Please accept our terms and conditions'
