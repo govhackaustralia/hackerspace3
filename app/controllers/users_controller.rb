@@ -81,25 +81,37 @@ class UsersController < ApplicationController
   end
 
   def complete_registration_params
-    params.require(:user).permit :full_name, :preferred_name,
-                                 :organisation_name, :phone_number, :twitter,
-                                 :slack, :mailing_list,
-                                 :challenge_sponsor_contact_place,
-                                 :challenge_sponsor_contact_enter,
-                                 :my_project_sponsor_contact, :me_govhack_contact,
-                                 :how_did_you_hear
+    params.require(:user).permit(:how_did_you_hear, *user_permitted_attributes)
   end
 
   def user_params
-    params.require(:user).permit :full_name, :preferred_name, :preferred_img,
-                                 :tshirt_size, :twitter, :phone_number,
-                                 :mailing_list, :slack,
-                                 :challenge_sponsor_contact_place,
-                                 :challenge_sponsor_contact_enter,
-                                 :my_project_sponsor_contact,
-                                 :me_govhack_contact, :dietary_requirements,
-                                 :organisation_name, :govhack_img,
-                                 :bsb, :acc_number, :acc_name, :branch_name
+    params.require(:user).permit(
+      :tshirt_size,
+      :govhack_contact,
+      :dietary_requirements,
+      :govhack_img,
+      :bsb,
+      :acc_number,
+      :acc_name,
+      :branch_name,
+      *user_permitted_attributes
+    )
+  end
+
+  def user_permitted_attributes
+    %i[
+      full_name
+      preferred_name
+      organisation_name
+      phone_number
+      twitter
+      slack
+      mailing_list
+      challenge_sponsor_contact_place
+      challenge_sponsor_contact_enter
+      my_project_sponsor_contact
+      me_govhack_contact
+    ]
   end
 
   def handle_update_user
