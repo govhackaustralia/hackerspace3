@@ -125,9 +125,9 @@ class Team < ApplicationRecord
   # ENHANCEMENT: Move to controller or helper.
   def available_challenges(challenge_type)
     if challenge_type == REGIONAL
-      region.challenges.where.not(id: regional_entries.pluck(:challenge_id), approved: false)
+      available_regional_challenges
     else
-      competition.international_region.challenges.where.not(id: national_entries.pluck(:challenge_id), approved: false)
+      available_international_challenges
     end
   end
 
@@ -168,6 +168,16 @@ class Team < ApplicationRecord
   end
 
   private
+
+  def available_regional_challenges
+    region.challenges.not_unapproved
+      .where.not(id: regional_entries.pluck(:challenge_id))
+  end
+
+  def available_international_challenges
+    competition.international_region.challenges.not_unapproved
+      .where.not(id: national_entries.pluck(:challenge_id))
+  end
 
   # Will check to see that all challenges are still eligible if team event
   # is amended
