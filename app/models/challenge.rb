@@ -21,6 +21,7 @@ class Challenge < ApplicationRecord
   has_one_attached :pdf_preview
 
   scope :approved, -> { where approved: true }
+  scope :not_unapproved, -> { where(approved: [nil, true]) }
   scope :nation_wides, -> { where nation_wide: true }
 
   validates :name, presence: true, uniqueness: true

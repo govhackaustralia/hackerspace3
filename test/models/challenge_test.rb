@@ -40,8 +40,13 @@ class ChallengeTest < ActiveSupport::TestCase
 
   test 'challenge scopes' do
     assert Challenge.approved.include? @challenge
-    @challenge.update approved: false
+    assert Challenge.not_unapproved.include? @challenge
+    @challenge.update! approved: false
     assert Challenge.approved.exclude? @challenge
+    assert Challenge.not_unapproved.exclude? @challenge
+    @challenge.update! approved: nil
+    assert Challenge.approved.exclude? @challenge
+    assert Challenge.not_unapproved.include? @challenge
     assert Challenge.nation_wides.include? @regional_challenge
     assert Challenge.nation_wides.exclude? @challenge
   end
