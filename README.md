@@ -10,13 +10,15 @@ Current major framework version is 6
 
 ## Ruby version
 
-- 2.6.3
+- `2.6.3`
 
 ## Database initialization and creation
 
 [PostgreSQL](https://www.postgresql.org/) is required.
 
-`$ rails db:setup`
+```bash
+$ rails db:setup
+```
 
 *This will load the seeds also, see db/seeds.rb for more options*
 
@@ -26,7 +28,9 @@ Current major framework version is 6
 
 Current coverage is unit tests for models, controllers, and services.
 
-`$ rails test`
+```bash
+$ rails test
+```
 
 ## Services
 
@@ -36,7 +40,9 @@ See the below Environment Variables Required to enable specific services.
 
 ## Deployment instructions
 
-  `$ rails s`
+```bash
+$ rails s
+```
 
 ## Specification Documents
 
