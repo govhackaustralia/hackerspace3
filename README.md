@@ -41,7 +41,7 @@ See the below Environment Variables Required to enable specific services.
 ## Deployment instructions
 
 ```bash
-$ rails s
+$ rails server
 ```
 
 ## Specification Documents
