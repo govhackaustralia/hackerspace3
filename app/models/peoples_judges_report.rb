@@ -1,6 +1,4 @@
 class PeoplesJudgesReport
-  require 'descriptive_statistics'
-
   attr_reader :competition, :event_assignments
 
   def initialize(competition)
@@ -29,11 +27,12 @@ class PeoplesJudgesReport
   end
 
   def row_values(assignment)
+    assignment.judgments.extend(DescriptiveStatistics)
     [
       assignment.user.full_name,
       assignment.user.email,
       assignment.scorecards.count,
-      assignment.judgments.pluck(:score).mean
+      assignment.judgments.mean(&:score)
     ]
   end
 

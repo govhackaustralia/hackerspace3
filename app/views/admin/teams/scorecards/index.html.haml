@@ -14,6 +14,7 @@
       - @scorecards.each do |scorecard|
         %tr
           - scores = scorecard.judgments.pluck(:score)
+          - scores.extend(DescriptiveStatistics)
           - if scores.include? nil
             %td Incomplete
             %td= link_to 'Delete Scorecard', admin_team_scorecard_path(@team, scorecard, include_judges: params[:include_judges]), data: { confirm: "Are you sure?" }, method: :delete
@@ -27,7 +28,8 @@
             %td= score
           - mean_score = ((scores.mean / MAX_SCORE.to_f) * 100).to_i
           = render 'challenges/judging_cell', locals: { total: mean_score }
-          - all_scores_mean = scorecard.assignment_judgments.pluck(:score).mean
+          - scorecard.assignment_judgments.extend(DescriptiveStatistics)
+          - all_scores_mean = scorecard.assignment_judgments.mean(&:score)
           - mean_score = ((all_scores_mean / MAX_SCORE.to_f) * 100).to_i
           = render 'challenges/judging_cell', locals: { total: mean_score }
           %td= scorecard.assignment_scorecards.length

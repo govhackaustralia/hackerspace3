@@ -111,6 +111,7 @@ class Scorecard < ApplicationRecord
       next unless scores.count == correct_score_count
       next if scores.include? nil
 
+      scores.extend(DescriptiveStatistics)
       region_scorecard_helper[scorecard.judgeable_id][:scores] << scores.mean
     end
     region_scorecard_helper

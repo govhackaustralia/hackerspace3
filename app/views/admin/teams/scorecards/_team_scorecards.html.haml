@@ -31,6 +31,7 @@
                 }                                                              |
               }                                                                |
             - unless scores.empty?
+              - scores.extend(DescriptiveStatistics)
               - mean_score = ((scores.mean / MAX_SCORE.to_f) * 100).to_i
               = render 'challenges/judging_cell', locals: { total: mean_score }
               - mode_score = ((scores.mode / MAX_SCORE.to_f) * 100).to_i

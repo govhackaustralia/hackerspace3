@@ -1,8 +1,6 @@
 class Admin::Regions::ScorecardsController < ApplicationController
   before_action :authenticate_user!, :check_for_privileges
 
-  require 'descriptive_statistics'
-
   def index
     @project_judging_total = @competition.score_total PROJECT
     retrieve_helpers

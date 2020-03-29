@@ -1,8 +1,6 @@
 class Admin::Teams::ScorecardsController < ApplicationController
   before_action :authenticate_user!, :check_for_privileges
 
-  require 'descriptive_statistics'
-
   def index
     @project = @team.current_project
     @region = @team.region
