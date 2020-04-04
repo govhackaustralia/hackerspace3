@@ -1,4 +1,5 @@
+- content_for :title, 'New Scorecard'
 %main.scorecard
-  %h2 New Scorecard
+  %h2= yield :title
   = render 'form'
   = link_to 'Close', project_path(@project.identifier), id: 'close-scorecard'

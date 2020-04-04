@@ -1,5 +1,6 @@
+- content_for :title, 'Edit Scorecard'
 %main.scorecard
-  %h2 Edit Scorecard
+  %h2= yield :title
   = render 'form'
   - @scorecards.each do |scorecard|
     - if scorecard.type == PROJECT
