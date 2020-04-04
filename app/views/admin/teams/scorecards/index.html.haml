@@ -13,7 +13,7 @@
     %tbody
       - @scorecards.each do |scorecard|
         %tr
-          - scores = scorecard.judgments.pluck(:score)
+          - scores = scorecard.scores.pluck(:entry)
           - scores.extend(DescriptiveStatistics)
           - if scores.include? nil
             %td Incomplete
@@ -28,8 +28,8 @@
             %td= score
           - mean_score = ((scores.mean / MAX_SCORE.to_f) * 100).to_i
           = render 'challenges/judging_cell', locals: { total: mean_score }
-          - scorecard.assignment_judgments.extend(DescriptiveStatistics)
-          - all_scores_mean = scorecard.assignment_judgments.mean(&:score)
+          - scorecard.assignment_scores.extend(DescriptiveStatistics)
+          - all_scores_mean = scorecard.assignment_scores.mean(&:entry)
           - mean_score = ((all_scores_mean / MAX_SCORE.to_f) * 100).to_i
           = render 'challenges/judging_cell', locals: { total: mean_score }
           %td= scorecard.assignment_scorecards.length

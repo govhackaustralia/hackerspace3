@@ -6,7 +6,7 @@ class ScorecardTest < ActiveSupport::TestCase
     @peoples_scorecard = Scorecard.second
     @particpiant = Assignment.fourth
     @user = User.first
-    @judgment = Judgment.first
+    @score = Score.first
     @entry = Entry.first
     @team = Team.first
     @team_user = User.second
@@ -17,9 +17,9 @@ class ScorecardTest < ActiveSupport::TestCase
     assert @peoples_scorecard.judgeable == @team
     assert @peoples_scorecard.assignment == @particpiant
     assert @peoples_scorecard.user == @user
-    assert @scorecard.judgments.include? @judgment
+    assert @scorecard.scores.include? @score
     assert @scorecard.assignment_scorecards.include? @scorecard
-    assert @scorecard.assignment_judgments.include? @judgment
+    assert @scorecard.assignment_scores.include? @score
   end
 
   test 'scorecard validations' do

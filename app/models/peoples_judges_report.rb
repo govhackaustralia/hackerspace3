@@ -27,12 +27,12 @@ class PeoplesJudgesReport
   end
 
   def row_values(assignment)
-    assignment.judgments.extend(DescriptiveStatistics)
+    assignment.scores.extend(DescriptiveStatistics)
     [
       assignment.user.full_name,
       assignment.user.email,
       assignment.scorecards.count,
-      assignment.judgments.mean(&:score)
+      assignment.scores.mean(&:entry)
     ]
   end
 
@@ -51,6 +51,6 @@ class PeoplesJudgesReport
       id: Scorecard.where(
         assignment: event_assignments
       ).pluck(:assignment_id)
-    ).preload(:user, :scorecards, :judgments)
+    ).preload(:user, :scorecards, :scores)
   end
 end

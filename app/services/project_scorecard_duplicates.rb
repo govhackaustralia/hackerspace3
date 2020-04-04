@@ -11,7 +11,7 @@ class ProjectScorecardDuplicates
     def clean_up!
       @messages = []
       Scorecard.all.preload(
-        :judgeable, :assignment, :judgments
+        :judgeable, :assignment, :scores
       ).each { |scorecard| check_for_duplicates! scorecard }
       puts @messages.join unless Rails.env.test?
     end
@@ -19,7 +19,7 @@ class ProjectScorecardDuplicates
     private
 
     def check_for_duplicates(scorecard)
-      @messages << "scorecard: #{scorecard.id}, DUPLICATE, Scores: #{scorecard.judgments.order(:criterion_id).pluck(:score)}" if Scorecard.where(
+      @messages << "scorecard: #{scorecard.id}, DUPLICATE, Scores: #{scorecard.scores.order(:criterion_id).pluck(:entry)}" if Scorecard.where(
         judgeable: scorecard.judgeable,
         assignment: scorecard.assignment
       ).count != 1
@@ -47,7 +47,7 @@ class ProjectScorecardDuplicates
     def retrieve_duplicate_canditates(scorecards)
       candidates = []
       scorecards.each do |scorecard|
-        next unless (scorecard.judgments.pluck(:score) - [nil]).empty?
+        next unless (scorecard.scores.pluck(:entry) - [nil]).empty?
 
         candidates << scorecard
       end

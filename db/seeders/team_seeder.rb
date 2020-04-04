@@ -66,10 +66,10 @@ class TeamSeeder < Seeder
           comp.challenge_criteria.each do |criterion|
             score = Random.rand(11)
             score = nil if score.zero?
-            Judgment.create(
+            Score.create(
               criterion: criterion,
               scorecard: scorecard,
-              score: score
+              entry: score
             )
           end
         end
@@ -85,10 +85,10 @@ class TeamSeeder < Seeder
         comp.project_criteria.each do |criterion|
           score = Random.rand(11)
           score = nil if score.zero?
-          Judgment.create(
+          Score.create(
             criterion: criterion,
             scorecard: scorecard,
-            score: score
+            entry: score
           )
         end
       end

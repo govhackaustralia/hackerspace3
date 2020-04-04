@@ -3,9 +3,9 @@
     %th Project
     %th Team
     %th Location
-    - if show_peoples_choice_stuff? || show_challenge_judgment_stuff?
+    - if show_peoples_choice_stuff? || show_challenge_score_stuff?
       %th Project Scorecard
-    - if show_challenge_judgment_stuff?
+    - if show_challenge_score_stuff?
       %th Challenge Scorecard
       %th Total Scorecard
   %tbody
@@ -14,14 +14,14 @@
         %td= link_to "#{project.project_name}", project_path(project.identifier)
         %td= project.team_name
         %td= project.event.name
-        - if show_peoples_choice_stuff? || show_challenge_judgment_stuff?
+        - if show_peoples_choice_stuff? || show_challenge_score_stuff?
           - score_value_project = 0
           - if (display_score = @project_judging[project.team_id][:display_score_status]).is_a? Integer
             - score_value_project = ((display_score.to_f / @project_judging_total.to_f) * 100).to_i
             = render 'judging_cell', locals: { total: score_value_project }
           - else
             %td= display_score
-        - if show_challenge_judgment_stuff?
+        - if show_challenge_score_stuff?
           - score_value_challenge = 0
           - if (display_score = @challenge_judging[project.team_id][:display_score_status]).is_a? Integer
             - score_value_challenge = ((display_score.to_f / @challenge_judging_total.to_f) * 100).to_i

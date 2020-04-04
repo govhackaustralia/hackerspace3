@@ -14,10 +14,10 @@ class ProjectScorecardReport
     Scorecard.where(
       judgeable_type: 'Team',
       judgeable_id: competition.teams.pluck(:id)
-    ).preload(:judgments, :judgeable, assignment: :user).each do |team_scorecard|
+    ).preload(:scores, :judgeable, assignment: :user).each do |team_scorecard|
       check_for_duplicates team_scorecard
       challenge_scorecards = check_for_missing_scorecards(team_scorecard)
-      check_for_all_missing_judgments team_scorecard, challenge_scorecards
+      check_for_all_missing_scores team_scorecard, challenge_scorecards
     end
     puts messages.join "\n" unless Rails.env.test?
   end
@@ -25,7 +25,7 @@ class ProjectScorecardReport
   private
 
   def check_for_duplicates(scorecard)
-    messages << "scorecard: #{scorecard.id}, DUPLICATE, Scores: #{scorecard.judgments.order(:criterion_id).pluck(:score)}" if Scorecard.where(
+    messages << "scorecard: #{scorecard.id}, DUPLICATE, Scores: #{scorecard.scores.order(:criterion_id).pluck(:entry)}" if Scorecard.where(
       judgeable: scorecard.judgeable,
       assignment: scorecard.assignment
     ).count != 1
@@ -40,17 +40,17 @@ class ProjectScorecardReport
     challenge_scorecards
   end
 
-  def check_for_all_missing_judgments(team_scorecard, challenge_scorecards)
-    check_for_missing_judgments team_scorecard, project_criteria
+  def check_for_all_missing_scores(team_scorecard, challenge_scorecards)
+    check_for_missing_scores team_scorecard, project_criteria
     challenge_scorecards.each do |challenge_scorecard|
-      check_for_missing_judgments challenge_scorecard, challenge_criteria
+      check_for_missing_scores challenge_scorecard, challenge_criteria
     end
   end
 
-  def check_for_missing_judgments(scorecard, criteria)
-    if scorecard.judgments.empty?
+  def check_for_missing_scores(scorecard, criteria)
+    if scorecard.scores.empty?
       messages << "scorecard: #{scorecard.id}, EMPTY"
-    elsif (criteria.pluck(:id) - scorecard.judgments.pluck(:criterion_id)).present?
+    elsif (criteria.pluck(:id) - scorecard.scores.pluck(:criterion_id)).present?
       messages << "scorecard: #{scorecard.id}, INCOMPLETE"
     end
   end

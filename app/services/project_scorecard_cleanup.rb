@@ -1,8 +1,8 @@
 class ProjectScorecardCleanup
   def self.cleanup!
     @counter = 0
-    Scorecard.all.preload(:judgments).each do |scorecard|
-      next if scorecard.judgments.present?
+    Scorecard.all.preload(:scores).each do |scorecard|
+      next if scorecard.scores.present?
 
       scorecard.destroy!
       @counter += 1

@@ -4,10 +4,10 @@ class Scorecard < ApplicationRecord
 
   has_one :user, through: :assignment
 
-  has_many :judgments, dependent: :destroy
+  has_many :scores, dependent: :destroy
   has_many :assignment_scorecards, through: :assignment, source: :scorecards
-  has_many :assignment_judgments, through: :assignment_scorecards,
-    source: :judgments
+  has_many :assignment_scores, through: :assignment_scorecards,
+    source: :scores
 
   validates :assignment, uniqueness: {
     scope: :judgeable,
@@ -22,12 +22,12 @@ class Scorecard < ApplicationRecord
   # competition criteria.
   # ENHANCEMENT: Move the responsibility of making sure the scorecards
   # conform to the correct amount of criteria, to the Criteria and make the
-  # process of creating judgments more RESTful.
-  def update_judgments
+  # process of creating scores more RESTful.
+  def update_scores
     criteria_ids = judgeable.competition.criteria.where(category: type).pluck(:id)
-    score_card_criteria_ids = judgments.pluck(:criterion_id)
+    score_card_criteria_ids = scores.pluck(:criterion_id)
     (criteria_ids - score_card_criteria_ids).each do |criterion_id|
-      judgments.create! criterion_id: criterion_id
+      scores.create! criterion_id: criterion_id
     end
   end
 
@@ -46,10 +46,10 @@ class Scorecard < ApplicationRecord
     errors.add(:assignment_id, 'Participants are not permitted to vote for a team they are a member of.')
   end
 
-  # Returns the total score of all a scorecard's judgments, or nil if any one
-  # of the judgments has a nil value for score.
+  # Returns the total score of all a scorecard's scores, or nil if any one
+  # of the scores has a nil value for score.
   def total_score
-    judgments.pluck(:score).sum
+    scores.pluck(:entry).sum
   rescue StandardError
     nil
   end
@@ -61,14 +61,14 @@ class Scorecard < ApplicationRecord
   end
 
   # Returns the maximum possible score that can be obtained from all a
-  # competition's criteria in given judgment type.
+  # competition's criteria in given score type.
   def max_score
     judgeable.competition.score_total type
   end
 
   def self.participant_scorecards(competition, teams, include_judges)
     # Returns all project based judging scorecards.
-    all_scorecards = Scorecard.included.where(judgeable: teams).order(:assignment_id).preload(:judgments)
+    all_scorecards = Scorecard.included.where(judgeable: teams).order(:assignment_id).preload(:scores)
     return all_scorecards if include_judges
 
     # if include judges false finds all the project scorecard associated
@@ -103,11 +103,11 @@ class Scorecard < ApplicationRecord
       region_scorecard_helper[scorecard.judgeable_id][:total_card_count] = scorecard_count
     end
 
-    # Will not 'scores' (a scorecards judgments) that have fewer entries than
+    # Will not 'scores' (a scorecards scores) that have fewer entries than
     # they are supposed to, have entries that are incomplete
     correct_score_count = competition.criteria.where(category: type).count
     scorecards.each do |scorecard|
-      scores = scorecard.judgments.pluck(:score)
+      scores = scorecard.scores.pluck(:entry)
       next unless scores.count == correct_score_count
       next if scores.include? nil
 

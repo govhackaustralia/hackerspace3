@@ -4,12 +4,12 @@ class CriterionTest < ActiveSupport::TestCase
   setup do
     @criterion = Criterion.first
     @competition = Competition.first
-    @judgment = Judgment.first
+    @score = Score.first
   end
 
   test 'criterion associations' do
     assert @criterion.competition == @competition
-    assert @criterion.judgments.include? @judgment
+    assert @criterion.scores.include? @score
   end
 
   test 'criterion validations' do

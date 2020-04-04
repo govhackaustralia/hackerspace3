@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_29_032404) do
+ActiveRecord::Schema.define(version: 2020_04_04_004412) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -236,16 +236,6 @@ ActiveRecord::Schema.define(version: 2020_02_29_032404) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "judgments", force: :cascade do |t|
-    t.integer "scorecard_id"
-    t.integer "criterion_id"
-    t.integer "score"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["criterion_id"], name: "index_judgments_on_criterion_id"
-    t.index ["scorecard_id"], name: "index_judgments_on_scorecard_id"
-  end
-
   create_table "projects", force: :cascade do |t|
     t.integer "team_id"
     t.string "team_name"
@@ -317,6 +307,16 @@ ActiveRecord::Schema.define(version: 2020_02_29_032404) do
     t.index ["assignment_id"], name: "index_scorecards_on_assignment_id"
     t.index ["included"], name: "index_scorecards_on_included"
     t.index ["judgeable_type", "judgeable_id"], name: "index_scorecards_on_judgeable_type_and_judgeable_id"
+  end
+
+  create_table "scores", force: :cascade do |t|
+    t.integer "scorecard_id"
+    t.integer "criterion_id"
+    t.integer "entry"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["criterion_id"], name: "index_scores_on_criterion_id"
+    t.index ["scorecard_id"], name: "index_scores_on_scorecard_id"
   end
 
   create_table "sponsors", force: :cascade do |t|

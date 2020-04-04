@@ -38,7 +38,7 @@ class Admin::Teams::ScorecardsController < ApplicationController
   # Retrieves all a team's scorecards and removes those of the judges if
   # params require.
   def participant_scorecards
-    all_scorecards = @team.scorecards.order(:assignment_id).preload :assignment_scorecards, :assignment_judgments, :judgments
+    all_scorecards = @team.scorecards.order(:assignment_id).preload :assignment_scorecards, :assignment_scores, :scores
     return all_scorecards if params[:include_judges] == true.to_s
 
     all_scorecards - @team.judge_scorecards.where(judgeable: @team)

@@ -5,9 +5,9 @@ class ScorecardsController < ApplicationController
   def new
     @judgeable_assignment = @user.judgeable_assignment @competition
     Scorecard.transaction do
-      Judgment.transaction do
+      Score.transaction do
         @scorecard = @team.scorecards.find_or_create_by(assignment: @judgeable_assignment)
-        @judgments = organise_judgments
+        @scores = organise_scores
       end
     end
   end
@@ -15,8 +15,8 @@ class ScorecardsController < ApplicationController
   def edit
     @scorecard = Scorecard.find(params[:id])
     Scorecard.transaction do
-      Judgment.transaction do
-        @judgments = organise_judgments
+      Score.transaction do
+        @scores = organise_scores
       end
     end
     return if @user == @scorecard.user
@@ -30,7 +30,7 @@ class ScorecardsController < ApplicationController
     @scorecard = Scorecard.find(params[:id])
     if @user == @scorecard.user
       update_scorecard
-      process_judgments
+      process_scores
       redirect_to edit_project_scorecard_path(@team.current_project.identifier, @scorecard, popup: true)
     else
       flash[:alert] = 'You do not have permission to edit this scorecard.'
@@ -51,8 +51,8 @@ class ScorecardsController < ApplicationController
 
   def update_scorecard
     Scorecard.transaction do
-      Judgment.transaction do
-        @judgments = organise_judgments
+      Score.transaction do
+        @scores = organise_scores
       end
     end
   end
@@ -67,12 +67,12 @@ class ScorecardsController < ApplicationController
     redirect_to root_path
   end
 
-  def process_judgments
+  def process_scores
     success = true
-    @judgments.each do |judgment|
-      new_score = params[:judgments][judgment.id.to_s][:score].to_i
+    @scores.each do |score|
+      new_score = params[:scores][score.id.to_s][:entry].to_i
       if validate_new_score(new_score)
-        judgment.update(score: new_score)
+        score.update(entry: new_score)
       else
         success = false
       end
@@ -86,22 +86,22 @@ class ScorecardsController < ApplicationController
     (MIN_SCORE..MAX_SCORE).cover?(new_score)
   end
 
-  def organise_judgments
+  def organise_scores
     @scorecards = [@scorecard]
-    @scorecard.update_judgments
+    @scorecard.update_scores
     assignments = Assignment.where(user: @user, title: JUDGE, assignable: @team.challenges).order(:id)
-    all_judgments = @scorecard.judgments.order(:criterion_id)
-    return all_judgments unless assignments.present?
+    all_scores = @scorecard.scores.order(:criterion_id)
+    return all_scores unless assignments.present?
 
-    assignments.each { |assignment| all_judgments += organise_challenge_scorecard(assignment) }
-    all_judgments
+    assignments.each { |assignment| all_scores += organise_challenge_scorecard(assignment) }
+    all_scores
   end
 
   def organise_challenge_scorecard(assignment)
     entry = Entry.find_by(team: @team, challenge: assignment.assignable)
     scorecard = Scorecard.find_or_create_by!(assignment: assignment, judgeable: entry)
-    scorecard.update_judgments
+    scorecard.update_scores
     @scorecards << scorecard
-    scorecard.judgments.order(:criterion_id)
+    scorecard.scores.order(:criterion_id)
   end
 end

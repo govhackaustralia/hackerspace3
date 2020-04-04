@@ -1,20 +1,20 @@
 = form_for [@project, @scorecard] do |f|
   - current_scorecard = @scorecard
-  - @judgments.each do |judgment|
-    - if challenge_title_required?(judgment)
+  - @scores.each do |score|
+    - if challenge_title_required?(score)
       %h3= @challenge_scorecard.judgeable.challenge.name
       %p.justification
         %strong> Justification
         \:
         %br/
         %em= @challenge_scorecard.judgeable.justification
-    = fields_for "judgments[]", judgment do |judgment_form|
+    = fields_for "scores[]", score do |score_form|
       .field
         %div
-          = judgment_form.label :score, judgment.criterion.name
+          = score_form.label :entry, score.criterion.name
           %br/
-          %em= judgment.criterion.description
-        = judgment_form.number_field(:score, { value: judgment.score, in: MIN_SCORE..MAX_SCORE, step: 1 })
+          %em= score.criterion.description
+        = score_form.number_field(:entry, { value: score.entry, in: MIN_SCORE..MAX_SCORE, step: 1 })
   .actions
     = f.submit 'Save Scorecard'
 = javascript_tag 'window.addEventListener("unload", function(event) { window.opener.location.reload();})'

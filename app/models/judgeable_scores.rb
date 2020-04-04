@@ -50,9 +50,9 @@ class JudgeableScores
 
   def compile_scorecard_id_to_scores
     @team_scorecards.each { |scorecard| @scorecard_id_to_scores[scorecard.id] = [] }
-    judgments = Judgment.where scorecard: @team_scorecards
-    judgments.each do |judgment|
-      @scorecard_id_to_scores[judgment.scorecard_id] << judgment.score
+    scores = Score.where scorecard: @team_scorecards
+    scores.each do |score|
+      @scorecard_id_to_scores[score.scorecard_id] << score.entry
     end
   end
 

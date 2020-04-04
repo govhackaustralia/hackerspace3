@@ -9,11 +9,11 @@ class ScorecardsHelperTest < ActionView::TestCase
   end
 
   test 'challenge_title_required?' do
-    assert_not challenge_title_required? Judgment.first
+    assert_not challenge_title_required? Score.first
   end
 
-  test 'show_challenge_judgment_stuff?' do
-    assert_not show_challenge_judgment_stuff?
+  test 'show_challenge_score_stuff?' do
+    assert_not show_challenge_score_stuff?
   end
 
   test 'show_peoples_choice_stuff?' do
