@@ -14,7 +14,7 @@ class Events::TeamsController < ApplicationController
     return unless @peoples_assignment.present? && @competition.in_peoples_judging_window?(LAST_TIME_ZONE)
     return unless (@judgeable_assignment = current_user.judgeable_assignment(@competition)).present?
 
-    @project_judging = @judgeable_assignment.judgeable_scores(@teams)
+    @project_judging = JudgeableScores.new(@judgeable_assignment, @teams).compile
     @project_judging_total = @competition.score_total PROJECT
   end
 end

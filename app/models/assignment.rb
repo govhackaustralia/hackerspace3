@@ -57,13 +57,6 @@ class Assignment < ApplicationRecord
     errors.add :event, 'Register for a competition event to join or create a team.'
   end
 
-  # Returns object for a particular judgeable assignment showing the status of
-  # each of the potential teams to be judged.
-  # ENHANCEMENT: One line, remove to where it is called.
-  def judgeable_scores(teams)
-    JudgeableScores.new(self, teams).compile
-  end
-
   # Will return the registrtation for the Competition Event a participant is
   # registered for
   def competition_event_registration

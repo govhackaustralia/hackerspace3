@@ -29,7 +29,7 @@ class ProjectsController < ApplicationController
     return unless (@peoples_assignment = current_user.peoples_assignment(@competition)).present?
 
     @judgeable_assignment = current_user.judgeable_assignment @competition
-    @project_judging = @judgeable_assignment.judgeable_scores(@teams)
+    @project_judging = JudgeableScores.new(@judgeable_assignment, @teams).compile
     @project_judging_total = @competition.score_total PROJECT
   end
 

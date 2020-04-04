@@ -81,15 +81,19 @@ class ChallengesController < ApplicationController
   end
 
   def user_judging
-    if (@judgeable_assignment = current_user.judgeable_assignment @competition).present?
-      @peoples_assignment = current_user.peoples_assignment @competition
-      @project_judging = @judgeable_assignment.judgeable_scores @teams
-      @project_judging_total = @competition.score_total PROJECT
-    end
+    peoples_project_judging
     return unless (@judge = current_user.judge_assignment(@challenge)).present?
 
-    @challenge_judging = @judge.judgeable_scores @teams
+    @challenge_judging = JudgeableScores.new(@judge, @teams).compile
     @challenge_judging_total = @competition.score_total CHALLENGE
+  end
+
+  def peoples_project_judging
+    return unless (@judgeable_assignment = current_user.judgeable_assignment(@competition)).present?
+
+    @peoples_assignment = current_user.peoples_assignment @competition
+    @project_judging = JudgeableScores.new(@judgeable_assignment, @teams).compile
+    @project_judging_total = @competition.score_total PROJECT
   end
 
   def checkpoint_entry_view
