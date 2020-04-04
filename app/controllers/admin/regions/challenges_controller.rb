@@ -10,7 +10,7 @@ class Admin::Regions::ChallengesController < ApplicationController
     @challenge = Challenge.find params[:id]
     @challenge_sponsorships = @challenge.challenge_sponsorships
     @challenge_data_sets = @challenge.challenge_data_sets
-    @judges = @challenge.judges
+    @judges = @challenge.judge_users
   end
 
   def preview

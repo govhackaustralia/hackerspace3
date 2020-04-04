@@ -3,9 +3,7 @@ class Challenge < ApplicationRecord
   has_one :competition, through: :region
 
   has_many :assignments, as: :assignable, dependent: :destroy
-  # ENHANCEMENT: Remove either users or judges association.
-  has_many :users, through: :assignments
-  has_many :judges, through: :assignments, source: :user
+  has_many :judge_users, through: :assignments, source: :user
   has_many :entries, dependent: :destroy
   has_many :published_entries, -> { published }, class_name: 'Entry'
   has_many :teams, through: :entries

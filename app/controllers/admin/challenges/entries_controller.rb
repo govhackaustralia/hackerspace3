@@ -2,7 +2,7 @@ class Admin::Challenges::EntriesController < ApplicationController
   before_action :authenticate_user!, :check_for_privileges
 
   def index
-    @judges = @challenge.users
+    @judges = @challenge.judge_users
     @region = @challenge.region
     team_project_entries
     project_judging

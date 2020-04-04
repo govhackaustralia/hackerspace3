@@ -21,8 +21,7 @@ class ChallengeTest < ActiveSupport::TestCase
     assert @challenge.competition == @competition
     assert @challenge.region == @region
     assert @challenge.assignments.include? @assignment
-    assert @challenge.users.include? @user
-    assert @challenge.judges.include? @user
+    assert @challenge.judge_users.include? @user
     assert @challenge.entries.include? @entry
     assert @challenge.published_entries.include? @entry
     assert @challenge.entries_at(@checkpoint).include? @entry
