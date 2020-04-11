@@ -20,7 +20,7 @@ class Project < ApplicationRecord
 
   private
 
-  # Make the latest proect created the current project.
+  # Make the latest project created the current project.
   def update_team_current_project
     team.update current_project: self
   end
