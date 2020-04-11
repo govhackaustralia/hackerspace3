@@ -37,7 +37,7 @@ class UserSeeder < Seeder
         dietary_requirements: ("No #{Faker::Food.dish}" if number % 3 == 0),
         tshirt_size: 'Small',
         twitter: "@#{first_name}#{number}",
-        slack: "@#{first_name}#{Faker::Food.spice.camelize(:lower)}", 
+        slack: "@#{first_name}#{Faker::Food.spice.camelize(:lower)}",
         mailing_list: random_boolean,
         challenge_sponsor_contact_place: random_boolean,
         challenge_sponsor_contact_enter: random_boolean,
@@ -55,8 +55,7 @@ class UserSeeder < Seeder
         coder: random_boolean,
         creative: random_boolean,
         facilitator: random_boolean,
-        registration_type: USER_REGISTRATION_TYPES.sample,
-
+        registration_type: USER_REGISTRATION_TYPES.sample
       )
 
       if user.registration_type == YOUTH_COMPETITOR
