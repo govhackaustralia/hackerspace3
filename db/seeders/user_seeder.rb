@@ -46,7 +46,7 @@ class UserSeeder < Seeder
         organisation_name: (Faker::Company.name if number % 5 == 0),
         phone_number: nil,
         how_did_you_hear: nil,
-        accepted_terms_and_conditions: false,
+        accepted_terms_and_conditions: nil,
         accepted_code_of_conduct: (Time.now unless number % 10 == 0),
         password: Devise.friendly_token[0, 20],
         request_not_photographed: random_boolean,
@@ -65,7 +65,7 @@ class UserSeeder < Seeder
       user.skip_confirmation_notification!
       user.skip_reconfirmation!
       user.confirm if number % 20 == 0
-      user.save
+      user.save!
     end
   end
 
