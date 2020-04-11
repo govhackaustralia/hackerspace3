@@ -22,7 +22,7 @@ class TeamSeeder < Seeder
         )
       end
 
-      [*1..20].sample.times do |time|
+      [*1..3].sample.times do |time|
         team.projects.create(
           team_name: "#{event.name} team #{team_time} #{comp.year}",
           description: Faker::Lorem.paragraph,
@@ -31,11 +31,11 @@ class TeamSeeder < Seeder
           source_code_url: 'https://github.com/tenderlove/allocation_sampler',
           video_url: 'https://www.youtube.com/embed/kqcrEFkA8g0',
           homepage_url: 'https://www.govhack.org/',
-          user: team.assignments.first.user
+          user: team.leaders.first
         )
       end
 
-      [*1..5].sample.times do |time|
+      [*1..3].sample.times do |time|
         team.team_data_sets.create(
           name: "#{team.name} dataset #{team_time + time} #{comp.year}",
           description: Faker::Lorem.paragraph,
