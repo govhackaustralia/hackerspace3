@@ -51,11 +51,11 @@ class Assignment < ApplicationRecord
   # A validation to ensure there only participants registered for a competition
   # event is able to join a team in any position.
   def can_only_join_team_if_registered_for_a_competition_event
-    return unless TEAM_ADMIN.include? title
+    return unless TEAM_ADMIN.include?(title) &&
+      user.participating_competition_events.competition(competition).empty?
 
-    return unless user.event_assignment(competition).registrations.participating.competition_events.empty?
-
-    errors.add :event, 'Register for a competition event to join or create a team.'
+    errors.add :event,
+      'Register for a competition event to join or create a team.'
   end
 
   # Will return the registrtation for the Competition Event a participant is
