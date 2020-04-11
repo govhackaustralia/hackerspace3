@@ -19,7 +19,8 @@ class UserSeeder < Seeder
   end
 
   def self.create_admin competition
-    User.find_by_email(ENV['SEED_EMAIL']).make_site_admin competition
+    user = User.find_by_email(ENV['SEED_EMAIL'])
+    user.make_site_admin competition, user.holder_for(competition)
   end
 
   def self.create_users size

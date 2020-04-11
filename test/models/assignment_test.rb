@@ -6,6 +6,7 @@ class AssignmentTest < ActiveSupport::TestCase
     @competition = Competition.first
     @region_assignment = Assignment.second
     @region = Region.first
+    @holder = Holder.first
     @user = User.first
     @judge = Assignment.find 7
     @participant = Assignment.fourth
@@ -31,6 +32,7 @@ class AssignmentTest < ActiveSupport::TestCase
   test 'assignment associations' do
     # Belongs To
     assert @comp_assignment.assignable == @competition
+    assert @comp_assignment.holder == @holder
     assert @comp_assignment.user == @user
     assert @region_assignment.assignable == @region
     assert @region_assignment.user == @user
@@ -78,7 +80,7 @@ class AssignmentTest < ActiveSupport::TestCase
     assert_not assignment.persisted?
     # Valid Title
     @user.assignments.destroy_all
-    assignment = @competition.assignments.create user: @user, title: PARTICIPANT
+    assignment = @competition.assignments.create user: @user, title: PARTICIPANT, holder: @holder
     assert assignment.persisted?
   end
 
@@ -95,8 +97,8 @@ class AssignmentTest < ActiveSupport::TestCase
     assert_not assignment.persisted?
     # Fix: Something wrong with this test/method, will fail when another
     # registration for @user is made as Not Attending.
-    @participant.registrations.create event: @competition_event, status: ATTENDING
-    assignment = @team.assignments.create user: @user, title: TEAM_LEADER
+    @participant.registrations.create event: @competition_event, status: ATTENDING, holder: @holder
+    assignment = @team.assignments.create user: @user, title: TEAM_LEADER, holder: @holder
     assert assignment.persisted?
   end
 

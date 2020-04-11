@@ -5,6 +5,7 @@ class Admin::Events::StaffFlightsControllerTest < ActionDispatch::IntegrationTes
     sign_in users :one
     @event = Event.first
     @staff_assignment = Assignment.second
+    @holder = Holder.first
     Registration.destroy_all
   end
 
@@ -21,7 +22,10 @@ class Admin::Events::StaffFlightsControllerTest < ActionDispatch::IntegrationTes
 
   test 'should post create success' do
     assert_difference 'Registration.count' do
-      post admin_event_staff_flights_url @event, params: { registration: { assignment_id: @staff_assignment.id } }
+      post admin_event_staff_flights_url @event, params: { registration: {
+        assignment_id: @staff_assignment.id,
+        holder_id: @holder.id
+      } }
     end
     assert_redirected_to admin_event_registrations_url @event
   end

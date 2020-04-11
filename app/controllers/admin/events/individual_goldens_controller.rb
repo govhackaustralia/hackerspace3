@@ -40,9 +40,12 @@ class Admin::Events::IndividualGoldensController < ApplicationController
     user = User.find_by id: params[:user_id]
     return if user.nil?
 
+    competition = @event.competition
     assignment = Assignment.find_or_create_by user: user, title: GOLDEN_TICKET,
-                                              assignable: @event.competition
+                                              assignable: competition,
+                                              holder: user.holder_for(competition)
     @registration.assignment = assignment
+    @registration.holder_id = assignment.holder_id
     @registration.time_notified = Time.now.in_time_zone COMP_TIME_ZONE
   end
 end

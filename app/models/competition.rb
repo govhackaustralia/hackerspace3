@@ -1,5 +1,6 @@
 class Competition < ApplicationRecord
   has_many :assignments, as: :assignable
+  has_many :holders, dependent: :destroy
   has_many :regions
   has_many :sponsors
   has_many :sponsorship_types

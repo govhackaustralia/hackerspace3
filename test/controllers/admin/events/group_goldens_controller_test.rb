@@ -6,6 +6,7 @@ class Admin::Events::GroupGoldensControllerTest < ActionDispatch::IntegrationTes
     @event = Event.first
     @team = Team.first
     @leader_assignment = Assignment.find 11
+    @holder = Holder.first
     Registration.destroy_all
   end
 
@@ -22,7 +23,10 @@ class Admin::Events::GroupGoldensControllerTest < ActionDispatch::IntegrationTes
 
   test 'should post create success' do
     assert_difference 'Registration.count' do
-      post admin_event_group_goldens_url @event, params: { registration: { assignment_id: @leader_assignment.id } }
+      post admin_event_group_goldens_url @event, params: { registration: {
+        assignment_id: @leader_assignment.id,
+        holder_id: @holder.id
+      } }
     end
     assert_redirected_to admin_event_registrations_url @event
   end

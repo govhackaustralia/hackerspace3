@@ -3,6 +3,7 @@ require 'test_helper'
 class UserTest < ActiveSupport::TestCase
   setup do
     @user = User.first
+    @holder = Holder.first
     @assignment = Assignment.first
     @team = Team.first
     @header= Header.second
@@ -26,6 +27,7 @@ class UserTest < ActiveSupport::TestCase
   end
 
   test 'user associations' do
+    assert @user.holders.include? @holder
     assert @user.assignments.include? @assignment
     assert @user.headers.include? @header
     assert @user.registrations.include? @registration
@@ -113,6 +115,10 @@ class UserTest < ActiveSupport::TestCase
     assert_not @user.criterion_privileges? @competition
   end
 
+  test 'holder_for' do
+    assert @user.holder_for(@competition) == @holder
+  end
+
   test 'judgeable_assignment' do
     assert @user.judgeable_assignment(@competition).present?
     assert_not @invitee.judgeable_assignment(@competition).present?
@@ -134,7 +140,7 @@ class UserTest < ActiveSupport::TestCase
 
   test 'site_admin?' do
     assert_not @user.site_admin? @competition
-    @user.assignments.create assignable: @competition, title: ADMIN
+    @user.assignments.create assignable: @competition, title: ADMIN, holder: @holder
     assert @user.site_admin? @competition
   end
 end

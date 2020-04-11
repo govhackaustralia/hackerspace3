@@ -112,6 +112,6 @@ class Admin::CompetitionsController < ApplicationController
       name: Region::INTERNATIONAL,
       category: Region::INTERNATIONAL
     )
-    current_user.make_site_admin @competition
+    current_user.make_site_admin @competition, @holder
   end
 end

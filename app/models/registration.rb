@@ -1,4 +1,5 @@
 class Registration < ApplicationRecord
+  belongs_to :holder
   belongs_to :assignment
   belongs_to :event
 

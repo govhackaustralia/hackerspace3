@@ -22,7 +22,7 @@ class Admin::Events::GroupGoldensController < ApplicationController
   private
 
   def registration_params
-    params.require(:registration).permit(:assignment_id)
+    params.require(:registration).permit(:assignment_id, :holder_id)
   end
 
   def check_for_privileges

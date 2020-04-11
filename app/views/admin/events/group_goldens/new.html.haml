@@ -15,7 +15,7 @@
           Golden Ticket Registration for #{@user.full_name} already exists for #{@project.team_name}.
         %p= link_to 'Update Registration', edit_admin_event_registration_path(@event, @existing_registration)
       - else
-        %p= link_to 'Assign Group Golden Ticket', admin_event_group_goldens_path(@event, registration: { assignment_id: @leader_assignment.id }), method: :post
+        %p= link_to 'Assign Group Golden Ticket', admin_event_group_goldens_path(@event, registration: { assignment_id: @leader_assignment.id, holder_id: @leader_assignment.holder_id }), method: :post
     - else
       %p No team leader assigned for this team.
   - elsif @teams.present?

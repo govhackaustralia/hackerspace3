@@ -5,4 +5,5 @@
       options = {checked: @registration.status == status}) |
     = f.label(:status, status)
   = f.hidden_field :assignment_id, value: @event_assignment.id
+  = f.hidden_field :holder_id, value: @event_assignment.holder_id
   = f.submit

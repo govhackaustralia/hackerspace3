@@ -124,6 +124,7 @@ class RegistrationsController < ApplicationController
     @registration = @event.registrations.new(status: params[:status])
     @user = current_user
     @registration.assignment = @user.event_assignment @event.competition
+    @registration.holder = @holder
     @registration.time_notified = Time.now.in_time_zone(COMP_TIME_ZONE)
   end
 

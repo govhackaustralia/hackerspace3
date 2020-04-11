@@ -50,7 +50,7 @@ class Admin::RegistrationsController < ApplicationController
   private
 
   def registration_params
-    params.require(:registration).permit :status, :assignment_id
+    params.require(:registration).permit :status, :assignment_id, :holder_id
   end
 
   def search_for_users

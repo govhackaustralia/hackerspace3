@@ -3,6 +3,7 @@ require 'test_helper'
 class RegistrationTest < ActiveSupport::TestCase
   setup do
     @registration = Registration.first
+    @holder = Holder.first
     @assignment = Assignment.fourth
     @competition = Competition.first
     @user = User.first
@@ -22,6 +23,7 @@ class RegistrationTest < ActiveSupport::TestCase
   end
 
   test 'registration associations' do
+    assert @registration.holder == @holder
     assert @registration.assignment == @assignment
     assert @registration.competition == @competition
     assert @registration.user == @user
@@ -65,11 +67,13 @@ class RegistrationTest < ActiveSupport::TestCase
     # Non valid status
     assert_not @event.registrations.create(
       assignment: @assignment,
+      holder: @holder,
       status: 'Maybe'
     ).persisted?
     # Valid status
     assert @event.registrations.create(
       assignment: @assignment,
+      holder: @holder,
       status: VALID_ATTENDANCE_STATUSES.sample
     ).persisted?
     @assignment.destroy
@@ -81,6 +85,7 @@ class RegistrationTest < ActiveSupport::TestCase
     exception = assert_raises(ActiveRecord::RecordInvalid) do
       Event.fourth.registrations.create!(
         assignment: @assignment,
+        holder: @holder,
         status: ATTENDING
       )
     end

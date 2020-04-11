@@ -1,5 +1,6 @@
 class Assignment < ApplicationRecord
   belongs_to :assignable, polymorphic: true
+  belongs_to :holder
   belongs_to :user
   belongs_to :competition
 

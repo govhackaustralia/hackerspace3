@@ -4,7 +4,8 @@ class Admin::CompetitionsControllerTest < ActionDispatch::IntegrationTest
   setup do
     sign_in users :one
     @competition = Competition.first
-    User.first.make_site_admin @competition
+    @holder = Holder.first
+    User.first.make_site_admin @competition, @holder
   end
 
   test 'should get index' do

@@ -5,7 +5,8 @@ class FavouritesController < ApplicationController
     team = Team.find params[:team_id]
     favourite = Favourite.create(
       team: team,
-      assignment: current_user.event_assignment(team.competition)
+      assignment: current_user.event_assignment(team.competition),
+      holder: @holder
     )
     handle_create favourite, team
   end

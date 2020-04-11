@@ -4,6 +4,7 @@ class User < ApplicationRecord
          :trackable, :validatable, :confirmable, :lockable, :timeoutable,
          :omniauthable
 
+  has_many :holders, dependent: :destroy
   has_many :assignments, dependent: :destroy
   has_many :headers, through: :assignments
   has_many :registrations, through: :assignments
@@ -89,8 +90,8 @@ class User < ApplicationRecord
   end
 
   # Assigns a user the assignment of site admin.
-  def make_site_admin(competition)
-    competition.assignments.find_or_create_by user: self, title: ADMIN
+  def make_site_admin(competition, holder)
+    competition.assignments.find_or_create_by user: self, title: ADMIN, holder: holder
   end
 
   # Returns a display name in order of system preference.
@@ -124,6 +125,12 @@ class User < ApplicationRecord
     event_assignment competition if
       joined_teams.published.competition(competition).present? ||
       assignments.volunteers.where(competition: competition).present?
+  end
+
+  # Returns the competition holder of a particular user. this is the container
+  # that holds a user's assignments, scorecards, registrations, and favourites
+  def holder_for(competition)
+    holders.find_or_create_by competition: competition
   end
 
   # Returns a user's challenge judging assignment given a challenge.

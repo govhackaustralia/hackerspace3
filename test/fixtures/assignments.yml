@@ -7,6 +7,7 @@
 one:
   id: 1
   user_id: 1
+  holder_id: 1
   assignable_id: 1
   assignable_type: Competition
   title: GovHack Management Team
@@ -15,6 +16,7 @@ one:
 two:
   id: 2
   user_id: 1
+  holder_id: 1
   assignable_id: 1
   assignable_type: Region
   title: Region Director
@@ -23,6 +25,7 @@ two:
 three:
   id: 3
   user_id: 1
+  holder_id: 1
   assignable_id: 1
   assignable_type: Event
   title: Event Host
@@ -31,6 +34,7 @@ three:
 four:
   id: 4
   user_id: 1
+  holder_id: 1
   assignable_id: 1
   assignable_type: Competition
   title: Participant
@@ -39,6 +43,7 @@ four:
 five:
   id: 5
   user_id: 1
+  holder_id: 1
   assignable_id: 1
   assignable_type: Sponsor
   title: Sponsor Contact
@@ -47,6 +52,7 @@ five:
 six:
   id: 6
   user_id: 2
+  holder_id: 2
   assignable_id: 1
   assignable_type: Competition
   title: VIP
@@ -55,6 +61,7 @@ six:
 seven:
   id: 7
   user_id: 2
+  holder_id: 2
   assignable_id: 1
   assignable_type: Challenge
   title: Judge
@@ -63,6 +70,7 @@ seven:
 eight:
   id: 8
   user_id: 1
+  holder_id: 1
   assignable_id: 1
   assignable_type: Competition
   title: GovHack Volunteer
@@ -71,6 +79,7 @@ eight:
 nine:
   id: 9
   user_id: 2
+  holder_id: 2
   assignable_id: 1
   assignable_type: Team
   title: Team Member
@@ -79,6 +88,7 @@ nine:
 ten:
   id: 10
   user_id: 1
+  holder_id: 1
   assignable_id: 1
   assignable_type: Event
   title: Event Support
@@ -87,6 +97,7 @@ ten:
 eleven:
   id: 11
   user_id: 1
+  holder_id: 1
   assignable_id: 1
   assignable_type: Team
   title: Team Leader
@@ -95,6 +106,7 @@ eleven:
 twelve:
   id: 12
   user_id: 3
+  holder_id: 3
   assignable_id: 1
   assignable_type: Team
   title: Invitee
@@ -103,6 +115,7 @@ twelve:
 thirteen:
   id: 13
   user_id: 3
+  holder_id: 3
   assignable_id: 1
   assignable_type: Competition
   title: Participant
@@ -111,6 +124,7 @@ thirteen:
 fourteen:
   id: 14
   user_id: 1
+  holder_id: 1
   assignable_id: 1
   assignable_type: Region
   title: Region Support
@@ -119,6 +133,7 @@ fourteen:
 fifteen:
   id: 15
   user_id: 1
+  holder_id: 1
   assignable_id: 1
   assignable_type: Competition
   title: Chief Judge

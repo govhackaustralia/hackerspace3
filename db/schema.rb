@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_11_105147) do
+ActiveRecord::Schema.define(version: 2020_04_12_045759) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -44,8 +44,10 @@ ActiveRecord::Schema.define(version: 2020_04_11_105147) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "competition_id"
+    t.integer "holder_id"
     t.index ["assignable_type", "assignable_id"], name: "index_assignments_on_assignable_type_and_assignable_id"
     t.index ["competition_id"], name: "index_assignments_on_competition_id"
+    t.index ["holder_id"], name: "index_assignments_on_holder_id"
     t.index ["title"], name: "index_assignments_on_title"
     t.index ["user_id"], name: "index_assignments_on_user_id"
   end
@@ -224,7 +226,9 @@ ActiveRecord::Schema.define(version: 2020_04_11_105147) do
     t.integer "team_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "holder_id"
     t.index ["assignment_id"], name: "index_favourites_on_assignment_id"
+    t.index ["holder_id"], name: "index_favourites_on_holder_id"
     t.index ["team_id"], name: "index_favourites_on_team_id"
   end
 
@@ -246,6 +250,17 @@ ActiveRecord::Schema.define(version: 2020_04_11_105147) do
     t.index ["assignment_id"], name: "index_headers_on_assignment_id"
     t.index ["included"], name: "index_headers_on_included"
     t.index ["scoreable_type", "scoreable_id"], name: "index_headers_on_scoreable_type_and_scoreable_id"
+  end
+
+  create_table "holders", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "competition_id", null: false
+    t.boolean "aws_credits_requested"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["aws_credits_requested"], name: "index_holders_on_aws_credits_requested"
+    t.index ["competition_id"], name: "index_holders_on_competition_id"
+    t.index ["user_id"], name: "index_holders_on_user_id"
   end
 
   create_table "projects", force: :cascade do |t|
@@ -304,8 +319,10 @@ ActiveRecord::Schema.define(version: 2020_04_11_105147) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "event_id"
+    t.integer "holder_id"
     t.index ["assignment_id"], name: "index_registrations_on_assignment_id"
     t.index ["event_id"], name: "index_registrations_on_event_id"
+    t.index ["holder_id"], name: "index_registrations_on_holder_id"
     t.index ["status"], name: "index_registrations_on_status"
   end
 
@@ -452,4 +469,6 @@ ActiveRecord::Schema.define(version: 2020_04_11_105147) do
     t.index ["unlock_token"], name: "index_users_on_unlock_token", unique: true
   end
 
+  add_foreign_key "holders", "competitions"
+  add_foreign_key "holders", "users"
 end

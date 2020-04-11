@@ -49,7 +49,7 @@ class Admin::AssignmentsController < ApplicationController
   def create_new_assignment
     @user = User.find_by id: params[:user_id]
     @title = params[:title]
-    @assignment = @assignable.assignments.new user: @user, title: @title
+    @assignment = @assignable.assignments.new user: @user, title: @title, holder: @user&.holder_for(@competition)
   end
 
   def user_found

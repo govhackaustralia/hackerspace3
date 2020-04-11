@@ -1,12 +1,18 @@
 class ApplicationController < ActionController::Base
   before_action :competition, :accepted_terms_and_conditions,
-                :filled_in_required_fields
+                :filled_in_required_fields, :holder
 
   private
 
   def competition
     @competition = Competition.find_by_year request.subdomain
     @competition ||= Competition.current
+  end
+
+  def holder
+    return unless user_signed_in?
+
+    @holder = current_user.holder_for(@competition)
   end
 
   def accepted_terms_and_conditions

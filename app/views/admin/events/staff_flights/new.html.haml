@@ -11,7 +11,7 @@
         Staff Registration for #{@user.full_name} already exists.
       %p= link_to 'Update Registration', edit_admin_event_registration_path(@event, @existing_registration)
     - else
-      %p= link_to 'Create Staff Invitation', admin_event_staff_flights_path(@event, registration: { assignment_id: @assignment.id }), method: :post
+      %p= link_to 'Create Staff Invitation', admin_event_staff_flights_path(@event, registration: { assignment_id: @assignment.id, holder_id: @assignment.holder_id }), method: :post
   - elsif @users.present?
     - @users.each do |user|
       = render 'admin/shared/user_contact', locals: { user: user }
