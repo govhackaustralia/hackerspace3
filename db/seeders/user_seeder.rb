@@ -74,7 +74,8 @@ class UserSeeder < Seeder
     comp.assignments.event_assignments.each do |event_assignment|
       6.times do
         event_assignment.favourites.create(
-          team: teams.sample
+          team: teams.sample,
+          holder_id: event_assignment.holder_id
         )
       end
     end

@@ -28,19 +28,25 @@ class EventSeeder < Seeder
       sponsor: sponsors.sample
     )
 
+    user = users.sample
     event.host_assignments.create(
-      user: users.sample
+      user: user,
+      holder: user.holder_for(comp)
     )
 
     2.times do
+      user = users.sample
       event.support_assignments.create(
-        user: users.sample
+        user: user,
+        holder: user.holder_for(comp)
       )
     end
 
     20.times do
+      assignment = participant_assignments.sample
       event.registrations.attending.create(
-        assignment: participant_assignments.sample
+        assignment: assignment,
+        holder_id: assignment.holder_id
       )
     end
 

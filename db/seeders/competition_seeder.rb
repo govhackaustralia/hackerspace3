@@ -53,25 +53,33 @@ class CompetitionSeeder < Seeder
     end
 
     4.times do
+      user = users.sample
       comp.assignments.create(
-        user: users.sample,
-        title: MANAGEMENT_TEAM
+        user: user,
+        title: MANAGEMENT_TEAM,
+        holder: user.holder_for(comp)
       )
     end
 
+    user = users.sample
     comp.assignments.create(
-      user: users.sample,
-      title: COMPETITION_DIRECTOR
+      user: user,
+      title: COMPETITION_DIRECTOR,
+      holder: user.holder_for(comp)
     )
 
+    user = users.sample
     comp.assignments.create(
-      user: users.sample,
-      title: SPONSORSHIP_DIRECTOR
+      user: user,
+      title: SPONSORSHIP_DIRECTOR,
+      holder: user.holder_for(comp)
     )
 
+    user = users.sample
     10.times do
       comp.assignments.volunteers.create(
-        user: users.sample
+        user: user,
+        holder: user.holder_for(comp)
       )
     end
 

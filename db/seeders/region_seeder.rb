@@ -50,15 +50,19 @@ class RegionSeeder < Seeder
 
     comp.regions.all.each do |region|
 
+      user = users.sample
       region.assignments.create(
-        user: users.sample,
-        title: REGION_DIRECTOR
+        user: user,
+        title: REGION_DIRECTOR,
+        holder: user.holder_for(comp)
       )
 
       3.times do
+        user = users.sample
         region.assignments.create(
-          user: users.sample,
-          title: REGION_SUPPORT
+          user: user,
+          title: REGION_SUPPORT,
+          holder: user.holder_for(comp)
         )
       end
 
@@ -114,8 +118,10 @@ class RegionSeeder < Seeder
         end
 
         3.times do
+          user = users.sample
           challenge.assignments.judges.create(
-            user: users.sample,
+            user: user,
+            holder: user.holder_for(comp)
           )
         end
       end

@@ -12,13 +12,17 @@ class TeamSeeder < Seeder
 
       team.assign_leader(competitors.sample)
       [*1..8].sample.times do
+        user = competitors.sample
         team.assignments.team_members.create(
-          user: competitors.sample
+          user: user,
+          holder: user.holder_for(comp)
         )
       end
       2.times do
+        user = competitors.sample
         team.assignments.team_invitees.create(
-          user: competitors.sample
+          user: user,
+          holder: user.holder_for(comp)
         )
       end
 
