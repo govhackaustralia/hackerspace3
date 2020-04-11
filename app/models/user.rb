@@ -106,10 +106,11 @@ class User < ApplicationRecord
   # This is the assignment to the competition that is used to register for
   # events (among other things), in a given competition.
   def event_assignment(competition)
-    assignment = competition.assignments.find_by user: self, title: VIP
+    holder = holder_for(competition)
+    assignment = competition.assignments.find_by user: self, title: VIP, holder: holder
     return assignment unless assignment.nil?
 
-    competition.assignments.find_or_create_by user: self, title: PARTICIPANT
+    competition.assignments.find_or_create_by user: self, title: PARTICIPANT, holder: holder
   end
 
   # Returns a user's event_assignment if they have permission to vote.
