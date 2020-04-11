@@ -35,7 +35,7 @@ class Registration < ApplicationRecord
   }
 
   scope :aws_credits_requested, lambda {
-    joins(:user).where(users: { aws_credits_requested: true })
+    joins(:holder).where(holders: { aws_credits_requested: true })
   }
 
   after_update :check_for_newly_freed_space

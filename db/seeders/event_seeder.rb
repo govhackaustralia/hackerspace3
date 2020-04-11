@@ -44,6 +44,12 @@ class EventSeeder < Seeder
       )
     end
 
+    if event_type == COMPETITION_EVENT
+      Holder.where(id: event.registrations.attending.pluck(:holder_id)).preload(:user).each do |holder|
+        holder.update aws_credits_requested: holder.user.aws_credits_requested
+      end
+    end
+
     event
   end
 

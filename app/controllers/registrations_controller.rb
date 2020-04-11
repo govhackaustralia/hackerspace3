@@ -163,7 +163,9 @@ class RegistrationsController < ApplicationController
     @user.update(
       registration_type: params[:registration_type],
       parent_guardian: params[:parent_guardian],
-      request_not_photographed: params[:request_not_photographed],
+      request_not_photographed: params[:request_not_photographed]
+    )
+    @holder.update(
       aws_credits_requested: params[:aws_credits_requested]
     )
   end

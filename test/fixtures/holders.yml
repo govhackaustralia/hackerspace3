@@ -10,7 +10,7 @@ two:
   id: 2
   user_id: 2
   competition_id: 1
-  aws_credits_requested: false
+  aws_credits_requested: true
 
 three:
   id: 3
