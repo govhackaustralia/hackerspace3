@@ -1,9 +1,9 @@
 module ScorecardsHelper
   def challenge_title_required?(score)
-    return false if score.scorecard_id == @scorecard.id
+    return false if score.header_id == @header.id
 
-    if @challenge_scorecard.nil? || @challenge_scorecard.id != score.scorecard_id
-      @challenge_scorecard = score.scorecard
+    if @challenge_header.nil? || @challenge_header.id != score.header_id
+      @challenge_header = score.header
       return true
     end
     false

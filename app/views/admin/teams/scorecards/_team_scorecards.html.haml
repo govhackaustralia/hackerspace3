@@ -14,8 +14,8 @@
         %td= link_to "#{project.project_name}", project_path(project.identifier)
         %td= project.team_name
         %td= project.event.name
-        - scores = @region_scorecard_helper[project.team_id][:scores]
-        - total_card_count = @region_scorecard_helper[project.team_id][:total_card_count]
+        - scores = @region_helper[project.team_id][:scores]
+        - total_card_count = @region_helper[project.team_id][:total_card_count]
         - if total_card_count == 0
           %td No Scores for this Team Project Recorded
         - else

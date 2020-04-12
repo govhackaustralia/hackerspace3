@@ -1,13 +1,13 @@
-= form_for [@project, @scorecard] do |f|
-  - current_scorecard = @scorecard
+= form_for [@project, @header], url: project_scorecard_path(@project, @header) do |f|
+  - current_header = @header
   - @scores.each do |score|
     - if challenge_title_required?(score)
-      %h3= @challenge_scorecard.judgeable.challenge.name
+      %h3= @challenge_header.scoreable.challenge.name
       %p.justification
         %strong> Justification
         \:
         %br/
-        %em= @challenge_scorecard.judgeable.justification
+        %em= @challenge_header.scoreable.justification
     = fields_for "scores[]", score do |score_form|
       .field
         %div

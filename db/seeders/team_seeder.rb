@@ -58,8 +58,8 @@ class TeamSeeder < Seeder
           assignable_type: 'Challenge',
           assignable_id: entry.challenge_id
         ).each do |assignment|
-          scorecard = Scorecard.create(
-            judgeable: entry,
+          header = Header.create(
+            scoreable: entry,
             assignment: assignment,
             included: (assignment.id % 5 != 0)
           )
@@ -68,7 +68,7 @@ class TeamSeeder < Seeder
             score = nil if score.zero?
             Score.create(
               criterion: criterion,
-              scorecard: scorecard,
+              header: header,
               entry: score
             )
           end
@@ -77,8 +77,8 @@ class TeamSeeder < Seeder
 
       20.times do
         assignment = participant_assignments.sample
-        scorecard = Scorecard.create(
-          judgeable: team,
+        header = Header.create(
+          scoreable: team,
           assignment: assignment,
           included: (assignment.id % 5 != 0)
         )
@@ -87,7 +87,7 @@ class TeamSeeder < Seeder
           score = nil if score.zero?
           Score.create(
             criterion: criterion,
-            scorecard: scorecard,
+            header: header,
             entry: score
           )
         end

@@ -5,7 +5,7 @@ class UserTest < ActiveSupport::TestCase
     @user = User.first
     @assignment = Assignment.first
     @team = Team.first
-    @scorecard = Scorecard.second
+    @header= Header.second
     @registration = Registration.first
     @joined_team_assignment = Assignment.find 11
     @joined_team = @team
@@ -27,7 +27,7 @@ class UserTest < ActiveSupport::TestCase
 
   test 'user associations' do
     assert @user.assignments.include? @assignment
-    assert @user.scorecards.include? @scorecard
+    assert @user.headers.include? @header
     assert @user.registrations.include? @registration
 
     assert @user.event_assignments.include? @participant_assignment

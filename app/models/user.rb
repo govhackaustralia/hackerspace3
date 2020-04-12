@@ -5,7 +5,7 @@ class User < ApplicationRecord
          :omniauthable
 
   has_many :assignments, dependent: :destroy
-  has_many :scorecards, through: :assignments
+  has_many :headers, through: :assignments
   has_many :registrations, through: :assignments
 
   has_many :event_assignments, -> { event_assignments }, class_name: 'Assignment'

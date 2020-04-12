@@ -11,7 +11,7 @@ class EntryTest < ActiveSupport::TestCase
     @project = @team.current_project
     @competition = Competition.first
     @region = Region.first
-    @scorecard = Scorecard.first
+    @header= Header.first
     @regional_entry = Entry.third
     @national_entry = @entry
     @next_competition = Competition.second
@@ -26,9 +26,9 @@ class EntryTest < ActiveSupport::TestCase
     assert @entry.competition == @competition
     assert @entry.project == @project
     assert @entry.region == @region
-    assert @entry.scorecards.include? @scorecard
+    assert @entry.headers.include? @header
     @entry.destroy
-    assert_raises(ActiveRecord::RecordNotFound) { @scorecard.reload }
+    assert_raises(ActiveRecord::RecordNotFound) { @header.reload }
   end
 
   test 'entry scopes' do

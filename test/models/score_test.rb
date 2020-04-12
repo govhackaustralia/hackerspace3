@@ -3,12 +3,12 @@ require 'test_helper'
 class ScoreTest < ActiveSupport::TestCase
   setup do
     @score = Score.first
-    @scorecard = Scorecard.first
+    @header= Header.first
     @criterion = Criterion.first
   end
 
   test 'score associations' do
-    assert @score.scorecard == @scorecard
+    assert @score.header == @header
     assert @score.criterion == @criterion
   end
 

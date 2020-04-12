@@ -9,7 +9,7 @@ class Entry < ApplicationRecord
   has_one :team_region, through: :team, source: :region
   has_one :region, through: :challenge
 
-  has_many :scorecards, dependent: :destroy, as: :judgeable
+  has_many :headers, dependent: :destroy, as: :scoreable
 
   validates :team_id, uniqueness: {
     scope: :challenge_id,
@@ -90,7 +90,7 @@ class Entry < ApplicationRecord
   # Returns the average score obtained across judges of a challenge.
   # ENHANCEMENT: Probably not very DB efficient.
   def average_score
-    cards = Scorecard.where(judgeable: self)
+    cards = Header.where(scoreable: self)
     total_score = 0
     voted = 0
     cards.each do |card|
@@ -106,7 +106,7 @@ class Entry < ApplicationRecord
   # entry.
   # ENHANCEMENT: Probably not very DB efficient.
   def judges_voted
-    cards = Scorecard.where(judgeable: self)
+    cards = Header.where(scoreable: self)
     voted = 0
     cards.each do |card|
       next if card.total_score.nil?

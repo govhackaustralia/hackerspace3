@@ -15,7 +15,7 @@ class TeamTest < ActiveSupport::TestCase
     @team_invitee = User.third
     @team_data_set = TeamDataSet.first
     @favourite = Favourite.first
-    @scorecard = Scorecard.fourth
+    @header= Header.fourth
     @entry = Entry.first
     @challenge = Challenge.first
     @user = User.second
@@ -36,12 +36,12 @@ class TeamTest < ActiveSupport::TestCase
     assert @team.projects.include? @project
     assert @team.team_data_sets.include? @team_data_set
     assert @team.favourites.include? @favourite
-    assert @team.scorecards.include? @scorecard
+    assert @team.headers.include? @header
 
     assert @team.entries.include? @entry
     assert @team.challenges.include? @challenge
     assert @team.judges.include? @user
-    assert @team.judge_scorecards.include? @scorecard
+    assert @team.judge_headers.include? @header
     assert @team.regional_entries.include? @regional_entry
     assert @team.regional_entries.exclude? @national_entry
     assert @team.national_entries.include? @national_entry
@@ -69,7 +69,7 @@ class TeamTest < ActiveSupport::TestCase
     assert_raises(ActiveRecord::RecordNotFound) { @project.reload }
     assert_raises(ActiveRecord::RecordNotFound) { @team_data_set.reload }
     assert_raises(ActiveRecord::RecordNotFound) { @favourite.reload }
-    assert_raises(ActiveRecord::RecordNotFound) { @scorecard.reload }
+    assert_raises(ActiveRecord::RecordNotFound) { @header.reload }
     assert_raises(ActiveRecord::RecordNotFound) { @entry.reload }
   end
 

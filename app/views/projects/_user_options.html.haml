@@ -6,10 +6,10 @@
   - else
     %p= link_to 'Favourite this Project', favourites_path(team_id: @team.id), method: :post
   - if (show_challenge_score_stuff? || show_peoples_choice_stuff?) && !@users_team
-    - if @scorecard.present?
+    - if @header.present?
       %p
-        = link_to 'Edit Scorecard', edit_project_scorecard_path(@current_project.identifier, @scorecard, popup: true), id: 'open-scorecard'
-        = javascript_tag  "window._scorecard_path = '#{edit_project_scorecard_path(@current_project.identifier, @scorecard, popup: true)}';"
+        = link_to 'Edit Scorecard', edit_project_scorecard_path(@current_project.identifier, @header, popup: true), id: 'open-scorecard'
+        = javascript_tag  "window._scorecard_path = '#{edit_project_scorecard_path(@current_project.identifier, @header, popup: true)}';"
     - else
       %p
         = link_to 'New Scorecard', new_project_scorecard_path(@current_project.identifier, popup: true), id: 'open-scorecard'

@@ -4,7 +4,7 @@ class ScorecardsControllerTest < ActionDispatch::IntegrationTest
   setup do
     sign_in users :one
     @project = Project.first
-    @scorecard = Scorecard.third
+    @header= Header.third
     Competition.first.update(
       peoples_choice_start: Time.now.yesterday,
       peoples_choice_end: Time.now.tomorrow
@@ -17,7 +17,7 @@ class ScorecardsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'should get edit' do
-    get edit_project_scorecard_path(@project.identifier, @scorecard)
+    get edit_project_scorecard_path(@project.identifier, @header)
     assert_response :success
   end
 end

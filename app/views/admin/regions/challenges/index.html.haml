@@ -9,7 +9,7 @@
         %p
           Short Description: #{challenge.short_desc}
       %p
-        = pluralize Scorecard.where(judgeable: challenge.entries).count, 'scorecard'
+        = pluralize Header.where(scoreable: challenge.entries).count, 'scorecard'
         from #{pluralize challenge.assignments.count, 'judge'}
       %p= link_to 'Go to Challenge', admin_region_challenge_path(@region, challenge)
   - else

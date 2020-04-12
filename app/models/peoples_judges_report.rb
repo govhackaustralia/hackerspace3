@@ -31,7 +31,7 @@ class PeoplesJudgesReport
     [
       assignment.user.full_name,
       assignment.user.email,
-      assignment.scorecards.count,
+      assignment.headers.count,
       assignment.scores.mean(&:entry)
     ]
   end
@@ -48,9 +48,9 @@ class PeoplesJudgesReport
 
   def all_competition_judges
     event_assignments.where(
-      id: Scorecard.where(
+      id: Header.where(
         assignment: event_assignments
       ).pluck(:assignment_id)
-    ).preload(:user, :scorecards, :scores)
+    ).preload(:user, :headers, :scores)
   end
 end

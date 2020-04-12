@@ -4,7 +4,7 @@ class Admin::Regions::ScorecardsControllerTest < ActionDispatch::IntegrationTest
   setup do
     sign_in users :one
     @region = Region.first
-    @scorecard = Scorecard.first
+    @header= Header.first
   end
 
   test 'should get index' do

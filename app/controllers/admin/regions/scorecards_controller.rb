@@ -20,7 +20,7 @@ class Admin::Regions::ScorecardsController < ApplicationController
   def retrieve_helpers
     @teams = @region.teams.published
     @projects = @region.published_projects_by_name.preload :event
-    @region_scorecard_helper = Scorecard.region_scorecard_helper(
+    @region_helper = Header.region_helper(
       @competition, @teams, PROJECT, params[:include_judges] == true.to_s
     )
   end

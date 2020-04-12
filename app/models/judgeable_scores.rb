@@ -5,23 +5,23 @@ class JudgeableScores
     @assignment = assignment
     @competition = assignment.competition
     @teams = teams
-    @team_id_to_scorecard = {}
+    @team_id_to_header = {}
     @user_team_ids = []
-    @scorecard_id_to_scores = {}
-    @judgeable_scores_obj = {}
+    @header_id_to_scores = {}
+    @scoreable_scores_obj = {}
   end
 
-  # Returns object for a particular judgeable assignment showing the status of
+  # Returns object for a particular scoreable assignment showing the status of
   # each of the potential teams to be judged.
   def compile
-    compile_team_id_scorecard_user_team_ids
-    compile_scorecard_id_to_scores
-    compile_judgeable_scores
+    compile_team_id_header_user_team_ids
+    compile_header_id_to_scores
+    compile_scoreable_scores
   end
 
   private
 
-  def compile_team_id_scorecard_user_team_ids
+  def compile_team_id_header_user_team_ids
     if @assignment.title == JUDGE
       compile_judge_objects
     else
@@ -31,46 +31,46 @@ class JudgeableScores
 
   def compile_judge_objects
     entries = Entry.where team: @teams, challenge: @assignment.assignable
-    @team_scorecards = @assignment.scorecards.where judgeable: entries
+    @team_headers = @assignment.headers.where scoreable: entries
     id_to_entry = {}
     entries.each { |entry| id_to_entry[entry.id] = entry }
-    @team_scorecards.each do |scorecard|
-      entry = id_to_entry[scorecard.judgeable_id]
-      @team_id_to_scorecard[entry.team_id] = scorecard
+    @team_headers.each do |header|
+      entry = id_to_entry[header.scoreable_id]
+      @team_id_to_header[entry.team_id] = header
     end
   end
 
   def compile_participant_objects
     @user_team_ids += @assignment.user.joined_teams.competition(@competition).pluck :id
-    @team_scorecards = @assignment.scorecards.where judgeable: @teams
-    @team_scorecards.each do |scorecard|
-      @team_id_to_scorecard[scorecard.judgeable_id] = scorecard
+    @team_headers = @assignment.headers.where scoreable: @teams
+    @team_headers.each do |header|
+      @team_id_to_header[header.scoreable_id] = header
     end
   end
 
-  def compile_scorecard_id_to_scores
-    @team_scorecards.each { |scorecard| @scorecard_id_to_scores[scorecard.id] = [] }
-    scores = Score.where scorecard: @team_scorecards
+  def compile_header_id_to_scores
+    @team_headers.each { |header| @header_id_to_scores[header.id] = [] }
+    scores = Score.where header: @team_headers
     scores.each do |score|
-      @scorecard_id_to_scores[score.scorecard_id] << score.entry
+      @header_id_to_scores[score.header_id] << score.entry
     end
   end
 
-  def compile_judgeable_scores
+  def compile_scoreable_scores
     @teams.each { |team| assign_verdict team }
-    @judgeable_scores_obj
+    @scoreable_scores_obj
   end
 
   def assign_verdict(team)
     verdict = if @assignment.title != JUDGE && @user_team_ids.include?(team.id)
                 'Your Team'
-              elsif (scorecard = @team_id_to_scorecard[team.id]).nil?
+              elsif (header = @team_id_to_header[team.id]).nil?
                 'Not Marked'
-              elsif (scores = @scorecard_id_to_scores[scorecard.id]).include? nil
+              elsif (scores = @header_id_to_scores[header.id]).include? nil
                 'Incomplete'
               else
                 scores.sum
               end
-    @judgeable_scores_obj[team.id] = { display_score_status: verdict }
+    @scoreable_scores_obj[team.id] = { display_score_status: verdict }
   end
 end

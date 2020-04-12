@@ -4,22 +4,22 @@ class ScorecardsController < ApplicationController
 
   def new
     @judgeable_assignment = @user.judgeable_assignment @competition
-    Scorecard.transaction do
+    Header.transaction do
       Score.transaction do
-        @scorecard = @team.scorecards.find_or_create_by(assignment: @judgeable_assignment)
+        @header= @team.headers.find_or_create_by(assignment: @judgeable_assignment)
         @scores = organise_scores
       end
     end
   end
 
   def edit
-    @scorecard = Scorecard.find(params[:id])
-    Scorecard.transaction do
+    @header= Header.find(params[:id])
+    Header.transaction do
       Score.transaction do
         @scores = organise_scores
       end
     end
-    return if @user == @scorecard.user
+    return if @user == @header.user
 
     flash[:alert] = 'You do not have permission to edit this scorecard.'
     redirect_to root_path
@@ -27,11 +27,11 @@ class ScorecardsController < ApplicationController
 
   # ENHANCEMENT: Hard to test, shape to REST.
   def update
-    @scorecard = Scorecard.find(params[:id])
-    if @user == @scorecard.user
+    @header= Header.find(params[:id])
+    if @user == @header.user
       update_scorecard
       process_scores
-      redirect_to edit_project_scorecard_path(@team.current_project.identifier, @scorecard, popup: true)
+      redirect_to edit_project_scorecard_path(@team.current_project.identifier, @header, popup: true)
     else
       flash[:alert] = 'You do not have permission to edit this scorecard.'
       redirect_to root_path
@@ -50,7 +50,7 @@ class ScorecardsController < ApplicationController
   end
 
   def update_scorecard
-    Scorecard.transaction do
+    Header.transaction do
       Score.transaction do
         @scores = organise_scores
       end
@@ -87,21 +87,21 @@ class ScorecardsController < ApplicationController
   end
 
   def organise_scores
-    @scorecards = [@scorecard]
-    @scorecard.update_scores
+    @headers = [@header]
+    @header.update_scores
     assignments = Assignment.where(user: @user, title: JUDGE, assignable: @team.challenges).order(:id)
-    all_scores = @scorecard.scores.order(:criterion_id)
+    all_scores = @header.scores.order(:criterion_id)
     return all_scores unless assignments.present?
 
-    assignments.each { |assignment| all_scores += organise_challenge_scorecard(assignment) }
+    assignments.each { |assignment| all_scores += organise_challenge_header(assignment) }
     all_scores
   end
 
-  def organise_challenge_scorecard(assignment)
+  def organise_challenge_header(assignment)
     entry = Entry.find_by(team: @team, challenge: assignment.assignable)
-    scorecard = Scorecard.find_or_create_by!(assignment: assignment, judgeable: entry)
-    scorecard.update_scores
-    @scorecards << scorecard
-    scorecard.scores.order(:criterion_id)
+    header = Header.find_or_create_by!(assignment: assignment, scoreable: entry)
+    header.update_scores
+    @headers << header
+    header.scores.order(:criterion_id)
   end
 end

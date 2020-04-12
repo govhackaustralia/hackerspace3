@@ -11,7 +11,7 @@ class AssignmentTest < ActiveSupport::TestCase
     @participant = Assignment.fourth
     @favourite = Favourite.first
     @team = Team.first
-    @scorecard = Scorecard.second
+    @header= Header.second
     @score = Score.third
     @registration = Registration.first
     @competition_event = Event.second
@@ -36,13 +36,13 @@ class AssignmentTest < ActiveSupport::TestCase
     assert @region_assignment.user == @user
     # Has Many
     assert @participant.favourite_teams.include? @team
-    assert @participant.scorecards.include? @scorecard
+    assert @participant.headers.include? @header
     assert @participant.scores.include? @score
     assert @participant.registrations.include? @registration
     # Dependent destroy
     @participant.destroy
     assert_raises(ActiveRecord::RecordNotFound) { @favourite.reload }
-    assert_raises(ActiveRecord::RecordNotFound) { @scorecard.reload }
+    assert_raises(ActiveRecord::RecordNotFound) { @header.reload }
     assert_raises(ActiveRecord::RecordNotFound) { @registration.reload }
   end
 

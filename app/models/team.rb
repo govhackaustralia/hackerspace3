@@ -20,12 +20,12 @@ class Team < ApplicationRecord
   has_many :projects, dependent: :destroy
   has_many :team_data_sets, dependent: :destroy
   has_many :favourites, dependent: :destroy
-  has_many :scorecards, dependent: :destroy, as: :judgeable
+  has_many :headers, dependent: :destroy, as: :scoreable
 
   has_many :entries, dependent: :destroy
   has_many :challenges, through: :entries
   has_many :judges, through: :challenges, source: :judge_users
-  has_many :judge_scorecards, through: :judges, source: :scorecards
+  has_many :judge_headers, through: :judges, source: :headers
   has_many :regional_entries, -> { regional }, class_name: 'Entry'
   has_many :national_entries, -> { national }, class_name: 'Entry'
 

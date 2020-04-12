@@ -15,7 +15,7 @@ AllCops:
     - 'node_modules/node-sass/src/**/*'
     - 'app/helpers/application_helper.rb'
     - 'app/controllers/users_controller.rb'
-    - 'app/models/scorecard.rb'
+    - 'app/models/header.rb'
     - 'app/models/data_set.rb'
     - 'app/models/team_entry_report.rb'
 

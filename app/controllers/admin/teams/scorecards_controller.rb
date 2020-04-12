@@ -8,16 +8,16 @@ class Admin::Teams::ScorecardsController < ApplicationController
   end
 
   def update
-    @scorecard = Scorecard.find params[:id]
-    @scorecard.update included: !@scorecard.included
-    redirect_to admin_team_scorecards_path @scorecard.judgeable, popup: true, include_judges: params[:include_judges]
+    @header= Header.find params[:id]
+    @header.update included: !@header.included
+    redirect_to admin_team_scorecards_path @header.scoreable, popup: true, include_judges: params[:include_judges]
   end
 
   def destroy
-    @scorecard = Scorecard.find params[:id]
-    @scorecard.destroy
+    @header= Header.find params[:id]
+    @header.destroy
     flash[:notice] = 'Scorecard Deleted'
-    redirect_to admin_team_scorecards_path @scorecard.judgeable, popup: true, include_judges: params[:include_judges]
+    redirect_to admin_team_scorecards_path @header.scoreable, popup: true, include_judges: params[:include_judges]
   end
 
   private
@@ -31,16 +31,16 @@ class Admin::Teams::ScorecardsController < ApplicationController
   end
 
   def retrieve_scorecard_info
-    @scorecards = participant_scorecards
+    @headers = participant_headers
     @project_criteria = @competition.project_criteria.order(:id)
   end
 
   # Retrieves all a team's scorecards and removes those of the judges if
   # params require.
-  def participant_scorecards
-    all_scorecards = @team.scorecards.order(:assignment_id).preload :assignment_scorecards, :assignment_scores, :scores
-    return all_scorecards if params[:include_judges] == true.to_s
+  def participant_headers
+    all_headers = @team.headers.order(:assignment_id).preload :assignment_headers, :assignment_scores, :scores
+    return all_headers if params[:include_judges] == true.to_s
 
-    all_scorecards - @team.judge_scorecards.where(judgeable: @team)
+    all_headers - @team.judge_headers.where(scoreable: @team)
   end
 end

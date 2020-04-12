@@ -3,25 +3,25 @@
 one:
   id: 1
   assignment_id: 7
-  judgeable_type: Entry
-  judgeable_id: 1
+  scoreable_type: Entry
+  scoreable_id: 1
   included: true
 
 two:
   id: 2
   assignment_id: 4
-  judgeable_type: Team
-  judgeable_id: 1
+  scoreable_type: Team
+  scoreable_id: 1
   included: false
 
 three:
   id: 3
   assignment_id: 8
-  judgeable_type: Team
-  judgeable_id: 1
+  scoreable_type: Team
+  scoreable_id: 1
 
 four:
   id: 4
   assignment_id: 6
-  judgeable_type: Team
-  judgeable_id: 1
+  scoreable_type: Team
+  scoreable_id: 1
