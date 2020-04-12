@@ -100,4 +100,9 @@ class TeamTest < ActiveSupport::TestCase
     )
     assert Team.second.update event: @event
   end
+
+  test 'assign_leader' do
+    @team.assignments.destroy_all
+    assert @team.assign_leader(@team_leader).persisted?
+  end
 end

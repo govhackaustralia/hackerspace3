@@ -50,7 +50,7 @@ class Team < ApplicationRecord
   # Assigns a leader to the team.
   # ENHANCEMENT: Should not be needed.
   def assign_leader(user)
-    leader_assignments.create user: user
+    leader_assignments.create user: user, holder: user.holder_for(competition)
   end
 
   # Returns the team_name from the latest project.
