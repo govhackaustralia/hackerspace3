@@ -62,9 +62,9 @@ class Event < ApplicationRecord
   validates :registration_type, inclusion: { in: EVENT_REGISTRATION_TYPES }
   validates :event_type, inclusion: { in: EVENT_TYPES }
 
-  after_save :update_identifier
+  after_save_commit :update_identifier
 
-  after_update :check_for_newly_freed_space
+  after_update_commit :check_for_newly_freed_space
 
   # Event Administration
 

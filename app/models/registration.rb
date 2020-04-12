@@ -38,7 +38,7 @@ class Registration < ApplicationRecord
     joins(:holder).where(holders: { aws_credits_requested: true })
   }
 
-  after_update :check_for_newly_freed_space
+  after_update_commit :check_for_newly_freed_space
 
   validates :status, presence: true
   validates :status, inclusion: { in: VALID_ATTENDANCE_STATUSES }

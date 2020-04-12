@@ -35,7 +35,7 @@ class Assignment < ApplicationRecord
 
   # ENHANCEMENT: Validation to prevent assignment duplicates.
 
-  after_save :only_one_team_leader
+  after_save_commit :only_one_team_leader
 
   # Callback to ensure that there is only one team leader per team.
   # Will remove longest serving Team Leader and change to Team Member.

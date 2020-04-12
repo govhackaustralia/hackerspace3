@@ -37,7 +37,7 @@ class Competition < ApplicationRecord
 
   validates :year, uniqueness: true
 
-  after_save :only_one_current
+  after_save_commit :only_one_current
 
   # Returns the name of a competition.
   def name

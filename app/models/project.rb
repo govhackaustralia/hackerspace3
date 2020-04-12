@@ -8,9 +8,9 @@ class Project < ApplicationRecord
 
   validates :team_name, :project_name, presence: true
 
-  after_save :update_entries_eligible, :update_identifier
+  after_save_commit :update_entries_eligible, :update_identifier
 
-  after_create :update_team_current_project
+  after_create_commit :update_team_current_project
 
   # Updates each of the entries that a team has entered and determines if the
   # team is eligible or ineligible.

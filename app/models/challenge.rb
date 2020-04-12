@@ -26,7 +26,7 @@ class Challenge < ApplicationRecord
 
   validate :only_regional_challenges_can_be_marked_nation_wide
 
-  after_save :update_identifier
+  after_save_commit :update_identifier
 
   # ENHANCEMENT: This should be in active record relation but can't pass
   # parameter. eg

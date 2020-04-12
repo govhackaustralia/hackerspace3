@@ -21,7 +21,7 @@ class Entry < ApplicationRecord
            :teams_cannot_enter_challenges_they_are_not_eligible_for,
            on: :create
 
-  after_create :update_eligible
+  after_create_commit :update_eligible
 
   scope :regional, lambda {
     joins(:region).where(regions: { category: Region::REGIONAL })
