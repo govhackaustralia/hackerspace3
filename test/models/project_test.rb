@@ -23,4 +23,14 @@ class ProjectTest < ActiveSupport::TestCase
     assert_not @project.update team_name: nil
     assert_not @project.update project_name: nil
   end
+
+  test 'update_team_current_project' do
+    project = @team.projects.create!(
+      team_name: 'new name',
+      project_name: 'new_name',
+      user: @user
+    )
+    @team.reload
+    assert @team.current_project == project
+  end
 end
