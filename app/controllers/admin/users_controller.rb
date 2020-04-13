@@ -24,21 +24,6 @@ class Admin::UsersController < ApplicationController
     @event_assignments = @user.event_assignments.order(competition_id: :desc).preload :competition
   end
 
-  def new
-    @user = User.new
-  end
-
-  def create
-    create_new_unauthed_user
-    if @user.save
-      flash[:notice] = 'New user saved'
-      redirect_to admin_user_path @user
-    else
-      flash[:alert] = @user.errors.full_messages.to_sentence
-      render :new
-    end
-  end
-
   def confirm
     @user = User.find params[:id]
     @user.confirm

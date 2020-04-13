@@ -125,7 +125,7 @@ Rails.application.routes.draw do
       resources :scorecards, only: [:index, :update, :destroy], controller: 'teams/scorecards'
     end
 
-    resources :users, except: [:destroy, :edit, :update] do
+    resources :users, only: [:index, :show] do
       member { post 'confirm' }
       collection do
         get 'unconfirmed'
