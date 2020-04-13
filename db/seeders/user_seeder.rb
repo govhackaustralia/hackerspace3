@@ -50,7 +50,6 @@ class UserSeeder < Seeder
         accepted_code_of_conduct: (Time.now unless number % 10 == 0),
         password: Devise.friendly_token[0, 20],
         request_not_photographed: random_boolean,
-        aws_credits_requested: number % 4 == 0,
         data_cruncher: random_boolean,
         coder: random_boolean,
         creative: random_boolean,
