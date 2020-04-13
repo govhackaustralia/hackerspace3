@@ -19,7 +19,7 @@
           %p
             = link_to 'Go to Challenge', challenge_path(challenge.identifier)
             - count = @counter.count(challenge)
-            | #{pluralize count, 'team' } #{ count == 1 ? 'has' : 'have'}
+            | #{pluralize count, 'team has', plural: 'teams have' }
             entered this challenge across all checkpoints that have passed.
         %aside.sponsors
           - if challenge.challenge_sponsorships.present?
