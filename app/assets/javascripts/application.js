@@ -24,3 +24,11 @@ $(document).ready(function() {
 		$(this).hide();
 	});
 });
+
+$( document ).on('turbolinks:load', function() {
+  if(!$('[id$="wrapper"]').length) {
+    $('.data-table, #projects_table').DataTable({
+      stateSave: true
+    });
+  }
+});
