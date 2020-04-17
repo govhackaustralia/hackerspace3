@@ -15,6 +15,7 @@ class Event < ApplicationRecord
 
   has_many :participant_registrations, -> { participants }, class_name: 'Registration'
   has_many :vip_registrations, -> { vips }, class_name: 'Registration'
+  has_many :attending_registrations, -> { attending }, class_name: 'Registration'
 
   has_many :teams
   has_many :entries, through: :teams
