@@ -2,12 +2,8 @@ class Admin::EventsController < ApplicationController
   before_action :authenticate_user!, :check_for_privileges
 
   def index
-    @connections = @competition.connection_events
-    @attending_connection_registrations_count = @competition.connection_registrations.attending.count
-    @competition_events = @competition.competition_events
-    @attending_competition_registrations_count = @competition.competition_registrations.attending.count
-    @award_events = @competition.award_events
-    @attending_awards_registrations_count = @competition.award_registrations.attending.count
+    @events = @competition.events.preload(:region, :attending_registrations, :registrations)
+    @admin_privileges = current_user.admin_privileges? @competition
   end
 
   private
