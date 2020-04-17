@@ -5,28 +5,28 @@
   %table#admin_events_table
     %thead
       %th Event
-      %th Type
       %th Region
+      %th Type
       %th Start Date
       %th Start Time
       %th End Date
       %th End Time
       %th Attending Registrations
-      %th Action
     %tbody
       - @events.each do |event|
         %tr
-          %td= event.name
-          %td= event.event_type
+          %td
+            - if event.admin_privileges?(current_user)
+              = link_to event.name, admin_region_event_path(event.region, event)
+            - else
+              = event.name
           %td= event.region.name
+          %td= event.event_type
           %td= event.start_time&.strftime('%b %d')
           %td= event.start_time&.strftime('%H:%M')
           %td= event.end_time&.strftime('%b %d')
           %td= event.end_time&.strftime('%H:%M')
           %td #{event.attending_registrations.length} / #{event.registrations.length}
-          %td
-            - if event.admin_privileges?(current_user)
-              = link_to 'Manage', admin_region_event_path(event.region, event)
 
 %p= link_to 'Back to Account Management', manage_account_path
 - if @admin_privileges
