@@ -21,13 +21,16 @@ class Admin::UsersController < ApplicationController
 
   def show
     @user = User.find params[:id]
-    @event_assignments = @user.event_assignments.order(competition_id: :desc).preload :competition
   end
 
   def confirm
-    @user = User.find params[:id]
-    @user.confirm
-    redirect_to admin_user_path @user
+    (@user = User.find params[:id]).confirm
+    if @user.confirmed?
+      redirect_to admin_user_path(@user), notice: 'User confirmed'
+    else
+      flash[:alert] = @user.errors.full_messages.to_sentence
+      render :show
+    end
   end
 
   private

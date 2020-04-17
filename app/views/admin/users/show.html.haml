@@ -7,7 +7,7 @@
     %p
       %strong
         Agreed to code of conduct on:
-      = @user.accepted_code_of_conduct.to_datetime
+      = @user.accepted_code_of_conduct.strftime("%e %B %Y  %I.%M %p")
   - else
     %p
       %strong
@@ -16,20 +16,20 @@
     %p
       %strong
         Confirmed account on:
-      = @user.confirmed_at
+      = @user.confirmed_at.strftime("%e %B %Y  %I.%M %p")
   - else
     %p
       %strong
-        User not confirmed, 
+        User not confirmed,
       = link_to 'Confirm User?', confirm_admin_user_path(@user), method: :post
-  - @event_assignments.each do |event_assignment|
+  - @user.event_assignments.order(competition_id: :desc).preload(:competition, :assignable).each do |event_assignment|
     %h3= event_assignment.competition.name
     %h4 Event Assignment
     %p Title: #{event_assignment.title}
     %p= link_to 'Update Event Assignment', edit_admin_user_assignment_path(@user, event_assignment)
     %br
     %h4 All Other Assignments
-    - @user.assignments.where(competition: event_assignment.competition).where.not(title: EVENT_ASSIGNMENT_TITLES).each do |assignment|
+    - @user.assignments.where(competition: event_assignment.competition).where.not(title: EVENT_ASSIGNMENT_TITLES).preload(:assignable).each do |assignment|
       %h5= assignment.assignable.name
       %p Assignment type: #{assignment.assignable.class.name}
       %p Title: #{assignment.title}

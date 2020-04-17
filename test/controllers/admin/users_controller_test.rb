@@ -4,6 +4,7 @@ class Admin::UsersControllerTest < ActionDispatch::IntegrationTest
   setup do
     @user = User.first
     sign_in users :one
+    @unconfirmed_user = users(:unconfirmed_user)
   end
 
   test 'should get index' do
@@ -26,9 +27,18 @@ class Admin::UsersControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-  test 'should post confirm' do
-    post confirm_admin_user_path @user
-    assert @user.confirmed?
-    assert_redirected_to admin_user_url @user
+  test 'should post confirm success' do
+    post confirm_admin_user_path @unconfirmed_user
+    @unconfirmed_user.reload
+    assert @unconfirmed_user.confirmed?
+    assert_redirected_to admin_user_url @unconfirmed_user
+  end
+
+  test 'should post confirm fail' do
+    @unconfirmed_user.update! confirmation_sent_at: Time.now - 3.days
+    post confirm_admin_user_path @unconfirmed_user
+    assert_response :success
+    @unconfirmed_user.reload
+    assert_not @unconfirmed_user.confirmed?
   end
 end
