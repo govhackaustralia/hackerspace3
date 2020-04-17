@@ -1,17 +1,21 @@
 - content_for :title, 'User Management'
-%main.team_page
+%main.project_index
   %h2= yield :title
-  = form_tag(admin_users_path, method: :get) do
-    = search_field_tag :term, params[:term]
-    = submit_tag 'Search'
   %p= link_to "Download CSV (All users and what events they registered for in #{@competition.year})", admin_users_path(format: 'csv'), class: 'download-csv'
   %p= link_to "Download CSV (Mailing List Export #{@competition.year})", mailing_list_export_admin_users_path(format: 'csv'), class: 'download-csv'
-  %p= link_to 'Unconfirmed Users', unconfirmed_admin_users_path
-  - if @users.present?
-    - @users.each do |user|
-      = render 'admin/shared/user_contact', locals: { user: user }
-      %p= link_to 'See User', admin_user_path(user)
-  - else
-    %p
-      No users matching search term, '#{params[:term]}'
+
+  %table#admin_users_table
+    %thead
+      %th Full Name
+      %th Preferred Name
+      %th Email
+      %th Confirmed Status
+    %tbody
+      - @users.each do |user|
+        %tr
+          %td= link_to user.full_name, admin_user_path(user)
+          %td= user.preferred_name
+          %td= user.email
+          %td= user.confirmed_status
+
 %p= link_to 'Back to Account Management', manage_account_path

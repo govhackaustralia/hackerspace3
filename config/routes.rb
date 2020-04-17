@@ -128,7 +128,6 @@ Rails.application.routes.draw do
     resources :users, only: [:index, :show] do
       member { post 'confirm' }
       collection do
-        get 'unconfirmed'
         get 'mailing_list_export'
       end
       resources :assignments, only: [:edit, :update, :destroy], controller: 'users/assignments'
