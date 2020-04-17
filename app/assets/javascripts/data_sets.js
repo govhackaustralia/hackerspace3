@@ -3,6 +3,7 @@
 $( document ).on('turbolinks:load', function() {
   if(!$('[id$="wrapper"]').length) {
     $('#dataset_table').DataTable({
+      scrollY: 750,
       stateSave: true
     });
   }
