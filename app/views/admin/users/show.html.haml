@@ -1,8 +1,10 @@
 - content_for :title, @user.display_name
-%main.team_page
+%main.project_index
   %h2= yield :title
   %p
-    Email: #{@user.email}
+    %strong
+      Email:
+    #{@user.email}
   - if @user.accepted_code_of_conduct
     %p
       %strong
@@ -22,17 +24,22 @@
       %strong
         User not confirmed,
       = link_to 'Confirm User?', confirm_admin_user_path(@user), method: :post
-  - @user.event_assignments.order(competition_id: :desc).preload(:competition, :assignable).each do |event_assignment|
-    %h3= event_assignment.competition.name
-    %h4 Event Assignment
-    %p Title: #{event_assignment.title}
-    %p= link_to 'Update Event Assignment', edit_admin_user_assignment_path(@user, event_assignment)
-    %br
-    %h4 All Other Assignments
-    - @user.assignments.where(competition: event_assignment.competition).where.not(title: EVENT_ASSIGNMENT_TITLES).preload(:assignable).each do |assignment|
-      %h5= assignment.assignable.name
-      %p Assignment type: #{assignment.assignable.class.name}
-      %p Title: #{assignment.title}
-      %p= link_to 'Remove Assignment', admin_user_assignment_path(@user, assignment), method: :delete, data: { confirm: 'Are you sure?' }
-      %br
+
+  %h3 Assignments for #{@user.display_name}
+  %table#admin_users_table
+    %thead
+      %th Competition
+      %th Assignable Type
+      %th Assignable Name
+      %th Title
+      %th Action
+    %tbody
+      - @user.assignments.preload(assignable: :current_project, holder: :competition).each do |assignment|
+        %tr
+          %td= assignment.holder.competition.year
+          %td= assignment.assignable.class.name
+          %td= assignment.assignable.name
+          %td= assignment.title
+          %td= link_to 'Remove', admin_user_assignment_path(@user, assignment), method: :delete, data: { confirm: 'Are you sure?' }
+
 %p= link_to 'Back to Users', admin_users_path

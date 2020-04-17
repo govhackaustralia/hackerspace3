@@ -130,7 +130,7 @@ Rails.application.routes.draw do
       collection do
         get 'mailing_list_export'
       end
-      resources :assignments, only: [:edit, :update, :destroy], controller: 'users/assignments'
+      resources :assignments, only: :destroy, controller: 'users/assignments'
     end
   end
 
