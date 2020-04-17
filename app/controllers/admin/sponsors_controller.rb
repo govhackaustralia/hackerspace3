@@ -2,7 +2,7 @@ class Admin::SponsorsController < ApplicationController
   before_action :authenticate_user!, :check_for_privileges
 
   def index
-    @sponsors = @competition.sponsors
+    @sponsors = @competition.sponsors.preload(:sponsorships, :event_partnerships, :challenge_sponsorships)
     @admin_privileges = current_user.admin_privileges? @competition
   end
 
