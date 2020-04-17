@@ -33,3 +33,10 @@ three:
   confirmed_at: <%= Time.current - 1.year %>
   how_did_you_hear: [no response recorded]
   accepted_code_of_conduct: <%= Time.now %>
+
+unconfirmed_user:
+  id: 4
+  email: user4@example.com
+  full_name: User Number Four
+  accepted_terms_and_conditions: true
+  confirmed_at: nil

@@ -24,6 +24,7 @@ class UserTest < ActiveSupport::TestCase
     @staff_assignment = @assignment
     @participant_assignment = Assignment.fourth
     @competition = Competition.first
+    @unconfirmed_user = users(:unconfirmed_user)
   end
 
   test 'user associations' do
@@ -142,5 +143,11 @@ class UserTest < ActiveSupport::TestCase
     assert_not @user.site_admin? @competition
     @user.assignments.create assignable: @competition, title: ADMIN, holder: @holder
     assert @user.site_admin? @competition
+  end
+
+  test 'confirmed_status' do
+    assert @unconfirmed_user.confirmed_status == 'unconfirmed'
+    @unconfirmed_user.confirm
+    assert @unconfirmed_user.confirmed_status.match? 'confirmed at'
   end
 end

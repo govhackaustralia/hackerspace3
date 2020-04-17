@@ -151,4 +151,10 @@ class User < ApplicationRecord
   def site_admin?(competition)
     assignments.where(competition: competition, title: ADMIN).present?
   end
+
+  def confirmed_status
+    return 'unconfirmed' if confirmed_at.nil?
+
+    "confirmed at #{confirmed_at.strftime('%e %B %Y  %I.%M %p')}"
+  end
 end
