@@ -26,7 +26,7 @@
         - if show_peoples_choice_stuff?
           %th Project Scorecard
       %tbody
-        - filter_projects(params[:term]).each do |project|
+        - @projects.each do |project|
           %tr
             %td= link_to "#{project.project_name}", project_path(project.identifier)
             %td= project.team_name

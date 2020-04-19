@@ -14,7 +14,7 @@
       %th Team
       %th Location
     %tbody
-      - filter_projects(params[:term]).each do |project|
+      - @projects.each do |project|
         %tr
           %td= link_to "#{project.project_name}", admin_competition_team_path(@competition, project.team)
           %td= project.team_name
