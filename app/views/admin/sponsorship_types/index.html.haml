@@ -2,7 +2,7 @@
 %main.project_index
   %h2= yield :title
   %p= link_to 'New Sponsorship Type', new_admin_competition_sponsorship_type_path(@competition), class: 'download-csv'
-  %table.data-table
+  %table#admin-sponsorship-types-table
     %thead
       %th Order
       %th Name

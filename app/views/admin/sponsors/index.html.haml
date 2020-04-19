@@ -4,7 +4,7 @@
     Competition #{@competition.year} Sponsors
   %p= link_to 'New Sponsor', new_admin_competition_sponsor_path(@competition), class: 'download-csv'
 
-  %table.data-table
+  %table#admin-sponsors-table
     %thead
       %th Name
       %th Sponsorships

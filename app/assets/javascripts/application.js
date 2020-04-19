@@ -27,7 +27,7 @@ $(document).ready(function() {
 
 $( document ).on('turbolinks:load', function() {
   if(!$('[id$="wrapper"]').length) {
-    $('.data-table, #projects_table').DataTable({
+    $('[id$="table"]').DataTable({
       stateSave: true
     });
   }

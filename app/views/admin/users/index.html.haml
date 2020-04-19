@@ -4,7 +4,7 @@
   %p= link_to "Download CSV (All users and what events they registered for in #{@competition.year})", admin_users_path(format: 'csv'), class: 'download-csv'
   %p= link_to "Download CSV (Mailing List Export #{@competition.year})", mailing_list_export_admin_users_path(format: 'csv'), class: 'download-csv'
 
-  %table.data-table
+  %table#admin-users-table
     %thead
       %th Full Name
       %th Preferred Name
