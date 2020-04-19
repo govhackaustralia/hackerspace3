@@ -1,5 +1,6 @@
-%main.team_page
-  %h2= @region.name
+- content_for :title, @region.name
+%main.project_index
+  %h2= yield :title
   - if @region.international?
     %p
       %strong Root Region
