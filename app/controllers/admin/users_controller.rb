@@ -41,11 +41,4 @@ class Admin::UsersController < ApplicationController
   def user_params
     params.require(:user).permit :full_name, :email
   end
-
-  # ENHANCEMENT: Redo when user auth seperated.
-  def create_new_unauthed_user
-    @user = User.new user_params
-    @user.password = Devise.friendly_token[0, 20]
-    @user.skip_confirmation_notification!
-  end
 end
