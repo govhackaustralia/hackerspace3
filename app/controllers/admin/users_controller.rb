@@ -2,11 +2,7 @@ class Admin::UsersController < ApplicationController
   before_action :authenticate_user!, :check_for_privileges
 
   def index
-    @users = if params[:term].blank?
-               User.take 10
-             else
-               User.search params[:term]
-             end
+    @users = User.all
     respond_to do |format|
       format.html
       format.csv { send_data UserRegistrationReport.report @competition }
