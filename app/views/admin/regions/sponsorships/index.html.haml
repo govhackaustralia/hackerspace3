@@ -1,7 +1,7 @@
-%main.team_page
-  %h2
-    Sponsorships for #{@region.name} Region
-  = link_to 'Add Sponsorship', new_admin_region_sponsorship_path(@region)
+- content_for :title, "Sponsorships for #{@region.name} Region"
+%main.project_index
+  %h2= yield :title
+  = link_to 'New Sponsorship', new_admin_region_sponsorship_path(@region), class: 'download-csv'
   - if @sponsorships.present?
     - @sponsorships.each do |sponsorship|
       = render 'admin/sponsors/sponsor', locals: { sponsor: sponsorship.sponsor }
