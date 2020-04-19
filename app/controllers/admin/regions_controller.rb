@@ -3,9 +3,7 @@ class Admin::RegionsController < ApplicationController
   before_action :retrieve_parent_regions, except: %i[index show]
 
   def index
-    @internationals = @competition.regions.internationals
-    @nationals = @competition.regions.nationals
-    @regionals = @competition.regions.regionals
+    @regions = @competition.regions
   end
 
   def show

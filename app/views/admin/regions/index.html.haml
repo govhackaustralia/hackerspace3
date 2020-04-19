@@ -1,24 +1,21 @@
-%main.team_page
-  %h2 Region Management
-  %p= link_to 'Create Region', new_admin_competition_region_path
-  %h3 #{Region::INTERNATIONAL} Region
-  - if @internationals.present?
-    - @internationals.each do |region|
-      = render 'region_modal', locals: { region: region }
-  - else
-    %p No International Region saved.
-  %h3 #{Region::NATIONAL} Regions
-  - if @nationals.present?
-    - @nationals.each do |region|
-      = render 'region_modal', locals: { region: region }
-  - else
-    %p No National Regions saved.
-  %h3 #{Region::REGIONAL} Regions
-  - if @regionals.present?
-    - @regionals.each do |region|
-      = render 'region_modal', locals: { region: region }
-  - else
-    %p No Regional Regions saved.
+- content_for :title, "Regions for #{@competition.name}"
+%main.project_index
+  %h2= yield :title
+  %p= link_to 'New Region', new_admin_competition_region_path, class: 'download-csv'
+  %table#admin-regions-table
+    %thead
+      %th Name
+      %th Category
+      %th Time Zone
+      %th Director
+    %tbody
+      - @regions.each do |region|
+        %tr
+          %td= link_to region.name, admin_competition_region_path(@competition, region)
+          %td= region.category
+          %td= region.time_zone ? region.time_zone : COMP_TIME_ZONE
+          %td= region.director&.display_name
+
 - if current_user.admin_privileges?(@competition)
   %p= link_to 'Back to Competition Management', admin_competition_path(@competition)
 %p= link_to 'Back to Account Management', manage_account_path
