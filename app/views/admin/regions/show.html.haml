@@ -86,11 +86,11 @@
     %h3 National Challenge Entries By Region
     %p
       %em Ignoring Checkpoints Unlike Public Screen
-    = render 'entries/national_challenge_entries'
+    = render 'national_challenge_entries'
   - else
     %h3 Regional Challenge Entries By Event
     %p
       %em Ignoring Checkpoints Unlike Public Screen
-    = render 'entries/regional_challenge_entries'
+    = render 'regional_challenge_entries'
 - if current_user.region_privileges?(@competition)
   %p= link_to 'Back to Competition Regions', admin_competition_regions_path(@competition)
