@@ -13,7 +13,7 @@
     %tbody
       - @users.each do |user|
         %tr
-          %td= link_to user.full_name, admin_user_path(user)
+          %td= link_to (user.full_name.present? ? user.full_name : '[no name]'), admin_user_path(user)
           %td= user.preferred_name
           %td= user.email
           %td= user.confirmed_status
