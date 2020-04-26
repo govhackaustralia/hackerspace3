@@ -1,7 +1,7 @@
 - content_for :title, "Participating Teams for #{@event.name}"
 %main.project_index
   %h2= yield :title
-  %table#events-teams-table
+  %table#events-teams-table{'data-turbolinks' => 'false'}
     %thead
       %th Project
       %th Team

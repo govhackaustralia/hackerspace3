@@ -26,9 +26,14 @@ $(document).ready(function() {
 });
 
 $( document ).on('turbolinks:load', function() {
-  if(!$('[id$="wrapper"]').length) {
-    $('[id$="table"]').DataTable({
-      stateSave: true
-    });
-  }
+	if($('#dataset_table').length) {
+		$('#dataset_table').DataTable({
+			scrollY: 750,
+			stateSave: true
+		});
+	} else {
+		$('[id$="table"]').DataTable({
+			stateSave: true
+		});
+	}
 });

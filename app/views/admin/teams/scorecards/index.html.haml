@@ -1,7 +1,7 @@
 %main
   %h2
     Scorecards for #{@project.team_name} - #{@project.project_name} #{'(with Judges)' if params[:include_judges] == 'true'}
-  %table#projects_table
+  %table#projects_table{'data-turbolinks' => 'false'}
     %thead
       %th Status
       %th Action
