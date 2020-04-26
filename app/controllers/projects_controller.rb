@@ -3,7 +3,7 @@ class ProjectsController < ApplicationController
 
   def index
     @teams = @competition.teams.published
-    @projects = @competition.published_projects_by_name.preload :event
+    @projects = @competition.published_projects_by_name.preload :event, team: [:challenges, :team_data_sets]
     user_records_index if user_signed_in?
     respond_to do |format|
       format.html

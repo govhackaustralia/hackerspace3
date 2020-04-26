@@ -23,6 +23,9 @@
         %th Project
         %th Team
         %th Location
+        %th Challenges Entered
+        %th Datasets Used
+        %th{style: 'display: none;'} meta
         - if show_peoples_choice_stuff?
           %th Project Scorecard
       %tbody
@@ -31,6 +34,9 @@
             %td= link_to "#{project.project_name}", project_path(project.identifier)
             %td= project.team_name
             %td= project.event.name
+            %td= project.team.challenges.length
+            %td= project.team.team_data_sets.length
+            %td{style: 'display: none;'}= project.description + project.data_story
             - if show_peoples_choice_stuff?
               - if (display_score = @project_judging[project.team_id][:display_score_status]).is_a? Integer
                 - score_value = ((display_score.to_f / @project_judging_total.to_f) * 100).to_i
