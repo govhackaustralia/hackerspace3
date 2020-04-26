@@ -150,34 +150,6 @@ h2 {
 	transform: scale(1.15, 1.15);
 }
 
-#dataset_table, #projects_table {
-	border-collapse: collapse;
-	border-spacing: 0;
-}
-
-#dataset_table td, #projects_table td {
-	font-family:Arial, sans-serif;
-	font-size: 14px;
-	padding: 10px 5px;
-	border-style: solid;
-	border-width: 1px;
-	overflow: hidden;
-	word-break: normal;
-	border-color: black;
-}
-
-#dataset_table th, #projects_table th {
-	font-family: Arial, sans-serif;
-	font-size: 14px;
-	font-weight: normal;
-	padding: 10px 5px;
-	border-style: solid;
-	border-width: 1px;
-	overflow: hidden;
-	word-break: normal;
-	border-color: black;
-}
-
 .download-csv {
     box-sizing: border-box;
     font-size: 1.5em;
