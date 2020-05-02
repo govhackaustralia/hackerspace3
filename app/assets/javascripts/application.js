@@ -26,14 +26,7 @@ $(document).ready(function() {
 });
 
 $( document ).on('turbolinks:load', function() {
-	if($('#dataset_table').length) {
-		$('#dataset_table').DataTable({
-			scrollY: 750,
-			stateSave: true
-		});
-	} else {
-		$('[id$="table"]').DataTable({
-			stateSave: true
-		});
-	}
+	$('[id$="table"]').DataTable({
+		stateSave: true
+	});
 });

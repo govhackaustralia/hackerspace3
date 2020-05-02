@@ -3,7 +3,9 @@ Rails.application.routes.draw do
 
   devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
 
-  resources :data_sets, only: [:index, :show]
+  resources :data_sets, only: [:index, :show] do
+    collection { get :highlight }
+  end
   resources :teams, only: [:new, :create]
   resources :favourites, only: [:create, :destroy]
   resources :challenges, param: :identifier, only: [:index, :show] do
