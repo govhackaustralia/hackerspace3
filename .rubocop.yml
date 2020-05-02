@@ -4,6 +4,7 @@
 require: rubocop-performance
 
 AllCops:
+  NewCops: enable
   Exclude:
     - 'config/**/*'
     - 'app/main/config/**/*'
@@ -39,12 +40,3 @@ Metrics/ClassLength:
 
 Metrics/ParameterLists:
   Enabled: false
-
-Style/HashEachMethods:
-  Enabled: true
-
-Style/HashTransformKeys:
-  Enabled: true
-
-Style/HashTransformValues:
-  Enabled: true
