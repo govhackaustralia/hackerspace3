@@ -1,11 +1,9 @@
-- content_for :title, 'Challenges'
 %main.challenge_index
-  %h2 Challenges for Competition #{@competition.year}
+  = render 'index_header'
   = form_tag challenges_path, method: :get do
     = search_field_tag :term, params[:term]
     = submit_tag 'Search'
   %p= link_to 'Clear Search', challenges_path
-  %p= link_to 'Download CSV', challenges_path(format: 'csv'), class: 'download-csv'
   - @regions.each do |region|
     - next unless @competition.started?(region.time_zone) || region.international?
     - next if (challenges = @region_challenges[region.id]).empty?

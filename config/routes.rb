@@ -9,7 +9,10 @@ Rails.application.routes.draw do
   resources :teams, only: [:new, :create]
   resources :favourites, only: [:create, :destroy]
   resources :challenges, param: :identifier, only: [:index, :show] do
-    collection { get 'landing_page' }
+    collection do
+      get 'landing_page'
+      get 'table'
+    end
     member { get 'entries' }
   end
   resources :users, only: :update do

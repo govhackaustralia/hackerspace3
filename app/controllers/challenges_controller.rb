@@ -1,15 +1,21 @@
 class ChallengesController < ApplicationController
   before_action :check_competition_start!, only: %i[show entries]
-  before_action :check_competition_index_landing_page!, only: :index
+  before_action :check_competition_index_landing_page!, only: %i[index table]
   before_action :check_competition_landing_page_index!, only: :landing_page
 
   def index
-    @challenges = @competition.challenges.approved.order(:name).preload(
-      challenge_sponsorships: :sponsor
-    )
+    @challenges = @competition.challenges.approved
+      .order(:name)
+      .preload(challenge_sponsorships: :sponsor)
     @regions = @competition.regions.order(:category).order :name
     @counter = PublishedEntryCounter.new @competition
     filter_challenges
+  end
+
+  def table
+    @challenges = @competition.challenges.approved
+      .order(:name)
+      .preload(:region, :sponsors, :published_entries)
     respond_to do |format|
       format.html
       format.csv { send_data @challenges.to_csv @competition }
