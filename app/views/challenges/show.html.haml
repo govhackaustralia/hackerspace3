@@ -65,7 +65,7 @@
                   %p All Checkpoints have passed.
                 - else
                   %p No entries to this challenge for this team.
-    - else
+    - elsif @competition.in_comp_window? LAST_TIME_ZONE
       %p Sign in to enter your team into this challenge.
     %h3 All Team Entries
     - if @competition.either_judging_window_open? LAST_TIME_ZONE
