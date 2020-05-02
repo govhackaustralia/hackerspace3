@@ -7,6 +7,6 @@
     - else
       %p No team entries to display for this challenge.
   - elsif @competition.started?(@region.time_zone) || @region.international?
-    = render 'team_checkpoint_display'
+    = render 'team_checkpoint_table'
   - else
     %p Challenge entries will appear here when the competition starts.

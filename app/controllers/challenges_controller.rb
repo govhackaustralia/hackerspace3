@@ -97,9 +97,12 @@ class ChallengesController < ApplicationController
   end
 
   def checkpoint_entry_view
-    @passed_public_checkpoints = @competition.checkpoints.where(id: passed_checkpoint_ids(@region)).order(:end_time)
-    team_ids = @challenge.entries.where(checkpoint_id: passed_checkpoint_ids(@region)).pluck(:team_id)
-    @teams = Team.published.where(id: team_ids)
+    @time_zone = @region.time_zone || LAST_TIME_ZONE
+    passed_public_checkpoints = @competition.checkpoints
+      .where(id: passed_checkpoint_ids(@region))
+    @entries = @challenge.published_entries
+      .where(checkpoint: passed_public_checkpoints)
+      .preload(:checkpoint, project: :event)
   end
 
   def challenge_entry_counts

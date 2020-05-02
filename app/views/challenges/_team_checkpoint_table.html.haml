@@ -1,0 +1,25 @@
+%section.teams
+  %p
+    %strong
+      Team Projects will appear below when the relevant checkpoint has passed
+      (#{@time_zone} time)
+  - if @entries.any?
+    %table#challenge-entries-table{'data-turbolinks' => 'false'}
+      %thead
+        %th Checkpoint
+        %th Project
+        %th Team
+        %th Location
+      %tbody
+        - @entries.each do |entry|
+          %tr
+            %td= entry.checkpoint.name
+            %td= link_to "#{entry.project.project_name}", project_path(entry.project.identifier)
+            %td= entry.project.team_name
+            %td= entry.project.event.name
+  - else
+    %article
+      %p
+        %strong
+          No team entries to display for this challenge.
+= link_to "Back to #{@challenge.name}", challenge_path(@challenge.identifier)
