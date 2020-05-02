@@ -35,6 +35,7 @@
             %strong= data_set.name
             %br/
             = link_to(data_set.url,data_set.url)
+      %p= link_to 'Challenge Entries', entries_challenge_path(@challenge.identifier), class: 'download-csv'
     %aside
       - unless @challenge.video_url.blank?
         .videoWrapper
@@ -67,16 +68,6 @@
                   %p No entries to this challenge for this team.
     - elsif @competition.in_comp_window? LAST_TIME_ZONE
       %p Sign in to enter your team into this challenge.
-    %h3 All Team Entries
-    - if @competition.either_judging_window_open? LAST_TIME_ZONE
-      - if @teams.present?
-        = render 'team_judging_table'
-      - else
-        %p No team entries to display for this challenge.
-    - elsif @competition.started?(@region.time_zone) || @region.international?
-      = render 'team_checkpoint_display'
-    - else
-      %p Challenge entries will appear here when the competition starts.
 %section.ie-push
   - if current_user.present? && current_user.region_privileges?(@competition)
     %p= link_to 'Manage this Challenge', admin_region_challenge_path(@region, @challenge)

@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   resources :favourites, only: [:create, :destroy]
   resources :challenges, param: :identifier, only: [:index, :show] do
     collection { get 'landing_page' }
+    member { get 'entries' }
   end
   resources :users, only: :update do
     collection do

@@ -1,5 +1,5 @@
 class ChallengesController < ApplicationController
-  before_action :check_competition_start!, only: :show
+  before_action :check_competition_start!, only: %i[show entries]
   before_action :check_competition_index_landing_page!, only: :index
   before_action :check_competition_landing_page_index!, only: :landing_page
 
@@ -25,8 +25,17 @@ class ChallengesController < ApplicationController
   def show
     @data_sets = @challenge.data_sets
     @challenge_sponsorships = @challenge.challenge_sponsorships
+
+    @user_eligible_teams = @challenge.eligible_teams & current_user.joined_teams if user_signed_in?
+  end
+
+  def entries
     @challenges = @competition.challenges.approved
-    challenge_show_entry_management
+    if @competition.either_judging_window_open?(LAST_TIME_ZONE)
+      judging_view
+    else
+      checkpoint_entry_view
+    end
   end
 
   private
@@ -61,15 +70,6 @@ class ChallengesController < ApplicationController
 
     flash[:alert] = 'Challenges will become visible at the start of the competition'
     redirect_to root_path
-  end
-
-  def challenge_show_entry_management
-    @user_eligible_teams = @challenge.eligible_teams & current_user.joined_teams if user_signed_in?
-    if @competition.either_judging_window_open?(LAST_TIME_ZONE)
-      judging_view
-    else
-      checkpoint_entry_view
-    end
   end
 
   def judging_view

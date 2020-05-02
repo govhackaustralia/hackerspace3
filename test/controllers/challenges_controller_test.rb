@@ -3,6 +3,7 @@ require 'test_helper'
 class ChallengesControllerTest < ActionDispatch::IntegrationTest
   setup do
     @competition = Competition.first
+    @challenge = challenges(:one)
   end
 
   test 'should get index' do
@@ -36,8 +37,12 @@ class ChallengesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'should get show' do
-    challenge = challenges(:one)
-    get challenge_url(challenge.identifier)
+    get challenge_url @challenge.identifier
+    assert_response :success
+  end
+
+  test 'should get entries' do
+    get entries_challenge_url @challenge.identifier
     assert_response :success
   end
 end
