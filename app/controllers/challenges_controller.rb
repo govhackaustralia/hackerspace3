@@ -1,6 +1,7 @@
 class ChallengesController < ApplicationController
   before_action :check_competition_start!, only: %i[show entries]
-  before_action :check_competition_index_landing_page!, only: %i[index table]
+  before_action :check_competition_index_landing_page!,
+                :preferred_index_view, only: %i[index table]
   before_action :check_competition_landing_page_index!, only: :landing_page
 
   def index
@@ -151,6 +152,10 @@ class ChallengesController < ApplicationController
     else
       @challenges.each { |challenge| @region_challenges[challenge.region_id] << challenge }
     end
+  end
+
+  def preferred_index_view
+    cookies[:challenge_index_view] = params[:action]
   end
 
   def search_challenge_string(challenge, term)
