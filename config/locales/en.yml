@@ -27,7 +27,7 @@
 #   'true': 'foo'
 #
 # To learn more, please read the Rails Internationalization guide
-# available at http://guides.rubyonrails.org/i18n.html.
+# available at https://guides.rubyonrails.org/i18n.html.
 
 en:
   helpers:
@@ -39,3 +39,4 @@ en:
         my_project_sponsor_contact: Can be contacted by sponsors that are interested in my project.
         me_govhack_contact: Can be contacted by GovHack.
         how_did_you_hear: How did you hear about GovHack?
+  hello: "Hello world"

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_13_010825) do
+ActiveRecord::Schema.define(version: 2020_05_08_043709) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -467,6 +467,7 @@ ActiveRecord::Schema.define(version: 2020_04_13_010825) do
     t.index ["unlock_token"], name: "index_users_on_unlock_token", unique: true
   end
 
+  add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "holders", "competitions"
   add_foreign_key "holders", "users"
 end
