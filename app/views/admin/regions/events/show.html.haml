@@ -1,7 +1,6 @@
+- content_for :title, "#{@event.name} Event"
 %main.team_page
-  %h2
-    = @event.name
-    Event
+  %h2= yield :title
   %h3 Event Information
   %p
     Region: #{@region.name}
