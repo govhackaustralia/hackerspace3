@@ -1,4 +1,6 @@
 class EventsController < ApplicationController
+  before_action :check_event_published!, only: :show
+
   def index
     retrieve_events
     respond_to do |format|
@@ -8,17 +10,21 @@ class EventsController < ApplicationController
   end
 
   def show
-    @event = Event.find_by identifier: params[:identifier]
-    @competition = @event.competition
-    if @event.published || (user_signed_in? && current_user.event_privileges?(@competition))
-      show_event
-    else
-      flash[:alert] = 'This event has not been published.'
-      redirect_to root_path
-    end
+    @event_partners = @event.event_partners
+    @region = @event.region
+    @sponsorship_types = @region.sponsorship_types.distinct.order order: :asc
+    set_signed_in_user_vars if user_signed_in?
   end
 
   private
+
+  def check_event_published!
+    @event = Event.find_by identifier: params[:identifier]
+    @competition = @event.competition
+    return if @event.published || (user_signed_in? && current_user.event_privileges?(@competition))
+
+    redirect_to root_path, alert: 'This event has not been published.'
+  end
 
   def retrieve_events
     @events = @competition.events.published.preload(:region).order start_time: :asc, name: :asc
@@ -37,13 +43,6 @@ class EventsController < ApplicationController
     @past_connections = @events.connections.past
     @past_competitions = @events.competitions.past
     @past_awards = @events.awards.past
-  end
-
-  def show_event
-    @event_partners = @event.event_partners
-    @region = @event.region
-    @sponsorship_types = @region.sponsorship_types.distinct.order order: :asc
-    set_signed_in_user_vars if user_signed_in?
   end
 
   def set_signed_in_user_vars
