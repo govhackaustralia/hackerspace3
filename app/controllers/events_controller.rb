@@ -52,6 +52,5 @@ class EventsController < ApplicationController
       event: @event,
       assignment: @event_assignment
     )
-    @team = @event.teams.new
   end
 end
