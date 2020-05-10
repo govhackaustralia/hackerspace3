@@ -21,10 +21,10 @@
           %h4 Registration Type:
           %p
             = @event.registration_type
-        = render 'event_text_information'
+        = render 'events/event_text_information'
       %aside
-        = render 'event_map_video'
-        = render 'event_registration_team_links'
+        = render 'events/event_map_video'
+        = render 'events/event_registration_team_links'
         - if @event_partners.present?
           %h3= @event_partners.count > 1 ? 'Event Partners' : 'Event Partner'
           - @event_partners.each do |event_partner|

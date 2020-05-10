@@ -15,8 +15,8 @@
     %p This event has been published and is in public view.
     = link_to 'Go to Event Page', event_path(@event.identifier)
   - else
-    %p This event has not been published and can only be viewed by admin.
-    = link_to 'Go to Event Page (Admin Only)', event_path(@event.identifier)
+    %p This event has not been published.
+    = link_to 'Go to Preview Page', preview_admin_region_event_path(@region, @event)
   %h3 Event Assignments
   %h4 Event Host
   - if (host = @event.event_host).present?

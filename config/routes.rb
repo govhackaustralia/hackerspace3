@@ -95,7 +95,9 @@ Rails.application.routes.draw do
       resources :assignments, only: [:index, :new, :create], controller: 'regions/assignments'
       resources :sponsorships, only: [:index, :new, :create], controller: 'regions/sponsorships'
       resources :scorecards, only: :index, controller: 'regions/scorecards'
-      resources :events, except: :destroy, controller: 'regions/events'
+      resources :events, except: :destroy, controller: 'regions/events' do
+        member { get :preview }
+      end
       resources :challenges, except: :destroy, controller: 'regions/challenges' do
         member { get :preview }
       end

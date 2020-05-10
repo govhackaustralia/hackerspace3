@@ -21,7 +21,7 @@ class EventsController < ApplicationController
   def check_event_published!
     @event = Event.find_by identifier: params[:identifier]
     @competition = @event.competition
-    return if @event.published || (user_signed_in? && current_user.event_privileges?(@competition))
+    return if @event.published
 
     redirect_to root_path, alert: 'This event has not been published.'
   end

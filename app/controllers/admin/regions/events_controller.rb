@@ -17,6 +17,19 @@ class Admin::Regions::EventsController < ApplicationController
     @bulk_mails = @event.bulk_mails
   end
 
+  def preview
+    @event = Event.find params[:id]
+    @event_partners = @event.event_partners
+    @sponsorship_types = @region.sponsorship_types.distinct.order order: :asc
+    @user = current_user
+    @event_assignment = @user.event_assignment(@competition)
+    @registration = Registration.find_by(
+      event: @event,
+      assignment: @event_assignment
+    )
+    render 'events/show'
+  end
+
   # ENHANCEMENT: Remove break tags from form.
   def new
     @event = @region.events.new
