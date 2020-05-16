@@ -45,13 +45,14 @@ class Admin::ProjectsController < ApplicationController
     params.require(:project).permit(
       %i[
         team_name description data_story source_code_url
-        video_url homepage_url project_name
+        video_url homepage_url project_name tag_list
       ]
     )
   end
 
   def update_project
     @project = @team.current_project.dup
+    project_params[:tag_list]&.tr!('#', '')
     @project.update project_params
     @project.user = current_user
   end

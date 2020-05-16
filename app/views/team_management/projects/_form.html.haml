@@ -14,6 +14,12 @@
       = project_form.text_area :description
     .field
       %div
+        = project_form.label :tag_list
+        %br/
+        %em Separate tags with commas
+      = project_form.text_field :tag_list, value: @project.tag_list&.join(', ')
+    .field
+      %div
         = project_form.label :data_story
         %br/
         %em Markdown supported

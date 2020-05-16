@@ -28,11 +28,13 @@ class TeamManagement::ProjectsControllerTest < ActionDispatch::IntegrationTest
 
   test 'should patch update success' do
     patch team_management_team_project_url @team, @project, params: { project: {
-      team_name: 'Updated', project_name: 'Same'
+      team_name: 'Updated', project_name: 'Same', tag_list: 'test, #Test2'
     } }
     new_project = Project.last
     assert_redirected_to edit_team_management_team_project_url @team, new_project
     assert new_project.team_name == 'Updated'
+    assert new_project.project_name == 'Same'
+    assert new_project.tag_list == %w[test test2]
   end
 
   test 'should patch update fail' do

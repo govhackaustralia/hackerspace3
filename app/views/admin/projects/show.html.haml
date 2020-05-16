@@ -19,6 +19,11 @@
   %p Homepage URL: #{@project.homepage_url}
   %h3 Description
   %p= @project.description
+  %h3 Tags
+  - unless @project.tag_list.empty?
+    %p
+      - @project.tag_list.each do |tag|
+        %span ##{tag}
   %h3 Data Story
   %p= @project.data_story
 %p= link_to 'Back to All Project Versions', admin_team_projects_path(@team)
