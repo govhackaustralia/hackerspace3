@@ -1,4 +1,4 @@
-= form_for [:team_management, @team, @project] do |project_form|
+= form_for [@namespace, @team, @project] do |project_form|
   .field
     = project_form.label :team_name
     = project_form.text_field :team_name

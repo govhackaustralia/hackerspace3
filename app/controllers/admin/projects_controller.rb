@@ -15,6 +15,7 @@ class Admin::ProjectsController < ApplicationController
 
   def edit
     @project = Project.find params[:id]
+    @namespace = :admin
   end
 
   def update
@@ -23,6 +24,7 @@ class Admin::ProjectsController < ApplicationController
       flash[:notice] = 'Team Project Saved'
       redirect_to admin_team_project_path @project.team, @project
     else
+      @namespace = :admin
       flash[:alert] = @project.errors.full_messages.to_sentence
       render :edit
     end

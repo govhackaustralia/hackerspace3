@@ -7,6 +7,7 @@ class TeamManagement::ProjectsController < TeamManagement::TeamsController
 
   def edit
     @project = Project.find params[:id]
+    @namespace = :team_management
   end
 
   def update
@@ -15,6 +16,7 @@ class TeamManagement::ProjectsController < TeamManagement::TeamsController
       flash[:notice] = 'Team Project Saved'
       redirect_to edit_team_management_team_project_path @project.team, @project
     else
+      @namespace = :team_management
       flash[:alert] = @project.errors.full_messages.to_sentence
       render :edit
     end
