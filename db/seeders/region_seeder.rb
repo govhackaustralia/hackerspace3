@@ -97,7 +97,7 @@ class RegionSeeder < Seeder
           user_id: 1,
           name: "Bulk Mail #{time} #{comp.year}",
           status: DRAFT,
-          from_email: ENV['SEED_EMAIL'],
+          from_email: admin_email,
           subject: 'Greetings',
           body: 'Hello { display_name }, How is { team_name } going with { project_name } ?'
         )

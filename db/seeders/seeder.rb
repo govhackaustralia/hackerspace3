@@ -25,4 +25,12 @@ class Seeder
   def self.random_tags
     rand(0..5).times.map { Faker::Hacker.adjective }.uniq
   end
+
+  def self.admin_email
+    ENV['SEED_EMAIL'] || 'admin@hackerspace.com'
+  end
+
+  def self.admin_name
+    ENV['SEED_NAME'] || 'Admin User'
+  end
 end

@@ -22,8 +22,6 @@ $ rails db:setup
 
 *This will load the seeds also, see db/seeds.rb for more options*
 
-**Note**: This will require SEED_EMAIL SEED_NAME environment variables to be set.
-
 ## Test Suite
 
 Current coverage is unit tests for models, controllers, and services.
@@ -55,10 +53,10 @@ Set these in `config/application.yml` using [figaro](https://github.com/laserlem
 
 ### Seed File
 
-Set if running in development and running the seed file.
+Optional: Set if running in development and running the seed file.
 
-- SEED_EMAIL
-- SEED_NAME
+- SEED_EMAIL (defaults to: admin@hackerspace.com)
+- SEED_NAME (defaults to: Admin User)
 
 ### Web Deployment
 

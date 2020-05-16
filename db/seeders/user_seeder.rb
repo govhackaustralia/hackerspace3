@@ -3,8 +3,8 @@ require_relative 'seeder'
 class UserSeeder < Seeder
   def self.create_tester
     tester = User.new(
-      email: ENV['SEED_EMAIL'],
-      full_name: ENV['SEED_NAME'],
+      email: admin_email,
+      full_name: admin_name,
       password: 'password',
       password_confirmation: 'password'
     )
@@ -19,7 +19,7 @@ class UserSeeder < Seeder
   end
 
   def self.create_admin competition
-    user = User.find_by_email(ENV['SEED_EMAIL'])
+    user = User.find_by_email(admin_email)
     user.make_site_admin competition, user.holder_for(competition)
   end
 
