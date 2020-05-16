@@ -21,4 +21,8 @@ class Seeder
   def self.random_boolean
     [true, false].sample
   end
+
+  def self.random_tags
+    rand(0..5).times.map { Faker::Hacker.adjective }.uniq
+  end
 end

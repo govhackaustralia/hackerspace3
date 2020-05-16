@@ -12,6 +12,8 @@ class Project < ApplicationRecord
 
   after_create_commit :update_team_current_project
 
+  acts_as_ordered_taggable
+
   # Updates each of the entries that a team has entered and determines if the
   # team is eligible or ineligible.
   def update_entries_eligible

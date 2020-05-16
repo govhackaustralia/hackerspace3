@@ -30,6 +30,7 @@ class TeamSeeder < Seeder
         team.projects.create(
           team_name: "#{event.name} team #{team_time} #{comp.year}",
           description: Faker::Lorem.paragraph,
+          tag_list: random_tags,
           project_name: "#{event.name} project #{team_time}",
           data_story: Faker::Lorem.paragraph,
           source_code_url: 'https://github.com/tenderlove/allocation_sampler',

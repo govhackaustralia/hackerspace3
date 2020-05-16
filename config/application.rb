@@ -17,5 +17,7 @@ module Hackerspace3
     # the framework and any gems in your application.
 
     config.time_zone = 'Sydney'
+
+    ActsAsTaggableOn.force_lowercase = true
   end
 end
