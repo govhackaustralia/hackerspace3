@@ -7,10 +7,12 @@
     %hr/
     = markdown @current_project.description
     %hr/
-%section
+%section.tags
   - unless @current_project.tag_list.empty?
     - @current_project.tag_list.each do |tag|
-      %span ##{tag}
+      %span
+        %strong
+          = link_to "##{tag}", projects_path(search: "##{tag}")
 %section.markdown
   - unless @current_project.data_story.blank?
     %h4.sectionHeading Data Story
