@@ -48,6 +48,8 @@ class RegionSeeder < Seeder
       )
     end
 
+    return unless users.any?
+
     comp.regions.all.each do |region|
 
       user = users.sample
@@ -65,6 +67,8 @@ class RegionSeeder < Seeder
           holder: user.holder_for(comp)
         )
       end
+
+      return unless sponsorship_types.any?
 
       3.times do
         region.sponsorships.create(
@@ -104,6 +108,8 @@ class RegionSeeder < Seeder
       end
 
       data_sets = region.data_sets
+      return unless data_sets.any?
+
       region.challenges.each do |challenge|
         5.times do
           challenge.challenge_data_sets.create(

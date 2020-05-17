@@ -70,6 +70,8 @@ class UserSeeder < Seeder
 
   def self.create_favourites(comp)
     teams = comp.teams
+    return unless teams.any?
+
     comp.assignments.event_assignments.each do |event_assignment|
       6.times do
         event_assignment.favourites.create(

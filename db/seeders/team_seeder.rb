@@ -8,6 +8,8 @@ class TeamSeeder < Seeder
     competitors = User.where id: user_ids
 
     10.times do |team_time|
+    return unless competitors.any?
+
       team = event.teams.create
 
       team.assign_leader(competitors.sample)
@@ -49,6 +51,8 @@ class TeamSeeder < Seeder
         )
       end
 
+      return unless challenges.any?
+
       comp.checkpoints.each_with_index do |checkpoint, index|
         entry = team.entries.create(
           checkpoint: checkpoint,
@@ -81,6 +85,8 @@ class TeamSeeder < Seeder
       end
 
       20.times do
+      return unless participant_assignments.any?
+
         assignment = participant_assignments.sample
         header = Header.create(
           scoreable: team,

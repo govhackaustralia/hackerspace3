@@ -52,6 +52,8 @@ class CompetitionSeeder < Seeder
       )
     end
 
+    return unless users.any?
+
     4.times do
       user = users.sample
       comp.assignments.create(

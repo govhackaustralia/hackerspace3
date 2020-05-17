@@ -23,10 +23,14 @@ class EventSeeder < Seeder
       published: true
     )
 
+    return unless sponsors.any?
+
     EventPartnership.create(
       event: event,
       sponsor: sponsors.sample
     )
+
+    return unless users.any?
 
     user = users.sample
     event.host_assignments.create(
@@ -41,6 +45,8 @@ class EventSeeder < Seeder
         holder: user.holder_for(comp)
       )
     end
+
+    return unless participant_assignments.any?
 
     20.times do
       assignment = participant_assignments.sample
