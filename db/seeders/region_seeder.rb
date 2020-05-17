@@ -70,14 +70,14 @@ class RegionSeeder < Seeder
 
       return unless sponsorship_types.any?
 
-      3.times do
+      [*0..3].sample.times do
         region.sponsorships.create(
           sponsor: sponsors.sample,
           sponsorship_type: sponsorship_types.sample
         )
       end
 
-      5.times do |time|
+      [*1..5].sample.times do |time|
         region.challenges.create(
           name: "#{region.name} #{Faker::Games::Pokemon.unique.name} Challenge #{comp.year}",
           short_desc: Faker::Lorem.sentence, approved: true,
@@ -88,7 +88,7 @@ class RegionSeeder < Seeder
         )
       end
 
-      10.times do |time|
+      [*1..10].sample.times do |time|
         region.data_sets.create(
           name: "#{region.name} Data Set #{time} #{comp.year}",
           url: "https://data.gov.au/dataset/#{Faker::Movies::HarryPotter.character}",
@@ -96,7 +96,7 @@ class RegionSeeder < Seeder
         )
       end
 
-      3.times do |time|
+      [*1..3].sample.times do |time|
         region.bulk_mails.create(
           user_id: 1,
           name: "Bulk Mail #{time} #{comp.year}",
@@ -111,19 +111,19 @@ class RegionSeeder < Seeder
       return unless data_sets.any?
 
       region.challenges.each do |challenge|
-        5.times do
+        [*1..5].sample.times do
           challenge.challenge_data_sets.create(
             data_set: data_sets.sample
           )
         end
 
-        3.times do
+        [*1..3].sample.times do
           challenge.challenge_sponsorships.create(
             sponsor: sponsors.sample
           )
         end
 
-        3.times do
+        [*1..3].sample.times do
           user = users.sample
           challenge.assignments.judges.create(
             user: user,

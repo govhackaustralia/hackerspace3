@@ -24,6 +24,6 @@ require_relative 'seeders/user_seeder'
 UserSeeder.create_tester
 # Create Competitions for all years since 2018
 (2018-Time.now.year..0).each do |offset|
-  UserSeeder.create_users 100/(offset.abs + 1)
+  UserSeeder.create_users 50/(offset.abs + 1)
   CompetitionSeeder.create offset
 end

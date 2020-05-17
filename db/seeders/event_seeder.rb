@@ -48,7 +48,7 @@ class EventSeeder < Seeder
 
     return unless participant_assignments.any?
 
-    20.times do
+    [*0..20].sample.times do
       assignment = participant_assignments.sample
       event.registrations.attending.create(
         assignment: assignment,
@@ -66,13 +66,13 @@ class EventSeeder < Seeder
   end
 
   def self.create_national_awards(event, comp)
-    8.times do
+    [*1..8].sample.times do
       event.flights.create(
         description: Faker::TvShows::GameOfThrones.city + ' ' + comp.year.to_s,
         direction: FLIGHT_DIRECTIONS.sample
       )
     end
-    3.times do |time|
+    [*1..3].sample.times do |time|
       bulk_mail = event.bulk_mails.create(
         user_id: 1,
         name: "Bulk Mail #{time} #{comp.year}",

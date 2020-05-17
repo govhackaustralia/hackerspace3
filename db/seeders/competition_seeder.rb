@@ -85,7 +85,7 @@ class CompetitionSeeder < Seeder
       )
     end
 
-    20.times do |time|
+    [*10..20].sample.times do |time|
       comp.sponsors.create(
         name: Faker::Company.name + ' ' + comp.year.to_s,
         description: Faker::Lorem.paragraph,
@@ -93,7 +93,7 @@ class CompetitionSeeder < Seeder
       )
     end
 
-    10.times do |time|
+    5.times do |time|
       comp.sponsorship_types.create(
         name: "Tier #{time + 1} #{comp.year}",
         order: time + 1

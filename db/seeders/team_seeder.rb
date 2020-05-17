@@ -7,9 +7,9 @@ class TeamSeeder < Seeder
     user_ids = Assignment.where(id: assignment_ids).pluck :user_id
     competitors = User.where id: user_ids
 
-    10.times do |team_time|
     return unless competitors.any?
 
+    [*0..10].sample.times do |team_time|
       team = event.teams.create
 
       team.assign_leader(competitors.sample)
@@ -20,7 +20,7 @@ class TeamSeeder < Seeder
           holder: user.holder_for(comp)
         )
       end
-      2.times do
+      [*0..2].sample.times do
         user = competitors.sample
         team.assignments.team_invitees.create(
           user: user,
@@ -42,7 +42,7 @@ class TeamSeeder < Seeder
         )
       end
 
-      [*1..3].sample.times do |time|
+      [*0..3].sample.times do |time|
         team.team_data_sets.create(
           name: "#{team.name} dataset #{team_time + time} #{comp.year}",
           description: Faker::Lorem.paragraph,
@@ -84,9 +84,9 @@ class TeamSeeder < Seeder
         end
       end
 
-      20.times do
       return unless participant_assignments.any?
 
+      [*0..5].sample.times do
         assignment = participant_assignments.sample
         header = Header.create(
           scoreable: team,
