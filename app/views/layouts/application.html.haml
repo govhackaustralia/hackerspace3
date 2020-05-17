@@ -24,3 +24,4 @@
     = yield
     - unless params[:popup].present?
       = render 'layouts/footer'
+    = javascript_tag "window._search = '#{params[:search]}'"
