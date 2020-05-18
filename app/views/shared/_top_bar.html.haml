@@ -1,12 +1,10 @@
-%body
-  %header
-    %nav#main-menu
-      %section
-        = link_to (render "shared/logo"), root_path
-        %article
-          = link_to 'Events', events_path
-          = link_to 'Challenges', challenges_path
-          = link_to 'Projects', projects_path
-          = link_to 'Datasets', data_sets_path
-          -# = link_to 'Stats', stats_path
-      = render "shared/session_login_links"
+%header
+  %nav#main-menu
+    %section
+      = link_to (render "shared/logo"), root_path
+      %article
+        = link_to 'Events', events_path
+        = link_to 'Challenges', challenges_path
+        = link_to 'Projects', projects_path
+        = link_to 'Datasets', data_sets_path
+    = render "shared/session_login_links"
