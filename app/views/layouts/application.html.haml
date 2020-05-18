@@ -8,10 +8,7 @@
     = csrf_meta_tags
     = csp_meta_tag
     %title
-      - if yield(:title).present?
-        = yield(:title)
-      - else
-        GovHack
+      = yield(:title).presence || 'GovHack'
       | Hackerspace
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
