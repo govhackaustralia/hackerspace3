@@ -41,8 +41,8 @@ Rails.application.configure do
 
   # Mount Action Cable outside main process or domain.
   # config.action_cable.mount_path = nil
-  config.action_cable.url = "wss://#{ENV['DOMAIN']}/cable"
-  config.action_cable.allowed_request_origins = ["http://#{ENV['DOMAIN']}"]
+  config.action_cable.url = "ws://#{ENV['DOMAIN']}/cable"
+  config.action_cable.allowed_request_origins = ['https://staging.hackerspace.govhack.org', 'govhack.org']
 
   # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
   config.force_ssl = true
