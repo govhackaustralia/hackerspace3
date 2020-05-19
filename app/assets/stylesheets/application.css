@@ -23,6 +23,11 @@
 	margin: 1%;
 }
 
+.ie-push {
+	margin: 1em;
+	padding: 1em;
+}
+
 footer {
 	display: flex;
 	flex-direction: column;
