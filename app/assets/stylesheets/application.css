@@ -15,11 +15,6 @@
  *= require_self
  */
 
-.ie-push {
-	margin: 1em;
-	padding: 1em;
-}
-
 .event-info {
 	padding: 0.5em;
 }
