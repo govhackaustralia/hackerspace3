@@ -1,0 +1,16 @@
+.score-display {
+  display: flex;
+  width: 100%;
+
+  p {
+    box-sizing: border-box;
+    width: 50%;
+    text-align: center;
+    font-weight: 700;
+    padding: 0.25em 0;
+
+    &:nth-child(2) {
+      font-size: 1.5em;
+    }
+  }
+}
