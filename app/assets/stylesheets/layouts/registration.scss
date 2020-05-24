@@ -1,0 +1,316 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+
+.registration {
+  padding: 2em 5em;
+
+  h2 {
+    color: #ca1e56;
+    font-size: 2em;
+  }
+
+  > section {
+    display: flex;
+  }
+
+  form {
+    box-sizing: border-box;
+    width: 60%;
+    padding: 2em 2em;
+    border-right: 5px solid #4c9ad2;
+  }
+
+  &.single-col form {
+    border-right: none;
+  }
+
+  form {
+    > div {
+      &.field {
+        display: flex;
+        padding: 0.5em 0em;
+        align-items: center;
+
+        > label {
+          box-sizing: border-box;
+          width: 50%;
+          padding-right: 1em;
+          text-align: right;
+          font-size: 1.15em;
+        }
+
+        > {
+          input, select {
+            box-sizing: border-box;
+            width: 50%;
+            padding-left: 1em;
+            font-size: 1em;
+            padding: 0.5em;
+            display: flex;
+          }
+        }
+
+        div {
+          &.field {
+            display: flex;
+            padding: 0.5em 0em;
+            align-items: center;
+            text-align: left !important;
+          }
+
+          &.select-profile {
+            padding: 0;
+          }
+
+          &.field {
+            div {
+              display: flex;
+              align-items: center;
+              justify-content: space-between;
+              width: 90%;
+              box-sizing: border-box;
+            }
+
+            .govhack-profile {
+              flex-direction: column;
+
+              div {
+                display: flex;
+                justify-content: space-between;
+                width: 100%;
+              }
+
+              input[type="file"] {
+                width: auto;
+              }
+            }
+
+            input {
+              box-sizing: border-box;
+              width: 10%;
+              padding-right: 1em;
+            }
+          }
+        }
+      }
+
+      > div {
+        box-sizing: border-box;
+        width: 50%;
+        padding-right: 1em;
+        text-align: right;
+        font-size: 1.15em;
+
+        em {
+          font-size: 0.85em;
+        }
+      }
+
+      &.actions {
+        display: flex;
+        justify-content: center;
+        margin-top: 1em;
+        margin-bottom: 1em;
+
+        input {
+          box-sizing: border-box;
+          font-size: 1.5em;
+          padding: 0.5em 1.5em;
+          -webkit-appearance: none;
+          -moz-appearance: none;
+          appearance: none;
+          background-color: #ca1e56;
+          color: #ddd;
+          font-weight: 700;
+          text-transform: uppercase;
+        }
+      }
+
+      &.field > div.field_with_errors > input {
+        padding-left: 1em;
+        font-size: 1em;
+        padding: 0.5em;
+        display: flex;
+        width: 100%;
+        border: 1px solid #C00;
+      }
+    }
+
+    #error_explanation {
+      h2 {
+        font-size: 1.25em;
+        color: #C00;
+      }
+
+      li {
+        color: #C00;
+        margin-left: 1.5em;
+      }
+    }
+  }
+
+  aside {
+    box-sizing: border-box;
+    width: 40%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: Roboto, arial, sans-serif;
+
+    a {
+      text-decoration: none;
+    }
+  }
+
+  #signgoogle {
+    height: 50px;
+    width: 240px;
+    background-color: #4285f4;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    text-align: center;
+    vertical-align: middle;
+    transition: background-color .218s,border-color .218s,box-shadow .218s;
+
+    &:hover {
+      -webkit-box-shadow: 0 0 3px 3px rgba(66, 133, 244, 0.3);
+      box-shadow: 0 0 3px 3px rgba(66, 133, 244, 0.3);
+    }
+
+    .wrapper {
+      height: 100%;
+      width: 100%;
+      border: 1px solid transparent;
+
+      .icon {
+        padding: 15px;
+        background-color: #fff;
+        border-radius: 1px;
+        float: left;
+
+        .icon-svg {
+          width: 18px;
+          height: 18px;
+        }
+      }
+
+      .message {
+        font-size: 16px;
+        line-height: 48px;
+        font-weight: 500;
+        letter-spacing: .21px;
+        margin-left: 6px;
+        margin-right: 6px;
+        vertical-align: top;
+        text-decoration: none !important;
+      }
+    }
+  }
+
+  &.signup #signgoogle .wrapper .message p:last-of-type, &.signin #signgoogle .wrapper .message p:first-of-type {
+    display: none;
+  }
+
+  &.single-col {
+    &.toc section, &.edit-account section, &.change-email-password section, &.manage-account section {
+      flex-direction: column;
+    }
+
+    &.edit-account section form {
+      width: 100%;
+    }
+
+    &.change-email-password {
+      section form {
+        width: 100%;
+      }
+
+      aside {
+        flex-direction: column;
+        width: 100%;
+
+        input {
+          box-sizing: border-box;
+          font-size: 1.1em;
+          padding: 0.25em 1.25em;
+          -webkit-appearance: none;
+          -moz-appearance: none;
+          appearance: none;
+          background-color: #C00;
+          color: #ddd;
+          font-weight: 700;
+          text-transform: uppercase;
+        }
+      }
+    }
+
+    &.manage-account section article {
+      padding: 2em 2em;
+    }
+
+    &.toc section {
+      article {
+        padding: 2em 2em;
+
+        h3:not(:first-of-type) {
+          margin-top: 1em;
+        }
+
+        p:not(:first-of-type) {
+          margin-top: 0.5em;
+        }
+
+        li {
+          list-style: square;
+          margin-left: 2em;
+        }
+      }
+
+      form {
+        width: 100%;
+        background: black;
+        color: white;
+
+        input[type='checkbox'] {
+          -webkit-appearance: none;
+          width: 30px;
+          height: 30px;
+          background: white;
+          border-radius: 5px;
+          border: 2px solid #555;
+
+          &:after {
+            content: "\2718";
+            color: red;
+          }
+
+          &:checked {
+            background: #ca1e56;
+
+            &:after {
+              content: "\2713";
+              color: white;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 1000px) {
+  .registration {
+    > section {
+      flex-direction: column;
+    }
+
+    form {
+      border-right: none;
+      width: 100%;
+    }
+
+    aside {
+      width: 100%;
+    }
+  }
+}
