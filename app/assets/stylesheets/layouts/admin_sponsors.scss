@@ -1,0 +1,22 @@
+.admin-sponsors figure {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  align-items: center;
+  padding: 1em 2em;
+  border: 1px solid #dde4e6;
+  transition: all 0.4s ease;
+  cursor: pointer;
+  width: 30%;
+  box-sizing: border-box;
+  height: calc(125px + 2em);
+  justify-content: center;
+
+  img {
+    display: inline-block;
+    width: auto !important;
+    height: auto !important;
+    max-height: 75px;
+    max-width: 100%;
+  }
+}
