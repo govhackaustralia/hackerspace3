@@ -1,0 +1,192 @@
+.dataset_page {
+  padding: 2em 5em;
+
+  h2 {
+    color: #4c9ad2;
+    font-size: 2em;
+  }
+
+  h3 {
+    font-size: 1.5em;
+    padding: 1em;
+  }
+
+  .dataportals {
+    padding: 1em;
+    padding-top: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+
+    a {
+      text-decoration: none;
+      text-align: center;
+      color: #ddd;
+      margin: 0.5em;
+
+      article {
+        background-image: url("/assets/cta.png");
+        background-size: cover;
+        background-position: center center;
+        width: 350px;
+        color: #ddd;
+        display: flex;
+        align-content: stretch;
+        align-items: stretch;
+      }
+
+      h4, p {
+        color: #ddd;
+      }
+
+      div {
+        padding: 2em;
+        padding-top: 5em;
+        width: 100%;
+        height: 100%;
+        min-height: 100px;
+        transition: all 0.4s ease;
+      }
+
+      &:nth-of-type(3n+1) div {
+        background-color: rgba(202, 30, 86, 0.5);
+        border-bottom: 1em solid #ca1e56;
+        overflow: hidden;
+      }
+
+      &:nth-of-type(3n+2) div {
+        background-color: rgba(76, 154, 210, 0.5);
+        border-bottom: 1em solid #4c9ad2;
+        overflow: hidden;
+      }
+
+      &:nth-of-type(3n+0) div {
+        background-color: rgba(113, 113, 113, 0.5);
+        border-bottom: 1em solid #717171;
+        overflow: hidden;
+      }
+
+      &:nth-of-type(3n+1) div:hover {
+        background-color: rgba(253, 37, 107, 0.5);
+        border-bottom: 1em solid #fd266c;
+        overflow: hidden;
+      }
+
+      &:nth-of-type(3n+2) div:hover {
+        background-color: rgba(94, 191, 261, 0.5);
+        border-bottom: 1em solid #6dbff9;
+        overflow: hidden;
+      }
+
+      &:nth-of-type(3n+0) div:hover {
+        background-color: rgba(161, 161, 161, 0.5);
+        border-bottom: 1em solid #a0a0a0;
+        overflow: hidden;
+      }
+    }
+  }
+
+  table {
+    box-sizing: border-box;
+    margin-top: 2em;
+    margin-left: 2em;
+    padding: 2em 2em;
+    border-collapse: collapse;
+
+    .dataseturl {
+      font-size: small;
+    }
+
+    border: 1px solid #ca1e56;
+    padding: 0.25em 1em;
+    box-sizing: border-box;
+  }
+
+  th, td {
+    border: 1px solid #ca1e56;
+    padding: 0.25em 1em;
+    box-sizing: border-box;
+  }
+
+  tr td {
+    &:nth-of-type(1), &:nth-of-type(3) {
+      width: 25%;
+    }
+
+    &:nth-of-type(2) {
+      width: 40%;
+    }
+
+    &:nth-of-type(4) {
+      width: 10%;
+    }
+  }
+
+  th {
+    background-color: #ca1e56;
+    color: #ddd;
+  }
+
+  form {
+    box-sizing: border-box;
+    padding: 2em 2em;
+
+    > div {
+      &.field {
+        display: flex;
+        padding: 0.5em 0em;
+        align-items: center;
+
+        > {
+          label {
+            box-sizing: border-box;
+            width: 50%;
+            padding-right: 1em;
+            text-align: right;
+            font-size: 1.15em;
+          }
+
+          input, textarea {
+            box-sizing: border-box;
+            width: 50%;
+            padding-left: 1em;
+            font-size: 1em;
+            padding: 0.5em;
+            display: flex;
+          }
+        }
+      }
+
+      &.actions {
+        display: flex;
+        justify-content: center;
+        margin-top: 1em;
+        margin-bottom: 1em;
+
+        input {
+          box-sizing: border-box;
+          font-size: 1.5em;
+          padding: 0.5em 1.5em;
+          -webkit-appearance: none;
+          -moz-appearance: none;
+          appearance: none;
+          background-color: #ca1e56;
+          color: #ddd;
+          font-weight: 700;
+          text-transform: uppercase;
+        }
+      }
+    }
+  }
+
+  #hiddendescription {
+    box-sizing: border-box;
+    width: 50%;
+    padding-left: 1em;
+    font-size: 1em;
+    padding: 0.5em;
+    display: none;
+  }
+}
