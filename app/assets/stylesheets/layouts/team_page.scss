@@ -1,0 +1,262 @@
+.team_page {
+  padding: 2em 5em;
+
+  h2 {
+    color: #4c9ad2;
+    font-size: 2em;
+  }
+
+  h3 {
+    font-size: 1.5em;
+    padding: 1em;
+  }
+
+  section {
+    padding: 0.25em 1.5em;
+
+    &.markdown {
+      img {
+        width: auto !important;
+        height: auto !important;
+      }
+
+      ul, li {
+        list-style: circle;
+        padding-left: 0.5em;
+      }
+
+      .sectionHeading {
+        color: #4c9ad2;
+      }
+
+      h1 {
+        font-size: 1.5em;
+        color: #ca1e56;
+      }
+
+      h2 {
+        font-size: 1.4em;
+        color: #ca1e56;
+      }
+
+      h3 {
+        font-size: 1.3em;
+        color: #ca1e56;
+      }
+
+      h4 {
+        font-size: 1.2em;
+        color: #ca1e56;
+      }
+
+      h5 {
+        font-size: 1.1em;
+        color: #ca1e56;
+      }
+
+      h6 {
+        font-size: 1em;
+        color: #ca1e56;
+      }
+
+      p {
+        padding: 0.5em 0.25em;
+      }
+    }
+
+    &.evidence {
+      padding: 2em 2em;
+      box-sizing: border-box;
+      display: flex;
+      width: 100%;
+      justify-content: center;
+
+      p {
+        width: 20%;
+        padding: 1em;
+      }
+
+      a {
+        box-sizing: border-box;
+        font-size: 1.0em;
+        padding: .5em .5em;
+        width: 100%;
+        display: block;
+        text-align: center;
+        margin-top: 0em;
+        background-color: #ca1e56;
+        color: #ddd;
+        font-weight: 700;
+        text-transform: uppercase;
+        text-decoration: none;
+      }
+
+      p a {
+        &.evidence_video {
+          background-color: #4c9ad2;
+        }
+
+        &.evidence_homepage {
+          background-color: #717171;
+        }
+      }
+    }
+  }
+
+  aside {
+    &.fav_judge {
+      display: flex;
+      width: 50%;
+      justify-content: flex-end;
+
+      p {
+        width: 50%;
+        box-sizing: border-box;
+        padding: 0.5em 0.5em;
+      }
+
+      a {
+        box-sizing: border-box;
+        font-size: 1.0em;
+        padding: 0em 0em;
+        width: 100%;
+        display: block;
+        text-align: center;
+        margin-top: 0em;
+        background-color: #ca1e56;
+        color: #ddd;
+        font-weight: 700;
+        text-transform: uppercase;
+        text-decoration: none;
+      }
+
+      p:nth-child(2) a {
+        background-color: #4c9ad2;
+      }
+    }
+
+    float: right;
+
+    a {
+      box-sizing: border-box;
+      font-size: 1.5em;
+      padding: 0.5em 1.5em;
+      width: 100%;
+      display: block;
+      text-align: center;
+      margin-top: 1em;
+      background-color: #ca1e56;
+      color: #ddd;
+      font-weight: 700;
+      text-transform: uppercase;
+      text-decoration: none;
+    }
+  }
+
+  form > div {
+    &.field {
+      display: flex;
+      padding: 0.5em 0em;
+      align-items: center;
+
+      > label {
+        box-sizing: border-box;
+        width: 50%;
+        padding-right: 1em;
+        text-align: right;
+        font-size: 1.15em;
+      }
+
+      > input {
+        box-sizing: border-box;
+        width: 50%;
+        padding-left: 1em;
+        font-size: 1em;
+        padding: 0.5em;
+        display: flex;
+      }
+    }
+
+    > div {
+      box-sizing: border-box;
+      width: 50%;
+      padding-right: 1em;
+      text-align: right;
+      font-size: 1.15em;
+
+      em {
+        font-size: 0.85em;
+      }
+    }
+  }
+}
+
+.registration form > div.field > select {
+  box-sizing: border-box;
+  width: 50%;
+  padding-left: 1em;
+  font-size: 1em;
+  padding: 0.5em;
+  display: flex;
+}
+
+.team_page {
+  form {
+    textarea {
+      width: 50%;
+      height: 5em;
+    }
+
+    select {
+      width: 50%;
+      padding: 0.5em;
+    }
+
+    > div {
+      &.field div.field {
+        display: flex;
+        padding: 0.5em 0em;
+        align-items: center;
+        text-align: left !important;
+      }
+
+      &.actions {
+        display: flex;
+        justify-content: center;
+        margin-top: 1em;
+        margin-bottom: 1em;
+
+        input {
+          box-sizing: border-box;
+          font-size: 1.5em;
+          padding: 0.5em 1.5em;
+          -webkit-appearance: none;
+          -moz-appearance: none;
+          appearance: none;
+          background-color: #ca1e56;
+          color: #ddd;
+          font-weight: 700;
+          text-transform: uppercase;
+        }
+      }
+
+      &.field > div.field_with_errors > input {
+        padding-left: 1em;
+        font-size: 1em;
+        padding: 0.5em;
+        display: flex;
+        width: 100%;
+        border: 1px solid #C00;
+      }
+    }
+  }
+
+  #hiddendescription {
+    box-sizing: border-box;
+    width: 50%;
+    padding-left: 1em;
+    font-size: 0.5em;
+    padding: 0.5em;
+    display: none;
+  }
+}

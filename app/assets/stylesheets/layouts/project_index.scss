@@ -1,0 +1,73 @@
+.project_index {
+  padding: 2em 5em;
+
+  h2 {
+    color: #4c9ad2;
+    font-size: 2em;
+  }
+
+  h3 {
+    font-size: 1.5em;
+    padding: 1em;
+  }
+
+  p {
+    padding: 0em 2.25em;
+  }
+
+  section.later {
+    padding: 1.5em 1.5em;
+  }
+
+  table {
+    box-sizing: border-box;
+    margin-top: 2em;
+    margin-left: 2em;
+    padding: 2em 2em;
+    border-collapse: collapse;
+
+    .dataseturl {
+      font-size: small;
+    }
+
+    width: 100%;
+    border: 1px solid #ca1e56;
+    padding: 0.25em 1em;
+    box-sizing: border-box;
+  }
+
+  th, td {
+    border: 1px solid #ca1e56;
+    padding: 0.25em 1em;
+    box-sizing: border-box;
+  }
+
+  th {
+    background-color: #ca1e56;
+    color: #ddd;
+  }
+
+  table a {
+    text-decoration: none;
+    color: #4c9ad2;
+  }
+
+  aside {
+    float: right;
+
+    a {
+      box-sizing: border-box;
+      font-size: 1.5em;
+      padding: 0.5em 1.5em;
+      width: 100%;
+      display: block;
+      text-align: center;
+      margin-top: 1em;
+      background-color: #ca1e56;
+      color: #ddd;
+      font-weight: 700;
+      text-transform: uppercase;
+      text-decoration: none;
+    }
+  }
+}
