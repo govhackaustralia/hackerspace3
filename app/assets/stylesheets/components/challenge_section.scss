@@ -1,0 +1,61 @@
+section {
+  &.challenge {
+    padding: 0.5em 1em;
+    box-sizing: border-box;
+    display: flex;
+
+    article {
+      width: 60%;
+      box-sizing: border-box;
+
+      h4 {
+        color: #4c9ad2;
+        font-size: 1.3em;
+      }
+
+      h5 {
+        color: #ca1e56;
+        font-weight: 400;
+        font-style: italic;
+        font-size: 1.25em;
+        padding: 0.5em 0.5em;
+      }
+    }
+
+    aside {
+      width: 40%;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      align-content: center;
+      align-items: flex-start;
+
+      figure {
+        display: flex;
+        flex-direction: column;
+        align-content: center;
+        align-items: center;
+        padding: 1em 2em;
+        border: 1px solid #dde4e6;
+        transition: all 0.4s ease;
+        cursor: pointer;
+        width: 50%;
+        box-sizing: border-box;
+        height: calc(75px + 2em);
+        justify-content: center;
+
+        &:hover {
+          background-color: #fff;
+        }
+
+        img {
+          display: inline-block;
+          width: auto !important;
+          height: auto !important;
+          max-height: 75px;
+          max-width: 100%;
+        }
+      }
+    }
+  }
+}
