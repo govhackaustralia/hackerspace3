@@ -19,7 +19,7 @@
             - count = @counter.count(challenge)
             | #{pluralize count, 'team has', plural: 'teams have' }
             entered this challenge across all checkpoints that have passed.
-        %aside.sponsors
+        %aside
           - if challenge.challenge_sponsorships.present?
             - challenge.challenge_sponsorships.each do |sponsorship|
               %figure
