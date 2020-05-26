@@ -3,4 +3,4 @@
   %section.events
     - events.each do |event|
       - unless event.end_time.blank?
-        = link_to (render partial: "events/event_single", locals: { event: event } ), event_path(event.identifier)
+        = link_to (render partial: "events/event_tile", locals: { event: event } ), event_path(event.identifier)
