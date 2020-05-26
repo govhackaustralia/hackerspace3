@@ -23,90 +23,6 @@
       margin-top: 0.5em;
       font-size: 1.25em;
     }
-
-    &.events {
-      padding: 2em 2em;
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      align-content: center;
-      align-items: center;
-
-      article {
-        font-size: 1.5em;
-        text-align: center;
-        line-height: 1.2em;
-        width: 250px;
-        margin: 0.5em 0.5em;
-        background-image: url("/assets/cta.png");
-        background-size: cover;
-        background-position: center center;
-        display: flex;
-        align-content: stretch;
-        align-items: stretch;
-
-        div {
-          padding: 2.5em 0.5em;
-          width: 100%;
-          height: 100%;
-          min-height: 250px;
-          transition: all 0.4s ease;
-        }
-      }
-
-      a {
-        &:nth-of-type(3n+0) div {
-          background-color: rgba(202, 30, 86, 0.5);
-          border-bottom: 1em solid #ca1e56;
-        }
-
-        &:nth-of-type(3n+1) div {
-          background-color: rgba(76, 154, 210, 0.5);
-          border-bottom: 1em solid #4c9ad2;
-        }
-
-        &:nth-of-type(3n+2) div {
-          background-color: rgba(113, 113, 113, 0.5);
-          border-bottom: 1em solid #717171;
-        }
-      }
-
-      article {
-        h3, h4 {
-          color: #ddd;
-          margin-bottom: 0.5em;
-        }
-      }
-
-      a {
-        text-decoration: none;
-      }
-
-      p {
-        color: #ddd;
-      }
-
-      &.connections p {
-        display: none;
-      }
-
-      a {
-        &:nth-of-type(3n+0) div:hover {
-          background-color: rgba(253, 37, 107, 0.5);
-          border-bottom: 1em solid #fd266c;
-        }
-
-        &:nth-of-type(3n+1) div:hover {
-          background-color: rgba(94, 191, 261, 0.5);
-          border-bottom: 1em solid #6dbff9;
-        }
-
-        &:nth-of-type(3n+2) div:hover {
-          background-color: rgba(161, 161, 161, 0.5);
-          border-bottom: 1em solid #a0a0a0;
-        }
-      }
-    }
   }
 
   > section {
@@ -117,10 +33,6 @@
 @media only screen and (max-width: 900px) {
   .events_page {
     padding: 1em 1em;
-
-    section.events article {
-      margin: .5em .5em;
-    }
 
     > section {
       padding: .5em .5em;
