@@ -9,19 +9,6 @@
     - next if (challenges = @region_challenges[region.id]).empty?
     %h3= region.name
     - challenges.each do |challenge|
-      %section.challenge
-        %article
-          %h4= challenge.name
-          - unless challenge.short_desc.blank?
-            %h5= challenge.short_desc
-          %p
-            = link_to 'Go to Challenge', challenge_path(challenge.identifier)
-            - count = @counter.count(challenge)
-            | #{pluralize count, 'team has', plural: 'teams have' }
-            entered this challenge across all checkpoints that have passed.
-        %aside
-          - if challenge.challenge_sponsorships.present?
-            - challenge.challenge_sponsorships.each do |sponsorship|
-              %figure
-                - sponsor = sponsorship.sponsor
-                = link_to (image_tag(sponsor.logo.attached? ? url_for(sponsor.logo) : 'default_profile_pic.png')), sponsor.website, target: '_blank'
+      = render 'challenge_panel',                    |
+        challenge: challenge,                        |
+        entry_count: @entry_counter.count(challenge)

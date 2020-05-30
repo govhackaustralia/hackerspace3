@@ -4,4 +4,10 @@ module ChallengesHelper
 
     challenges_path
   end
+
+  def sponsor_logo_asset_path(sponsor)
+    return url_for(sponsor.logo) if sponsor.logo.attached?
+
+    'default_profile_pic.png'
+  end
 end
