@@ -1,30 +1,38 @@
 class PublishedEntryCounter
+  attr_reader :competition, :challenge
+
   def initialize(competition)
-    @challenges = competition.challenges.preload :published_entries
-    @region_to_passed = {}
-    competition.regions.each do |region|
-      @region_to_passed[region.id] = competition.passed_checkpoint_ids(
-        region.time_zone
-      )
-    end
+    @competition = competition
   end
 
   def count(challenge)
-    passed_entries = []
-    checkpoint_ids = @region_to_passed[challenge.region_id]
-    challenge_entries(challenge).each do |entry|
-      passed_entries << entry if checkpoint_ids.include? entry.checkpoint_id
+    @challenge = challenge
+    challenge_entries.count do |entry|
+      region_passed_checkpoints.include? entry.checkpoint_id
     end
-    passed_entries.length
   end
 
   private
 
-  def challenge_entries(challenge)
-    @challenges.each do |c|
-      next unless c == challenge
+  def challenge_entries
+    challenges.detect { |c| c == challenge  }.published_entries
+  end
 
-      return c.published_entries
+  def challenges
+    @challenges ||= competition.challenges.preload :published_entries
+  end
+
+  def region_passed_checkpoints
+    compute_region_passed_checkpoints unless @region_passed_checkpoints.is_a? Hash
+    @region_passed_checkpoints[challenge.region_id]
+  end
+
+  def compute_region_passed_checkpoints
+    @region_passed_checkpoints = {}
+    competition.regions.each do |region|
+      @region_passed_checkpoints[region.id] = competition.passed_checkpoint_ids(
+        region.time_zone
+      )
     end
   end
 end
