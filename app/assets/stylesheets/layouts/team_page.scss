@@ -13,44 +13,6 @@
 
   section {
     padding: 0.25em 1.5em;
-
-    &.evidence {
-      padding: 2em 2em;
-      box-sizing: border-box;
-      display: flex;
-      width: 100%;
-      justify-content: center;
-
-      p {
-        width: 20%;
-        padding: 1em;
-      }
-
-      a {
-        box-sizing: border-box;
-        font-size: 1.0em;
-        padding: .5em .5em;
-        width: 100%;
-        display: block;
-        text-align: center;
-        margin-top: 0em;
-        background-color: #ca1e56;
-        color: #ddd;
-        font-weight: 700;
-        text-transform: uppercase;
-        text-decoration: none;
-      }
-
-      p a {
-        &.evidence_video {
-          background-color: #4c9ad2;
-        }
-
-        &.evidence_homepage {
-          background-color: #717171;
-        }
-      }
-    }
   }
 
   aside {
