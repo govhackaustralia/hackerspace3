@@ -2,7 +2,7 @@
   = render 'index_header'
   - if @challenges.any?
     %p= link_to 'Download CSV', table_challenges_path(format: 'csv'), class: 'download-csv'
-    %table#challenges_table_table{'data-turbolinks' => 'false'}
+    %table.projects-table#challenges_table_table{'data-turbolinks' => 'false'}
       %thead
         %tr
           %th Region

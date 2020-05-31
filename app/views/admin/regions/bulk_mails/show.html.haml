@@ -17,7 +17,7 @@
     %p#edit= link_to 'Edit Bulk Mail', edit_admin_region_bulk_mail_path(@region, @bulk_mail)
     %p#configure= link_to 'Configure Mail Orders', edit_admin_region_bulk_mail_path(@region, @bulk_mail, team_orders: true)
   - if @team_orders.present? && @team_orders.where(request_type: NONE).count != @team_orders.count
-    %table#correspondences{'data-bulk-mail-id' => @bulk_mail.id}
+    %table.projects-table#correspondences{'data-bulk-mail-id' => @bulk_mail.id}
       %tr
         %th Team Name
         %th Project Name

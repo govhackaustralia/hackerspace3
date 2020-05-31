@@ -18,7 +18,7 @@
     = form_for [:admin, @bulk_mail, @user_order] do |form|
       = form.select(:request_type, options_for_select(USER_ORDER_QUERIES, @user_order.request_type))
       = form.submit 'Amend Order'
-  %table#correspondences{'data-bulk-mail-id' => @bulk_mail.id}
+  %table.projects-table#correspondences{'data-bulk-mail-id' => @bulk_mail.id}
     %tr
       %th Status
       %th Display Name

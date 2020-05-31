@@ -2,7 +2,7 @@
 %main.project_index
   %h2= yield :title
   %p= link_to 'New Region', new_admin_competition_region_path, class: 'download-csv'
-  %table#admin-regions-table{'data-turbolinks' => 'false'}
+  %table.projects-table#admin-regions-table{'data-turbolinks' => 'false'}
     %thead
       %th Name
       %th Category

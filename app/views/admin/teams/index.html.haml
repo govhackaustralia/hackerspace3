@@ -5,7 +5,7 @@
   %p= link_to 'Download CSV (Every Team Member)', admin_competition_teams_path(@competition, format: 'csv', category: 'members'), class: 'download-csv'
   - if current_user.site_admin?(@competition)
     %p= link_to 'Download CSV (Team Entries)', admin_competition_teams_path(@competition, format: 'csv', category: 'entries'), class: 'download-csv'
-  %table#admin-teams-table{'data-turbolinks' => 'false'}
+  %table.projects-table#admin-teams-table{'data-turbolinks' => 'false'}
     %thead
       %th Project
       %th Team

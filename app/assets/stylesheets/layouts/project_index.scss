@@ -15,39 +15,6 @@
     padding: 0em 2.25em;
   }
 
-  table {
-    box-sizing: border-box;
-    margin-top: 2em;
-    margin-left: 2em;
-    padding: 2em 2em;
-    border-collapse: collapse;
-
-    .dataseturl {
-      font-size: small;
-    }
-
-    width: 100%;
-    border: 1px solid #ca1e56;
-    padding: 0.25em 1em;
-    box-sizing: border-box;
-  }
-
-  th, td {
-    border: 1px solid #ca1e56;
-    padding: 0.25em 1em;
-    box-sizing: border-box;
-  }
-
-  th {
-    background-color: #ca1e56;
-    color: #ddd;
-  }
-
-  table a {
-    text-decoration: none;
-    color: #4c9ad2;
-  }
-
   aside {
     float: right;
 

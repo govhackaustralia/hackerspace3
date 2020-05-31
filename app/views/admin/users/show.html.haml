@@ -26,7 +26,7 @@
       = link_to 'Confirm User?', confirm_admin_user_path(@user), method: :post
 
   %h3 Assignments for #{@user.display_name}
-  %table#admin-users-show-table{'data-turbolinks' => 'false'}
+  %table.projects-table#admin-users-show-table{'data-turbolinks' => 'false'}
     %thead
       %th Competition
       %th Assignable Type
