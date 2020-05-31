@@ -1,8 +1,9 @@
 class PublishedEntryCounter
-  attr_reader :competition, :challenge
+  attr_reader :competition, :challenge, :challenge_ids
 
-  def initialize(competition)
+  def initialize(competition, challenge_ids: [])
     @competition = competition
+    @challenge_ids = challenge_ids
   end
 
   def count(challenge)
@@ -19,7 +20,11 @@ class PublishedEntryCounter
   end
 
   def challenges
-    @challenges ||= competition.challenges.preload :published_entries
+    @challenges ||= if challenge_ids.any?
+      competition.challenges.where(id: challenge_ids).preload :published_entries
+    else
+      competition.challenges.preload :published_entries
+    end
   end
 
   def region_passed_checkpoints
