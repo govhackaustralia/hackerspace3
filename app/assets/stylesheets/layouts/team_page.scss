@@ -65,45 +65,6 @@
     }
   }
 
-  form > div {
-    &.field {
-      display: flex;
-      padding: 0.5em 0em;
-      align-items: center;
-
-      > label {
-        box-sizing: border-box;
-        width: 50%;
-        padding-right: 1em;
-        text-align: right;
-        font-size: 1.15em;
-      }
-
-      > input {
-        box-sizing: border-box;
-        width: 50%;
-        padding-left: 1em;
-        font-size: 1em;
-        padding: 0.5em;
-        display: flex;
-      }
-    }
-
-    > div {
-      box-sizing: border-box;
-      width: 50%;
-      padding-right: 1em;
-      text-align: right;
-      font-size: 1.15em;
-
-      em {
-        font-size: 0.85em;
-      }
-    }
-  }
-}
-
-.team_page {
   form {
     textarea {
       width: 50%;
@@ -116,11 +77,14 @@
     }
 
     > div {
-      &.field div.field {
-        display: flex;
-        padding: 0.5em 0em;
-        align-items: center;
-        text-align: left !important;
+      box-sizing: border-box;
+      width: 50%;
+      padding-right: 1em;
+      text-align: right;
+      font-size: 1.15em;
+
+      em {
+        font-size: 0.85em;
       }
 
       &.actions {
@@ -143,13 +107,37 @@
         }
       }
 
-      &.field > div.field_with_errors > input {
-        padding-left: 1em;
-        font-size: 1em;
-        padding: 0.5em;
+      &.field {
         display: flex;
-        width: 100%;
-        border: 1px solid #C00;
+        padding: 0.5em 0em;
+        align-items: center;
+        text-align: left !important;
+
+        > label {
+          box-sizing: border-box;
+          width: 50%;
+          padding-right: 1em;
+          text-align: right;
+          font-size: 1.15em;
+        }
+
+        > input {
+          box-sizing: border-box;
+          width: 50%;
+          padding-left: 1em;
+          font-size: 1em;
+          padding: 0.5em;
+          display: flex;
+        }
+
+        > div.field_with_errors > input {
+          padding-left: 1em;
+          font-size: 1em;
+          padding: 0.5em;
+          display: flex;
+          width: 100%;
+          border: 1px solid #C00;
+        }
       }
     }
   }
