@@ -1,60 +1,48 @@
 - unless @event.email.blank?
   .event-info
     %h4 Email:
-    %p
-      = @event.email
+    %p= @event.email
 - unless @event.twitter.blank?
   .event-info
     %h4 Twitter:
-    %p
-      = @event.twitter
+    %p= @event.twitter
 - unless @event.address.blank?
   .event-info
     %h4 Address:
-    %p
-      = simple_format(@event.address)
-- if @event.event_type == "Connection" || @event.event_type == AWARD_EVENT
+    %p= simple_format(@event.address)
+- if [CONNECTION_EVENT, AWARD_EVENT].include? @event.event_type
   - unless @event.start_time.blank?
     .event-info
       %h4 Date:
-      %p
-        = @event.start_time.strftime("%e %B %Y")
+      %p= @event.start_time.strftime("%e %B %Y")
     .event-info
       %h4 Start time:
-      %p
-        = @event.start_time.strftime("%I:%M%p")
+      %p= @event.start_time.strftime("%I:%M%p")
   - unless @event.end_time.blank?
     .event-info
       %h4 End time:
-      %p
-        = @event.end_time.strftime("%I:%M%p")
+      %p= @event.end_time.strftime("%I:%M%p")
 - unless @event.accessibility.blank?
   .event-info
     %h4 Accessibility:
-    %p
-      = simple_format(@event.accessibility)
+    %p= simple_format(@event.accessibility)
 - unless @event.youth_support.blank?
   .event-info
     %h4 Youth Support:
-    %p
-      = simple_format(@event.youth_support)
+    %p= simple_format(@event.youth_support)
 - unless @event.parking.blank?
   .event-info
     %h4 Parking:
-    %p
-      = simple_format(@event.parking)
+    %p= simple_format(@event.parking)
 - unless @event.public_transport.blank?
   .event-info
     %h4 Public Transport:
-    %p
-      = simple_format(@event.public_transport)
+    %p= simple_format(@event.public_transport)
 - unless @event.operation_hours.blank?
   .event-info
     %h4 Operating hours:
-    %p
-      = simple_format(@event.operation_hours)
+    %p= simple_format(@event.operation_hours)
 - unless @event.catering.blank?
   .event-info
     %h4 Catering:
-    %p
-      = simple_format(@event.catering)
+    %p= simple_format(@event.catering)
