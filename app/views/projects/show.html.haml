@@ -13,22 +13,18 @@
     - else
       %div This team does not currently have any datasets.
   %h3 Challenges
-  %section.markdown
-    - if @passed_checkpoint_ids.present?
-      - if @entries_to_display.present?
-        - @entries_to_display.each do |entry|
-          %section.markdown
-            %h4= entry.challenge.name
-            %p
-              %strong> Region
-              \: #{entry.challenge.region.name}
-            = link_to 'Challenge', challenge_path(entry.challenge.identifier)
-      - else
-        %p There are no challenges to display for this team as yet.
+  - if @passed_checkpoint_ids.present?
+    - if @entries_to_display.present?
+      - @entries_to_display.each do |entry|
+        = render 'challenges/challenge_panel',               |
+          challenge: entry.challenge,                        |
+          entry_count: @entry_counter.count(entry.challenge)
     - else
-      %p
-        Check back here once the first checkpoint passes to see the challenges
-        this team has entered.
+      %p There are no challenges to display for this team as yet.
+  - else
+    %p
+      Check back here once the first checkpoint passes to see the challenges
+      this team has entered.
 %p= link_to 'Back to Projects', projects_path
 - if current_user&.admin_privileges? @competition
   %p= link_to "Administer #{@current_project.team_name}", admin_competition_team_path(@competition, @team)

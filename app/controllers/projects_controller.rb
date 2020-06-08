@@ -17,7 +17,10 @@ class ProjectsController < ApplicationController
     @passed_checkpoint_ids = @competition.passed_checkpoint_ids @time_zone
     @entries_to_display = @team.entries.where(
       checkpoint: @passed_checkpoint_ids
-    ).preload challenge: :region
+    ).preload(challenge: :sponsors)
+    @entry_counter = PublishedEntryCounter.new(@competition,
+      challenge_ids: @entries_to_display.pluck(:challenge_id)
+    )
     user_records_show if user_signed_in?
   end
 
