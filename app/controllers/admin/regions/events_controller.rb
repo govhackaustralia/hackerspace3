@@ -54,7 +54,7 @@ class Admin::Regions::EventsController < ApplicationController
   def update
     @event = Event.find params[:id]
     if @event.update event_params
-      redirect_to admin_region_event_path @event.region_id, @event
+      redirect_to admin_region_event_path @event.region, @event
     else
       flash[:alert] = @event.errors.full_messages.to_sentence
       @region = @event.region
@@ -65,7 +65,7 @@ class Admin::Regions::EventsController < ApplicationController
   private
 
   def check_for_privileges
-    @region = Region.find params[:region_id]
+    @region = @competition.regions.find_by_identifier params[:region_id]
     @competition = @region.competition
     return if current_user.event_privileges? @competition
 

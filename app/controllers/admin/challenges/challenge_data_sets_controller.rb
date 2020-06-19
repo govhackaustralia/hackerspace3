@@ -19,7 +19,7 @@ class Admin::Challenges::ChallengeDataSetsController < ApplicationController
     @challenge_data_set = ChallengeDataSet.find params[:id]
     @challenge_data_set.destroy
     flash[:notice] = 'Challenge Data Set Destroyed'
-    redirect_to admin_region_challenge_path @challenge.region_id, @challenge
+    redirect_to admin_region_challenge_path @challenge.region, @challenge
   end
 
   private
@@ -39,7 +39,7 @@ class Admin::Challenges::ChallengeDataSetsController < ApplicationController
   def handle_create_save
     if @challenge_data_set.save
       flash[:notice] = 'New Challenge Data Set Added'
-      redirect_to admin_region_challenge_path(@challenge.region_id, @challenge)
+      redirect_to admin_region_challenge_path(@challenge.region, @challenge)
     else
       flash[:alert] = @challenge_data_set.errors.full_messages.to_sentence
       render :new

@@ -18,7 +18,7 @@ class Admin::Regions::ChallengesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'should get new' do
-    get new_admin_region_challenge_url @challenge
+    get new_admin_region_challenge_url @region, @challenge
     assert_response :success
   end
 

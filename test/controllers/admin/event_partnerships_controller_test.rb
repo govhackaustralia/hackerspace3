@@ -17,7 +17,7 @@ class Admin::EventPartnershipsControllerTest < ActionDispatch::IntegrationTest
     assert_difference 'EventPartnership.count' do
       post admin_event_event_partnerships_url @event, params: { event_partnership: { sponsor_id: 1 } }
     end
-    assert_redirected_to admin_region_event_url @event.region_id, @event
+    assert_redirected_to admin_region_event_url @event.region, @event
   end
 
   test 'should delete destroy' do

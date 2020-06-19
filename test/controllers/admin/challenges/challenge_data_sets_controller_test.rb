@@ -18,7 +18,7 @@ class Admin::Challenges::ChallengeDataSetsControllerTest < ActionDispatch::Integ
     assert_difference 'ChallengeDataSet.count' do
       post admin_challenge_challenge_data_sets_url @challenge, params: { challenge_data_set: { data_set_id: @data_set.id } }
     end
-    assert_redirected_to admin_region_challenge_url @challenge.region_id, @challenge
+    assert_redirected_to admin_region_challenge_url @challenge.region, @challenge
   end
 
   test 'should post create fail' do
@@ -33,6 +33,6 @@ class Admin::Challenges::ChallengeDataSetsControllerTest < ActionDispatch::Integ
     assert_difference 'ChallengeDataSet.count', -1 do
       delete admin_challenge_challenge_data_set_url @challenge, @challenge_data_set
     end
-    assert_redirected_to admin_region_challenge_url @challenge.region_id, @challenge
+    assert_redirected_to admin_region_challenge_url @challenge.region, @challenge
   end
 end

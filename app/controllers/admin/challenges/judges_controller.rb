@@ -31,7 +31,7 @@ class Admin::Challenges::JudgesController < ApplicationController
   def save_new_judge
     if @judge.save
       flash[:notice] = 'New judge assigned'
-      redirect_to admin_region_challenge_path @challenge.region_id, @challenge
+      redirect_to admin_region_challenge_path @challenge.region, @challenge
     else
       @judge.errors.full_messages.to_sentence
       render :new

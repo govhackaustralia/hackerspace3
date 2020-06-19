@@ -34,7 +34,7 @@ class Admin::Regions::SponsorshipsController < ApplicationController
   end
 
   def check_for_privileges
-    @region = Region.find params[:region_id]
+    @region = @competition.regions.find_by_identifier params[:region_id]
     @competition = @region.competition
     return if current_user.sponsor_privileges? @competition
 

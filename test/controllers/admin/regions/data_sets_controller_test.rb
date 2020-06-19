@@ -13,7 +13,7 @@ class Admin::Regions::DataSetsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'should get new' do
-    get new_admin_region_data_set_url @data_set
+    get new_admin_region_data_set_url @region, @data_set
     assert_response :success
   end
 

@@ -7,7 +7,7 @@ class Admin::RegionsController < ApplicationController
   end
 
   def show
-    @region = Region.find params[:id]
+    @region = @competition.regions.find_by_identifier params[:id]
     @parent = @region.parent
     @director = @region.director
     @supports_count = @region.supports.count
@@ -32,7 +32,7 @@ class Admin::RegionsController < ApplicationController
   end
 
   def edit
-    @region = Region.find params[:id]
+    @region = @competition.regions.find_by_identifier params[:id]
   end
 
   def update
@@ -67,7 +67,7 @@ class Admin::RegionsController < ApplicationController
   end
 
   def retrieve_region_and_comp
-    @region = Region.find params[:id]
+    @region = @competition.regions.find_by_identifier params[:id]
     @competition = @region.competition
   end
 

@@ -20,7 +20,7 @@ class Admin::Challenges::JudgesControllerTest < ActionDispatch::IntegrationTest
     assert_difference 'Assignment.count' do
       post admin_challenge_judges_url @challenge, params: { assignment: { user_id: @user.id } }
     end
-    assert_redirected_to admin_region_challenge_url @challenge.region_id, @challenge
+    assert_redirected_to admin_region_challenge_url @challenge.region, @challenge
   end
 
   test 'should post create fail' do

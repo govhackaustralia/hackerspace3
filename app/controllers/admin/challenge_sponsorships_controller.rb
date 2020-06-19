@@ -18,7 +18,7 @@ class Admin::ChallengeSponsorshipsController < ApplicationController
     @sponsorship = ChallengeSponsorship.find params[:id]
     @sponsorship.destroy
     flash[:notice] = 'Challenge Sponsorship Destroyed'
-    redirect_to admin_region_challenge_path @challenge.region_id, @challenge
+    redirect_to admin_region_challenge_path @challenge.region, @challenge
   end
 
   private
@@ -46,7 +46,7 @@ class Admin::ChallengeSponsorshipsController < ApplicationController
   def handle_create
     if @challenge_sponsorship.save
       flash[:notice] = 'New challenge sponsorship created'
-      redirect_to admin_region_challenge_path(@challenge.region_id, @challenge)
+      redirect_to admin_region_challenge_path(@challenge.region, @challenge)
     else
       flash.now[:alert] = @challenge_sponsorship.errors.full_messages.to_sentence
       render :new

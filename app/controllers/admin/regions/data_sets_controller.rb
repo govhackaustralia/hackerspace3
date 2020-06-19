@@ -38,7 +38,7 @@ class Admin::Regions::DataSetsController < ApplicationController
   private
 
   def check_for_privileges
-    @region = Region.find params[:region_id]
+    @region = @competition.regions.find_by_identifier params[:region_id]
     @competition = @region.competition
     return if current_user.region_privileges? @competition
 

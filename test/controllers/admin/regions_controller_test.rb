@@ -54,8 +54,8 @@ class Admin::RegionsControllerTest < ActionDispatch::IntegrationTest
     patch admin_competition_region_url @competition, @region, params: {
       region: { name: 'Updated' }
     }
-    assert_redirected_to admin_competition_region_url @competition, @region
     @region.reload
+    assert_redirected_to admin_competition_region_url @competition, @region
     assert @region.name == 'Updated'
   end
 

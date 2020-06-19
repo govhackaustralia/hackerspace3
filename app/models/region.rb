@@ -54,6 +54,12 @@ class Region < ApplicationRecord
     in: VALID_TIME_ZONES.map(&:name)
   }
 
+  after_save_commit :update_identifier
+
+  def to_param
+    identifier
+  end
+
   # Returns the user record for the Director of a region.
   # ENHANCEMENT: Move into active record associations.
   def director
@@ -152,5 +158,10 @@ class Region < ApplicationRecord
     return if parent.national?
 
     errors.add :parent, 'Only national can be parent of regional'
+  end
+
+  # Generates a unique name and updates the identifier field.
+  def update_identifier
+    update_columns identifier: uri_pritty(name)
   end
 end

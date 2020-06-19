@@ -23,7 +23,7 @@ class Admin::Regions::EventsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'should get new' do
-    get new_admin_region_event_url @event
+    get new_admin_region_event_url @region, @event
     assert_response :success
   end
 

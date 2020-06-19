@@ -7,6 +7,7 @@ one:
   time_zone: ''
   competition_id: 1
   category: National
+  identifier: australia
 
 two:
   id: 2
@@ -15,6 +16,7 @@ two:
   time_zone: Brisbane
   competition_id: 1
   category: Regional
+  identifier: queensland
 
 three:
   id: 3
@@ -23,6 +25,7 @@ three:
   time_zone:
   competition_id: 1
   category: International
+  identifier: international
 
 four:
   id: 4
@@ -31,3 +34,4 @@ four:
   time_zone: Wellington
   competition_id: 1
   category: National
+  identifier: new_zealand

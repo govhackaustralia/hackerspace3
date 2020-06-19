@@ -2,18 +2,18 @@ class Admin::Regions::AssignmentsController < Admin::AssignmentsController
   before_action :authenticate_user!
 
   def index
-    @assignable = Region.find(params[:region_id])
+    @assignable = @competition.regions.find_by_identifier params[:region_id]
     @competition = @assignable.competition
     handle_index
   end
 
   def new
-    @assignable = Region.find(params[:region_id])
+    @assignable = @competition.regions.find_by_identifier params[:region_id]
     handle_new
   end
 
   def create
-    @assignable = Region.find(params[:region_id])
+    @assignable = @competition.regions.find_by_identifier params[:region_id]
     handle_create
   end
 

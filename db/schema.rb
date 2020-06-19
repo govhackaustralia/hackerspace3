@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_15_214822) do
+ActiveRecord::Schema.define(version: 2020_06_17_220301) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -301,7 +301,9 @@ ActiveRecord::Schema.define(version: 2020_05_15_214822) do
     t.datetime "award_release"
     t.integer "competition_id"
     t.string "category"
+    t.string "identifier"
     t.index ["competition_id"], name: "index_regions_on_competition_id"
+    t.index ["identifier"], name: "index_regions_on_identifier"
     t.index ["parent_id"], name: "index_regions_on_parent_id"
   end
 
