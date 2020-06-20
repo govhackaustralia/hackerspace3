@@ -39,6 +39,7 @@ class RegionTest < ActiveSupport::TestCase
     assert @national.sponsorships.include? @sponsorship
     assert @national.sponsorship_types.include? @sponsorship_type
     assert @national.challenges.include? @challenge
+    assert @national.approved_challenges.include? @challenge
     assert @national.data_sets.include? @data_set
     assert @national.bulk_mails.include? @bulk_mail
     assert @national.support_assignments.include? @support_assignment

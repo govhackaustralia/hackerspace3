@@ -1,14 +1,9 @@
 %main.challenge_index
   = render 'index_header'
-  = form_tag challenges_path, method: :get do
-    = search_field_tag :term, params[:term]
-    = submit_tag 'Search'
-  %p= link_to 'Clear Search', challenges_path
   - @regions.each do |region|
-    - next unless @competition.started?(region.time_zone) || region.international?
-    - next if (challenges = @region_challenges[region.id]).empty?
+    - next unless @checker.show?(region)
     %h3= region.name
-    - challenges.each do |challenge|
+    - region.approved_challenges.each do |challenge|
       = render 'challenge_panel',                    |
         challenge: challenge,                        |
         entry_count: @entry_counter.count(challenge)

@@ -27,6 +27,7 @@ class Region < ApplicationRecord
   has_many :sponsorships, as: :sponsorable, dependent: :destroy
   has_many :sponsorship_types, through: :sponsorships
   has_many :challenges, dependent: :destroy
+  has_many :approved_challenges, -> { approved.order(name: :asc) }, class_name: 'Challenge'
   has_many :data_sets, dependent: :destroy
   has_many :bulk_mails, as: :mailable, dependent: :destroy
   has_many :support_assignments, -> { region_supports }, class_name: 'Assignment', as: :assignable

@@ -5,12 +5,11 @@ class ChallengesController < ApplicationController
   before_action :check_competition_landing_page_index!, only: :landing_page
 
   def index
-    @challenges = @competition.challenges.approved
-      .order(:name)
-      .preload(:sponsors)
-    @regions = @competition.regions.order(:category).order :name
+    @regions = @competition.regions
+      .order(:category, :name)
+      .preload(approved_challenges: :sponsors)
     @entry_counter = PublishedEntryCounter.new @competition
-    filter_challenges
+    @checker = ShowChallengesChecker.new @competition
   end
 
   def table
@@ -141,16 +140,6 @@ class ChallengesController < ApplicationController
       @competition.passed_checkpoint_ids(LAST_TIME_ZONE)
     else
       @competition.passed_checkpoint_ids(region.time_zone)
-    end
-  end
-
-  def filter_challenges
-    @region_challenges = {}
-    @regions.each { |r| @region_challenges[r.id] = [] }
-    if params[:term].present?
-      @challenges.each { |challenge| search_challenge_string(challenge, params[:term]) }
-    else
-      @challenges.each { |challenge| @region_challenges[challenge.region_id] << challenge }
     end
   end
 
