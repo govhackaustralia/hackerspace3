@@ -1,0 +1,39 @@
+- content_for :title,"#{@region.name} Challenges"
+%main.challenge_index
+  %h2= yield :title
+  - @challenges.each do |challenge|
+    = render 'challenges/challenge_panel',                    |
+      challenge: challenge,                                   |
+      entry_count: @entry_counter.count(challenge)
+  - if @nation_wides.any?
+    %h3 Nation Wide (#{@national.name}) Challenges
+    - @nation_wides.each do |challenge|
+      = render 'challenges/challenge_panel',                  |
+        challenge: challenge,                                 |
+        entry_count: @entry_counter.count(challenge)
+  - if @national.present?
+    - unless @region.national?
+      %h3 #{@national.name} (National) Challenges
+      - @national.challenges.each do |challenge|
+        = render 'challenges/challenge_panel',                |
+          challenge: challenge,                               |
+          entry_count: @entry_counter.count(challenge)
+  - unless @region.international?
+    %h3 International Challenges
+    - @international.challenges.each do |challenge|
+      = render 'challenges/challenge_panel',                  |
+        challenge: challenge,                                 |
+        entry_count: @entry_counter.count(challenge)
+  - if @national_regions.any?
+    %h3 National Regions
+    %section.tiles
+      - @national_regions.each do |region|
+        - next unless @checker.show?(region)
+        = link_to (render 'challenges/region_tile', region: region ), region_path(region)
+  - if @regions.any?
+    %h3 Regions
+    %section.tiles
+      - @regions.each do |region|
+        - next unless @checker.show?(region)
+        = link_to (render 'challenges/region_tile', region: region ), region_path(region)
+= link_to 'Back to Challenges Catalogue', challenges_path

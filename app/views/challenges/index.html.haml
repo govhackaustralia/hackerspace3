@@ -1,5 +1,9 @@
 %main.challenge_index
   = render 'index_header'
+  %section.tiles
+    - @regions.each do |region|
+      - next unless @checker.show?(region)
+      = link_to (render 'region_tile', region: region ), region_path(region)
   - @regions.each do |region|
     - next unless @checker.show?(region)
     %h3= region.name

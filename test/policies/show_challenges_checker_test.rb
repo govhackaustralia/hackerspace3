@@ -6,6 +6,7 @@ class ShowChallengesCheckerTest < ActiveSupport::TestCase
   end
 
   test 'show?' do
-    assert @checker.show?(regions(:one))
+    assert @checker.show?(regions(:international))
+    assert_not @checker.show?(regions(:four))
   end
 end

@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   end
   resources :teams, only: [:new, :create]
   resources :favourites, only: [:create, :destroy]
+  resources :regions, only: :show
   resources :challenges, param: :identifier, only: [:index, :show] do
     collection do
       get 'landing_page'

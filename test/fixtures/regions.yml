@@ -1,6 +1,6 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
+national:
   id: 1
   name: Australia
   parent_id: 3
@@ -9,7 +9,7 @@ one:
   category: National
   identifier: australia
 
-two:
+regional:
   id: 2
   name: Queensland
   parent_id: 1
@@ -18,7 +18,7 @@ two:
   category: Regional
   identifier: queensland
 
-three:
+international:
   id: 3
   name: International
   parent_id:

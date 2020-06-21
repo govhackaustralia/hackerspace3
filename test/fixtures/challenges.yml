@@ -33,3 +33,14 @@ three:
   approved: true
   identifier: queensland_challenge_1
   nation_wide: true
+
+four:
+  id: 4
+  region_id: 3
+  name: International Challenge 1
+  short_desc: MyText
+  long_desc: MyText
+  eligibility: MyText
+  video_url: MyString
+  approved: true
+  identifier: international_challenge_1
