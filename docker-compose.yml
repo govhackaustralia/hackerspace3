@@ -3,7 +3,7 @@ version: '3.1'
 services:
 
   hackerspace3:
-    image: hackerspace3
+    image: mattcen/hackerspace3
     build: .
     environment:
       POSTGRES_PASSWORD: SuperSecretPass
