@@ -1,0 +1,27 @@
+version: '3.1'
+
+services:
+
+  hackerspace3:
+    image: hackerspace3
+    build: .
+    environment:
+      POSTGRES_PASSWORD: SuperSecretPass
+      POSTGRES_USER: hackerspace
+      POSTGRES_HOST: postgres
+      #DATABASE_URL: postgres://hackerspace:SuperSecretPass@postgres
+    ports:
+      - 3000:3000
+    restart: always
+
+  postgres:
+    image: postgres:12.1
+    environment:
+      POSTGRES_USER: hackerspace
+      POSTGRES_PASSWORD: SuperSecretPass
+    volumes:
+      - pg_db:/var/lib/postgresql/data
+    restart: always
+
+volumes:
+  pg_db:
