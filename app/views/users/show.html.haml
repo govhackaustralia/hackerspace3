@@ -43,7 +43,7 @@
           %p= link_to 'Go to Challenge', challenge_path(challenge.identifier)
     %article
       %h3 My Events
-      - if @connection_registrations.present? || @competition_registrations.present? || @award_registrations.present?
+      - if @registrations_present
         - if @connection_registrations.present?
           %h4 Connection Events
           - @connection_registrations.each do |registration|
