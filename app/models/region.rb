@@ -129,6 +129,11 @@ class Region < ApplicationRecord
     ].flatten.uniq.compact
   end
 
+  # Returns the time in a particular region.
+  def time
+    self.class.region_time(time_zone)
+  end
+
   def self.region_time(time_zone = nil)
     Time.now.in_time_zone(
       time_zone.presence || COMP_TIME_ZONE

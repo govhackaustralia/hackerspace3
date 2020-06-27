@@ -136,6 +136,11 @@ class RegionTest < ActiveSupport::TestCase
     ).persisted?
   end
 
+  test 'time' do
+    assert @regional.time.is_a? String
+    assert @international.time.is_a? String
+  end
+
   test 'Region.region_time' do
     assert Region.region_time.is_a? String
   end
