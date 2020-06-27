@@ -2,7 +2,7 @@
   .field
     = project_form.label :team_name
     = project_form.text_field :team_name
-  - if @competition.in_comp_window? @time_zone
+  - if @competition.in_comp_window?(@time_zone) || params[:controller] == 'admin/projects'
     .field
       = project_form.label :project_name
       = project_form.text_field :project_name
