@@ -381,7 +381,7 @@ DEPENDENCIES
   pg (>= 0.18, < 2.0)
   pry (~> 0.12.2)
   puma (~> 4.3.5)
-  rails (~> 6.0.3.1)
+  rails (~> 6.0.3.2)
   rails_autolink (~> 1.1)
   redcarpet
   redis (~> 4.0)
