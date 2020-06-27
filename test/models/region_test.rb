@@ -136,6 +136,10 @@ class RegionTest < ActiveSupport::TestCase
     ).persisted?
   end
 
+  test 'Region.region_time' do
+    assert Region.region_time.is_a? String
+  end
+
   test 'only_national_can_be_parent_of_regional' do
     assert_not @competition.regions.regionals.create(
       name: 'New Regional',

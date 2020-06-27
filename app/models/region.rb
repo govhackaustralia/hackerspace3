@@ -129,6 +129,12 @@ class Region < ApplicationRecord
     ].flatten.uniq.compact
   end
 
+  def self.region_time(time_zone = nil)
+    Time.now.in_time_zone(
+      time_zone.presence || COMP_TIME_ZONE
+    ).to_formatted_s(:number)
+  end
+
   private
 
   # Ensures only one root region is assigned to a competition

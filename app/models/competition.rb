@@ -139,12 +139,12 @@ class Competition < ApplicationRecord
 
   # Returns true if the competition has started, false otherwise.
   def started?(time_zone = nil)
-    start_time.to_formatted_s(:number) < region_time(time_zone)
+    start_time.to_formatted_s(:number) < Region.region_time(time_zone)
   end
 
   # Returns true if the competition has not finished, false otherwise.
   def not_finished?(time_zone = nil)
-    region_time(time_zone) < end_time.to_formatted_s(:number)
+    Region.region_time(time_zone) < end_time.to_formatted_s(:number)
   end
 
   # Returns true if the competition is running, false otherwise.
@@ -195,17 +195,10 @@ class Competition < ApplicationRecord
 
   # Returns true if a time is within a window for a particular region.
   def in_region_window?(time_zone, start_time, end_time)
-    time = region_time(time_zone)
+    time = Region.region_time(time_zone)
     started = start_time.to_formatted_s(:number) < time
     not_finished = time < end_time.to_formatted_s(:number)
     started && not_finished
-  end
-
-  # Returns the time in a particular region.
-  def region_time(time_zone)
-    Time.now.in_time_zone(
-      time_zone.presence || COMP_TIME_ZONE
-    ).to_formatted_s(:number)
   end
 
   def only_one_current
