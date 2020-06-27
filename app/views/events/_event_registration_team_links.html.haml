@@ -1,4 +1,4 @@
-- unless @event.closed?
+- unless @event.closed? || event_registration_closed?(@event, @region, @competition)
   - if user_signed_in?
     - if @registration.present?
       = link_to 'Manage your Event Registration', event_registration_path(@event.identifier, @registration)
