@@ -1,17 +1,33 @@
 %main.team_page
   %h2
     Events for Region #{@region.name}
-  = link_to "Create New Event", new_admin_region_event_path(@region)
+  = link_to "Create New Event", new_admin_region_event_path(@region), class: 'download-csv'
   - if @events.present?
-    %h3 Connection Events
-    - @connection_events.each do |event|
-      = render 'event_single', locals: { event: event }
-    %h3 Competition Events
-    - @competition_events.each do |event|
-      = render 'event_single', locals: { event: event }
-    %h3 Awards Events
-    - @award_events.each do |event|
-      = render 'event_single', locals: { event: event }
+    %table.projects-table#admin-events-table{'data-turbolinks' => 'false'}
+      %thead
+        %th Event
+        %th Region
+        %th Type
+        %th Start Date
+        %th Start Time
+        %th End Date
+        %th End Time
+        %th Attending Registrations
+      %tbody
+        - @events.each do |event|
+          %tr
+            %td
+              - if event.admin_privileges?(current_user)
+                = link_to event.name, admin_region_event_path(event.region, event)
+              - else
+                = event.name
+            %td= event.region.name
+            %td= event.event_type
+            %td= event.start_time&.strftime('%b %d')
+            %td= event.start_time&.strftime('%H:%M')
+            %td= event.end_time&.strftime('%b %d')
+            %td= event.end_time&.strftime('%H:%M')
+            %td #{event.attending_registrations.length} / #{event.registrations.length}
   - else
     %p There are currently no events planned for the current Competitition.
 %p= link_to 'Back to Region', admin_competition_region_path(@competition, @region)

@@ -3,9 +3,6 @@ class Admin::Regions::EventsController < ApplicationController
 
   def index
     @events = @region.events
-    @connection_events = @events.connections
-    @competition_events = @events.competitions
-    @award_events = @events.awards
   end
 
   def show
