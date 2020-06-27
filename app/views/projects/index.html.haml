@@ -2,6 +2,7 @@
 %main.project_index
   %h2
     Team Projects for Competition #{@competition.year}
+    %span.search= params[:search]
   - if @competition.started? FIRST_TIME_ZONE
     %p= link_to 'Download CSV', projects_path(format: 'csv'), class: 'download-csv'
     - if @competition.in_form_or_comp_window?(LAST_TIME_ZONE)

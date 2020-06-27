@@ -47,6 +47,7 @@ $( document ).on('turbolinks:load', function() {
 
 				history.replaceState({}, clean_title, clean_tail);
 				document.title = clean_title;
+				$('span.search').remove();
 			}
 		});
 	}
