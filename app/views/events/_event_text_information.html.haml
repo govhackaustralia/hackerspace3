@@ -10,7 +10,7 @@
   .event-info
     %h4 Address:
     %p= simple_format(@event.address)
-- if [CONNECTION_EVENT, AWARD_EVENT].include? @event.event_type
+- if [CONNECTION_EVENT, MINI_CONFERENCE, AWARD_EVENT].include? @event.event_type
   - unless @event.start_time.blank?
     .event-info
       %h4 Date:

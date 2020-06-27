@@ -11,6 +11,7 @@ class UsersController < ApplicationController
 
     @registrations_present = @event_assignment.registrations.exists?
     @connection_registrations = @event_assignment.registrations.connection_events.preload event: :region
+    @mini_conf_registrations = @event_assignment.registrations.mini_conf_events.preload event: :region
     @competition_registrations = @event_assignment.registrations.competition_events.preload event: :region
     @award_registrations = @event_assignment.registrations.award_events.preload event: :region
 

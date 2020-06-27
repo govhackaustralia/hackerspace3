@@ -60,6 +60,7 @@ class EventTest < ActiveSupport::TestCase
     assert Event.past.exclude? @event
     assert Event.connections.include? @event
     assert Event.competitions.include? @competition_event
+    assert Event.mini_confs.include? events :mini_conf
     @event.update event_type: AWARD_EVENT
     assert Event.awards.include? @event
     assert Event.locations.include? @competition_event

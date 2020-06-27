@@ -67,3 +67,11 @@ seven:
   holder_id: 3
   time_notified: 2018-07-22 12:34:03
   status: Invited
+
+mini_conf_registration:
+  id: 8
+  event_id: 5
+  assignment_id: 13
+  holder_id: 3
+  time_notified: 2018-07-22 12:34:03
+  status: Invited

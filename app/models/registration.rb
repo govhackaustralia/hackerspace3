@@ -24,6 +24,9 @@ class Registration < ApplicationRecord
   scope :connection_events, lambda {
     joins(:event).where(events: { event_type: CONNECTION_EVENT })
   }
+  scope :mini_conf_events, lambda {
+    joins(:event).where(events: { event_type: MINI_CONFERENCE })
+  }
   scope :competition_events, lambda {
     joins(:event).where(events: { event_type: COMPETITION_EVENT })
   }

@@ -43,3 +43,13 @@ four:
   registration_type: Open
   identifier: competition_new_zealand
   published: true
+
+mini_conf:
+  id: 5
+  name: Brisbane
+  region_id: 2
+  capacity: 1
+  event_type: Mini Conference
+  registration_type: Open
+  identifier: mini_conf_brisbane
+  published: true

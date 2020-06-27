@@ -151,7 +151,7 @@ class RegionSeeder < Seeder
           TeamSeeder.create(event, comp, participant_assignments, challenges)
           event = EventSeeder.create(event_type, event_name, region, comp_start, comp, sponsors, users, participant_assignments)
           TeamSeeder.create(event, comp, participant_assignments, challenges)
-        elsif event_type == CONNECTION_EVENT
+        elsif [CONNECTION_EVENT, MINI_CONFERENCE].include? event_type
           event = EventSeeder.create(event_type, event_name, region, connection_start, comp, sponsors, users, participant_assignments)
         elsif event_type == AWARD_EVENT
           event = EventSeeder.create(event_type, event_name, region, award_start, comp, sponsors, users, participant_assignments)

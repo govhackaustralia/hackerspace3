@@ -43,6 +43,7 @@ class Event < ApplicationRecord
   }
 
   scope :connections, -> { where event_type: CONNECTION_EVENT }
+  scope :mini_confs, -> { where event_type: MINI_CONFERENCE }
   scope :competitions, -> { where event_type: COMPETITION_EVENT }
   scope :awards, -> { where event_type: AWARD_EVENT }
 
