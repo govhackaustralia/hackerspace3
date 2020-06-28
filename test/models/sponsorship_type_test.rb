@@ -10,6 +10,7 @@ class SponsorshipTypeTest < ActiveSupport::TestCase
   test 'sponsorship type associations' do
     assert @sponsorship_type.competition == @competition
     assert @sponsorship_type.sponsorships.include? @sponsorship
+    assert @sponsorship_type.sponsors.include? sponsors(:one)
   end
 
   test 'sponsorship type validations' do

@@ -2,6 +2,7 @@ class SponsorshipType < ApplicationRecord
   belongs_to :competition
 
   has_many :sponsorships, dependent: :destroy
+  has_many :sponsors, through: :sponsorships
 
   validates :name, :order, presence: true
 
