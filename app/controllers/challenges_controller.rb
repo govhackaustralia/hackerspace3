@@ -16,6 +16,7 @@ class ChallengesController < ApplicationController
     @challenges = @competition.challenges.approved
       .order(:name)
       .preload(:region, :sponsors, :published_entries)
+    @entry_counter = PublishedEntryCounter.new @competition
     respond_to do |format|
       format.html
       format.csv { send_data @challenges.to_csv @competition }

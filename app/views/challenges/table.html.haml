@@ -16,8 +16,8 @@
             %td= challenge.region.name
             %td= link_to challenge.name, challenge_path(challenge)
             %td= challenge.sponsors.pluck(:name).join(', ')
-            %td= challenge.published_entries.length
+            %td= @entry_counter.count(challenge)
             %td{style: 'display: none;'}= "#{challenge.short_desc} #{challenge.long_desc}"
   - else
     %p
-      %strong No Data Set Highlights saved for #{@competition.name} at this time.
+      %strong No Challenges saved for #{@competition.name} at this time.
