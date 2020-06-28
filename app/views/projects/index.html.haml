@@ -35,9 +35,9 @@
             %td= link_to "#{project.project_name}", project_path(project.identifier)
             %td= project.team_name
             %td= project.event.name
-            %td= project.team.challenges.length
-            %td= project.team.team_data_sets.length
-            %td{style: 'display: none;'}= "#{project.description} #{project.data_story} #{project.tag_list.map {|tag|"##{tag}"}.join(' ')}"
+            %td= @challenge_counts[project.team_id]
+            %td= @team_data_set_counts[project.team_id]
+            %td{style: 'display: none;'}= "#{project.description} #{project.data_story} #{project.tags.map {|tag|"##{tag}"}.join(' ')}"
             - if show_peoples_choice_stuff?
               - if (display_score = @project_judging[project.team_id][:display_score_status]).is_a? Integer
                 - score_value = ((display_score.to_f / @project_judging_total.to_f) * 100).to_i

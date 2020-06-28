@@ -2,8 +2,10 @@ class ProjectsController < ApplicationController
   before_action :check_competition_started!, :check_team_published!, only: :show
 
   def index
-    @teams = @competition.teams.published
-    @projects = @competition.published_projects_by_name.preload :event, team: %i[challenges team_data_sets]
+    @projects = @competition.published_projects_by_name
+      .preload(:event, :team)
+      .includes(:tags)
+    project_counts
     user_records_index if user_signed_in?
     respond_to do |format|
       format.html
@@ -34,6 +36,11 @@ class ProjectsController < ApplicationController
     @judgeable_assignment = current_user.judgeable_assignment @competition
     @project_judging = JudgeableScores.new(@judgeable_assignment, @teams).compile
     @project_judging_total = @competition.score_total PROJECT
+  end
+
+  def project_counts
+    @challenge_counts = @competition.entries.group(:team_id).count
+    @team_data_set_counts = @competition.team_data_sets.group(:team_id).count
   end
 
   def retrieve_attending_events
