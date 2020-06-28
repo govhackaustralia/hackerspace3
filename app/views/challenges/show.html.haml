@@ -41,8 +41,8 @@
         .videoWrapper
           %iframe{:allow => "autoplay; encrypted-media", :allowfullscreen => "", :frameborder => "0", :height => "315", :src => "#{@challenge.video_url}", :width => "560"}
       - if @challenge.pdf.attached? && @challenge.pdf_preview.attached?
-        %a{:href => "#{url_for(@challenge.pdf)}", :target => "_blank"}
-          %img.pdf_preview{:alt => "#{@challenge.name} pdf_preview", :src => "#{url_for(@challenge.pdf_preview)}", :title => "Govhack Hackerspace"}/
+        = link_to url_for(@challenge.pdf), target: '_blank' do
+          = image_tag url_for(@challenge.pdf_preview), alt: "#{@challenge.name} pdf_preview", title: 'Govhack Hackerspace', class: 'pdf_preview'
           %br/
   - if @challenge.image.attached?
     %img.challenge_image{alt:"#{@challenge.name} image", src: "#{url_for(@challenge.image)}"}/
