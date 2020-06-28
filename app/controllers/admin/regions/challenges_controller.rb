@@ -15,7 +15,7 @@ class Admin::Regions::ChallengesController < ApplicationController
 
   def preview
     @data_sets = @challenge.data_sets
-    @challenge_sponsorships = @challenge.challenge_sponsorships
+    @sponsors = @challenge.sponsors.with_attached_logo
     @user_eligible_teams = []
     render 'challenges/show'
   end
