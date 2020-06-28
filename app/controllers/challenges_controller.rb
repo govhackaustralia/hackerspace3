@@ -30,7 +30,7 @@ class ChallengesController < ApplicationController
 
   def show
     @data_sets = @challenge.data_sets
-    @challenge_sponsorships = @challenge.challenge_sponsorships
+    @sponsors = @challenge.sponsors.with_attached_logo
 
     @user_eligible_teams = @challenge.eligible_teams & current_user.joined_teams if user_signed_in?
   end

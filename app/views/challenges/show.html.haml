@@ -6,15 +6,13 @@
       %h3
         Jurisdiction: #{@region.name}
     %aside.sponsors
-      - if @challenge_sponsorships.present?
-        - @challenge_sponsorships.each do |sponsorship|
-          - sponsor = sponsorship.sponsor
-          %figure
-            %a{:href => "#{sponsor.website}", :target => "_blank"}
-              - if sponsor.logo.attached?
-                = image_tag url_for(sponsor.logo)
-              - else
-                = image_tag 'default_profile_pic.png'
+      - @sponsors.each do |sponsor|
+        %figure
+          = link_to sponsor.website, target: '_blank' do
+            - if sponsor.logo.attached?
+              = image_tag url_for sponsor.logo
+            - else
+              = image_tag 'default_profile_pic.png'
   %section.challenge_body
     %article
       - unless @challenge.short_desc.blank?
