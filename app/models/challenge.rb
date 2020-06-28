@@ -11,6 +11,7 @@ class Challenge < ApplicationRecord
   has_many :published_projects_by_name, -> { order(:project_name) }, through: :published_teams, source: :current_project
   has_many :challenge_sponsorships, dependent: :destroy
   has_many :sponsors, through: :challenge_sponsorships
+  has_many :sponsors_with_logos, -> { with_attached_logo }, through: :challenge_sponsorships, source: :sponsor
   has_many :challenge_data_sets, dependent: :destroy
   has_many :data_sets, through: :challenge_data_sets
 

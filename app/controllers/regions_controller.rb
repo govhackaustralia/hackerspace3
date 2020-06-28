@@ -3,6 +3,7 @@ class RegionsController < ApplicationController
 
   def show
     @challenges = @region.approved_challenges
+      .preload(:sponsors_with_logos)
     national_challenges
     nation_wides
     international_challenges
@@ -16,6 +17,7 @@ class RegionsController < ApplicationController
   def national_challenges
     @national_challenges = if national.present?
       national.approved_challenges
+        .preload(:sponsors_with_logos)
     else
       []
     end
@@ -23,7 +25,9 @@ class RegionsController < ApplicationController
 
   def nation_wides
     @nation_wides = if national.present?
-      national.sub_region_challenges.nation_wides.approved.order(:name)
+      national.sub_region_challenges.nation_wides.approved
+        .order(:name)
+        .preload(:sponsors_with_logos)
     else
       []
     end
@@ -31,6 +35,7 @@ class RegionsController < ApplicationController
 
   def international_challenges
     @international_challenges = international.approved_challenges
+      .preload(:sponsors_with_logos)
   end
 
   def regions

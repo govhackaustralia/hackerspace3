@@ -28,6 +28,7 @@ class ChallengeTest < ActiveSupport::TestCase
     assert @challenge.teams.include? @team
     assert @challenge.challenge_sponsorships.include? @challenge_sponsorship
     assert @challenge.sponsors.include? @sponsor
+    assert @challenge.sponsors_with_logos.include? @sponsor
     assert @challenge.challenge_data_sets.include? @challenge_data_set
     assert @challenge.data_sets.include? @data_set
     @challenge.destroy

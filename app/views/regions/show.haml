@@ -14,13 +14,13 @@
   - if @national.present?
     - unless @region.national?
       %h3 #{@national.name} (National) Challenges
-      - @national.challenges.each do |challenge|
+      - @national_challenges.each do |challenge|
         = render 'challenges/challenge_panel',                |
           challenge: challenge,                               |
           entry_count: @entry_counter.count(challenge)
   - unless @region.international?
     %h3 International Challenges
-    - @international.challenges.each do |challenge|
+    - @international_challenges.each do |challenge|
       = render 'challenges/challenge_panel',                  |
         challenge: challenge,                                 |
         entry_count: @entry_counter.count(challenge)
