@@ -37,7 +37,7 @@
       - @sponsorship_types.each do |sponsorship_type|
         %h4= sponsorship_type.name
         .sponsors
-          - sponsorship_type.sponsors.joins(:sponsorships).where(sponsorships: { sponsorable: @region }).with_attached_logo.each do |sponsor|
+          - sponsorship_type.sponsors.where(sponsorships: { sponsorable: @region }).with_attached_logo.each do |sponsor|
             %figure
               = link_to sponsor.website, target: '_blank' do
                 - if sponsor.logo.attached?
