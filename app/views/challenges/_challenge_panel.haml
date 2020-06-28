@@ -9,7 +9,7 @@
       entered this challenge across all checkpoints that have passed.
   %aside
     - if challenge.sponsors.present?
-      - challenge.sponsors.each do |sponsor|
+      - challenge.sponsors.with_attached_logo.each do |sponsor|
         %figure
           = link_to (image_tag(sponsor_logo_asset_path(sponsor))),             |
             sponsor.website, target: '_blank'
