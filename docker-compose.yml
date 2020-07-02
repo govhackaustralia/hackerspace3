@@ -5,21 +5,14 @@ services:
   hackerspace3:
     image: mattcen/hackerspace3
     build: .
-    environment:
-      POSTGRES_PASSWORD: SuperSecretPass
-      POSTGRES_USER: hackerspace
-      POSTGRES_HOST: postgres
-      POSTGRES_DB: hackerspace3
-      #DATABASE_URL: postgres://hackerspace:SuperSecretPass@postgres
+    env_file: .env
     ports:
       - 3000:3000
     restart: always
 
   postgres:
     image: postgres:12.1
-    environment:
-      POSTGRES_USER: hackerspace
-      POSTGRES_PASSWORD: SuperSecretPass
+    env_file: .env
     volumes:
       - pg_db:/var/lib/postgresql/data
     restart: always

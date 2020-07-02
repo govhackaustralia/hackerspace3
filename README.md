@@ -44,7 +44,15 @@ $ rails server
 
 ## Docker Deployment Instructions
 
-To initialise the postgres database:
+Initialise environment variables required by `docker-compose`:
+
+```bash
+cp .env.example .env
+```
+
+**IMPORTANT**: Then edit `.env` with a text editor and choose a more secure password for the `POSTGRES_PASSWORD` variable.
+
+Initialise the postgres database:
 
 ```bash
 $ docker-compose up -d postgres
@@ -52,7 +60,7 @@ $ docker-compose run --rm hackerspace3 rails db:setup
 $ docker-compose down
 ```
 
-To subsequently run Hackerspace:
+Run Hackerspace:
 
 ```bash
 $ docker-compose up -d
