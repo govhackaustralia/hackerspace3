@@ -42,6 +42,41 @@ See the below Environment Variables Required to enable specific services.
 $ rails server
 ```
 
+## Docker Deployment Instructions
+
+To initialise the postgres database:
+
+```bash
+$ docker-compose up -d postgres
+$ docker-compose run --rm hackerspace3 rails db:setup
+$ docker-compose down
+```
+
+To subsequently run Hackerspace:
+
+```bash
+$ docker-compose up -d
+```
+
+Then browse to http://localhost:3000 and click Sign In.
+
+* Username: `admin@hackerspace.com`
+* Password: `password`
+
+(Note, refer to `db/seeders/seeder.rb` and `db/seeders/user_seeder.rb` to see where these are set)
+
+To stop Hackerspace:
+
+```bash
+$ docker-compose down
+```
+
+Or, to stop and remove the Hackerspace database:
+
+```bash
+$ docker-compose down -v
+```
+
 ## Specification Documents
 
 All documents relating to specification can be found in the [project
