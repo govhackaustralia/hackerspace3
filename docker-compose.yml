@@ -9,6 +9,7 @@ services:
       POSTGRES_PASSWORD: SuperSecretPass
       POSTGRES_USER: hackerspace
       POSTGRES_HOST: postgres
+      POSTGRES_DB: hackerspace3
       #DATABASE_URL: postgres://hackerspace:SuperSecretPass@postgres
     ports:
       - 3000:3000
