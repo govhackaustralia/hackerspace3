@@ -53,6 +53,8 @@ gem 'omniauth-rails_csrf_protection'
 gem 'webpacker'
 # A tagging plugin that allows for custom tagging along dynamic contexts.
 gem 'acts-as-taggable-on', '~> 6.0'
+# See https://github.com/rails/execjs#readme for more supported runtimes
+gem 'mini_racer', platforms: :ruby
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -99,9 +101,6 @@ end
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
-
-# See https://github.com/rails/execjs#readme for more supported runtimes
-# gem 'mini_racer', platforms: :ruby
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 # gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
