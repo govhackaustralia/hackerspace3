@@ -114,7 +114,7 @@ docker-compose up -d postgres
 Then start the `govhackau/hackerspace3` image with:
 
 ```bash
-docker-compose run --rm -v "$PWD":/usr/src/app --service-ports hackerspace3
+docker-compose run --rm -d -v "$PWD":/usr/src/app --service-ports hackerspace3
 ```
 
 This runs the container and bind-mounts your checked out code into the container so you can work on it without needing to rebuild the container's image.
