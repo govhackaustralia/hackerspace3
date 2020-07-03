@@ -52,6 +52,14 @@ cp .env.example .env
 
 **IMPORTANT**: Then edit `.env` with a text editor and choose a more secure password for the `POSTGRES_PASSWORD` variable.
 
+If you don't want to wait for the Docker image to build from your local copy of the repo, start with:
+
+```bash
+docker pull govhackau/hackerspace3
+```
+
+(If you don't do the above, the image will get automatically built; this should take about 10 minutes on a modern machine.)
+
 Initialise the postgres database:
 
 ```bash
@@ -84,6 +92,32 @@ Or, to stop and remove the Hackerspace database:
 ```bash
 $ docker-compose down -v
 ```
+
+To explicitly rebuild a new `hackerspace3` Docker image from your local code:
+
+```bash
+docker build -t govhackau/hackerspace3 .
+```
+
+Or, to build the image *and* start the container as usual, run:
+
+```bash
+docker-compose up --build
+```
+
+To actively make local changes to your codebase without needing to rebuild the image, start the database image with:
+
+```bash
+docker-compose up -d postgres
+```
+
+Then start the `govhackau/hackerspace3` image with:
+
+```bash
+docker-compose run --rm -v "$PWD":/usr/src/app --service-ports hackerspace3
+```
+
+This runs the container and bind-mounts your checked out code into the container so you can work on it without needing to rebuild the container's image.
 
 ## Specification Documents
 
