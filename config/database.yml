@@ -85,12 +85,12 @@ production:
   <<: *default
   database: <%= ENV['POSTGRES_DB'] || 'hackerspace3' %>_production
   username: <%= ENV['POSTGRES_USER'] || 'hackerspace' %>
-  password: <%= ENV['POSTGRES_PASSWORD'] %>
-  host: <%= ENV['POSTGRES_HOST'] || 'localhost' %>
+  password: <%= ENV['POSTGRES_PASSWORD'] || '' %>
+  host: <%= ENV['POSTGRES_HOST'] || '' %>
 
 staging:
   <<: *default
   database: <%= ENV['POSTGRES_DB'] || 'hackerspace3' %>_staging
   username: <%= ENV['POSTGRES_USER'] || 'hackerspace' %>
-  password: <%= ENV['POSTGRES_PASSWORD'] %>
-  host: <%= ENV['POSTGRES_HOST'] || 'localhost' %>
+  password: <%= ENV['POSTGRES_PASSWORD'] || '' %>
+  host: <%= ENV['POSTGRES_HOST'] || '' %>
