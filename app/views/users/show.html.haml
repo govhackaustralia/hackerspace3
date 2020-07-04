@@ -48,9 +48,9 @@
           %h4 Connection Events
           - @connection_registrations.each do |registration|
             = render 'registration_management', locals: { registration: registration }
-        - if @mini_conf_registrations.present?
-          %h4 Mini Conferences
-          - @mini_conf_registrations.each do |registration|
+        - if @conference_registrations.present?
+          %h4 Conferences
+          - @conference_registrations.each do |registration|
             = render 'registration_management', locals: { registration: registration }
         - if @competition_registrations.present?
           %h4 Competition Events

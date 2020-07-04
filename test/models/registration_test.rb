@@ -49,7 +49,7 @@ class RegistrationTest < ActiveSupport::TestCase
     assert Registration.vips.include? @vip_registration
     assert Registration.vips.exclude? @registration
     assert Registration.connection_events.include? @registration
-    assert Registration.mini_conf_events.include? registrations :mini_conf_registration
+    assert Registration.conference_events.include? registrations :conference_registration
     assert Registration.competition_events.include? @competition_event_registration
     assert Registration.award_events.include? @award_registration
     assert Registration.competition_events.exclude? @waitlist_registration
