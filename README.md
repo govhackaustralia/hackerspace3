@@ -89,6 +89,8 @@ $ docker-compose down
 
 Or, to stop and remove the Hackerspace database:
 
+**NOTE:** If you do this, you'll need to re-run the "Initialise the postgres database" instructions above, the next time you want to use Hackerspcae. Only do this if you want to start with a fresh database, or completely remove the Hackerspace project from Docker.
+
 ```bash
 $ docker-compose down -v
 ```
