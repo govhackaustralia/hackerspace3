@@ -9,8 +9,8 @@ class Competition < ApplicationRecord
   has_many :events, through: :regions
   has_many :connection_events, -> { connections }, through: :regions, source: :events
   has_many :connection_registrations, through: :connection_events, source: :registrations
-  has_many :mini_conf_events, -> { mini_confs }, through: :regions, source: :events
-  has_many :mini_conf_registrations, through: :mini_conf_events, source: :registrations
+  has_many :conference_events, -> { conferences }, through: :regions, source: :events
+  has_many :conference_registrations, through: :conference_events, source: :registrations
   has_many :competition_events, -> { competitions }, through: :regions, source: :events
   has_many :competition_registrations, through: :competition_events, source: :registrations
   has_many :award_events, -> { awards }, through: :regions, source: :events

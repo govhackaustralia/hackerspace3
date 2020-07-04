@@ -37,8 +37,8 @@ class CompetitionTest < ActiveSupport::TestCase
     assert @competition.events.include? @event
     assert @competition.connection_events.include? @connection_event
     assert @competition.connection_registrations.include? @connection_registration
-    assert @competition.mini_conf_events.include? events :mini_conf
-    assert @competition.mini_conf_registrations.include? registrations :mini_conf_registration
+    assert @competition.conference_events.include? events :conference
+    assert @competition.conference_registrations.include? registrations :conference_registration
     assert @competition.competition_events.include? @competition_event
     assert @competition.competition_registrations.include? @competition_registration
     assert @competition.award_events.include? @award_event

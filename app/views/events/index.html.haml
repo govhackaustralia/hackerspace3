@@ -5,12 +5,12 @@
     - if @events.present?
       %p= link_to 'Download CSV', events_path(format: 'csv'), class: 'download-csv'
       = render partial: 'events/event_collection', locals: { events: @future_connections, title: 'Upcoming Connection Events' }
-      = render partial: 'events/event_collection', locals: { events: @future_mini_confs, title: 'Upcoming Mini Conferences' }
+      = render partial: 'events/event_collection', locals: { events: @future_conferences, title: 'Upcoming Conferences' }
       = render partial: 'events/event_collection', locals: { events: @future_locations, title: 'Upcoming Competition Events' }
       = render partial: 'events/event_collection', locals: { events: @future_remotes, title: "Upcoming Remote Kitchen Table Competition Events" }
       = render partial: 'events/event_collection', locals: { events: @future_awards, title: 'Upcoming Awards Events' }
       = render partial: 'events/event_collection', locals: { events: @past_connections, title: 'Past Connection Events' }
-      = render partial: 'events/event_collection', locals: { events: @past_mini_confs, title: 'Past Mini Conferences' }
+      = render partial: 'events/event_collection', locals: { events: @past_conferences, title: 'Past Conferences' }
       = render partial: 'events/event_collection', locals: { events: @past_competitions, title: 'Past Competition Events' }
       = render partial: 'events/event_collection', locals: { events: @past_awards, title: 'Past Award Events' }
     - else

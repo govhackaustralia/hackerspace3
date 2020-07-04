@@ -44,12 +44,12 @@ four:
   identifier: competition_new_zealand
   published: true
 
-mini_conf:
+conference:
   id: 5
   name: Brisbane
   region_id: 2
   capacity: 1
-  event_type: Mini Conference
+  event_type: Conference
   registration_type: Open
-  identifier: mini_conf_brisbane
+  identifier: conference_brisbane
   published: true
