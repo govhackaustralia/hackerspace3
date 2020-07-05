@@ -82,6 +82,25 @@ class User < ApplicationRecord
 
   validates :accepted_terms_and_conditions, acceptance: true
 
+  enum region: {
+    'Queensland' => 0,
+    'New South Wales' => 1,
+    'Victoria' => 2,
+    'Tasmania' => 3,
+    'South Australia' => 4,
+    'Western Australia' => 5,
+    'Northern Territory' => 6,
+    'Australian Capital Territory' => 7,
+    'New Zealand' => 8,
+    'Outside Australia and New Zealand' => 9
+  }
+
+  def registration_complete?
+    errors[:full_name] << 'must be entered' if full_name.blank?
+    errors[:region] << 'must be entered' if region.blank?
+    errors.empty?
+  end
+
   # Gravitar Gem
   include Gravtastic
   has_gravatar
