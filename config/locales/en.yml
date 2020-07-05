@@ -33,10 +33,20 @@ en:
   helpers:
     label:
       user:
-        mailing_list: Consent to be added to the GovHack mailing list.
-        challenge_sponsor_contact_place: Can be contacted by sponsors of a challenge if I am placed in a challenge.
-        challenge_sponsor_contact_enter: Can be contacted by sponsors of a challenge if I enter a challenge.
-        my_project_sponsor_contact: Can be contacted by sponsors that are interested in my project.
-        me_govhack_contact: Can be contacted by GovHack.
+        full_name: 'Full name (required)'
+        mailing_list: Do you consent to be added to the GovHack mailing list?
+        under_18: 'Are you under 18 years of age?'
+        challenge_sponsor_contact_place: Can be contacted by sponsors of a challenge if I am placed in a challenge?
+        challenge_sponsor_contact_enter: Can be contacted by sponsors of a challenge if I enter a challenge?
+        my_project_sponsor_contact: Can be contacted by sponsors that are interested in my project?
+        me_govhack_contact: Can be contacted by GovHack?
         how_did_you_hear: How did you hear about GovHack?
+      profile:
+        gender: 'What is your gender?'
+        first_peoples: 'Are you of Aboriginal or Torres Strait Islander origin?'
+        disability: 'Do you identify as a person with a disability?'
+        education: 'What is the highest education level you have completed?'
+        employment: 'What is your employment status?'
+        age: 'What is your age category?'
+        postcode: 'What is your postcode?'
   hello: "Hello world"
