@@ -35,37 +35,6 @@ class UsersController < ApplicationController
     @user = current_user
   end
 
-  def review_terms_and_conditions
-    @user = current_user
-  end
-
-  def accept_terms_and_conditions
-    @user = current_user
-    @user.update accept_terms_params
-    if @user.save && @user.accepted_terms_and_conditions
-      flash[:notice] = 'Welcome! Please complete your registration.'
-      redirect_to complete_registration_path
-    else
-      flash[:alert] = 'Please accept our terms and conditions before continuing'
-      redirect_to review_terms_and_conditions_path
-    end
-  end
-
-  def complete_registration_edit
-    @user = current_user
-  end
-
-  def complete_registration_update
-    @user = current_user
-    @user.update complete_registration_params
-    if @user.save && @user.full_name.present?
-      flash[:notice] = 'Your account has been created.'
-      redirect_to session[:user_return_to] || manage_account_path
-    else
-      flash[:alert] = 'Plese enter your Full name before proceeding'
-      redirect_to complete_registration_path
-    end
-  end
 
   def update
     @user = current_user
@@ -77,14 +46,6 @@ class UsersController < ApplicationController
   end
 
   private
-
-  def accept_terms_params
-    params.require(:user).permit :accepted_terms_and_conditions
-  end
-
-  def complete_registration_params
-    params.require(:user).permit(:how_did_you_hear, *user_permitted_attributes)
-  end
 
   def user_params
     params.require(:user).permit(

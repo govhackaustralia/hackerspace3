@@ -1,0 +1,50 @@
+- content_for :title, 'Complete Account Registration'
+%main.registration.single-col.edit-account
+  %h2= yield :title
+  %section
+    = form_with model: @user, url: account_path(@user), method: :patch do |form|
+      .field
+        = form.label :full_name
+        = form.text_field :full_name
+      .field
+        = form.label :preferred_name
+        = form.text_field :preferred_name
+      .field
+        = form.label :organisation_name
+        = form.text_field :organisation_name
+      .field
+        = form.label :phone_number
+        = telephone_field(:user, :phone_number)
+      .field
+        = form.label :region
+        = form.select :region,                                                 |
+          options_for_select(User.regions.keys.sort, selected: @user.region), |
+          include_blank: true
+      .field
+        = form.label :how_did_you_hear
+        = form.text_field :how_did_you_hear
+      .field
+        = form.label :under_18
+        = form.check_box :under_18, |
+          checked: @user.under_18
+      .field
+        = form.label :mailing_list
+        = form.check_box :mailing_list, checked: @user.mailing_list
+      .field
+        = form.label :challenge_sponsor_contact_place
+        = form.check_box :challenge_sponsor_contact_place, |
+          checked: @user.challenge_sponsor_contact_place
+      .field
+        = form.label :challenge_sponsor_contact_enter
+        = form.check_box :challenge_sponsor_contact_enter, |
+          checked: @user.challenge_sponsor_contact_enter
+      .field
+        = form.label :my_project_sponsor_contact
+        = form.check_box :my_project_sponsor_contact, |
+          checked: @user.my_project_sponsor_contact
+      .field
+        = form.label :me_govhack_contact
+        = form.check_box :me_govhack_contact, checked: @user.me_govhack_contact
+        = hidden_field_tag(:account_registration, true)
+      .actions
+        = form.submit 'Complete Registration'
