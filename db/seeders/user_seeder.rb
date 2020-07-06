@@ -54,7 +54,9 @@ class UserSeeder < Seeder
         coder: random_boolean,
         creative: random_boolean,
         facilitator: random_boolean,
-        registration_type: USER_REGISTRATION_TYPES.sample
+        registration_type: USER_REGISTRATION_TYPES.sample,
+        region: User.regions.keys.sample,
+        under_18: random_boolean
       )
 
       if user.registration_type == YOUTH_COMPETITOR
@@ -65,6 +67,18 @@ class UserSeeder < Seeder
       user.skip_reconfirmation!
       user.confirm if number % 20 == 0
       user.save!
+
+      Profile.create(
+        user: user,
+        age: Profile.ages.keys.sample,
+        gender: Faker::Gender.type,
+        first_peoples: Profile.first_peoples.keys.sample,
+        disability: Profile.disabilities.keys.sample,
+        education: Profile.educations.keys.sample,
+        employment: Profile.employments.keys.sample,
+        postcode: Faker::Address.postcode,
+        skill_list: random_skills
+      )
     end
   end
 
