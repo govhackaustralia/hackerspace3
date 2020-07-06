@@ -28,6 +28,8 @@ Rails.application.routes.draw do
     resources :memberships, only: [:destroy]
   end
 
+  resources :profiles, only: [:index, :show]
+
   namespace :flights do
     resources :registrations, only: [] do
       resources :registration_flights, only: [:new, :create], controller: 'registrations/registration_flights'

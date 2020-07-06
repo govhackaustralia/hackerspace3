@@ -1,0 +1,17 @@
+- content_for :title, @user.display_name
+%main.project_index
+  %h2= yield :title
+  %p
+    %strong
+      Region
+    = @user.region
+  %p
+    %strong
+      Slack Handle
+    = @user.slack
+  %p
+    %strong
+      Skills
+    = @profile.skills.map {|tag|"##{tag}"}.join(' ')
+
+= link_to 'Back to Profiles', profiles_path
