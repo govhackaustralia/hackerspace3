@@ -1,7 +1,15 @@
 class Profile < ApplicationRecord
   belongs_to :user
 
+  validates :identifier, uniqueness: true
+
   acts_as_taggable_on :skills
+
+  def to_param
+    identifier
+  end
+
+  after_save_commit :update_identifier
 
   enum first_peoples: {
     'No' => 0,
@@ -52,4 +60,16 @@ class Profile < ApplicationRecord
     '75 years and older' => 7,
     'Prefer not to say' => 8
   }, _prefix: true
+
+  def update_identifier(identifier_name = nil)
+    update_columns identifier: generate_identifier(identifier_name)
+  end
+
+  def generate_identifier(identifier_name)
+    new_identifier = uri_pritty identifier_name.presence || user.identifier_name
+
+    return new_identifier unless Profile.where(identifier: new_identifier).where.not(id: id).exists?
+
+    uri_pritty "#{new_identifier}-#{Profile.where(identifier: new_identifier).count}"
+  end
 end

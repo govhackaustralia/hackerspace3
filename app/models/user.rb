@@ -4,6 +4,8 @@ class User < ApplicationRecord
          :trackable, :validatable, :confirmable, :lockable, :timeoutable,
          :omniauthable
 
+  has_one :profile, dependent: :destroy
+
   has_many :holders, dependent: :destroy
   has_many :assignments, dependent: :destroy
   has_many :headers, through: :assignments
@@ -81,6 +83,8 @@ class User < ApplicationRecord
   scope :mailing_list, -> { where mailing_list: true }
 
   validates :accepted_terms_and_conditions, acceptance: true
+
+  after_save_commit :update_profile_identifier
 
   enum region: {
     'Queensland' => 0,
@@ -219,5 +223,13 @@ class User < ApplicationRecord
     return 'unconfirmed' if confirmed_at.nil?
 
     "confirmed at #{confirmed_at.strftime('%e %B %Y  %I.%M %p')}"
+  end
+
+  def update_profile_identifier
+    profile&.update_identifier identifier_name
+  end
+
+  def identifier_name
+    preferred_name.presence || full_name
   end
 end

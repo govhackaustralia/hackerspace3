@@ -3,6 +3,7 @@ require 'test_helper'
 class UserTest < ActiveSupport::TestCase
   setup do
     @user = User.first
+    @profile = profiles(:one)
     @holder = Holder.first
     @assignment = Assignment.first
     @team = Team.first
@@ -28,6 +29,7 @@ class UserTest < ActiveSupport::TestCase
   end
 
   test 'user associations' do
+    assert @user.profile == @profile
     assert @user.holders.include? @holder
     assert @user.assignments.include? @assignment
     assert @user.headers.include? @header
@@ -57,6 +59,7 @@ class UserTest < ActiveSupport::TestCase
 
     @user.destroy
     assert_raises(ActiveRecord::RecordNotFound) { @assignment.reload }
+    assert_raises(ActiveRecord::RecordNotFound) { @profile.reload }
   end
 
   test 'scopes' do
