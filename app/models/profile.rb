@@ -3,7 +3,7 @@ class Profile < ApplicationRecord
 
   validates :identifier, uniqueness: true
 
-  acts_as_taggable_on :skills
+  acts_as_taggable_on :skills, :interests
 
   has_one_attached :profile_picture
 

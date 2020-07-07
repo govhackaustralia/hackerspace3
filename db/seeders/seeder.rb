@@ -30,6 +30,10 @@ class Seeder
     rand(0..5).times.map { Faker::Job.key_skill }.uniq
   end
 
+  def self.random_interests
+    rand(0..5).times.map { Faker::Hacker.ingverb }.uniq
+  end
+
   def self.admin_email
     ENV['SEED_EMAIL'] || 'admin@hackerspace.com'
   end

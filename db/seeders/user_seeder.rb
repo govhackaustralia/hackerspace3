@@ -77,7 +77,8 @@ class UserSeeder < Seeder
         education: Profile.educations.keys.sample,
         employment: Profile.employments.keys.sample,
         postcode: Faker::Address.postcode,
-        skill_list: random_skills
+        skill_list: random_skills,
+        interest_list: random_interests
       )
     end
   end

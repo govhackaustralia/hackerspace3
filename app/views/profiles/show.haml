@@ -17,5 +17,9 @@
     %strong
       Skills
     = @profile.skills.map {|tag|"##{tag}"}.join(' ')
+  %p
+    %strong
+      Interests
+    = @profile.interests.map {|tag|"##{tag}"}.join(' ')
 
 = link_to 'Back to Profiles', profiles_path
