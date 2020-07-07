@@ -60,15 +60,9 @@ docker pull govhackau/hackerspace3
 
 (If you don't do the above, the image will get automatically built; this should take about 10 minutes on a modern machine.)
 
-Initialise the postgres database:
-
-```bash
-$ docker-compose up -d postgres
-$ docker-compose run --rm hackerspace3 rails db:setup
-$ docker-compose down
-```
-
 Run Hackerspace:
+
+**NOTE**: The initial run of Hackerspace will likely take several minutes to initialise the database before being usable. This is normal.
 
 ```bash
 $ docker-compose up -d
@@ -89,7 +83,7 @@ $ docker-compose down
 
 Or, to stop and remove the Hackerspace database:
 
-**NOTE:** If you do this, you'll need to re-run the "Initialise the postgres database" instructions above, the next time you want to use Hackerspcae. Only do this if you want to start with a fresh database, or completely remove the Hackerspace project from Docker.
+**NOTE:** If you do this, you'll need to re-run the "Initialise the postgres database" instructions above, the next time you want to use Hackerspace. Only do this if you want to start with a fresh database, or completely remove the Hackerspace project from Docker.
 
 ```bash
 $ docker-compose down -v
