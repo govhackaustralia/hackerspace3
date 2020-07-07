@@ -3,12 +3,10 @@
   %h2= yield :title
   %section
     %article
-      - if false
-        = render 'user_profile_pic'
-        %p= link_to 'Change Profile Pic', update_personal_details_path(profile_pic: true)
       = render 'user_contact', locals: { user: @user }
       %p= link_to 'Update Personal Details' , update_personal_details_path
       %p= link_to 'Update Email and Password' , edit_user_registration_path
+      %p= link_to 'Update Profile Picture', update_profile_picture_path
       - if @public_winning_entries
         %p= link_to 'Update Banking Details', update_personal_details_path(banking: true)
     %article

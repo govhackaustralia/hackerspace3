@@ -5,6 +5,8 @@ class Profile < ApplicationRecord
 
   acts_as_taggable_on :skills
 
+  has_one_attached :profile_picture
+
   def to_param
     identifier
   end

@@ -15,6 +15,12 @@ class ApplicationController < ActionController::Base
     @holder = current_user.holder_for(@competition)
   end
 
+  def profile
+    return unless user_signed_in?
+
+    @profile ||= Profile.find_or_create_by user: current_user
+  end
+
   def check_accepted_terms_and_conditions!
     return if terms_and_conditions_completed? || user_at_resolution_point?
 

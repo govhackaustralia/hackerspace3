@@ -109,11 +109,6 @@ class User < ApplicationRecord
   include Gravtastic
   has_gravatar
 
-  # Active Storage prifel image.
-  has_one_attached :govhack_img
-
-  # ENHANCEMENT: Need validation to make sure email is fully formed.
-
   # Returns true if a user has any of the privileges (assignments) passed
   # through the parameters.
   # ENHANCEMENT: Move to Controller.
