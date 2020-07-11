@@ -1,12 +1,17 @@
 class ApplicationController < ActionController::Base
-  before_action :competition, :accepted_terms_and_conditions,
-                :filled_in_required_fields, :holder
+  before_action :competition, :check_accepted_terms_and_conditions!,
+                :check_required_fields!, :holder
 
   private
 
   def competition
-    @competition = Competition.find_by_year request.subdomain
-    @competition ||= Competition.current
+    @competition ||= competition_by_year || Competition.current
+  end
+
+  def competition_by_year
+    return unless request.subdomain.match?(/\A\d{4}\z/)
+
+    Competition.find_by_year request.subdomain
   end
 
   def holder
@@ -15,55 +20,47 @@ class ApplicationController < ActionController::Base
     @holder = current_user.holder_for(@competition)
   end
 
-  def accepted_terms_and_conditions
-    return unless ts_and_cs_conditions_not_met
+  def check_accepted_terms_and_conditions!
+    return if terms_and_conditions_completed? || user_at_resolution_point?
 
     session[:user_return_to] = request.url
-    flash[:notice] = 'Please accept our terms and conditions'
-    redirect_to review_terms_and_conditions_path
+    redirect_to review_terms_and_conditions_path,
+      notice: 'Please accept our terms and conditions'
   end
 
-  def ts_and_cs_conditions_not_met
-    return unless user_signed_in?
-    return if current_user.accepted_terms_and_conditions
-    return unless user_not_at_resolution_point
+  def terms_and_conditions_completed?
+    return true unless user_signed_in?
 
-    true
+    current_user.accepted_terms_and_conditions.present?
   end
 
-  def filled_in_required_fields
-    return unless required_conditions_not_met
+  def check_required_fields!
+    return if required_fields_complete? || user_at_resolution_point?
 
-    flash[:notice] = 'Please complete the required fields.'
-    redirect_to complete_registration_path
+    redirect_to complete_registration_path,
+      notice: 'Please complete the required fields.'
   end
 
-  def required_conditions_not_met
-    return unless user_signed_in?
-    return unless current_user.full_name.blank?
-    return unless user_not_at_resolution_point
+  def required_fields_complete?
+    return true unless user_signed_in?
 
-    true
+    current_user.full_name.present? && current_user.region.present?
   end
 
-  def user_not_at_resolution_point
-    return unless user_not_editing_updating_account
-    return if controller_name == 'omniauth_callbacks' && ['google'].include?(action_name)
-
-    true
+  def user_at_resolution_point?
+    user_editing_updating_account? || user_logging_out? || google_authing?
   end
 
-  def user_not_editing_updating_account
-    return if controller_name == 'users' && %w[
-      edit
-      update
-      review_terms_and_conditions
-      accept_terms_and_conditions
-      complete_registration_edit
-      complete_registration_update
-    ].include?(action_name)
-    return if controller_name == 'sessions' && ['destroy'].include?(action_name)
+  def user_editing_updating_account?
+    %w[agreements accounts].include?(controller_name) &&
+    %w[edit update].include?(action_name)
+  end
 
-    true
+  def google_authing?
+    controller_name == 'omniauth_callbacks' && action_name == 'google'
+  end
+
+  def user_logging_out?
+    controller_name == 'sessions' && action_name == 'destroy'
   end
 end

@@ -1,0 +1,46 @@
+- content_for :title, 'Demographics'
+%main.registration.single-col.edit-account
+  %h2= yield :title
+  %section
+    = form_with model: @profile, url: demographic_path(@profile), method: :patch do |form|
+      %article
+        %strong
+          GovHack values diversity and inclusion. The following fields are
+          completely optional and are used strictly for reporting on our progress
+          in making GovHack inclusive for all. You may choose to skip some or all
+          of the questions. We would be grateful for any answers you do provide
+          and these are stored securely and will not be passed onto a third party
+          except in aggregated, de-identified form.
+      .field
+        = form.label :gender
+        = form.text_field :gender
+      .field
+        = form.label :first_peoples
+        = form.select :first_peoples, |
+          options_for_select(Profile.first_peoples.keys, selected: @profile.first_peoples), |
+          include_blank: true
+      .field
+        = form.label :disability
+        = form.select :disability, |
+          options_for_select(Profile.disabilities.keys, selected: @profile.disability), |
+          include_blank: true
+      .field
+        = form.label :education
+        = form.select :education, |
+          options_for_select(Profile.educations.keys, selected: @profile.education), |
+          include_blank: true
+      .field
+        = form.label :employment
+        = form.select :employment, |
+          options_for_select(Profile.employments.keys, selected: @profile.employment), |
+          include_blank: true
+      .field
+        = form.label :age
+        = form.select :age, |
+          options_for_select(Profile.ages.keys, selected: @profile.age), |
+          include_blank: true
+      .field
+        = form.label :postcode
+        = form.text_field :postcode
+      .actions
+        = form.submit 'Submit'

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_17_220301) do
+ActiveRecord::Schema.define(version: 2020_07_05_094737) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -258,9 +258,25 @@ ActiveRecord::Schema.define(version: 2020_06_17_220301) do
     t.boolean "aws_credits_requested"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "team_status"
     t.index ["aws_credits_requested"], name: "index_holders_on_aws_credits_requested"
     t.index ["competition_id"], name: "index_holders_on_competition_id"
+    t.index ["team_status"], name: "index_holders_on_team_status"
     t.index ["user_id"], name: "index_holders_on_user_id"
+  end
+
+  create_table "profiles", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "age"
+    t.string "gender"
+    t.integer "first_peoples"
+    t.integer "disability"
+    t.integer "education"
+    t.integer "employment"
+    t.string "users"
+    t.string "postcode"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "projects", force: :cascade do |t|
@@ -490,9 +506,13 @@ ActiveRecord::Schema.define(version: 2020_06_17_220301) do
     t.string "branch_name"
     t.string "slack"
     t.datetime "accepted_code_of_conduct"
+    t.boolean "under_18"
+    t.integer "region"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["region"], name: "index_users_on_region"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+    t.index ["under_18"], name: "index_users_on_under_18"
     t.index ["unlock_token"], name: "index_users_on_unlock_token", unique: true
   end
 

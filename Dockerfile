@@ -11,4 +11,6 @@ RUN bundle install
 COPY . .
 
 EXPOSE 3000
+COPY docker-entrypoint.sh /usr/local/bin/
+ENTRYPOINT [ "docker-entrypoint.sh" ]
 CMD ["rails", "server", "-b", "0.0.0.0"]

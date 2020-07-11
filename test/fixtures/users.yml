@@ -14,6 +14,7 @@ one:
   me_govhack_contact: true
   accepted_code_of_conduct: <%= Time.now %>
   mailing_list: true
+  region: South Australia
 
 two:
   id: 2
@@ -24,6 +25,7 @@ two:
   how_did_you_hear: [no response recorded]
   me_govhack_contact: true
   accepted_code_of_conduct: <%= Time.now %>
+  region: New Zealand
 
 three:
   id: 3
@@ -33,6 +35,7 @@ three:
   confirmed_at: <%= Time.current - 1.year %>
   how_did_you_hear: [no response recorded]
   accepted_code_of_conduct: <%= Time.now %>
+  region: New South Wales
 
 unconfirmed_user:
   id: 4

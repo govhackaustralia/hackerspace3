@@ -1,6 +1,6 @@
 = form_for current_user do |form|
   .field
-    = form.label :full_name, 'Full name: (Required)'
+    = form.label :full_name
     = form.text_field :full_name
   .field
     = form.label :preferred_name
@@ -12,32 +12,26 @@
     = form.label :phone_number
     = telephone_field(:user, :phone_number)
   .field
-    = form.label :twitter
-    = form.text_field :twitter
-  .field
-    = form.label :slack
-    = form.text_field :slack
-  .field
     = form.label :dietary_requirements
     = form.text_field :dietary_requirements
-  - if false
-    .field
-      = form.label :tshirt_size
-      = form.select(:tshirt_size, options_for_select(AVAILABLE_TSHIRT_SIZES, @user.tshirt_size))
   .field
     = form.label :mailing_list
-    = form.check_box :mailing_list, { checked: @user.mailing_list }
+    = form.check_box :mailing_list, checked: @user.mailing_list
   .field
     = form.label :challenge_sponsor_contact_place
-    = form.check_box :challenge_sponsor_contact_place, { checked: @user.challenge_sponsor_contact_place }
+    = form.check_box :challenge_sponsor_contact_place, |
+      checked: @user.challenge_sponsor_contact_place
   .field
     = form.label :challenge_sponsor_contact_enter
-    = form.check_box :challenge_sponsor_contact_enter, { checked: @user.challenge_sponsor_contact_enter }
+    = form.check_box :challenge_sponsor_contact_enter, |
+      checked: @user.challenge_sponsor_contact_enter
   .field
     = form.label :my_project_sponsor_contact
-    = form.check_box :my_project_sponsor_contact, { checked: @user.my_project_sponsor_contact }
+    = form.check_box :my_project_sponsor_contact, |
+      checked: @user.my_project_sponsor_contact
   .field
     = form.label :me_govhack_contact
-    = form.check_box :me_govhack_contact, { checked: @user.me_govhack_contact }
+    = form.check_box :me_govhack_contact, |
+      checked: @user.me_govhack_contact
   .actions
     = form.submit 'Update Details'

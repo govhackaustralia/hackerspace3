@@ -150,4 +150,24 @@ class UserTest < ActiveSupport::TestCase
     @unconfirmed_user.confirm
     assert @unconfirmed_user.confirmed_status.match? 'confirmed at'
   end
+
+  test 'enums' do
+    assert User.regions.is_a? Hash
+  end
+
+  test 'registration_complete? false for no full_name' do
+    @user.full_name = nil
+    assert_not @user.registration_complete?
+  end
+
+  test 'registration_complete? false for no region' do
+    @user.region = nil
+    assert_not @user.registration_complete?
+  end
+
+  test 'registration_complete? true for full_name and region entered' do
+    assert @user.full_name.present?
+    assert @user.region.present?
+    assert @user.registration_complete?
+  end
 end

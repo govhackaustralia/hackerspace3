@@ -9,34 +9,97 @@ class User < ApplicationRecord
   has_many :headers, through: :assignments
   has_many :registrations, through: :assignments
 
-  has_many :event_assignments, -> { event_assignments }, class_name: 'Assignment'
+  has_many :event_assignments,
+    -> { event_assignments },
+    class_name: 'Assignment'
 
-  has_many :joined_team_assignments, -> { team_confirmed }, class_name: 'Assignment'
-  has_many :joined_teams, through: :joined_team_assignments, source: :assignable, source_type: 'Team'
+  has_many :joined_team_assignments,
+    -> { team_confirmed },
+    class_name: 'Assignment'
 
-  has_many :invited_team_assignments, -> { team_invitees }, class_name: 'Assignment'
-  has_many :invited_teams, through: :invited_team_assignments, source: :assignable, source_type: 'Team'
+  has_many :joined_teams,
+    through: :joined_team_assignments,
+    source: :assignable,
+    source_type: 'Team'
 
-  has_many :judge_assignments, -> { judges }, class_name: 'Assignment'
-  has_many :challenges_judging, through: :judge_assignments, source: :assignable, source_type: 'Challenge'
+  has_many :invited_team_assignments,
+    -> { team_invitees },
+    class_name: 'Assignment'
 
-  has_many :leader_assignments, -> { team_leaders }, class_name: 'Assignment'
-  has_many :leader_teams, through: :leader_assignments, source: :assignable, source_type: 'Team'
-  has_many :winning_entries, -> { winners }, through: :leader_teams, source: :entries
+  has_many :invited_teams,
+    through: :invited_team_assignments,
+    source: :assignable,
+    source_type: 'Team'
 
-  has_many :participating_registrations, -> { participating }, through: :assignments, source: :registrations
-  has_many :participating_events, through: :participating_registrations, source: :event
-  has_many :participating_competition_events, -> { competitions }, through: :participating_registrations, source: :event
+  has_many :judge_assignments,
+    -> { judges },
+    class_name: 'Assignment'
 
-  has_many :staff_assignments, -> { staff }, class_name: 'Assignment'
+  has_many :challenges_judging,
+
+  through: :judge_assignments,
+    source: :assignable,
+    source_type: 'Challenge'
+
+  has_many :leader_assignments,
+    -> { team_leaders },
+    class_name: 'Assignment'
+
+  has_many :leader_teams,
+    through: :leader_assignments,
+    source: :assignable,
+    source_type: 'Team'
+
+  has_many :winning_entries,
+    -> { winners },
+    through: :leader_teams,
+    source: :entries
+
+  has_many :participating_registrations,
+    -> { participating },
+    through: :assignments,
+    source: :registrations
+
+  has_many :participating_events,
+    through: :participating_registrations,
+    source: :event
+
+  has_many :participating_competition_events,
+    -> { competitions },
+    through: :participating_registrations,
+    source: :event
+
+  has_many :staff_assignments,
+    -> { staff },
+    class_name: 'Assignment'
 
   scope :search, lambda { |term|
     where 'full_name ILIKE ? OR email ILIKE ? OR preferred_name ILIKE ?',
           "%#{term}%", "%#{term}%", "%#{term}%"
   }
+
   scope :mailing_list, -> { where mailing_list: true }
 
   validates :accepted_terms_and_conditions, acceptance: true
+
+  enum region: {
+    'Queensland' => 0,
+    'New South Wales' => 1,
+    'Victoria' => 2,
+    'Tasmania' => 3,
+    'South Australia' => 4,
+    'Western Australia' => 5,
+    'Northern Territory' => 6,
+    'Australian Capital Territory' => 7,
+    'New Zealand' => 8,
+    'Outside Australia and New Zealand' => 9
+  }
+
+  def registration_complete?
+    errors[:full_name] << 'must be entered' if full_name.blank?
+    errors[:region] << 'must be entered' if region.blank?
+    errors.empty?
+  end
 
   # Gravitar Gem
   include Gravtastic
