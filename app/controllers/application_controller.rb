@@ -5,13 +5,8 @@ class ApplicationController < ActionController::Base
   private
 
   def competition
-    @competition ||= competition_by_year || Competition.current
-  end
-
-  def competition_by_year
-    return unless request.subdomain.match?(/\A\d{4}\z/)
-
-    Competition.find_by_year request.subdomain
+    @competition = Competition.find_by_year request.subdomain
+    @competition ||= Competition.current
   end
 
   def holder
