@@ -116,8 +116,10 @@ docker-compose up -d postgres
 Then start the `govhackau/hackerspace3` image with:
 
 ```bash
-docker-compose run --rm -d -v "$PWD":/usr/src/app --service-ports hackerspace3
+docker-compose run --rm -d -v "$(pwd)":/usr/src/app --service-ports hackerspace3
 ```
+
+NOTE: Due to the "$(pwd)" in the above command, it should work in any POSIX shell (bash/sh/zsh etc), and PowerShell. It won't work in Windows Command Prompt.
 
 This runs the container and bind-mounts your checked out code into the container so you can work on it without needing to rebuild the container's image.
 
