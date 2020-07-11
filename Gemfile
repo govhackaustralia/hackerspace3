@@ -81,6 +81,8 @@ group :development do
   gem 'guard-bundler'
   # Preview mail in the browser instead of sending
   gem 'letter_opener'
+  # https://realfavicongenerator.net/ favicon generator
+  gem 'rails_real_favicon'
 end
 
 group :test do
