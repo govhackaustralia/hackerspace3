@@ -6,7 +6,9 @@ A system to manage competition participants, sponsors, and management.
 
 Hackerspace 3 is a [Ruby on Rails application](https://rubyonrails.org/)
 
-Current major framework version is 6
+Current major version is 6
+
+Check out the [Rails Guides](https://guides.rubyonrails.org/index.html) to get up and running.
 
 ## Ruby version
 
