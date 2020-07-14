@@ -11,6 +11,15 @@ class User < ApplicationRecord
   has_many :headers, through: :assignments
   has_many :registrations, through: :assignments
 
+  has_many :badge_assignments,
+    -> { where title: ASSIGNEE },
+    class_name: 'Assignment'
+
+  has_many :badges,
+    through: :badge_assignments,
+    source: :assignable,
+    source_type: 'Badge'
+
   has_many :event_assignments,
     -> { event_assignments },
     class_name: 'Assignment'

@@ -1,0 +1,17 @@
+- content_for :title, "#{@badge.name} Badge"
+%main.team_page
+  %h2= yield :title
+  = link_to edit_admin_competition_badge_path(@competition, @badge)
+  %p
+    %strong
+      Name:
+    = @badge.name
+  %p
+    %strong
+      Capacity:
+    = @badge.capacity
+  - if @badge.art.attached?
+    = image_tag url_for(@badge.art), alt: @badge.name
+  - else
+    = image_tag 'default_profile_pic.png'
+= link_to 'Back to Badges', admin_competition_badges_path(@competition)

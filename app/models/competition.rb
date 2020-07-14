@@ -25,6 +25,7 @@ class Competition < ApplicationRecord
   has_many :entries, through: :challenges
   has_many :checkpoints
   has_many :data_sets, through: :regions
+  has_many :badges
 
   has_many :criteria
   has_many :project_criteria, -> { where category: PROJECT }, class_name: 'Criterion'

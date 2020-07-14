@@ -21,5 +21,14 @@
     %strong
       Interests
     = @profile.interests.map {|tag|"##{tag}"}.join(' ')
+  %h3 Badges
+  - @badges.each do |badge|
+    %p
+      %strong
+        = badge.name
+    - if badge.art.attached?
+      = image_tag(url_for(badge.art), alt: 'GovHack Badge Art')
+    - else
+      = image_tag "default_profile_pic.png"
 
 = link_to 'Back to Profiles', profiles_path

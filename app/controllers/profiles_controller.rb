@@ -6,5 +6,6 @@ class ProfilesController < ApplicationController
   def show
     @profile = Profile.find_by_identifier params[:id]
     @user = @profile.user
+    @badges = @user.badges
   end
 end

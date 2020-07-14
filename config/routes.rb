@@ -79,6 +79,7 @@ Rails.application.routes.draw do
       end
       resources :events, only: :index
       resources :sponsors
+      resources :badges
       member do
         get 'aws_credits_requested'
         get 'sponsor_data_set_report'

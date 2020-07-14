@@ -138,3 +138,12 @@ fifteen:
   assignable_type: Competition
   title: Chief Judge
   competition_id: 1
+
+badge_assignment:
+  id: 16
+  user_id: 1
+  holder_id: 1
+  assignable_id: 1
+  assignable_type: Badge
+  title: Assignee
+  competition_id: 1

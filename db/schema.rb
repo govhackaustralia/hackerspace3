@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_06_122305) do
+ActiveRecord::Schema.define(version: 2020_07_08_092646) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -50,6 +50,16 @@ ActiveRecord::Schema.define(version: 2020_07_06_122305) do
     t.index ["holder_id"], name: "index_assignments_on_holder_id"
     t.index ["title"], name: "index_assignments_on_title"
     t.index ["user_id"], name: "index_assignments_on_user_id"
+  end
+
+  create_table "badges", force: :cascade do |t|
+    t.integer "competition_id"
+    t.string "name"
+    t.string "identifier"
+    t.integer "capacity"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["identifier"], name: "index_badges_on_identifier"
   end
 
   create_table "bulk_mails", force: :cascade do |t|
