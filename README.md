@@ -67,7 +67,7 @@ Run Hackerspace:
 **NOTE**: The initial run of Hackerspace will likely take several minutes to initialise the database before being usable. This is normal.
 
 ```bash
-$ docker-compose up -d
+$ docker-compose up
 ```
 
 Then browse to http://localhost:3000 and click Sign In.
@@ -112,7 +112,7 @@ docker-compose up -d postgres
 Then start the `govhackau/hackerspace3` image with:
 
 ```bash
-docker-compose run --rm -d -v "$(pwd)":/usr/src/app --service-ports hackerspace3
+docker-compose run --rm -v "$(pwd)":/usr/src/app --service-ports hackerspace3
 ```
 
 NOTE: Due to the "$(pwd)" in the above command, it should work in any POSIX shell (bash/sh/zsh etc), and PowerShell. It won't work in Windows Command Prompt.
