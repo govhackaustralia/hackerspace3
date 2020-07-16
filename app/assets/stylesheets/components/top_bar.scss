@@ -2,7 +2,7 @@
   display: flex;
   justify-content: space-between;
   background-color: white;
-  border-bottom: 3em solid #23282D;
+  border-bottom: 0.05em solid #23282D;
 
   section {
     display: flex;
@@ -15,10 +15,10 @@
     #logo {
       display: flex;
       align-items: center;
-      padding: 0.25em 0.5em 0.25em 0.5em;
+      padding: 0.25em 0.5em 0.25em 1em;
 
       img {
-        max-width: 300px;
+        max-width: 200px;
         width: auto;
         height: auto;
       }
@@ -38,9 +38,10 @@
         display: block;
         text-decoration: none;
         text-transform: uppercase;
-        color: #424242;
-        font-size: 2em;
-        margin: 0.5em 0.5em;
+        color: #000000;
+        font-size: 1.25em;
+        font-weight: 800;
+        margin: 0.5em 1.75em;
         padding: 0.5em 0;
         border-radius: 0;
         border-style: solid;
@@ -74,26 +75,48 @@
     }
   }
 
+  .nav-button {
+    border-radius: 0.5em;
+    line-height: 0.875em;
+    color: #FFFFFF;
+    font-family: Open Sans;
+    font-size: 1.2em;
+    font-weight: 450;
+    padding: 0.5em 1em;
+    margin: 1.3em 2.7em 1.3em 2em;
+    background-color: #C61F55;
+    border: solid #C61F55 0.0625em;
+    text-decoration: none;
+    text-align: center;
+    display: inline-block;
+    cursor: pointer;
+    text-align: center;
+    text-transform: uppercase;
+  }
+
+  .nav-button:hover {
+    background: #BB0C45;
+    border: solid #CB1C55 0.0625em;
+    border-radius: 0.625em;
+    text-decoration: none;
+  }
+
   aside {
     display: flex;
     flex-direction: column;
     text-align: right;
     justify-content: center;
+    width: 3.5em;
+    height: 3.5em;
+    overflow: hidden;
+    margin: 1em;
+  }
 
-    a {
-      display: block;
-      text-decoration: none;
-      text-transform: uppercase;
-      color: #424242;
-      font-size: 1.15em;
-      padding: 0.25em 0.5em;
-      margin: 0 1em;
-      transition: all 0.5s ease;
-
-      &:hover {
-        transform: scale(1.15, 1.15);
-      }
-    }
+  aside > img {
+    border-radius: 50%;
+    width: auto;
+    height: 100%;
+    cursor: pointer;
   }
 }
 
