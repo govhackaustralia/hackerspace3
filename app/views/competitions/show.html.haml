@@ -4,15 +4,17 @@
     Welcome to GovHack #{@competition.year} Hackerspace
   %nav
     %section
-      - if @connections.present?
+      - if @event_counts[CONFERENCE]
+        %div= link_to 'Conferences', conferences_path
+      - if @event_counts[CONNECTION_EVENT]
         %div= link_to 'Connections Events', connections_path
-      - if @competition_events.present?
+      - if @event_counts[COMPETITION_EVENT]
         %div= link_to 'Competition Events', competition_events_path
-      - if @awards.present?
+      - if @event_counts[AWARD_EVENT]
         %div= link_to 'Awards Events', awards_path
-      - if @challenges.present?
+      - if @any_challenges
         %div= link_to 'Challenges', challenges_path
-      - if @teams.present?
+      - if @any_teams
         %div= link_to 'Projects', projects_path
-      - if @data_sets.present?
+      - if @any_data_sets
         %div= link_to 'Datasets', data_sets_path
