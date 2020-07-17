@@ -1,16 +1,14 @@
 class CompetitionsController < ApplicationController
   def show
     retrieve_events
-    @challenges = @competition.challenges.approved
-    @teams = @competition.teams.published
-    @data_sets = @competition.data_sets
+    @any_challenges = @competition.challenges.approved.exists?
+    @any_teams = @competition.teams.published.exists?
+    @any_data_sets = @competition.data_sets.exists?
   end
 
   private
 
   def retrieve_events
-    @connections = @competition.events.published.future.connections
-    @competition_events = @competition.events.published.future.competitions
-    @awards = @competition.events.published.future.awards
+    @event_counts = @competition.events.published.future.group(:event_type).count
   end
 end
