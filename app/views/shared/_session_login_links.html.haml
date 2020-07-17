@@ -2,7 +2,11 @@
   %aside
     -# = link_to "Manage Account (#{current_user.display_name})", manage_account_path
     -# = link_to 'Sign Out', destroy_user_session_path, :method => :delete
-    = link_to (image_tag("sydneyback.jpg", :class => "navbar-avatar")), manage_account_path
+    -# = link_to (image_tag("sydneyback.jpg", :class => "navbar-avatar")), manage_account_path
+    = image_tag "sydneyback.jpg", :class => "navbar-avatar"
+    %div{:class => "nav-dropdown"}
+      = link_to "Manage Account (#{current_user.display_name})", manage_account_path
+      = link_to 'Sign Out', destroy_user_session_path, :method => :delete
 - else
   -# %aside
   -#   = link_to 'Sign In', user_session_path

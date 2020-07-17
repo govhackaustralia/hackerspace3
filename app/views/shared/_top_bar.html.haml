@@ -4,10 +4,12 @@
       = link_to (render "shared/logo"), root_path
       %article
         - if user_signed_in?
-          = link_to 'Team', root_path
+          = link_to 'Events', events_path
+          = link_to 'Challenges', challenges_path
+          = link_to 'Projects', projects_path
           = link_to 'Datasets', root_path
+          = link_to 'Team', root_path
           = link_to 'Schedule', root_path
-          = link_to 'FAQs', root_path
         - else
           = link_to 'Conferences', root_path
           = link_to 'Events', events_path
