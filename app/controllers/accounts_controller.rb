@@ -26,8 +26,6 @@ class AccountsController < ApplicationController
   ACCOUNT_PARAMS = %i[
     full_name
     preferred_name
-    organisation_name
-    phone_number
     mailing_list
     how_did_you_hear
     challenge_sponsor_contact_place

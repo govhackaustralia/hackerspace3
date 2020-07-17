@@ -10,12 +10,6 @@
         = form.label :preferred_name
         = form.text_field :preferred_name
       .field
-        = form.label :organisation_name
-        = form.text_field :organisation_name
-      .field
-        = form.label :phone_number
-        = telephone_field(:user, :phone_number)
-      .field
         = form.label :region
         = form.select :region,                                                 |
           options_for_select(User.regions.keys.sort, selected: @user.region), |
