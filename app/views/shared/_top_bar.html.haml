@@ -9,7 +9,8 @@
           = link_to 'Schedule', root_path
           = link_to 'FAQs', root_path
         - else
-          = link_to 'Conferences', root_path
+          - unless @competition.started?
+            = link_to 'Conferences', conferences_path
           = link_to 'Events', events_path
           = link_to 'Challenges', challenges_path
           = link_to 'Projects', projects_path
