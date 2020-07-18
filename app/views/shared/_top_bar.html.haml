@@ -7,9 +7,7 @@
           = link_to 'Events', events_path
           = link_to 'Challenges', challenges_path
           = link_to 'Projects', projects_path
-          = link_to 'Datasets', root_path
-          = link_to 'Team', root_path
-          = link_to 'Schedule', root_path
+          = link_to 'Datasets', data_sets_path
         - else
           - unless @competition.started?
             = link_to 'Conferences', conferences_path
