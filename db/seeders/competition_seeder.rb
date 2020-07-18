@@ -42,6 +42,10 @@ class CompetitionSeeder < Seeder
         description: Faker::Lorem.paragraph,
         category: PROJECT
       )
+      comp.hunt_questions.create(
+        question: "What is the answer to question #{time}?",
+        answer: "Answer #{time}"
+      )
     end
 
     2.times do |time|
