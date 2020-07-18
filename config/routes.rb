@@ -22,6 +22,7 @@ Rails.application.routes.draw do
   resources :agreements, only: [:edit, :update]
   resources :demographics, only: [:edit, :update]
   resources :connections, :conferences, :competition_events, :awards, only: :index
+  resources :hunt_questions, only: [:index, :update]
 
   namespace :users do
     resources :invitations, only: [:update, :destroy]
@@ -150,6 +151,7 @@ Rails.application.routes.draw do
   get 'update_personal_details', to: 'users#edit'
   get 'terms_and_conditions', to: 'static_pages#terms_and_conditions'
   get 'code_of_conduct', to: 'static_pages#code_of_conduct'
+  get 'scavenger_hunt', to: 'hunt_questions#index'
 
   mount ActionCable.server => '/cable'
 

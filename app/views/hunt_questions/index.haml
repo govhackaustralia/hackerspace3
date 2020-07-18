@@ -1,0 +1,17 @@
+- content_for :title, 'Scavenger Hunt'
+%main
+%h2= yield :title
+- @questions.each do |question|
+  = form_for question do |form|
+    = form.label :answer, question.question
+    - if user_signed_in?
+      - if current_user.assignments.where(assignable: question).exists?
+        %p You have successfully answered this question
+      - else
+        = form.text_field :answer
+        = form.submit 'Attempt'
+    - else
+      %p Sign Up to participate in the scavenger hunt!
+
+- if @scavenger_badge.present?
+  %p You have claimed the scavenger badge!
