@@ -155,14 +155,14 @@ class RegistrationsController < ApplicationController
     @user.update(
       preferred_name: params[:preferred_name],
       organisation_name: params[:organisation_name],
-      dietary_requirements: params[:dietary_requirements]
+      dietary_requirements: params[:dietary_requirements],
+      registration_type: params[:registration_type],
+      parent_guardian: params[:parent_guardian]
     )
   end
 
   def update_competition_event_attrs
     @user.update(
-      registration_type: params[:registration_type],
-      parent_guardian: params[:parent_guardian],
       request_not_photographed: params[:request_not_photographed]
     )
     @holder.update(
