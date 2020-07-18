@@ -3,8 +3,16 @@
     %section
       = link_to (render "shared/logo"), root_path
       %article
-        = link_to 'Events', events_path
-        = link_to 'Challenges', challenges_path
-        = link_to 'Projects', projects_path
-        = link_to 'Datasets', data_sets_path
+        - if user_signed_in?
+          = link_to 'Events', events_path
+          = link_to 'Challenges', challenges_path
+          = link_to 'Projects', projects_path
+          = link_to 'Datasets', data_sets_path
+        - else
+          - unless @competition.started?
+            = link_to 'Conferences', conferences_path
+          = link_to 'Events', events_path
+          = link_to 'Challenges', challenges_path
+          = link_to 'Projects', projects_path
+          = link_to 'Datasets', data_sets_path
     = render "shared/session_login_links"

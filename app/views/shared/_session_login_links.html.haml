@@ -1,8 +1,8 @@
 - if user_signed_in?
   %aside
-    = link_to "Manage Account (#{current_user.display_name})", manage_account_path
-    = link_to 'Sign Out', destroy_user_session_path, :method => :delete
+    = image_tag "sydneyback.jpg", class: "navbar-avatar"
+    %div.nav-dropdown
+      = link_to "Manage Account (#{current_user.display_name})", manage_account_path
+      = link_to 'Sign Out', destroy_user_session_path, method: :delete
 - else
-  %aside
-    = link_to 'Sign In', user_session_path
-    = link_to 'Register', new_user_registration_path
+  = link_to 'Join the Hack', new_user_registration_path, class: "nav-button"
