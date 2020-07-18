@@ -49,6 +49,7 @@ class CompetitionTest < ActiveSupport::TestCase
     assert @competition.challenges.include? @challenge
     assert @competition.entries.include? @entry
     assert @competition.checkpoints.include? @checkpoint
+    assert @competition.hunt_questions.include? hunt_questions(:one)
     assert @competition.data_sets.include? @data_set
     assert @competition.badges.include? badges(:one)
     assert @competition.criteria.include? @criterion
