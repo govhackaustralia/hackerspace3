@@ -1,12 +1,16 @@
 %article.event-tile
   %div
     %h3= event.name
-    %h4= event.region.name
+    %h4
+      - if event.event_type == CONFERENCE
+        = event.event_partners.first&.name
+      - else
+        = event.region.name
     - if [CONNECTION_EVENT, CONFERENCE, AWARD_EVENT].include? event.event_type
       - unless event.start_time.blank?
         %h4= event.start_time.strftime("%e %B %Y")
       - unless event.end_time.blank?
-        %h4= event.start_time.strftime("%I.%M %p")
+        %h4= event.end_time.strftime("%I.%M %p")
       %p
         = event.event_type
         = event.event_type == CONFERENCE ? 'Session' : 'Event'
