@@ -5,7 +5,7 @@
   %nav
     %section
       - if @event_counts[CONFERENCE]
-        %div= link_to 'Conferences', conferences_path
+        %div= link_to 'Conference', conference_index_path
       - if @event_counts[CONNECTION_EVENT]
         %div= link_to 'Connections Events', connections_path
       - if @event_counts[COMPETITION_EVENT]

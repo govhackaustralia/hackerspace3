@@ -1,0 +1,8 @@
+- content_for :title, 'Conference'
+%main.events_page
+  %section.header
+    %h2 GovHack Conference | 20th - 31st July 2020
+    %p An online conference discussing the wonders of data, tech and future.
+  = render partial: 'events/event_collection', locals: { events: @future_sessions, title: 'Upcoming Sessions' }
+  = render partial: 'events/event_collection', locals: { events: @past_sessions, title: 'Past Sessions' }
+%p= link_to 'All Events', events_path

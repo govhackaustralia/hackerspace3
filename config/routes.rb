@@ -21,7 +21,7 @@ Rails.application.routes.draw do
   resources :accounts, only: [:edit, :update]
   resources :agreements, only: [:edit, :update]
   resources :demographics, only: [:edit, :update]
-  resources :connections, :conferences, :competition_events, :awards, only: :index
+  resources :connections, :conference, :competition_events, :awards, only: :index
 
   namespace :users do
     resources :invitations, only: [:update, :destroy]
