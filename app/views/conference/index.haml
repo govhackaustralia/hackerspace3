@@ -4,5 +4,7 @@
     %h2 GovHack Conference | 22nd - 30th July 2020
     %p GovHack will be running its first international and virtual conference in 2020! The conference presents a great opportunity to network and learn from industry experts, all from the comfort of your own home.
   = render partial: 'events/event_collection', locals: { events: @future_sessions, title: 'Upcoming Conference Sessions' }
+  = render partial: 'events/event_collection', locals: { events: @future_connections, title: 'Upcoming Connection Events' }
   = render partial: 'events/event_collection', locals: { events: @past_sessions, title: 'Past Conference Sessions' }
+  = render partial: 'events/event_collection', locals: { events: @past_connections, title: 'Past Connection Events' }
 %p= link_to 'All Events', events_path
