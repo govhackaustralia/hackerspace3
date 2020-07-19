@@ -1,6 +1,7 @@
 - content_for :title, @event.name
 %main.events_page.single-event
-  %h2 #{@event.name} - #{@region.name}
+  %section.header
+    %h2 #{@event.name} - #{@region.name}
   %section
     %h3 Event Information
     %section.info

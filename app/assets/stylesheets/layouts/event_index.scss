@@ -1,32 +1,48 @@
 .events_page {
-  padding: 2em 5em;
+  margin: 0 auto;
 
   h2 {
-    color: #4c9ad2;
+    color: #ffffff;
+    text-align: center;
+    line-height: 1.2em;
     font-size: 2em;
   }
 
   h3 {
     font-size: 1.5em;
+    line-height: 1.3em;
   }
 
   > {
-    section > h3, h3 {
+    section > h3,
+    h3 {
       margin-top: 1em;
       margin-left: 1em;
       color: #ca1e56;
     }
+    section.header > p,
+    p {
+      margin-top: 0.5em;
+      font-size: 1.25em;
+      text-align: center;
+      color: #ffffff;
+    }
   }
 
   section {
+    &.header {
+      display: block;
+      background-color: #4c9ad2;
+      padding: 5rem;
+      align-content: center;
+    }
     &.info p {
       margin-top: 0.5em;
       font-size: 1.25em;
     }
   }
-
   > section {
-    padding: 2em 2em;
+    padding: 2em;
   }
 }
 
@@ -35,7 +51,7 @@
     padding: 1em 1em;
 
     > section {
-      padding: .5em .5em;
+      padding: 0.5em 0.5em;
     }
   }
 }
