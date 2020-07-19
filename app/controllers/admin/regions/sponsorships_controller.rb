@@ -43,7 +43,7 @@ class Admin::Regions::SponsorshipsController < ApplicationController
   end
 
   def search_sponsors
-    @sponsor = Sponsor.find_by_name params[:term]
+    @sponsor = @competition.sponsors.find_by_name params[:term]
     if @sponsor.present?
       @existing_sponsorship = Sponsorship.find_by(
         sponsor: @sponsor,
