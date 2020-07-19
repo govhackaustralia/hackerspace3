@@ -10,7 +10,7 @@
       - unless event.start_time.blank?
         %h4= event.start_time.strftime("%e %B %Y")
       - unless event.end_time.blank?
-        %h4= event.end_time.strftime("%I.%M %p")
+        %h4= event.start_time.strftime("%I.%M %p")
       %p
         = event.event_type
         = event.event_type == CONFERENCE ? 'Session' : 'Event'
