@@ -103,7 +103,7 @@ class User < ApplicationRecord
 
   # Gravitar Gem
   include Gravtastic
-  has_gravatar
+  has_gravatar default: 'robohash'
 
   # Active Storage prifel image.
   has_one_attached :govhack_img

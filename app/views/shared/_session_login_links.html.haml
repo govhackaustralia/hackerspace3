@@ -1,6 +1,6 @@
 - if user_signed_in?
   %aside
-    = image_tag "sydneyback.jpg", class: "navbar-avatar"
+    = image_tag current_user.gravatar_url, class: "navbar-avatar"
     %div.nav-dropdown
       = link_to "Manage Account (#{current_user.display_name})", manage_account_path
       = link_to 'Sign Out', destroy_user_session_path, method: :delete
