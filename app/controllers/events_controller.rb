@@ -36,7 +36,7 @@ class EventsController < ApplicationController
 
   def retrieve_future_events
     @future_connections = @events.connections.future
-    @future_conferences = @events.conferences.future
+    @future_sessions = @events.conferences.future
     @future_locations = @events.locations.future
     @future_remotes = @events.remotes.future
     @future_awards = @events.awards.future
@@ -44,7 +44,7 @@ class EventsController < ApplicationController
 
   def retrive_past_events
     @past_connections = @events.connections.past
-    @past_conferences = @events.conferences.past
+    @past_sessions = @events.conferences.past
     @past_competitions = @events.competitions.past
     @past_awards = @events.awards.past
   end

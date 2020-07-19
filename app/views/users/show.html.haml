@@ -49,7 +49,7 @@
           - @connection_registrations.each do |registration|
             = render 'registration_management', locals: { registration: registration }
         - if @conference_registrations.present?
-          %h4 Conferences
+          %h4 Conference
           - @conference_registrations.each do |registration|
             = render 'registration_management', locals: { registration: registration }
         - if @competition_registrations.present?
