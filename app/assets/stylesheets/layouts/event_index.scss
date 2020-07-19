@@ -16,8 +16,8 @@
   > {
     section > h3,
     h3 {
-      margin-top: 1em;
-      margin-left: 1em;
+      margin-top: 2em;
+      padding: 0em 2em;
       color: #ca1e56;
     }
     section.header > p,
@@ -26,6 +26,8 @@
       font-size: 1.25em;
       text-align: center;
       color: #ffffff;
+      width: 50%;
+      margin: 0 auto;
     }
   }
 
@@ -48,10 +50,24 @@
 
 @media only screen and (max-width: 900px) {
   .events_page {
-    padding: 1em 1em;
+    margin: 0 auto;
+    section > h3,
+    h3 {
+      text-align: center;
+      margin-left: 0;
+    }
+    > {
+      section.header > p,
+      p {
+        width: 100%;
+        margin: 0 auto;
+      }
+    }
 
-    > section {
-      padding: 0.5em 0.5em;
+    section {
+      &.header {
+        padding: 2rem;
+      }
     }
   }
 }
