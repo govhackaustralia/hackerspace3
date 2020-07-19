@@ -1,7 +1,10 @@
 - content_for :title, @event.name
 %main.events_page.single-event
   %section.header
-    %h2 #{@event.name} - #{@region.name}
+    %h2
+      #{@event.name}
+      - unless @event.event_type == CONFERENCE
+        = "- #{@region.name}"
   %section
     %h3 Event Information
     %section.info
