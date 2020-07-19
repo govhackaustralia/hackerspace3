@@ -1,7 +1,8 @@
 - content_for :title, 'Events'
 %main.events_page
-  %section
+  %section.header
     %h2 Events for #{@competition.name}
+  %section
     - if @events.present?
       %p= link_to 'Download CSV', events_path(format: 'csv'), class: 'download-csv'
       = render partial: 'events/event_collection', locals: { events: @future_connections, title: 'Upcoming Connection Events' }

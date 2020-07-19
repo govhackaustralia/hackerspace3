@@ -21,6 +21,17 @@
     display: block;
   }
 
+  .header {
+    display: block;
+    background-color: #4c9ad2;
+    padding: 5rem;
+    align-content: center;
+    h1 {
+      color: white;
+      text-align: center;
+    }
+  }
+
   > section > section > aside {
     > a {
       box-sizing: border-box;
