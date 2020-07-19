@@ -1,17 +1,41 @@
 - content_for :title, 'Scavenger Hunt'
 %main
-%h2= yield :title
-- @questions.each do |question|
-  = form_for question do |form|
-    = form.label :answer, question.question
-    - if user_signed_in?
-      - if current_user.assignments.where(assignable: question).exists?
-        %p You have successfully answered this question
-      - else
-        = form.text_field :answer
-        = form.submit 'Attempt'
-    - else
-      %p Sign Up to participate in the scavenger hunt!
+:javascript
+  const showInstructions = (shouldShow) => 
+    document.querySelector(".scavenger_instructions").style.display = shouldShow ? 'block' : 'none'
+  
+%div{:class => "scavenger_container"}
+  %div{:class => "scavenger_questions"}
+    - @questions.each do |question|
+      %div= question.question
+  %div{:class => "scavenger_answers"}
+    %h2= yield :title
+    - @questions.each do |question|
+      = form_for question do |form|
+        = form.label :answer, question.question
+        - if user_signed_in?
+          - if current_user.assignments.where(assignable: question).exists?
+            %p{:class => "scavenger_answered"} You have successfully answered this question
+          - else
+            = form.text_field :answer
+            = form.submit 'Submit'
+        - else
+          %p Sign Up to participate in the scavenger hunt!
 
-- if @scavenger_badge.present?
-  %p You have claimed the scavenger badge!
+    %a{:class => "nav-button", :onclick => "showInstructions(true)"} View Instructions
+
+    - if @scavenger_badge.present?
+      %p You have claimed the scavenger badge!
+
+    %div{:class => "scavenger_instructions"}
+      %h2 Instructions:
+      
+      %p Getting lost, can sometimes be the easiest way to disover new things. The GovHack Treasure Hunt will help you find your way around the digital competition.
+      
+      %p Correct answers will earn you Treasure Hunt badges for your GovHack profile.
+
+      %a{:class => "nav-button", :onclick => "showInstructions(false)"} Back
+
+
+
+
