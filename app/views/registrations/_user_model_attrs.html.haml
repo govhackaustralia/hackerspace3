@@ -12,7 +12,8 @@
   %div
     = label_tag :preferred_name
     %br/
-    %em (this will be printed on your badge)
+    - unless @event.event_type == CONFERENCE
+      %em (this will be printed on your badge)
   = text_field_tag :preferred_name, @user.preferred_name
 .field
   = label_tag :organisation_name
