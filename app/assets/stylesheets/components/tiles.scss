@@ -1,5 +1,5 @@
 section.tiles {
-  padding: 2em 2em;
+  padding: 2em;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -7,24 +7,25 @@ section.tiles {
   align-items: center;
 
   a {
-    &:nth-of-type(3n+0) div {
+    &:nth-of-type(3n + 0) div {
       background-color: rgba(202, 30, 86, 0.5);
       border-bottom: 1em solid #ca1e56;
     }
 
-    &:nth-of-type(3n+1) div {
+    &:nth-of-type(3n + 1) div {
       background-color: rgba(76, 154, 210, 0.5);
       border-bottom: 1em solid #4c9ad2;
     }
 
-    &:nth-of-type(3n+2) div {
+    &:nth-of-type(3n + 2) div {
       background-color: rgba(113, 113, 113, 0.5);
       border-bottom: 1em solid #717171;
     }
   }
 
   article {
-    h3, h4 {
+    h3,
+    h4 {
       color: #ddd;
       margin-bottom: 0.5em;
     }
@@ -43,17 +44,17 @@ section.tiles {
   }
 
   a {
-    &:nth-of-type(3n+0) div:hover {
+    &:nth-of-type(3n + 0) div:hover {
       background-color: rgba(253, 37, 107, 0.5);
       border-bottom: 1em solid #fd266c;
     }
 
-    &:nth-of-type(3n+1) div:hover {
+    &:nth-of-type(3n + 1) div:hover {
       background-color: rgba(94, 191, 261, 0.5);
       border-bottom: 1em solid #6dbff9;
     }
 
-    &:nth-of-type(3n+2) div:hover {
+    &:nth-of-type(3n + 2) div:hover {
       background-color: rgba(161, 161, 161, 0.5);
       border-bottom: 1em solid #a0a0a0;
     }
@@ -62,6 +63,6 @@ section.tiles {
 
 @media only screen and (max-width: 900px) {
   section.events article {
-    margin: .5em .5em;
+    margin: 0.5em 0.5em;
   }
 }

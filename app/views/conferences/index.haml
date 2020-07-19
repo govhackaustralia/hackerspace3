@@ -1,7 +1,9 @@
 - content_for :title, 'Conferences'
 %main.events_page
-  %section.info
-    %h2= yield :title
-  = render partial: 'events/event_collection', locals: { events: @future_conferences, title: 'Upcoming Conferences' }
-  = render partial: 'events/event_collection', locals: { events: @past_conferences, title: 'Past Conferences' }
-%p= link_to 'All Events', events_path
+  %section.header
+    %h2 GovHack Conference | 20th - 31st July 2020
+    %p An online conference discussing the wonders of data, tech and future.
+  %section
+    = render partial: 'events/event_collection', locals: { events: @future_conferences, title: 'Upcoming Conferences' }
+    = render partial: 'events/event_collection', locals: { events: @past_conferences, title: 'Past Conferences' }
+  %p= link_to 'All Events', events_path
