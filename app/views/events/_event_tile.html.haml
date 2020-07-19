@@ -1,6 +1,6 @@
 %article.event-tile
   %div
-    %h3= event.name
+    %h3{style: ('font-size: 1.2em;' if event.event_type == CONFERENCE)}= event.name
     %h4
       - if event.event_type == CONFERENCE
         = event.event_partners.first&.name
