@@ -16,16 +16,17 @@
 .field
   = label_tag :organisation_name
   = text_field_tag :organisation_name, @user.organisation_name
-.field
-  = label_tag :dietary_requirements
-  = text_field_tag :dietary_requirements, @user.dietary_requirements
-.field
-  = label_tag :registration_type
-  = select_tag :registration_type, options_for_select(USER_REGISTRATION_TYPES, @user.registration_type)
-  %br/
-.field
-  = label_tag :parent_guardian, "If Registration Type '#{YOUTH_COMPETITOR}', name of your parent/guardian"
-  = text_field_tag :parent_guardian, @user.parent_guardian
+- unless @event.event_type == CONFERENCE
+  .field
+    = label_tag :dietary_requirements
+    = text_field_tag :dietary_requirements, @user.dietary_requirements
+  .field
+    = label_tag :registration_type
+    = select_tag :registration_type, options_for_select(USER_REGISTRATION_TYPES, @user.registration_type)
+    %br/
+  .field
+    = label_tag :parent_guardian, "If Registration Type '#{YOUTH_COMPETITOR}', name of your parent/guardian"
+    = text_field_tag :parent_guardian, @user.parent_guardian
 - if @event.event_type == COMPETITION_EVENT
   .field
     = label_tag :request_not_photographed, 'Request not to be photographed'
