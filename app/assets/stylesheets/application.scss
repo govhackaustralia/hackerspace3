@@ -9,10 +9,43 @@
  * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
  * files in this directory. Styles in this file should be added after the last require_* statement.
  * It is generally better to create a new file per style scope.
- *= require datatable
- *= require_tree .
- *= require_self
  */
 
- // Custom bootstrap variables must be set or imported *before* bootstrap.
+@import 'datatable';
+
+@import 'layouts/admin_sponsors';
+@import 'layouts/base';
+@import 'layouts/challenge_admin';
+@import 'layouts/challenge_index';
+@import 'layouts/challenge_page';
+@import 'layouts/competition_page';
+@import 'layouts/dataset_index';
+@import 'layouts/event_index';
+@import 'layouts/event_page';
+@import 'layouts/project_index';
+@import 'layouts/register';
+@import 'layouts/registration_list';
+@import 'layouts/registration';
+@import 'layouts/scorecard';
+@import 'layouts/team_page';
+
+@import 'components/challenge_panel';
+@import 'components/csv_button';
+@import 'components/dataset_nav';
+@import 'components/event_info';
+@import 'components/event_tile';
+@import 'components/evidence';
+@import 'components/flash_notification';
+@import 'components/ie_push';
+@import 'components/later_section';
+@import 'components/markdown';
+@import 'components/projects_table';
+@import 'components/region_tile';
+@import 'components/score_display';
+@import 'components/team_tags';
+@import 'components/tiles';
+@import 'components/top_bar';
+@import 'components/user_contact';
+
+// Custom bootstrap variables must be set or imported *before* bootstrap.
 @import 'bootstrap-custom';
