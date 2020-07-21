@@ -1,6 +1,10 @@
 - url: https://data.gov.au/
   name: Australia
   short_url: data.gov.au
+  
+- url: https://https://researchdata.edu.au/
+  name: Research Data Australia
+  short_url: researchdata.edu.au
 
 - url: https://data.govt.nz
   name: New Zealand
