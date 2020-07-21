@@ -156,6 +156,7 @@ Rails.application.routes.draw do
   get 'complete_registration', to: 'accounts#edit'
   get 'demographics', to: 'demographics#edit'
   get 'update_personal_details', to: 'users#edit'
+  get 'update_profile_picture', to: 'profile_pictures#edit'
   get 'terms_and_conditions', to: 'static_pages#terms_and_conditions'
   get 'code_of_conduct', to: 'static_pages#code_of_conduct'
 
