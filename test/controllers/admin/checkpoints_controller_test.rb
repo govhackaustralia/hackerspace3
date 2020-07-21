@@ -19,14 +19,28 @@ class Admin::CheckpointsControllerTest < ActionDispatch::IntegrationTest
 
   test 'should post create success' do
     assert_difference('Checkpoint.count') do
-      post admin_competition_checkpoints_url(@competition), params: { checkpoint: { name: 'Fun Checkpoint', end_time: Time.now + 1.week, max_national_challenges: 2, max_regional_challenges: 2 } }
+      post admin_competition_checkpoints_url(@competition), params: {
+        checkpoint: {
+          name: 'Fun Checkpoint',
+          end_time: Time.now + 1.week,
+          max_national_challenges: 2,
+          max_regional_challenges: 2
+        }
+      }
     end
     assert_redirected_to admin_competition_checkpoints_url(@competition)
   end
 
   test 'should post create fail' do
     assert_no_difference('Checkpoint.count') do
-      post admin_competition_checkpoints_url(@competition), params: { checkpoint: { name: nil, end_time: Time.now + 1.week, max_national_challenges: 2, max_regional_challenges: 2 } }
+      post admin_competition_checkpoints_url(@competition), params: {
+        checkpoint: {
+          name: nil,
+          end_time: Time.now + 1.week,
+          max_national_challenges: 2,
+          max_regional_challenges: 2
+        }
+      }
     end
     assert_response :success
   end
@@ -37,7 +51,9 @@ class Admin::CheckpointsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'should patch update success' do
-    patch admin_competition_checkpoint_url(@competition, @checkpoint), params: { checkpoint: { name: 'updated' } }
+    patch admin_competition_checkpoint_url(@competition, @checkpoint), params: {
+      checkpoint: { name: 'updated' }
+    }
     assert_redirected_to admin_competition_checkpoints_url(@competition)
     @checkpoint.reload
     assert @checkpoint.name == 'updated'

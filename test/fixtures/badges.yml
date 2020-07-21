@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  id: 1
+  competition_id: 1
+  name: MyString
+  identifier: MyString
+  capacity: 5 
+
+two:
+  id: 2
+  competition_id: 1
+  name: MyString2
+  identifier: MyString2
+  capacity: 0

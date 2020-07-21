@@ -1,0 +1,15 @@
+= form_for [:admin, @competition, @badge] do |f|
+  .field
+    = f.label :name
+    = f.text_field :name
+  .field
+    = f.label :capacity
+    = f.number_field :capacity
+  .field
+    = f.file_field :art, accept: 'image/png,image/gif,image/jpeg'
+    - if @badge.art.attached?
+      = image_tag url_for(@badge.art), alt: @badge.name
+    - else
+      = image_tag 'default_profile_pic.png'
+  .actions
+    = f.submit

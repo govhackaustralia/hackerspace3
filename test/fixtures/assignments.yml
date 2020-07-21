@@ -4,7 +4,7 @@
 # model remove the '{}' from the fixture names and add the columns immediately
 # below each fixture, per the syntax in the comments below
 #
-one:
+management_team:
   id: 1
   user_id: 1
   holder_id: 1
@@ -13,7 +13,7 @@ one:
   title: GovHack Management Team
   competition_id: 1
 
-two:
+region_director:
   id: 2
   user_id: 1
   holder_id: 1
@@ -22,7 +22,7 @@ two:
   title: Region Director
   competition_id: 1
 
-three:
+event_host:
   id: 3
   user_id: 1
   holder_id: 1
@@ -40,7 +40,7 @@ four:
   title: Participant
   competition_id: 1
 
-five:
+sponsor_contact:
   id: 5
   user_id: 1
   holder_id: 1
@@ -94,7 +94,7 @@ ten:
   title: Event Support
   competition_id: 1
 
-eleven:
+team_leader:
   id: 11
   user_id: 1
   holder_id: 1
@@ -137,4 +137,13 @@ fifteen:
   assignable_id: 1
   assignable_type: Competition
   title: Chief Judge
+  competition_id: 1
+
+badge_assignment:
+  id: 16
+  user_id: 1
+  holder_id: 1
+  assignable_id: 1
+  assignable_type: Badge
+  title: Assignee
   competition_id: 1

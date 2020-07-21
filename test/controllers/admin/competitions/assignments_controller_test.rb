@@ -22,8 +22,8 @@ class Admin::Competitions::AssignmentsControllerTest < ActionDispatch::Integrati
   end
 
   test 'should post create success' do
-    assert_difference 'Assignment.count' do
-      post admin_competition_assignments_url @competition, params: { title: MANAGEMENT_TEAM, user_id: @user }
+    assert_difference 'Assignment.count', 1 do
+      post admin_competition_assignments_url @competition, params: { title: MANAGEMENT_TEAM, user_id: users(:two) }
     end
     assert_redirected_to admin_competition_assignments_url @competition
   end

@@ -1,0 +1,19 @@
+- content_for :title, "#{@competition.name} Badges"
+%main.team_page
+  %h2= yield :title
+  = link_to 'New Badge', new_admin_competition_badge_path(@competition)
+  - if @badges.any?
+    %table.admin-badges{'data-turbolinks' => 'false'}
+      %thead
+        %th Name
+        %th Capacity
+        %th Image Saved?
+      %tbody
+        - @badges.each do |badge|
+          %tr
+            %td= link_to "#{badge.name}", admin_competition_badge_path(@competition, badge)
+            %td= badge.capacity
+            %td= badge.art.attached?
+  - else
+    %p No badges saved for the current competition.
+= link_to 'Back to Competition', admin_competition_path(@competition)

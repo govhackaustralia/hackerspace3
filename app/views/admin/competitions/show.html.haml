@@ -68,6 +68,11 @@
     = pluralize @project_criteria_count, 'Project Criterion'
     saved.
   %p= link_to 'Competition Criteria', admin_competition_criteria_path(@competition)
+  %h3 Badges
+  %p
+    = pluralize @badge_count, 'badge'
+    saved.
+  %p= link_to 'Competition Badges', admin_competition_badges_path(@competition)
   %h3 Teams
   %p
     = pluralize @teams_count, 'Team'

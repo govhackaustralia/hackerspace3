@@ -21,7 +21,8 @@ class Admin::Sponsors::AssignmentsControllerTest < ActionDispatch::IntegrationTe
   end
 
   test 'should post create success' do
-    assert_difference 'Assignment.count' do
+    assignments(:sponsor_contact).destroy!
+    assert_difference 'Assignment.count', 1 do
       post admin_sponsor_assignments_url @sponsor, params: {
         title: SPONSOR_CONTACT, user_id: @user
       }
