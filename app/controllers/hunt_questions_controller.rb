@@ -28,7 +28,7 @@ class HuntQuestionsController < ApplicationController
 
   def award_question
     @assignment = current_user.assignments.create(
-      title: PARTICIPANT,
+      title: ASSIGNEE,
       assignable: @question,
       holder: holder
     )
