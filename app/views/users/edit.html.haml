@@ -1,9 +1,5 @@
 %main.registration.single-col.edit-account
-  - if params[:profile_pic].present?
-    %h2 Update Profile Picture
-    = render 'edit_profile_pic'
-    %br/
-  - elsif params[:banking].present?
+  - if params[:banking].present?
     %h2 Update Banking Details
     %section
       = render 'edit_banking'

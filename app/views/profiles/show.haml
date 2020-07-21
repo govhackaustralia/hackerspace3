@@ -1,0 +1,34 @@
+- content_for :title, @user.display_name
+%main.project_index
+  %h2= yield :title
+  - if @profile.profile_picture.attached?
+    = image_tag(url_for(@profile.profile_picture), alt: 'GovHack Profile Picture')
+  - else
+    = image_tag "default_profile_pic.png"
+  %p
+    %strong
+      Region
+    = @user.region
+  %p
+    %strong
+      Slack Handle
+    = @user.slack
+  %p
+    %strong
+      Skills
+    = @profile.skills.map {|tag|"##{tag}"}.join(' ')
+  %p
+    %strong
+      Interests
+    = @profile.interests.map {|tag|"##{tag}"}.join(' ')
+  %h3 Badges
+  - @badges.each do |badge|
+    %p
+      %strong
+        = badge.name
+    - if badge.art.attached?
+      = image_tag(url_for(badge.art), alt: 'GovHack Badge Art')
+    - else
+      = image_tag "default_profile_pic.png"
+
+= link_to 'Back to Profiles', profiles_path
