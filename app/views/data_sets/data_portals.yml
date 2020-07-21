@@ -18,7 +18,7 @@
   name: Australian Antarctic Data Centre
   short_url: data.aad.gov.au
 
-- url: http://www.aihw.gov.au/data/
+- url: https://www.aihw.gov.au/reports-data/a-z-topics
   name: Australian Institute of Health and Welfare
   short_url: www.aihw.gov.au/data
 
@@ -26,9 +26,9 @@
   name: AURIN
   short_url: data.aurin.org.a
 
-- url: http://govhack.bom.gov.au/
+- url: http://reg.bom.gov.au/catalogue/data-feeds.shtml
   name: Bureau of Meteorology
-  short_url: govhack.bom.gov.au
+  short_url: bom.gov.au
 
 - url: https://data.csiro.au/
   name: CSIRO Data Access Portal
@@ -145,3 +145,11 @@
 - url:  https://data-waikatolass.opendata.arcgis.com
   name: Waikato Local Authority Shared Services
   short_url: data-waikatolass.opendata.arcgis.com
+  
+  - url:  https://data.linz.govt.nz/
+  name: Land Information New Zealand
+  short_url: LINZ
+  
+   - url:   https://nvs.landcareresearch.co.nz/
+  name: New Zealand National Vegetation Survey Databank
+  short_url: NVS
