@@ -2,6 +2,8 @@ class Event < ApplicationRecord
   belongs_to :region
   has_one :competition, through: :region
 
+  has_rich_text :description
+
   has_many :assignments, as: :assignable, dependent: :destroy
 
   has_many :host_assignments, -> { event_hosts }, class_name: 'Assignment', as: :assignable

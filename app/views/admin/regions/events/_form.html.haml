@@ -1,3 +1,6 @@
+
+%trix-editor
+
 = form_for [:admin, @region, @event] do |form|
   .field
     = form.label :published
@@ -16,7 +19,7 @@
     = form.number_field :capacity
   .field
     = form.label :description
-    = form.text_area :description
+    = form.rich_text_area :description
   .field
     = form.label :start_time
     = form.datetime_local_field :start_time
