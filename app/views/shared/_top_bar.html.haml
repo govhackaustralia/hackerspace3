@@ -1,18 +1,25 @@
 %header
-  %nav#top-bar
-    %section
-      = link_to (render "shared/logo"), root_path
-      %article
-        - if user_signed_in?
-          = link_to 'Events', events_path
-          = link_to 'Challenges', challenges_path
-          = link_to 'Projects', projects_path
-          = link_to 'Datasets', data_sets_path
-        - else
+  %nav.navbar.navbar-default.top-bar{:role => "navigation"}
+    .container-fluid
+      .navbar-header
+        = link_to (render "shared/logo"), root_path
+        %button.navbar-toggle{"data-target" => ".navbar-collapse", "data-toggle" => "collapse", :type => "button"}
+          %span
+          %span
+          %span
+      .collapse.navbar-collapse
+        %ul.nav.navbar-nav
           - unless @competition.started?
-            = link_to 'Conference', conference_index_path
-          = link_to 'Events', events_path
-          = link_to 'Challenges', challenges_path
-          = link_to 'Projects', projects_path
-          = link_to 'Datasets', data_sets_path
-    = render "shared/session_login_links"
+            %li
+              = link_to 'Conference', conference_index_path
+          %li
+            = link_to 'Events', events_path
+          %li
+            = link_to 'Challenges', challenges_path
+          %li
+            = link_to 'Projects', projects_path
+          %li
+            = link_to 'Datasets', data_sets_path
+        %div.nav.navbar-nav.navbar-right
+          %button
+            = render "shared/session_login_links"
