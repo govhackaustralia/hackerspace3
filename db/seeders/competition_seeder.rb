@@ -77,8 +77,9 @@ class CompetitionSeeder < Seeder
       holder: user.holder_for(comp)
     )
 
-    user = users.sample
+
     10.times do
+      user = users.sample
       comp.assignments.volunteers.create(
         user: user,
         holder: user.holder_for(comp)
@@ -99,6 +100,20 @@ class CompetitionSeeder < Seeder
         order: time + 1
       )
     end
+
+    5.times do
+      badge = comp.badges.create(name: "#{Faker::Color.unique.color_name} Badge")
+      [*10..20].sample.times do |time|
+        user = users.sample
+        badge.assignments.create(
+          title: ASSIGNEE,
+          user: user,
+          holder: user.holder_for(comp)
+        )
+      end
+    end
+
+    Faker::Color.unique.clear
 
     users.each { |user| user.event_assignment(comp) }
 

@@ -22,7 +22,8 @@ class Admin::Events::AssignmentsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'should post create success' do
-    assert_difference 'Assignment.count' do
+    assignments(:event_host).destroy!
+    assert_difference 'Assignment.count', 1 do
       post admin_event_assignments_url @event, params: { title: EVENT_HOST, user_id: @user }
     end
     assert_redirected_to admin_event_assignments_url @event

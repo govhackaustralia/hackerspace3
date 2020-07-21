@@ -22,7 +22,8 @@ class Admin::Regions::AssignmentsControllerTest < ActionDispatch::IntegrationTes
   end
 
   test 'should post create success' do
-    assert_difference 'Assignment.count' do
+    assignments(:region_director).destroy!
+    assert_difference 'Assignment.count', 1 do
       post admin_region_assignments_url @region, params: { title: REGION_DIRECTOR, user_id: @user }
     end
     assert_redirected_to admin_region_assignments_url @region

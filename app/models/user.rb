@@ -4,10 +4,21 @@ class User < ApplicationRecord
          :trackable, :validatable, :confirmable, :lockable, :timeoutable,
          :omniauthable
 
+  has_one :profile, dependent: :destroy
+
   has_many :holders, dependent: :destroy
   has_many :assignments, dependent: :destroy
   has_many :headers, through: :assignments
   has_many :registrations, through: :assignments
+
+  has_many :badge_assignments,
+    -> { where title: ASSIGNEE },
+    class_name: 'Assignment'
+
+  has_many :badges,
+    through: :badge_assignments,
+    source: :assignable,
+    source_type: 'Badge'
 
   has_many :event_assignments,
     -> { event_assignments },
@@ -82,6 +93,8 @@ class User < ApplicationRecord
 
   validates :accepted_terms_and_conditions, acceptance: true
 
+  after_save_commit :update_profile_identifier
+
   enum region: {
     'Queensland' => 0,
     'New South Wales' => 1,
@@ -104,11 +117,6 @@ class User < ApplicationRecord
   # Gravitar Gem
   include Gravtastic
   has_gravatar default: 'robohash'
-
-  # Active Storage prifel image.
-  has_one_attached :govhack_img
-
-  # ENHANCEMENT: Need validation to make sure email is fully formed.
 
   # Returns true if a user has any of the privileges (assignments) passed
   # through the parameters.
@@ -219,5 +227,13 @@ class User < ApplicationRecord
     return 'unconfirmed' if confirmed_at.nil?
 
     "confirmed at #{confirmed_at.strftime('%e %B %Y  %I.%M %p')}"
+  end
+
+  def update_profile_identifier
+    profile&.update_identifier identifier_name
+  end
+
+  def identifier_name
+    preferred_name.presence || full_name
   end
 end
