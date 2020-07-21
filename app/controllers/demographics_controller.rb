@@ -18,10 +18,6 @@ class DemographicsController < ApplicationController
     params.require(:profile).permit(*DEMOGRAPHIC_PARAMS)
   end
 
-  def profile
-    @profile ||= Profile.find_or_create_by(user: current_user)
-  end
-
   DEMOGRAPHIC_PARAMS = %i[
     gender
     first_peoples
