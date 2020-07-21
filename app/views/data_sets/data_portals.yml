@@ -1,7 +1,7 @@
 - url: https://data.gov.au/
   name: Australia
   short_url: data.gov.au
-  
+
 - url: https://https://researchdata.edu.au/
   name: Research Data Australia
   short_url: researchdata.edu.au
@@ -145,11 +145,11 @@
 - url:  https://data-waikatolass.opendata.arcgis.com
   name: Waikato Local Authority Shared Services
   short_url: data-waikatolass.opendata.arcgis.com
-  
-  - url:  https://data.linz.govt.nz/
+
+- url:  https://data.linz.govt.nz/
   name: Land Information New Zealand
   short_url: LINZ
-  
-   - url:   https://nvs.landcareresearch.co.nz/
+
+- url:   https://nvs.landcareresearch.co.nz/
   name: New Zealand National Vegetation Survey Databank
   short_url: NVS
