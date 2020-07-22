@@ -1,13 +1,15 @@
 class HuntQuestionsController < ApplicationController
   before_action :hunt_questions
-  before_action :authenticate_user!, only: :update
+  before_action :authenticate_user!, :check_for_previous_correct_answer!, only: :update
 
-  def index; end
+  def index
+    return unless user_signed_in?
+
+    @hunt_badge = current_user.assignments.find_by(assignable: @competition.hunt_badge)
+  end
 
   def update
-    @question = HuntQuestion.find params[:id]
-    award_question if @question.answer.downcase.match? attempt.downcase
-    # award_hunt_badge if all_questions_answered?
+    process_attempt
     if @assignment&.save
       flash[:notice] =  'Question Answered!'
     else
@@ -18,8 +20,17 @@ class HuntQuestionsController < ApplicationController
 
   private
 
+  def hunt_question
+    @hunt_question ||= HuntQuestion.find params[:id]
+  end
+
+  def process_attempt
+    award_question if hunt_question.answer.downcase.match? attempt.downcase.strip
+    award_hunt_badge if all_questions_answered?
+  end
+
   def hunt_questions
-    @questions = @competition.hunt_questions
+    @hunt_questions ||= @competition.hunt_questions
   end
 
   def attempt
@@ -27,22 +38,32 @@ class HuntQuestionsController < ApplicationController
   end
 
   def award_question
-    @assignment = current_user.assignments.create(
+    @assignment = current_user.assignments.new(
       title: ASSIGNEE,
-      assignable: @question,
+      assignable: hunt_question,
       holder: holder
     )
   end
 
   def clear_answers
-    @questions.map { |question| question.answer = '' }
+    hunt_questions.map { |question| question.answer = '' }
   end
 
-  # def award_hunt_badge
-  #
-  # end
+  def award_hunt_badge
+    current_user.assignments.create(
+      title: ASSIGNEE,
+      assignable: @competition.hunt_badge,
+      holder: holder
+    )
+  end
 
-  # def all_questions_answered?
-  #
-  # end
+  def all_questions_answered?
+    (hunt_questions.pluck(:id) - current_user.assignments.where(assignable: hunt_questions).pluck(:assignable_id)).empty?
+  end
+
+  def check_for_previous_correct_answer!
+    return unless current_user.assignments.where(assignable: hunt_question).exists?
+
+    redirect_to scavenger_hunt_path, alert: 'Already answered question'
+  end
 end
