@@ -59,7 +59,7 @@ class Assignment < ApplicationRecord
   end
 
   def cant_exceed_badge_capacity
-    return unless title == ASSIGNEE
+    return unless title == ASSIGNEE && assignable_type == 'Badge'
 
     return if BadgePolicy.enough_badges? assignable
 
