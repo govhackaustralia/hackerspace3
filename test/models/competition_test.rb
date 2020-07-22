@@ -62,6 +62,22 @@ class CompetitionTest < ActiveSupport::TestCase
     assert @competition.competition_assignments.include? @assignment
   end
 
+  test 'competition event associations' do
+    assert @competition.events.include? @event
+    assert @competition.connection_events.include? @connection_event
+    assert @competition.connection_registrations.include? @connection_registration
+    assert @competition.conference_events.include? events :conference
+    assert @competition.conference_registrations.include? registrations :conference_registration
+    assert @competition.competition_events.include? @competition_event
+    assert @competition.competition_registrations.include? @competition_registration
+    assert @competition.award_events.include? @award_event
+    assert @competition.award_registrations.include? @award_registration
+  end
+
+  test 'competition belongs to associations' do
+    assert @competition.hunt_badge == badges(:one)
+  end
+
   test 'competition validations' do
     @competition.destroy
     # No year
