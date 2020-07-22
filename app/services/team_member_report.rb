@@ -31,7 +31,7 @@ class TeamMemberReport
   end
 
   def preload_entities
-    [:user, assignable: %i[current_project event]]
+    [:user, {assignable: %i[current_project event]}]
   end
 
   def row_values(assignment)
