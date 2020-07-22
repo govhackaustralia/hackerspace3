@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_18_003936) do
+ActiveRecord::Schema.define(version: 2020_07_21_133419) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -138,6 +138,7 @@ ActiveRecord::Schema.define(version: 2020_07_18_003936) do
     t.boolean "current"
     t.datetime "team_form_start"
     t.datetime "team_form_end"
+    t.integer "hunt_badge_id"
     t.index ["current"], name: "index_competitions_on_current"
     t.index ["year"], name: "index_competitions_on_year"
   end

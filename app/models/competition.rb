@@ -34,6 +34,8 @@ class Competition < ApplicationRecord
   has_many :project_criteria, -> { where category: PROJECT }, class_name: 'Criterion'
   has_many :challenge_criteria, -> { where category: CHALLENGE }, class_name: 'Criterion'
 
+  belongs_to :hunt_badge, class_name: 'Badge', optional: true
+
   validates :year,
             :team_form_start, :team_form_end,
             :start_time, :end_time,

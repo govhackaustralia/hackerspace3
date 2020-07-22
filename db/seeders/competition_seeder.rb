@@ -116,6 +116,7 @@ class CompetitionSeeder < Seeder
         )
       end
     end
+    comp.update hunt_badge: comp.badges.sample
 
     Faker::Color.unique.clear
 
