@@ -1,7 +1,7 @@
 - content_for :title, 'Scavenger Hunt'
 %main
 %h2= yield :title
-- @questions.each do |question|
+- @hunt_questions.each do |question|
   = form_for question do |form|
     = form.label :answer, question.question
     - if user_signed_in?
@@ -13,5 +13,5 @@
     - else
       %p Sign Up to participate in the scavenger hunt!
 
-- if @scavenger_badge.present?
+- if @hunt_badge.present?
   %p You have claimed the scavenger badge!
