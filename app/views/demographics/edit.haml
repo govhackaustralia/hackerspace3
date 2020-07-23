@@ -2,7 +2,7 @@
 %main.registration.single-col.edit-account
   %h2= yield :title
   %section
-    = form_with model: @profile, url: demographic_path(@profile), method: :patch do |form|
+    = form_with model: @profile, url: demographic_path(profile), method: :patch do |form|
       %article
         %strong
           GovHack values diversity and inclusion. The following fields are
