@@ -17,8 +17,7 @@
   .field
     = form.label :region
     = form.select :region,                                                 |
-      options_for_select(User.regions.keys.sort, selected: @user.region), |
-      include_blank: true
+      options_for_select(User.regions.keys.sort, selected: @user.region)
   .field
     = form.label :mailing_list
     = form.check_box :mailing_list, checked: @user.mailing_list
