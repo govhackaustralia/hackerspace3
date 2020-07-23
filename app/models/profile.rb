@@ -1,15 +1,17 @@
 class Profile < ApplicationRecord
   belongs_to :user
 
-  validates :identifier, uniqueness: true
+  # This was also causing it to fail
+  # validates :identifier, uniqueness: true
 
   acts_as_taggable_on :skills, :interests
 
   has_one_attached :profile_picture
 
-  def to_param
-    identifier
-  end
+  # Removing this for good measure
+  # def to_param
+  #   identifier
+  # end
 
   # after_save_commit :update_identifier
 
