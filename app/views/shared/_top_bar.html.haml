@@ -9,7 +9,7 @@
           %span
       .navbar-collapse
         %ul.nav.navbar-nav
-          - unless @competition.started?
+          - unless @competition&.started?
             %li
               = link_to 'Conference', conference_index_path
           %li
