@@ -93,7 +93,8 @@ class User < ApplicationRecord
 
   validates :accepted_terms_and_conditions, acceptance: true
 
-  after_save_commit :update_profile_identifier
+  # Remove this too :()
+  # after_save_commit :update_profile_identifier
 
   enum region: {
     'Queensland' => 0,
@@ -229,11 +230,13 @@ class User < ApplicationRecord
     "confirmed at #{confirmed_at.strftime('%e %B %Y  %I.%M %p')}"
   end
 
-  def update_profile_identifier
-    profile&.update_identifier identifier_name
-  end
+  # Remove this too!
 
-  def identifier_name
-    preferred_name.presence || full_name
-  end
+  # def update_profile_identifier
+  #   profile&.update_identifier identifier_name
+  # end
+  #
+  # def identifier_name
+  #   preferred_name.presence || full_name
+  # end
 end
