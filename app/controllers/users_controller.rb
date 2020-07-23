@@ -67,6 +67,7 @@ class UsersController < ApplicationController
       preferred_name
       organisation_name
       phone_number
+      region
       twitter
       slack
       mailing_list

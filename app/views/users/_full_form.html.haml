@@ -15,6 +15,11 @@
     = form.label :dietary_requirements
     = form.text_field :dietary_requirements
   .field
+    = form.label :region
+    = form.select :region,                                                 |
+      options_for_select(User.regions.keys.sort, selected: @user.region), |
+      include_blank: true
+  .field
     = form.label :mailing_list
     = form.check_box :mailing_list, checked: @user.mailing_list
   .field
