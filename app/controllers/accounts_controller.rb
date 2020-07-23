@@ -5,7 +5,7 @@ class AccountsController < ApplicationController
 
   def update
     if @user.update(user_params) && @user.registration_complete?
-      redirect_to next_page_path,
+      redirect_to demographics_path,
         notice: 'Your account has been created'
     else
       redirect_to complete_registration_path,
@@ -17,10 +17,6 @@ class AccountsController < ApplicationController
 
   def user_params
     params.require(:user).permit(*ACCOUNT_PARAMS)
-  end
-
-  def next_page_path
-    session[:user_return_to].presence || manage_account_path
   end
 
   def user
