@@ -1,19 +1,17 @@
 class Profile < ApplicationRecord
   belongs_to :user
 
-  # This was also causing it to fail
-  # validates :identifier, uniqueness: true
+  validates :identifier, uniqueness: true
 
   acts_as_taggable_on :skills, :interests
 
   has_one_attached :profile_picture
 
-  # Removing this for good measure
-  # def to_param
-  #   identifier
-  # end
+  def to_param
+    identifier
+  end
 
-  # after_save_commit :update_identifier
+  after_create_commit :update_identifier
 
   enum first_peoples: {
     'No' => 0,
@@ -65,21 +63,19 @@ class Profile < ApplicationRecord
     'Prefer not to say' => 8
   }, _prefix: true
 
-# This wass erroring when a new profile was being created
+  def update_identifier(identifier_name = nil)
+    identifier_name ||= user.identifier_name
 
-#   D, [2020-07-23T05:10:55.524718 #30055] DEBUG -- : [178640d8-b8d0-423e-8bfc-67024febd8f6]    (0.1ms)  BEGIN
-# D, [2020-07-23T05:10:55.525131 #30055] DEBUG -- : [178640d8-b8d0-423e-8bfc-67024febd8f6]   Profile Exists? (0.3ms)  SELECT 1 AS one FROM "profiles" WHERE "profiles"."identifier" IS NULL LIMIT $1  [["LIMIT", 1]]
-# D, [2020-07-23T05:10:55.526133 #30055] DEBUG -- : [178640d8-b8d0-423e-8bfc-67024febd8f6]    (0.1ms)  ROLLBACK
+    return if identifier_name.nil?
 
-  # def update_identifier(identifier_name = nil)
-  #   update_columns identifier: generate_identifier(identifier_name)
-  # end
-  #
-  # def generate_identifier(identifier_name)
-  #   new_identifier = uri_pritty identifier_name.presence || user.identifier_name
-  #
-  #   return new_identifier unless Profile.where(identifier: new_identifier).where.not(id: id).exists?
-  #
-  #   uri_pritty "#{new_identifier}-#{Profile.where(identifier: new_identifier).count}"
-  # end
+    update_columns identifier: generate_identifier(identifier_name)
+  end
+
+  def generate_identifier(identifier_name)
+    new_identifier = uri_pritty identifier_name
+
+    return new_identifier unless Profile.where(identifier: new_identifier).where.not(id: id).exists?
+
+    uri_pritty "#{new_identifier}-#{Profile.where(identifier: new_identifier).count}"
+  end
 end
