@@ -1,7 +1,7 @@
 class Profile < ApplicationRecord
   belongs_to :user
 
-  validates :identifier, uniqueness: true
+  validates :identifier, uniqueness: true, allow_nil: true
 
   acts_as_taggable_on :skills, :interests
 
