@@ -59,6 +59,16 @@ class Admin::CompetitionsController < ApplicationController
     end
   end
 
+  def demographics_data_set_report
+    demographics_data_set = DemographicsDataSetReport.new(@competition)
+    respond_to do |format|
+      format.html do
+        @report = demographics_data_set.report
+      end
+      format.csv { send_data demographics_data_set.to_csv }
+    end
+  end
+
   private
 
   def competition_params
