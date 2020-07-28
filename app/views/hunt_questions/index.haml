@@ -1,9 +1,17 @@
 - content_for :title, 'Scavenger Hunt'
 %main
 :javascript
-  const showInstructions = (shouldShow) =>
-    document.querySelector(".scavenger_instructions").style.display = shouldShow ? 'block' : 'none'
+  const showInstructions = (shouldShow) => {
+    document.querySelector(".scavenger_instructions").style.display = shouldShow ? 'block' : 'none';
+    document.querySelector(".scavenger_title_instructions").style.display = shouldShow ? 'inline' : 'none';
+    document.querySelector(".scavenger_title").style.display = shouldShow ? 'none' : 'inline';
+  }
 
+%section{:class => "header"}
+  %h2 
+    Scavenger Hunt - 
+    %span{:class => "scavenger_title"} Submit your answers
+    %span{:class => "scavenger_title_instructions"} Instructions
 %div{:class => "scavenger_container"}
   %div{:class => "scavenger_questions"}
     - @hunt_questions.each do |question|

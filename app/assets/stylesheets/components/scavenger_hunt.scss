@@ -1,92 +1,106 @@
 .scavenger_container {
-    display: flex;
-    flex-direction: row-reverse;
-    width: 100%;
-    height: 100vh;
-    background: url('/assets/hunt_bg.jpg') top left no-repeat;
-    background-size: contain;
-    position: relative;
+  display: flex;
+  flex-direction: row-reverse;
+  width: 100%;
+  height: 100vh;
+  background: url("/assets/hunt_bg.jpg") top left no-repeat;
+  background-size: contain;
+  position: relative;
 }
 .scavenger_questions {
-    position: absolute;
-    transform: rotate(-9deg);
-    left: 40%;
-    top: 40%;
-    max-width: 15%;
-    font-weight: bold;
-    color: black;
+  position: absolute;
+  transform: rotate(-9deg);
+  left: 40%;
+  top: 40%;
+  max-width: 15%;
+  font-weight: bold;
+  color: black;
 
-    div {
-        margin-top: 10px;
+  div {
+    margin-top: 10px;
+  }
+}
+section.header {
+  display: block;
+  background-color: #4c9ad2;
+  padding: 5rem;
+  align-content: center;
+  h2 {
+    color: #ffffff;
+    text-align: center;
+    line-height: 1.2em;
+    font-size: 2em;
+
+    .scavenger_title_instructions {
+      display: none;
     }
-
-
+  }
 }
 .scavenger_answers {
-    position: relative;
+  position: relative;
+  background: white;
+  display: border-box;
+  padding: 50px;
+  width: 20%;
+  h2 {
+    margin-bottom: 30px;
+  }
+  label {
+    display: block;
+  }
+  input[type="text"] {
+    width: 100%;
+    display: block;
+    padding: 8px;
+    border-radius: 2px;
+    border: 1px solid #666;
+    box-sizing: border-box;
+    box-shadow: 0px 2px 1px 1px rgba(0, 0, 0, 0.15);
+
+    &:focus {
+      outline: 0;
+    }
+  }
+  input[type="submit"] {
+    border: 0;
     background: white;
+    text-decoration: underline;
+    width: 100%;
+    text-align: right;
+    cursor: pointer;
+  }
+  .scavenger_answered {
+    margin: 5px 0 15px 0;
+  }
+
+  .nav-button {
+    border-radius: 6px;
+    color: #fff;
+    font-size: 1.2em;
+    box-sizing: border-box;
+    padding: 12px;
+    background-color: #c61f55;
+    margin-top: 20px;
+    text-decoration: none;
+    text-align: center;
+    cursor: pointer;
+    text-transform: uppercase;
+    float: right;
+  }
+
+  .scavenger_instructions {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    max-width: 100%;
+    height: 100%;
     display: border-box;
     padding: 50px;
-    width: 20%;
-    h2 {
-        margin-bottom: 30px;
-    }
-    label {
-        display: block;
-    }
-    input[type="text"] {
-        width: 100%;
-        display: block;
-        padding: 8px;
-        border-radius: 2px;
-        border: 1px solid #666;
-        box-sizing: border-box;
-        box-shadow: 0px 2px 1px 1px rgba(0,0,0,0.15);
+    background: white;
 
-        &:focus {
-            outline: 0;
-        }
+    p {
+      margin-top: 20px;
     }
-    input[type="submit"] {
-        border: 0;
-        background: white;
-        text-decoration: underline;
-        width: 100%;
-        text-align: right;
-        cursor: pointer;
-    }
-    .scavenger_answered {
-        margin: 5px 0 15px 0;
-    }
-
-    .nav-button {
-        border-radius: 6px;
-        color: #fff;
-        font-size: 1.2em;
-        box-sizing: border-box;
-        padding: 12px;
-        background-color: #C61F55;
-        margin-top: 20px;
-        text-decoration: none;
-        text-align: center;
-        cursor: pointer;
-        text-transform: uppercase;
-        float: right;
-    }
-
-    .scavenger_instructions {
-        display: none;
-        position: absolute;
-        top: 0;
-        left: 0;
-        max-width: 100%;
-        height: 100%;
-        display: border-box;
-        padding: 50px;
-        background: white;
-
-        p {
-            margin-top: 20px;
-        }
-    }
+  }
 }
