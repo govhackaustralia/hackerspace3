@@ -86,7 +86,7 @@ Rails.application.routes.draw do
       member do
         get 'aws_credits_requested'
         get 'sponsor_data_set_report'
-        get 'demographics_data_set_report'
+        get 'demographics_report'
       end
     end
 

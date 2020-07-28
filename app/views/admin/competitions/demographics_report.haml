@@ -1,0 +1,17 @@
+- content_for :title, 'Demographics Report '
+%main.project_index
+  %h2
+    #{yield :title} ( #{@field} ) for #{@competition.year}    
+  %p= link_to 'Download CSV', demographics_report_admin_competition_path(@competition, format: 'csv', :field => @field ), class: 'download-csv'
+
+  %table
+    %thead
+      %th  input
+      %th  count
+    %tbody
+      - @report.each do |row|
+        %tr
+          %td= row[:input]
+          %td= row[:count]
+          
+%p= link_to 'Back to Competition', admin_competition_path(@competition)

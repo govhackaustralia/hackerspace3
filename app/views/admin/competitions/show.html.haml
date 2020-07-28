@@ -85,7 +85,12 @@
   %p= link_to 'AWS Creditis Requsted', aws_credits_requested_admin_competition_path(@competition)
   %h3 Sponsor Data Set Report
   %p= link_to 'Sponsor Data Set Report', sponsor_data_set_report_admin_competition_path(@competition)
-  %h3 Demographics Data Set Report
-  %p= link_to 'Demographics Data Set Report', demographics_data_set_report_admin_competition_path(@competition)
-
+  %h3 Demographics Report
+  %p= link_to 'Age', demographics_report_admin_competition_path(@competition , field: 'age')
+  %p= link_to 'Gender', demographics_report_admin_competition_path(@competition , field: 'gender')
+  %p= link_to 'First Peoples', demographics_report_admin_competition_path(@competition , field: 'first_peoples')
+  %p= link_to 'Disability', demographics_report_admin_competition_path(@competition , field:  'disability')
+  %p= link_to 'Education', demographics_report_admin_competition_path(@competition , field: 'education')
+  %p= link_to 'Employment', demographics_report_admin_competition_path(@competition , field: 'employment')
+  %p= link_to 'Postcode', demographics_report_admin_competition_path(@competition , field: 'postcode')
 %p= link_to 'Back to Competitions', admin_competitions_path
