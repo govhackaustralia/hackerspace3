@@ -2,6 +2,24 @@
 
 A system to manage competition participants, sponsors, and management.
 
+## Getting Started
+
+### 1. Installing Docker
+
+The first thing you should do is install Docker. Docker uses a concept called containers, which allows you to get started on software without having to manually setup your development environment and install a bunch of things - Docker will handle that for you.
+
+#### Windows
+
+If running Windows 10 Pro, Enterprise, or Education, use these instructions - https://docs.docker.com/docker-for-windows/install/
+
+If running Windows 10 Home, use these instructions - https://docs.docker.com/docker-for-windows/install-windows-home/
+
+**Issues that you may encounter:**
+* Unable to install WSL 2 due to running an older version of Windows
+  * **Solution** is to install WSL 1 and then install an older version of Docker. Try installing [2.1.0.5](https://docs.docker.com/docker-for-windows/release-notes/#docker-desktop-community-2101)
+* Unable to install Docker with Error: Installation Failed: one prerequisite is not fulfilled. Docker Desktop requires Windows 10 Pro or Enterprise version xxxxx to run.
+  * **Solution** is to follow [this workaround](https://itnext.io/install-docker-on-windows-10-home-d8e621997c1d) to 'trick' Docker during installation 
+
 ## Framework
 
 Hackerspace 3 is a [Ruby on Rails application](https://rubyonrails.org/)
