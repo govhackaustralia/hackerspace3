@@ -1,0 +1,168 @@
+@import url("https://fonts.googleapis.com/css?family=Roboto");
+
+.user_profile {
+    margin: 0 auto;
+    background-color: #ffffff;
+
+    img.profile-picture {
+        border: 1px solid #000000;
+        border-radius: 50%;
+        z-index: 1001;
+        position: absolute;
+        background: #ffffff;
+        left: 40px;
+        @media only screen and (min-width: 1700px) {
+            top: calc(27% - 10%);
+            width: 150px;
+        }
+        @media only screen and (min-width: 1440px) {
+            top: calc(37% - 10%);
+            width: 125px;
+        }
+        @media only screen and (min-width: 1024px) {
+            top: calc(50% - 22%);
+            width: 100px;
+        }
+        @media only screen and (min-width: 425px) {
+            top: 25%;
+            left: 25px;
+            width: 100px;
+        }
+        @media only screen and (min-width: 425px) {
+            top: 30%;
+            left: 20px;
+            width: 90px;
+        }
+    }
+
+    button {
+        border-radius: 0.5em;
+        color: #ffffff;
+        display: inline-block;
+        cursor: pointer;
+        padding: 10px 15px;
+        a {
+            color: #ffffff;
+        }
+        font-family: Open Sans;
+        font-size: 1rem;
+        text-decoration: none;
+        text-align: center;
+        .red-button {
+            background-color: #c61f55;
+            border: 1px solid #c61f55;
+        }
+        .red-button:hover {
+            background-color: #fd266c;
+            border: 1px solid #fd266c;
+            > a {
+                color: #ffffff;
+                text-decoration: none;
+            }
+        }
+
+        .blue-button {
+            background-color: #4c9ad2;
+            border: 1px solid #4c9ad2;
+        }
+        .blue-button:hover {
+            background-color: #4c9ad2;
+            border: 1px solid #4c9ad2;
+            > a {
+                color: #ffffff;
+                text-decoration: none;
+            }
+        }
+        .black-button {
+            background-color: #000000;
+            border: 1px solid #000000;
+        }
+        .black-button:hover {
+            background-color: #000000;
+            border: 1px solid #000000;
+            > a {
+                color: #ffffff;
+                text-decoration: none;
+            }
+        }
+    }
+
+    article {
+        padding: 2rem;
+        h3 {
+            margin-bottom: 10px;
+            color: #000000;
+        }
+        a {
+            color: #ca1e56;
+            text-decoration: none;
+            margin-bottom: 5px;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+    }
+
+    section {
+        &.profile-header {
+            display: block;
+            background-color: #ca1e56;
+            padding: 5rem;
+            align-content: center;
+            .name {
+                color: #ffffff;
+                left: 50px;
+                top: 80px;
+                position: relative;
+            }
+        }
+
+        &.profile-contents {
+            display: flex;
+            margin-top: 25px;
+            justify-content: space-between;
+            padding: 2rem;
+
+            div {
+                &.manage-profile {
+                    width: 25%;
+                    padding: 1em;
+                }
+
+                &.profile-events {
+                    width: 75%;
+                    padding: 1em;
+                }
+            }
+
+            @media only screen and (min-width: 425px) {
+                flex-direction: column;
+                margin-top: 10px;
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 900px) {
+    .events_page {
+        margin: 0 auto;
+        section > h3,
+        h3 {
+            text-align: center;
+            margin-left: 0;
+        }
+        > {
+            section.profile-header > p,
+            p {
+                width: 100%;
+                margin: 0 auto;
+            }
+        }
+
+        section {
+            &.profile-header {
+                padding: 2rem;
+            }
+        }
+    }
+}
