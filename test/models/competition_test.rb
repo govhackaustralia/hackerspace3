@@ -27,6 +27,7 @@ class CompetitionTest < ActiveSupport::TestCase
     @old_competition = @competition
     @new_competition = Competition.second
     @event_assignment = Assignment.fourth
+    @user = User.first
   end
 
   test 'competition associations' do
@@ -35,6 +36,7 @@ class CompetitionTest < ActiveSupport::TestCase
     assert @competition.sponsors.include? @sponsor
     assert @competition.sponsorship_types.include? @sponsorship_type
     assert @competition.events.include? @event
+    assert @competition.users.include? @user
     assert @competition.connection_events.include? @connection_event
     assert @competition.connection_registrations.include? @connection_registration
     assert @competition.conference_events.include? events :conference

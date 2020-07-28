@@ -4,7 +4,7 @@
     #{yield :title} ( #{@field} ) for #{@competition.year}    
   %p= link_to 'Download CSV', demographics_report_admin_competition_path(@competition, format: 'csv', :field => @field ), class: 'download-csv'
 
-  %table
+  %table.projects-table#admin_demographics_table{'data-turbolinks' => 'false'}
     %thead
       %th  input
       %th  count
