@@ -1,11 +1,11 @@
 - content_for :title, 'Demographics Data Set Report'
 %main.project_index
   %h2
-    #{yield :title} for #{@competition.year}    
-      
+    #{yield :title} for #{@competition.year}
+
   %p= link_to 'Download CSV', demographics_data_set_report_admin_competition_path(@competition, format: 'csv'), class: 'download-csv'
 
-  %table
+  %table.projects-table#admin_demographics_table{'data-turbolinks' => 'false'}
     %thead
       %th  user_id
       %th  full_name
@@ -14,7 +14,7 @@
       %th  gender
       %th  first_peoples
       %th  disability
-      %th  education 
+      %th  education
       %th  employment
       %th  postcode
     %tbody
@@ -30,5 +30,5 @@
           %td= row[:education]
           %td= row[:employment]
           %td= row[:postcode]
-          
+
 %p= link_to 'Back to Competition', admin_competition_path(@competition)
