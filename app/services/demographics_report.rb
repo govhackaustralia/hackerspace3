@@ -1,31 +1,30 @@
 class DemographicsReport
   require 'csv'
 
-  attr_reader :competition, :data_sets, :fieldtype
+  attr_reader :competition, :profiles, :fieldtype
 
   def initialize(competition, fieldtype )
     @competition = competition
     @fieldtype = fieldtype.downcase 
-    @data_sets = @competition.users.preload(:profile)
+    @profiles = @competition.profiles.compact
   end
 
   def report 
-    profiles = data_sets.collect { |data_set| data_set.profile }
     case @fieldtype
     when "age"
-      grouped_data = profiles.group_by(&:age)
+      grouped_data = @profiles.group_by(&:age)
     when "gender"
-      grouped_data = profiles.group_by(&:gender)
+      grouped_data = @profiles.group_by(&:gender)
     when "first_peoples"
-      grouped_data = profiles.group_by(&:first_peoples)
+      grouped_data = @profiles.group_by(&:first_peoples)
     when "disability"
-      grouped_data = profiles.group_by(&:disability)
+      grouped_data = @profiles.group_by(&:disability)
     when "education"
-      grouped_data = profiles.group_by(&:education)
+      grouped_data = @profiles.group_by(&:education)
     when "employment"
-      grouped_data = profiles.group_by(&:employment)
+      grouped_data = @profiles.group_by(&:employment)
     when "postcode"
-      grouped_data = profiles.group_by(&:postcode)
+      grouped_data = @profiles.group_by(&:postcode)
     else
       raise "field does not exist"
     end

@@ -14,5 +14,4 @@ class DemographicsReportTest < ActiveSupport::TestCase
     assert @demographics_report.to_csv.class == String
   end
 
-
 end
