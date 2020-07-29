@@ -1,0 +1,50 @@
+.profiles_page {
+    padding: 2em 5em;
+    background: #ffffff;
+
+    h2 {
+        color: #4c9ad2;
+        font-size: 2em;
+    }
+
+    h3 {
+        color: #000000;
+        font-size: 1em;
+    }
+
+    section {
+        padding: 2rem 0;
+    }
+
+    table.profiles-table {
+        width: 100%;
+        padding: 10px;
+        margin: 0 auto;
+        border: none;
+
+        th,
+        td {
+            border-bottom: 1px solid #ca1e56;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+
+        th {
+            background-color: #f4f4f4;
+            color: #ca1e56;
+            text-align: left;
+        }
+
+        a {
+            text-decoration: none;
+            color: #000000;
+        }
+
+        a:hover {
+            text-decoration: underline;
+            color: #000000;
+        }
+
+
+    }
+}

@@ -1,18 +1,20 @@
-- content_for :title, 'Profiles'
-%main.project_index
-  %h2= yield :title
-  %table.projects-table#projects_table{'data-turbolinks' => 'false'}
-    %thead
-      %th Full Name
-      %th Preferred Name
-      %th Region
-      %th Slack
-      %th Skills
-    %tbody
-      - @profiles.each do |profile|
-        %tr
-          %td= link_to "#{profile.user.full_name}", profile_path(profile)
-          %td= profile.user.preferred_name
-          %td= profile.user.region
-          %td= profile.user.slack
-          %td= profile.skills.map {|tag|"##{tag}"}.join(' ')
+%main.profiles_page
+  %section.header
+    %h2 GovHack 2020 Directory
+    %h3 Find your team mate, mentor or industry partner here.
+  %section.table-wrapper
+    %table.profiles-table#projects_table{'data-turbolinks' => 'false'}
+      %thead
+        %th Full Name
+        %th Preferred Name
+        %th Region
+        %th Slack
+        %th Skills
+      %tbody
+        - @profiles.each do |profile|
+          %tr
+            %td= link_to "#{profile.user.full_name}", profile_path(profile)
+            %td= profile.user.preferred_name
+            %td= profile.user.region
+            %td= profile.user.slack
+            %td= profile.skills.map {|tag|"##{tag}"}.join(' ')
