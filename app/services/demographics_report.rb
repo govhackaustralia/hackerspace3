@@ -11,22 +11,22 @@ class DemographicsReport
 
   def report 
     case @fieldtype
-    when "age"
+    when 'age'
       grouped_data = @profiles.group_by(&:age)
-    when "gender"
+    when 'gender'
       grouped_data = @profiles.group_by(&:gender)
-    when "first_peoples"
+    when 'first_peoples'
       grouped_data = @profiles.group_by(&:first_peoples)
-    when "disability"
+    when 'disability'
       grouped_data = @profiles.group_by(&:disability)
-    when "education"
+    when 'education'
       grouped_data = @profiles.group_by(&:education)
-    when "employment"
+    when 'employment'
       grouped_data = @profiles.group_by(&:employment)
-    when "postcode"
+    when 'postcode'
       grouped_data = @profiles.group_by(&:postcode)
     else
-      raise "field does not exist"
+      raise 'field does not exist'
     end
 
     grouped_data.collect { |key, profile| data_set_object(key,profile)  }
