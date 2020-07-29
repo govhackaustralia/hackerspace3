@@ -88,4 +88,15 @@ class Admin::CompetitionsControllerTest < ActionDispatch::IntegrationTest
     get sponsor_data_set_report_admin_competition_url @competition, format: :csv
     assert_response :success
   end
+
+  test 'should get demographics report' do
+    get demographics_report_admin_competition_url @competition, field: 'age'
+    assert_response :success
+  end
+
+  test 'should get demographics report as csv' do
+    get sponsor_data_set_report_admin_competition_url @competition, field: 'age', format: :csv
+    assert_response :success
+  end
+
 end

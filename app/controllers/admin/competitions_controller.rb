@@ -59,6 +59,19 @@ class Admin::CompetitionsController < ApplicationController
     end
   end
 
+  def demographics_report
+    field = params[:field]
+    demographics_report = DemographicsReport.new(@competition, field)
+    
+    respond_to do |format|
+      format.html do
+        @report = demographics_report.report
+        @field = field.capitalize
+      end
+      format.csv { send_data demographics_report.to_csv }
+    end
+  end
+
   private
 
   def competition_params
