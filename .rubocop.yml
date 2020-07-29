@@ -19,6 +19,7 @@ AllCops:
     - 'app/models/header.rb'
     - 'app/models/data_set.rb'
     - 'app/models/team_entry_report.rb'
+    - 'app/services/demographics_report.rb'
 
 Style/Documentation:
   Enabled: false
