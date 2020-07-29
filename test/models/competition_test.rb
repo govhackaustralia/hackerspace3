@@ -27,8 +27,8 @@ class CompetitionTest < ActiveSupport::TestCase
     @old_competition = @competition
     @new_competition = Competition.second
     @event_assignment = Assignment.fourth
-    @user = @competition.users.first
-    @profile = @user.profile
+    @user = users(:one)
+    @profile = profiles(:one)
   end
 
   test 'competition associations' do
