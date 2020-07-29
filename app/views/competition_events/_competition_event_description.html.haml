@@ -1,11 +1,16 @@
+- start_day = @competition.start_time.day.ordinalize
+- end_day = @competition.end_time.day.ordinalize
+- start_month = @competition.start_time.strftime("%B")
+- end_month = @competition.end_time.strftime("%B")
+
 %p
   %em GovHack
   is an annual Open Data competition held across Australia. In #{@competition.year} it will be held on the weekend of
   = succeed "." do
-    %strong #{@competition.start_time.day.ordinalize} - #{@competition.end_time.day.ordinalize} #{@competition.start_time.strftime("%B")}
+    %strong #{start_day} #{start_month == end_month ? "" : start_month} - #{end_day} #{end_month}
 %p In 46 hours teams create a project page, proof of concept and a video that tells the story of how government data can be reused.
 %p
-  Doors generally open at 6pm local time #{@competition.start_time.strftime("%A")} #{@competition.start_time.day.ordinalize} #{@competition.start_time.strftime("%B")}
+  Doors generally open at #{@competition.start_time.strftime("%-I%p")} local time #{@competition.start_time.strftime("%A")} #{start_day} #{start_month}
   = succeed "." do
     %em (confirm with event times below)
 %p Some venues will keep the doors open all 46 hours! However good ideas need sleep, so many will close late and reopen in the morning.
