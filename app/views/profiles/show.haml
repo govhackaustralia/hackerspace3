@@ -1,5 +1,5 @@
 - content_for :title, @user.display_name
-%main.project_index
+%main.profile_page
   %h2= yield :title
   - if @profile.profile_picture.attached?
     = image_tag(url_for(@profile.profile_picture), alt: 'GovHack Profile Picture')
