@@ -162,4 +162,9 @@ class RegionTest < ActiveSupport::TestCase
     assert @national.eligible_challenges.present?
     assert @regional.eligible_challenges.present?
   end
+
+  test 'zone_code' do
+    assert @national.zone_code == 'AEST'
+    assert regions(:other_national).zone_code == 'NZST'
+  end
 end

@@ -140,6 +140,10 @@ class Region < ApplicationRecord
     ).to_formatted_s(:number)
   end
 
+  def zone_code
+    Time.now.in_time_zone(time_zone.presence || COMP_TIME_ZONE).zone
+  end
+
   private
 
   # Ensures only one root region is assigned to a competition
