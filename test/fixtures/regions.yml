@@ -27,7 +27,7 @@ international:
   category: International
   identifier: international
 
-four:
+other_national:
   id: 4
   name: New Zealand
   parent_id: 3
