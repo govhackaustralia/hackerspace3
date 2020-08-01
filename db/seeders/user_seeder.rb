@@ -84,7 +84,7 @@ class UserSeeder < Seeder
   end
 
   def self.create_favourites(comp)
-    teams = comp.teams
+    teams = comp.teams.where.not project_id: nil
     return unless teams.any?
 
     comp.assignments.event_assignments.each do |event_assignment|
