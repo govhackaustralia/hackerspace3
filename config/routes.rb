@@ -32,7 +32,13 @@ Rails.application.routes.draw do
     resources :memberships, only: [:destroy]
   end
 
-  resources :profiles, only: [:index, :show, :edit, :update]
+  resources :profiles, only: [:index, :show, :edit, :update] do
+    collection do
+      get :participants
+      get :mentors
+      get :industry
+    end
+  end
   resources :profile_pictures, only: [:edit, :update]
   resources :badges, only: [] do
     resources :claims, only: [:new, :create]
