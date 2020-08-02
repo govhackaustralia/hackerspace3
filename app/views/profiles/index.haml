@@ -1,12 +1,15 @@
 - content_for :title, 'Profiles'
 %main.project_index
   %h2= yield :title
+  = link_to 'Participants', participants_profiles_path
+  = link_to 'Mentors', mentors_profiles_path
+  = link_to 'Industry', industry_profiles_path
   %table.projects-table#projects_table{'data-turbolinks' => 'false'}
     %thead
       %th Full Name
       %th Preferred Name
       %th Region
-      %th Slack
+      %th Team Status
       %th Skills
     %tbody
       - @profiles.each do |profile|
@@ -14,5 +17,5 @@
           %td= link_to "#{profile.user.full_name}", profile_path(profile)
           %td= profile.user.preferred_name
           %td= profile.user.region
-          %td= profile.user.slack
+          %td= profile.team_status
           %td= profile.skills.map {|tag|"##{tag}"}.join(' ')
