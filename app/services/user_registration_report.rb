@@ -7,7 +7,6 @@ class UserRegistrationReport
     preferred_name
     dietary_requirements
     tshirt_size
-    twitter
     slack
     mailing_list
     challenge_sponsor_contact_place
