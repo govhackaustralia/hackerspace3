@@ -10,6 +10,21 @@ class ProfilesControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
+  test 'should get participants' do
+    get participants_profiles_path
+    assert_response :success
+  end
+
+  test 'should get mentors' do
+    get mentors_profiles_path
+    assert_response :success
+  end
+
+  test 'should get industry' do
+    get industry_profiles_path
+    assert_response :success
+  end
+
   test 'should get show' do
     get profile_path @profile
     assert_response :success

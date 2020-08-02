@@ -6,6 +6,36 @@ class ProfilesController < ApplicationController
     @profiles = Profile.all.where.not(identifier: nil).preload(:user).includes(:skills)
   end
 
+  def participants
+    users = User.where(registration_type: [COMPETITOR, YOUTH_COMPETITOR])
+    @profiles = Profile.all
+      .where(user: users)
+      .where.not(identifier: nil)
+      .preload(:user)
+      .includes(:skills)
+    render :index
+  end
+
+  def mentors
+    users = User.where(registration_type: MENTOR)
+    @profiles = Profile.all
+      .where(user: users)
+      .where.not(identifier: nil)
+      .preload(:user)
+      .includes(:skills)
+    render :index
+  end
+
+  def industry
+    users = User.where(registration_type: [ORGANISER, GUARDIAN_OBSERVER, SPONSOR_VIP_MEDIA])
+    @profiles = Profile.all
+      .where(user: users)
+      .where.not(identifier: nil)
+      .preload(:user)
+      .includes(:skills)
+    render :index
+  end
+
   def show
     @profile = Profile.find_by_identifier params[:id]
     @user = @profile.user
