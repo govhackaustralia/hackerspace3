@@ -1,18 +1,34 @@
 - content_for :title, @user.display_name
 %main.project_index
   %h2= yield :title
-  - if @profile.profile_picture.attached?
-    = image_tag(url_for(@profile.profile_picture), alt: 'GovHack Profile Picture')
-  - else
-    = image_tag "default_profile_pic.png"
+  - if user_signed_in? && @profile == current_user.profile
+    = link_to 'Edit Profile', edit_profile_path(@profile)
+  = image_tag @user.gravatar_url, class: "profile-picture"
+  - if @profile.team_status.present?
+    %strong
+      Team Status
+    = @profile.team_status
+  - if @team_name.present?
+    %p
+      %strong
+        Team Name
+      = @team_name
   %p
     %strong
       Region
     = @user.region
   %p
     %strong
-      Slack Handle
-    = @user.slack
+      Website
+    = @profile.website
+  %p
+    %strong
+      linkedin
+    = @profile.linkedin
+  %p
+    %strong
+      Description
+    = @profile.description
   %p
     %strong
       Skills
