@@ -36,7 +36,6 @@ class UserSeeder < Seeder
         google_img: nil,
         dietary_requirements: ("No #{Faker::Food.dish}" if number % 3 == 0),
         tshirt_size: 'Small',
-        twitter: "@#{first_name}#{number}",
         slack: "@#{first_name}#{Faker::Food.spice.camelize(:lower)}",
         mailing_list: random_boolean,
         challenge_sponsor_contact_place: random_boolean,
@@ -78,7 +77,12 @@ class UserSeeder < Seeder
         employment: Profile.employments.keys.sample,
         postcode: Faker::Address.postcode,
         skill_list: random_skills,
-        interest_list: random_interests
+        interest_list: random_interests,
+        twitter: "@#{user.preferred_name}#{number}",
+        team_status: Profile.team_statuses.keys.sample,
+        website: "www.#{user.preferred_name}.com",
+        linkedin: "#{user.preferred_name}@linkedin",
+        description: Faker::Lorem.paragraph
       )
     end
   end
