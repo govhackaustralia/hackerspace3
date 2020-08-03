@@ -3,9 +3,13 @@ Rails.application.routes.draw do
 
   devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
 
-  resources :data_sets, only: [:index, :show] do
-    collection { get :highlight }
+  resources :resources, only: :index do
+    collection do
+      get :data_portals
+      get :tech
+    end
   end
+  resources :data_sets, only: [:index, :show]
   resources :teams, only: [:new, :create]
   resources :favourites, only: [:create, :destroy]
   resources :regions, only: :show

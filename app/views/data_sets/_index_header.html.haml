@@ -1,8 +1,0 @@
-- content_for :title, 'Datasets'
-%h2 Datasets for Competition #{@competition.year}
-%h3
-  %span{style: "text-decoration: #{params[:action] == 'index' && 'underline'};"}
-    = link_to 'Data Portals', data_sets_path, class: 'dataset_nav'
-  |
-  %span{style: "text-decoration: #{params[:action] == 'highlight' && 'underline'};"}
-    = link_to 'Dataset Highlight', highlight_data_sets_path, class: 'dataset_nav'

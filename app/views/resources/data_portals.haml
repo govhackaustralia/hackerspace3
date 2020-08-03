@@ -1,0 +1,10 @@
+- content_for :title, "Data Portals for #{@competition.name}"
+%main.dataset_page
+  %h2= yield :title
+  %section.dataportals
+    - @data_portals.each do |resource|
+      = render 'resource_tile',          |
+        url: resource['url'],            |
+        name: resource['name'],          |
+        short_url: resource['short_url']
+= link_to 'Back to Resources', resources_path

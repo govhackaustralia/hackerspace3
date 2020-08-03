@@ -6,8 +6,8 @@ class DataSetsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-  test 'should get highlight' do
-    get highlight_data_sets_url
+  test 'should get index csv' do
+    get data_sets_url format: :csv
     assert_response :success
   end
 

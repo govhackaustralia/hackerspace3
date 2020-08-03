@@ -1,0 +1,18 @@
+- content_for :title, "Resources for #{@competition.name}"
+%main.dataset_page
+  %h2= yield :title
+  %section.dataportals
+    = link_to data_portals_resources_path do
+      %article
+        %div
+          %h3 Data Portals
+
+    = link_to data_sets_path do
+      %article.resource_tile
+        %div
+          %h3 Datasets
+
+    = link_to tech_resources_path do
+      %article
+        %div
+          %h3 Tech
