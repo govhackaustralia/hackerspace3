@@ -1,7 +1,7 @@
-- content_for :title, 'Profiles'
+- content_for :title, (action_name.capitalize unless action_name == 'index')
 %main.profiles_page_test
   %section.header
-    %h2 GovHack 2020 Directory
+    %h2 GovHack 2020 Profiles
     %h3 Find your team mate, mentor or industry partner here.
     = link_to 'All', profiles_path
     |
@@ -11,6 +11,7 @@
     |
     = link_to 'Industry', industry_profiles_path
   %section.table-wrapper
+    %h2= yield :title
     %table.profiles-table#projects_table{'data-turbolinks' => 'false'}
       %thead
         %th Full Name

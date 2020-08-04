@@ -42,13 +42,14 @@
                         color: #201d21;
                         margin-right: 15px;
                         font-style: italic;
-                        font-size: 1.5rem;
+                        font-size: 1rem;
                     }
                 }
 
                 .links {
                     display: flex;
                     padding: 10px 0px;
+                    align-items: center;
 
                     p {
                         color: #201d21;
@@ -92,31 +93,49 @@
 
         &.profile-skills {
             display: flex;
+            flex-direction: column;
             padding: 2rem;
 
             @media only screen and (max-width: 425px) {
                 flex-direction: column;
                 margin-top: 10px;
+            }
+
+            .profile-skills-content {
+                padding: 1rem 0rem;
+                align-items: center;
             }
         }
 
         &.profile-interests {
             display: flex;
             padding: 2rem;
+            flex-direction: column;
 
             @media only screen and (max-width: 425px) {
                 flex-direction: column;
                 margin-top: 10px;
+            }
+
+            .profile-interests-content {
+                padding: 1rem 0rem;
+                align-items: center;
             }
         }
 
         &.profile-badges {
             display: flex;
             padding: 2rem;
+            flex-direction: column;
 
             @media only screen and (max-width: 425px) {
                 flex-direction: column;
                 margin-top: 10px;
+            }
+
+            .profile-badges-content {
+                padding: 1rem 0rem;
+                align-items: center;
             }
         }
 
@@ -124,6 +143,7 @@
             display: flex;
             padding: 2rem;
             align-items: center;
+            flex-direction: column;
 
             button {
                 &.black-button {

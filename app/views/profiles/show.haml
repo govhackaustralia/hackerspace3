@@ -46,29 +46,35 @@
     %h2
       %strong
         Skills
-    - if @profile.skills.present?
-      = @profile.skills.map {|tag|"##{tag}"}.join(' ')
-    - else
-      %p No skills listed here
+    %div.profile-skills-content
+      - if @profile.skills.present?
+        = @profile.skills.map {|tag|"##{tag}"}.join(' ')
+      - else
+        %p No skills listed here
   %section.profile-interests
     %h2
       %strong
         Interests
-    - if @profile.interests.present?
-      = @profile.interests.map {|tag|"##{tag}"}.join(' ')
-    - else
-      %p No interests listed here
+    %div.profile-interests-content
+      - if @profile.interests.present?
+        = @profile.interests.map {|tag|"##{tag}"}.join(' ')
+      - else
+        %p No interests listed here
   %section.profile-badges
     %h2
       %strong
         Badges
-      - @badges.each do |badge|
-        %p
-          %strong
-            = badge.name
-        - if badge.art.attached?
-          = image_tag(url_for(badge.art), alt: 'GovHack Badge Art')
-        - else
-          = image_tag "default_profile_pic.png"
+    %div.profile-badges-content
+      - if @badges.present?
+        - @badges.each do |badge|
+          %p
+            %strong
+              = badge.name
+          - if badge.art.attached?
+            = image_tag(url_for(badge.art), alt: 'GovHack Badge Art')
+          - else
+            = image_tag "default_profile_pic.png"
+      - else
+        %p No badges at the moment :( 
   %section.profile-footer
     %button.black-button= link_to 'Back to Profiles', profiles_path
