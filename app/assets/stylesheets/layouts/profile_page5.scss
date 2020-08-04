@@ -1,0 +1,117 @@
+.profile_page {
+    margin: 0rem 5rem;
+    background-color: #ffffff;
+
+    hr.grey-border {
+        border-radius: 5px;
+        height: 2px;
+        background-color: #eee;
+        border: none;
+        margin: 0 1rem;
+    }
+
+    section {
+        &.profile-header {
+            display: flex;
+            padding: 2rem;
+
+            div.profile-content {
+                margin-left: 1.5rem;
+                align-self: center;
+                display: flex;
+                flex-direction: column;
+
+                .name {
+                    color: #0c010e;
+                }
+
+                .links {
+                    display: flex;
+                    padding: 10px 0px;
+
+                    p {
+                        color: #201d21;
+                        margin-right: 15px;
+                    }
+                }
+            }
+
+
+            img.profile-picture {
+                border-radius: 50%;
+                height: 5rem;
+                width: 5rem;
+                object-fit: cover;
+                border: 1px solid #eee;
+            }
+        }
+
+        &.profile-skills {
+            display: flex;
+            padding: 2rem;
+
+            @media only screen and (max-width: 425px) {
+                flex-direction: column;
+                margin-top: 10px;
+            }
+        }
+
+        &.profile-interests {
+            display: flex;
+            padding: 2rem;
+
+            @media only screen and (max-width: 425px) {
+                flex-direction: column;
+                margin-top: 10px;
+            }
+        }
+
+        &.profile-badges {
+            display: flex;
+            padding: 2rem;
+
+            @media only screen and (max-width: 425px) {
+                flex-direction: column;
+                margin-top: 10px;
+            }
+        }
+
+        &.profile-footer {
+            display: flex;
+            padding: 2rem;
+            align-items: center;
+
+            button {
+                &.black-button {
+                    margin: 5px 0px;
+                    border-radius: 0.5em;
+
+                    a {
+                        color: #ffffff;
+                        text-decoration: none;
+                    }
+
+                    display: inline-block;
+                    cursor: pointer;
+                    padding: 5px 10px;
+                    font-family: Open Sans;
+                    font-size: 1rem;
+                    text-decoration: none;
+                    text-align: center;
+                    background-color: #0c010e;
+                    border: 1px solid #0c010e;
+                }
+
+                &.black-button:hover {
+                    background-color: #323232;
+                    border: 1px solid #323232;
+
+                    a {
+                        color: #ffffff;
+                        text-decoration: none;
+                    }
+                }
+            }
+        }
+    }
+}

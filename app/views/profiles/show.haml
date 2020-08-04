@@ -1,34 +1,39 @@
 - content_for :title, @user.display_name
 %main.profile_page
-  %h2= yield :title
-  - if @profile.profile_picture.attached?
-    = image_tag(url_for(@profile.profile_picture), alt: 'GovHack Profile Picture')
-  - else
-    = image_tag "default_profile_pic.png"
-  %p
-    %strong
-      Region
-    = @user.region
-  %p
-    %strong
-      Slack Handle
-    = @user.slack
-  %p
-    %strong
-      Skills
-    = @profile.skills.map {|tag|"##{tag}"}.join(' ')
-  %p
-    %strong
-      Interests
-    = @profile.interests.map {|tag|"##{tag}"}.join(' ')
-  %h3 Badges
-  - @badges.each do |badge|
-    %p
-      %strong
-        = badge.name
-    - if badge.art.attached?
-      = image_tag(url_for(badge.art), alt: 'GovHack Badge Art')
+  %section.profile-header
+    - if @profile.profile_picture.attached?
+      = image_tag(url_for(@profile.profile_picture), alt: 'GovHack Profile Picture', class: "profile-picture")
     - else
-      = image_tag "default_profile_pic.png"
-
-= link_to 'Back to Profiles', profiles_path
+      = image_tag "default_profile_pic.png", :class => "profile-picture"
+    %div.profile-content
+      %h2.name= yield :title
+      %div.links
+        %p.region
+          %strong
+            Region
+          = @user.region
+        %p.slack
+          %strong
+            Slack Handle
+          = @user.slack
+  %hr.grey-border
+  %section.profile-skills
+    %h2
+      %strong
+        Skills
+      = @profile.skills.map {|tag|"##{tag}"}.join(' ')
+  %section.profile-interests
+    %h2
+      %strong
+        Interests
+      = @profile.interests.map {|tag|"##{tag}"}.join(' ')
+  %section.profile-badges
+    %h2 Badges
+    = @badges.each do |badge|
+      %p= badge.name
+      - if badge.art.attached?
+        = image_tag(url_for(badge.art), alt: 'GovHack Badge Art', class: 'badge-image')
+      - else
+        = image_tag "default_profile_pic.png", :class => "profile-picture"
+  %section.profile-footer
+    %button.black-button= link_to 'Back to Profiles', profiles_path
