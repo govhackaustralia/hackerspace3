@@ -17,8 +17,8 @@ class RegionsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'get show fail' do
-    regions(:four).challenges.destroy_all
-    get region_path regions(:four)
+    regions(:other_national).challenges.destroy_all
+    get region_path regions(:other_national)
     assert_redirected_to challenges_url
   end
 end

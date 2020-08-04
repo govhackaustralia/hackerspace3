@@ -17,11 +17,15 @@
       %p= @event.start_time.strftime("%e %B %Y")
     .event-info
       %h4 Start time:
-      %p= @event.start_time.strftime("%I:%M%p")
+      %p
+        = @event.start_time.strftime("%I:%M%p")
+        = @region.zone_code
   - unless @event.end_time.blank?
     .event-info
       %h4 End time:
-      %p= @event.end_time.strftime("%I:%M%p")
+      %p
+        = @event.end_time.strftime("%I:%M%p")
+        = @region.zone_code
 - unless @event.accessibility.blank?
   .event-info
     %h4 Accessibility:

@@ -8,7 +8,7 @@
       team data sets unaccounted for in the below output.
   %p= link_to 'Download CSV', sponsor_data_set_report_admin_competition_path(@competition, format: 'csv'), class: 'download-csv'
 
-  %table
+  %table.projects-table#admin_demographics_table{'data-turbolinks' => 'false'}
     %thead
       %th Data Set
       %th Challenges

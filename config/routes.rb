@@ -28,7 +28,13 @@ Rails.application.routes.draw do
     resources :memberships, only: [:destroy]
   end
 
-  resources :profiles, only: [:index, :show]
+  resources :profiles, only: [:index, :show, :edit, :update] do
+    collection do
+      get :participants
+      get :mentors
+      get :industry
+    end
+  end
   resources :profile_pictures, only: [:edit, :update]
   resources :badges, only: [] do
     resources :claims, only: [:new, :create]
@@ -86,6 +92,7 @@ Rails.application.routes.draw do
       member do
         get 'aws_credits_requested'
         get 'sponsor_data_set_report'
+        get 'demographics_report'
       end
     end
 
