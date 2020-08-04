@@ -173,4 +173,14 @@ class UserTest < ActiveSupport::TestCase
     assert @user.region.present?
     assert @user.registration_complete?
   end
+
+  test 'registration types' do
+    assert @user.participant?
+    assert users(:two).mentor?
+    assert users(:three).industry?
+
+    assert_not @user.mentor?
+    assert_not users(:unconfirmed_user).industry?
+    assert_not users(:two).participant?
+  end
 end

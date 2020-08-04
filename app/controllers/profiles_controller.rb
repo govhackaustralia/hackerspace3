@@ -7,9 +7,8 @@ class ProfilesController < ApplicationController
   end
 
   def participants
-    users = User.where(registration_type: [COMPETITOR, YOUTH_COMPETITOR])
     @profiles = Profile.all
-      .where(user: users)
+      .where(user: User.where(registration_type: PARTICIPANT_TYPES))
       .where.not(identifier: nil)
       .preload(:user)
       .includes(:skills)
@@ -17,9 +16,8 @@ class ProfilesController < ApplicationController
   end
 
   def mentors
-    users = User.where(registration_type: MENTOR)
     @profiles = Profile.all
-      .where(user: users)
+      .where(user: User.where(registration_type: MENTOR_TYPES))
       .where.not(identifier: nil)
       .preload(:user)
       .includes(:skills)
@@ -27,9 +25,8 @@ class ProfilesController < ApplicationController
   end
 
   def industry
-    users = User.where(registration_type: [ORGANISER, GUARDIAN_OBSERVER, SPONSOR_VIP_MEDIA])
     @profiles = Profile.all
-      .where(user: users)
+      .where(user: User.where(registration_type: INDUSTRY_TYPES))
       .where.not(identifier: nil)
       .preload(:user)
       .includes(:skills)
