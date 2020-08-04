@@ -4,7 +4,9 @@
   margin: 0;
   padding: 0;
 }
-
+html, body {
+  height: 100%;
+}
 ul {
   list-style: none;
 }
@@ -15,6 +17,8 @@ body {
   line-height: 1.5em;
   background-color: #eee;
   color: #626262;
+  display: flex;
+  flex-direction: column;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -26,10 +30,8 @@ h2 {
 }
 
 footer {
-	display: flex;
-	flex-direction: column;
+	margin-top: auto;
 	justify-content: center;
 	text-align: center;
 	font-size: 10px;
-	margin-top: 2em;
 }
