@@ -57,6 +57,8 @@ gem 'acts-as-taggable-on', '~> 6.0'
 gem 'mini_racer', platforms: :ruby
 # Bootstrap 4 ruby gem for Ruby on Rails (Sprockets) and Hanami (formerly Lotus).
 gem 'bootstrap', '~> 4.5.0'
+# This gem provides only Free icons from Font-Awesome.
+gem 'font_awesome5_rails'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
