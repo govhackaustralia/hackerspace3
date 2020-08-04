@@ -1,0 +1,14 @@
+- content_for :title, "Tech for #{@competition.name}"
+%main.dataset_page
+  %h2= yield :title
+  %section.dataportals
+    - @tech.each do |resource|
+      = render 'resource_tile',          |
+        url: resource['url'],            |
+        name: resource['name'],          |
+        short_url: resource['short_url']
+    %a
+      %article
+        %div
+          %h4 More to come!
+= link_to 'Back to Resources', resources_path

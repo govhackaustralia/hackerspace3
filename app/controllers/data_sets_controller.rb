@@ -1,9 +1,5 @@
 class DataSetsController < ApplicationController
   def index
-    @data_portals = YAML.load_file "#{Rails.root}/app/views/data_sets/data_portals.yml"
-  end
-
-  def highlight
     @data_sets = @competition.data_sets.order(:name).preload(:region)
     respond_to do |format|
       format.html

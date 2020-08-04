@@ -95,6 +95,18 @@ class User < ApplicationRecord
 
   after_save_commit :update_profile_identifier
 
+  def participant?
+    PARTICIPANT_TYPES.include? registration_type
+  end
+
+  def mentor?
+    MENTOR_TYPES.include? registration_type
+  end
+
+  def industry?
+    INDUSTRY_TYPES.include? registration_type
+  end
+
   enum region: {
     'Queensland' => 0,
     'New South Wales' => 1,
@@ -232,7 +244,7 @@ class User < ApplicationRecord
   def update_profile_identifier
     return if identifier_name.nil?
 
-    profile&.update_identifier identifier_name 
+    profile&.update_identifier identifier_name
   end
 
   def identifier_name
