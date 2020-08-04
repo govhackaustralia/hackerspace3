@@ -1,14 +1,21 @@
 - content_for :title, @user.display_name
-%main.profile_page
+%main.profile_page_test
   %section.profile-header
     = image_tag @user.gravatar_url, class: "profile-picture"
-      %div.profile-content
-        %h2.name= yield :title
-        %div.links
+    %div.profile-content
+      %h2.name= yield :title
+      %div.bio
+        %p
+          %strong
+            A short bio...
+          = @profile.description
+      %div.links
+        - if @user.region.present?
           %p.region
             %strong
               Region
             = @user.region
+        - if @user.slack.present?
           %p.slack
             %strong
               Slack Handle
@@ -22,48 +29,46 @@
             %strong
               Team Name
             = @team_name
-          %p
-            %strong
-              Region
-            = @user.region
+        - if @profile.website.present?
           %p
             %strong
               Website
             = @profile.website
+        - if @profile.linkedin.present?
           %p
             %strong
               linkedin
             = @profile.linkedin
-          %p
-            %strong
-              Description
-            = @profile.description
         - if user_signed_in? && @profile == current_user.profile
-        = link_to 'Edit Profile', edit_profile_path(@profile)
+          %button.black-button= link_to 'Edit Profile', edit_profile_path(@profile)
   %hr.grey-border
   %section.profile-skills
     %h2
       %strong
         Skills
+    - if @profile.skills.present?
       = @profile.skills.map {|tag|"##{tag}"}.join(' ')
+    - else
+      %p No skills listed here
   %section.profile-interests
-    %p
-      %strong
-        Skills
-      = @profile.skills.map {|tag|"##{tag}"}.join(' ')
     %h2
       %strong
         Interests
+    - if @profile.interests.present?
       = @profile.interests.map {|tag|"##{tag}"}.join(' ')
-  %section.profile-badges
-    %h3 Badges
-  - @badges.each do |badge|
-    %p
-      %strong
-        = badge.name
-    - if badge.art.attached?
-      = image_tag(url_for(badge.art), alt: 'GovHack Badge Art')
     - else
-      = image_tag "default_profile_pic.png"
+      %p No interests listed here
+  %section.profile-badges
+    %h2
+      %strong
+        Badges
+      - @badges.each do |badge|
+        %p
+          %strong
+            = badge.name
+        - if badge.art.attached?
+          = image_tag(url_for(badge.art), alt: 'GovHack Badge Art')
+        - else
+          = image_tag "default_profile_pic.png"
   %section.profile-footer
     %button.black-button= link_to 'Back to Profiles', profiles_path

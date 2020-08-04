@@ -1,4 +1,4 @@
-.profile_page {
+.profile_page_test {
     margin: 0rem 5rem;
     background-color: #ffffff;
 
@@ -31,6 +31,19 @@
 
                 .name {
                     color: #0c010e;
+                }
+
+                .bio {
+                    display: flex;
+                    padding: 10px 0px;
+                    margin-bottom: 10px;
+
+                    p {
+                        color: #201d21;
+                        margin-right: 15px;
+                        font-style: italic;
+                        font-size: 1.5rem;
+                    }
                 }
 
                 .links {

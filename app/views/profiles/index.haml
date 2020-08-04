@@ -1,14 +1,17 @@
 - content_for :title, 'Profiles'
-%main.profiles_page
+%main.profiles_page_test
   %section.header
     %h2 GovHack 2020 Directory
     %h3 Find your team mate, mentor or industry partner here.
-    %h2= yield :title
+    = link_to 'All', profiles_path
+    |
     = link_to 'Participants', participants_profiles_path
+    |
     = link_to 'Mentors', mentors_profiles_path
+    |
     = link_to 'Industry', industry_profiles_path
   %section.table-wrapper
-    %table.projects-table#projects_table{'data-turbolinks' => 'false'}
+    %table.profiles-table#projects_table{'data-turbolinks' => 'false'}
       %thead
         %th Full Name
         %th Preferred Name
