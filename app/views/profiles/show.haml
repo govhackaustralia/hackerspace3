@@ -22,7 +22,7 @@
             = @user.slack
         - if @profile.team_status.present?
           %strong
-            Team Status
+            = fa_icon('user-friends')
           = @profile.team_status
         - if @team_name.present?
           %p
@@ -32,12 +32,12 @@
         - if @profile.website.present?
           %p
             %strong
-              Website
+              = fa_icon('link')
             = @profile.website
         - if @profile.linkedin.present?
           %p
             %strong
-              linkedin
+              = fa_icon('linkedin-in')
             = @profile.linkedin
         - if user_signed_in? && @profile == current_user.profile
           %button.black-button= link_to 'Edit Profile', edit_profile_path(@profile)
@@ -45,6 +45,7 @@
   %section.profile-skills
     %h2
       %strong
+        = fa_icon('tools')
         Skills
     %div.profile-skills-content
       - if @profile.skills.present?
@@ -54,6 +55,7 @@
   %section.profile-interests
     %h2
       %strong
+        = fa_icon('heart')
         Interests
     %div.profile-interests-content
       - if @profile.interests.present?
@@ -63,17 +65,19 @@
   %section.profile-badges
     %h2
       %strong
+        = fa_icon('award')
         Badges
     %div.profile-badges-content
       - if @badges.present?
         - @badges.each do |badge|
-          %p
-            %strong
-              = badge.name
-          - if badge.art.attached?
-            = image_tag(url_for(badge.art), alt: 'GovHack Badge Art')
-          - else
-            = image_tag "default_profile_pic.png"
+          %div.badge-wrapper
+            %p
+              %strong
+                = badge.name
+            - if badge.art.attached?
+              = image_tag(url_for(badge.art), alt: 'GovHack Badge Art')
+            - else
+              = image_tag "default_profile_pic.png"
       - else
         %p No badges at the moment :( 
   %section.profile-footer

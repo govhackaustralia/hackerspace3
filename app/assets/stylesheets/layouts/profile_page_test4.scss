@@ -13,7 +13,7 @@
     section {
         &.profile-header {
             display: flex;
-            padding: 2rem;
+            margin: 2rem 1rem 0rem;
 
             img.profile-picture {
                 border-radius: 50%;
@@ -35,8 +35,6 @@
 
                 .bio {
                     display: flex;
-                    padding: 10px 0px;
-                    margin-bottom: 10px;
 
                     p {
                         color: #201d21;
@@ -48,7 +46,6 @@
 
                 .links {
                     display: flex;
-                    padding: 10px 0px;
                     align-items: center;
 
                     p {
@@ -136,6 +133,17 @@
             .profile-badges-content {
                 padding: 1rem 0rem;
                 align-items: center;
+                justify-content: space-evenly;
+
+                .badge-wrapper {
+                    max-width: 20%;
+                    padding: 2px;
+                    align-items: center;
+
+                    p {
+                        text-align: center;
+                    }
+                }
             }
         }
 
