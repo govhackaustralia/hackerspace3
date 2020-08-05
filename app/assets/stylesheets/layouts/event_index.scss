@@ -43,7 +43,7 @@
       font-size: 1.25em;
     }
   }
-  > section {
+  > section:not(:first-child) {
     padding: 2em;
   }
 }

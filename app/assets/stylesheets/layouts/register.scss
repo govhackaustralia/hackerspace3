@@ -1,5 +1,7 @@
 .register {
-  padding: 2em 5em;
+  > *:not(:first-child) {
+    padding: 2em 5em;
+  }
 
   h2 {
     color: #ca1e56;

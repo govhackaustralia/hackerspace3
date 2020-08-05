@@ -1,6 +1,8 @@
 .challenge_index {
-  padding: 2em 5em;
-
+  > *:not(:first-child) {
+    padding: 2em 5em;
+  }
+  
   h2 {
     color: #4c9ad2;
     font-size: 2em;

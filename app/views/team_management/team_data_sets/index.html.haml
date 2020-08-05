@@ -1,6 +1,7 @@
 - content_for :title, 'Project Data Sets'
 %main.team_page
-  %h2 #{@team.name} Data Sets
+  %div.main-content-header
+    %h1 #{@team.name} Data Sets
   - if @team_data_sets.present?
     - @team_data_sets.each do |team_data_set|
       = render 'projects/team_data_set', locals: { data_set: team_data_set }

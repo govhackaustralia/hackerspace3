@@ -1,5 +1,7 @@
 .dataset_page {
-  padding: 2em 5em;
+  > *:not(:first-child) {
+    padding: 2em 5em;
+  }
 
   h2 {
     color: #4c9ad2;

@@ -1,7 +1,7 @@
 - content_for :title, 'Competition Events'
 %main.events_page
-  %section.header
-    %h2 Competition Events
+  %h2 Competition Events
+  %section
     = render 'competition_event_description'
   %section
     = render partial: 'events/event_collection', locals: { events: @future_locations, title: 'Upcoming Competition Events' }

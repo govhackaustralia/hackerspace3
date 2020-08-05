@@ -1,7 +1,6 @@
 - content_for :title, 'Events'
 %main.events_page
-  %section.header
-    %h2 Events for #{@competition.name}
+  %h2 Events for #{@competition.name}
   %section
     - if @events.present?
       %p= link_to 'Download CSV', events_path(format: 'csv'), class: 'download-csv'
