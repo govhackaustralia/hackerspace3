@@ -13,12 +13,12 @@
         - if @user.region.present?
           %p.region
             %strong
-              Region
+              = fa_icon('location-arrow')
             = @user.region
         - if @user.slack.present?
           %p.slack
             %strong
-              Slack Handle
+              = fa_icon('slack', type: :brand)
             = @user.slack
         - if @profile.team_status.present?
           %strong
@@ -27,7 +27,7 @@
         - if @team_name.present?
           %p
             %strong
-              Team Name
+              = fa_icon('user-friends')
             = @team_name
         - if @profile.website.present?
           %p
