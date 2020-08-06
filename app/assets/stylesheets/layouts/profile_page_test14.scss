@@ -13,7 +13,8 @@
     section {
         &.profile-header {
             display: flex;
-            margin: 2rem 1rem 0rem;
+            margin: 0 2rem 1rem 0rem;
+            padding: 2rem 1rem 0 1rem;
 
             img.profile-picture {
                 border-radius: 50%;
@@ -45,8 +46,10 @@
                 }
 
                 .links {
-                    display: flex;
                     align-items: center;
+                    flex-direction: row;
+                    display: flex;
+                    flex-flow: wrap;
 
                     p {
                         color: #201d21;
@@ -101,6 +104,24 @@
             .profile-skills-content {
                 padding: 1rem 0rem;
                 align-items: center;
+                display: flex;
+
+                .tag {
+                    color: white;
+                    width: fit-content;
+                    border-radius: 10px;
+                    padding: 5px 10px;
+                    align-items: center;
+                    margin: 3px;
+
+                    &:nth-of-type(odd) {
+                        background: #4c9ad2;
+                    }
+
+                    &:nth-of-type(even) {
+                        background: #c61f55;
+                    }
+                }
             }
         }
 
@@ -117,6 +138,24 @@
             .profile-interests-content {
                 padding: 1rem 0rem;
                 align-items: center;
+                display: flex;
+
+                .tag {
+                    color: white;
+                    width: fit-content;
+                    border-radius: 10px;
+                    padding: 5px 10px;
+                    align-items: center;
+                    margin: 3px;
+
+                    &:nth-of-type(odd) {
+                        background: #4c9ad2;
+                    }
+
+                    &:nth-of-type(even) {
+                        background: #c61f55;
+                    }
+                }
             }
         }
 
@@ -133,15 +172,38 @@
             .profile-badges-content {
                 padding: 1rem 0rem;
                 align-items: center;
-                justify-content: space-evenly;
+                flex-direction: row;
+                display: flex;
+                flex-flow: wrap;
 
                 .badge-wrapper {
-                    max-width: 20%;
-                    padding: 2px;
+                    padding: 10px;
+                    margin: 5px;
                     align-items: center;
+                    width: 300px;
+                    border: 1px solid black;
+                    border-radius: 10px;
+                    display: flex;
+                    flex-direction: row-reverse;
 
-                    p {
-                        text-align: center;
+                    div.text-content {
+                        width: 70%;
+                        margin-left: 10px;
+
+                        p.title {
+                            text-transform: uppercase;
+                            font-size: medium;
+                        }
+
+                        p.date-issued {
+                            font-style: italic;
+                            font-size: small;
+                        }
+                    }
+
+                    img {
+                        display: block;
+                        width: 100px;
                     }
                 }
             }

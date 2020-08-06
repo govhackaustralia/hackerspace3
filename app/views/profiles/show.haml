@@ -5,10 +5,10 @@
     %div.profile-content
       %h2.name= yield :title
       %div.bio
-        %p
-          %strong
-            A short bio...
-          = @profile.description
+        - if @profile.description.present?
+          %p= @profile.description
+        - else
+          %p Doesn't look like they have a bio yet... :(
       %div.links
         - if @user.region.present?
           %p.region
@@ -21,9 +21,10 @@
               = fa_icon('slack', type: :brand)
             = @user.slack
         - if @profile.team_status.present?
-          %strong
-            = fa_icon('user-friends')
-          = @profile.team_status
+          %p.team-status
+            %strong
+              = fa_icon('user-friends')
+            = @profile.team_status
         - if @team_name.present?
           %p
             %strong
@@ -39,6 +40,16 @@
             %strong
               = fa_icon('linkedin-in')
             = @profile.linkedin
+        -# - if @profile.github.present?
+        -#   %p
+        -#     %strong
+        -#       = fa_icon('github')
+        -#     = @profile.github
+        -# - if @profile.twitter.present?
+        -#   %p
+        -#     %strong
+        -#       = fa_icon('twitter')
+        -#     = @profile.twitter
         - if user_signed_in? && @profile == current_user.profile
           %button.black-button= link_to 'Edit Profile', edit_profile_path(@profile)
   %hr.grey-border
@@ -48,8 +59,9 @@
         = fa_icon('tools')
         Skills
     %div.profile-skills-content
-      - if @profile.skills.present?
-        = @profile.skills.map {|tag|"##{tag}"}.join(' ')
+      - if @profile.skill_list.present?
+        - @profile.skill_list.map do |tag|
+          %div.tag= "##{tag}"
       - else
         %p No skills listed here
   %section.profile-interests
@@ -59,7 +71,8 @@
         Interests
     %div.profile-interests-content
       - if @profile.interests.present?
-        = @profile.interests.map {|tag|"##{tag}"}.join(' ')
+        - @profile.interests.map do |tag|
+          %div.tag= "##{tag}"
       - else
         %p No interests listed here
   %section.profile-badges
@@ -71,14 +84,17 @@
       - if @badges.present?
         - @badges.each do |badge|
           %div.badge-wrapper
-            %p
-              %strong
-                = badge.name
+            %div.text-content
+              %p.title= badge.name
+              %p.date-issued August 2020
             - if badge.art.attached?
               = image_tag(url_for(badge.art), alt: 'GovHack Badge Art')
             - else
-              = image_tag "default_profile_pic.png"
+              = image_tag "treasurehunt_badge.png"
       - else
         %p No badges at the moment :( 
   %section.profile-footer
     %button.black-button= link_to 'Back to Profiles', profiles_path
+
+-# = @profile.skills.map {|tag|"##{tag}"}.join(' ')
+-# = @profile.interests.map {|tag|"##{tag}"}.join(' ')
