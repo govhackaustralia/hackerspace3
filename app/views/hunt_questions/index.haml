@@ -8,8 +8,8 @@
     }
 
   %section{:class => "header"}
-    %h2 
-      Scavenger Hunt - 
+    %h2
+      Scavenger Hunt -
       %span{:class => "scavenger_title"} Submit your answers
       %span{:class => "scavenger_title_instructions"} Instructions
   %div{:class => "scavenger_container"}
@@ -18,6 +18,8 @@
         %div= question.question
     %div{:class => "scavenger_answers"}
       %h2= yield :title
+      - unless user_signed_in?
+        %p Sign Up to participate in the scavenger hunt!
       - @hunt_questions.each do |question|
         = form_for question do |form|
           = form.label :answer, question.question
@@ -27,8 +29,6 @@
             - else
               = form.text_field :answer
               = form.submit 'Submit'
-          - else
-            %p Sign Up to participate in the scavenger hunt!
 
       %a{:class => "nav-button", :onclick => "showInstructions(true)"} View Instructions
 
