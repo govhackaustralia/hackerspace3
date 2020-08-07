@@ -20,7 +20,7 @@ If running Windows 10 Home, use these instructions - https://docs.docker.com/doc
 * Unable to install WSL 2 due to running an older version of Windows
   * **Solution** is to install WSL 1 and then install an older version of Docker. Try installing [2.1.0.5](https://docs.docker.com/docker-for-windows/release-notes/#docker-desktop-community-2101)
 * Unable to install Docker with Error: Installation Failed: one prerequisite is not fulfilled. Docker Desktop requires Windows 10 Pro or Enterprise version xxxxx to run.
-  * **Solution** is to follow [this workaround](https://itnext.io/install-docker-on-windows-10-home-d8e621997c1d) to 'trick' Docker during installation 
+  * **Solution** is to follow [this workaround](https://itnext.io/install-docker-on-windows-10-home-d8e621997c1d) to 'trick' Docker during installation
 
 Once installed and running, use Powershell to follow the instructions in the **Docker Deployment Instructions** section.
 
@@ -144,7 +144,7 @@ This runs the container and bind-mounts your checked out code into the container
 ## Specification Documents
 
 All documents relating to specification can be found in the [project
-wiki](https://github.com/cassar/hackerspace3/wiki).
+wiki](https://github.com/govhackaustralia/hackerspace3/wiki).
 
 ## Environment Variables Required
 
