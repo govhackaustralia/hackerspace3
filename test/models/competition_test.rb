@@ -75,7 +75,7 @@ class CompetitionTest < ActiveSupport::TestCase
   end
 
   test 'competition belongs to associations' do
-    assert @competition.hunt_badge == badges(:one)
+    assert @competition.hunt_badge == badges(:hunt_badge)
   end
 
   test 'competition validations' do
