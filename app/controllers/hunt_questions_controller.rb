@@ -9,8 +9,8 @@ class HuntQuestionsController < ApplicationController
   end
 
   def update
-    process_attempt
-    if @assignment&.save
+    if answered_correctly?
+      log_success_and_award_badge!
       flash[:notice] =  'Question Answered!'
     else
       flash[:alert] = 'Please try again'
@@ -24,9 +24,15 @@ class HuntQuestionsController < ApplicationController
     @hunt_question ||= HuntQuestion.find params[:id]
   end
 
-  def process_attempt
-    award_question if hunt_question.answer.downcase.match? attempt.downcase.strip
-    award_hunt_badge if all_questions_answered?
+  def log_success_and_award_badge!
+    Assignment.transaction do
+      log_correctly_answered_question
+      award_hunt_badge if all_questions_answered?
+    end
+  end
+
+  def answered_correctly?
+    hunt_question.answer.downcase.match? attempt.downcase.strip
   end
 
   def hunt_questions
@@ -37,8 +43,8 @@ class HuntQuestionsController < ApplicationController
     params.require(:hunt_question).permit(:answer)[:answer]
   end
 
-  def award_question
-    @assignment = current_user.assignments.new(
+  def log_correctly_answered_question
+    current_user.assignments.create!(
       title: ASSIGNEE,
       assignable: hunt_question,
       holder: holder
@@ -50,7 +56,7 @@ class HuntQuestionsController < ApplicationController
   end
 
   def award_hunt_badge
-    current_user.assignments.create(
+    current_user.assignments.create!(
       title: ASSIGNEE,
       assignable: @competition.hunt_badge,
       holder: holder
