@@ -1,5 +1,5 @@
 - content_for :title, @user.display_name
-%main.profile_page_test
+%main.profile_page
   %section.profile-header
     = image_tag @user.gravatar_url, class: "profile-picture"
     %div.profile-content
@@ -38,18 +38,18 @@
         - if @profile.linkedin.present?
           %p
             %strong
-              = fa_icon('linkedin-in')
+              = fa_icon('linkedin-in', type: :brand)
             = @profile.linkedin
-        -# - if @profile.github.present?
-        -#   %p
-        -#     %strong
-        -#       = fa_icon('github')
-        -#     = @profile.github
-        -# - if @profile.twitter.present?
-        -#   %p
-        -#     %strong
-        -#       = fa_icon('twitter')
-        -#     = @profile.twitter
+        - if @profile.github.present?
+          %p
+            %strong
+              = fa_icon('github', type: :brand)
+            = @profile.github
+        - if @profile.twitter.present?
+          %p
+            %strong
+              = fa_icon('twitter', type: :brand)
+            = @profile.twitter
         - if user_signed_in? && @profile == current_user.profile
           %button.black-button= link_to 'Edit Profile', edit_profile_path(@profile)
   %hr.grey-border
@@ -95,6 +95,3 @@
         %p No badges at the moment :( 
   %section.profile-footer
     %button.black-button= link_to 'Back to Profiles', profiles_path
-
--# = @profile.skills.map {|tag|"##{tag}"}.join(' ')
--# = @profile.interests.map {|tag|"##{tag}"}.join(' ')
