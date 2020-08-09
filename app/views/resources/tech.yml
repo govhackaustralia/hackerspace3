@@ -1,3 +1,7 @@
 - url: https://awsgovhack2020.splashthat.com/
   name: AWS Credits & more
-  short_url: awsgovhack2020.splashthat.com
+  short_url: awsgovhack2020.com
+
+- url: https://dev.telstra.com/content/get-started-telstradev-messaging-api
+  name: TelstraDev Messaging API Free Trial
+  short_url: dev.testra.com

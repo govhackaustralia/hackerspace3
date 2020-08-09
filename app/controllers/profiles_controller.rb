@@ -51,7 +51,7 @@ class ProfilesController < ApplicationController
 
   def profile_params
     params.require(:profile).permit(:team_status, :description, :website,
-      :twitter, :linkedin, :skill_list, :interest_list)
+      :github, :twitter, :linkedin, :skill_list, :interest_list)
   end
 
   def authorize_user!

@@ -79,6 +79,7 @@ class UserSeeder < Seeder
         skill_list: random_skills,
         interest_list: random_interests,
         twitter: "@#{user.preferred_name}#{number}",
+        github: "@#{user.preferred_name}#{number}",
         team_status: Profile.team_statuses.keys.sample,
         website: "www.#{user.preferred_name}.com",
         linkedin: "#{user.preferred_name}@linkedin",
