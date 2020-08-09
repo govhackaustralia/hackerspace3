@@ -10,6 +10,7 @@
         %h3 Manage your profile
         %button.red-button= link_to 'Update Personal Details' , update_personal_details_path
         %button.red-button= link_to 'Update Email and Password' , edit_user_registration_path
+        %button.red-button= link_to 'Update Profile', edit_profile_path(current_user.profile)
         %button.red-button= link_to 'Update Profile Picture', update_profile_picture_path
         - if @public_winning_entries
           %button.red-button= link_to 'Update Banking Details', update_personal_details_path(banking: true)
