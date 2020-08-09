@@ -1,0 +1,12 @@
+- content_for :title, 'Update Profile Picture'
+%main.team_page
+  %h2= yield :title
+  = form_with model: @profile, url: profile_picture_path(@profile), method: :patch do |form|
+    .field
+      = image_tag(default_profile_picture_url(current_user, @profile), alt: 'GovHack Profile Picture')
+    .field
+      = form.label :profile_picture, 'Upload a Profile Picture (only png/gif/jpeg/jpg)'
+      = form.file_field :profile_picture, accept: 'image/png,image/gif,image/jpeg'
+    .actions
+      = form.submit 'Upload Image'
+= link_to 'Back to Account Management', manage_account_path

@@ -63,6 +63,13 @@ class Profile < ApplicationRecord
     'Prefer not to say' => 8
   }, _prefix: true
 
+  enum team_status: {
+    'Looking for a Team' => 0,
+    'Looking for Team Mates' => 1,
+    'Team Full' => 2,
+    'In a Team' => 3
+  }
+
   def update_identifier(identifier_name = nil)
     identifier_name ||= user.identifier_name
 

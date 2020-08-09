@@ -1,0 +1,98 @@
+- content_for :title, @user.display_name
+%main.profile_page
+  %section.profile-header
+    = image_tag default_profile_picture_url(@user, @profile), class: "profile-picture"
+    %div.profile-content
+      %h2.name= yield :title
+      %div.bio
+        - if @profile.description.present?
+          %p= @profile.description
+        - else
+          %p Doesn't look like they have a bio yet... :(
+      %div.links
+        - if @user.region.present?
+          %p.region
+            %strong
+              = fa_icon('location-arrow')
+            = @user.region
+        - if @user.slack.present?
+          %p.slack
+            %strong
+              = fa_icon('slack', type: :brand)
+            = @user.slack
+        - if @profile.team_status.present?
+          %p.team-status
+            %strong
+              = fa_icon('user-friends')
+            = @profile.team_status
+        - if @team_name.present?
+          %p
+            %strong
+              = fa_icon('user-friends')
+            = @team_name
+        - if @profile.website.present?
+          %p
+            %strong
+              = fa_icon('link')
+            = @profile.website
+        - if @profile.linkedin.present?
+          %p
+            %strong
+              = fa_icon('linkedin-in', type: :brand)
+            = @profile.linkedin
+        - if @profile.github.present?
+          %p
+            %strong
+              = fa_icon('github', type: :brand)
+            = @profile.github
+        - if @profile.twitter.present?
+          %p
+            %strong
+              = fa_icon('twitter', type: :brand)
+            = @profile.twitter
+        - if user_signed_in? && @profile == current_user.profile
+          %button.black-button= link_to 'Edit Profile', edit_profile_path(@profile)
+  %hr.grey-border
+  %section.profile-skills
+    %h2
+      %strong
+        = fa_icon('tools')
+        Skills
+    %div.profile-skills-content
+      - if @profile.skill_list.present?
+        - @profile.skill_list.map do |tag|
+          %div.tag= "##{tag}"
+      - else
+        %p No skills listed here
+  %section.profile-interests
+    %h2
+      %strong
+        = fa_icon('heart')
+        Interests
+    %div.profile-interests-content
+      - if @profile.interests.present?
+        - @profile.interests.map do |tag|
+          %div.tag= "##{tag}"
+      - else
+        %p No interests listed here
+  %section.profile-badges
+    %h2
+      %strong
+        = fa_icon('award')
+        Badges
+    %div.profile-badges-content
+      - if @badge_assignments.present?
+        - @badge_assignments.each do |badge_assignment|
+          - badge = badge_assignment.assignable
+          %div.badge-wrapper
+            %div.text-content
+              %p.title= badge.name
+              %p.date-issued= badge_assignment.created_at.strftime '%B %Y'
+            - if badge.art.attached?
+              = image_tag(url_for(badge.art), alt: 'GovHack Badge Art')
+            - else
+              = image_tag "treasurehunt_badge.png"
+      - else
+        %p No badges at the moment :(
+  %section.profile-footer
+    %button.black-button= link_to 'Back to Profiles', profiles_path

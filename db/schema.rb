@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_08_092646) do
+ActiveRecord::Schema.define(version: 2020_08_07_141225) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -288,6 +288,12 @@ ActiveRecord::Schema.define(version: 2020_07_08_092646) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "identifier"
+    t.integer "team_status"
+    t.string "website"
+    t.string "linkedin"
+    t.string "twitter"
+    t.string "description"
+    t.string "github"
     t.index ["identifier"], name: "index_profiles_on_identifier"
   end
 
@@ -478,7 +484,6 @@ ActiveRecord::Schema.define(version: 2020_07_08_092646) do
     t.string "google_img"
     t.text "dietary_requirements"
     t.string "tshirt_size"
-    t.string "twitter"
     t.boolean "mailing_list", default: false
     t.boolean "challenge_sponsor_contact_place", default: false
     t.boolean "challenge_sponsor_contact_enter", default: false

@@ -20,6 +20,7 @@ class ProfileTest < ActiveSupport::TestCase
     assert Profile.educations.is_a? Hash
     assert Profile.employments.is_a? Hash
     assert Profile.ages.is_a? Hash
+    assert Profile.team_statuses.is_a? Hash
   end
 
   test 'update_identifier callback' do

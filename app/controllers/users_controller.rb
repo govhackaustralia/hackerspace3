@@ -68,7 +68,6 @@ class UsersController < ApplicationController
       organisation_name
       phone_number
       region
-      twitter
       slack
       mailing_list
       challenge_sponsor_contact_place
@@ -88,18 +87,11 @@ class UsersController < ApplicationController
   end
 
   def account_update_successfully
-    if params[:user][:govhack_img].present?
-      handle_profile_img
-    elsif params[:banking].present?
+    if params[:banking].present?
       handle_bank_update
     else
       handle_personal_details
     end
-  end
-
-  def handle_profile_img
-    flash[:notice] = 'GovHack Profile Uploaded'
-    render :edit, profile_pic: true
   end
 
   def handle_bank_update

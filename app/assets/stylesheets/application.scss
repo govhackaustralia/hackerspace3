@@ -12,6 +12,7 @@
  */
 
 @import 'datatable';
+@import 'font_awesome5_webfont';
 
 @import 'layouts/admin_sponsors';
 @import 'layouts/base';
@@ -28,6 +29,10 @@
 @import 'layouts/registration';
 @import 'layouts/scorecard';
 @import 'layouts/team_page';
+@import 'layouts/profiles_index.scss';
+@import 'layouts/profile_index.scss';
+@import 'layouts/manage_account.scss';
+@import 'layouts/manage_account.scss';
 
 @import 'components/challenge_panel';
 @import 'components/csv_button';
