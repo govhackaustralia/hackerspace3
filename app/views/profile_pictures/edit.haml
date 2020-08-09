@@ -1,4 +1,6 @@
+- content_for :title, 'Update Profile Picture'
 %main.team_page
+  %h2= yield :title
   = form_with model: @profile, url: profile_picture_path(@profile), method: :patch do |form|
     .field
       - if @profile.profile_picture.attached?
