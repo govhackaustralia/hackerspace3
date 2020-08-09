@@ -81,17 +81,18 @@
         = fa_icon('award')
         Badges
     %div.profile-badges-content
-      - if @badges.present?
-        - @badges.each do |badge|
+      - if @badge_assignments.present?
+        - @badge_assignments.each do |badge_assignment|
+          - badge = badge_assignment.assignable
           %div.badge-wrapper
             %div.text-content
               %p.title= badge.name
-              %p.date-issued August 2020
+              %p.date-issued= badge_assignment.created_at.strftime '%B %Y'
             - if badge.art.attached?
               = image_tag(url_for(badge.art), alt: 'GovHack Badge Art')
             - else
               = image_tag "treasurehunt_badge.png"
       - else
-        %p No badges at the moment :( 
+        %p No badges at the moment :(
   %section.profile-footer
     %button.black-button= link_to 'Back to Profiles', profiles_path

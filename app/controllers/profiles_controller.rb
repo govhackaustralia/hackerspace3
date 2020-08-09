@@ -36,7 +36,7 @@ class ProfilesController < ApplicationController
   def show
     @profile = Profile.find_by_identifier params[:id]
     @user = @profile.user
-    @badges = @user.badges
+    @badge_assignments = @user.badge_assignments
     @team_name = @user.joined_teams.first&.current_project&.team_name
   end
 
