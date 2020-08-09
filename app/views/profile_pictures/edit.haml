@@ -3,10 +3,7 @@
   %h2= yield :title
   = form_with model: @profile, url: profile_picture_path(@profile), method: :patch do |form|
     .field
-      - if @profile.profile_picture.attached?
-        = image_tag(url_for(@profile.profile_picture), alt: 'GovHack Profile Picture')
-      - else
-        = image_tag "default_profile_pic.png"
+      = image_tag(default_profile_picture_url(current_user, @profile), alt: 'GovHack Profile Picture')
     .field
       = form.label :profile_picture, 'Upload a Profile Picture (only png/gif/jpeg/jpg)'
       = form.file_field :profile_picture, accept: 'image/png,image/gif,image/jpeg'

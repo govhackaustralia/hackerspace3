@@ -1,7 +1,7 @@
 - content_for :title, @user.display_name
 %main.profile_page
   %section.profile-header
-    = image_tag @user.gravatar_url, class: "profile-picture"
+    = image_tag default_profile_picture_url(@user, @profile), class: "profile-picture"
     %div.profile-content
       %h2.name= yield :title
       %div.bio

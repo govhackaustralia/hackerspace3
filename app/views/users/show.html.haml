@@ -1,7 +1,8 @@
 - content_for :title, 'Manage Account'
 %main.manage_account
   %section.profile-header
-    = image_tag(current_user.gravatar_url, class: "profile-picture")
+    = link_to profile_path(current_user.profile) do
+      = image_tag(default_profile_picture_url(current_user, current_user.profile), class: "profile-picture")
     %h2.name= render 'user_contact', locals: { user: @user }
   %hr.grey-border
   %section.profile-contents
