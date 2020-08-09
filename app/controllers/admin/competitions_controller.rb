@@ -62,7 +62,7 @@ class Admin::CompetitionsController < ApplicationController
   def demographics_report
     field = params[:field]
     demographics_report = DemographicsReport.new(@competition, field)
-    
+
     respond_to do |format|
       format.html do
         @report = demographics_report.report
@@ -111,6 +111,7 @@ class Admin::CompetitionsController < ApplicationController
     @challenge_criteria_count = @competition.challenge_criteria.count
     @project_criteria_count = @competition.project_criteria.count
     @teams_count = @competition.teams.count
+    @badge_count = @competition.badges.count
     sponsoresk_counts
   end
 
