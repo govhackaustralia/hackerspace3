@@ -37,6 +37,7 @@ Rails.application.routes.draw do
       get :participants
       get :mentors
       get :industry
+      get :support
     end
   end
   resources :profile_pictures, only: [:edit, :update]

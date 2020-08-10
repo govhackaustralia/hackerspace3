@@ -3,33 +3,29 @@ class ProfilesController < ApplicationController
   before_action :authorize_user!, only: %i[edit update]
 
   def index
-    @profiles = Profile.all.where.not(identifier: nil).preload(:user).includes(:skills)
-  end
-
-  def participants
     @profiles = Profile.all
-      .where(user: User.where(registration_type: PARTICIPANT_TYPES))
       .where.not(identifier: nil)
       .preload(:user)
       .includes(:skills)
+  end
+
+  def participants
+    user_registration_scoped_profiles(PARTICIPANT_TYPES)
     render :index
   end
 
   def mentors
-    @profiles = Profile.all
-      .where(user: User.where(registration_type: MENTOR_TYPES))
-      .where.not(identifier: nil)
-      .preload(:user)
-      .includes(:skills)
+    user_registration_scoped_profiles(MENTOR_TYPES)
     render :index
   end
 
   def industry
-    @profiles = Profile.all
-      .where(user: User.where(registration_type: INDUSTRY_TYPES))
-      .where.not(identifier: nil)
-      .preload(:user)
-      .includes(:skills)
+    user_registration_scoped_profiles(INDUSTRY_TYPES)
+    render :index
+  end
+
+  def support
+    user_registration_scoped_profiles(SUPPORT_TYPES)
     render :index
   end
 
@@ -48,6 +44,14 @@ class ProfilesController < ApplicationController
   end
 
   private
+
+  def user_registration_scoped_profiles(registration_types)
+    @profiles = Profile.all
+      .where(user: User.where(registration_type: registration_types))
+      .where.not(identifier: nil)
+      .preload(:user)
+      .includes(:skills)
+  end
 
   def profile_params
     params.require(:profile).permit(:team_status, :description, :website,

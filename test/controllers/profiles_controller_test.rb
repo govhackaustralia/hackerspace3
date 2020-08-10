@@ -25,6 +25,11 @@ class ProfilesControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
+  test 'should get support' do
+    get support_profiles_path
+    assert_response :success
+  end
+
   test 'should get show' do
     get profile_path @profile
     assert_response :success
