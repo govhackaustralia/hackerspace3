@@ -13,9 +13,11 @@
       %span.scavenger_title Submit your answers
       %span.scavenger_title_instructions Instructions
   .scavenger_container
-    .scavenger_questions
-      - @hunt_questions.each do |question|
-        %div= question.question
+    .scavenger_questions_container
+      .scavenger_questions
+        %h2 Scavenger Hunt Clues
+        - @hunt_questions.each do |question|
+          %div= question.question
     .scavenger_answers
       %h2= yield :title
       - unless user_signed_in?
@@ -38,10 +40,17 @@
       .scavenger_instructions
         %h2 Instructions:
 
-        %p
-          Getting lost, can sometimes be the easiest way to disover new things.
-          The GovHack Treasure Hunt will help you find your way around the digital competition.
+        %p Getting lost can sometimes be the easiest way to discover new things. The GovHack Treasure Hunt will help you find your way around the digital competition.
 
-        %p Correct answers will earn you Treasure Hunt badges for your GovHack profile.
+        %p Five correct answers will earn you a Treasure Hunt badge for your GovHack profile.
 
+        %p 
+          %strong How To Play:
+
+        %ol
+          %li Each clue will lead you to a website or dataset
+          %li Search the website or dataset to look up the answer to the clue
+          %li Each answer will be a single non-case sensitive word or a number in numerical format e.g. 19585
+
+        %p Note: you do not need to download files, register, or sign into any additional pages to find the answers.
         %a{class: "nav-button", onclick: "showInstructions(false)"} Back
