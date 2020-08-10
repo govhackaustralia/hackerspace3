@@ -5,12 +5,11 @@ class ProfilePicturesController < ApplicationController
 
   def update
     if @profile.update profile_params
-      redirect_to manage_account_path,
-        notice: 'Profile Picture updated'
+      flash[:notice] = 'Profile Picture updated'
     else
       flash[:alert] = @profile.errors.full_messages.to_sentence
-      render :edit
     end
+    render :edit
   end
 
   private
