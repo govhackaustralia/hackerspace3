@@ -25,7 +25,7 @@ class HuntQuestionsControllerTest < ActionDispatch::IntegrationTest
     assert_difference 'Assignment.count', 1 do
       patch hunt_question_path(@hunt_question), params: {
         hunt_question: {
-          answer: 'bCC'
+          answer: 'AAAbbbCCc'
         }
       }
     end

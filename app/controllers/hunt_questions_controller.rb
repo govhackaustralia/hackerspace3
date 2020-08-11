@@ -32,7 +32,7 @@ class HuntQuestionsController < ApplicationController
   end
 
   def answered_correctly?
-    hunt_question.answer.downcase.match? attempt.downcase.strip
+    hunt_question.answer.downcase.strip == attempt.downcase.strip
   end
 
   def hunt_questions
