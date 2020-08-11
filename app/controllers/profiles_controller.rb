@@ -3,7 +3,7 @@ class ProfilesController < ApplicationController
   before_action :authorize_user!, only: %i[edit update]
 
   def index
-    @profiles = Profile.all
+    @profiles = Profile.published
       .where.not(identifier: nil)
       .where.not(identifier: '')
       .preload(:user)
@@ -47,7 +47,7 @@ class ProfilesController < ApplicationController
   private
 
   def user_registration_scoped_profiles(registration_types)
-    @profiles = Profile.all
+    @profiles = Profile.published
       .where(user: User.where(registration_type: registration_types))
       .where.not(identifier: nil)
       .where.not(identifier: '')

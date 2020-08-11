@@ -14,6 +14,10 @@ class ProfileTest < ActiveSupport::TestCase
     assert_not Profile.create(identifier: @profile.identifier).save
   end
 
+  test 'scopes' do
+    assert_not Profile.published.include? @profile
+  end
+
   test 'enums' do
     assert Profile.first_peoples.is_a? Hash
     assert Profile.disabilities.is_a? Hash

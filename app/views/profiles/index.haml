@@ -16,16 +16,14 @@
     %h2= yield :title
     %table.profiles-table#projects_table{'data-turbolinks' => 'false'}
       %thead
-        %th Full Name
-        %th Preferred Name
+        %th Name
         %th Region
         %th Team Status
         %th Skills
       %tbody
         - @profiles.each do |profile|
           %tr
-            %td= link_to "#{profile.user.full_name}", profile_path(profile)
-            %td= profile.user.preferred_name
+            %td= link_to "#{profile.user.display_name}", profile_path(profile)
             %td= profile.user.region
             %td= profile.team_status
             %td= profile.skills.map {|tag|"##{tag}"}.join(' ')

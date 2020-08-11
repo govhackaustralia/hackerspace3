@@ -7,6 +7,8 @@ class Profile < ApplicationRecord
 
   has_one_attached :profile_picture
 
+  scope :published, -> { where published: true }
+
   def to_param
     identifier
   end
