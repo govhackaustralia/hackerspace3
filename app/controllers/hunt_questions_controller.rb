@@ -3,6 +3,7 @@ class HuntQuestionsController < ApplicationController
   before_action :authenticate_user!, :check_for_previous_correct_answer!, only: :update
 
   def index
+    clear_answers
     return unless user_signed_in?
 
     @hunt_badge = current_user.assignments.find_by(assignable: @competition.hunt_badge)
