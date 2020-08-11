@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_11_021420) do
+ActiveRecord::Schema.define(version: 2020_08_11_090808) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -138,6 +138,8 @@ ActiveRecord::Schema.define(version: 2020_08_11_021420) do
     t.boolean "current"
     t.datetime "team_form_start"
     t.datetime "team_form_end"
+    t.integer "hunt_badge_id"
+    t.boolean "hunt_published"
     t.index ["current"], name: "index_competitions_on_current"
     t.index ["year"], name: "index_competitions_on_year"
   end
@@ -273,6 +275,14 @@ ActiveRecord::Schema.define(version: 2020_08_11_021420) do
     t.index ["competition_id"], name: "index_holders_on_competition_id"
     t.index ["team_status"], name: "index_holders_on_team_status"
     t.index ["user_id"], name: "index_holders_on_user_id"
+  end
+
+  create_table "hunt_questions", force: :cascade do |t|
+    t.integer "competition_id"
+    t.string "question"
+    t.string "answer"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "profiles", force: :cascade do |t|

@@ -1,0 +1,9 @@
+= form_for [:admin, @competition, @hunt_question] do |form|
+  .field
+    = form.label :question
+    = form.text_field :question
+  .field
+    = form.label :answer
+    = form.text_field :answer
+  .actions
+    = form.submit

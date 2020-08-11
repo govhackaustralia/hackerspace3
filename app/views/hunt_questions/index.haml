@@ -1,0 +1,55 @@
+- content_for :title, 'Scavenger Hunt'
+%main.scavenger_hunt
+  :javascript
+    const showInstructions = (shouldShow) => {
+      document.querySelector(".scavenger_instructions").style.display = shouldShow ? 'block' : 'none';
+      document.querySelector(".scavenger_title_instructions").style.display = shouldShow ? 'inline' : 'none';
+      document.querySelector(".scavenger_title").style.display = shouldShow ? 'none' : 'inline';
+    }
+
+  %section.header
+    %h2
+      Scavenger Hunt
+      %span.scavenger_title_instructions - Instructions
+  .scavenger_container
+    .scavenger_questions_container
+      .scavenger_questions
+        %h2 Scavenger Hunt Clues
+        - @hunt_questions.each do |question|
+          %div= question.question
+    .scavenger_answers
+      %h2 Submit your answers
+      - unless user_signed_in?
+        %p Sign Up to participate in the scavenger hunt!
+      - @hunt_questions.each do |question|
+        = form_for question do |form|
+          = form.label :answer, question.question
+          - if user_signed_in?
+            - if current_user.assignments.where(assignable: question).exists?
+              %p.scavenger_answered You have successfully answered this question
+            - else
+              = form.text_field :answer
+              = form.submit 'Submit'
+
+      %a{class: "nav-button", onclick: "showInstructions(true)"} View Instructions
+
+      - if @hunt_badge_assignment.present?
+        %p You have claimed the #{@hunt_badge.name}!
+
+      .scavenger_instructions
+        %h2 Instructions:
+
+        %p Getting lost can sometimes be the easiest way to discover new things. The GovHack Treasure Hunt will help you find your way around the digital competition.
+
+        %p Five correct answers will earn you a Treasure Hunt badge for your GovHack profile.
+
+        %p
+          %strong How To Play:
+
+        %ol
+          %li Each clue will lead you to a website or dataset
+          %li Search the website or dataset to look up the answer to the clue
+          %li Each answer will be a single non-case sensitive word or a number in numerical format e.g. 19585
+
+        %p Note: you do not need to download files, register, or sign into any additional pages to find the answers.
+        %a{class: "nav-button", onclick: "showInstructions(false)"} Back

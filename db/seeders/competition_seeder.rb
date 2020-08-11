@@ -25,7 +25,8 @@ class CompetitionSeeder < Seeder
       challenge_judging_start: judging_start,
       challenge_judging_end: judging_end,
       year: year,
-      current: Time.current.year == year
+      current: Time.current.year == year,
+      hunt_published: Time.current.year == year
     )
 
     UserSeeder.create_admin comp
@@ -41,6 +42,10 @@ class CompetitionSeeder < Seeder
         name: "Project Criterion #{time} #{comp.year}",
         description: Faker::Lorem.paragraph,
         category: PROJECT
+      )
+      comp.hunt_questions.create(
+        question: "What is the answer to question #{time}?",
+        answer: "Answer #{time}"
       )
     end
 
@@ -112,6 +117,7 @@ class CompetitionSeeder < Seeder
         )
       end
     end
+    comp.update hunt_badge: comp.badges.sample
 
     Faker::Color.unique.clear
 

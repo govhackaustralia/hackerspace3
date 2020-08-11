@@ -112,6 +112,7 @@ class Admin::CompetitionsController < ApplicationController
     @project_criteria_count = @competition.project_criteria.count
     @teams_count = @competition.teams.count
     @badge_count = @competition.badges.count
+    @hunt_question_count = @competition.hunt_questions.count
     sponsoresk_counts
   end
 

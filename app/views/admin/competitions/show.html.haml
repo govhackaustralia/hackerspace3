@@ -73,6 +73,11 @@
     = pluralize @badge_count, 'badge'
     saved.
   %p= link_to 'Competition Badges', admin_competition_badges_path(@competition)
+  %h3 Hunt Questions
+  %p
+    = pluralize @hunt_question_count, 'hunt question'
+    saved.
+  %p= link_to 'Competition Hunt Questions', admin_competition_hunt_questions_path(@competition)
   %h3 Teams
   %p
     = pluralize @teams_count, 'Team'
