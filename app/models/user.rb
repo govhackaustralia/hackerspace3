@@ -107,6 +107,10 @@ class User < ApplicationRecord
     INDUSTRY_TYPES.include? registration_type
   end
 
+  def support?
+    SUPPORT_TYPES.include? registration_type
+  end
+
   enum region: {
     'Queensland' => 0,
     'New South Wales' => 1,

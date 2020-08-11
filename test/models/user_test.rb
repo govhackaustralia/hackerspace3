@@ -177,7 +177,7 @@ class UserTest < ActiveSupport::TestCase
   test 'registration types' do
     assert @user.participant?
     assert users(:two).mentor?
-    assert users(:three).industry?
+    assert users(:three).support?
 
     assert_not @user.mentor?
     assert_not users(:unconfirmed_user).industry?
