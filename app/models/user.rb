@@ -12,7 +12,7 @@ class User < ApplicationRecord
   has_many :registrations, through: :assignments
 
   has_many :badge_assignments,
-    -> { where title: ASSIGNEE },
+    -> { where title: ASSIGNEE, assignable_type: 'Badge' },
     class_name: 'Assignment'
 
   has_many :badges,
