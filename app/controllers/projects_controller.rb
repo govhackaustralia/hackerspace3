@@ -5,6 +5,7 @@ class ProjectsController < ApplicationController
     @projects = @competition.published_projects_by_name
       .preload(:event, :team)
       .includes(:tags)
+    @teams = Team.where(id: @projects.pluck(:team_id))
     project_counts
     user_records_index if user_signed_in?
     respond_to do |format|

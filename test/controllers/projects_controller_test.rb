@@ -12,6 +12,11 @@ class ProjectsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
+  test 'should get index csv' do
+    get projects_url format: :csv
+    assert_response :success
+  end
+
   test 'should get show' do
     get project_url @project.identifier
     assert_response :success
