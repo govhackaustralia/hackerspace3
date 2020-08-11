@@ -83,7 +83,8 @@ class UserSeeder < Seeder
         team_status: Profile.team_statuses.keys.sample,
         website: "www.#{user.preferred_name}.com",
         linkedin: "#{user.preferred_name}@linkedin",
-        description: Faker::Lorem.paragraph
+        description: Faker::Lorem.paragraph,
+        published: (number % 20 != 0),
       )
     end
   end
