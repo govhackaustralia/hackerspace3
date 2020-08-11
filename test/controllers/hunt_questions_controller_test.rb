@@ -14,6 +14,12 @@ class HuntQuestionsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
+  test 'should redirect on hunt not published' do
+    @competition.update hunt_published: false
+    get scavenger_hunt_path
+    assert_redirected_to root_path
+  end
+
   test 'should award question' do
     @hunt_question.update! answer: 'AAAbbbCCC'
     assert_difference 'Assignment.count', 1 do

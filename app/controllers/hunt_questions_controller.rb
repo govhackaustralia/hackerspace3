@@ -1,5 +1,5 @@
 class HuntQuestionsController < ApplicationController
-  before_action :hunt_questions
+  before_action :check_published!, :hunt_questions
   before_action :authenticate_user!, :check_for_previous_correct_answer!, only: :update
 
   def index
@@ -71,5 +71,11 @@ class HuntQuestionsController < ApplicationController
     return unless current_user.assignments.where(assignable: hunt_question).exists?
 
     redirect_to scavenger_hunt_path, alert: 'Already answered question'
+  end
+
+  def check_published!
+    return if @competition.hunt_published
+
+    redirect_to root_url, alert: 'Scavenger Hunt not available yet'
   end
 end
