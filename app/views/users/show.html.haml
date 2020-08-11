@@ -3,7 +3,7 @@
   %section.profile-header
     = link_to profile_path(current_user.profile) do
       = image_tag(default_profile_picture_url(current_user, current_user.profile), class: "profile-picture")
-    %h2.name= render 'user_contact', locals: { user: @user }
+    %h2.name= @user.display_name
   %hr.grey-border
   %section.profile-contents
     %div.manage-profile
