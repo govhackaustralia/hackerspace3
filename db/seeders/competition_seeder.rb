@@ -25,7 +25,8 @@ class CompetitionSeeder < Seeder
       challenge_judging_start: judging_start,
       challenge_judging_end: judging_end,
       year: year,
-      current: Time.current.year == year
+      current: Time.current.year == year,
+      hunt_published: Time.current.year == year
     )
 
     UserSeeder.create_admin comp
