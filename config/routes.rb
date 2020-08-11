@@ -95,6 +95,12 @@ Rails.application.routes.draw do
       resources :events, only: :index
       resources :sponsors
       resources :badges
+      resources :hunt_questions, only: [:index, :new, :create, :edit, :update] do
+        collection do
+          patch :badge
+          patch :hunt_published
+        end
+      end
       member do
         get 'aws_credits_requested'
         get 'sponsor_data_set_report'

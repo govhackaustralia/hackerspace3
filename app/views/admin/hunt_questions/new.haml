@@ -1,0 +1,4 @@
+%main.team_page
+  %h2= "New Hunt Question for Competition #{@competition.name}"
+  = render 'form'
+%p= link_to 'Back to Competition Hunt Questions', admin_competition_hunt_questions_path(@competition)
