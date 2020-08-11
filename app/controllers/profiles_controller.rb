@@ -5,6 +5,7 @@ class ProfilesController < ApplicationController
   def index
     @profiles = Profile.all
       .where.not(identifier: nil)
+      .where.not(identifier: '')
       .preload(:user)
       .includes(:skills)
   end
@@ -49,6 +50,7 @@ class ProfilesController < ApplicationController
     @profiles = Profile.all
       .where(user: User.where(registration_type: registration_types))
       .where.not(identifier: nil)
+      .where.not(identifier: '')
       .preload(:user)
       .includes(:skills)
   end
