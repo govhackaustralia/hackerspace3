@@ -78,7 +78,8 @@ class HuntQuestionsControllerTest < ActionDispatch::IntegrationTest
     )
 
     assert_no_difference 'Assignment.count' do
-      assert_raises(ActiveRecord::RecordInvalid) do
+      @competition.update! hunt_badge_id: nil
+      assert_raises(NoMethodError) do
         patch hunt_question_path(@last_hunt_question), params: {
           hunt_question: {
             answer: @last_hunt_question.answer

@@ -58,7 +58,7 @@ class HuntQuestionsController < ApplicationController
   end
 
   def award_hunt_badge
-    current_user.assignments.create!(
+    current_user.assignments.find_or_create_by!(
       title: ASSIGNEE,
       assignable: @competition.hunt_badge,
       holder: holder
