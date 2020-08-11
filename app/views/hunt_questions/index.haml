@@ -9,9 +9,8 @@
 
   %section.header
     %h2
-      Scavenger Hunt -
-      %span.scavenger_title Submit your answers
-      %span.scavenger_title_instructions Instructions
+      Scavenger Hunt
+      %span.scavenger_title_instructions - Instructions
   .scavenger_container
     .scavenger_questions_container
       .scavenger_questions
@@ -19,7 +18,7 @@
         - @hunt_questions.each do |question|
           %div= question.question
     .scavenger_answers
-      %h2= yield :title
+      %h2 Submit your answers
       - unless user_signed_in?
         %p Sign Up to participate in the scavenger hunt!
       - @hunt_questions.each do |question|
@@ -34,8 +33,8 @@
 
       %a{class: "nav-button", onclick: "showInstructions(true)"} View Instructions
 
-      - if @hunt_badge.present?
-        %p You have claimed the scavenger badge!
+      - if @hunt_badge_assignment.present?
+        %p You have claimed the #{@hunt_badge.name}!
 
       .scavenger_instructions
         %h2 Instructions:
@@ -44,7 +43,7 @@
 
         %p Five correct answers will earn you a Treasure Hunt badge for your GovHack profile.
 
-        %p 
+        %p
           %strong How To Play:
 
         %ol

@@ -6,7 +6,8 @@ class HuntQuestionsController < ApplicationController
     clear_answers
     return unless user_signed_in?
 
-    @hunt_badge = current_user.assignments.find_by(assignable: @competition.hunt_badge)
+    @hunt_badge = @competition.hunt_badge
+    @hunt_badge_assignment = current_user.assignments.find_by(assignable: @hunt_badge)
   end
 
   def update
