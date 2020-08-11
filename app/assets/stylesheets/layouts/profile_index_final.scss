@@ -52,8 +52,23 @@
                     flex-flow: wrap;
 
                     p {
+                        font-size: 1rem;
+                        line-height: 2rem;
                         color: #201d21;
-                        margin-right: 15px;
+
+                        &:nth-of-type(n+2) {
+                            margin: 0 20px;
+                        }
+
+                        a {
+                            color: #4c9ad2;
+                            text-decoration: none;
+                        }
+
+                        a:hover {
+                            color: #4c9ad2;
+                            text-decoration: underline;
+                        }
                     }
 
                     button {
@@ -113,14 +128,7 @@
                     padding: 5px 10px;
                     align-items: center;
                     margin: 3px;
-
-                    &:nth-of-type(odd) {
-                        background: #4c9ad2;
-                    }
-
-                    &:nth-of-type(even) {
-                        background: #c61f55;
-                    }
+                    background: #4c9ad2;
                 }
             }
         }
@@ -147,14 +155,7 @@
                     padding: 5px 10px;
                     align-items: center;
                     margin: 3px;
-
-                    &:nth-of-type(odd) {
-                        background: #4c9ad2;
-                    }
-
-                    &:nth-of-type(even) {
-                        background: #c61f55;
-                    }
+                    background: #c61f55;
                 }
             }
         }

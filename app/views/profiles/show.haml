@@ -34,22 +34,22 @@
           %p
             %strong
               = fa_icon('link')
-            = @profile.website
+            %a{:href => "#{@profile.website}", :target => "_blank"}= @profile.website
         - if @profile.linkedin.present?
           %p
             %strong
               = fa_icon('linkedin-in', type: :brand)
-            = @profile.linkedin
+            %a{:href => "#{@profile.linkedin}", :target => "_blank"}= 'LinkedIn'
         - if @profile.github.present?
           %p
             %strong
               = fa_icon('github', type: :brand)
-            = @profile.github
+            %a{:href => "#{@profile.github}", :target => "_blank"}= 'GitHub'
         - if @profile.twitter.present?
           %p
             %strong
               = fa_icon('twitter', type: :brand)
-            = @profile.twitter
+            %a{:href => "#{@profile.twitter}", :target => "_blank"}= 'Twitter'
         - if user_signed_in? && @profile == current_user.profile
           %button.black-button= link_to 'Edit Profile', edit_profile_path(@profile)
   %hr.grey-border
