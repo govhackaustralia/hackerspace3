@@ -1,6 +1,7 @@
 class ProfilesController < ApplicationController
   before_action :authenticate_user!, only: %i[edit update]
   before_action :authorize_user!, only: %i[edit update]
+  before_action :check_profile_found!, :check_published!, only: :show
 
   def index
     @profiles = Profile.published
@@ -31,7 +32,6 @@ class ProfilesController < ApplicationController
   end
 
   def show
-    @profile = Profile.find_by_identifier params[:id]
     @user = @profile.user
     @badge_assignments = @user.badge_assignments
     @team_name = @user.joined_teams.first&.current_project&.team_name
@@ -66,5 +66,24 @@ class ProfilesController < ApplicationController
 
     redirect_to profile_path(@profile),
       alert: 'You are not permitted to edit this Profile'
+  end
+
+  def check_profile_found!
+    @profile = Profile.find_by_identifier params[:id]
+
+    return if @profile.present?
+
+    redirect_to profiles_path, alert: "Could not find Profile: '#{params[:id]}'"
+  end
+
+  def check_published!
+    return if @profile.published
+
+    if user_signed_in? && current_user.profile == @profile
+      flash[:notice] = 'This Profile is not yet published, only you can see it.'
+      return
+    end
+
+    redirect_to profiles_path, alert: 'This Profile has not been published yet'
   end
 end

@@ -31,8 +31,31 @@ class ProfilesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'should get show' do
+    @profile.update published: true
     get profile_path @profile
     assert_response :success
+  end
+
+  test 'should redirect on wrong profile' do
+    get profile_path 'wrong identifier'
+    assert_redirected_to profiles_path
+  end
+
+  test 'should not show if not published' do
+    get profile_path @profile
+    assert_redirected_to profiles_path
+  end
+
+  test 'should show if not published but is users' do
+    sign_in users :one
+    get profile_path @profile
+    assert_response :success
+  end
+
+  test 'should not show if not published and not users' do
+    sign_in users :two
+    get profile_path @profile
+    assert_redirected_to profiles_path
   end
 
   test 'should authorize user' do
