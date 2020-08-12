@@ -181,7 +181,7 @@ Rails.application.routes.draw do
   get 'update_profile_picture', to: 'profile_pictures#edit'
   get 'terms_and_conditions', to: 'static_pages#terms_and_conditions'
   get 'code_of_conduct', to: 'static_pages#code_of_conduct'
-  get 'scavenger_hunt', to: 'hunt_questions#index'
+  get 'treasure_hunt', to: 'hunt_questions#index'
 
   mount ActionCable.server => '/cable'
 

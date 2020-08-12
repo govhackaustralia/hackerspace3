@@ -9,14 +9,14 @@ class HuntQuestionsControllerTest < ActionDispatch::IntegrationTest
     sign_in @user
   end
 
-  test 'should get scavenger_hunt' do
-    get scavenger_hunt_path
+  test 'should get treasure_hunt' do
+    get treasure_hunt_path
     assert_response :success
   end
 
   test 'should redirect on hunt not published' do
     @competition.update hunt_published: false
-    get scavenger_hunt_path
+    get treasure_hunt_path
     assert_redirected_to root_path
   end
 
@@ -29,7 +29,7 @@ class HuntQuestionsControllerTest < ActionDispatch::IntegrationTest
         }
       }
     end
-    assert_redirected_to scavenger_hunt_path
+    assert_redirected_to treasure_hunt_path
     assert flash[:notice].present?
   end
 
@@ -41,7 +41,7 @@ class HuntQuestionsControllerTest < ActionDispatch::IntegrationTest
         }
       }
     end
-    assert_redirected_to scavenger_hunt_path
+    assert_redirected_to treasure_hunt_path
     assert flash[:alert].present?
   end
 

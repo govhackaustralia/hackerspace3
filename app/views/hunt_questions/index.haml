@@ -1,33 +1,33 @@
 - content_for :title, 'Treasure Hunt'
-%main.scavenger_hunt
+%main.treasure_hunt
   :javascript
     const showInstructions = (shouldShow) => {
-      document.querySelector(".scavenger_instructions").style.display = shouldShow ? 'block' : 'none';
-      document.querySelector(".scavenger_title_instructions").style.display = shouldShow ? 'inline' : 'none';
-      document.querySelector(".scavenger_title").style.display = shouldShow ? 'none' : 'inline';
+      document.querySelector(".treasure_instructions").style.display = shouldShow ? 'block' : 'none';
+      document.querySelector(".treasure_title_instructions").style.display = shouldShow ? 'inline' : 'none';
+      document.querySelector(".treasure_title").style.display = shouldShow ? 'none' : 'inline';
     }
 
   %section.header
     %h2
       Treasure Hunt
-      %span.scavenger_title_instructions - Instructions
-  .scavenger_container
-    .scavenger_questions_container
-      .scavenger_questions
+      %span.treasure_title_instructions - Instructions
+  .treasure_container
+    .treasure_questions_container
+      .treasure_questions
         %h2 Treasure Hunt Clues
         - @hunt_questions.each do |question|
           %div= question.question
-    .scavenger_answers
+    .treasure_answers
       %h2 Submit your answers
       - unless user_signed_in?
-        %p Sign Up to participate in the scavenger hunt!
       - @hunt_questions.each_with_index do |question, index|
+        %p Sign Up to participate in the treasure hunt!
         = form_for question do |form|
           %p Clue #{index+1}:
           = form.label :answer, question.question
           - if user_signed_in?
             - if current_user.assignments.where(assignable: question).exists?
-              %p.scavenger_answered You have successfully answered this question
+              %p.treasure_answered You have successfully answered this question
             - else
               = form.text_field :answer, placeholder: "Enter clue #{index+1} Answer"
               = form.submit 'Submit'
@@ -37,7 +37,7 @@
       - if @hunt_badge_assignment.present?
         %p You have claimed the #{@hunt_badge.name}!
 
-      .scavenger_instructions
+      .treasure_instructions
         %h2 Instructions:
 
         %p Getting lost can sometimes be the easiest way to discover new things. The GovHack Treasure Hunt will help you find your way around the digital competition.

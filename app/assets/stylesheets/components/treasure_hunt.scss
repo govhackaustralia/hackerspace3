@@ -1,8 +1,8 @@
-.scavenger_container {
+.treasure_container {
   display: flex;
   flex-direction: row;
 }
-.scavenger_questions_container {
+.treasure_questions_container {
   width: 100%;
   min-height:100vh;
   display: flex;
@@ -17,7 +17,7 @@
   }
 
 }
-.scavenger_questions {
+.treasure_questions {
   transform: rotate(3deg);
   height: 630px;
   width:900px;
@@ -47,7 +47,7 @@
 
 
 }
-.scavenger_hunt section.header {
+.treasure_hunt section.header {
   display: block;
   background-color: #4c9ad2;
   padding: 5rem;
@@ -58,12 +58,12 @@
     line-height: 1.2em;
     font-size: 2em;
 
-    .scavenger_title_instructions {
+    .treasure_title_instructions {
       display: none;
     }
   }
 }
-.scavenger_answers {
+.treasure_answers {
   position: relative;
   background: white;
   display: border-box;
@@ -101,7 +101,7 @@
     text-align: right;
     cursor: pointer;
   }
-  .scavenger_answered {
+  .treasure_answered {
     margin: 5px 0 15px 0;
   }
 
@@ -120,7 +120,7 @@
     float: right;
   }
 
-  .scavenger_instructions {
+  .treasure_instructions {
     display: none;
     position: absolute;
     top: 0;
