@@ -25,11 +25,11 @@
             %strong
               = fa_icon('user-friends')
             = @profile.team_status
-        - if @team_name.present?
+        - @joined_projects.each do |project|
           %p
             %strong
               = fa_icon('user-friends')
-            = @team_name
+            = project.team_name
         - if @profile.website.present?
           %p
             %strong

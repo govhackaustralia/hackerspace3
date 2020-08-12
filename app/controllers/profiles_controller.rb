@@ -34,7 +34,7 @@ class ProfilesController < ApplicationController
   def show
     @user = @profile.user
     @badge_assignments = @user.badge_assignments
-    @team_name = @user.joined_teams.first&.current_project&.team_name
+    @joined_projects = @user.joined_projects.where(competition: @competition)
   end
 
   def edit; end

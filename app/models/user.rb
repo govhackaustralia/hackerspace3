@@ -33,6 +33,10 @@ class User < ApplicationRecord
     source: :assignable,
     source_type: 'Team'
 
+  has_many :joined_projects,
+    through: :joined_teams,
+    source: :current_project
+
   has_many :invited_team_assignments,
     -> { team_invitees },
     class_name: 'Assignment'

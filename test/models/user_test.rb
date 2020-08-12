@@ -39,6 +39,7 @@ class UserTest < ActiveSupport::TestCase
 
     assert @user.joined_team_assignments.include? @joined_team_assignment
     assert @user.joined_teams.include? @joined_team
+    assert @user.joined_projects.include? projects :one
 
     assert @invitee.invited_team_assignments.include? @invited_team_assignments
     assert @invitee.invited_teams.include? @invited_team
