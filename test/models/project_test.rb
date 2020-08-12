@@ -12,6 +12,7 @@ class ProjectTest < ActiveSupport::TestCase
     assert @project.team == @team
     assert @project.user == @user
     assert @project.event == @event
+    assert @project.competition == competitions(:one)
   end
 
   test 'project scopes' do

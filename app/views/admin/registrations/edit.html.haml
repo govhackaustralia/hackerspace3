@@ -8,9 +8,9 @@
     %p Waitlist, will be emailed should a space become available.
     \#{render 'form', locals: { options: [WAITLIST, NON_ATTENDING] }}
   - elsif @registration.status == ATTENDING
-    %p Registerd as attending.
+    %p Registered as attending.
     \#{render 'form', locals: { options: [ATTENDING, NON_ATTENDING] }}
   - elsif @registration.status == NON_ATTENDING
-    %p Registerd as not attending.
+    %p Registered as not attending.
     \#{render 'form', locals: { options: [ATTENDING, NON_ATTENDING] }}
 %p= link_to 'Back to Registrations', admin_event_registrations_path(@event)

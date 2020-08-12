@@ -1,42 +1,47 @@
-- content_for :title, 'Scavenger Hunt'
-%main.scavenger_hunt
+- content_for :title, 'Treasure Hunt'
+%main.treasure_hunt
   :javascript
     const showInstructions = (shouldShow) => {
-      document.querySelector(".scavenger_instructions").style.display = shouldShow ? 'block' : 'none';
-      document.querySelector(".scavenger_title_instructions").style.display = shouldShow ? 'inline' : 'none';
-      document.querySelector(".scavenger_title").style.display = shouldShow ? 'none' : 'inline';
+      document.querySelector(".treasure_instructions").style.display = shouldShow ? 'block' : 'none';
+      document.querySelector(".treasure_title_instructions").style.display = shouldShow ? 'inline' : 'none';
+      document.querySelector(".treasure_title").style.display = shouldShow ? 'none' : 'inline';
     }
 
   %section.header
     %h2
-      Scavenger Hunt
-      %span.scavenger_title_instructions - Instructions
-  .scavenger_container
-    .scavenger_questions_container
-      .scavenger_questions
-        %h2 Scavenger Hunt Clues
+      Treasure Hunt
+      %span.treasure_title_instructions - Instructions
+  .treasure_container
+    .treasure_questions_container
+      .treasure_questions
+        %h2 Treasure Hunt Clues
         - @hunt_questions.each do |question|
           %div= question.question
-    .scavenger_answers
-      %h2 Submit your answers
-      - unless user_signed_in?
-        %p Sign Up to participate in the scavenger hunt!
-      - @hunt_questions.each do |question|
-        = form_for question do |form|
-          = form.label :answer, question.question
-          - if user_signed_in?
-            - if current_user.assignments.where(assignable: question).exists?
-              %p.scavenger_answered You have successfully answered this question
-            - else
-              = form.text_field :answer
-              = form.submit 'Submit'
+    .treasure_answers
+      - if user_signed_in?
+        - @hunt_questions.each do |question|
+          = form_for question do |form|
+            = form.label :answer, question.question
+            - if user_signed_in?
+              - if current_user.assignments.where(assignable: question).exists?
+                %p.treasure_answered You have successfully answered this question
+              - else
+                = form.text_field :answer, placeholder: "Your answer"
+                = form.submit 'Submit'
+      - else
+        %p
+          %strong
+            = link_to 'Sign up to join the Treasure Hunt!', new_user_registration_path
+
+        - @hunt_questions.each do |question|
+          %p= question.question
 
       %a{class: "nav-button", onclick: "showInstructions(true)"} View Instructions
 
       - if @hunt_badge_assignment.present?
         %p You have claimed the #{@hunt_badge.name}!
 
-      .scavenger_instructions
+      .treasure_instructions
         %h2 Instructions:
 
         %p Getting lost can sometimes be the easiest way to discover new things. The GovHack Treasure Hunt will help you find your way around the digital competition.

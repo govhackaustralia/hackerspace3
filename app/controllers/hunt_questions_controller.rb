@@ -17,7 +17,7 @@ class HuntQuestionsController < ApplicationController
     else
       flash[:alert] = 'Please try again'
     end
-    redirect_to scavenger_hunt_path
+    redirect_to treasure_hunt_path
   end
 
   private
@@ -72,12 +72,12 @@ class HuntQuestionsController < ApplicationController
   def check_for_previous_correct_answer!
     return unless current_user.assignments.where(assignable: hunt_question).exists?
 
-    redirect_to scavenger_hunt_path, alert: 'Already answered question'
+    redirect_to treasure_hunt_path, alert: 'Already answered question'
   end
 
   def check_published!
     return if @competition.hunt_published
 
-    redirect_to root_url, alert: 'Scavenger Hunt not available yet'
+    redirect_to root_url, alert: 'Treasure Hunt not available yet'
   end
 end

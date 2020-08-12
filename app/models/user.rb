@@ -33,6 +33,10 @@ class User < ApplicationRecord
     source: :assignable,
     source_type: 'Team'
 
+  has_many :joined_projects,
+    through: :joined_teams,
+    source: :current_project
+
   has_many :invited_team_assignments,
     -> { team_invitees },
     class_name: 'Assignment'
@@ -130,7 +134,7 @@ class User < ApplicationRecord
     errors.empty?
   end
 
-  # Gravitar Gem
+  # Gravatar Gem
   include Gravtastic
   has_gravatar default: 'robohash'
 

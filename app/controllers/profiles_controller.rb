@@ -1,5 +1,5 @@
 class ProfilesController < ApplicationController
-  before_action :authenticate_user!, only: %i[edit update]
+  before_action :authenticate_user!, only: %i[edit update slack_chat]
   before_action :authorize_user!, only: %i[edit update]
   before_action :check_profile_found!, :check_published!, only: :show
 
@@ -34,14 +34,31 @@ class ProfilesController < ApplicationController
   def show
     @user = @profile.user
     @badge_assignments = @user.badge_assignments
-    @team_name = @user.joined_teams.first&.current_project&.team_name
+    @joined_projects = @user.joined_projects.where(competition: @competition)
   end
 
   def edit; end
 
   def update
-    @profile.update profile_params
-    redirect_to profile_path(@profile), notice: 'Your Profile has been updated'
+    if @profile.update(profile_params)
+      redirect_to profile_path(@profile), notice: 'Your Profile has been updated'
+    else
+      flash[:alert] = @profile.errors.full_messages.to_sentence
+      render :edit
+    end
+  end
+
+  def slack_chat
+    @other_profile = Profile.find_by_identifier params[:id]
+    response = Excon.post('https://slack.com/api/conversations.open',
+      headers: { "Content-Type" => "application/x-www-form-urlencoded" },
+      body: URI.encode_www_form(token: profile.slack_access_token, users: @other_profile.slack_user_id))
+    channel_id = JSON.parse(response.body).dig('channel', 'id')
+    if channel_id.present?
+      redirect_to "https://app.slack.com/client/#{ENV['SLACK_TEAM_ID']}/#{channel_id}"
+    else
+      redirect_to profile_path(@other_profile), alert: 'Something went wrong'
+    end
   end
 
   private
@@ -57,7 +74,7 @@ class ProfilesController < ApplicationController
 
   def profile_params
     params.require(:profile).permit(:team_status, :description, :website,
-      :github, :twitter, :linkedin, :skill_list, :interest_list, :published)
+      :github, :twitter, :linkedin, :skill_list, :interest_list, :published).merge(published: true)
   end
 
   def authorize_user!

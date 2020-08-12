@@ -12,7 +12,7 @@
     Entry:
     = render 'challenges/challenge_entry'
   - unless @challenge.video_url.blank?
-    %p This challange has a video attached
+    %p This challenge has a video attached
   %p= link_to 'Update Challenge', edit_admin_region_challenge_path(@region, @challenge)
   - if @challenge.image.attached?
     %p This challenge has an image attached.

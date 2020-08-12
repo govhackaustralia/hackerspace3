@@ -3,6 +3,7 @@ class Project < ApplicationRecord
   belongs_to :user
 
   has_one :event, through: :team
+  has_one :competition, through: :event
 
   scope :search, ->(term) { where 'team_name ILIKE ? OR project_name ILIKE ?', "%#{term}%", "%#{term}%" }
 

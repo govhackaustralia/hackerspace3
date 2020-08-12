@@ -33,7 +33,7 @@
               User Management
           = link_to admin_competitions_path do
             %button.black-button
-              Competiton Management
+              Competition Management
         - if user_has_region_privileges?
           = link_to admin_competition_regions_path(@competition) do
             %button.black-button
@@ -44,7 +44,7 @@
               Event Management
       %article.left-menu
         - if user_has_sponsor_privileges?
-          %h3 Sponsor Managmement
+          %h3 Sponsor Management
           = link_to admin_competition_sponsors_path(@competition) do
             %button.blue-button
               Sponsor Management

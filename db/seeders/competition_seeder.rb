@@ -44,7 +44,7 @@ class CompetitionSeeder < Seeder
         category: PROJECT
       )
       comp.hunt_questions.create(
-        question: "What is the answer to question #{time}?",
+        question: "What is the answer to question #{time}? #{Faker::Lorem.paragraph}",
         answer: "Answer #{time}"
       )
     end

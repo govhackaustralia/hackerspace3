@@ -169,6 +169,12 @@ Set if running in staging or production environments.
 - GOOGLE_CLIENT_ID
 - GOOGLE_CLIENT_SECRET
 
+### Slack Intergration
+
+- SLACK_CLIENT_ID
+- SLACK_CLIENT_SECRET
+- SLACK_TEAM_ID
+
 ### AWS Simple Email Service
 
 - AWS_SES_ID

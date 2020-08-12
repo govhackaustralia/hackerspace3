@@ -62,7 +62,7 @@ class Admin::HuntQuestionsControllerTest < ActionDispatch::IntegrationTest
     assert @competition.hunt_badge == badges(:two)
   end
 
-  test 'should publish the scavenger hunt' do
+  test 'should publish the treasure hunt' do
     patch hunt_published_admin_competition_hunt_questions_url(@competition, params: {
       competition: {hunt_published: true}
     })

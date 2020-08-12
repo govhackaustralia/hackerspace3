@@ -30,9 +30,9 @@
             - if @competition.hunt_badge_id == badge.id
               %td
                 %strong
-                  This is the Scavenger Hunt Badge
+                  This is the Treasure Hunt Badge
             - else
-              %td= link_to 'Make this the Scavenger Hunt Badge', badge_admin_competition_hunt_questions_path(@competition, competition: {hunt_badge_id: badge.id}), method: :patch
+              %td= link_to 'Make this the Treasure Hunt Badge', badge_admin_competition_hunt_questions_path(@competition, competition: {hunt_badge_id: badge.id}), method: :patch
   - else
     %p The Competition does not currently have any Hunt Questions set.
   %h3 Publishing

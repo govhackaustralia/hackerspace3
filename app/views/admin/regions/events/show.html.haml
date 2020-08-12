@@ -69,4 +69,4 @@
 - if @region.admin_privileges?(current_user)
   %p= link_to "Back to #{@region.name} Events", admin_region_events_path(@region)
 - if current_user.event_privileges? @competition
-  %p= link_to "Back to Event Mangement", admin_competition_events_path(@competition)
+  %p= link_to "Back to Event Management", admin_competition_events_path(@competition)
