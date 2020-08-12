@@ -6,7 +6,8 @@ class UserSeeder < Seeder
       email: admin_email,
       full_name: admin_name,
       password: 'password',
-      password_confirmation: 'password'
+      password_confirmation: 'password',
+      region: User.regions.keys.sample
     )
     tester.skip_confirmation_notification!
     tester.skip_reconfirmation!
