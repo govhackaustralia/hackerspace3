@@ -27,9 +27,9 @@
           - else
             %img{:alt => "Google Profile Picture", :src => "#{@user.google_img}"}/
       .field
-        = form.radio_button(:preferred_img, GRAVITAR, options = {checked: GRAVITAR == @user.preferred_img})
+        = form.radio_button(:preferred_img, GRAVATAR, options = {checked: GRAVATAR == @user.preferred_img})
         %div
-          = form.label(:preferred_img, 'Gravitar')
+          = form.label(:preferred_img, 'Gravatar')
           = image_tag @user.gravatar_url
   .actions
     = hidden_field_tag(:profile_pic, true)

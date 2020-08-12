@@ -134,7 +134,7 @@ class User < ApplicationRecord
     errors.empty?
   end
 
-  # Gravitar Gem
+  # Gravatar Gem
   include Gravtastic
   has_gravatar default: 'robohash'
 

@@ -29,5 +29,5 @@
             %td= event.end_time&.strftime('%H:%M')
             %td #{event.attending_registrations.length} / #{event.registrations.length}
   - else
-    %p There are currently no events planned for the current Competitition.
+    %p There are currently no events planned for the current Competition.
 %p= link_to 'Back to Region', admin_competition_region_path(@competition, @region)
