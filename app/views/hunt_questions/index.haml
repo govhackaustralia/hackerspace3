@@ -9,7 +9,7 @@
 
   %section.header
     %h2
-      Scavenger Hunt
+      Treasure Hunt
       %span.scavenger_title_instructions - Instructions
   .scavenger_container
     .scavenger_questions_container
@@ -21,14 +21,15 @@
       %h2 Submit your answers
       - unless user_signed_in?
         %p Sign Up to participate in the scavenger hunt!
-      - @hunt_questions.each do |question|
+      - @hunt_questions.each_with_index do |question, index|
         = form_for question do |form|
+          %p Clue #{index+1}:
           = form.label :answer, question.question
           - if user_signed_in?
             - if current_user.assignments.where(assignable: question).exists?
               %p.scavenger_answered You have successfully answered this question
             - else
-              = form.text_field :answer
+              = form.text_field :answer, placeholder: "Enter clue #{index+1} Answer"
               = form.submit 'Submit'
 
       %a{class: "nav-button", onclick: "showInstructions(true)"} View Instructions
