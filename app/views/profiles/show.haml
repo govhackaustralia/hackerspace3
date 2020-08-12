@@ -15,16 +15,22 @@
             %strong
               = fa_icon('location-arrow')
             = @user.region
-        - if @user.slack.present?
-          %p.slack
-            %strong
-              = fa_icon('slack', type: :brand)
-            = @user.slack
         - if @profile.team_status.present?
           %p.team-status
             %strong
               = fa_icon('user-friends')
             = @profile.team_status
+        - if @profile.slack_user_id.present?
+          %p.slack
+            %strong
+              = fa_icon('slack', type: :brand)
+            - if user_signed_in?
+              - if current_user.profile.slack_access_token.present?
+                = link_to 'Open a chat with this User on Slack', slack_chat_profile_path(@profile), target: '_blank'
+              - else
+                %p Link up your Slack Account to Contact this User
+            - else
+              %p Sign In to Contact this User via Slack
         - @joined_projects.each do |project|
           %p
             %strong
