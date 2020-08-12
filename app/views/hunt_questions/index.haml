@@ -40,7 +40,8 @@
       %a{class: "nav-button", onclick: "showInstructions(true)"} View Instructions
 
       - if @hunt_badge_assignment.present?
-        %p You have claimed the #{@hunt_badge.name}!
+        %p
+          %strong You have claimed the #{@hunt_badge.name}!
 
       .treasure_instructions
         %h2 Instructions:
