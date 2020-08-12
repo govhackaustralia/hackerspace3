@@ -19,19 +19,19 @@
         - if user_has_admin_privileges?
           %h3 Admin Settings
           %button.black-button= link_to 'User Management', admin_users_path
-          %button.black-button= link_to 'Competiton Management', admin_competitions_path
+          %button.black-button= link_to 'Competition Management', admin_competitions_path
         - if user_has_region_privileges?
           %button.black-button= link_to 'Region Management', admin_competition_regions_path(@competition)
         - if user_has_event_privileges?
           %button.black-button= link_to 'Event Management', admin_competition_events_path(@competition)
       %article.left-menu
         - if user_has_sponsor_privileges?
-          %h3 Sponsor Managmement
+          %h3 Sponsor Management
           %button.blue-button= link_to 'Sponsor Management', admin_competition_sponsors_path(@competition)
           %button.blue-button= link_to 'Sponsorship Type Management', admin_competition_sponsorship_types_path(@competition)
         - if user_is_chief_judge?
           %h3 Competition Judging Criteria
-          %button.black-button= link_to 'Competiton Criteria Management', admin_competition_criteria_path(@competition)
+          %button.black-button= link_to 'Competition Criteria Management', admin_competition_criteria_path(@competition)
     %div.profile-events
       - if @sponsor_contact_assignments.present?
         %article
