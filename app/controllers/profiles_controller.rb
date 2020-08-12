@@ -1,5 +1,5 @@
 class ProfilesController < ApplicationController
-  before_action :authenticate_user!, only: %i[edit update]
+  before_action :authenticate_user!, only: %i[edit update slack_chat]
   before_action :authorize_user!, only: %i[edit update]
   before_action :check_profile_found!, :check_published!, only: :show
 
@@ -45,6 +45,19 @@ class ProfilesController < ApplicationController
     else
       flash[:alert] = @profile.errors.full_messages.to_sentence
       render :edit
+    end
+  end
+
+  def slack_chat
+    @other_profile = Profile.find_by_identifier params[:id]
+    response = Excon.post('https://slack.com/api/conversations.open',
+      headers: { "Content-Type" => "application/x-www-form-urlencoded" },
+      body: URI.encode_www_form(token: profile.slack_access_token, users: @other_profile.slack_user_id))
+    channel_id = JSON.parse(response.body).dig('channel', 'id')
+    if channel_id.present?
+      redirect_to "https://app.slack.com/client/#{ENV['SLACK_TEAM_ID']}/#{channel_id}"
+    else
+      redirect_to profile_path(@other_profile), alert: 'Something went wrong'
     end
   end
 

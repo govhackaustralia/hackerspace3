@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_11_090808) do
+ActiveRecord::Schema.define(version: 2020_08_11_132951) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -305,6 +305,8 @@ ActiveRecord::Schema.define(version: 2020_08_11_090808) do
     t.string "description"
     t.string "github"
     t.boolean "published"
+    t.string "slack_user_id"
+    t.string "slack_access_token"
     t.index ["identifier"], name: "index_profiles_on_identifier"
   end
 

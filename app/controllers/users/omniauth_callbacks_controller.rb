@@ -1,4 +1,6 @@
 class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
+  before_action :authenticate_user!, only: :slack
+
   def google
     @user = google_sign_in request.env['omniauth.auth']
     if @user.persisted?
@@ -6,6 +8,17 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       sign_in_and_redirect @user, event: :authentication
     else
       handle_auth_error
+    end
+  end
+
+  def slack
+    data = request.env['omniauth.strategy'].access_token.to_hash
+    profile.slack_user_id = data.fetch('user_id')
+    profile.slack_access_token = data.fetch(:access_token)
+    if profile.save
+      render 'profiles/edit'
+    else
+      redirect_to profiles_path, alert: 'slack did not work'
     end
   end
 

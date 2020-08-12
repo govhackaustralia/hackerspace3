@@ -21,6 +21,10 @@ gem 'bootsnap', '>= 1.1.0', require: false
 gem 'devise'
 # Oauth2 strategy for Google
 gem 'omniauth-google-oauth2'
+# Oauth2 strategy for Slack
+gem 'omniauth-slack'
+# Usable, fast, simple Ruby HTTP 1.1
+gem 'excon'
 # Add JQuery to Rails
 gem 'jquery-rails'
 # Enable AWS S3

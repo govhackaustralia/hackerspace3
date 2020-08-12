@@ -40,6 +40,10 @@ Rails.application.routes.draw do
       get :industry
       get :support
     end
+
+    member do
+      get :slack_chat
+    end
   end
   resources :profile_pictures, only: [:edit, :update]
   resources :badges, only: [] do
