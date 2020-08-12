@@ -38,7 +38,7 @@ class HuntQuestionsController < ApplicationController
   end
 
   def hunt_questions
-    @hunt_questions ||= @competition.hunt_questions
+    @hunt_questions ||= @competition.hunt_questions.order(:question)
   end
 
   def attempt
