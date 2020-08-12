@@ -5,7 +5,7 @@
   %nav
     %section
       - if @competition.hunt_published
-        %div= link_to 'Scavenger Hunt', scavenger_hunt_path
+        %div= link_to 'Treasure Hunt', scavenger_hunt_path
       - if @event_counts[CONFERENCE]
         %div= link_to 'Conference', conference_index_path
       - if @event_counts[CONNECTION_EVENT]

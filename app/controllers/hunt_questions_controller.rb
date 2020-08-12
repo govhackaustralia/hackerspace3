@@ -78,6 +78,6 @@ class HuntQuestionsController < ApplicationController
   def check_published!
     return if @competition.hunt_published
 
-    redirect_to root_url, alert: 'Scavenger Hunt not available yet'
+    redirect_to root_url, alert: 'Treasure Hunt not available yet'
   end
 end
