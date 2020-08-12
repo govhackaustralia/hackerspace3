@@ -20,16 +20,15 @@
     .treasure_answers
       %h2 Submit your answers
       - unless user_signed_in?
-      - @hunt_questions.each_with_index do |question, index|
         %p Sign Up to participate in the treasure hunt!
+      - @hunt_questions.each do |question|
         = form_for question do |form|
-          %p Clue #{index+1}:
           = form.label :answer, question.question
           - if user_signed_in?
             - if current_user.assignments.where(assignable: question).exists?
               %p.treasure_answered You have successfully answered this question
             - else
-              = form.text_field :answer, placeholder: "Enter clue #{index+1} Answer"
+              = form.text_field :answer, placeholder: "Your answer"
               = form.submit 'Submit'
 
       %a{class: "nav-button", onclick: "showInstructions(true)"} View Instructions
