@@ -40,6 +40,9 @@
           %br/
           %em Separate tags with commas
         = form.text_field :interest_list, value: @profile.interest_list&.join(', ')
+      .field
+        = form.label :published, 'Show my profile on Hackerspace and on the web'
+        = form.check_box :published
       .actions
         = form.submit (@profile.published ? 'Update' : 'Publish')
 = link_to 'Back to Profile', profile_path(@profile)

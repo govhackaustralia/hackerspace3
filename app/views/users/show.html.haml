@@ -9,87 +9,134 @@
     %div.manage-profile
       %article.left-menu
         %h3 Manage your profile
-        %button.red-button= link_to 'Update Personal Details' , update_personal_details_path
-        %button.red-button= link_to 'Update Email and Password' , edit_user_registration_path
-        %button.red-button= link_to 'Update Profile', edit_profile_path(current_user.profile)
-        %button.red-button= link_to 'Update Profile Picture', update_profile_picture_path
+        = link_to update_personal_details_path do
+          %button.red-button
+            Update Personal Details
+        = link_to edit_user_registration_path do
+          %button.red-button
+            Update Email and Password
+        = link_to edit_profile_path(current_user.profile) do
+          %button.red-button
+            Update Profile
+        = link_to update_profile_picture_path do
+          %button.red-button
+            Update Profile Picture
         - if @public_winning_entries
-          %button.red-button= link_to 'Update Banking Details', update_personal_details_path(banking: true)
+          = link_to update_personal_details_path(banking: true) do
+            %button.red-button
+              Update Banking Details
       %article.left-menu
         - if user_has_admin_privileges?
           %h3 Admin Settings
-          %button.black-button= link_to 'User Management', admin_users_path
-          %button.black-button= link_to 'Competition Management', admin_competitions_path
+          = link_to admin_users_path do
+            %button.black-button
+              User Management
+          = link_to admin_competitions_path do
+            %button.black-button
+              Competiton Management
         - if user_has_region_privileges?
-          %button.black-button= link_to 'Region Management', admin_competition_regions_path(@competition)
+          = link_to admin_competition_regions_path(@competition) do
+            %button.black-button
+              Region Management
         - if user_has_event_privileges?
-          %button.black-button= link_to 'Event Management', admin_competition_events_path(@competition)
+          = link_to admin_competition_events_path(@competition) do
+            %button.black-button
+              Event Management
       %article.left-menu
         - if user_has_sponsor_privileges?
           %h3 Sponsor Management
-          %button.blue-button= link_to 'Sponsor Management', admin_competition_sponsors_path(@competition)
-          %button.blue-button= link_to 'Sponsorship Type Management', admin_competition_sponsorship_types_path(@competition)
+          = link_to admin_competition_sponsors_path(@competition) do
+            %button.blue-button
+              Sponsor Management
+          = link_to admin_competition_sponsorship_types_path(@competition) do
+            %button.blue-button
+              Sponsorship Type Management
         - if user_is_chief_judge?
           %h3 Competition Judging Criteria
-          %button.black-button= link_to 'Competition Criteria Management', admin_competition_criteria_path(@competition)
+          = link_to admin_competition_criteria_path(@competition) do
+            %button.black-button
+              Competiton Criteria Management
     %div.profile-events
       - if @sponsor_contact_assignments.present?
         %article
-          %h3 My Sponsors
+          %h2.section-heading My Sponsors
           - @sponsor_contact_assignments.each do |assignment|
-            %h4= assignment.assignable.name
-            %button.blue-button= link_to 'Go to Sponsor', sponsorship_management_sponsor_path(assignment.assignable)
+            %div.content-wrapper
+              %div.content-wrapper-content
+                %h4 #{assignment.assignable.name}
+              %div.content-wrapper-button
+                = link_to sponsorship_management_sponsor_path(assignment.assignable) do
+                  %button.content-black-button
+                    Go to Sponsor
       - if @competition.in_challenge_judging_window?(LAST_TIME_ZONE) && @judging_assignments.present?
         %article
-          %h3 Challenge Judging
+          %h2.section-heading Challenge Judging
           - @judging_assignments.each do |assignment|
             - challenge = assignment.assignable
-            %h4= challenge.name
-            %button.blue-button= link_to 'Go to Challenge', challenge_path(challenge.identifier)
+            %div.content-wrapper
+              %div.content-wrapper-content
+                %h4= challenge.name
+                %div.content-wrapper-button
+                  = link_to challenge_path(challenge.identifier) do
+                    %button.content-black-button
+                      Go to Challenge
       %article
-        %h2 My Events
+        %h2.section-heading My Events
         - if @registrations_present
           - if @connection_registrations.present?
-            %h3 Connection Events
-            - @connection_registrations.each do |registration|
-              = render 'registration_management', locals: { registration: registration }
+            %section
+              %h3.sub-heading Connection Events
+              - @connection_registrations.each do |registration|
+                = render 'registration_management', locals: { registration: registration }
           - if @conference_registrations.present?
-            %h3 Conference
-            - @conference_registrations.each do |registration|
-              = render 'registration_management', locals: { registration: registration }
+            %section
+              %h3.sub-heading Conference
+              - @conference_registrations.each do |registration|
+                = render 'registration_management', locals: { registration: registration }
           - if @competition_registrations.present?
-            %h3 Competition Events
-            - @competition_registrations.each do |registration|
-              = render 'registration_management', locals: { registration: registration }
+            %section
+              %h3.sub-heading Competition Events
+              - @competition_registrations.each do |registration|
+                = render 'registration_management', locals: { registration: registration }
           - if @award_registrations.present?
-            %h3 Award Events
-            - @award_registrations.each do |registration|
-              = render 'registration_management', locals: { registration: registration }
+            %section
+              %h3.sub-heading Award Events
+              - @award_registrations.each do |registration|
+                = render 'registration_management', locals: { registration: registration }
         - else
-          %div
-            %p You are not currently registered for any events.
-            %button.red-button= link_to 'Find events', events_path
-      - if @participating_competition_event
-        %article
+          %section
+            %div.message
+              %p.message-text You are not currently registered for any events.
+              = link_to events_path do
+                %button.message-button
+                  Find more events
+      %article
+        %h2.section-heading My Team Projects
+        - if @participating_competition_event
           = render 'my_projects'
         - if @competition.in_form_or_comp_window? LAST_TIME_ZONE
-          %article
-            = render 'my_invitations'
-      - elsif @competition.in_form_or_comp_window? LAST_TIME_ZONE
-        %article
-          %h2 My Team Projects
-          %p Join a Competition Event to create a team.
-          %button.blue-button= link_to 'Go to Competition Events', competition_events_path
+          = render 'my_invitations'
+        - elsif @competition.in_form_or_comp_window? LAST_TIME_ZONE
+          %section
+            %div.message
+              %p.message-text Join a Competition Event to create a team.
+              = link_to competition_events_path do
+                %button.message-button
+                  Go to Competition Events
       %article
-        %h2 My Favourite Projects
-        - if @competition.started? && @favourite_teams.present?
-          - @favourite_teams.each do |team|
-            %div.team-project
-              %div.team-project-content
-                %h4 #{team.current_project.team_name} - #{team.current_project.project_name}
-                %p Event: #{team.event.name}
-              %div.team-button
-                %button.blue-button= link_to 'Go to Team Project', project_path(team.current_project.identifier)
-        - else
-          %p Projects that you favourite will appear here.
+        %h2.section-heading My Favourite Projects
+        %section
+          - if @competition.started? && @favourite_teams.present?
+            - @favourite_teams.each do |team|
+              %div.content-wrapper
+                %div.content-wrapper-content
+                  %h2 #{team.current_project.team_name} - #{team.current_project.project_name}
+                  %p Event: #{team.event.name}
+                %div.content-wrapper-button
+                  = link_to project_path(team.current_project.identifier) do
+                    %button.content-blue-button
+                      Go to Team Project
+          - else
+            %div
+              %p.blank-message Projects that you favourite will appear here.
 %main
