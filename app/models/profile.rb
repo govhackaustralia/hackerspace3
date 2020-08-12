@@ -75,7 +75,7 @@ class Profile < ApplicationRecord
   def update_identifier(identifier_name = nil)
     identifier_name ||= user.identifier_name
 
-    return if identifier_name.nil?
+    return unless identifier_name.present?
 
     update_columns identifier: generate_identifier(identifier_name)
   end
