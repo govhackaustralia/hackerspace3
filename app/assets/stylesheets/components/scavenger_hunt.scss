@@ -4,9 +4,9 @@
 }
 .scavenger_questions_container {
   width: 100%;
-  height:100vh;
+  min-height:100vh;
   display: flex;
-  align-items: center;
+  padding-top: 90px;
   justify-content: center;
   background: url("/assets/hunt_bg.png") top left no-repeat;
 
@@ -28,7 +28,7 @@
   
   font-weight: bold;
   color: black;
-  font-size: 1rem;
+  font-size: 0.9rem;
   line-height: 1.7;
   flex-wrap: wrap;
   box-sizing: border-box;
@@ -36,11 +36,11 @@
   padding-bottom: 65px;
 
   h2 {
-    font-size: 1.5rem;
-    margin-left: 70px;
+    font-size: 1.2rem;
+    margin-left: 95px;
   }
   div {
-    margin-top: 15px;
+    margin-top: 17px;
     margin-left: 57px;
     max-width: 35%;
   }
@@ -73,9 +73,10 @@
   @media screen and (max-width: 800px) {
     width: 100%;
   }
-  h2 {
-    margin-bottom: 30px;
+  p {
+    margin-top: 30px;
   }
+
   label {
     display: block;
   }
