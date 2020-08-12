@@ -4,6 +4,8 @@
     Welcome to GovHack #{@competition.year} Hackerspace
   %nav
     %section
+      - if @competition.current
+        %div= link_to 'GovHack Handbook', 'https://govhack.org/howtocompete/handbook/', target: '_blank'
       - if @competition.hunt_published
         %div= link_to 'Treasure Hunt', scavenger_hunt_path
       - if @event_counts[CONFERENCE]
