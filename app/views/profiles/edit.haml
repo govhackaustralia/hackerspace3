@@ -35,9 +35,6 @@
           %br/
           %em Separate tags with commas
         = form.text_field :interest_list, value: @profile.interest_list&.join(', ')
-      .field
-        = form.label :published, 'Publish'
-        = form.check_box :published
       .actions
-        = form.submit 'Submit'
+        = form.submit (@profile.published ? 'Update' : 'Publish')
 = link_to 'Back to Profile', profile_path(@profile)

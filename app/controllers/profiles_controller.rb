@@ -40,8 +40,12 @@ class ProfilesController < ApplicationController
   def edit; end
 
   def update
-    @profile.update profile_params
-    redirect_to profile_path(@profile), notice: 'Your Profile has been updated'
+    if @profile.update(profile_params)
+      redirect_to profile_path(@profile), notice: 'Your Profile has been updated'
+    else
+      flash[:alert] = @profile.errors.full_messages.to_sentence
+      render :edit
+    end
   end
 
   private
@@ -57,7 +61,7 @@ class ProfilesController < ApplicationController
 
   def profile_params
     params.require(:profile).permit(:team_status, :description, :website,
-      :github, :twitter, :linkedin, :skill_list, :interest_list, :published)
+      :github, :twitter, :linkedin, :skill_list, :interest_list, :published).merge(published: true)
   end
 
   def authorize_user!
