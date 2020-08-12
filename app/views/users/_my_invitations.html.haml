@@ -1,11 +1,19 @@
-%h3 My Invitations
-- if @invited_team_assignments.present?
-  - @invited_team_assignments.each do |assignment|
-    - team = assignment.assignable
-    %h4 #{team.current_project.team_name} - #{team.current_project.project_name}
-    %p Event: #{team.event.name}
-    %p= link_to 'Accept Invitation and Go to Team', users_invitation_path(assignment), method: :patch
-    %p= link_to 'Decline Invitation', users_invitation_path(assignment), method: :delete, data: { confirm: 'Are you sure?' }
-- else
-  - if @competition.not_finished? @time_zone
-    %p Your team invitations will appear here.
+%section
+  %h3.sub-heading My Invitations
+  - if @invited_team_assignments.present?
+    - @invited_team_assignments.each do |assignment|
+      - team = assignment.assignable
+      %div.content-wrapper
+        %div.content-wrapper-content
+          %h2 #{team.current_project.team_name} - #{team.current_project.project_name}
+          %p Event: #{team.event.name}
+      %div.content-wrapper-button
+        = link_to users_invitation_path(assignment), method: :patch do
+          %button.content-blue-button
+            Accept Invitation and Go to Team
+        = link_to users_invitation_path(assignment), method: :delete, data: { confirm: 'Are you sure?' } do
+          %button.content-black-button
+            Decline Invitation
+  - else
+    - if @competition.not_finished? @time_zone
+      %p.blank-message Your team invitations will appear here.
