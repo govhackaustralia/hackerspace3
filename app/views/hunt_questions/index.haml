@@ -1,4 +1,4 @@
-- content_for :title, 'Scavenger Hunt'
+- content_for :title, 'Treasure Hunt'
 %main.scavenger_hunt
   :javascript
     const showInstructions = (shouldShow) => {
@@ -14,7 +14,7 @@
   .scavenger_container
     .scavenger_questions_container
       .scavenger_questions
-        %h2 Scavenger Hunt Clues
+        %h2 Treasure Hunt
         - @hunt_questions.each do |question|
           %div= question.question
     .scavenger_answers
