@@ -25,7 +25,8 @@
             = form.label :answer, question.question
             - if user_signed_in?
               - if current_user.assignments.where(assignable: question).exists?
-                %p.treasure_answered You have successfully answered this question
+                %p.treasure_answered
+                  %strong You have successfully answered this question
               - else
                 = form.text_field :answer, placeholder: "Your answer"
                 = form.submit 'Submit'
