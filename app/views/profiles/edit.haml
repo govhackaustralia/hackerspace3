@@ -2,11 +2,10 @@
 %main.registration.single-col.edit-account
   %h2= yield :title
   %section
-    - unless Rails.env.production?
-      -if @profile.slack_user_id
-        %p Slack Account Linked
-      - else
-        = link_to 'Link Slack Account for Chat', user_slack_omniauth_authorize_path, method: :post
+    -if @profile.slack_user_id
+      %p Slack Account Linked
+    - else
+      = link_to 'Link Slack Account for Chat', user_slack_omniauth_authorize_path, method: :post
     = form_for @profile do |form|
       .field
         = form.label :team_status
