@@ -1,42 +1,41 @@
 - content_for :title, 'Update Email and Password'
-%main.registration.single-col.change-email-password
-  %h2= yield :title
-  %section
-    = form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f|
-      = render 'devise/shared/error_messages', resource: resource
-      .field
-        = f.label :email
-        %br/
-        = f.email_field :email, autofocus: true, autocomplete: "email"
-      - if devise_mapping.confirmable? && resource.pending_reconfirmation?
-        %div
-          Currently waiting confirmation for: #{resource.unconfirmed_email}
-      .field
-        %div
-          = f.label :password
-          %em (leave blank if you don't want to change it)
+%main.registration.change-email-password
+  %container
+    %section.signup-form
+      %h2.heading Update Email and Password
+      = form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f|
+        = render 'devise/shared/error_messages', resource: resource
+        .form-group
+          = f.label :email
           %br/
+          = f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control'
+        - if devise_mapping.confirmable? && resource.pending_reconfirmation?
+          %div
+            Currently waiting confirmation for: #{resource.unconfirmed_email}
+        .form-group
+          = f.label :password
+          = f.password_field :password, autocomplete: "off", class: 'form-control'
           - if @minimum_password_length
-            %em
+            %small
               = @minimum_password_length
               characters minimum
-        = f.password_field :password, autocomplete: "off"
-      .field
-        = f.label :password_confirmation
-        %br/
-        = f.password_field :password_confirmation, autocomplete: "off"
-      .field
-        %div
-          = f.label :current_password
           %br/
-          %em (we need your current password to confirm your changes)
-        = f.password_field :current_password, autocomplete: "off"
+          %small leave blank if you don't want to change it
+        .form-group
+          = f.label :password_confirmation
+          %br/
+          = f.password_field :password_confirmation, autocomplete: "off", class: 'form-control'
+        .form-group
+          = f.label :current_password
+          = f.password_field :current_password, autocomplete: "off", class: 'form-control'
+          %small we need your current password to confirm your changes.
+        .actions
+          = f.submit "Update"
+      %p= link_to 'Back to Account Management', manage_account_path
+    %hr/
+    %section
+      %h3 Cancel my account
+      %p Unhappy?
       .actions
-        = f.submit "Update"
-  %hr/
-  %aside
-    %h3 Cancel my account
-    %p Unhappy?
-    .actions
-      = button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete
-  %p= link_to 'Back to Account Management', manage_account_path
+        = button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete
+    

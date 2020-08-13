@@ -1,12 +1,12 @@
 %main.team_page
   %h2= "Update #{@team.name}'s Entry to Challenge #{@challenge.name}"
   = form_for [:admin, @team, @entry] do |form|
-    .field
+    .form-group
       = form.label :checkpoint_id
       = form.select :checkpoint_id, options_from_collection_for_select(@checkpoints, :id, :name, @entry.checkpoint_id.to_s)
-    .field
+    .form-group
       = form.label :justification
-      = form.text_area :justification
+      = form.text_area :justification, class: "form-control"
     .actions
       = form.submit
-%p= link_to 'Back To Team', admin_competition_team_path(@competition, @team)
+  %p= link_to 'Back To Team', admin_competition_team_path(@competition, @team)

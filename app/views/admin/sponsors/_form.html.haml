@@ -1,12 +1,12 @@
 = form_for [:admin, @competition, @sponsor] do |f|
-  .field
+  .form-group
     = f.label :name
-    = f.text_field :name
-  .field
+    = f.text_field :name, class: "form-control"
+  .form-group
     = f.label :website
-    = f.url_field :website
-  .field
+    = f.url_field :website, class: "form-control"
+  .form-group
     = f.label :description
-    = f.text_field :description
+    = f.text_field :description, class: "form-control"
   .actions
     = f.submit

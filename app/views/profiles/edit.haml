@@ -1,47 +1,48 @@
 - content_for :title, 'Update Profile'
-%main.registration.single-col.edit-account
-  %h2= yield :title
-  %section
-    - unless Rails.env.production?
-      -if @profile.slack_user_id
-        %p Slack Account Linked
-      - else
-        = link_to 'Link Slack Account for Chat', user_slack_omniauth_authorize_path, method: :post
-    = form_for @profile do |form|
-      .field
-        = form.label :team_status
-        = form.select :team_status, |
-          options_for_select(Profile.team_statuses.keys, selected: @profile.team_status), |
-          include_blank: true
-      .field
-        = form.label :description
-        = form.text_field :description
-      .field
-        = form.label :website
-        = form.url_field :website
-      .field
-        = form.label :github
-        = form.url_field :github
-      .field
-        = form.label :twitter
-        = form.url_field :twitter
-      .field
-        = form.label :linkedin, 'LinkedIn'
-        = form.url_field :linkedin
-      .field
-        %div
+%main.registration.edit-account
+  %container
+    %section.signup-form
+      %h2.heading Update Profile
+      - unless Rails.env.production?
+        -if @profile.slack_user_id
+          %p Slack Account Linked
+        - else
+          = link_to 'Link Slack Account for Chat', user_slack_omniauth_authorize_path, method: :post
+      = form_for @profile do |form|
+        .form-group
+          = form.label :team_status
+          = form.select :team_status, |
+            options_for_select(Profile.team_statuses.keys, selected: @profile.team_status), |
+            include_blank: true
+        .form-group
+          = form.label :description
+          = form.text_field :description, class: 'form-control'
+        .form-group
+          = form.label :website
+          = form.url_field :website, class: 'form-control'
+          %small Please put in the full URL
+        .form-group
+          = form.label :github
+          = form.url_field :github, class: 'form-control'
+          %small Please put in the full URL
+        .form-group
+          = form.label :twitter
+          = form.url_field :twitter, class: 'form-control'
+          %small Please put in the full URL
+        .form-group
+          = form.label :linkedin, 'LinkedIn'
+          = form.url_field :linkedin, class: 'form-control'
+          %small Please put in the full URL
+        .form-group
           = form.label :skill_list
-          %br/
-          %em Separate tags with commas
-        = form.text_field :skill_list, value: @profile.skill_list&.join(', ')
-      .field
-        %div
+          = form.text_field :skill_list, value: @profile.skill_list&.join(', '), class: 'form-control'
+          %small Separate tags with commas
+        .form-group
           = form.label :interest_list
-          %br/
-          %em Separate tags with commas
-        = form.text_field :interest_list, value: @profile.interest_list&.join(', ')
-      .actions
-        = form.submit (@profile.published ? 'Update' : 'Publish')
-
-%p= link_to 'Back to Account Management', manage_account_path
-%p= link_to 'Back to Profile', profile_path(@profile)
+          = form.text_field :interest_list, value: @profile.interest_list&.join(', '), class: 'form-control'
+          %small Separate tags with commas
+        .actions
+          = form.submit (@profile.published ? 'Update' : 'Publish')
+      %div.links
+        %p= link_to 'Back to Account Management', manage_account_path
+        %p= link_to 'Back to Profile', profile_path(@profile)
