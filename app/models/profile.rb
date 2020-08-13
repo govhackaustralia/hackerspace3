@@ -85,6 +85,6 @@ class Profile < ApplicationRecord
 
     return new_identifier unless Profile.where(identifier: new_identifier).where.not(id: id).exists?
 
-    uri_pritty "#{new_identifier}-#{Profile.where(identifier: new_identifier).count}"
+    uri_pritty "#{new_identifier}-#{id}"
   end
 end
