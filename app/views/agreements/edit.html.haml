@@ -6,7 +6,7 @@
       = render 'static_pages/terms_and_conditions_text'
       = form_with model: @user, url: agreement_path(@user), method: :patch do |f|
         .custom-control.custom-checkbox
-          = f.check_box(:accepted_terms_and_conditions), class:'custom-control-input'
-          = f.label(:accepted_terms_and_conditions, 'I accept GovHack Terms and Conditions'), class: 'custom-control-label'
+          = f.check_box :accepted_terms_and_conditions, class: 'custom-control-input'
+          = f.label :accepted_terms_and_conditions, 'I accept GovHack Terms and Conditions', class: 'custom-control-label'
         .actions
           = f.submit 'Continue'
