@@ -31,6 +31,7 @@
                 %p Link up your Slack Account to Contact this User
             - else
               %p Sign In to Contact this User via Slack
+        %p= @user.slack
         - @joined_projects.each do |project|
           %p
             %strong
