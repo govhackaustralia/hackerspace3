@@ -7,6 +7,8 @@
       - if @competition.current
         %div= link_to 'GovHack Handbook', 'https://govhack.org/howtocompete/handbook/', target: '_blank'
         %div= link_to '#lifehacks Photo Competition', 'https://govhack.org/lifehacks/', target: '_blank'
+        %div= link_to 'AU - Opening Ceremony Fri 6.30PM AEST', 'https://www.youtube.com/watch?v=gvfMuF5wI-s', target: '_blank'
+        %div= link_to 'NZ - Opening Ceremony Fri 6.30PM NZST', 'https://www.youtube.com/watch?v=dLwPqIGSoJ0', target: '_blank'
       - if @competition.hunt_published
         %div= link_to 'Treasure Hunt', treasure_hunt_path
       - if @event_counts[CONFERENCE]
