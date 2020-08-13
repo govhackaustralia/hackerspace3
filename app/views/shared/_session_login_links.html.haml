@@ -5,4 +5,6 @@
       = link_to "Manage Account (#{current_user.display_name})", manage_account_path
       = link_to 'Sign Out', destroy_user_session_path, method: :delete
 - else
-  = link_to 'Join the Hack', new_user_registration_path, class: "nav-button"
+  %div.buttons-group
+    = link_to 'Join the hack', new_user_registration_path, class: "nav-button"
+    = link_to "Sign In", manage_account_path, class: "login-button"
