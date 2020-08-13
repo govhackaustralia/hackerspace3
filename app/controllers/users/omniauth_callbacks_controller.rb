@@ -1,5 +1,5 @@
 class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
-  before_action :authenticate_user!, only: :slack
+  before_action :authenticate_user!, :confirm_success!, only: :slack
 
   def google
     @user = google_sign_in request.env['omniauth.auth']
@@ -12,13 +12,10 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   end
 
   def slack
-    data = request.env['omniauth.strategy'].access_token.to_hash
-    profile.slack_user_id = data.fetch('user_id')
-    profile.slack_access_token = data.fetch(:access_token)
-    if profile.save
+    if profile.update profile_params
       render 'profiles/edit'
     else
-      redirect_to profiles_path, alert: 'slack did not work'
+      redirect_to profiles_path, alert: profile.errors.full_messages.to_sentence
     end
   end
 
@@ -27,6 +24,24 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   end
 
   private
+
+  def confirm_success!
+    return if data.fetch 'ok'
+
+    redirect_to edit_profile_path(current_user.profile),
+      alert: 'Something went wrong with Slack Connecting'
+  end
+
+  def profile_params
+    {
+      slack_user_id: data.fetch('user_id'),
+      slack_access_token: data.fetch(:access_token)
+    }
+  end
+
+  def data
+    request.env['omniauth.strategy'].access_token.to_hash
+  end
 
   def handle_auth_error
     session['devise.google_data'] = request.env['omniauth.auth'].except(:extra) # Removing extra as it can overflow some session stores
