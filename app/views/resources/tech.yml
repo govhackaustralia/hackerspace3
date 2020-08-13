@@ -13,3 +13,7 @@
 - url: https://account.uipath.com/login?state=g6Fo2SBZcmZWZUxFdWxuWnJMWUZid3Btc3hwSmZER2FpSUpPbaN0aWTZIHg3NzJBTXBnakt0eGhJVUFnNkJUbzhjeTBwREM3SnhCo2NpZNkgVHRGeXhTQW11a2sydGlWNEJ1T0ViNk9GNUVHQ050YzU&client=TtFyxSAmukk2tiV4BuOEb6OF5EGCNtc5&protocol=oauth2&redirect_uri=https%3A%2F%2Fcloud.uipath.com%2Fidentity_%2Fsignin-oidc&response_type=id_token&scope=openid+profile+email&response_mode=form_post&nonce=637328798960430191.ZmUxNTY0YzUtZjliOS00ZTUwLTk2ODItNTY0NGJhMGM5MjFlNGE5ODNmNWQtZDZmYi00MjQ0LWI2MDEtZjUxNzdlN2Y0ZjQx&hide_login=true&type=signup&product_name=UiPath+Automation+Cloud&company_code=B2B_CP&platform_name=UiPath+Automation+Cloud+for+community&cloudrpa_signup_domain=cloud.uipath.com&cloudrpa_signup_subdomain=%2Fportal_&register_endpoint=%2Fregister&signup_redirect_uri=https%3A%2F%2Fcloud.uipath.com%2Fportal_%2F&theme=light&selected_language=en&x-client-SKU=ID_NETSTANDARD2_0&x-client-ver=5.6.0.0
   name: UIPaths Free Community Licence for Orchestrator
   short_url: account.uipath.com
+
+- url: https://govhack.onwingspan.com/
+  name: Infosys Wingspan Academy
+  short_url: govhack.onwingspan.com
