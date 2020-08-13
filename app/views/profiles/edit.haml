@@ -4,7 +4,8 @@
     %section.signup-form
       %h2.heading Update Profile
       -if @profile.slack_user_id
-        %p Slack Account Linked
+        %p
+          %strong Slack Account Linked
       - else
         = link_to 'Link Slack Account for Chat', user_slack_omniauth_authorize_path, method: :post
       = form_for @profile do |form|
