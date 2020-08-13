@@ -5,13 +5,13 @@
   %p Checkpoint: #{@checkpoint.name}
   %p Justification: #{@entry.justification}
   = form_for [:admin, @challenge, @entry] do |form|
-    .field
+    .form-group
       = form.label :eligible, 'Mark Eligible'
       = form.radio_button :eligible, true, options = {checked: @entry.eligible == true}
-    .field
+    .form-group
       = form.label :eligible, 'Mark Ineligible'
       = form.radio_button :eligible, false, options = {checked: @entry.eligible == false}
-    .field
+    .form-group
       = form.label :award
       = form.select :award, options_for_select([nil] + AWARD_NAMES, @entry.award)
     .actions

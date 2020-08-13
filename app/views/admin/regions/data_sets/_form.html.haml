@@ -1,12 +1,12 @@
 = form_for [:admin, @region, @data_set] do |form|
   #hiddendescription
-  .field
+  .form-group
     = form.label :url
     = form.url_field :url
-  .field
+  .form-group
     = form.label :name
     = form.text_field :name
-  .field
+  .form-group
     = form.label :description
     = form.text_area :description
   .actions

@@ -2,21 +2,35 @@
 
 .registration {
   padding: 2em 5em;
+  background: #fff;
 
   h2 {
     color: #ca1e56;
     font-size: 2em;
   }
 
-  > section {
+  a {
+    text-decoration: none;
+  }
+
+  .links {
+    a {
+      color: #4c9ad2;
+      text-decoration: none;
+    }
+
+    a:hover {
+      color: #4c9ad2;
+      text-decoration: underline;
+    }
+  }
+
+  >section {
     display: flex;
   }
 
   form {
     box-sizing: border-box;
-    width: 60%;
-    padding: 2em 2em;
-    border-right: 5px solid #4c9ad2;
   }
 
   &.single-col form {
@@ -24,13 +38,13 @@
   }
 
   form {
-    > div {
+    >div {
       &.field {
         display: flex;
         padding: 0.5em 0em;
         align-items: center;
 
-        > label {
+        >label {
           box-sizing: border-box;
           width: 50%;
           padding-right: 1em;
@@ -39,7 +53,9 @@
         }
 
         > {
-          input, select {
+
+          input,
+          select {
             box-sizing: border-box;
             width: 50%;
             padding-left: 1em;
@@ -93,7 +109,7 @@
         }
       }
 
-      > div {
+      >div {
         box-sizing: border-box;
         width: 50%;
         padding-right: 1em;
@@ -107,25 +123,25 @@
 
       &.actions {
         display: flex;
-        justify-content: center;
         margin-top: 1em;
         margin-bottom: 1em;
 
         input {
-          box-sizing: border-box;
-          font-size: 1.5em;
-          padding: 0.5em 1.5em;
-          -webkit-appearance: none;
-          -moz-appearance: none;
-          appearance: none;
+          margin: 5px 0px;
+          border-radius: 0.5em;
+          display: inline-block;
+          cursor: pointer;
+          padding: 10px 20px;
+          font-family: Open Sans;
+          font-size: 1rem;
+          text-align: left;
           background-color: #ca1e56;
-          color: #ddd;
-          font-weight: 700;
-          text-transform: uppercase;
+          border: 1px solid #ca1e56;
+          color: #fff;
         }
       }
 
-      &.field > div.field_with_errors > input {
+      &.field>div.field_with_errors>input {
         padding-left: 1em;
         font-size: 1em;
         padding: 0.5em;
@@ -148,100 +164,109 @@
     }
   }
 
-  aside {
-    box-sizing: border-box;
-    width: 40%;
+  .google-oath {
+    margin-bottom: 2rem;
     display: flex;
-    justify-content: center;
     align-items: center;
-    font-family: Roboto, arial, sans-serif;
 
-    a {
-      text-decoration: none;
+    hr.grey-border {
+      border-radius: 5px;
+      height: 2px;
+      background-color: #eee;
+      border: none;
+      margin: 0 1rem;
+      width: 50%;
+    }
+
+    p.alt-text {
+      margin-right: 2rem;
+    }
+
+    #signgoogle {
+      height: 50px;
+      width: 240px;
+      background-color: #4285f4;
+      border: none;
+      color: #fff;
+      cursor: pointer;
+      text-align: center;
+      vertical-align: middle;
+      transition: background-color .218s, border-color .218s, box-shadow .218s;
+
+      &:hover {
+        -webkit-box-shadow: 0 0 3px 3px rgba(66, 133, 244, 0.3);
+        box-shadow: 0 0 3px 3px rgba(66, 133, 244, 0.3);
+      }
+
+      .wrapper {
+        height: 100%;
+        border: 1px solid transparent;
+
+        .icon {
+          padding: 15px;
+          background-color: #fff;
+          border-radius: 1px;
+          float: left;
+
+          .icon-svg {
+            width: 18px;
+            height: 18px;
+          }
+        }
+
+        .message {
+          font-size: 16px;
+          line-height: 48px;
+          font-weight: 500;
+          letter-spacing: .21px;
+          margin-left: 6px;
+          margin-right: 6px;
+          vertical-align: top;
+          text-decoration: none !important;
+        }
+      }
     }
   }
 
-  #signgoogle {
-    height: 50px;
-    width: 240px;
-    background-color: #4285f4;
-    border: none;
-    color: #fff;
-    cursor: pointer;
-    text-align: center;
-    vertical-align: middle;
-    transition: background-color .218s,border-color .218s,box-shadow .218s;
+  // All pages that use forms
+  &.signup,
+  &.signin,
+  &.change-email-password,
+  &.edit-account,
+  &.update-profile-picture {
+    section {
+      &.signup-form {
+        padding: 5em 2em;
+        width: 40%;
 
-    &:hover {
-      -webkit-box-shadow: 0 0 3px 3px rgba(66, 133, 244, 0.3);
-      box-shadow: 0 0 3px 3px rgba(66, 133, 244, 0.3);
-    }
-
-    .wrapper {
-      height: 100%;
-      width: 100%;
-      border: 1px solid transparent;
-
-      .icon {
-        padding: 15px;
-        background-color: #fff;
-        border-radius: 1px;
-        float: left;
-
-        .icon-svg {
-          width: 18px;
-          height: 18px;
+        h2 {
+          &.heading {
+            margin-bottom: 3rem;
+          }
         }
       }
 
-      .message {
-        font-size: 16px;
-        line-height: 48px;
-        font-weight: 500;
-        letter-spacing: .21px;
-        margin-left: 6px;
-        margin-right: 6px;
-        vertical-align: top;
-        text-decoration: none !important;
+      @media only screen and (max-width: 1000px) {
+        &.signup-form {
+          width: 100%;
+          padding: 2em;
+        }
       }
     }
   }
 
-  &.signup #signgoogle .wrapper .message p:last-of-type, &.signin #signgoogle .wrapper .message p:first-of-type {
+  &.signup #signgoogle .wrapper .message p:last-of-type,
+  &.signin #signgoogle .wrapper .message p:first-of-type {
     display: none;
   }
 
   &.single-col {
-    &.toc section, &.edit-account section, &.change-email-password section, &.manage-account section {
+
+    &.toc section,
+    &.edit-account section,
+    &.change-email-password section,
+    &.manage-account section {
       flex-direction: column;
-    }
-
-    &.edit-account section form {
-      width: 100%;
-    }
-
-    &.change-email-password {
-      section form {
-        width: 100%;
-      }
-
-      aside {
-        flex-direction: column;
-        width: 100%;
-
-        input {
-          box-sizing: border-box;
-          font-size: 1.1em;
-          padding: 0.25em 1.25em;
-          -webkit-appearance: none;
-          -moz-appearance: none;
-          appearance: none;
-          background-color: #C00;
-          color: #ddd;
-          font-weight: 700;
-          text-transform: uppercase;
-        }
-      }
     }
 
     &.manage-account section article {
@@ -300,7 +325,7 @@
 
 @media only screen and (max-width: 1000px) {
   .registration {
-    > section {
+    >section {
       flex-direction: column;
     }
 

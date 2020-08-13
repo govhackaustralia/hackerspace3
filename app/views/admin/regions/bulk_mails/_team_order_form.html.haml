@@ -5,7 +5,7 @@
         = team_order.team.current_project.team_name
         | #{team_order.team.current_project.project_name}
       = fields_for "team_orders[]", team_order do |team_order_form|
-        .field
+        .form-group
           = team_order_form.select(:request_type, options_for_select(TEAM_ORDER_REQUEST_TYPES, team_order.request_type))
         %table
           %tr
