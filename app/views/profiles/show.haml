@@ -26,9 +26,9 @@
               = fa_icon('slack', type: :brand)
             - if user_signed_in?
               - if current_user.profile.slack_access_token.present?
-                = link_to 'Open a chat with this User on Slack', slack_chat_profile_path(@profile), target: '_blank'
+                = link_to 'Open a Slack Chat with this User', slack_chat_profile_path(@profile), target: '_blank'
               - else
-                %p Link up your Slack Account to Contact this User
+                = link_to 'Link up your Slack Account to chat with this User', edit_profile_path(current_user.profile)
             - else
               %p Sign In to Contact this User via Slack
         %p= @user.slack
