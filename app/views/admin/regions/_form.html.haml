@@ -1,17 +1,17 @@
 = form_for [:admin, @competition, @region] do |f|
-  .field
-    = f.label :name, "Region name:"
-    = f.text_field :name
-  .field
-    = f.label :time_zone, "Time zone:"
+  .form-group
+    = f.label :name, "Region name"
+    = f.text_field :name, class: 'form-control'
+  .form-group
+    = f.label :time_zone, "Time zone"
     = f.select :time_zone, options_from_collection_for_select(Region::VALID_TIME_ZONES, :name, :name, @region.time_zone), include_blank: true
-  .field
+  .form-group
     = f.label :award_release, 'Award Release: (Times are saved as Sydney time)'
     = f.datetime_local_field :award_release
-  .field
+  .form-group
     = f.label :category
     = f.select :category, options_for_select(Region::CATEGORIES, @region.category)
-  .field
+  .form-group
     = f.label :parent_id
     = f.select :parent_id, options_from_collection_for_select(@parent_regions, :id, :name, @region.parent_id.to_s), include_blank: true
   .actions

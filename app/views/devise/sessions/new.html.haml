@@ -1,24 +1,26 @@
 - content_for :title, 'Sign In'
 %main.registration.signin
-  %h2= yield :title
-  %section
-    = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
-      .field
-        = f.label :email
-        %br/
-        = f.email_field :email, autofocus: true, autocomplete: "email"
-      .field
-        = f.label :password
-        %br/
-        = f.password_field :password, autocomplete: "off"
-      - if devise_mapping.rememberable?
-        .field
-          = f.label :remember_me
-          = f.check_box :remember_me
-      .actions
-        = f.submit 'Sign in'
-      = render "devise/shared/links"
-    %aside
+  %container
+    %section.signup-form
+      %h2.heading Sign in to Hackerspace
       - unless Rails.env.production?
-        -# TODO: remove once https://github.com/omniauth/omniauth/pull/809 is resolved
-        = link_to (render "devise/shared/google"), user_google_omniauth_authorize_path, method: :post
+        %div.google-oath
+          -# TODO: remove once https://github.com/omniauth/omniauth/pull/809 is resolved
+          = link_to (render "devise/shared/google"), user_google_omniauth_authorize_path, method: :post
+          %hr.grey-border
+          %p.alt-text or sign in below
+      %section
+        = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
+          .form-group
+            = f.label :email
+            = f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control'
+          .form-group
+            = f.label :password
+            = f.password_field :password, autocomplete: "off", class: 'form-control'
+          - if devise_mapping.rememberable?
+            .custom-control.custom-checkbox
+              = f.check_box :remember_me, class:'custom-control-input'
+              = f.label :remember_me, class: 'custom-control-label'
+          .actions
+            = f.submit 'Sign in'
+          = render "devise/shared/links"

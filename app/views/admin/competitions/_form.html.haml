@@ -1,33 +1,33 @@
 = form_for [:admin, @competition] do |form|
-  .field
+  .form-group
     = form.label :year
     = form.number_field :year
-  .field
+  .form-group
     = form.label :team_form_start
     = form.datetime_local_field :team_form_start
-  .field
+  .form-group
     = form.label :team_form_end
     = form.datetime_local_field :team_form_end
-  .field
+  .form-group
     = form.label :start_time
     = form.datetime_local_field :start_time
-  .field
+  .form-group
     = form.label :end_time
     = form.datetime_local_field :end_time
-  .field
+  .form-group
     = form.label :peoples_choice_start
     = form.datetime_local_field :peoples_choice_start
-  .field
+  .form-group
     = form.label :peoples_choice_end
     = form.datetime_local_field :peoples_choice_end
-  .field
+  .form-group
     = form.label :challenge_judging_start
     = form.datetime_local_field :challenge_judging_start
-  .field
+  .form-group
     = form.label :challenge_judging_end
     = form.datetime_local_field :challenge_judging_end
-  .field
-    = form.label :current
-    = form.check_box :current
+  .custom-control.custom-checkbox
+    = form.check_box :current, class:'custom-control-input'
+    = form.label :current, class: 'custom-control-label'
   .actions
     = form.submit

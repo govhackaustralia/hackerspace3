@@ -1,27 +1,25 @@
 - content_for :title, 'Sign Up'
 %main.registration.signup
-  %h2 Sign Up
-  %section
-    = form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
-      = render 'devise/shared/error_messages', resource: resource
-      .field
-        %div= f.label :email
-        = f.email_field :email, autofocus: true, autocomplete: "email"
-      .field
-        %div
-          = f.label :password
-          - if @minimum_password_length
-            %br/
-            %em
-              (#{@minimum_password_length} characters minimum)
-        = f.password_field :password, autocomplete: "off"
-      .field
-        %div= f.label :password_confirmation
-        = f.password_field :password_confirmation, autocomplete: "off"
-      .actions
-        = f.submit "Sign up"
-      = render "devise/shared/links"
-    %aside
+  %container
+    %section.signup-form
+      %h2.heading Register for GovHack 2020
       - unless Rails.env.production?
-        -# TODO: remove once https://github.com/omniauth/omniauth/pull/809 is resolved
-        = link_to (render "devise/shared/google"), user_google_omniauth_authorize_path, method: :post
+        %div.google-oath
+          -# TODO: remove once https://github.com/omniauth/omniauth/pull/809 is resolved
+          = link_to (render "devise/shared/google"), user_google_omniauth_authorize_path, method: :post
+          %hr.grey-border
+          %p.alt-text or register below
+      = form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
+        = render 'devise/shared/error_messages', resource: resource
+        .form-group
+          = f.label :email
+          = f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control'
+        .form-group
+          = f.label :password
+          = f.password_field :password, autocomplete: "off", class: 'form-control'
+        .form-group
+          = f.label :password_confirmation
+          = f.password_field :password_confirmation, autocomplete: "off", class: 'form-control'
+        .actions
+          = f.submit "Sign Up"
+        = render "devise/shared/links"
