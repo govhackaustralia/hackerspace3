@@ -20,5 +20,5 @@
         %div= link_to 'Challenges', challenges_path
       - if @any_teams
         %div= link_to 'Projects', projects_path
-      - if @any_data_sets
-        %div= link_to 'Datasets', data_sets_path
+      - if @competition.current
+        %div= link_to 'Resources', resources_path
