@@ -17,7 +17,7 @@
             %td= challenge.region.name
             %td= link_to challenge.name, challenge_path(challenge)
             %td= challenge.sponsors.pluck(:name).join(', ')
-            %td= @entry_counter.count(challenge)
+            %td= challenge.published_entries.length
             %td{style: 'display: none;'}= "#{challenge.short_desc} #{challenge.long_desc}"
   - else
     %p
