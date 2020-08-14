@@ -32,7 +32,7 @@
             %td= user.full_name
             %td= user.preferred_name
             %td= user.email
-            %td= link_to(user.profile.identifier, profile_path(user.profile)) if user.profile.present?
+            %td= link_to(user.profile.identifier, profile_path(user.profile)) if user.profile&.identifier
             %td
               - if (@badge_assignments & user.badge_assignments).any?
                 Badge Awarded
