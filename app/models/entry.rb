@@ -72,7 +72,7 @@ class Entry < ApplicationRecord
 
     errors.add(
       :checkpoint_id,
-      'Maximum National Challenges already entered for this Checkpoint'
+      'Maximum number of Challenges already entered for this Checkpoint'
     )
   end
 
