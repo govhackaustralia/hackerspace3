@@ -1,5 +1,6 @@
-.team_page {
+.team_pageOriginal {
   padding: 2em 5em;
+  background-color: #ffffff;
 
   h2 {
     color: #4c9ad2;
@@ -113,7 +114,7 @@
         align-items: center;
         text-align: left !important;
 
-        > label {
+        >label {
           box-sizing: border-box;
           width: 50%;
           padding-right: 1em;
@@ -121,7 +122,7 @@
           font-size: 1.15em;
         }
 
-        > input {
+        >input {
           box-sizing: border-box;
           width: 50%;
           padding-left: 1em;
@@ -130,7 +131,7 @@
           display: flex;
         }
 
-        > div.field_with_errors > input {
+        >div.field_with_errors>input {
           padding-left: 1em;
           font-size: 1em;
           padding: 0.5em;

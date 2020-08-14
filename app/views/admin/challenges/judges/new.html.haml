@@ -1,18 +1,19 @@
 %main.team_page
-  %h2
-    Add New #{@title} Assignment to #{@challenge.name} #{@challenge.class.to_s}
-  = form_tag new_admin_challenge_judge_path, method: :get do
-    = search_field_tag :term, params[:term]
-    = submit_tag 'Search'
-  - if @users.present?
-    - @users.each do |user|
-      = render 'admin/shared/user_contact', locals: { user: user }
-      - unless user.challenges_judging.include? @challenge
-        %p= link_to 'Assign Judge Assignment', admin_challenge_judges_url(@challenge, assignment: { user_id: user.id }), method: :post
-      - else
-        %p #{user.full_name} already a #{@title} for #{@challenge.name}
-  - elsif params[:term].present?
-    %p Apologies, no names matching search term '#{params[:term]}'
-  - else
-    %p Please enter an email address or name to search for a user.
-%p= link_to "Back to #{@challenge.name} management", admin_region_challenge_path(@challenge.region, @challenge)
+  %section
+    %h2
+      Add New #{@title} Assignment to #{@challenge.name} #{@challenge.class.to_s}
+    = form_tag new_admin_challenge_judge_path, method: :get do
+      = search_field_tag :term, params[:term]
+      = submit_tag 'Search'
+    - if @users.present?
+      - @users.each do |user|
+        = render 'admin/shared/user_contact', locals: { user: user }
+        - unless user.challenges_judging.include? @challenge
+          %p= link_to 'Assign Judge Assignment', admin_challenge_judges_url(@challenge, assignment: { user_id: user.id }), method: :post
+        - else
+          %p #{user.full_name} already a #{@title} for #{@challenge.name}
+    - elsif params[:term].present?
+      %p Apologies, no names matching search term '#{params[:term]}'
+    - else
+      %p Please enter an email address or name to search for a user.
+    %p= link_to "Back to #{@challenge.name} management", admin_region_challenge_path(@challenge.region, @challenge)

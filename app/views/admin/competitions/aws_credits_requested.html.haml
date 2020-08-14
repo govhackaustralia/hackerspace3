@@ -1,16 +1,17 @@
 - content_for :title, 'AWS Credits Requested'
 %main.team_page
-  %h2
-    #{yield :title} for #{@competition.year}
-  %p
-    %strong
-      Total Count:
-    = @report.competition_count
-  %h3 Regions
-  - @regions.each do |region|
-    - next if region.international?
-    %h4 #{region.name}: #{@report.region_count(region)}
-    - region.events.each do |event|
-      - next unless event.competition_event?
-      %p #{event.name}: #{@report.event_count(event)}
-%p= link_to 'Back to Competition', admin_competition_path(@competition)
+  %section
+    %h2
+      #{yield :title} for #{@competition.year}
+    %p
+      %strong
+        Total Count:
+      = @report.competition_count
+    %h3 Regions
+    - @regions.each do |region|
+      - next if region.international?
+      %h4 #{region.name}: #{@report.region_count(region)}
+      - region.events.each do |event|
+        - next unless event.competition_event?
+        %p #{event.name}: #{@report.event_count(event)}
+    %p= link_to 'Back to Competition', admin_competition_path(@competition)

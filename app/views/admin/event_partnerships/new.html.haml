@@ -1,21 +1,22 @@
 %main.team_page
-  %h2
-    Create New Event Partner for #{@event.name}
-  = form_tag(new_admin_event_event_partnership_path, method: :get) do
-    = search_field_tag :term, params[:term]
-    = submit_tag 'Search'
-  - if @sponsor.present?
-    %h3= @sponsor.name
-    %p= link_to "Create new Event Partnership with #{@sponsor.name}",   |
-        admin_event_event_partnerships_path(@event, @event_partnership, |
-        event_partnership: { sponsor_id: @sponsor.id }), method: :post  |
-  - elsif @sponsors.present?
-    - @sponsors.each do |sponsor|
-      %h3= sponsor.name
-      %p= link_to 'Select', new_admin_event_event_partnership_path(@event, term: sponsor.name)
-  - elsif params[:term].present?
-    %p
-      Apologies, no sponsor name matching search term '#{params[:term]}'
-  - else
-    %p Please enter a sponsor name above.
-%p= link_to "Back to #{@event.name} Event", admin_region_event_path(@event.region, @event)
+  %section
+    %h2
+      Create New Event Partner for #{@event.name}
+    = form_tag(new_admin_event_event_partnership_path, method: :get) do
+      = search_field_tag :term, params[:term]
+      = submit_tag 'Search'
+    - if @sponsor.present?
+      %h3= @sponsor.name
+      %p= link_to "Create new Event Partnership with #{@sponsor.name}",   |
+          admin_event_event_partnerships_path(@event, @event_partnership, |
+          event_partnership: { sponsor_id: @sponsor.id }), method: :post  |
+    - elsif @sponsors.present?
+      - @sponsors.each do |sponsor|
+        %h3= sponsor.name
+        %p= link_to 'Select', new_admin_event_event_partnership_path(@event, term: sponsor.name)
+    - elsif params[:term].present?
+      %p
+        Apologies, no sponsor name matching search term '#{params[:term]}'
+    - else
+      %p Please enter a sponsor name above.
+    %p= link_to "Back to #{@event.name} Event", admin_region_event_path(@event.region, @event)

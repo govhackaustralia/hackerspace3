@@ -1,5 +1,6 @@
 - content_for :title, "New Badge for #{@competition.name}"
 %main.team_page
-  %h2= yield :title
-  = render 'form'
-%p= link_to 'Back to Competition Badges', admin_competition_badges_path(@competition)
+  %section
+    %h2= yield :title
+    = render 'form'
+    %p= link_to 'Back to Competition Badges', admin_competition_badges_path(@competition)

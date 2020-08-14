@@ -1,4 +1,5 @@
 %main.team_page
-  %h2= "Edit Criterion for #{@competition.name}"
-  = render 'form'
-  %p= link_to 'Back to Competition Criteria', admin_competition_criteria_path(@competition)
+  %section
+    %h2= "Edit Criterion for #{@competition.name}"
+    = render 'form'
+    %p= link_to 'Back to Competition Criteria', admin_competition_criteria_path(@competition)

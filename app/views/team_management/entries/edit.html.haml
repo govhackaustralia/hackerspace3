@@ -1,5 +1,6 @@
 - content_for :title, 'Update Entry'
 %main.team_page
-  %h2= "Update Entry for Challenge #{@challenge.name}"
-  = render 'form'
-  = link_to 'Back to Challenge Entries', team_management_team_entries_path(@team)
+  %section.team_page_body
+    %h2= "Update Entry for Challenge #{@challenge.name}"
+    = render 'form'
+    = link_to 'Back to Challenge Entries', team_management_team_entries_path(@team)

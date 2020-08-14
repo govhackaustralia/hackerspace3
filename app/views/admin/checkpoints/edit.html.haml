@@ -1,4 +1,5 @@
 %main.team_page
-  %h2= "Edit Checkpoint for Competition #{@competition.year}"
-  = render 'form'
-%p= link_to 'Back to Competition Checkpoints', admin_competition_checkpoints_path(@competition)
+  %section
+    %h2= "Edit Checkpoint for Competition #{@competition.year}"
+    = render 'form'
+    %p= link_to 'Back to Competition Checkpoints', admin_competition_checkpoints_path(@competition)

@@ -24,6 +24,5 @@
                 Go to #{team.name}
           - else
             %p This project is yet to be published.
-    - else
-      - if @competition.not_finished? @time_zone
-        %p.blank-message Your team project memberships will appear here.
+  - else
+    %p.blank-message Your team project memberships will appear here.

@@ -1,19 +1,20 @@
 %main.team_page
-  %h2
-    Correspondence to #{@user.display_name} from Bulk Mail #{@bulk_mail.name}
-  %p
-    %strong Sent At:
-    = @correspondence.created_at
-  %p
-    %strong From:
-    = @bulk_mail.from_email
-  %p
-    %strong To:
-    = @user.email
-  %p
-    %strong Subject:
-    = @bulk_mail.subject
-  \&gt;&gt;&gt;&gt;
-  \#{markdown @correspondence.body}
-  \&gt;&gt;&gt;&gt;
-%p= link_to 'Back to Bulk Mail', [:admin, @mailable, @bulk_mail]
+  %section
+    %h2
+      Correspondence to #{@user.display_name} from Bulk Mail #{@bulk_mail.name}
+    %p
+      %strong Sent At:
+      = @correspondence.created_at
+    %p
+      %strong From:
+      = @bulk_mail.from_email
+    %p
+      %strong To:
+      = @user.email
+    %p
+      %strong Subject:
+      = @bulk_mail.subject
+    \&gt;&gt;&gt;&gt;
+    \#{markdown @correspondence.body}
+    \&gt;&gt;&gt;&gt;
+    %p= link_to 'Back to Bulk Mail', [:admin, @mailable, @bulk_mail]
