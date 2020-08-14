@@ -16,8 +16,7 @@ class Entry < ApplicationRecord
     message: 'Teams are not able to enter the same Challenge twice.'
   }
   validates :award, allow_nil: true, inclusion: { in: AWARD_NAMES }
-  validate :entries_must_not_exceed_max_regional_allowed_for_checkpoint,
-           :entries_must_not_exceed_max_national_allowed_for_checkpoint,
+  validate :entries_must_not_exceed_max_national_allowed_for_checkpoint,
            :teams_cannot_enter_challenges_they_are_not_eligible_for,
            on: :create
 
@@ -67,9 +66,7 @@ class Entry < ApplicationRecord
   # Checks that a team has not entered the maximum number of national challenges
   # at a given checkpoint.
   def entries_must_not_exceed_max_national_allowed_for_checkpoint
-    return if challenge.region.regional?
-
-    current_count = team.national_challenges(checkpoint).count
+    current_count = team.entries.count
     max_allowed = checkpoint.max_national(region)
     return unless current_count >= max_allowed
 
