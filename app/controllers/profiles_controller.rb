@@ -50,7 +50,7 @@ class ProfilesController < ApplicationController
   def slack_chat
     @other_profile = Profile.find_by_identifier params[:id]
     response = Excon.post('https://slack.com/api/conversations.open',
-      headers: { "Content-Type" => "application/x-www-form-urlencoded" },
+      headers: { 'Content-Type' => 'application/x-www-form-urlencoded' },
       body: URI.encode_www_form(token: profile.slack_access_token, users: @other_profile.slack_user_id))
     channel_id = JSON.parse(response.body).dig('channel', 'id')
     if channel_id.present?
