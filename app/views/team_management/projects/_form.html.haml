@@ -1,40 +1,40 @@
 = form_for [@namespace, @team, @project] do |project_form|
-  .field
+  .form-group
     = project_form.label :team_name
-    = project_form.text_field :team_name
+    = project_form.text_field :team_name, class: 'form-control'
   - if @competition.in_comp_window?(@time_zone) || params[:controller] == 'admin/projects'
-    .field
+    .form-group
       = project_form.label :project_name
-      = project_form.text_field :project_name
-    .field
+      = project_form.text_field :project_name, class: 'form-control'
+    .form-group
       %div
         = project_form.label :description
         %br/
         %em Markdown supported
-      = project_form.text_area :description
-    .field
+      = project_form.text_area :description, class: 'form-control'
+    .form-group
       %div
         = project_form.label :tag_list
         %br/
         %em Separate tags with commas
-      = project_form.text_field :tag_list, value: @project.tag_list&.join(', ')
-    .field
+      = project_form.text_field :tag_list, value: @project.tag_list&.join(', '), class: 'form-control'
+    .form-group
       %div
         = project_form.label :data_story
         %br/
         %em Markdown supported
-      = project_form.text_area :data_story
-    .field
+      = project_form.text_area :data_story, class: 'form-control'
+    .form-group
       %div
         = project_form.label :source_code_url
         %br/
         %em Or evidence of work
-      = project_form.url_field :source_code_url
-    .field
+      = project_form.url_field :source_code_url, class: 'form-control'
+    .form-group
       = project_form.label :video_url
-      = project_form.url_field :video_url
-    .field
+      = project_form.url_field :video_url, class: 'form-control'
+    .form-group
       = project_form.label :homepage_url
-      = project_form.url_field :homepage_url
+      = project_form.url_field :homepage_url, class: 'form-control'
   .actions
     = project_form.submit 'Save'

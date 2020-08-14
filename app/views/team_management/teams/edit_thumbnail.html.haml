@@ -1,6 +1,6 @@
 - content_for :title, 'Update Thumbnail'
 %main.team_page
-  %section.team_page_body
+  %section
     %h2
       Update #{@team.name} Thumbnail
     = form_for [:team_management, @team], url: update_thumbnail_team_management_team_path(@team) do |form|

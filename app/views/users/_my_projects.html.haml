@@ -13,16 +13,16 @@
             %h2 #{team.current_project.team_name} - #{team.current_project.project_name}
             %p
               Event: #{team.event.name}
-        %div.content-wrapper-button
-          - if @competition.in_form_or_comp_window?(team.region.time_zone)
-            = link_to team_management_team_path(team) do
-              %button.content-blue-button
-                Manage #{team.name}
-          - elsif team.published
-            = link_to project_path(team.current_project.identifier) do
-              %button.content-black-button
-                Go to #{team.name}
-          - else
-            %p This project is yet to be published.
+          %div.content-wrapper-button
+            - if @competition.in_form_or_comp_window?(team.region.time_zone)
+              = link_to team_management_team_path(team) do
+                %button.content-blue-button
+                  Manage #{team.name}
+            - elsif team.published
+              = link_to project_path(team.current_project.identifier) do
+                %button.content-black-button
+                  Go to #{team.name}
+            - else
+              %p This project is yet to be published.
   - else
     %p.blank-message Your team project memberships will appear here.

@@ -1,6 +1,6 @@
 - content_for :title, 'Update High Res Image'
 %main.team_page
-  %section.team_page_body
+  %section
     %h2
       Update #{@team.name} High Resolution Image
     = form_for [:team_management, @team], url: update_image_team_management_team_path(@team) do |form|
