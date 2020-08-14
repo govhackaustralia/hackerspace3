@@ -13,6 +13,16 @@
     -# = link_to 'Industry', industry_profiles_path
     -# |
     -# = link_to 'Support', support_profiles_path
+
+    - if user_signed_in?
+      - if current_user.profile&.published
+        %p Your Profile is Published
+      - else
+        %p
+          %strong= link_to 'Publish Your Profile', edit_profile_path(current_user.profile)
+    - else
+      %p Sign up to create your Profile
+
   %section.table-wrapper
     %h2= yield :title
     %table.profiles-table#projects_table{'data-turbolinks' => 'false'}
