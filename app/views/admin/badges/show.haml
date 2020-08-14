@@ -11,10 +11,6 @@
       %strong
         Capacity:
       = @badge.capacity || '-'
-    - if @badge.art.attached?
-      = image_tag url_for(@badge.art), alt: @badge.name
-    - else
-      = image_tag 'default_profile_pic.png'
     %p= link_to 'Delete Badge', admin_competition_badge_path(@competition, @badge), |
       method: :delete,                                                                          |
       data: { confirm: 'Are you sure you want to delete this badge?...and its awards' }
