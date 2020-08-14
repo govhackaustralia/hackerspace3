@@ -1,30 +1,31 @@
 %main.team_page
-  %h2
-    Create New Data Set for #{@challenge.name}
-  = form_tag(new_admin_challenge_challenge_data_set_path, method: :get) do
-    = search_field_tag :term, params[:term]
-    = submit_tag 'Search'
-  - if @data_set.present?
-    %h3
-      Data Set: #{@data_set.name}
-    %p
-      Data URL: #{@data_set.url}
-    - unless @existing_challenge_data_set.present?
-      %p= link_to "Create new Challenge Data Set with #{@data_set.name}", admin_challenge_challenge_data_sets_path(@challenge, challenge_data_set: { data_set_id: @data_set.id }), method: :post
-    - else
-      %p
-        %strong
-          Challenge Data Set #{@data_set.name} to #{@challenge.name} already exists.
-  - elsif @data_sets.present?
-    - @data_sets.each do |data_set|
+  %section.team_page_body
+    %h2
+      Create New Data Set for #{@challenge.name}
+    = form_tag(new_admin_challenge_challenge_data_set_path, method: :get) do
+      = search_field_tag :term, params[:term]
+      = submit_tag 'Search'
+    - if @data_set.present?
       %h3
-        Data Set: #{data_set.name}
+        Data Set: #{@data_set.name}
       %p
-        Data URL: #{data_set.url}
-      %p= link_to 'Select', new_admin_challenge_challenge_data_set_path(@challenge, term: data_set.url)
-  - elsif params[:term].present?
-    %p
-      No data set name matching search term '#{params[:term]}'
-  - else
-    %p Please enter a data set name above.
-  %p= link_to "Back to #{@challenge.name}", admin_region_challenge_path(@challenge.region, @challenge)
+        Data URL: #{@data_set.url}
+      - unless @existing_challenge_data_set.present?
+        %p= link_to "Create new Challenge Data Set with #{@data_set.name}", admin_challenge_challenge_data_sets_path(@challenge, challenge_data_set: { data_set_id: @data_set.id }), method: :post
+      - else
+        %p
+          %strong
+            Challenge Data Set #{@data_set.name} to #{@challenge.name} already exists.
+    - elsif @data_sets.present?
+      - @data_sets.each do |data_set|
+        %h3
+          Data Set: #{data_set.name}
+        %p
+          Data URL: #{data_set.url}
+        %p= link_to 'Select', new_admin_challenge_challenge_data_set_path(@challenge, term: data_set.url)
+    - elsif params[:term].present?
+      %p
+        No data set name matching search term '#{params[:term]}'
+    - else
+      %p Please enter a data set name above.
+    %p= link_to "Back to #{@challenge.name}", admin_region_challenge_path(@challenge.region, @challenge)

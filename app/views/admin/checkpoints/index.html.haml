@@ -1,29 +1,30 @@
 %main.team_page
-  %h2
-    Checkpoints for Competition #{@competition.year}
-  %p= link_to 'Add New Checkpoint', new_admin_competition_checkpoint_path(@competition)
-  %p
-    %em
-      'National Challenges' refers to both National and International challenges.
-  - if @checkpoints.present?
-    - @checkpoints.order(end_time: :asc).each do |checkpoint|
-      %h3= checkpoint.name
-      %p End Time: #{checkpoint.end_time}
-      %p
-        %em Max number of challenges a team can enter for this checkpoint...
-      %p National Challenges: #{checkpoint.max_national_challenges}
-      %p Regional Challenges: #{checkpoint.max_regional_challenges}
-      %p= link_to 'Update Checkpoint', edit_admin_competition_checkpoint_path(@competition, checkpoint)
-      - if (region_limits = checkpoint.region_limits).present?
-        %h4 Region Specific Challenge Maximums
-        - region_limits.each do |region_limit|
-          %h5= region_limit.region.name
-          %p National Challenges: #{region_limit.max_national_challenges}
-          %p Regional Challenges: #{region_limit.max_regional_challenges}
-          %p= link_to "Update #{region_limit.region.name} limits", edit_admin_checkpoint_region_limit_path(checkpoint, region_limit)
-      - else
-        %p No Region specific limits set for this Checkpoint.
-      %p= link_to "New Region Specific for #{checkpoint.name}", new_admin_checkpoint_region_limit_path(checkpoint)
-  - else
-    %p The Competition does not currently have any checkpoints set.
-%p= link_to 'Back to Competition', admin_competition_path(@competition)
+  %section.team_page_body
+    %h2
+      Checkpoints for Competition #{@competition.year}
+    %p= link_to 'Add New Checkpoint', new_admin_competition_checkpoint_path(@competition)
+    %p
+      %em
+        'National Challenges' refers to both National and International challenges.
+    - if @checkpoints.present?
+      - @checkpoints.order(end_time: :asc).each do |checkpoint|
+        %h3= checkpoint.name
+        %p End Time: #{checkpoint.end_time}
+        %p
+          %em Max number of challenges a team can enter for this checkpoint...
+        %p National Challenges: #{checkpoint.max_national_challenges}
+        %p Regional Challenges: #{checkpoint.max_regional_challenges}
+        %p= link_to 'Update Checkpoint', edit_admin_competition_checkpoint_path(@competition, checkpoint)
+        - if (region_limits = checkpoint.region_limits).present?
+          %h4 Region Specific Challenge Maximums
+          - region_limits.each do |region_limit|
+            %h5= region_limit.region.name
+            %p National Challenges: #{region_limit.max_national_challenges}
+            %p Regional Challenges: #{region_limit.max_regional_challenges}
+            %p= link_to "Update #{region_limit.region.name} limits", edit_admin_checkpoint_region_limit_path(checkpoint, region_limit)
+        - else
+          %p No Region specific limits set for this Checkpoint.
+        %p= link_to "New Region Specific for #{checkpoint.name}", new_admin_checkpoint_region_limit_path(checkpoint)
+    - else
+      %p The Competition does not currently have any checkpoints set.
+    %p= link_to 'Back to Competition', admin_competition_path(@competition)

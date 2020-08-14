@@ -1,42 +1,43 @@
 %main.team_page
-  %h2 Competition Assignments
-  %h3 Competition Director
-  - if (director = @assignable.director).present?
-    = render 'admin/shared/user_contact', locals: { user: director }
-  - else
-    %p This competition does not currently have a Director.
-    %p= link_to "New #{COMPETITION_DIRECTOR} Assignment", new_admin_competition_assignment_path(@assignable, title: COMPETITION_DIRECTOR)
-  %h3 Sponsorship Director
-  - if (director = @assignable.sponsorship_director).present?
-    = render 'admin/shared/user_contact', locals: { user: director }
-  - else
-    %p This competition does not currently have a Sponsorship Director.
-    %p= link_to "New #{SPONSORSHIP_DIRECTOR} Assignment", new_admin_competition_assignment_path(@assignable, title: SPONSORSHIP_DIRECTOR)
-  %h3 Chief Judge
-  - if (chief_judge = @assignable.chief_judge).present?
-    = render 'admin/shared/user_contact', locals: { user: chief_judge }
-  - else
-    %p This competition does not currently have a Chief Judge.
-    %p= link_to "New #{CHIEF_JUDGE} Assignment", new_admin_competition_assignment_path(@assignable, title: CHIEF_JUDGE)
-  %h3 Site Admins
-  - if (site_admins = @assignable.site_admins).present?
-    - site_admins.each do |site_admin|
-      = render 'admin/shared/user_contact', locals: { user: site_admin }
-  - else
-    %p This competition does not currently have any Site Admins.
-    %p= link_to "New #{ADMIN} Assignment", new_admin_competition_assignment_path(@assignable, title: ADMIN)
-  %h3 GovHack Management Team
-  - if (members = @assignable.management_team).present?
-    - members.each do |member|
-      = render 'admin/shared/user_contact', locals: { user: member }
-  - else
-    %p This competition does not currently have any management team members.
-  %p= link_to "New #{MANAGEMENT_TEAM} Assignment", new_admin_competition_assignment_path(@assignable, title: MANAGEMENT_TEAM)
-  %h3 GovHack Volunteers
-  - if (members = @assignable.volunteers).present?
-    - members.each do |member|
-      = render 'admin/shared/user_contact', locals: { user: member }
-  - else
-    %p This competition does not currently have any volunteers.
-  %p= link_to "New #{VOLUNTEER} Assignment", new_admin_competition_assignment_path(@assignable, title: VOLUNTEER)
-  %p= link_to 'Back to Competition', admin_competition_path(@assignable)
+  %section.team_page_body
+    %h2 Competition Assignments
+    %h3 Competition Director
+    - if (director = @assignable.director).present?
+      = render 'admin/shared/user_contact', locals: { user: director }
+    - else
+      %p This competition does not currently have a Director.
+      %p= link_to "New #{COMPETITION_DIRECTOR} Assignment", new_admin_competition_assignment_path(@assignable, title: COMPETITION_DIRECTOR)
+    %h3 Sponsorship Director
+    - if (director = @assignable.sponsorship_director).present?
+      = render 'admin/shared/user_contact', locals: { user: director }
+    - else
+      %p This competition does not currently have a Sponsorship Director.
+      %p= link_to "New #{SPONSORSHIP_DIRECTOR} Assignment", new_admin_competition_assignment_path(@assignable, title: SPONSORSHIP_DIRECTOR)
+    %h3 Chief Judge
+    - if (chief_judge = @assignable.chief_judge).present?
+      = render 'admin/shared/user_contact', locals: { user: chief_judge }
+    - else
+      %p This competition does not currently have a Chief Judge.
+      %p= link_to "New #{CHIEF_JUDGE} Assignment", new_admin_competition_assignment_path(@assignable, title: CHIEF_JUDGE)
+    %h3 Site Admins
+    - if (site_admins = @assignable.site_admins).present?
+      - site_admins.each do |site_admin|
+        = render 'admin/shared/user_contact', locals: { user: site_admin }
+    - else
+      %p This competition does not currently have any Site Admins.
+      %p= link_to "New #{ADMIN} Assignment", new_admin_competition_assignment_path(@assignable, title: ADMIN)
+    %h3 GovHack Management Team
+    - if (members = @assignable.management_team).present?
+      - members.each do |member|
+        = render 'admin/shared/user_contact', locals: { user: member }
+    - else
+      %p This competition does not currently have any management team members.
+    %p= link_to "New #{MANAGEMENT_TEAM} Assignment", new_admin_competition_assignment_path(@assignable, title: MANAGEMENT_TEAM)
+    %h3 GovHack Volunteers
+    - if (members = @assignable.volunteers).present?
+      - members.each do |member|
+        = render 'admin/shared/user_contact', locals: { user: member }
+    - else
+      %p This competition does not currently have any volunteers.
+    %p= link_to "New #{VOLUNTEER} Assignment", new_admin_competition_assignment_path(@assignable, title: VOLUNTEER)
+    %p= link_to 'Back to Competition', admin_competition_path(@assignable)

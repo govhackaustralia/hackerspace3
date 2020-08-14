@@ -1,20 +1,21 @@
 - content_for :title, 'Update High Res Image'
 %main.team_page
-  %h2
-    Update #{@team.name} High Resolution Image
-  = form_for [:team_management, @team], url: update_image_team_management_team_path(@team) do |form|
-    .field
-      - if @team.high_res_image.attached?
-        %img{:alt => "#{@team.name} High Resolution Image", :src => "#{url_for(@team.high_res_image)}"}/
-      - else
-        = image_tag "default_profile_pic.png"
-    .field
-      = form.label :high_res_image, 'Upload a High Resolution Image (only png/gif/jpeg/jpg)'
-      = form.file_field :high_res_image, accept: 'image/png,image/gif,image/jpeg'
-    .actions
-      = hidden_field_tag(:high_res_image, true)
-      - if @team.high_res_image.attached?
-        = form.submit 'Replace High Res Image'
-      - else
-        = form.submit 'Upload High Res Image'
-= link_to 'Back to Team', team_management_team_path(@team)
+  %section.team_page_body
+    %h2
+      Update #{@team.name} High Resolution Image
+    = form_for [:team_management, @team], url: update_image_team_management_team_path(@team) do |form|
+      .field
+        - if @team.high_res_image.attached?
+          %img{:alt => "#{@team.name} High Resolution Image", :src => "#{url_for(@team.high_res_image)}"}/
+        - else
+          = image_tag "default_profile_pic.png"
+      .field
+        = form.label :high_res_image, 'Upload a High Resolution Image (only png/gif/jpeg/jpg)'
+        = form.file_field :high_res_image, accept: 'image/png,image/gif,image/jpeg'
+      .actions
+        = hidden_field_tag(:high_res_image, true)
+        - if @team.high_res_image.attached?
+          = form.submit 'Replace High Res Image'
+        - else
+          = form.submit 'Upload High Res Image'
+    = link_to 'Back to Team', team_management_team_path(@team)

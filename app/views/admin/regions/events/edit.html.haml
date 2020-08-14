@@ -1,5 +1,6 @@
 %main.team_page
-  %h2
-    Update #{@event.name} Event
-  = render 'form'
-  = link_to 'Back to Event', admin_region_event_path(@region, @event)
+  %section.team_page_body
+    %h2
+      Update #{@event.name} Event
+    = render 'form'
+    = link_to 'Back to Event', admin_region_event_path(@region, @event)

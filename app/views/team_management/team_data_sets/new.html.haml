@@ -1,6 +1,7 @@
 - content_for :title, 'Create Data Set'
 %main.team_page
-  %h2
-    Create New Data Set for #{@team.current_project.team_name}
-  = render 'form'
-  %p= link_to 'Back to Team Data Sets', team_management_team_team_data_sets_path(@team)
+  %section.team_page_body
+    %h2
+      Create New Data Set for #{@team.current_project.team_name}
+    = render 'form'
+    %p= link_to 'Back to Team Data Sets', team_management_team_team_data_sets_path(@team)

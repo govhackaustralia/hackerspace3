@@ -1,15 +1,16 @@
 %main.team_page
-  %h2
-    Bulk Mails for #{@event.name}
-  = link_to 'New Bulk Mail', new_admin_event_bulk_mail_path(@event)
-  - if @bulk_mails.present?
-    - @bulk_mails.each do |bulk_mail|
-      %h3= bulk_mail.name
-      %p
-        Created At: #{bulk_mail.created_at}
-      %p
-        Status: #{bulk_mail.status}
-      %p= link_to 'Go to Bulk Mail', admin_event_bulk_mail_path(@event, bulk_mail)
-  - else
-    %p There are no bulk mails for this event.
-= link_to "Back to #{@event.name}", admin_region_event_path(@region, @event)
+  %section.team_page_body
+    %h2
+      Bulk Mails for #{@event.name}
+    = link_to 'New Bulk Mail', new_admin_event_bulk_mail_path(@event)
+    - if @bulk_mails.present?
+      - @bulk_mails.each do |bulk_mail|
+        %h3= bulk_mail.name
+        %p
+          Created At: #{bulk_mail.created_at}
+        %p
+          Status: #{bulk_mail.status}
+        %p= link_to 'Go to Bulk Mail', admin_event_bulk_mail_path(@event, bulk_mail)
+    - else
+      %p There are no bulk mails for this event.
+    = link_to "Back to #{@event.name}", admin_region_event_path(@region, @event)

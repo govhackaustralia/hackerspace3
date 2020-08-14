@@ -1,30 +1,31 @@
 - content_for :title, @current_project.project_name
 %main.team_page
-  %h2= yield :title
-  %aside.fav_judge
-    = render 'user_options'
-  %h3 Project Info
-  = render 'team_project_info'
-  %h3 Team DataSets
-  %section.markdown
-    - if (team_data_sets = @team.team_data_sets).present?
-      - team_data_sets.each do |team_data_set|
-        = render 'team_data_set', locals: { data_set: team_data_set }
+  %section.team_page_body
+    %h2= yield :title
+    %aside.fav_judge
+      = render 'user_options'
+    %h3 Project Info
+    = render 'team_project_info'
+    %h3 Team DataSets
+    %section.markdown
+      - if (team_data_sets = @team.team_data_sets).present?
+        - team_data_sets.each do |team_data_set|
+          = render 'team_data_set', locals: { data_set: team_data_set }
+      - else
+        %div This team does not currently have any datasets.
+    %h3 Challenges
+    - if @passed_checkpoint_ids.present?
+      - if @entries_to_display.present?
+        - @entries_to_display.each do |entry|
+          = render 'challenges/challenge_panel',               |
+            challenge: entry.challenge,                        |
+            entry_count: @entry_counter.count(entry.challenge)
+      - else
+        %p There are no challenges to display for this team as yet.
     - else
-      %div This team does not currently have any datasets.
-  %h3 Challenges
-  - if @passed_checkpoint_ids.present?
-    - if @entries_to_display.present?
-      - @entries_to_display.each do |entry|
-        = render 'challenges/challenge_panel',               |
-          challenge: entry.challenge,                        |
-          entry_count: @entry_counter.count(entry.challenge)
-    - else
-      %p There are no challenges to display for this team as yet.
-  - else
-    %p
-      Check back here once the first checkpoint passes to see the challenges
-      this team has entered.
-%p= link_to 'Back to Projects', projects_path
-- if current_user&.admin_privileges? @competition
-  %p= link_to "Administer #{@current_project.team_name}", admin_competition_team_path(@competition, @team)
+      %p
+        Check back here once the first checkpoint passes to see the challenges
+        this team has entered.
+    %p= link_to 'Back to Projects', projects_path
+    - if current_user&.admin_privileges? @competition
+      %p= link_to "Administer #{@current_project.team_name}", admin_competition_team_path(@competition, @team)
