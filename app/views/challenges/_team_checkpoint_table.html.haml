@@ -1,9 +1,4 @@
 %section.teams
-  - if @competition.in_comp_window? LAST_TIME_ZONE
-    %p
-      %strong
-        Team Projects will appear below when the relevant checkpoint has passed
-        (#{@time_zone} time)
   - if @entries.any?
     %table.projects-table#challenge-entries-table{'data-turbolinks' => 'false'}
       %thead
