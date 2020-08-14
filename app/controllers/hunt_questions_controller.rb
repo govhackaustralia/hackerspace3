@@ -15,7 +15,7 @@ class HuntQuestionsController < ApplicationController
       log_success_and_award_badge!
       flash[:notice] =  'Question Answered!'
     else
-      flash[:alert] = 'Please try again'
+      flash[:alert] = 'Incorrect Answer, Please try again'
     end
     redirect_to treasure_hunt_path
   end
