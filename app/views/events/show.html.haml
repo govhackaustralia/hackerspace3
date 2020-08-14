@@ -37,7 +37,7 @@
                 - else
                   = image_tag 'default_profile_pic.png'
     - if @sponsorship_types.present?
-      %h3 State Sponsors
+      %h3 #{@region.name} Sponsors 
       - @sponsorship_types.each do |sponsorship_type|
         %h4= sponsorship_type.name
         .sponsors
