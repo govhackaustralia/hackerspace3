@@ -34,6 +34,7 @@ class Assignment < ApplicationRecord
   validate :can_only_join_team_if_registered_for_a_competition_event
   validate :correct_competition
   validate :cant_exceed_badge_capacity
+  validate :cant_exceed_the_team_limit
 
   after_save_commit :only_one_team_leader
 
@@ -64,6 +65,14 @@ class Assignment < ApplicationRecord
     return if BadgePolicy.enough_badges? assignable
 
     errors.add :badge, 'All badges have been claimed'
+  end
+
+  def cant_exceed_the_team_limit
+    return unless assignable_type == 'Team'
+
+    return if assignable.assignments.count < MAX_TEAM_SIZE
+
+    errors.add :user, "Only #{MAX_TEAM_SIZE} members per team"
   end
 
   # Will return the registrtation for the Competition Event a participant is
