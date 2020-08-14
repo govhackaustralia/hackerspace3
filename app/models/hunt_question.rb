@@ -3,5 +3,7 @@ class HuntQuestion < ApplicationRecord
 
   validates :question, :answer, presence: true
 
-  alias_method :name, :question
+  def name
+    question
+  end
 end
