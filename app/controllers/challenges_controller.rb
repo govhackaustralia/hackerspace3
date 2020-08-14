@@ -7,7 +7,7 @@ class ChallengesController < ApplicationController
   def index
     @regions = @competition.regions
       .order(:category, :name)
-      .preload(approved_challenges: [:sponsors_with_logos, :published_entries])
+      .preload(approved_challenges: %i[sponsors_with_logos published_entries])
     @entry_counter = PublishedEntryCounter.new @competition
     @checker = ShowChallengesChecker.new @competition
   end
