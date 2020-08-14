@@ -16,7 +16,6 @@ class ProjectsController < ApplicationController
 
   def show
     @current_project = @team.current_project
-    @checkpoints = @competition.checkpoints.order :end_time
     @passed_checkpoint_ids = @competition.passed_checkpoint_ids @time_zone
     @published_users = @team.confirmed_members.joins(:profile).where(profiles: {published: true}).preload(:profile)
     @entries_to_display = @team.entries.where(
