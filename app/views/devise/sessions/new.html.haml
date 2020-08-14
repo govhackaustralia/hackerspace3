@@ -6,9 +6,13 @@
       - unless Rails.env.production?
         %div.google-oath
           -# TODO: remove once https://github.com/omniauth/omniauth/pull/809 is resolved
-          = link_to (render "devise/shared/google"), user_google_omniauth_authorize_path, method: :post
+          -# = link_to (render "devise/shared/google"), user_google_omniauth_authorize_path, method: :post
           %hr.grey-border
-          %p.alt-text or sign in below
+          -# %p.alt-text or sign in below
+          %p.alt-text
+            Google Sign in is unavailable at this time, please use the
+            = link_to 'forgot password link', new_user_password_path
+            if you need to regain access to an existing Hackerspace account.
       %section
         = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
           .form-group
