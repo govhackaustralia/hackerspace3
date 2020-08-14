@@ -17,6 +17,7 @@ class ChallengesController < ApplicationController
       .order(:name)
       .preload(:region, :sponsors, :published_entries)
     @entry_counter = PublishedEntryCounter.new @competition
+    @checker = ShowChallengesChecker.new @competition
     respond_to do |format|
       format.html
       format.csv { send_data @challenges.to_csv @competition }
@@ -24,6 +25,7 @@ class ChallengesController < ApplicationController
   end
 
   def landing_page
+    @event = current_user.participating_competition_event(@competition)
     return unless (@started = @competition.started?(FIRST_TIME_ZONE))
 
     @regions = @competition.regions
@@ -48,32 +50,27 @@ class ChallengesController < ApplicationController
   private
 
   def check_competition_index_landing_page!
-    return unless landing_page?
+    return unless show_landing_page?
 
     redirect_to landing_page_challenges_path
   end
 
   def check_competition_landing_page_index!
-    return if landing_page?
+    return if show_landing_page?
 
     redirect_to challenges_path
   end
 
-  def landing_page?
-    return false if @competition.started? LAST_TIME_ZONE
-
-    return false if user_signed_in? &&
-                    (@event = current_user.participating_competition_event(@competition)).present? &&
-                    @competition.started?(@event.region.time_zone)
-
-    true
+  def show_landing_page?
+    ! @competition.started?(FIRST_TIME_ZONE)
   end
 
   def check_competition_start!
     @challenge = Challenge.find_by identifier: params[:identifier]
     @challenge = Challenge.find(params[:identifier]) if @challenge.nil?
     @region = @challenge.region
-    return if @competition.started?(@region.time_zone) || @region.international?
+    return if @competition.started?(@region.national_time_zone) ||
+      (@region.international? && @competition.started?(FIRST_TIME_ZONE))
 
     flash[:alert] = 'Challenges will become visible at the start of the competition'
     redirect_to root_path

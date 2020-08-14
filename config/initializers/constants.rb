@@ -47,7 +47,7 @@ MAX_DECISION_TIME = 2.minutes
 CODE_OF_CONDUCT_URL = 'https://govhack.org/competition/code-of-conduct/'
 
 FIRST_TIME_ZONE = 'Wellington'
-LAST_TIME_ZONE = 'Perth'
+LAST_TIME_ZONE = 'Sydney'
 COMP_TIME_ZONE = 'Sydney'
 
 # Assignment Permissions Framework Titles

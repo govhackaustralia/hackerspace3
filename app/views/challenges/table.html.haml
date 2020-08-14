@@ -12,6 +12,7 @@
           %th{style: 'display: none;'} meta
       %tbody
         - @challenges.each do |challenge|
+          - next unless @checker.show?(challenge.region)
           %tr
             %td= challenge.region.name
             %td= link_to challenge.name, challenge_path(challenge)
