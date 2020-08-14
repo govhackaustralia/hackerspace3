@@ -49,7 +49,7 @@
           %div.content-wrapper-button
             - if @team.published && @competition.started?(@time_zone)
               = link_to project_path(@current_project.identifier) do
-                %button.content-button
+                %button.content-red-button
                   Go to Team Page
             - elsif @competition.started?(@time_zone)
               %p This Project is yet to be published.
