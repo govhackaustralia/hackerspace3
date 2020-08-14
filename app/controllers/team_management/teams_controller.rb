@@ -13,7 +13,6 @@ class TeamManagement::TeamsController < ApplicationController
   ]
 
   def show
-    @published_users = @team.confirmed_members.joins(:profile).where(profiles: {published: true}).preload(:profile)
     @current_project = @team.current_project
     @event = @team.event
     @region = @event.region

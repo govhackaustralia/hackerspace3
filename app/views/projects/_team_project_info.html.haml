@@ -3,16 +3,6 @@
     %img{:alt => "#{@team.name} thumbnail", :src => "#{url_for(@team.thumbnail)}", :style => "width: 150px; height: auto;"}/
 
 %section.markdown
-  - unless @published_users.empty?
-    %h4.sectionHeading Team Members
-    %hr/
-    - @published_users.each_with_index do |user, index|
-      %span
-        %strong
-          = link_to user.display_name, profile_path(user.profile)
-          = ',' if index < @published_users.length - 1
-    %hr/
-%section.markdown
   - unless @current_project.description.blank?
     %h4.sectionHeading Project Description
     %hr/

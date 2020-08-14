@@ -5,6 +5,16 @@
     %aside.fav_judge
       = render 'user_options'
     %h3 Project Info
+    %section.markdown
+      - unless @published_users.empty?
+        %h4.sectionHeading Team Members
+        %hr/
+        - @published_users.each_with_index do |user, index|
+          %span
+            %strong
+              = link_to user.display_name, profile_path(user.profile)
+              = ',' if index < @published_users.length - 1
+        %hr/
     = render 'team_project_info'
     %h3 Team DataSets
     %section.markdown
