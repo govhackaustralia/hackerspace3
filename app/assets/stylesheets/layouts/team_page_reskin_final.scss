@@ -62,65 +62,67 @@
             flex-direction: column;
             display: flex;
 
-            button {
-              &.content-red-button {
-                margin: 5px 0px;
-                border-radius: 0.5em;
-                display: inline-block;
-                cursor: pointer;
-                padding: 5px 10px;
-                font-family: Open Sans;
-                font-size: 1rem;
-                text-align: center;
-                background-color: #fd266c;
-                border: 1px solid #fd266c;
-                color: #fff;
-              }
+            a {
+              button {
+                &.content-red-button {
+                  margin: 5px 0px;
+                  border-radius: 0.5em;
+                  display: inline-block;
+                  cursor: pointer;
+                  padding: 5px 10px;
+                  font-family: Open Sans;
+                  font-size: 1rem;
+                  text-align: center;
+                  background-color: #fd266c;
+                  border: 1px solid #fd266c;
+                  color: #fff;
+                }
 
-              &.content-red-button:hover {
-                background-color: #fd266c;
-                border: 1px solid #fd266c;
-                color: #ffffff;
-              }
+                &.content-red-button:hover {
+                  background-color: #fd266c;
+                  border: 1px solid #fd266c;
+                  color: #ffffff;
+                }
 
-              &.content-blue-button {
-                margin: 5px 0px;
-                border-radius: 0.5em;
-                display: inline-block;
-                cursor: pointer;
-                padding: 5px 10px;
-                font-family: Open Sans;
-                font-size: 1rem;
-                text-align: center;
-                background-color: #6dbff9;
-                border: 1px solid #6dbff9;
-                color: #fff;
-              }
+                &.content-blue-button {
+                  margin: 5px 0px;
+                  border-radius: 0.5em;
+                  display: inline-block;
+                  cursor: pointer;
+                  padding: 5px 10px;
+                  font-family: Open Sans;
+                  font-size: 1rem;
+                  text-align: center;
+                  background-color: #6dbff9;
+                  border: 1px solid #6dbff9;
+                  color: #fff;
+                }
 
-              &.content-blue-button:hover {
-                background-color: #6dbff9;
-                border: 1px solid #6dbff9;
-                color: #ffffff;
-              }
+                &.content-blue-button:hover {
+                  background-color: #6dbff9;
+                  border: 1px solid #6dbff9;
+                  color: #ffffff;
+                }
 
-              &.content-black-button {
-                margin: 5px 0px;
-                border-radius: 0.5em;
-                display: inline-block;
-                cursor: pointer;
-                padding: 5px 10px;
-                font-family: Open Sans;
-                font-size: 1rem;
-                text-align: center;
-                background-color: #0c010e;
-                border: 1px solid #0c010e;
-                color: #fff;
-              }
+                &.content-black-button {
+                  margin: 5px 0px;
+                  border-radius: 0.5em;
+                  display: inline-block;
+                  cursor: pointer;
+                  padding: 5px 10px;
+                  font-family: Open Sans;
+                  font-size: 1rem;
+                  text-align: center;
+                  background-color: #0c010e;
+                  border: 1px solid #0c010e;
+                  color: #fff;
+                }
 
-              &.content-black-button:hover {
-                background-color: #0c010e;
-                border: 1px solid #0c010e;
-                color: #ffffff;
+                &.content-black-button:hover {
+                  background-color: #0c010e;
+                  border: 1px solid #0c010e;
+                  color: #ffffff;
+                }
               }
             }
           }
