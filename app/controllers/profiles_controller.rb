@@ -4,31 +4,30 @@ class ProfilesController < ApplicationController
   before_action :check_profile_found!, :check_published!, only: :show
 
   def index
-    @profiles = Profile.published
-      .where.not(identifier: nil)
-      .where.not(identifier: '')
+    @profiles = Profile.published.joins(:user)
+      .where.not(identifier: [nil, ''])
       .preload(:user)
       .includes(:skills)
   end
 
   def participants
-    user_registration_scoped_profiles(PARTICIPANT_TYPES)
-    render :index
+    # user_registration_scoped_profiles(PARTICIPANT_TYPES)
+    redirect_to profiles_path
   end
 
   def mentors
-    user_registration_scoped_profiles(MENTOR_TYPES)
-    render :index
+    # user_registration_scoped_profiles(MENTOR_TYPES)
+    redirect_to profiles_path
   end
 
   def industry
-    user_registration_scoped_profiles(INDUSTRY_TYPES)
-    render :index
+    # user_registration_scoped_profiles(INDUSTRY_TYPES)
+    redirect_to profiles_path
   end
 
   def support
-    user_registration_scoped_profiles(SUPPORT_TYPES)
-    render :index
+    # user_registration_scoped_profiles(SUPPORT_TYPES)
+    redirect_to profiles_path
   end
 
   def show

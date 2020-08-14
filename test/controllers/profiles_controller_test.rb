@@ -12,22 +12,22 @@ class ProfilesControllerTest < ActionDispatch::IntegrationTest
 
   test 'should get participants' do
     get participants_profiles_path
-    assert_response :success
+    assert_redirected_to profiles_path
   end
 
   test 'should get mentors' do
     get mentors_profiles_path
-    assert_response :success
+    assert_redirected_to profiles_path
   end
 
   test 'should get industry' do
     get industry_profiles_path
-    assert_response :success
+    assert_redirected_to profiles_path
   end
 
   test 'should get support' do
     get support_profiles_path
-    assert_response :success
+    assert_redirected_to profiles_path
   end
 
   test 'should get show' do

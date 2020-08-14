@@ -115,6 +115,13 @@ class User < ApplicationRecord
     SUPPORT_TYPES.include? registration_type
   end
 
+  def category
+    return 'Participant' if participant?
+    return 'Mentor' if mentor?
+    return 'Industry' if industry?
+    return 'Support' if support?
+  end
+
   enum region: {
     'Queensland' => 0,
     'New South Wales' => 1,
