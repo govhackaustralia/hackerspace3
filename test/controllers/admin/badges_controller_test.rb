@@ -5,6 +5,7 @@ class Admin::BadgesControllerTest < ActionDispatch::IntegrationTest
     sign_in users :one
     @badge = badges :one
     @competition = competitions :one
+    @user = users :two
   end
 
   test 'should get index' do
@@ -15,6 +16,22 @@ class Admin::BadgesControllerTest < ActionDispatch::IntegrationTest
   test 'should get show' do
     get admin_competition_badge_path(@competition, @badge)
     assert_response :success
+  end
+
+  test 'should post award success' do
+    assert_difference 'Assignment.count', 1 do
+      post award_admin_competition_badge_path(@competition, @badge), params: {
+        assignment: { user_id: @user.id }
+      }
+    end
+  end
+
+  test 'should post award fail' do
+    assert_no_difference 'Badge.count', 1 do
+      post award_admin_competition_badge_path(@competition, @badge), params: {
+        assignment: { user_id: users(:one).id }
+      }
+    end
   end
 
   test 'should get new' do

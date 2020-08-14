@@ -2,11 +2,23 @@ class Admin::BadgesController < ApplicationController
   before_action :authenticate_user!, :authorize_user!
 
   def index
-    @badges = @competition.badges.with_attached_art
+    @badges = @competition.badges.with_attached_art.preload(:assignments)
   end
 
   def show
     @badge = @competition.badges.find_by_identifier params[:id]
+    @users = User.preload(:profile, :badge_assignments).order(:full_name)
+    @badge_assignments = @badge.assignments
+  end
+
+  def award
+    award_badge
+    if @assignment.save
+      flash[:notice] = 'Badge Awarded'
+    else
+      flash[:alert] = @assignment.errors.full_messages.to_sentence
+    end
+    redirect_to admin_competition_badge_path(@competition, @badge)
   end
 
   def new
@@ -54,6 +66,20 @@ class Admin::BadgesController < ApplicationController
 
   def badge_params
     params.require(:badge).permit(:name, :capacity, :art)
+  end
+
+  def assignment_params
+    params.require(:assignment).permit(:user_id)
+  end
+
+  def award_badge
+    @badge = @competition.badges.find_by_identifier params[:id]
+    user = User.find assignment_params[:user_id]
+    @assignment = @badge.assignments.new(
+      user: user,
+      holder: user.holder_for(@competition),
+      title: ASSIGNEE
+    )
   end
 
   def authorize_user!

@@ -98,7 +98,9 @@ Rails.application.routes.draw do
       end
       resources :events, only: :index
       resources :sponsors
-      resources :badges
+      resources :badges do
+        member { post :award }
+      end
       resources :hunt_questions, only: [:index, :new, :create, :edit, :update] do
         collection do
           patch :badge
