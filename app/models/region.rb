@@ -144,6 +144,13 @@ class Region < ApplicationRecord
     Time.now.in_time_zone(time_zone.presence || COMP_TIME_ZONE).zone
   end
 
+  def national_time_zone
+    return time_zone if national?
+    return parent.time_zone if regional?
+
+    COMP_TIME_ZONE
+  end
+
   private
 
   # Ensures only one root region is assigned to a competition

@@ -6,7 +6,7 @@
     %p
       = link_to 'Go to Challenge', challenge_path(challenge.identifier)
       | #{pluralize entry_count, 'team has', plural: 'teams have' }
-      entered this challenge across all checkpoints that have passed.
+      entered this challenge.
   %aside
     - challenge.sponsors_with_logos.each do |sponsor|
       %figure

@@ -17,7 +17,11 @@
             Update Email and Password
         = link_to edit_profile_path(current_user.profile) do
           %button.red-button
-            Update Profile
+            -if current_user.profile&.published
+              Update
+            - else
+              Publish
+            Profile
         = link_to update_profile_picture_path do
           %button.red-button
             Update Profile Picture

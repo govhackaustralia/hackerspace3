@@ -4,32 +4,16 @@
   %section.later
     %p
       %strong
-        -if @started
-          The Competition has started in the below regions...
-          - @regions.each do |region|
-            %p
-              - if region.time_zone.blank?
-                ➖
-              - elsif @competition.started? region.time_zone
-                ✅
-              - else
-                ❌
-              = region.name
-        - else
-          Check back here at the commencement of the competition at #{@competition.start_time.strftime("%I.%M %p %e %B")}
-          -if @event.present?
-            (#{@event.region.time_zone} time)
+        Check back here at the commencement of the competition to view the challenges.
     - if user_signed_in?
       - if @event.present?
-        %p
-          You are registered for #{@event.name}
+        %p You are registered for #{@event.name}
       - else
         %p
           Be sure to register for one of the many
           = link_to 'Competition Events', competition_events_path
-          in order to view the Challenges over the Competition Weekend.
+          to participate in #{@competition.name}
     - else
       %p
         Be sure to sign up to the Hackerspace and register for one of the many
         = link_to 'Competition Events', competition_events_path
-        in order to view the Challenges over the Competition Weekend.

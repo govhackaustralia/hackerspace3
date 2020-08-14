@@ -5,7 +5,7 @@
     %span.search= params[:search]
   - if @competition.started? FIRST_TIME_ZONE
     %p= link_to 'Download CSV', projects_path(format: 'csv'), class: 'download-csv'
-    - if @competition.in_form_or_comp_window?(LAST_TIME_ZONE)
+    - if @competition.in_form_or_comp_window?(FIRST_TIME_ZONE)
       - if user_signed_in?
         - if @participating_competition_event.present?
           - if @competition.in_form_or_comp_window?(@time_zone)

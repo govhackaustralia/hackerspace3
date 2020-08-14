@@ -10,4 +10,4 @@
     - region.approved_challenges.each do |challenge|
       = render 'challenge_panel',                    |
         challenge: challenge,                        |
-        entry_count: @entry_counter.count(challenge)
+        entry_count: challenge.published_entries.length
