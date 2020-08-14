@@ -1,68 +1,90 @@
 - content_for :title, @current_project.project_name
 %main.team_page
-  %h2= yield :title
-  %section
-    %p
-      %strong> Team Name
-      \: #{@current_project.team_name}
-    %p
-      %strong> Competition Event
-      \: #{@event.name}
-    %p
-      %strong> Region
-      \: #{@region.name}
-    - if @team.published && @competition.started?(@time_zone)
-      %p= link_to 'Go to Team Page', project_path(@current_project.identifier)
-    - elsif @competition.started?(@time_zone)
-      %p This Project is yet to be published.
-    - else
-      %p Team projects will become public at the start of the competition.
-  %aside
-    %p= link_to 'Update Team Details', edit_team_management_team_path(@team)
-    - if @competition.in_comp_window?(@time_zone)
-      %p= link_to 'Update Thumbnail', edit_thumbnail_team_management_team_path(@team)
-      %p= link_to 'Update High Resolution Image', edit_image_team_management_team_path(@team)
-  %h3 Team Project Info
-  - if @competition.in_comp_window?(@time_zone)
-    = render 'projects/team_project_info'
-  - else
-    %section
-      %p Team project information will be displayed here.
-  - if @competition.in_form_or_comp_window?(@time_zone)
-    %aside
-      %p= link_to 'Update Project Details', edit_team_management_team_project_path(@team, @current_project)
-  %h3 Team Data Sets
-  %section
-    %p
-      This team currently has #{pluralize @team.team_data_sets.count, 'data set'}.
-  - if @competition.in_comp_window?(@time_zone)
-    %aside
-      %p= link_to 'Manage Team Data Sets', team_management_team_team_data_sets_path(@team)
-  %h3 Team Members
-  %section
-    %h4 Team Leader
-    - if (team_leader = @team.team_leader).present?
-      = render 'users/user_contact', locals: { user: team_leader }
-    - else
-      %p
-        %strong No team leader assigned for this team.
-    - if (team_members = @team.members).present?
-      %p
-        %strong
-          + #{pluralize team_members.count, 'other team member'}.
-    - if (invitees = @team.invitees).present?
-      %p
-        %strong
-          = pluralize invitees.count, 'invitee'
-          \.
-  %aside
-    %p= link_to 'Manage Team Members', team_management_team_assignments_path(@team)
-  %h3 Challenge Entries
-  - if @competition.in_comp_window?(@time_zone)
-    %aside
-      %p= link_to 'Manage Challenge Entries', team_management_team_entries_path(@team)
-  %section
-    %p
-      = pluralize @team.challenges.count, 'challenge'
-      entered.
-%p= link_to 'Back to Account Management', manage_account_path
+  %section.team_page_header
+    %h2 Team Management
+  %hr.grey-border
+  %section.team_page_body
+    %div.menu
+      %article.menu-group
+        - if @competition.in_comp_window?(@time_zone)
+          %h3 Team Management
+          = link_to edit_team_management_team_path(@team) do
+            %button.red-button
+              Update Team Details
+          = link_to edit_thumbnail_team_management_team_path(@team) do
+            %button.red-button
+              Update Thumbnail
+          = link_to edit_image_team_management_team_path(@team) do
+            %button.red-button
+              Update High Resolution Image
+          = link_to team_management_team_assignments_path(@team) do
+            %button.red-button
+              Manage Team Members
+      %article.menu-group
+        - if @competition.in_form_or_comp_window?(@time_zone)
+          %h3 Project Management
+          = link_to edit_team_management_team_project_path(@team, @current_project) do
+            %button.blue-button
+              Update Project Details
+        - if @competition.in_comp_window?(@time_zone)
+          = link_to team_management_team_team_data_sets_path(@team) do
+            %button.blue-button
+              Manage Team Data Sets
+        - if @competition.in_comp_window?(@time_zone)
+          = link_to team_management_team_entries_path(@team) do
+            %button.blue-button
+              Manage Challenge Entries
+      %article.menu-group-footer
+        = link_to manage_account_path do
+          %button.black-button
+            Back to Account Management
+    %div.team_page_content
+      %article.main-content
+        %h3.article-heading= yield :title
+        %div.content-wrapper
+          %div.content-wrapper-content
+            %h2 Team Name: #{@current_project.team_name}
+            %p Event: #{@event.name}
+            %p Region: #{@region.name}
+          %div.content-wrapper-button
+            - if @team.published && @competition.started?(@time_zone)
+              = link_to project_path(@current_project.identifier) do
+                %button.content-button
+                  Go to Team Page
+            - elsif @competition.started?(@time_zone)
+              %p This Project is yet to be published.
+            - else
+              %p Team projects will become public at the start of the competition.
+      %article.main-content
+        %h3.article-heading Team Project Info
+        - if @competition.in_comp_window?(@time_zone)
+          = render 'projects/team_project_info'
+        - else
+          %section
+            %p Team project information will be displayed here.
+      %article.main-content
+        %h3.article-heading Team Data Sets
+        %p
+          This team currently has #{pluralize @team.team_data_sets.count, 'data set'}.
+      %article.main-content
+        %h3.article-heading Team Members
+        %h4 Team Leader
+        - if (team_leader = @team.team_leader).present?
+          = render 'users/user_contact', locals: { user: team_leader }
+        - else
+          %p
+            %strong No team leader assigned for this team.
+        - if (team_members = @team.members).present?
+          %p
+            %strong
+              + #{pluralize team_members.count, 'other team member'}.
+        - if (invitees = @team.invitees).present?
+          %p
+            %strong
+              = pluralize invitees.count, 'invitee'
+              \.
+      %article.main-content
+        %h3.article-heading Challenge %Entries
+        %p
+          = pluralize @team.challenges.count, 'challenge'
+          entered.
