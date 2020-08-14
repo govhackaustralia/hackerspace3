@@ -31,7 +31,8 @@
           %small we need your current password to confirm your changes.
         .actions
           = f.submit "Update"
-      %p= link_to 'Back to Account Management', manage_account_path
+      %div.links
+        %p= link_to 'Back to Account Management', manage_account_path
     %hr/
     %section
       %h3 Cancel my account
