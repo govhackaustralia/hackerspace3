@@ -1,6 +1,6 @@
 - content_for :title, @current_project.project_name
 %main.team_page
-  %section.team_page_body
+  %section
     %h2= yield :title
     %aside.fav_judge
       = render 'user_options'
