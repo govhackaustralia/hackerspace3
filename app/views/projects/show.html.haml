@@ -24,18 +24,13 @@
       - else
         %div This team does not currently have any datasets.
     %h3 Challenges
-    - if @passed_checkpoint_ids.present?
-      - if @entries_to_display.present?
-        - @entries_to_display.each do |entry|
-          = render 'challenges/challenge_panel',               |
-            challenge: entry.challenge,                        |
-            entry_count: @entry_counter.count(entry.challenge)
-      - else
-        %p There are no challenges to display for this team as yet.
+    - if @entries.any?
+      - @entries.each do |entry|
+        = render 'challenges/challenge_panel',               |
+          challenge: entry.challenge,                        |
+          entry_count: entry.challenge.published_entries.length
     - else
-      %p
-        Check back here once the first checkpoint passes to see the challenges
-        this team has entered.
+      %p There are no challenge entries to display for this team as yet.
     %div.links
       %p= link_to 'Back to Projects', projects_path
       - if current_user&.admin_privileges? @competition

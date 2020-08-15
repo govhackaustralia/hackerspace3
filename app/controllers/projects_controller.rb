@@ -18,12 +18,7 @@ class ProjectsController < ApplicationController
     @current_project = @team.current_project
     @passed_checkpoint_ids = @competition.passed_checkpoint_ids @time_zone
     @published_users = @team.confirmed_members.joins(:profile).where(profiles: {published: true}).preload(:profile)
-    @entries_to_display = @team.entries.where(
-      checkpoint: @passed_checkpoint_ids
-    ).preload(challenge: :sponsors_with_logos)
-    @entry_counter = PublishedEntryCounter.new(@competition,
-      challenge_ids: @entries_to_display.pluck(:challenge_id)
-    )
+    @entries = @team.entries.preload(challenge: [:sponsors_with_logos, :published_entries])
     user_records_show if user_signed_in?
   end
 
