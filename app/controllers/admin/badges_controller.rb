@@ -10,7 +10,7 @@ class Admin::BadgesController < ApplicationController
     @users = User.joins(:profile)
       .where.not(profiles: {identifier: [nil, '']})
       .order(:email)
-      .preload(:profile)
+      .preload(:profile, :badge_assignments)
 
     @badge_assignments = @badge.assignments
   end
@@ -18,7 +18,8 @@ class Admin::BadgesController < ApplicationController
   def award
     award_badge
     if @assignment.save
-      flash[:notice] = 'Badge Awarded'
+      BadgeMailer.notify_badge_awarded(@user, @badge).deliver_later
+      flash[:notice] = 'Badge Awarded, and Notification Sent'
     else
       flash[:alert] = @assignment.errors.full_messages.to_sentence
     end
@@ -78,10 +79,10 @@ class Admin::BadgesController < ApplicationController
 
   def award_badge
     @badge = @competition.badges.find_by_identifier params[:id]
-    user = User.find assignment_params[:user_id]
+    @user = User.find assignment_params[:user_id]
     @assignment = @badge.assignments.new(
-      user: user,
-      holder: user.holder_for(@competition),
+      user: @user,
+      holder: @user.holder_for(@competition),
       title: ASSIGNEE
     )
   end
