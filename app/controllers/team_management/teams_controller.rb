@@ -20,6 +20,7 @@ class TeamManagement::TeamsController < ApplicationController
 
   def edit
     @events = @team.member_competition_events
+    @current_project = @team.current_project
   end
 
   def update
