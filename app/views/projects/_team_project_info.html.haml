@@ -1,35 +1,36 @@
 %section
-  - if @team.thumbnail.attached?
-    %img{:alt => "#{@team.name} thumbnail", :src => "#{url_for(@team.thumbnail)}", :style => "width: 150px; height: auto;"}/
+  %section
+    - if @team.thumbnail.attached?
+      %img{:alt => "#{@team.name} thumbnail", :src => "#{url_for(@team.thumbnail)}", :style => "width: 150px; height: auto;"}/
 
-%section.markdown
-  - unless @current_project.description.blank?
-    %h4.sectionHeading Project Description
-    %hr/
-    = markdown @current_project.description
-    %hr/
-%section.tags
-  - unless @current_project.tag_list.empty?
-    - @current_project.tag_list.each do |tag|
-      %span
-        %strong
-          = link_to "##{tag}", projects_path(search: "##{tag}")
-%section.markdown
-  - unless @current_project.data_story.blank?
-    %h4.sectionHeading Data Story
-    %hr/
-    = markdown @current_project.data_story
-    %hr/
-%section.evidence
-  - unless @current_project.source_code_url.blank?
-    %p
-      %a.evidence_work{:href => "#{@current_project.source_code_url}", :target => "_blank"} Evidence of Work
-  - unless @current_project.video_url.blank?
-    %p
-      %a.evidence_video{:href => "#{@current_project.video_url}", :target => "_blank"} Video
-  - unless @current_project.homepage_url.blank?
-    %p
-      %a.evidence_homepage{:href => "#{@current_project.homepage_url}", :target => "_blank"} Homepage
-  - if @team.high_res_image.attached?
-    %p
-      %a.evidence_picture{:href => "#{url_for(@team.high_res_image)}", :target => "_blank"} High-Res Image
+  %section.markdown
+    - unless @current_project.description.blank?
+      %h4.sectionHeading Project Description
+      %hr/
+      = markdown @current_project.description
+      %hr/
+  %section.tags
+    - unless @current_project.tag_list.empty?
+      - @current_project.tag_list.each do |tag|
+        %span
+          %strong
+            = link_to "##{tag}", projects_path(search: "##{tag}")
+  %section.markdown
+    - unless @current_project.data_story.blank?
+      %h4.sectionHeading Data Story
+      %hr/
+      = markdown @current_project.data_story
+      %hr/
+  %section.evidence
+    - unless @current_project.source_code_url.blank?
+      %p
+        %a.evidence_work{:href => "#{@current_project.source_code_url}", :target => "_blank"} Evidence of Work
+    - unless @current_project.video_url.blank?
+      %p
+        %a.evidence_video{:href => "#{@current_project.video_url}", :target => "_blank"} Video
+    - unless @current_project.homepage_url.blank?
+      %p
+        %a.evidence_homepage{:href => "#{@current_project.homepage_url}", :target => "_blank"} Homepage
+    - if @team.high_res_image.attached?
+      %p
+        %a.evidence_picture{:href => "#{url_for(@team.high_res_image)}", :target => "_blank"} High-Res Image

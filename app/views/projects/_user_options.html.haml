@@ -1,10 +1,16 @@
 - if user_signed_in?
   - if @users_team && @competition.in_comp_window?(@team.time_zone)
-    %p= link_to 'Manage this Team Project', team_management_team_path(@team)
+    = link_to team_management_team_path(@team) do
+      %button.blue-button
+        Manage this Team Project
   - if @favourite.present?
-    %p= link_to 'Unfavourite this Project', favourite_path(@favourite), method: :delete
+    = link_to favourite_path(@favourite), method: :delete do
+      %button.blue-button
+        Unfavourite this Project
   - else
-    %p= link_to 'Favourite this Project', favourites_path(team_id: @team.id), method: :post
+    = link_to favourites_path(team_id: @team.id), method: :post do
+      %button.blue-button
+        Favourite this Project
   - if (show_challenge_score_stuff? || show_peoples_choice_stuff?) && !@users_team
     - if @header.present?
       %p
