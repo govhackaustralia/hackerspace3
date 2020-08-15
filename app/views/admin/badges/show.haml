@@ -34,7 +34,7 @@
               - else
                 [none]
             %td
-              - if (@badge_assignments & user.badge_assignments).any?
+              - if @badge_assignments.find {|a| a.user_id == user.id }.present?
                 Badge Awarded
               - else
                 = link_to 'Award Badge', award_admin_competition_badge_path(@competition, @badge,  assignment: { user_id: user.id }), method: :post
