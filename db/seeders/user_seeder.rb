@@ -17,6 +17,7 @@ class UserSeeder < Seeder
       accepted_terms_and_conditions: true,
       how_did_you_hear: 'jas'
     )
+    Profile.create(user: tester, identifier: admin_name)
   end
 
   def self.create_admin competition
