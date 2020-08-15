@@ -1,5 +1,5 @@
 # Preview all emails at http://localhost:3000/rails/mailers/devise_mailer_preview.rb
-class Devise::MailerPreview < ActionMailer::Preview
+class Devise::DeviseMailerPreview < ActionMailer::Preview
   def confirmation_instructions
     Devise::Mailer.confirmation_instructions(User.first, 'faketoken')
   end
