@@ -3,6 +3,6 @@ class BadgeMailer < ApplicationMailer
     @user = user
     @profile = user.profile
     @badge = badge
-    mail(to: @user.email, subject: "You've been awarded the #{@badge.name}!")
+    mail(to: @user.email, subject: "You've been awarded the #{@badge.name} badge!")
   end
 end
