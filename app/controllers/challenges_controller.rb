@@ -8,7 +8,6 @@ class ChallengesController < ApplicationController
     @regions = @competition.regions
       .order(:category, :name)
       .preload(approved_challenges: %i[sponsors_with_logos published_entries])
-    @entry_counter = PublishedEntryCounter.new @competition
     @checker = ShowChallengesChecker.new @competition
   end
 
@@ -105,44 +104,7 @@ class ChallengesController < ApplicationController
       .preload(:checkpoint, project: :event)
   end
 
-  def challenge_entry_counts
-    all_entries = all_region_entries
-    unpublished_entries = Entry.where(team: @competition.teams.unpublished).to_a
-    published_entries = all_entries - unpublished_entries
-    @challenge_id_to_entry_count = {}
-    @challenges.each { |challenge| @challenge_id_to_entry_count[challenge.id] = 0 }
-    published_entries.each do |entry|
-      challenge_array = @challenge_id_to_entry_count[entry.challenge_id]
-      next if challenge_array.nil?
-
-      challenge_array += 1
-    end
-  end
-
-  def all_region_entries
-    all_entries = []
-    @competition.regions.each do |region|
-      all_entries += region.entries.where(
-        checkpoint_id: passed_checkpoint_ids(region)
-      ).to_a
-    end
-    all_entries
-  end
-
-  def passed_checkpoint_ids(region)
-    if region.international?
-      @competition.passed_checkpoint_ids(LAST_TIME_ZONE)
-    else
-      @competition.passed_checkpoint_ids(region.time_zone)
-    end
-  end
-
   def preferred_index_view
     cookies[:challenge_index_view] = params[:action]
-  end
-
-  def search_challenge_string(challenge, term)
-    challenge_string = "#{challenge.name} #{challenge.short_desc} #{challenge.region.name}".downcase
-    @region_challenges[challenge.region_id] << challenge if challenge_string.include? term.downcase
   end
 end
