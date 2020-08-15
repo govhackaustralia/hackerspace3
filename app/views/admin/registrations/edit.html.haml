@@ -1,5 +1,5 @@
 %main.team_page
-  %section.team_page_body
+  %section
     %h2
       Update Registration for #{@user.display_name} #{@event.name} #{@region.name}
     - if @event.not_attending?(@event_assignment) && @event.at_capacity?
