@@ -1,6 +1,6 @@
 - content_for :title, 'Project Data Sets'
 %main.team_page
-  %section.team_page_body
+  %section
     %h2 #{@team.name} Data Sets
     - if @team_data_sets.present?
       - @team_data_sets.each do |team_data_set|

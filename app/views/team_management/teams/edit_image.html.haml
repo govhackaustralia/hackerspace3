@@ -18,4 +18,5 @@
           = form.submit 'Replace High Res Image'
         - else
           = form.submit 'Upload High Res Image'
-    = link_to 'Back to Team', team_management_team_path(@team)
+    %div.links
+      = link_to 'Back to Team', team_management_team_path(@team)

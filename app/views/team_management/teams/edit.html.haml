@@ -7,8 +7,9 @@
         = form.label :event_id
         = form.select :event_id, options_from_collection_for_select(@events, :id, :name, @team.event_id.to_s)
       .custom-control.custom-checkbox
-        = form.check_box :youth_team, class: 'custom-control-label'
-        = form.label :youth_team, 'Is your team a youth team (made up by at least 75% people aged under 18 years old)?', class:'custom-control-input'
+        = form.check_box :youth_team, class: 'custom-control-input'
+        = form.label :youth_team, 'Is your team a youth team (made up by at least 75% people aged under 18 years old)?', class:'custom-control-label'
       .actions
         = form.submit
-  = link_to 'Back to Team', team_management_team_path(@team)
+    %div.links
+    = link_to 'Back to Team', team_management_team_path(@team)

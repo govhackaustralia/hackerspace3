@@ -13,11 +13,77 @@
   h2 {
     color: #4c9ad2;
     font-size: 2em;
+    line-height: 30px;
   }
 
   h3 {
     font-size: 1.5em;
     padding: 1em;
+    margin-bottom: 1em;
+    line-height: 30px;
+  }
+
+  a {
+    button {
+      &.blue-button {
+        margin: 5px 0px;
+        border-radius: 0.5em;
+        display: inline-block;
+        cursor: pointer;
+        padding: 5px 10px;
+        font-family: Open Sans;
+        font-size: 1rem;
+        text-align: center;
+        background-color: #4c9ad2;
+        border: 1px solid #4c9ad2;
+        color: #fff;
+      }
+
+      &.blue-button:hover {
+        background-color: #6dbff9;
+        border: 1px solid #6dbff9;
+        color: #ffffff;
+      }
+    }
+  }
+
+  .links {
+    a {
+      color: #4c9ad2;
+      text-decoration: none;
+    }
+
+    a:hover {
+      color: #4c9ad2;
+      text-decoration: underline;
+    }
+  }
+
+  form {
+    div {
+      text-align: left;
+      width: 50%;
+
+      &.actions {
+        display: block;
+        margin-top: 1em;
+        margin-bottom: 1em;
+
+        input {
+          margin: 5px 0px;
+          border-radius: 0.5em;
+          display: inline-block;
+          cursor: pointer;
+          padding: 10px 20px;
+          font-family: Open Sans;
+          font-size: 1rem;
+          text-align: left;
+          background-color: #ca1e56;
+          border: 1px solid #ca1e56;
+          color: #fff;
+        }
+      }
+    }
   }
 
   section {
@@ -232,5 +298,19 @@
     font-size: 0.5em;
     padding: 0.5em;
     display: none;
+  }
+}
+
+@media only screen and (max-width: 1000px) {
+  .team_page {
+    >section {
+      flex-direction: column;
+    }
+
+    form {
+      div {
+        width: 100%;
+      }
+    }
   }
 }
