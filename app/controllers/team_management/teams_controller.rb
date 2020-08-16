@@ -16,6 +16,8 @@ class TeamManagement::TeamsController < ApplicationController
     @current_project = @team.current_project
     @event = @team.event
     @region = @event.region
+    @published_users = @team.confirmed_members.joins(:profile).where(profiles: {published: true}).preload(:profile)
+    @unpublished_users = @team.confirmed_members.joins(:profile).where.not(profiles: {published: true})
   end
 
   def edit
