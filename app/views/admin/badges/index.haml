@@ -2,7 +2,7 @@
 %main.team_page
   %section
     %h2= yield :title
-    = link_to 'New Badge', new_admin_competition_badge_path(@competition)
+    = link_to 'New Badge', new_admin_competition_badge_path(@competition), class: 'download-csv'
     - if @badges.any?
       %table.projects-table#admin-badge{'data-turbolinks' => 'false'}
         %thead

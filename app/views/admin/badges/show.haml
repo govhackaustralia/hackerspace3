@@ -2,7 +2,7 @@
 %main.team_page
   %section
     %h2= yield :title
-    = link_to 'edit badge', edit_admin_competition_badge_path(@competition, @badge)
+    = link_to 'edit badge', edit_admin_competition_badge_path(@competition, @badge), class: 'download-csv'
     %p
       %strong
         Name:
