@@ -21,6 +21,7 @@
       %p Email: #{user.email}
       - if user.slack
         %p Slack: #{user.slack}
+      %p Event: #{user.participating_competition_event(@competition)&.name}
   %h3 Challenge Management
   - @checkpoints.each do |checkpoint|
     %h4 #{checkpoint.name} Checkpoint
