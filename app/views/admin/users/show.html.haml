@@ -24,6 +24,16 @@
       %strong
         User not confirmed,
       = link_to 'Confirm User?', confirm_admin_user_path(@user), method: :post
+  - if @profile.present?
+    %p
+      %strong Profile Identifier:
+      -if @profile.published
+        = link_to @profile.identifier, profile_path(@profile)
+      - else
+        = @profile.identifier
+    %p
+      %strong Published:
+      = @profile.published ? '✅' : '❌'
 
   %h3 Assignments for #{@user.display_name}
   %table.projects-table#admin-users-show-table{'data-turbolinks' => 'false'}
