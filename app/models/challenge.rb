@@ -66,8 +66,8 @@ class Challenge < ApplicationRecord
   def self.to_csv(competition, options = {})
     challenge_columns = %w[id name short_desc long_desc eligibility video_url created_at updated_at]
     CSV.generate(options) do |csv|
-      csv << (%w[region_name competition_year] + challenge_columns + %w[sponsors])
-      competition.challenges.preload(:region, :sponsors).each do |challenge|
+      csv << (%w[region_name competition_year] + challenge_columns + %w[sponsors entries])
+      competition.challenges.preload(:region, :sponsors, :published_entries).each do |challenge|
         csv << challenge_csv_line(challenge, competition, challenge_columns)
       end
     end
@@ -79,6 +79,7 @@ class Challenge < ApplicationRecord
     values = [challenge.region.name, competition.year]
     values += challenge.attributes.values_at(*challenge_columns)
     values << challenge.sponsors.pluck(:name)
+    values << challenge.published_entries.length
   end
 
   private
