@@ -1,10 +1,11 @@
 section.markdown {
   img {
-    width: auto !important;
-    height: auto !important;
+    width: 100% !important;
+    height: 100% !important;
   }
 
-  ul, li {
+  ul,
+  li {
     list-style: circle;
     padding-left: 0.5em;
   }
