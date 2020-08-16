@@ -16,8 +16,7 @@
     = form.text_field :dietary_requirements, class: 'form-control'
   .form-group
     = form.label :region
-    = form.select :region,                                                |
-      options_for_select(User.regions.keys.sort, selected: @user.region)
+    = form.select :region, options_for_select(User.regions.keys.sort, selected: @user.region)
   .form-group
     = form.label :registration_type
     = form.select :registration_type, options_for_select(USER_REGISTRATION_TYPES, @user.registration_type)
