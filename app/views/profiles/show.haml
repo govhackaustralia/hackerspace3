@@ -31,12 +31,11 @@
                 = link_to 'Link up your Slack Account to chat with this User', edit_profile_path(current_user.profile)
             - else
               %p Sign In to Contact this User via Slack
-        %p= @user.slack
         - @joined_projects.each do |project|
           %p
             %strong
               = fa_icon('user-friends')
-            = project.team_name
+            = link_to "#{project.team_name}", project_path(project.identifier)
         - if @profile.website.present?
           %p
             %strong
