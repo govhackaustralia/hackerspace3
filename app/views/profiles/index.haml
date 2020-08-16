@@ -2,17 +2,7 @@
 %main.profiles_page_test
   %section.header
     %h2 GovHack 2020 Profiles
-    %h3 Find a Participant, Mentor, Industry partner, GovHack Support here.
-
-    -# = link_to 'All', profiles_path
-    -# |
-    -# = link_to 'Participants', participants_profiles_path
-    -# |
-    -# = link_to 'Mentors', mentors_profiles_path
-    -# |
-    -# = link_to 'Industry', industry_profiles_path
-    -# |
-    -# = link_to 'Support', support_profiles_path
+    %h3 Find a Participant, Mentor, Industry partner, or GovHack Support here.
 
     - if user_signed_in?
       - if current_user.profile&.published
