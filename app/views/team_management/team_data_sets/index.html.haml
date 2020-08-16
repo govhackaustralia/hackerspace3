@@ -2,6 +2,7 @@
 %main.team_page
   %section
     %h2 #{@team.name} Data Sets
+    = link_to 'Add New Data Set', new_team_management_team_team_data_set_path(@team)
     - if @team_data_sets.present?
       - @team_data_sets.each do |team_data_set|
         = render 'projects/team_data_set', locals: { data_set: team_data_set }
@@ -13,6 +14,5 @@
     - else
       %div.links
         %p Your team does not currently have any data sets.
-        = link_to 'Add New Data Set', new_team_management_team_team_data_set_path(@team)
     %div.links
       %p= link_to 'Back to Team', team_management_team_path(@team)
