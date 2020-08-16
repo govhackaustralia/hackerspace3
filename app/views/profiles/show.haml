@@ -35,7 +35,7 @@
           %p
             %strong
               = fa_icon('user-friends')
-            = project.team_name
+            = link_to "#{project.team_name}", project_path(project.identifier)
         - if @profile.website.present?
           %p
             %strong
