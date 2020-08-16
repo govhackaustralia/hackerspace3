@@ -1,7 +1,7 @@
 %main.team_page
   %h2
     Hunt Questions for #{@competition.name}
-  %p= link_to 'Add New Hunt Question', new_admin_competition_hunt_question_path(@competition)
+  %p= link_to 'Add New Hunt Question', new_admin_competition_hunt_question_path(@competition), class: 'download-csv'
   - if @hunt_questions.present?
     %table.projects-table#admin-hunt-question-table{'data-turbolinks' => 'false'}
       %thead
@@ -39,9 +39,9 @@
   - if @competition.hunt_published
     %p
       This hunt has been published.
-      = link_to 'Unpublish', hunt_published_admin_competition_hunt_questions_url(@competition, competition: {hunt_published: false}), method: :patch
+      = link_to 'Unpublish', hunt_published_admin_competition_hunt_questions_url(@competition, competition: {hunt_published: false}), method: :patch, class: 'download-csv'
   - else
     %p
       This hunt has not been published.
-      = link_to 'Publish', hunt_published_admin_competition_hunt_questions_url(@competition, competition: {hunt_published: true}), method: :patch
+      = link_to 'Publish', hunt_published_admin_competition_hunt_questions_url(@competition, competition: {hunt_published: true}), method: :patch, class: 'download-csv'
 %p= link_to 'Back to Competition', admin_competition_path(@competition)
