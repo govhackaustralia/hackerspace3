@@ -34,7 +34,7 @@ class Admin::TeamsController < ApplicationController
 
   def check_for_privileges!
     @competition = Competition.find params[:competition_id]
-    return if current_user.region_privileges? @competition
+    return if current_user.admin_privileges? @competition
 
     flash[:alert] = 'You must have valid assignments to access this section.'
     redirect_to root_path
