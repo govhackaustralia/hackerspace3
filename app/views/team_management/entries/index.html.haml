@@ -12,4 +12,4 @@
       - @team.regional_challenges(checkpoint).each do |challenge|
         = render 'challenge_entry', locals: { checkpoint: checkpoint, challenge: challenge }
     %div.links
-    = link_to 'Back to Team', team_management_team_path(@team)
+      = link_to 'Back to Team', team_management_team_path(@team)
