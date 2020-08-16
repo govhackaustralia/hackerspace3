@@ -3,33 +3,33 @@
     - if @team.thumbnail.attached?
       %img{:alt => "#{@team.name} thumbnail", :src => "#{url_for(@team.thumbnail)}", :style => "width: 150px; height: auto;"}/
 
-  %section.markdown
-    %h4.sectionHeading Team Members
-    %hr/
-    - if @published_users.any?
-      - @published_users.each_with_index do |user, index|
+  - if @published_users.any? || @unpublished_users.any?
+    %section.markdown
+      %h4.sectionHeading Team Members
+      %hr/
+      - if @published_users.any?
+        - @published_users.each_with_index do |user, index|
+          %span
+            %strong
+              = link_to user.display_name, profile_path(user.profile)
+              = ',' if index < @published_users.length - 1
+        - if @unpublished_users.any?
+          %span
+            - unless @published_users.empty?
+              and
+            = pluralize @unpublished_users.length, 'other member'
+            - if @unpublished_users.length > 1
+              with unpublished profiles.
+            - else
+              with an unpublished profile.
+      - else
         %span
           %strong
-            = link_to user.display_name, profile_path(user.profile)
-            = ',' if index < @published_users.length - 1
-      - if @unpublished_users.any?
-        %span
-          - unless @published_users.empty?
-            and
-          = pluralize @unpublished_users.length, 'other member'
-          - if @unpublished_users.length > 1
-            with unpublished profiles.
-          - else
-            with an unpublished profile.
-      %hr/
-    - else
-      %span
-        %strong
-          = pluralize @unpublished_users.length, 'member'
-          - if @unpublished_users.length > 1
-            with unpublished profiles.
-          - else
-            with an unpublished profile.
+            = pluralize @unpublished_users.length, 'member'
+            - if @unpublished_users.length > 1
+              with unpublished profiles.
+            - else
+              with an unpublished profile.
       %hr/
   %section.markdown
     - unless @current_project.description.blank?
