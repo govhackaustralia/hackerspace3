@@ -33,5 +33,5 @@
       %p There are no challenge entries to display for this team as yet.
     %div.links
       %p= link_to 'Back to Projects', projects_path
-      - if current_user&.admin_privileges? @competition
+      - if current_user&.region_privileges? @competition
         %p= link_to "Administer #{@current_project.team_name}", admin_competition_team_path(@competition, @team)
