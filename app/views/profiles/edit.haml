@@ -7,7 +7,8 @@
         %p
           %strong Slack Account Linked
       - else
-        = link_to 'Link Slack Account for Chat', user_slack_omniauth_authorize_path, method: :post
+        = link_to 'Link Slack Account for Chat', user_slack_omniauth_authorize_path, method: :post, class: 'download-csv'
+      %br
       = form_for @profile do |form|
         .form-group
           = form.label :team_status
@@ -20,19 +21,19 @@
         .form-group
           = form.label :website
           = form.url_field :website, class: 'form-control'
-          %small Please put in the full URL
+          %small Please put in the full URL: https://my-site.com/me
         .form-group
           = form.label :github
           = form.url_field :github, class: 'form-control'
-          %small Please put in the full URL
+          %small Please put in the full URL: https://github.com/profile-name
         .form-group
           = form.label :twitter
           = form.url_field :twitter, class: 'form-control'
-          %small Please put in the full URL
+          %small Please put in the full URL: https://twitter.com/my-handle
         .form-group
           = form.label :linkedin, 'LinkedIn'
           = form.url_field :linkedin, class: 'form-control'
-          %small Please put in the full URL
+          %small Please put in the full URL: https://www.linkedin.com/in/name-id
         .form-group
           = form.label :skill_list
           = form.text_field :skill_list, value: @profile.skill_list&.join(', '), class: 'form-control'
