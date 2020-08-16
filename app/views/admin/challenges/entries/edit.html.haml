@@ -17,5 +17,6 @@
         = form.select :award, options_for_select([nil] + AWARD_NAMES, @entry.award)
       .actions
         = form.submit
-    %p= link_to 'Go to Team Project', project_path(@team.current_project.identifier), target: '_blank'
-    %p= link_to 'Back to Entries', admin_challenge_entries_path(@challenge)
+    %div.links
+      %p= link_to 'Go to Team Project', project_path(@team.current_project.identifier), target: '_blank'
+      %p= link_to 'Back to Entries', admin_challenge_entries_path(@challenge)
