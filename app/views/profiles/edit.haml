@@ -3,11 +3,12 @@
   %container
     %section.signup-form
       %h2.heading Update Profile
-      -if @profile.slack_user_id
-        %p
-          %strong Slack Account Linked
-      - else
-        = link_to 'Link Slack Account for Chat', user_slack_omniauth_authorize_path, method: :post, class: 'download-csv'
+      %p
+        %strong
+          -if @profile.slack_user_id
+            Slack Account Linked
+          - else
+            = link_to 'Link Slack Account for Chat', user_slack_omniauth_authorize_path, method: :post
       %br
       = form_for @profile do |form|
         .form-group
