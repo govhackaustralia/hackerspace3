@@ -1,12 +1,13 @@
 %main.registration.single-col.resend-unlock
-  %h2 Resend unlock instructions
-  %section
-    = form_for(resource, as: resource_name, url: unlock_path(resource_name), html: { method: :post }) do |f|
-      = render 'devise/shared/error_messages', resource: resource
-      .field
-        = f.label :email
-        %br/
-        = f.email_field :email, autofocus: true, autocomplete: "email"
-      .actions
-        = f.submit "Resend unlock instructions"
-      = render "devise/shared/links"
+  %container
+    %section.signup-form
+      %h2.heading Resend unlock instructions
+      = form_for(resource, as: resource_name, url: unlock_path(resource_name), html: { method: :post }) do |f|
+        = render 'devise/shared/error_messages', resource: resource
+        .form-group
+          = f.label :email
+          = f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control'
+        .actions
+          = f.submit "Resend unlock instructions"
+      %div.links
+        = render "devise/shared/links"

@@ -7,10 +7,12 @@
   h2 {
     color: #ca1e56;
     font-size: 2em;
+    line-height: 1.2em;
   }
 
   a {
-    text-decoration: none;
+    text-decoration: underline;
+    color: #ca1e56;
   }
 
   .links {
@@ -46,7 +48,6 @@
 
         >label {
           box-sizing: border-box;
-          width: 50%;
           padding-right: 1em;
           text-align: right;
           font-size: 1.15em;
@@ -57,7 +58,6 @@
           input,
           select {
             box-sizing: border-box;
-            width: 50%;
             padding-left: 1em;
             font-size: 1em;
             padding: 0.5em;
@@ -70,7 +70,6 @@
             display: flex;
             padding: 0.5em 0em;
             align-items: center;
-            text-align: left !important;
           }
 
           &.select-profile {
@@ -111,14 +110,8 @@
 
       >div {
         box-sizing: border-box;
-        width: 50%;
         padding-right: 1em;
-        text-align: right;
         font-size: 1.15em;
-
-        em {
-          font-size: 0.85em;
-        }
       }
 
       &.actions {
@@ -180,6 +173,8 @@
 
     p.alt-text {
       margin-right: 2rem;
+      font-style: italic;
+      color: #555;
     }
 
     #signgoogle {
@@ -233,7 +228,10 @@
   &.signin,
   &.change-email-password,
   &.edit-account,
-  &.update-profile-picture {
+  &.forgot-password,
+  &.update-profile-picture,
+  &.resend-confirmation,
+  &.resend-unlock {
     section {
       &.signup-form {
         padding: 5em 2em;
@@ -265,7 +263,7 @@
     &.toc section,
     &.edit-account section,
     &.change-email-password section,
-    &.manage-account section {
+    &.manage-account section &.forgot-password section {
       flex-direction: column;
     }
 
@@ -273,9 +271,19 @@
       padding: 2em 2em;
     }
 
+    &.edit-account section article {
+      padding-bottom: 2em;
+    }
+
     &.toc section {
       article {
         padding: 2em 2em;
+
+        h2 {
+          &.heading {
+            margin-bottom: 3rem;
+          }
+        }
 
         h3:not(:first-of-type) {
           margin-top: 1em;
@@ -288,35 +296,6 @@
         li {
           list-style: square;
           margin-left: 2em;
-        }
-      }
-
-      form {
-        width: 100%;
-        background: black;
-        color: white;
-
-        input[type='checkbox'] {
-          -webkit-appearance: none;
-          width: 30px;
-          height: 30px;
-          background: white;
-          border-radius: 5px;
-          border: 2px solid #555;
-
-          &:after {
-            content: "\2718";
-            color: red;
-          }
-
-          &:checked {
-            background: #ca1e56;
-
-            &:after {
-              content: "\2713";
-              color: white;
-            }
-          }
         }
       }
     }

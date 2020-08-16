@@ -1,13 +1,13 @@
 - content_for :title, 'Password Reset'
 %main.registration.single-col.forgot-password
-  %h2 Forgot your password?
-  %section
-    = form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f|
-      = render 'devise/shared/error_messages', resource: resource
-      .field
-        = f.label :email
-        %br/
-        = f.email_field :email, autofocus: true, autocomplete: "email"
-      .actions
-        = f.submit "Send me reset password instructions"
-      = render "devise/shared/links"
+  %container
+    %section.signup-form
+      %h2.heading Forgot your password?
+      = form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f|
+        = render 'devise/shared/error_messages', resource: resource
+        .form-group
+          = f.label :email
+          = f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control'
+        .actions
+          = f.submit "Send me reset password instructions"
+        = render "devise/shared/links"
