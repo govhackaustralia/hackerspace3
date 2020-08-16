@@ -11,6 +11,8 @@
           method: :delete,                                                                          |
           data: { confirm: 'Are you sure?' }                                                        |
     - else
-      %div Your team does not currently have any data sets.
-    %aside= link_to 'Add New Data Set', new_team_management_team_team_data_set_path(@team)
-    %p= link_to 'Back to Team', team_management_team_path(@team)
+      %div.links
+        %p Your team does not currently have any data sets.
+        = link_to 'Add New Data Set', new_team_management_team_team_data_set_path(@team)
+    %div.links
+      %p= link_to 'Back to Team', team_management_team_path(@team)

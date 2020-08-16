@@ -5,4 +5,5 @@
       = yield :title
       for Team #{@team.name}
     = render 'form'
-    = link_to 'Back to Project', team_management_team_path(@team)
+    %div.links
+      = link_to 'Back to Project', team_management_team_path(@team)
