@@ -31,7 +31,6 @@
                 = link_to 'Link up your Slack Account to chat with this User', edit_profile_path(current_user.profile)
             - else
               %p Sign In to Contact this User via Slack
-        %p= @user.slack
         - @joined_projects.each do |project|
           %p
             %strong
