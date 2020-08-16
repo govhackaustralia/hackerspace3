@@ -1,26 +1,33 @@
 class HuntQuestionsController < ApplicationController
-  before_action :check_published!, :hunt_questions
+  before_action :check_published!, :hunt_questions, :hunt_badge
   before_action :authenticate_user!, :check_for_previous_correct_answer!, only: :update
 
   def index
     clear_answers
     return unless user_signed_in?
 
-    @hunt_badge = @competition.hunt_badge
     @hunt_badge_assignment = current_user.assignments.find_by(assignable: @hunt_badge)
   end
 
   def update
     if answered_correctly?
-      log_success_and_award_badge!
-      flash[:notice] =  'Question Answered!'
+      handle_correct_answer
     else
-      flash[:alert] = 'Incorrect Answer, Please try again'
+      redirect_to treasure_hunt_path, alert: 'Incorrect Answer, Please try again'
     end
-    redirect_to treasure_hunt_path
   end
 
   private
+
+  def handle_correct_answer
+    log_success_and_award_badge!
+    if @badge_won
+      redirect_to profile_path(current_user.profile),
+        notice: "You have won the #{hunt_badge.name} badge!"
+    else
+      redirect_to treasure_hunt_path, notice: 'Question Answered!'
+    end
+  end
 
   def hunt_question
     @hunt_question ||= HuntQuestion.find params[:id]
@@ -39,6 +46,10 @@ class HuntQuestionsController < ApplicationController
 
   def hunt_questions
     @hunt_questions ||= @competition.hunt_questions.order(:question)
+  end
+
+  def hunt_badge
+    @hunt_badge ||= @competition.hunt_badge
   end
 
   def attempt
@@ -60,9 +71,10 @@ class HuntQuestionsController < ApplicationController
   def award_hunt_badge
     current_user.assignments.find_or_create_by!(
       title: ASSIGNEE,
-      assignable: @competition.hunt_badge,
+      assignable: hunt_badge,
       holder: holder
     )
+    @badge_won = true
   end
 
   def all_questions_answered?

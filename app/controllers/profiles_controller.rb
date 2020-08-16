@@ -96,7 +96,7 @@ class ProfilesController < ApplicationController
     return if @profile.published
 
     if user_signed_in? && current_user.profile == @profile
-      flash[:notice] = 'This Profile is not yet published, only you can see it.'
+      flash[:alert] = 'This Profile is not yet published, only you can see it.'
       return
     end
 
