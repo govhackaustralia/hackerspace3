@@ -7,9 +7,7 @@ class Admin::BadgesController < ApplicationController
 
   def show
     @badge = @competition.badges.find_by_identifier params[:id]
-    @users = User.joins(:profile)
-      .where.not(full_name: [nil, ''])
-      .where.not(profiles: {identifier: [nil, '']})
+    @users = @competition.users
       .order(:email)
       .preload(:profile, :badge_assignments)
 
