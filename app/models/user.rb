@@ -95,8 +95,6 @@ class User < ApplicationRecord
 
   scope :mailing_list, -> { where mailing_list: true }
 
-  validates :accepted_terms_and_conditions, acceptance: true
-
   after_save_commit :update_profile_identifier
 
   def participant?
