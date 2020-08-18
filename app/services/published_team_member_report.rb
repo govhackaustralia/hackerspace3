@@ -26,6 +26,7 @@ class PublishedTeamMemberReport
     coder
     creative
     facilitator
+    region
   ].freeze
 
   def initialize(competition)
@@ -34,9 +35,9 @@ class PublishedTeamMemberReport
 
   def to_csv
     CSV.generate do |csv|
-      csv << HEADER_NAMES
+      csv << (HEADER_NAMES + ['project identifiers'])
       users.each do |user|
-        csv << user.attributes.values_at(*HEADER_NAMES)
+        csv << (user.attributes.values_at(*HEADER_NAMES) + [user.partipating_projects.joins(:competition).where(competitions: {id: @competition.id}).pluck(:identifier)])
       end
     end
   end
@@ -47,7 +48,7 @@ class PublishedTeamMemberReport
     # ENHANCEMENT: Create a scope for the below.
     User.where(
       id: competition.competition_assignments.team_participants.where(
-        assignable: competition.teams.published
+        assignable: competition.teams
       ).pluck(:user_id).uniq
     )
   end
