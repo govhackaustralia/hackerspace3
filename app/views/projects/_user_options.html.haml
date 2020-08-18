@@ -8,7 +8,7 @@
       %button.blue-button
         Unfavourite this Project
   - else
-    = link_to favourites_path(team_id: @team.id), method: :post do
+    = link_to favourites_path(favourite: {team_id: @team.id}), method: :post do
       %button.blue-button
         Favourite this Project
   - if (show_challenge_score_stuff? || show_peoples_choice_stuff?) && !@users_team

@@ -2,34 +2,28 @@ class FavouritesController < ApplicationController
   before_action :authenticate_user!
 
   def create
-    team = Team.find params[:team_id]
-    favourite = Favourite.create(
-      team: team,
-      assignment: current_user.event_assignment(team.competition),
-      holder: @holder
-    )
-    handle_create favourite, team
-  end
-
-  def destroy
-    favourite = Favourite.find id: params[:id]
-    if favourite.present?
-      favourite.destroy
-      flash[:notice] = 'Favourite Removed'
-    else
-      flash[:alert] = 'Problem removing favourite'
-    end
-    redirect_to project_path favourite.team.current_project.identifier
-  end
-
-  private
-
-  def handle_create(favourite, team)
+    favourite = Favourite.create favourite_params
     if favourite.save
       flash[:notice] = 'Favourite Added'
     else
       flash[:alert] = 'Error adding Favourite'
     end
-    redirect_to project_path team.current_project.identifier
+    redirect_to project_path favourite.project.identifier
+  end
+
+  def destroy
+    favourite = Favourite.find params[:id]
+    favourite.destroy!
+    redirect_to project_path(favourite.project.identifier),
+      notice: 'Favourite Removed'
+  end
+
+  private
+
+  def favourite_params
+    params.require(:favourite).permit(:team_id).merge(
+      assignment: current_user.event_assignment(@competition),
+      holder: current_user.holder_for(@competition)
+    )
   end
 end
