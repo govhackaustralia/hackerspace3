@@ -6,15 +6,17 @@ class FavouriteTest < ActiveSupport::TestCase
     @team = Team.first
     @holder = Holder.first
     @assignment = Assignment.find(4)
+    @project = projects :one
   end
 
-  test 'favourite associations' do
+  test 'associations' do
     assert @favourite.team == @team
     assert @favourite.holder == @holder
     assert @favourite.assignment == @assignment
+    assert @favourite.project == @project
   end
 
-  test 'favouite validations' do
+  test 'validations' do
     assert_not Favourite.create(team: @team, assignment: @assignment).persisted?
   end
 end
