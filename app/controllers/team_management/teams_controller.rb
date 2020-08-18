@@ -32,6 +32,7 @@ class TeamManagement::TeamsController < ApplicationController
       flash[:notice] = 'Team Details Updated'
       redirect_to team_management_team_path @team
     else
+      @current_project = @team.current_project
       flash[:alert] = @team.errors.full_messages.to_sentence
       render :edit
     end
