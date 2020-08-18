@@ -46,19 +46,6 @@ class User < ApplicationRecord
     source: :assignable,
     source_type: 'Team'
 
-  has_many :participating_team_assignments,
-    -> { team_participants },
-    class_name: 'Assignment'
-
-  has_many :participating_teams,
-    through: :participating_team_assignments,
-    source: :assignable,
-    source_type: 'Team'
-
-  has_many :partipating_projects,
-    through: :participating_teams,
-    source: :current_project
-
   has_many :judge_assignments,
     -> { judges },
     class_name: 'Assignment'
