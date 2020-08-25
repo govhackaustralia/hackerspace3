@@ -12,13 +12,16 @@
       %button.blue-button
         Favourite this Project
   - if (show_challenge_score_stuff? || show_peoples_choice_stuff?) && !@users_team
-    - if @header.present?
-      %p
-        = link_to 'Edit Scorecard', edit_project_scorecard_path(@current_project.identifier, @header, popup: true), id: 'open-scorecard'
+    %p
+      - if @header.present?
+        = link_to edit_project_scorecard_path(@current_project.identifier, @header, popup: true), id: 'open-scorecard' do
+          %button.blue-button
+            Edit Scorecard
         = javascript_tag  "window._scorecard_path = '#{edit_project_scorecard_path(@current_project.identifier, @header, popup: true)}';"
-    - else
-      %p
-        = link_to 'New Scorecard', new_project_scorecard_path(@current_project.identifier, popup: true), id: 'open-scorecard'
+      - else
+        = link_to new_project_scorecard_path(@current_project.identifier, popup: true), id: 'open-scorecard' do
+          %button.blue-button
+            New Scorecard
         = javascript_tag "window._scorecard_path = '#{new_project_scorecard_path(@current_project.identifier, popup: true)}'"
 - elsif @competition.in_peoples_judging_window? LAST_TIME_ZONE
   %div
