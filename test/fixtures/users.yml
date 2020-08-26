@@ -16,6 +16,7 @@ one:
   mailing_list: true
   region: South Australia
   registration_type: Competitor
+  acting_on_behalf_of_id: 3
 
 two:
   id: 2

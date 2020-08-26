@@ -11,6 +11,11 @@ class User < ApplicationRecord
   has_many :headers, through: :assignments
   has_many :registrations, through: :assignments
 
+  belongs_to :acting_on_behalf_of_user,
+    class_name: 'User',
+    foreign_key: 'acting_on_behalf_of_id',
+    optional: true
+
   has_many :badge_assignments,
     -> { where title: ASSIGNEE, assignable_type: 'Badge' },
     class_name: 'Assignment'

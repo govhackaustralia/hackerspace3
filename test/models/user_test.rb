@@ -35,6 +35,8 @@ class UserTest < ActiveSupport::TestCase
     assert @user.headers.include? @header
     assert @user.registrations.include? @registration
 
+    assert @user.acting_on_behalf_of_user == @invitee
+
     assert @user.event_assignments.include? @participant_assignment
 
     assert @user.joined_team_assignments.include? @joined_team_assignment
