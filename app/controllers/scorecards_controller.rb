@@ -1,5 +1,6 @@
 class ScorecardsController < ApplicationController
   before_action :authenticate_user!, :check_for_privileges
+  before_action :authorise_edit_update!, only: %i[edit update]
 
   def new
     @judgeable_assignment = @user.judgeable_assignment @competition
@@ -12,32 +13,29 @@ class ScorecardsController < ApplicationController
   end
 
   def edit
-    @header= Header.find(params[:id])
     Header.transaction do
       Score.transaction do
         @scores = organise_scores
       end
     end
-    return if @user == @header.user
-
-    flash[:alert] = 'You do not have permission to edit this scorecard.'
-    redirect_to root_path
   end
 
   # ENHANCEMENT: Hard to test, shape to REST.
   def update
-    @header= Header.find(params[:id])
-    if @user == @header.user
-      update_scorecard
-      process_scores
-      redirect_to edit_project_scorecard_path(@team.current_project.identifier, @header, popup: true)
-    else
-      flash[:alert] = 'You do not have permission to edit this scorecard.'
-      redirect_to root_path
-    end
+    update_scorecard
+    process_scores
+    redirect_to edit_project_scorecard_path(@team.current_project.identifier, @header, popup: true)
   end
 
   private
+
+  def authorise_edit_update!
+    @header= Header.find params[:id]
+    return if @user == @header.user
+
+    redirect_to root_path,
+      alert: 'You do not have permission to edit this scorecard.'
+  end
 
   def check_for_privileges
     @user = current_user
