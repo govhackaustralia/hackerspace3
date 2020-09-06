@@ -39,7 +39,7 @@
       - if current_user.acting_on_behalf_of_id == @user.id
         You are currently acting on behalf of this user.
       - else
-        = link_to 'Act on Behalf of this User (Enter Score Cards)', act_on_behalf_of_user_admin_user_path(@user), method: :patch
+        = link_to 'Act on Behalf of this User (Enter Scorecards)', act_on_behalf_of_user_admin_user_path(@user), method: :patch
 
   %h3 Assignments for #{@user.display_name}
   %table.projects-table#admin-users-show-table{'data-turbolinks' => 'false'}
