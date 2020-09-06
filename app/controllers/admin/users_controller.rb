@@ -30,6 +30,18 @@ class Admin::UsersController < ApplicationController
     end
   end
 
+  def act_on_behalf_of_user
+    user = User.find params[:id]
+    current_user.update! acting_on_behalf_of_user: user
+    redirect_to admin_user_path user
+  end
+
+  def cease_acting_on_behalf_of_user
+    user = current_user.acting_on_behalf_of_user
+    current_user.update! acting_on_behalf_of_user: nil
+    redirect_to admin_user_path user
+  end
+
   private
 
   def check_for_privileges

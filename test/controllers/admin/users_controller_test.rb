@@ -41,4 +41,20 @@ class Admin::UsersControllerTest < ActionDispatch::IntegrationTest
     @unconfirmed_user.reload
     assert_not @unconfirmed_user.confirmed?
   end
+
+  test 'should patch act_on_behalf_of_user' do
+    @user.update! acting_on_behalf_of_user: nil
+    patch act_on_behalf_of_user_admin_user_path @unconfirmed_user
+    assert_redirected_to admin_user_path @unconfirmed_user
+    @user.reload
+    assert @user.acting_on_behalf_of_user == @unconfirmed_user
+  end
+
+  test 'should patch cease_acting_on_behalf_of_user' do
+    acting_on_behalf_of_user = users :three
+    patch cease_acting_on_behalf_of_user_admin_user_path acting_on_behalf_of_user
+    assert_redirected_to admin_user_path acting_on_behalf_of_user
+    @user.reload
+    assert @user.acting_on_behalf_of_user.nil?
+  end
 end

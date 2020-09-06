@@ -167,7 +167,11 @@ Rails.application.routes.draw do
     end
 
     resources :users, only: [:index, :show] do
-      member { post 'confirm' }
+      member do
+        post :confirm
+        patch :act_on_behalf_of_user
+        patch :cease_acting_on_behalf_of_user
+      end
       collection do
         get 'mailing_list_export'
       end

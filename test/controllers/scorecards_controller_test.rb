@@ -11,12 +11,14 @@ class ScorecardsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'should get new' do
+    users(:one).update! acting_on_behalf_of_user: nil
     sign_in users :one
     get new_project_scorecard_path(@project.identifier)
     assert_response :success
   end
 
   test 'should get edit' do
+    users(:one).update! acting_on_behalf_of_user: nil
     sign_in users :one
     get edit_project_scorecard_path(@project.identifier, @header)
     assert_response :success

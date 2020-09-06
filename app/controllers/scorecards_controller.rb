@@ -38,7 +38,7 @@ class ScorecardsController < ApplicationController
   end
 
   def check_for_privileges
-    @user = current_user
+    @user = @acting_on_behalf_of_user.presence || current_user
     @project = Project.find_by(identifier: params[:project_identifier])
     @project = Project.find(params[:project_identifier]) if @project.nil?
     @team = @project.team

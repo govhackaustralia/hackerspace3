@@ -50,7 +50,7 @@ class ProjectsController < ApplicationController
   end
 
   def user_records_show
-    @user = current_user
+    @user = @acting_on_behalf_of_user.presence || current_user
     retrieve_favourite_and_scorecard
     @judgeable_assignment = @user.judgeable_assignment @competition
     @peoples_assignment = @user.peoples_assignment @competition

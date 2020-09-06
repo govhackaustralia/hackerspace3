@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
   before_action :competition, :check_accepted_terms_and_conditions!,
-                :check_required_fields!, :holder
+                :check_required_fields!, :holder, :acting_on_behalf_of_user
 
   private
 
@@ -19,6 +19,12 @@ class ApplicationController < ActionController::Base
     return unless user_signed_in?
 
     @profile ||= Profile.find_or_create_by user: current_user
+  end
+
+  def acting_on_behalf_of_user
+    return unless user_signed_in? && current_user.acting_on_behalf_of_id.present?
+
+    @acting_on_behalf_of_user ||= current_user.acting_on_behalf_of_user
   end
 
   def check_accepted_terms_and_conditions!
