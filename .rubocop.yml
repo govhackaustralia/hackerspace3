@@ -45,3 +45,6 @@ Metrics/ClassLength:
 
 Metrics/ParameterLists:
   Enabled: false
+
+Performance/CollectionLiteralInLoop:
+  Enabled: false
