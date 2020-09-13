@@ -22,6 +22,13 @@ If running Windows 10 Home, use these instructions - https://docs.docker.com/doc
 * Unable to install Docker with Error: Installation Failed: one prerequisite is not fulfilled. Docker Desktop requires Windows 10 Pro or Enterprise version xxxxx to run.
   * **Solution** is to follow [this workaround](https://itnext.io/install-docker-on-windows-10-home-d8e621997c1d) to 'trick' Docker during installation
 
+* You can install Docker but when you build locally, your container gives the following error in the logs "standard_init_linux.go:207: exec user process caused “no such file or directory” on windows"
+  * **Solution** is to run this command "dos2unix docker-entrypoint.sh" which will convert the file to UNIX format. (source - https://stackoverflow.com/a/56880170)
+
+
+
+
+
 Once installed and running, use Powershell to follow the instructions in the **Docker Deployment Instructions** section.
 
 ## Framework
