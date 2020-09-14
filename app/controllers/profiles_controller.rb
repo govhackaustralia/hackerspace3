@@ -4,7 +4,7 @@ class ProfilesController < ApplicationController
   before_action :check_profile_found!, :check_published!, only: :show
 
   def index
-    @profiles = Profile.published.joins(:user)
+    @profiles = @competition.profiles.published
       .where.not(identifier: [nil, ''])
       .preload(:user)
       .includes(:skills)
