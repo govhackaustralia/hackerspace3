@@ -10,26 +10,6 @@ class ProfilesController < ApplicationController
       .includes(:skills)
   end
 
-  def participants
-    # user_registration_scoped_profiles(PARTICIPANT_TYPES)
-    redirect_to profiles_path
-  end
-
-  def mentors
-    # user_registration_scoped_profiles(MENTOR_TYPES)
-    redirect_to profiles_path
-  end
-
-  def industry
-    # user_registration_scoped_profiles(INDUSTRY_TYPES)
-    redirect_to profiles_path
-  end
-
-  def support
-    # user_registration_scoped_profiles(SUPPORT_TYPES)
-    redirect_to profiles_path
-  end
-
   def show
     @user = @profile.user
     @badge_assignments = @user.badge_assignments
@@ -61,15 +41,6 @@ class ProfilesController < ApplicationController
   end
 
   private
-
-  def user_registration_scoped_profiles(registration_types)
-    @profiles = Profile.published
-      .where(user: User.where(registration_type: registration_types))
-      .where.not(identifier: nil)
-      .where.not(identifier: '')
-      .preload(:user)
-      .includes(:skills)
-  end
 
   def profile_params
     params.require(:profile).permit(:team_status, :description, :website,
