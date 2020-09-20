@@ -1,0 +1,24 @@
+<% content_for :title, "Update Registration for #{@user.display_name} #{@event.name} #{@region.name}" %>
+<main class="team_page">
+  <section>
+    <h2>
+      <%= yield :title %>
+    </h2>
+    <% if @event.not_attending?(@event_assignment) && @event.at_capacity? %>
+      <p>This event is at capacity.</p>
+      <%= render 'form', locals: { options: [WAITLIST, NON_ATTENDING] } %>
+    <% elsif @event.waitlisted? @event_assignment %>
+      <p>Waitlist, will be emailed should a space become available.</p>
+      <%= render 'form', locals: { options: [WAITLIST, NON_ATTENDING] } %>
+    <% elsif @registration.status == ATTENDING %>
+      <p>Registered as attending.</p>
+      <%= render 'form', locals: { options: [ATTENDING, NON_ATTENDING] } %>
+    <% elsif @registration.status == NON_ATTENDING %>
+      <p>Registered as not attending.</p>
+      <%= render 'form', locals: { options: [ATTENDING, NON_ATTENDING] } %>
+    <% end %>
+  </section>
+  <p>
+    <%= link_to 'Back to Registrations', admin_event_registrations_path(@event) %>
+  </p>
+</main>

@@ -1,0 +1,32 @@
+<main class="team_page">
+  <section>
+    <h2>
+      <%= @assignable.name %>
+      Region Assignments
+    </h2>
+    <h3>Region Director</h3>
+    <% if (director = @assignable.director).present? %>
+      <%= render 'admin/shared/user_contact', locals: { user: director } %>
+    <% else %>
+      This region does not currently have a director.
+      <br/>
+      <%= link_to "New #{REGION_DIRECTOR} Assignment", new_admin_region_assignment_path(@assignable, title: REGION_DIRECTOR) %>
+      <br/>
+    <% end %>
+    <h3>Region Support</h3>
+    <% if (supports = @assignable.supports).present? %>
+      <% supports.each do |support| %>
+        <%= render 'admin/shared/user_contact', locals: { user: support } %>
+      <% end %>
+    <% else %>
+      This region does not currently have any supports.
+      <br/>
+    <% end %>
+    <p>
+      <%= link_to "New #{REGION_SUPPORT} Assignment", new_admin_region_assignment_path(@assignable, title: REGION_SUPPORT) %>
+    </p>
+    <p>
+      <%= link_to "Back to #{@assignable.name} Region", admin_competition_region_path(@competition, @assignable) %>
+    </p>
+  </section>
+</main>

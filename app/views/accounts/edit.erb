@@ -1,0 +1,59 @@
+<% content_for :title, 'Complete Account Registration' %>
+<main class="registration single-col edit-account">
+  <container>
+    <section class="signup-form">
+      <h2 class="heading">
+        <%= yield :title %>
+      </h2>
+      <%= form_with model: @user, url: account_path(@user), method: :patch do |form| %>
+        <div class="form-group">
+          <%= form.label :full_name %>
+          <%= form.text_field :full_name, class: 'form-control' %>
+        </div>
+        <div class="form-group">
+          <%= form.label :preferred_name %>
+          <%= form.text_field :preferred_name, class: 'form-control' %>
+        </div>
+        <div class="form-group">
+          <%= form.label :region %>
+          <%= form.select :region,                                                
+            options_for_select(User.regions.keys.sort, selected: @user.region), 
+            include_blank: true, class: 'form-control-lg w-100'
+          %>
+        </div>
+        <div class="form-group">
+          <%= form.label :how_did_you_hear %>
+          <%= form.text_field :how_did_you_hear, class: 'form-control' %>
+        </div>
+        <div class="custom-control custom-checkbox">
+          <%= form.check_box :under_18, checked: @user.under_18, class:'custom-control-input' %>
+          <%= form.label :under_18, class: 'custom-control-label' %>
+        </div>
+        <div class="custom-control custom-checkbox">
+          <%= form.check_box :mailing_list, checked: @user.mailing_list, class:'custom-control-input' %>
+          <%= form.label :mailing_list, class: 'custom-control-label' %>
+        </div>
+        <div class="custom-control custom-checkbox">
+          <%= form.check_box :challenge_sponsor_contact_place, checked: @user.challenge_sponsor_contact_place, class:'custom-control-input' %>
+          <%= form.label :challenge_sponsor_contact_place, class: 'custom-control-label' %>
+        </div>
+        <div class="custom-control custom-checkbox">
+          <%= form.check_box :challenge_sponsor_contact_enter, checked: @user.challenge_sponsor_contact_enter, class:'custom-control-input' %>
+          <%= form.label :challenge_sponsor_contact_enter, class: 'custom-control-label' %>
+        </div>
+        <div class="custom-control custom-checkbox">
+          <%= form.check_box :my_project_sponsor_contact, checked: @user.my_project_sponsor_contact, class:'custom-control-input' %>
+          <%= form.label :my_project_sponsor_contact, class: 'custom-control-label' %>
+        </div>
+        <div class="custom-control custom-checkbox">
+          <%= form.check_box :me_govhack_contact, checked: @user.me_govhack_contact, class:'custom-control-input' %>
+          <%= form.label :me_govhack_contact, class: 'custom-control-label' %>
+          <%= hidden_field_tag(:account_registration, true) %>
+        </div>
+        <div class="actions">
+          <%= form.submit 'Complete Registration' %>
+        </div>
+      <% end %>
+    </section>
+  </container>
+</main>

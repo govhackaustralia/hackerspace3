@@ -1,0 +1,10 @@
+<% content_for :title, 'New Entry' %>
+<main class="team_page">
+  <section>
+    <h2>
+      <%= "Enter #{@challenge.name} Challenge for Team #{@team.name}" %>
+    </h2>
+    <%= render 'form' %>
+    <%= link_to 'Back to Challenge', challenge_path(@challenge.identifier) %>
+  </section>
+</main>

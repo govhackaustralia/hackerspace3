@@ -1,0 +1,41 @@
+<%= form_for [:admin, @region, @challenge] do |form| %>
+  <div class="form-group">
+    <%= form.label :name %>
+    <%= form.text_field :name %>
+  </div>
+  <div class="form-group">
+    <%= form.label :short_desc %>
+    <%= form.text_area :short_desc %>
+  </div>
+  <div class="form-group">
+    <%= form.label :long_desc %>
+    <%= form.text_area :long_desc %>
+  </div>
+  <div class="form-group">
+    <%= form.label :eligibility %>
+    <%= form.text_area :eligibility %>
+  </div>
+  <div class="form-group">
+    <%= form.label :video_url %>
+    <%= form.url_field :video_url %>
+  </div>
+  <% if current_user.admin_privileges?(@region.competition) %>
+    <div class="form-group">
+      <%= form.label :approved %>
+      <%= form.check_box :approved, { checked: @challenge.approved } %>
+    </div>
+    <% if @challenge.type == REGIONAL %>
+      <p>
+        Nation wide: This option makes this Regional Challenge available
+        to any team in <%= @region.parent.name %>.
+      </p>
+      <div class="form-group">
+        <%= form.label :nation_wide %>
+        <%= form.check_box :nation_wide, { checked: @challenge.nation_wide } %>
+      </div>
+    <% end %>
+  <% end %>
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

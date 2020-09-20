@@ -1,0 +1,34 @@
+<%= form_for [@project, @header], url: project_scorecard_path(@project, @header) do |f| %>
+  <% current_header = @header %>
+  <% @scores.each do |score| %>
+    <% if challenge_title_required?(score) %>
+      <h3>
+        <%= @challenge_header.scoreable.challenge.name %>
+      </h3>
+      <p class="justification">
+        <strong>> Justification</strong>
+        \:
+        <br/>
+        <em>
+          <%= @challenge_header.scoreable.justification %>
+        </em>
+      </p>
+    <% end %>
+    <%= fields_for "scores[]", score do |score_form| %>
+      <div class="field">
+        <div>
+          <%= score_form.label :entry, score.criterion.name %>
+          <br/>
+          <em>
+            <%= score.criterion.description %>
+          </em>
+        </div>
+        <%= score_form.number_field(:entry, { value: score.entry, in: MIN_SCORE..MAX_SCORE, step: 1 }) %>
+      </div>
+    <% end %>
+  <% end %>
+  <div class="actions">
+    <%= f.submit 'Save Scorecard' %>
+  </div>
+<% end %>
+<%= javascript_tag 'window.addEventListener("unload", function(event) { window.opener.location.reload();})' %>

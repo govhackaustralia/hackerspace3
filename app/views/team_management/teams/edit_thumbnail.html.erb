@@ -1,0 +1,32 @@
+<% content_for :title, "Update #{@team.name} Thumbnail" %>
+<main class="team_page">
+  <section>
+    <h2>
+      <%= yield :title %>
+    </h2>
+    <%= form_for [:team_management, @team], url: update_thumbnail_team_management_team_path(@team) do |form| %>
+      <div class="form-field">
+        <% if @team.thumbnail.attached? %>
+          <img alt="<%= @team.name %> thumbnail" src="<%= url_for(@team.thumbnail) %>"/>
+        <% else %>
+          <%= image_tag "default_profile_pic.png" %>
+        <% end %>
+      </div>
+      <div class="form-field">
+        <%= form.label :thumbnail, 'Upload a New Thumbnail (only png/gif/jpeg/jpg)' %>
+        <%= form.file_field :thumbnail, accept: 'image/png,image/gif,image/jpeg' %>
+      </div>
+      <%= hidden_field_tag(:thumbnail, true) %>
+      <div class="actions">
+        <% if @team.thumbnail.attached? %>
+          <%= form.submit 'Replace Thumbnail' %>
+        <% else %>
+          <%= form.submit 'Upload Thumbnail' %>
+        <% end %>
+      </div>
+    <% end %>
+    <div class="links">
+      <%= link_to 'Back to Team', team_management_team_path(@team) %>
+    </div>
+  </section>
+</main>

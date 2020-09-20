@@ -1,0 +1,42 @@
+<% content_for :title, "Teams for #{@competition.name}" %>
+<main class="project_index">
+  <h2>
+    <%= yield :title %>
+  </h2>
+  <p>
+    <%= link_to 'Download CSV (Users who are members of a published team)', admin_competition_teams_path(@competition, format: 'csv'), class: 'download-csv' %>
+  </p>
+  <p>
+    <%= link_to 'Download CSV (Every Team Member)', admin_competition_teams_path(@competition, format: 'csv', category: 'members'), class: 'download-csv' %>
+  </p>
+  <% if current_user.site_admin?(@competition) %>
+    <p>
+      <%= link_to 'Download CSV (Team Entries)', admin_competition_teams_path(@competition, format: 'csv', category: 'entries'), class: 'download-csv' %>
+    </p>
+  <% end %>
+  <table class="projects-table" data-turbolinks="false" id="admin-teams-table">
+    <thead>
+      <th>Project</th>
+      <th>Team</th>
+      <th>Location</th>
+    </thead>
+    <tbody>
+      <% @projects.each do |project| %>
+        <tr>
+          <td>
+            <%= link_to "#{project.project_name}", admin_competition_team_path(@competition, project.team) %>
+          </td>
+          <td>
+            <%= project.team_name %>
+          </td>
+          <td>
+            <%= project.event.name %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</main>
+<p>
+  <%= link_to 'Back to Account Management', manage_account_path %>
+</p>

@@ -1,6 +1,0 @@
-- if events.present?
-  %h3= title
-  %section.tiles
-    - events.each do |event|
-      - unless event.end_time.blank?
-        = link_to (render partial: "events/event_tile", locals: { event: event } ), event_path(event.identifier)

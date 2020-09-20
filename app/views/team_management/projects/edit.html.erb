@@ -1,0 +1,12 @@
+<% content_for :title, "Update Project for Team #{@team.name}" %>
+<main class="team_page">
+  <section>
+    <h2>
+      <%= yield :title %>
+    </h2>
+    <%= render 'form' %>
+    <div class="links">
+      <%= link_to 'Back to Project', team_management_team_path(@team) %>
+    </div>
+  </section>
+</main>

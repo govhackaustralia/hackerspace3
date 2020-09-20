@@ -1,0 +1,44 @@
+<% content_for :title, @current_project.project_name %>
+<main class="team_page">
+  <section>
+    <h2>
+      <%= yield :title %>
+    </h2>
+    <aside class="fav_judge">
+      <%= render 'user_options' %>
+    </aside>
+    <h3>Project Info</h3>
+    <%= render 'team_project_info' %>
+    <h3>Team DataSets</h3>
+    <section class="markdown">
+      <% if (team_data_sets = @team.team_data_sets).present? %>
+        <% team_data_sets.each do |team_data_set| %>
+          <%= render 'team_data_set', locals: { data_set: team_data_set } %>
+        <% end %>
+      <% else %>
+        <div>This team does not currently have any datasets.</div>
+      <% end %>
+    </section>
+    <h3>Challenges</h3>
+    <% if @entries.any? %>
+      <% @entries.each do |entry| %>
+        <%= render 'challenges/challenge_panel',              
+          challenge: entry.challenge,                       
+          entry_count: entry.challenge.published_entries.length
+        %>
+      <% end %>
+    <% else %>
+      <p>There are no challenge entries to display for this team as yet.</p>
+    <% end %>
+    <div class="links">
+      <p>
+        <%= link_to 'Back to Projects', projects_path %>
+      </p>
+      <% if current_user&.admin_privileges? @competition %>
+        <p>
+          <%= link_to "Administer #{@current_project.team_name}", admin_competition_team_path(@competition, @team) %>
+        </p>
+      <% end %>
+    </div>
+  </section>
+</main>

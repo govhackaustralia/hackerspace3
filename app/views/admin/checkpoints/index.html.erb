@@ -1,0 +1,54 @@
+<main class="team_page">
+  <section>
+    <h2>
+      Checkpoints for Competition <%= @competition.year %>
+    </h2>
+    <p>
+      <%= link_to 'Add New Checkpoint', new_admin_competition_checkpoint_path(@competition) %>
+    </p>
+    <p>
+      <em>
+        'National Challenges' refers to both National and International challenges.
+      </em>
+    </p>
+    <% if @checkpoints.present? %>
+      <% @checkpoints.order(end_time: :asc).each do |checkpoint| %>
+        <h3>
+          <%= checkpoint.name %>
+        </h3>
+        <p>End Time: <%= checkpoint.end_time %></p>
+        <p>
+          <em>Max number of challenges a team can enter for this checkpoint...</em>
+        </p>
+        <p>National Challenges: <%= checkpoint.max_national_challenges %></p>
+        <p>Regional Challenges: <%= checkpoint.max_regional_challenges %></p>
+        <p>
+          <%= link_to 'Update Checkpoint', edit_admin_competition_checkpoint_path(@competition, checkpoint) %>
+        </p>
+        <% if (region_limits = checkpoint.region_limits).present? %>
+          <h4>Region Specific Challenge Maximums</h4>
+          <% region_limits.each do |region_limit| %>
+            <h5>
+              <%= region_limit.region.name %>
+            </h5>
+            <p>National Challenges: <%= region_limit.max_national_challenges %></p>
+            <p>Regional Challenges: <%= region_limit.max_regional_challenges %></p>
+            <p>
+              <%= link_to "Update #{region_limit.region.name} limits", edit_admin_checkpoint_region_limit_path(checkpoint, region_limit) %>
+            </p>
+          <% end %>
+        <% else %>
+          <p>No Region specific limits set for this Checkpoint.</p>
+        <% end %>
+        <p>
+          <%= link_to "New Region Specific for #{checkpoint.name}", new_admin_checkpoint_region_limit_path(checkpoint) %>
+        </p>
+      <% end %>
+    <% else %>
+      <p>The Competition does not currently have any checkpoints set.</p>
+    <% end %>
+    <p>
+      <%= link_to 'Back to Competition', admin_competition_path(@competition) %>
+    </p>
+  </section>
+</main>

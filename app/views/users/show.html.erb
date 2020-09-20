@@ -1,0 +1,241 @@
+<% content_for :title, 'Manage Account' %>
+<main class="manage_account">
+  <section class="profile-header">
+    <%= link_to profile_path(current_user.profile) do %>
+      <%= image_tag(default_profile_picture_url(current_user, current_user.profile), class: "profile-picture") %>
+    <% end %>
+    <h2 class="name">
+      <%= @user.display_name %>
+    </h2>
+  </section>
+  <hr class="grey-border"/>
+  <section class="profile-contents">
+    <div class="manage-profile">
+      <article class="left-menu">
+        <h3>Manage your profile</h3>
+        <%= link_to update_personal_details_path do %>
+          <button class="red-button">
+            Update Personal Details
+          </button>
+        <% end %>
+        <%= link_to edit_user_registration_path do %>
+          <button class="red-button">
+            Update Email and Password
+          </button>
+        <% end %>
+        <%= link_to edit_profile_path(current_user.profile) do %>
+          <button class="red-button">
+            <% if current_user.profile&.published %>
+              Update
+            <% else %>
+              Publish
+            <% end %>
+            Profile
+          </button>
+        <% end %>
+        <%= link_to update_profile_picture_path do %>
+          <button class="red-button">
+            Update Profile Picture
+          </button>
+        <% end %>
+        <% if @public_winning_entries %>
+          <%= link_to update_personal_details_path(banking: true) do %>
+            <button class="red-button">
+              Update Banking Details
+            </button>
+          <% end %>
+        <% end %>
+      </article>
+      <article class="left-menu">
+        <% if user_has_admin_privileges? %>
+          <h3>Admin Settings</h3>
+          <%= link_to admin_users_path do %>
+            <button class="black-button">
+              User Management
+            </button>
+          <% end %>
+          <%= link_to admin_competitions_path do %>
+            <button class="black-button">
+              Competition Management
+            </button>
+          <% end %>
+        <% end %>
+        <% if user_has_region_privileges? %>
+          <%= link_to admin_competition_regions_path(@competition) do %>
+            <button class="black-button">
+              Region Management
+            </button>
+          <% end %>
+        <% end %>
+        <% if user_has_event_privileges? %>
+          <%= link_to admin_competition_events_path(@competition) do %>
+            <button class="black-button">
+              Event Management
+            </button>
+          <% end %>
+        <% end %>
+      </article>
+      <article class="left-menu">
+        <% if user_has_sponsor_privileges? %>
+          <h3>Sponsor Management</h3>
+          <%= link_to admin_competition_sponsors_path(@competition) do %>
+            <button class="blue-button">
+              Sponsor Management
+            </button>
+          <% end %>
+          <%= link_to admin_competition_sponsorship_types_path(@competition) do %>
+            <button class="blue-button">
+              Sponsorship Type Management
+            </button>
+          <% end %>
+        <% end %>
+        <% if user_is_chief_judge? %>
+          <h3>Competition Judging Criteria</h3>
+          <%= link_to admin_competition_criteria_path(@competition) do %>
+            <button class="black-button">
+              Competiton Criteria Management
+            </button>
+          <% end %>
+        <% end %>
+      </article>
+    </div>
+    <div class="profile-events">
+      <% if @sponsor_contact_assignments.present? %>
+        <article>
+          <h2 class="section-heading">My Sponsors</h2>
+          <% @sponsor_contact_assignments.each do |assignment| %>
+            <div class="content-wrapper">
+              <div class="content-wrapper-content">
+                <h4><%= assignment.assignable.name %></h4>
+              </div>
+              <div class="content-wrapper-button">
+                <%= link_to sponsorship_management_sponsor_path(assignment.assignable) do %>
+                  <button class="content-black-button">
+                    Go to Sponsor
+                  </button>
+                <% end %>
+              </div>
+            </div>
+          <% end %>
+        </article>
+      <% end %>
+      <% if @competition.in_challenge_judging_window?(LAST_TIME_ZONE) && @judging_assignments.present? %>
+        <article>
+          <h2 class="section-heading">Challenge Judging</h2>
+          <% @judging_assignments.each do |assignment| %>
+            <% challenge = assignment.assignable %>
+            <div class="content-wrapper">
+              <div class="content-wrapper-content">
+                <h4>
+                  <%= challenge.name %>
+                </h4>
+                <div class="content-wrapper-button">
+                  <%= link_to challenge_path(challenge.identifier) do %>
+                    <button class="content-black-button">
+                      Go to Challenge
+                    </button>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+          <% end %>
+        </article>
+      <% end %>
+      <article>
+        <h2 class="section-heading">My Events</h2>
+        <% if @registrations_present %>
+          <% if @connection_registrations.present? %>
+            <section>
+              <h3 class="sub-heading">Connection Events</h3>
+              <% @connection_registrations.each do |registration| %>
+                <%= render 'registration_management', locals: { registration: registration } %>
+              <% end %>
+            </section>
+          <% end %>
+          <% if @conference_registrations.present? %>
+            <section>
+              <h3 class="sub-heading">Conference</h3>
+              <% @conference_registrations.each do |registration| %>
+                <%= render 'registration_management', locals: { registration: registration } %>
+              <% end %>
+            </section>
+          <% end %>
+          <% if @competition_registrations.present? %>
+            <section>
+              <h3 class="sub-heading">Competition Events</h3>
+              <% @competition_registrations.each do |registration| %>
+                <%= render 'registration_management', locals: { registration: registration } %>
+              <% end %>
+            </section>
+          <% end %>
+          <% if @award_registrations.present? %>
+            <section>
+              <h3 class="sub-heading">Award Events</h3>
+              <% @award_registrations.each do |registration| %>
+                <%= render 'registration_management', locals: { registration: registration } %>
+              <% end %>
+            </section>
+          <% end %>
+        <% else %>
+          <section>
+            <div class="message">
+              <p class="message-text">You are not currently registered for any events.</p>
+              <%= link_to events_path do %>
+                <button class="message-button">
+                  Find more events
+                </button>
+              <% end %>
+            </div>
+          </section>
+        <% end %>
+      </article>
+      <article>
+        <h2 class="section-heading">My Team Projects</h2>
+        <% if @participating_competition_event %>
+          <%= render 'my_projects' %>
+        <% end %>
+        <% if @competition.in_form_or_comp_window? LAST_TIME_ZONE %>
+          <%= render 'my_invitations' %>
+        <% elsif @competition.in_form_or_comp_window? LAST_TIME_ZONE %>
+          <section>
+            <div class="message">
+              <p class="message-text">Join a Competition Event to create a team.</p>
+              <%= link_to competition_events_path do %>
+                <button class="message-button">
+                  Go to Competition Events
+                </button>
+              <% end %>
+            </div>
+          </section>
+        <% end %>
+      </article>
+      <article>
+        <h2 class="section-heading">My Favourite Projects</h2>
+        <section>
+          <% if @competition.started? && @favourite_teams.present? %>
+            <% @favourite_teams.each do |team| %>
+              <div class="content-wrapper">
+                <div class="content-wrapper-content">
+                  <h2><%= team.current_project.team_name %> - <%= team.current_project.project_name %></h2>
+                  <p>Event: <%= team.event.name %></p>
+                </div>
+                <div class="content-wrapper-button">
+                  <%= link_to project_path(team.current_project.identifier) do %>
+                    <button class="content-blue-button">
+                      Go to Team Project
+                    </button>
+                  <% end %>
+                </div>
+              </div>
+            <% end %>
+          <% else %>
+            <div>
+              <p class="blank-message">Projects that you favourite will appear here.</p>
+            </div>
+          <% end %>
+        </section>
+      </article>
+    </div>
+  </section>
+</main>
+<main></main>

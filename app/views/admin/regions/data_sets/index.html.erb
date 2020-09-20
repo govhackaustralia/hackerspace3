@@ -1,0 +1,30 @@
+<% content_for :title, "Data Sets for #{@region.name} Region" %>
+<main class="team_page">
+  <section>
+    <h2><%= yield :title %></h2>
+    <p>
+      <%= link_to "Create New Data Set for #{@region.name}", new_admin_region_data_set_path(@region) %>
+    </p>
+    <% if @data_sets.present? %>
+      <% @data_sets.each do |data_set| %>
+        <h3>
+          <%= data_set.name %>
+        </h3>
+        <% unless data_set.description.blank? %>
+          <p>Description: <%= data_set.description %></p>
+        <% end %>
+        <% unless data_set.url.blank? %>
+          <p>URL: <%= data_set.url %></p>
+        <% end %>
+        <p>
+          <%= link_to 'Update Data Set', edit_admin_region_data_set_path(@region, data_set) %>
+        </p>
+      <% end %>
+    <% else %>
+      <p>There are currently no data sets for this region in the current competition.</p>
+    <% end %>
+    <p>
+      <%= link_to "Back to #{@region.name} Region", admin_competition_region_path(@competition, @region) %>
+    </p>
+  </section>
+</main>

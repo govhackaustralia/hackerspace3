@@ -1,0 +1,42 @@
+<% content_for :title, "Datasets for #{@competition.name}" %>
+<main class="dataset_page">
+  <h2>
+    <%= yield :title %>
+  </h2>
+  <% if @data_sets.present? %>
+    <%= link_to 'Download CSV', data_sets_path(format: 'csv'), class: 'download-csv' %>
+    <table class="projects-table" data-turbolinks="false" id="dataset_table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Description</th>
+          <th>Dataset URL</th>
+          <th>Jurisdiction</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @data_sets.each do |data_set| %>
+          <tr>
+            <td>
+              <%= link_to data_set.name, data_set_path(data_set) %>
+            </td>
+            <td>
+              <%= markdown truncate(data_set.description, length: 100, omission: '... ') %>
+            </td>
+            <td>
+              <%= link_to data_set.url, data_set.url, class: 'dataseturl' %>
+            </td>
+            <td>
+              <%= data_set.region.name %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% else %>
+    <p>
+      <strong>No Data Set Highlights saved for <%= @competition.name %> at this time.</strong>
+    </p>
+  <% end %>
+</main>
+<%= link_to 'Back to Resources', resources_path %>

@@ -1,0 +1,48 @@
+<main class="team_page">
+  <section>
+    <h2>
+      Create New Sponsorship for <%= @sponsorable.name %>
+    </h2>
+    <%= form_tag(new_admin_region_sponsorship_path, method: :get) do %>
+      <%= search_field_tag :term, params[:term] %>
+      <%= submit_tag 'Search' %>
+    <% end %>
+    <% if @sponsor.present? %>
+      <p>
+        Sponsor: <%= @sponsor.name %>
+      </p>
+      <% unless @existing_sponsorship.present? %>
+        <%= form_for [:admin, @sponsorable, @sponsorship] do |f| %>
+          <%= f.hidden_field :sponsor_id, value: @sponsor.id %>
+          <%= f.label :sponsorship_type_id %>
+          <br/>
+          <%= f.select :sponsorship_type_id, options_from_collection_for_select(@competition.sponsorship_types, :id, :name, @sponsorship.sponsorship_type) %>
+          <br/>
+          <%= f.submit "Create new Region Sponsorship with #{@sponsor.name}" %>
+        <% end %>
+      <% else %>
+        <p>
+          Event Partnership for <%= @sponsor.name %> to <%= @sponsorable.name %> already exists.
+        </p>
+      <% end %>
+    <% elsif @sponsors.present? %>
+      <% @sponsors.each do |sponsor| %>
+        <p>
+          Sponsor: <%= sponsor.name %>
+        </p>
+        <p>
+          <%= link_to 'Select', new_admin_region_sponsorship_path(@sponsorable, term: sponsor.name) %>
+        </p>
+      <% end %>
+    <% elsif params[:term].present? %>
+      <p>
+        Apologies, no sponsor name matching search term '<%= params[:term] %>'
+      </p>
+    <% else %>
+      <p>Please enter a sponsor name above.</p>
+    <% end %>
+    <p>
+      <%= link_to "Back to #{@sponsorable.name} Sponsorships", admin_region_sponsorships_path(@sponsorable) %>
+    </p>
+  </section>
+</main>

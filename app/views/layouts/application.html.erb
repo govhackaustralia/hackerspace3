@@ -1,0 +1,44 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+  <head>
+    <% if ENV['RAILS_ENV'] == 'development' %>
+      <meta content="text/html; charset=UTF-8" http-equiv="Content-Type"/>
+    <% else %>
+      <meta content="upgrade-insecure-requests" http-equiv="Content-Security-Policy"/>
+    <% end %>
+    <meta content="width=device-width, initial-scale=1" name="viewport"/>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <title>
+      <%= yield(:title).presence || 'GovHack' %>
+      | Hackerspace
+    </title>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= render 'application/favicon' %>
+  </head>
+  <body>
+    <% unless params[:popup].present? %>
+      <% if @acting_on_behalf_of_user %>
+        <div class="acting-on-behalf-of-user">
+          You are acting on behalf of
+          <strong>
+            <%= @acting_on_behalf_of_user.display_name %>
+          </strong>
+          <%= link_to "Revert back to #{current_user.display_name}", cease_acting_on_behalf_of_user_admin_user_path(@acting_on_behalf_of_user), method: :patch %>
+        </div>
+      <% end %>
+      <%= render "shared/top_bar" %>
+    <% end %>
+    <% flash.each do |type, msg| %>
+      <p class="<%= "flash #{type}" %>" >
+        <%= msg %>
+      </p>
+    <% end %>
+    <%= yield %>
+    <% unless params[:popup].present? %>
+      <%= render 'layouts/footer' %>
+    <% end %>
+    <%= javascript_tag "window._search = '#{params[:search]}'" %>
+  </body>
+</html>

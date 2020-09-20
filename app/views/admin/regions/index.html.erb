@@ -1,0 +1,43 @@
+<% content_for :title, "Regions for #{@competition.name}" %>
+<main class="project_index">
+  <h2>
+    <%= yield :title %>
+  </h2>
+  <p>
+    <%= link_to 'New Region', new_admin_competition_region_path, class: 'download-csv' %>
+  </p>
+  <table class="projects-table" data-turbolinks="false" id="admin-regions-table">
+    <thead>
+      <th>Name</th>
+      <th>Category</th>
+      <th>Time Zone</th>
+      <th>Director</th>
+    </thead>
+    <tbody>
+      <% @regions.each do |region| %>
+        <tr>
+          <td>
+            <%= link_to region.name, admin_competition_region_path(@competition, region) %>
+          </td>
+          <td>
+            <%= region.category %>
+          </td>
+          <td>
+            <%= region.time_zone ? region.time_zone : COMP_TIME_ZONE %>
+          </td>
+          <td>
+            <%= region.director&.display_name %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</main>
+<% if current_user.admin_privileges?(@competition) %>
+  <p>
+    <%= link_to 'Back to Competition Management', admin_competition_path(@competition) %>
+  </p>
+<% end %>
+<p>
+  <%= link_to 'Back to Account Management', manage_account_path %>
+</p>

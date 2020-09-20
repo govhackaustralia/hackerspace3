@@ -1,0 +1,60 @@
+<% content_for :title, "Events for Region #{@region.name}" %>
+<main class="team_page">
+  <section>
+    <h2>
+      <%= yield :title %>
+    </h2>
+    <%= link_to "Create New Event", new_admin_region_event_path(@region), class: 'download-csv' %>
+    <% if @events.present? %>
+      <table class="projects-table" data-turbolinks="false" id="admin-events-table">
+        <thead>
+          <th>Event</th>
+          <th>Region</th>
+          <th>Type</th>
+          <th>Start Date</th>
+          <th>Start Time</th>
+          <th>End Date</th>
+          <th>End Time</th>
+          <th>Attending Registrations</th>
+        </thead>
+        <tbody>
+          <% @events.each do |event| %>
+            <tr>
+              <td>
+                <% if event.admin_privileges?(current_user) %>
+                  <%= link_to event.name, admin_region_event_path(event.region, event) %>
+                <% else %>
+                  <%= event.name %>
+                <% end %>
+              </td>
+              <td>
+                <%= event.region.name %>
+              </td>
+              <td>
+                <%= event.event_type %>
+              </td>
+              <td>
+                <%= event.start_time&.strftime('%b %d') %>
+              </td>
+              <td>
+                <%= event.start_time&.strftime('%H:%M') %>
+              </td>
+              <td>
+                <%= event.end_time&.strftime('%b %d') %>
+              </td>
+              <td>
+                <%= event.end_time&.strftime('%H:%M') %>
+              </td>
+              <td><%= event.attending_registrations.length %> / <%= event.registrations.length %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    <% else %>
+      <p>There are currently no events planned for the current Competition.</p>
+    <% end %>
+    <p>
+      <%= link_to 'Back to Region', admin_competition_region_path(@competition, @region) %>
+    </p>
+  </section>
+</main>

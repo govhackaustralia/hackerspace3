@@ -1,0 +1,11 @@
+<main class="team_page">
+  <section>
+    <h2>
+      <%= "Edit Region Limit for #{@checkpoint.name}" %>
+    </h2>
+    <%= render 'form' %>
+  </section>
+  <p>
+    <%= link_to 'Back to Competition Checkpoints', admin_competition_checkpoints_path(@competition) %>
+  </p>
+</main>

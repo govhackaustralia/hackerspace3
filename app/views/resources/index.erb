@@ -1,0 +1,43 @@
+<% content_for :title, "Resources for #{@competition.name}" %>
+<main class="dataset_page">
+  <h2>
+    <%= yield :title %>
+  </h2>
+  <section class="dataportals">
+    <%= link_to data_portals_resources_path do %>
+      <article>
+        <div>
+          <h3>Data Portals</h3>
+        </div>
+      </article>
+    <% end %>
+    <%= link_to data_sets_path do %>
+      <article class="resource_tile">
+        <div>
+          <h3>Datasets</h3>
+        </div>
+      </article>
+    <% end %>
+    <%= link_to tech_resources_path do %>
+      <article>
+        <div>
+          <h3>Tech</h3>
+        </div>
+      </article>
+    <% end %>
+    <%= link_to 'https://govhack.org/lifehacks/', target: '_blank' do %>
+      <article>
+        <div>
+          <h3>#lifehacks Photo Competition</h3>
+        </div>
+      </article>
+    <% end %>
+    <%= link_to 'https://govhack.org/howtocompete/handbook/', target: '_blank' do %>
+      <article>
+        <div>
+          <h3>GovHack Handbook</h3>
+        </div>
+      </article>
+    <% end %>
+  </section>
+</main>

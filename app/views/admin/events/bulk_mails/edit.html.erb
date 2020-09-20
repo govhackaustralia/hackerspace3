@@ -1,0 +1,10 @@
+<% content_for :title, "Edit Bulk Mail #{@bulk_mail.name}" %>
+<main class="team_page">
+  <section>
+    <h2>
+      <%= yield :title %>
+    </h2>
+    <%= render 'form' %>
+    <%= link_to 'Back to Bulk Mail', admin_event_bulk_mail_path(@event, @bulk_mail) %>
+  </section>
+</main>

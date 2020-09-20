@@ -1,0 +1,54 @@
+<table class="projects-table" data-turbolinks="false" id="team-scorecards-table">
+  <thead>
+    <th>Project</th>
+    <th>Team</th>
+    <th>Location</th>
+    <th>Scorecard Count</th>
+    <th>Mean</th>
+    <th>Mode</th>
+    <th>Median</th>
+    <th>Standard Deviation</th>
+  </thead>
+  <tbody>
+    <% @projects.each do |project| %>
+      <tr>
+        <td>
+          <%= link_to "#{project.project_name}", project_path(project.identifier) %>
+        </td>
+        <td>
+          <%= project.team_name %>
+        </td>
+        <td>
+          <%= project.event.name %>
+        </td>
+        <% scores = @region_helper[project.team_id][:scores] %>
+        <% total_card_count = @region_helper[project.team_id][:total_card_count] %>
+        <% if total_card_count == 0 %>
+          <td>No Scores for this Team Project Recorded</td>
+        <% else %>
+          <td>
+            <%= link_to "#{scores.count}/#{total_card_count}",             
+              admin_team_scorecards_path(project.team_id,                  
+              popup: true, include_judges: params[:include_judges]),         
+              {                                                            
+              }                                                         
+            %>
+            <% unless scores.empty? %>
+              <% scores.extend(DescriptiveStatistics) %>
+              <% mean_score = ((scores.mean / MAX_SCORE.to_f) * 100).to_i %>
+              <%= render 'challenges/judging_cell', locals: { total: mean_score } %>
+              <% mode_score = ((scores.mode / MAX_SCORE.to_f) * 100).to_i %>
+              <%= render 'challenges/judging_cell', locals: { total: mode_score } %>
+              <% median_score = ((scores.median / MAX_SCORE.to_f) * 100).to_i %>
+              <%= render 'challenges/judging_cell', locals: { total: median_score } %>
+              <td>
+                <%= scores.standard_deviation %>
+              </td>
+            <% end %>
+          </td>
+        <% end %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<%= javascript_tag "window._admin_teams_path = '#{admin_competition_teams_path(@competition)}';" %>

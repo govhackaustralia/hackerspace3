@@ -1,0 +1,28 @@
+<% content_for :title, 'Update Team Event Details' %>
+<main class="team_page">
+  <section>
+    <h2>Update Team Event Details</h2>
+    <p>
+      <strong>
+        You can update your Team's name in
+        <%= link_to 'Update Project Details', edit_team_management_team_project_path(@team, @current_project) %>
+      </strong>
+    </p>
+    <br/>
+    <%= form_for [:team_management, @team] do |form| %>
+      <div class="form-group">
+        <%= form.label :event_id, 'Event your Team is registered in:' %>
+        <%= form.select :event_id, options_from_collection_for_select(@events, :id, :name, @team.event_id.to_s) %>
+      </div>
+      <div class="custom-control custom-checkbox">
+        <%= form.check_box :youth_team, class: 'custom-control-input' %>
+        <%= form.label :youth_team, 'Is your team a youth team (made up by at least 75% people aged under 18 years old)?', class:'custom-control-label' %>
+      </div>
+      <div class="actions">
+        <%= form.submit %>
+      </div>
+    <% end %>
+    <div class="links"></div>
+    <%= link_to 'Back to Team', team_management_team_path(@team) %>
+  </section>
+</main>

@@ -1,0 +1,46 @@
+<% content_for :title, 'Sponsor Data Set Report' %>
+<main class="project_index">
+  <h2><%= "#{yield :title} for #{@competition.year}" %></h2>
+  <p>
+    <strong>
+      <%= @unaccounted_team_data_set_count %>
+      team data sets unaccounted for in the below output.
+    </strong>
+  </p>
+  <p>
+    <%= link_to 'Download CSV', sponsor_data_set_report_admin_competition_path(@competition, format: 'csv'), class: 'download-csv' %>
+  </p>
+  <table class="projects-table" data-turbolinks="false" id="admin_demographics_table">
+    <thead>
+      <th>Data Set</th>
+      <th>Challenges</th>
+      <th>Sponsors</th>
+      <th>Team Data Sets</th>
+      <th>Teams</th>
+    </thead>
+    <tbody>
+      <% @report.each do |row| %>
+        <tr>
+          <td>
+            <%= row[:data_set_name] %>
+          </td>
+          <td>
+            <%= row[:challenges].join ', ' %>
+          </td>
+          <td>
+            <%= row[:sponsors].join ', ' %>
+          </td>
+          <td>
+            <%= row[:team_data_sets_count] %>
+          </td>
+          <td>
+            <%= row[:teams_count] %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</main>
+<p>
+  <%= link_to 'Back to Competition', admin_competition_path(@competition) %>
+</p>

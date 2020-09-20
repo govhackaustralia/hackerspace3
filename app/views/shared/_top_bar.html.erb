@@ -1,0 +1,38 @@
+<header>
+  <nav class="navbar navbar-default top-bar" role="navigation">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <%= link_to (render "shared/logo"), root_path %>
+        <button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse" type="button">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+      <div class="navbar-collapse">
+        <ul class="nav navbar-nav">
+          <li>
+            <%= link_to 'Events', events_path %>
+          </li>
+          <li>
+            <%= link_to 'Challenges', challenges_path %>
+          </li>
+          <li>
+            <%= link_to 'Projects', projects_path %>
+          </li>
+          <li>
+            <%= link_to 'Profiles', profiles_path %>
+          </li>
+          <li>
+            <%= link_to 'Resources', resources_path %>
+          </li>
+        </ul>
+        <div class="nav navbar-nav navbar-right">
+          <button>
+            <%= render "shared/session_login_links" %>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>

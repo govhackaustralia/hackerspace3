@@ -1,0 +1,39 @@
+<% content_for :title, "Competition #{@competition.year} Sponsorship Types" %>
+<main class="project_index">
+  <h2>
+    <%= yield :title %>
+  </h2>
+  <p>
+    <%= link_to 'New Sponsorship Type', new_admin_competition_sponsorship_type_path(@competition), class: 'download-csv' %>
+  </p>
+  <table class="projects-table" data-turbolinks="false" id="admin-sponsorship-types-table">
+    <thead>
+      <th>Order</th>
+      <th>Name</th>
+      <th>Action</th>
+    </thead>
+    <tbody>
+      <% @sponsorship_types.each do |sponsorship_type| %>
+        <tr>
+          <td>
+            <%= sponsorship_type.order %>
+          </td>
+          <td>
+            <%= sponsorship_type.name %>
+          </td>
+          <td>
+            <%= link_to 'Edit', edit_admin_competition_sponsorship_type_path(@competition, sponsorship_type) %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</main>
+<p>
+  <%= link_to 'Back to Account Management', manage_account_path %>
+</p>
+<% if @admin_privileges %>
+  <p>
+    <%= link_to 'Back to Competition Management', admin_competition_path(@competition) %>
+  </p>
+<% end %>

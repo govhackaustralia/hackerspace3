@@ -1,0 +1,21 @@
+<%= form_for [:admin, @competition, @badge] do |f| %>
+  <div class="form-group">
+    <%= f.label :name %>
+    <%= f.text_field :name, class: 'form-control' %>
+  </div>
+  <div class="form-group">
+    <%= f.label :capacity %>
+    <%= f.number_field :capacity %>
+  </div>
+  <div class="form-group">
+    <%= f.file_field :art, accept: 'image/png,image/gif,image/jpeg', class: 'form-control' %>
+    <% if @badge.art.attached? %>
+      <%= image_tag url_for(@badge.art), alt: @badge.name %>
+    <% else %>
+      <%= image_tag 'default_profile_pic.png' %>
+    <% end %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

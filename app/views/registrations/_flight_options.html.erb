@@ -1,0 +1,21 @@
+<h3>Flight Options</h3>
+<h4>Inbound Flight</h4>
+<% if @inbound_flight.present? %>
+  <p>
+    <%= @inbound_flight.description %>
+  </p>
+<% else %>
+  <p>
+    <%= link_to 'Choose an Inbound Flight', new_flights_registration_registration_flight_path(@registration, direction: INBOUND) %>
+  </p>
+<% end %>
+<h4>OutBound Flight</h4>
+<% if @outbound_flight.present? %>
+  <p>
+    <%= @outbound_flight.description %>
+  </p>
+<% else %>
+  <p>
+    <%= link_to 'Choose an Outbound Flight', new_flights_registration_registration_flight_path(@registration, direction: OUTBOUND) %>
+  </p>
+<% end %>

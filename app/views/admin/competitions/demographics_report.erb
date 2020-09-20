@@ -1,0 +1,28 @@
+<% content_for :title, 'Demographics Report' %>
+<main class="project_index">
+  <h2><%= "#{yield :title} (#{@field}) for #{@competition.year}" %></h2>
+  <p>
+    <%= link_to 'Download CSV', demographics_report_admin_competition_path(@competition, format: 'csv', :field => @field ), class: 'download-csv' %>
+  </p>
+  <table class="projects-table" data-turbolinks="false" id="admin_demographics_table">
+    <thead>
+      <th>input</th>
+      <th>count</th>
+    </thead>
+    <tbody>
+      <% @report.each do |row| %>
+        <tr>
+          <td>
+            <%= row[:input] %>
+          </td>
+          <td>
+            <%= row[:count] %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</main>
+<p>
+  <%= link_to 'Back to Competition', admin_competition_path(@competition) %>
+</p>

@@ -1,0 +1,43 @@
+<%= form_for [@namespace, @team, @project] do |project_form| %>
+  <div class="form-group">
+    <%= project_form.label :team_name %>
+    <%= project_form.text_field :team_name, class: 'form-control' %>
+  </div>
+  <% if @competition.in_comp_window?(@time_zone) || params[:controller] == 'admin/projects' %>
+    <div class="form-group">
+      <%= project_form.label :project_name %>
+      <%= project_form.text_field :project_name, class: 'form-control' %>
+    </div>
+    <div class="form-group">
+      <%= project_form.label :description %>
+      <small>Markdown supported</small>
+      <%= project_form.text_area :description, class: 'form-control w-100' %>
+    </div>
+    <div class="form-group">
+      <%= project_form.label :tag_list %>
+      <small>Separate tags with commas</small>
+      <%= project_form.text_field :tag_list, value: @project.tag_list&.join(', '), class: 'form-control' %>
+    </div>
+    <div class="form-group">
+      <%= project_form.label :data_story %>
+      <small>Markdown supported</small>
+      <%= project_form.text_area :data_story, class: 'form-control w-100' %>
+    </div>
+    <div class="form-group">
+      <%= project_form.label :source_code_url %>
+      <small>Or evidence of work</small>
+      <%= project_form.url_field :source_code_url, class: 'form-control' %>
+    </div>
+    <div class="form-group">
+      <%= project_form.label :video_url %>
+      <%= project_form.url_field :video_url, class: 'form-control' %>
+    </div>
+    <div class="form-group">
+      <%= project_form.label :homepage_url %>
+      <%= project_form.url_field :homepage_url, class: 'form-control' %>
+    </div>
+  <% end %>
+  <div class="actions">
+    <%= project_form.submit 'Save' %>
+  </div>
+<% end %>

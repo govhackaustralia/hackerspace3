@@ -1,0 +1,40 @@
+<% content_for :title, "#{@competition.name} Badges" %>
+<main class="team_page">
+  <section>
+    <h2>
+      <%= yield :title %>
+    </h2>
+    <%= link_to 'New Badge', new_admin_competition_badge_path(@competition), class: 'download-csv' %>
+    <% if @badges.any? %>
+      <table class="projects-table" data-turbolinks="false" id="admin-badge">
+        <thead>
+          <th>Name</th>
+          <th>Capacity</th>
+          <th>Image Saved?</th>
+          <th>Claim Count</th>
+        </thead>
+        <tbody>
+          <% @badges.each do |badge| %>
+            <tr>
+              <td>
+                <%= link_to "#{badge.name}", admin_competition_badge_path(@competition, badge) %>
+              </td>
+              <td>
+                <%= badge.capacity %>
+              </td>
+              <td>
+                <%= badge.art.attached? %>
+              </td>
+              <td>
+                <%= badge.assignments.length %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    <% else %>
+      <p>No badges saved for the current competition.</p>
+    <% end %>
+    <%= link_to 'Back to Competition', admin_competition_path(@competition) %>
+  </section>
+</main>

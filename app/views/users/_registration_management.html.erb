@@ -1,0 +1,38 @@
+<% registration = locals[:registration] %>
+<% event = registration.event %>
+<% region = event.region %>
+<div class="content-wrapper">
+  <div class="content-wrapper-content">
+    <h2><%= "#{event.name} - #{region.name}" %></h2>
+    <% unless event.registration_type == CLOSED %>
+      <h4><%= "RSVP: #{registration.status}" %></h4>
+    <% end %>
+  </div>
+  <div class="content-wrapper-button">
+    <% if registration.status == INVITED %>
+      <%= link_to edit_event_registration_path(event.identifier, registration) do %>
+        <button class="content-black-button">
+          Respond to Invitation
+        </button>
+      <% end %>
+    <% end %>
+    <% if registration.category == GROUP_GOLDEN %>
+      <%= link_to edit_event_registration_path(event.identifier, registration, task: GROUP_GOLDEN) do %>
+        <button class="content-black-button">
+          Transfer Group Golden Ticket to another team member
+        </button>
+      <% end %>
+    <% else %>
+      <%= link_to event_registration_path(event.identifier, registration) do %>
+        <button class="content-blue-button">
+          View Registration
+        </button>
+      <% end %>
+    <% end %>
+    <%= link_to event_path(event.identifier) do %>
+      <button class="content-red-button">
+        Go to Event Page
+      </button>
+    <% end %>
+  </div>
+</div>

@@ -1,8 +1,0 @@
-Hi #{@user.display_name},
-
-You have just been awarded the #{@badge.name} badge!
-
-- if @profile.published
-  You can view this on your #{link_to 'Profile', profile_url(@profile)}
-- else
-  To view this on your Profile, #{link_to 'update your Profile', edit_profile_url(@profile)}.

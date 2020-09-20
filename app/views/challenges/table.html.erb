@@ -1,0 +1,45 @@
+<main class="project_index">
+  <%= render 'index_header' %>
+  <% if @challenges.any? %>
+    <p>
+      <%= link_to 'Download CSV', table_challenges_path(format: 'csv'), class: 'download-csv' %>
+    </p>
+    <table class="projects-table" data-turbolinks="false" id="challenges_table_table">
+      <thead>
+        <tr>
+          <th>Region</th>
+          <th>Name</th>
+          <th>Sponsors</th>
+          <th>Entries</th>
+          <th style="display: none;">meta</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @challenges.each do |challenge| %>
+          <% next unless @checker.show?(challenge.region) %>
+          <tr>
+            <td>
+              <%= challenge.region.name %>
+            </td>
+            <td>
+              <%= link_to challenge.name, challenge_path(challenge) %>
+            </td>
+            <td>
+              <%= challenge.sponsors.pluck(:name).join(', ') %>
+            </td>
+            <td>
+              <%= challenge.published_entries.length %>
+            </td>
+            <td style="display: none;">
+              <%= "#{challenge.short_desc} #{challenge.long_desc}" %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% else %>
+    <p>
+      <strong>No Challenges saved for <%= @competition.name %> at this time.</strong>
+    </p>
+  <% end %>
+</main>

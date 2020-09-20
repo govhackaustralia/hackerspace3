@@ -1,0 +1,23 @@
+<main class="team_page">
+  <section>
+    <h2>Competitions</h2>
+    <% if @admin_user %>
+      <p>
+        <%= link_to 'Create New Competition', new_admin_competition_path, class: 'download-csv' %>
+      </p>
+    <% end %>
+    <% @competitions.each do |competition| %>
+      <h3><%= competition.name %> <%= '(Current)' if competition.current %></h3>
+      <% if current_user.admin_privileges? competition %>
+        <p>
+          <%= link_to 'Go to Competition', admin_competition_path(competition) %>
+        </p>
+      <% else %>
+        <p>You have not yet been granted access to manage this competition.</p>
+      <% end %>
+    <% end %>
+  </section>
+  <p>
+    <%= link_to 'Back to Account Management', manage_account_path %>
+  </p>
+</main>

@@ -1,0 +1,10 @@
+<% content_for :title, "Update #{@event.name} Event" %>
+<main class="team_page">
+  <section>
+    <h2>
+      <%= yield :title %>
+    </h2>
+    <%= render 'form' %>
+    <%= link_to 'Back to Event', admin_region_event_path(@region, @event) %>
+  </section>
+</main>

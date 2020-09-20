@@ -1,0 +1,47 @@
+<main class="team_page">
+  <h2>Add New Staff Flight Registration</h2>
+  <%= form_tag new_admin_event_staff_flight_path, method: :get do %>
+    <%= search_field_tag :term, params[:term] %>
+    <%= submit_tag 'Search' %>
+  <% end %>
+  <% if @user.present? %>
+    <%= render 'admin/shared/user_contact', locals: { user: @user } %>
+    <p>
+      <%= "#{@assignment.title} at #{@assignment.assignable.name}" %>
+    </p>
+    <% if @existing_registration.present? %>
+      <p>
+        Staff Registration for <%= @user.full_name %> already exists.
+      </p>
+      <p>
+        <%= link_to 'Update Registration', edit_admin_event_registration_path(@event, @existing_registration) %>
+      </p>
+    <% else %>
+      <p>
+        <%= link_to 'Create Staff Invitation', admin_event_staff_flights_path(@event, registration: { assignment_id: @assignment.id, holder_id: @assignment.holder_id }), method: :post %>
+      </p>
+    <% end %>
+  <% elsif @users.present? %>
+    <% @users.each do |user| %>
+      <%= render 'admin/shared/user_contact', locals: { user: user } %>
+      <% if (staff_assignments = user.staff_assignments.where(competition: @competition)).any? %>
+        <% staff_assignments.each do |assignment| %>
+          <p>
+            <%= link_to "Select as #{assignment.title} at #{assignment.assignable.name}", new_admin_event_staff_flight_path(@event, term: assignment.id) %>
+          </p>
+        <% end %>
+      <% else %>
+        <p>
+          <strong>This Participant does not have any staff assignments.</strong>
+        </p>
+      <% end %>
+    <% end %>
+  <% elsif params[:term].present? %>
+    <p>
+      Apologies, no staff name matching search term '<%= params[:term] %>'
+    </p>
+  <% else %>
+    <p>Please enter an email address or name to search for a staff member.</p>
+  <% end %>
+</main>
+<%= link_to "Back to #{@event.name} Registrations", admin_event_registrations_path(@event) %>

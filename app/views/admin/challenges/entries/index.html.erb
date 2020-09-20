@@ -1,0 +1,34 @@
+<main class="challenge_page">
+  <h2>
+    <%= @challenge.name %>
+    Entries
+  </h2>
+  <% unless @judges.present? %>
+    <h3>No judges assigned to this challenge.</h3>
+  <% end %>
+  <% if @entries.present? %>
+    <h4>Note:</h4>
+    <p>
+      In order for a team's entry to be marked 'Eligible',
+      the project needs to have entered...
+    </p>
+    <ul>
+      <li>
+        <em>A data story</em>
+      </li>
+      <li>
+        <em>A video url</em>
+      </li>
+      <li>
+        <em>A source code url</em>
+      </li>
+    </ul>
+    <p>Expect most teams to show 'Not Eligible' until towards the end of the Competition.</p>
+    <%= render 'judge_entry_table' %>
+  <% else %>
+    <p>No entries for this challenge currently</p>
+  <% end %>
+</main>
+<p>
+  <%= link_to 'Back to Challenge', admin_region_challenge_path(@region, @challenge) %>
+</p>

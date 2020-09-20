@@ -1,0 +1,57 @@
+<% content_for :title, 'All Profiles' %>
+<main class="profiles_page_test">
+  <section class="header">
+    <h2>GovHack 2020 Profiles</h2>
+    <h3>Find a Participant, Mentor, Industry partner, or GovHack Support here.</h3>
+    <% if user_signed_in? %>
+      <% if current_user.profile&.published %>
+        <p>Your Profile is Published</p>
+      <% else %>
+        <p>
+          <strong>
+            <%= link_to 'Publish Your Profile', edit_profile_path(current_user.profile) %>
+          </strong>
+        </p>
+      <% end %>
+    <% else %>
+      <p>Sign up to create your Profile</p>
+    <% end %>
+  </section>
+  <section class="table-wrapper">
+    <h2>
+      <%= yield :title %>
+    </h2>
+    <table class="profiles-table" data-turbolinks="false" id="projects_table">
+      <thead>
+        <th>Name</th>
+        <th>Category</th>
+        <th>Region</th>
+        <th>Team Status</th>
+        <th>Skills</th>
+      </thead>
+      <tbody>
+        <% @profiles.each do |profile| %>
+          <tr>
+            <td>
+              <strong>
+                <%= link_to "#{profile.user.display_name}", profile_path(profile) %>
+              </strong>
+            </td>
+            <td>
+              <%= profile.user.category %>
+            </td>
+            <td>
+              <%= profile.user.region %>
+            </td>
+            <td>
+              <%= profile.team_status %>
+            </td>
+            <td>
+              <%= profile.skills.map {|tag|"##{tag}"}.join(' ') %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </section>
+</main>

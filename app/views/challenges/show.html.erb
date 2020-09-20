@@ -1,0 +1,126 @@
+<% content_for :title, @challenge.name %>
+<main class="challenge_page">
+  <section class="challenge_head">
+    <article>
+      <h2>
+        <%= @challenge.name %>
+      </h2>
+      <h3>
+        Jurisdiction: <%= @region.name %>
+      </h3>
+    </article>
+    <aside class="sponsors">
+      <% @sponsors.each do |sponsor| %>
+        <figure>
+          <%= link_to sponsor.website, target: '_blank' do %>
+            <% if sponsor.logo.attached? %>
+              <%= image_tag url_for sponsor.logo %>
+            <% else %>
+              <%= image_tag 'default_profile_pic.png' %>
+            <% end %>
+          <% end %>
+        </figure>
+      <% end %>
+    </aside>
+  </section>
+  <section class="challenge_body">
+    <article>
+      <% unless @challenge.short_desc.blank? %>
+        <h4>
+          <%= @challenge.short_desc %>
+        </h4>
+      <% end %>
+      <% unless @challenge.long_desc.blank? %>
+        <p>
+          <%= markdown @challenge.long_desc %>
+        </p>
+      <% end %>
+      <% unless @challenge.eligibility.blank? %>
+        <p>
+          <strong>> Eligibility</strong>
+          <%= @challenge.eligibility %>
+        </p>
+      <% end %>
+      <p>
+        <strong>Entry:</strong>
+        <%= render 'challenges/challenge_entry' %>
+      </p>
+      <% if @data_sets.present? %>
+        <h5>Dataset Highlight</h5>
+        <% @data_sets.each do |data_set| %>
+          <p>
+            <strong>
+              <%= data_set.name %>
+            </strong>
+            <br/>
+            <%= link_to(data_set.url,data_set.url) %>
+          </p>
+        <% end %>
+      <% end %>
+      <p>
+        <%= link_to 'Challenge Entries', entries_challenge_path(@challenge.identifier), class: 'download-csv' %>
+      </p>
+    </article>
+    <aside>
+      <% unless @challenge.video_url.blank? %>
+        <div class="videoWrapper">
+          <iframe allow="autoplay; encrypted-media" frameborder="0" height="315" src="<%= @challenge.video_url %>" width="560"></iframe>
+        </div>
+      <% end %>
+      <% if @challenge.pdf.attached? && @challenge.pdf_preview.attached? %>
+        <%= link_to url_for(@challenge.pdf), target: '_blank' do %>
+          <%= image_tag url_for(@challenge.pdf_preview), alt: "#{@challenge.name} pdf_preview", title: 'Govhack Hackerspace', class: 'pdf_preview' %>
+          <br/>
+        <% end %>
+      <% end %>
+    </aside>
+  </section>
+  <% if @challenge.image.attached? %>
+    <img alt="<%= @challenge.name %> image" class="challenge_image" src="<%= url_for(@challenge.image) %>"/>
+    <br/>
+  <% end %>
+  <section>
+    <% if user_signed_in? %>
+      <% unless @user_eligible_teams.empty? %>
+        <h3>Your Team Entries</h3>
+        <% @user_eligible_teams.each do |team| %>
+          <% project = team.current_project %>
+          <h4>
+            <%= "#{project.team_name} - #{project.project_name}" %>
+          </h4>
+          <% if (entry = Entry.find_by(team: team, challenge: @challenge)).present? %>
+            <p>Team entered into this challenge for <%= entry.checkpoint.name %> Checkpoint.</p>
+          <% else %>
+            <% if team.available_checkpoints(@challenge).present? %>
+              <article>
+                <p class="challenge_enter">
+                  <%= link_to 'Enter Challenge', new_team_management_team_entry_path(team, challenge_id: @challenge.id) %>
+                </p>
+              </article>
+            <% else %>
+              <% if team.all_checkpoints_passed? %>
+                <% if @competition.in_comp_window? LAST_TIME_ZONE %>
+                  <p>All Checkpoints have passed.</p>
+                <% else %>
+                  <p>No entries to this challenge for this team.</p>
+                <% end %>
+              <% end %>
+            <% end %>
+          <% end %>
+        <% end %>
+      <% end %>
+    <% elsif @competition.in_comp_window? LAST_TIME_ZONE %>
+      <p>Sign in to enter your team into this challenge.</p>
+    <% end %>
+  </section>
+</main>
+<section class="ie-push">
+  <% if current_user.present? && current_user.region_privileges?(@competition) %>
+    <p>
+      <%= link_to 'Manage this Challenge', admin_region_challenge_path(@region, @challenge) %>
+    </p>
+  <% end %>
+  <p>
+    <%= link_to 'Back to Challenges', user_challenges_path %>
+  </p>
+</section>

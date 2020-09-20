@@ -1,0 +1,169 @@
+<main class="team_page">
+  <section>
+    <h2>
+      Competition <%= @competition.year %>
+    </h2>
+    <% if @competition.current %>
+      <p>
+        <strong>Current Competition</strong>
+      </p>
+    <% end %>
+    <p>Team Form Start: <%= time_tag @competition.team_form_start %></p>
+    <p>Team Form End: <%= time_tag @competition.team_form_end %></p>
+    <p>Start Time: <%= time_tag @competition.start_time %></p>
+    <p>End Time: <%= time_tag @competition.end_time %></p>
+    <p>People's Choice Start: <%= time_tag @competition.peoples_choice_start %></p>
+    <p>People's Choice End: <%= time_tag @competition.peoples_choice_end %></p>
+    <p>Challenge Judging Start: <%= time_tag @competition.challenge_judging_start %></p>
+    <p>Challenge Judging End: <%= time_tag @competition.challenge_judging_end %></p>
+    <p>
+      <%= link_to 'Update Competition', edit_admin_competition_path(@competition) %>
+    </p>
+    <h3>Regions</h3>
+    <p>
+      <%= pluralize @regions_count, 'region' %>
+      set for this competition.
+    </p>
+    <p>
+      <%= link_to 'Manage Regions', admin_competition_regions_path(@competition) %>
+    </p>
+    <h3>Events</h3>
+    <p>
+      <%= pluralize @events_count, 'event' %>
+      set for this competition
+    </p>
+    <p>
+      <%= link_to 'Manage Events', admin_competition_events_path(@competition) %>
+    </p>
+    <h3>Sponsors</h3>
+    <p>
+      <%= pluralize @sponsors_count, 'sponsor' %>
+      set for this competition
+    </p>
+    <p>
+      <%= link_to 'Manage Sponsors', admin_competition_sponsors_path(@competition) %>
+    </p>
+    <h3>Sponsorship Types</h3>
+    <p>
+      <%= pluralize @sponsorship_types_count, 'sponsorship type' %>
+      set for this competition
+    </p>
+    <p>
+      <%= link_to 'Manage Sponsorship Types', admin_competition_sponsorship_types_path(@competition) %>
+    </p>
+    <h3>People's Choice Judging</h3>
+    <p>
+      <%= link_to 'Competition Judging', admin_competition_scorecards_path(@competition, include_judges: false) %>
+    </p>
+    <p>
+      <%= link_to 'Competition Judging (with Judges)', admin_competition_scorecards_path(@competition, include_judges: true) %>
+    </p>
+    <h3>Competition Assignments</h3>
+    <h4>Competition Director</h4>
+    <% if @director.present? %>
+      <%= render 'admin/shared/user_contact', locals: { user: @director } %>
+    <% else %>
+      <p>This competition does not currently have a director.</p>
+    <% end %>
+    <h4>Site Admins</h4>
+    <% if @site_admins.present? %>
+      <% @site_admins.each do |site_admin| %>
+        <%= render 'admin/shared/user_contact', locals: { user: site_admin } %>
+      <% end %>
+    <% else %>
+      <p>This competition does not currently have any site admins.</p>
+    <% end %>
+    <h4>GovHack Management Team</h4>
+    <% if @management_team.present? %>
+      <% @management_team.each do |member| %>
+        <%= render 'admin/shared/user_contact', locals: { user: member } %>
+      <% end %>
+    <% else %>
+      <p>This competition does not currently have any management team members.</p>
+    <% end %>
+    <p>
+      <%= link_to 'Assignments Management', admin_competition_assignments_path(@competition) %>
+    </p>
+    <h3>CheckPoints</h3>
+    <p>
+      <%= pluralize @checkpoints.count, 'checkpoint' %>
+      saved.
+    </p>
+    <p>
+      <%= link_to 'Competition Checkpoints', admin_competition_checkpoints_path(@competition) %>
+    </p>
+    <h3>Criteria</h3>
+    <p>
+      <%= pluralize @challenge_criteria_count, 'Challenge Criterion' %>
+      saved.
+    </p>
+    <p>
+      <%= pluralize @project_criteria_count, 'Project Criterion' %>
+      saved.
+    </p>
+    <p>
+      <%= link_to 'Competition Criteria', admin_competition_criteria_path(@competition) %>
+    </p>
+    <h3>Badges</h3>
+    <p>
+      <%= pluralize @badge_count, 'badge' %>
+      saved.
+    </p>
+    <p>
+      <%= link_to 'Competition Badges', admin_competition_badges_path(@competition) %>
+    </p>
+    <h3>Hunt Questions</h3>
+    <p>
+      <%= pluralize @hunt_question_count, 'hunt question' %>
+      saved.
+    </p>
+    <p>
+      <%= link_to 'Competition Hunt Questions', admin_competition_hunt_questions_path(@competition) %>
+    </p>
+    <h3>Teams</h3>
+    <p>
+      <%= pluralize @teams_count, 'Team' %>
+      created for this competition.
+    </p>
+    <p>
+      <%= link_to 'Competition Teams', admin_competition_teams_path(@competition) %>
+    </p>
+    <h3>AWS Credits Requested</h3>
+    <p>
+      <%= pluralize @credits_count, 'AWS credit' %>
+      requested for this competition.
+    </p>
+    <p>
+      <%= link_to 'AWS Credits Requested', aws_credits_requested_admin_competition_path(@competition) %>
+    </p>
+    <h3>Sponsor Data Set Report</h3>
+    <p>
+      <%= link_to 'Sponsor Data Set Report', sponsor_data_set_report_admin_competition_path(@competition) %>
+    </p>
+    <h3>Demographics Report</h3>
+    <p>
+      <%= link_to 'Age', demographics_report_admin_competition_path(@competition , field: 'age') %>
+    </p>
+    <p>
+      <%= link_to 'Gender', demographics_report_admin_competition_path(@competition , field: 'gender') %>
+    </p>
+    <p>
+      <%= link_to 'First Peoples', demographics_report_admin_competition_path(@competition , field: 'first_peoples') %>
+    </p>
+    <p>
+      <%= link_to 'Disability', demographics_report_admin_competition_path(@competition , field:  'disability') %>
+    </p>
+    <p>
+      <%= link_to 'Education', demographics_report_admin_competition_path(@competition , field: 'education') %>
+    </p>
+    <p>
+      <%= link_to 'Employment', demographics_report_admin_competition_path(@competition , field: 'employment') %>
+    </p>
+    <p>
+      <%= link_to 'Postcode', demographics_report_admin_competition_path(@competition , field: 'postcode') %>
+    </p>
+    <p>
+      <%= link_to 'Back to Competitions', admin_competitions_path %>
+    </p>
+  </section>
+</main>

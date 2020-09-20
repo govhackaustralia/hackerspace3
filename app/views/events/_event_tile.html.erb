@@ -1,0 +1,31 @@
+<article class="event-tile">
+  <div>
+    <h3 style="<%= ('font-size: 1.2em;' if event.event_type == CONFERENCE) %>">
+      <%= event.name %>
+    </h3>
+    <h4>
+      <% if event.event_type == CONFERENCE %>
+        <%= event.event_partners.first&.name %>
+      <% else %>
+        <%= event.region.name %>
+      <% end %>
+    </h4>
+    <% if [CONNECTION_EVENT, CONFERENCE, AWARD_EVENT].include? event.event_type %>
+      <% unless event.start_time.blank? %>
+        <h4>
+          <%= event.start_time.strftime "%e %B %Y" %>
+        </h4>
+      <% end %>
+      <% unless event.end_time.blank? %>
+        <h4>
+          <%= event.start_time.strftime "%l:%M %p" %>
+          <%= event.region.zone_code %>
+        </h4>
+      <% end %>
+      <p>
+        <%= event.event_type %>
+        <%= event.event_type == CONFERENCE ? 'Session' : 'Event' %>
+      </p>
+    <% end %>
+  </div>
+</article>

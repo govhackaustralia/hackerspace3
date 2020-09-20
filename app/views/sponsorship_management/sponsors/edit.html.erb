@@ -1,0 +1,6 @@
+<% if params[:logo].present? %>
+  <%= render 'edit_logo' %>
+<% else %>
+  <%= render 'edit_details' %>
+<% end %>
+<%= link_to 'Back to Sponsor', sponsorship_management_sponsor_path(@sponsor) %>

@@ -1,0 +1,14 @@
+<% content_for :title, "Update #{@team_data_set.name}" %>
+<main class="team_page">
+  <section>
+    <h2>
+      <%= yield :title %>
+    </h2>
+    <%= render 'form' %>
+    <div class="links">
+      <p>
+        <%= link_to 'Back to Team Data Sets', team_management_team_team_data_sets_path(@team) %>
+      </p>
+    </div>
+  </section>
+</main>

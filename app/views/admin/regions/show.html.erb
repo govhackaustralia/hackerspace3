@@ -1,0 +1,146 @@
+<% content_for :title, @region.name %>
+<main class="project_index">
+  <h2>
+    <%= yield :title %>
+  </h2>
+  <% if @region.international? %>
+    <p>
+      <strong>Root Region</strong>
+    </p>
+  <% end %>
+  <% if @region.time_zone %>
+    <p>Time Zone: <%= @region.time_zone %></p>
+  <% end %>
+  <% if @region.award_release %>
+    <p>Award Release: <%= @region.award_release %></p>
+  <% end %>
+  <p>Region Category: <%= @region.category  %></p>
+  <% if @parent %>
+    <p>Parent: <%= @parent.name  %></p>
+  <% end %>
+  <p>
+    <%= link_to 'Update Region Info', edit_admin_competition_region_path(@competition, @region) %>
+  </p>
+  <h3>Assignments</h3>
+  <h4>Region Director</h4>
+  <% if @director.present? %>
+    <%= render 'admin/shared/user_contact', locals: { user: @director } %>
+  <% else %>
+    <p>This region does not currently have a director.</p>
+    <p>
+      <%= link_to "New #{REGION_DIRECTOR} Assignment", new_admin_region_assignment_path(@region, title: REGION_DIRECTOR) %>
+    </p>
+  <% end %>
+  <h4>Region Support</h4>
+  <% if @supports_count.zero? %>
+    <p>There are currently no region supports assigned to this region.</p>
+  <% else %>
+    <p>
+      <%= pluralize @supports_count, 'region support' %>
+      currently assigned to this region.
+    </p>
+  <% end %>
+  <p>
+    <%= link_to 'Manage Assignments', admin_region_assignments_path(@region) %>
+  </p>
+  <h3>People's Choice Judging</h3>
+  <% if @region.international? %>
+    <p>See Competition Dashboard</p>
+  <% else %>
+    <p>
+      <%= link_to 'Regional Judging', admin_region_scorecards_path(@region, include_judges: false) %>
+    </p>
+    <p>
+      <%= link_to 'Regional Judging (with Judges)', admin_region_scorecards_path(@region, include_judges: true) %>
+    </p>
+  <% end %>
+  <h3>Events</h3>
+  <% if @events.present? %>
+    <h4>Connection Events</h4>
+    <p>
+      <%= pluralize @connections_count, 'connection event' %>
+      planned.
+    </p>
+    <h4>Competition Events</h4>
+    <p>
+      <%= pluralize @competitions_count, 'competition event' %>
+      planned
+    </p>
+    <h4>Awards Events</h4>
+    <p>
+      <%= pluralize @awards_count, 'award event' %>
+      planned
+    </p>
+  <% else %>
+    <p>There are currently no events planned for the current region.</p>
+  <% end %>
+  <p>
+    <%= link_to 'Manage Events', admin_region_events_path(@region) %>
+  </p>
+  <h3>Sponsorships</h3>
+  <% if @sponsorships_count.zero? %>
+    <p>There are currently no sponsorships for this region in the current competition.</p>
+  <% else %>
+    <p>
+      <%= pluralize @sponsorships_count, 'sponsorship' %>
+      recorded for this region.
+    </p>
+  <% end %>
+  <p>
+    <%= link_to 'Manage Sponsorships', admin_region_sponsorships_path(@region) %>
+  </p>
+  <h3>Data Sets</h3>
+  <% if @data_sets_count.zero? %>
+    <p>There are currently no data sets for this region in the current competition.</p>
+  <% else %>
+    <p>
+      <%= pluralize @data_sets_count, 'data set' %>
+      saved for this region.
+    </p>
+  <% end %>
+  <p>
+    <%= link_to 'Manage Data Sets', admin_region_data_sets_path(@region) %>
+  </p>
+  <h3>Challenges</h3>
+  <% if @challenges_count.zero? %>
+    <p>There are currently no challenges for this region in the current competition.</p>
+  <% else %>
+    <p>
+      <%= pluralize @challenges_count, 'challenge' %>
+      created for this region.
+    </p>
+  <% end %>
+  <p>
+    <%= link_to 'Manage Challenges', admin_region_challenges_path(@region) %>
+  </p>
+  <h3>Bulk Mails</h3>
+  <% if @bulk_mails_count.zero? %>
+    <p>There are currently no bulk mails for this region in the current competition.</p>
+  <% else %>
+    <p>
+      <%= pluralize @bulk_mails_count, 'bulk mail' %>
+      created for this region.
+    </p>
+  <% end %>
+  <p>
+    <%= link_to 'Bulk Mails', admin_region_bulk_mails_path(@region) %>
+  </p>
+  <% if @region.international? %>
+    <h3>National Challenge Entries By Region</h3>
+    <p>
+      <em>Ignoring Checkpoints Unlike Public Screen</em>
+    </p>
+    <%= render 'national_challenge_entries' %>
+  <% else %>
+    <h3>Regional Challenge Entries By Event</h3>
+    <p>
+      <em>Ignoring Checkpoints Unlike Public Screen</em>
+    </p>
+    <%= render 'regional_challenge_entries' %>
+  <% end %>
+</main>
+<% if current_user.region_privileges?(@competition) %>
+  <p>
+    <%= link_to 'Back to Competition Regions', admin_competition_regions_path(@competition) %>
+  </p>
+<% end %>

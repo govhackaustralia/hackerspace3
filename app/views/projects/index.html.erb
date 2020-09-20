@@ -1,0 +1,96 @@
+<% content_for :title, "Projects #{params[:search]}" %>
+<main class="project_index">
+  <h2>
+    Team Projects for Competition <%= @competition.year %>
+    <span class="search">
+      <%= params[:search] %>
+    </span>
+  </h2>
+  <% if @competition.started? FIRST_TIME_ZONE %>
+    <p>
+      <%= link_to 'Download CSV', projects_path(format: 'csv'), class: 'download-csv' %>
+    </p>
+    <% if @competition.in_form_or_comp_window?(FIRST_TIME_ZONE) %>
+      <% if user_signed_in? %>
+        <% if @participating_competition_event.present? %>
+          <% if @competition.in_form_or_comp_window?(@time_zone) %>
+            <aside>
+              <%= link_to 'Create New Team Project', new_team_path %>
+            </aside>
+          <% end %>
+        <% else %>
+          <p>
+            <strong>Please register for a competition event to create a team.</strong>
+          </p>
+          <p>
+            <%= link_to 'Competition Events', competition_events_path %>
+          </p>
+        <% end %>
+      <% else %>
+        <p>
+          <strong>
+            Sign in to the Hackerspace and register for a competition event
+            to create a team.
+          </strong>
+        </p>
+      <% end %>
+    <% end %>
+    <table class="projects-table" data-turbolinks="false" id="projects_table">
+      <thead>
+        <th>Project</th>
+        <th>Team</th>
+        <th>Location</th>
+        <% unless @competition.not_finished?(LAST_TIME_ZONE) %>
+          <th>Challenges Entered</th>
+          <th>Datasets Used</th>
+        <% end %>
+        <th style="display: none;">meta</th>
+        <% if show_peoples_choice_stuff? %>
+          <th>Project Scorecard</th>
+        <% end %>
+      </thead>
+      <tbody>
+        <% @projects.each do |project| %>
+          <tr>
+            <td>
+              <%= link_to "#{project.project_name}", project_path(project.identifier) %>
+            </td>
+            <td>
+              <%= project.team_name %>
+            </td>
+            <td>
+              <%= project.event.name %>
+            </td>
+            <% unless @competition.not_finished?(LAST_TIME_ZONE) %>
+              <td>
+                <%= @challenge_counts[project.team_id] %>
+              </td>
+              <td>
+                <%= @team_data_set_counts[project.team_id] %>
+              </td>
+            <% end %>
+            <td style="display: none;">
+              <%= "#{project.description} #{project.data_story} #{project.tags.map {|tag|"##{tag}"}.join(' ')}" %>
+            </td>
+            <% if show_peoples_choice_stuff? %>
+              <% if (display_score = @project_judging[project.team_id][:display_score_status]).is_a? Integer %>
+                <% score_value = ((display_score.to_f / @project_judging_total.to_f) * 100).to_i %>
+                <%= render 'challenges/judging_cell', locals: { total: score_value } %>
+              <% else %>
+                <td>
+                  <%= display_score %>
+                </td>
+              <% end %>
+            <% end %>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% else %>
+    <section class="later">
+      <strong>
+        Check back here at the commencement of the competition at <%= @competition.start_time.strftime("%I.%M %p %e %B %Y") %>
+      </strong>
+    </section>
+  <% end %>
+</main>
