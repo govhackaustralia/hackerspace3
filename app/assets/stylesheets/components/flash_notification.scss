@@ -1,5 +1,5 @@
 p {
-  &.alert {
+  &.flash {
     position: absolute;
     margin: 0 auto;
     padding: 0.5em 1.5em;
@@ -11,37 +11,13 @@ p {
     width: auto;
     cursor: pointer;
     text-align: center;
-  }
-
-  &.notice {
-    position: absolute;
-    margin: 0 auto;
-    padding: 0.5em 1.5em;
-    color: #ddd;
-    margin-left: auto;
-    margin-right: auto;
-    left: 50%;
-    transform: translate(-50%, 1em);
-    width: auto;
-    cursor: pointer;
-    text-align: center;
-    background-color: #4c9ad2;
   }
 
   &.alert {
     background-color: #C00;
-
-    &:empty {
-      display: none;
-    }
   }
 
-  &.notice:empty {
-    display: none;
-  }
-
-  &.alert:not(:empty):after, &.notice:not(:empty):after {
-    content: " Click to dismiss.";
-    font-style: italic;
+  &.notice {
+    background-color: #4c9ad2;
   }
 }

@@ -30,12 +30,11 @@
       <% end %>
       <%= render "shared/top_bar" %>
     <% end %>
-    <p class="notice">
-      <%= notice %>
-    </p>
-    <p class="alert">
-      <%= alert %>
-    </p>
+    <% flash.each do |type, msg| %>
+      <p class="<%= "flash #{type}" %>" >
+        <%= msg %>
+      </p>
+    <% end %>
     <%= yield %>
     <% unless params[:popup].present? %>
       <%= render 'layouts/footer' %>
