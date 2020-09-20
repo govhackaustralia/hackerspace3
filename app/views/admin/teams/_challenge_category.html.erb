@@ -1,0 +1,34 @@
+<% checkpoint = locals[:checkpoint] %>
+<% challenges = locals[:challenges] %>
+<% type = locals[:type] %>
+<% max_challenges = locals[:max_challenges] %>
+<% available_challenges = locals[:available_challenges] %>
+<% if type == NATIONAL %>
+  <p>
+    <%= "#{challenges.count} of #{pluralize checkpoint.max_national(@region), "#{type} challenge"} entered" %>
+  </p>
+<% else %>
+  <p>
+    <%= "#{challenges.count} of #{pluralize checkpoint.max_regional(@region), "#{type} challenge"} entered" %>
+  </p>
+<% end %>
+<% challenges.each do |challenge| %>
+  <%= render 'challenge_entry', locals: { checkpoint: checkpoint, challenge: challenge } %>
+<% end %>
+<% if challenges.count < max_challenges && available_challenges.present? %>
+  <p>
+    <%= link_to "Enter New #{type} Challenge at checkpoint #{checkpoint.name}", new_admin_team_entry_path(@team, challenge_type: type, checkpoint_id: checkpoint.id) %>
+  </p>
+<% elsif available_challenges.empty? %>
+  <p>
+    <strong>
+      No more <%= type %> challenges left to enter.
+    </strong>
+  </p>
+<% else %>
+  <p>
+    <strong>
+      Team has entered the maximum number of <%= type %> challenges for this checkpoint
+    </strong>
+  </p>
+<% end %>

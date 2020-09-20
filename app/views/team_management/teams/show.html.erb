@@ -1,0 +1,143 @@
+<% content_for :title, @current_project.project_name %>
+<main class="team_page">
+  <section class="team_page_header">
+    <h2>Team Management</h2>
+  </section>
+  <hr class="grey-border"/>
+  <section class="team_page_body">
+    <div class="menu">
+      <article class="menu-group">
+        <% if @competition.in_comp_window?(@time_zone) %>
+          <h3>Team Management</h3>
+          <%= link_to edit_team_management_team_path(@team) do %>
+            <button class="red-button">
+              Update Team Event Details
+            </button>
+          <% end %>
+          <%= link_to edit_thumbnail_team_management_team_path(@team) do %>
+            <button class="red-button">
+              Update Thumbnail
+            </button>
+          <% end %>
+          <%= link_to edit_image_team_management_team_path(@team) do %>
+            <button class="red-button">
+              Update High Resolution Image
+            </button>
+          <% end %>
+          <%= link_to team_management_team_assignments_path(@team) do %>
+            <button class="red-button">
+              Manage Team Members
+            </button>
+          <% end %>
+        <% end %>
+      </article>
+      <article class="menu-group">
+        <% if @competition.in_form_or_comp_window?(@time_zone) %>
+          <h3>Project Management</h3>
+          <%= link_to edit_team_management_team_project_path(@team, @current_project) do %>
+            <button class="blue-button">
+              Update Project Details
+            </button>
+          <% end %>
+        <% end %>
+        <% if @competition.in_comp_window?(@time_zone) %>
+          <%= link_to team_management_team_team_data_sets_path(@team) do %>
+            <button class="blue-button">
+              Manage Team Data Sets
+            </button>
+          <% end %>
+        <% end %>
+        <% if @competition.in_comp_window?(@time_zone) %>
+          <%= link_to team_management_team_entries_path(@team) do %>
+            <button class="blue-button">
+              Manage Challenge Entries
+            </button>
+          <% end %>
+        <% end %>
+      </article>
+      <article class="menu-group-footer">
+        <%= link_to manage_account_path do %>
+          <button class="black-button">
+            Back to Account Management
+          </button>
+        <% end %>
+      </article>
+    </div>
+    <div class="team_page_content">
+      <article class="main-content">
+        <h3 class="article-heading">
+          <%= yield :title %>
+        </h3>
+        <div class="content-wrapper">
+          <div class="content-wrapper-content">
+            <h2>Team Name: <%= @current_project.team_name %></h2>
+            <p>Event: <%= @event.name %></p>
+            <p>Region: <%= @region.name %></p>
+          </div>
+          <div class="content-wrapper-button">
+            <% if @team.published && @competition.started?(@time_zone) %>
+              <%= link_to project_path(@current_project.identifier) do %>
+                <button class="content-red-button">
+                  Go to Team Page
+                </button>
+              <% end %>
+            <% elsif @competition.started?(@time_zone) %>
+              <p>This Project is yet to be published.</p>
+            <% else %>
+              <p>Team projects will become public at the start of the competition.</p>
+            <% end %>
+          </div>
+        </div>
+      </article>
+      <article class="main-content">
+        <h3 class="article-heading">Team Project Info</h3>
+        <% if @competition.in_comp_window?(@time_zone) %>
+          <%= render 'projects/team_project_info' %>
+        <% else %>
+          <section>
+            <p>Team project information will be displayed here.</p>
+          </section>
+        <% end %>
+      </article>
+      <article class="main-content">
+        <h3 class="article-heading">Team Data Sets</h3>
+        <p>
+          This team currently has <%= pluralize @team.team_data_sets.count, 'data set' %>.
+        </p>
+      </article>
+      <article class="main-content">
+        <h3 class="article-heading">Team Members</h3>
+        <h4>Team Leader</h4>
+        <% if (team_leader = @team.team_leader).present? %>
+          <%= render 'users/user_contact', locals: { user: team_leader } %>
+        <% else %>
+          <p>
+            <strong>No team leader assigned for this team.</strong>
+          </p>
+        <% end %>
+        <% if (team_members = @team.members).present? %>
+          <p>
+            <strong>
+              + <%= pluralize team_members.count, 'other team member' %>.
+            </strong>
+          </p>
+        <% end %>
+        <% if (invitees = @team.invitees).present? %>
+          <p>
+            <strong>
+              <%= pluralize invitees.count, 'invitee' %>
+              \.
+            </strong>
+          </p>
+        <% end %>
+      </article>
+      <article class="main-content">
+        <h3 class="article-heading">Challenge Entries</h3>
+        <p>
+          <%= pluralize @team.challenges.count, 'challenge' %>
+          entered.
+        </p>
+      </article>
+    </div>
+  </section>
+</main>

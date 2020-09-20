@@ -1,0 +1,8 @@
+<% content_for :title, "Create a Data Set for #{@region.name}" %>
+<main class="dataset_page">
+  <h2>
+    <%= yield :title %>
+  </h2>
+  <%= render 'form' %>
+  <%= link_to "Back to #{@region.name} Region Data Sets", admin_region_data_sets_path(@region) %>
+</main>

@@ -1,0 +1,27 @@
+<% content_for :title, "Projects for #{@current_project.team_name}" %>
+<main class="project_index">
+  <h2><%= yield :title %></h2>
+  <p>
+    <%= link_to 'Update Team Project', edit_admin_team_project_path(@team, @current_project) %>
+  </p>
+  <% @projects.each do |project| %>
+    <h3>
+      <%= project.team_name %>
+    </h3>
+    <% if project == @current_project %>
+      <p>
+        <strong>(Current Project)</strong>
+      </p>
+    <% end %>
+    <p>Created At: <%= project.created_at %></p>
+    <% if (user = project.user).present? %>
+      <p>Created By: <%= user.display_name %></p>
+    <% end %>
+    <p>
+      <%= link_to 'Go to project version', admin_team_project_path(@team, project) %>
+    </p>
+  <% end %>
+</main>
+<p>
+  <%= link_to 'Back to Team Management', admin_competition_team_path(@team.competition, @team) %>
+</p>

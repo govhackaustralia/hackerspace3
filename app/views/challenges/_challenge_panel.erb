@@ -1,0 +1,24 @@
+<section class="challenge-panel">
+  <article>
+    <h4>
+      <%= challenge.name %>
+    </h4>
+    <% unless challenge.short_desc.blank? %>
+      <h5>
+        <%= challenge.short_desc %>
+      </h5>
+    <% end %>
+    <p>
+      <%= link_to 'Go to Challenge', challenge_path(challenge.identifier) %>
+      | <%= pluralize entry_count, 'team has', plural: 'teams have'  %>
+      entered this challenge.
+    </p>
+  </article>
+  <aside>
+    <% challenge.sponsors_with_logos.each do |sponsor| %>
+      <figure>
+        <%= link_to (image_tag(sponsor_logo_asset_path(sponsor))), sponsor.website, target: '_blank' %>
+      </figure>
+    <% end %>
+  </aside>
+</section>

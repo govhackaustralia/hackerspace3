@@ -1,0 +1,12 @@
+<% content_for :title, "New Badge for #{@competition.name}" %>
+<main class="team_page">
+  <section>
+    <h2>
+      <%= yield :title %>
+    </h2>
+    <%= render 'form' %>
+    <p>
+      <%= link_to 'Back to Competition Badges', admin_competition_badges_path(@competition) %>
+    </p>
+  </section>
+</main>

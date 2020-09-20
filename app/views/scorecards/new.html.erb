@@ -1,0 +1,8 @@
+<% content_for :title, 'New Scorecard' %>
+<main class="scorecard">
+  <h2>
+    <%= yield :title %>
+  </h2>
+  <%= render 'form' %>
+  <%= link_to 'Close', project_path(@project.identifier), id: 'close-scorecard' %>
+</main>

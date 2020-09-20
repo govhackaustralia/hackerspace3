@@ -1,8 +1,0 @@
-- content_for :title, 'Update Data Set'
-%main.team_page
-  %section
-    %h2
-      Update #{@team_data_set.name}
-    = render 'form'
-    %div.links
-      %p= link_to 'Back to Team Data Sets', team_management_team_team_data_sets_path(@team)

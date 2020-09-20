@@ -1,6 +1,0 @@
-- content_for :title, 'Update Project'
-%main.team_page
-  %section
-    %h2 #{yield :title} for Team #{@team.name}
-    = render 'team_management/projects/form'
-    = link_to 'Back to Project Versions', admin_team_projects_path(@team)

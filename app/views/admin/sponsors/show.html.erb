@@ -1,0 +1,83 @@
+<main class="team_page admin-sponsors">
+  <h2>
+    <%= @sponsor.name %>
+  </h2>
+  <figure>
+    <% if @sponsor.logo.attached? %>
+      <img alt="<%= @sponsor.name %> logo" src="<%= url_for @sponsor.logo %>"/>
+    <% else %>
+      <%= image_tag "default_profile_pic.png" %>
+    <% end %>
+    <br/>
+  </figure>
+  <p>
+    <%= link_to 'Change Logo', edit_admin_sponsor_logo_path(@sponsor) %>
+  </p>
+  <p>
+    <%= link_to 'Destroy Sponsor', admin_competition_sponsor_path(@competition, @sponsor), method: :delete, data: { confirm: 'Are you sure?' } %>
+  </p>
+  <br/>
+  <% if @sponsor.description.present? %>
+    <article>
+      Description: <%= @sponsor.description %>
+    </article>
+  <% end %>
+  <% if @sponsor.website.present? %>
+    Website:
+    <a href="<%= @sponsor.website %>" target="_blank">
+      <%= @sponsor.website %>
+    </a>
+    <br/>
+  <% else %>
+    <p>No website recorded for this sponsor.</p>
+  <% end %>
+  <%= link_to 'Edit Sponsor', edit_admin_competition_sponsor_path(@competition, @sponsor) %>
+  <br/>
+  <h3>Sponsor Contact</h3>
+  <% if (contacts = @sponsor.assignments).present? %>
+    <% contacts.each do |contact| %>
+      <%= render 'admin/shared/user_contact', locals: { user: contact.user } %>
+    <% end %>
+  <% else %>
+    This sponsor does not currently have any contacts.
+    <br/>
+  <% end %>
+  <%= link_to "New #{SPONSOR_CONTACT} Assignment", new_admin_sponsor_assignment_path(@sponsor, title: SPONSOR_CONTACT) %>
+  <br/>
+  <h3>Sponsorships</h3>
+  <div>Please go to individual regions to add sponsorships.</div>
+  <% if (sponsorships = @sponsor.sponsorships).empty? %>
+    <div>
+      No sponsorships for <%= @sponsor.name %>
+    </div>
+  <% else %>
+    <% sponsorships.each do |sponsorship| %>
+      <h4>
+        <%= "#{sponsorship.sponsorable_type}: #{sponsorship.sponsorable.name}" %>
+      </h4>
+      <p>Sponsorship type: <%= sponsorship.sponsorship_type.name %></p>
+      <p>
+        <%= link_to 'Destroy Sponsorship', admin_sponsor_sponsorship_path(@sponsor, sponsorship), method: :delete, data: { confirm: 'Are you sure?' } %>
+      </p>
+    <% end %>
+  <% end %>
+  <h3>Event Partnerships</h3>
+  <div>Please go to individual events to add event parters.</div>
+  <% if (event_partnerships = @sponsor.event_partnerships).empty? %>
+    <div>
+      No event partnerships for <%= @sponsor.name %>
+    </div>
+  <% else %>
+    <% event_partnerships.each do |event_partnership| %>
+      <h4>
+        Event: <%= event_partnership.event.name %>
+      </h4>
+      <p>
+        <%= link_to 'Destroy Event Partnership', admin_event_partnership_path(event_partnership), method: :delete, data: { confirm: 'Are you sure?' } %>
+      </p>
+    <% end %>
+  <% end %>
+</main>
+<p>
+  <%= link_to 'Back to Sponsors', admin_competition_sponsors_path(@competition) %>
+</p>

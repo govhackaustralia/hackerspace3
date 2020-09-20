@@ -1,0 +1,19 @@
+<% content_for :title, "Create New Team Project #{@participating_competition_event.name}" %>
+<main class="team_page">
+  <h2><%= yield :title %></h2>
+  <%= form_for @team do |form| %>
+    <div class="field">
+      <%= form.label :youth_team, 'Is your team a youth team (made up by at least 75% people aged under 18 years old)?' %>
+      <%= form.check_box :youth_team %>
+    </div>
+    <div class="actions">
+      <%= form.submit 'Create New Team Project' %>
+    </div>
+  <% end %>
+</main>
+<p>
+  <%= link_to 'Back to Account Management', manage_account_path %>
+</p>
+<p>
+  <%= link_to 'Back to Projects', projects_path %>
+</p>

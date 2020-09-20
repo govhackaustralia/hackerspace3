@@ -1,0 +1,7 @@
+<%= form_for [:admin, @event, @flight] do |form| %>
+  <%= form.label :description %>
+  <%= form.text_field :description %>
+  <%= form.label :direction %>
+  <%= form.select(:direction, options_for_select(FLIGHT_DIRECTIONS, @flight.direction)) %>
+  <%= form.submit %>
+<% end %>

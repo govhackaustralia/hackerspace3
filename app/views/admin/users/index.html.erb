@@ -1,0 +1,41 @@
+<% content_for :title, 'User Management' %>
+<main class="project_index">
+  <h2>
+    <%= yield :title %>
+  </h2>
+  <p>
+    <%= link_to "Download CSV (All users and what events they registered for in #{@competition.year})", admin_users_path(format: 'csv'), class: 'download-csv' %>
+  </p>
+  <p>
+    <%= link_to "Download CSV (Mailing List Export #{@competition.year})", mailing_list_export_admin_users_path(format: 'csv'), class: 'download-csv' %>
+  </p>
+  <table class="projects-table" data-turbolinks="false" id="admin-users-table">
+    <thead>
+      <th>Full Name</th>
+      <th>Preferred Name</th>
+      <th>Email</th>
+      <th>Confirmed Status</th>
+    </thead>
+    <tbody>
+      <% @users.each do |user| %>
+        <tr>
+          <td>
+            <%= link_to (user.full_name || '[no name]'), admin_user_path(user) %>
+          </td>
+          <td>
+            <%= user.preferred_name %>
+          </td>
+          <td>
+            <%= user.email %>
+          </td>
+          <td>
+            <%= user.confirmed_status %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</main>
+<p>
+  <%= link_to 'Back to Account Management', manage_account_path %>
+</p>

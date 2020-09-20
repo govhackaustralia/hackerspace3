@@ -1,0 +1,34 @@
+<main class="team_page">
+  <section>
+    <h2>Review Entry</h2>
+    <p>Team: <%= @team.name %></p>
+    <p>Challenge:  <%= @challenge.name %></p>
+    <p>Checkpoint: <%= @checkpoint.name %></p>
+    <p>Justification: <%= @entry.justification %></p>
+    <%= form_for [:admin, @challenge, @entry] do |form| %>
+      <div class="form-group">
+        <%= form.label :eligible, 'Mark Eligible' %>
+        <%= form.radio_button :eligible, true, options = {checked: @entry.eligible == true} %>
+      </div>
+      <div class="form-group">
+        <%= form.label :eligible, 'Mark Ineligible' %>
+        <%= form.radio_button :eligible, false, options = {checked: @entry.eligible == false} %>
+      </div>
+      <div class="form-group">
+        <%= form.label :award %>
+        <%= form.select :award, options_for_select([nil] + AWARD_NAMES, @entry.award) %>
+      </div>
+      <div class="actions">
+        <%= form.submit %>
+      </div>
+    <% end %>
+    <div class="links">
+      <p>
+        <%= link_to 'Go to Team Project', project_path(@team.current_project.identifier), target: '_blank' %>
+      </p>
+      <p>
+        <%= link_to 'Back to Entries', admin_challenge_entries_path(@challenge) %>
+      </p>
+    </div>
+  </section>
+</main>

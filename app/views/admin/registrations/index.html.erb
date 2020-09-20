@@ -1,0 +1,116 @@
+<% content_for :title, "Registrations for #{@event.name} Event" %>
+<main class="registrations_list">
+  <section>
+    <h2>
+      <%= yield :title %>
+    </h2>
+    <p>
+      <%= link_to 'New Registration', new_admin_event_registration_path(@event), class: 'download-csv' %>
+    </p>
+    <p>
+      <%= link_to 'Download CSV', admin_event_registrations_path(@event, format: 'csv'), class: 'download-csv' %>
+    </p>
+    <table data-turbolinks="false" id="admin-registrations-table">
+      <thead>
+        <tr>
+          <% if @region.international? && @event.event_type == AWARD_EVENT %>
+            <th>Ticket Type</th>
+          <% end %>
+          <th>Full Name</th>
+          <th>Email</th>
+          <th>Slack</th>
+          <th>Preferred Name</th>
+          <th>Organisation</th>
+          <th>Dietary</th>
+          <th>Status</th>
+          <th>Registration Type</th>
+          <th>Parent/Guardian</th>
+          <th>No Photos</th>
+          <th>Data Cruncher</th>
+          <th>Coder</th>
+          <th>Creative</th>
+          <th>Facilitator</th>
+          <th>Edit</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @registrations.each do |registration| %>
+          <% assignment = registration.assignment %>
+          <% user = assignment.user %>
+          <tr>
+            <% if @region.international? && @event.event_type == AWARD_EVENT %>
+              <% if assignment.title == VIP || assignment.title == PARTICIPANT %>
+                <td>Regular</td>
+              <% elsif assignment.assignable_type == 'Team' %>
+                <td>Team Golden Ticket</td>
+              <% elsif assignment.title == GOLDEN_TICKET %>
+                <td>Individual Golden Ticket</td>
+              <% else %>
+                <td>Staff Invitation</td>
+              <% end %>
+            <% end %>
+            <td>
+              <%= user.full_name %>
+            </td>
+            <td>
+              <%= user.email %>
+            </td>
+            <td>
+              <%= user.slack %>
+            </td>
+            <td>
+              <%= user.preferred_name %>
+            </td>
+            <td>
+              <%= user.organisation_name %>
+            </td>
+            <td>
+              <%= user.dietary_requirements %>
+            </td>
+            <td>
+              <%= registration.status %>
+            </td>
+            <td>
+              <%= user.registration_type %>
+            </td>
+            <td>
+              <%= user.parent_guardian %>
+            </td>
+            <td>
+              <%= user.request_not_photographed %>
+            </td>
+            <td>
+              <%= user.data_cruncher %>
+            </td>
+            <td>
+              <%= user.coder %>
+            </td>
+            <td>
+              <%= user.creative %>
+            </td>
+            <td>
+              <%= user.facilitator %>
+            </td>
+            <td>
+              <%= link_to 'Edit', edit_admin_event_registration_path(@event, registration) %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <% if @region.international? && @event.event_type == AWARD_EVENT %>
+      <p>
+        <%= link_to 'New Individual Golden Ticket', new_admin_event_individual_golden_path(@event) %>
+      </p>
+      <p>
+        <%= link_to 'New Group Golden Ticket', new_admin_event_group_golden_path(@event) %>
+      </p>
+      <p>
+        <%= link_to 'New Staff Flight Registration', new_admin_event_staff_flight_path(@event) %>
+      </p>
+    <% end %>
+  </section>
+</main>
+<p>
+  <%= link_to "Back to #{@event.name} Event", admin_region_event_path(@region, @event) %>
+</p>

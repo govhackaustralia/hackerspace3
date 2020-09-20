@@ -1,0 +1,22 @@
+<%= form_for [:team_management, @team, @team_data_set] do |form| %>
+  <div id="hiddendescription"></div>
+  <div class="form-group">
+    <%= form.label :url %>
+    <%= form.url_field :url, class: 'form-control' %>
+  </div>
+  <div class="form-group">
+    <%= form.label :name %>
+    <%= form.text_field :name, class: 'form-control' %>
+  </div>
+  <div class="form-group">
+    <%= form.label :description %>
+    <%= form.text_area :description, class: 'form-control w-100' %>
+  </div>
+  <div class="form-group">
+    <%= form.label :description_of_use %>
+    <%= form.text_area :description_of_use, class: 'form-control w-100' %>
+  </div>
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

@@ -1,0 +1,11 @@
+<main class="team_page">
+  <section>
+    <h2>
+      Update Competition <%= @competition.year %>
+    </h2>
+    <%= render 'form' %>
+    <p>
+      <%= link_to 'Back to Competition', admin_competition_path(@competition) %>
+    </p>
+  </section>
+</main>

@@ -1,0 +1,28 @@
+<main class="registration single-col change-password">
+  <container>
+    <section class="signup-form">
+      <h2 class="heading">Change your password</h2>
+      <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
+        <%= render 'devise/shared/error_messages', resource: resource %>
+        <%= f.hidden_field :reset_password_token %>
+        <div class="form-group">
+          <%= f.label :password, "New password" %>
+          <% if @minimum_password_length %>
+            <small>
+              (<%= @minimum_password_length %> characters minimum)
+            </small>
+          <% end %>
+          <%= f.password_field :password, autofocus: true, autocomplete: "off", class: 'form-control' %>
+        </div>
+        <div class="form-group">
+          <%= f.label :password_confirmation, "Confirm new password" %>
+          <%= f.password_field :password_confirmation, autocomplete: "off", class: 'form-control' %>
+        </div>
+        <div class="actions">
+          <%= f.submit "Change my password" %>
+        </div>
+        <%= render "devise/shared/links" %>
+      <% end %>
+    </section>
+  </container>
+</main>

@@ -1,0 +1,21 @@
+<main class="team_page">
+  <h2>
+    <%= "Update #{@team.name}'s Entry to Challenge #{@challenge.name}" %>
+  </h2>
+  <%= form_for [:admin, @team, @entry] do |form| %>
+    <div class="form-group">
+      <%= form.label :checkpoint_id %>
+      <%= form.select :checkpoint_id, options_from_collection_for_select(@checkpoints, :id, :name, @entry.checkpoint_id.to_s) %>
+    </div>
+    <div class="form-group">
+      <%= form.label :justification %>
+      <%= form.text_area :justification, class: "form-control" %>
+    </div>
+    <div class="actions">
+      <%= form.submit %>
+    </div>
+  <% end %>
+  <p>
+    <%= link_to 'Back To Team', admin_competition_team_path(@competition, @team) %>
+  </p>
+</main>

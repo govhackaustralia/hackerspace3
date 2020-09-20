@@ -1,0 +1,46 @@
+<% content_for :title, "Project Create At #{@project.created_at}" %>
+<main class="project_index">
+  <h2><%= yield :title %></h2>
+  <% if @project == @current_project %>
+    <p>
+      <strong>This is the current project version.</strong>
+    </p>
+  <% else %>
+    <p>
+      <%= link_to 'Make this the current version',
+      update_version_admin_competition_team_path(
+      ), method: :patch, data: { confirm: 'Are you sure?' }    %>
+    </p>
+  <% end %>
+  <p>Created At: <%= @project.created_at %></p>
+  <% if @user.present? %>
+    <p>Created By: <%= @user.display_name %></p>
+  <% else %>
+    <p>User: User no longer in system.</p>
+  <% end %>
+  <p>Team Name: <%= @project.team_name %></p>
+  <p>Project Name: <%= @project.project_name %></p>
+  <p>Video URL: <%= @project.created_at %></p>
+  <p>Homepage URL: <%= @project.homepage_url %></p>
+  <h3>Description</h3>
+  <p>
+    <%= @project.description %>
+  </p>
+  <h3>Tags</h3>
+  <% unless @project.tag_list.empty? %>
+    <p>
+      <% @project.tag_list.each do |tag| %>
+        <span>
+          <%= link_to "##{tag}", projects_path(search: "##{tag}") %>
+        </span>
+      <% end %>
+    </p>
+  <% end %>
+  <h3>Data Story</h3>
+  <p>
+    <%= @project.data_story %>
+  </p>
+</main>
+<p>
+  <%= link_to 'Back to All Project Versions', admin_team_projects_path(@team) %>
+</p>

@@ -1,9 +1,0 @@
-= form_for [:admin, @competition, @sponsorship_type] do |f|
-  .form-group
-    = f.label :name
-    = f.text_field :name, class: "form-control"
-  .form-group
-    = f.label :order
-    = f.number_field :order, min: 1
-  .actions
-    = f.submit

@@ -1,0 +1,16 @@
+<% content_for :title, "Data Portals for #{@competition.name}" %>
+<main class="dataset_page">
+  <h2>
+    <%= yield :title %>
+  </h2>
+  <section class="dataportals">
+    <% @data_portals.each do |resource| %>
+      <%= render 'resource_tile',  
+        url: resource['url'],      
+        name: resource['name'],      
+        short_url: resource['short_url']
+       %>
+    <% end %>
+  </section>
+</main>
+<%= link_to 'Back to Resources', resources_path %>

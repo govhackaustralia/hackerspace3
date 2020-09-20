@@ -1,0 +1,83 @@
+<% content_for :title, 'Treasure Hunt' %>
+<main class="treasure_hunt">
+  <script>
+
+    const showInstructions = (shouldShow) => {
+      document.querySelector(".treasure_instructions").style.display = shouldShow ? 'block' : 'none';
+      document.querySelector(".treasure_title_instructions").style.display = shouldShow ? 'inline' : 'none';
+      document.querySelector(".treasure_title").style.display = shouldShow ? 'none' : 'inline';
+    }
+
+
+  </script>
+  <section class="header">
+    <h2>
+      Treasure Hunt
+      <span class="treasure_title_instructions">- Instructions</span>
+    </h2>
+  </section>
+  <div class="treasure_container">
+    <div class="treasure_questions_container">
+      <div class="treasure_questions">
+        <h2>Treasure Hunt Clues</h2>
+        <% @hunt_questions.each do |question| %>
+          <div>
+            <%= question.question %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+    <div class="treasure_answers">
+      <% if user_signed_in? %>
+        <h2>Answers</h2>
+        <% @hunt_questions.each do |question| %>
+          <%= form_for question do |form| %>
+            <%= form.label :answer, question.question %>
+            <% if user_signed_in? %>
+              <% if current_user.assignments.where(assignable: question).exists? %>
+                <p class="treasure_answered">
+                  <strong>You have successfully answered this question</strong>
+                </p>
+              <% else %>
+                <%= form.text_field :answer, placeholder: "Your answer" %>
+                <%= form.submit 'Submit' %>
+              <% end %>
+            <% end %>
+          <% end %>
+        <% end %>
+      <% else %>
+        <p>
+          <strong>
+            <%= link_to 'Sign up to join the Treasure Hunt!', new_user_registration_path %>
+          </strong>
+        </p>
+        <% @hunt_questions.each do |question| %>
+          <p>
+            <%= question.question %>
+          </p>
+        <% end %>
+      <% end %>
+      <a class="nav-button" onclick="showInstructions(true)">View Instructions</a>
+      <% if @hunt_badge_assignment.present? %>
+        <p>
+          <strong>You have claimed the <%= @hunt_badge.name %> badge!</strong>
+        </p>
+      <% end %>
+      <div class="treasure_instructions">
+        <h2>Instructions:</h2>
+        <p>Getting lost can sometimes be the easiest way to discover new things. The GovHack Treasure Hunt will help you find your way around the digital competition.</p>
+        <p>Solving all clues will earn you a Treasure Hunt badge for your GovHack profile.</p>
+        <p>
+          <strong>How To Play:</strong>
+        </p>
+        <ol>
+          <li>Each clue will lead you to a website or dataset</li>
+          <li>Search the website or dataset to look up the answer to the clue</li>
+          <li>Each answer will be a single non-case sensitive word or a number in numerical format e.g. 19585</li>
+        </ol>
+        <p>Note: you do not need to download files, register, or sign into any additional pages to find the answers.</p>
+        <a class="nav-button" onclick="showInstructions(false)">Back</a>
+      </div>
+    </div>
+  </div>
+</main>

@@ -1,0 +1,32 @@
+<% content_for :title, "Update #{@team.name} High Resolution Image" %>
+<main class="team_page">
+  <section>
+    <h2>
+      <%= yield :title %>
+    </h2>
+    <%= form_for [:team_management, @team], url: update_image_team_management_team_path(@team) do |form| %>
+      <div class="field">
+        <% if @team.high_res_image.attached? %>
+          <img alt="<%= @team.name %> High Resolution Image" src="<%= url_for(@team.high_res_image) %>"/>
+        <% else %>
+          <%= image_tag "default_profile_pic.png" %>
+        <% end %>
+      </div>
+      <div class="field">
+        <%= form.label :high_res_image, 'Upload a High Resolution Image (only png/gif/jpeg/jpg)' %>
+        <%= form.file_field :high_res_image, accept: 'image/png,image/gif,image/jpeg' %>
+      </div>
+      <div class="actions">
+        <%= hidden_field_tag(:high_res_image, true) %>
+        <% if @team.high_res_image.attached? %>
+          <%= form.submit 'Replace High Res Image' %>
+        <% else %>
+          <%= form.submit 'Upload High Res Image' %>
+        <% end %>
+      </div>
+    <% end %>
+    <div class="links">
+      <%= link_to 'Back to Team', team_management_team_path(@team) %>
+    </div>
+  </section>
+</main>

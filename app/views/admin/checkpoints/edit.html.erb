@@ -1,0 +1,11 @@
+<main class="team_page">
+  <section>
+    <h2>
+      <%= "Edit Checkpoint for Competition #{@competition.year}" %>
+    </h2>
+    <%= render 'form' %>
+    <p>
+      <%= link_to 'Back to Competition Checkpoints', admin_competition_checkpoints_path(@competition) %>
+    </p>
+  </section>
+</main>

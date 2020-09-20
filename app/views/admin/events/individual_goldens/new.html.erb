@@ -1,0 +1,39 @@
+<% content_for :title, 'Add New Individual Golden Ticket Registration' %>
+<main class="team_page">
+  <h2><%= yield :title %></h2>
+  <%= form_tag new_admin_event_individual_golden_path, method: :get do %>
+    <%= search_field_tag :term, params[:term] %>
+    <%= submit_tag 'Search' %>
+  <% end %>
+  <% if @user.present? %>
+    <%= render 'admin/shared/user_contact', locals: { user: @user } %>
+    <% if @existing_registration.present? %>
+      <p>
+        Registration for <%= @user.full_name %> already exists.
+      </p>
+      <p>
+        <%= link_to 'Update Registration', edit_admin_event_registration_path(@event, @existing_registration) %>
+      </p>
+    <% else %>
+      <p>
+        <%= link_to 'Assign Golden Ticket', admin_event_individual_goldens_path(@event, user_id: @user.id), method: :post %>
+      </p>
+    <% end %>
+  <% elsif @users.present? %>
+    <% @users.each do |user| %>
+      <%= render 'admin/shared/user_contact', locals: { user: user } %>
+      <p>
+        <%= link_to 'Select', new_admin_event_individual_golden_path(@event, term: user.email) %>
+      </p>
+    <% end %>
+  <% elsif params[:term].present? %>
+    <p>
+      Apologies, no name matching search term '<%= params[:term] %>'
+    </p>
+  <% else %>
+    <p>Please enter an email address or name to search for a user.</p>
+  <% end %>
+  <p>
+    <%= link_to "Back to #{@event.name} Registrations", admin_event_registrations_path(@event) %>
+  </p>
+</main>

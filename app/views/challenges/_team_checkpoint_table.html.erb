@@ -1,0 +1,39 @@
+<section class="teams">
+  <% if @entries.any? %>
+    <table class="projects-table" data-turbolinks="false" id="challenge-entries-table">
+      <thead>
+        <th>Checkpoint</th>
+        <th>Project</th>
+        <th>Team</th>
+        <th>Location</th>
+      </thead>
+      <tbody>
+        <% @entries.each do |entry| %>
+          <tr>
+            <td>
+              <%= entry.checkpoint.name %>
+            </td>
+            <td>
+              <%= link_to "#{entry.project.project_name}", project_path(entry.project.identifier) %>
+            </td>
+            <td>
+              <%= entry.project.team_name %>
+            </td>
+            <td>
+              <%= entry.project.event.name %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% else %>
+    <article>
+      <p>
+        <strong>
+          No team entries to display for this challenge.
+        </strong>
+      </p>
+    </article>
+  <% end %>
+</section>
+<%= link_to "Back to #{@challenge.name}", challenge_path(@challenge.identifier) %>

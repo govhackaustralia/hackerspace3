@@ -1,0 +1,80 @@
+<main class="team_page">
+  <h2>
+    Hunt Questions for <%= @competition.name %>
+  </h2>
+  <p>
+    <%= link_to 'Add New Hunt Question', new_admin_competition_hunt_question_path(@competition), class: 'download-csv' %>
+  </p>
+  <% if @hunt_questions.present? %>
+    <table class="projects-table" data-turbolinks="false" id="admin-hunt-question-table">
+      <thead>
+        <th>Question</th>
+        <th>Answer</th>
+        <th>Edit</th>
+      </thead>
+      <tbody>
+        <% @hunt_questions.each do |hunt_question| %>
+          <tr>
+            <td>
+              <%= hunt_question.question %>
+            </td>
+            <td>
+              <%= hunt_question.answer %>
+            </td>
+            <td>
+              <%= link_to 'Edit', edit_admin_competition_hunt_question_path(@competition, hunt_question) %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% else %>
+    <p>The Competition does not currently have any Hunt Questions set.</p>
+  <% end %>
+  <h3>Choose the Hunt Badge</h3>
+  <% if @badges.present? %>
+    <table class="projects-table" data-turbolinks="false" id="admin-hunt-question-badges-table">
+      <thead>
+        <th>Name</th>
+        <th>Action</th>
+      </thead>
+      <tbody>
+        <% @badges.each do |badge| %>
+          <tr>
+            <td>
+              <%= badge.name %>
+            </td>
+            <% if @competition.hunt_badge_id == badge.id %>
+              <td>
+                <strong>
+                  This is the Treasure Hunt Badge
+                </strong>
+              </td>
+            <% else %>
+              <td>
+                <%= link_to 'Make this the Treasure Hunt Badge', badge_admin_competition_hunt_questions_path(@competition, competition: {hunt_badge_id: badge.id}), method: :patch %>
+              </td>
+            <% end %>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% else %>
+    <p>The Competition does not currently have any Hunt Questions set.</p>
+  <% end %>
+  <h3>Publishing</h3>
+  <% if @competition.hunt_published %>
+    <p>
+      This hunt has been published.
+      <%= link_to 'Unpublish', hunt_published_admin_competition_hunt_questions_url(@competition, competition: {hunt_published: false}), method: :patch, class: 'download-csv' %>
+    </p>
+  <% else %>
+    <p>
+      This hunt has not been published.
+      <%= link_to 'Publish', hunt_published_admin_competition_hunt_questions_url(@competition, competition: {hunt_published: true}), method: :patch, class: 'download-csv' %>
+    </p>
+  <% end %>
+</main>
+<p>
+  <%= link_to 'Back to Competition', admin_competition_path(@competition) %>
+</p>

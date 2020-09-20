@@ -1,0 +1,16 @@
+<% content_for :title, "Limit Reached for #{@competition.name}" %>
+<main class="register">
+  <h2><%= yield :title %></h2>
+  <section>
+    <article>
+      <p>Participants are only permitted to register for a single Competition Event.</p>
+      <p>To enter <%= @event.name %>, first cancel your registration to <%= @current_event.name %>.</p>
+      <p>
+        <%= link_to "Amend Registration for #{@current_event.name}", event_registration_path(@current_event.identifier, @registration) %>
+      </p>
+    </article>
+  </section>
+</main>
+<p>
+  <%= link_to "Back to #{@event.name}", event_path(@event.identifier) %>
+</p>

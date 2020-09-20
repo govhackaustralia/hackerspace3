@@ -1,0 +1,183 @@
+<% content_for :title, @user.display_name %>
+<main class="profile_page">
+  <section class="profile-header">
+    <%= image_tag default_profile_picture_url(@user, @profile), class: "profile-picture" %>
+    <div class="profile-content">
+      <h2 class="name">
+        <%= yield :title %>
+      </h2>
+      <div class="bio">
+        <% if @profile.description.present? %>
+          <p>
+            <%= @profile.description %>
+          </p>
+        <% else %>
+          <p>Doesn't look like they have a bio yet... :(</p>
+        <% end %>
+      </div>
+      <div class="links">
+        <% if @user.region.present? %>
+          <p class="region">
+            <strong>
+              <%= fa_icon('location-arrow') %>
+            </strong>
+            <%= @user.region %>
+          </p>
+        <% end %>
+        <% if @profile.team_status.present? %>
+          <p class="team-status">
+            <strong>
+              <%= fa_icon('user-friends') %>
+            </strong>
+            <%= @profile.team_status %>
+          </p>
+        <% end %>
+        <% if @profile.slack_user_id.present? %>
+          <p class="slack">
+            <strong>
+              <%= fa_icon('slack', type: :brand) %>
+            </strong>
+            <% if user_signed_in? %>
+              <% if current_user.profile.slack_access_token.present? %>
+                <%= link_to 'Open a Slack Chat with this User', slack_chat_profile_path(@profile), target: '_blank' %>
+              <% else %>
+                <%= link_to 'Link up your Slack Account to chat with this User', edit_profile_path(current_user.profile) %>
+              <% end %>
+            <% else %>
+              <p>Sign In to Contact this User via Slack</p>
+            <% end %>
+          </p>
+        <% end %>
+        <% @joined_projects.each do |project| %>
+          <p>
+            <strong>
+              <%= fa_icon('user-friends') %>
+            </strong>
+            <%= link_to "#{project.team_name}", project_path(project.identifier) %>
+          </p>
+        <% end %>
+        <% if @profile.website.present? %>
+          <p>
+            <strong>
+              <%= fa_icon('link') %>
+            </strong>
+            <a href="<%= @profile.website %>" target="_blank">
+              <%= @profile.website %>
+            </a>
+          </p>
+        <% end %>
+        <% if @profile.linkedin.present? %>
+          <p>
+            <strong>
+              <%= fa_icon('linkedin-in', type: :brand) %>
+            </strong>
+            <a href="<%= @profile.linkedin %>" target="_blank">
+              <%= 'LinkedIn' %>
+            </a>
+          </p>
+        <% end %>
+        <% if @profile.github.present? %>
+          <p>
+            <strong>
+              <%= fa_icon('github', type: :brand) %>
+            </strong>
+            <a href="<%= @profile.github %>" target="_blank">
+              <%= 'GitHub' %>
+            </a>
+          </p>
+        <% end %>
+        <% if @profile.twitter.present? %>
+          <p>
+            <strong>
+              <%= fa_icon('twitter', type: :brand) %>
+            </strong>
+            <a href="<%= @profile.twitter %>" target="_blank">
+              <%= 'Twitter' %>
+            </a>
+          </p>
+        <% end %>
+        <% if user_signed_in? && @profile == current_user.profile %>
+          <button class="black-button">
+            <%= link_to 'Edit Profile', edit_profile_path(@profile) %>
+          </button>
+        <% end %>
+      </div>
+    </div>
+  </section>
+  <hr class="grey-border"/>
+  <section class="profile-skills">
+    <h2>
+      <strong>
+        <%= fa_icon('tools') %>
+        Skills
+      </strong>
+    </h2>
+    <div class="profile-skills-content">
+      <% if @profile.skill_list.present? %>
+        <% @profile.skill_list.map do |tag| %>
+          <div class="tag">
+            <%= "##{tag}" %>
+          </div>
+        <% end %>
+      <% else %>
+        <p>No skills listed here</p>
+      <% end %>
+    </div>
+  </section>
+  <section class="profile-interests">
+    <h2>
+      <strong>
+        <%= fa_icon('heart') %>
+        Interests
+      </strong>
+    </h2>
+    <div class="profile-interests-content">
+      <% if @profile.interests.present? %>
+        <% @profile.interests.map do |tag| %>
+          <div class="tag">
+            <%= "##{tag}" %>
+          </div>
+        <% end %>
+      <% else %>
+        <p>No interests listed here</p>
+      <% end %>
+    </div>
+  </section>
+  <section class="profile-badges">
+    <h2>
+      <strong>
+        <%= fa_icon('award') %>
+        Badges
+      </strong>
+    </h2>
+    <div class="profile-badges-content">
+      <% if @badge_assignments.present? %>
+        <% @badge_assignments.each do |badge_assignment| %>
+          <% badge = badge_assignment.assignable %>
+          <div class="badge-wrapper">
+            <div class="text-content">
+              <p class="title">
+                <%= badge.name %>
+              </p>
+              <p class="date-issued">
+                <%= badge_assignment.created_at.strftime '%B %Y' %>
+              </p>
+            </div>
+            <% if badge.art.attached? %>
+              <%= image_tag(url_for(badge.art), alt: 'GovHack Badge Art') %>
+            <% else %>
+              <%= image_tag "treasurehunt_badge.png" %>
+            <% end %>
+          </div>
+        <% end %>
+      <% else %>
+        <p>No badges at the moment :(</p>
+      <% end %>
+    </div>
+  </section>
+  <section class="profile-footer">
+    <button class="black-button">
+      <%= link_to 'Back to Profiles', profiles_path %>
+    </button>
+  </section>
+</main>

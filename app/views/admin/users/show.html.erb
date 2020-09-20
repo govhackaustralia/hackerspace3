@@ -1,0 +1,97 @@
+<% content_for :title, @user.display_name %>
+<main class="project_index">
+  <h2>
+    <%= yield :title %>
+  </h2>
+  <p>
+    <strong>
+      Email: <%= @user.email %>
+    </strong>
+  </p>
+  <% if @user.accepted_code_of_conduct %>
+    <p>
+      <strong>
+        Agreed to code of conduct on:
+      </strong>
+      <%= @user.accepted_code_of_conduct.strftime("%e %B %Y  %I.%M %p") %>
+    </p>
+  <% else %>
+    <p>
+      <strong>
+        Has not agreed to code of conduct.
+      </strong>
+    </p>
+  <% end %>
+  <% if @user.confirmed? %>
+    <p>
+      <strong>
+        Confirmed account on:
+      </strong>
+      <%= @user.confirmed_at.strftime("%e %B %Y  %I.%M %p") %>
+    </p>
+  <% else %>
+    <p>
+      <strong>
+        User not confirmed,
+      </strong>
+      <%= link_to 'Confirm User?', confirm_admin_user_path(@user), method: :post %>
+    </p>
+  <% end %>
+  <% if @profile.present? %>
+    <p>
+      <strong>Profile Identifier:</strong>
+      <% if @profile.published %>
+        <%= link_to @profile.identifier, profile_path(@profile) %>
+      <% else %>
+        <%= @profile.identifier %>
+      <% end %>
+    </p>
+    <p>
+      <strong>Published:</strong>
+      <%= @profile.published ? '✅' : '❌' %>
+    </p>
+  <% end %>
+  <p>
+    <strong>
+      <% if current_user.acting_on_behalf_of_id == @user.id %>
+        You are currently acting on behalf of this user.
+      <% else %>
+        <%= link_to 'Act on Behalf of this User (Enter Scorecards)', act_on_behalf_of_user_admin_user_path(@user), method: :patch %>
+      <% end %>
+    </strong>
+  </p>
+  <h3>Assignments for <%= @user.display_name %></h3>
+  <table class="projects-table" data-turbolinks="false" id="admin-users-show-table">
+    <thead>
+      <th>Competition</th>
+      <th>Assignable Type</th>
+      <th>Assignable Name</th>
+      <th>Title</th>
+      <th>Action</th>
+    </thead>
+    <tbody>
+      <% @user.assignments.preload(assignable: :current_project, holder: :competition).each do |assignment| %>
+        <tr>
+          <td>
+            <%= assignment.holder.competition.year %>
+          </td>
+          <td>
+            <%= assignment.assignable.class.name %>
+          </td>
+          <td>
+            <%= assignment.assignable.name %>
+          </td>
+          <td>
+            <%= assignment.title %>
+          </td>
+          <td>
+            <%= link_to 'Remove', admin_user_assignment_path(@user, assignment), method: :delete, data: { confirm: 'Are you sure?' } %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</main>
+<p>
+  <%= link_to 'Back to Users', admin_users_path %>
+</p>

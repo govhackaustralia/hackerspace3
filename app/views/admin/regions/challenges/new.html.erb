@@ -1,0 +1,8 @@
+<% content_for :title, "Create a New Challenge for #{@region.name} region" %>
+<main class="challenge_admin">
+  <h2>
+    <%= yield :title %>
+  </h2>
+  <%= render 'form' %>
+  <%= link_to "Back to Challenges", admin_region_challenges_path(@region) %>
+</main>

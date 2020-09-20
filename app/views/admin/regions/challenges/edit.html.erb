@@ -1,0 +1,27 @@
+<% # ENHANCEMENT: This needs to be split up into multiple controller actions. %>
+<main class="challenge_admin">
+  <% if params[:image].present? %>
+    <h2>
+      Update <%= @challenge.name %> Image
+    </h2>
+    <%= render 'edit_image' %>
+  <% elsif params[:pdf].present? %>
+    <h2>
+      Update <%= @challenge.name %> PDF
+    </h2>
+    <%= render 'edit_pdf' %>
+  <% elsif params[:pdf_preview].present? %>
+    <h2>
+      Update <%= @challenge.name %> PDF Preview
+    </h2>
+    <%= render 'edit_pdf_preview' %>
+  <% else %>
+    <h2>
+      Update Challenge <%= @challenge.name %>
+    </h2>
+    <%= render 'form' %>
+  <% end %>
+</main>
+<p>
+  <%= link_to 'Back to Challenge', admin_region_challenge_path(@region, @challenge) %>
+</p>

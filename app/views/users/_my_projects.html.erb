@@ -1,0 +1,44 @@
+<section>
+  <h3 class="sub-heading">My Team Projects</h3>
+  <% if @competition.in_form_or_comp_window? @time_zone %>
+    <div class="message">
+      <p class="message-text">Let's create a new team project!</p>
+      <%= link_to new_team_path do %>
+        <button class="message-button">
+          Create New Project
+        </button>
+      <% end %>
+    </div>
+    <% if @joined_teams.present? %>
+      <% @joined_teams.each do |team| %>
+        <div class="content-wrapper">
+          <div class="content-wrapper-content">
+            <h2><%= team.current_project.team_name %> - <%= team.current_project.project_name %></h2>
+            <p>
+              Event: <%= team.event.name %>
+            </p>
+          </div>
+          <div class="content-wrapper-button">
+            <% if @competition.in_form_or_comp_window?(team.region.time_zone) %>
+              <%= link_to team_management_team_path(team) do %>
+                <button class="content-blue-button">
+                  Manage <%= team.name %>
+                </button>
+              <% end %>
+            <% elsif team.published %>
+              <%= link_to project_path(team.current_project.identifier) do %>
+                <button class="content-black-button">
+                  Go to <%= team.name %>
+                </button>
+              <% end %>
+            <% else %>
+              <p>This project is yet to be published.</p>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+  <% else %>
+    <p class="blank-message">Your team project memberships will appear here.</p>
+  <% end %>
+</section>

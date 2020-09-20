@@ -1,0 +1,27 @@
+<% content_for :title, 'Challenges' %>
+<main class="challenge_index">
+  <h2>Challenges for <%= @competition.name %></h2>
+  <section class="later">
+    <p>
+      <strong>
+        Check back here at the commencement of the competition to view the challenges.
+      </strong>
+    </p>
+    <% if user_signed_in? %>
+      <% if @event.present? %>
+        <p>You are registered for <%= @event.name %></p>
+      <% else %>
+        <p>
+          Be sure to register for one of the many
+          <%= link_to 'Competition Events', competition_events_path %>
+          to participate in <%= @competition.name %>
+        </p>
+      <% end %>
+    <% else %>
+      <p>
+        Be sure to sign up to the Hackerspace and register for one of the many
+        <%= link_to 'Competition Events', competition_events_path %>
+      </p>
+    <% end %>
+  </section>
+</main>

@@ -1,0 +1,10 @@
+<% content_for :title, "Edit Sponsor #{@sponsor.name}" %>
+<main class="team_page">
+  <h2>
+    <%= yield :title %>
+  </h2>
+  <%= render 'form' %>
+  <p>
+    <%= link_to 'Back to Sponsor', admin_competition_sponsor_path(@sponsor.competition_id, @sponsor) %>
+  </p>
+</main>

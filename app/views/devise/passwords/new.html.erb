@@ -1,0 +1,19 @@
+<% content_for :title, 'Password Reset' %>
+<main class="registration single-col forgot-password">
+  <container>
+    <section class="signup-form">
+      <h2 class="heading">Forgot your password?</h2>
+      <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
+        <%= render 'devise/shared/error_messages', resource: resource %>
+        <div class="form-group">
+          <%= f.label :email %>
+          <%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control' %>
+        </div>
+        <div class="actions">
+          <%= f.submit "Send me reset password instructions" %>
+        </div>
+        <%= render "devise/shared/links" %>
+      <% end %>
+    </section>
+  </container>
+</main>

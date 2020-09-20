@@ -1,0 +1,43 @@
+<% content_for :title, 'Sponsors' %>
+<main class="project_index">
+  <h2>
+    Competition <%= @competition.year %> Sponsors
+  </h2>
+  <p>
+    <%= link_to 'New Sponsor', new_admin_competition_sponsor_path(@competition), class: 'download-csv' %>
+  </p>
+  <table class="projects-table" data-turbolinks="false" id="admin-sponsors-table">
+    <thead>
+      <th>Name</th>
+      <th>Sponsorships</th>
+      <th>Event Partnerships</th>
+      <th>Challenge Sponsorships</th>
+    </thead>
+    <tbody>
+      <% @sponsors.each do |sponsor| %>
+        <tr>
+          <td>
+            <%= link_to sponsor.name, admin_competition_sponsor_path(sponsor.competition_id, sponsor) %>
+          </td>
+          <td>
+            <%= sponsor.sponsorships.length %>
+          </td>
+          <td>
+            <%= sponsor.event_partnerships.length %>
+          </td>
+          <td>
+            <%= sponsor.challenge_sponsorships.length %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</main>
+<p>
+  <%= link_to 'Back to Account Management', manage_account_path %>
+</p>
+<% if @admin_privileges %>
+  <p>
+    <%= link_to 'Back to Competition Management', admin_competition_path(@competition) %>
+  </p>
+<% end %>

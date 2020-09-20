@@ -1,0 +1,59 @@
+<main>
+  <h2>
+    Scorecards for <%= @project.team_name %> - <%= @project.project_name %>  <%= '(with Judges)' if params[:include_judges] == 'true' %>
+  </h2>
+  <table class="projects-table" data-turbolinks="false" id="projects_table">
+    <thead>
+      <th>Status</th>
+      <th>Action</th>
+      <% @project_criteria.each do |criterion| %>
+        <th>
+          <%= criterion.name %>
+        </th>
+      <% end %>
+      <th>Score</th>
+      <th>Average Score</th>
+      <th>Scorecard Count</th>
+    </thead>
+    <tbody>
+      <% @headers.each do |header| %>
+        <tr>
+          <% scores = header.scores.pluck(:entry) %>
+          <% scores.extend(DescriptiveStatistics) %>
+          <% if scores.include? nil %>
+            <td>Incomplete</td>
+            <td>
+              <%= link_to 'Delete Scorecard', admin_team_scorecard_path(@team, header, include_judges: params[:include_judges]), data: { confirm: "Are you sure?" }, method: :delete %>
+            </td>
+          <% elsif header.included %>
+            <td>Included</td>
+            <td>
+              <%= link_to 'Exclude Scorecard', admin_team_scorecard_path(@team, header, include_judges: params[:include_judges]), method: :patch %>
+            </td>
+          <% else %>
+            <td>Excluded</td>
+            <td>
+              <%= link_to 'Include Scorecard', admin_team_scorecard_path(@team, header, include_judges: params[:include_judges]), method: :patch %>
+            </td>
+          <% end %>
+          <% scores.each do |score| %>
+            <td>
+              <%= score %>
+            </td>
+          <% end %>
+          <% mean_score = ((scores.mean / MAX_SCORE.to_f) * 100).to_i %>
+          <%= render 'challenges/judging_cell', locals: { total: mean_score } %>
+          <% header.assignment_scores.extend(DescriptiveStatistics) %>
+          <% all_scores_mean = header.assignment_scores.mean(&:entry) %>
+          <% mean_score = ((all_scores_mean / MAX_SCORE.to_f) * 100).to_i %>
+          <%= render 'challenges/judging_cell', locals: { total: mean_score } %>
+          <td>
+            <%= header.assignment_headers.length %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</main>
+<%= link_to 'Close', root_path, id: 'close-team-scorecards' %>
+<%= javascript_tag 'window.addEventListener("unload", function(event) { window.opener.location.reload();})' %>

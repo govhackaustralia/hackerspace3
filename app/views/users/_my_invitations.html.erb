@@ -1,0 +1,28 @@
+<section>
+  <h3 class="sub-heading">My Invitations</h3>
+  <% if @invited_team_assignments.present? %>
+    <% @invited_team_assignments.each do |assignment| %>
+      <% team = assignment.assignable %>
+      <div class="content-wrapper">
+        <div class="content-wrapper-content">
+          <h2><%= team.current_project.team_name %> - <%= team.current_project.project_name %></h2>
+          <p>Event: <%= team.event.name %></p>
+        </div>
+      </div>
+      <div class="content-wrapper-button">
+        <%= link_to users_invitation_path(assignment), method: :patch do %>
+          <button class="content-blue-button">
+            Accept Invitation and Go to Team
+          </button>
+        <% end %>
+        <%= link_to users_invitation_path(assignment), method: :delete, data: { confirm: 'Are you sure?' } do %>
+          <button class="content-black-button">
+            Decline Invitation
+          </button>
+        <% end %>
+      </div>
+    <% end %>
+  <% else %>
+    <p class="blank-message">Your team invitations will appear here.</p>
+  <% end %>
+</section>

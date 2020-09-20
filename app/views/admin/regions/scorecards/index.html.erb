@@ -1,0 +1,10 @@
+<% content_for :title, "People's Choice Voting in #{@region.name} for #{@competition.name} #{'(with Judges)' if params[:include_judges] == 'true'}" %>
+<main class="project_index">
+  <h2>
+    <%= yield :title %>
+  </h2>
+  <%= render 'admin/teams/scorecards/team_scorecards' %>
+</main>
+<p>
+  <%= link_to "Back to #{@region.name} Region", admin_competition_region_path(@competition, @region) %>
+</p>
