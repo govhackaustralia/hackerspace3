@@ -6,16 +6,44 @@
         <%= link_to 'Create New Competition', new_admin_competition_path, class: 'download-csv' %>
       </p>
     <% end %>
-    <% @competitions.each do |competition| %>
-      <h3><%= competition.name %> <%= '(Current)' if competition.current %></h3>
-      <% if current_user.admin_privileges? competition %>
-        <p>
-          <%= link_to 'Go to Competition', admin_competition_path(competition) %>
-        </p>
-      <% else %>
-        <p>You have not yet been granted access to manage this competition.</p>
-      <% end %>
-    <% end %>
+    <table class="projects-table" data-turbolinks="false" id="admin-competitions">
+      <thead>
+        <th>Current</th>
+        <th>Year</th>
+        <th>Regions</th>
+        <th>Events</th>
+        <th>Challenges</th>
+        <th>Teams</th>
+      </thead>
+      <tbody>
+        <% @competitions.each do |competition| %>
+          <tr>
+            <td>
+              <%= '✅' if competition.current %>
+            </td>
+            <td>
+              <% if current_user.admin_privileges? competition %>
+                <%= link_to competition.year, admin_competition_path(competition) %>
+              <% else %>
+                <%= competition.year %>
+              <% end %>
+            </td>
+            <td>
+              <%= competition.regions.count %>
+            </td>
+            <td>
+              <%= competition.events.count %>
+            </td>
+            <td>
+              <%= competition.challenges.count %>
+            </td>
+            <td>
+              <%= competition.teams.count %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
   </section>
   <p>
     <%= link_to 'Back to Account Management', manage_account_path %>
