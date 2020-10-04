@@ -11,6 +11,9 @@ assignees: ''
 
 <!--
 A clear and concise description of what the bug is.
+
+Note:
+Text between <!-- and --​> marks will be invisible in the report.
 -->
 
 **To Reproduce**
