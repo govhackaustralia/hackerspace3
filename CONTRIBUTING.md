@@ -1,6 +1,7 @@
 # How to contribute
 
-To contribute, we encourage you to create useful Issues for us to work on, either bug reports or feature requests.
+To contribute, we encourage you to create useful Issues for us to work on,
+either bug reports or feature requests.
 
 If you're feeling more adventurous, take a look about our [good first
 issue](../../issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22)
