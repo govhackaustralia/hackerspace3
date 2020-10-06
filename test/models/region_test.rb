@@ -164,8 +164,8 @@ class RegionTest < ActiveSupport::TestCase
   end
 
   test 'zone_code' do
-    assert @national.zone_code == 'AEST'
-    assert regions(:other_national).zone_code == 'NZST'
+    assert %w[AEST AEDT].include? @national.zone_code
+    assert %w[NZST NZDT].include? regions(:other_national).zone_code
   end
 
   test 'national_time_zone' do
