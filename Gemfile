@@ -41,10 +41,6 @@ gem "rails_autolink", "~> 1.1"
 gem 'descriptive_statistics', '~> 2.4.0', :require => 'descriptive_statistics/safe'
 # Pretend Data
 gem 'faker'
-# HAML
-gem 'hamlit'
-# Provides hamlit generators for Rails
-gem 'hamlit-rails'
 # Use Redis adapter to run Action Cable in production
 gem 'redis', '~> 4.0'
 # CoffeeScript adapter for the Rails asset pipeline
