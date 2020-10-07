@@ -140,8 +140,8 @@ class Region < ApplicationRecord
     ).to_formatted_s(:number)
   end
 
-  def zone_code
-    Time.now.in_time_zone(time_zone.presence || COMP_TIME_ZONE).zone
+  def zone_code_when(time)
+    time.in_time_zone(time_zone.presence || COMP_TIME_ZONE).zone
   end
 
   def national_time_zone
