@@ -391,7 +391,6 @@ DEPENDENCIES
   omniauth-rails_csrf_protection
   omniauth-slack
   pg (>= 0.18, < 2.0)
-  pry (~> 0.12.2)
   puma (~> 4.3.5)
   rails (~> 6.0.3.3)
   rails_autolink (~> 1.1)
