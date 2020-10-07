@@ -19,7 +19,7 @@
       <% unless event.end_time.blank? %>
         <h4>
           <%= event.start_time.strftime "%l:%M %p" %>
-          <%= event.region.zone_code %>
+          <%= event.region.zone_code_when(event.start_time) %>
         </h4>
       <% end %>
       <p>

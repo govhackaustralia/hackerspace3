@@ -163,9 +163,13 @@ class RegionTest < ActiveSupport::TestCase
     assert @regional.eligible_challenges.present?
   end
 
-  test 'zone_code' do
-    assert %w[AEST AEDT].include? @national.zone_code
-    assert %w[NZST NZDT].include? regions(:other_national).zone_code
+  test 'zone_code_when' do
+    event = events(:four)
+    region = regions(:other_national)
+    event.update! start_time: '10th December', end_time: '10th July'
+
+    assert region.zone_code_when(event.start_time) == 'NZDT'
+    assert region.zone_code_when(event.end_time) == 'NZST'
   end
 
   test 'national_time_zone' do
