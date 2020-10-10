@@ -3,7 +3,7 @@ version: '3.1'
 services:
 
   hackerspace3:
-    image: govhackau/hackerspace3:ruby2.7
+    image: govhackau/hackerspace3
     build: .
     env_file: .env
     ports:
