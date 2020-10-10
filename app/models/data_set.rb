@@ -16,12 +16,12 @@ class DataSet < ApplicationRecord
   require 'csv'
 
   # Outputs a CSV file of Data Set attributes.
-  def self.to_csv(competition, options = {})
+  def self.to_csv(competition)
     data_set_columns = %w[name url description]
     combined = data_set_columns + ['projects']
     data_sets = competition.data_sets
     url_to_project_names = data_set_project_helper data_sets
-    CSV.generate(options) do |csv|
+    CSV.generate do |csv|
       csv << combined
       data_sets.each do |data_set|
         data_set_values = data_set.attributes.values_at(*data_set_columns)
