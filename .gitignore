@@ -33,8 +33,12 @@
 
 /public/packs
 /public/packs-test
+/public/packs-ci
 /node_modules
 /yarn-error.log
 yarn-debug.log*
 .yarn-integrity
 .env
+
+# Ignore CI database
+db/ci.sqlite3

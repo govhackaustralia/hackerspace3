@@ -62,6 +62,15 @@ test:
   password: <%= ENV['POSTGRES_PASSWORD'] %>
   host: <%= ENV['POSTGRES_HOST'] || 'localhost' %>
 
+# Warning: The database defined as "ci" will be erased and
+# re-generated from your development database when you run "rake".
+# Do not set this db to the same as development or production.
+ci:
+  database: db/ci.sqlite3
+  adapter: sqlite3
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  timeout: 5000
+
 # As with config/secrets.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is
 # ever seen by anyone, they now have access to your database.
