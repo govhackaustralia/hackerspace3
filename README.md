@@ -75,6 +75,17 @@ $ rails server
 
 ## Docker Deployment Instructions
 
+If running on Windows, start by running the following in the cloned `hackerspace3` repo:
+
+(This is required because otherwise `docker-entrypoint.sh` has Windows line-endings, CRLF, instead of Linux line endings, LF, and can't be run by bash within the Docker system.)
+
+```bash
+git config --local core.autocrlf false
+git config --local core.eol lf
+rm -rf *
+git checkout .
+```
+
 Initialise environment variables required by `docker-compose`:
 
 ```bash
