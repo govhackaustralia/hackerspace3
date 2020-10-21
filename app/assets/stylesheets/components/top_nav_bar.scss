@@ -1,47 +1,6 @@
 .top-bar {
   box-shadow: -8px 6px 30px -4px rgba(0, 0, 0, 0.55);
 
-  .navbar-header {
-    a>figure {
-      margin: 0;
-    }
-
-    @media only screen and (max-width: 900px) {
-      display: flex;
-      justify-content: space-between;
-      width: 100%;
-    }
-
-    .navbar-toggle {
-      display: none;
-
-      @media only screen and (max-width: 900px) {
-        display: block;
-        height: 3rem;
-        width: 3rem;
-        align-self: center;
-        background-color: transparent;
-        border: none;
-        padding: 5px;
-
-        span {
-          display: block;
-          width: 33px;
-          height: 4px;
-          margin-bottom: 5px;
-          position: relative;
-          background: #ca1e56;
-          border-radius: 3px;
-          z-index: 1;
-        }
-
-        &:focus {
-          outline: none;
-        }
-      }
-    }
-  }
-
   .navbar-brand {
     margin-right: 0;
 
@@ -49,175 +8,6 @@
       max-width: 200px;
       margin: 0;
       align-self: center;
-    }
-  }
-
-  .navbar-collapse {
-    .navbar-nav {
-      flex-direction: row;
-      justify-content: space-evenly;
-
-      li {
-        list-style: outside none none;
-        display: block;
-        text-transform: uppercase;
-        font-size: 1rem;
-        font-weight: 500;
-
-        a {
-          color: #000000;
-          margin: 0.5em 1.75em;
-          padding: 0.5em 0;
-          border-radius: 0;
-          border-style: solid;
-          border-color: transparent;
-          border-width: 2px;
-          transition: all 0.4s ease;
-          text-decoration: none;
-
-          &:hover {
-            border-radius: 0;
-            border-bottom-style: solid;
-          }
-
-          &:nth-child(odd):hover {
-            color: #ca1e56;
-            border-bottom-color: #ca1e56;
-          }
-
-          &:nth-child(even):hover {
-            color: #4c9ad2;
-            border-bottom-color: #4c9ad2;
-          }
-        }
-      }
-    }
-
-    .navbar-right {
-
-      .buttons-group {
-        display: flex;
-        flex-direction: column;
-      }
-
-      button {
-        border: none;
-        background: none;
-
-        .nav-button {
-          margin: 3px;
-          border-radius: 0.5em;
-          background-color: #c61f55;
-          border: 1px solid #c61f55;
-          color: #ffffff;
-          display: inline-block;
-          cursor: pointer;
-          padding: 10px 15px;
-
-          a {
-            color: #ffffff;
-          }
-
-          font-family: Open Sans;
-          font-size: 1rem;
-          text-decoration: none;
-          text-align: center;
-          text-transform: uppercase;
-        }
-
-        .login-button:hover {
-          background-color: #6dbff9;
-          border: 1px solid #6dbff9;
-
-          >a {
-            color: #fff;
-            text-decoration: none;
-          }
-        }
-
-        .login-button {
-          margin: 3px;
-          border-radius: 0.5em;
-          background-color: #4c9ad2;
-          border: 1px solid #4c9ad2;
-          color: #fff;
-          display: inline-block;
-          cursor: pointer;
-          padding: 10px 15px;
-
-          a {
-            color: #ffffff;
-          }
-
-          font-family: Open Sans;
-          font-size: 1rem;
-          text-decoration: none;
-          text-align: center;
-          text-transform: uppercase;
-        }
-
-        .nav-button:hover {
-          background-color: #fd266c;
-          border: 1px solid #fd266c;
-
-          >a {
-            color: #ffffff;
-            text-decoration: none;
-          }
-        }
-
-        .aside {
-          display: flex;
-          flex-direction: column;
-          text-align: right;
-          justify-content: center;
-          width: 3.5em;
-          height: 3.5em;
-          overflow: hidden;
-          margin: 1em;
-          float: left;
-        }
-
-        .navbar-avatar {
-          border-radius: 100px;
-          border: 1px solid #000000;
-          max-width: 5rem;
-          height: 5rem;
-          margin: 0;
-          cursor: pointer;
-          display: block;
-          overflow: hidden;
-          transition-duration: 0.5s;
-          object-fit: cover;
-        }
-      }
-    }
-
-    @media only screen and (max-width: 999px) {
-      &:not(.show) {
-        display: none;
-      }
-
-      display: block;
-
-      .navbar-nav {
-        flex-direction: column;
-
-        li {
-          margin: 10px 5px;
-          text-align: center;
-        }
-      }
-
-      .navbar-right {
-        .nav-button {
-          margin: 10px 5px;
-        }
-      }
-    }
-
-    @media only screen and (min-width: 1000px) {
-      display: contents;
     }
   }
 
@@ -229,23 +19,22 @@
     min-width: 6em;
     box-shadow: 0em 0.5em 1em 0em rgba(0, 0, 0, 0.2);
     background-color: #ffffff;
+
+    a {
+      color: black;
+      padding: 0.75em 1em;
+      text-decoration: none;
+      display: block;
+      text-align: left;
+    }
+
+    a:hover {
+      background-color: #bb0c45;
+      color: #ffffff;
+    }
   }
 
-  .nav-dropdown a {
-    color: black;
-    padding: 0.75em 1em;
-    text-decoration: none;
-    display: block;
-    text-align: left;
-  }
-
-  .nav-dropdown a:hover {
-    background-color: #bb0c45;
-    color: #ffffff;
-  }
-
-  aside:hover>.nav-dropdown,
-  .nav-dropdown:hover {
+  aside:hover>.nav-dropdown, .nav-dropdown:hover {
     display: block;
   }
 }

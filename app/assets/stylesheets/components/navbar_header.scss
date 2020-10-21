@@ -1,0 +1,40 @@
+.navbar-header {
+  a > figure {
+    margin: 0;
+  }
+
+  @media only screen and (max-width: 900px) {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  .navbar-toggle {
+    display: none;
+
+    @media only screen and (max-width: 900px) {
+      display: block;
+      height: 3rem;
+      width: 3rem;
+      align-self: center;
+      background-color: transparent;
+      border: none;
+      padding: 5px;
+
+      span {
+        display: block;
+        width: 33px;
+        height: 4px;
+        margin-bottom: 5px;
+        position: relative;
+        background: #ca1e56;
+        border-radius: 3px;
+        z-index: 1;
+      }
+
+      &:focus {
+        outline: none;
+      }
+    }
+  }
+}
