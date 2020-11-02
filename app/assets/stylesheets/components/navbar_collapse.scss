@@ -39,105 +39,6 @@
     }
   }
 
-  .navbar-right {
-
-    .buttons-group {
-      display: flex;
-      flex-direction: column;
-    }
-
-    button {
-      border: none;
-      background: none;
-
-      .nav-button {
-        margin: 3px;
-        border-radius: 0.5em;
-        background-color: #c61f55;
-        border: 1px solid #c61f55;
-        color: #ffffff;
-        display: inline-block;
-        cursor: pointer;
-        padding: 10px 15px;
-
-        a {
-          color: #ffffff;
-        }
-
-        font-family: Open Sans;
-        font-size: 1rem;
-        text-decoration: none;
-        text-align: center;
-        text-transform: uppercase;
-      }
-
-      .login-button:hover {
-        background-color: #6dbff9;
-        border: 1px solid #6dbff9;
-
-        >a {
-          color: #fff;
-          text-decoration: none;
-        }
-      }
-
-      .login-button {
-        margin: 3px;
-        border-radius: 0.5em;
-        background-color: #4c9ad2;
-        border: 1px solid #4c9ad2;
-        color: #fff;
-        display: inline-block;
-        cursor: pointer;
-        padding: 10px 15px;
-
-        a {
-          color: #ffffff;
-        }
-
-        font-family: Open Sans;
-        font-size: 1rem;
-        text-decoration: none;
-        text-align: center;
-        text-transform: uppercase;
-      }
-
-      .nav-button:hover {
-        background-color: #fd266c;
-        border: 1px solid #fd266c;
-
-        >a {
-          color: #ffffff;
-          text-decoration: none;
-        }
-      }
-
-      .aside {
-        display: flex;
-        flex-direction: column;
-        text-align: right;
-        justify-content: center;
-        width: 3.5em;
-        height: 3.5em;
-        overflow: hidden;
-        margin: 1em;
-        float: left;
-      }
-
-      .navbar-avatar {
-        border-radius: 100px;
-        border: 1px solid #000000;
-        max-width: 5rem;
-        height: 5rem;
-        margin: 0;
-        cursor: pointer;
-        display: block;
-        overflow: hidden;
-        transition-duration: 0.5s;
-        object-fit: cover;
-      }
-    }
-  }
 
   @media only screen and (max-width: 999px) {
     &:not(.show) {
@@ -152,12 +53,6 @@
       li {
         margin: 10px 5px;
         text-align: center;
-      }
-    }
-
-    .navbar-right {
-      .nav-button {
-        margin: 10px 5px;
       }
     }
   }
