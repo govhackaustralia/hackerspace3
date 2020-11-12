@@ -1,0 +1,45 @@
+/*==========  Mobile First Method  ==========*/
+
+/* Custom, iPhone Retina */
+@media only screen and (min-device-width: 320px) and (min-width : 320px) {
+  footer {
+  	display: flex;
+  	flex-direction: column;
+  	justify-content: center;
+  	text-align: center;
+  	font-size: 10px;
+  	margin-top: 2em;
+    margin-bottom: 2em;
+  }
+
+  .footerLogoSize {
+    width: 80px;
+    height: 60px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+/* Extra Small Devices, Phones */
+@media only screen and (min-device-width: 480px) and (min-width : 480px) {
+  .footerLogoSize {
+    width: 100px;
+    height: 80px;
+  }
+}
+
+/* Small Devices, Tablets */
+@media only screen and (min-width : 768px) {
+
+}
+
+/* Medium Devices, Desktops */
+@media only screen and (min-width : 992px) {
+
+}
+
+/* Large Devices, Wide Screens */
+@media only screen and (min-width : 1200px) {
+
+}
