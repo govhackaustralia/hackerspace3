@@ -1,29 +1,54 @@
-article.region-tile {
-  font-size: 1.5em;
-  text-align: center;
-  line-height: 1.2em;
-  width: 250px;
-  margin: 0.5em 0.5em;
-  background-image: url("/assets/cta.png");
-  background-size: cover;
-  background-position: center center;
-  display: flex;
-  align-content: stretch;
-  align-items: stretch;
+/*==========  Mobile First Method  ==========*/
 
-  div {
-    width: 100%;
-    height: 100%;
-    min-height: 250px;
-    transition: all 0.4s ease;
-    position: relative;
+/* Custom, iPhone Retina */
+@media only screen and (min-device-width: 320px) and (min-width : 320px) {
+  article.region-tile {
+    font-size: 1.5em;
+    text-align: center;
+    line-height: 1.2em;
+    width: 250px;
+    margin: 0.5em 0.5em;
+    background-image: url("/assets/cta.png");
+    background-size: cover;
+    background-position: center center;
+    display: flex;
+    align-content: stretch;
+    align-items: stretch;
 
-    h3 {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      margin-right: -50%;
-      transform: translate(-50%, -50%)
+    div {
+      width: 100%;
+      height: 100%;
+      min-height: 250px;
+      transition: all 0.4s ease;
+      position: relative;
+
+      h3 {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        margin-right: -50%;
+        transform: translate(-50%, -50%)
+      }
     }
   }
+}
+
+/* Extra Small Devices, Phones */
+@media only screen and (min-device-width: 480px) and (min-width : 480px) {
+
+}
+
+/* Small Devices, Tablets */
+@media only screen and (min-width : 768px) {
+
+}
+
+/* Medium Devices, Desktops */
+@media only screen and (min-width : 992px) {
+
+}
+
+/* Large Devices, Wide Screens */
+@media only screen and (min-width : 1200px) {
+
 }
