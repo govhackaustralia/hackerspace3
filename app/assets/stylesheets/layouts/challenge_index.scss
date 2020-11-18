@@ -10,7 +10,7 @@
       font-size: 2em;
     }
 
-    h3 {
+    h3.challenge-views {
       display: none;
     }
   }
@@ -24,7 +24,7 @@
 /* Small Devices, Tablets */
 @media only screen and (min-width : 768px) {
   .challenge_index {
-    h3 {
+    h3.challenge-views {
       display: block;
       font-size: 1.5em;
       padding: 1em;
