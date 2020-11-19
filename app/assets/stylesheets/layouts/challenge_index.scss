@@ -7,7 +7,7 @@
 
     h2 {
       color: #4c9ad2;
-      font-size: 2em;
+      font-size: 1.5em;
     }
 
     h3.challenge-views {
@@ -24,6 +24,10 @@
 /* Small Devices, Tablets */
 @media only screen and (min-width : 768px) {
   .challenge_index {
+    h2 {
+      font-size: 2em;
+    }
+
     h3.challenge-views {
       display: block;
       font-size: 1.5em;
