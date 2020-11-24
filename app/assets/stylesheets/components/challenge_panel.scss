@@ -5,36 +5,29 @@
   section.challenge-panel {
     padding: 0.5em 1em;
     box-sizing: border-box;
-    display: flex;
     border: 1px solid black;
     border-radius: 10px;
     margin: 0.5em 1em;
 
     article {
-      width: 60%;
       box-sizing: border-box;
 
       h4 {
         color: #4c9ad2;
-        font-size: 1.3em;
+        font-size: 1em;
       }
 
       h5 {
         color: #ca1e56;
         font-weight: 400;
         font-style: italic;
-        font-size: 1.25em;
+        font-size: 0.9em;
         padding: 0.5em 0.5em;
       }
     }
 
     aside {
-      width: 40%;
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: flex-end;
-      align-content: center;
-      align-items: flex-start;
+      display: block;
 
       figure {
         display: flex;
@@ -45,7 +38,6 @@
         border: 1px solid #dde4e6;
         transition: all 0.4s ease;
         cursor: pointer;
-        width: 50%;
         box-sizing: border-box;
         height: calc(75px + 2em);
         justify-content: center;
@@ -79,7 +71,34 @@
 
 /* Small Devices, Tablets */
 @media only screen and (min-width : 768px) {
+  section.challenge-panel {
+    display: flex;
 
+    article {
+      width: 60%;
+
+      h4 {
+        font-size: 1.3em;
+      }
+
+      h5 {
+        font-size: 1.25em;
+      }
+    }
+
+    aside {
+      width: 40%;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      align-content: center;
+      align-items: flex-start;
+
+      figure {
+        width: 50%;
+      }
+    }
+  }
 }
 
 /* Medium Devices, Desktops */
