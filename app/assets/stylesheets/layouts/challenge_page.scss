@@ -1,186 +1,213 @@
-.challenge_page {
-  padding: 2em 5em;
+/*==========  Mobile First Method  ==========*/
 
-  h2 {
-    color: #4c9ad2;
-    font-size: 2em;
-  }
+/* Custom, iPhone Retina */
+@media only screen and (min-device-width: 320px) and (min-width : 320px) {
+  .challenge_page {
+    padding: 2em 0em;
 
-  h3 {
-    font-size: 1.5em;
-    padding: 1em;
-  }
-
-  .challenge_head, .challenge_body {
-    article {
-      width: 60%;
+    h2 {
+      color: #4c9ad2;
+      font-size: 2em;
     }
 
-    aside {
-      width: 40%;
+    h3 {
+      font-size: 1.5em;
+      padding: 1em;
     }
-  }
 
-  section {
-    padding: 0 1.5em;
+    .challenge_head, .challenge_body {
+      article {
+        width: 60%;
+      }
 
-    &.challenge_body, &.challenge_head {
+      aside {
+        width: 40%;
+      }
+    }
+
+    section {
       padding: 0 1.5em;
-      display: flex;
-    }
 
-    &.teams {
-      h4 {
-        color: #ca1e56;
-        padding: 0.25em 0.25em;
+      &.challenge_body, &.challenge_head {
+        padding: 0 1.5em;
+        display: flex;
       }
 
-      h5 {
-        color: #4c9ad2;
-        padding: 0.25em 0.55em;
-      }
-    }
+      &.teams {
+        h4 {
+          color: #ca1e56;
+          padding: 0.25em 0.25em;
+        }
 
-    article {
-      p.challenge_enter a {
+        h5 {
+          color: #4c9ad2;
+          padding: 0.25em 0.55em;
+        }
+      }
+
+      article {
+        p.challenge_enter a {
+          box-sizing: border-box;
+          font-size: 1.5em;
+          padding: 0.5em 1.5em;
+          width: 100%;
+          display: block;
+          text-align: center;
+          margin-top: 0.25em;
+          background-color: #ca1e56;
+          color: #ddd;
+          font-weight: 700;
+          text-transform: uppercase;
+          text-decoration: none;
+        }
+
         box-sizing: border-box;
-        font-size: 1.5em;
-        padding: 0.5em 1.5em;
+        padding: 0.25em;
+      }
+
+      aside {
+        box-sizing: border-box;
+        padding: 0.25em;
+      }
+
+      article {
+        h4 {
+          color: #ca1e56;
+          font-weight: 400;
+          font-size: 1.5em;
+          font-style: italic;
+        }
+
+        p {
+          padding-bottom: 0.5em;
+          padding-left: 0.5em;
+          padding-right: 0.5em;
+        }
+
+        h5 {
+          font-weight: 400;
+          font-size: 1.25em;
+        }
+      }
+    }
+
+    .videoWrapper {
+      position: relative;
+      padding-bottom: 56.25%;
+
+      /* 16:9 */
+      padding-top: 25px;
+      height: 0;
+
+      iframe {
+        position: absolute;
+        top: 0;
+        left: 0;
         width: 100%;
-        display: block;
-        text-align: center;
-        margin-top: 0.25em;
-        background-color: #ca1e56;
-        color: #ddd;
-        font-weight: 700;
-        text-transform: uppercase;
-        text-decoration: none;
-      }
-
-      box-sizing: border-box;
-      padding: 0.25em;
-    }
-
-    aside {
-      box-sizing: border-box;
-      padding: 0.25em;
-    }
-
-    article {
-      h4 {
-        color: #ca1e56;
-        font-weight: 400;
-        font-size: 1.5em;
-        font-style: italic;
-      }
-
-      p {
-        padding-bottom: 0.5em;
-        padding-left: 0.5em;
-        padding-right: 0.5em;
-      }
-
-      h5 {
-        font-weight: 400;
-        font-size: 1.25em;
+        height: 100%;
       }
     }
-  }
 
-  .videoWrapper {
-    position: relative;
-    padding-bottom: 56.25%;
-
-    /* 16:9 */
-    padding-top: 25px;
-    height: 0;
-
-    iframe {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-    }
-  }
-
-  .pdf_preview {
-    padding-top: .5em;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    width: 50%;
-    height: 50%;
-  }
-
-  .challenge_image {
-    max-width: 40%;
-    max-height: 20%;
-  }
-
-  .sponsors {
-    display: flex;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: flex-end;
-    align-content: center;
-    align-items: flex-start;
-
-    figure {
-      display: flex;
-      flex-direction: column;
-      align-content: center;
-      align-items: center;
-      padding: 1em 2em;
-      border: 1px solid #dde4e6;
-      transition: all 0.4s ease;
-      cursor: pointer;
+    .pdf_preview {
+      padding-top: .5em;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
       width: 50%;
-      box-sizing: border-box;
-      height: calc(75px + 2em);
-      justify-content: center;
+      height: 50%;
+    }
 
-      &:hover {
-        background-color: #fff;
-      }
+    .challenge_image {
+      max-width: 40%;
+      max-height: 20%;
+    }
 
-      img {
-        display: inline-block;
-        width: auto !important;
-        height: auto !important;
-        max-height: 75px;
-        max-width: 100%;
+    .sponsors {
+      display: flex;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      align-content: center;
+      align-items: flex-start;
+
+      figure {
+        display: flex;
+        flex-direction: column;
+        align-content: center;
+        align-items: center;
+        padding: 1em 2em;
+        border: 1px solid #dde4e6;
+        transition: all 0.4s ease;
+        cursor: pointer;
+        width: 50%;
+        box-sizing: border-box;
+        height: calc(75px + 2em);
+        justify-content: center;
+
+        &:hover {
+          background-color: #fff;
+        }
+
+        img {
+          display: inline-block;
+          width: auto !important;
+          height: auto !important;
+          max-height: 75px;
+          max-width: 100%;
+        }
       }
     }
-  }
 
-  table {
-    box-sizing: border-box;
-    margin-top: 2em;
-    margin-left: 2em;
-    padding: 2em 2em;
-    border-collapse: collapse;
-    width: 100%;
-    border: 1px solid #ca1e56;
-    padding: 0.25em 1em;
-    box-sizing: border-box;
-  }
+    table {
+      box-sizing: border-box;
+      margin-top: 2em;
+      margin-left: 2em;
+      padding: 2em 2em;
+      border-collapse: collapse;
+      width: 100%;
+      border: 1px solid #ca1e56;
+      padding: 0.25em 1em;
+      box-sizing: border-box;
+    }
 
-  th, td {
-    border: 1px solid #ca1e56;
-    padding: 0.25em 1em;
-    box-sizing: border-box;
-  }
+    th, td {
+      border: 1px solid #ca1e56;
+      padding: 0.25em 1em;
+      box-sizing: border-box;
+    }
 
-  th {
-    background-color: #ca1e56;
-    color: #ddd;
-  }
+    th {
+      background-color: #ca1e56;
+      color: #ddd;
+    }
 
-  table a {
-    text-decoration: none;
-    color: #4c9ad2;
+    table a {
+      text-decoration: none;
+      color: #4c9ad2;
+    }
   }
+}
+
+/* Extra Small Devices, Phones */
+@media only screen and (min-device-width: 480px) and (min-width : 480px) {
+
+}
+
+/* Small Devices, Tablets */
+@media only screen and (min-width : 768px) {
+  .challenge_page {
+    padding: 2em 5em;
+  }
+}
+
+/* Medium Devices, Desktops */
+@media only screen and (min-width : 992px) {
+
+}
+
+/* Large Devices, Wide Screens */
+@media only screen and (min-width : 1200px) {
+
 }
 
 @media only screen and (max-width: 800px) {
