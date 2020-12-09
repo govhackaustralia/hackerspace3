@@ -124,9 +124,7 @@
 
     .sponsors {
       display: flex;
-      display: flex;
       flex-wrap: wrap;
-      justify-content: flex-end;
       align-content: center;
       align-items: flex-start;
 
@@ -139,7 +137,7 @@
         border: 1px solid #dde4e6;
         transition: all 0.4s ease;
         cursor: pointer;
-        width: 50%;
+        width: 100%;
         box-sizing: border-box;
         height: calc(75px + 2em);
         justify-content: center;
@@ -197,6 +195,14 @@
 @media only screen and (min-width : 768px) {
   .challenge_page {
     padding: 2em 5em;
+
+    .sponsors {
+      justify-content: flex-end;
+
+      figure {
+        width: 50%;
+      }
+    }
   }
 }
 
