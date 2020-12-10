@@ -48,13 +48,12 @@
       <% if @data_sets.present? %>
         <h5>Dataset Highlight</h5>
         <% @data_sets.each do |data_set| %>
-          <p>
-            <strong>
-              <%= data_set.name %>
-            </strong>
-            <br/>
-            <%= link_to(data_set.url,data_set.url) %>
-          </p>
+          <div class="challenge-dataset">
+            <p>
+              <strong><%= data_set.name %></strong>
+            </p>
+            <p><%= link_to "Go to Dataset", data_set.url %></p>
+          </div>
         <% end %>
       <% end %>
       <p>
