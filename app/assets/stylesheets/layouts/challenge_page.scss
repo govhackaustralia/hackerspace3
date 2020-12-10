@@ -193,6 +193,11 @@
 
 /* Small Devices, Tablets */
 @media only screen and (min-width : 768px) {
+
+}
+
+/* Medium Devices, Desktops */
+@media only screen and (min-width : 992px) {
   .challenge_page {
     padding: 2em 5em;
 
@@ -204,11 +209,6 @@
       }
     }
   }
-}
-
-/* Medium Devices, Desktops */
-@media only screen and (min-width : 992px) {
-
 }
 
 /* Large Devices, Wide Screens */
