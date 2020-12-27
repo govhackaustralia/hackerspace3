@@ -53,7 +53,7 @@
             <strong>
               <%= fa_icon('user-friends') %>
             </strong>
-            <%= link_to "#{project.team_name}", project_path(project.identifier) %>
+            <%= link_to "#{project.project_name}", project_path(project.identifier) %>
           </p>
         <% end %>
         <% if @profile.website.present? %>
