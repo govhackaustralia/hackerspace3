@@ -102,7 +102,7 @@ end
 # gem 'bcrypt', '~> 3.1.7'
 
 # Use ActiveStorage variant
-# gem 'mini_magick', '~> 4.8'
+# gem 'image_processing'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
