@@ -40,8 +40,16 @@ class UserTest < ActiveSupport::TestCase
     assert @user.event_assignments.include? @participant_assignment
 
     assert @user.joined_team_assignments.include? @joined_team_assignment
+    assert @user.joined_team_assignments.include? assignments :to_unpublished_team
+
     assert @user.joined_teams.include? @joined_team
-    assert @user.joined_projects.include? projects :one
+    assert @user.joined_teams.include? teams :unpublished_team
+
+    assert @user.joined_published_teams.include? @joined_team
+    assert @user.joined_published_teams.exclude? teams :unpublished_team
+
+    assert @user.joined_published_projects.include? projects :one
+    assert @user.joined_published_projects.exclude? projects :unpublished_project
 
     assert @invitee.invited_team_assignments.include? @invited_team_assignments
     assert @invitee.invited_teams.include? @invited_team

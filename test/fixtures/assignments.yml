@@ -147,3 +147,12 @@ badge_assignment:
   assignable_type: Badge
   title: Assignee
   competition_id: 1
+
+to_unpublished_team:
+  id: 17
+  user_id: 1
+  holder_id: 1
+  assignable_id: 3
+  assignable_type: Team
+  title: Team Member
+  competition_id: 1

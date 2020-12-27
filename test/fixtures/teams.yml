@@ -16,3 +16,9 @@ two:
   event_id: 4
   project_id: 1
   published: true
+
+unpublished_team:
+  id: 3
+  event_id: 4
+  project_id: 3
+  published: false

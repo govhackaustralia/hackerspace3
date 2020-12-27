@@ -29,3 +29,16 @@ two:
   homepage_url:
   identifier: open_data_team
   user_id: 1
+
+unpublished_project:
+  id: 3
+  team_id: 3
+  team_name: Unpublished Team
+  project_name: zzz
+  description: An awesome team full of people who work well together. version 2
+  data_story: This data tells a story.
+  source_code_url:
+  video_url:
+  homepage_url:
+  identifier: unpublished_team
+  user_id: 1

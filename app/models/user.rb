@@ -38,8 +38,14 @@ class User < ApplicationRecord
     source: :assignable,
     source_type: 'Team'
 
-  has_many :joined_projects,
-    through: :joined_teams,
+  has_many :joined_published_teams,
+    -> { published },
+    through: :joined_team_assignments,
+    source: :assignable,
+    source_type: 'Team'
+
+  has_many :joined_published_projects,
+    through: :joined_published_teams,
     source: :current_project
 
   has_many :invited_team_assignments,
