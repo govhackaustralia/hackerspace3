@@ -51,7 +51,7 @@
         <% @joined_published_projects.each do |project| %>
           <p>
             <strong>
-              <%= fa_icon('user-friends') %>
+              <%= fa_icon('file') %>
             </strong>
             <%= link_to "#{project.project_name}", project_path(project.identifier) %>
           </p>
