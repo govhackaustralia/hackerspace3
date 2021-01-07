@@ -36,7 +36,7 @@ class TeamSeeder < Seeder
           project_name: "#{event.name} project #{team_time}",
           data_story: Faker::Lorem.paragraph,
           source_code_url: 'https://github.com/tenderlove/allocation_sampler',
-          video_url: 'https://www.youtube.com/embed/kqcrEFkA8g0',
+          video_url: 'https://www.youtube.com/embed/-aOYRiY7Avk',
           homepage_url: 'https://www.govhack.org/',
           user: team.leaders.first
         )

@@ -83,7 +83,7 @@ class RegionSeeder < Seeder
           short_desc: Faker::Lorem.sentence, approved: true,
           long_desc: Faker::Lorem.paragraph,
           eligibility: 'You must be this tall to go on this ride.',
-          video_url: 'https://www.youtube.com/embed/kqcrEFkA8g0',
+          video_url: 'https://www.youtube.com/embed/-aOYRiY7Avk',
           nation_wide: region.regional? && (time % 2 == 0)
         )
       end
