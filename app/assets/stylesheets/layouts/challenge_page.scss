@@ -113,7 +113,7 @@
       display: block;
       margin-left: auto;
       margin-right: auto;
-      width: 50%;
+      width: 100%;
       height: 50%;
     }
 
@@ -200,6 +200,10 @@
 @media only screen and (min-width : 992px) {
   .challenge_page {
     padding: 2em 5em;
+
+    .pdf_preview {
+      width: 50%;
+    }
 
     .challenge_image {
       max-width: 40%;
