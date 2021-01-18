@@ -118,7 +118,7 @@
     }
 
     .challenge_image {
-      max-width: 40%;
+      max-width: 100%;
       max-height: 20%;
     }
 
@@ -200,6 +200,10 @@
 @media only screen and (min-width : 992px) {
   .challenge_page {
     padding: 2em 5em;
+
+    .challenge_image {
+      max-width: 40%;
+    }
 
     .sponsors {
       justify-content: flex-end;
