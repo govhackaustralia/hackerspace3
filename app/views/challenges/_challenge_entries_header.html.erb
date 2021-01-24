@@ -1,0 +1,8 @@
+<%= render 'components/index_header',
+  title: "Entries to #{@challenge.name}",
+  full_title: "Entries to #{@challenge.name}",
+  catalogue_action: 'entries',
+  table_action: 'entries_table',
+  catalogue_path: entries_challenge_path(@challenge.identifier),
+  table_path: entries_table_challenge_path(@challenge.identifier)
+%>

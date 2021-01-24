@@ -7,7 +7,7 @@ class ChallengesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'should get index' do
-
+    get challenges_path
   end
 
   test 'should get table' do
@@ -25,10 +25,6 @@ class ChallengesControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to landing_page_challenges_url
   end
 
-  test 'should get coming soon' do
-
-  end
-
   test 'should get show' do
     get challenge_url @challenge.identifier
     assert_response :success
@@ -36,6 +32,11 @@ class ChallengesControllerTest < ActionDispatch::IntegrationTest
 
   test 'should get entries' do
     get entries_challenge_url @challenge.identifier
+    assert_response :success
+  end
+
+  test 'should get entries table' do
+    get entries_table_challenge_url @challenge.identifier
     assert_response :success
   end
 end

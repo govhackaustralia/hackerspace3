@@ -1,0 +1,17 @@
+<section class="challenge-panel">
+  <article>
+    <h4><%= team.current_project.project_name %></h4>
+    <h5><%= team.current_project.team_name %></h5>
+    <% unless team.current_project.description.blank? %>
+      <p><%= truncate team.current_project.description, length: 300 %></p>
+    <% end %>
+    <p>
+      <%= link_to 'Go to Project', project_path(team.current_project.identifier) %>
+    </p>
+  </article>
+  <aside>
+    <figure>
+      <%= link_to (image_tag(team_thumbnail_asset_path(team))), project_path(team.current_project.identifier) %>
+    </figure>
+  </aside>
+</section>

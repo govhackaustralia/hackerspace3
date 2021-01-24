@@ -18,7 +18,10 @@ Rails.application.routes.draw do
       get 'landing_page'
       get 'table'
     end
-    member { get 'entries' }
+    member do
+      get 'entries'
+      get 'entries_table'
+    end
   end
 
   resources :users, only: :update

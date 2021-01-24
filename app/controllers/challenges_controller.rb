@@ -1,5 +1,5 @@
 class ChallengesController < ApplicationController
-  before_action :check_competition_start!, only: %i[show entries]
+  before_action :check_competition_start!, only: %i[show entries entries_table]
   before_action :check_competition_index_landing_page!,
                 :preferred_index_view, only: %i[index table]
   before_action :check_competition_landing_page_index!, only: :landing_page
@@ -37,6 +37,11 @@ class ChallengesController < ApplicationController
   end
 
   def entries
+    @teams = @challenge.published_teams.with_attached_thumbnail
+      .preload(:event, :current_project)
+  end
+
+  def entries_table
     @challenges = @competition.challenges.approved
     if @competition.either_judging_window_open?(LAST_TIME_ZONE)
       judging_view
