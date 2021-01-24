@@ -1,5 +1,5 @@
 <main class="project_index">
-  <%= render 'index_header' %>
+  <%= render 'challenges_header' %>
   <% if @challenges.any? %>
     <p>
       <%= link_to 'Download CSV', table_challenges_path(format: 'csv'), class: 'download-csv' %>
