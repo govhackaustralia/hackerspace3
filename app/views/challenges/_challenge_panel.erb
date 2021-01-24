@@ -1,12 +1,8 @@
 <section class="challenge-panel">
   <article>
-    <h4>
-      <%= challenge.name %>
-    </h4>
+    <h4><%= challenge.name %></h4>
     <% unless challenge.short_desc.blank? %>
-      <h5>
-        <%= challenge.short_desc %>
-      </h5>
+      <h5><%= challenge.short_desc %></h5>
     <% end %>
     <p>
       <%= link_to 'Go to Challenge', challenge_path(challenge.identifier) %>
