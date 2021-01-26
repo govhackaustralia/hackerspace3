@@ -35,7 +35,7 @@ Once installed and running, use Powershell to follow the instructions in the **D
 
 Hackerspace 3 is a [Ruby on Rails application](https://rubyonrails.org/)
 
-Current major version is 6
+Current major version is 6.1
 
 Check out the [Rails Guides](https://guides.rubyonrails.org/index.html) to get up and running.
 
