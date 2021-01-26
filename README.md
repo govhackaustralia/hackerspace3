@@ -41,7 +41,7 @@ Check out the [Rails Guides](https://guides.rubyonrails.org/index.html) to get u
 
 ## Ruby version
 
-- `3.0.0`
+- `2.7.2`
 
 ## Database initialization and creation
 
