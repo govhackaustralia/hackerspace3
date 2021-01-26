@@ -3,7 +3,15 @@
   <% if @teams.any? %>
     <%= render partial: 'components/team_panel', collection: @teams, as: :team %>
   <% else %>
-    <p><strong>No team entries to display for this challenge.</strong></p>
+    <section class="teams">
+      <article>
+        <p>
+          <strong>
+            No team entries to display for this challenge.
+          </strong>
+        </p>
+      </article>
+    </section>
   <% end %>
   <%= link_to 'Back to Challenge', challenge_path(@challenge.identifier) %>
 </main>
