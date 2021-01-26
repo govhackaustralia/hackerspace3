@@ -178,10 +178,9 @@ GEM
     letter_opener (1.7.0)
       launchy (~> 2.2)
     libv8 (8.4.255.0)
-    listen (3.1.5)
+    listen (3.0.8)
       rb-fsevent (~> 0.9, >= 0.9.4)
       rb-inotify (~> 0.9, >= 0.9.7)
-      ruby_dep (~> 1.2)
     loofah (2.9.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
@@ -309,7 +308,6 @@ GEM
       rubocop-ast (>= 0.4.0)
     ruby-progressbar (1.11.0)
     ruby2_keywords (0.0.4)
-    ruby_dep (1.5.0)
     rubyzip (2.3.0)
     sassc (2.4.0)
       ffi (~> 1.9)
@@ -419,4 +417,4 @@ DEPENDENCIES
   webpacker
 
 BUNDLED WITH
-   2.1.4
+   2.2.6
