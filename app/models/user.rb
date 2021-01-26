@@ -147,8 +147,8 @@ class User < ApplicationRecord
   }
 
   def registration_complete?
-    errors[:full_name] << 'must be entered' if full_name.blank?
-    errors[:region] << 'must be entered' if region.blank?
+    errors.add :full_name, 'must be entered' if full_name.blank?
+    errors.add :region, 'must be entered' if region.blank?
     errors.empty?
   end
 
