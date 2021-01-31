@@ -68,7 +68,7 @@ class EventSeeder < Seeder
   def self.create_national_awards(event, comp)
     [*1..8].sample.times do
       event.flights.create(
-        description: Faker::TvShows::GameOfThrones.city + ' ' + comp.year.to_s,
+        description: [Faker::TvShows::TheExpanse.location, comp.year].join(' '),
         direction: FLIGHT_DIRECTIONS.sample
       )
     end

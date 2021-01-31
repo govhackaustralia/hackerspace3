@@ -135,7 +135,7 @@ class RegionSeeder < Seeder
       event_name = if region.time_zone.nil?
                     international_region.name
                    else
-                    Faker::TvShows::GameOfThrones.city
+                    Faker::TvShows::TheExpanse.location
                    end
 
       # ENHANCEMENT: Split into National and Regional challenges to assign
