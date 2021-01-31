@@ -156,5 +156,11 @@
 
 /* Large Devices, Wide Screens */
 @media only screen and (min-width : 1200px) {
-
+  .single-event {
+    > section > section > aside {
+      iframe {
+        height: 400px;
+      }
+    }
+  }
 }
