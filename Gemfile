@@ -18,11 +18,11 @@ gem 'jbuilder', '~> 2.5'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
 # Flexible authentication solution for Rails with Warden.
-gem 'devise'
+gem 'devise', github: 'heartcombo/devise', branch: 'ca-omniauth-2'
 # Oauth2 strategy for Google
 gem 'omniauth-google-oauth2'
 # Oauth2 strategy for Slack
-gem 'omniauth-slack'
+gem 'ginjo-omniauth-slack', require:'omniauth-slack'
 # Usable, fast, simple Ruby HTTP 1.1
 gem 'excon'
 # Add JQuery to Rails
