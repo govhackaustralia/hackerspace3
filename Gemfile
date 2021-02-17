@@ -19,6 +19,8 @@ gem 'jbuilder', '~> 2.5'
 gem 'bootsnap', '>= 1.1.0', require: false
 # Flexible authentication solution for Rails with Warden.
 gem 'devise', github: 'heartcombo/devise', branch: 'ca-omniauth-2'
+# This gem provides a mitigation against CVE-2015-9284
+gem 'omniauth-rails_csrf_protection'
 # Oauth2 strategy for Google
 gem 'omniauth-google-oauth2'
 # Oauth2 strategy for Slack
@@ -47,8 +49,6 @@ gem 'redis', '~> 4.0'
 gem 'coffee-rails'
 # Patch-level verification for bundler.
 gem 'bundler-audit'
-# This gem provides a mitigation against CVE-2015-9284
-gem 'omniauth-rails_csrf_protection'
 # Use Webpack to manage app-like JavaScript modules in Rails
 gem 'webpacker'
 # A tagging plugin that allows for custom tagging along dynamic contexts.

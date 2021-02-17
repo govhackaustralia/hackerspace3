@@ -4,7 +4,6 @@
     <section class="signup-form">
       <h2 class="heading">Register for GovHack 2020</h2>
       <div class="google-oath">
-        <% # TODO: remove once https://github.com/omniauth/omniauth/pull/809 is resolved %>
         <%= link_to (render "devise/shared/google"), user_google_omniauth_authorize_path, method: :post %>
         <hr class="grey-border">
         <p class="alt-text">or register below</p>
