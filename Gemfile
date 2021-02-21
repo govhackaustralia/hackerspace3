@@ -40,7 +40,7 @@ gem 'redcarpet'
 # Automatically generate links in HTML
 gem "rails_autolink", "~> 1.1"
 # Basic Stats Gem
-gem 'descriptive_statistics', '~> 2.4.0', :require => 'descriptive_statistics/safe'
+gem 'descriptive_statistics', '~> 2.4.0', require: 'descriptive_statistics/safe'
 # Pretend Data
 gem 'faker'
 # Use Redis adapter to run Action Cable in production
