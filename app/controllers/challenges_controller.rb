@@ -23,7 +23,7 @@ class ChallengesController < ApplicationController
   end
 
   def landing_page
-    @event = current_user.participating_competition_event(@competition)
+    @event = user_signed_in? && current_user.participating_competition_event(@competition)
     return unless (@started = @competition.started?(FIRST_TIME_ZONE))
 
     @regions = @competition.regions
