@@ -17,7 +17,6 @@ module Types
     field :video_id, String, null: true
     field :start_time, GraphQL::Types::ISO8601DateTime, null: true
     field :end_time, GraphQL::Types::ISO8601DateTime, null: true
-    field :published, Boolean, null: true
     field :created_at, GraphQL::Types::ISO8601DateTime, null: false
     field :updated_at, GraphQL::Types::ISO8601DateTime, null: false
     field :place_id, String, null: true

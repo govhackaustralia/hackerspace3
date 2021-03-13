@@ -6,7 +6,6 @@ module Types
     field :parent_id, Integer, null: true
     field :created_at, GraphQL::Types::ISO8601DateTime, null: false
     field :updated_at, GraphQL::Types::ISO8601DateTime, null: false
-    field :award_release, GraphQL::Types::ISO8601DateTime, null: true
     field :competition_id, Integer, null: true
     field :category, String, null: true
     field :identifier, String, null: true
