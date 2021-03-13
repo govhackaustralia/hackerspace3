@@ -116,7 +116,7 @@ class Entry < ApplicationRecord
   # Returns on objects of a teams challenge entries.
   # ENHANCEMENT: Not needed, move to active record preload.
   def self.team_id_entries(entries)
-    entries = where(id: entries.uniq) if entries.class == Array
+    entries = where(id: entries.uniq) if entries.instance_of?(Array)
     id_entries = {}
     entries.each { |entry| id_entries[entry.team_id] = entry }
     id_entries

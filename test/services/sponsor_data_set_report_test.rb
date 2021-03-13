@@ -7,7 +7,7 @@ class SponsorDataSetReportTest < ActiveSupport::TestCase
   end
 
   test 'report' do
-    assert @sponsor_dataset_report.report.class == Array
+    assert @sponsor_dataset_report.report.instance_of?(Array)
   end
 
   test 'unaccounted_team_data_set_count' do
@@ -16,10 +16,10 @@ class SponsorDataSetReportTest < ActiveSupport::TestCase
     end
 
     @sponsor_dataset_report.report
-    assert @sponsor_dataset_report.unaccounted_team_data_set_count.class == Integer
+    assert @sponsor_dataset_report.unaccounted_team_data_set_count.instance_of?(Integer)
   end
 
   test 'to_csv' do
-    assert @sponsor_dataset_report.to_csv.class == String
+    assert @sponsor_dataset_report.to_csv.instance_of?(String)
   end
 end

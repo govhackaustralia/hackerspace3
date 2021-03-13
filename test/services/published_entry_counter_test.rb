@@ -8,11 +8,11 @@ class ChallengeEntryCounterTest < ActiveSupport::TestCase
   end
 
   test 'count' do
-    assert @counter.count(@challenge).class == Integer
+    assert @counter.count(@challenge).instance_of?(Integer)
   end
 
   test 'count with challenge_ids' do
     counter = PublishedEntryCounter.new(@competition, challenge_ids: [1])
-    assert counter.count(@challenge).class == Integer
+    assert counter.count(@challenge).instance_of?(Integer)
   end
 end

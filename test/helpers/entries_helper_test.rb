@@ -7,10 +7,10 @@ class EntriesHelperTest < ActionView::TestCase
   end
 
   test 'challenges_event_counts' do
-    assert challenges_event_counts(@region).class == Hash
+    assert challenges_event_counts(@region).instance_of?(Hash)
   end
 
   test 'challenges_region_counts' do
-    assert challenges_region_counts(@competition).class == Hash
+    assert challenges_region_counts(@competition).instance_of?(Hash)
   end
 end

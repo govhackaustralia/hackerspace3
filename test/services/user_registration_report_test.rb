@@ -6,6 +6,6 @@ class UserRegistrationReportTest < ActiveSupport::TestCase
   end
 
   test 'report' do
-    UserRegistrationReport.report(@competition).class == String
+    UserRegistrationReport.report(@competition).instance_of?(String)
   end
 end

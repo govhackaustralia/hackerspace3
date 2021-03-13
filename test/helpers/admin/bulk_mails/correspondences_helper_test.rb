@@ -6,6 +6,6 @@ class Admin::BulkMails::CorrespondencesHelperTest < ActionView::TestCase
   end
 
   test 'correspondence_with' do
-    assert correspondence_with(1).class == Correspondence
+    assert correspondence_with(1).instance_of?(Correspondence)
   end
 end

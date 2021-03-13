@@ -7,6 +7,6 @@ class PublishedTeamMemberReportTest < ActiveSupport::TestCase
   end
 
   test 'to_csv' do
-    @report.to_csv.class == String
+    @report.to_csv.instance_of?(String)
   end
 end

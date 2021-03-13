@@ -6,6 +6,6 @@ class MailingListExportTest < ActiveSupport::TestCase
   end
 
   test 'csv' do
-    MailingListExport.new(@competition).to_csv.class == String
+    MailingListExport.new(@competition).to_csv.instance_of?(String)
   end
 end

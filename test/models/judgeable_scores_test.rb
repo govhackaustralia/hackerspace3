@@ -8,7 +8,7 @@ class JudgeableScoresTest < ActiveSupport::TestCase
   end
 
   test 'compile' do
-    assert JudgeableScores.new(@participant, @teams).compile.class == Hash
-    assert JudgeableScores.new(@judge, @teams).compile.class == Hash
+    assert JudgeableScores.new(@participant, @teams).compile.instance_of?(Hash)
+    assert JudgeableScores.new(@judge, @teams).compile.instance_of?(Hash)
   end
 end
