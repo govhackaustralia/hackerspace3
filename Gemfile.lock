@@ -148,6 +148,10 @@ GEM
       omniauth-oauth2 (>= 1.4.0)
     globalid (0.4.2)
       activesupport (>= 4.2.0)
+    graphiql-rails (1.7.0)
+      railties
+      sprockets-rails
+    graphql (1.12.6)
     gravtastic (3.2.6)
     guard (2.16.2)
       formatador (>= 0.2.4)
@@ -396,6 +400,8 @@ DEPENDENCIES
   figaro
   font_awesome5_rails
   ginjo-omniauth-slack
+  graphiql-rails
+  graphql
   gravtastic
   guard
   guard-bundler
