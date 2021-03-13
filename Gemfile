@@ -59,10 +59,17 @@ gem 'mini_racer', platforms: :ruby
 gem 'bootstrap', '~> 4.5.0'
 # This gem provides only Free icons from Font-Awesome.
 gem 'font_awesome5_rails'
+# A Ruby implementation of GraphQL.
+gem 'graphql'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+end
+
+group :development, :test, :staging do
+  # Mount the GraphiQL IDE in Ruby on Rails.
+  gem 'graphiql-rails'
 end
 
 group :development do
