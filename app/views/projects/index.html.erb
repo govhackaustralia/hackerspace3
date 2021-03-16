@@ -44,7 +44,6 @@
           <th>Challenges Entered</th>
           <th>Datasets Used</th>
         <% end %>
-        <th style="display: none;">meta</th>
         <% if show_peoples_choice_stuff? %>
           <th>Project Scorecard</th>
         <% end %>
@@ -69,9 +68,6 @@
                 <%= @team_data_set_counts[project.team_id] %>
               </td>
             <% end %>
-            <td style="display: none;">
-              <%= "#{project.description} #{project.data_story} #{project.tags.map {|tag|"##{tag}"}.join(' ')}" %>
-            </td>
             <% if show_peoples_choice_stuff? %>
               <% if (display_score = @project_judging[project.team_id][:display_score_status]).is_a? Integer %>
                 <% score_value = ((display_score.to_f / @project_judging_total.to_f) * 100).to_i %>
