@@ -58,7 +58,7 @@
       <% @current_project.tag_list.each do |tag| %>
         <span>
           <strong>
-            <%= link_to "##{tag}", projects_path(search: "##{tag}") %>
+            #<%= tag %>
           </strong>
         </span>
       <% end %>
