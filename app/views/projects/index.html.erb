@@ -40,10 +40,7 @@
         <th>Project</th>
         <th>Team</th>
         <th>Location</th>
-        <% unless @competition.not_finished?(LAST_TIME_ZONE) %>
-          <th>Challenges Entered</th>
-          <th>Datasets Used</th>
-        <% end %>
+        <th>Tags</th>
         <% if show_peoples_choice_stuff? %>
           <th>Project Scorecard</th>
         <% end %>
@@ -60,14 +57,13 @@
             <td>
               <%= project.event.name %>
             </td>
-            <% unless @competition.not_finished?(LAST_TIME_ZONE) %>
-              <td>
-                <%= @challenge_counts[project.team_id] %>
-              </td>
-              <td>
-                <%= @team_data_set_counts[project.team_id] %>
-              </td>
-            <% end %>
+            <td>
+              <% project.tags.each do |tag| %>
+                <span>
+                  <%= link_to "##{tag}", projects_path(search: "##{tag}") %>
+                </span>
+              <% end %>
+            </td>
             <% if show_peoples_choice_stuff? %>
               <% if (display_score = @project_judging[project.team_id][:display_score_status]).is_a? Integer %>
                 <% score_value = ((display_score.to_f / @project_judging_total.to_f) * 100).to_i %>
