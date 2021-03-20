@@ -34,7 +34,7 @@ class ProfilesController < ApplicationController
       body: URI.encode_www_form(token: profile.slack_access_token, users: @other_profile.slack_user_id))
     channel_id = JSON.parse(response.body).dig('channel', 'id')
     if channel_id.present?
-      redirect_to "https://slack.com/app_redirect?channel=#{channel_id}"
+      redirect_to "https://app.slack.com/client/#{ENV['SLACK_TEAM_ID']}/#{channel_id}"
     else
       redirect_to profile_path(@other_profile), alert: 'Something went wrong'
     end
