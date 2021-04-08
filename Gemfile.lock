@@ -176,6 +176,8 @@ GEM
     hashie (4.1.0)
     i18n (1.8.9)
       concurrent-ruby (~> 1.0)
+    invisible_captcha (2.0.0)
+      rails (>= 5.0)
     jbuilder (2.11.2)
       activesupport (>= 5.0.0)
     jmespath (1.4.0)
@@ -407,6 +409,7 @@ DEPENDENCIES
   guard-bundler
   guard-minitest
   guard-rubocop
+  invisible_captcha
   jbuilder (~> 2.5)
   jquery-rails
   letter_opener
