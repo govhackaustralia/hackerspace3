@@ -63,6 +63,8 @@ gem 'font_awesome5_rails'
 gem 'graphql'
 # Mount the GraphiQL IDE in Ruby on Rails.
 gem 'graphiql-rails'
+# Complete and flexible spam protection solution for Rails applications.
+gem 'invisible_captcha'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
