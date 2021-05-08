@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_08_050110) do
+ActiveRecord::Schema.define(version: 2021_05_08_054615) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -341,6 +341,14 @@ ActiveRecord::Schema.define(version: 2021_05_08_050110) do
     t.index ["identifier"], name: "index_projects_on_identifier"
     t.index ["team_id"], name: "index_projects_on_team_id"
     t.index ["user_id"], name: "index_projects_on_user_id"
+  end
+
+  create_table "region_datasets", force: :cascade do |t|
+    t.integer "dataset_id"
+    t.integer "region_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["dataset_id", "region_id"], name: "index_region_datasets_on_dataset_id_and_region_id"
   end
 
   create_table "region_limits", force: :cascade do |t|

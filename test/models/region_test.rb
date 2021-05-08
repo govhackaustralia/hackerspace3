@@ -14,6 +14,8 @@ class RegionTest < ActiveSupport::TestCase
     @sponsorship_type = SponsorshipType.first
     @challenge = Challenge.first
     @data_set = DataSet.first
+    @region_dataset = region_datasets(:one)
+    @dataset = datasets(:one)
     @bulk_mail = BulkMail.first
     @support_assignment = Assignment.find 14
     @support = User.first
@@ -41,6 +43,8 @@ class RegionTest < ActiveSupport::TestCase
     assert @national.challenges.include? @challenge
     assert @national.approved_challenges.include? @challenge
     assert @national.data_sets.include? @data_set
+    assert @national.region_datasets.include? @region_dataset
+    assert @national.datasets.include? @dataset
     assert @national.bulk_mails.include? @bulk_mail
     assert @national.support_assignments.include? @support_assignment
     assert @national.supports.include? @support

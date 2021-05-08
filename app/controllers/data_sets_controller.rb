@@ -3,7 +3,7 @@ class DataSetsController < ApplicationController
     @data_sets = @competition.data_sets.order(:name).preload(:region)
     respond_to do |format|
       format.html
-      format.csv { send_data @data_sets.to_csv @competition }
+      format.csv { send_data DatasetReport.new(@data_sets).to_csv }
     end
   end
 

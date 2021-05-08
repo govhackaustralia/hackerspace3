@@ -13,5 +13,4 @@ class DemographicsReportTest < ActiveSupport::TestCase
   test 'to_csv' do
     assert @demographics_report.to_csv.instance_of?(String)
   end
-
 end
