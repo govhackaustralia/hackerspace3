@@ -2,7 +2,7 @@ require 'test_helper'
 
 class ExtraTest < ActiveSupport::TestCase
   setup do
-    @portal = portals(:one)
+    @portal = portals(:competition)
     @extra = extras(:one)
   end
 

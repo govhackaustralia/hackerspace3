@@ -22,7 +22,7 @@ class CompetitionTest < ActiveSupport::TestCase
     @checkpoint = Checkpoint.first
     @data_set = DataSet.first
     @dataset = datasets(:one)
-    @portal = portals(:one)
+    @portal = portals(:competition)
     @criterion = Criterion.first
     @project_criterion = Criterion.first
     @challenge_criterion = Criterion.second
