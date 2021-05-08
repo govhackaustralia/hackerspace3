@@ -19,6 +19,7 @@ class Team < ApplicationRecord
 
   has_many :projects, dependent: :destroy
   has_many :team_data_sets, dependent: :destroy
+  has_many :portals, as: :portable, dependent: :destroy
   has_many :favourites, dependent: :destroy
   has_many :headers, dependent: :destroy, as: :scoreable
 

@@ -1,22 +1,22 @@
-<% content_for :title, @data_set.name %>
+<% content_for :title, @dataset.name %>
 <main class="project_index">
   <h2>
-    <%= @data_set.name %>
+    <%= @dataset.name %>
   </h2>
   <p>
-    Region: <%= @data_set.region.name %>
+    Region: <%= @region.name %>
   </p>
   <p>
-    Description: <%= @data_set.description %>
+    Description: <%= @dataset.description %>
   </p>
   <p>
-    <a href="<%= @data_set.url %>" target="_blank">URL</a>
+    <a href="<%= @dataset.url %>" target="_blank">URL</a>
   </p>
   <h3>
-    Team Projects Utilising <%= @data_set.name %>
+    Team Projects Utilising <%= @dataset.name %>
   </h3>
   <% if @competition.started? %>
-    <% if @team_data_sets.present? %>
+    <% if @teams.any? %>
       <% @teams.each do |team| %>
         <h4>
           <%= "#{ team.current_project.team_name } - #{ team.current_project.project_name }" %>
@@ -26,15 +26,15 @@
         </p>
       <% end %>
     <% else %>
-      <p>No team projects utilising this data set currently.</p>
+      <p>No team projects utilising this dataset currently.</p>
     <% end %>
   <% else %>
     <p>
       Check back here at the start of the competition to see which team projects
-      are utilising this data set.
+      are utilising this dataset.
     </p>
   <% end %>
 </main>
 <p>
-  <%= link_to 'Back to Datasets', data_sets_path %>
+  <%= link_to 'Back to Datasets', datasets_path %>
 </p>

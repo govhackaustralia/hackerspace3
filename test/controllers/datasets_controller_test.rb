@@ -1,19 +1,18 @@
 require 'test_helper'
 
-class DataSetsControllerTest < ActionDispatch::IntegrationTest
+class DatasetsControllerTest < ActionDispatch::IntegrationTest
   test 'should get index' do
-    get data_sets_url
+    get datasets_url
     assert_response :success
   end
 
   test 'should get index csv' do
-    get data_sets_url format: :csv
+    get datasets_url format: :csv
     assert_response :success
   end
 
   test 'should get show' do
-    data_set = data_sets(:one)
-    get data_set_url(data_set)
+    get dataset_url(datasets(:one))
     assert_response :success
   end
 end

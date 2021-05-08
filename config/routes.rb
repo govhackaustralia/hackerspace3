@@ -13,7 +13,7 @@ Rails.application.routes.draw do
       get :tech
     end
   end
-  resources :data_sets, only: [:index, :show]
+  resources :datasets, only: [:index, :show]
   resources :teams, only: [:new, :create]
   resources :favourites, only: [:create, :destroy]
   resources :regions, only: :show
