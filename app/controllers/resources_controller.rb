@@ -2,7 +2,7 @@ class ResourcesController < ApplicationController
   def index; end
 
   def data_portals
-    @data_portals = YAML.load_file "#{Rails.root}/app/views/resources/data_portals.yml"
+    @data_portals = @competition.data_portals
   end
 
   def tech

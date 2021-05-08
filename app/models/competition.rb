@@ -2,7 +2,7 @@ class Competition < ApplicationRecord
   has_many :assignments, as: :assignable
   has_many :holders, dependent: :destroy
   has_many :users, through: :holders
-  has_many :profiles, through: :users 
+  has_many :profiles, through: :users
   has_many :regions
   has_many :sponsors
   has_many :sponsorship_types
@@ -29,6 +29,7 @@ class Competition < ApplicationRecord
   has_many :hunt_questions
   has_many :data_sets, through: :regions
   has_many :datasets, through: :regions
+  has_many :portals, as: :portable, dependent: :destroy
   has_many :badges
 
   has_many :criteria
@@ -191,6 +192,16 @@ class Competition < ApplicationRecord
 
   def already_participating_in_a_competition_event?(event_assignment)
     competition_registrations.participating.where(assignment: event_assignment).present?
+  end
+
+  def data_portals
+    portals.preload(:extra, :dataset).map do |portal|
+      {
+        'name' => portal.dataset.name,
+        'url' => portal.dataset.url,
+        'short_url' => portal.extra.entry
+      }
+    end
   end
 
   private
