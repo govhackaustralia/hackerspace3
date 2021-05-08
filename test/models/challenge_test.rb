@@ -13,6 +13,8 @@ class ChallengeTest < ActiveSupport::TestCase
     @challenge_sponsorship = ChallengeSponsorship.first
     @sponsor = Sponsor.first
     @challenge_data_set = ChallengeDataSet.first
+    @challenge_dataset = challenge_datasets(:one)
+    @dataset = datasets(:one)
     @data_set = DataSet.first
     @regional_challenge = Challenge.third
   end
@@ -31,6 +33,8 @@ class ChallengeTest < ActiveSupport::TestCase
     assert @challenge.sponsors_with_logos.include? @sponsor
     assert @challenge.challenge_data_sets.include? @challenge_data_set
     assert @challenge.data_sets.include? @data_set
+    assert @challenge.challenge_datasets.include? @challenge_dataset
+    assert @challenge.datasets.include? @dataset
     @challenge.destroy
     assert_raises(ActiveRecord::RecordNotFound) { @assignment.reload }
     assert_raises(ActiveRecord::RecordNotFound) { @entry.reload }

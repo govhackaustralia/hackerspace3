@@ -13,4 +13,9 @@ class RegionDatasetTest < ActiveSupport::TestCase
     assert @region_dataset.region == @region
     assert @region_dataset.competition == @competition
   end
+
+  test 'region data set validations' do
+    region_dataset = RegionDataset.create(region: @region, dataset: @dataset)
+    assert_not region_dataset.persisted?
+  end
 end
