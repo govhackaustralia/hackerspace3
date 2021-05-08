@@ -21,7 +21,6 @@ AllCops:
     - app/controllers/registrations_controller.rb
     - app/controllers/graphql_controller.rb
     - app/models/header.rb
-    - app/models/data_set.rb
     - app/models/team_entry_report.rb
     - app/services/demographics_report.rb
     - test/models/competition_test.rb

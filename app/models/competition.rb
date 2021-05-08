@@ -28,6 +28,7 @@ class Competition < ApplicationRecord
   has_many :checkpoints
   has_many :hunt_questions
   has_many :data_sets, through: :regions
+  has_many :datasets, through: :regions
   has_many :badges
 
   has_many :criteria

@@ -2,12 +2,10 @@
 
 one:
   id: 1
-  name: MyString
-  url: MyString
-  description: MyText
+  dataset_id: 1
+  region_id: 1
 
 two:
   id: 2
-  name: MyString
-  url: MyString
-  description: MyText
+  dataset_id: 2
+  region_id: 1
