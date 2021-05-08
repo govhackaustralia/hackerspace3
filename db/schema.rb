@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_08_054615) do
+ActiveRecord::Schema.define(version: 2021_05_08_075109) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -91,6 +91,14 @@ ActiveRecord::Schema.define(version: 2021_05_08_054615) do
     t.datetime "updated_at", null: false
     t.index ["challenge_id"], name: "index_challenge_data_sets_on_challenge_id"
     t.index ["data_set_id"], name: "index_challenge_data_sets_on_data_set_id"
+  end
+
+  create_table "challenge_datasets", force: :cascade do |t|
+    t.integer "dataset_id"
+    t.integer "challenge_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["dataset_id", "challenge_id"], name: "index_challenge_datasets_on_dataset_id_and_challenge_id"
   end
 
   create_table "challenge_sponsorships", force: :cascade do |t|
