@@ -4,8 +4,9 @@ class DatasetsController < ApplicationController
       format.csv { send_data DatasetReport.new(@competition.datasets).to_csv }
       format.html do
         @portals = @competition.region_portals
+          .joins(:dataset)
+          .order('datasets.name ASC')
           .preload(:dataset, :portable)
-          .sort_by { |portal| portal.dataset.name }
       end
     end
   end

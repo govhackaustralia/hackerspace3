@@ -197,12 +197,15 @@ class Competition < ApplicationRecord
   end
 
   def data_portals
-    portals.preload(:extra, :dataset).map do |portal|
-      {
-        'name' => portal.dataset.name,
-        'url' => portal.dataset.url,
-        'short_url' => portal.extra.entry
-      }
+    portals
+      .joins(:dataset)
+      .order('datasets.name ASC')
+      .preload(:extra, :dataset).map do |portal|
+        {
+          'name' => portal.dataset.name,
+          'url' => portal.dataset.url,
+          'short_url' => portal.extra.entry
+        }
     end
   end
 
