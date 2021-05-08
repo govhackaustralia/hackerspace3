@@ -1,4 +1,4 @@
-class DataSetsController < ApplicationController
+class DatasetsController < ApplicationController
   def index
     respond_to do |format|
       format.csv { send_data DatasetReport.new(@competition.datasets).to_csv }
