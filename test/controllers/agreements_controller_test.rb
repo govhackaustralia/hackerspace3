@@ -30,8 +30,8 @@ class AgreementsControllerTest < ActionDispatch::IntegrationTest
     assert @user.accepted_terms_and_conditions.nil?
   end
 
-  # Tried to write the below test but was not working ☹️
-  # test 'should patch update repel robot! 🤖' do
+  # Tried to write the below test but was not working
+  # test 'should patch update repel robot!' do
   #   patch agreement_path(@user), params: { user: {
   #     accepted_terms_and_conditions: true, terms_and_conditions: 'obey!'
   #   }}
