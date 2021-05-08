@@ -1,9 +1,12 @@
 class DataSetsController < ApplicationController
   def index
-    @data_sets = @competition.data_sets.order(:name).preload(:region)
     respond_to do |format|
-      format.html
-      format.csv { send_data DatasetReport.new(@data_sets).to_csv }
+      format.csv { send_data DatasetReport.new(@competition.datasets).to_csv }
+      format.html do
+        @portals = @competition.region_portals
+          .preload(:dataset, :portable)
+          .sort_by { |portal| portal.dataset.name }
+      end
     end
   end
 

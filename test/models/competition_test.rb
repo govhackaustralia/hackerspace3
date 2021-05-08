@@ -21,6 +21,7 @@ class CompetitionTest < ActiveSupport::TestCase
     @entry = Entry.first
     @checkpoint = Checkpoint.first
     @data_set = DataSet.first
+    @region_portal = portals(:region)
     @dataset = datasets(:one)
     @portal = portals(:competition)
     @criterion = Criterion.first
@@ -57,6 +58,7 @@ class CompetitionTest < ActiveSupport::TestCase
     assert @competition.checkpoints.include? @checkpoint
     assert @competition.hunt_questions.include? hunt_questions(:one)
     assert @competition.data_sets.include? @data_set
+    assert @competition.region_portals.include? @region_portal
     assert @competition.datasets.include? @dataset
     assert @competition.portals.include? @portal
     assert @competition.badges.include? badges(:one)

@@ -29,6 +29,7 @@ class Competition < ApplicationRecord
   has_many :hunt_questions
   has_many :data_sets, through: :regions
   has_many :datasets, through: :regions
+  has_many :region_portals, through: :regions, source: :portals
   has_many :portals, as: :portable, dependent: :destroy
   has_many :badges
 
