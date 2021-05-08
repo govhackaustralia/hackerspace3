@@ -17,3 +17,9 @@ region:
   portable_type: Region
   portable_id: 1
   dataset_id: 1
+
+team:
+  id: 4
+  portable_type: Team
+  portable_id: 1
+  dataset_id: 1

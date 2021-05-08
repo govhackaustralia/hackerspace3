@@ -11,8 +11,12 @@ class DataSetsController < ApplicationController
   end
 
   def show
-    @data_set = DataSet.find(params[:id])
-    @team_data_sets = TeamDataSet.where(url: @data_set.url)
-    @teams = Team.published.where(id: @team_data_sets.pluck(:team_id)).preload(:current_project)
+    @portal = Portal.find(params[:id])
+    @dataset = @portal.dataset
+    @region = @portal.portable
+    @team_portals = @competition.team_portals.where(dataset: @dataset)
+    @teams = Team.published
+      .where(id: @team_portals.pluck(:portable_id))
+      .preload(:current_project)
   end
 end

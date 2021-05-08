@@ -18,7 +18,7 @@
         <% @portals.each do |portal| %>
           <tr>
             <td>
-              <%= link_to portal.dataset.name, data_set_path(portal.dataset) %>
+              <%= link_to portal.dataset.name, data_set_path(portal) %>
             </td>
             <td>
               <%= markdown truncate(portal.dataset.description, length: 100, omission: '... ') %>
