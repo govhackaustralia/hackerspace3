@@ -6,24 +6,25 @@ require: rubocop-performance
 AllCops:
   NewCops: enable
   Exclude:
-    - 'config/**/*'
-    - 'app/main/config/**/*'
-    - 'Gemfile'
-    - 'Guardfile'
-    - 'Rakefile'
-    - 'bin/*'
-    - 'db/**/*'
-    - 'node_modules/node-sass/src/**/*'
-    - 'app/helpers/application_helper.rb'
-    - 'app/controllers/users_controller.rb'
-    - 'app/controllers/events_controller.rb'
-    - 'app/controllers/admin/events/individual_goldens_controller.rb'
-    - 'app/controllers/registrations_controller.rb'
-    - 'app/models/header.rb'
-    - 'app/models/data_set.rb'
-    - 'app/models/team_entry_report.rb'
-    - 'app/services/demographics_report.rb'
-    - 'test/models/competition_test.rb'
+    - config/**/*
+    - app/main/config/**/*
+    - Gemfile
+    - Guardfile
+    - Rakefile
+    - bin/*
+    - db/**/*
+    - node_modules/node-sass/src/**/*
+    - app/helpers/application_helper.rb
+    - app/controllers/users_controller.rb
+    - app/controllers/events_controller.rb
+    - app/controllers/admin/events/individual_goldens_controller.rb
+    - app/controllers/registrations_controller.rb
+    - app/controllers/graphql_controller.rb
+    - app/models/header.rb
+    - app/models/data_set.rb
+    - app/models/team_entry_report.rb
+    - app/services/demographics_report.rb
+    - test/models/competition_test.rb
 
 Style/Documentation:
   Enabled: false
@@ -48,3 +49,7 @@ Metrics/ParameterLists:
 
 Performance/CollectionLiteralInLoop:
   Enabled: false
+
+Naming/VariableNumber:
+  Exclude:
+    - app/controllers/accounts_controller.rb
