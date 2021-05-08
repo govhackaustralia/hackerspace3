@@ -13,9 +13,9 @@ class Challenge < ApplicationRecord
   has_many :sponsors, through: :challenge_sponsorships
   has_many :sponsors_with_logos, -> { with_attached_logo }, through: :challenge_sponsorships, source: :sponsor
   has_many :challenge_data_sets, dependent: :destroy
-  has_many :challenge_datasets, dependent: :destroy
+  has_many :portals, as: :portable, dependent: :destroy
   has_many :data_sets, through: :challenge_data_sets
-  has_many :datasets, through: :challenge_datasets
+  has_many :datasets, through: :portals
 
   has_one_attached :image
   has_one_attached :pdf

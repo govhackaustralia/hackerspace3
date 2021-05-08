@@ -1,13 +1,19 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
+competition:
   id: 1
   portable_type: Competition
   portable_id: 1
   dataset_id: 1
 
-two:
+challenge:
   id: 2
-  portable_type: Competition
+  portable_type: Challenge
   portable_id: 1
-  dataset_id: 2
+  dataset_id: 1
+
+region:
+  id: 3
+  portable_type: Region
+  portable_id: 1
+  dataset_id: 1
