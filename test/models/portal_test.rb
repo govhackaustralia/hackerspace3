@@ -2,7 +2,7 @@ require 'test_helper'
 
 class PortalTest < ActiveSupport::TestCase
   setup do
-    @portal = portals(:competition)
+    @portal = portals(:one)
     @dataset = datasets(:one)
     @competition = competitions(:one)
     @extra = extras(:one)

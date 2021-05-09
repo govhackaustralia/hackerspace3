@@ -14,7 +14,7 @@ class RegionTest < ActiveSupport::TestCase
     @sponsorship_type = SponsorshipType.first
     @challenge = Challenge.first
     @data_set = DataSet.first
-    @portal = portals(:region)
+    @region_dataset = region_datasets(:one)
     @dataset = datasets(:one)
     @bulk_mail = BulkMail.first
     @support_assignment = Assignment.find 14
@@ -43,22 +43,12 @@ class RegionTest < ActiveSupport::TestCase
     assert @national.challenges.include? @challenge
     assert @national.approved_challenges.include? @challenge
     assert @national.data_sets.include? @data_set
-    assert @national.portals.include? @portal
+    assert @national.region_datasets.include? @region_dataset
     assert @national.datasets.include? @dataset
     assert @national.bulk_mails.include? @bulk_mail
     assert @national.support_assignments.include? @support_assignment
     assert @national.supports.include? @support
     assert @national.region_limits.include? @region_limit
-  end
-
-  test 'region dependent destroy' do
-    @national.destroy
-    assert_raises(ActiveRecord::RecordNotFound) { @assignment.reload }
-    assert_raises(ActiveRecord::RecordNotFound) { @sponsorship.reload }
-    assert_raises(ActiveRecord::RecordNotFound) { @challenge.reload }
-    assert_raises(ActiveRecord::RecordNotFound) { @data_set.reload }
-    assert_raises(ActiveRecord::RecordNotFound) { @portal.reload }
-    assert_raises(ActiveRecord::RecordNotFound) { @bulk_mail.reload }
   end
 
   test 'region scopes' do
