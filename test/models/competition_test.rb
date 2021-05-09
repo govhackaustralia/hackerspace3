@@ -16,13 +16,11 @@ class CompetitionTest < ActiveSupport::TestCase
     @award_registration = Registration.find 6
     @team = Team.first
     @team_data_set = TeamDataSet.first
-    @team_portal = portals(:team)
     @project = Project.first
     @challenge = Challenge.first
     @entry = Entry.first
     @checkpoint = Checkpoint.first
     @data_set = DataSet.first
-    @region_portal = portals(:region)
     @dataset = datasets(:one)
     @portal = portals(:competition)
     @criterion = Criterion.first
@@ -54,13 +52,11 @@ class CompetitionTest < ActiveSupport::TestCase
     assert @competition.teams.include? @team
     assert @competition.projects.include? @project
     assert @competition.team_data_sets.include? @team_data_set
-    assert @competition.team_portals.include? @team_portal
     assert @competition.challenges.include? @challenge
     assert @competition.entries.include? @entry
     assert @competition.checkpoints.include? @checkpoint
     assert @competition.hunt_questions.include? hunt_questions(:one)
     assert @competition.data_sets.include? @data_set
-    assert @competition.region_portals.include? @region_portal
     assert @competition.datasets.include? @dataset
     assert @competition.portals.include? @portal
     assert @competition.badges.include? badges(:one)

@@ -14,7 +14,6 @@ class TeamTest < ActiveSupport::TestCase
     @team_invitee_assignment = Assignment.find 12
     @team_invitee = User.third
     @team_data_set = TeamDataSet.first
-    @team_portal = portals(:team)
     @favourite = Favourite.first
     @header= Header.fourth
     @entry = Entry.first
@@ -36,7 +35,6 @@ class TeamTest < ActiveSupport::TestCase
 
     assert @team.projects.include? @project
     assert @team.team_data_sets.include? @team_data_set
-    assert @team.portals.include? @team_portal
     assert @team.favourites.include? @favourite
     assert @team.headers.include? @header
 
@@ -48,9 +46,6 @@ class TeamTest < ActiveSupport::TestCase
     assert @team.regional_entries.exclude? @national_entry
     assert @team.national_entries.include? @national_entry
     assert @team.national_entries.exclude? @regional_entry
-
-    @team.destroy
-    assert_raises(ActiveRecord::RecordNotFound) { @team_portal.reload }
   end
 
   test 'team assignment user associations' do

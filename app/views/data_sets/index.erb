@@ -3,8 +3,8 @@
   <h2>
     <%= yield :title %>
   </h2>
-  <% if @portals.present? %>
-    <%= link_to 'Download CSV', datasets_path(format: 'csv'), class: 'download-csv' %>
+  <% if @data_sets.present? %>
+    <%= link_to 'Download CSV', data_sets_path(format: 'csv'), class: 'download-csv' %>
     <table class="projects-table" data-turbolinks="false" id="dataset_table">
       <thead>
         <tr>
@@ -15,19 +15,19 @@
         </tr>
       </thead>
       <tbody>
-        <% @portals.each do |portal| %>
+        <% @data_sets.each do |data_set| %>
           <tr>
             <td>
-              <%= link_to portal.dataset.name, dataset_path(portal) %>
+              <%= link_to data_set.name, data_set_path(data_set) %>
             </td>
             <td>
-              <%= markdown truncate(portal.dataset.description, length: 100, omission: '... ') %>
+              <%= markdown truncate(data_set.description, length: 100, omission: '... ') %>
             </td>
             <td>
-              <%= link_to portal.dataset.url, portal.dataset.url, class: 'dataseturl' %>
+              <%= link_to data_set.url, data_set.url, class: 'dataseturl' %>
             </td>
             <td>
-              <%= portal.portable.name %>
+              <%= data_set.region.name %>
             </td>
           </tr>
         <% end %>
