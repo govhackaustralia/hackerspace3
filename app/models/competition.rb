@@ -23,14 +23,12 @@ class Competition < ApplicationRecord
   has_many :published_projects_by_name, through: :events
   has_many :projects, through: :teams
   has_many :team_data_sets, through: :teams
-  has_many :team_portals, through: :teams, source: :portals
   has_many :challenges, through: :regions
   has_many :entries, through: :challenges
   has_many :checkpoints
   has_many :hunt_questions
   has_many :data_sets, through: :regions
   has_many :datasets, through: :regions
-  has_many :region_portals, through: :regions, source: :portals
   has_many :portals, as: :portable, dependent: :destroy
   has_many :badges
 
@@ -197,15 +195,12 @@ class Competition < ApplicationRecord
   end
 
   def data_portals
-    portals
-      .joins(:dataset)
-      .order('datasets.name ASC')
-      .preload(:extra, :dataset).map do |portal|
-        {
-          'name' => portal.dataset.name,
-          'url' => portal.dataset.url,
-          'short_url' => portal.extra.entry
-        }
+    portals.preload(:extra, :dataset).map do |portal|
+      {
+        'name' => portal.dataset.name,
+        'url' => portal.dataset.url,
+        'short_url' => portal.extra.entry
+      }
     end
   end
 
