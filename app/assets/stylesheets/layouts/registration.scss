@@ -1,7 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto');
 
 .registration {
-  padding: 2em 5em;
   background: #fff;
 
   h2 {
@@ -33,6 +32,7 @@
 
   form {
     box-sizing: border-box;
+    max-width: 95%;
   }
 
   &.single-col form {
@@ -232,10 +232,19 @@
   &.update-profile-picture,
   &.resend-confirmation,
   &.resend-unlock {
+    container {
+      &.registration {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+      }
+    }
     section {
       &.signup-form {
+        flex-direction: column;
+        justify-content: center;
         padding: 5em 2em;
-        width: 40%;
+        width: 50%;
 
         h2 {
           &.heading {
@@ -243,6 +252,49 @@
           }
         }
       }
+        &.signup-content {
+          width: 50%;
+          background: 
+          linear-gradient(
+            rgba(0, 0, 0, 0.6),
+            rgba(0, 0, 0, 0.6)
+          ),
+          url("/assets/city.png");
+          background-size: cover;
+          position: relative;
+          float: left;
+          height: auto;
+          flex-direction: column;
+          justify-content: center;
+          .content {
+            color: #ffffff;
+            margin: 3rem;
+            max-width: 80%;
+          p {
+            &.leading-text {
+              margin-bottom: 1rem;
+              font-size: 1rem;
+              line-height: 1.5rem;
+            }
+          }
+          h2 {
+            &.heading {
+              margin-bottom: 1.5rem;
+              font-size: 3rem;
+              line-height: 3.5rem;
+              color: #FFFFFF;
+              font-weight: 500;
+            }
+          }
+          p {
+            &.description {
+              margin-bottom: 1rem;
+              font-size: 1.5rem;
+              line-height: 2rem;
+            }
+          }
+          }
+        }
 
       @media only screen and (max-width: 1000px) {
         &.signup-form {

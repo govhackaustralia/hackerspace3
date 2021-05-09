@@ -1,8 +1,8 @@
 <% content_for :title, 'Sign Up' %>
 <main class="registration signup">
-  <container>
+  <container class="registration">
     <section class="signup-form">
-      <h2 class="heading">Register for GovHack 2020</h2>
+      <h2 class="heading">Register for GovHack 2021</h2>
       <div class="google-oath">
         <%= link_to (render "devise/shared/google"), user_google_omniauth_authorize_path, method: :post %>
         <hr class="grey-border">
@@ -27,6 +27,18 @@
         </div>
         <%= render "devise/shared/links" %>
       <% end %>
+    </section>
+    <section class="signup-content">
+      <section class="content">
+        <p class="leading-text">Welcome to</p>
+        <h2 class="heading">GovHack 2021</h2>
+        <p class="description">
+        GovHack is an international competition for people of all abilities who seek to make life better through open data.
+        </p>
+        <p class="description">
+        Across one weekend, thousands come together to form teams, agree projects, and participate in what has become one of the world’s largest open data competition. 
+        </p>
+      </section>
     </section>
   </container>
 </main>
