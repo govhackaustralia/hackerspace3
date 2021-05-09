@@ -4,7 +4,13 @@
     <%= yield :title %>
   </h2>
   <section class="dataportals">
-    <%= render partial: 'resource_tile', collection: @data_portals %>
+    <% @data_portals.each do |resource| %>
+      <%= render 'resource_tile',  
+        url: resource['url'],      
+        name: resource['name'],      
+        short_url: resource['short_url']
+       %>
+    <% end %>
   </section>
 </main>
 <%= link_to 'Back to Resources', resources_path %>

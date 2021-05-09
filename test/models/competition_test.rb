@@ -22,7 +22,6 @@ class CompetitionTest < ActiveSupport::TestCase
     @checkpoint = Checkpoint.first
     @data_set = DataSet.first
     @dataset = datasets(:one)
-    @portal = portals(:one)
     @criterion = Criterion.first
     @project_criterion = Criterion.first
     @challenge_criterion = Criterion.second
@@ -58,15 +57,11 @@ class CompetitionTest < ActiveSupport::TestCase
     assert @competition.hunt_questions.include? hunt_questions(:one)
     assert @competition.data_sets.include? @data_set
     assert @competition.datasets.include? @dataset
-    assert @competition.portals.include? @portal
     assert @competition.badges.include? badges(:one)
     assert @competition.criteria.include? @criterion
     assert @competition.project_criteria.include? @project_criterion
     assert @competition.challenge_criteria.include? @challenge_criterion
     assert @competition.competition_assignments.include? @assignment
-
-    @competition.destroy
-    assert_raises(ActiveRecord::RecordNotFound) { @portal.reload }
   end
 
   test 'competition event associations' do
@@ -181,13 +176,5 @@ class CompetitionTest < ActiveSupport::TestCase
 
   test 'already_participating_in_a_competition_event?' do
     assert @competition.already_participating_in_a_competition_event? @event_assignment
-  end
-
-  test 'data_portals' do
-    assert @competition.data_portals.first == {
-      'name' => 'MyString',
-      'url' => 'MyString',
-      'short_url' => 'MyText'
-    }
   end
 end
