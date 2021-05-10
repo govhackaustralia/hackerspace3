@@ -138,18 +138,18 @@
         padding: 0.5em;
         display: flex;
         width: 100%;
-        border: 1px solid #c00;
+        border: 1px solid #9c1040;
       }
     }
 
     #error_explanation {
       h2 {
         font-size: 1.25em;
-        color: #c00;
+        color: #9c1040;
       }
 
       li {
-        color: #c00;
+        color: #9c1040;
         margin-left: 1.5em;
       }
     }
@@ -301,7 +301,6 @@
   &.edit-account,
   &.forgot-password,
   &.update-profile-picture,
-  &.resend-confirmation,
   &.resend-unlock {
     container {
       &.registration {
@@ -493,6 +492,128 @@
                 font-size: 1.2rem;
                 line-height: 2rem;
               }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  &.resend-confirmation {
+    container {
+      &.registration {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        background-color: #fff;
+        @media only screen and (min-width: 992px) {
+          background-color: #f4f4f4;
+        }
+      }
+
+      /* Custom, iPhone Retina */
+      @media only screen and (min-device-width: 320px) and (min-width: 320px) {
+        section {
+          &.form {
+            flex-direction: column;
+            width: 100%;
+            background-color: #fff;
+            h2 {
+              &.heading {
+                margin: 2rem 0;
+              }
+            }
+            div.form-wrapper {
+              padding: 1.5rem;
+            }
+          }
+        }
+      }
+
+      /* Extra Small Devices, Phones */
+      @media only screen and (min-device-width: 480px) and (min-width: 480px) {
+        section {
+          &.form {
+            flex-direction: column;
+            width: 100%;
+            background-color: #fff;
+            h2 {
+              &.heading {
+                margin: 2rem 0;
+              }
+            }
+            div.form-wrapper {
+              padding: 1.5rem;
+            }
+          }
+        }
+      }
+
+      /* Small Devices, Tablets */
+      @media only screen and (min-width: 768px) {
+        section {
+          &.form {
+            flex-direction: column;
+            width: 100%;
+            background-color: #fff;
+            h2 {
+              &.heading {
+                margin: 2rem 0;
+              }
+            }
+            div.form-wrapper {
+              padding: 2rem 3rem;
+            }
+          }
+        }
+      }
+
+      /* Medium Devices, Desktops */
+      @media only screen and (min-width: 992px) {
+        section {
+          &.form {
+            margin: 3rem 0rem;
+            flex-direction: column;
+            justify-content: center;
+            align-self: center;
+            width: 50%;
+            height: 50%;
+            border: 1px solid #c1c9d2;
+            border-radius: 5px;
+            background-color: #fff;
+            h2 {
+              &.heading {
+                margin-bottom: 3rem;
+              }
+            }
+
+            div.form-wrapper {
+              padding: 3rem 2rem;
+            }
+          }
+        }
+      }
+      /* Large Devices, Wide Screens */
+      @media only screen and (min-width: 1200px) {
+        section {
+          &.form {
+            margin: 3rem 0rem;
+            flex-direction: column;
+            justify-content: center;
+            align-self: center;
+            width: 50%;
+            height: 50%;
+            border: 1px solid #c1c9d2;
+            border-radius: 5px;
+            background-color: #fff;
+            h2 {
+              &.heading {
+                margin-bottom: 3rem;
+              }
+            }
+
+            div.form-wrapper {
+              padding: 3rem 2rem;
             }
           }
         }
