@@ -1,5 +1,6 @@
 class AgreementsController < ApplicationController
   before_action :authenticate_user!, :user
+  invisible_captcha only: :update, honeypot: :terms_and_conditions
 
   def edit; end
 
