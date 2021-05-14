@@ -17,6 +17,10 @@ p {
     background-color: #C00;
   }
 
+  &.error {
+    background-color: gray;
+  }
+
   &.notice {
     background-color: #4c9ad2;
   }
