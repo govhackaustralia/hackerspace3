@@ -22,6 +22,7 @@
           <%= f.label :password_confirmation %>
           <%= f.password_field :password_confirmation, autocomplete: "off", class: 'form-control' %>
         </div>
+        <%= f.invisible_captcha :terms_and_conditions %>
         <div class="actions">
           <%= f.submit "Sign Up" %>
         </div>
