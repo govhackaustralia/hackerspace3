@@ -1,0 +1,16 @@
+require 'test_helper'
+
+class DatasetTest < ActiveSupport::TestCase
+  setup do
+    @dataset = datasets(:one)
+  end
+
+  test 'dataset scopes' do
+    assert Dataset.search('m').include? @dataset
+    assert_not Dataset.search('z').include? @dataset
+  end
+
+  test 'dataset validations' do
+    assert_not @dataset.update(name: nil)
+  end
+end

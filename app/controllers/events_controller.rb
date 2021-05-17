@@ -20,10 +20,6 @@ class EventsController < ApplicationController
 
   def check_event_found!
     @event = Event.find_by identifier: params[:identifier]
-    if params[:identifier] == 'nz_new_zealand_auckland_physical_new_zealand'
-      @event ||= Event.find_by identifier: 'nz_new_zealand_auckland_physical_aotearoa_new_zealand'
-    end
-
     return if @event.present?
 
     redirect_to events_path, alert: "Could not find event '#{params[:identifier]}'"

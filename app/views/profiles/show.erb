@@ -32,6 +32,22 @@
             <%= @profile.team_status %>
           </p>
         <% end %>
+        <% if @profile.slack_user_id.present? %>
+          <p class="slack">
+            <strong>
+              <%= fa_icon('slack', type: :brand) %>
+            </strong>
+            <% if user_signed_in? %>
+              <% if current_user.profile.slack_access_token.present? %>
+                <%= link_to 'Open a Slack Chat with this User', slack_chat_profile_path(@profile) %>
+              <% else %>
+                <%= link_to 'Link up your Slack Account to chat with this User', edit_profile_path(current_user.profile) %>
+              <% end %>
+            <% else %>
+              <p>Sign In to Contact this User via Slack</p>
+            <% end %>
+          </p>
+        <% end %>
         <% @joined_published_projects.each do |project| %>
           <p>
             <strong>

@@ -276,4 +276,8 @@ class User < ApplicationRecord
   def identifier_name
     preferred_name.presence || full_name
   end
+
+  # Invisible Captcha is using this attribute to find robots
+  # Removing will prevent real people from signing in :(
+  def terms_and_conditions=(value); end
 end

@@ -13,6 +13,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
   def slack
     if profile.update profile_params
+      flash[:notice] = 'Slack account successfully linked 🥳'
       render 'profiles/edit'
     else
       redirect_to profiles_path, alert: profile.errors.full_messages.to_sentence
@@ -20,7 +21,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   end
 
   def failure
-    redirect_to root_path
+    redirect_to root_path, alert: 'Something went wrong ☹️'
   end
 
   private
@@ -34,7 +35,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
   def profile_params
     {
-      slack_user_id: data.fetch('user_id'),
+      slack_user_id: data.dig('authed_user', 'id'),
       slack_access_token: data.fetch(:access_token)
     }
   end

@@ -23,7 +23,7 @@ class Seeder
   end
 
   def self.random_tags
-    rand(0..5).times.map { Faker::Hacker.adjective }.uniq
+    rand(0..15).times.map { Faker::Hacker.adjective }.uniq
   end
 
   def self.random_skills

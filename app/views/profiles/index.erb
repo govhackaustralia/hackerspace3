@@ -1,7 +1,7 @@
 <% content_for :title, 'All Profiles' %>
 <main class="profiles_page_test">
   <section class="header">
-    <h2>GovHack 2020 Profiles</h2>
+    <h2>GovHack <%= @competition.year %> Profiles</h2>
     <h3>Find a Participant, Mentor, Industry partner, or GovHack Support here.</h3>
     <% if user_signed_in? %>
       <% if current_user.profile&.published %>

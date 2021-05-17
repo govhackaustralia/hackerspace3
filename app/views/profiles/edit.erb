@@ -3,6 +3,16 @@
   <container>
     <section class="signup-form">
       <h2 class="heading">Update Profile</h2>
+      <p>
+        <strong>
+          <% if @profile.slack_user_id %>
+            Slack Account Linked
+          <% else %>
+            <%= link_to 'Link Slack Account for Chat', user_slack_omniauth_authorize_path, method: :post %>
+          <% end %>
+        </strong>
+      </p>
+      <br/>
       <%= form_for @profile do |form| %>
         <div class="form-group">
           <%= form.label :team_status %>

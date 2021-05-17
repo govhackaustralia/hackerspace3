@@ -18,6 +18,7 @@
 //= require bootstrap-sprockets
 //= require cable
 //= require datatable
+//= require datatable_responsive
 //= require_tree .
 
 
@@ -30,7 +31,8 @@ $(document).ready(function() {
 $( document ).on('turbolinks:load', function() {
 	// Initilize the table and save any state changes.
 	var table = $('[id$="table"]').DataTable({
-		stateSave: true
+		stateSave: true,
+		responsive: true
 	});
 
 	// Check if filter needs to be applied
