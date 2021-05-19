@@ -3,10 +3,10 @@
 /* Custom, iPhone Retina */
 @media only screen and (min-device-width: 320px) and (min-width : 320px) {
   section.evidence {
-    padding: 2em 2em;
+    padding: 1em;
     box-sizing: border-box;
     display: block;
-    width: 100%;
+    width: 90%;
     justify-content: center;
 
     p {
@@ -50,6 +50,8 @@
 @media only screen and (min-width : 768px) {
   section.evidence {
     display: flex;
+    padding: 2em 2em;
+    width: 100%;
 
     p {
       width: 20%;
