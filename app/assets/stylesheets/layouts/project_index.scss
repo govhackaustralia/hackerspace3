@@ -38,6 +38,14 @@
         text-decoration: none;
       }
     }
+
+    .download-csv {
+      display: none;
+    }
+
+    .projects-table {
+      width: 85%;
+    }
   }
 }
 
@@ -53,6 +61,14 @@
 
     h2 {
       text-align: left;
+    }
+
+    .download-csv {
+      display: inherit;
+    }
+
+    .projects-table {
+      width: inherit;
     }
   }
 }
