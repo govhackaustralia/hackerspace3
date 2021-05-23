@@ -3,7 +3,7 @@
 /* Custom, iPhone Retina */
 @media only screen and (min-device-width: 320px) and (min-width : 320px) {
   .profiles_index {
-    padding: 2em 5em;
+    padding: 1em 2em;
     background: #ffffff;
 
     h2 {
@@ -14,6 +14,7 @@
     h3 {
       color: #000000;
       font-size: 1em;
+      padding-top: .5em
     }
 
     a {
@@ -29,7 +30,7 @@
     }
 
     section {
-      padding: 2rem 0;
+      padding: 1rem 0;
     }
 
     table.profiles-table {
@@ -71,7 +72,9 @@
 
 /* Small Devices, Tablets */
 @media only screen and (min-width : 768px) {
-
+  .profiles_index {
+    padding: 2em 5em;
+  }
 }
 
 /* Medium Devices, Desktops */
