@@ -1,5 +1,5 @@
-<% content_for :title, 'All Profiles' %>
-<main class="profiles_page_test">
+<% content_for :title, 'Profiles' %>
+<main class="profiles_index">
   <section class="header">
     <h2>GovHack <%= @competition.year %> Profiles</h2>
     <h3>Find a Participant, Mentor, Industry partner, or GovHack Support here.</h3>
@@ -18,9 +18,6 @@
     <% end %>
   </section>
   <section class="table-wrapper">
-    <h2>
-      <%= yield :title %>
-    </h2>
     <table class="profiles-table" data-turbolinks="false" id="projects_table">
       <thead>
         <th>Name</th>

@@ -23,6 +23,7 @@
             <%= f.label :password_confirmation %>
             <%= f.password_field :password_confirmation, autocomplete: "off", class: 'form-control' %>
           </div>
+          <%= f.invisible_captcha :terms_and_conditions %>
           <div class="actions">
             <%= f.submit "Sign Up" %>
           </div>
@@ -38,7 +39,7 @@
         GovHack is an international competition for people of all abilities who seek to make life better through open data.
         </p>
         <p class="description">
-        Across one weekend, thousands come together to form teams, agree projects, and participate in what has become one of the world’s largest open data competition. 
+        Across one weekend, thousands come together to form teams, agree projects, and participate in what has become one of the world’s largest open data competition.
         </p>
       </section>
     </section>

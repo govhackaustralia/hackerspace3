@@ -1,37 +1,70 @@
-section.evidence {
-  padding: 2em 2em;
-  box-sizing: border-box;
-  display: flex;
-  width: 100%;
-  justify-content: center;
+/*==========  Mobile First Method  ==========*/
 
-  p {
-    width: 20%;
+/* Custom, iPhone Retina */
+@media only screen and (min-device-width: 320px) and (min-width : 320px) {
+  section.evidence {
     padding: 1em;
-  }
-
-  a {
     box-sizing: border-box;
-    font-size: 1.0em;
-    padding: .5em .5em;
-    width: 100%;
     display: block;
-    text-align: center;
-    margin-top: 0em;
-    background-color: #ca1e56;
-    color: #ddd;
-    font-weight: 700;
-    text-transform: uppercase;
-    text-decoration: none;
-  }
+    width: 90%;
+    justify-content: center;
 
-  p a {
-    &.evidence_video {
-      background-color: #4c9ad2;
+    p {
+      width: 100%;
+      padding: 1em;
     }
 
-    &.evidence_homepage {
-      background-color: #717171;
+    a {
+      box-sizing: border-box;
+      font-size: 1.0em;
+      padding: .5em .5em;
+      width: 100%;
+      display: block;
+      text-align: center;
+      margin-top: 0em;
+      background-color: #ca1e56;
+      color: #ddd;
+      font-weight: 700;
+      text-transform: uppercase;
+      text-decoration: none;
+    }
+
+    p a {
+      &.evidence_video {
+        background-color: #4c9ad2;
+      }
+
+      &.evidence_homepage {
+        background-color: #717171;
+      }
     }
   }
+}
+
+/* Extra Small Devices, Phones */
+@media only screen and (min-device-width: 480px) and (min-width : 480px) {
+
+}
+
+/* Small Devices, Tablets */
+@media only screen and (min-width : 768px) {
+  section.evidence {
+    display: flex;
+    padding: 2em 2em;
+    width: 100%;
+
+    p {
+      width: 20%;
+    }
+  }
+}
+
+/* Medium Devices, Desktops */
+@media only screen and (min-width : 992px) {
+
+}
+
+/* Large Devices, Wide Screens */
+@media only screen and (min-width : 1200px) {
+
 }

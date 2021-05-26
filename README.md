@@ -1,6 +1,6 @@
 # GovHack - Hackerspace
 
-A system to manage competition participants, sponsors, and management.
+A system for competition participants, sponsors, and volunteers.
 
 ## Getting Started
 

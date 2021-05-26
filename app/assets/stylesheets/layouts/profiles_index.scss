@@ -1,62 +1,88 @@
-.profiles_page_test {
-    padding: 2em 5em;
+/*==========  Mobile First Method  ==========*/
+
+/* Custom, iPhone Retina */
+@media only screen and (min-device-width: 320px) and (min-width : 320px) {
+  .profiles_index {
+    padding: 1em 2em;
     background: #ffffff;
 
     h2 {
-        color: #4c9ad2;
-        font-size: 2em;
+      color: #4c9ad2;
+      font-size: 2em;
     }
 
     h3 {
-        color: #000000;
-        font-size: 1em;
+      color: #000000;
+      font-size: 1em;
+      padding-top: .5em
     }
 
     a {
-        color: #000000;
-        text-decoration: none;
-        text-transform: capitalize;
+      color: #000000;
+      text-decoration: none;
+      text-transform: capitalize;
     }
 
     a:hover,
     a:active {
-        color: #ca1e56;
-        text-decoration: underline;
+      color: #ca1e56;
+      text-decoration: underline;
     }
 
     section {
-        padding: 2rem 0;
+      padding: 1rem 0;
     }
 
     table.profiles-table {
-        width: 100%;
+      width: 100%;
+      padding: 10px;
+      margin: 0 auto;
+      border: none;
+
+      th,
+      td {
+        border-bottom: 1px solid #ca1e56;
         padding: 10px;
-        margin: 0 auto;
-        border: none;
+        box-sizing: border-box;
+      }
 
-        th,
-        td {
-            border-bottom: 1px solid #ca1e56;
-            padding: 10px;
-            box-sizing: border-box;
-        }
+      th {
+        background-color: #f4f4f4;
+        color: #ca1e56;
+        text-align: left;
+      }
 
-        th {
-            background-color: #f4f4f4;
-            color: #ca1e56;
-            text-align: left;
-        }
+      a {
+        text-decoration: none;
+        color: #000000;
+      }
 
-        a {
-            text-decoration: none;
-            color: #000000;
-        }
-
-        a:hover {
-            text-decoration: underline;
-            color: #000000;
-        }
-
-
+      a:hover {
+        text-decoration: underline;
+        color: #000000;
+      }
     }
+  }
+}
+
+/* Extra Small Devices, Phones */
+@media only screen and (min-device-width: 480px) and (min-width : 480px) {
+
+}
+
+/* Small Devices, Tablets */
+@media only screen and (min-width : 768px) {
+  .profiles_index {
+    padding: 2em 5em;
+  }
+}
+
+/* Medium Devices, Desktops */
+@media only screen and (min-width : 992px) {
+
+}
+
+/* Large Devices, Wide Screens */
+@media only screen and (min-width : 1200px) {
+
 }

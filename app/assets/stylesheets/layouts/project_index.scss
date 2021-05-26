@@ -1,36 +1,84 @@
-.project_index {
-  padding: 2em 5em;
+/*==========  Mobile First Method  ==========*/
 
-  h2 {
-    color: #4c9ad2;
-    font-size: 2em;
-  }
+/* Custom, iPhone Retina */
+@media only screen and (min-device-width: 320px) and (min-width : 320px) {
+  .project_index {
+    padding: 1em .5em;
 
-  h3 {
-    font-size: 1.5em;
-    padding: 1em;
-  }
-
-  p {
-    padding: 0em 2.25em;
-  }
-
-  aside {
-    float: right;
-
-    a {
-      box-sizing: border-box;
-      font-size: 1.5em;
-      padding: 0.5em 1.5em;
-      width: 100%;
-      display: block;
+    h2 {
+      color: #4c9ad2;
+      font-size: 2em;
       text-align: center;
-      margin-top: 1em;
-      background-color: #ca1e56;
-      color: #ddd;
-      font-weight: 700;
-      text-transform: uppercase;
-      text-decoration: none;
+    }
+
+    h3 {
+      font-size: 1.5em;
+      padding: 1em;
+    }
+
+    p {
+      padding: 0em 2.25em;
+    }
+
+    aside {
+      float: right;
+
+      a {
+        box-sizing: border-box;
+        font-size: 1.5em;
+        padding: 0.5em 1.5em;
+        width: 100%;
+        display: block;
+        text-align: center;
+        margin-top: 1em;
+        background-color: #ca1e56;
+        color: #ddd;
+        font-weight: 700;
+        text-transform: uppercase;
+        text-decoration: none;
+      }
+    }
+
+    .download-csv {
+      display: none;
+    }
+
+    .projects-table {
+      width: 85%;
     }
   }
+}
+
+/* Extra Small Devices, Phones */
+@media only screen and (min-device-width: 480px) and (min-width : 480px) {
+
+}
+
+/* Small Devices, Tablets */
+@media only screen and (min-width : 768px) {
+  .project_index {
+    padding: 2em 5em;
+
+    h2 {
+      text-align: left;
+    }
+
+    .download-csv {
+      display: inherit;
+    }
+
+    .projects-table {
+      width: inherit;
+    }
+  }
+}
+
+/* Medium Devices, Desktops */
+@media only screen and (min-width : 992px) {
+
+}
+
+/* Large Devices, Wide Screens */
+@media only screen and (min-width : 1200px) {
+
 }
