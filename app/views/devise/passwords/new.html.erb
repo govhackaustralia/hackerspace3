@@ -1,7 +1,8 @@
 <% content_for :title, 'Password Reset' %>
 <main class="registration single-col forgot-password">
-  <container>
-    <section class="signup-form">
+  <container class="registration">
+    <section class="form">
+    <div class="form-wrapper">
       <h2 class="heading">Forgot your password?</h2>
       <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
         <%= render 'devise/shared/error_messages', resource: resource %>
@@ -14,6 +15,7 @@
         </div>
         <%= render "devise/shared/links" %>
       <% end %>
+      </div>
     </section>
   </container>
 </main>

@@ -299,9 +299,7 @@
   &.signin,
   &.change-email-password,
   &.edit-account,
-  &.forgot-password,
-  &.update-profile-picture,
-  &.resend-unlock {
+  &.update-profile-picture {
     container {
       &.registration {
         display: flex;
@@ -499,7 +497,10 @@
     }
   }
 
-  &.resend-confirmation {
+  &.resend-confirmation,
+  &.resend-unlock,
+  &.forgot-password,
+  &.change-password {
     container {
       &.registration {
         display: flex;
@@ -627,7 +628,11 @@
   }
 
   &.single-col {
-    &.toc section,
+    &.toc {
+      display: flex;
+      justify-content: center;
+    }
+
     &.edit-account section,
     &.change-email-password section,
     &.manage-account section &.forgot-password section {
@@ -643,12 +648,15 @@
     }
 
     &.toc section {
+      width: 65%;
+      margin-top: 4rem;
       article {
-        padding: 2em 2em;
+        padding: 2rem;
 
         h2 {
           &.heading {
             margin-bottom: 3rem;
+            text-align: center;
           }
         }
 
@@ -671,6 +679,35 @@
 
 @media only screen and (max-width: 1000px) {
   .registration {
+    &.single-col {
+      &.toc section {
+        width: 100%;
+        margin-top: 2rem;
+        article {
+          padding: 2rem;
+  
+          h2 {
+            &.heading {
+              margin-bottom: 2rem;
+              text-align: left;
+            }
+          }
+  
+          h3:not(:first-of-type) {
+            margin-top: 1em;
+          }
+  
+          p:not(:first-of-type) {
+            margin-top: 0.5em;
+          }
+  
+          li {
+            list-style: square;
+            margin-left: 2em;
+          }
+        }
+      }
+    }
     > section {
       flex-direction: column;
     }

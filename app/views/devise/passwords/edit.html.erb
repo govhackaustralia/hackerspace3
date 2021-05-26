@@ -1,6 +1,7 @@
 <main class="registration single-col change-password">
-  <container>
-    <section class="signup-form">
+  <container class="registration">
+    <section class="form">
+    <div class="form-wrapper">
       <h2 class="heading">Change your password</h2>
       <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
         <%= render 'devise/shared/error_messages', resource: resource %>
@@ -23,6 +24,7 @@
         </div>
         <%= render "devise/shared/links" %>
       <% end %>
+      </div>
     </section>
   </container>
 </main>
