@@ -1,33 +1,47 @@
 <% content_for :title, 'Sign Up' %>
 <main class="registration signup">
-  <container>
+  <container class="registration">
     <section class="signup-form">
-      <h2 class="heading">Register for GovHack 2020</h2>
-      <div class="google-oath">
-        <%= link_to (render "devise/shared/google"), user_google_omniauth_authorize_path, method: :post %>
-        <hr class="grey-border">
-        <p class="alt-text">or register below</p>
-      </div>
-      <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-        <%= render 'devise/shared/error_messages', resource: resource %>
-        <div class="form-group">
-          <%= f.label :email %>
-          <%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control' %>
+      <div class="form-wrapper">
+        <h2 class="heading">Register for GovHack 2021</h2>
+        <div class="google-oath">
+          <%= link_to (render "devise/shared/google"), user_google_omniauth_authorize_path, method: :post %>
+          <hr class="grey-border">
+          <p class="alt-text">or register below</p>
         </div>
-        <div class="form-group">
-          <%= f.label :password %>
-          <%= f.password_field :password, autocomplete: "off", class: 'form-control' %>
+        <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+          <%= render 'devise/shared/error_messages', resource: resource %>
+          <div class="form-group">
+            <%= f.label :email %>
+            <%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control' %>
+          </div>
+          <div class="form-group">
+            <%= f.label :password %>
+            <%= f.password_field :password, autocomplete: "off", class: 'form-control' %>
+          </div>
+          <div class="form-group">
+            <%= f.label :password_confirmation %>
+            <%= f.password_field :password_confirmation, autocomplete: "off", class: 'form-control' %>
+          </div>
+          <%= f.invisible_captcha :terms_and_conditions %>
+          <div class="actions">
+            <%= f.submit "Sign Up" %>
+          </div>
+          <%= render "devise/shared/links" %>
+        <% end %>
         </div>
-        <div class="form-group">
-          <%= f.label :password_confirmation %>
-          <%= f.password_field :password_confirmation, autocomplete: "off", class: 'form-control' %>
-        </div>
-        <%= f.invisible_captcha :terms_and_conditions %>
-        <div class="actions">
-          <%= f.submit "Sign Up" %>
-        </div>
-        <%= render "devise/shared/links" %>
-      <% end %>
+    </section>
+    <section class="signup-content">
+      <section class="content">
+        <p class="leading-text">Welcome to</p>
+        <h2 class="heading">GovHack 2021</h2>
+        <p class="description">
+        GovHack is an international competition for people of all abilities who seek to make life better through open data.
+        </p>
+        <p class="description">
+        Across one weekend, thousands come together to form teams, agree projects, and participate in what has become one of the world’s largest open data competition.
+        </p>
+      </section>
     </section>
   </container>
 </main>
