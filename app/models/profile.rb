@@ -49,7 +49,7 @@ class Profile < ApplicationRecord
     'Not employed, looking for work' => 4,
     'Not employed, NOT looking for work' => 5,
     'Retired' => 6,
-    'Disabled, not able to work' => 7,
+    'Not able to work' => 7,
     'Prefer not to say' => 8
   }, _prefix: true
 
