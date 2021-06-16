@@ -67,9 +67,9 @@ Rails.application.configure do
 
   config.action_mailer.logger = nil
 
-  config.action_mailer.default_url_options = { host: ENV['DOMAIN'] }
+  config.action_mailer.default_url_options = { host: ENV['DOMAIN'] || 'localhost' }
 
-  config.action_mailer.asset_host = "https://#{ENV['DOMAIN']}"
+  config.action_mailer.asset_host = "https://#{ENV['DOMAIN'] || 'localhost'}"
 
   config.action_mailer.smtp_settings = {
     :address => ENV['AWS_SES_SERVER'],
