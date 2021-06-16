@@ -38,14 +38,14 @@ Rails.application.configure do
 
   config.action_mailer.perform_caching = false
 
-  config.action_mailer.default_url_options = { host: ENV['DOMAIN'], port: 3000 }
+  config.action_mailer.default_url_options = { host: (ENV['DOMAIN'] || 'localhost'), port: 3000 }
 
-  config.action_mailer.asset_host = "http://#{ENV['DOMAIN']}:3000"
+  config.action_mailer.asset_host = "http://#{ENV['DOMAIN'] || 'localhost'}:3000"
 
   config.action_mailer.delivery_method = :letter_opener
 
   config.action_mailer.perform_deliveries = true
-  
+
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log
 

@@ -43,7 +43,7 @@ Rails.application.configure do
 
   # Mount Action Cable outside main process or domain.
   # config.action_cable.mount_path = nil
-  config.action_cable.url = "ws://#{ENV['DOMAIN']}/cable"
+  config.action_cable.url = "ws://#{ENV['DOMAIN'] || 'localhost'}/cable"
   config.action_cable.allowed_request_origins = ['https://staging.hackerspace.govhack.org', 'govhack.org']
 
   # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
@@ -67,9 +67,9 @@ Rails.application.configure do
 
   config.action_mailer.logger = nil
 
-  config.action_mailer.default_url_options = { host: ENV['DOMAIN'] }
+  config.action_mailer.default_url_options = { host: ENV['DOMAIN'] || 'localhost' }
 
-  config.action_mailer.asset_host = "https://#{ENV['DOMAIN']}"
+  config.action_mailer.asset_host = "https://#{ENV['DOMAIN'] || 'localhost'}"
 
   config.action_mailer.smtp_settings = {
     :address => ENV['AWS_SES_SERVER'],
