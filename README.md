@@ -10,6 +10,8 @@ Current major version is 6.1
 
 Check out the [Rails Guides](https://guides.rubyonrails.org/index.html) to get up and running.
 
+- [Getting Started with Rails](https://guides.rubyonrails.org/getting_started.html)
+
 There is also a Dockerfile with instructions on how to get up and running in our wiki.
 
 - [Running Hackerspace with Docker](https://github.com/govhackaustralia/hackerspace3/wiki/Running-Hackerspace-with-Docker)
