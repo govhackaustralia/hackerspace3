@@ -151,6 +151,9 @@ GEM
     font_awesome5_rails (1.4.0)
       railties (>= 4.2)
     formatador (0.2.5)
+    gibbon (3.4.0)
+      faraday (>= 0.16.0)
+      multi_json (>= 1.11.0)
     ginjo-omniauth-slack (2.5.0)
       omniauth-oauth2 (>= 1.4.0)
     globalid (0.4.2)
@@ -407,6 +410,7 @@ DEPENDENCIES
   faker
   figaro
   font_awesome5_rails
+  gibbon
   ginjo-omniauth-slack
   graphiql-rails
   graphql
