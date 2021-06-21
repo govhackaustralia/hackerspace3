@@ -7,7 +7,7 @@ class MailchimpUpdateJob < ApplicationJob
     users.each do |user|
       next unless user.confirmed?
 
-      gibbon.lists(ENV['MAILCHIMP_LIST_ID'])
+      response = gibbon.lists(ENV['MAILCHIMP_LIST_ID'])
         .members(Digest::MD5.hexdigest(user.email))
         .upsert(body:
           {
@@ -18,6 +18,8 @@ class MailchimpUpdateJob < ApplicationJob
             }
           }
         )
+
+        puts "Created/Update Mailchimp User: #{response.body.slice(:id, :email_address, :full_name, :status)}"
     end
   end
 
