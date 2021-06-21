@@ -4,7 +4,7 @@ class MailchimpUpdateJob < ApplicationJob
   def perform(*users)
     return if ENV['MAILCHIMP_API_KEY'].nil? || ENV['MAILCHIMP_LIST_ID'].nil?
 
-    users.each do |user|
+    users.flatten.each do |user|
       next unless user.confirmed?
 
       response = gibbon.lists(ENV['MAILCHIMP_LIST_ID'])
