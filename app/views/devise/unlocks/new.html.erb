@@ -1,7 +1,6 @@
 <main class="registration single-col resend-unlock">
-  <container class="registration">
-    <section class="form">
-    <div class="form-wrapper">
+  <container>
+    <section class="signup-form">
       <h2 class="heading">Resend unlock instructions</h2>
       <%= form_for(resource, as: resource_name, url: unlock_path(resource_name), html: { method: :post }) do |f| %>
         <%= render 'devise/shared/error_messages', resource: resource %>
@@ -13,7 +12,8 @@
           <%= f.submit "Resend unlock instructions" %>
         </div>
       <% end %>
-      <%= render "devise/shared/links" %>
+      <div class="links">
+        <%= render "devise/shared/links" %>
       </div>
     </section>
   </container>

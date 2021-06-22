@@ -1,14 +1,14 @@
 <% content_for :title, 'Sign In' %>
 <main class="registration signin">
-  <container class="registration">
+  <container>
     <section class="signup-form">
-    <div class="form-wrapper">
       <h2 class="heading">Sign in to Hackerspace</h2>
       <div class="google-oath">
         <%= link_to (render "devise/shared/google"), user_google_omniauth_authorize_path, method: :post %>
         <hr class="grey-border">
         <p class="alt-text"> or sign in below</p>
       </div>
+      <section>
         <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
           <div class="form-group">
             <%= f.label :email %>
@@ -29,18 +29,6 @@
           </div>
           <%= render "devise/shared/links" %>
         <% end %>
-      </div>
-    </section>
-    <section class="signup-content">
-      <section class="content">
-        <p class="leading-text">Sign into</p>
-        <h2 class="heading">GovHack 2021</h2>
-        <p class="description">
-        GovHack is an international competition for people of all abilities who seek to make life better through open data.
-        </p>
-        <p class="description">
-        Across one weekend, thousands come together to form teams, agree projects, and participate in what has become one of the world’s largest open data competition. 
-        </p>
       </section>
     </section>
   </container>

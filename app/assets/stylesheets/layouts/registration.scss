@@ -1,6 +1,7 @@
-@import url("https://fonts.googleapis.com/css?family=Roboto");
+@import url('https://fonts.googleapis.com/css?family=Roboto');
 
 .registration {
+  padding: 2em 5em;
   background: #fff;
 
   h2 {
@@ -10,7 +11,8 @@
   }
 
   a {
-    text-decoration: none;
+    text-decoration: underline;
+    color: #ca1e56;
   }
 
   .links {
@@ -25,13 +27,12 @@
     }
   }
 
-  > section {
+  >section {
     display: flex;
   }
 
   form {
     box-sizing: border-box;
-    max-width: 95%;
   }
 
   &.single-col form {
@@ -39,13 +40,13 @@
   }
 
   form {
-    > div {
+    >div {
       &.field {
         display: flex;
         padding: 0.5em 0em;
         align-items: center;
 
-        > label {
+        >label {
           box-sizing: border-box;
           padding-right: 1em;
           text-align: right;
@@ -53,6 +54,7 @@
         }
 
         > {
+
           input,
           select {
             box-sizing: border-box;
@@ -106,7 +108,7 @@
         }
       }
 
-      > div {
+      >div {
         box-sizing: border-box;
         padding-right: 1em;
         font-size: 1.15em;
@@ -132,24 +134,24 @@
         }
       }
 
-      &.field > div.field_with_errors > input {
+      &.field>div.field_with_errors>input {
         padding-left: 1em;
         font-size: 1em;
         padding: 0.5em;
         display: flex;
         width: 100%;
-        border: 1px solid #9c1040;
+        border: 1px solid #C00;
       }
     }
 
     #error_explanation {
       h2 {
         font-size: 1.25em;
-        color: #9c1040;
+        color: #C00;
       }
 
       li {
-        color: #9c1040;
+        color: #C00;
         margin-left: 1.5em;
       }
     }
@@ -170,6 +172,7 @@
     }
 
     p.alt-text {
+      margin-right: 2rem;
       font-style: italic;
       color: #555;
     }
@@ -183,8 +186,7 @@
       cursor: pointer;
       text-align: center;
       vertical-align: middle;
-      transition: background-color 0.218s, border-color 0.218s,
-        box-shadow 0.218s;
+      transition: background-color .218s, border-color .218s, box-shadow .218s;
 
       &:hover {
         -webkit-box-shadow: 0 0 3px 3px rgba(66, 133, 244, 0.3);
@@ -211,7 +213,7 @@
           font-size: 16px;
           line-height: 48px;
           font-weight: 500;
-          letter-spacing: 0.21px;
+          letter-spacing: .21px;
           margin-left: 6px;
           margin-right: 6px;
           vertical-align: top;
@@ -219,404 +221,33 @@
         }
       }
     }
-    // small phone screens
-    @media (min-width: 300px) and (max-width: 599px) {
-      margin: 1rem 0rem;
-      display: flex;
-      align-items: flex-start;
-      flex-direction: column;
-
-      hr.grey-border {
-        margin: 1rem 0;
-        width: 100%;
-      }
-
-      #signgoogle {
-        height: 45px;
-        width: 200px;
-        .wrapper {
-          .icon {
-            padding: 12px;
-            background-color: #fff;
-            border-radius: 1px;
-            float: left;
-          }
-
-          .message {
-            font-size: 14px;
-            line-height: 38px;
-            font-weight: 500;
-            letter-spacing: 0.21px;
-            margin-left: 6px;
-            margin-right: 6px;
-            vertical-align: top;
-            text-decoration: none !important;
-          }
-        }
-      }
-    }
-
-    // tablet screens
-    @media (min-width: 600px) and (max-width: 959px) {
-      margin: 1rem 0rem;
-      display: flex;
-      align-items: center;
-      flex-direction: row;
-
-      hr.grey-border {
-        margin: 1rem;
-        width: 50%;
-      }
-
-      #signgoogle {
-        height: 45px;
-        width: 200px;
-        .wrapper {
-          .icon {
-            padding: 12px;
-            background-color: #fff;
-            border-radius: 1px;
-            float: left;
-          }
-
-          .message {
-            font-size: 14px;
-            line-height: 38px;
-            font-weight: 500;
-            letter-spacing: 0.21px;
-            margin-left: 6px;
-            margin-right: 6px;
-            vertical-align: top;
-            text-decoration: none !important;
-          }
-        }
-      }
-    }
   }
 
-  // All registration pages that has a form
+  // All pages that use forms
   &.signup,
   &.signin,
   &.change-email-password,
   &.edit-account,
-  &.update-profile-picture {
-    container {
-      &.registration {
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-
-        @media (min-width: 1440px) {
-          height: 90vh;
-        }
-      }
-    }
-
-    /* Custom, iPhone Retina */
-    @media only screen and (min-device-width: 320px) and (min-width: 320px) {
-      section {
-        &.signup-form {
-          flex-direction: column;
-          width: 100%;
-          h2 {
-            &.heading {
-              margin: 2rem 0;
-            }
-          }
-          div.form-wrapper {
-            padding: 1.5rem;
-          }
-        }
-        &.signup-content {
-          display: none;
-        }
-      }
-    }
-
-    /* Extra Small Devices, Phones */
-    @media only screen and (min-device-width: 480px) and (min-width: 480px) {
-      section {
-        &.signup-form {
-          flex-direction: column;
-          width: 100%;
-          h2 {
-            &.heading {
-              margin: 2rem 0;
-            }
-          }
-          div.form-wrapper {
-            padding: 1.5rem;
-          }
-        }
-        &.signup-content {
-          display: none;
-        }
-      }
-    }
-
-    /* Small Devices, Tablets */
-    @media only screen and (min-width: 768px) {
-      section {
-        &.signup-form {
-          flex-direction: column;
-          width: 100%;
-          h2 {
-            &.heading {
-              margin: 2rem 0;
-            }
-          }
-          div.form-wrapper {
-            padding: 2rem 3rem;
-          }
-        }
-        &.signup-content {
-          display: none;
-        }
-      }
-    }
-
-    /* Medium Devices, Desktops */
-    @media only screen and (min-width: 992px) {
-      section {
-        &.signup-form {
-          flex-direction: column;
-          justify-content: center;
-          width: 50%;
-
-          h2 {
-            &.heading {
-              margin-bottom: 2rem;
-            }
-          }
-
-          div.form-wrapper {
-            padding: 3rem 2rem;
-          }
-        }
-        &.signup-content {
-          display: flex;
-          width: 50%;
-          background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
-            url("/assets/city.png");
-          background-size: cover;
-          float: left;
-          height: auto;
-          flex-direction: column;
-          justify-content: center;
-          .content {
-            color: #ffffff;
-            margin: 2rem;
-            max-width: 80%;
-            p {
-              &.leading-text {
-                margin-bottom: 1rem;
-                font-size: 0.9rem;
-                line-height: 1rem;
-              }
-            }
-            h2 {
-              &.heading {
-                margin-bottom: 1.5rem;
-                font-size: 2rem;
-                line-height: 2.5rem;
-                color: #ffffff;
-                font-weight: 500;
-              }
-            }
-            p {
-              &.description {
-                margin-bottom: 1rem;
-                font-size: 1rem;
-                line-height: 1.5rem;
-              }
-            }
-          }
-        }
-      }
-    }
-
-    /* Large Devices, Wide Screens */
-    @media only screen and (min-width: 1200px) {
-      // large desktops
-      section {
-        &.signup-form {
-          flex-direction: column;
-          justify-content: center;
-          width: 50%;
-
-          h2 {
-            &.heading {
-              margin-bottom: 3rem;
-            }
-          }
-
-          div.form-wrapper {
-            padding: 3rem;
-          }
-        }
-        &.signup-content {
-          display: flex;
-          width: 50%;
-          background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
-            url("/assets/city.png");
-          background-size: cover;
-          float: left;
-          height: auto;
-          flex-direction: column;
-          justify-content: center;
-          .content {
-            color: #ffffff;
-            margin: 3rem;
-            max-width: 80%;
-            p {
-              &.leading-text {
-                margin-bottom: 1rem;
-                font-size: 1rem;
-                line-height: 1.5rem;
-              }
-            }
-            h2 {
-              &.heading {
-                margin-bottom: 1.5rem;
-                font-size: 3rem;
-                line-height: 3.5rem;
-                color: #ffffff;
-                font-weight: 500;
-              }
-            }
-            p {
-              &.description {
-                margin-bottom: 1rem;
-                font-size: 1.2rem;
-                line-height: 2rem;
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-
-  &.resend-confirmation,
-  &.resend-unlock,
   &.forgot-password,
-  &.change-password {
-    container {
-      &.registration {
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        background-color: #fff;
-        @media only screen and (min-width: 992px) {
-          background-color: #f4f4f4;
-        }
-      }
+  &.update-profile-picture,
+  &.resend-confirmation,
+  &.resend-unlock {
+    section {
+      &.signup-form {
+        padding: 5em 2em;
+        width: 40%;
 
-      /* Custom, iPhone Retina */
-      @media only screen and (min-device-width: 320px) and (min-width: 320px) {
-        section {
-          &.form {
-            flex-direction: column;
-            width: 100%;
-            background-color: #fff;
-            h2 {
-              &.heading {
-                margin: 2rem 0;
-              }
-            }
-            div.form-wrapper {
-              padding: 1.5rem;
-            }
+        h2 {
+          &.heading {
+            margin-bottom: 3rem;
           }
         }
       }
 
-      /* Extra Small Devices, Phones */
-      @media only screen and (min-device-width: 480px) and (min-width: 480px) {
-        section {
-          &.form {
-            flex-direction: column;
-            width: 100%;
-            background-color: #fff;
-            h2 {
-              &.heading {
-                margin: 2rem 0;
-              }
-            }
-            div.form-wrapper {
-              padding: 1.5rem;
-            }
-          }
-        }
-      }
-
-      /* Small Devices, Tablets */
-      @media only screen and (min-width: 768px) {
-        section {
-          &.form {
-            flex-direction: column;
-            width: 100%;
-            background-color: #fff;
-            h2 {
-              &.heading {
-                margin: 2rem 0;
-              }
-            }
-            div.form-wrapper {
-              padding: 2rem 3rem;
-            }
-          }
-        }
-      }
-
-      /* Medium Devices, Desktops */
-      @media only screen and (min-width: 992px) {
-        section {
-          &.form {
-            margin: 3rem 0rem;
-            flex-direction: column;
-            justify-content: center;
-            align-self: center;
-            width: 50%;
-            height: 50%;
-            border: 1px solid #c1c9d2;
-            border-radius: 5px;
-            background-color: #fff;
-            h2 {
-              &.heading {
-                margin-bottom: 3rem;
-              }
-            }
-
-            div.form-wrapper {
-              padding: 3rem 2rem;
-            }
-          }
-        }
-      }
-      /* Large Devices, Wide Screens */
-      @media only screen and (min-width: 1200px) {
-        section {
-          &.form {
-            margin: 3rem 0rem;
-            flex-direction: column;
-            justify-content: center;
-            align-self: center;
-            width: 50%;
-            height: 50%;
-            border: 1px solid #c1c9d2;
-            border-radius: 5px;
-            background-color: #fff;
-            h2 {
-              &.heading {
-                margin-bottom: 3rem;
-              }
-            }
-
-            div.form-wrapper {
-              padding: 3rem 2rem;
-            }
-          }
+      @media only screen and (max-width: 1000px) {
+        &.signup-form {
+          width: 100%;
+          padding: 2em;
         }
       }
     }
@@ -628,11 +259,8 @@
   }
 
   &.single-col {
-    &.toc {
-      display: flex;
-      justify-content: center;
-    }
 
+    &.toc section,
     &.edit-account section,
     &.change-email-password section,
     &.manage-account section &.forgot-password section {
@@ -648,15 +276,12 @@
     }
 
     &.toc section {
-      width: 65%;
-      margin-top: 4rem;
       article {
-        padding: 2rem;
+        padding: 2em 2em;
 
         h2 {
           &.heading {
             margin-bottom: 3rem;
-            text-align: center;
           }
         }
 
@@ -679,36 +304,7 @@
 
 @media only screen and (max-width: 1000px) {
   .registration {
-    &.single-col {
-      &.toc section {
-        width: 100%;
-        margin-top: 2rem;
-        article {
-          padding: 2rem;
-  
-          h2 {
-            &.heading {
-              margin-bottom: 2rem;
-              text-align: left;
-            }
-          }
-  
-          h3:not(:first-of-type) {
-            margin-top: 1em;
-          }
-  
-          p:not(:first-of-type) {
-            margin-top: 0.5em;
-          }
-  
-          li {
-            list-style: square;
-            margin-left: 2em;
-          }
-        }
-      }
-    }
-    > section {
+    >section {
       flex-direction: column;
     }
 
