@@ -97,6 +97,11 @@ Set if running in staging or production environments.
 
 - GOOGLE_API_KEY
 
+### Mailchimp
+
+- MAILCHIMP_API_KEY
+- MAILCHIMP_LIST_ID
+
 ## Contributing
 
 Filter the issues section to ["good first issue"](https://github.com/govhackaustralia/hackerspace3/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22)

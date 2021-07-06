@@ -108,7 +108,7 @@ class User < ApplicationRecord
 
   validates :accepted_terms_and_conditions, acceptance: true
 
-  after_save_commit :update_profile_identifier
+  after_save_commit :update_profile_identifier, :update_mailchimp
 
   def participant?
     PARTICIPANT_TYPES.include? registration_type
@@ -271,6 +271,10 @@ class User < ApplicationRecord
     return if identifier_name.nil?
 
     profile&.update_identifier identifier_name
+  end
+
+  def update_mailchimp
+    MailchimpUpdateJob.perform_later self
   end
 
   def identifier_name
