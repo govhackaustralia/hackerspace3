@@ -5,6 +5,7 @@
       <h2 class="heading">
         <%= yield :title %>
       </h2>
+      <%= render 'components/registration_status', page: 'complete_registration' %>
       <%= form_with model: @user, url: account_path(@user), method: :patch do |form| %>
         <div class="form-group">
           <%= form.label :full_name %>

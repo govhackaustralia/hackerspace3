@@ -3,6 +3,7 @@
   <container>
     <section class="signup-form">
       <h2 class="heading">Register for GovHack 2020</h2>
+      <%= render 'components/registration_status', page: 'sign_up' %>
       <div class="google-oath">
         <%= link_to (render "devise/shared/google"), user_google_omniauth_authorize_path, method: :post %>
         <hr class="grey-border">
@@ -28,6 +29,8 @@
         </div>
         <%= render "devise/shared/links" %>
       <% end %>
+    </section>
+    <section class="rhs-image">
     </section>
   </container>
 </main>
