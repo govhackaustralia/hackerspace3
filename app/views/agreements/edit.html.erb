@@ -2,7 +2,9 @@
 <main class="registration single-col toc">
   <section>
     <article>
-      <h2 class="heading">GovHack Hackerspace Terms and Conditions</h2>
+      <p class="eyebrow">GovHack Hackerspace</p>
+      <h2 class="heading">Terms and Conditions</h2>
+      <%= render 'components/registration_status', page: 'terms_and_conditions' %>
       <%= render 'static_pages/terms_and_conditions_text' %>
       <%= form_with model: @user, url: agreement_path(@user), method: :patch do |f| %>
         <div class="custom-control custom-checkbox">
