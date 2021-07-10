@@ -29,11 +29,16 @@ $(document).ready(function() {
 });
 
 $( document ).on('turbolinks:load', function() {
-	// Initilize the table and save any state changes.
-	var table = $('[id$="table"]').DataTable({
-		stateSave: true,
-		responsive: true
-	});
+
+	// Check if table is already cached
+	if ($('[id$="table_wrapper"]').length < 1) {
+
+		// Initilize the table and save any state changes.
+		var table = $('[id$="table"]').DataTable({
+			stateSave: true,
+			responsive: true
+		});
+	}
 
 	// Check if filter needs to be applied
 	if ((window._search != undefined) && (window._search.length > 0 )) {
