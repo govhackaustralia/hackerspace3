@@ -29,10 +29,16 @@ $(document).ready(function() {
 });
 
 $( document ).on('turbolinks:load', function() {
+
 	// Initilize the table and save any state changes.
 	var table = $('[id$="table"]').DataTable({
 		stateSave: true,
-		responsive: true
+		responsive: true,
+		bAutoWidth: false
+	});
+
+	$(document).on('turbolinks:before-cache', function() {
+		table.destroy();
 	});
 
 	// Check if filter needs to be applied
