@@ -1,8 +1,8 @@
 <div class="links">
   <% if controller_name != 'sessions' %>
     <p>
-      Already a member? 
-      <%= link_to "Sign in", new_session_path(resource_name) %>
+      Already a member?
+      <%= link_to "Log in", new_session_path(resource_name) %>
     </p>
   <% end %>
   <% if devise_mapping.registerable? && controller_name != 'registrations' %>
