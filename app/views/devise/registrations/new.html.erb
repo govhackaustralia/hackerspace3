@@ -4,9 +4,15 @@
     <section class="signup-form">
       <h2 class="heading">Register for GovHack 2020</h2>
       <div class="google-oath">
-        <%= link_to (render "devise/shared/google"), user_google_omniauth_authorize_path, method: :post %>
-        <hr class="grey-border">
-        <p class="alt-text">or register below</p>
+        <% if Rails.env.production? %>
+          <p class="alt-text">
+            Google sign up is unavailable at this time, please sign up with email.
+          </p>
+        <% else %>
+          <%= link_to (render "devise/shared/google"), user_google_omniauth_authorize_path, method: :post %>
+          <hr class="grey-border">
+          <p class="alt-text">or register below</p>
+        <% end %>
       </div>
       <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
         <%= render 'devise/shared/error_messages', resource: resource %>

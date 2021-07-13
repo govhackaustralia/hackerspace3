@@ -4,9 +4,17 @@
     <section class="signup-form">
       <h2 class="heading">Log in to Hackerspace</h2>
       <div class="google-oath">
-        <%= link_to (render "devise/shared/google"), user_google_omniauth_authorize_path, method: :post %>
-        <hr class="grey-border">
-        <p class="alt-text"> or log in below</p>
+        <% if Rails.env.production? %>
+          <p class="alt-text">
+            Google log in is unavailable at this time, please use the
+            <%= link_to 'forgot password link', new_user_password_path %>
+            if you need to regain access to an existing Hackerspace account.
+          </p>
+        <% else %>
+          <%= link_to (render "devise/shared/google"), user_google_omniauth_authorize_path, method: :post %>
+          <hr class="grey-border">
+          <p class="alt-text"> or log in below</p>
+        <% end %>
       </div>
       <section>
         <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
