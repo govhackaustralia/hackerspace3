@@ -134,10 +134,9 @@
 
           .status {
             display: flex;
-            flex-direction: row;
-            margin: 20px 0px;
+            margin: 50px 0px;
             width: 100%;
-
+  
             ul {
               display: flex;
               list-style-type: none;
@@ -171,9 +170,26 @@
       }
 
       &.toc section {
+        .header {
+          padding: 5em 5em 0em 5em;
+        }
+        .status {
+          display: flex;
+          flex-direction: row;
+          margin: 20px 0px;
+          width: 100%;
+
+          ul {
+            display: flex;
+            list-style-type: none;
+          }
+          li {
+            width: auto;
+            margin-right: 20px;
+          }
+        }
         article {
           padding: 0;
-
           .eyebrow {
             color: #ca1e56;
             font-family: "Roboto";
@@ -583,7 +599,7 @@
 
       &.toc section {
         article {
-          padding: 5em;
+          padding: 0em 5em 5em 5em;
 
           h2 {
             &.heading {
