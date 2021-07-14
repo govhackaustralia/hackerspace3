@@ -139,6 +139,7 @@
   
             ul {
               display: flex;
+              flex-direction: column;
               list-style-type: none;
             }
             li {
@@ -171,16 +172,16 @@
 
       &.toc section {
         .header {
-          padding: 5em 5em 0em 5em;
+          padding: 0;
         }
         .status {
           display: flex;
-          flex-direction: row;
-          margin: 20px 0px;
+          margin: 50px 0px;
           width: 100%;
 
           ul {
             display: flex;
+            flex-direction: column;
             list-style-type: none;
           }
           li {
@@ -552,6 +553,7 @@
 
           ul {
             display: flex;
+            flex-direction: row;
             list-style-type: none;
           }
           li {
@@ -567,6 +569,22 @@
           h2 {
             &.heading {
               margin-bottom: 3rem;
+            }
+          }
+
+          .status {
+            display: flex;
+            margin: 50px 0px;
+            width: 100%;
+  
+            ul {
+              display: flex;
+              flex-direction: row;
+              list-style-type: none;
+            }
+            li {
+              width: auto;
+              margin-right: 20px;
             }
           }
         }
@@ -598,6 +616,24 @@
       }
 
       &.toc section {
+        .header {
+          padding: 5em 5em 0em 5em;
+        }
+        .status {
+          display: flex;
+          margin: 50px 0px;
+          width: 100%;
+
+          ul {
+            display: flex;
+            flex-direction: row;
+            list-style-type: none;
+          }
+          li {
+            width: auto;
+            margin-right: 20px;
+          }
+        }
         article {
           padding: 0em 5em 5em 5em;
 
