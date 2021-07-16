@@ -4,6 +4,12 @@
     <% unless challenge.short_desc.blank? %>
       <h5><%= challenge.short_desc %></h5>
     <% end %>
+    <% if challenge.eligibility.present? && @competition.current %>
+      <p>
+        <strong>Eligibility:</strong>
+        <%= challenge.eligibility %>
+      </p>
+    <% end %>
     <p>
       <%= link_to 'Go to Challenge', challenge_path(challenge.identifier) %>
       | <%= pluralize entry_count, 'team has', plural: 'teams have'  %>
