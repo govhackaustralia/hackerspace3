@@ -21,7 +21,7 @@
   </div>
   <div class="form-group">
     <%= form.label :region %>
-    <%= form.select :region, options_for_select(User.regions.keys.sort, selected: @user.region) %>
+    <%= form.select :region, options_for_select(User.regions.keys, selected: @user.region) %>
   </div>
   <div class="form-group">
     <%= form.label :registration_type %>
