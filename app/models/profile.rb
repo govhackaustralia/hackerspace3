@@ -44,7 +44,7 @@ class Profile < ApplicationRecord
     'Prefer not to say' => 9
   }, _prefix: true
 
-  # Remove once #PR Blah blah blah has been merged
+  # Remove once PR #290 is merged and migrated
   enum employment: {
     'Employed, working full time' => 0,
     'Employed, working part time or casual' => 1,
