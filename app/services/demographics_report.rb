@@ -5,26 +5,26 @@ class DemographicsReport
 
   def initialize(competition, fieldtype )
     @competition = competition
-    @fieldtype = fieldtype.downcase 
-    @profiles = @competition.profiles.compact
+    @fieldtype = fieldtype.downcase
+    @profiles = @competition.profiles.preload(:employment_status).compact
   end
 
-  def report 
-    case @fieldtype
+  def report
+    grouped_data = case @fieldtype
     when 'age'
-      grouped_data = @profiles.group_by(&:age)
+      @profiles.group_by(&:age)
     when 'gender'
-      grouped_data = @profiles.group_by(&:gender)
+      @profiles.group_by(&:gender)
     when 'first_peoples'
-      grouped_data = @profiles.group_by(&:first_peoples)
+      @profiles.group_by(&:first_peoples)
     when 'disability'
-      grouped_data = @profiles.group_by(&:disability)
+      @profiles.group_by(&:disability)
     when 'education'
-      grouped_data = @profiles.group_by(&:education)
+      @profiles.group_by(&:education)
     when 'employment'
-      grouped_data = @profiles.group_by(&:employment)
+      employment_grouped_data
     when 'postcode'
-      grouped_data = @profiles.group_by(&:postcode)
+      @profiles.group_by(&:postcode)
     else
       raise 'field does not exist'
     end
@@ -42,16 +42,28 @@ class DemographicsReport
     end
   end
 
-  # private
+  private
 
+  def employment_grouped_data
+    grouped_data = EmploymentStatus.options.reduce({}) do |hash, option|
+      hash.update(option => [])
+    end
+    @profiles.each do |profile|
+      next if profile.employment_status.nil?
+
+      EmploymentStatus.options.each do |option|
+        next unless profile.employment_status.send(option)
+
+        grouped_data[option] << profile
+      end
+    end
+    grouped_data
+  end
 
   def data_set_object(key, profile)
     {
       input: key,
       count: profile.count
-      
     }
   end
-
-
 end
