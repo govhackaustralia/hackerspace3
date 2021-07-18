@@ -1,7 +1,8 @@
-section.tiles {
-  padding: 2em;
+.tiles {
+  padding: 2em 0em;
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   align-content: center;
   align-items: center;
   color: #fff;
@@ -67,8 +68,15 @@ section.tiles {
   }
 }
 
-@media only screen and (max-width: 900px) {
-  section.events article {
-    margin: 0.5em 0.5em;
+/* Large Devices, Wide Screens */
+@media only screen and (min-width : 992px) {
+  .tiles {
+    padding: 2em 0em;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-content: center;
+    align-items: center;
+    color: #fff;
   }
 }

@@ -1,16 +1,21 @@
 .events_page {
   background-color: #fff;
   section {
-    &.row {
+    &.events_row {
       display: flex;
       flex-direction: column;
       flex-wrap: wrap;
+      width: 100%;
 
       .menu_col {
         display: flex;
         flex-direction: column;
-        padding: 4rem;
+        padding: 2rem 0rem;
         width: 100%;
+
+        .menu_section {
+          padding: 2em;
+        }
         
         h2 {
           color: #4C9AD2;
@@ -30,15 +35,24 @@
   
       }
       .contents {
-        padding: 4rem;
+        padding: 2rem 0rem;
         display: flex;
         flex-direction: column;
         width: 100%;
+
+        .tile_wrapper {
+          padding: 2em;
+        }
   
         h3 {
           font-size: 1.5em;
           line-height: 1.3em;
         }
+      }
+      .grey-line {
+        width: 90%;
+        margin: 0 auto;
+        border: 1px solid #F4F4F4;
       }
     }
     
@@ -49,64 +63,11 @@
   }
 }
 
-/* Extra Small Devices, Phones */
-@media only screen and (min-device-width: 480px) and (min-width : 480px) {
-  .events_page {
-    section {
-      &.row {
-        display: flex;
-        flex-direction: column;
-        flex-wrap: wrap;
-
-        .menu_col {
-          display: flex;
-          flex-direction: column;
-          padding: 4rem;
-          width: 100%;
-    
-          h2 {
-            color: #4C9AD2;
-            text-align: left;
-            line-height: 1.2em;
-            font-size: 2em;
-          }
-    
-          p {
-            margin-top: 0.5em;
-            font-size: 1.25em;
-            text-align: left;
-            color: #000;
-            width: 100%;
-            margin: 5px 0px;
-          }
-    
-        }
-        .contents {
-          padding: 4rem;
-          display: flex;
-          flex-direction: column;
-          width: 100%;
-    
-          h3 {
-            font-size: 1.5em;
-            line-height: 1.3em;
-          }
-        }
-      }
-      
-      &.info p {
-        margin-top: 0.5em;
-        font-size: 1.25em;
-      }
-    }
-  }
-}
-
 /* Small Devices, Tablets */
 @media only screen and (min-width : 768px) {
   .events_page {
     section {
-      &.row {
+      &.events_row {
         display: flex;
         flex-direction: column;
         flex-wrap: wrap;
@@ -145,6 +106,11 @@
             font-size: 1.5em;
             line-height: 1.3em;
           }
+        }
+        .grey-line {
+          width: 90%;
+          margin: 0 auto;
+          border: 1px solid #F4F4F4;
         }
       }
       
@@ -160,7 +126,7 @@
 @media only screen and (min-width : 992px) {
   .events_page {
     section {
-      &.row {
+      &.events_row {
         display: flex;
         flex-direction: row;
         flex-wrap: nowrap;
@@ -170,7 +136,11 @@
           flex-direction: column;
           padding: 5rem;
           width: 30%;
-    
+
+          .menu_section {
+            margin: 10px 0px;
+            padding: 0; 
+          }
     
           h2 {
             color: #4C9AD2;
@@ -214,7 +184,7 @@
 @media only screen and (min-width : 1200px) {
   .events_page {
     section {
-      &.row {
+      &.events_row {
         display: flex;
         flex-direction: row;
         flex-wrap: nowrap;
@@ -223,16 +193,17 @@
           display: flex;
           flex-direction: column;
           padding: 4rem;
-          width: 15%;
+          width: 20%;
 
           .menu_section {
-            margin: 20px 0px; 
+            margin: 10px 0px;
+            padding: 0; 
           }
     
           h2 {
             color: #4C9AD2;
             text-align: left;
-            line-height: 1.2em;
+            line-height: 1.5em;
             font-size: 2em;
           }
     
@@ -253,13 +224,18 @@
           padding: 4rem;
           display: flex;
           flex-direction: column;
-          width: 85%;
+          width: 80%;
     
           h3 {
             font-size: 25px;
             line-height: 30px;
-            color: #CC1E57;
           }
+        }
+
+        .subtitle {
+          font-size: 30px;
+          line-height: 30px;
+          color: #ca1e56;
         }
       }
       

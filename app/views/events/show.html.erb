@@ -1,72 +1,81 @@
 <% content_for :title, "#{@event.name} #{ "- #{@region.name}" unless @event.event_type == CONFERENCE }" %>
 <main class="events_page single-event">
-  <section class="header">
-    <h2><%= yield :title %></h2>
-  </section>
-  <section>
-    <h3>Event Information</h3>
-    <section class="info">
-      <% if @event.description.present? %>
-        <% @event.description.split(/\r\n/).each do |paragraph| %>
-          <p><%= simple_format(paragraph) %></p>
-        <% end %>
-      <% elsif @event.event_type == CONNECTION_EVENT %>
-        <%= render 'connections/connection_description' %>
-      <% elsif @event.event_type == AWARD_EVENT %>
-        <%= render 'awards/award_description' %>
-      <% else %>
-        <%= render 'competition_events/competition_event_description' %>
+  <section class="events_row">
+    <div class="side-menu">
+      <h2><%= yield :title %></h2>
+      <div class="event-info">
+        <h4>Registration Type:</h4>
+        <p><%= @event.registration_type %></p>
+      </div>
+      <hr class="grey-line" />
+      <%= render 'events/event_text_information' %>
+      <br />
+      <hr class="grey-line" />
+      <br />
+      <%= render 'events/event_registration_team_links' %>
+      <% if user_signed_in? && @event.admin_privileges?(current_user) %>
+        <p><%= link_to 'Manage this Event', admin_region_event_path(@region, @event), class: 'black' %></p>
       <% end %>
-    </section>
-    <section>
-      <article>
-        <div class="event-info">
-          <h4>Registration Type:</h4>
-          <p><%= @event.registration_type %></p>
-        </div>
-        <%= render 'events/event_text_information' %>
-      </article>
-      <aside>
+      <p><%= link_to 'Back to Events', events_path, class: "blue"%></p>
+    </div>
+    <div class="content">
+      <div class="info">
+        <h3>Event Information</h3>
+        <% if @event.description.present? %>
+          <% @event.description.split(/\r\n/).each do |paragraph| %>
+            <p><%= simple_format(paragraph) %></p>
+          <% end %>
+        <% elsif @event.event_type == CONNECTION_EVENT %>
+          <%= render 'connections/connection_description' %>
+        <% elsif @event.event_type == AWARD_EVENT %>
+          <%= render 'awards/award_description' %>
+        <% else %>
+          <%= render 'competition_events/competition_event_description' %>
+        <% end %>
+      </div>
+      <div class="info">
         <%= render 'events/event_map_video' %>
-        <%= render 'events/event_registration_team_links' %>
-        <% if @event_partners.present? %>
-          <h3><%= pluralize @event_partners.count, 'Event Partner' %></h3>
-          <% @event_partners.each do |event_partner| %>
-            <figure>
-              <a href="<%= event_partner.website %>" target="_blank">
-                <% if event_partner.logo.attached? %>
-                  <%= image_tag url_for(event_partner.logo) %>
-                <% else %>
-                  <%= image_tag 'default_profile_pic.png' %>
-                <% end %>
-              </a>
-            </figure>
+          <br />
+          <% if @event_partners.present? %>
+            <h3><%= pluralize @event_partners.count, 'Event Partner' %></h3>
+            <br />
+            <% @event_partners.each do |event_partner| %>
+              <div class="clickable_tile">
+                <a href="<%= event_partner.website %>" target="_blank">
+                  <% if event_partner.logo.attached? %>
+                    <%= image_tag url_for(event_partner.logo) %>
+                  <% else %>
+                    <%= image_tag 'default_profile_pic.png' %>
+                  <% end %>
+                </a>
+              </div>
+            <br />
           <% end %>
         <% end %>
-      </aside>
-    </section>
-    <% if @sponsorship_types.present? %>
-      <h3><%= @region.name %> Sponsors</h3>
-      <% @sponsorship_types.each do |sponsorship_type| %>
-        <h4><%= sponsorship_type.name %></h4>
-        <div class="sponsors">
-          <% sponsorship_type.sponsors.where(sponsorships: { sponsorable: @region }).with_attached_logo.each do |sponsor| %>
-            <figure>
-              <%= link_to sponsor.website, target: '_blank' do %>
-                <% if sponsor.logo.attached? %>
-                  <%= image_tag url_for(sponsor.logo) %>
-                <% else %>
-                  <%= image_tag 'default_profile_pic.png' %>
+      </div>
+      <% if @sponsorship_types.present? %>
+        <div class="info">
+          <h3><%= @region.name %> Sponsors</h3>
+          <br />
+            <% @sponsorship_types.each do |sponsorship_type| %>
+              <h4><%= sponsorship_type.name %></h4>
+              <br />
+              <div class="sponsors">
+                <% sponsorship_type.sponsors.where(sponsorships: { sponsorable: @region }).with_attached_logo.each do |sponsor| %>
+                  <div class="clickable_tile">
+                    <%= link_to sponsor.website, target: '_blank' do %>
+                      <% if sponsor.logo.attached? %>
+                        <%= image_tag url_for(sponsor.logo) %>
+                      <% else %>
+                        <%= image_tag 'default_profile_pic.png' %>
+                      <% end %>
+                    <% end %>
+                  </div>
                 <% end %>
-              <% end %>
-            </figure>
-          <% end %>
-        </div>
+              </div>
+            <% end %>
+          </div>
       <% end %>
-    <% end %>
+    </div>
   </section>
 </main>
-<% if user_signed_in? && @event.admin_privileges?(current_user) %>
-  <p><%= link_to 'Manage this Event', admin_region_event_path(@region, @event) %></p>
-<% end %>
-<p><%= link_to 'Back to Events', events_path %></p>
