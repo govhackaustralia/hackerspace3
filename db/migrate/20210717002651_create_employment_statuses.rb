@@ -37,8 +37,20 @@ class CreateEmploymentStatuses < ActiveRecord::Migration[6.1]
       8 => :prefer_not_to_say,
     }
 
+    profile_employment_enum = {
+      'Employed, working full time' => 0,
+      'Employed, working part time or casual' => 1,
+      'Student, studying full time' => 2,
+      'Student, studying part time' => 3,
+      'Not employed, looking for work' => 4,
+      'Not employed, NOT looking for work' => 5,
+      'Retired' => 6,
+      'Not able to work' => 7,
+      'Prefer not to say' => 8
+    }
+
     Profile.all.where.not(employment: nil).each do |profile|
-      EmploymentStatus.create profile: profile, attributes[Profile.employments[profile.employment]] => true
+      EmploymentStatus.create profile: profile, attributes[profile_employment_enum[profile.employment]] => true
     end
 
     raise if profile_full_time_employed_count != EmploymentStatus.where(full_time_employed: true).count
