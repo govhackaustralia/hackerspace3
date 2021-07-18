@@ -40,9 +40,7 @@
         <%= @user.dietary_requirements %>
       </p>
     <% end %>
-    <div class="actions">
-      <%= link_to 'Update Registration', edit_event_registration_path(@event.identifier, @registration), class: 'red'%>
-    </div>
+    <%= link_to 'Update Registration', edit_event_registration_path(@event.identifier, @registration), class: 'red'%>
     <%= link_to 'Back to Event Page', event_path(@event.identifier), class: 'blue'%>
     <%= link_to 'Back to Account Management', manage_account_path,  class: 'blue'%>
   </section>
