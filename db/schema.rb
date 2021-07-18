@@ -196,6 +196,7 @@ ActiveRecord::Schema.define(version: 2021_07_17_002651) do
     t.integer "profile_id"
     t.boolean "full_time_employed"
     t.boolean "part_time_casual"
+    t.boolean "self_employed"
     t.boolean "full_time_student"
     t.boolean "part_time_student"
     t.boolean "not_employed_looking"

@@ -52,6 +52,7 @@ en:
       employment_status:
         full_time_employed: 'Employed, working full time'
         part_time_casual: 'Employed, working part time or casual'
+        self_employed: 'Self employed'
         full_time_student: 'Student, studying full time'
         part_time_student: 'Student, studying part time'
         not_employed_looking: 'Not employed, looking for work'
