@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_08_050110) do
+ActiveRecord::Schema.define(version: 2021_07_17_002651) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -192,6 +192,22 @@ ActiveRecord::Schema.define(version: 2021_05_08_050110) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "employment_statuses", force: :cascade do |t|
+    t.integer "profile_id"
+    t.boolean "full_time_employed"
+    t.boolean "part_time_casual"
+    t.boolean "self_employed"
+    t.boolean "full_time_student"
+    t.boolean "part_time_student"
+    t.boolean "not_employed_looking"
+    t.boolean "not_employed_not_looking"
+    t.boolean "retired"
+    t.boolean "not_able_to_work"
+    t.boolean "prefer_not_to_say"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "entries", force: :cascade do |t|
     t.integer "team_id"
     t.integer "challenge_id"
@@ -307,7 +323,6 @@ ActiveRecord::Schema.define(version: 2021_05_08_050110) do
     t.integer "first_peoples"
     t.integer "disability"
     t.integer "education"
-    t.integer "employment"
     t.string "users"
     t.string "postcode"
     t.datetime "created_at", precision: 6, null: false

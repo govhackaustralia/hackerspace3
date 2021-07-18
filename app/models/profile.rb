@@ -1,6 +1,9 @@
 class Profile < ApplicationRecord
   belongs_to :user
 
+  has_one :employment_status, dependent: :destroy, inverse_of: :profile
+  accepts_nested_attributes_for :employment_status
+
   validates :identifier, uniqueness: true, allow_nil: true
 
   acts_as_taggable_on :skills, :interests
@@ -41,6 +44,7 @@ class Profile < ApplicationRecord
     'Prefer not to say' => 9
   }, _prefix: true
 
+  # Remove once PR #290 is merged and migrated
   enum employment: {
     'Employed, working full time' => 0,
     'Employed, working part time or casual' => 1,

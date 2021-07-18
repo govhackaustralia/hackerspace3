@@ -49,4 +49,15 @@ en:
         employment: 'What is your employment status?'
         age: 'What is your age category?'
         postcode: 'What is your postcode?'
+      employment_status:
+        full_time_employed: 'Employed, working full time'
+        part_time_casual: 'Employed, working part time or casual'
+        self_employed: 'Self employed'
+        full_time_student: 'Student, studying full time'
+        part_time_student: 'Student, studying part time'
+        not_employed_looking: 'Not employed, looking for work'
+        not_employed_not_looking: 'Not employed, NOT looking for work'
+        retired: 'Retired'
+        not_able_to_work: 'Not able to work'
+        prefer_not_to_say: 'Prefer not to say'
   hello: "Hello world"
