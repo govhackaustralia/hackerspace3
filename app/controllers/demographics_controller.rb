@@ -1,7 +1,11 @@
 class DemographicsController < ApplicationController
   before_action :authenticate_user!, :profile
 
-  def edit; end
+  def edit
+    return if @profile.employment_status.present?
+
+    @profile.build_employment_status
+  end
 
   def update
     @profile.update profile_params
@@ -15,7 +19,8 @@ class DemographicsController < ApplicationController
   end
 
   def profile_params
-    params.require(:profile).permit(*DEMOGRAPHIC_PARAMS)
+    params.require(:profile).permit(*DEMOGRAPHIC_PARAMS,
+      employment_status_attributes: EmploymentStatus.options)
   end
 
   DEMOGRAPHIC_PARAMS = %i[
@@ -23,7 +28,6 @@ class DemographicsController < ApplicationController
     first_peoples
     disability
     education
-    employment
     age
     postcode
   ].freeze

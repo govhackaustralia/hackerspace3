@@ -24,37 +24,40 @@
         <div class="form-group">
           <%= form.label :first_peoples %>
           <%= form.select :first_peoples,
-            options_for_select(Profile.first_peoples.keys, selected: @profile.first_peoples), 
+            options_for_select(Profile.first_peoples.keys, selected: @profile.first_peoples),
             include_blank: true %>
         </div>
         <div class="form-group">
           <%= form.label :disability %>
-          <%= form.select :disability, 
-            options_for_select(Profile.disabilities.keys, selected: @profile.disability), 
+          <%= form.select :disability,
+            options_for_select(Profile.disabilities.keys, selected: @profile.disability),
             include_blank: true
            %>
         </div>
         <div class="form-group">
           <%= form.label :education %>
-          <%= form.select :education, 
-            options_for_select(Profile.educations.keys, selected: @profile.education), 
-            include_blank: true
-          %>
-        </div>
-        <div class="form-group">
-          <%= form.label :employment %>
-          <%= form.select :employment, 
-            options_for_select(Profile.employments.keys, selected: @profile.employment), 
+          <%= form.select :education,
+            options_for_select(Profile.educations.keys, selected: @profile.education),
             include_blank: true
           %>
         </div>
         <div class="form-group">
           <%= form.label :age %>
-          <%= form.select :age, 
-            options_for_select(Profile.ages.keys, selected: @profile.age), 
+          <%= form.select :age,
+            options_for_select(Profile.ages.keys, selected: @profile.age),
             include_blank: true
           %>
         </div>
+        <div>What is your employment status?</div>
+        <br>
+        <%= form.fields_for :employment_status, @profile.employment_status do |employment_form| %>
+          <% EmploymentStatus.options.each do |option| %>
+            <div class="form-group">
+              <%= employment_form.check_box option %>
+              <%= employment_form.label option %>
+            </div>
+          <% end %>
+        <% end %>
         <div class="form-group">
           <%= form.label :postcode %>
           <%= form.text_field :postcode, class: 'form-control' %>

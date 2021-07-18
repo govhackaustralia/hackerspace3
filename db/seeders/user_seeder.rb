@@ -69,14 +69,13 @@ class UserSeeder < Seeder
       user.confirm if number % 20 == 0
       user.save!
 
-      Profile.create(
+      profile = Profile.create(
         user: user,
         age: Profile.ages.keys.sample,
         gender: Faker::Gender.type,
         first_peoples: Profile.first_peoples.keys.sample,
         disability: Profile.disabilities.keys.sample,
         education: Profile.educations.keys.sample,
-        employment: Profile.employments.keys.sample,
         postcode: Faker::Address.postcode,
         skill_list: random_skills,
         interest_list: random_interests,
@@ -88,6 +87,12 @@ class UserSeeder < Seeder
         description: Faker::Lorem.paragraph,
         published: (number % 20 != 0),
       )
+
+      sample_count = (0...EmploymentStatus.options.length).to_a.sample
+      attributes = EmploymentStatus.options.sample(sample_count).reduce({}) do |hash, option|
+        hash.update(option => true)
+      end.merge(profile: profile)
+      EmploymentStatus.create(attributes)
     end
   end
 

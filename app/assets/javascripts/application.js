@@ -35,6 +35,12 @@ $( document ).on('turbolinks:load', function() {
 		responsive: true
 	});
 
+	// To avoid duplicate table initializations, make sure turbolinks only caches
+	// the orginial un-enhanced table.
+	$( document ).on('turbolinks:before-cache', function() {
+		table.destroy();
+	});
+
 	// Check if filter needs to be applied
 	if ((window._search != undefined) && (window._search.length > 0 )) {
 		// Apply the filter param to the filter box.

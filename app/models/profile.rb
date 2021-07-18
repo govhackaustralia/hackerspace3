@@ -1,6 +1,9 @@
 class Profile < ApplicationRecord
   belongs_to :user
 
+  has_one :employment_status, dependent: :destroy, inverse_of: :profile
+  accepts_nested_attributes_for :employment_status
+
   validates :identifier, uniqueness: true, allow_nil: true
 
   acts_as_taggable_on :skills, :interests
@@ -39,18 +42,6 @@ class Profile < ApplicationRecord
     "Master's degree" => 7,
     'Doctorate' => 8,
     'Prefer not to say' => 9
-  }, _prefix: true
-
-  enum employment: {
-    'Employed, working full time' => 0,
-    'Employed, working part time or casual' => 1,
-    'Student, studying full time' => 2,
-    'Student, studying part time' => 3,
-    'Not employed, looking for work' => 4,
-    'Not employed, NOT looking for work' => 5,
-    'Retired' => 6,
-    'Not able to work' => 7,
-    'Prefer not to say' => 8
   }, _prefix: true
 
   enum age: {

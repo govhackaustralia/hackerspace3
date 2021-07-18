@@ -65,6 +65,8 @@ gem 'graphql'
 gem 'graphiql-rails'
 # Complete and flexible spam protection solution for Rails applications.
 gem 'invisible_captcha'
+# Gibbon is an API wrapper for MailChimp's API
+gem 'gibbon'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

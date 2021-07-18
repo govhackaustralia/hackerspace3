@@ -4,10 +4,16 @@ class ProfileTest < ActiveSupport::TestCase
   setup do
     @profile = profiles(:one)
     @user = users(:one)
+    @employment_status = employment_statuses(:one)
   end
 
   test 'associations' do
     assert @profile.user == @user
+    assert @profile.employment_status == @employment_status
+
+    @profile.destroy
+
+    assert_raises(ActiveRecord::RecordNotFound) { @employment_status.reload }
   end
 
   test 'validations' do
@@ -22,7 +28,6 @@ class ProfileTest < ActiveSupport::TestCase
     assert Profile.first_peoples.is_a? Hash
     assert Profile.disabilities.is_a? Hash
     assert Profile.educations.is_a? Hash
-    assert Profile.employments.is_a? Hash
     assert Profile.ages.is_a? Hash
     assert Profile.team_statuses.is_a? Hash
   end

@@ -17,8 +17,8 @@
         </div>
         <div class="form-group">
           <%= form.label :region %>
-          <%= form.select :region,                                                
-            options_for_select(User.regions.keys.sort, selected: @user.region), 
+          <%= form.select :region,
+            options_for_select(User.regions.keys, selected: @user.region), 
             include_blank: true, class: 'form-control-lg w-100'
           %>
         </div>
