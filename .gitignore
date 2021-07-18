@@ -8,7 +8,7 @@
 /.bundle
 
 # Ignore vendor folder
-/.vendor
+/vendor
 
 # Ignore all logfiles and tempfiles.
 /log/*
