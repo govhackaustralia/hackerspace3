@@ -1,28 +1,41 @@
 <% content_for :title, 'Events' %>
 <main class="events_page">
-  <section class="header">
-    <h2>Events for <%= @competition.name %> </h2>
-  </section>
-  <section>
-    <% if @events.present? %>
-      <p>
-        <%= link_to 'Download CSV', events_path(format: 'csv'), class: 'download-csv' %>
-      </p>
-      <%= render partial: 'events/event_collection', locals: { events: @future_sessions, title: 'Upcoming Conference Sessions' } %>
-      <%= render partial: 'events/event_collection', locals: { events: @future_connections, title: 'Upcoming Connection Events' } %>
-      <%= render partial: 'events/event_collection', locals: { events: @future_locations, title: 'Upcoming Competition Events' } %>
-      <%= render partial: 'events/event_collection', locals: { events: @future_remotes, title: "Upcoming Remote Kitchen Table Competition Events" } %>
-      <%= render partial: 'events/event_collection', locals: { events: @future_awards, title: 'Upcoming Awards Events' } %>
-      <%= render partial: 'events/event_collection', locals: { events: @past_sessions, title: 'Past Conference Sessions' } %>
-      <%= render partial: 'events/event_collection', locals: { events: @past_connections, title: 'Past Connection Events' } %>
-      <%= render partial: 'events/event_collection', locals: { events: @past_competitions, title: 'Past Competition Events' } %>
-      <%= render partial: 'events/event_collection', locals: { events: @past_awards, title: 'Past Award Events' } %>
-    <% else %>
-      <section class="later">
-        <p>
-          <strong>No events published for this competition, please check back later</strong>
-        </p>
-      </section>
-    <% end %>
+  <section class="row">
+    <div class="menu_col">
+      <div class="menu_section">
+        <h2>GovHack <%= @competition.name %> Events</h2>
+        <p>Browse to attend an event</p>
+      </div>
+      <hr class="grey-line" />
+      <div class="menu_section">
+        <% if @events.present? %>
+            <p class="helper_text">Download a CSV for all current events</p>
+            <%= link_to 'Download CSV', events_path(format: 'csv'), class: 'download-csv' %>
+        <% else %>
+          <p>
+            <strong>No events published for this competition, please check back later</strong>
+          </p>
+        <% end %>
+      </div>
+    </div>
+    <div class="contents">
+      <% if @events.present? %>
+        <%= render partial: 'events/event_collection', locals: { events: @future_sessions, title: 'Upcoming Conference Sessions' } %>
+        <%= render partial: 'events/event_collection', locals: { events: @future_connections, title: 'Upcoming Connection Events' } %>
+        <%= render partial: 'events/event_collection', locals: { events: @future_locations, title: 'Upcoming Competition Events' } %>
+        <%= render partial: 'events/event_collection', locals: { events: @future_remotes, title: "Upcoming Remote Kitchen Table Competition Events" } %>
+        <%= render partial: 'events/event_collection', locals: { events: @future_awards, title: 'Upcoming Awards Events' } %>
+        <%= render partial: 'events/event_collection', locals: { events: @past_sessions, title: 'Past Conference Sessions' } %>
+        <%= render partial: 'events/event_collection', locals: { events: @past_connections, title: 'Past Connection Events' } %>
+        <%= render partial: 'events/event_collection', locals: { events: @past_competitions, title: 'Past Competition Events' } %>
+        <%= render partial: 'events/event_collection', locals: { events: @past_awards, title: 'Past Award Events' } %>
+      <% else %>
+        <section class="later">
+          <p>
+            <strong>No events published for this competition, please check back later</strong>
+          </p>
+        </section>
+      <% end %>
+    </div>
   </section>
 </main>

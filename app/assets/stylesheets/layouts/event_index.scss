@@ -1,73 +1,273 @@
 .events_page {
-  margin: 0 auto;
-
-  h2 {
-    color: #ffffff;
-    text-align: center;
-    line-height: 1.2em;
-    font-size: 2em;
-  }
-
-  h3 {
-    font-size: 1.5em;
-    line-height: 1.3em;
-  }
-
-  > {
-    section > h3,
-    h3 {
-      margin-top: 2em;
-      padding: 0em 2em;
-      color: #ca1e56;
-    }
-    section.header > p,
-    p {
-      margin-top: 0.5em;
-      font-size: 1.25em;
-      text-align: center;
-      color: #ffffff;
-      width: 50%;
-      margin: 0 auto;
-    }
-  }
-
+  background-color: #fff;
   section {
-    &.header {
-      display: block;
-      background-color: #4c9ad2;
-      padding: 5rem;
-      align-content: center;
+    &.row {
+      display: flex;
+      flex-direction: column;
+      flex-wrap: wrap;
+
+      .menu_col {
+        display: flex;
+        flex-direction: column;
+        padding: 4rem;
+        width: 100%;
+        
+        h2 {
+          color: #4C9AD2;
+          text-align: left;
+          line-height: 1.2em;
+          font-size: 2em;
+        }
+  
+        p {
+          margin-top: 0.5em;
+          font-size: 1.25em;
+          text-align: left;
+          color: #000;
+          width: 100%;
+          margin: 5px 0px;
+        }
+  
+      }
+      .contents {
+        padding: 4rem;
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+  
+        h3 {
+          font-size: 1.5em;
+          line-height: 1.3em;
+        }
+      }
     }
+    
     &.info p {
       margin-top: 0.5em;
       font-size: 1.25em;
     }
   }
-  > section {
-    padding: 2em;
+}
+
+/* Extra Small Devices, Phones */
+@media only screen and (min-device-width: 480px) and (min-width : 480px) {
+  .events_page {
+    section {
+      &.row {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+
+        .menu_col {
+          display: flex;
+          flex-direction: column;
+          padding: 4rem;
+          width: 100%;
+    
+          h2 {
+            color: #4C9AD2;
+            text-align: left;
+            line-height: 1.2em;
+            font-size: 2em;
+          }
+    
+          p {
+            margin-top: 0.5em;
+            font-size: 1.25em;
+            text-align: left;
+            color: #000;
+            width: 100%;
+            margin: 5px 0px;
+          }
+    
+        }
+        .contents {
+          padding: 4rem;
+          display: flex;
+          flex-direction: column;
+          width: 100%;
+    
+          h3 {
+            font-size: 1.5em;
+            line-height: 1.3em;
+          }
+        }
+      }
+      
+      &.info p {
+        margin-top: 0.5em;
+        font-size: 1.25em;
+      }
+    }
   }
 }
 
-@media only screen and (max-width: 900px) {
+/* Small Devices, Tablets */
+@media only screen and (min-width : 768px) {
   .events_page {
-    margin: 0 auto;
-    section > h3,
-    h3 {
-      text-align: center;
-      margin-left: 0;
-    }
-    > {
-      section.header > p,
-      p {
-        width: 100%;
-        margin: 0 auto;
-      }
-    }
-
     section {
-      &.header {
-        padding: 2rem;
+      &.row {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+
+        .menu_col {
+          display: flex;
+          flex-direction: column;
+          padding: 4rem;
+          width: 100%;
+    
+          h2 {
+            color: #4C9AD2;
+            text-align: left;
+            line-height: 1.2em;
+            font-size: 2em;
+          }
+    
+          p {
+            margin-top: 0.5em;
+            font-size: 1.25em;
+            text-align: left;
+            color: #000;
+            width: 100%;
+            margin: 5px 0px;
+          }
+    
+        }
+        .contents {
+          padding: 4rem;
+          display: flex;
+          flex-direction: column;
+          width: 100%;
+
+    
+          h3 {
+            font-size: 1.5em;
+            line-height: 1.3em;
+          }
+        }
+      }
+      
+      &.info p {
+        margin-top: 0.5em;
+        font-size: 1.25em;
       }
     }
   }
+}
+
+/* Medium Devices, Desktops */
+@media only screen and (min-width : 992px) {
+  .events_page {
+    section {
+      &.row {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+
+        .menu_col {
+          display: flex;
+          flex-direction: column;
+          padding: 5rem;
+          width: 30%;
+    
+    
+          h2 {
+            color: #4C9AD2;
+            text-align: left;
+            line-height: 1.2em;
+            font-size: 2em;
+          }
+    
+          p {
+            margin-top: 0.5em;
+            font-size: 1.25em;
+            text-align: left;
+            color: #000;
+            width: 100%;
+            margin: 5px 0px;
+          }
+    
+        }
+        .contents {
+          padding: 5rem;
+          display: flex;
+          flex-direction: column;
+          width: 70%;
+    
+          h3 {
+            font-size: 1.5em;
+            line-height: 1.3em;
+          }
+        }
+      }
+      
+      &.info p {
+        margin-top: 0.5em;
+        font-size: 1.25em;
+      }
+    }
+  }
+}
+
+/* Large Devices, Wide Screens */
+@media only screen and (min-width : 1200px) {
+  .events_page {
+    section {
+      &.row {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+
+        .menu_col {
+          display: flex;
+          flex-direction: column;
+          padding: 4rem;
+          width: 15%;
+
+          .menu_section {
+            margin: 20px 0px; 
+          }
+    
+          h2 {
+            color: #4C9AD2;
+            text-align: left;
+            line-height: 1.2em;
+            font-size: 2em;
+          }
+    
+          p {
+            font-size: 20px;
+            line-height: 30px;
+            color: #000000;
+          }
+
+          .grey-line {
+            width: 90%;
+            margin: 0 auto;
+            border: 1px solid #F4F4F4;
+          }
+    
+        }
+        .contents {
+          padding: 4rem;
+          display: flex;
+          flex-direction: column;
+          width: 85%;
+    
+          h3 {
+            font-size: 25px;
+            line-height: 30px;
+            color: #CC1E57;
+          }
+        }
+      }
+      
+      &.info p {
+        margin-top: 0.5em;
+        font-size: 1.25em;
+      }
+    }
+  }
+
 }
