@@ -1,51 +1,47 @@
 <% content_for :title, "Registration for #{@event.name}" %>
 <main class="register">
-  <h2>
-    <%= yield :title %>
-  </h2>
-  <section>
-    <article>
-      <% if @event.attending? @assignment %>
-        <p>You are registered to attend the event.</p>
-        <p>If you no longer wish to attend, please update your registration below.</p>
-        <% if @event.competition_event? && @event.not_remote_event? %>
-          <h3>Waste Minimisation Policy</h3>
-          <p>
-            GovHack <%= @competition.year %> is proudly adopting a waste
-            minimisation policy as much as possible.
-          </p>
-          <p>
-            Can you help support us at the event and BYO your coffee cup and
-            water bottle?
-          </p>
-        <% end %>
-        <% unless @registration.category == REGULAR %>
-          <%= render 'flight_options' %>
-        <% end %>
-      <% elsif @event.waitlisted? @assignment %>
-        <p>You are on the waitlist, you will be notified should a space become available.</p>
-        <p>If you no longer wish to attend, please update your registration below.</p>
-      <% elsif @event.not_attending? @assignment %>
-        <p>You are registered as not attending.</p>
-        <p>Please update your registration below if you wish to attend.</p>
-      <% end %>
-      <h3>Dietary Requirements</h3>
-      <% if @user.no_dietary_requirements? %>
-        <p>We do not have any dietary requirements for you on record.</p>
-      <% else %>
+  <section class="register_section">
+    <h2>
+      <%= yield :title %>
+    </h2>
+    <% if @event.attending? @assignment %>
+      <p>You are registered to attend the event.</p>
+      <p>If you no longer wish to attend, please update your registration below.</p>
+      <% if @event.competition_event? && @event.not_remote_event? %>
+        <h3>Waste Minimisation Policy</h3>
         <p>
-          <%= @user.dietary_requirements %>
+          GovHack <%= @competition.year %> is proudly adopting a waste
+          minimisation policy as much as possible.
+        </p>
+        <p>
+          Can you help support us at the event and BYO your coffee cup and
+          water bottle?
         </p>
       <% end %>
-      <div class="actions">
-        <%= link_to 'Update Registration', edit_event_registration_path(@event.identifier, @registration) %>
-      </div>
-    </article>
+      <% unless @registration.category == REGULAR %>
+        <%= render 'flight_options' %>
+      <% end %>
+    <% elsif @event.waitlisted? @assignment %>
+      <br />
+      <p>You are on the waitlist, you will be notified should a space become available.</p>
+      <p>If you no longer wish to attend, please update your registration below.</p>
+    <% elsif @event.not_attending? @assignment %>
+      <br />
+      <p>You are registered as not attending.</p>
+      <p>Please update your registration below if you wish to attend.</p>
+    <% end %>
+    <br />
+    <h3>Dietary Requirements</h3>
+    <% if @user.no_dietary_requirements? %>
+      <p>We do not have any dietary requirements for you on record.</p>
+    <% else %>
+      <br />
+      <p>
+        <%= @user.dietary_requirements %>
+      </p>
+    <% end %>
+    <%= link_to 'Update Registration', edit_event_registration_path(@event.identifier, @registration), class: 'red'%>
+    <%= link_to 'Back to Event Page', event_path(@event.identifier), class: 'blue'%>
+    <%= link_to 'Back to Account Management', manage_account_path,  class: 'blue'%>
   </section>
 </main>
-<p>
-  <%= link_to 'Back to Event Page', event_path(@event.identifier) %>
-</p>
-<p>
-  <%= link_to 'Back to Account Management', manage_account_path %>
-</p>

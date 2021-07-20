@@ -3,6 +3,7 @@
   <br/>
 <% end %>
 <% unless @event.video_id.blank? %>
-  <iframe frameborder="0" height="360" id="ytplayer" src="https://www.youtube.com/embed/<%= @event.video_id %>" type="text/html" width="640"></iframe>
+  <br />
+    <iframe frameborder="0" height="360" id="ytplayer" src="https://www.youtube.com/embed/<%= @event.video_id %>" type="text/html" width="640"></iframe>
   <br/>
 <% end %>
