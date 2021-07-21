@@ -48,6 +48,10 @@
             include_blank: true
           %>
         </div>
+        <div class="form-group">
+          <%= form.label :postcode %>
+          <%= form.text_field :postcode, class: 'form-control' %>
+        </div>
         <div>What is your employment status?</div>
         <br>
         <%= form.fields_for :employment_status, @profile.employment_status do |employment_form| %>
@@ -58,10 +62,6 @@
             </div>
           <% end %>
         <% end %>
-        <div class="form-group">
-          <%= form.label :postcode %>
-          <%= form.text_field :postcode, class: 'form-control' %>
-        </div>
         <div class="actions">
           <%= form.submit 'Submit' %>
         </div>
