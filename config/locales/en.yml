@@ -34,6 +34,7 @@ en:
     label:
       user:
         full_name: 'Full name (required)'
+        region: 'Region (required)'
         mailing_list: Do you consent to be added to the GovHack mailing list?
         under_18: 'Are you under 18 years of age?'
         challenge_sponsor_contact_place: Can be contacted by sponsors of a challenge if I am placed in a challenge?
