@@ -176,6 +176,8 @@ Rails.application.routes.draw do
       resources :scorecards, only: [:index, :update, :destroy], controller: 'teams/scorecards'
     end
 
+    resources :profiles, only: :update
+
     resources :users, only: [:index, :show] do
       member do
         post :confirm

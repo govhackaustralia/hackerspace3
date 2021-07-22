@@ -48,7 +48,11 @@
     </p>
     <p>
       <strong>Published:</strong>
-      <%= @profile.published ? '✅' : '❌' %>
+      <% if @profile.published %>
+        ✅ <%= link_to 'unpublish', admin_profile_path(@profile, profile: {published: false}), method: :patch %>
+      <% else %>
+        ❌ <%= link_to 'publish', admin_profile_path(@profile, profile: {published: true}), method: :patch %>
+      <% end %>
     </p>
   <% end %>
   <p>
