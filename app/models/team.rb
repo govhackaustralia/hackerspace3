@@ -56,6 +56,8 @@ class Team < ApplicationRecord
   # Returns the team_name from the latest project.
   # ENHANCEMENT: Move to Helper.
   def name
+    return unless current_project.present?
+
     current_project.team_name
   end
 

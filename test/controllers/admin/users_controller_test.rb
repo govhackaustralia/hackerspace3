@@ -7,6 +7,19 @@ class Admin::UsersControllerTest < ActionDispatch::IntegrationTest
     @unconfirmed_user = users(:unconfirmed_user)
   end
 
+  test 'should fail authenticate' do
+    sign_out users :one
+    get admin_users_url
+    assert_redirected_to new_user_session_path
+  end
+
+  test 'should fail authorize' do
+    sign_in users :two
+    get admin_users_url
+    assert_redirected_to root_path
+  end
+
+
   test 'should get index' do
     get admin_users_url
     assert_response :success
@@ -56,5 +69,11 @@ class Admin::UsersControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to admin_user_path acting_on_behalf_of_user
     @user.reload
     assert @user.acting_on_behalf_of_user.nil?
+  end
+
+  test 'should delete user success' do
+    delete admin_user_path(users(:two))
+    assert_redirected_to admin_users_path
+    assert_raises(ActiveRecord::RecordNotFound) { users(:two).reload }
   end
 end

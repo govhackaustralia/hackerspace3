@@ -5,7 +5,8 @@
   </h2>
   <p>
     <strong>
-      Email: <%= @user.email %>
+      Email: <%= @user.email %> |
+      <%= link_to 'Destroy User', admin_user_path(@user), data: { confirm: "Are you sure?" }, method: :delete %>
     </strong>
   </p>
   <% if @user.accepted_code_of_conduct %>

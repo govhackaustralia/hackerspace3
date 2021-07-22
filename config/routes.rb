@@ -178,7 +178,7 @@ Rails.application.routes.draw do
 
     resources :profiles, only: :update
 
-    resources :users, only: [:index, :show] do
+    resources :users, only: [:index, :show, :destroy] do
       member do
         post :confirm
         patch :act_on_behalf_of_user

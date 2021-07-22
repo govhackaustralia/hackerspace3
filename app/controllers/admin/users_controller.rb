@@ -30,6 +30,12 @@ class Admin::UsersController < ApplicationController
     end
   end
 
+  def destroy
+    @user = User.find params[:id]
+    @user.destroy
+    redirect_to admin_users_path, notice: 'User destroyed'
+  end
+
   def act_on_behalf_of_user
     user = User.find params[:id]
     current_user.update! acting_on_behalf_of_user: user
