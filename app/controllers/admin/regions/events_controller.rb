@@ -17,7 +17,7 @@ class Admin::Regions::EventsController < ApplicationController
   def preview
     @event = Event.find params[:id]
     @event_partners = @event.event_partners
-    @sponsorship_types = @region.sponsorship_types.distinct.order order: :asc
+    @sponsorship_types = @region.sponsorship_types.distinct.order position: :asc
     @user = current_user
     @event_assignment = @user.event_assignment(@competition)
     @registration = Registration.find_by(

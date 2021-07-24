@@ -21,7 +21,7 @@ class Admin::SponsorshipTypesControllerTest < ActionDispatch::IntegrationTest
     assert_difference 'SponsorshipType.count' do
       post admin_competition_sponsorship_types_url(
         @competition, params: {
-          sponsorship_type: { name: 'Example', order: 1 }
+          sponsorship_type: { name: 'Example', position: 1 }
         }
       )
     end
@@ -32,7 +32,7 @@ class Admin::SponsorshipTypesControllerTest < ActionDispatch::IntegrationTest
     assert_no_difference 'SponsorshipType.count' do
       post admin_competition_sponsorship_types_url(
         @competition, params: {
-          sponsorship_type: { name: 'Example', order: nil }
+          sponsorship_type: { name: 'Example', position: nil }
         }
       )
     end

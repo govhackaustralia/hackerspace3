@@ -12,7 +12,7 @@ class EventsController < ApplicationController
   def show
     @event_partners = @event.event_partners
     @region = @event.region
-    @sponsorship_types = @region.sponsorship_types.distinct.order order: :asc
+    @sponsorship_types = @region.sponsorship_types.distinct.order position: :asc
     set_signed_in_user_vars if user_signed_in?
   end
 

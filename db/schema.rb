@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_07_17_002651) do
+ActiveRecord::Schema.define(version: 2021_07_24_052650) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -428,11 +428,11 @@ ActiveRecord::Schema.define(version: 2021_07_17_002651) do
   create_table "sponsorship_types", force: :cascade do |t|
     t.integer "competition_id"
     t.string "name"
-    t.integer "order"
+    t.integer "position"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["competition_id"], name: "index_sponsorship_types_on_competition_id"
-    t.index ["order"], name: "index_sponsorship_types_on_order"
+    t.index ["position"], name: "index_sponsorship_types_on_position"
   end
 
   create_table "sponsorships", force: :cascade do |t|

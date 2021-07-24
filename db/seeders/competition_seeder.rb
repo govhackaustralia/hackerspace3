@@ -102,7 +102,7 @@ class CompetitionSeeder < Seeder
     5.times do |time|
       comp.sponsorship_types.create(
         name: "Tier #{time + 1} #{comp.year}",
-        order: time + 1
+        position: time + 1
       )
     end
 
