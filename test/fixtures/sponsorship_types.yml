@@ -8,10 +8,10 @@ one:
   id: 1
   competition_id: 1
   name: Gold Sponsor
-  order: 1
+  position: 1
 #
 two:
   id: 2
   competition_id: 1
   name: Silver Sponsor
-  order: 2
+  position: 2

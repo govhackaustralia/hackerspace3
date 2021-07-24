@@ -14,7 +14,7 @@ class SponsorshipTypeTest < ActiveSupport::TestCase
   end
 
   test 'sponsorship type validations' do
-    assert_not SponsorshipType.new(name: 'example', order: nil).save
-    assert_not SponsorshipType.new(name: nil, order: 1).save
+    assert_not SponsorshipType.new(name: 'example', position: nil).save
+    assert_not SponsorshipType.new(name: nil, position: 1).save
   end
 end

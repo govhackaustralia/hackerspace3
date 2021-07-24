@@ -2,7 +2,7 @@ class Admin::SponsorshipTypesController < ApplicationController
   before_action :authenticate_user!, :check_for_privileges
 
   def index
-    @sponsorship_types = @competition.sponsorship_types.order order: :asc
+    @sponsorship_types = @competition.sponsorship_types.order position: :asc
     @admin_privileges = current_user.admin_privileges? @competition
   end
 
@@ -39,7 +39,7 @@ class Admin::SponsorshipTypesController < ApplicationController
   private
 
   def sponsorship_type_params
-    params.require(:sponsorship_type).permit :name, :order
+    params.require(:sponsorship_type).permit :name, :position
   end
 
   def check_for_privileges
@@ -51,14 +51,14 @@ class Admin::SponsorshipTypesController < ApplicationController
   end
 
   def create_new_sponsorship_type
-    SponsorshipType.reorder_from params[:sponsorship_type][:order].to_i
+    SponsorshipType.reorder_from params[:sponsorship_type][:position].to_i
     @sponsorship_type = @competition.sponsorship_types.new(
       sponsorship_type_params
     )
   end
 
   def update_sponsorship_type
-    SponsorshipType.reorder_from params[:sponsorship_type][:order].to_i
+    SponsorshipType.reorder_from params[:sponsorship_type][:position].to_i
     @sponsorship_type = SponsorshipType.find params[:id]
   end
 end
