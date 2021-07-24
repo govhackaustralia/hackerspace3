@@ -1,10 +1,10 @@
 class SponsorshipType < ApplicationRecord
+  include Position
+
   belongs_to :competition
 
   has_many :sponsorships, dependent: :destroy
   has_many :sponsors, through: :sponsorships
-
-  before_validation :make_a_space!
 
   validates :name, :position, presence: true
   validates :position, uniqueness: { scope: :competition_id,
@@ -12,21 +12,7 @@ class SponsorshipType < ApplicationRecord
 
   private
 
-  def make_a_space!
-    SponsorshipType.transaction { candidates_to_update.each(&:save!) }
-  end
-
-  def candidates_to_update
-    counter = position
-    candidates_to_consider.select do |sponsorship_type|
-      next false unless sponsorship_type.position == counter
-
-      counter += 1
-      sponsorship_type.position = counter
-    end
-  end
-
-  def candidates_to_consider
+  def candidates_to_reposition
     return [] if competition.nil?
 
     competition.sponsorship_types

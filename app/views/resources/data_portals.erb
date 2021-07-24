@@ -5,10 +5,10 @@
   </h2>
   <section class="dataportals">
     <% @data_portals.each do |resource| %>
-      <%= render 'resource_tile',  
-        url: resource['url'],      
-        name: resource['name'],      
-        short_url: resource['short_url']
+      <%= render 'resource_tile',
+        url: resource.url,
+        name: resource.name,
+        short_url: resource.short_url
        %>
     <% end %>
   </section>

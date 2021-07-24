@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_07_24_052650) do
+ActiveRecord::Schema.define(version: 2021_07_24_100750) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -403,6 +403,17 @@ ActiveRecord::Schema.define(version: 2021_07_24_052650) do
     t.index ["event_id"], name: "index_registrations_on_event_id"
     t.index ["holder_id"], name: "index_registrations_on_holder_id"
     t.index ["status"], name: "index_registrations_on_status"
+  end
+
+  create_table "resources", force: :cascade do |t|
+    t.integer "competition_id"
+    t.integer "category"
+    t.integer "position"
+    t.string "url"
+    t.string "name"
+    t.string "short_url"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "scores", force: :cascade do |t|

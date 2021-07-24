@@ -1,0 +1,45 @@
+require 'test_helper'
+
+class ResourceTest < ActiveSupport::TestCase
+  setup do
+    @resource = resources(:one)
+    @competition = competitions(:one)
+  end
+
+  test 'resources associations' do
+    assert_equal @competition, @resource.competition
+  end
+
+  test 'resources validations presence' do
+    %i[category position name url short_url].each do |attribute|
+      attributes = {
+        category: :data_portal,
+        position: 1,
+        name: 'New Name',
+        url: 'www.new.com',
+        short_url: 'new'
+      }
+      attributes[attribute] = nil
+      resource = competitions(:two).resources.new(attributes)
+      assert_raises(ActiveRecord::RecordInvalid) { resource.save! }
+    end
+  end
+
+  test 'resources validations uniqueness' do
+    resource_two = resources(:two)
+    assert_raises(ActiveRecord::RecordInvalid) do
+      @resource.update! name: resource_two.name, category: resource_two.category
+    end
+  end
+
+  test 'position validation' do
+    @competition.resources.data_portal.new(
+      position: 1,
+      name: 'resource 2',
+      url: 'www.resource.2',
+      short_url: 'resourcee.2'
+    ).save!
+
+    assert_equal 2, @resource.reload.position
+  end
+end

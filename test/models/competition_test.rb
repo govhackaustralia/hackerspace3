@@ -27,38 +27,31 @@ class CompetitionTest < ActiveSupport::TestCase
     @old_competition = @competition
     @new_competition = Competition.second
     @event_assignment = Assignment.fourth
-    @user = users(:one)
-    @profile = profiles(:one)
+  end
+
+  test 'direct competition associations' do
+    assert @competition.project_criteria.include? @project_criterion
+    assert @competition.challenge_criteria.include? @challenge_criterion
+    assert @competition.hunt_questions.include? hunt_questions(:one)
+    assert @competition.badges.include? badges(:one)
+    assert @competition.criteria.include? @criterion
+    assert_includes @competition.resources, resources(:one)
+    assert @competition.sponsorship_types.include? @sponsorship_type
+    assert @competition.regions.include? @region
+    assert @competition.sponsors.include? @sponsor
+    assert @competition.checkpoints.include? @checkpoint
   end
 
   test 'competition associations' do
     assert @competition.assignments.include? @assignment
-    assert @competition.regions.include? @region
-    assert @competition.sponsors.include? @sponsor
-    assert @competition.sponsorship_types.include? @sponsorship_type
-    assert @competition.events.include? @event
-    assert @competition.users.include? @user
-    assert @competition.profiles.include? @profile
-    assert @competition.connection_events.include? @connection_event
-    assert @competition.connection_registrations.include? @connection_registration
-    assert @competition.conference_events.include? events :conference
-    assert @competition.conference_registrations.include? registrations :conference_registration
-    assert @competition.competition_events.include? @competition_event
-    assert @competition.competition_registrations.include? @competition_registration
-    assert @competition.award_events.include? @award_event
-    assert @competition.award_registrations.include? @award_registration
+    assert @competition.users.include? users(:one)
+    assert @competition.profiles.include? profiles(:one)
     assert @competition.teams.include? @team
     assert @competition.projects.include? @project
     assert @competition.team_data_sets.include? @team_data_set
     assert @competition.challenges.include? @challenge
     assert @competition.entries.include? @entry
-    assert @competition.checkpoints.include? @checkpoint
-    assert @competition.hunt_questions.include? hunt_questions(:one)
     assert @competition.data_sets.include? @data_set
-    assert @competition.badges.include? badges(:one)
-    assert @competition.criteria.include? @criterion
-    assert @competition.project_criteria.include? @project_criterion
-    assert @competition.challenge_criteria.include? @challenge_criterion
     assert @competition.competition_assignments.include? @assignment
   end
 
@@ -72,6 +65,12 @@ class CompetitionTest < ActiveSupport::TestCase
     assert @competition.competition_registrations.include? @competition_registration
     assert @competition.award_events.include? @award_event
     assert @competition.award_registrations.include? @award_registration
+  end
+
+  test 'dependent destroy' do
+    @competition.destroy!
+
+    assert_raises(ActiveRecord::RecordNotFound) { resources(:one).reload }
   end
 
   test 'competition belongs to associations' do
