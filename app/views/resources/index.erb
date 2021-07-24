@@ -4,12 +4,14 @@
     <%= yield :title %>
   </h2>
   <section class="dataportals">
-    <%= link_to data_portals_resources_path do %>
-      <article>
-        <div>
-          <h3>Data Portals</h3>
-        </div>
-      </article>
+    <% if @any_data_portals %>
+      <%= link_to data_portals_resources_path do %>
+        <article>
+          <div>
+            <h3>Data Portals</h3>
+          </div>
+        </article>
+      <% end %>
     <% end %>
     <%= link_to data_sets_path do %>
       <article class="resource_tile">
@@ -18,7 +20,7 @@
         </div>
       </article>
     <% end %>
-    <% if @competition.year == 2020 %>
+    <% if @any_tech %>
       <%= link_to tech_resources_path do %>
         <article>
           <div>
@@ -26,6 +28,8 @@
           </div>
         </article>
       <% end %>
+    <% end %>
+    <% if @competition.year == 2020 %>
       <%= link_to 'https://govhack.org/lifehacks/', target: '_blank' do %>
         <article>
           <div>

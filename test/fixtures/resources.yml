@@ -1,0 +1,24 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+# This model initially had no columns defined. If you add columns to the
+# model remove the '{}' from the fixture names and add the columns immediately
+# below each fixture, per the syntax in the comments below
+#
+one:
+  id: 1
+  competition_id: 1
+  position: 1
+  category: 0
+  name: resource 1
+  url: www.url1.com
+  short_url: url1
+
+#
+two:
+  id: 2
+  competition_id: 1
+  position: 1
+  category: 1
+  name: resource 2
+  url: www.url2.com
+  short_url: url2

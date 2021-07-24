@@ -117,6 +117,25 @@ class CompetitionSeeder < Seeder
         )
       end
     end
+
+    5.times do |time|
+      comp.resources.tech.create!(
+        position: time,
+        name: "Tech #{time}",
+        url: "www.tech#{time}.com",
+        short_url: "tech.#{time}"
+      )
+    end
+
+    20.times do |time|
+      comp.resources.data_portal.create!(
+        position: time,
+        name: "Data Portal #{time}",
+        url: "www.data_portal#{time}.com",
+        short_url: "data_portal.#{time}"
+      )
+    end
+
     comp.update hunt_badge: comp.badges.sample
 
     Faker::Color.unique.clear

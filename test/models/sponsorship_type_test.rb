@@ -18,10 +18,10 @@ class SponsorshipTypeTest < ActiveSupport::TestCase
     assert_not @competition.sponsorship_types.new(name: nil, position: 1).save
   end
 
-  test 'make_a_space validation' do
+  test 'position validation' do
     @competition.sponsorship_types.new(name: 'Paladium', position: 1).save!
 
     assert_equal 2, @sponsorship_type.reload.position
-    assert_equal 4, sponsorship_types(:two).reload.position 
+    assert_equal 4, sponsorship_types(:two).reload.position
   end
 end

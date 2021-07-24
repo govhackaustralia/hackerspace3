@@ -2,7 +2,7 @@ class Competition < ApplicationRecord
   has_many :assignments, as: :assignable
   has_many :holders, dependent: :destroy
   has_many :users, through: :holders
-  has_many :profiles, through: :users 
+  has_many :profiles, through: :users
   has_many :regions
   has_many :sponsors
   has_many :sponsorship_types
@@ -29,6 +29,7 @@ class Competition < ApplicationRecord
   has_many :hunt_questions
   has_many :data_sets, through: :regions
   has_many :badges
+  has_many :resources, dependent: :destroy
 
   has_many :criteria
   has_many :project_criteria, -> { where category: PROJECT }, class_name: 'Criterion'
