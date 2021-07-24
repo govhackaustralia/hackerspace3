@@ -1,4 +1,4 @@
-require "test_helper"
+require 'test_helper'
 
 class Admin::ProfilesControllerTest < ActionDispatch::IntegrationTest
   test 'should patch update fail authenticate' do
