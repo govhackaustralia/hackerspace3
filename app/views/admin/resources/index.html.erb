@@ -1,0 +1,44 @@
+<% content_for :title, "Competition #{@competition.year} Resources" %>
+<main class="project_index">
+  <h2>
+    <%= yield :title %>
+  </h2>
+  <p>
+    <%= link_to 'New Resource', new_admin_competition_resource_path(@competition), class: 'download-csv' %>
+  </p>
+  <table class="projects-table" id="admin-resources-table">
+    <thead>
+      <th>Category</th>
+      <th>Position</th>
+      <th>Name</th>
+      <th>Short Url</th>
+      <th>Actions</th>
+    </thead>
+    <tbody>
+      <% @resources.each do |resource| %>
+        <tr>
+          <td>
+            <%= resource.category.titleize %>
+          </td>
+          <td>
+            <%= resource.position %>
+          </td>
+          <td>
+            <%= resource.name %>
+          </td>
+          <td>
+            <%= link_to resource.short_url, resource.url, target: '_blank' %>
+          </td>
+          <td>
+            <%= link_to 'Edit', edit_admin_competition_resource_path(@competition, resource) %>
+            |
+            <%= link_to 'Delete', admin_competition_resource_path(@competition, resource), data: { confirm: "Are you sure?" }, method: :delete %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</main>
+<p>
+  <%= link_to 'Back to Competition Management', admin_competition_path(@competition) %>
+</p>

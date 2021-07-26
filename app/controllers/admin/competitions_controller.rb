@@ -109,11 +109,17 @@ class Admin::CompetitionsController < ApplicationController
     @regions_count = @competition.regions.count
     @events_count = @competition.events.count
     @challenge_criteria_count = @competition.challenge_criteria.count
-    @project_criteria_count = @competition.project_criteria.count
     @teams_count = @competition.teams.count
+    competition_entity_counts
+    sponsoresk_counts
+  end
+
+  def competition_entity_counts
+    @project_criteria_count = @competition.project_criteria.count
     @badge_count = @competition.badges.count
     @hunt_question_count = @competition.hunt_questions.count
-    sponsoresk_counts
+    @data_portals_count = @competition.resources.data_portal.count
+    @tech_count = @competition.resources.tech.count
   end
 
   def sponsoresk_counts

@@ -108,6 +108,7 @@ Rails.application.routes.draw do
       end
       resources :events, only: :index
       resources :sponsors
+      resources :resources, except: :show
       resources :badges do
         member { post :award }
       end

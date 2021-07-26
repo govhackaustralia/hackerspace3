@@ -1,0 +1,9 @@
+<main class="team_page">
+  <h2>
+    Edit Resource: <%= @resource.name %>
+  </h2>
+  <%= render 'form' %>
+  <p>
+    <%= link_to 'Back to Resources', admin_competition_resources_path(@competition) %>
+  </p>
+</main>

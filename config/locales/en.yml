@@ -61,4 +61,7 @@ en:
         retired: 'Retired'
         not_able_to_work: 'Not able to work'
         prefer_not_to_say: 'Prefer not to say'
+      resource:
+        url: URL
+        short_url: Short URL
   hello: "Hello world"

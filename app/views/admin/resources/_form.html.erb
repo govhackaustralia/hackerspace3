@@ -1,0 +1,28 @@
+<%= form_for [:admin, @competition, @resource] do |form| %>
+  <div class="form-group">
+    <%= form.label :category %>
+    <%= form.select :category,
+      options_for_select(Resource.categories.keys.map {|key| [key.titleize, key] },
+      selected: @resource.category)
+    %>
+  </div>
+  <div class="form-group">
+    <%= form.label :name %>
+    <%= form.text_field :name %>
+  </div>
+  <div class="form-group">
+    <%= form.label :url %>
+    <%= form.url_field :url %>
+  </div>
+  <div class="form-group">
+    <%= form.label :short_url %>
+    <%= form.text_field :short_url %>
+  </div>
+  <div class="form-group">
+    <%= form.label :position %>
+    <%= form.number_field :position, min: 1 %>
+  </div>
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

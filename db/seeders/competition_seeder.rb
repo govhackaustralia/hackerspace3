@@ -122,7 +122,7 @@ class CompetitionSeeder < Seeder
       comp.resources.tech.create!(
         position: time,
         name: "Tech #{time}",
-        url: "www.tech#{time}.com",
+        url: "https://www.tech#{time}.com",
         short_url: "tech.#{time}"
       )
     end
@@ -131,7 +131,7 @@ class CompetitionSeeder < Seeder
       comp.resources.data_portal.create!(
         position: time,
         name: "Data Portal #{time}",
-        url: "www.data_portal#{time}.com",
+        url: "https://www.data_portal#{time}.com",
         short_url: "data_portal.#{time}"
       )
     end

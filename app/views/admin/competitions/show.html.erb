@@ -128,6 +128,10 @@
     <p>
       <%= link_to 'Competition Teams', admin_competition_teams_path(@competition) %>
     </p>
+    <h3>Resources</h3>
+    <p><%= pluralize @data_portals_count, 'Data Portal' %> saved.</p>
+    <p><%= pluralize @tech_count, 'Tech Resource' %> saved.</p>
+    <p><%= link_to 'Resources', admin_competition_resources_path(@competition) %></p>
     <h3>AWS Credits Requested</h3>
     <p>
       <%= pluralize @credits_count, 'AWS credit' %>
