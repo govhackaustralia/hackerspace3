@@ -48,6 +48,10 @@ class Admin::ResourcesController < ApplicationController
     params.require(:resource).permit(:name, :position, :category, :url, :short_url)
   end
 
+  def competition
+    @competition = Competition.find params[:competition_id]
+  end
+
   def authorise_user!
     return if current_user.admin_privileges? @competition
 
