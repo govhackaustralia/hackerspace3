@@ -33,7 +33,7 @@
   }
 
   .info {
-    margin: 0.8em 0;
+    padding: 3rem 2rem;
   }
 
   .grey-line {
@@ -44,6 +44,7 @@
 
   iframe {
     padding-top: 1em;
+    width: 100%;
   }
 
   figure {
@@ -82,9 +83,9 @@
     padding: 1em;
     transition: all 0.4s ease;
     cursor: pointer;
-    width: 200px;
+    width: auto;
     box-sizing: border-box;
-    height: 125px;
+    height: auto;
     margin: 2px;
     background-color: white;
     border: 1px solid #F4F4F4;
