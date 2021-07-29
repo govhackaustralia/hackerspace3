@@ -3,13 +3,14 @@
   <section class="events_row">
     <div class="menu_col">
       <h2>Competition Events</h2>
-      <%= render 'competition_event_description' %>
+      <%= render 'competition_event_side' %>
       <%= link_to 'Back to Events', events_path, class: 'blue' %>
     </div>
     <div class="contents">
-    <%= render partial: 'events/event_collection', locals: { events: @future_locations, title: 'Upcoming Competition Events' } %>
-    <%= render partial: 'events/event_collection', locals: { events: @future_remotes, title: "Upcoming Remote Kitchen Table Competition Events" } %>
-    <%= render partial: 'events/event_collection', locals: { events: @past_competitions, title: 'Past Competition Events' } %>
-  </div>
+      <%= render 'competition_event_description' %>
+      <%= render partial: 'events/event_collection', locals: { events: @future_locations, title: 'Upcoming Competition Events' } %>
+      <%= render partial: 'events/event_collection', locals: { events: @future_remotes, title: "Upcoming Remote Kitchen Table Competition Events" } %>
+      <%= render partial: 'events/event_collection', locals: { events: @past_competitions, title: 'Past Competition Events' } %>
+    </div>
   </section>
 </main>
