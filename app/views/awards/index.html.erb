@@ -1,14 +1,12 @@
 <% content_for :title, 'Awards' %>
 <main class="events_page">
-  <section class="events_row">
-    <div class="menu_col">
-      <h2>Award Events</h2>
-      <%= render 'award_description' %>
-      <%= link_to 'Back to Events', events_path, class: 'blue' %>
-    </div>
-    <div class="contents">
-    <%= render partial: 'events/event_collection', locals: { events: @future_awards, title: 'Upcoming Awards Events' } %>
-  <%= render partial: 'events/event_collection', locals: { events: @past_awards, title: 'Past Awards Events' } %>
-    </div>
+  <section class="header">
+    <h2>Award Events</h2>
+    <%= render 'award_description' %>
   </section>
+  <%= render partial: 'events/event_collection', locals: { events: @future_awards, title: 'Upcoming Awards Events' } %>
+  <%= render partial: 'events/event_collection', locals: { events: @past_awards, title: 'Past Awards Events' } %>
+  <p>
+    <%= link_to 'All Events', events_path %>
+  </p>
 </main>

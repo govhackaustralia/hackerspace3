@@ -1,21 +1,21 @@
 <% content_for :title, "Register to attend #{@event.name} - #{@region.name}" %>
 <main class="register">
-  <section class="register_section">
-    <h2>
-      <%= yield :title %>
-    </h2>
-    <% if @event.below_capacity? %>
-      <%= render 'new_form', locals: { status: ATTENDING, label: 'Register to Attend Event' }, class: 'red' %>
-    <% else %>
-      <p>
-        This event is at capacity.
-      </p>
-      <p>
-        If you add yourself to the waitlist below, you will be emailed should a space
-        become available.
-      </p>
-      <%= render 'new_form', locals: { status: WAITLIST, label: 'Add to Waitlist' }, class: 'blue' %>
-    <% end %>
-    <%= link_to 'Back to Event', event_path(@event.identifier), class: 'blue' %>
-  </section>
+  <h2>
+    <%= yield :title %>
+  </h2>
+  <% if @event.below_capacity? %>
+    <%= render 'new_form', locals: { status: ATTENDING, label: 'Register to Attend Event' } %>
+  <% else %>
+    <p>
+      This event is at capacity.
+    </p>
+    <p>
+      If you add yourself to the waitlist below, you will be emailed should a space
+      become available.
+    </p>
+    <%= render 'new_form', locals: { status: WAITLIST, label: 'Add to Waitlist' } %>
+  <% end %>
 </main>
+<p>
+  <%= link_to 'Back to Event', event_path(@event.identifier) %>
+</p>
