@@ -1,32 +1,36 @@
-section.tiles {
-  padding: 2em;
+.tiles {
+  padding: 2em 0em;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   align-content: center;
   align-items: center;
+  color: #fff;
 
   a {
     &:nth-of-type(3n + 0) div {
       background-color: rgba(202, 30, 86, 0.5);
       border-bottom: 1em solid #ca1e56;
+      color: #fff;
     }
 
     &:nth-of-type(3n + 1) div {
       background-color: rgba(76, 154, 210, 0.5);
       border-bottom: 1em solid #4c9ad2;
+      color: #fff;
     }
 
     &:nth-of-type(3n + 2) div {
       background-color: rgba(113, 113, 113, 0.5);
       border-bottom: 1em solid #717171;
+      color: #fff;
     }
   }
 
   article {
     h3,
     h4 {
-      color: #ddd;
+      color: #fff;
       margin-bottom: 0.5em;
     }
   }
@@ -36,7 +40,7 @@ section.tiles {
   }
 
   p {
-    color: #ddd;
+    color: #fff;
   }
 
   &.connections p {
@@ -47,22 +51,32 @@ section.tiles {
     &:nth-of-type(3n + 0) div:hover {
       background-color: rgba(253, 37, 107, 0.5);
       border-bottom: 1em solid #fd266c;
+      color: #fff;
     }
 
     &:nth-of-type(3n + 1) div:hover {
       background-color: rgba(94, 191, 261, 0.5);
       border-bottom: 1em solid #6dbff9;
+      color: #fff;
     }
 
     &:nth-of-type(3n + 2) div:hover {
       background-color: rgba(161, 161, 161, 0.5);
       border-bottom: 1em solid #a0a0a0;
+      color: #fff;
     }
   }
 }
 
-@media only screen and (max-width: 900px) {
-  section.events article {
-    margin: 0.5em 0.5em;
+/* Large Devices, Wide Screens */
+@media only screen and (min-width : 992px) {
+  .tiles {
+    padding: 2em 0em;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-content: center;
+    align-items: center;
+    color: #fff;
   }
 }
