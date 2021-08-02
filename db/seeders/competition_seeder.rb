@@ -95,7 +95,7 @@ class CompetitionSeeder < Seeder
       comp.sponsors.create(
         name: Faker::Company.name + ' ' + comp.year.to_s,
         description: Faker::Lorem.paragraph,
-        website: 'http://seinfeld.wikia.com/wiki/Vandelay_Industries'
+        url: 'http://seinfeld.wikia.com/wiki/Vandelay_Industries'
       )
     end
 
