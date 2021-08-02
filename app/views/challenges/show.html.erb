@@ -12,7 +12,7 @@
     <aside class="sponsors">
       <% @sponsors.each do |sponsor| %>
         <figure>
-          <%= link_to sponsor.website, target: '_blank' do %>
+          <%= link_to sponsor.url, target: '_blank' do %>
             <% if sponsor.logo.attached? %>
               <%= image_tag url_for sponsor.logo %>
             <% else %>

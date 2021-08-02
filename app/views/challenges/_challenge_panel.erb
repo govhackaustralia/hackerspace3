@@ -19,7 +19,7 @@
   <aside>
     <% challenge.sponsors_with_logos.each do |sponsor| %>
       <figure>
-        <%= link_to (image_tag(sponsor_logo_asset_path(sponsor))), sponsor.website, target: '_blank' %>
+        <%= link_to (image_tag(sponsor_logo_asset_path(sponsor))), sponsor.url, target: '_blank' %>
       </figure>
     <% end %>
   </aside>

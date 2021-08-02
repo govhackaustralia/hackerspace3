@@ -50,7 +50,7 @@ class Admin::SponsorsController < ApplicationController
   private
 
   def sponsor_params
-    params.require(:sponsor).permit :name, :description, :website
+    params.require(:sponsor).permit :name, :description, :url
   end
 
   def check_for_privileges
