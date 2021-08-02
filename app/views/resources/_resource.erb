@@ -1,0 +1,12 @@
+<%= link_to visits_path(visit: {visitable_type: 'Resource', visitable_id: resource.id}), target: '_blank', method: :post do %>
+  <article>
+    <div>
+      <h4>
+        <%= resource.name %>
+      </h4>
+      <p>
+        <%= resource.short_url %>
+      </p>
+    </div>
+  </article>
+<% end %>

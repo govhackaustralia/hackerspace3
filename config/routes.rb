@@ -30,6 +30,7 @@ Rails.application.routes.draw do
       get 'entries_table'
     end
   end
+  resources :visits, only: :create
 
   resources :users, only: :update
   resources :accounts, only: [:edit, :update]

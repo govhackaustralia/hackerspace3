@@ -24,7 +24,7 @@
               <%= markdown truncate(data_set.description, length: 100, omission: '... ') %>
             </td>
             <td>
-              <%= link_to data_set.url, data_set.url, class: 'dataseturl' %>
+              <%= link_to data_set.url, visits_path(visit: {visitable_type: 'DataSet', visitable_id: data_set.id}), method: :post, class: 'dataseturl' %>
             </td>
             <td>
               <%= data_set.region.name %>
