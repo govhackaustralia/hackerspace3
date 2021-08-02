@@ -10,7 +10,7 @@
     Description: <%= @data_set.description %>
   </p>
   <p>
-    <a href="<%= @data_set.url %>" target="_blank">URL</a>
+    <%= link_to 'URL', visits_path(visit: {visitable_type: 'DataSet', visitable_id: @data_set.id}), method: :post, target: '_blank' %>
   </p>
   <h3>
     Team Projects Utilising <%= @data_set.name %>

@@ -33,13 +33,13 @@
           <h3><%= pluralize @event_partners.count, 'Event Partner' %></h3>
           <% @event_partners.each do |event_partner| %>
             <figure>
-              <a href="<%= event_partner.url %>" target="_blank">
+              <%= link_to visits_path(visit: {visitable_type: 'Sponsor', visitable_id: event_partner.id}), method: :post, target: '_blank' do %>
                 <% if event_partner.logo.attached? %>
                   <%= image_tag url_for(event_partner.logo) %>
                 <% else %>
                   <%= image_tag 'default_profile_pic.png' %>
                 <% end %>
-              </a>
+              <% end %>
             </figure>
           <% end %>
         <% end %>
@@ -52,7 +52,7 @@
         <div class="sponsors">
           <% sponsorship_type.sponsors.where(sponsorships: { sponsorable: @region }).with_attached_logo.each do |sponsor| %>
             <figure>
-              <%= link_to sponsor.url, target: '_blank' do %>
+              <%= link_to visits_path(visit: {visitable_type: 'Sponsor', visitable_id: sponsor.id}), method: :post, target: '_blank' do %>
                 <% if sponsor.logo.attached? %>
                   <%= image_tag url_for(sponsor.logo) %>
                 <% else %>
