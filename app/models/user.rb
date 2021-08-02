@@ -10,6 +10,7 @@ class User < ApplicationRecord
   has_many :assignments, dependent: :destroy
   has_many :headers, through: :assignments
   has_many :registrations, through: :assignments
+  has_many :visits, dependent: :destroy
 
   belongs_to :acting_on_behalf_of_user,
     class_name: 'User',
