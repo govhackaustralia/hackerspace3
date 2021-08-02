@@ -89,11 +89,17 @@ class RegionSeeder < Seeder
       end
 
       [*1..10].sample.times do |time|
-        region.data_sets.create(
+        data_set = region.data_sets.create(
           name: "#{region.name} Data Set #{time} #{comp.year}",
           url: "https://data.gov.au/dataset/#{Faker::Movies::HarryPotter.character}",
           description: Faker::Lorem.paragraph
         )
+        [*0..2].sample.times do |time|
+          comp.visits.create(
+            user: users.sample,
+            visitable: data_set
+          )
+        end
       end
 
       [*1..3].sample.times do |time|

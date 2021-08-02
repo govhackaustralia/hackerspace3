@@ -92,11 +92,17 @@ class CompetitionSeeder < Seeder
     end
 
     [*10..20].sample.times do |time|
-      comp.sponsors.create(
+      sponsor = comp.sponsors.create(
         name: Faker::Company.name + ' ' + comp.year.to_s,
         description: Faker::Lorem.paragraph,
         url: 'http://seinfeld.wikia.com/wiki/Vandelay_Industries'
       )
+      [*0..2].sample.times do |time|
+        comp.visits.create(
+          user: users.sample,
+          visitable: sponsor
+        )
+      end
     end
 
     5.times do |time|
@@ -119,21 +125,33 @@ class CompetitionSeeder < Seeder
     end
 
     5.times do |time|
-      comp.resources.tech.create!(
+      resource = comp.resources.tech.create!(
         position: time,
         name: "Tech #{time}",
         url: "https://www.tech#{time}.com",
         short_url: "tech.#{time}"
       )
+      [*0..2].sample.times do |time|
+        comp.visits.create(
+          user: users.sample,
+          visitable: resource
+        )
+      end
     end
 
     20.times do |time|
-      comp.resources.data_portal.create!(
+      resource = comp.resources.data_portal.create!(
         position: time,
         name: "Data Portal #{time}",
         url: "https://www.data_portal#{time}.com",
         short_url: "data_portal.#{time}"
       )
+      [*0..2].sample.times do |time|
+        comp.visits.create(
+          user: users.sample,
+          visitable: resource
+        )
+      end
     end
 
     comp.update hunt_badge: comp.badges.sample
