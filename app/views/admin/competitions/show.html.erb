@@ -132,6 +132,11 @@
     <p><%= pluralize @data_portals_count, 'Data Portal' %> saved.</p>
     <p><%= pluralize @tech_count, 'Tech Resource' %> saved.</p>
     <p><%= link_to 'Resources', admin_competition_resources_path(@competition) %></p>
+    <h3>Visits</h3>
+    <% @visitable_counts.each do |visitable_type, count| %>
+      <p><%= pluralize count, "#{visitable_type.titleize} visit" %></p>
+    <% end %>
+    <p><%= link_to 'Visits', admin_competition_visits_path(@competition) %></p>
     <h3>AWS Credits Requested</h3>
     <p>
       <%= pluralize @credits_count, 'AWS credit' %>

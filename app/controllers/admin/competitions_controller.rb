@@ -120,6 +120,7 @@ class Admin::CompetitionsController < ApplicationController
     @hunt_question_count = @competition.hunt_questions.count
     @data_portals_count = @competition.resources.data_portal.count
     @tech_count = @competition.resources.tech.count
+    @visitable_counts = @competition.visits.group(:visitable_type).count
   end
 
   def sponsoresk_counts
