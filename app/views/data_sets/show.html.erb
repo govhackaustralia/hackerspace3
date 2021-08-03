@@ -15,7 +15,7 @@
   <h3>
     Team Projects Utilising <%= @data_set.name %>
   </h3>
-  <% if @competition.started? %>
+  <% if @competition.started? FIRST_TIME_ZONE %>
     <% if @team_data_sets.present? %>
       <% @teams.each do |team| %>
         <h4>
