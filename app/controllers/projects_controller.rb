@@ -46,7 +46,7 @@ class ProjectsController < ApplicationController
     @participating_competition_event = current_user.participating_competition_event @competition
     return unless @participating_competition_event.present?
 
-    @time_zone = @participating_competition_event.region.time_zone
+    @time_zone = @participating_competition_event.region.national_time_zone
   end
 
   def user_records_show

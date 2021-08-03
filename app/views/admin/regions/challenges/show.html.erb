@@ -51,7 +51,7 @@
         <strong>This challenge is yet to be approved.</strong>
       </p>
     <% end %>
-    <% if @competition.started? @region.time_zone %>
+    <% if @competition.started? @region.national_time_zone %>
       <p>
         <%= link_to 'Go to Challenge Page', challenge_path(@challenge.identifier) %>
       </p>
@@ -84,9 +84,9 @@
       <% @challenge_sponsorships.each do |sponsorship| %>
         <%= render 'admin/sponsors/sponsor', locals: { sponsor: sponsorship.sponsor } %>
         <p>
-          <%= link_to 'Destroy Challenge Sponsorship', admin_challenge_challenge_sponsorship_path(@challenge, sponsorship), 
-          method: :delete,                                                                                              
-          data: { confirm: 'Are you sure?' }      %>                                                                      
+          <%= link_to 'Destroy Challenge Sponsorship', admin_challenge_challenge_sponsorship_path(@challenge, sponsorship),
+          method: :delete,
+          data: { confirm: 'Are you sure?' }      %>
         </p>
       <% end %>
     <% else %>
@@ -104,9 +104,9 @@
         </h4>
         <%= data_set.url %>
         <p>
-          <%= link_to 'Destroy Challenge Data Set', admin_challenge_challenge_data_set_path(@challenge, challenge_data_set), 
-          method: :delete,                                                                                              
-          data: { confirm: 'Are you sure?' }    %>                                                                          
+          <%= link_to 'Destroy Challenge Data Set', admin_challenge_challenge_data_set_path(@challenge, challenge_data_set),
+          method: :delete,
+          data: { confirm: 'Are you sure?' }    %>
         </p>
       <% end %>
     <% else %>

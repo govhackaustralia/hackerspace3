@@ -14,6 +14,6 @@
     <br/>
   <% end %>
 <% end %>
-<% if @event.competition_event? && @competition.started? && @event.teams.published.present? %>
+<% if @event.competition_event? && @competition.started?(@region.national_time_zone) && @event.teams.published.present? %>
   <%= link_to 'See Participating Teams', event_teams_path(@event.identifier) %>
 <% end %>

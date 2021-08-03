@@ -212,7 +212,7 @@
       <article>
         <h2 class="section-heading">My Favourite Projects</h2>
         <section>
-          <% if @competition.started? && @favourite_teams.present? %>
+          <% if @competition.started?(FIRST_TIME_ZONE) && @favourite_teams.present? %>
             <% @favourite_teams.each do |team| %>
               <div class="content-wrapper">
                 <div class="content-wrapper-content">
