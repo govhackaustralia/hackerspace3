@@ -115,22 +115,6 @@ class CompetitionTest < ActiveSupport::TestCase
     assert_not @competition.in_comp_window?
   end
 
-  test 'in_form_or_comp_started?' do
-    @competition.update(
-      start_time: Time.now - 1.day,
-      end_time: Time.now + 1.day,
-      team_form_start: Time.now - 1.day,
-      team_form_end: Time.now - 1.day
-    )
-    assert @competition.in_form_or_comp_started?
-    @competition.update(
-      start_time: Time.now + 1.day,
-      team_form_start: Time.now + 1.day,
-      team_form_end: Time.now + 1.day
-    )
-    assert_not @competition.in_form_or_comp_window?
-  end
-
   test 'in_form_or_comp_window?' do
     @competition.update(
       start_time: Time.now - 1.day,
