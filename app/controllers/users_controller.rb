@@ -28,7 +28,7 @@ class UsersController < ApplicationController
     @region_privileges = @user.region_privileges? @competition
 
     @participating_competition_event = @user.participating_competition_event @competition
-    @time_zone = @participating_competition_event&.region&.time_zone
+    @time_zone = @participating_competition_event&.region&.national_time_zone
   end
 
   def edit
