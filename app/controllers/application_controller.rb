@@ -5,7 +5,8 @@ class ApplicationController < ActionController::Base
   private
 
   def competition
-    @competition = Competition.find_by_year request.subdomain
+    @competition = Competition.find params[:competition_id] if params[:competition_id].present?
+    @competition ||= Competition.find_by_year request.subdomain
     @competition ||= Competition.current
   end
 
