@@ -4,4 +4,10 @@ module Admin::VisitsHelper
       visit.visitable_type == type && visit.visitable_id == id
     end.visitable
   end
+
+  def visitable_label(visitable)
+    return visitable.category.titleize if visitable.is_a? Resource
+
+    visitable.class.to_s.titleize
+  end
 end

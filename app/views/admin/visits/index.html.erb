@@ -14,7 +14,7 @@
         <% visitable = visitable(@visits, type, id) %>
         <tr>
           <td>
-            <%= type.titleize %>
+            <%= visitable_label visitable %>
           </td>
           <td>
             <%= link_to visitable.url, target: '_blank' do %>
