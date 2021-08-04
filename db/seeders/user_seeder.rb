@@ -96,11 +96,11 @@ class UserSeeder < Seeder
     end
   end
 
-  def self.create_favourites(comp)
-    teams = comp.teams.where.not project_id: nil
+  def self.create_favourites(competition)
+    teams = competition.teams.where.not project_id: nil
     return unless teams.any?
 
-    comp.assignments.event_assignments.each do |event_assignment|
+    competition.assignments.event_assignments.each do |event_assignment|
       6.times do
         event_assignment.favourites.create(
           team: teams.sample,

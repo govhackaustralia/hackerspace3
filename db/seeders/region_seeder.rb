@@ -3,28 +3,28 @@ require_relative 'event_seeder'
 require_relative 'seeder'
 
 class RegionSeeder < Seeder
-  def self.create(comp)
-    connection_start = comp_start - 1.months
-    award_start = comp_start + 3.weeks
+  def self.create(competition)
+    connection_start = competition_start - 1.months
+    award_start = competition_start + 3.weeks
     award_release = award_start
     users = User.all
-    sponsors = comp.sponsors
-    sponsorship_types = comp.sponsorship_types
-    participant_assignments = comp.competition_assignments.participants
+    sponsors = competition.sponsors
+    sponsorship_types = competition.sponsorship_types
+    participant_assignments = competition.competition_assignments.participants
 
-    international_region = comp.regions.create(
-      name: 'International' + ' ' + comp.year.to_s,
+    international_region = competition.regions.create(
+      name: 'International' + ' ' + competition.year.to_s,
       category: Region::INTERNATIONAL
     )
 
-    australia_national = comp.regions.create(
-      name: 'Australia' + comp.year.to_s,
+    australia_national = competition.regions.create(
+      name: 'Australia' + competition.year.to_s,
       category: Region::NATIONAL,
       parent: international_region
     )
 
-    comp.regions.create(
-      name: 'New Zealand' + comp.year.to_s,
+    competition.regions.create(
+      name: 'New Zealand' + competition.year.to_s,
       category: Region::NATIONAL,
       parent: international_region,
       time_zone: 'Wellington'
@@ -40,8 +40,8 @@ class RegionSeeder < Seeder
       {name: 'ACT', time_zone: 'Canberra'},
       {name: 'Queensland', time_zone: 'Brisbane'}
     ].each do |name_and_time_zone|
-      comp.regions.create name_and_time_zone.merge(
-        name: name_and_time_zone[:name] + ' ' + comp.year.to_s,
+      competition.regions.create name_and_time_zone.merge(
+        name: name_and_time_zone[:name] + ' ' + competition.year.to_s,
         parent: australia_national,
         award_release: award_release,
         category: Region::REGIONAL
@@ -50,13 +50,13 @@ class RegionSeeder < Seeder
 
     return unless users.any?
 
-    comp.regions.all.each do |region|
+    competition.regions.all.each do |region|
 
       user = users.sample
       region.assignments.create(
         user: user,
         title: REGION_DIRECTOR,
-        holder: user.holder_for(comp)
+        holder: user.holder_for(competition)
       )
 
       3.times do
@@ -64,7 +64,7 @@ class RegionSeeder < Seeder
         region.assignments.create(
           user: user,
           title: REGION_SUPPORT,
-          holder: user.holder_for(comp)
+          holder: user.holder_for(competition)
         )
       end
 
@@ -79,7 +79,7 @@ class RegionSeeder < Seeder
 
       [*1..5].sample.times do |time|
         region.challenges.create(
-          name: "#{region.name} #{Faker::Games::Pokemon.unique.name} Challenge #{comp.year}",
+          name: "#{region.name} #{Faker::Games::Pokemon.unique.name} Challenge #{competition.year}",
           short_desc: Faker::Lorem.sentence, approved: true,
           long_desc: Faker::Lorem.paragraph,
           eligibility: 'You must be this tall to go on this ride.',
@@ -90,12 +90,12 @@ class RegionSeeder < Seeder
 
       [*1..10].sample.times do |time|
         data_set = region.data_sets.create(
-          name: "#{region.name} Data Set #{time} #{comp.year}",
+          name: "#{region.name} Data Set #{time} #{competition.year}",
           url: "https://data.gov.au/dataset/#{Faker::Movies::HarryPotter.character}",
           description: Faker::Lorem.paragraph
         )
         [*0..2].sample.times do |time|
-          comp.visits.create(
+          competition.visits.create(
             user: users.sample,
             visitable: data_set
           )
@@ -105,7 +105,7 @@ class RegionSeeder < Seeder
       [*1..3].sample.times do |time|
         region.bulk_mails.create(
           user_id: 1,
-          name: "Bulk Mail #{time} #{comp.year}",
+          name: "Bulk Mail #{time} #{competition.year}",
           status: DRAFT,
           from_email: admin_email,
           subject: 'Greetings',
@@ -133,7 +133,7 @@ class RegionSeeder < Seeder
           user = users.sample
           challenge.assignments.judges.create(
             user: user,
-            holder: user.holder_for(comp)
+            holder: user.holder_for(competition)
           )
         end
       end
@@ -146,23 +146,23 @@ class RegionSeeder < Seeder
 
       # ENHANCEMENT: Split into National and Regional challenges to assign
       # teams to both.
-      challenges = comp.international_region&.challenges + region.challenges
+      challenges = competition.international_region&.challenges + region.challenges
       EVENT_TYPES.each do |event_type|
 
         next if event_name == international_region.name && event_type == COMPETITION_EVENT
 
-        comp_start = comp.start_time
+        competition_start = competition.start_time
         if event_type == COMPETITION_EVENT
-          event = EventSeeder.create(event_type, "Remote #{region.name}", region, comp_start, comp, sponsors, users, participant_assignments)
-          TeamSeeder.create(event, comp, participant_assignments, challenges)
-          event = EventSeeder.create(event_type, event_name, region, comp_start, comp, sponsors, users, participant_assignments)
-          TeamSeeder.create(event, comp, participant_assignments, challenges)
+          event = EventSeeder.create(event_type, "Remote #{region.name}", region, competition_start, competition, sponsors, users, participant_assignments)
+          TeamSeeder.create(event, competition, participant_assignments, challenges)
+          event = EventSeeder.create(event_type, event_name, region, competition_start, competition, sponsors, users, participant_assignments)
+          TeamSeeder.create(event, competition, participant_assignments, challenges)
         elsif [CONNECTION_EVENT, CONFERENCE].include? event_type
-          event = EventSeeder.create(event_type, event_name, region, connection_start, comp, sponsors, users, participant_assignments)
+          event = EventSeeder.create(event_type, event_name, region, connection_start, competition, sponsors, users, participant_assignments)
         elsif event_type == AWARD_EVENT
-          event = EventSeeder.create(event_type, event_name, region, award_start, comp, sponsors, users, participant_assignments)
+          event = EventSeeder.create(event_type, event_name, region, award_start, competition, sponsors, users, participant_assignments)
           if event_name == international_region.name
-            EventSeeder.create_national_awards(event, comp)
+            EventSeeder.create_national_awards(event, competition)
           end
         end
       end

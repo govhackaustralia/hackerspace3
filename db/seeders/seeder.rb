@@ -1,5 +1,5 @@
 class Seeder
-  def self.comp_start
+  def self.competition_start
     case ENV['STAGE']
     when 'PRE_CONNECTION'
       Time.now + 2.months

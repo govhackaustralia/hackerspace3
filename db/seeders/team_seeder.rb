@@ -1,36 +1,36 @@
 require_relative 'seeder'
 
 class TeamSeeder < Seeder
-  def self.create(event, comp, participant_assignments, challenges)
-    events = comp.events.competitions
+  def self.create(event, competition, participant_assignments, challenges)
+    events = competition.events.competitions
     assignment_ids = Registration.where(event: events).pluck :assignment_id
     user_ids = Assignment.where(id: assignment_ids).pluck :user_id
-    competitors = User.where id: user_ids
+    competitionetitors = User.where id: user_ids
 
-    return unless competitors.any?
+    return unless competitionetitors.any?
 
     [*0..10].sample.times do |team_time|
       team = event.teams.create
 
-      team.assign_leader(competitors.sample)
+      team.assign_leader(competitionetitors.sample)
       [*1..8].sample.times do
-        user = competitors.sample
+        user = competitionetitors.sample
         team.assignments.team_members.create(
           user: user,
-          holder: user.holder_for(comp)
+          holder: user.holder_for(competition)
         )
       end
       [*0..2].sample.times do
-        user = competitors.sample
+        user = competitionetitors.sample
         team.assignments.team_invitees.create(
           user: user,
-          holder: user.holder_for(comp)
+          holder: user.holder_for(competition)
         )
       end
 
       [*1..3].sample.times do |time|
         team.projects.create(
-          team_name: "#{event.name} team #{team_time} #{comp.year}",
+          team_name: "#{event.name} team #{team_time} #{competition.year}",
           description: Faker::Lorem.paragraph,
           tag_list: random_tags,
           project_name: "#{event.name} project #{team_time}",
@@ -44,7 +44,7 @@ class TeamSeeder < Seeder
 
       [*0..3].sample.times do |time|
         team.team_data_sets.create(
-          name: "#{team.name} dataset #{team_time + time} #{comp.year}",
+          name: "#{team.name} dataset #{team_time + time} #{competition.year}",
           description: Faker::Lorem.paragraph,
           description_of_use: Faker::Lorem.paragraph,
           url: "https://data.gov.au/dataset/#{Faker::Movies::LordOfTheRings.character}"
@@ -53,7 +53,7 @@ class TeamSeeder < Seeder
 
       return unless challenges.any?
 
-      comp.checkpoints.each_with_index do |checkpoint, index|
+      competition.checkpoints.each_with_index do |checkpoint, index|
         entry = team.entries.create(
           checkpoint: checkpoint,
           challenge: challenges.sample,
@@ -63,7 +63,7 @@ class TeamSeeder < Seeder
 
         next unless entry.persisted?
 
-        comp.competition_assignments.judges.where(
+        competition.competition_assignments.judges.where(
           assignable_type: 'Challenge',
           assignable_id: entry.challenge_id
         ).each do |assignment|
@@ -72,7 +72,7 @@ class TeamSeeder < Seeder
             assignment: assignment,
             included: (assignment.id % 5 != 0)
           )
-          comp.challenge_criteria.each do |criterion|
+          competition.challenge_criteria.each do |criterion|
             score = Random.rand(11)
             score = nil if score.zero?
             Score.create(
@@ -93,7 +93,7 @@ class TeamSeeder < Seeder
           assignment: assignment,
           included: (assignment.id % 5 != 0)
         )
-        comp.project_criteria.each do |criterion|
+        competition.project_criteria.each do |criterion|
           score = Random.rand(11)
           score = nil if score.zero?
           Score.create(
