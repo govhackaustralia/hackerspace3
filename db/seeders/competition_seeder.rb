@@ -31,13 +31,14 @@ class CompetitionSeeder < Seeder
 
     UserSeeder.create_admin comp
 
+    comp.checkpoints.create(
+      end_time: comp_end,
+      name: "Checkpoint #{comp.year}",
+      max_national_challenges: 5,
+      max_regional_challenges: 5
+    )
+
     5.times do |time|
-      comp.checkpoints.create(
-        end_time: comp.start_time + (time * 6).days,
-        name: "Checkpoint #{time} #{comp.year}",
-        max_national_challenges: 1,
-        max_regional_challenges: 1
-      )
       comp.criteria.create(
         name: "Project Criterion #{time} #{comp.year}",
         description: Faker::Lorem.paragraph,
