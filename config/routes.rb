@@ -45,13 +45,6 @@ Rails.application.routes.draw do
   end
 
   resources :profiles, only: [:index, :show, :edit, :update] do
-    collection do
-      get :participants
-      get :mentors
-      get :industry
-      get :support
-    end
-
     member do
       get :slack_chat
     end
