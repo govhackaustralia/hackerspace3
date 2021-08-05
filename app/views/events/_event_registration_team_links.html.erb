@@ -7,7 +7,7 @@
       <%= link_to 'Register to Attend this Event', new_event_registration_path(@event.identifier) %>
       <br/>
     <% else %>
-      <%= link_to 'Registration Limit Reached [Click for Details]', limit_reached_event_registrations_path(@event.identifier) %>
+      <%= link_to 'Register to Attend this Event', limit_reached_event_registrations_path(@event.identifier) %>
     <% end %>
   <% else %>
     <%= link_to 'Register to Attend this Event', new_event_registration_path(@event.identifier) %>
