@@ -41,4 +41,12 @@ class ProfileTest < ActiveSupport::TestCase
     @profile.reload
     assert @profile.identifier == 'example_name'
   end
+
+  test 'accept_code_of_conduct_before_publish' do
+    @user.update! accepted_code_of_conduct: false
+
+    assert_raises(ActiveRecord::RecordInvalid) do
+      @profile.update!(published: true)
+    end
+  end
 end

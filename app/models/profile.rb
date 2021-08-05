@@ -6,6 +6,8 @@ class Profile < ApplicationRecord
 
   validates :identifier, uniqueness: true, allow_nil: true
 
+  validate :accept_code_of_conduct_before_publish
+
   acts_as_taggable_on :skills, :interests
 
   has_one_attached :profile_picture
@@ -77,5 +79,15 @@ class Profile < ApplicationRecord
     return new_identifier unless Profile.where(identifier: new_identifier).where.not(id: id).exists?
 
     uri_pritty "#{new_identifier}-#{id}"
+  end
+
+  private
+
+  def accept_code_of_conduct_before_publish
+    return unless published
+
+    return if user.accepted_code_of_conduct
+
+    errors.add :user, 'please agree to the Code of Conduct'
   end
 end
