@@ -1,6 +1,6 @@
 <section>
   <h3 class="sub-heading">My Team Projects</h3>
-  <% if @competition.in_form_or_comp_window? @time_zone %>
+  <% if @competition.started? @time_zone %>
     <div class="message">
       <p class="message-text">Let's create a new team project!</p>
       <%= link_to new_team_path do %>
@@ -28,7 +28,7 @@
             <% elsif team.published %>
               <%= link_to project_path(team.current_project.identifier) do %>
                 <button class="content-black-button">
-                  Go to <%= team.name %>
+                  Go to Public Page
                 </button>
               <% end %>
             <% else %>
