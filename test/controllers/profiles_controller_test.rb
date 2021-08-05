@@ -60,4 +60,13 @@ class ProfilesControllerTest < ActionDispatch::IntegrationTest
     @profile.reload
     assert @profile.team_status != old_team_status
   end
+
+  test 'should patch update fail' do
+    sign_in users :one
+    users(:one).update! accepted_code_of_conduct: nil
+    patch profile_path @profile, params: {
+      profile: { team_status: 'Team Full' }
+    }
+    assert_response :success
+  end
 end
