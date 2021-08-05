@@ -124,6 +124,6 @@ class Registration < ApplicationRecord
   def check_code_of_conduct
     return if assignment_id.nil? || user.accepted_code_of_conduct
 
-    errors.add :user, 'The Code of Conduct must be agreed to.'
+    errors.add :user, 'please agree to the Code of Conduct'
   end
 end
