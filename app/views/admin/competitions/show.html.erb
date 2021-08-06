@@ -137,14 +137,16 @@
       <p><%= pluralize count, "#{visitable_type.titleize} visit" %></p>
     <% end %>
     <p><%= link_to 'Visits', admin_competition_visits_path(@competition) %></p>
-    <h3>AWS Credits Requested</h3>
-    <p>
-      <%= pluralize @credits_count, 'AWS credit' %>
-      requested for this competition.
-    </p>
-    <p>
-      <%= link_to 'AWS Credits Requested', aws_credits_requested_admin_competition_path(@competition) %>
-    </p>
+    <% if @credits_count.positive? %>
+      <h3>AWS Credits Requested</h3>
+      <p>
+        <%= pluralize @credits_count, 'AWS credit' %>
+        requested for this competition.
+      </p>
+      <p>
+        <%= link_to 'AWS Credits Requested', aws_credits_requested_admin_competition_path(@competition) %>
+      </p>
+    <% end %>
     <h3>Sponsor Data Set Report</h3>
     <p>
       <%= link_to 'Sponsor Data Set Report', sponsor_data_set_report_admin_competition_path(@competition) %>
