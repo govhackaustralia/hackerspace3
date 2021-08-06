@@ -165,9 +165,6 @@ class RegistrationsController < ApplicationController
     @user.update(
       request_not_photographed: params[:request_not_photographed]
     )
-    @holder.update(
-      aws_credits_requested: params[:aws_credits_requested]
-    )
   end
 
   def update_skills_attrs
