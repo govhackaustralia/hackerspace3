@@ -1,8 +1,8 @@
-<% content_for :title, 'Conference' %>
+<% content_for :title, "GovHack Conference #{@competition.year}" %>
 <main class="events_page">
   <section class="header">
-    <h2>GovHack Conference | 27th July - 5th July 2021</h2>
-    <p>GovHack will again be running an international and virtual conference in 2021! The conference presents a great opportunity to network and learn from industry experts, all from the comfort of your own home.</p>
+    <h2><%= yield :title %></h2>
+    <p>The conference presents a great opportunity to network and learn from industry experts, all from the comfort of your own home.</p>
   </section>
   <%= render partial: 'events/event_collection', locals: { events: @future_sessions, title: 'Upcoming Conference Sessions' } %>
   <%= render partial: 'events/event_collection', locals: { events: @future_connections, title: 'Upcoming Connection Events' } %>
