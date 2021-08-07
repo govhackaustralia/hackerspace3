@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_05_115752) do
+ActiveRecord::Schema.define(version: 2021_08_07_095226) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -302,8 +302,10 @@ ActiveRecord::Schema.define(version: 2021_08_05_115752) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "team_status"
+    t.bigint "profile_id"
     t.index ["aws_credits_requested"], name: "index_holders_on_aws_credits_requested"
     t.index ["competition_id"], name: "index_holders_on_competition_id"
+    t.index ["profile_id"], name: "index_holders_on_profile_id"
     t.index ["team_status"], name: "index_holders_on_team_status"
     t.index ["user_id"], name: "index_holders_on_user_id"
   end
@@ -603,6 +605,7 @@ ActiveRecord::Schema.define(version: 2021_08_05_115752) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "holders", "competitions"
+  add_foreign_key "holders", "profiles"
   add_foreign_key "holders", "users"
   add_foreign_key "taggings", "tags"
   add_foreign_key "visits", "competitions"

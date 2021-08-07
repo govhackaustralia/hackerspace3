@@ -242,7 +242,10 @@ class User < ApplicationRecord
   # Returns the competition holder of a particular user. this is the container
   # that holds a user's assignments, scorecards, registrations, and favourites
   def holder_for(competition)
-    holders.find_or_create_by competition: competition
+    holders.find_or_create_by(
+      competition: competition,
+      profile: Profile.find_or_create_by(user: self)
+    )
   end
 
   # Returns a user's challenge judging assignment given a challenge.
