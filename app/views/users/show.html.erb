@@ -193,10 +193,11 @@
         <h2 class="section-heading">My Team Projects</h2>
         <% if @participating_competition_event %>
           <%= render 'my_projects' %>
+          <% if @competition.in_form_or_comp_window? @time_zone %>
+            <%= render 'my_invitations' %>
+          <% end %>
         <% end %>
-        <% if @competition.in_form_or_comp_window? LAST_TIME_ZONE %>
-          <%= render 'my_invitations' %>
-        <% elsif @competition.in_form_or_comp_window? LAST_TIME_ZONE %>
+        <% if @competition.in_form_or_comp_window?(FIRST_TIME_ZONE) || @competition.in_form_or_comp_window?(LAST_TIME_ZONE) %>
           <section>
             <div class="message">
               <p class="message-text">Join a Competition Event to create a team.</p>

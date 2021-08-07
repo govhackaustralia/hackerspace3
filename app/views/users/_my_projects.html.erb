@@ -1,6 +1,6 @@
 <section>
   <h3 class="sub-heading">My Team Projects</h3>
-  <% if @competition.started? @time_zone %>
+  <% if @competition.in_form_or_comp_window? @time_zone %>
     <div class="message">
       <p class="message-text">Let's create a new team project!</p>
       <%= link_to new_team_path do %>
