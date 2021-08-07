@@ -127,8 +127,7 @@
         <% if (invitees = @team.invitees).present? %>
           <p>
             <strong>
-              <%= pluralize invitees.count, 'invitee' %>
-              \.
+              + <%= pluralize invitees.count, 'invitee' %>.
             </strong>
           </p>
         <% end %>
