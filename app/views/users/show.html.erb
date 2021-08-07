@@ -196,18 +196,19 @@
           <% if @competition.in_form_or_comp_window? @time_zone %>
             <%= render 'my_invitations' %>
           <% end %>
-        <% end %>
-        <% if @competition.in_form_or_comp_window?(FIRST_TIME_ZONE) || @competition.in_form_or_comp_window?(LAST_TIME_ZONE) %>
-          <section>
-            <div class="message">
-              <p class="message-text">Join a Competition Event to create a team.</p>
-              <%= link_to competition_events_path do %>
-                <button class="message-button">
-                  Go to Competition Events
-                </button>
-              <% end %>
-            </div>
-          </section>
+        <% else %>
+          <% if @competition.in_form_or_comp_window?(FIRST_TIME_ZONE) || @competition.in_form_or_comp_window?(LAST_TIME_ZONE) %>
+            <section>
+              <div class="message">
+                <p class="message-text">Join a Competition Event to create a team.</p>
+                <%= link_to competition_events_path do %>
+                  <button class="message-button">
+                    Go to Competition Events
+                  </button>
+                <% end %>
+              </div>
+            </section>
+          <% end %>
         <% end %>
       </article>
       <article>
