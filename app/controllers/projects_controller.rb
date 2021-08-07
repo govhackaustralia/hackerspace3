@@ -74,14 +74,14 @@ class ProjectsController < ApplicationController
     @time_zone = @team.time_zone
     return if @competition.started? @time_zone
 
-    flash[:alert] = 'Teams will become visible at the start of the competition'
-    redirect_to projects_path
+    redirect_to projects_path,
+      alert: 'Teams will become visible at the start of the competition'
   end
 
   def check_team_published!
     return if @team.published
 
-    flash[:alert] = 'This Team Project has not been published.'
-    redirect_to projects_path
+    redirect_to projects_path,
+      alert: 'This Team Project has not been published'
   end
 end
