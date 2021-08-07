@@ -1,6 +1,8 @@
 class Profile < ApplicationRecord
   belongs_to :user
 
+  has_many :holders, dependent: :destroy
+
   has_one :employment_status, dependent: :destroy, inverse_of: :profile
   accepts_nested_attributes_for :employment_status
 

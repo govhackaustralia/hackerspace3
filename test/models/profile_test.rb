@@ -9,10 +9,12 @@ class ProfileTest < ActiveSupport::TestCase
 
   test 'associations' do
     assert @profile.user == @user
+    assert profiles(:one).holders.include? holders(:one)
     assert @profile.employment_status == @employment_status
 
     @profile.destroy
 
+    assert_raises(ActiveRecord::RecordNotFound) { holders(:one).reload }
     assert_raises(ActiveRecord::RecordNotFound) { @employment_status.reload }
   end
 
