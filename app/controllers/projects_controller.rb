@@ -1,5 +1,6 @@
 class ProjectsController < ApplicationController
-  before_action :check_competition_started!, :check_team_published!, only: :show
+  before_action :check_competition_started!, :check_team_published!, except: :index
+  before_action :authenticate_user!, :check_slack_chat!, only: :slack_chat
 
   def index
     @projects = @competition.published_projects_by_name
@@ -21,6 +22,10 @@ class ProjectsController < ApplicationController
     @unpublished_users = @team.confirmed_members.joins(:profile).where(profiles: {published: [nil, false]})
     @entries = @team.entries.preload(challenge: %i[sponsors_with_logos published_entries])
     user_records_show if user_signed_in?
+  end
+
+  def slack_chat
+    redirect_to team_slack_chat_service.team_slack_chat_url
   end
 
   private
@@ -52,6 +57,7 @@ class ProjectsController < ApplicationController
   def user_records_show
     @user = @acting_on_behalf_of_user.presence || current_user
     retrieve_favourite_and_scorecard
+    retrieve_slack_chat_stuff
     @judgeable_assignment = @user.judgeable_assignment @competition
     @peoples_assignment = @user.peoples_assignment @competition
     @judge = @user.judge_assignment(@team.challenges)
@@ -69,6 +75,17 @@ class ProjectsController < ApplicationController
     )
   end
 
+  def retrieve_slack_chat_stuff
+    @team_can_slack_chat = team_slack_chat_service.can_chat?
+    return unless @team.slack_channel_id.present?
+
+    @team_slack_chat_url = team_slack_chat_service.team_slack_chat_url
+  end
+
+  def team_slack_chat_service
+    @team_slack_chat_service ||= TeamSlackChatService.new(@team)
+  end
+
   def check_competition_started!
     @team = Project.find_by(identifier: params[:identifier]).team
     @time_zone = @team.time_zone
@@ -83,5 +100,12 @@ class ProjectsController < ApplicationController
 
     redirect_to projects_path,
       alert: 'This Team Project has not been published'
+  end
+
+  def check_slack_chat!
+    return if team_slack_chat_service.can_chat? && user_signed_in? && profile.slack_user_id
+
+    redirect_to projects_path,
+      alert: 'Unable to slack chat with this team'
   end
 end
