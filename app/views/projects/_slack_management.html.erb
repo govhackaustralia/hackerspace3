@@ -19,11 +19,9 @@
     <% end %>
   <% end %>
 <% else %>
-  <% if @team_can_slack_chat %>
-    <%= link_to edit_profile_path(current_user.profile) do %>
-      <button class="blue-button">
-        Link up your Slack Account to chat with Teams
-      </button>
-    <% end %>
+  <%= link_to edit_profile_path(current_user.profile) do %>
+    <button class="blue-button">
+      Link up your Slack Account to chat with Teams
+    </button>
   <% end %>
 <% end %>
