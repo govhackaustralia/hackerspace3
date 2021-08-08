@@ -61,6 +61,7 @@ class TeamTest < ActiveSupport::TestCase
     assert @team.confirmed_members.include? @team_member
     assert @team.confirmed_members.include? @team_leader
     assert @team.confirmed_members.exclude? @team_invitee
+    assert @team.confirmed_slack_profiles.include? profiles(:one)
   end
 
   test 'dependent destroy' do
