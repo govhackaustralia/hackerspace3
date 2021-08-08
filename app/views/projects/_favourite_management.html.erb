@@ -1,0 +1,13 @@
+<% if @favourite.present? %>
+  <%= link_to favourite_path(@favourite), method: :delete do %>
+    <button class="blue-button">
+      Unfavourite this Project
+    </button>
+  <% end %>
+<% else %>
+  <%= link_to favourites_path(favourite: {team_id: @team.id}), method: :post do %>
+    <button class="blue-button">
+      Favourite this Project
+    </button>
+  <% end %>
+<% end %>
