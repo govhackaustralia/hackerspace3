@@ -2,26 +2,26 @@
   <% if @team_slack_chat_url.present? %>
     <%= link_to @team_slack_chat_url do %>
       <button class="blue-button">
-        Slack Chat with the Team
+        Slack chat with the team members
       </button>
     <% end %>
   <% elsif @team_can_slack_chat %>
     <%= link_to slack_chat_project_path(@current_project.identifier), method: :post do %>
       <button class="blue-button">
-        Slack Chat with the Team
+        Slack chat with the team members
       </button>
     <% end %>
   <% else %>
     <%= link_to '' do %>
       <button class="blue-button" disabled="true">
-        No Team Members with Slack Enabled ☹️
+        No team members with Slack enabled ☹️
       </button>
     <% end %>
   <% end %>
 <% else %>
   <%= link_to edit_profile_path(current_user.profile) do %>
     <button class="blue-button">
-      Link up your Slack Account to chat with Teams
+      Link up your Slack account to chat with team members
     </button>
   <% end %>
 <% end %>
