@@ -1,5 +1,5 @@
 class ProfilesController < ApplicationController
-  before_action :authenticate_user!, only: %i[edit update slack_chat]
+  before_action :authenticate_user!, only: %i[edit update]
   before_action :authorize_user!, only: %i[edit update]
   before_action :check_profile_found!, :check_published!, only: :show
 
@@ -29,11 +29,6 @@ class ProfilesController < ApplicationController
       flash[:alert] = @profile.errors.full_messages.to_sentence
       render :edit
     end
-  end
-
-  def slack_chat
-    @other_profile = Profile.find_by_identifier params[:id]
-    redirect_to "slack://user?team=#{ENV['SLACK_TEAM_ID']}&id=#{@other_profile.slack_user_id}"
   end
 
   private

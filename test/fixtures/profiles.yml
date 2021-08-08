@@ -9,6 +9,7 @@ one:
   user_id: 1
   identifier: user_number_one
   team_status: Looking for a Team
+  slack_user_id: 'profile1'
 
 two:
   id: 2

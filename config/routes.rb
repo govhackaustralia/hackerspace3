@@ -44,11 +44,7 @@ Rails.application.routes.draw do
     resources :memberships, only: [:destroy]
   end
 
-  resources :profiles, only: [:index, :show, :edit, :update] do
-    member do
-      get :slack_chat
-    end
-  end
+  resources :profiles, only: [:index, :show, :edit, :update]
   resources :profile_pictures, only: [:edit, :update]
   resources :badges, only: [] do
     resources :claims, only: [:new, :create]
