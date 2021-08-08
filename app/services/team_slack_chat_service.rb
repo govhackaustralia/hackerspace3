@@ -12,7 +12,7 @@ class TeamSlackChatService
   end
 
   def team_slack_chat_url
-    raise unless can_chat?
+    raise 'team unable to chat' unless can_chat?
     slack_channel_id = team.slack_channel_id
     slack_channel_id ||= connect_team_to_slack
 
@@ -22,7 +22,7 @@ class TeamSlackChatService
   private
 
   def connect_team_to_slack
-    raise unless team.confirmed_slack_profiles.any?
+    raise 'no connected slack profiles' unless team.confirmed_slack_profiles.any?
     slack_channel_id = create_team_slack_channel
     add_team_slack_users
     slack_channel_id
@@ -30,7 +30,7 @@ class TeamSlackChatService
 
   def create_team_slack_channel
     response = slack_conversatons_create
-    raise unless response['ok']
+    raise response['error'] unless response['ok']
     slack_channel_id = response.dig('channel', 'id')
     team.update! slack_channel_id: slack_channel_id
     slack_channel_id
@@ -39,7 +39,7 @@ class TeamSlackChatService
   def add_team_slack_users
     slack_user_ids = team.confirmed_slack_profiles.pluck(:slack_user_id).join(',')
     response = slack_conversatons_invite(team.slack_channel_id, slack_user_ids)
-    raise unless response['ok']
+    raise response['error'] unless response['ok']
   end
 
   # Channel names may only contain
