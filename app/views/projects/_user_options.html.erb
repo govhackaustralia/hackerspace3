@@ -7,7 +7,7 @@
     <% end %>
   <% end %>
   <%= render partial: 'favourite_management' %>
-  <% unless Rails.env.production? %>
+  <% unless Rails.env.production? || ENV['SLACK_BOT_TOKEN'].nil? %>
     <%= render partial: 'slack_management' %>
   <% end %>
   <% if (show_challenge_score_stuff? || show_peoples_choice_stuff?) && !@users_team %>
