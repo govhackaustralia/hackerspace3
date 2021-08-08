@@ -22,13 +22,13 @@ class ProjectsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-  test 'should get show fail comp starts tommorow' do
+  test 'should get show fail competition starts tomorrow' do
     @competition.update start_time: Time.now.tomorrow, end_time: Time.now.tomorrow
     get project_url @project.identifier
     assert_redirected_to projects_path
   end
 
-  test 'should get show fail comp finished yesterday' do
+  test 'should get show fail competition finished yesterday' do
     @team.update published: false
     @competition.update start_time: Time.now.yesterday, end_time: Time.now.yesterday
     get project_url @project.identifier
