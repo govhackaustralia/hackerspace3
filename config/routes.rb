@@ -57,6 +57,9 @@ Rails.application.routes.draw do
   end
 
   resources :projects, param: :identifier, only: [:index, :show] do
+    member do
+      post :slack_chat
+    end
     resources :scorecards, only: [:new, :edit, :update]
   end
 

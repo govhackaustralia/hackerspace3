@@ -10,6 +10,8 @@ class Assignment < ApplicationRecord
   has_many :headers, dependent: :destroy
   has_many :scores, through: :headers
 
+  has_one :profile, through: :holder
+
   scope :event_assignments, -> { where title: EVENT_ASSIGNMENT_TITLES }
   scope :region_supports, -> { where title: REGION_SUPPORT }
   scope :event_hosts, -> { where title: EVENT_HOST }
