@@ -29,9 +29,15 @@
     </p>
     <h3>Events</h3>
     <p>
-      <%= pluralize @events_count, 'event' %>
-      set for this competition
+      <%= pluralize @events_count, 'event' %> set for this competition
     </p>
+    <p><strong>Attending Registration Counts</strong></p>
+    <ul>
+      <li>- <%= pluralize @attending_connection_registrations_count, 'Connection Registation' %></li>
+      <li>- <%= pluralize @attending_conference_registrations_count, 'Conference Registation' %></li>
+      <li>- <%= pluralize @attending_competition_registrations_count, 'Competition Registation' %></li>
+      <li>- <%= pluralize @attending_award_registrations_count, 'Award Registation' %></li>
+    </ul>
     <p>
       <%= link_to 'Manage Events', admin_competition_events_path(@competition) %>
     </p>

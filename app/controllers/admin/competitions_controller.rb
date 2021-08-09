@@ -107,11 +107,23 @@ class Admin::CompetitionsController < ApplicationController
 
   def retrieve_counts
     @regions_count = @competition.regions.count
-    @events_count = @competition.events.count
     @challenge_criteria_count = @competition.challenge_criteria.count
     @teams_count = @competition.teams.count
+    event_and_registration_counts
     competition_entity_counts
     sponsoresk_counts
+  end
+
+  def event_and_registration_counts
+    @events_count = @competition.events.count
+    @attending_connection_registrations_count =
+      @competition.connection_registrations.attending.count
+    @attending_conference_registrations_count =
+      @competition.conference_registrations.attending.count
+    @attending_competition_registrations_count =
+      @competition.competition_registrations.attending.count
+    @attending_award_registrations_count =
+      @competition.award_registrations.attending.count 
   end
 
   def competition_entity_counts
