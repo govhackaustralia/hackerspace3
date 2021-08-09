@@ -5,10 +5,12 @@
   </h2>
   <nav>
     <section>
-      <% if @competition.year == 2020 %>
+      <% if @competition.year == 2021 %>
         <div>
           <%= link_to 'GovHack Handbook', 'https://govhack.org/howtocompete/handbook/', target: '_blank' %>
         </div>
+      <% end %>
+      <% if @competition.year == 2020 %>
         <div>
           <%= link_to '#lifehacks Photo Competition', 'https://govhack.org/lifehacks/', target: '_blank' %>
         </div>
