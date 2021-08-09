@@ -124,4 +124,16 @@ class RegistrationTest < ActiveSupport::TestCase
   #   @user.registrations.where(event: @event).each { |reg| reg.update(status: NON_ATTENDING) }
   #   assert(Registration.find_by(event: @event, assignment: @wait_ass).status == ATTENDING)
   # end
+
+  test 'check_user_registration_type' do
+    users(:one).update! registration_type: nil
+
+    assert_raises ActiveRecord::RecordInvalid do 
+      events(:two).registrations.new(
+        user: users(:one),
+        holder: holders(:one),
+        status: ATTENDING
+      ).save!
+    end
+  end
 end
