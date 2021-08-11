@@ -8,12 +8,18 @@
   display: flex;
   padding-top: 90px;
   justify-content: center;
-  background: url("/assets/hunt_bg.png") top left no-repeat;
+  background: url("/assets/hunt_new_bg.png") top left no-repeat;
 
   background-size: cover;
 
   @media screen and (max-width: 800px) {
     display: none;
+  }
+
+  p {
+    color: white;
+    position: absolute;
+    align-self: flex-end;
   }
 
 }
@@ -23,7 +29,7 @@
   width:900px;
   display: flex;
   flex-direction: column;
-  background: url("/assets/hunt-book.png") top left no-repeat;
+  background: url("/assets/hunt-scroll.png") top left no-repeat;
   background-size: contain;
   
   font-weight: bold;
