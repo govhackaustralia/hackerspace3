@@ -9,10 +9,12 @@ class ProfileTest < ActiveSupport::TestCase
 
   test 'associations' do
     assert @profile.user == @user
+    assert profiles(:one).holders.include? holders(:one)
     assert @profile.employment_status == @employment_status
 
     @profile.destroy
 
+    assert_raises(ActiveRecord::RecordNotFound) { holders(:one).reload }
     assert_raises(ActiveRecord::RecordNotFound) { @employment_status.reload }
   end
 
@@ -40,5 +42,13 @@ class ProfileTest < ActiveSupport::TestCase
     @user.update preferred_name: 'example name'
     @profile.reload
     assert @profile.identifier == 'example_name'
+  end
+
+  test 'accept_code_of_conduct_before_publish' do
+    @user.update! accepted_code_of_conduct: false
+
+    assert_raises(ActiveRecord::RecordInvalid) do
+      @profile.update!(published: true)
+    end
   end
 end

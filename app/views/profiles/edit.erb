@@ -55,6 +55,7 @@
           <%= form.text_field :interest_list, value: @profile.interest_list&.join(', '), class: 'form-control' %>
           <small>Separate tags with commas</small>
         </div>
+        <%= render 'registrations/agree_to_code_of_conduct' %>
         <div class="actions">
           <%= form.submit (@profile.published ? 'Update' : 'Publish') %>
         </div>

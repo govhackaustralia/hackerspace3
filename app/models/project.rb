@@ -29,7 +29,8 @@ class Project < ApplicationRecord
   end
 
   # Generates a unique name and updates the identifier field.
-  # ENHANCEMENT: Should be moved to Team object.
+  # This is done through the project model so that old identifiers will still
+  # work when a team project changes its name.
   def update_identifier
     new_identifier = uri_pritty project_name
     new_identifier = uri_pritty "#{project_name}-#{team.id}" if already_there? Project, new_identifier, self

@@ -77,6 +77,8 @@ Set if running in staging or production environments.
 - SLACK_CLIENT_ID
 - SLACK_CLIENT_SECRET
 - SLACK_TEAM_ID
+- SLACK_BOT_TOKEN
+  - note: requires `channels:manage` scope
 
 ### AWS Simple Email Service
 

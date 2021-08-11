@@ -193,26 +193,28 @@
         <h2 class="section-heading">My Team Projects</h2>
         <% if @participating_competition_event %>
           <%= render 'my_projects' %>
-        <% end %>
-        <% if @competition.in_form_or_comp_window? LAST_TIME_ZONE %>
-          <%= render 'my_invitations' %>
-        <% elsif @competition.in_form_or_comp_window? LAST_TIME_ZONE %>
-          <section>
-            <div class="message">
-              <p class="message-text">Join a Competition Event to create a team.</p>
-              <%= link_to competition_events_path do %>
-                <button class="message-button">
-                  Go to Competition Events
-                </button>
-              <% end %>
-            </div>
-          </section>
+          <% if @competition.in_form_or_comp_window? @time_zone %>
+            <%= render 'my_invitations' %>
+          <% end %>
+        <% else %>
+          <% if @competition.in_form_or_comp_window?(FIRST_TIME_ZONE) || @competition.in_form_or_comp_window?(LAST_TIME_ZONE) %>
+            <section>
+              <div class="message">
+                <p class="message-text">Join a Competition Event to create a team.</p>
+                <%= link_to competition_events_path do %>
+                  <button class="message-button">
+                    Go to Competition Events
+                  </button>
+                <% end %>
+              </div>
+            </section>
+          <% end %>
         <% end %>
       </article>
       <article>
         <h2 class="section-heading">My Favourite Projects</h2>
         <section>
-          <% if @competition.started? && @favourite_teams.present? %>
+          <% if @competition.started?(FIRST_TIME_ZONE) && @favourite_teams.present? %>
             <% @favourite_teams.each do |team| %>
               <div class="content-wrapper">
                 <div class="content-wrapper-content">

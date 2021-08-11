@@ -1,10 +1,10 @@
 require_relative 'seeder'
 
 class EventSeeder < Seeder
-  def self.create(event_type, event_name, region, event_start, comp, sponsors, users, participant_assignments)
+  def self.create(event_type, event_name, region, event_start, competition, sponsors, users, participant_assignments)
     event = region.events.create(
       event_type: event_type,
-      name: event_name + ' ' + comp.year.to_s,
+      name: event_name + ' ' + competition.year.to_s,
       registration_type: OPEN,
       capacity: 50,
       email: "#{event_name}@mail.com",
@@ -35,14 +35,14 @@ class EventSeeder < Seeder
     user = users.sample
     event.host_assignments.create(
       user: user,
-      holder: user.holder_for(comp)
+      holder: user.holder_for(competition)
     )
 
     2.times do
       user = users.sample
       event.support_assignments.create(
         user: user,
-        holder: user.holder_for(comp)
+        holder: user.holder_for(competition)
       )
     end
 
@@ -65,17 +65,17 @@ class EventSeeder < Seeder
     event
   end
 
-  def self.create_national_awards(event, comp)
+  def self.create_national_awards(event, competition)
     [*1..8].sample.times do
       event.flights.create(
-        description: [Faker::TvShows::TheExpanse.location, comp.year].join(' '),
+        description: [Faker::TvShows::TheExpanse.location, competition.year].join(' '),
         direction: FLIGHT_DIRECTIONS.sample
       )
     end
     [*1..3].sample.times do |time|
       bulk_mail = event.bulk_mails.create(
         user_id: 1,
-        name: "Bulk Mail #{time} #{comp.year}",
+        name: "Bulk Mail #{time} #{competition.year}",
         status: DRAFT,
         from_email: admin_email,
         subject: 'Greetings',

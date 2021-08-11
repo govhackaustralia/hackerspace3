@@ -54,6 +54,8 @@ class Registration < ApplicationRecord
            :check_for_team_assignments,
            :check_code_of_conduct
 
+  validate :check_user_registration_type, on: :create
+
   # Returns the category of a registration for the purpose of allocating
   # different event ticket types.
   def category
@@ -124,6 +126,14 @@ class Registration < ApplicationRecord
   def check_code_of_conduct
     return if assignment_id.nil? || user.accepted_code_of_conduct
 
-    errors.add :user, 'The Code of Conduct must be agreed to.'
+    errors.add :user, 'please agree to the Code of Conduct'
+  end
+
+  def check_user_registration_type
+    return unless event.event_type == COMPETITION_EVENT
+
+    return if user.registration_type.present?
+
+    errors.add :user, 'please select a registration type'
   end
 end

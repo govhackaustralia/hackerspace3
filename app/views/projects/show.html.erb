@@ -20,16 +20,18 @@
       <% end %>
     </section>
     <h3>Challenge Entries</h3>
-    <% if @entries.any? %>
-      <% @entries.each do |entry| %>
-        <%= render 'challenges/challenge_panel',              
-          challenge: entry.challenge,                       
-          entry_count: entry.challenge.published_entries.length
-        %>
+      <% if @entries.any? %>
+        <% @entries.each do |entry| %>
+          <%= render 'challenges/challenge_panel',
+            challenge: entry.challenge,
+            entry_count: entry.challenge.published_entries.length
+          %>
+        <% end %>
+      <% else %>
+        <section class="markdown">
+          <p>There are no challenge entries to display for this team as yet.</p>
+        </section>
       <% end %>
-    <% else %>
-      <p>There are no challenge entries to display for this team as yet.</p>
-    <% end %>
     <div class="links">
       <p>
         <%= link_to 'Back to Projects', projects_path %>

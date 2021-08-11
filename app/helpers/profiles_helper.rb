@@ -8,4 +8,8 @@ module ProfilesHelper
       user.gravatar_url
     end
   end
+
+  def profile_slack_chat_url(profile)
+    "slack://user?team=#{ENV['SLACK_TEAM_ID']}&id=#{profile.slack_user_id}"
+  end
 end

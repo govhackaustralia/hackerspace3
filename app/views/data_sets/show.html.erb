@@ -10,12 +10,12 @@
     Description: <%= @data_set.description %>
   </p>
   <p>
-    <a href="<%= @data_set.url %>" target="_blank">URL</a>
+    <%= link_to 'URL', visits_path(visit: {visitable_type: 'DataSet', visitable_id: @data_set.id}), method: :post, target: '_blank' %>
   </p>
   <h3>
     Team Projects Utilising <%= @data_set.name %>
   </h3>
-  <% if @competition.started? %>
+  <% if @competition.started? FIRST_TIME_ZONE %>
     <% if @team_data_sets.present? %>
       <% @teams.each do |team| %>
         <h4>

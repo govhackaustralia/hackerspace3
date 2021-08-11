@@ -24,6 +24,8 @@
               Update High Resolution Image
             </button>
           <% end %>
+        <% end %>
+        <% if @competition.in_form_or_comp_window?(@time_zone) %>
           <%= link_to team_management_team_assignments_path(@team) do %>
             <button class="red-button">
               Manage Team Members
@@ -125,8 +127,7 @@
         <% if (invitees = @team.invitees).present? %>
           <p>
             <strong>
-              <%= pluralize invitees.count, 'invitee' %>
-              \.
+              + <%= pluralize invitees.count, 'invitee' %>.
             </strong>
           </p>
         <% end %>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_07_24_100750) do
+ActiveRecord::Schema.define(version: 2021_08_07_110828) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -302,8 +302,10 @@ ActiveRecord::Schema.define(version: 2021_07_24_100750) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "team_status"
+    t.bigint "profile_id"
     t.index ["aws_credits_requested"], name: "index_holders_on_aws_credits_requested"
     t.index ["competition_id"], name: "index_holders_on_competition_id"
+    t.index ["profile_id"], name: "index_holders_on_profile_id"
     t.index ["team_status"], name: "index_holders_on_team_status"
     t.index ["user_id"], name: "index_holders_on_user_id"
   end
@@ -429,7 +431,7 @@ ActiveRecord::Schema.define(version: 2021_07_24_100750) do
   create_table "sponsors", force: :cascade do |t|
     t.string "name"
     t.text "description"
-    t.string "website"
+    t.string "url"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "competition_id"
@@ -515,6 +517,7 @@ ActiveRecord::Schema.define(version: 2021_07_24_100750) do
     t.datetime "updated_at", null: false
     t.boolean "published", default: true
     t.boolean "youth_team", default: false
+    t.string "slack_channel_id"
     t.index ["event_id"], name: "index_teams_on_event_id"
     t.index ["project_id"], name: "index_teams_on_project_id"
     t.index ["published"], name: "index_teams_on_published"
@@ -588,9 +591,24 @@ ActiveRecord::Schema.define(version: 2021_07_24_100750) do
     t.index ["unlock_token"], name: "index_users_on_unlock_token", unique: true
   end
 
+  create_table "visits", force: :cascade do |t|
+    t.string "visitable_type", null: false
+    t.bigint "visitable_id", null: false
+    t.bigint "user_id"
+    t.bigint "competition_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["competition_id"], name: "index_visits_on_competition_id"
+    t.index ["user_id"], name: "index_visits_on_user_id"
+    t.index ["visitable_type", "visitable_id"], name: "index_visits_on_visitable"
+  end
+
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "holders", "competitions"
+  add_foreign_key "holders", "profiles"
   add_foreign_key "holders", "users"
   add_foreign_key "taggings", "tags"
+  add_foreign_key "visits", "competitions"
+  add_foreign_key "visits", "users"
 end

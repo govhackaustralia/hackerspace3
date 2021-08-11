@@ -1,5 +1,5 @@
 class ProfilesController < ApplicationController
-  before_action :authenticate_user!, only: %i[edit update slack_chat]
+  before_action :authenticate_user!, only: %i[edit update]
   before_action :authorize_user!, only: %i[edit update]
   before_action :check_profile_found!, :check_published!, only: :show
 
@@ -16,20 +16,19 @@ class ProfilesController < ApplicationController
     @joined_published_projects = @user.joined_published_projects.joins(:competition).where(competitions: {id: @competition.id})
   end
 
-  def edit; end
+  def edit
+    @user = current_user
+  end
 
   def update
+    check_code_of_conduct
     if @profile.update(profile_params)
       redirect_to profile_path(@profile), notice: 'Your Profile has been updated'
     else
+      @user = current_user
       flash[:alert] = @profile.errors.full_messages.to_sentence
       render :edit
     end
-  end
-
-  def slack_chat
-    @other_profile = Profile.find_by_identifier params[:id]
-    redirect_to "slack://user?team=#{ENV['SLACK_TEAM_ID']}&id=#{@other_profile.slack_user_id}"
   end
 
   private
@@ -64,5 +63,11 @@ class ProfilesController < ApplicationController
     end
 
     redirect_to profiles_path, alert: 'This Profile has not been published yet'
+  end
+
+  def check_code_of_conduct
+    return unless params[:accepted_code_of_conduct] == 'true'
+
+    current_user.update accepted_code_of_conduct: Time.now.in_time_zone(COMP_TIME_ZONE)
   end
 end

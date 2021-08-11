@@ -29,9 +29,15 @@
     </p>
     <h3>Events</h3>
     <p>
-      <%= pluralize @events_count, 'event' %>
-      set for this competition
+      <%= pluralize @events_count, 'event' %> set for this competition
     </p>
+    <p><strong>Attending Registration Counts</strong></p>
+    <ul>
+      <li>- <%= pluralize @attending_connection_registrations_count, 'Connection Registation' %></li>
+      <li>- <%= pluralize @attending_conference_registrations_count, 'Conference Registation' %></li>
+      <li>- <%= pluralize @attending_competition_registrations_count, 'Competition Registation' %></li>
+      <li>- <%= pluralize @attending_award_registrations_count, 'Award Registation' %></li>
+    </ul>
     <p>
       <%= link_to 'Manage Events', admin_competition_events_path(@competition) %>
     </p>
@@ -132,14 +138,21 @@
     <p><%= pluralize @data_portals_count, 'Data Portal' %> saved.</p>
     <p><%= pluralize @tech_count, 'Tech Resource' %> saved.</p>
     <p><%= link_to 'Resources', admin_competition_resources_path(@competition) %></p>
-    <h3>AWS Credits Requested</h3>
-    <p>
-      <%= pluralize @credits_count, 'AWS credit' %>
-      requested for this competition.
-    </p>
-    <p>
-      <%= link_to 'AWS Credits Requested', aws_credits_requested_admin_competition_path(@competition) %>
-    </p>
+    <h3>Visits</h3>
+    <% @visitable_counts.each do |visitable_type, count| %>
+      <p><%= pluralize count, "#{visitable_type.titleize} visit" %></p>
+    <% end %>
+    <p><%= link_to 'Visits', admin_competition_visits_path(@competition) %></p>
+    <% if @credits_count.positive? %>
+      <h3>AWS Credits Requested</h3>
+      <p>
+        <%= pluralize @credits_count, 'AWS credit' %>
+        requested for this competition.
+      </p>
+      <p>
+        <%= link_to 'AWS Credits Requested', aws_credits_requested_admin_competition_path(@competition) %>
+      </p>
+    <% end %>
     <h3>Sponsor Data Set Report</h3>
     <p>
       <%= link_to 'Sponsor Data Set Report', sponsor_data_set_report_admin_competition_path(@competition) %>

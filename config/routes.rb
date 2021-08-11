@@ -30,6 +30,7 @@ Rails.application.routes.draw do
       get 'entries_table'
     end
   end
+  resources :visits, only: :create
 
   resources :users, only: :update
   resources :accounts, only: [:edit, :update]
@@ -43,18 +44,7 @@ Rails.application.routes.draw do
     resources :memberships, only: [:destroy]
   end
 
-  resources :profiles, only: [:index, :show, :edit, :update] do
-    collection do
-      get :participants
-      get :mentors
-      get :industry
-      get :support
-    end
-
-    member do
-      get :slack_chat
-    end
-  end
+  resources :profiles, only: [:index, :show, :edit, :update]
   resources :profile_pictures, only: [:edit, :update]
   resources :badges, only: [] do
     resources :claims, only: [:new, :create]
@@ -67,6 +57,9 @@ Rails.application.routes.draw do
   end
 
   resources :projects, param: :identifier, only: [:index, :show] do
+    member do
+      post :slack_chat
+    end
     resources :scorecards, only: [:new, :edit, :update]
   end
 
@@ -109,6 +102,7 @@ Rails.application.routes.draw do
       resources :events, only: :index
       resources :sponsors
       resources :resources, except: :show
+      resources :visits, only: :index
       resources :badges do
         member { post :award }
       end

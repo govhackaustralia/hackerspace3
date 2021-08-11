@@ -1,0 +1,23 @@
+<p>
+  <% if @header.present? %>
+    <%= link_to edit_project_scorecard_path(@current_project.identifier, @header, popup: true), id: 'open-scorecard' do %>
+      <button class="blue-button">
+        Edit Scorecard
+        <% if @acting_on_behalf_of_user.present? %>
+          for <%= @acting_on_behalf_of_user.display_name %>
+        <% end %>
+      </button>
+    <% end %>
+    <%= javascript_tag  "window._scorecard_path = '#{edit_project_scorecard_path(@current_project.identifier, @header, popup: true)}';" %>
+  <% else %>
+    <%= link_to new_project_scorecard_path(@current_project.identifier, popup: true), id: 'open-scorecard' do %>
+      <button class="blue-button">
+        New Scorecard
+        <% if @acting_on_behalf_of_user.present? %>
+          for <%= @acting_on_behalf_of_user.display_name %>
+        <% end %>
+      </button>
+    <% end %>
+    <%= javascript_tag "window._scorecard_path = '#{new_project_scorecard_path(@current_project.identifier, popup: true)}'" %>
+  <% end %>
+</p>

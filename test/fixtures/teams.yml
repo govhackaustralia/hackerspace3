@@ -10,6 +10,7 @@ one:
   project_id: 1
   published: true
   youth_team: false
+  slack_channel_id: team_one_1
 
 two:
   id: 2

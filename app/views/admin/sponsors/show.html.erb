@@ -22,10 +22,10 @@
       Description: <%= @sponsor.description %>
     </article>
   <% end %>
-  <% if @sponsor.website.present? %>
+  <% if @sponsor.url.present? %>
     Website:
-    <a href="<%= @sponsor.website %>" target="_blank">
-      <%= @sponsor.website %>
+    <a href="<%= @sponsor.url %>" target="_blank">
+      <%= @sponsor.url %>
     </a>
     <br/>
   <% else %>

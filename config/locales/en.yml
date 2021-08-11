@@ -64,4 +64,6 @@ en:
       resource:
         url: URL
         short_url: Short URL
+      sponsor:
+        url: Website
   hello: "Hello world"

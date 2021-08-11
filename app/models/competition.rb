@@ -7,6 +7,7 @@ class Competition < ApplicationRecord
   has_many :sponsors
   has_many :sponsorship_types
   has_many :competition_assignments, class_name: 'Assignment'
+  has_many :visits, dependent: :destroy
 
   has_many :events, through: :regions
   has_many :connection_events, -> { connections }, through: :regions, source: :events
@@ -157,12 +158,6 @@ class Competition < ApplicationRecord
   # Returns true if the competition is running, false otherwise.
   def in_comp_window?(time_zone = nil)
     started?(time_zone) && not_finished?(time_zone)
-  end
-
-  # Returns true if the competition is in the team form stage or has started,
-  # false otherwise.
-  def in_form_or_comp_started?(time_zone = nil)
-    in_team_form_window?(time_zone) || started?(time_zone)
   end
 
   # Returns true if the competition is running or if the competition is in the

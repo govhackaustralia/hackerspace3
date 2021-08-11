@@ -9,6 +9,7 @@ class HolderTest < ActiveSupport::TestCase
 
   test 'associations' do
     assert @holder.user == @user
+    assert profiles(:one), holders(:one).profile
     assert @holder.competition == @competition
   end
 

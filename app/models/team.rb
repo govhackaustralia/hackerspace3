@@ -17,6 +17,11 @@ class Team < ApplicationRecord
   has_many :confirmed_assignments, -> { team_confirmed }, as: :assignable, class_name: 'Assignment'
   has_many :confirmed_members, through: :confirmed_assignments, source: :user
 
+  has_many :confirmed_slack_profiles,
+    -> { where.not slack_user_id: nil },
+    through: :confirmed_assignments,
+    source: :profile
+
   has_many :projects, dependent: :destroy
   has_many :team_data_sets, dependent: :destroy
   has_many :favourites, dependent: :destroy
@@ -64,7 +69,7 @@ class Team < ApplicationRecord
   # Returns the time_zone from the parent region.
   # ENHANCEMENT: Remove and replace with preload region.
   def time_zone
-    region.time_zone
+    region.national_time_zone
   end
 
   # Returns true if a given user has an assignment attached to the team.

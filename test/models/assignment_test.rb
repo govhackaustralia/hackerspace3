@@ -41,6 +41,8 @@ class AssignmentTest < ActiveSupport::TestCase
     assert @participant.headers.include? @header
     assert @participant.scores.include? @score
     assert @participant.registrations.include? @registration
+    # Has One
+    assert_equal profiles(:one), assignments(:management_team).profile
     # Dependent destroy
     @participant.destroy
     assert_raises(ActiveRecord::RecordNotFound) { @favourite.reload }

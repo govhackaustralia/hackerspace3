@@ -14,9 +14,11 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   def slack
     if profile.update profile_params
       flash[:notice] = 'Slack account successfully linked 🥳'
+      @user = current_user
       render 'profiles/edit'
     else
-      redirect_to profiles_path, alert: profile.errors.full_messages.to_sentence
+      redirect_to profiles_path,
+        alert: profile.errors.full_messages.to_sentence
     end
   end
 
