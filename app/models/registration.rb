@@ -111,7 +111,7 @@ class Registration < ApplicationRecord
 
     return unless user_has_team_assignments_for_this_competition?
 
-    errors.add :user, 'leave teams or decline team invites to amend registration'
+    errors.add :user, 'needs to leave teams or decline invitations before amending registration'
   end
 
   def user_is_trying_to_edit_their_competition_event_registration?

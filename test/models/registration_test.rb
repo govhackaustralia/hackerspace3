@@ -100,7 +100,7 @@ class RegistrationTest < ActiveSupport::TestCase
       @competition_event_registration.update! status: NON_ATTENDING
     end
     assert exception.message.include?(
-      'leave teams or decline team invites to amend registration'
+      'needs to leave teams or decline invitations before amending registration'
     )
   end
 
@@ -128,7 +128,7 @@ class RegistrationTest < ActiveSupport::TestCase
   test 'check_user_registration_type' do
     users(:one).update! registration_type: nil
 
-    assert_raises ActiveRecord::RecordInvalid do 
+    assert_raises ActiveRecord::RecordInvalid do
       events(:two).registrations.new(
         user: users(:one),
         holder: holders(:one),
