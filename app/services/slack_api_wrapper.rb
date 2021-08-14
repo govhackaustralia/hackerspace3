@@ -30,4 +30,16 @@ module SlackApiWrapper
     )
     JSON.parse response.body
   end
+
+  def self.slack_conversatons_rename(channel_id, channel_name)
+    response = Excon.post('https://slack.com/api/conversations.rename',
+      headers: { 'Content-Type' => 'application/x-www-form-urlencoded' },
+      body: URI.encode_www_form(
+       token: ENV['SLACK_BOT_TOKEN'],
+       channel: channel_id,
+       name: channel_name[...MAX_CHANNEL_LENGTH]
+      )
+    )
+    JSON.parse response.body
+  end
 end
