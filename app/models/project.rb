@@ -21,6 +21,10 @@ class Project < ApplicationRecord
     team.entries.each { |entry| entry.update_eligible self }
   end
 
+  def slack_channel_name
+    "project-#{identifier}"
+  end
+
   private
 
   # Make the latest project created the current project.
