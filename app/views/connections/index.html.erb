@@ -1,15 +1,14 @@
 <% content_for :title, 'Connections' %>
 <main class="events_page">
-  <section class="header">
-    <h2>Connection Events</h2>
-    <%= render 'connection_description' %>
-  </section>
-  <section>
-    <%= render partial: 'events/event_collection', locals: { events: @future_connections, title: 'Upcoming Connection Events' } %>
+  <section class="events_row">
+    <div class="menu_col">
+      <h2>Connection Events</h2>
+      <%= render 'connection_description' %>
+      <%= link_to 'Back to Events', events_path, class: 'blue' %>
+    </div>
+    <div class="contents">
+      <%= render partial: 'events/event_collection', locals: { events: @future_connections, title: 'Upcoming Connection Events' } %>
     <%= render partial: 'events/event_collection', locals: { events: @past_connections, title: 'Past Connection Events' } %>
-    <p>
-      <%= link_to 'All Events', events_path %>
-    </p>
+    </div>
   </section>
-  <main></main>
 </main>

@@ -1,14 +1,16 @@
 <% content_for :title, "GovHack Conference #{@competition.year}" %>
 <main class="events_page">
-  <section class="header">
-    <h2><%= yield :title %></h2>
-    <p>The conference presents a great opportunity to network and learn from industry experts, all from the comfort of your own home.</p>
+  <section class="events_row">
+    <div class="menu_col">
+      <h2><%= yield :title %></h2>
+      <p>The conference presents a great opportunity to network and learn from industry experts, all from the comfort of your own home.</p>
+      <%= link_to 'All Events', events_path, class: 'blue' %>
+    </div>
+    <div class="contents">
+      <%= render partial: 'events/event_collection', locals: { events: @future_sessions, title: 'Upcoming Conference Sessions' } %>
+      <%= render partial: 'events/event_collection', locals: { events: @future_connections, title: 'Upcoming Connection Events' } %>
+      <%= render partial: 'events/event_collection', locals: { events: @past_sessions, title: 'Past Conference Sessions' } %>
+      <%= render partial: 'events/event_collection', locals: { events: @past_connections, title: 'Past Connection Events' } %>
+    </div>
   </section>
-  <%= render partial: 'events/event_collection', locals: { events: @future_sessions, title: 'Upcoming Conference Sessions' } %>
-  <%= render partial: 'events/event_collection', locals: { events: @future_connections, title: 'Upcoming Connection Events' } %>
-  <%= render partial: 'events/event_collection', locals: { events: @past_sessions, title: 'Past Conference Sessions' } %>
-  <%= render partial: 'events/event_collection', locals: { events: @past_connections, title: 'Past Connection Events' } %>
-</main>
-<p>
-  <%= link_to 'All Events', events_path %>
-</p>
+<main>
