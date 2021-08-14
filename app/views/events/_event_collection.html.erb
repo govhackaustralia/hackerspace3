@@ -1,12 +1,14 @@
 <% if events.present? %>
-  <h3>
-    <%= title %>
-  </h3>
-  <section class="tiles">
-    <% events.each do |event| %>
-      <% unless event.end_time.blank? %>
-        <%= link_to (render partial: "events/event_tile", locals: { event: event } ), event_path(event.identifier) %>
+  <div class="tile_wrapper">
+    <h3 class="subtitle">
+      <%= title %>
+    </h3>
+    <section class="tiles">
+      <% events.each do |event| %>
+        <% unless event.end_time.blank? %>
+          <%= link_to (render partial: "events/event_tile", locals: { event: event } ), event_path(event.identifier) %>
+        <% end %>
       <% end %>
-    <% end %>
-  </section>
+    </section>
+  <div>
 <% end %>

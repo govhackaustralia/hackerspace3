@@ -1,0 +1,18 @@
+<% start_day = @competition.start_time.day.ordinalize %>
+<% end_day = @competition.end_time.day.ordinalize %>
+
+<% start_month = @competition.start_time.strftime("%B") %>
+<% end_month = @competition.end_time.strftime("%B") %>
+
+<div class="event-info">
+    <h4>Dates</h4>
+    <p>
+        <%= start_day%> <%= start_month == end_month ? "" : start_month %> - <%= end_day %> <%= end_month %>
+    </p>
+</div>
+<div class="event-info">
+    <h4>Gates open</h4>
+    <p>
+        <%= @competition.start_time.strftime("%-I%p") %> local time <%= @competition.start_time.strftime("%A")%> <%= start_day %> <%= start_month%>
+    </p>
+</div>

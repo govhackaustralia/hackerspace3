@@ -1,16 +1,16 @@
 <% content_for :title, 'Competition Events' %>
 <main class="events_page">
-  <section class="header">
-    <h2>Competition Events</h2>
-    <%= render 'competition_event_description' %>
+  <section class="events_row">
+    <div class="menu_col">
+      <h2>Competition Events</h2>
+      <%= render 'competition_event_side' %>
+      <%= link_to 'Back to Events', events_path, class: 'blue' %>
+    </div>
+    <div class="contents">
+      <%= render 'competition_event_description' %>
+      <%= render partial: 'events/event_collection', locals: { events: @future_locations, title: 'Upcoming Competition Events' } %>
+      <%= render partial: 'events/event_collection', locals: { events: @future_remotes, title: "Upcoming Remote Kitchen Table Competition Events" } %>
+      <%= render partial: 'events/event_collection', locals: { events: @past_competitions, title: 'Past Competition Events' } %>
+    </div>
   </section>
-  <section>
-    <%= render partial: 'events/event_collection', locals: { events: @future_locations, title: 'Upcoming Competition Events' } %>
-    <%= render partial: 'events/event_collection', locals: { events: @future_remotes, title: "Upcoming Remote Kitchen Table Competition Events" } %>
-    <%= render partial: 'events/event_collection', locals: { events: @past_competitions, title: 'Past Competition Events' } %>
-    <p>
-      <%= link_to 'All Events', events_path %>
-    </p>
-  </section>
-  <main></main>
 </main>
