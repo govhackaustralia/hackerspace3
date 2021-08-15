@@ -5,14 +5,14 @@
 <% end_month = @competition.end_time.strftime("%B") %>
 
 <div class="event-info">
-    <h4>Dates</h4>
-    <p>
-        <%= start_day%> <%= start_month == end_month ? "" : start_month %> - <%= end_day %> <%= end_month %>
-    </p>
+  <h4>Dates</h4>
+  <p>
+    <%= start_day%> <%= start_month == end_month ? "" : start_month %> - <%= end_day %> <%= end_month %>
+  </p>
 </div>
 <div class="event-info">
-    <h4>Gates open</h4>
-    <p>
-        <%= @competition.start_time.strftime("%-I%p") %> local time <%= @competition.start_time.strftime("%A")%> <%= start_day %> <%= start_month%>
-    </p>
+  <h4>Challenges Open</h4>
+  <p>Friday 20th August</p>
+  <p>Australia: 7PM AEST</p>
+  <p>New Zealand: 7PM NZST</p>
 </div>
