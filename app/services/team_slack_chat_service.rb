@@ -47,7 +47,7 @@ class TeamSlackChatService
   def add_team_slack_users
     slack_user_ids = team.confirmed_slack_profiles.pluck(:slack_user_id).join(',')
     response = SlackApiWrapper.slack_conversatons_invite(
-      slack_channel_id: team.slack_channel_id,
+      channel_id: team.slack_channel_id,
       slack_user_ids: slack_user_ids
     )
     raise response['error'] unless response['ok']
