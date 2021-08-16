@@ -64,7 +64,8 @@
 
     img {
       display: inline-block;
-      margin: 0 auto;
+      width: auto !important;
+      height: auto !important;
       max-height: 125px;
       max-width: 100%;
     }
