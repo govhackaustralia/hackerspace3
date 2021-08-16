@@ -31,8 +31,16 @@ class TeamSlackChatService
     response = SlackApiWrapper.slack_conversatons_create(
       team.current_project.slack_channel_name)
     raise response['error'] unless response['ok']
+    update_team_slack_details(response)
+  end
+
+  def update_team_slack_details(response)
     slack_channel_id = response.dig('channel', 'id')
-    team.update! slack_channel_id: slack_channel_id
+    slack_channel_name = response.dig('channel', 'name')
+    team.update!(
+      slack_channel_id: slack_channel_id,
+      slack_channel_name: slack_channel_name
+    )
     slack_channel_id
   end
 
