@@ -22,7 +22,6 @@ class TeamSlackChatService
   private
 
   def connect_team_to_slack
-    raise 'no connected slack profiles' unless team.confirmed_slack_profiles.any?
     slack_channel_id = create_team_slack_channel
     add_team_slack_users
     slack_channel_id
