@@ -102,6 +102,8 @@ group :test do
   gem 'selenium-webdriver'
 
   gem 'webdrivers'
+  # A mocking and stubbing library for Ruby 
+  gem 'mocha'
 end
 
 # Extras
