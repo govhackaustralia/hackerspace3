@@ -22,7 +22,7 @@ class Project < ApplicationRecord
   end
 
   def slack_channel_name
-    "project-#{identifier}"
+    "project-#{identifier}"[...SlackApiWrapper::MAX_CHANNEL_LENGTH]
   end
 
   private
