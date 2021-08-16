@@ -225,6 +225,7 @@ GEM
     mini_racer (0.4.0)
       libv8-node (~> 15.14.0.0)
     minitest (5.14.4)
+    mocha (1.13.0)
     msgpack (1.4.2)
     multi_json (1.15.0)
     multi_xml (0.6.0)
@@ -430,6 +431,7 @@ DEPENDENCIES
   letter_opener
   listen (>= 3.0.5, < 3.2)
   mini_racer
+  mocha
   omniauth-google-oauth2
   omniauth-rails_csrf_protection
   pg (>= 0.18, < 2.0)

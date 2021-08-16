@@ -11,6 +11,7 @@ one:
   published: true
   youth_team: false
   slack_channel_id: team_one_1
+  slack_channel_name: project-open_data_team
 
 two:
   id: 2

@@ -60,6 +60,34 @@ class ProjectsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'should post slack_chat success' do
+    assert @team.slack_channel_id.present?
+
+    sign_in users :one
+    post slack_chat_project_url @project.identifier
+    assert_redirected_to "slack://channel?id=#{teams(:one).slack_channel_id}&team=#{ENV['SLACK_TEAM_ID']}"
+  end
+
+  test 'should post slack_chat success connect slack' do
+    @team.update! slack_channel_id: nil
+
+    slack_channel_id = 'slack channel id'
+    slack_channel_name = @team.current_project.slack_channel_name
+    slack_user_ids = @team.confirmed_slack_profiles.pluck(:slack_user_id).join(',')
+
+    SlackApiWrapper.expects(:slack_conversatons_create)
+      .with(slack_channel_name)
+      .returns({
+        'ok' => true,
+        'channel' => {
+          'id' => slack_channel_id,
+          'name' => slack_channel_name
+        }
+      })
+
+    SlackApiWrapper.expects(:slack_conversatons_invite)
+      .with(channel_id: slack_channel_id, slack_user_ids: slack_user_ids)
+      .returns({'ok' => true})
+
     sign_in users :one
     post slack_chat_project_url @project.identifier
     assert_redirected_to "slack://channel?id=#{teams(:one).slack_channel_id}&team=#{ENV['SLACK_TEAM_ID']}"

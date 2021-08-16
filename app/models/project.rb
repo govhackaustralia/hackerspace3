@@ -11,7 +11,7 @@ class Project < ApplicationRecord
 
   after_save_commit :update_entries_eligible, :update_identifier
 
-  after_create_commit :update_team_current_project
+  after_create_commit :update_team_current_project, :update_slack_channel_name
 
   acts_as_ordered_taggable
 
@@ -21,11 +21,21 @@ class Project < ApplicationRecord
     team.entries.each { |entry| entry.update_eligible self }
   end
 
+  def slack_channel_name
+    "project-#{identifier}"[...SlackApiWrapper::MAX_CHANNEL_LENGTH]
+  end
+
   private
 
   # Make the latest project created the current project.
   def update_team_current_project
     team.update current_project: self
+  end
+
+  def update_slack_channel_name
+    return unless team.slack_channel_id.present?
+
+    UpdateChannelNameJob.perform_later self
   end
 
   # Generates a unique name and updates the identifier field.

@@ -22,52 +22,34 @@ class TeamSlackChatService
   private
 
   def connect_team_to_slack
-    raise 'no connected slack profiles' unless team.confirmed_slack_profiles.any?
     slack_channel_id = create_team_slack_channel
     add_team_slack_users
     slack_channel_id
   end
 
   def create_team_slack_channel
-    response = slack_conversatons_create
+    response = SlackApiWrapper.slack_conversatons_create(
+      team.current_project.slack_channel_name)
     raise response['error'] unless response['ok']
+    update_team_slack_details(response)
+  end
+
+  def update_team_slack_details(response)
     slack_channel_id = response.dig('channel', 'id')
-    team.update! slack_channel_id: slack_channel_id
+    slack_channel_name = response.dig('channel', 'name')
+    team.update!(
+      slack_channel_id: slack_channel_id,
+      slack_channel_name: slack_channel_name
+    )
     slack_channel_id
   end
 
   def add_team_slack_users
     slack_user_ids = team.confirmed_slack_profiles.pluck(:slack_user_id).join(',')
-    response = slack_conversatons_invite(team.slack_channel_id, slack_user_ids)
+    response = SlackApiWrapper.slack_conversatons_invite(
+      channel_id: team.slack_channel_id,
+      slack_user_ids: slack_user_ids
+    )
     raise response['error'] unless response['ok']
-  end
-
-  # Channel names may only contain
-  #   lowercase letters,
-  #   numbers,
-  #   hyphens,
-  #   underscores,
-  #   and must be 80 characters or less.
-  def slack_conversatons_create
-    response = Excon.post('https://slack.com/api/conversations.create',
-      headers: { 'Content-Type' => 'application/x-www-form-urlencoded' },
-      body: URI.encode_www_form(
-        token: ENV['SLACK_BOT_TOKEN'],
-        name: team.current_project.identifier[...80]
-      )
-    )
-    JSON.parse response.body
-  end
-
-  def slack_conversatons_invite(channel_id, slack_user_ids)
-    response = Excon.post('https://slack.com/api/conversations.invite',
-      headers: { 'Content-Type' => 'application/x-www-form-urlencoded' },
-      body: URI.encode_www_form(
-       token: ENV['SLACK_BOT_TOKEN'],
-       channel: channel_id,
-       users: slack_user_ids
-      )
-    )
-    JSON.parse response.body
   end
 end
