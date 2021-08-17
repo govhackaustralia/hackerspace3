@@ -9,9 +9,9 @@ class Project < ApplicationRecord
 
   validates :team_name, :project_name, presence: true
 
-  after_save_commit :update_entries_eligible, :update_identifier
+  after_save_commit :update_entries_eligible, :update_identifier, :update_slack_channel_name
 
-  after_create_commit :update_team_current_project, :update_slack_channel_name
+  after_create_commit :update_team_current_project
 
   acts_as_ordered_taggable
 
