@@ -1,4 +1,4 @@
-class UpdateChannelNameJob < ApplicationJob
+class UpdateSlackChannelNameJob < ApplicationJob
   queue_as :default
 
   def perform(*projects)

@@ -1,12 +1,12 @@
 require 'test_helper'
 
-class UpdateChannelNameJobTest < ActiveJob::TestCase
+class UpdateSlackChannelNameJobTest < ActiveJob::TestCase
   test 'perform cannot update channel' do
     teams(:one).update! slack_channel_id: nil
 
     SlackApiWrapper.expects(:slack_conversatons_rename).never
 
-    UpdateChannelNameJob.perform_now(projects(:one))
+    UpdateSlackChannelNameJob.perform_now(projects(:one))
   end
 
   test 'peform should not update channel' do
@@ -15,7 +15,7 @@ class UpdateChannelNameJobTest < ActiveJob::TestCase
 
     SlackApiWrapper.expects(:slack_conversatons_rename).never
 
-    UpdateChannelNameJob.perform_now(projects(:one))
+    UpdateSlackChannelNameJob.perform_now(projects(:one))
   end
 
   test 'perform updates channel' do
@@ -35,7 +35,7 @@ class UpdateChannelNameJobTest < ActiveJob::TestCase
         }
       })
 
-    UpdateChannelNameJob.perform_now(projects(:one))
+    UpdateSlackChannelNameJob.perform_now(projects(:one))
     assert_equal new_project_name, teams(:one).reload.slack_channel_name
   end
 
@@ -52,7 +52,7 @@ class UpdateChannelNameJobTest < ActiveJob::TestCase
       .returns({'ok' => false, 'error' => 'error message'})
 
     assert_raises RuntimeError do
-      UpdateChannelNameJob.perform_now(projects(:one))
+      UpdateSlackChannelNameJob.perform_now(projects(:one))
     end
     assert_not_equal new_project_name, teams(:one).reload.slack_channel_name
   end

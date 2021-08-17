@@ -35,7 +35,7 @@ class Project < ApplicationRecord
   def update_slack_channel_name
     return unless team.slack_channel_id.present?
 
-    UpdateChannelNameJob.perform_later self
+    UpdateSlackChannelNameJob.perform_later self
   end
 
   # Generates a unique name and updates the identifier field.
