@@ -57,7 +57,7 @@ class TeamSlackChatServiceTest < ActiveSupport::TestCase
       })
 
     SlackApiWrapper.expects(:slack_conversatons_invite)
-      .with(slack_channel_id: slack_channel_id, slack_user_ids: slack_user_ids)
+      .with(channel_id: slack_channel_id, slack_user_ids: slack_user_ids)
       .returns({'ok' => true})
 
     assert_equal(
@@ -98,7 +98,7 @@ class TeamSlackChatServiceTest < ActiveSupport::TestCase
       })
 
     SlackApiWrapper.expects(:slack_conversatons_invite)
-      .with(slack_channel_id: slack_channel_id, slack_user_ids: slack_user_ids)
+      .with(channel_id: slack_channel_id, slack_user_ids: slack_user_ids)
       .returns({'ok' => false, 'error' => 'error message'})
 
     assert_raises RuntimeError do
