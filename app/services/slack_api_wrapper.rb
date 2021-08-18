@@ -42,4 +42,16 @@ module SlackApiWrapper
     )
     JSON.parse response.body
   end
+
+  def self.slack_conversatons_set_topic(channel_id:)
+    response = Excon.post('https://slack.com/api/conversations.setTopic',
+      headers: { 'Content-Type' => 'application/x-www-form-urlencoded' },
+      body: URI.encode_www_form(
+       token: ENV['SLACK_BOT_TOKEN'],
+       channel: channel_id,
+       topic: 'Public Slack channel for team members, mentors, and the rest of the GovHack community to discuss this project'
+      )
+    )
+    JSON.parse response.body
+  end
 end

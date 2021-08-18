@@ -24,6 +24,7 @@ class TeamSlackChatService
   def connect_team_to_slack
     slack_channel_id = create_team_slack_channel
     add_team_slack_users
+    add_channel_topic
     slack_channel_id
   end
 
@@ -49,6 +50,13 @@ class TeamSlackChatService
     response = SlackApiWrapper.slack_conversations_invite(
       channel_id: team.slack_channel_id,
       slack_user_ids: slack_user_ids
+    )
+    raise response['error'] unless response['ok']
+  end
+
+  def add_channel_topic
+    response = SlackApiWrapper.slack_conversatons_set_topic(
+      channel_id: team.slack_channel_id
     )
     raise response['error'] unless response['ok']
   end

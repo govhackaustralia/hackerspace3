@@ -60,6 +60,10 @@ class TeamSlackChatServiceTest < ActiveSupport::TestCase
       .with(channel_id: slack_channel_id, slack_user_ids: slack_user_ids)
       .returns({'ok' => true})
 
+    SlackApiWrapper.expects(:slack_conversatons_set_topic)
+      .with(channel_id: slack_channel_id)
+      .returns({'ok' => true})
+
     assert_equal(
       "slack://channel?id=#{slack_channel_id}&team=#{ENV['SLACK_TEAM_ID']}",
       TeamSlackChatService.new(teams(:one)).team_slack_chat_url

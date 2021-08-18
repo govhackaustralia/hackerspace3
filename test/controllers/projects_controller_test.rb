@@ -88,6 +88,10 @@ class ProjectsControllerTest < ActionDispatch::IntegrationTest
       .with(channel_id: slack_channel_id, slack_user_ids: slack_user_ids)
       .returns({'ok' => true})
 
+    SlackApiWrapper.expects(:slack_conversatons_set_topic)
+      .with(channel_id: slack_channel_id)
+      .returns({'ok' => true})
+
     sign_in users :one
     post slack_chat_project_url @project.identifier
     assert_redirected_to "slack://channel?id=#{teams(:one).slack_channel_id}&team=#{ENV['SLACK_TEAM_ID']}"
