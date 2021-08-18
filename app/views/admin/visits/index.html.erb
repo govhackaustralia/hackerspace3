@@ -17,8 +17,12 @@
             <%= visitable_label visitable %>
           </td>
           <td>
-            <%= link_to visitable.url, target: '_blank' do %>
-              <%= visitable.name %>
+            <% if visitable.url.present? %>
+              <%= link_to visitable.url, target: '_blank' do %>
+                <%= visitable.name %>
+              <% end %>
+            <% else %>
+              <%= visitable.name %> [NO URL PRESENT]
             <% end %>
           </td>
           <td>
