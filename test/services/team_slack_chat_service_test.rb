@@ -56,7 +56,7 @@ class TeamSlackChatServiceTest < ActiveSupport::TestCase
         }
       })
 
-    SlackApiWrapper.expects(:slack_conversatons_invite)
+    SlackApiWrapper.expects(:slack_conversations_invite)
       .with(channel_id: slack_channel_id, slack_user_ids: slack_user_ids)
       .returns({'ok' => true})
 
@@ -81,7 +81,7 @@ class TeamSlackChatServiceTest < ActiveSupport::TestCase
     end
   end
 
-  test 'team_slack_chat_url slack_channel_id slack_conversatons_invite fail' do
+  test 'team_slack_chat_url slack_channel_id slack_conversations_invite fail' do
     teams(:one).update! slack_channel_id: nil
     slack_channel_id = 'slack channel id'
     slack_channel_name = teams(:one).current_project.slack_channel_name
@@ -97,7 +97,7 @@ class TeamSlackChatServiceTest < ActiveSupport::TestCase
         }
       })
 
-    SlackApiWrapper.expects(:slack_conversatons_invite)
+    SlackApiWrapper.expects(:slack_conversations_invite)
       .with(channel_id: slack_channel_id, slack_user_ids: slack_user_ids)
       .returns({'ok' => false, 'error' => 'error message'})
 

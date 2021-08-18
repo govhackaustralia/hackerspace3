@@ -84,7 +84,7 @@ class ProjectsControllerTest < ActionDispatch::IntegrationTest
         }
       })
 
-    SlackApiWrapper.expects(:slack_conversatons_invite)
+    SlackApiWrapper.expects(:slack_conversations_invite)
       .with(channel_id: slack_channel_id, slack_user_ids: slack_user_ids)
       .returns({'ok' => true})
 
