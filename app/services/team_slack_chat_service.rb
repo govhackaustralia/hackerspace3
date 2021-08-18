@@ -13,10 +13,9 @@ class TeamSlackChatService
 
   def team_slack_chat_url
     raise 'team unable to chat' unless can_chat?
-    slack_channel_id = team.slack_channel_id
-    slack_channel_id ||= connect_team_to_slack
+    connect_team_to_slack unless team.slack_channel_id.present?
 
-    "slack://channel?id=#{slack_channel_id}&team=#{ENV['SLACK_TEAM_ID']}"
+    "slack://channel?id=#{team.slack_channel_id}&team=#{ENV['SLACK_TEAM_ID']}"
   end
 
   private
