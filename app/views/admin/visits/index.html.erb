@@ -12,6 +12,7 @@
     <tbody>
       <% @visit_counts.each do |(type, id), count| %>
         <% visitable = visitable(@visits, type, id) %>
+        <% next if visitable.nil? %>
         <tr>
           <td>
             <%= visitable_label visitable %>
