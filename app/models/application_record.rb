@@ -3,7 +3,7 @@ class ApplicationRecord < ActiveRecord::Base
 
   # Converts a string to uri friendly string.
   def uri_pritty(string)
-    CGI.escape((string.split(/\W/) - ['']).join('-').downcase)
+    CGI.escape((string.split(/\W/) - ['']).join('_').downcase)
   end
 
   # Checks to see if an identifier has been taken.
