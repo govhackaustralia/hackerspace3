@@ -22,7 +22,7 @@ class UserSeeder < Seeder
 
   def self.create_admin competition
     user = User.find_by_email(admin_email)
-    user.make_site_admin competition, user.holder_for(competition)
+    user.make_site_admin competition
   end
 
   def self.create_users size

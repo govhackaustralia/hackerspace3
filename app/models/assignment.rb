@@ -29,12 +29,13 @@ class Assignment < ApplicationRecord
   scope :volunteers, -> { where title: VOLUNTEER }
   scope :judgeables, -> { where title: [VOLUNTEER, ADMIN, JUDGE] }
 
-  before_validation :check_competition
+  before_validation :check_competition, :check_holder
 
   validates :user_id, uniqueness: { scope: %i[assignable_id assignable_type title] }
   validates :title, inclusion: { in: VALID_ASSIGNMENT_TITLES }
   validate :can_only_join_team_if_registered_for_a_competition_event
   validate :correct_competition
+  validate :correct_holder
   validate :cant_exceed_badge_capacity
   validate :cant_exceed_the_team_limit
 
@@ -92,6 +93,20 @@ class Assignment < ApplicationRecord
     self.competition_id = correct_competition_id
   end
 
+  def check_holder
+    return unless holder_id.nil?
+
+    self.holder_id = correct_holder_id
+  end
+
+  def correct_holder
+    return if user_id.nil? || competition_id.nil?
+
+    return if correct_holder_id == holder_id
+
+    errors.add :holder, 'The Holder is not correct'
+  end
+
   # A validation to check that the competition that was attached to the
   # assignment was the correct one as per the assignable entity
   def correct_competition
@@ -105,5 +120,9 @@ class Assignment < ApplicationRecord
     return assignable_id if assignable_type == 'Competition'
 
     assignable.competition.id
+  end
+
+  def correct_holder_id
+    Holder.find_or_create_by(user_id: user_id, competition_id: competition_id).id
   end
 end

@@ -48,7 +48,6 @@ class TeamManagement::Teams::AssignmentsController < TeamManagement::TeamsContro
 
   def new_invitee_assignment
     @assignment = @team.assignments.team_invitees.new assignment_params
-    @assignment.holder = @holder
   end
 
   def search_for_existing_assignment

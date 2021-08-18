@@ -201,8 +201,8 @@ class User < ApplicationRecord
   end
 
   # Assigns a user the assignment of site admin.
-  def make_site_admin(competition, holder)
-    competition.assignments.find_or_create_by user: self, title: ADMIN, holder: holder
+  def make_site_admin(competition)
+    competition.assignments.find_or_create_by! user: self, title: ADMIN, holder: holder_for(competition)
   end
 
   # Returns a display name in order of system preference.

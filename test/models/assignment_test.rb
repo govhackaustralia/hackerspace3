@@ -86,6 +86,18 @@ class AssignmentTest < ActiveSupport::TestCase
     assert assignment.persisted?
   end
 
+  test 'validation correct holder' do
+    assert_raises ActiveRecord::RecordInvalid do
+      assignments(:management_team).update! holder: holders(:two)
+    end
+  end
+
+  test 'holder added before save' do
+    assignments(:management_team).holder = nil
+    assignments(:management_team).save!
+    assert assignments(:management_team).present?
+  end
+
   test 'only_one_team_leader_assignment' do
     Registration.fourth.update status: ATTENDING
     @team_member_assignment.update! title: TEAM_LEADER
