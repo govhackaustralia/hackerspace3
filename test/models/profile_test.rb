@@ -37,11 +37,11 @@ class ProfileTest < ActiveSupport::TestCase
   test 'update_identifier callback' do
     @profile.touch
     @profile.reload
-    assert_equal 'user-number-one', @profile.identifier
+    assert_equal 'user_number_one', @profile.identifier
 
     @user.update preferred_name: 'example name'
     @profile.reload
-    assert_equal 'example-name', @profile.identifier
+    assert_equal 'example_name', @profile.identifier
   end
 
   test 'accept_code_of_conduct_before_publish' do
