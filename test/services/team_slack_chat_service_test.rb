@@ -22,15 +22,6 @@ class TeamSlackChatServiceTest < ActiveSupport::TestCase
     assert_not TeamSlackChatService.new(teams(:two)).can_chat?
   end
 
-  test 'team_slack_chat_url raise' do
-    assert teams(:two).slack_channel_id.nil?
-    assert teams(:two).confirmed_slack_profiles.empty?
-
-    assert_raises RuntimeError do
-      TeamSlackChatService.new(teams(:two)).team_slack_chat_url
-    end
-  end
-
   test 'team_slack_chat_url slack_channel_id present' do
     assert teams(:one).slack_channel_id.present?
 
