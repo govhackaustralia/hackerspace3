@@ -5,9 +5,4 @@ class StaticPagesControllerTest < ActionDispatch::IntegrationTest
     get terms_and_conditions_url
     assert_response :success
   end
-
-  test 'code of conduct' do
-    get code_of_conduct_url
-    assert_response :success
-  end
 end
