@@ -72,7 +72,6 @@ class ProjectsControllerTest < ActionDispatch::IntegrationTest
 
     slack_channel_id = 'slack channel id'
     slack_channel_name = @team.current_project.slack_channel_name
-    slack_user_ids = @team.confirmed_slack_profiles.pluck(:slack_user_id).join(',')
 
     SlackApiWrapper.expects(:slack_conversatons_create)
       .with(slack_channel_name)
@@ -84,13 +83,9 @@ class ProjectsControllerTest < ActionDispatch::IntegrationTest
         }
       })
 
-    SlackApiWrapper.expects(:slack_conversations_invite)
-      .with(channel_id: slack_channel_id, slack_user_ids: slack_user_ids)
-      .returns({'ok' => true})
-
-    SlackApiWrapper.expects(:slack_conversatons_set_topic)
-      .with(channel_id: slack_channel_id)
-      .returns({'ok' => true})
+    FinishTeamSlackChannelJob.expects(:perform_later)
+      .with(@team)
+      .returns(true)
 
     sign_in users :one
     post slack_chat_project_url @project.identifier

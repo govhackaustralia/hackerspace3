@@ -44,7 +44,6 @@ class TeamSlackChatServiceTest < ActiveSupport::TestCase
     teams(:one).update! slack_channel_id: nil
     slack_channel_id = 'slack channel id'
     slack_channel_name = teams(:one).current_project.slack_channel_name
-    slack_user_ids = teams(:one).confirmed_slack_profiles.pluck(:slack_user_id).join(',')
 
     SlackApiWrapper.expects(:slack_conversatons_create)
       .with(slack_channel_name)
@@ -56,13 +55,9 @@ class TeamSlackChatServiceTest < ActiveSupport::TestCase
         }
       })
 
-    SlackApiWrapper.expects(:slack_conversations_invite)
-      .with(channel_id: slack_channel_id, slack_user_ids: slack_user_ids)
-      .returns({'ok' => true})
-
-    SlackApiWrapper.expects(:slack_conversatons_set_topic)
-      .with(channel_id: slack_channel_id)
-      .returns({'ok' => true})
+    FinishTeamSlackChannelJob.expects(:perform_later)
+      .with(teams(:one))
+      .returns(true)
 
     assert_equal(
       "slack://channel?id=#{slack_channel_id}&team=#{ENV['SLACK_TEAM_ID']}",
@@ -78,31 +73,6 @@ class TeamSlackChatServiceTest < ActiveSupport::TestCase
 
     SlackApiWrapper.expects(:slack_conversatons_create)
       .with(slack_channel_name)
-      .returns({'ok' => false, 'error' => 'error message'})
-
-    assert_raises RuntimeError do
-      TeamSlackChatService.new(teams(:one)).team_slack_chat_url
-    end
-  end
-
-  test 'team_slack_chat_url slack_channel_id slack_conversations_invite fail' do
-    teams(:one).update! slack_channel_id: nil
-    slack_channel_id = 'slack channel id'
-    slack_channel_name = teams(:one).current_project.slack_channel_name
-    slack_user_ids = teams(:one).confirmed_slack_profiles.pluck(:slack_user_id).join(',')
-
-    SlackApiWrapper.expects(:slack_conversatons_create)
-      .with(slack_channel_name)
-      .returns({
-        'ok' => true,
-        'channel' => {
-          'id' => slack_channel_id,
-          'name' => slack_channel_name
-        }
-      })
-
-    SlackApiWrapper.expects(:slack_conversations_invite)
-      .with(channel_id: slack_channel_id, slack_user_ids: slack_user_ids)
       .returns({'ok' => false, 'error' => 'error message'})
 
     assert_raises RuntimeError do
