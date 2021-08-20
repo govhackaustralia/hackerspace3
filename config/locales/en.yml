@@ -66,4 +66,7 @@ en:
         short_url: Short URL
       sponsor:
         url: Website
+      challenge:
+        video_url: Embedded Youtube URL
+
   hello: "Hello world"
