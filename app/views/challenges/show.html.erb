@@ -12,7 +12,7 @@
     <aside class="sponsors">
       <% @sponsors.each do |sponsor| %>
         <figure>
-          <%= link_to visits_path(visit: {visitable_type: 'Sponsor', visitable_id: sponsor.id}), method: :post, target: '_blank' do %>
+          <%= link_to visits_path(visit: {visitable_type: 'Sponsor', visitable_id: sponsor.id}), target: '_blank' do %>
             <% if sponsor.logo.attached? %>
               <%= image_tag url_for sponsor.logo %>
             <% else %>
@@ -52,7 +52,7 @@
             <p>
               <strong><%= data_set.name %></strong>
             </p>
-            <p><%= link_to "Go to Dataset", visits_path(visit: {visitable_type: 'DataSet', visitable_id: data_set.id}), method: :post %></p>
+            <p><%= link_to "Go to Dataset", visits_path(visit: {visitable_type: 'DataSet', visitable_id: data_set.id}) %></p>
           </div>
         <% end %>
       <% end %>

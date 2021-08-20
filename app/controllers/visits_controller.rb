@@ -1,5 +1,5 @@
 class VisitsController < ApplicationController
-  def create
+  def index
     visit = Visit.create(visit_params)
     redirect_to visit.visitable.url
   end

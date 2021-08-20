@@ -1,9 +1,9 @@
 require 'test_helper'
 
 class VisitsControllerTest < ActionDispatch::IntegrationTest
-  test 'post create data set visit' do
+  test 'get create data set visit' do
     assert_difference 'Visit.count' do
-      post visits_path(params: {
+      get visits_path(params: {
         visit: {
           visitable_id: 1,
           visitable_type: 'DataSet'
@@ -13,9 +13,9 @@ class VisitsControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to data_sets(:one).url
   end
 
-  test 'post create resource visit' do
+  test 'get create resource visit' do
     assert_difference 'Visit.count' do
-      post visits_path(params: {
+      get visits_path(params: {
         visit: {
           visitable_id: 1,
           visitable_type: 'Resource'
@@ -25,9 +25,9 @@ class VisitsControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to resources(:one).url
   end
 
-  test 'post create sponsor visit' do
+  test 'get create sponsor visit' do
     assert_difference 'Visit.count' do
-      post visits_path(params: {
+      get visits_path(params: {
         visit: {
           visitable_id: 1,
           visitable_type: 'Sponsor'
