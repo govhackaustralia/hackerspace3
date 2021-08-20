@@ -4,6 +4,12 @@ class Admin::EventsController < ApplicationController
   def index
     @events = @competition.events.preload(:region, :attending_registrations, :registrations)
     @admin_privileges = current_user.admin_privileges? @competition
+    @published_user_ids = Assignment.where(assignable: @competition.teams.published)
+      .pluck(:user_id).uniq
+    @participant_counts = @competition.competition_registrations
+      .joins(:assignment)
+      .where(status: ATTENDING, assignments: {user_id: @published_user_ids})
+      .group('events.id').count
   end
 
   private

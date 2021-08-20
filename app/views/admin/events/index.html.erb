@@ -13,6 +13,7 @@
       <th>End Date</th>
       <th>End Time</th>
       <th>Attending Registrations / Total Registrations</th>
+      <th>Particpiants Published Teams (Total: <%= @published_user_ids.length %>)</th>
     </thead>
     <tbody>
       <% @events.each do |event| %>
@@ -43,6 +44,7 @@
             <%= event.end_time&.strftime('%H:%M') %>
           </td>
           <td><%= event.attending_registrations.length %> / <%= event.registrations.length %></td>
+          <td><%= @participant_counts[event.id] %></td>
         </tr>
       <% end %>
     </tbody>
