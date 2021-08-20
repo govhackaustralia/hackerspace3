@@ -38,7 +38,7 @@
           <small>we need your current password to confirm your changes.</small>
         </div>
         <div class="actions">
-          <%= f.submit "Update" %>
+          <%= f.submit "Update", class: 'blue' %>
         </div>
       <% end %>
       <div class="links">
@@ -48,11 +48,11 @@
       </div>
     </section>
     <hr/>
-    <section>
+    <section class="signup-form">
       <h3>Cancel my account</h3>
       <p>Unhappy?</p>
       <div class="actions">
-        <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %>
+        <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete, class: 'black'%>
       </div>
     </section>
   </container>
