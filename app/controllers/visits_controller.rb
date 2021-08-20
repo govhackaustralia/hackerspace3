@@ -1,7 +1,11 @@
 class VisitsController < ApplicationController
   def index
     visit = Visit.create(visit_params)
-    redirect_to visit.visitable.url
+    if visit.visitable.url.present?
+      redirect_to visit.visitable.url
+    else
+      redirect_to root_path, alert: 'No URL to navigate to 😬'
+    end
   end
 
   private

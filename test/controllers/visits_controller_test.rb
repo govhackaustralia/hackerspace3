@@ -36,4 +36,17 @@ class VisitsControllerTest < ActionDispatch::IntegrationTest
     end
     assert_redirected_to sponsors(:one).url
   end
+
+  test 'get create sponsor no url' do
+    sponsors(:one).update! url: nil
+    assert_difference 'Visit.count' do
+      get visits_path(params: {
+        visit: {
+          visitable_id: 1,
+          visitable_type: 'Sponsor'
+        }
+      })
+    end
+    assert_redirected_to root_path
+  end
 end
