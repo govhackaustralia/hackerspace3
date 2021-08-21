@@ -21,7 +21,7 @@ class Competition < ApplicationRecord
 
   has_many :teams, through: :events
   has_many :projects_by_name, through: :events
-  has_many :published_projects_by_name, through: :events
+  has_many :published_projects_by_name_with_entries_and_assignments, through: :events
   has_many :projects, through: :teams
   has_many :team_data_sets, through: :teams
   has_many :challenges, through: :regions

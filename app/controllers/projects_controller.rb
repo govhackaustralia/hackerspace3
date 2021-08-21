@@ -3,7 +3,7 @@ class ProjectsController < ApplicationController
   before_action :authenticate_user!, :check_slack_chat!, only: :slack_chat
 
   def index
-    @projects = @competition.published_projects_by_name
+    @projects = @competition.published_projects_by_name_with_entries_and_assignments
       .preload(:event, :team)
       .includes(:tags)
     @teams = Team.where(id: @projects.pluck(:team_id))

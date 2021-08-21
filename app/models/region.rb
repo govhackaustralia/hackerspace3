@@ -22,7 +22,7 @@ class Region < ApplicationRecord
   has_many :assignments, as: :assignable, dependent: :destroy
   has_many :events
   has_many :teams, through: :events
-  has_many :published_projects_by_name, through: :events
+  has_many :published_projects_by_name_with_entries_and_assignments, through: :events
   has_many :entries, through: :teams
   has_many :sponsorships, as: :sponsorable, dependent: :destroy
   has_many :sponsorship_types, through: :sponsorships

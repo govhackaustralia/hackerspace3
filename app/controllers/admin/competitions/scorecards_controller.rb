@@ -4,7 +4,7 @@ class Admin::Competitions::ScorecardsController < ApplicationController
   def index
     @project_judging_total = @competition.score_total PROJECT
     @teams = @competition.teams.published
-    @projects = @competition.published_projects_by_name.preload :event
+    @projects = @competition.published_projects_by_name_with_entries_and_assignments.preload :event
     @region_helper = Header.region_helper(
       @competition, @teams, PROJECT, params[:include_judges] == true.to_s
     )

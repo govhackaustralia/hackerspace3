@@ -47,6 +47,7 @@ class CompetitionTest < ActiveSupport::TestCase
     assert @competition.users.include? users(:one)
     assert @competition.profiles.include? profiles(:one)
     assert @competition.teams.include? @team
+    assert @competition.published_projects_by_name_with_entries_and_assignments.include? @project
     assert @competition.projects.include? @project
     assert @competition.team_data_sets.include? @team_data_set
     assert @competition.challenges.include? @challenge

@@ -34,7 +34,7 @@ class RegionTest < ActiveSupport::TestCase
     assert @national.assignments.include? @assignment
     assert @regional.events.include? @event
     assert @regional.teams.include? @team
-    assert @regional.published_projects_by_name.include? @published_project
+    assert @regional.published_projects_by_name_with_entries_and_assignments.include? @published_project
     assert @regional.entries.include? @entry
     assert @national.sponsorships.include? @sponsorship
     assert @national.sponsorship_types.include? @sponsorship_type
