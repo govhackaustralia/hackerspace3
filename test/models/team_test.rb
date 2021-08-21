@@ -74,12 +74,15 @@ class TeamTest < ActiveSupport::TestCase
     assert_raises(ActiveRecord::RecordNotFound) { @entry.reload }
   end
 
-  test 'team scopes' do
+  test 'team scopes published' do
     assert Team.published.include? @team
     assert Team.unpublished.exclude? @team
     @team.update published: false
     assert Team.published.exclude? @team
     assert Team.unpublished.include? @team
+  end
+
+  test 'team scopes competition' do
     assert Team.competition(@competition).include? @team
   end
 
