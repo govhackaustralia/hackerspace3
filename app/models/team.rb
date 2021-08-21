@@ -40,6 +40,9 @@ class Team < ApplicationRecord
   scope :published, -> { where published: true }
   scope :unpublished, -> { where published: false }
 
+  scope :with_assignments, lambda {
+    joins(:assignments).where.not(assignments: {id: nil}).distinct
+  }
   scope :competition, lambda { |competition|
     joins(event: :region).where(regions: { competition: competition })
   }
