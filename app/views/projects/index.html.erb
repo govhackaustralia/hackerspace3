@@ -47,6 +47,7 @@
       </thead>
       <tbody>
         <% @projects.each do |project| %>
+          <% next if project.identifier.nil? %>
           <tr>
             <td>
               <%= link_to "#{project.project_name}", project_path(project.identifier) %>
