@@ -39,6 +39,8 @@ class EventTest < ActiveSupport::TestCase
     assert @event.participant_registrations.include? @registration
     assert @event.vip_registrations.include? @vip_registration
     assert @event.attending_registrations.include? @registration
+    assert events(:two).published_teams_with_entries_and_assignments.include? @team
+    assert events(:two).published_projects_by_name_with_entries_and_assignments.include? @team.current_project
     @event.destroy
     assert_raises(ActiveRecord::RecordNotFound) { @event_partnership.reload }
     assert_raises(ActiveRecord::RecordNotFound) { @assignment.reload }

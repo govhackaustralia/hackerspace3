@@ -21,8 +21,13 @@ class Event < ApplicationRecord
   has_many :entries, through: :teams
   has_many :projects_by_name, -> { order :project_name }, through: :teams, source: :current_project
 
-  has_many :published_teams, -> { published }, class_name: 'Team'
-  has_many :published_projects_by_name, -> { order :project_name }, through: :published_teams, source: :current_project
+  has_many :published_teams_with_entries_and_assignments, lambda {
+    published.with_entries.with_assignments
+  }, class_name: 'Team'
+  has_many :published_projects_by_name_with_entries_and_assignments,
+    -> { order :project_name },
+    through: :published_teams_with_entries_and_assignments,
+    source: :current_project
 
   has_many :bulk_mails, as: :mailable, dependent: :destroy
 
