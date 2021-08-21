@@ -43,6 +43,10 @@ class Team < ApplicationRecord
   scope :with_assignments, lambda {
     joins(:assignments).where.not(assignments: {id: nil}).distinct
   }
+  scope :with_entries, lambda {
+    joins(:entries).where.not(entries: {id: nil}).distinct
+  }
+
   scope :competition, lambda { |competition|
     joins(event: :region).where(regions: { competition: competition })
   }
