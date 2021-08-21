@@ -46,10 +46,13 @@ class EventTest < ActiveSupport::TestCase
     assert_raises(ActiveRecord::RecordNotFound) { @bulk_mail.reload }
   end
 
-  test 'event scopes' do
+  test 'event scopes published' do
     assert Event.published.include? @event
     @event.update published: false
     assert Event.published.exclude? @event
+  end
+
+  test 'event scopes past future' do
     @event.update start_time: Time.now.in_time_zone(COMP_TIME_ZONE) - 1.week,
                   end_time: Time.now.in_time_zone(COMP_TIME_ZONE) - 1.week
     assert Event.past.include? @event
@@ -58,6 +61,9 @@ class EventTest < ActiveSupport::TestCase
                   end_time: Time.now.in_time_zone(COMP_TIME_ZONE) + 1.week
     assert Event.future.include? @event
     assert Event.past.exclude? @event
+  end
+
+  test 'event scopes connections competitions awards conferences' do
     assert Event.connections.include? @event
     assert Event.competitions.include? @competition_event
     assert Event.conferences.include? events :conference
