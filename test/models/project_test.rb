@@ -34,4 +34,11 @@ class ProjectTest < ActiveSupport::TestCase
     @team.reload
     assert @team.current_project == project
   end
+
+  test 'update identifier saves identifier despite no url save characters' do
+    assert_not_equal '1', @project.identifier
+    @project.update! project_name: '...'
+    @project.reload
+    assert_equal '1', @project.identifier
+  end
 end

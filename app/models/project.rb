@@ -42,13 +42,15 @@ class Project < ApplicationRecord
   # This is done through the project model so that old identifiers will still
   # work when a team project changes its name.
   def update_identifier
-    new_identifier = uri_pritty project_name if available? new_identifier
-    new_identifier ||= uri_pritty "#{project_name}-#{team.id}"
+    new_identifier = uri_pritty project_name
+    new_identifier = uri_pritty "#{project_name}-#{team.id}" unless available? new_identifier
     update_columns identifier: new_identifier
   end
 
   # Checks to see if an identifier has been taken.
   def available?(new_identifier)
+    return false if new_identifier.blank?
+
     Project.where.not(team_id: team_id).where(identifier: new_identifier).none?
   end
 end
