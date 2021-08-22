@@ -16,10 +16,12 @@
       <% if (team_leader = @team.team_leader).present? %>
         <%= render 'users/user_contact', locals: { user: team_leader } %>
         <% if (assignment =  @team.leader_assignments.first).present? %>
-          <p>
-            <%= link_to 'Leave Team', users_membership_path(assignment),
-            method: :delete, data: { confirm: 'Are you sure?' }  %>
-          </p>
+          <% if team_leader == current_user %>
+            <p>
+              <%= link_to 'Leave Team', users_membership_path(assignment),
+              method: :delete, data: { confirm: 'Are you sure?' }  %>
+            </p>
+          <% end %>
         <% end %>
       <% else %>
         <strong>No team leader assigned for this team.</strong>
