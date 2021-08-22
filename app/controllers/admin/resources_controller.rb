@@ -45,7 +45,8 @@ class Admin::ResourcesController < ApplicationController
   private
 
   def resource_params
-    params.require(:resource).permit(:name, :position, :category, :url, :short_url)
+    params.require(:resource)
+      .permit(:name, :position, :category, :url, :short_url, :show_on_front_page)
   end
 
   def authorise_user!

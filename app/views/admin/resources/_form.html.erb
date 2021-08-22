@@ -22,6 +22,10 @@
     <%= form.label :position %>
     <%= form.number_field :position, min: 1 %>
   </div>
+  <div class="form-group">
+    <%= form.label :show_on_front_page %>
+    <%= form.check_box :show_on_front_page, checked: @resource.show_on_front_page %>
+  </div>
   <div class="actions">
     <%= form.submit %>
   </div>

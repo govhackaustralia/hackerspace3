@@ -10,6 +10,7 @@
     <thead>
       <th>Category</th>
       <th>Position</th>
+      <th>Show on Front Page</th>
       <th>Name</th>
       <th>Short Url</th>
       <th>Actions</th>
@@ -23,6 +24,7 @@
           <td>
             <%= resource.position %>
           </td>
+          <td><%= '✅' if resource.show_on_front_page %></td>
           <td>
             <%= resource.name %>
           </td>

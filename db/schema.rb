@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_18_143919) do
+ActiveRecord::Schema.define(version: 2021_08_22_015152) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -416,6 +416,8 @@ ActiveRecord::Schema.define(version: 2021_08_18_143919) do
     t.string "short_url"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.boolean "show_on_front_page"
+    t.index ["show_on_front_page"], name: "index_resources_on_show_on_front_page"
   end
 
   create_table "scores", force: :cascade do |t|

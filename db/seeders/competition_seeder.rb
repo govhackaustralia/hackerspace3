@@ -130,7 +130,8 @@ class CompetitionSeeder < Seeder
         position: time,
         name: "Tech #{time}",
         url: "https://www.tech#{time}.com",
-        short_url: "tech.#{time}"
+        short_url: "tech.#{time}",
+        show_on_front_page: random_boolean
       )
       [*0..2].sample.times do |time|
         competition.visits.create(
