@@ -71,7 +71,7 @@ class CompetitionTest < ActiveSupport::TestCase
     @competition.destroy!
 
     assert_raises(ActiveRecord::RecordNotFound) { resources(:one).reload }
-    assert_raises(ActiveRecord::RecordNotFound) { visits(:one).reload }
+    assert_raises(ActiveRecord::RecordNotFound) { visits(:resource).reload }
   end
 
   test 'competition belongs to associations' do
