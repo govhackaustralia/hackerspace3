@@ -123,7 +123,7 @@ class Admin::CompetitionsController < ApplicationController
     @attending_competition_registrations_count =
       @competition.competition_registrations.attending.count
     @attending_award_registrations_count =
-      @competition.award_registrations.attending.count 
+      @competition.award_registrations.attending.count
   end
 
   def competition_entity_counts
@@ -132,6 +132,7 @@ class Admin::CompetitionsController < ApplicationController
     @hunt_question_count = @competition.hunt_questions.count
     @data_portals_count = @competition.resources.data_portal.count
     @tech_count = @competition.resources.tech.count
+    @information_count = @competition.resources.information.count
     @visitable_counts = @competition.visits.group(:visitable_type).count
   end
 

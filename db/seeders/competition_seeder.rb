@@ -125,13 +125,28 @@ class CompetitionSeeder < Seeder
       end
     end
 
+    3.times do |time|
+      resource = competition.information.tech.create!(
+        position: time,
+        name: "Information #{time}",
+        url: "https://www.information#{time}.com",
+        short_url: "information.#{time}",
+        show_on_front_page: random_boolean
+      )
+      [*0..2].sample.times do |time|
+        competition.visits.create(
+          user: users.sample,
+          visitable: resource
+        )
+      end
+    end
+
     5.times do |time|
       resource = competition.resources.tech.create!(
         position: time,
         name: "Tech #{time}",
         url: "https://www.tech#{time}.com",
         short_url: "tech.#{time}",
-        show_on_front_page: random_boolean
       )
       [*0..2].sample.times do |time|
         competition.visits.create(

@@ -9,7 +9,8 @@ class Resource < ApplicationRecord
 
   enum category: {
     data_portal: 0,
-    tech: 1
+    tech: 1,
+    information: 2
   }
 
   private
