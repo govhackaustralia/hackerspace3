@@ -73,7 +73,7 @@ class Assignment < ApplicationRecord
   def cant_exceed_the_team_limit
     return unless assignable_type == 'Team'
 
-    return if assignable.assignments.count < MAX_TEAM_SIZE
+    return if assignable.assignments.count <= MAX_TEAM_SIZE
 
     errors.add :user, "Only #{MAX_TEAM_SIZE} members per team"
   end
