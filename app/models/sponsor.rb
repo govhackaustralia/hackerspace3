@@ -5,6 +5,7 @@ class Sponsor < ApplicationRecord
   has_many :sponsorships, dependent: :destroy
   has_many :event_partnerships, dependent: :destroy
   has_many :challenge_sponsorships, dependent: :destroy
+  has_many :visits, as: :visitable, dependent: :destroy
 
   has_one_attached :logo
 

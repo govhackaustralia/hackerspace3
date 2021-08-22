@@ -1,6 +1,8 @@
 class Resource < ApplicationRecord
   include Position
 
+  has_many :visits, as: :visitable, dependent: :destroy
+
   belongs_to :competition
 
   scope :show_on_front_page, -> { where show_on_front_page: true }

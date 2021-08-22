@@ -8,6 +8,11 @@ class ResourceTest < ActiveSupport::TestCase
 
   test 'resources associations' do
     assert_equal @competition, @resource.competition
+    assert @resource.visits.include? visits(:resource)
+
+    @resource.destroy!
+
+    assert_raises(ActiveRecord::RecordNotFound) { visits(:resource).reload }
   end
 
   test 'resources validations presence' do

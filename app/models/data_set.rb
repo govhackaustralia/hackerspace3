@@ -5,6 +5,7 @@ class DataSet < ApplicationRecord
   has_many :challenge_data_sets
   has_many :challenges, through: :challenge_data_sets
   has_many :sponsors, through: :challenges
+  has_many :visits, as: :visitable, dependent: :destroy
 
   scope :search, ->(term) {
     where 'data_sets.name ILIKE ? OR url ILIKE ? OR description ILIKE ?',

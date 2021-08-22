@@ -16,6 +16,11 @@ class DataSetTest < ActiveSupport::TestCase
     assert @data_set.challenge_data_sets.include? @challenge_data_set
     assert @data_set.challenges.include? @challenge
     assert @data_set.sponsors.include? @sponsor
+    assert @data_set.visits.include? visits(:data_set)
+
+    @data_set.destroy!
+
+    assert_raises(ActiveRecord::RecordNotFound) { visits(:data_set).reload }
   end
 
   test 'data set scopes' do

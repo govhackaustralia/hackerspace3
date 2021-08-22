@@ -13,3 +13,10 @@ data_set:
   visitable_type: DataSet
   user_id: 1
   competition_id: 1
+
+sponsor:
+  id: 3
+  visitable_id: 1
+  visitable_type: Sponsor
+  user_id:
+  competition_id: 1

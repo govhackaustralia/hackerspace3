@@ -16,8 +16,12 @@ class SponsorTest < ActiveSupport::TestCase
     assert @sponsor.sponsorships.include? @sponsorship
     assert @sponsor.event_partnerships.include? @event_partnership
     assert @sponsor.challenge_sponsorships.include? @challenge_sponsorship
+    assert @sponsor.visits.include? visits(:sponsor)
+
     @sponsor.destroy
+
     assert_raises(ActiveRecord::RecordNotFound) { @assignment.reload }
+    assert_raises(ActiveRecord::RecordNotFound) { visits(:sponsor).reload }
   end
 
   test 'sponsor validations' do
