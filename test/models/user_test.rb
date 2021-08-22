@@ -59,7 +59,7 @@ class UserTest < ActiveSupport::TestCase
     @user.destroy
     assert_raises(ActiveRecord::RecordNotFound) { @assignment.reload }
     assert_raises(ActiveRecord::RecordNotFound) { @profile.reload }
-    assert_raises(ActiveRecord::RecordNotFound) { visits(:one).reload }
+    assert_raises(ActiveRecord::RecordNotFound) { visits(:resource).reload }
   end
 
   test 'user joined associations' do
