@@ -39,6 +39,25 @@ class Team < ApplicationRecord
 
   scope :published, -> { where published: true }
   scope :unpublished, -> { where published: false }
+  scope :with_assignments, lambda {
+    joins(:assignments)
+      .where('EXISTS(
+        SELECT assignments.assignable_id
+        FROM assignments
+        WHERE
+          teams.id = assignments.assignable_id
+        AND
+          assignments.assignable_type = ?
+        )', 'Team').distinct
+    }
+    scope :with_entries, lambda {
+      joins(:entries)
+        .where('EXISTS(
+          SELECT entries.team_id
+          FROM entries
+          WHERE teams.id = entries.team_id
+        )').distinct
+    }
 
   scope :competition, lambda { |competition|
     joins(event: :region).where(regions: { competition: competition })

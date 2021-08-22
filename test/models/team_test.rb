@@ -86,6 +86,22 @@ class TeamTest < ActiveSupport::TestCase
     assert Team.competition(@competition).include? @team
   end
 
+  test 'team scopes with_assignments' do
+    assert_equal 3, @team.assignments.count
+    assert_equal 2, Team.with_assignments.count
+    assert Team.with_assignments.include? @team
+    @team.assignments.destroy_all
+    assert Team.with_assignments.exclude? @team
+  end
+
+  test 'team scopes with_entries' do
+    assert_equal 3, @team.entries.count
+    assert_equal 1, Team.with_entries.count
+    assert Team.with_entries.include? @team
+    @team.entries.destroy_all
+    assert Team.with_entries.exclude? @team
+  end
+
   test 'member_competition_events' do
     assert @team.member_competition_events.include? @event
   end
