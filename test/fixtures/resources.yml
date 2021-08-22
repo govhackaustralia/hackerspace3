@@ -17,8 +17,18 @@ one:
 two:
   id: 2
   competition_id: 1
-  position: 1
+  position: 2
   category: 1
   name: resource 2
   url: www.url2.com
   short_url: url2
+
+information:
+  id: 3
+  competition_id: 1
+  position: 3
+  category: 2
+  name: resource 3
+  url: www.url3.com
+  short_url: url3
+  show_on_front_page: true

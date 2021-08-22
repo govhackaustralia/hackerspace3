@@ -25,6 +25,11 @@ class ResourceTest < ActiveSupport::TestCase
     end
   end
 
+  test 'scopes' do
+    assert Resource.show_on_front_page.include? resources(:information)
+    assert Resource.show_on_front_page.exclude? resources(:one)
+  end
+
   test 'resources validations uniqueness' do
     resource_two = resources(:two)
     assert_raises(ActiveRecord::RecordInvalid) do

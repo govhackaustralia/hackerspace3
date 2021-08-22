@@ -29,18 +29,11 @@
         </article>
       <% end %>
     <% end %>
-    <% if @competition.year == 2021 %>
-      <%= link_to 'https://govhack.org/lifehacks/', target: '_blank' do %>
+    <% @information.each do |information| %>
+      <%= link_to visits_path(visit: {visitable_type: 'Resource', visitable_id: information.id}), target: '_blank' do %>
         <article>
           <div>
-            <h3>#lifehacks Photo Competition</h3>
-          </div>
-        </article>
-      <% end %>
-      <%= link_to 'https://govhack.org/howtocompete/handbook/', target: '_blank' do %>
-        <article>
-          <div>
-            <h3>GovHack Handbook</h3>
+            <h3><%= information.name %></h3>
           </div>
         </article>
       <% end %>

@@ -126,7 +126,7 @@ class CompetitionSeeder < Seeder
     end
 
     3.times do |time|
-      resource = competition.information.tech.create!(
+      resource = competition.resources.information.create!(
         position: time,
         name: "Information #{time}",
         url: "https://www.information#{time}.com",

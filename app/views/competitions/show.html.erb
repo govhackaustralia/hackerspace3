@@ -5,14 +5,9 @@
   </h2>
   <nav>
     <section>
-      <% if @competition.year == 2021 %>
+      <% @resources.each do |resource| %>
         <div>
-          <%= link_to 'GovHack Handbook', 'https://govhack.org/howtocompete/handbook/', target: '_blank' %>
-        </div>
-      <% end %>
-      <% if @competition.year == 2021 %>
-        <div>
-          <%= link_to '#lifehacks Photo Competition', 'https://govhack.org/lifehacks/', target: '_blank' %>
+          <%= link_to resource.name, visits_path(visit: {visitable_type: 'Resource', visitable_id: resource.id}), target: '_blank' %>
         </div>
       <% end %>
       <% if @competition.hunt_published %>
@@ -53,9 +48,6 @@
       <% if @competition.current %>
         <div>
           <%= link_to 'Resources', resources_path %>
-        </div>
-        <div>
-          <%= link_to 'Competition Rules', 'https://govhack.org/howtocompete/competition-rules-and-code-of-conduct/', target: 'blank' %>
         </div>
       <% end %>
     </section>
