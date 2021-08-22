@@ -1,4 +1,4 @@
-<% content_for :title, "Update #{@team.name} High Resolution Image" %>
+<% content_for :title, "Update #{@team.name} Project Image" %>
 <main class="team_page">
   <section>
     <h2>
@@ -7,21 +7,21 @@
     <%= form_for [:team_management, @team], url: update_image_team_management_team_path(@team) do |form| %>
       <div class="field">
         <% if @team.high_res_image.attached? %>
-          <img alt="<%= @team.name %> High Resolution Image" src="<%= url_for(@team.high_res_image) %>"/>
+          <img alt="<%= @team.name %> Project Image" src="<%= url_for(@team.high_res_image) %>"/>
         <% else %>
           <%= image_tag "default_profile_pic.png" %>
         <% end %>
       </div>
       <div class="field">
-        <%= form.label :high_res_image, 'Upload a High Resolution Image (only png/gif/jpeg/jpg)' %>
+        <%= form.label :high_res_image, 'Upload a Project Image (only png/gif/jpeg/jpg)' %>
         <%= form.file_field :high_res_image, accept: 'image/png,image/gif,image/jpeg' %>
       </div>
       <div class="actions">
         <%= hidden_field_tag(:high_res_image, true) %>
         <% if @team.high_res_image.attached? %>
-          <%= form.submit 'Replace High Res Image' %>
+          <%= form.submit 'Replace Project Image' %>
         <% else %>
-          <%= form.submit 'Upload High Res Image' %>
+          <%= form.submit 'Upload Project Image' %>
         <% end %>
       </div>
     <% end %>
