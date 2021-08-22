@@ -35,6 +35,15 @@ class ProjectTest < ActiveSupport::TestCase
     assert @team.current_project == project
   end
 
+  test 'strip_team_and_project_name' do
+    projects(:one).update! project_name: '  project name ', team_name: '   team name  '
+
+    projects(:one).reload
+
+    assert_equal 'project name', projects(:one).project_name
+    assert_equal 'team name', projects(:one).team_name
+  end
+
   test 'update identifier saves identifier despite no url save characters' do
     assert_not_equal '1', @project.identifier
     @project.update! project_name: '...'

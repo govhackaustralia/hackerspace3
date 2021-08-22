@@ -7,10 +7,12 @@ class Project < ApplicationRecord
 
   scope :search, ->(term) { where 'team_name ILIKE ? OR project_name ILIKE ?', "%#{term}%", "%#{term}%" }
 
+  before_validation :strip_team_and_project_name
+
   validates :team_name, :project_name, presence: true
 
   after_create_commit :update_team_current_project
-  
+
   after_save_commit :update_entries_eligible, :update_identifier, :update_slack_channel_name
 
   acts_as_ordered_taggable
@@ -26,6 +28,11 @@ class Project < ApplicationRecord
   end
 
   private
+
+  def strip_team_and_project_name
+    self.team_name = team_name.strip unless team_name.nil?
+    self.project_name = project_name.strip unless project_name.nil?
+  end
 
   # Make the latest project created the current project.
   def update_team_current_project
