@@ -39,7 +39,7 @@ class UserSeeder < Seeder
         dietary_requirements: ("No #{Faker::Food.dish}" if number % 3 == 0),
         tshirt_size: 'Small',
         slack: "@#{first_name}#{Faker::Food.spice.camelize(:lower)}",
-        mailing_list: random_boolean,
+        mailing_list: false,
         challenge_sponsor_contact_place: random_boolean,
         challenge_sponsor_contact_enter: random_boolean,
         my_project_sponsor_contact: random_boolean,
