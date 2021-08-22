@@ -111,6 +111,7 @@ class Admin::CompetitionsController < ApplicationController
     @teams_count = @competition.teams.count
     event_and_registration_counts
     competition_entity_counts
+    resource_counts
     sponsoresk_counts
   end
 
@@ -131,6 +132,9 @@ class Admin::CompetitionsController < ApplicationController
     @badge_count = @competition.badges.count
     @hunt_question_count = @competition.hunt_questions.count
     @data_portals_count = @competition.resources.data_portal.count
+  end
+
+  def resource_counts
     @tech_count = @competition.resources.tech.count
     @information_count = @competition.resources.information.count
     @visitable_counts = @competition.visits.group(:visitable_type).count
