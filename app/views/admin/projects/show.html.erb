@@ -8,8 +8,8 @@
   <% else %>
     <p>
       <%= link_to 'Make this the current version',
-      update_version_admin_competition_team_path(
-      ), method: :patch, data: { confirm: 'Are you sure?' }    %>
+        update_version_admin_competition_team_path(@competition, @team, project_id: @project),
+        method: :patch, data: { confirm: 'Are you sure?' } %>
     </p>
   <% end %>
   <p>Created At: <%= @project.created_at %></p>
