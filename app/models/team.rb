@@ -153,7 +153,7 @@ class Team < ApplicationRecord
     if challenge_type == REGIONAL
       available_regional_challenges
     else
-      available_international_challenges
+      available_national_challenges
     end
   end
 
@@ -200,9 +200,19 @@ class Team < ApplicationRecord
       .where.not(id: regional_entries.pluck(:challenge_id))
   end
 
-  def available_international_challenges
-    competition.international_region.challenges.not_unapproved
+  def available_national_challenges
+    competition.international_region.challenges
+      .or(national_region.challenges)
+      .not_unapproved
       .where.not(id: national_entries.pluck(:challenge_id))
+  end
+
+  def national_region
+    return region if region.national?
+
+    raise 'No National!' unless region.parent.national?
+
+    region.parent
   end
 
   # Will check to see that all challenges are still eligible if team event
