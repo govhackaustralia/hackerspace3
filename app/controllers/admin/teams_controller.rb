@@ -25,8 +25,11 @@ class Admin::TeamsController < ApplicationController
   end
 
   def update_published
-    @team.update published: params[:published]
-    flash[:notice] = "Team #{'un' unless @team.published }published"
+    if @team.update published: !@team.published
+      flash[:notice] = "Team #{'un' unless @team.published }published"
+    else
+      flash[:error] = @team.errors.full_messages.to_sentence
+    end
     redirect_to admin_competition_team_path @competition, @team
   end
 
