@@ -33,7 +33,7 @@ class Admin::Challenges::JudgesController < ApplicationController
       flash[:notice] = 'New judge assigned'
       redirect_to admin_region_challenge_path @challenge.region, @challenge
     else
-      @judge.errors.full_messages.to_sentence
+      flash[:error] = @judge.errors.full_messages.to_sentence
       render :new
     end
   end
