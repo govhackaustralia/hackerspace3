@@ -10,7 +10,6 @@ class Admin::Challenges::JudgesController < ApplicationController
 
   def create
     @judge = @challenge.assignments.judges.new assignment_params
-    @judge.holder = @holder
     save_new_judge
   end
 
