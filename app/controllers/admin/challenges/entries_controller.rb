@@ -7,6 +7,10 @@ class Admin::Challenges::EntriesController < ApplicationController
     team_project_entries
     project_judging
     challenge_judging
+    respond_to do |format|
+      format.html
+      format.csv { send_data ProjectJudgingReport.new(@challenge).to_csv }
+    end
   end
 
   def edit

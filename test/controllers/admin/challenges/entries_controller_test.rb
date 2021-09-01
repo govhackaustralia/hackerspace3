@@ -7,12 +7,15 @@ class Admin::Challenges::EntriesControllerTest < ActionDispatch::IntegrationTest
     @entry = Entry.first
   end
 
-  # ENHANCEMENT: Test will fail when all tests are run but not when individual
-  # run.
-  # test 'should get index' do
-  #   get admin_challenge_entries_url @challenge
-  #   assert_response :success
-  # end
+  test 'should get index' do
+    get admin_challenge_entries_url @challenge
+    assert_response :success
+  end
+
+  test 'should get index csv' do
+    get admin_challenge_entries_url @challenge, format: :csv
+    assert_response :success
+  end
 
   test 'should get edit' do
     get edit_admin_challenge_entry_url @challenge, @entry
