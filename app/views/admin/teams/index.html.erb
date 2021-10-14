@@ -16,18 +16,26 @@
   <% end %>
   <table class="projects-table" data-turbolinks="false" id="admin-teams-table">
     <thead>
+      <th>Published</th>
       <th>Project</th>
       <th>Team</th>
+      <th>Youth Team</th>
       <th>Location</th>
     </thead>
     <tbody>
       <% @projects.each do |project| %>
         <tr>
           <td>
+            <%= project.team.published ? '✅' : '❌' %>
+          </td>
+          <td>
             <%= link_to "#{project.project_name}", admin_competition_team_path(@competition, project.team) %>
           </td>
           <td>
             <%= project.team_name %>
+          </td>
+          <td>
+            <%= project.team.youth_team ? '✅' : '❌'  %>
           </td>
           <td>
             <%= project.event.name %>
