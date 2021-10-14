@@ -2,6 +2,7 @@
   <thead>
     <th>Project</th>
     <th>Team</th>
+    <th>Youth Team</th>
     <th>Location</th>
     <th>Scorecard Count</th>
     <th>Mean</th>
@@ -19,6 +20,9 @@
           <%= project.team_name %>
         </td>
         <td>
+          <%= project.team.youth_team ? '✅' : '❌' %>
+        </td>
+        <td>
           <%= project.event.name %>
         </td>
         <% scores = @region_helper[project.team_id][:scores] %>
@@ -27,11 +31,11 @@
           <td>No Scores for this Team Project Recorded</td>
         <% else %>
           <td>
-            <%= link_to "#{scores.count}/#{total_card_count}",             
-              admin_team_scorecards_path(project.team_id,                  
-              popup: true, include_judges: params[:include_judges]),         
-              {                                                            
-              }                                                         
+            <%= link_to "#{scores.count}/#{total_card_count}",
+              admin_team_scorecards_path(project.team_id,
+              popup: true, include_judges: params[:include_judges]),
+              {
+              }
             %>
             <% unless scores.empty? %>
               <% scores.extend(DescriptiveStatistics) %>
