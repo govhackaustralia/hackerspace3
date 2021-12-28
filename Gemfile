@@ -49,8 +49,6 @@ gem 'redis', '~> 4.0'
 gem 'coffee-rails'
 # Patch-level verification for bundler.
 gem 'bundler-audit'
-# Use Webpack to manage app-like JavaScript modules in Rails
-gem 'webpacker'
 # A tagging plugin that allows for custom tagging along dynamic contexts.
 gem 'acts-as-taggable-on', '~> 7.0'
 # See https://github.com/rails/execjs#readme for more supported runtimes
