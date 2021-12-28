@@ -18,7 +18,7 @@ gem 'jbuilder', '~> 2.5'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
 # Flexible authentication solution for Rails with Warden.
-gem 'devise', github: 'heartcombo/devise', branch: 'ca-omniauth-2'
+gem 'devise'
 # This gem provides a mitigation against CVE-2015-9284
 gem 'omniauth-rails_csrf_protection'
 # Oauth2 strategy for Google
@@ -102,7 +102,7 @@ group :test do
   gem 'selenium-webdriver'
 
   gem 'webdrivers'
-  # A mocking and stubbing library for Ruby 
+  # A mocking and stubbing library for Ruby
   gem 'mocha'
 end
 
