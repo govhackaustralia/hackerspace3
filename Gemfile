@@ -6,7 +6,7 @@ gem 'rails', '~> 6.1.2'
 # Use postgresql as the database for Active Record
 gem 'pg', '>= 0.18', '< 2.0'
 # Use Puma as the app server
-gem 'puma', '~> 4.3.5'
+gem 'puma', '~> 4.3.11'
 # Integrates the C implementation of Sass, LibSass, into the asset pipeline
 gem 'sassc-rails'
 # Use Uglifier as compressor for JavaScript assets
