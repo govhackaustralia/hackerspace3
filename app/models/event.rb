@@ -182,7 +182,7 @@ class Event < ApplicationRecord
       csv << combined
       registrations.each do |registration|
         user_values = registration.user.attributes.values_at(*user_columns)
-        csv << user_values + [registration.status]
+        csv << (user_values + [registration.status])
       end
     end
   end

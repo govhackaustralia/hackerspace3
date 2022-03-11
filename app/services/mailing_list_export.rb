@@ -13,10 +13,10 @@ class MailingListExport
 
   def to_csv
     CSV.generate do |csv|
-      csv << USER_COLUMNS + ['region']
+      csv << (USER_COLUMNS + ['region'])
       competition.regions.each do |region|
         region_users(region).each do |user|
-          csv << user.attributes.values_at(*USER_COLUMNS) + [region.name]
+          csv << (user.attributes.values_at(*USER_COLUMNS) + [region.name])
         end
       end
     end
