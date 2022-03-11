@@ -24,7 +24,7 @@ class ChallengesController < ApplicationController
 
   def landing_page
     @event = user_signed_in? && current_user.participating_competition_event(@competition)
-    return unless (@started = @competition.started?(FIRST_TIME_ZONE))
+    return unless (@started = @competition.started?(FIRST_COMPETITION_TIME_ZONE))
 
     @regions = @competition.regions
   end
@@ -65,7 +65,7 @@ class ChallengesController < ApplicationController
   end
 
   def show_landing_page?
-    ! @competition.started?(FIRST_TIME_ZONE)
+    ! @competition.started?(FIRST_COMPETITION_TIME_ZONE)
   end
 
   def check_competition_start!
@@ -73,7 +73,7 @@ class ChallengesController < ApplicationController
     @challenge = Challenge.find(params[:identifier]) if @challenge.nil?
     @region = @challenge.region
     return if @competition.started?(@region.national_time_zone) ||
-      (@region.international? && @competition.started?(FIRST_TIME_ZONE))
+      (@region.international? && @competition.started?(FIRST_COMPETITION_TIME_ZONE))
 
     flash[:alert] = 'Challenges will become visible at the start of the competition'
     redirect_to root_path
@@ -104,7 +104,7 @@ class ChallengesController < ApplicationController
   end
 
   def checkpoint_entry_view
-    @time_zone = @region.time_zone || FIRST_TIME_ZONE
+    @time_zone = @region.time_zone || FIRST_COMPETITION_TIME_ZONE
     @entries = @challenge.published_entries
       .preload(:checkpoint, project: :event)
   end
