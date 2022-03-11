@@ -49,7 +49,8 @@ class Region < ApplicationRecord
 
   validate :only_one_international_per_competition,
            :only_international_can_be_parent_of_national,
-           :only_national_can_be_parent_of_regional
+           :only_national_can_be_parent_of_regional,
+           :only_non_descendants_can_be_parents
 
   validates :time_zone, allow_blank: true, inclusion: {
     in: VALID_TIME_ZONES.map(&:name)
@@ -181,6 +182,14 @@ class Region < ApplicationRecord
     return if parent.national?
 
     errors.add :parent, 'Only national can be parent of regional'
+  end
+
+  def only_non_descendants_can_be_parents
+    current = self
+    loop do
+      break if (current = current.parent).nil?
+      break errors.add(:parent, 'already a descendant region') if self == current
+    end
   end
 
   # Generates a unique name and updates the identifier field.
