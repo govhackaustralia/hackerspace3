@@ -125,7 +125,7 @@ class RegistrationsController < ApplicationController
     @user = current_user
     @registration.assignment = @user.event_assignment @event.competition
     @registration.holder = @holder
-    @registration.time_notified = Time.now.in_time_zone(COMP_TIME_ZONE)
+    @registration.time_notified = Time.now.in_time_zone(LAST_COMPETITION_TIME_ZONE)
   end
 
   def update_registration
@@ -133,14 +133,14 @@ class RegistrationsController < ApplicationController
     @event = @registration.event
     @region = @event.region
     @registration.update(registration_params)
-    @registration.update(time_notified: Time.now.in_time_zone(COMP_TIME_ZONE))
+    @registration.update(time_notified: Time.now.in_time_zone(LAST_COMPETITION_TIME_ZONE))
     @user = current_user
   end
 
   def check_code_of_conduct
     return unless params[:accepted_code_of_conduct] == 'true'
 
-    current_user.update accepted_code_of_conduct: Time.now.in_time_zone(COMP_TIME_ZONE)
+    current_user.update accepted_code_of_conduct: Time.now.in_time_zone(LAST_COMPETITION_TIME_ZONE)
   end
 
   def update_user_preferences

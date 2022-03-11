@@ -149,7 +149,7 @@ class Event < ApplicationRecord
   end
 
   def finished?
-    Time.now.in_time_zone(COMP_TIME_ZONE) > end_time
+    Time.now.in_time_zone(LAST_COMPETITION_TIME_ZONE) > end_time
   end
 
   # Returns true if an event has registration type 'competition', false

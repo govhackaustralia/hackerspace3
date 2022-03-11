@@ -104,7 +104,7 @@ class Region < ApplicationRecord
   def awards_released?
     return false if award_release.nil?
 
-    award_release.to_formatted_s(:number) < Time.now.in_time_zone(COMP_TIME_ZONE).to_formatted_s(:number)
+    award_release.to_formatted_s(:number) < Time.now.in_time_zone(LAST_COMPETITION_TIME_ZONE).to_formatted_s(:number)
   end
 
   # Returns a custom region checkpoint challenge limit either of this region
@@ -136,19 +136,19 @@ class Region < ApplicationRecord
 
   def self.region_time(time_zone = nil)
     Time.now.in_time_zone(
-      time_zone.presence || COMP_TIME_ZONE
+      time_zone.presence || LAST_COMPETITION_TIME_ZONE
     ).to_formatted_s(:number)
   end
 
   def zone_code_when(time)
-    time.in_time_zone(time_zone.presence || COMP_TIME_ZONE).zone
+    time.in_time_zone(time_zone.presence || LAST_COMPETITION_TIME_ZONE).zone
   end
 
   def national_time_zone
     return time_zone if national?
     return parent.time_zone if regional?
 
-    COMP_TIME_ZONE
+    LAST_COMPETITION_TIME_ZONE
   end
 
   private

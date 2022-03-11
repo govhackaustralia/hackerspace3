@@ -7,7 +7,7 @@ module EventsHelper
 
   def event_registration_closed?(event, region, competition)
     end_time = event.end_time || competition.end_time
-    end_time.in_time_zone(region.time_zone.presence || COMP_TIME_ZONE)
+    end_time.in_time_zone(region.time_zone.presence || LAST_COMPETITION_TIME_ZONE)
       .to_formatted_s(:number) < region.time
   end
 end

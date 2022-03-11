@@ -68,6 +68,6 @@ class ProfilesController < ApplicationController
   def check_code_of_conduct
     return unless params[:accepted_code_of_conduct] == 'true'
 
-    current_user.update accepted_code_of_conduct: Time.now.in_time_zone(COMP_TIME_ZONE)
+    current_user.update accepted_code_of_conduct: Time.now.in_time_zone(LAST_COMPETITION_TIME_ZONE)
   end
 end

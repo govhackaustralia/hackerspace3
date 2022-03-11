@@ -13,7 +13,7 @@
   <% if (show_challenge_score_stuff? || show_peoples_choice_stuff?) && !@users_team %>
     <%= render partial: 'scorecard_management' %>
   <% end %>
-<% elsif @competition.in_peoples_judging_window? COMP_TIME_ZONE %>
+<% elsif @competition.in_peoples_judging_window? LAST_COMPETITION_TIME_ZONE %>
   <div>
     <p>
       <strong>Were you a participant in this year's competition?</strong>
