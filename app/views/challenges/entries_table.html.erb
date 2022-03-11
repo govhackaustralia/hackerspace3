@@ -1,6 +1,6 @@
 <main class="challenge_page">
   <%= render 'challenge_entries_header' %>
-  <% if @competition.either_judging_window_open? LAST_TIME_ZONE %>
+  <% if @competition.either_judging_window_open? COMP_TIME_ZONE %>
     <% if @teams.present? %>
       <%= render 'team_judging_table' %>
     <% else %>

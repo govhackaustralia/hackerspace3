@@ -32,7 +32,7 @@ class ProjectsController < ApplicationController
 
   def user_records_index
     retrieve_attending_events
-    return unless @competition.in_peoples_judging_window? LAST_TIME_ZONE
+    return unless @competition.in_peoples_judging_window? COMP_TIME_ZONE
     return unless (@peoples_assignment = current_user.peoples_assignment(@competition)).present?
 
     @judgeable_assignment = current_user.judgeable_assignment @competition
@@ -46,7 +46,7 @@ class ProjectsController < ApplicationController
   end
 
   def retrieve_attending_events
-    return unless @competition.in_form_or_comp_window? LAST_TIME_ZONE
+    return unless @competition.in_form_or_comp_window? COMP_TIME_ZONE
 
     @participating_competition_event = current_user.participating_competition_event @competition
     return unless @participating_competition_event.present?

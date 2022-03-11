@@ -43,7 +43,7 @@ class ChallengesController < ApplicationController
 
   def entries_table
     @challenges = @competition.challenges.approved
-    if @competition.either_judging_window_open?(LAST_TIME_ZONE)
+    if @competition.either_judging_window_open?(COMP_TIME_ZONE)
       judging_view
     else
       checkpoint_entry_view
