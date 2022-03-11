@@ -36,10 +36,10 @@ class Event < ApplicationRecord
   scope :published, -> { where published: true }
 
   scope :past, lambda {
-    where 'end_time < ?', Time.now.in_time_zone(LAST_TIME_ZONE)
+    where 'end_time < ?', Time.now.in_time_zone(LAST_EVENT_TIME_ZONE)
   }
   scope :future, lambda {
-    where 'end_time > ?', Time.now.in_time_zone(LAST_TIME_ZONE)
+    where 'end_time > ?', Time.now.in_time_zone(LAST_EVENT_TIME_ZONE)
   }
 
   scope :connections, -> { where event_type: CONNECTION_EVENT }
