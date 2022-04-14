@@ -46,6 +46,6 @@ class Admin::Events::IndividualGoldensController < ApplicationController
                                               holder: user.holder_for(competition)
     @registration.assignment = assignment
     @registration.holder_id = assignment.holder_id
-    @registration.time_notified = Time.now.in_time_zone COMP_TIME_ZONE
+    @registration.time_notified = Time.now.in_time_zone LAST_COMPETITION_TIME_ZONE
   end
 end

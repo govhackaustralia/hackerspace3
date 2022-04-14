@@ -119,7 +119,7 @@
           <% end %>
         </article>
       <% end %>
-      <% if @competition.in_challenge_judging_window?(LAST_TIME_ZONE) && @judging_assignments.present? %>
+      <% if @competition.in_challenge_judging_window?(LAST_COMPETITION_TIME_ZONE) && @judging_assignments.present? %>
         <article>
           <h2 class="section-heading">Challenge Judging</h2>
           <% @judging_assignments.each do |assignment| %>
@@ -197,7 +197,7 @@
             <%= render 'my_invitations' %>
           <% end %>
         <% else %>
-          <% if @competition.in_form_or_comp_window?(FIRST_TIME_ZONE) || @competition.in_form_or_comp_window?(LAST_TIME_ZONE) %>
+          <% if @competition.in_form_or_comp_window?(FIRST_COMPETITION_TIME_ZONE) || @competition.in_form_or_comp_window?(LAST_COMPETITION_TIME_ZONE) %>
             <section>
               <div class="message">
                 <p class="message-text">Join a Competition Event to create a team.</p>
@@ -214,7 +214,7 @@
       <article>
         <h2 class="section-heading">My Favourite Projects</h2>
         <section>
-          <% if @competition.started?(FIRST_TIME_ZONE) && @favourite_teams.present? %>
+          <% if @competition.started?(FIRST_COMPETITION_TIME_ZONE) && @favourite_teams.present? %>
             <% @favourite_teams.each do |team| %>
               <div class="content-wrapper">
                 <div class="content-wrapper-content">

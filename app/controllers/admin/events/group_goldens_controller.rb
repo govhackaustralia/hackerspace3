@@ -10,7 +10,7 @@ class Admin::Events::GroupGoldensController < ApplicationController
   def create
     @registration = @event.registrations.new registration_params
     @registration.status = INVITED
-    @registration.time_notified = Time.now.in_time_zone COMP_TIME_ZONE
+    @registration.time_notified = Time.now.in_time_zone LAST_COMPETITION_TIME_ZONE
     if @registration.save
       flash[:notice] = 'New Registration Added.'
       redirect_to admin_event_registrations_path @event

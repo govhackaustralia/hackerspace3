@@ -36,10 +36,10 @@ class Event < ApplicationRecord
   scope :published, -> { where published: true }
 
   scope :past, lambda {
-    where 'end_time < ?', Time.now.in_time_zone(LAST_TIME_ZONE)
+    where 'end_time < ?', Time.now.in_time_zone(LAST_EVENT_TIME_ZONE)
   }
   scope :future, lambda {
-    where 'end_time > ?', Time.now.in_time_zone(LAST_TIME_ZONE)
+    where 'end_time > ?', Time.now.in_time_zone(LAST_EVENT_TIME_ZONE)
   }
 
   scope :connections, -> { where event_type: CONNECTION_EVENT }
@@ -149,7 +149,7 @@ class Event < ApplicationRecord
   end
 
   def finished?
-    Time.now.in_time_zone(COMP_TIME_ZONE) > end_time
+    Time.now.in_time_zone(LAST_COMPETITION_TIME_ZONE) > end_time
   end
 
   # Returns true if an event has registration type 'competition', false

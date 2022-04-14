@@ -48,7 +48,7 @@ class Admin::Events::StaffFlightsController < ApplicationController
 
   def new_registration
     @registration = @event.registrations.invited.new registration_params
-    @registration.time_notified = Time.now.in_time_zone COMP_TIME_ZONE
+    @registration.time_notified = Time.now.in_time_zone LAST_COMPETITION_TIME_ZONE
   end
 
   def create_error
