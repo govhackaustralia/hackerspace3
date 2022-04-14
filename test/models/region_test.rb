@@ -177,4 +177,14 @@ class RegionTest < ActiveSupport::TestCase
     assert @regional.national_time_zone == @regional.parent.time_zone
     assert @international.national_time_zone == LAST_COMPETITION_TIME_ZONE
   end
+
+  test 'try to add parent when already child' do
+    assert_equal @international, @national.parent
+
+    error = assert_raises ActiveRecord::RecordInvalid do
+      @international.update! parent: @national
+    end
+    assert_match "Validation failed: Parent already a descendant region",
+      error.message
+  end
 end
