@@ -195,7 +195,7 @@ class Event < ApplicationRecord
         break unless below_capacity?
 
         registration.update status: ATTENDING
-        next if %w[development test].include? ENV['RAILS_ENV']
+        next if %w[development test].include? ENV.fetch('RAILS_ENV', nil)
 
         RegistrationMailer.attendance_email(registration).deliver_later
       end

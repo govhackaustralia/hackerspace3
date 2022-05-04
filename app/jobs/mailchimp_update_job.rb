@@ -10,13 +10,13 @@ class MailchimpUpdateJob < ApplicationJob
   private
 
   def mailchimp_env_variables_set?
-    [ENV['MAILCHIMP_API_KEY'], ENV['MAILCHIMP_LIST_ID']].exclude? nil
+    [ENV.fetch('MAILCHIMP_API_KEY', nil), ENV.fetch('MAILCHIMP_LIST_ID', nil)].exclude? nil
   end
 
   def upsert_to_mailchimp(user)
     return unless user.confirmed?
 
-    response = gibbon.lists(ENV['MAILCHIMP_LIST_ID'])
+    response = gibbon.lists(ENV.fetch('MAILCHIMP_LIST_ID', nil))
       .members(Digest::MD5.hexdigest(user.email))
       .upsert(user_params(user))
 
@@ -36,7 +36,7 @@ class MailchimpUpdateJob < ApplicationJob
   end
 
   def gibbon
-    @gibbon ||= Gibbon::Request.new(api_key: ENV['MAILCHIMP_API_KEY'], symbolize_keys: true)
+    @gibbon ||= Gibbon::Request.new(api_key: ENV.fetch('MAILCHIMP_API_KEY', nil), symbolize_keys: true)
   end
 
   def status_label(user)

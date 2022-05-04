@@ -10,6 +10,6 @@ module ProfilesHelper
   end
 
   def profile_slack_chat_url(profile)
-    "slack://user?team=#{ENV['SLACK_TEAM_ID']}&id=#{profile.slack_user_id}"
+    "slack://user?team=#{ENV.fetch('SLACK_TEAM_ID', nil)}&id=#{profile.slack_user_id}"
   end
 end

@@ -64,7 +64,7 @@ class ProjectsControllerTest < ActionDispatch::IntegrationTest
 
     sign_in users :one
     post slack_chat_project_url @project.identifier
-    assert_redirected_to "slack://channel?id=#{teams(:one).slack_channel_id}&team=#{ENV['SLACK_TEAM_ID']}"
+    assert_redirected_to "slack://channel?id=#{teams(:one).slack_channel_id}&team=#{ENV.fetch('SLACK_TEAM_ID', nil)}"
   end
 
   test 'should post slack_chat success connect slack' do
@@ -89,6 +89,6 @@ class ProjectsControllerTest < ActionDispatch::IntegrationTest
 
     sign_in users :one
     post slack_chat_project_url @project.identifier
-    assert_redirected_to "slack://channel?id=#{teams(:one).slack_channel_id}&team=#{ENV['SLACK_TEAM_ID']}"
+    assert_redirected_to "slack://channel?id=#{teams(:one).slack_channel_id}&team=#{ENV.fetch('SLACK_TEAM_ID', nil)}"
   end
 end

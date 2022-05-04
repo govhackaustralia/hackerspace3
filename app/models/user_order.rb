@@ -23,7 +23,7 @@ class UserOrder < ApplicationRecord
 
     email_body = BulkMail.correspondence_body bulk_mail.body, registration.user
     correspondence = correspondences.create(user: registration.user, body: email_body, status: PENDING)
-    BulkMailer.participant_email(self, correspondence, registration.user).deliver_now unless %w[development test].include? ENV['RAILS_ENV']
+    BulkMailer.participant_email(self, correspondence, registration.user).deliver_now unless %w[development test].include? ENV.fetch('RAILS_ENV', nil)
     correspondence.update status: SENT
   end
 end

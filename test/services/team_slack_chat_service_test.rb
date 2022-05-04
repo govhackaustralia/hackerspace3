@@ -26,7 +26,7 @@ class TeamSlackChatServiceTest < ActiveSupport::TestCase
     assert teams(:one).slack_channel_id.present?
 
     assert_equal(
-      "slack://channel?id=#{teams(:one).slack_channel_id}&team=#{ENV['SLACK_TEAM_ID']}",
+      "slack://channel?id=#{teams(:one).slack_channel_id}&team=#{ENV.fetch('SLACK_TEAM_ID', nil)}",
       TeamSlackChatService.new(teams(:one)).team_slack_chat_url
     )
   end
@@ -51,7 +51,7 @@ class TeamSlackChatServiceTest < ActiveSupport::TestCase
       .returns(true)
 
     assert_equal(
-      "slack://channel?id=#{slack_channel_id}&team=#{ENV['SLACK_TEAM_ID']}",
+      "slack://channel?id=#{slack_channel_id}&team=#{ENV.fetch('SLACK_TEAM_ID', nil)}",
       TeamSlackChatService.new(teams(:one)).team_slack_chat_url
     )
 

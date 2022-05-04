@@ -14,7 +14,7 @@ class TeamSlackChatService
   def team_slack_chat_url
     connect_team_to_slack unless team.slack_channel_id.present?
 
-    "slack://channel?id=#{team.slack_channel_id}&team=#{ENV['SLACK_TEAM_ID']}"
+    "slack://channel?id=#{team.slack_channel_id}&team=#{ENV.fetch('SLACK_TEAM_ID', nil)}"
   end
 
   private
