@@ -184,7 +184,7 @@ class RegionTest < ActiveSupport::TestCase
     error = assert_raises ActiveRecord::RecordInvalid do
       @international.update! parent: @national
     end
-    assert_match "Validation failed: Parent already a descendant region",
+    assert_match 'Validation failed: Parent already a descendant region',
       error.message
   end
 end
