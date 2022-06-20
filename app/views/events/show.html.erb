@@ -59,7 +59,7 @@
           <% end %>
           <br />
           <% if @event_partners.present? %>
-            <h3><%= pluralize @event_partners.count, 'Event Partner' %></h3>
+            <h3><%= 'Event Partner'.pluralize(@event_partners.count) %></h3>
             <br />
             <% @event_partners.each do |event_partner| %>
               <div class="clickable_tile">
