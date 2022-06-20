@@ -3,19 +3,24 @@ version: '3.1'
 services:
 
   hackerspace3:
-    image: govhackau/hackerspace3
     build: .
+    depends_on:
+      - postgres
     env_file: .env
+    image: govhackau/hackerspace3
     ports:
-      - 3000:3000
-    restart: always
+      - "3000:3000"
+    restart: on-failure
+    volumes:
+      - ./:/usr/src/app
 
   postgres:
-    image: postgres:12.1
     env_file: .env
+    image: postgres:12.1
+    ports:
+      - "5432:5432"
     volumes:
       - pg_db:/var/lib/postgresql/data
-    restart: always
 
 volumes:
   pg_db:
