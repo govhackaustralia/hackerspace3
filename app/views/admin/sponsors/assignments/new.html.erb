@@ -33,5 +33,5 @@
     Please enter an email address or name to search for a user.
     <br/>
   <% end %>
-  <%= link_to "Back to #{@assignable.name} #{@assignable.class.to_s} Assignments", admin_sponsor_assignments_path(@assignable) %>
+  <%= link_to "Back to #{@assignable.name}", admin_competition_sponsor_path(@assignable.competition_id, @assignable) %>
 </main>
