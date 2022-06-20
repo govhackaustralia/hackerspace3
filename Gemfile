@@ -51,8 +51,6 @@ gem 'coffee-rails'
 gem 'bundler-audit'
 # A tagging plugin that allows for custom tagging along dynamic contexts.
 gem 'acts-as-taggable-on', '~> 7.0'
-# See https://github.com/rails/execjs#readme for more supported runtimes
-gem 'mini_racer', platforms: :ruby
 # Bootstrap 4 ruby gem for Ruby on Rails (Sprockets) and Hanami (formerly Lotus).
 gem 'bootstrap', '~> 4.5.0'
 # This gem provides only Free icons from Font-Awesome.
@@ -117,3 +115,6 @@ end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 # gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+
+# See https://github.com/rails/execjs#readme for more supported runtimes
+# gem 'mini_racer', platforms: :ruby
