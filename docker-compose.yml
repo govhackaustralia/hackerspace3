@@ -10,7 +10,6 @@ services:
     image: govhackau/hackerspace3
     ports:
       - "3000:3000"
-    restart: on-failure
     volumes:
       - ./:/usr/src/app
 
