@@ -10,8 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_22_015152) do
-
+ActiveRecord::Schema[7.0].define(version: 2022_06_25_045952) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -20,7 +19,7 @@ ActiveRecord::Schema.define(version: 2021_08_22_015152) do
     t.string "record_type", null: false
     t.bigint "record_id", null: false
     t.bigint "blob_id", null: false
-    t.datetime "created_at", null: false
+    t.datetime "created_at", precision: nil, null: false
     t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
     t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
   end
@@ -31,8 +30,8 @@ ActiveRecord::Schema.define(version: 2021_08_22_015152) do
     t.string "content_type"
     t.text "metadata"
     t.bigint "byte_size", null: false
-    t.string "checksum", null: false
-    t.datetime "created_at", null: false
+    t.string "checksum"
+    t.datetime "created_at", precision: nil, null: false
     t.string "service_name", null: false
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
@@ -48,8 +47,8 @@ ActiveRecord::Schema.define(version: 2021_08_22_015152) do
     t.string "assignable_type"
     t.integer "assignable_id"
     t.string "title"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.integer "competition_id"
     t.integer "holder_id"
     t.index ["assignable_type", "assignable_id"], name: "index_assignments_on_assignable_type_and_assignable_id"
@@ -64,16 +63,16 @@ ActiveRecord::Schema.define(version: 2021_08_22_015152) do
     t.string "name"
     t.string "identifier"
     t.integer "capacity"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["identifier"], name: "index_badges_on_identifier"
   end
 
   create_table "bulk_mails", force: :cascade do |t|
     t.integer "user_id"
     t.text "body"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.string "name"
     t.string "status"
     t.string "from_email"
@@ -87,8 +86,8 @@ ActiveRecord::Schema.define(version: 2021_08_22_015152) do
   create_table "challenge_data_sets", force: :cascade do |t|
     t.integer "challenge_id"
     t.integer "data_set_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.index ["challenge_id"], name: "index_challenge_data_sets_on_challenge_id"
     t.index ["data_set_id"], name: "index_challenge_data_sets_on_data_set_id"
   end
@@ -96,8 +95,8 @@ ActiveRecord::Schema.define(version: 2021_08_22_015152) do
   create_table "challenge_sponsorships", force: :cascade do |t|
     t.integer "challenge_id"
     t.integer "sponsor_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.boolean "approved", default: false
     t.index ["challenge_id"], name: "index_challenge_sponsorships_on_challenge_id"
     t.index ["sponsor_id"], name: "index_challenge_sponsorships_on_sponsor_id"
@@ -111,8 +110,8 @@ ActiveRecord::Schema.define(version: 2021_08_22_015152) do
     t.text "eligibility"
     t.string "video_url"
     t.boolean "approved", default: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.string "identifier"
     t.boolean "nation_wide"
     t.index ["approved"], name: "index_challenges_on_approved"
@@ -123,9 +122,9 @@ ActiveRecord::Schema.define(version: 2021_08_22_015152) do
 
   create_table "checkpoints", force: :cascade do |t|
     t.integer "competition_id"
-    t.datetime "end_time"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "end_time", precision: nil
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.integer "max_regional_challenges"
     t.integer "max_national_challenges"
     t.string "name"
@@ -134,17 +133,17 @@ ActiveRecord::Schema.define(version: 2021_08_22_015152) do
 
   create_table "competitions", force: :cascade do |t|
     t.integer "year"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.datetime "start_time"
-    t.datetime "end_time"
-    t.datetime "peoples_choice_start"
-    t.datetime "peoples_choice_end"
-    t.datetime "challenge_judging_start"
-    t.datetime "challenge_judging_end"
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
+    t.datetime "start_time", precision: nil
+    t.datetime "end_time", precision: nil
+    t.datetime "peoples_choice_start", precision: nil
+    t.datetime "peoples_choice_end", precision: nil
+    t.datetime "challenge_judging_start", precision: nil
+    t.datetime "challenge_judging_end", precision: nil
     t.boolean "current"
-    t.datetime "team_form_start"
-    t.datetime "team_form_end"
+    t.datetime "team_form_start", precision: nil
+    t.datetime "team_form_end", precision: nil
     t.integer "hunt_badge_id"
     t.boolean "hunt_published"
     t.index ["current"], name: "index_competitions_on_current"
@@ -154,8 +153,8 @@ ActiveRecord::Schema.define(version: 2021_08_22_015152) do
   create_table "correspondences", force: :cascade do |t|
     t.integer "user_id"
     t.string "status"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.string "body"
     t.string "orderable_type"
     t.integer "orderable_id"
@@ -168,8 +167,8 @@ ActiveRecord::Schema.define(version: 2021_08_22_015152) do
     t.integer "competition_id"
     t.text "description"
     t.string "category"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.string "name"
     t.index ["competition_id"], name: "index_criteria_on_competition_id"
   end
@@ -179,8 +178,8 @@ ActiveRecord::Schema.define(version: 2021_08_22_015152) do
     t.string "name"
     t.string "url"
     t.text "description"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.index ["region_id"], name: "index_data_sets_on_region_id"
   end
 
@@ -188,8 +187,8 @@ ActiveRecord::Schema.define(version: 2021_08_22_015152) do
     t.string "name"
     t.string "url"
     t.text "description"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "employment_statuses", force: :cascade do |t|
@@ -204,8 +203,8 @@ ActiveRecord::Schema.define(version: 2021_08_22_015152) do
     t.boolean "retired"
     t.boolean "not_able_to_work"
     t.boolean "prefer_not_to_say"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "entries", force: :cascade do |t|
@@ -214,8 +213,8 @@ ActiveRecord::Schema.define(version: 2021_08_22_015152) do
     t.integer "checkpoint_id"
     t.text "justification"
     t.boolean "eligible"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.string "award"
     t.index ["award"], name: "index_entries_on_award"
     t.index ["challenge_id"], name: "index_entries_on_challenge_id"
@@ -228,8 +227,8 @@ ActiveRecord::Schema.define(version: 2021_08_22_015152) do
     t.integer "event_id"
     t.integer "sponsor_id"
     t.boolean "approved", default: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.index ["approved"], name: "index_event_partnerships_on_approved"
     t.index ["event_id"], name: "index_event_partnerships_on_event_id"
     t.index ["sponsor_id"], name: "index_event_partnerships_on_sponsor_id"
@@ -250,11 +249,11 @@ ActiveRecord::Schema.define(version: 2021_08_22_015152) do
     t.text "operation_hours"
     t.text "catering"
     t.string "video_id"
-    t.datetime "start_time"
-    t.datetime "end_time"
+    t.datetime "start_time", precision: nil
+    t.datetime "end_time", precision: nil
     t.boolean "published", default: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.string "place_id"
     t.string "identifier"
     t.string "event_type"
@@ -267,8 +266,8 @@ ActiveRecord::Schema.define(version: 2021_08_22_015152) do
   create_table "favourites", force: :cascade do |t|
     t.integer "assignment_id"
     t.integer "team_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.integer "holder_id"
     t.index ["assignment_id"], name: "index_favourites_on_assignment_id"
     t.index ["holder_id"], name: "index_favourites_on_holder_id"
@@ -279,16 +278,16 @@ ActiveRecord::Schema.define(version: 2021_08_22_015152) do
     t.integer "event_id"
     t.string "description"
     t.string "direction"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
   end
 
   create_table "headers", force: :cascade do |t|
     t.integer "assignment_id"
     t.string "scoreable_type"
     t.bigint "scoreable_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.boolean "included", default: true
     t.index ["assignment_id"], name: "index_headers_on_assignment_id"
     t.index ["included"], name: "index_headers_on_included"
@@ -299,8 +298,8 @@ ActiveRecord::Schema.define(version: 2021_08_22_015152) do
     t.bigint "user_id", null: false
     t.bigint "competition_id", null: false
     t.boolean "aws_credits_requested"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.integer "team_status"
     t.bigint "profile_id"
     t.index ["aws_credits_requested"], name: "index_holders_on_aws_credits_requested"
@@ -314,8 +313,8 @@ ActiveRecord::Schema.define(version: 2021_08_22_015152) do
     t.integer "competition_id"
     t.string "question"
     t.string "answer"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "profiles", force: :cascade do |t|
@@ -327,8 +326,8 @@ ActiveRecord::Schema.define(version: 2021_08_22_015152) do
     t.integer "education"
     t.string "users"
     t.string "postcode"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.string "identifier"
     t.integer "team_status"
     t.string "website"
@@ -350,8 +349,8 @@ ActiveRecord::Schema.define(version: 2021_08_22_015152) do
     t.string "source_code_url"
     t.string "video_url"
     t.string "homepage_url"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.integer "user_id"
     t.string "project_name"
     t.string "identifier"
@@ -365,8 +364,8 @@ ActiveRecord::Schema.define(version: 2021_08_22_015152) do
     t.integer "checkpoint_id"
     t.integer "max_regional_challenges"
     t.integer "max_national_challenges"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.index ["checkpoint_id"], name: "index_region_limits_on_checkpoint_id"
     t.index ["region_id"], name: "index_region_limits_on_region_id"
   end
@@ -375,9 +374,9 @@ ActiveRecord::Schema.define(version: 2021_08_22_015152) do
     t.string "name"
     t.string "time_zone"
     t.integer "parent_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.datetime "award_release"
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
+    t.datetime "award_release", precision: nil
     t.integer "competition_id"
     t.string "category"
     t.string "identifier"
@@ -389,16 +388,16 @@ ActiveRecord::Schema.define(version: 2021_08_22_015152) do
   create_table "registration_flights", force: :cascade do |t|
     t.integer "registration_id"
     t.integer "flight_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
   end
 
   create_table "registrations", force: :cascade do |t|
     t.integer "assignment_id"
-    t.datetime "time_notified"
+    t.datetime "time_notified", precision: nil
     t.string "status"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.integer "event_id"
     t.integer "holder_id"
     t.index ["assignment_id"], name: "index_registrations_on_assignment_id"
@@ -414,8 +413,8 @@ ActiveRecord::Schema.define(version: 2021_08_22_015152) do
     t.string "url"
     t.string "name"
     t.string "short_url"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.boolean "show_on_front_page"
     t.index ["show_on_front_page"], name: "index_resources_on_show_on_front_page"
   end
@@ -424,8 +423,8 @@ ActiveRecord::Schema.define(version: 2021_08_22_015152) do
     t.integer "header_id"
     t.integer "criterion_id"
     t.integer "entry"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.index ["criterion_id"], name: "index_scores_on_criterion_id"
     t.index ["header_id"], name: "index_scores_on_header_id"
   end
@@ -434,8 +433,8 @@ ActiveRecord::Schema.define(version: 2021_08_22_015152) do
     t.string "name"
     t.text "description"
     t.string "url"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.integer "competition_id"
     t.index ["competition_id"], name: "index_sponsors_on_competition_id"
   end
@@ -444,8 +443,8 @@ ActiveRecord::Schema.define(version: 2021_08_22_015152) do
     t.integer "competition_id"
     t.string "name"
     t.integer "position"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.index ["competition_id"], name: "index_sponsorship_types_on_competition_id"
     t.index ["position"], name: "index_sponsorship_types_on_position"
   end
@@ -455,8 +454,8 @@ ActiveRecord::Schema.define(version: 2021_08_22_015152) do
     t.integer "sponsorship_type_id"
     t.string "sponsorable_type"
     t.integer "sponsorable_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.boolean "approved", default: false
     t.index ["approved"], name: "index_sponsorships_on_approved"
     t.index ["sponsor_id"], name: "index_sponsorships_on_sponsor_id"
@@ -470,7 +469,7 @@ ActiveRecord::Schema.define(version: 2021_08_22_015152) do
     t.string "tagger_type"
     t.integer "tagger_id"
     t.string "context", limit: 128
-    t.datetime "created_at"
+    t.datetime "created_at", precision: nil
     t.index ["context"], name: "index_taggings_on_context"
     t.index ["tag_id", "taggable_id", "taggable_type", "context", "tagger_id", "tagger_type"], name: "taggings_idx", unique: true
     t.index ["tag_id"], name: "index_taggings_on_tag_id"
@@ -484,8 +483,8 @@ ActiveRecord::Schema.define(version: 2021_08_22_015152) do
 
   create_table "tags", id: :serial, force: :cascade do |t|
     t.string "name"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", precision: nil
+    t.datetime "updated_at", precision: nil
     t.integer "taggings_count", default: 0
     t.index ["name"], name: "index_tags_on_name", unique: true
   end
@@ -496,8 +495,8 @@ ActiveRecord::Schema.define(version: 2021_08_22_015152) do
     t.text "description"
     t.text "description_of_use"
     t.string "url"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.index ["team_id"], name: "index_team_data_sets_on_team_id"
   end
 
@@ -505,8 +504,8 @@ ActiveRecord::Schema.define(version: 2021_08_22_015152) do
     t.integer "bulk_mail_id"
     t.integer "team_id"
     t.string "request_type"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.index ["bulk_mail_id"], name: "index_team_orders_on_bulk_mail_id"
     t.index ["request_type"], name: "index_team_orders_on_request_type"
     t.index ["team_id"], name: "index_team_orders_on_team_id"
@@ -515,8 +514,8 @@ ActiveRecord::Schema.define(version: 2021_08_22_015152) do
   create_table "teams", force: :cascade do |t|
     t.integer "event_id"
     t.integer "project_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.boolean "published", default: true
     t.boolean "youth_team", default: false
     t.string "slack_channel_id"
@@ -529,8 +528,8 @@ ActiveRecord::Schema.define(version: 2021_08_22_015152) do
   create_table "user_orders", force: :cascade do |t|
     t.integer "bulk_mail_id"
     t.string "request_type"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.index ["bulk_mail_id"], name: "index_user_orders_on_bulk_mail_id"
     t.index ["request_type"], name: "index_user_orders_on_request_type"
   end
@@ -550,22 +549,22 @@ ActiveRecord::Schema.define(version: 2021_08_22_015152) do
     t.boolean "my_project_sponsor_contact", default: false
     t.boolean "me_govhack_contact", default: false
     t.string "reset_password_token"
-    t.datetime "reset_password_sent_at"
-    t.datetime "remember_created_at"
+    t.datetime "reset_password_sent_at", precision: nil
+    t.datetime "remember_created_at", precision: nil
     t.integer "sign_in_count", default: 0, null: false
-    t.datetime "current_sign_in_at"
-    t.datetime "last_sign_in_at"
+    t.datetime "current_sign_in_at", precision: nil
+    t.datetime "last_sign_in_at", precision: nil
     t.inet "current_sign_in_ip"
     t.inet "last_sign_in_ip"
     t.string "confirmation_token"
-    t.datetime "confirmed_at"
-    t.datetime "confirmation_sent_at"
+    t.datetime "confirmed_at", precision: nil
+    t.datetime "confirmation_sent_at", precision: nil
     t.string "unconfirmed_email"
     t.integer "failed_attempts", default: 0, null: false
     t.string "unlock_token"
-    t.datetime "locked_at"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "locked_at", precision: nil
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.string "organisation_name"
     t.string "phone_number"
     t.text "how_did_you_hear"
@@ -582,7 +581,7 @@ ActiveRecord::Schema.define(version: 2021_08_22_015152) do
     t.string "acc_name"
     t.string "branch_name"
     t.string "slack"
-    t.datetime "accepted_code_of_conduct"
+    t.datetime "accepted_code_of_conduct", precision: nil
     t.boolean "under_18"
     t.integer "region"
     t.integer "acting_on_behalf_of_id"
@@ -599,8 +598,8 @@ ActiveRecord::Schema.define(version: 2021_08_22_015152) do
     t.bigint "visitable_id", null: false
     t.bigint "user_id"
     t.bigint "competition_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["competition_id"], name: "index_visits_on_competition_id"
     t.index ["user_id"], name: "index_visits_on_user_id"
     t.index ["visitable_type", "visitable_id"], name: "index_visits_on_visitable"
