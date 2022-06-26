@@ -13,8 +13,6 @@ class EventTest < ActiveSupport::TestCase
     @team = Team.first
     @entry = Entry.first
     @user = User.first
-    @flight = Flight.first
-    @bulk_mail = BulkMail.second
     @vip_registration = Registration.second
     @competition_event = Event.second
     @wait_ass = Assignment.find 6
@@ -31,8 +29,6 @@ class EventTest < ActiveSupport::TestCase
     assert @event.users.include? @user
     assert @comp_event.teams.include? @team
     assert @comp_event.entries.include? @entry
-    assert @event.flights.include? @flight
-    assert @event.bulk_mails.include? @bulk_mail
     assert @event.host_assignments.include? @assignment
     assert @event.event_hosts.include? @user
     assert @event.event_supports.include? @user
@@ -43,7 +39,6 @@ class EventTest < ActiveSupport::TestCase
     assert_raises(ActiveRecord::RecordNotFound) { @event_partnership.reload }
     assert_raises(ActiveRecord::RecordNotFound) { @assignment.reload }
     assert_raises(ActiveRecord::RecordNotFound) { @registration.reload }
-    assert_raises(ActiveRecord::RecordNotFound) { @bulk_mail.reload }
   end
 
   test 'event scopes published' do

@@ -25,12 +25,11 @@ CHIEF_JUDGE = 'Chief Judge'
 VOLUNTEER = 'GovHack Volunteer'
 VIP = 'VIP'
 PARTICIPANT = 'Participant'
-GOLDEN_TICKET = 'Golden Ticket'
 ASSIGNEE = 'Assignee'
 
 COMP_ADMIN = [MANAGEMENT_TEAM, ADMIN, COMPETITION_DIRECTOR]
 EVENT_ASSIGNMENT_TITLES = [VIP, PARTICIPANT]
-COMP_NON_ADMIN = [VIP, PARTICIPANT, VOLUNTEER, GOLDEN_TICKET, ASSIGNEE]
+COMP_NON_ADMIN = [VIP, PARTICIPANT, VOLUNTEER, ASSIGNEE]
 
 ## Region Assignments
 
@@ -181,41 +180,3 @@ RUNNERUP = 'Runner-up'
 HONOURABLE = 'Honourable Mentions'
 
 AWARD_NAMES = [WINNER, RUNNERUP, HONOURABLE]
-
-# Bulk Mail Statuses
-
-DRAFT = 'Draft'
-PROCESS = 'Process'
-PROCESSED = 'Processed'
-
-BULK_MAIL_STATUS_TYPES = [DRAFT, PROCESS, PROCESSED]
-
-# Mail Order Request Types
-
-ALL = 'All'
-NONE = 'None'
-LEADER_ONLY = 'Leader Only'
-
-TEAM_ORDER_REQUEST_TYPES = [ALL, NONE, LEADER_ONLY]
-
-# Correspondence Statuses
-
-PENDING = 'Pending'
-SENT = 'Sent'
-ERROR = 'Error'
-
-CORRESPONDENCE_STATUS_TYPES = [PENDING, SENT, ERROR]
-
-# National Awards Event Types
-
-INDIVIDUAL_GOLDEN = 'Individual Golden Ticket'
-GROUP_GOLDEN = 'Group Golden Ticket'
-STAFF = 'Staff Ticket'
-REGULAR = 'Regular Ticket'
-
-# Event Flight Directions
-
-INBOUND = 'Inbound'
-OUTBOUND = 'Outbound'
-
-FLIGHT_DIRECTIONS = [INBOUND, OUTBOUND]

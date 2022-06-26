@@ -13,9 +13,6 @@
     <table data-turbolinks="false" id="admin-registrations-table">
       <thead>
         <tr>
-          <% if @region.international? && @event.event_type == AWARD_EVENT %>
-            <th>Ticket Type</th>
-          <% end %>
           <th>Full Name</th>
           <th>Email</th>
           <th>Slack</th>
@@ -38,17 +35,6 @@
           <% assignment = registration.assignment %>
           <% user = assignment.user %>
           <tr>
-            <% if @region.international? && @event.event_type == AWARD_EVENT %>
-              <% if assignment.title == VIP || assignment.title == PARTICIPANT %>
-                <td>Regular</td>
-              <% elsif assignment.assignable_type == 'Team' %>
-                <td>Team Golden Ticket</td>
-              <% elsif assignment.title == GOLDEN_TICKET %>
-                <td>Individual Golden Ticket</td>
-              <% else %>
-                <td>Staff Invitation</td>
-              <% end %>
-            <% end %>
             <td>
               <%= user.full_name %>
             </td>
@@ -98,17 +84,6 @@
         <% end %>
       </tbody>
     </table>
-    <% if @region.international? && @event.event_type == AWARD_EVENT %>
-      <p>
-        <%= link_to 'New Individual Golden Ticket', new_admin_event_individual_golden_path(@event) %>
-      </p>
-      <p>
-        <%= link_to 'New Group Golden Ticket', new_admin_event_group_golden_path(@event) %>
-      </p>
-      <p>
-        <%= link_to 'New Staff Flight Registration', new_admin_event_staff_flight_path(@event) %>
-      </p>
-    <% end %>
   </section>
 </main>
 <p>

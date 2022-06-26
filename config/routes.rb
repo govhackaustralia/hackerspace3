@@ -50,12 +50,6 @@ Rails.application.routes.draw do
     resources :claims, only: [:new, :create]
   end
 
-  namespace :flights do
-    resources :registrations, only: [] do
-      resources :registration_flights, only: [:new, :create], controller: 'registrations/registration_flights'
-    end
-  end
-
   resources :projects, param: :identifier, only: [:index, :show] do
     member do
       post :slack_chat
@@ -139,12 +133,6 @@ Rails.application.routes.draw do
       resources :challenges, except: :destroy, controller: 'regions/challenges' do
         member { get :preview }
       end
-      resources :bulk_mails, except: :destroy, controller: 'regions/bulk_mails'
-    end
-
-    resources :bulk_mails, only: [] do
-      resources :correspondences, only: :show, controller: 'bulk_mails/correspondences'
-      resources :user_orders, only: :update, controller: 'bulk_mails/user_orders'
     end
 
     resources :challenges, only: [] do
@@ -158,11 +146,6 @@ Rails.application.routes.draw do
       resources :registrations, except: [:show, :destroy]
       resources :event_partnerships, only: [:new, :create, :destroy]
       resources :assignments, only: [:index, :new, :create], controller: 'events/assignments'
-      resources :flights, except: :show, controller: 'events/flights'
-      resources :bulk_mails, except: :destroy, controller: 'events/bulk_mails'
-      resources :group_goldens, only: [:new, :create], controller: 'events/group_goldens'
-      resources :staff_flights, only: [:new, :create], controller: 'events/staff_flights'
-      resources :individual_goldens, only: [:new, :create], controller: 'events/individual_goldens'
     end
 
     resources :teams, only: [] do
