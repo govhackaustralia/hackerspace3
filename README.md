@@ -32,17 +32,17 @@ $ rails db:setup
 
 ## Test Suite
 
-Current coverage is unit tests for models, controllers, and services.
+Current coverage is unit tests for models, controllers, and service classes.
 
 ```bash
 $ rails test
 ```
 
-## Services
+## External Services
 
 hackerspace3 makes use of AWS and Google services.
 
-See the below Environment Variables Required to enable specific services.
+See the below Environment Variables section to enable specific services.
 
 ## Specification Documents
 
