@@ -23,7 +23,8 @@ class ProjectsController < ApplicationController
   end
 
   def slack_chat
-    redirect_to team_slack_chat_service.team_slack_chat_url
+    redirect_to team_slack_chat_service.team_slack_chat_url,
+      allow_other_host: true
   end
 
   private
