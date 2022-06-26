@@ -18,9 +18,15 @@ class ProjectsController < ApplicationController
   def show
     @current_project = @team.current_project
     @passed_checkpoint_ids = @competition.passed_checkpoint_ids @time_zone
-    @published_users = @team.confirmed_members.joins(:profile).where(profiles: {published: true}).preload(:profile)
-    @unpublished_users = @team.confirmed_members.joins(:profile).where(profiles: {published: [nil, false]})
-    @entries = @team.entries.preload(challenge: %i[sponsors_with_logos published_entries])
+    @published_users = @team.confirmed_members
+      .joins(:profile)
+      .where(profiles: {published: true})
+      .preload(:profile)
+    @unpublished_users = @team.confirmed_members
+      .joins(:profile)
+      .where(profiles: {published: [nil, false]})
+    @entries = @team.entries
+      .preload(challenge: %i[sponsors_with_logos published_entries])
     user_records_show if user_signed_in?
   end
 
