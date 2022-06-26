@@ -18,15 +18,7 @@ class ProjectsController < ApplicationController
   def show
     @current_project = @team.current_project
     @passed_checkpoint_ids = @competition.passed_checkpoint_ids @time_zone
-    @published_users = @team.confirmed_members
-      .joins(:profile)
-      .where(profiles: {published: true})
-      .preload(:profile)
-    @unpublished_users = @team.confirmed_members
-      .joins(:profile)
-      .where(profiles: {published: [nil, false]})
-    @entries = @team.entries
-      .preload(challenge: %i[sponsors_with_logos published_entries])
+    entries_and_users
     user_records_show if user_signed_in?
   end
 
@@ -90,6 +82,18 @@ class ProjectsController < ApplicationController
 
   def team_slack_chat_service
     @team_slack_chat_service ||= TeamSlackChatService.new(@team)
+  end
+
+  def entries_and_users
+    @published_users = @team.confirmed_members
+      .joins(:profile)
+      .where(profiles: {published: true})
+      .preload(:profile)
+    @unpublished_users = @team.confirmed_members
+      .joins(:profile)
+      .where(profiles: {published: [nil, false]})
+    @entries = @team.entries
+      .preload(challenge: %i[sponsors_with_logos published_entries])
   end
 
   def check_competition_started!
