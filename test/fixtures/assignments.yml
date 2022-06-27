@@ -31,7 +31,7 @@ event_host:
   title: Event Host
   competition_id: 1
 
-four:
+participant:
   id: 4
   user_id: 1
   holder_id: 1
@@ -49,7 +49,7 @@ sponsor_contact:
   title: Sponsor Contact
   competition_id: 1
 
-six:
+vip:
   id: 6
   user_id: 2
   holder_id: 2
@@ -58,7 +58,7 @@ six:
   title: VIP
   competition_id: 1
 
-seven:
+judge:
   id: 7
   user_id: 2
   holder_id: 2
@@ -67,7 +67,7 @@ seven:
   title: Judge
   competition_id: 1
 
-eight:
+volunteer:
   id: 8
   user_id: 1
   holder_id: 1
@@ -76,7 +76,7 @@ eight:
   title: GovHack Volunteer
   competition_id: 1
 
-nine:
+team_member:
   id: 9
   user_id: 2
   holder_id: 2
@@ -85,7 +85,7 @@ nine:
   title: Team Member
   competition_id: 1
 
-ten:
+event_support:
   id: 10
   user_id: 1
   holder_id: 1
@@ -103,7 +103,7 @@ team_leader:
   title: Team Leader
   competition_id: 1
 
-twelve:
+invitee:
   id: 12
   user_id: 3
   holder_id: 3
@@ -112,7 +112,7 @@ twelve:
   title: Invitee
   competition_id: 1
 
-thirteen:
+other_participant:
   id: 13
   user_id: 3
   holder_id: 3
@@ -121,7 +121,7 @@ thirteen:
   title: Participant
   competition_id: 1
 
-fourteen:
+region_support:
   id: 14
   user_id: 1
   holder_id: 1
@@ -130,7 +130,7 @@ fourteen:
   title: Region Support
   competition_id: 1
 
-fifteen:
+chief_judge:
   id: 15
   user_id: 1
   holder_id: 1

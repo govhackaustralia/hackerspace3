@@ -162,7 +162,7 @@ class RegionTest < ActiveSupport::TestCase
   end
 
   test 'zone_code_when' do
-    event = events(:four)
+    event = events(:other_competition)
     region = regions(:other_national)
     event.update! start_time: '10th December', end_time: '10th July'
 

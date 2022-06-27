@@ -4,7 +4,7 @@
 # model remove the '{}' from the fixture names and add the columns immediately
 # below each fixture, per the syntax in the comments below
 #
-one:
+connection:
   id: 1
   name: Brisbane
   region_id: 2
@@ -14,7 +14,7 @@ one:
   identifier: connection_brisbane
   published: true
 
-two:
+competition:
   id: 2
   name: Brisbane
   region_id: 2
@@ -24,7 +24,7 @@ two:
   identifier: competition_brisbane
   published: true
 
-three:
+award:
   id: 3
   name: Brisbane
   region_id: 2
@@ -34,7 +34,7 @@ three:
   identifier: award_brisbane
   published: true
 
-four:
+other_competition:
   id: 4
   name: New Zealand
   region_id: 4

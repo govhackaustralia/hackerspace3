@@ -119,7 +119,7 @@ class RegistrationTest < ActiveSupport::TestCase
     users(:one).update! registration_type: nil
 
     assert_raises ActiveRecord::RecordInvalid do
-      events(:two).registrations.new(
+      events(:competition).registrations.new(
         user: users(:one),
         holder: holders(:one),
         status: ATTENDING
