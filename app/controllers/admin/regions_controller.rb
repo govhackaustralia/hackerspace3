@@ -96,7 +96,6 @@ class Admin::RegionsController < ApplicationController
     @sponsorships_count = @region.sponsorships.count
     @data_sets_count = @region.data_sets.count
     @challenges_count = @region.challenges.count
-    @bulk_mails_count = @region.bulk_mails.count
   end
 
   def retrieve_national_counts

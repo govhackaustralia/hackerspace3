@@ -16,18 +16,10 @@
         </button>
       <% end %>
     <% end %>
-    <% if registration.category == GROUP_GOLDEN %>
-      <%= link_to edit_event_registration_path(event.identifier, registration, task: GROUP_GOLDEN) do %>
-        <button class="content-black-button">
-          Transfer Group Golden Ticket to another team member
-        </button>
-      <% end %>
-    <% else %>
-      <%= link_to event_registration_path(event.identifier, registration) do %>
-        <button class="content-blue-button">
-          View Registration
-        </button>
-      <% end %>
+    <%= link_to event_registration_path(event.identifier, registration) do %>
+      <button class="content-blue-button">
+        View Registration
+      </button>
     <% end %>
     <%= link_to event_path(event.identifier) do %>
       <button class="content-red-button">

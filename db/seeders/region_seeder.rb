@@ -161,9 +161,6 @@ class RegionSeeder < Seeder
           event = EventSeeder.create(event_type, event_name, region, connection_start, competition, sponsors, users, participant_assignments)
         elsif event_type == AWARD_EVENT
           event = EventSeeder.create(event_type, event_name, region, award_start, competition, sponsors, users, participant_assignments)
-          if event_name == international_region.name
-            EventSeeder.create_national_awards(event, competition)
-          end
         end
       end
     end

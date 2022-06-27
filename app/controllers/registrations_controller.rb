@@ -16,34 +16,21 @@ class RegistrationsController < ApplicationController
     @assignment = @registration.assignment
     @event = @registration.event
     @region = @event.region
-    return if @registration.category == REGULAR
-
-    @inbound_flight = @registration.inbound_flight
-    @outbound_flight = @registration.outbound_flight
   end
 
-  # ENHANCEMENT: Split Group Golden into seperate controller.
   def edit
     @registration = Registration.find(params[:id])
     @event = @registration.event
     @region = @event.region
     @user = current_user
     @assignment = @registration.assignment
-    return unless params[:task] == GROUP_GOLDEN
-
-    edit_group_golden
   end
 
-  # ENHANCEMENT: Split Group Golden into seperate controller.
   def update
     check_code_of_conduct
-    if params[:task] == GROUP_GOLDEN
-      update_group_golden
-    else
-      update_registration
-      update_user_preferences
-      handle_update
-    end
+    update_registration
+    update_user_preferences
+    handle_update
   end
 
   # Hard to check Create Method when it is so long.
@@ -174,19 +161,5 @@ class RegistrationsController < ApplicationController
       creative: params[:creative],
       facilitator: params[:facilitator]
     )
-  end
-
-  def update_group_golden
-    @registration = Registration.find(params[:id])
-    @registration.update(assignment_id: params[:assignment_id])
-    flash[:notice] = 'Group Golden Ticket Transferred'
-    redirect_to __account_path
-  end
-
-  def edit_group_golden
-    @assignment = @registration.assignment
-    @team = @assignment.assignable
-    @project = @team.current_project
-    @other_members = @team.assignments.where.not(user: @user)
   end
 end

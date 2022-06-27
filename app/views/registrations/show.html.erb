@@ -18,9 +18,6 @@
           water bottle?
         </p>
       <% end %>
-      <% unless @registration.category == REGULAR %>
-        <%= render 'flight_options' %>
-      <% end %>
     <% elsif @event.waitlisted? @assignment %>
       <br />
       <p>You are on the waitlist, you will be notified should a space become available.</p>

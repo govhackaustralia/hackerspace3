@@ -24,14 +24,8 @@ class Event < ApplicationRecord
   has_many :published_teams, -> { published }, class_name: 'Team'
   has_many :published_projects_by_name, -> { order :project_name }, through: :published_teams, source: :current_project
 
-  has_many :bulk_mails, as: :mailable, dependent: :destroy
-
   has_many :event_partnerships, dependent: :destroy
   has_many :event_partners, through: :event_partnerships, source: :sponsor
-
-  has_many :flights, dependent: :destroy
-  has_many :inbound_flights, -> { inbound }, class_name: 'Flight'
-  has_many :outbound_flights, -> { outbound }, class_name: 'Flight'
 
   scope :published, -> { where published: true }
 
