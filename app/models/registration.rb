@@ -6,9 +6,6 @@ class Registration < ApplicationRecord
   has_one :user, through: :assignment
   has_one :competition, through: :assignment
 
-  has_many :registration_flights, dependent: :destroy
-  has_many :flights, through: :registration_flights
-
   scope :attending, -> { where status: ATTENDING }
   scope :waitlist, -> { where status: WAITLIST }
   scope :non_attending, -> { where status: NON_ATTENDING }
@@ -55,33 +52,6 @@ class Registration < ApplicationRecord
            :check_code_of_conduct
 
   validate :check_user_registration_type, on: :create
-
-  # Returns the category of a registration for the purpose of allocating
-  # different event ticket types.
-  def category
-    reg_assignment = assignment
-    if [PARTICIPANT, VIP].include? reg_assignment.title
-      REGULAR
-    elsif reg_assignment.assignable_type == 'Team'
-      GROUP_GOLDEN
-    elsif reg_assignment.title == GOLDEN_TICKET
-      INDIVIDUAL_GOLDEN
-    else
-      STAFF
-    end
-  end
-
-  # Return the inbound flight chosen by a registraton.
-  # ENHANCEMENT: Move into rails associations
-  def inbound_flight
-    flights.inbound.first
-  end
-
-  # Return the outbound flight chosen by a registraton.
-  # ENHANCEMENT: Move into rails associations
-  def outbound_flight
-    flights.outbound.first
-  end
 
   private
 

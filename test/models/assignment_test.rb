@@ -14,28 +14,28 @@ class AssignmentTest < ActiveSupport::TestCase
     @team = Team.first
     @header= Header.second
     @score = Score.third
-    @registration = Registration.first
-    @competition_event = Event.second
-    @region_support = Assignment.find 14
-    @event_host = Assignment.third
-    @event_support = Assignment.find 10
-    @team_leader_assignment = Assignment.find 11
-    @team_invitee = Assignment.find 12
-    @team_member_assignment = Assignment.find 9
-    @judge = Assignment.find 7
-    @chief_judge = Assignment.find 15
-    @contact = Assignment.find 5
-    @volunteer = Assignment.find 8
-    @participating_comp_registration = Registration.third
+    @registration = registrations(:attending)
+    @competition_event = events(:competition)
+    @region_support = assignments(:region_support)
+    @event_host = assignments(:event_host)
+    @event_support = assignments(:event_support)
+    @team_leader_assignment = assignments(:team_leader)
+    @team_invitee = assignments(:invitee)
+    @team_member_assignment = assignments(:team_member)
+    @judge = assignments(:judge)
+    @chief_judge = assignments(:chief_judge)
+    @contact = assignments(:sponsor_contact)
+    @volunteer = assignments(:volunteer)
+    @participating_comp_registration = registrations(:attending_two)
   end
 
   test 'assignment associations' do
     # Belongs To
-    assert @comp_assignment.assignable == @competition
-    assert @comp_assignment.holder == @holder
-    assert @comp_assignment.user == @user
-    assert @region_assignment.assignable == @region
-    assert @region_assignment.user == @user
+    assert_equal @competition, @comp_assignment.assignable
+    assert_equal @holder, @comp_assignment.holder
+    assert_equal @user, @comp_assignment.user
+    assert_equal @region, @region_assignment.assignable
+    assert_equal @user, @region_assignment.user
     # Has Many
     assert @participant.favourite_teams.include? @team
     assert @participant.headers.include? @header

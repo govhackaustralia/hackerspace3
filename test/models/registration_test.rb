@@ -8,12 +8,8 @@ class RegistrationTest < ActiveSupport::TestCase
     @competition = Competition.first
     @user = User.first
     @event = Event.first
-    @registration_flight = RegistrationFlight.first
-    @flight = Flight.first
     @waitlister = User.second
     @wait_ass = Assignment.find(6)
-    @inbound_flight = Flight.first
-    @outbound_flight = Flight.second
     @waitlist_registration = Registration.second
     @competition_event_registration = Registration.third
     @non_attending_registration = Registration.fourth
@@ -28,12 +24,6 @@ class RegistrationTest < ActiveSupport::TestCase
     assert @registration.competition == @competition
     assert @registration.user == @user
     assert @registration.event == @event
-    assert @registration.registration_flights.include? @registration_flight
-    assert @registration.flights.include? @flight
-    assert @registration.inbound_flight == @inbound_flight
-    assert @registration.outbound_flight == @outbound_flight
-    @registration.destroy
-    assert_raises(ActiveRecord::RecordNotFound) { @registration_flight.reload }
   end
 
   test 'registration scopes' do
@@ -129,7 +119,7 @@ class RegistrationTest < ActiveSupport::TestCase
     users(:one).update! registration_type: nil
 
     assert_raises ActiveRecord::RecordInvalid do
-      events(:two).registrations.new(
+      events(:competition).registrations.new(
         user: users(:one),
         holder: holders(:one),
         status: ATTENDING

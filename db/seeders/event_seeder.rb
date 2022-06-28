@@ -64,26 +64,4 @@ class EventSeeder < Seeder
 
     event
   end
-
-  def self.create_national_awards(event, competition)
-    [*1..8].sample.times do
-      event.flights.create(
-        description: [Faker::TvShows::TheExpanse.location, competition.year].join(' '),
-        direction: FLIGHT_DIRECTIONS.sample
-      )
-    end
-    [*1..3].sample.times do |time|
-      bulk_mail = event.bulk_mails.create(
-        user_id: 1,
-        name: "Bulk Mail #{time} #{competition.year}",
-        status: DRAFT,
-        from_email: admin_email,
-        subject: 'Greetings',
-        body: 'Hello { display_name }, How are you?'
-      )
-      bulk_mail.user_orders.create(
-        request_type: USER_ORDER_QUERIES.sample
-      )
-    end
-  end
 end

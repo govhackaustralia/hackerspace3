@@ -29,7 +29,6 @@ class Region < ApplicationRecord
   has_many :challenges, dependent: :destroy
   has_many :approved_challenges, -> { approved.order(name: :asc) }, class_name: 'Challenge'
   has_many :data_sets, dependent: :destroy
-  has_many :bulk_mails, as: :mailable, dependent: :destroy
   has_many :support_assignments, -> { region_supports }, class_name: 'Assignment', as: :assignable
   has_many :supports, through: :support_assignments, source: :user
   has_many :region_limits

@@ -6,7 +6,7 @@ A system for competition participants, sponsors, and volunteers.
 
 Hackerspace 3 is a [Ruby on Rails application](https://rubyonrails.org/)
 
-Current major version is 6.1
+Current major version is 7
 
 Check out the [Rails Guides](https://guides.rubyonrails.org/index.html) to get up and running.
 
@@ -18,7 +18,7 @@ There is also a Dockerfile with instructions on how to get up and running in our
 
 ## Ruby version
 
-- `2.7.2`
+- `3.0.0`
 
 ## Database initialization and creation
 
@@ -28,28 +28,30 @@ There is also a Dockerfile with instructions on how to get up and running in our
 $ rails db:setup
 ```
 
-*This will load the seeds also, see db/seeds.rb for more options*
+*This will also load seed data, see db/seeds.rb for more options*
 
 ## Test Suite
 
-Current coverage is unit tests for models, controllers, and services.
+Current coverage is unit tests for models, controllers, and service classes.
 
 ```bash
 $ rails test
 ```
 
-## Services
+## External Services
 
 hackerspace3 makes use of AWS and Google services.
 
-See the below Environment Variables Required to enable specific services.
+See the below Environment Variables section to enable specific services.
 
 ## Specification Documents
 
 All documents relating to specification can be found in the [project
 wiki](https://github.com/govhackaustralia/hackerspace3/wiki).
 
-## Environment Variables Required
+## Environment Variables
+
+Environment variables only need to be set if external services (Google Maps, S3) need to be tested.
 
 Set these in `config/application.yml` using [figaro](https://github.com/laserlemon/figaro)
 

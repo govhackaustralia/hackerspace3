@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_06_25_045952) do
+ActiveRecord::Schema[7.0].define(version: 2022_06_27_085655) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -66,21 +66,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_25_045952) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["identifier"], name: "index_badges_on_identifier"
-  end
-
-  create_table "bulk_mails", force: :cascade do |t|
-    t.integer "user_id"
-    t.text "body"
-    t.datetime "created_at", precision: nil, null: false
-    t.datetime "updated_at", precision: nil, null: false
-    t.string "name"
-    t.string "status"
-    t.string "from_email"
-    t.string "subject"
-    t.string "mailable_type"
-    t.integer "mailable_id"
-    t.index ["mailable_type", "mailable_id"], name: "index_bulk_mails_on_mailable_type_and_mailable_id"
-    t.index ["user_id"], name: "index_bulk_mails_on_user_id"
   end
 
   create_table "challenge_data_sets", force: :cascade do |t|
@@ -148,19 +133,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_25_045952) do
     t.boolean "hunt_published"
     t.index ["current"], name: "index_competitions_on_current"
     t.index ["year"], name: "index_competitions_on_year"
-  end
-
-  create_table "correspondences", force: :cascade do |t|
-    t.integer "user_id"
-    t.string "status"
-    t.datetime "created_at", precision: nil, null: false
-    t.datetime "updated_at", precision: nil, null: false
-    t.string "body"
-    t.string "orderable_type"
-    t.integer "orderable_id"
-    t.index ["orderable_type", "orderable_id"], name: "index_correspondences_on_orderable_type_and_orderable_id"
-    t.index ["status"], name: "index_correspondences_on_status"
-    t.index ["user_id"], name: "index_correspondences_on_user_id"
   end
 
   create_table "criteria", force: :cascade do |t|
@@ -274,14 +246,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_25_045952) do
     t.index ["team_id"], name: "index_favourites_on_team_id"
   end
 
-  create_table "flights", force: :cascade do |t|
-    t.integer "event_id"
-    t.string "description"
-    t.string "direction"
-    t.datetime "created_at", precision: nil, null: false
-    t.datetime "updated_at", precision: nil, null: false
-  end
-
   create_table "headers", force: :cascade do |t|
     t.integer "assignment_id"
     t.string "scoreable_type"
@@ -383,13 +347,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_25_045952) do
     t.index ["competition_id"], name: "index_regions_on_competition_id"
     t.index ["identifier"], name: "index_regions_on_identifier"
     t.index ["parent_id"], name: "index_regions_on_parent_id"
-  end
-
-  create_table "registration_flights", force: :cascade do |t|
-    t.integer "registration_id"
-    t.integer "flight_id"
-    t.datetime "created_at", precision: nil, null: false
-    t.datetime "updated_at", precision: nil, null: false
   end
 
   create_table "registrations", force: :cascade do |t|
@@ -500,17 +457,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_25_045952) do
     t.index ["team_id"], name: "index_team_data_sets_on_team_id"
   end
 
-  create_table "team_orders", force: :cascade do |t|
-    t.integer "bulk_mail_id"
-    t.integer "team_id"
-    t.string "request_type"
-    t.datetime "created_at", precision: nil, null: false
-    t.datetime "updated_at", precision: nil, null: false
-    t.index ["bulk_mail_id"], name: "index_team_orders_on_bulk_mail_id"
-    t.index ["request_type"], name: "index_team_orders_on_request_type"
-    t.index ["team_id"], name: "index_team_orders_on_team_id"
-  end
-
   create_table "teams", force: :cascade do |t|
     t.integer "event_id"
     t.integer "project_id"
@@ -523,15 +469,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_25_045952) do
     t.index ["event_id"], name: "index_teams_on_event_id"
     t.index ["project_id"], name: "index_teams_on_project_id"
     t.index ["published"], name: "index_teams_on_published"
-  end
-
-  create_table "user_orders", force: :cascade do |t|
-    t.integer "bulk_mail_id"
-    t.string "request_type"
-    t.datetime "created_at", precision: nil, null: false
-    t.datetime "updated_at", precision: nil, null: false
-    t.index ["bulk_mail_id"], name: "index_user_orders_on_bulk_mail_id"
-    t.index ["request_type"], name: "index_user_orders_on_request_type"
   end
 
   create_table "users", force: :cascade do |t|

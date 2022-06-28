@@ -14,7 +14,6 @@ class RegionTest < ActiveSupport::TestCase
     @sponsorship_type = SponsorshipType.first
     @challenge = Challenge.first
     @data_set = DataSet.first
-    @bulk_mail = BulkMail.first
     @support_assignment = Assignment.find 14
     @support = User.first
     @next_competition = Competition.second
@@ -41,7 +40,6 @@ class RegionTest < ActiveSupport::TestCase
     assert @national.challenges.include? @challenge
     assert @national.approved_challenges.include? @challenge
     assert @national.data_sets.include? @data_set
-    assert @national.bulk_mails.include? @bulk_mail
     assert @national.support_assignments.include? @support_assignment
     assert @national.supports.include? @support
     assert @national.region_limits.include? @region_limit
@@ -164,7 +162,7 @@ class RegionTest < ActiveSupport::TestCase
   end
 
   test 'zone_code_when' do
-    event = events(:four)
+    event = events(:other_competition)
     region = regions(:other_national)
     event.update! start_time: '10th December', end_time: '10th July'
 

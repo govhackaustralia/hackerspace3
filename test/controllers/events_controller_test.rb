@@ -2,7 +2,7 @@ require 'test_helper'
 
 class EventsControllerTest < ActionDispatch::IntegrationTest
   setup do
-    @event = events :one
+    @event = events(:connection)
   end
 
   test 'should get index' do
@@ -11,7 +11,7 @@ class EventsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'should get show' do
-    event = events :one
+    event = events(:connection)
     get event_url event.identifier
     assert_response :success
   end
