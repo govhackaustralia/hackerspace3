@@ -2,7 +2,7 @@
 
   .buttons-group {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
   }
 
   button {
@@ -11,13 +11,13 @@
 
     .nav-button {
       margin: 3px;
-      border-radius: 10em;
+      border-radius: 0.5em;
       background-color: #c61f55;
       border: 1px solid #c61f55;
       color: #ffffff;
       display: inline-block;
       cursor: pointer;
-      padding: 10px 40px;
+      padding: 10px 15px;
 
       a {
         color: #ffffff;
@@ -31,16 +31,24 @@
     }
 
     .login-button:hover {
-      color: #59baff;
+      background-color: #6dbff9;
+      border: 1px solid #6dbff9;
+
+      >a {
+        color: #fff;
+        text-decoration: none;
+      }
     }
 
     .login-button {
       margin: 3px;
       border-radius: 0.5em;
-      color: #3C7CAB;
+      background-color: #4c9ad2;
+      border: 1px solid #4c9ad2;
+      color: #fff;
       display: inline-block;
       cursor: pointer;
-      padding: 10px 40px;
+      padding: 10px 15px;
 
       a {
         color: #ffffff;
@@ -93,11 +101,6 @@
 
 @media only screen and (max-width: 999px) {
   .navbar-right {
-
-    .buttons-group {
-      flex-direction: column;
-    }
-    
     .nav-button {
       margin: 10px 5px;
     }
