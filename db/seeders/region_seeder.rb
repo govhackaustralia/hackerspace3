@@ -102,17 +102,6 @@ class RegionSeeder < Seeder
         end
       end
 
-      [*1..3].sample.times do |time|
-        region.bulk_mails.create(
-          user_id: 1,
-          name: "Bulk Mail #{time} #{competition.year}",
-          status: DRAFT,
-          from_email: admin_email,
-          subject: 'Greetings',
-          body: 'Hello { display_name }, How is { team_name } going with { project_name } ?'
-        )
-      end
-
       data_sets = region.data_sets
       return unless data_sets.any?
 
