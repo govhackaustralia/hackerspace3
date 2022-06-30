@@ -2,8 +2,8 @@ require 'test_helper'
 
 class SponsorshipTest < ActiveSupport::TestCase
   setup do
-    @event_sponsorship = Sponsorship.first
-    @region_sponsorship = Sponsorship.second
+    @event_sponsorship = sponsorships(:one)
+    @region_sponsorship = sponsorships(:two)
     @sponsor = sponsors(:one)
     @event = events(:connection)
     @region = regions(:national)

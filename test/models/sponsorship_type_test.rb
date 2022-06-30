@@ -4,7 +4,7 @@ class SponsorshipTypeTest < ActiveSupport::TestCase
   setup do
     @sponsorship_type = SponsorshipType.first
     @competition = competitions(:one)
-    @sponsorship = Sponsorship.first
+    @sponsorship = sponsorships(:one)
   end
 
   test 'sponsorship type associations' do

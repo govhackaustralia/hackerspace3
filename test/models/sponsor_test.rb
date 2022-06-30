@@ -5,7 +5,7 @@ class SponsorTest < ActiveSupport::TestCase
     @sponsor = sponsors(:one)
     @competition = competitions(:one)
     @assignment = Assignment.fifth
-    @sponsorship = Sponsorship.first
+    @sponsorship = sponsorships(:one)
     @event_partnership = EventPartnership.first
     @challenge_sponsorship = challenge_sponsorships(:one)
   end
