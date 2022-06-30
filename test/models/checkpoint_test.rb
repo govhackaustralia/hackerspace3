@@ -2,7 +2,7 @@ require 'test_helper'
 
 class CheckpointTest < ActiveSupport::TestCase
   setup do
-    @checkpoint = Checkpoint.first
+    @checkpoint = checkpoints(:one)
     @competition = competitions(:one)
     @entry = entries(:one)
     @team = teams(:one)

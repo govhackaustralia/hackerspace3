@@ -8,7 +8,7 @@ class ChallengeTest < ActiveSupport::TestCase
     @assignment = Assignment.find(7)
     @user = users(:two)
     @entry = entries(:one)
-    @checkpoint = Checkpoint.first
+    @checkpoint = checkpoints(:one)
     @team = teams(:one)
     @challenge_sponsorship = challenge_sponsorships(:one)
     @sponsor = sponsors(:one)

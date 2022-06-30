@@ -5,7 +5,7 @@ class TeamManagement::EntriesControllerTest < ActionDispatch::IntegrationTest
     sign_in users(:two)
     @team = teams(:one)
     @challenge = challenges(:three)
-    @checkpoint = Checkpoint.first
+    @checkpoint = checkpoints(:one)
     @entry = entries(:one)
     @competition = competitions(:one)
   end
@@ -57,7 +57,7 @@ class TeamManagement::EntriesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'should patch update fail' do
-    checkpoint = Checkpoint.second
+    checkpoint = checkpoints(:two)
     checkpoint.update end_time: Time.now.yesterday
     patch team_management_team_entry_url @team, @entry, params: { entry: {
       checkpoint_id: checkpoint.id

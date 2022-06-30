@@ -3,7 +3,7 @@ require 'test_helper'
 class Admin::RegionLimitsControllerTest < ActionDispatch::IntegrationTest
   setup do
     sign_in users(:one)
-    @checkpoint = Checkpoint.first
+    @checkpoint = checkpoints(:one)
     @region_limit = RegionLimit.first
     @competition = competitions(:one)
   end

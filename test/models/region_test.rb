@@ -106,7 +106,7 @@ class RegionTest < ActiveSupport::TestCase
   end
 
   test 'limit' do
-    checkpoint = Checkpoint.first
+    checkpoint = checkpoints(:one)
     assert @national.limit(checkpoint) == @region_limit
     assert @regional.limit(checkpoint) == @region_limit
     assert @international.limit(checkpoint).nil?

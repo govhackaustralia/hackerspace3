@@ -6,7 +6,7 @@ class Admin::Teams::EntriesControllerTest < ActionDispatch::IntegrationTest
     @team = teams(:one)
     @entry = entries(:one)
     @challenge = challenges(:three)
-    @checkpoint = Checkpoint.first
+    @checkpoint = checkpoints(:one)
     @competition = @team.competition
   end
 

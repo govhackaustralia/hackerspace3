@@ -3,7 +3,7 @@ require 'test_helper'
 class EntryTest < ActiveSupport::TestCase
   setup do
     @entry = entries(:one)
-    @checkpoint = Checkpoint.first
+    @checkpoint = checkpoints(:one)
     @challenge = challenges(:one)
     @team = teams(:one)
     @event = @team.event
@@ -76,7 +76,7 @@ class EntryTest < ActiveSupport::TestCase
       Entry.create!(
         challenge: challenges(:one),
         team: teams(:two),
-        checkpoint: Checkpoint.first
+        checkpoint: checkpoints(:one)
       )
     end
     assert exception.message.include?(
@@ -85,7 +85,7 @@ class EntryTest < ActiveSupport::TestCase
     assert Entry.create!(
       challenge: challenges(:one),
       team: teams(:one),
-      checkpoint: Checkpoint.first
+      checkpoint: checkpoints(:one)
     ).persisted?
   end
 end

@@ -4,7 +4,7 @@ class Admin::CheckpointsControllerTest < ActionDispatch::IntegrationTest
   setup do
     sign_in users(:one)
     @competition = competitions(:one)
-    @checkpoint = Checkpoint.first
+    @checkpoint = checkpoints(:one)
   end
 
   test 'should get index' do
