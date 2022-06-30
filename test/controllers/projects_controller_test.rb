@@ -36,7 +36,7 @@ class ProjectsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'should post slack_chat fail authentication' do
-    sign_out users :one
+    sign_out users(:one)
 
     post slack_chat_project_url @project.identifier
     assert_redirected_to new_user_session_path
@@ -45,7 +45,7 @@ class ProjectsControllerTest < ActionDispatch::IntegrationTest
   test 'should post slack_chat fail user cannot slack chat' do
     profiles(:one).update! slack_user_id: nil
 
-    sign_in users :one
+    sign_in users(:one)
     post slack_chat_project_url @project.identifier
     assert_redirected_to projects_path
   end
@@ -54,7 +54,7 @@ class ProjectsControllerTest < ActionDispatch::IntegrationTest
     teams(:one).assignments.destroy_all
     teams(:one).update! slack_channel_id: nil
 
-    sign_in users :one
+    sign_in users(:one)
     post slack_chat_project_url @project.identifier
     assert_redirected_to projects_path
   end
@@ -62,7 +62,7 @@ class ProjectsControllerTest < ActionDispatch::IntegrationTest
   test 'should post slack_chat success' do
     assert @team.slack_channel_id.present?
 
-    sign_in users :one
+    sign_in users(:one)
     post slack_chat_project_url @project.identifier
     assert_redirected_to "slack://channel?id=#{teams(:one).slack_channel_id}&team=#{ENV.fetch('SLACK_TEAM_ID', nil)}"
   end
@@ -87,7 +87,7 @@ class ProjectsControllerTest < ActionDispatch::IntegrationTest
       .with(@team)
       .returns(true)
 
-    sign_in users :one
+    sign_in users(:one)
     post slack_chat_project_url @project.identifier
     assert_redirected_to "slack://channel?id=#{teams(:one).slack_channel_id}&team=#{ENV.fetch('SLACK_TEAM_ID', nil)}"
   end

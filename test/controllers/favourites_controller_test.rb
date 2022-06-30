@@ -2,7 +2,7 @@ require 'test_helper'
 
 class FavouritesControllerTest < ActionDispatch::IntegrationTest
   setup do
-    sign_in users :one
+    sign_in users(:one)
     @team = teams :one
     @favourite = favourites :one
     @project = projects :one

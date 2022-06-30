@@ -2,7 +2,7 @@ require 'test_helper'
 
 class Admin::Teams::ScorecardsControllerTest < ActionDispatch::IntegrationTest
   setup do
-    sign_in users :one
+    sign_in users(:one)
     @team = Team.first
     @header= Header.first
   end

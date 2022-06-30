@@ -13,7 +13,7 @@ class Admin::ProfilesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'should patch update fail authorize' do
-    sign_in users :two
+    sign_in users(:two)
     profiles(:one).update! published: true
     patch admin_profile_path(profiles(:one)), params: {
       profile: {
@@ -25,7 +25,7 @@ class Admin::ProfilesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'should patch update profile' do
-    sign_in users :one
+    sign_in users(:one)
     profiles(:one).update! published: true
     patch admin_profile_path(profiles(:one)), params: {
       profile: {

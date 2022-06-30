@@ -2,7 +2,7 @@ require 'test_helper'
 
 class Admin::SponsorshipTypesControllerTest < ActionDispatch::IntegrationTest
   setup do
-    sign_in users :one
+    sign_in users(:one)
     @sponsorship_type = SponsorshipType.first
     @competition = Competition.first
   end

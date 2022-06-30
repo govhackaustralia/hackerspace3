@@ -2,7 +2,7 @@ require 'test_helper'
 
 class TeamManagement::TeamDataSetsControllerTest < ActionDispatch::IntegrationTest
   setup do
-    sign_in users :one
+    sign_in users(:one)
     @team = Team.first
     @team_data_set = team_data_sets(:one)
   end

@@ -2,7 +2,7 @@ require 'test_helper'
 
 class Admin::CheckpointsControllerTest < ActionDispatch::IntegrationTest
   setup do
-    sign_in users :one
+    sign_in users(:one)
     @competition = Competition.first
     @checkpoint = Checkpoint.first
   end

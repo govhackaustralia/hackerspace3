@@ -2,7 +2,7 @@ require 'test_helper'
 
 class Admin::Users::AssignmentsControllerTest < ActionDispatch::IntegrationTest
   setup do
-    sign_in users :one
+    sign_in users(:one)
     @vip = User.second
     @vip_assignment = Assignment.find 6
   end

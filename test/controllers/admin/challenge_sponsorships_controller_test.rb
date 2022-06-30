@@ -2,7 +2,7 @@ require 'test_helper'
 
 class Admin::ChallengeSponsorshipsControllerTest < ActionDispatch::IntegrationTest
   setup do
-    sign_in users :one
+    sign_in users(:one)
     @challenge = challenges(:one)
     @challenge_sponsorship = ChallengeSponsorship.first
     @region = Region.first

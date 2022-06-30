@@ -2,7 +2,7 @@ require 'test_helper'
 
 class Admin::HuntQuestionsControllerTest < ActionDispatch::IntegrationTest
   setup do
-    sign_in users :one
+    sign_in users(:one)
     @competition = Competition.first
     @hunt_question = hunt_questions(:one)
   end

@@ -2,7 +2,7 @@ require 'test_helper'
 
 class AgreementsControllerTest < ActionDispatch::IntegrationTest
   setup do
-    sign_in users :one
+    sign_in users(:one)
     @user = users(:one)
     @user.update(accepted_terms_and_conditions: nil)
   end

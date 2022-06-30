@@ -2,7 +2,7 @@ require 'test_helper'
 
 class Admin::Sponsors::AssignmentsControllerTest < ActionDispatch::IntegrationTest
   setup do
-    sign_in users :one
+    sign_in users(:one)
     @sponsor = Sponsor.first
     @user = User.first
   end

@@ -2,7 +2,7 @@ require 'test_helper'
 
 class TeamsControllerTest < ActionDispatch::IntegrationTest
   setup do
-    sign_in users :one
+    sign_in users(:one)
     @competition = Competition.first
     @competition.update(
       start_time: Time.now.yesterday,
