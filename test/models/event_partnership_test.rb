@@ -4,7 +4,7 @@ class EventPartnershipTest < ActiveSupport::TestCase
   setup do
     @event_partnership = EventPartnership.first
     @event = events(:connection)
-    @sponsor = Sponsor.first
+    @sponsor = sponsors(:one)
   end
 
   test 'event partnership associations' do

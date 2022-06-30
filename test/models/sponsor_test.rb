@@ -2,7 +2,7 @@ require 'test_helper'
 
 class SponsorTest < ActiveSupport::TestCase
   setup do
-    @sponsor = Sponsor.first
+    @sponsor = sponsors(:one)
     @competition = competitions(:one)
     @assignment = Assignment.fifth
     @sponsorship = Sponsorship.first
@@ -26,7 +26,7 @@ class SponsorTest < ActiveSupport::TestCase
 
   test 'sponsor validations' do
     assert_not @sponsor.update name: nil
-    assert_not @sponsor.update name: Sponsor.second.name
+    assert_not @sponsor.update name: sponsors(:two).name
   end
 
   test 'sponsor scopes' do

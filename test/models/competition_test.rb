@@ -5,7 +5,7 @@ class CompetitionTest < ActiveSupport::TestCase
     @competition = competitions(:one)
     @region = regions(:international)
     @assignment = Assignment.first
-    @sponsor = Sponsor.first
+    @sponsor = sponsors(:one)
     @sponsorship_type = SponsorshipType.first
     @event = events(:connection)
     @connection_event = @event

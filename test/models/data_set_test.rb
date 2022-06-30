@@ -7,7 +7,7 @@ class DataSetTest < ActiveSupport::TestCase
     @competition = competitions(:one)
     @challenge_data_set = challenge_data_sets(:one)
     @challenge = challenges(:one)
-    @sponsor = Sponsor.first
+    @sponsor = sponsors(:one)
   end
 
   test 'data set associations' do

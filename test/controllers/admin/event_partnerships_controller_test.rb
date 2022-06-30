@@ -5,7 +5,7 @@ class Admin::EventPartnershipsControllerTest < ActionDispatch::IntegrationTest
     sign_in users(:one)
     @event = events(:connection)
     @event_partnership = EventPartnership.first
-    @sponsor = Sponsor.first
+    @sponsor = sponsors(:one)
   end
 
   test 'should get new' do

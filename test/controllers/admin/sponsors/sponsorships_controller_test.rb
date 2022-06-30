@@ -4,7 +4,7 @@ class Admin::Sponsors::SponsorshipsControllerTest < ActionDispatch::IntegrationT
   setup do
     sign_in users(:one)
     @sponsorship = Sponsorship.first
-    @sponsor = Sponsor.first
+    @sponsor = sponsors(:one)
   end
 
   test 'should delete destroy success' do

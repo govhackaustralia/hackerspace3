@@ -3,7 +3,7 @@ require 'test_helper'
 class Admin::SponsorLogosControllerTest < ActionDispatch::IntegrationTest
   setup do
     sign_in users(:one)
-    @sponsor = Sponsor.first
+    @sponsor = sponsors(:one)
   end
 
   test 'should get edit' do

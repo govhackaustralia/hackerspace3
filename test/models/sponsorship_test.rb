@@ -4,7 +4,7 @@ class SponsorshipTest < ActiveSupport::TestCase
   setup do
     @event_sponsorship = Sponsorship.first
     @region_sponsorship = Sponsorship.second
-    @sponsor = Sponsor.first
+    @sponsor = sponsors(:one)
     @event = events(:connection)
     @region = regions(:national)
     @sponsorship_type = SponsorshipType.first
