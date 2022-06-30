@@ -13,7 +13,7 @@ class TeamTest < ActiveSupport::TestCase
     @team_leader = User.first
     @team_invitee_assignment = Assignment.find 12
     @team_invitee = User.third
-    @team_data_set = TeamDataSet.first
+    @team_data_set = team_data_sets(:one)
     @favourite = Favourite.first
     @header= Header.fourth
     @entry = Entry.first

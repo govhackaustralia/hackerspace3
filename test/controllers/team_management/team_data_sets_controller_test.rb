@@ -4,7 +4,7 @@ class TeamManagement::TeamDataSetsControllerTest < ActionDispatch::IntegrationTe
   setup do
     sign_in users :one
     @team = Team.first
-    @team_data_set = TeamDataSet.first
+    @team_data_set = team_data_sets(:one)
   end
 
   test 'should get index' do
