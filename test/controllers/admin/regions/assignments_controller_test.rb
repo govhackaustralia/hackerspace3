@@ -4,7 +4,7 @@ class Admin::Regions::AssignmentsControllerTest < ActionDispatch::IntegrationTes
   setup do
     sign_in users(:one)
     @region = Region.first
-    @user = User.first
+    @user = users(:one)
   end
 
   test 'should get index' do

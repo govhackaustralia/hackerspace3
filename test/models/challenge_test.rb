@@ -6,7 +6,7 @@ class ChallengeTest < ActiveSupport::TestCase
     @competition = Competition.first
     @region = Region.first
     @assignment = Assignment.find(7)
-    @user = User.second
+    @user = users(:two)
     @entry = entries(:one)
     @checkpoint = Checkpoint.first
     @team = Team.first

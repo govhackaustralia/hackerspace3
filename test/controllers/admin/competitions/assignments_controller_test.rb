@@ -4,7 +4,7 @@ class Admin::Competitions::AssignmentsControllerTest < ActionDispatch::Integrati
   setup do
     sign_in users(:one)
     @competition = Competition.first
-    @user = User.first
+    @user = users(:one)
   end
 
   test 'should get index' do

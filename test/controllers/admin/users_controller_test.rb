@@ -2,7 +2,7 @@ require 'test_helper'
 
 class Admin::UsersControllerTest < ActionDispatch::IntegrationTest
   setup do
-    @user = User.first
+    @user = users(:one)
     sign_in users(:one)
     @unconfirmed_user = users(:unconfirmed_user)
   end

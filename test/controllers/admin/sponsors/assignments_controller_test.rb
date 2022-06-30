@@ -4,7 +4,7 @@ class Admin::Sponsors::AssignmentsControllerTest < ActionDispatch::IntegrationTe
   setup do
     sign_in users(:one)
     @sponsor = Sponsor.first
-    @user = User.first
+    @user = users(:one)
   end
 
   test 'should get new' do

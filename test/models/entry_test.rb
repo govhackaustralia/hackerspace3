@@ -60,7 +60,7 @@ class EntryTest < ActiveSupport::TestCase
     )
     assert_not entry.eligible
     @team.projects.create(
-      user: User.first,
+      user: users(:one),
       team_name: 'test',
       project_name: 'test',
       data_story: 'test',

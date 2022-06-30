@@ -4,7 +4,7 @@ class Admin::Challenges::JudgesControllerTest < ActionDispatch::IntegrationTest
   setup do
     sign_in users(:one)
     @challenge = challenges(:one)
-    @user = User.first
+    @user = users(:one)
   end
 
   test 'should get new' do

@@ -3,7 +3,7 @@ require 'test_helper'
 class HolderTest < ActiveSupport::TestCase
   setup do
     @holder = Holder.first
-    @user = User.first
+    @user = users(:one)
     @competition = Competition.first
   end
 

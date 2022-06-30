@@ -3,7 +3,7 @@ require 'test_helper'
 class UsersControllerTest < ActionDispatch::IntegrationTest
   setup do
     sign_in users(:one)
-    @user = User.first
+    @user = users(:one)
   end
 
   test 'should get show' do

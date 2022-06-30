@@ -4,7 +4,7 @@ class TeamManagement::Teams::AssignmentsControllerTest < ActionDispatch::Integra
   setup do
     sign_in users(:one)
     @team = Team.first
-    @member = User.second
+    @member = users(:two)
     @member_assignment = Assignment.find(9)
   end
 

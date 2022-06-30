@@ -4,7 +4,7 @@ class Admin::Events::AssignmentsControllerTest < ActionDispatch::IntegrationTest
   setup do
     sign_in users(:one)
     @event = Event.first
-    @user = User.first
+    @user = users(:one)
   end
 
   test 'should get index' do

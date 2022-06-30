@@ -5,7 +5,7 @@ class Admin::RegistrationsControllerTest < ActionDispatch::IntegrationTest
     sign_in users(:one)
     @event = Event.first
     @registration = Registration.first
-    @user = User.first
+    @user = users(:one)
   end
 
   test 'should get index' do

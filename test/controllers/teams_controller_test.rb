@@ -25,7 +25,7 @@ class TeamsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'should redirect to competition events if not registered for one' do
-    User.first.event_assignment(@competition).destroy
+    users(:one).event_assignment(@competition).destroy
     get new_team_url
     assert_redirected_to competition_events_url
   end

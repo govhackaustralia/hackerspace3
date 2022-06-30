@@ -5,11 +5,11 @@ class HeaderTest < ActiveSupport::TestCase
     @challenge_header = @header= Header.first
     @peoples_header = Header.second
     @particpiant = Assignment.fourth
-    @user = User.first
+    @user = users(:one)
     @score = Score.first
     @entry = entries(:one)
     @team = Team.first
-    @team_user = User.second
+    @team_user = users(:two)
   end
 
   test 'header associations' do

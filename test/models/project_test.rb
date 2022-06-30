@@ -4,7 +4,7 @@ class ProjectTest < ActiveSupport::TestCase
   setup do
     @project = Project.first
     @team = Team.first
-    @user = User.first
+    @user = users(:one)
     @event = Event.second
   end
 

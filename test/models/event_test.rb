@@ -12,7 +12,7 @@ class EventTest < ActiveSupport::TestCase
     @user = @registration.user
     @team = Team.first
     @entry = entries(:one)
-    @user = User.first
+    @user = users(:one)
     @vip_registration = Registration.second
     @competition_event = Event.second
     @wait_ass = Assignment.find 6

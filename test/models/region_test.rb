@@ -15,7 +15,7 @@ class RegionTest < ActiveSupport::TestCase
     @challenge = challenges(:one)
     @data_set = data_sets(:one)
     @support_assignment = Assignment.find 14
-    @support = User.first
+    @support = users(:one)
     @next_competition = Competition.second
     @international = Region.third
     @region_limit = RegionLimit.first

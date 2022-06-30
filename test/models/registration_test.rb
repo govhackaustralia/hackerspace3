@@ -6,9 +6,9 @@ class RegistrationTest < ActiveSupport::TestCase
     @holder = Holder.first
     @assignment = Assignment.fourth
     @competition = Competition.first
-    @user = User.first
+    @user = users(:one)
     @event = Event.first
-    @waitlister = User.second
+    @waitlister = users(:two)
     @wait_ass = Assignment.find(6)
     @waitlist_registration = Registration.second
     @competition_event_registration = Registration.third

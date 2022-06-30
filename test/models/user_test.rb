@@ -2,7 +2,7 @@ require 'test_helper'
 
 class UserTest < ActiveSupport::TestCase
   setup do
-    @user = User.first
+    @user = users(:one)
     @profile = profiles(:one)
     @holder = Holder.first
     @assignment = Assignment.first
@@ -11,10 +11,10 @@ class UserTest < ActiveSupport::TestCase
     @registration = Registration.first
     @joined_team_assignment = Assignment.find 11
     @joined_team = @team
-    @invitee = User.third
+    @invitee = users(:three)
     @invited_team_assignments = Assignment.find 12
     @invited_team = @team
-    @judge = User.second
+    @judge = users(:two)
     @judge_assignment = Assignment.find 7
     @challenge = challenges(:one)
     @leader_assignment = @joined_team_assignment

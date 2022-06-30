@@ -8,17 +8,17 @@ class TeamTest < ActiveSupport::TestCase
     @competition = Competition.first
     @region = Region.second
     @team_member_assignment = Assignment.find 9
-    @team_member = User.second
+    @team_member = users(:two)
     @team_leader_assignment = Assignment.find 11
-    @team_leader = User.first
+    @team_leader = users(:one)
     @team_invitee_assignment = Assignment.find 12
-    @team_invitee = User.third
+    @team_invitee = users(:three)
     @team_data_set = team_data_sets(:one)
     @favourite = Favourite.first
     @header= Header.fourth
     @entry = entries(:one)
     @challenge = challenges(:one)
-    @user = User.second
+    @user = users(:two)
     @regional_entry = entries(:three)
     @national_entry = @entry
   end
