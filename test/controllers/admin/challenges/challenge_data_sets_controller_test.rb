@@ -5,7 +5,7 @@ class Admin::Challenges::ChallengeDataSetsControllerTest < ActionDispatch::Integ
     sign_in users :one
     @challenge = challenges(:one)
     @data_set = DataSet.first
-    @challenge_data_set = ChallengeDataSet.first
+    @challenge_data_set = challenge_data_sets(:one)
   end
 
   test 'should get new' do

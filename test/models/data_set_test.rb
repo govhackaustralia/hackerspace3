@@ -5,7 +5,7 @@ class DataSetTest < ActiveSupport::TestCase
     @data_set = DataSet.first
     @region = Region.first
     @competition = Competition.first
-    @challenge_data_set = ChallengeDataSet.first
+    @challenge_data_set = challenge_data_sets(:one)
     @challenge = challenges(:one)
     @sponsor = Sponsor.first
   end

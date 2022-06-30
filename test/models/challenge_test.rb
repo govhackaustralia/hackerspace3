@@ -12,7 +12,7 @@ class ChallengeTest < ActiveSupport::TestCase
     @team = Team.first
     @challenge_sponsorship = ChallengeSponsorship.first
     @sponsor = Sponsor.first
-    @challenge_data_set = ChallengeDataSet.first
+    @challenge_data_set = challenge_data_sets(:one)
     @data_set = DataSet.first
     @regional_challenge = challenges(:three)
   end
