@@ -2,7 +2,7 @@ require 'test_helper'
 
 class DataSetTest < ActiveSupport::TestCase
   setup do
-    @data_set = DataSet.first
+    @data_set = data_sets(:one)
     @region = Region.first
     @competition = Competition.first
     @challenge_data_set = challenge_data_sets(:one)

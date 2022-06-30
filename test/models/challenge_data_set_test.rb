@@ -4,7 +4,7 @@ class ChallengeDataSetTest < ActiveSupport::TestCase
   setup do
     @challenge_data_set = challenge_data_sets(:one)
     @challenge = challenges(:one)
-    @data_set = DataSet.first
+    @data_set = data_sets(:one)
   end
 
   test 'challenge data set associations' do
