@@ -3,7 +3,7 @@ require 'test_helper'
 class SponsorTest < ActiveSupport::TestCase
   setup do
     @sponsor = Sponsor.first
-    @competition = Competition.first
+    @competition = competitions(:one)
     @assignment = Assignment.fifth
     @sponsorship = Sponsorship.first
     @event_partnership = EventPartnership.first

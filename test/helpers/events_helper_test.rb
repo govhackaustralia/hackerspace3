@@ -3,7 +3,7 @@ require 'test_helper'
 class EventsHelperTest < ActionView::TestCase
   setup do
     @event = Event.fourth
-    @competition = Competition.first
+    @competition = competitions(:one)
     @region = regions(:regional)
     @event_assignment = Assignment.fourth
   end

@@ -5,7 +5,7 @@ class ScorecardsHelperTest < ActionView::TestCase
     @header= Header.first
     @judge = users(:one)
     @peoples_assignment = Assignment.first
-    @competition = Competition.first
+    @competition = competitions(:one)
   end
 
   test 'challenge_title_required?' do

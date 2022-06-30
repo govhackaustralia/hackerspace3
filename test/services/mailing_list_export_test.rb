@@ -2,7 +2,7 @@ require 'test_helper'
 
 class MailingListExportTest < ActiveSupport::TestCase
   setup do
-    @competition = Competition.first
+    @competition = competitions(:one)
   end
 
   test 'csv' do

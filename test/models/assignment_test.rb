@@ -3,7 +3,7 @@ require 'test_helper'
 class AssignmentTest < ActiveSupport::TestCase
   setup do
     @comp_assignment = Assignment.first
-    @competition = Competition.first
+    @competition = competitions(:one)
     @region_assignment = Assignment.second
     @region = Region.first
     @holder = Holder.first

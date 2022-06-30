@@ -4,7 +4,7 @@ class ScorecardsControllerTest < ActionDispatch::IntegrationTest
   setup do
     @project = Project.first
     @header= Header.third
-    Competition.first.update(
+    competitions(:one).update(
       peoples_choice_start: Time.now.yesterday,
       peoples_choice_end: Time.now.tomorrow
     )

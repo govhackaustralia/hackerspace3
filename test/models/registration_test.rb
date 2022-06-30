@@ -5,7 +5,7 @@ class RegistrationTest < ActiveSupport::TestCase
     @registration = Registration.first
     @holder = Holder.first
     @assignment = Assignment.fourth
-    @competition = Competition.first
+    @competition = competitions(:one)
     @user = users(:one)
     @event = Event.first
     @waitlister = users(:two)

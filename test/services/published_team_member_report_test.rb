@@ -2,7 +2,7 @@ require 'test_helper'
 
 class PublishedTeamMemberReportTest < ActiveSupport::TestCase
   setup do
-    competition = Competition.first
+    competition = competitions(:one)
     @report = PublishedTeamMemberReport.new(competition)
   end
 

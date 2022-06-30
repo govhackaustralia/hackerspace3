@@ -7,7 +7,7 @@ class TeamManagement::EntriesControllerTest < ActionDispatch::IntegrationTest
     @challenge = challenges(:three)
     @checkpoint = Checkpoint.first
     @entry = entries(:one)
-    @competition = Competition.first
+    @competition = competitions(:one)
   end
 
   test 'should get index' do

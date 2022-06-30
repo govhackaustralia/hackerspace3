@@ -3,7 +3,7 @@ require 'test_helper'
 class EntriesHelperTest < ActionView::TestCase
   setup do
     @region = Region.second
-    @competition = Competition.first
+    @competition = competitions(:one)
   end
 
   test 'challenges_event_counts' do

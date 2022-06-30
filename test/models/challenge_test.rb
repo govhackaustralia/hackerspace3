@@ -3,7 +3,7 @@ require 'test_helper'
 class ChallengeTest < ActiveSupport::TestCase
   setup do
     @challenge = challenges(:one)
-    @competition = Competition.first
+    @competition = competitions(:one)
     @region = Region.first
     @assignment = Assignment.find(7)
     @user = users(:two)

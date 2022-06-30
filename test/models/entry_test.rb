@@ -9,12 +9,12 @@ class EntryTest < ActiveSupport::TestCase
     @event = @team.event
     @team_region = @team.region
     @project = @team.current_project
-    @competition = Competition.first
+    @competition = competitions(:one)
     @region = Region.first
     @header= Header.first
     @regional_entry = entries(:three)
     @national_entry = @entry
-    @next_competition = Competition.second
+    @next_competition = competitions(:two)
   end
 
   test 'entry associations' do

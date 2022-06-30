@@ -4,7 +4,7 @@ class EventTest < ActiveSupport::TestCase
   setup do
     @event = Event.first
     @region = Region.second
-    @competition = Competition.first
+    @competition = competitions(:one)
     @event_partnership = EventPartnership.first
     @event_partner = Sponsor.first
     @assignment = Assignment.third

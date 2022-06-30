@@ -4,7 +4,7 @@ class HolderTest < ActiveSupport::TestCase
   setup do
     @holder = Holder.first
     @user = users(:one)
-    @competition = Competition.first
+    @competition = competitions(:one)
   end
 
   test 'associations' do

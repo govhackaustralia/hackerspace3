@@ -2,7 +2,7 @@ require 'test_helper'
 
 class AwsCreditsRequestedReportTest < ActiveSupport::TestCase
   setup do
-    @competition = Competition.first
+    @competition = competitions(:one)
     @report = AwsCreditsRequestedReport.new @competition
   end
 

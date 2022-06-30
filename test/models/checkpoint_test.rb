@@ -3,7 +3,7 @@ require 'test_helper'
 class CheckpointTest < ActiveSupport::TestCase
   setup do
     @checkpoint = Checkpoint.first
-    @competition = Competition.first
+    @competition = competitions(:one)
     @entry = entries(:one)
     @team = Team.first
     @international_region = Region.first

@@ -5,7 +5,7 @@ class Admin::RegionLimitsControllerTest < ActionDispatch::IntegrationTest
     sign_in users(:one)
     @checkpoint = Checkpoint.first
     @region_limit = RegionLimit.first
-    @competition = Competition.first
+    @competition = competitions(:one)
   end
 
   test 'should get new' do

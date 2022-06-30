@@ -3,7 +3,7 @@ require 'test_helper'
 class RegionTest < ActiveSupport::TestCase
   setup do
     @national = Region.first
-    @competition = Competition.first
+    @competition = competitions(:one)
     @regional = Region.second
     @assignment = Assignment.second
     @event = Event.first
@@ -16,7 +16,7 @@ class RegionTest < ActiveSupport::TestCase
     @data_set = data_sets(:one)
     @support_assignment = Assignment.find 14
     @support = users(:one)
-    @next_competition = Competition.second
+    @next_competition = competitions(:two)
     @international = Region.third
     @region_limit = RegionLimit.first
     @regionalless_national = Region.fourth

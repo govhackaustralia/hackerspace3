@@ -2,7 +2,7 @@ require 'test_helper'
 
 class CompetitionTest < ActiveSupport::TestCase
   setup do
-    @competition = Competition.first
+    @competition = competitions(:one)
     @region = Region.third
     @assignment = Assignment.first
     @sponsor = Sponsor.first
@@ -25,7 +25,7 @@ class CompetitionTest < ActiveSupport::TestCase
     @project_criterion = Criterion.first
     @challenge_criterion = Criterion.second
     @old_competition = @competition
-    @new_competition = Competition.second
+    @new_competition = competitions(:two)
     @event_assignment = Assignment.fourth
   end
 

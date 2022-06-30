@@ -4,7 +4,7 @@ class Admin::SponsorshipTypesControllerTest < ActionDispatch::IntegrationTest
   setup do
     sign_in users(:one)
     @sponsorship_type = SponsorshipType.first
-    @competition = Competition.first
+    @competition = competitions(:one)
   end
 
   test 'should get index' do
