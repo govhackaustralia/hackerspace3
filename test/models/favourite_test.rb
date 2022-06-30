@@ -3,7 +3,7 @@ require 'test_helper'
 class FavouriteTest < ActiveSupport::TestCase
   setup do
     @favourite = Favourite.first
-    @team = Team.first
+    @team = teams(:one)
     @holder = Holder.first
     @assignment = Assignment.find(4)
     @project = projects :one

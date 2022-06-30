@@ -2,7 +2,7 @@ require 'test_helper'
 
 class TeamDataSetTest < ActiveSupport::TestCase
   setup do
-    @team = Team.first
+    @team = teams(:one)
     @team_data_set = team_data_sets(:one)
     @current_project = Project.first
   end

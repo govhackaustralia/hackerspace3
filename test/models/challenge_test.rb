@@ -9,7 +9,7 @@ class ChallengeTest < ActiveSupport::TestCase
     @user = users(:two)
     @entry = entries(:one)
     @checkpoint = Checkpoint.first
-    @team = Team.first
+    @team = teams(:one)
     @challenge_sponsorship = challenge_sponsorships(:one)
     @sponsor = sponsors(:one)
     @challenge_data_set = challenge_data_sets(:one)

@@ -2,7 +2,7 @@ require 'test_helper'
 
 class TeamTest < ActiveSupport::TestCase
   setup do
-    @team = Team.first
+    @team = teams(:one)
     @event = events(:competition)
     @project = Project.first
     @competition = competitions(:one)
@@ -118,7 +118,7 @@ class TeamTest < ActiveSupport::TestCase
     assert exception.message.include?(
       'some challenge entries will not be eligible'
     )
-    assert Team.second.update event: @event
+    assert teams(:two).update event: @event
   end
 
   test 'assign_leader' do

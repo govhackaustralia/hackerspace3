@@ -3,7 +3,7 @@ require 'test_helper'
 class Admin::Teams::ScorecardsControllerTest < ActionDispatch::IntegrationTest
   setup do
     sign_in users(:one)
-    @team = Team.first
+    @team = teams(:one)
     @header= headers(:one)
   end
 

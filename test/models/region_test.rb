@@ -7,7 +7,7 @@ class RegionTest < ActiveSupport::TestCase
     @regional = regions(:regional)
     @assignment = Assignment.second
     @event = events(:connection)
-    @team = Team.first
+    @team = teams(:one)
     @published_project = Project.first
     @entry = entries(:one)
     @sponsorship = sponsorships(:two)
@@ -20,7 +20,7 @@ class RegionTest < ActiveSupport::TestCase
     @international = regions(:international)
     @region_limit = RegionLimit.first
     @regionalless_national = regions(:other_national)
-    @national_team = Team.second
+    @national_team = teams(:two)
     @regional_challenge = challenges(:three)
   end
 

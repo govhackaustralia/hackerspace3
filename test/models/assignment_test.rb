@@ -11,7 +11,7 @@ class AssignmentTest < ActiveSupport::TestCase
     @judge = Assignment.find 7
     @participant = Assignment.fourth
     @favourite = Favourite.first
-    @team = Team.first
+    @team = teams(:one)
     @header= headers(:two)
     @score = Score.third
     @registration = registrations(:attending)

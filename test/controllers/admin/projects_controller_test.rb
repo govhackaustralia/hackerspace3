@@ -3,7 +3,7 @@ require 'test_helper'
 class Admin::ProjectsControllerTest < ActionDispatch::IntegrationTest
   setup do
     sign_in users(:one)
-    @team = Team.first
+    @team = teams(:one)
     @project = Project.first
   end
 

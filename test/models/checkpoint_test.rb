@@ -5,7 +5,7 @@ class CheckpointTest < ActiveSupport::TestCase
     @checkpoint = Checkpoint.first
     @competition = competitions(:one)
     @entry = entries(:one)
-    @team = Team.first
+    @team = teams(:one)
     @international_region = regions(:national)
     @sub_region = regions(:regional)
   end

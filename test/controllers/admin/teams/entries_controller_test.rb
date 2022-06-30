@@ -3,7 +3,7 @@ require 'test_helper'
 class Admin::Teams::EntriesControllerTest < ActionDispatch::IntegrationTest
   setup do
     sign_in users(:one)
-    @team = Team.first
+    @team = teams(:one)
     @entry = entries(:one)
     @challenge = challenges(:three)
     @checkpoint = Checkpoint.first

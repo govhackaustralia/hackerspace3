@@ -10,7 +10,7 @@ class EventTest < ActiveSupport::TestCase
     @assignment = Assignment.third
     @registration = Registration.first
     @user = @registration.user
-    @team = Team.first
+    @team = teams(:one)
     @entry = entries(:one)
     @user = users(:one)
     @vip_registration = Registration.second

@@ -5,7 +5,7 @@ class EntryTest < ActiveSupport::TestCase
     @entry = entries(:one)
     @checkpoint = Checkpoint.first
     @challenge = challenges(:one)
-    @team = Team.first
+    @team = teams(:one)
     @event = @team.event
     @team_region = @team.region
     @project = @team.current_project
@@ -75,7 +75,7 @@ class EntryTest < ActiveSupport::TestCase
     exception = assert_raises(ActiveRecord::RecordInvalid) do
       Entry.create!(
         challenge: challenges(:one),
-        team: Team.second,
+        team: teams(:two),
         checkpoint: Checkpoint.first
       )
     end
@@ -84,7 +84,7 @@ class EntryTest < ActiveSupport::TestCase
     )
     assert Entry.create!(
       challenge: challenges(:one),
-      team: Team.first,
+      team: teams(:one),
       checkpoint: Checkpoint.first
     ).persisted?
   end

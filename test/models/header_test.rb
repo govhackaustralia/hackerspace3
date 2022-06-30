@@ -8,7 +8,7 @@ class HeaderTest < ActiveSupport::TestCase
     @user = users(:one)
     @score = Score.first
     @entry = entries(:one)
-    @team = Team.first
+    @team = teams(:one)
     @team_user = users(:two)
   end
 
