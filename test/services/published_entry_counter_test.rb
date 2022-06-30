@@ -4,7 +4,7 @@ class ChallengeEntryCounterTest < ActiveSupport::TestCase
   setup do
     @competition = Competition.first
     @counter = PublishedEntryCounter.new(@competition)
-    @challenge = Challenge.first
+    @challenge = challenges(:one)
   end
 
   test 'count' do

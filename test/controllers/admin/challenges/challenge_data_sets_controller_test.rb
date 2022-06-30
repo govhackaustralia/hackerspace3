@@ -3,7 +3,7 @@ require 'test_helper'
 class Admin::Challenges::ChallengeDataSetsControllerTest < ActionDispatch::IntegrationTest
   setup do
     sign_in users :one
-    @challenge = Challenge.first
+    @challenge = challenges(:one)
     @data_set = DataSet.first
     @challenge_data_set = ChallengeDataSet.first
   end

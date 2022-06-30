@@ -4,7 +4,7 @@ class EntryTest < ActiveSupport::TestCase
   setup do
     @entry = Entry.first
     @checkpoint = Checkpoint.first
-    @challenge = Challenge.first
+    @challenge = challenges(:one)
     @team = Team.first
     @event = @team.event
     @team_region = @team.region
@@ -74,7 +74,7 @@ class EntryTest < ActiveSupport::TestCase
     Entry.destroy_all
     exception = assert_raises(ActiveRecord::RecordInvalid) do
       Entry.create!(
-        challenge: Challenge.first,
+        challenge: challenges(:one),
         team: Team.second,
         checkpoint: Checkpoint.first
       )
@@ -83,7 +83,7 @@ class EntryTest < ActiveSupport::TestCase
       'Challenge Team not eligible to enter this challenge'
     )
     assert Entry.create!(
-      challenge: Challenge.first,
+      challenge: challenges(:one),
       team: Team.first,
       checkpoint: Checkpoint.first
     ).persisted?

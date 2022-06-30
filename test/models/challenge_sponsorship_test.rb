@@ -3,7 +3,7 @@ require 'test_helper'
 class ChallengeSponsorshipTest < ActiveSupport::TestCase
   setup do
     @challenge_sponsorship = ChallengeSponsorship.first
-    @challenge = Challenge.first
+    @challenge = challenges(:one)
     @sponsor = Sponsor.first
   end
 

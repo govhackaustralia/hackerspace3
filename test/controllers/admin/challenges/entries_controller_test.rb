@@ -3,7 +3,7 @@ require 'test_helper'
 class Admin::Challenges::EntriesControllerTest < ActionDispatch::IntegrationTest
   setup do
     sign_in users :one
-    @challenge = Challenge.first
+    @challenge = challenges(:one)
     @entry = Entry.first
   end
 

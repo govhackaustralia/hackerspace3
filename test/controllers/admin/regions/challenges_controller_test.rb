@@ -4,7 +4,7 @@ class Admin::Regions::ChallengesControllerTest < ActionDispatch::IntegrationTest
   setup do
     sign_in users :one
     @region = Region.first
-    @challenge = Challenge.first
+    @challenge = challenges(:one)
   end
 
   test 'should get index' do

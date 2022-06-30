@@ -2,7 +2,7 @@ require 'test_helper'
 
 class ChallengeTest < ActiveSupport::TestCase
   setup do
-    @challenge = Challenge.first
+    @challenge = challenges(:one)
     @competition = Competition.first
     @region = Region.first
     @assignment = Assignment.find(7)
@@ -14,7 +14,7 @@ class ChallengeTest < ActiveSupport::TestCase
     @sponsor = Sponsor.first
     @challenge_data_set = ChallengeDataSet.first
     @data_set = DataSet.first
-    @regional_challenge = Challenge.third
+    @regional_challenge = challenges(:three)
   end
 
   test 'challenge associations' do
@@ -53,7 +53,7 @@ class ChallengeTest < ActiveSupport::TestCase
 
   test 'challenge validations' do
     assert_not @challenge.update(name: nil)
-    challenge2 = Challenge.second
+    challenge2 = challenges(:two)
     assert_not @challenge.update(name: challenge2.name)
   end
 

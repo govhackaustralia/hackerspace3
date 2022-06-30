@@ -17,7 +17,7 @@ class CompetitionTest < ActiveSupport::TestCase
     @team = Team.first
     @team_data_set = TeamDataSet.first
     @project = Project.first
-    @challenge = Challenge.first
+    @challenge = challenges(:one)
     @entry = Entry.first
     @checkpoint = Checkpoint.first
     @data_set = DataSet.first

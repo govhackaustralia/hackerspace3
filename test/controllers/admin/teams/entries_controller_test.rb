@@ -5,7 +5,7 @@ class Admin::Teams::EntriesControllerTest < ActionDispatch::IntegrationTest
     sign_in users :one
     @team = Team.first
     @entry = Entry.first
-    @challenge = Challenge.third
+    @challenge = challenges(:three)
     @checkpoint = Checkpoint.first
     @competition = @team.competition
   end

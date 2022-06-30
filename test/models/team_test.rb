@@ -17,7 +17,7 @@ class TeamTest < ActiveSupport::TestCase
     @favourite = Favourite.first
     @header= Header.fourth
     @entry = Entry.first
-    @challenge = Challenge.first
+    @challenge = challenges(:one)
     @user = User.second
     @regional_entry = Entry.third
     @national_entry = @entry

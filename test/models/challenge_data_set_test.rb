@@ -3,7 +3,7 @@ require 'test_helper'
 class ChallengeDataSetTest < ActiveSupport::TestCase
   setup do
     @challenge_data_set = ChallengeDataSet.first
-    @challenge = Challenge.first
+    @challenge = challenges(:one)
     @data_set = DataSet.first
   end
 

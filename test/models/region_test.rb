@@ -12,7 +12,7 @@ class RegionTest < ActiveSupport::TestCase
     @entry = Entry.first
     @sponsorship = Sponsorship.second
     @sponsorship_type = SponsorshipType.first
-    @challenge = Challenge.first
+    @challenge = challenges(:one)
     @data_set = DataSet.first
     @support_assignment = Assignment.find 14
     @support = User.first
@@ -21,7 +21,7 @@ class RegionTest < ActiveSupport::TestCase
     @region_limit = RegionLimit.first
     @regionalless_national = Region.fourth
     @national_team = Team.second
-    @regional_challenge = Challenge.third
+    @regional_challenge = challenges(:three)
   end
 
   test 'region associations' do
@@ -155,7 +155,7 @@ class RegionTest < ActiveSupport::TestCase
   end
 
   test 'eligible_challenges' do
-    Challenge.first.update region: Region.third
+    challenges(:one).update region: Region.third
     assert @international.eligible_challenges.present?
     assert @national.eligible_challenges.present?
     assert @regional.eligible_challenges.present?
