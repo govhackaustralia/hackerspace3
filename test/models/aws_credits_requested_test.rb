@@ -18,7 +18,7 @@ class AwsCreditsRequestedReportTest < ActiveSupport::TestCase
   end
 
   test 'event_count' do
-    event = Event.second
+    event = events(:competition)
     assert @report.event_count(event) == event.registrations.aws_credits_requested.count
   end
 end

@@ -4,7 +4,7 @@ class Admin::Regions::EventsControllerTest < ActionDispatch::IntegrationTest
   setup do
     sign_in users(:one)
     @region = Region.second
-    @event = Event.first
+    @event = events(:connection)
   end
 
   test 'should get index' do

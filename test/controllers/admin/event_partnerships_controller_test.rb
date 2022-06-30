@@ -3,7 +3,7 @@ require 'test_helper'
 class Admin::EventPartnershipsControllerTest < ActionDispatch::IntegrationTest
   setup do
     sign_in users(:one)
-    @event = Event.first
+    @event = events(:connection)
     @event_partnership = EventPartnership.first
     @sponsor = Sponsor.first
   end

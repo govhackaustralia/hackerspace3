@@ -6,7 +6,7 @@ class RegionTest < ActiveSupport::TestCase
     @competition = competitions(:one)
     @regional = Region.second
     @assignment = Assignment.second
-    @event = Event.first
+    @event = events(:connection)
     @team = Team.first
     @published_project = Project.first
     @entry = entries(:one)

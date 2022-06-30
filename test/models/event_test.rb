@@ -2,7 +2,7 @@ require 'test_helper'
 
 class EventTest < ActiveSupport::TestCase
   setup do
-    @event = Event.first
+    @event = events(:connection)
     @region = Region.second
     @competition = competitions(:one)
     @event_partnership = EventPartnership.first
@@ -14,9 +14,9 @@ class EventTest < ActiveSupport::TestCase
     @entry = entries(:one)
     @user = users(:one)
     @vip_registration = Registration.second
-    @competition_event = Event.second
+    @competition_event = events(:competition)
     @wait_ass = Assignment.find 6
-    @comp_event = Event.second
+    @comp_event = events(:competition)
   end
 
   test 'event associations' do

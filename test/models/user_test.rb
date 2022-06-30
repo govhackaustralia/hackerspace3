@@ -20,8 +20,8 @@ class UserTest < ActiveSupport::TestCase
     @leader_assignment = @joined_team_assignment
     @winning_entry = entries(:three)
     @competition_registration = Registration.third
-    @participating_event = Event.first
-    @competition_event = Event.second
+    @participating_event = events(:connection)
+    @competition_event = events(:competition)
     @staff_assignment = @assignment
     @participant_assignment = Assignment.fourth
     @competition = competitions(:one)

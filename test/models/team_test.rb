@@ -3,7 +3,7 @@ require 'test_helper'
 class TeamTest < ActiveSupport::TestCase
   setup do
     @team = Team.first
-    @event = Event.second
+    @event = events(:competition)
     @project = Project.first
     @competition = competitions(:one)
     @region = Region.second
@@ -113,7 +113,7 @@ class TeamTest < ActiveSupport::TestCase
 
   test 'check_for_ineligible_challenge_entries' do
     exception = assert_raises(ActiveRecord::RecordInvalid) do
-      @team.update! event: Event.fourth
+      @team.update! event: events(:other_competition)
     end
     assert exception.message.include?(
       'some challenge entries will not be eligible'

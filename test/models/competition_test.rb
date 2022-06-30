@@ -7,12 +7,12 @@ class CompetitionTest < ActiveSupport::TestCase
     @assignment = Assignment.first
     @sponsor = Sponsor.first
     @sponsorship_type = SponsorshipType.first
-    @event = Event.first
+    @event = events(:connection)
     @connection_event = @event
     @connection_registration = Registration.first
-    @competition_event = Event.second
+    @competition_event = events(:competition)
     @competition_registration = Registration.third
-    @award_event = Event.third
+    @award_event = events(:award)
     @award_registration = Registration.find 6
     @team = Team.first
     @team_data_set = team_data_sets(:one)

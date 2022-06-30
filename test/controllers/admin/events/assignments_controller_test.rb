@@ -3,7 +3,7 @@ require 'test_helper'
 class Admin::Events::AssignmentsControllerTest < ActionDispatch::IntegrationTest
   setup do
     sign_in users(:one)
-    @event = Event.first
+    @event = events(:connection)
     @user = users(:one)
   end
 
