@@ -16,10 +16,10 @@ class TeamTest < ActiveSupport::TestCase
     @team_data_set = team_data_sets(:one)
     @favourite = Favourite.first
     @header= Header.fourth
-    @entry = Entry.first
+    @entry = entries(:one)
     @challenge = challenges(:one)
     @user = User.second
-    @regional_entry = Entry.third
+    @regional_entry = entries(:three)
     @national_entry = @entry
   end
 

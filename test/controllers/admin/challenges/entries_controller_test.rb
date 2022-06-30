@@ -4,7 +4,7 @@ class Admin::Challenges::EntriesControllerTest < ActionDispatch::IntegrationTest
   setup do
     sign_in users :one
     @challenge = challenges(:one)
-    @entry = Entry.first
+    @entry = entries(:one)
   end
 
   test 'should get index' do

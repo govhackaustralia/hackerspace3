@@ -9,7 +9,7 @@ class RegionTest < ActiveSupport::TestCase
     @event = Event.first
     @team = Team.first
     @published_project = Project.first
-    @entry = Entry.first
+    @entry = entries(:one)
     @sponsorship = Sponsorship.second
     @sponsorship_type = SponsorshipType.first
     @challenge = challenges(:one)

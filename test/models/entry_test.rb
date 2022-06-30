@@ -2,7 +2,7 @@ require 'test_helper'
 
 class EntryTest < ActiveSupport::TestCase
   setup do
-    @entry = Entry.first
+    @entry = entries(:one)
     @checkpoint = Checkpoint.first
     @challenge = challenges(:one)
     @team = Team.first
@@ -12,7 +12,7 @@ class EntryTest < ActiveSupport::TestCase
     @competition = Competition.first
     @region = Region.first
     @header= Header.first
-    @regional_entry = Entry.third
+    @regional_entry = entries(:three)
     @national_entry = @entry
     @next_competition = Competition.second
   end
@@ -48,7 +48,7 @@ class EntryTest < ActiveSupport::TestCase
     assert @entry.update! award: AWARD_NAMES.sample
     assert_not @entry.update award: 'Test'
     # No duplicate entries by Team into Challenge.
-    assert_not Entry.second.update challenge: @challenge
+    assert_not entries(:two).update challenge: @challenge
   end
 
   test 'update eligible' do

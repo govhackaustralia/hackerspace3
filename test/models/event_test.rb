@@ -11,7 +11,7 @@ class EventTest < ActiveSupport::TestCase
     @registration = Registration.first
     @user = @registration.user
     @team = Team.first
-    @entry = Entry.first
+    @entry = entries(:one)
     @user = User.first
     @vip_registration = Registration.second
     @competition_event = Event.second

@@ -18,7 +18,7 @@ class UserTest < ActiveSupport::TestCase
     @judge_assignment = Assignment.find 7
     @challenge = challenges(:one)
     @leader_assignment = @joined_team_assignment
-    @winning_entry = Entry.third
+    @winning_entry = entries(:three)
     @competition_registration = Registration.third
     @participating_event = Event.first
     @competition_event = Event.second

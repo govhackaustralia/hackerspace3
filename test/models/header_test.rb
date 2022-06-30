@@ -7,7 +7,7 @@ class HeaderTest < ActiveSupport::TestCase
     @particpiant = Assignment.fourth
     @user = User.first
     @score = Score.first
-    @entry = Entry.first
+    @entry = entries(:one)
     @team = Team.first
     @team_user = User.second
   end

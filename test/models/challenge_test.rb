@@ -7,7 +7,7 @@ class ChallengeTest < ActiveSupport::TestCase
     @region = Region.first
     @assignment = Assignment.find(7)
     @user = User.second
-    @entry = Entry.first
+    @entry = entries(:one)
     @checkpoint = Checkpoint.first
     @team = Team.first
     @challenge_sponsorship = ChallengeSponsorship.first
