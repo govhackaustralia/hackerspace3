@@ -6,8 +6,8 @@ class CheckpointTest < ActiveSupport::TestCase
     @competition = competitions(:one)
     @entry = entries(:one)
     @team = Team.first
-    @international_region = Region.first
-    @sub_region = Region.second
+    @international_region = regions(:national)
+    @sub_region = regions(:regional)
   end
 
   test 'checkpoint associations' do

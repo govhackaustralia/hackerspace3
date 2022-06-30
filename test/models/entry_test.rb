@@ -10,7 +10,7 @@ class EntryTest < ActiveSupport::TestCase
     @team_region = @team.region
     @project = @team.current_project
     @competition = competitions(:one)
-    @region = Region.first
+    @region = regions(:national)
     @header= Header.first
     @regional_entry = entries(:three)
     @national_entry = @entry

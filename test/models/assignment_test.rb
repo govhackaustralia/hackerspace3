@@ -5,7 +5,7 @@ class AssignmentTest < ActiveSupport::TestCase
     @comp_assignment = Assignment.first
     @competition = competitions(:one)
     @region_assignment = Assignment.second
-    @region = Region.first
+    @region = regions(:national)
     @holder = Holder.first
     @user = users(:one)
     @judge = Assignment.find 7

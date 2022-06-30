@@ -6,7 +6,7 @@ class TeamTest < ActiveSupport::TestCase
     @event = events(:competition)
     @project = Project.first
     @competition = competitions(:one)
-    @region = Region.second
+    @region = regions(:regional)
     @team_member_assignment = Assignment.find 9
     @team_member = users(:two)
     @team_leader_assignment = Assignment.find 11

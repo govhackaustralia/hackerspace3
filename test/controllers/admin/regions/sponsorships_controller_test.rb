@@ -3,7 +3,7 @@ require 'test_helper'
 class Admin::Regions::SponsorshipsControllerTest < ActionDispatch::IntegrationTest
   setup do
     sign_in users(:one)
-    @region = Region.first
+    @region = regions(:national)
   end
 
   test 'should get index' do

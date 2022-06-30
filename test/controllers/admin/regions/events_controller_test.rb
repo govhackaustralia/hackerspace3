@@ -3,7 +3,7 @@ require 'test_helper'
 class Admin::Regions::EventsControllerTest < ActionDispatch::IntegrationTest
   setup do
     sign_in users(:one)
-    @region = Region.second
+    @region = regions(:regional)
     @event = events(:connection)
   end
 

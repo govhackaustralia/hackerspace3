@@ -2,7 +2,7 @@ require 'test_helper'
 
 class EntriesHelperTest < ActionView::TestCase
   setup do
-    @region = Region.second
+    @region = regions(:regional)
     @competition = competitions(:one)
   end
 

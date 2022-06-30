@@ -11,7 +11,7 @@ class AwsCreditsRequestedReportTest < ActiveSupport::TestCase
   end
 
   test 'region_count' do
-    region = Region.second
+    region = regions(:regional)
     count = 0
     region.events.competitions.each { |event| count += event.registrations.aws_credits_requested.count }
     assert @report.region_count(region) == count

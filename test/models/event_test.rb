@@ -3,7 +3,7 @@ require 'test_helper'
 class EventTest < ActiveSupport::TestCase
   setup do
     @event = events(:connection)
-    @region = Region.second
+    @region = regions(:regional)
     @competition = competitions(:one)
     @event_partnership = EventPartnership.first
     @event_partner = Sponsor.first

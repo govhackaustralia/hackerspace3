@@ -3,7 +3,7 @@ require 'test_helper'
 class Admin::Regions::ScorecardsControllerTest < ActionDispatch::IntegrationTest
   setup do
     sign_in users(:one)
-    @region = Region.first
+    @region = regions(:national)
     @header= Header.first
   end
 

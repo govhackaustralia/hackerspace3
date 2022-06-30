@@ -4,7 +4,7 @@ class ChallengeTest < ActiveSupport::TestCase
   setup do
     @challenge = challenges(:one)
     @competition = competitions(:one)
-    @region = Region.first
+    @region = regions(:national)
     @assignment = Assignment.find(7)
     @user = users(:two)
     @entry = entries(:one)

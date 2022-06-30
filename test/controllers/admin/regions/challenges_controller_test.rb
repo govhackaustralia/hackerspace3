@@ -3,7 +3,7 @@ require 'test_helper'
 class Admin::Regions::ChallengesControllerTest < ActionDispatch::IntegrationTest
   setup do
     sign_in users(:one)
-    @region = Region.first
+    @region = regions(:national)
     @challenge = challenges(:one)
   end
 

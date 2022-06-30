@@ -5,7 +5,7 @@ class Admin::ChallengeSponsorshipsControllerTest < ActionDispatch::IntegrationTe
     sign_in users(:one)
     @challenge = challenges(:one)
     @challenge_sponsorship = ChallengeSponsorship.first
-    @region = Region.first
+    @region = regions(:national)
   end
 
   test 'should get new' do

@@ -2,9 +2,9 @@ require 'test_helper'
 
 class RegionTest < ActiveSupport::TestCase
   setup do
-    @national = Region.first
+    @national = regions(:national)
     @competition = competitions(:one)
-    @regional = Region.second
+    @regional = regions(:regional)
     @assignment = Assignment.second
     @event = events(:connection)
     @team = Team.first
@@ -17,9 +17,9 @@ class RegionTest < ActiveSupport::TestCase
     @support_assignment = Assignment.find 14
     @support = users(:one)
     @next_competition = competitions(:two)
-    @international = Region.third
+    @international = regions(:international)
     @region_limit = RegionLimit.first
-    @regionalless_national = Region.fourth
+    @regionalless_national = regions(:other_national)
     @national_team = Team.second
     @regional_challenge = challenges(:three)
   end
@@ -155,7 +155,7 @@ class RegionTest < ActiveSupport::TestCase
   end
 
   test 'eligible_challenges' do
-    challenges(:one).update region: Region.third
+    challenges(:one).update region: regions(:international)
     assert @international.eligible_challenges.present?
     assert @national.eligible_challenges.present?
     assert @regional.eligible_challenges.present?

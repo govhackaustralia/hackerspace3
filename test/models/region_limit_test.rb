@@ -2,7 +2,7 @@ require 'test_helper'
 
 class RegionLimitTest < ActiveSupport::TestCase
   setup do
-    @region = Region.first
+    @region = regions(:national)
     @checkpoint = Checkpoint.first
     @region_limit = RegionLimit.first
   end
