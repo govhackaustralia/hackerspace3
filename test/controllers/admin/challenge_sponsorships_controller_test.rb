@@ -4,7 +4,7 @@ class Admin::ChallengeSponsorshipsControllerTest < ActionDispatch::IntegrationTe
   setup do
     sign_in users(:one)
     @challenge = challenges(:one)
-    @challenge_sponsorship = ChallengeSponsorship.first
+    @challenge_sponsorship = challenge_sponsorships(:one)
     @region = regions(:national)
   end
 

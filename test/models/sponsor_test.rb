@@ -7,7 +7,7 @@ class SponsorTest < ActiveSupport::TestCase
     @assignment = Assignment.fifth
     @sponsorship = Sponsorship.first
     @event_partnership = EventPartnership.first
-    @challenge_sponsorship = ChallengeSponsorship.first
+    @challenge_sponsorship = challenge_sponsorships(:one)
   end
 
   test 'sponsor associations' do
