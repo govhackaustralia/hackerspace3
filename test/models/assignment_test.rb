@@ -12,7 +12,7 @@ class AssignmentTest < ActiveSupport::TestCase
     @participant = Assignment.fourth
     @favourite = Favourite.first
     @team = Team.first
-    @header= Header.second
+    @header= headers(:two)
     @score = Score.third
     @registration = registrations(:attending)
     @competition_event = events(:competition)

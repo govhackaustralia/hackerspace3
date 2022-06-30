@@ -7,7 +7,7 @@ class UserTest < ActiveSupport::TestCase
     @holder = Holder.first
     @assignment = Assignment.first
     @team = Team.first
-    @header= Header.second
+    @header= headers(:two)
     @registration = Registration.first
     @joined_team_assignment = Assignment.find 11
     @joined_team = @team

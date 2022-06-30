@@ -4,7 +4,7 @@ class Admin::Teams::ScorecardsControllerTest < ActionDispatch::IntegrationTest
   setup do
     sign_in users(:one)
     @team = Team.first
-    @header= Header.first
+    @header= headers(:one)
   end
 
   test 'should get index' do

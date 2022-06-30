@@ -2,8 +2,8 @@ require 'test_helper'
 
 class HeaderTest < ActiveSupport::TestCase
   setup do
-    @challenge_header = @header= Header.first
-    @peoples_header = Header.second
+    @challenge_header = @header= headers(:one)
+    @peoples_header = headers(:two)
     @particpiant = Assignment.fourth
     @user = users(:one)
     @score = Score.first

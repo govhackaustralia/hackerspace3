@@ -2,7 +2,7 @@ require 'test_helper'
 
 class ScorecardsHelperTest < ActionView::TestCase
   setup do
-    @header= Header.first
+    @header = Header.first
     @judge = users(:one)
     @peoples_assignment = Assignment.first
     @competition = competitions(:one)
