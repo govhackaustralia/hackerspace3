@@ -14,7 +14,7 @@ class TeamTest < ActiveSupport::TestCase
     @team_invitee_assignment = assignments(:invitee)
     @team_invitee = users(:three)
     @team_data_set = team_data_sets(:one)
-    @favourite = Favourite.first
+    @favourite = favourites(:one)
     @header= headers(:four)
     @entry = entries(:one)
     @challenge = challenges(:one)

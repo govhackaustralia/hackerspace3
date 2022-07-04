@@ -9,7 +9,7 @@ class FavouritesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'should post create success' do
-    Favourite.first.destroy
+    favourites(:one).destroy
     assert_difference 'Favourite.count', 1 do
       post favourites_url, params: { favourite: {team_id: @team.id} }
     end

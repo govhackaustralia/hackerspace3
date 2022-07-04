@@ -2,7 +2,7 @@ require 'test_helper'
 
 class FavouriteTest < ActiveSupport::TestCase
   setup do
-    @favourite = Favourite.first
+    @favourite = favourites(:one)
     @team = teams(:one)
     @holder = Holder.first
     @assignment = assignments(:participant)
