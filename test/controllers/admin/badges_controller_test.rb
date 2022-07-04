@@ -3,8 +3,8 @@ require 'test_helper'
 class Admin::BadgesControllerTest < ActionDispatch::IntegrationTest
   setup do
     sign_in users(:one)
-    @badge = badges :one
-    @competition = competitions :one
+    @badge = badges(:one)
+    @competition = competitions(:one)
     @user = users(:two)
   end
 
