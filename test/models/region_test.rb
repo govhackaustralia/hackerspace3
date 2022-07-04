@@ -18,7 +18,7 @@ class RegionTest < ActiveSupport::TestCase
     @support = users(:one)
     @next_competition = competitions(:two)
     @international = regions(:international)
-    @region_limit = RegionLimit.first
+    @region_limit = region_limits(:one)
     @regionalless_national = regions(:other_national)
     @national_team = teams(:two)
     @regional_challenge = challenges(:three)

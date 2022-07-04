@@ -4,7 +4,7 @@ class RegionLimitTest < ActiveSupport::TestCase
   setup do
     @region = regions(:national)
     @checkpoint = checkpoints(:one)
-    @region_limit = RegionLimit.first
+    @region_limit = region_limits(:one)
   end
 
   test 'associations' do
