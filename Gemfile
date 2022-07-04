@@ -53,8 +53,8 @@ gem 'bundler-audit'
 gem 'acts-as-taggable-on', '~> 9.0'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 gem 'mini_racer', platforms: :ruby
-# Bootstrap 4 ruby gem for Ruby on Rails (Sprockets) and Hanami (formerly Lotus).
-gem 'bootstrap', '~> 4.5.0'
+# Bootstrap rubygem for Rails / Sprockets / Hanami / etc 
+gem 'bootstrap', '~> 5.1.3'
 # This gem provides only Free icons from Font-Awesome.
 gem 'font_awesome5_rails'
 # A Ruby implementation of GraphQL.
