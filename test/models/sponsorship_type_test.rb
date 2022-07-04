@@ -2,7 +2,7 @@ require 'test_helper'
 
 class SponsorshipTypeTest < ActiveSupport::TestCase
   setup do
-    @sponsorship_type = SponsorshipType.first
+    @sponsorship_type = sponsorship_types(:one)
     @competition = competitions(:one)
     @sponsorship = sponsorships(:one)
   end

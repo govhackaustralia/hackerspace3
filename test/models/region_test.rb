@@ -11,7 +11,7 @@ class RegionTest < ActiveSupport::TestCase
     @published_project = projects(:one)
     @entry = entries(:one)
     @sponsorship = sponsorships(:two)
-    @sponsorship_type = SponsorshipType.first
+    @sponsorship_type = sponsorship_types(:one)
     @challenge = challenges(:one)
     @data_set = data_sets(:one)
     @support_assignment = assignments(:region_support)
