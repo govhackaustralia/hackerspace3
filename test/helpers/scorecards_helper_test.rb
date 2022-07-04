@@ -1,6 +1,8 @@
 require 'test_helper'
 # Up to here
 class ScorecardsHelperTest < ActionView::TestCase
+  # ENHANCEMENT: Move instance variables out of helpers
+  # ENHANCEMENT: `headers` seems to be reserved, rename table
   setup do
     @header = Header.first
     @judge = users(:one)
