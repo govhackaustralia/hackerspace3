@@ -4,7 +4,7 @@ class HeaderTest < ActiveSupport::TestCase
   setup do
     @challenge_header = @header= headers(:one)
     @peoples_header = headers(:two)
-    @particpiant = Assignment.fourth
+    @particpiant = assignments(:participant)
     @user = users(:one)
     @score = Score.first
     @entry = entries(:one)

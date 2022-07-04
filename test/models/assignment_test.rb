@@ -9,7 +9,7 @@ class AssignmentTest < ActiveSupport::TestCase
     @holder = Holder.first
     @user = users(:one)
     @judge = assignments(:judge)
-    @participant = Assignment.fourth
+    @participant = assignments(:participant)
     @favourite = Favourite.first
     @team = teams(:one)
     @header= headers(:two)

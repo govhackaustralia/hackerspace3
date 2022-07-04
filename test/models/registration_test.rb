@@ -4,7 +4,7 @@ class RegistrationTest < ActiveSupport::TestCase
   setup do
     @registration = Registration.first
     @holder = Holder.first
-    @assignment = Assignment.fourth
+    @assignment = assignments(:participant)
     @competition = competitions(:one)
     @user = users(:one)
     @event = events(:connection)

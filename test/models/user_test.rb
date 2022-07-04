@@ -23,7 +23,7 @@ class UserTest < ActiveSupport::TestCase
     @participating_event = events(:connection)
     @competition_event = events(:competition)
     @staff_assignment = @assignment
-    @participant_assignment = Assignment.fourth
+    @participant_assignment = assignments(:participant)
     @competition = competitions(:one)
     @unconfirmed_user = users(:unconfirmed_user)
   end

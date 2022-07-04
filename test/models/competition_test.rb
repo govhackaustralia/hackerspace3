@@ -26,7 +26,7 @@ class CompetitionTest < ActiveSupport::TestCase
     @challenge_criterion = Criterion.second
     @old_competition = @competition
     @new_competition = competitions(:two)
-    @event_assignment = Assignment.fourth
+    @event_assignment = assignments(:participant)
   end
 
   test 'direct competition associations' do

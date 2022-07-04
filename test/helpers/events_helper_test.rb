@@ -5,7 +5,7 @@ class EventsHelperTest < ActionView::TestCase
     @event = events(:other_competition)
     @competition = competitions(:one)
     @region = regions(:regional)
-    @event_assignment = Assignment.fourth
+    @event_assignment = assignments(:participant)
   end
 
   test 'participant_able_to_enter?' do
