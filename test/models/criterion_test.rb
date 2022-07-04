@@ -2,7 +2,7 @@ require 'test_helper'
 
 class CriterionTest < ActiveSupport::TestCase
   setup do
-    @criterion = Criterion.first
+    @criterion = criteria(:one)
     @competition = competitions(:one)
     @score = Score.first
   end

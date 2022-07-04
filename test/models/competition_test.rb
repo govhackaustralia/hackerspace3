@@ -21,9 +21,9 @@ class CompetitionTest < ActiveSupport::TestCase
     @entry = entries(:one)
     @checkpoint = checkpoints(:one)
     @data_set = data_sets(:one)
-    @criterion = Criterion.first
-    @project_criterion = Criterion.first
-    @challenge_criterion = Criterion.second
+    @criterion = criteria(:one)
+    @project_criterion = criteria(:one)
+    @challenge_criterion = criteria(:two)
     @old_competition = @competition
     @new_competition = competitions(:two)
     @event_assignment = assignments(:participant)

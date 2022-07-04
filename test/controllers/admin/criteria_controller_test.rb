@@ -4,7 +4,7 @@ class Admin::CriteriaControllerTest < ActionDispatch::IntegrationTest
   setup do
     sign_in users(:one)
     @competition = competitions(:one)
-    @criterion = Criterion.first
+    @criterion = criteria(:one)
   end
 
   test 'should get index' do

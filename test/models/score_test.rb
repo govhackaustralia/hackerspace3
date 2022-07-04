@@ -4,7 +4,7 @@ class ScoreTest < ActiveSupport::TestCase
   setup do
     @score = Score.first
     @header= headers(:one)
-    @criterion = Criterion.first
+    @criterion = criteria(:one)
   end
 
   test 'score associations' do
