@@ -2,7 +2,7 @@ require 'test_helper'
 
 class EventPartnershipTest < ActiveSupport::TestCase
   setup do
-    @event_partnership = EventPartnership.first
+    @event_partnership = event_partnerships(:one)
     @event = events(:connection)
     @sponsor = sponsors(:one)
   end

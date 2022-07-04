@@ -5,7 +5,7 @@ class EventTest < ActiveSupport::TestCase
     @event = events(:connection)
     @region = regions(:regional)
     @competition = competitions(:one)
-    @event_partnership = EventPartnership.first
+    @event_partnership = event_partnerships(:one)
     @event_partner = sponsors(:one)
     @assignment = assignments(:event_host)
     @registration = Registration.first

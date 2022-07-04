@@ -4,7 +4,7 @@ class Admin::EventPartnershipsControllerTest < ActionDispatch::IntegrationTest
   setup do
     sign_in users(:one)
     @event = events(:connection)
-    @event_partnership = EventPartnership.first
+    @event_partnership = event_partnerships(:one)
     @sponsor = sponsors(:one)
   end
 
