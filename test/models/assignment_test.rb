@@ -8,7 +8,7 @@ class AssignmentTest < ActiveSupport::TestCase
     @region = regions(:national)
     @holder = Holder.first
     @user = users(:one)
-    @judge = Assignment.find 7
+    @judge = assignments(:judge)
     @participant = Assignment.fourth
     @favourite = Favourite.first
     @team = teams(:one)

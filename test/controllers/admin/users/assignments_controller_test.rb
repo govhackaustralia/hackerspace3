@@ -4,7 +4,7 @@ class Admin::Users::AssignmentsControllerTest < ActionDispatch::IntegrationTest
   setup do
     sign_in users(:one)
     @vip = users(:two)
-    @vip_assignment = Assignment.find 6
+    @vip_assignment = assignments(:vip)
   end
 
   test 'should delete destroy' do

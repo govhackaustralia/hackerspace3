@@ -14,7 +14,7 @@ class RegionTest < ActiveSupport::TestCase
     @sponsorship_type = SponsorshipType.first
     @challenge = challenges(:one)
     @data_set = data_sets(:one)
-    @support_assignment = Assignment.find 14
+    @support_assignment = assignments(:region_support)
     @support = users(:one)
     @next_competition = competitions(:two)
     @international = regions(:international)

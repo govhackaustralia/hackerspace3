@@ -15,7 +15,7 @@ class EventTest < ActiveSupport::TestCase
     @user = users(:one)
     @vip_registration = Registration.second
     @competition_event = events(:competition)
-    @wait_ass = Assignment.find 6
+    @wait_ass = assignments(:vip)
     @comp_event = events(:competition)
   end
 

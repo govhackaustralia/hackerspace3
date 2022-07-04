@@ -2,9 +2,9 @@ require 'test_helper'
 
 class JudgeableScoresTest < ActiveSupport::TestCase
   setup do
-    @participant = Assignment.fourth
-    @judge = Assignment.find 7
-    @teams = Team.all
+    @participant = assignments(:participant)
+    @judge = assignments(:judge)
+    @teams = teams(:one, :two, :unpublished_team)
   end
 
   test 'compile' do

@@ -5,7 +5,7 @@ class TeamManagement::Teams::AssignmentsControllerTest < ActionDispatch::Integra
     sign_in users(:one)
     @team = teams(:one)
     @member = users(:two)
-    @member_assignment = Assignment.find(9)
+    @member_assignment = assignments(:team_member)
   end
 
   test 'should get index' do

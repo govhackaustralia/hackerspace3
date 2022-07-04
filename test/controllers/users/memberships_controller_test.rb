@@ -3,7 +3,7 @@ require 'test_helper'
 class Users::MembershipsControllerTest < ActionDispatch::IntegrationTest
   setup do
     sign_in users(:two)
-    @membership = Assignment.find(9)
+    @membership = assignments(:team_member)
   end
 
   test 'should delete destroy' do

@@ -9,13 +9,13 @@ class UserTest < ActiveSupport::TestCase
     @team = teams(:one)
     @header= headers(:two)
     @registration = Registration.first
-    @joined_team_assignment = Assignment.find 11
+    @joined_team_assignment = assignments(:team_leader)
     @joined_team = @team
     @invitee = users(:three)
-    @invited_team_assignments = Assignment.find 12
+    @invited_team_assignments = assignments(:invitee)
     @invited_team = @team
     @judge = users(:two)
-    @judge_assignment = Assignment.find 7
+    @judge_assignment = assignments(:judge)
     @challenge = challenges(:one)
     @leader_assignment = @joined_team_assignment
     @winning_entry = entries(:three)

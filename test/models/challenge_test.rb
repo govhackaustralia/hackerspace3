@@ -5,7 +5,7 @@ class ChallengeTest < ActiveSupport::TestCase
     @challenge = challenges(:one)
     @competition = competitions(:one)
     @region = regions(:national)
-    @assignment = Assignment.find(7)
+    @assignment = assignments(:judge)
     @user = users(:two)
     @entry = entries(:one)
     @checkpoint = checkpoints(:one)

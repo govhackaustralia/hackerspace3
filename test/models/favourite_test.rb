@@ -5,8 +5,8 @@ class FavouriteTest < ActiveSupport::TestCase
     @favourite = Favourite.first
     @team = teams(:one)
     @holder = Holder.first
-    @assignment = Assignment.find(4)
-    @project = projects :one
+    @assignment = assignments(:participant)
+    @project = projects(:one)
   end
 
   test 'associations' do

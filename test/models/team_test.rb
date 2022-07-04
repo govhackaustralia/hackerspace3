@@ -7,11 +7,11 @@ class TeamTest < ActiveSupport::TestCase
     @project = Project.first
     @competition = competitions(:one)
     @region = regions(:regional)
-    @team_member_assignment = Assignment.find 9
+    @team_member_assignment = assignments(:team_member)
     @team_member = users(:two)
-    @team_leader_assignment = Assignment.find 11
+    @team_leader_assignment = assignments(:team_leader)
     @team_leader = users(:one)
-    @team_invitee_assignment = Assignment.find 12
+    @team_invitee_assignment = assignments(:invitee)
     @team_invitee = users(:three)
     @team_data_set = team_data_sets(:one)
     @favourite = Favourite.first

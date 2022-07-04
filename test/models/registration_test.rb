@@ -9,7 +9,7 @@ class RegistrationTest < ActiveSupport::TestCase
     @user = users(:one)
     @event = events(:connection)
     @waitlister = users(:two)
-    @wait_ass = Assignment.find(6)
+    @wait_ass = assignments(:vip)
     @waitlist_registration = Registration.second
     @competition_event_registration = Registration.third
     @non_attending_registration = Registration.fourth
