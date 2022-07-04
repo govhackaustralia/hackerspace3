@@ -4,7 +4,7 @@ class AssignmentTest < ActiveSupport::TestCase
   setup do
     @comp_assignment = assignments(:management_team)
     @competition = competitions(:one)
-    @region_assignment = Assignment.second
+    @region_assignment = assignments(:region_director)
     @region = regions(:national)
     @holder = Holder.first
     @user = users(:one)
