@@ -2,7 +2,7 @@ require 'test_helper'
 
 class TeamsHelperTest < ActionView::TestCase
   setup do
-    @team = teams :one
+    @team = teams(:one)
   end
 
   test 'team_thumbnail_asset_path return default on nothing attached' do

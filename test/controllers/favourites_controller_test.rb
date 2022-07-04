@@ -3,9 +3,9 @@ require 'test_helper'
 class FavouritesControllerTest < ActionDispatch::IntegrationTest
   setup do
     sign_in users(:one)
-    @team = teams :one
-    @favourite = favourites :one
-    @project = projects :one
+    @team = teams(:one)
+    @favourite = favourites(:one)
+    @project = projects(:one)
   end
 
   test 'should post create success' do
