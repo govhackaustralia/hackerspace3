@@ -3,8 +3,8 @@ require 'test_helper'
 class SponsorshipTypeTest < ActiveSupport::TestCase
   setup do
     @sponsorship_type = SponsorshipType.first
-    @competition = Competition.first
-    @sponsorship = Sponsorship.first
+    @competition = competitions(:one)
+    @sponsorship = sponsorships(:one)
   end
 
   test 'sponsorship type associations' do

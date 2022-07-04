@@ -2,9 +2,9 @@ require 'test_helper'
 
 class Admin::Challenges::EntriesControllerTest < ActionDispatch::IntegrationTest
   setup do
-    sign_in users :one
-    @challenge = Challenge.first
-    @entry = Entry.first
+    sign_in users(:one)
+    @challenge = challenges(:one)
+    @entry = entries(:one)
   end
 
   test 'should get index' do

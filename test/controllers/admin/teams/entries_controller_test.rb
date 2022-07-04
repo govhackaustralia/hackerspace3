@@ -2,11 +2,11 @@ require 'test_helper'
 
 class Admin::Teams::EntriesControllerTest < ActionDispatch::IntegrationTest
   setup do
-    sign_in users :one
-    @team = Team.first
-    @entry = Entry.first
-    @challenge = Challenge.third
-    @checkpoint = Checkpoint.first
+    sign_in users(:one)
+    @team = teams(:one)
+    @entry = entries(:one)
+    @challenge = challenges(:three)
+    @checkpoint = checkpoints(:one)
     @competition = @team.competition
   end
 

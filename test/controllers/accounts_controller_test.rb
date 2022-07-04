@@ -2,7 +2,7 @@ require 'test_helper'
 
 class AccountsControllerTest < ActionDispatch::IntegrationTest
   setup do
-    sign_in users :one
+    sign_in users(:one)
     @user = users(:one)
     @user.update(full_name: '', region: nil)
   end

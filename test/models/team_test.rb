@@ -2,24 +2,24 @@ require 'test_helper'
 
 class TeamTest < ActiveSupport::TestCase
   setup do
-    @team = Team.first
-    @event = Event.second
+    @team = teams(:one)
+    @event = events(:competition)
     @project = Project.first
-    @competition = Competition.first
-    @region = Region.second
+    @competition = competitions(:one)
+    @region = regions(:regional)
     @team_member_assignment = Assignment.find 9
-    @team_member = User.second
+    @team_member = users(:two)
     @team_leader_assignment = Assignment.find 11
-    @team_leader = User.first
+    @team_leader = users(:one)
     @team_invitee_assignment = Assignment.find 12
-    @team_invitee = User.third
-    @team_data_set = TeamDataSet.first
+    @team_invitee = users(:three)
+    @team_data_set = team_data_sets(:one)
     @favourite = Favourite.first
-    @header= Header.fourth
-    @entry = Entry.first
-    @challenge = Challenge.first
-    @user = User.second
-    @regional_entry = Entry.third
+    @header= headers(:four)
+    @entry = entries(:one)
+    @challenge = challenges(:one)
+    @user = users(:two)
+    @regional_entry = entries(:three)
     @national_entry = @entry
   end
 
@@ -113,12 +113,12 @@ class TeamTest < ActiveSupport::TestCase
 
   test 'check_for_ineligible_challenge_entries' do
     exception = assert_raises(ActiveRecord::RecordInvalid) do
-      @team.update! event: Event.fourth
+      @team.update! event: events(:other_competition)
     end
     assert exception.message.include?(
       'some challenge entries will not be eligible'
     )
-    assert Team.second.update event: @event
+    assert teams(:two).update event: @event
   end
 
   test 'assign_leader' do

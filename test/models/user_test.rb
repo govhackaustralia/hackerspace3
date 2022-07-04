@@ -2,29 +2,29 @@ require 'test_helper'
 
 class UserTest < ActiveSupport::TestCase
   setup do
-    @user = User.first
+    @user = users(:one)
     @profile = profiles(:one)
     @holder = Holder.first
     @assignment = Assignment.first
-    @team = Team.first
-    @header= Header.second
+    @team = teams(:one)
+    @header= headers(:two)
     @registration = Registration.first
     @joined_team_assignment = Assignment.find 11
     @joined_team = @team
-    @invitee = User.third
+    @invitee = users(:three)
     @invited_team_assignments = Assignment.find 12
     @invited_team = @team
-    @judge = User.second
+    @judge = users(:two)
     @judge_assignment = Assignment.find 7
-    @challenge = Challenge.first
+    @challenge = challenges(:one)
     @leader_assignment = @joined_team_assignment
-    @winning_entry = Entry.third
+    @winning_entry = entries(:three)
     @competition_registration = Registration.third
-    @participating_event = Event.first
-    @competition_event = Event.second
+    @participating_event = events(:connection)
+    @competition_event = events(:competition)
     @staff_assignment = @assignment
     @participant_assignment = Assignment.fourth
-    @competition = Competition.first
+    @competition = competitions(:one)
     @unconfirmed_user = users(:unconfirmed_user)
   end
 

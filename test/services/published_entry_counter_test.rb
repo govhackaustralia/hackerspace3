@@ -2,9 +2,9 @@ require 'test_helper'
 
 class ChallengeEntryCounterTest < ActiveSupport::TestCase
   setup do
-    @competition = Competition.first
+    @competition = competitions(:one)
     @counter = PublishedEntryCounter.new(@competition)
-    @challenge = Challenge.first
+    @challenge = challenges(:one)
   end
 
   test 'count' do

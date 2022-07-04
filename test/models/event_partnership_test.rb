@@ -3,8 +3,8 @@ require 'test_helper'
 class EventPartnershipTest < ActiveSupport::TestCase
   setup do
     @event_partnership = EventPartnership.first
-    @event = Event.first
-    @sponsor = Sponsor.first
+    @event = events(:connection)
+    @sponsor = sponsors(:one)
   end
 
   test 'event partnership associations' do

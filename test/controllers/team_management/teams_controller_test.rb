@@ -2,8 +2,8 @@ require 'test_helper'
 
 class TeamManagement::TeamsControllerTest < ActionDispatch::IntegrationTest
   setup do
-    sign_in users :one
-    @team = Team.first
+    sign_in users(:one)
+    @team = teams(:one)
     Registration.fourth.update status: ATTENDING
   end
 

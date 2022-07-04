@@ -2,12 +2,12 @@ require 'test_helper'
 
 class TeamManagement::EntriesControllerTest < ActionDispatch::IntegrationTest
   setup do
-    sign_in users :two
-    @team = Team.first
-    @challenge = Challenge.third
-    @checkpoint = Checkpoint.first
-    @entry = Entry.first
-    @competition = Competition.first
+    sign_in users(:two)
+    @team = teams(:one)
+    @challenge = challenges(:three)
+    @checkpoint = checkpoints(:one)
+    @entry = entries(:one)
+    @competition = competitions(:one)
   end
 
   test 'should get index' do
@@ -57,7 +57,7 @@ class TeamManagement::EntriesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'should patch update fail' do
-    checkpoint = Checkpoint.second
+    checkpoint = checkpoints(:two)
     checkpoint.update end_time: Time.now.yesterday
     patch team_management_team_entry_url @team, @entry, params: { entry: {
       checkpoint_id: checkpoint.id

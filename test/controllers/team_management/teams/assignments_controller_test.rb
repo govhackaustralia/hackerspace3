@@ -2,9 +2,9 @@ require 'test_helper'
 
 class TeamManagement::Teams::AssignmentsControllerTest < ActionDispatch::IntegrationTest
   setup do
-    sign_in users :one
-    @team = Team.first
-    @member = User.second
+    sign_in users(:one)
+    @team = teams(:one)
+    @member = users(:two)
     @member_assignment = Assignment.find(9)
   end
 

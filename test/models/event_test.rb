@@ -2,21 +2,21 @@ require 'test_helper'
 
 class EventTest < ActiveSupport::TestCase
   setup do
-    @event = Event.first
-    @region = Region.second
-    @competition = Competition.first
+    @event = events(:connection)
+    @region = regions(:regional)
+    @competition = competitions(:one)
     @event_partnership = EventPartnership.first
-    @event_partner = Sponsor.first
+    @event_partner = sponsors(:one)
     @assignment = Assignment.third
     @registration = Registration.first
     @user = @registration.user
-    @team = Team.first
-    @entry = Entry.first
-    @user = User.first
+    @team = teams(:one)
+    @entry = entries(:one)
+    @user = users(:one)
     @vip_registration = Registration.second
-    @competition_event = Event.second
+    @competition_event = events(:competition)
     @wait_ass = Assignment.find 6
-    @comp_event = Event.second
+    @comp_event = events(:competition)
   end
 
   test 'event associations' do

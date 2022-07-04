@@ -2,7 +2,7 @@ require 'test_helper'
 
 class SponsorDataSetReportTest < ActiveSupport::TestCase
   setup do
-    competition = Competition.first
+    competition = competitions(:one)
     @sponsor_dataset_report = SponsorDataSetReport.new(competition)
   end
 

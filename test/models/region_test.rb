@@ -2,26 +2,26 @@ require 'test_helper'
 
 class RegionTest < ActiveSupport::TestCase
   setup do
-    @national = Region.first
-    @competition = Competition.first
-    @regional = Region.second
+    @national = regions(:national)
+    @competition = competitions(:one)
+    @regional = regions(:regional)
     @assignment = Assignment.second
-    @event = Event.first
-    @team = Team.first
+    @event = events(:connection)
+    @team = teams(:one)
     @published_project = Project.first
-    @entry = Entry.first
-    @sponsorship = Sponsorship.second
+    @entry = entries(:one)
+    @sponsorship = sponsorships(:two)
     @sponsorship_type = SponsorshipType.first
-    @challenge = Challenge.first
-    @data_set = DataSet.first
+    @challenge = challenges(:one)
+    @data_set = data_sets(:one)
     @support_assignment = Assignment.find 14
-    @support = User.first
-    @next_competition = Competition.second
-    @international = Region.third
+    @support = users(:one)
+    @next_competition = competitions(:two)
+    @international = regions(:international)
     @region_limit = RegionLimit.first
-    @regionalless_national = Region.fourth
-    @national_team = Team.second
-    @regional_challenge = Challenge.third
+    @regionalless_national = regions(:other_national)
+    @national_team = teams(:two)
+    @regional_challenge = challenges(:three)
   end
 
   test 'region associations' do
@@ -106,7 +106,7 @@ class RegionTest < ActiveSupport::TestCase
   end
 
   test 'limit' do
-    checkpoint = Checkpoint.first
+    checkpoint = checkpoints(:one)
     assert @national.limit(checkpoint) == @region_limit
     assert @regional.limit(checkpoint) == @region_limit
     assert @international.limit(checkpoint).nil?
@@ -155,7 +155,7 @@ class RegionTest < ActiveSupport::TestCase
   end
 
   test 'eligible_challenges' do
-    Challenge.first.update region: Region.third
+    challenges(:one).update region: regions(:international)
     assert @international.eligible_challenges.present?
     assert @national.eligible_challenges.present?
     assert @regional.eligible_challenges.present?

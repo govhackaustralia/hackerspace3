@@ -2,9 +2,9 @@ require 'test_helper'
 
 class Admin::Sponsors::AssignmentsControllerTest < ActionDispatch::IntegrationTest
   setup do
-    sign_in users :one
-    @sponsor = Sponsor.first
-    @user = User.first
+    sign_in users(:one)
+    @sponsor = sponsors(:one)
+    @user = users(:one)
   end
 
   test 'should get new' do

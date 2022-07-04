@@ -3,7 +3,7 @@ require 'test_helper'
 class CriterionTest < ActiveSupport::TestCase
   setup do
     @criterion = Criterion.first
-    @competition = Competition.first
+    @competition = competitions(:one)
     @score = Score.first
   end
 

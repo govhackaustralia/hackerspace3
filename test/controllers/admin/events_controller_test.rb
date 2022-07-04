@@ -2,8 +2,8 @@ require 'test_helper'
 
 class Admin::EventsControllerTest < ActionDispatch::IntegrationTest
   setup do
-    sign_in users :one
-    @competition = Competition.first
+    sign_in users(:one)
+    @competition = competitions(:one)
   end
 
   test 'should get index' do

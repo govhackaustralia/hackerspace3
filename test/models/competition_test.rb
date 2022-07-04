@@ -2,30 +2,30 @@ require 'test_helper'
 
 class CompetitionTest < ActiveSupport::TestCase
   setup do
-    @competition = Competition.first
-    @region = Region.third
+    @competition = competitions(:one)
+    @region = regions(:international)
     @assignment = Assignment.first
-    @sponsor = Sponsor.first
+    @sponsor = sponsors(:one)
     @sponsorship_type = SponsorshipType.first
-    @event = Event.first
+    @event = events(:connection)
     @connection_event = @event
     @connection_registration = Registration.first
-    @competition_event = Event.second
+    @competition_event = events(:competition)
     @competition_registration = Registration.third
-    @award_event = Event.third
+    @award_event = events(:award)
     @award_registration = Registration.find 6
-    @team = Team.first
-    @team_data_set = TeamDataSet.first
+    @team = teams(:one)
+    @team_data_set = team_data_sets(:one)
     @project = Project.first
-    @challenge = Challenge.first
-    @entry = Entry.first
-    @checkpoint = Checkpoint.first
-    @data_set = DataSet.first
+    @challenge = challenges(:one)
+    @entry = entries(:one)
+    @checkpoint = checkpoints(:one)
+    @data_set = data_sets(:one)
     @criterion = Criterion.first
     @project_criterion = Criterion.first
     @challenge_criterion = Criterion.second
     @old_competition = @competition
-    @new_competition = Competition.second
+    @new_competition = competitions(:two)
     @event_assignment = Assignment.fourth
   end
 

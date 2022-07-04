@@ -2,8 +2,8 @@ require 'test_helper'
 
 class Admin::TeamsControllerTest < ActionDispatch::IntegrationTest
   setup do
-    sign_in users :one
-    @team = Team.first
+    sign_in users(:one)
+    @team = teams(:one)
     @project = Project.second
     @competition = @team.competition
   end

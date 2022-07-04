@@ -2,7 +2,7 @@ require 'test_helper'
 
 class TeamMemberReportTest < ActiveSupport::TestCase
   setup do
-    @competition = Competition.first
+    @competition = competitions(:one)
   end
 
   test 'to_csv' do

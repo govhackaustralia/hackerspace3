@@ -2,9 +2,9 @@ require 'test_helper'
 
 class Admin::Regions::DataSetsControllerTest < ActionDispatch::IntegrationTest
   setup do
-    sign_in users :one
-    @region = Region.first
-    @data_set = DataSet.first
+    sign_in users(:one)
+    @region = regions(:national)
+    @data_set = data_sets(:one)
   end
 
   test 'should get index' do

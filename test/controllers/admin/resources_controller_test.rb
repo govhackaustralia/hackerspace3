@@ -2,20 +2,20 @@ require 'test_helper'
 
 class Admin::ResourcesControllerTest < ActionDispatch::IntegrationTest
   setup do
-    sign_in users :one
+    sign_in users(:one)
     @resource = resources(:one)
     @competition = competitions(:one)
   end
 
   test 'should authenticate user' do
-    sign_out users :one
+    sign_out users(:one)
     get admin_competition_resources_path @competition
     assert_redirected_to new_user_session_path
   end
 
   test 'should authorise user' do
-    sign_out users :one
-    sign_in users :two
+    sign_out users(:one)
+    sign_in users(:two)
     get admin_competition_resources_path @competition
     assert_redirected_to root_path
   end

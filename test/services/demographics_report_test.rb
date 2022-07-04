@@ -2,7 +2,7 @@ require 'test_helper'
 
 class DemographicsReportTest < ActiveSupport::TestCase
   setup do
-    competition = Competition.first
+    competition = competitions(:one)
     @demographics_report = DemographicsReport.new(competition, 'gender')
   end
 

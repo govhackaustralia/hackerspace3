@@ -2,7 +2,7 @@ require 'test_helper'
 
 class ChallengesControllerTest < ActionDispatch::IntegrationTest
   setup do
-    @competition = Competition.first
+    @competition = competitions(:one)
     @challenge = challenges(:one)
   end
 

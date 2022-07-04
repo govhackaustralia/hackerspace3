@@ -2,7 +2,7 @@ require 'test_helper'
 
 class Users::MembershipsControllerTest < ActionDispatch::IntegrationTest
   setup do
-    sign_in users :two
+    sign_in users(:two)
     @membership = Assignment.find(9)
   end
 

@@ -2,10 +2,10 @@ require 'test_helper'
 
 class Admin::RegistrationsControllerTest < ActionDispatch::IntegrationTest
   setup do
-    sign_in users :one
-    @event = Event.first
+    sign_in users(:one)
+    @event = events(:connection)
     @registration = Registration.first
-    @user = User.first
+    @user = users(:one)
   end
 
   test 'should get index' do

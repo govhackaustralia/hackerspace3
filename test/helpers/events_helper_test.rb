@@ -2,8 +2,8 @@ require 'test_helper'
 
 class EventsHelperTest < ActionView::TestCase
   setup do
-    @event = Event.fourth
-    @competition = Competition.first
+    @event = events(:other_competition)
+    @competition = competitions(:one)
     @region = regions(:regional)
     @event_assignment = Assignment.fourth
   end

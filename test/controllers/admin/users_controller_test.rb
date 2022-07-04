@@ -2,19 +2,19 @@ require 'test_helper'
 
 class Admin::UsersControllerTest < ActionDispatch::IntegrationTest
   setup do
-    @user = User.first
-    sign_in users :one
+    @user = users(:one)
+    sign_in users(:one)
     @unconfirmed_user = users(:unconfirmed_user)
   end
 
   test 'should fail authenticate' do
-    sign_out users :one
+    sign_out users(:one)
     get admin_users_url
     assert_redirected_to new_user_session_path
   end
 
   test 'should fail authorize' do
-    sign_in users :two
+    sign_in users(:two)
     get admin_users_url
     assert_redirected_to root_path
   end
@@ -64,7 +64,7 @@ class Admin::UsersControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'should patch cease_acting_on_behalf_of_user' do
-    acting_on_behalf_of_user = users :three
+    acting_on_behalf_of_user = users(:three)
     patch cease_acting_on_behalf_of_user_admin_user_path acting_on_behalf_of_user
     assert_redirected_to admin_user_path acting_on_behalf_of_user
     @user.reload

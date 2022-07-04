@@ -2,9 +2,9 @@ require 'test_helper'
 
 class Admin::RegionsControllerTest < ActionDispatch::IntegrationTest
   setup do
-    sign_in users :one
-    @competition = Competition.first
-    @region = Region.first
+    sign_in users(:one)
+    @competition = competitions(:one)
+    @region = regions(:national)
   end
 
   test 'should get index' do
@@ -30,7 +30,7 @@ class Admin::RegionsControllerTest < ActionDispatch::IntegrationTest
         time_zone: 'Sydney',
         competition: @competition,
         category: Region::REGIONAL,
-        parent_id: Region.first.id
+        parent_id: regions(:national).id
       } }
     end
     assert_redirected_to admin_competition_region_url @competition, Region.last

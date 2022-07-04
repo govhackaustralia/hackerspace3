@@ -2,8 +2,8 @@ require 'test_helper'
 
 class SponsorshipManagement::SponsorsControllerTest < ActionDispatch::IntegrationTest
   setup do
-    sign_in users :one
-    @sponsor = Sponsor.first
+    sign_in users(:one)
+    @sponsor = sponsors(:one)
   end
 
   test 'should get show' do

@@ -2,9 +2,9 @@ require 'test_helper'
 
 class Admin::CompetitionsControllerTest < ActionDispatch::IntegrationTest
   setup do
-    sign_in users :one
-    @competition = Competition.first
-    User.first.make_site_admin @competition
+    sign_in users(:one)
+    @competition = competitions(:one)
+    users(:one).make_site_admin @competition
   end
 
   test 'should get index' do
@@ -37,7 +37,7 @@ class Admin::CompetitionsControllerTest < ActionDispatch::IntegrationTest
       } }
     end
     assert_redirected_to admin_competition_url(new_comp = Competition.last)
-    assert User.first.assignments.where(assignable: new_comp, title: ADMIN).any?
+    assert users(:one).assignments.where(assignable: new_comp, title: ADMIN).any?
     assert Competition.last.international_region == Region.last
   end
 

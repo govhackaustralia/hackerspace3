@@ -2,10 +2,10 @@ require 'test_helper'
 
 class Admin::EventPartnershipsControllerTest < ActionDispatch::IntegrationTest
   setup do
-    sign_in users :one
-    @event = Event.first
+    sign_in users(:one)
+    @event = events(:connection)
     @event_partnership = EventPartnership.first
-    @sponsor = Sponsor.first
+    @sponsor = sponsors(:one)
   end
 
   test 'should get new' do

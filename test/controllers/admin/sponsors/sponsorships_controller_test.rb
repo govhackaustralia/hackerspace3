@@ -2,9 +2,9 @@ require 'test_helper'
 
 class Admin::Sponsors::SponsorshipsControllerTest < ActionDispatch::IntegrationTest
   setup do
-    sign_in users :one
-    @sponsorship = Sponsorship.first
-    @sponsor = Sponsor.first
+    sign_in users(:one)
+    @sponsorship = sponsorships(:one)
+    @sponsor = sponsors(:one)
   end
 
   test 'should delete destroy success' do

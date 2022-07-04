@@ -2,10 +2,10 @@ require 'test_helper'
 
 class Admin::BadgesControllerTest < ActionDispatch::IntegrationTest
   setup do
-    sign_in users :one
+    sign_in users(:one)
     @badge = badges :one
     @competition = competitions :one
-    @user = users :two
+    @user = users(:two)
   end
 
   test 'should get index' do

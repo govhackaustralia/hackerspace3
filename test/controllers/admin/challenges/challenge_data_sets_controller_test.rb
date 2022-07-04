@@ -2,10 +2,10 @@ require 'test_helper'
 
 class Admin::Challenges::ChallengeDataSetsControllerTest < ActionDispatch::IntegrationTest
   setup do
-    sign_in users :one
-    @challenge = Challenge.first
-    @data_set = DataSet.first
-    @challenge_data_set = ChallengeDataSet.first
+    sign_in users(:one)
+    @challenge = challenges(:one)
+    @data_set = data_sets(:one)
+    @challenge_data_set = challenge_data_sets(:one)
   end
 
   test 'should get new' do
@@ -16,7 +16,9 @@ class Admin::Challenges::ChallengeDataSetsControllerTest < ActionDispatch::Integ
   test 'should post create success' do
     ChallengeDataSet.destroy_all
     assert_difference 'ChallengeDataSet.count' do
-      post admin_challenge_challenge_data_sets_url @challenge, params: { challenge_data_set: { data_set_id: @data_set.id } }
+      post admin_challenge_challenge_data_sets_url @challenge, params: {
+        challenge_data_set: { data_set_id: @data_set.id }
+      }
     end
     assert_redirected_to admin_region_challenge_url @challenge.region, @challenge
   end
@@ -24,7 +26,9 @@ class Admin::Challenges::ChallengeDataSetsControllerTest < ActionDispatch::Integ
   test 'should post create fail' do
     ChallengeDataSet.destroy_all
     assert_no_difference 'ChallengeDataSet.count' do
-      post admin_challenge_challenge_data_sets_url @challenge, params: { challenge_data_set: { data_set_id: nil } }
+      post admin_challenge_challenge_data_sets_url @challenge, params: {
+        challenge_data_set: { data_set_id: nil }
+      }
     end
     assert_response :success
   end

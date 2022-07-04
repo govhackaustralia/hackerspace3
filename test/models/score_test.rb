@@ -3,7 +3,7 @@ require 'test_helper'
 class ScoreTest < ActiveSupport::TestCase
   setup do
     @score = Score.first
-    @header= Header.first
+    @header= headers(:one)
     @criterion = Criterion.first
   end
 

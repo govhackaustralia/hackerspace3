@@ -2,8 +2,8 @@ require 'test_helper'
 
 class TeamsControllerTest < ActionDispatch::IntegrationTest
   setup do
-    sign_in users :one
-    @competition = Competition.first
+    sign_in users(:one)
+    @competition = competitions(:one)
     @competition.update(
       start_time: Time.now.yesterday,
       end_time: Time.now.tomorrow
@@ -25,7 +25,7 @@ class TeamsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'should redirect to competition events if not registered for one' do
-    User.first.event_assignment(@competition).destroy
+    users(:one).event_assignment(@competition).destroy
     get new_team_url
     assert_redirected_to competition_events_url
   end

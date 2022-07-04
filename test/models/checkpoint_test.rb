@@ -2,12 +2,12 @@ require 'test_helper'
 
 class CheckpointTest < ActiveSupport::TestCase
   setup do
-    @checkpoint = Checkpoint.first
-    @competition = Competition.first
-    @entry = Entry.first
-    @team = Team.first
-    @international_region = Region.first
-    @sub_region = Region.second
+    @checkpoint = checkpoints(:one)
+    @competition = competitions(:one)
+    @entry = entries(:one)
+    @team = teams(:one)
+    @international_region = regions(:national)
+    @sub_region = regions(:regional)
   end
 
   test 'checkpoint associations' do

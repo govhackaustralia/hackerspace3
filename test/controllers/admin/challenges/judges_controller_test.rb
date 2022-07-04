@@ -2,9 +2,9 @@ require 'test_helper'
 
 class Admin::Challenges::JudgesControllerTest < ActionDispatch::IntegrationTest
   setup do
-    sign_in users :one
-    @challenge = Challenge.first
-    @user = User.first
+    sign_in users(:one)
+    @challenge = challenges(:one)
+    @user = users(:one)
   end
 
   test 'should get new' do

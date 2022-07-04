@@ -2,7 +2,7 @@ require 'test_helper'
 
 class AwsCreditsRequestedReportTest < ActiveSupport::TestCase
   setup do
-    @competition = Competition.first
+    @competition = competitions(:one)
     @report = AwsCreditsRequestedReport.new @competition
   end
 
@@ -11,14 +11,14 @@ class AwsCreditsRequestedReportTest < ActiveSupport::TestCase
   end
 
   test 'region_count' do
-    region = Region.second
+    region = regions(:regional)
     count = 0
     region.events.competitions.each { |event| count += event.registrations.aws_credits_requested.count }
     assert @report.region_count(region) == count
   end
 
   test 'event_count' do
-    event = Event.second
+    event = events(:competition)
     assert @report.event_count(event) == event.registrations.aws_credits_requested.count
   end
 end

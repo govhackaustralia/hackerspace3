@@ -5,10 +5,10 @@ class RegistrationTest < ActiveSupport::TestCase
     @registration = Registration.first
     @holder = Holder.first
     @assignment = Assignment.fourth
-    @competition = Competition.first
-    @user = User.first
-    @event = Event.first
-    @waitlister = User.second
+    @competition = competitions(:one)
+    @user = users(:one)
+    @event = events(:connection)
+    @waitlister = users(:two)
     @wait_ass = Assignment.find(6)
     @waitlist_registration = Registration.second
     @competition_event_registration = Registration.third
@@ -74,7 +74,7 @@ class RegistrationTest < ActiveSupport::TestCase
 
   test 'validate single competition event registration' do
     exception = assert_raises(ActiveRecord::RecordInvalid) do
-      Event.fourth.registrations.create!(
+      events(:other_competition).registrations.create!(
         assignment: @assignment,
         holder: @holder,
         status: ATTENDING

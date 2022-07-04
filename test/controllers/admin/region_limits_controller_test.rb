@@ -2,10 +2,10 @@ require 'test_helper'
 
 class Admin::RegionLimitsControllerTest < ActionDispatch::IntegrationTest
   setup do
-    sign_in users :one
-    @checkpoint = Checkpoint.first
+    sign_in users(:one)
+    @checkpoint = checkpoints(:one)
     @region_limit = RegionLimit.first
-    @competition = Competition.first
+    @competition = competitions(:one)
   end
 
   test 'should get new' do

@@ -2,9 +2,9 @@ require 'test_helper'
 
 class Admin::CheckpointsControllerTest < ActionDispatch::IntegrationTest
   setup do
-    sign_in users :one
-    @competition = Competition.first
-    @checkpoint = Checkpoint.first
+    sign_in users(:one)
+    @competition = competitions(:one)
+    @checkpoint = checkpoints(:one)
   end
 
   test 'should get index' do

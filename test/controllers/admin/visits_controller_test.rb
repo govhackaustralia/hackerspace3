@@ -7,13 +7,13 @@ class Admin::VisitsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'should authorise user' do
-    sign_in users :two
+    sign_in users(:two)
     get admin_competition_visits_path competitions(:one)
     assert_redirected_to root_path
   end
 
   test 'should get index' do
-    sign_in users :one
+    sign_in users(:one)
     get admin_competition_visits_path competitions(:one)
     assert_response :success
   end

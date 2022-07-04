@@ -3,16 +3,16 @@ require 'test_helper'
 class AssignmentTest < ActiveSupport::TestCase
   setup do
     @comp_assignment = Assignment.first
-    @competition = Competition.first
+    @competition = competitions(:one)
     @region_assignment = Assignment.second
-    @region = Region.first
+    @region = regions(:national)
     @holder = Holder.first
-    @user = User.first
+    @user = users(:one)
     @judge = Assignment.find 7
     @participant = Assignment.fourth
     @favourite = Favourite.first
-    @team = Team.first
-    @header= Header.second
+    @team = teams(:one)
+    @header= headers(:two)
     @score = Score.third
     @registration = registrations(:attending)
     @competition_event = events(:competition)

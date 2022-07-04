@@ -2,19 +2,19 @@ require 'test_helper'
 
 class EntryTest < ActiveSupport::TestCase
   setup do
-    @entry = Entry.first
-    @checkpoint = Checkpoint.first
-    @challenge = Challenge.first
-    @team = Team.first
+    @entry = entries(:one)
+    @checkpoint = checkpoints(:one)
+    @challenge = challenges(:one)
+    @team = teams(:one)
     @event = @team.event
     @team_region = @team.region
     @project = @team.current_project
-    @competition = Competition.first
-    @region = Region.first
-    @header= Header.first
-    @regional_entry = Entry.third
+    @competition = competitions(:one)
+    @region = regions(:national)
+    @header= headers(:one)
+    @regional_entry = entries(:three)
     @national_entry = @entry
-    @next_competition = Competition.second
+    @next_competition = competitions(:two)
   end
 
   test 'entry associations' do
@@ -48,7 +48,7 @@ class EntryTest < ActiveSupport::TestCase
     assert @entry.update! award: AWARD_NAMES.sample
     assert_not @entry.update award: 'Test'
     # No duplicate entries by Team into Challenge.
-    assert_not Entry.second.update challenge: @challenge
+    assert_not entries(:two).update challenge: @challenge
   end
 
   test 'update eligible' do
@@ -60,7 +60,7 @@ class EntryTest < ActiveSupport::TestCase
     )
     assert_not entry.eligible
     @team.projects.create(
-      user: User.first,
+      user: users(:one),
       team_name: 'test',
       project_name: 'test',
       data_story: 'test',
@@ -74,18 +74,18 @@ class EntryTest < ActiveSupport::TestCase
     Entry.destroy_all
     exception = assert_raises(ActiveRecord::RecordInvalid) do
       Entry.create!(
-        challenge: Challenge.first,
-        team: Team.second,
-        checkpoint: Checkpoint.first
+        challenge: challenges(:one),
+        team: teams(:two),
+        checkpoint: checkpoints(:one)
       )
     end
     assert exception.message.include?(
       'Challenge Team not eligible to enter this challenge'
     )
     assert Entry.create!(
-      challenge: Challenge.first,
-      team: Team.first,
-      checkpoint: Checkpoint.first
+      challenge: challenges(:one),
+      team: teams(:one),
+      checkpoint: checkpoints(:one)
     ).persisted?
   end
 end

@@ -3,9 +3,9 @@ require 'test_helper'
 class ProjectTest < ActiveSupport::TestCase
   setup do
     @project = Project.first
-    @team = Team.first
-    @user = User.first
-    @event = Event.second
+    @team = teams(:one)
+    @user = users(:one)
+    @event = events(:competition)
   end
 
   test 'project associations' do

@@ -2,9 +2,9 @@ require 'test_helper'
 
 class Admin::Competitions::AssignmentsControllerTest < ActionDispatch::IntegrationTest
   setup do
-    sign_in users :one
-    @competition = Competition.first
-    @user = User.first
+    sign_in users(:one)
+    @competition = competitions(:one)
+    @user = users(:one)
   end
 
   test 'should get index' do
