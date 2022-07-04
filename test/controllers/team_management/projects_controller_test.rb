@@ -4,7 +4,7 @@ class TeamManagement::ProjectsControllerTest < ActionDispatch::IntegrationTest
   setup do
     sign_in users(:one)
     @team = teams(:one)
-    @project = Project.first
+    @project = projects(:one)
     competition = @team.competition
     competition.update(
       start_time: Time.now - 1.day,

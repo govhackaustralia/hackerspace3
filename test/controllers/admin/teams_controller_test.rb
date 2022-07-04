@@ -4,7 +4,7 @@ class Admin::TeamsControllerTest < ActionDispatch::IntegrationTest
   setup do
     sign_in users(:one)
     @team = teams(:one)
-    @project = Project.second
+    @project = projects(:two)
     @competition = @team.competition
   end
 

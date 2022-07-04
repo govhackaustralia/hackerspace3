@@ -2,7 +2,7 @@ require 'test_helper'
 
 class ProjectsControllerTest < ActionDispatch::IntegrationTest
   setup do
-    @project = Project.first
+    @project = projects(:one)
     @competition = competitions(:one)
     @team = @project.team
   end

@@ -4,7 +4,7 @@ class TeamTest < ActiveSupport::TestCase
   setup do
     @team = teams(:one)
     @event = events(:competition)
-    @project = Project.first
+    @project = projects(:one)
     @competition = competitions(:one)
     @region = regions(:regional)
     @team_member_assignment = assignments(:team_member)

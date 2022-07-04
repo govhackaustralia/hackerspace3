@@ -2,7 +2,7 @@ require 'test_helper'
 
 class ScorecardsControllerTest < ActionDispatch::IntegrationTest
   setup do
-    @project = Project.first
+    @project = projects(:one)
     @header= headers(:three)
     competitions(:one).update(
       peoples_choice_start: Time.now.yesterday,

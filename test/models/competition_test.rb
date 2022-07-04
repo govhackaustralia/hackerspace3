@@ -16,7 +16,7 @@ class CompetitionTest < ActiveSupport::TestCase
     @award_registration = Registration.find 6
     @team = teams(:one)
     @team_data_set = team_data_sets(:one)
-    @project = Project.first
+    @project = projects(:one)
     @challenge = challenges(:one)
     @entry = entries(:one)
     @checkpoint = checkpoints(:one)

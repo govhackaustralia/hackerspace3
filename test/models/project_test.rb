@@ -2,7 +2,7 @@ require 'test_helper'
 
 class ProjectTest < ActiveSupport::TestCase
   setup do
-    @project = Project.first
+    @project = projects(:one)
     @team = teams(:one)
     @user = users(:one)
     @event = events(:competition)

@@ -8,7 +8,7 @@ class RegionTest < ActiveSupport::TestCase
     @assignment = assignments(:region_director)
     @event = events(:connection)
     @team = teams(:one)
-    @published_project = Project.first
+    @published_project = projects(:one)
     @entry = entries(:one)
     @sponsorship = sponsorships(:two)
     @sponsorship_type = SponsorshipType.first

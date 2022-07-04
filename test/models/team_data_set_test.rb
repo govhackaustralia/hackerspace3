@@ -4,7 +4,7 @@ class TeamDataSetTest < ActiveSupport::TestCase
   setup do
     @team = teams(:one)
     @team_data_set = team_data_sets(:one)
-    @current_project = Project.first
+    @current_project = projects(:one)
   end
 
   test 'TeamDataSet Associations' do
