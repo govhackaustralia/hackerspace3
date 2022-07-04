@@ -1,5 +1,5 @@
 require 'test_helper'
-
+# Up to here
 class ScorecardsHelperTest < ActionView::TestCase
   setup do
     @header = Header.first
@@ -9,7 +9,7 @@ class ScorecardsHelperTest < ActionView::TestCase
   end
 
   test 'challenge_title_required?' do
-    assert_not challenge_title_required? Score.first
+    assert_not challenge_title_required? scores(:one)
   end
 
   test 'show_challenge_score_stuff?' do

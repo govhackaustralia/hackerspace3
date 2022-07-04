@@ -4,7 +4,7 @@ class CriterionTest < ActiveSupport::TestCase
   setup do
     @criterion = criteria(:one)
     @competition = competitions(:one)
-    @score = Score.first
+    @score = scores(:one)
   end
 
   test 'criterion associations' do

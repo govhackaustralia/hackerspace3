@@ -6,7 +6,7 @@ class HeaderTest < ActiveSupport::TestCase
     @peoples_header = headers(:two)
     @particpiant = assignments(:participant)
     @user = users(:one)
-    @score = Score.first
+    @score = scores(:one)
     @entry = entries(:one)
     @team = teams(:one)
     @team_user = users(:two)
