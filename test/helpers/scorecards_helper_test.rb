@@ -4,7 +4,7 @@ class ScorecardsHelperTest < ActionView::TestCase
   setup do
     @header = Header.first
     @judge = users(:one)
-    @peoples_assignment = Assignment.first
+    @peoples_assignment = assignments(:management_team)
     @competition = competitions(:one)
   end
 

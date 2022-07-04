@@ -5,7 +5,7 @@ class UserTest < ActiveSupport::TestCase
     @user = users(:one)
     @profile = profiles(:one)
     @holder = Holder.first
-    @assignment = Assignment.first
+    @assignment = assignments(:management_team)
     @team = teams(:one)
     @header= headers(:two)
     @registration = Registration.first

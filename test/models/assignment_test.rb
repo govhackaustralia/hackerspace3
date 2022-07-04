@@ -2,7 +2,7 @@ require 'test_helper'
 
 class AssignmentTest < ActiveSupport::TestCase
   setup do
-    @comp_assignment = Assignment.first
+    @comp_assignment = assignments(:management_team)
     @competition = competitions(:one)
     @region_assignment = Assignment.second
     @region = regions(:national)
