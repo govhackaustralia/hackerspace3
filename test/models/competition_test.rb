@@ -9,11 +9,11 @@ class CompetitionTest < ActiveSupport::TestCase
     @sponsorship_type = SponsorshipType.first
     @event = events(:connection)
     @connection_event = @event
-    @connection_registration = Registration.first
+    @connection_registration = registrations(:attending)
     @competition_event = events(:competition)
-    @competition_registration = Registration.third
+    @competition_registration = registrations(:attending_two)
     @award_event = events(:award)
-    @award_registration = Registration.find 6
+    @award_registration = registrations(:attending_three)
     @team = teams(:one)
     @team_data_set = team_data_sets(:one)
     @project = projects(:one)

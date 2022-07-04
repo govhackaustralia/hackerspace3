@@ -99,7 +99,7 @@ class AssignmentTest < ActiveSupport::TestCase
   end
 
   test 'only_one_team_leader_assignment' do
-    Registration.fourth.update status: ATTENDING
+    registrations(:non_attending).update status: ATTENDING
     @team_member_assignment.update! title: TEAM_LEADER
 
     assert @team_leader_assignment.reload.title == TEAM_MEMBER

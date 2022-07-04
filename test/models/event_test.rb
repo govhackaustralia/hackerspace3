@@ -8,12 +8,12 @@ class EventTest < ActiveSupport::TestCase
     @event_partnership = event_partnerships(:one)
     @event_partner = sponsors(:one)
     @assignment = assignments(:event_host)
-    @registration = Registration.first
+    @registration = registrations(:attending)
     @user = @registration.user
     @team = teams(:one)
     @entry = entries(:one)
     @user = users(:one)
-    @vip_registration = Registration.second
+    @vip_registration = registrations(:wait_list)
     @competition_event = events(:competition)
     @wait_ass = assignments(:vip)
     @comp_event = events(:competition)

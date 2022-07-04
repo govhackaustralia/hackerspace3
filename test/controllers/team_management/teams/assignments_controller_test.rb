@@ -26,7 +26,7 @@ class TeamManagement::Teams::AssignmentsControllerTest < ActionDispatch::Integra
 
   test 'should post create success' do
     @member_assignment.destroy
-    Registration.fourth.update status: ATTENDING
+    registrations(:non_attending).update status: ATTENDING
     assert_difference 'Assignment.count' do
       post team_management_team_assignments_url @team, params: { assignment: {
         user_id: @member.id
@@ -45,7 +45,7 @@ class TeamManagement::Teams::AssignmentsControllerTest < ActionDispatch::Integra
   end
 
   test 'should patch update success' do
-    Registration.fourth.update status: ATTENDING
+    registrations(:non_attending).update status: ATTENDING
     patch team_management_team_assignment_url @team, @member_assignment
     assert_redirected_to team_management_team_assignments_url @team
     @member_assignment.reload

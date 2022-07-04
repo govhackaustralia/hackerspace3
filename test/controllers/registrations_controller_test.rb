@@ -4,7 +4,7 @@ class RegistrationsControllerTest < ActionDispatch::IntegrationTest
   setup do
     sign_in users(:one)
     @event = events(:connection)
-    @registration = Registration.first
+    @registration = registrations(:attending)
   end
 
   test 'should get new' do

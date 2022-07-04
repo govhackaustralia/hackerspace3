@@ -4,7 +4,7 @@ class TeamManagement::TeamsControllerTest < ActionDispatch::IntegrationTest
   setup do
     sign_in users(:one)
     @team = teams(:one)
-    Registration.fourth.update status: ATTENDING
+    registrations(:non_attending).update status: ATTENDING
   end
 
   test 'should get show' do

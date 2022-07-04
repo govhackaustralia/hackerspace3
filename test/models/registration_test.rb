@@ -2,7 +2,7 @@ require 'test_helper'
 
 class RegistrationTest < ActiveSupport::TestCase
   setup do
-    @registration = Registration.first
+    @registration = registrations(:attending)
     @holder = Holder.first
     @assignment = assignments(:participant)
     @competition = competitions(:one)
@@ -10,12 +10,12 @@ class RegistrationTest < ActiveSupport::TestCase
     @event = events(:connection)
     @waitlister = users(:two)
     @wait_ass = assignments(:vip)
-    @waitlist_registration = Registration.second
-    @competition_event_registration = Registration.third
-    @non_attending_registration = Registration.fourth
-    @invited = Registration.find 7
+    @waitlist_registration = registrations(:wait_list)
+    @competition_event_registration = registrations(:attending_two)
+    @non_attending_registration = registrations(:non_attending)
+    @invited = registrations(:invited)
     @vip_registration = @non_attending_registration
-    @award_registration = Registration.find(6)
+    @award_registration = registrations(:attending_three)
   end
 
   test 'registration associations' do

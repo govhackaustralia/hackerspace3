@@ -8,7 +8,7 @@ class UserTest < ActiveSupport::TestCase
     @assignment = assignments(:management_team)
     @team = teams(:one)
     @header= headers(:two)
-    @registration = Registration.first
+    @registration = registrations(:attending)
     @joined_team_assignment = assignments(:team_leader)
     @joined_team = @team
     @invitee = users(:three)
@@ -19,7 +19,7 @@ class UserTest < ActiveSupport::TestCase
     @challenge = challenges(:one)
     @leader_assignment = @joined_team_assignment
     @winning_entry = entries(:three)
-    @competition_registration = Registration.third
+    @competition_registration = registrations(:attending_two)
     @participating_event = events(:connection)
     @competition_event = events(:competition)
     @staff_assignment = @assignment
