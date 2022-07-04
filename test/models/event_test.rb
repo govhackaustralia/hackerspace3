@@ -7,7 +7,7 @@ class EventTest < ActiveSupport::TestCase
     @competition = competitions(:one)
     @event_partnership = EventPartnership.first
     @event_partner = sponsors(:one)
-    @assignment = Assignment.third
+    @assignment = assignments(:event_host)
     @registration = Registration.first
     @user = @registration.user
     @team = teams(:one)
