@@ -3,25 +3,21 @@
 one:
   id: 1
   assignment: judge
-  scoreable_type: Entry
-  scoreable_id: 1
+  scoreable: one (Entry)
   included: true
 
 two:
   id: 2
   assignment: participant
-  scoreable_type: Team
-  scoreable_id: 1
+  scoreable: one (Team)
   included: false
 
 three:
   id: 3
   assignment: volunteer
-  scoreable_type: Team
-  scoreable_id: 1
+  scoreable: one (Team)
 
 four:
   id: 4
   assignment: vip
-  scoreable_type: Team
-  scoreable_id: 1
+  scoreable: one (Team)
