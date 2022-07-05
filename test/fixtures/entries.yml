@@ -4,7 +4,7 @@ one:
   id: 1
   team: one
   challenge: one
-  checkpoint_id: 1
+  checkpoint: one
   justification: MyText
   eligible: false
 
@@ -12,7 +12,7 @@ two:
   id: 2
   team: one
   challenge: two
-  checkpoint_id: 1
+  checkpoint: one
   justification: MyText
   eligible: false
 
@@ -20,7 +20,7 @@ three:
   id: 3
   team: one
   challenge: three
-  checkpoint_id: 1
+  checkpoint: one
   justification: MyText
   eligible: true
   award: Winner

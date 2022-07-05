@@ -6,14 +6,14 @@
 #
 one:
   id: 1
-  checkpoint_id: 1
+  checkpoint: one
   region: national
   max_national_challenges: 2
   max_regional_challenges: 2
 
 two:
   id: 2
-  checkpoint_id: 2
+  checkpoint: two
   region: national
   max_national_challenges: 2
   max_regional_challenges: 2
