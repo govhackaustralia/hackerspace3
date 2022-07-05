@@ -4,4 +4,4 @@ one:
   id: 1
   assignment_id: 4
   holder: one
-  team_id: 1
+  team: one

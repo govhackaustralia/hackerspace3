@@ -2,7 +2,7 @@
 
 one:
   id: 1
-  team_id: 1
+  team: one
   challenge: one
   checkpoint_id: 1
   justification: MyText
@@ -10,7 +10,7 @@ one:
 
 two:
   id: 2
-  team_id: 1
+  team: one
   challenge: two
   checkpoint_id: 1
   justification: MyText
@@ -18,7 +18,7 @@ two:
 
 three:
   id: 3
-  team_id: 1
+  team: one
   challenge: three
   checkpoint_id: 1
   justification: MyText
