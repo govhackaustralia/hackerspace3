@@ -2,10 +2,10 @@
 
 one:
   id: 1
-  challenge_id: 1
+  challenge: one
   data_set_id: 1
 
 two:
   id: 2
-  challenge_id: 1
+  challenge: one
   data_set_id: 1

@@ -3,7 +3,7 @@
 one:
   id: 1
   team_id: 1
-  challenge_id: 1
+  challenge: one
   checkpoint_id: 1
   justification: MyText
   eligible: false
@@ -11,7 +11,7 @@ one:
 two:
   id: 2
   team_id: 1
-  challenge_id: 2
+  challenge: two
   checkpoint_id: 1
   justification: MyText
   eligible: false
@@ -19,7 +19,7 @@ two:
 three:
   id: 3
   team_id: 1
-  challenge_id: 3
+  challenge: three
   checkpoint_id: 1
   justification: MyText
   eligible: true
