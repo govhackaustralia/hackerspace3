@@ -2,7 +2,7 @@
 
 one:
   id: 1
-  region_id: 1
+  region: national
   name: Australia Challenge 0
   short_desc: MyText
   long_desc: MyText
@@ -13,7 +13,7 @@ one:
 
 two:
   id: 2
-  region_id: 1
+  region: national
   name: Australia Challenge 1
   short_desc: MyText
   long_desc: MyText
@@ -24,7 +24,7 @@ two:
 
 three:
   id: 3
-  region_id: 2
+  region: regional
   name: Queensland Challenge 1
   short_desc: MyText
   long_desc: MyText
@@ -36,7 +36,7 @@ three:
 
 four:
   id: 4
-  region_id: 3
+  region: international
   name: International Challenge 1
   short_desc: MyText
   long_desc: MyText

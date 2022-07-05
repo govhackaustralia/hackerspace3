@@ -7,7 +7,7 @@
 connection:
   id: 1
   name: Brisbane
-  region_id: 2
+  region: regional
   capacity: 1
   event_type: Connection
   registration_type: Open
@@ -17,7 +17,7 @@ connection:
 competition:
   id: 2
   name: Brisbane
-  region_id: 2
+  region: regional
   capacity: 1
   event_type: Competition
   registration_type: Open
@@ -27,7 +27,7 @@ competition:
 award:
   id: 3
   name: Brisbane
-  region_id: 2
+  region: regional
   capacity: 1
   event_type: Award
   registration_type: Open
@@ -37,7 +37,7 @@ award:
 other_competition:
   id: 4
   name: New Zealand
-  region_id: 4
+  region: other_national
   capacity: 5
   event_type: Competition
   registration_type: Open
@@ -47,7 +47,7 @@ other_competition:
 conference:
   id: 5
   name: Brisbane
-  region_id: 2
+  region: regional
   capacity: 1
   event_type: Conference
   registration_type: Open
