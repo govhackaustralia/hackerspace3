@@ -8,8 +8,7 @@ management_team:
   id: 1
   user: one
   holder: one
-  assignable_id: 1
-  assignable_type: Competition
+  assignable: one (Competition)
   title: GovHack Management Team
   competition_id: 1
 
@@ -17,8 +16,7 @@ region_director:
   id: 2
   user: one
   holder: one
-  assignable_id: 1
-  assignable_type: Region
+  assignable: national (Region)
   title: Region Director
   competition_id: 1
 
@@ -26,8 +24,7 @@ event_host:
   id: 3
   user: one
   holder: one
-  assignable_id: 1
-  assignable_type: Event
+  assignable: connection (Event)
   title: Event Host
   competition_id: 1
 
@@ -35,8 +32,7 @@ participant:
   id: 4
   user: one
   holder: one
-  assignable_id: 1
-  assignable_type: Competition
+  assignable: one (Competition)
   title: Participant
   competition_id: 1
 
@@ -44,8 +40,7 @@ sponsor_contact:
   id: 5
   user: one
   holder: one
-  assignable_id: 1
-  assignable_type: Sponsor
+  assignable: one (Sponsor)
   title: Sponsor Contact
   competition_id: 1
 
@@ -53,8 +48,7 @@ vip:
   id: 6
   user: two
   holder: two
-  assignable_id: 1
-  assignable_type: Competition
+  assignable: one (Competition)
   title: VIP
   competition_id: 1
 
@@ -62,8 +56,7 @@ judge:
   id: 7
   user: two
   holder: two
-  assignable_id: 1
-  assignable_type: Challenge
+  assignable: one (Challenge)
   title: Judge
   competition_id: 1
 
@@ -71,8 +64,7 @@ volunteer:
   id: 8
   user: one
   holder: one
-  assignable_id: 1
-  assignable_type: Competition
+  assignable: one (Competition)
   title: GovHack Volunteer
   competition_id: 1
 
@@ -80,8 +72,7 @@ team_member:
   id: 9
   user: two
   holder: two
-  assignable_id: 1
-  assignable_type: Team
+  assignable_type: one (Team)
   title: Team Member
   competition_id: 1
 
@@ -89,8 +80,7 @@ event_support:
   id: 10
   user: one
   holder: one
-  assignable_id: 1
-  assignable_type: Event
+  assignable: connection (Event)
   title: Event Support
   competition_id: 1
 
@@ -98,8 +88,7 @@ team_leader:
   id: 11
   user: one
   holder: one
-  assignable_id: 1
-  assignable_type: Team
+  assignable_type: one (Team)
   title: Team Leader
   competition_id: 1
 
@@ -107,8 +96,7 @@ invitee:
   id: 12
   user: three
   holder: three
-  assignable_id: 1
-  assignable_type: Team
+  assignable_type: one (Team)
   title: Invitee
   competition_id: 1
 
@@ -116,8 +104,7 @@ other_participant:
   id: 13
   user: three
   holder: three
-  assignable_id: 1
-  assignable_type: Competition
+  assignable: one (Competition)
   title: Participant
   competition_id: 1
 
@@ -125,8 +112,7 @@ region_support:
   id: 14
   user: one
   holder: one
-  assignable_id: 1
-  assignable_type: Region
+  assignable: national (Region)
   title: Region Support
   competition_id: 1
 
@@ -134,8 +120,7 @@ chief_judge:
   id: 15
   user: one
   holder: one
-  assignable_id: 1
-  assignable_type: Competition
+  assignable: one (Competition)
   title: Chief Judge
   competition_id: 1
 
@@ -143,8 +128,7 @@ badge_assignment:
   id: 16
   user: one
   holder: one
-  assignable_id: 1
-  assignable_type: Badge
+  assignable: one (Badge)
   title: Assignee
   competition_id: 1
 
@@ -152,7 +136,6 @@ to_unpublished_team:
   id: 17
   user: one
   holder: one
-  assignable_id: 3
-  assignable_type: Team
+  assignable: unpublished_team (Team)
   title: Team Member
   competition_id: 1
