@@ -8,20 +8,17 @@ one:
   id: 1
   sponsor: one
   sponsorship_type: one
-  sponsorable_type: 'Event'
-  sponsorable_id: 1
+  sponsorable: connection (Event)
 
 #
 two:
   id: 2
   sponsor: one
   sponsorship_type: one
-  sponsorable_type: 'Region'
-  sponsorable_id: 1
+  sponsorable: national (Region)
 
 three:
   id: 3
   sponsor: one
   sponsorship_type: one
-  sponsorable_type: 'Challenge'
-  sponsorable_id: 1
+  sponsorable_type: national (Challenge)
