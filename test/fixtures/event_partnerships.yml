@@ -6,5 +6,5 @@
 #
 one:
   id: 1
-  event_id: 1
+  event: connection
   sponsor: one

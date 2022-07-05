@@ -6,7 +6,7 @@
 #
 one:
   id: 1
-  event_id: 2
+  event: competition
   project_id: 1
   published: true
   youth_team: false
@@ -15,12 +15,12 @@ one:
 
 two:
   id: 2
-  event_id: 4
+  event: other_competition
   project_id: 1
   published: true
 
 unpublished_team:
   id: 3
-  event_id: 4
+  event: other_competition
   project_id: 3
   published: false

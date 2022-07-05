@@ -6,7 +6,7 @@
 #
 attending:
   id: 1
-  event_id: 1
+  event: connection
   assignment_id: 4
   holder: one
   time_notified: 2018-07-22 12:34:03
@@ -14,7 +14,7 @@ attending:
 
 wait_list:
   id: 2
-  event_id: 1
+  event: connection
   assignment_id: 6
   holder: two
   time_notified: 2018-07-22 12:34:03
@@ -22,7 +22,7 @@ wait_list:
 
 attending_two:
   id: 3
-  event_id: 2
+  event: competition
   assignment_id: 4
   holder: one
   time_notified: 2018-07-22 12:34:03
@@ -30,7 +30,7 @@ attending_two:
 
 non_attending:
   id: 4
-  event_id: 2
+  event: competition
   assignment_id: 6
   holder: two
   time_notified: 2018-07-22 12:34:03
@@ -38,7 +38,7 @@ non_attending:
 
 five:
   id: 5
-  event_id: 2
+  event: competition
   assignment_id: 13
   holder: three
   time_notified: 2018-07-22 12:34:03
@@ -46,7 +46,7 @@ five:
 
 attending_three:
   id: 6
-  event_id: 3
+  event: award
   assignment_id: 13
   holder: three
   time_notified: 2018-07-22 12:34:03
@@ -54,7 +54,7 @@ attending_three:
 
 invited:
   id: 7
-  event_id: 3
+  event: award
   assignment_id: 13
   holder: three
   time_notified: 2018-07-22 12:34:03
@@ -62,7 +62,7 @@ invited:
 
 conference_registration:
   id: 8
-  event_id: 5
+  event: conference
   assignment_id: 13
   holder: three
   time_notified: 2018-07-22 12:34:03
