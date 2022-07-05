@@ -15,7 +15,7 @@ one:
   video_url:
   homepage_url:
   identifier: open_data_team
-  user_id: 1
+  user: one
 
 two:
   id: 2
@@ -28,7 +28,7 @@ two:
   video_url:
   homepage_url:
   identifier: open_data_team
-  user_id: 1
+  user: one
 
 unpublished_project:
   id: 3
@@ -41,4 +41,4 @@ unpublished_project:
   video_url:
   homepage_url:
   identifier: unpublished_team
-  user_id: 1
+  user: one

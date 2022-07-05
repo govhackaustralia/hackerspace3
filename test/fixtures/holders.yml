@@ -2,21 +2,21 @@
 
 one:
   id: 1
-  user_id: 1
+  user: one
   profile_id: 1
   competition_id: 1
   aws_credits_requested: false
 
 two:
   id: 2
-  user_id: 2
+  user: two
   profile_id: 2
   competition_id: 1
   aws_credits_requested: true
 
 three:
   id: 3
-  user_id: 3
+  user: three
   profile_id: 3
   competition_id: 1
   aws_credits_requested:

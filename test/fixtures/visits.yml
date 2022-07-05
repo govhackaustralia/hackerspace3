@@ -4,14 +4,14 @@ resource:
   id: 1
   visitable_id: 1
   visitable_type: Resource
-  user_id: 1
+  user: one
   competition_id: 1
 
 data_set:
   id: 2
   visitable_id: 1
   visitable_type: DataSet
-  user_id: 1
+  user: one
   competition_id: 1
 
 sponsor:

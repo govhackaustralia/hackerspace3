@@ -6,7 +6,7 @@
 #
 management_team:
   id: 1
-  user_id: 1
+  user: one
   holder_id: 1
   assignable_id: 1
   assignable_type: Competition
@@ -15,7 +15,7 @@ management_team:
 
 region_director:
   id: 2
-  user_id: 1
+  user: one
   holder_id: 1
   assignable_id: 1
   assignable_type: Region
@@ -24,7 +24,7 @@ region_director:
 
 event_host:
   id: 3
-  user_id: 1
+  user: one
   holder_id: 1
   assignable_id: 1
   assignable_type: Event
@@ -33,7 +33,7 @@ event_host:
 
 participant:
   id: 4
-  user_id: 1
+  user: one
   holder_id: 1
   assignable_id: 1
   assignable_type: Competition
@@ -42,7 +42,7 @@ participant:
 
 sponsor_contact:
   id: 5
-  user_id: 1
+  user: one
   holder_id: 1
   assignable_id: 1
   assignable_type: Sponsor
@@ -51,7 +51,7 @@ sponsor_contact:
 
 vip:
   id: 6
-  user_id: 2
+  user: two
   holder_id: 2
   assignable_id: 1
   assignable_type: Competition
@@ -60,7 +60,7 @@ vip:
 
 judge:
   id: 7
-  user_id: 2
+  user: two
   holder_id: 2
   assignable_id: 1
   assignable_type: Challenge
@@ -69,7 +69,7 @@ judge:
 
 volunteer:
   id: 8
-  user_id: 1
+  user: one
   holder_id: 1
   assignable_id: 1
   assignable_type: Competition
@@ -78,7 +78,7 @@ volunteer:
 
 team_member:
   id: 9
-  user_id: 2
+  user: two
   holder_id: 2
   assignable_id: 1
   assignable_type: Team
@@ -87,7 +87,7 @@ team_member:
 
 event_support:
   id: 10
-  user_id: 1
+  user: one
   holder_id: 1
   assignable_id: 1
   assignable_type: Event
@@ -96,7 +96,7 @@ event_support:
 
 team_leader:
   id: 11
-  user_id: 1
+  user: one
   holder_id: 1
   assignable_id: 1
   assignable_type: Team
@@ -105,7 +105,7 @@ team_leader:
 
 invitee:
   id: 12
-  user_id: 3
+  user: three
   holder_id: 3
   assignable_id: 1
   assignable_type: Team
@@ -114,7 +114,7 @@ invitee:
 
 other_participant:
   id: 13
-  user_id: 3
+  user: three
   holder_id: 3
   assignable_id: 1
   assignable_type: Competition
@@ -123,7 +123,7 @@ other_participant:
 
 region_support:
   id: 14
-  user_id: 1
+  user: one
   holder_id: 1
   assignable_id: 1
   assignable_type: Region
@@ -132,7 +132,7 @@ region_support:
 
 chief_judge:
   id: 15
-  user_id: 1
+  user: one
   holder_id: 1
   assignable_id: 1
   assignable_type: Competition
@@ -141,7 +141,7 @@ chief_judge:
 
 badge_assignment:
   id: 16
-  user_id: 1
+  user: one
   holder_id: 1
   assignable_id: 1
   assignable_type: Badge
@@ -150,7 +150,7 @@ badge_assignment:
 
 to_unpublished_team:
   id: 17
-  user_id: 1
+  user: one
   holder_id: 1
   assignable_id: 3
   assignable_type: Team

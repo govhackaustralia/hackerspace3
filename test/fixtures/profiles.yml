@@ -6,12 +6,12 @@
 #
 one:
   id: 1
-  user_id: 1
+  user: one
   identifier: user_number_one
   team_status: Looking for a Team
   slack_user_id: user_one_1
 
 two:
   id: 2
-  user_id: 2
+  user: two
   identifier: user_number_two
