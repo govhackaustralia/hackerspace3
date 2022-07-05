@@ -6,8 +6,8 @@
 #
 one:
  id: 1
- profile_id: 1
+ profile: one
 
 two:
  id: 2
- profile_id: 2
+ profile: two

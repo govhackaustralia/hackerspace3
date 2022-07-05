@@ -3,14 +3,14 @@
 one:
   id: 1
   user: one
-  profile_id: 1
+  profile: one
   competition: one
   aws_credits_requested: false
 
 two:
   id: 2
   user: two
-  profile_id: 2
+  profile: two
   competition: one
   aws_credits_requested: true
 
