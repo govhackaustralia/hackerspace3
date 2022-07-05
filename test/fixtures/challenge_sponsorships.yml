@@ -3,9 +3,9 @@
 one:
   id: 1
   challenge: one
-  sponsor_id: 1
+  sponsor: one
 
 two:
   id: 2
   challenge: one
-  sponsor_id: 2
+  sponsor: two
