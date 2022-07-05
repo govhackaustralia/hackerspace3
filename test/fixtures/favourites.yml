@@ -2,6 +2,6 @@
 
 one:
   id: 1
-  assignment_id: 4
+  assignment: participant
   holder: one
   team: one

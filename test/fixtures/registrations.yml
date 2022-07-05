@@ -7,7 +7,7 @@
 attending:
   id: 1
   event: connection
-  assignment_id: 4
+  assignment: participant
   holder: one
   time_notified: 2018-07-22 12:34:03
   status: Attending
@@ -15,7 +15,7 @@ attending:
 wait_list:
   id: 2
   event: connection
-  assignment_id: 6
+  assignment: vip
   holder: two
   time_notified: 2018-07-22 12:34:03
   status: Waitlist
@@ -23,7 +23,7 @@ wait_list:
 attending_two:
   id: 3
   event: competition
-  assignment_id: 4
+  assignment: participant
   holder: one
   time_notified: 2018-07-22 12:34:03
   status: Attending
@@ -31,7 +31,7 @@ attending_two:
 non_attending:
   id: 4
   event: competition
-  assignment_id: 6
+  assignment: vip
   holder: two
   time_notified: 2018-07-22 12:34:03
   status: Non Attending
@@ -39,7 +39,7 @@ non_attending:
 five:
   id: 5
   event: competition
-  assignment_id: 13
+  assignment: management_team3
   holder: three
   time_notified: 2018-07-22 12:34:03
   status: Attending
@@ -47,7 +47,7 @@ five:
 attending_three:
   id: 6
   event: award
-  assignment_id: 13
+  assignment: management_team3
   holder: three
   time_notified: 2018-07-22 12:34:03
   status: Attending
@@ -55,7 +55,7 @@ attending_three:
 invited:
   id: 7
   event: award
-  assignment_id: 13
+  assignment: management_team3
   holder: three
   time_notified: 2018-07-22 12:34:03
   status: Invited
@@ -63,7 +63,7 @@ invited:
 conference_registration:
   id: 8
   event: conference
-  assignment_id: 13
+  assignment: management_team3
   holder: three
   time_notified: 2018-07-22 12:34:03
   status: Invited
