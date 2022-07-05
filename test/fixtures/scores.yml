@@ -3,29 +3,29 @@
 one:
   id: 1
   header: one
-  criterion_id: 1
+  criterion: one
   entry: 1
 
 two:
   id: 2
   header: one
-  criterion_id: 2
+  criterion: two
   entry: 1
 
 three:
   id: 3
   header: two
-  criterion_id: 1
+  criterion: one
   entry: 1
 
 four:
   id: 4
   header: three
-  criterion_id: 2
+  criterion: two
   entry: 1
 
 five:
   id: 5
   header: four
-  criterion_id: 1
+  criterion: one
   entry: 1
