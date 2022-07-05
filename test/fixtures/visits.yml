@@ -2,21 +2,18 @@
 
 resource:
   id: 1
-  visitable_id: 1
-  visitable_type: Resource
+  visitable: one (Resource)
   user: one
   competition: one
 
 data_set:
   id: 2
-  visitable_id: 1
-  visitable_type: DataSet
+  visitable: one (DataSet)
   user: one
   competition: one
 
 sponsor:
   id: 3
-  visitable_id: 1
-  visitable_type: Sponsor
+  visitable: one (Sponsor)
   user_id:
   competition: one
