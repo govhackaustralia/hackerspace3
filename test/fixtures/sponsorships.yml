@@ -7,7 +7,7 @@
 one:
   id: 1
   sponsor: one
-  sponsorship_type_id: 1
+  sponsorship_type: one
   sponsorable_type: 'Event'
   sponsorable_id: 1
 
@@ -15,13 +15,13 @@ one:
 two:
   id: 2
   sponsor: one
-  sponsorship_type_id: 1
+  sponsorship_type: one
   sponsorable_type: 'Region'
   sponsorable_id: 1
 
 three:
   id: 3
   sponsor: one
-  sponsorship_type_id: 1
+  sponsorship_type: one
   sponsorable_type: 'Challenge'
   sponsorable_id: 1
