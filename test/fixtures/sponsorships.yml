@@ -5,20 +5,17 @@
 # below each fixture, per the syntax in the comments below
 #
 one:
-  id: 1
   sponsor: one
   sponsorship_type: one
   sponsorable: connection (Event)
 
 #
 two:
-  id: 2
   sponsor: one
   sponsorship_type: one
   sponsorable: national (Region)
 
 three:
-  id: 3
   sponsor: one
   sponsorship_type: one
   sponsorable_type: national (Challenge)

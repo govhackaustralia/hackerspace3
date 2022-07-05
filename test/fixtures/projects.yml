@@ -5,7 +5,6 @@
 # below each fixture, per the syntax in the comments below
 #
 one:
-  id: 1
   team: one
   team_name: Open Data Team
   project_name: xxx
@@ -18,7 +17,6 @@ one:
   user: one
 
 two:
-  id: 2
   team: one
   team_name: Open Data Team
   project_name: xxx
@@ -31,7 +29,6 @@ two:
   user: one
 
 unpublished_project:
-  id: 3
   team: unpublished_team
   team_name: Unpublished Team
   project_name: zzz

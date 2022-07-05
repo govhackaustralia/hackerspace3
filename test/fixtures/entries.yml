@@ -1,7 +1,6 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  id: 1
   team: one
   challenge: one
   checkpoint: one
@@ -9,7 +8,6 @@ one:
   eligible: false
 
 two:
-  id: 2
   team: one
   challenge: two
   checkpoint: one
@@ -17,7 +15,6 @@ two:
   eligible: false
 
 three:
-  id: 3
   team: one
   challenge: three
   checkpoint: one

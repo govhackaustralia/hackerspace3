@@ -5,9 +5,7 @@
 # below each fixture, per the syntax in the comments below
 #
 one:
- id: 1
  profile: one
 
 two:
- id: 2
  profile: two

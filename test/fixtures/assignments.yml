@@ -5,7 +5,6 @@
 # below each fixture, per the syntax in the comments below
 #
 management_team:
-  id: 1
   user: one
   holder: one
   assignable: one (Competition)
@@ -13,7 +12,6 @@ management_team:
   competition: one
 
 region_director:
-  id: 2
   user: one
   holder: one
   assignable: national (Region)
@@ -21,7 +19,6 @@ region_director:
   competition: one
 
 event_host:
-  id: 3
   user: one
   holder: one
   assignable: connection (Event)
@@ -29,7 +26,6 @@ event_host:
   competition: one
 
 participant:
-  id: 4
   user: one
   holder: one
   assignable: one (Competition)
@@ -37,7 +33,6 @@ participant:
   competition: one
 
 sponsor_contact:
-  id: 5
   user: one
   holder: one
   assignable: one (Sponsor)
@@ -45,7 +40,6 @@ sponsor_contact:
   competition: one
 
 vip:
-  id: 6
   user: two
   holder: two
   assignable: one (Competition)
@@ -53,7 +47,6 @@ vip:
   competition: one
 
 judge:
-  id: 7
   user: two
   holder: two
   assignable: one (Challenge)
@@ -61,7 +54,6 @@ judge:
   competition: one
 
 volunteer:
-  id: 8
   user: one
   holder: one
   assignable: one (Competition)
@@ -69,7 +61,6 @@ volunteer:
   competition: one
 
 team_member:
-  id: 9
   user: two
   holder: two
   assignable_type: one (Team)
@@ -77,7 +68,6 @@ team_member:
   competition: one
 
 event_support:
-  id: 10
   user: one
   holder: one
   assignable: connection (Event)
@@ -85,7 +75,6 @@ event_support:
   competition: one
 
 team_leader:
-  id: 11
   user: one
   holder: one
   assignable_type: one (Team)
@@ -93,7 +82,6 @@ team_leader:
   competition: one
 
 invitee:
-  id: 12
   user: three
   holder: three
   assignable_type: one (Team)
@@ -101,7 +89,6 @@ invitee:
   competition: one
 
 other_participant:
-  id: 13
   user: three
   holder: three
   assignable: one (Competition)
@@ -109,7 +96,6 @@ other_participant:
   competition: one
 
 region_support:
-  id: 14
   user: one
   holder: one
   assignable: national (Region)
@@ -117,7 +103,6 @@ region_support:
   competition: one
 
 chief_judge:
-  id: 15
   user: one
   holder: one
   assignable: one (Competition)
@@ -125,7 +110,6 @@ chief_judge:
   competition: one
 
 badge_assignment:
-  id: 16
   user: one
   holder: one
   assignable: one (Badge)
@@ -133,7 +117,6 @@ badge_assignment:
   competition: one
 
 to_unpublished_team:
-  id: 17
   user: one
   holder: one
   assignable: unpublished_team (Team)

@@ -5,7 +5,6 @@
 # below each fixture, per the syntax in the comments below
 #
 attending:
-  id: 1
   event: connection
   assignment: participant
   holder: one
@@ -13,7 +12,6 @@ attending:
   status: Attending
 
 wait_list:
-  id: 2
   event: connection
   assignment: vip
   holder: two
@@ -21,7 +19,6 @@ wait_list:
   status: Waitlist
 
 attending_two:
-  id: 3
   event: competition
   assignment: participant
   holder: one
@@ -29,7 +26,6 @@ attending_two:
   status: Attending
 
 non_attending:
-  id: 4
   event: competition
   assignment: vip
   holder: two
@@ -37,7 +33,6 @@ non_attending:
   status: Non Attending
 
 five:
-  id: 5
   event: competition
   assignment: management_team3
   holder: three
@@ -45,7 +40,6 @@ five:
   status: Attending
 
 attending_three:
-  id: 6
   event: award
   assignment: management_team3
   holder: three
@@ -53,7 +47,6 @@ attending_three:
   status: Attending
 
 invited:
-  id: 7
   event: award
   assignment: management_team3
   holder: three
@@ -61,7 +54,6 @@ invited:
   status: Invited
 
 conference_registration:
-  id: 8
   event: conference
   assignment: management_team3
   holder: three

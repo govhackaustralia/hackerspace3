@@ -5,6 +5,5 @@
 # below each fixture, per the syntax in the comments below
 #
 one:
-  id: 1
   event: connection
   sponsor: one

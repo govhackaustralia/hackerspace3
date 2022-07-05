@@ -1,7 +1,6 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 national:
-  id: 1
   name: Australia
   parent: international
   time_zone: ''
@@ -10,7 +9,6 @@ national:
   identifier: australia
 
 regional:
-  id: 2
   name: Queensland
   parent: national
   time_zone: Brisbane
@@ -19,7 +17,6 @@ regional:
   identifier: queensland
 
 international:
-  id: 3
   name: International
   parent_id:
   time_zone:
@@ -28,7 +25,6 @@ international:
   identifier: international
 
 other_national:
-  id: 4
   name: New Zealand
   parent: international
   time_zone: Wellington

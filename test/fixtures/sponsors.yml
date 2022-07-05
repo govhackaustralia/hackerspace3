@@ -5,7 +5,6 @@
 # below each fixture, per the syntax in the comments below
 #
 one:
-  id: 1
   competition: one
   name: Vandelay Industries
   description: xzzx
@@ -13,6 +12,5 @@ one:
 
 #
 two:
-  id: 2
   competition: one
   name: Mandalay Industries

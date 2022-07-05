@@ -1,7 +1,6 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  id: 1
   team: one
   name: MyString
   description: MyText
@@ -9,7 +8,6 @@ one:
   url: MyString
 
 two:
-  id: 2
   team: one
   name: MyString
   description: MyText

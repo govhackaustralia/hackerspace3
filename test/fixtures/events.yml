@@ -5,7 +5,6 @@
 # below each fixture, per the syntax in the comments below
 #
 connection:
-  id: 1
   name: Brisbane
   region: regional
   capacity: 1
@@ -15,7 +14,6 @@ connection:
   published: true
 
 competition:
-  id: 2
   name: Brisbane
   region: regional
   capacity: 1
@@ -25,7 +23,6 @@ competition:
   published: true
 
 award:
-  id: 3
   name: Brisbane
   region: regional
   capacity: 1
@@ -35,7 +32,6 @@ award:
   published: true
 
 other_competition:
-  id: 4
   name: New Zealand
   region: other_national
   capacity: 5
@@ -45,7 +41,6 @@ other_competition:
   published: true
 
 conference:
-  id: 5
   name: Brisbane
   region: regional
   capacity: 1

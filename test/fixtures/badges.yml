@@ -1,21 +1,18 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  id: 1
   competition: one
   name: MyString
   identifier: MyString
   capacity: 5
 
 two:
-  id: 2
   competition: one
   name: MyString2
   identifier: MyString2
   capacity: 0
 
 hunt_badge:
-  id: 3
   competition: one
   name: MyString3
   identifier: MyString3

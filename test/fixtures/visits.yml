@@ -1,19 +1,16 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 resource:
-  id: 1
   visitable: one (Resource)
   user: one
   competition: one
 
 data_set:
-  id: 2
   visitable: one (DataSet)
   user: one
   competition: one
 
 sponsor:
-  id: 3
   visitable: one (Sponsor)
   user_id:
   competition: one

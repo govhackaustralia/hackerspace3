@@ -5,7 +5,6 @@
 # below each fixture, per the syntax in the comments below
 #
 one:
-  id: 1
   year: <%= Time.current.year %>
   team_form_start: <%= Time.current - 1.day %>
   team_form_end: <%= Time.current + 1.day %>
@@ -20,7 +19,6 @@ one:
   hunt_published: true
 
 two:
-  id: 2
   year: <%= Time.current.year + 1 %>
   team_form_start: Thu, 06 Dec 2018 19:36:56 AEDT +11:00
   team_form_end: Sun, 09 Dec 2018 19:36:56 AEDT +11:00
