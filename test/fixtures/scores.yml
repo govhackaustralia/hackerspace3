@@ -2,30 +2,30 @@
 
 one:
   id: 1
-  header_id: 1
+  header: one
   criterion_id: 1
   entry: 1
 
 two:
   id: 2
-  header_id: 1
+  header: one
   criterion_id: 2
   entry: 1
 
 three:
   id: 3
-  header_id: 2
+  header: two
   criterion_id: 1
   entry: 1
 
 four:
   id: 4
-  header_id: 3
+  header: three
   criterion_id: 2
   entry: 1
 
 five:
   id: 5
-  header_id: 4
+  header: four
   criterion_id: 1
   entry: 1
