@@ -5,18 +5,18 @@ resource:
   visitable_id: 1
   visitable_type: Resource
   user: one
-  competition_id: 1
+  competition: one
 
 data_set:
   id: 2
   visitable_id: 1
   visitable_type: DataSet
   user: one
-  competition_id: 1
+  competition: one
 
 sponsor:
   id: 3
   visitable_id: 1
   visitable_type: Sponsor
   user_id:
-  competition_id: 1
+  competition: one

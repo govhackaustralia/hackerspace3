@@ -5,7 +5,7 @@ national:
   name: Australia
   parent_id: 3
   time_zone: ''
-  competition_id: 1
+  competition: one
   category: National
   identifier: australia
 
@@ -14,7 +14,7 @@ regional:
   name: Queensland
   parent_id: 1
   time_zone: Brisbane
-  competition_id: 1
+  competition: one
   category: Regional
   identifier: queensland
 
@@ -23,7 +23,7 @@ international:
   name: International
   parent_id:
   time_zone:
-  competition_id: 1
+  competition: one
   category: International
   identifier: international
 
@@ -32,6 +32,6 @@ other_national:
   name: New Zealand
   parent_id: 3
   time_zone: Wellington
-  competition_id: 1
+  competition: one
   category: National
   identifier: new_zealand

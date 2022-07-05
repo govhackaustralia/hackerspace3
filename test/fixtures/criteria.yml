@@ -2,14 +2,14 @@
 
 one:
   id: 1
-  competition_id: 1
+  competition: one
   name: MyName
   description: MyText
   category: Project
 
 two:
   id: 2
-  competition_id: 1
+  competition: one
   name: MyName
   description: MyText
   category: Challenge

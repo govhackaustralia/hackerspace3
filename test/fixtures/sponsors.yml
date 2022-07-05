@@ -6,7 +6,7 @@
 #
 one:
   id: 1
-  competition_id: 1
+  competition: one
   name: Vandelay Industries
   description: xzzx
   url: www.website.com
@@ -14,5 +14,5 @@ one:
 #
 two:
   id: 2
-  competition_id: 1
+  competition: one
   name: Mandalay Industries

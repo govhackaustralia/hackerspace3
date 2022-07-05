@@ -10,7 +10,7 @@ management_team:
   holder: one
   assignable: one (Competition)
   title: GovHack Management Team
-  competition_id: 1
+  competition: one
 
 region_director:
   id: 2
@@ -18,7 +18,7 @@ region_director:
   holder: one
   assignable: national (Region)
   title: Region Director
-  competition_id: 1
+  competition: one
 
 event_host:
   id: 3
@@ -26,7 +26,7 @@ event_host:
   holder: one
   assignable: connection (Event)
   title: Event Host
-  competition_id: 1
+  competition: one
 
 participant:
   id: 4
@@ -34,7 +34,7 @@ participant:
   holder: one
   assignable: one (Competition)
   title: Participant
-  competition_id: 1
+  competition: one
 
 sponsor_contact:
   id: 5
@@ -42,7 +42,7 @@ sponsor_contact:
   holder: one
   assignable: one (Sponsor)
   title: Sponsor Contact
-  competition_id: 1
+  competition: one
 
 vip:
   id: 6
@@ -50,7 +50,7 @@ vip:
   holder: two
   assignable: one (Competition)
   title: VIP
-  competition_id: 1
+  competition: one
 
 judge:
   id: 7
@@ -58,7 +58,7 @@ judge:
   holder: two
   assignable: one (Challenge)
   title: Judge
-  competition_id: 1
+  competition: one
 
 volunteer:
   id: 8
@@ -66,7 +66,7 @@ volunteer:
   holder: one
   assignable: one (Competition)
   title: GovHack Volunteer
-  competition_id: 1
+  competition: one
 
 team_member:
   id: 9
@@ -74,7 +74,7 @@ team_member:
   holder: two
   assignable_type: one (Team)
   title: Team Member
-  competition_id: 1
+  competition: one
 
 event_support:
   id: 10
@@ -82,7 +82,7 @@ event_support:
   holder: one
   assignable: connection (Event)
   title: Event Support
-  competition_id: 1
+  competition: one
 
 team_leader:
   id: 11
@@ -90,7 +90,7 @@ team_leader:
   holder: one
   assignable_type: one (Team)
   title: Team Leader
-  competition_id: 1
+  competition: one
 
 invitee:
   id: 12
@@ -98,7 +98,7 @@ invitee:
   holder: three
   assignable_type: one (Team)
   title: Invitee
-  competition_id: 1
+  competition: one
 
 other_participant:
   id: 13
@@ -106,7 +106,7 @@ other_participant:
   holder: three
   assignable: one (Competition)
   title: Participant
-  competition_id: 1
+  competition: one
 
 region_support:
   id: 14
@@ -114,7 +114,7 @@ region_support:
   holder: one
   assignable: national (Region)
   title: Region Support
-  competition_id: 1
+  competition: one
 
 chief_judge:
   id: 15
@@ -122,7 +122,7 @@ chief_judge:
   holder: one
   assignable: one (Competition)
   title: Chief Judge
-  competition_id: 1
+  competition: one
 
 badge_assignment:
   id: 16
@@ -130,7 +130,7 @@ badge_assignment:
   holder: one
   assignable: one (Badge)
   title: Assignee
-  competition_id: 1
+  competition: one
 
 to_unpublished_team:
   id: 17
@@ -138,4 +138,4 @@ to_unpublished_team:
   holder: one
   assignable: unpublished_team (Team)
   title: Team Member
-  competition_id: 1
+  competition: one

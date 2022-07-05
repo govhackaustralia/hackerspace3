@@ -2,12 +2,12 @@
 
 one:
   id: 1
-  competition_id: 1
+  competition: one
   question: MyString
   answer: MyString
 
 two:
   id: 2
-  competition_id: 1
+  competition: one
   question: MyString
   answer: MyString

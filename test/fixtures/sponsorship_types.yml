@@ -6,12 +6,12 @@
 #
 one:
   id: 1
-  competition_id: 1
+  competition: one
   name: Gold Sponsor
   position: 1
 #
 two:
   id: 2
-  competition_id: 1
+  competition: one
   name: Silver Sponsor
   position: 4
