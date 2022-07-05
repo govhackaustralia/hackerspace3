@@ -7,7 +7,7 @@
 one:
   id: 1
   event: competition
-  project_id: 1
+  project: one
   published: true
   youth_team: false
   slack_channel_id: team_one_1
@@ -16,11 +16,11 @@ one:
 two:
   id: 2
   event: other_competition
-  project_id: 1
+  project: one
   published: true
 
 unpublished_team:
   id: 3
   event: other_competition
-  project_id: 3
+  project: unpublished_project
   published: false
