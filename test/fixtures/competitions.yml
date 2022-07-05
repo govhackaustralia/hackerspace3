@@ -16,7 +16,7 @@ one:
   challenge_judging_start: 2018-12-13 08:36:56
   challenge_judging_end: 2019-01-03 08:36:56
   current: true
-  hunt_badge_id: 3
+  hunt_badge: hunt_badge
   hunt_published: true
 
 two:
