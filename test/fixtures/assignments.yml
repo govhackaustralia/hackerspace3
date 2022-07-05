@@ -63,7 +63,7 @@ volunteer:
 team_member:
   user: two
   holder: two
-  assignable_type: one (Team)
+  assignable: one (Team)
   title: Team Member
   competition: one
 
@@ -77,14 +77,14 @@ event_support:
 team_leader:
   user: one
   holder: one
-  assignable_type: one (Team)
+  assignable: one (Team)
   title: Team Leader
   competition: one
 
 invitee:
   user: three
   holder: three
-  assignable_type: one (Team)
+  assignable: one (Team)
   title: Invitee
   competition: one
 

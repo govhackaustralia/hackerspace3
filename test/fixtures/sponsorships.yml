@@ -18,4 +18,4 @@ two:
 three:
   sponsor: one
   sponsorship_type: one
-  sponsorable_type: national (Challenge)
+  sponsorable: national (Challenge)
