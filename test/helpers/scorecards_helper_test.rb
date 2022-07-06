@@ -4,7 +4,7 @@ class ScorecardsHelperTest < ActionView::TestCase
   # ENHANCEMENT: Move instance variables out of helpers
   # ENHANCEMENT: `headers` seems to be reserved, rename table
   setup do
-    @header = Header.first
+    @header = Header.find_by assignment: assignments(:judge)
     @judge = users(:one)
     @peoples_assignment = assignments(:management_team)
     @competition = competitions(:one)
