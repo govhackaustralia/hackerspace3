@@ -17,7 +17,7 @@ class Admin::RegionLimitsControllerTest < ActionDispatch::IntegrationTest
     assert_difference('RegionLimit.count') do
       post admin_checkpoint_region_limits_url(@checkpoint), params: {
         region_limit: {
-          region_id: 2,
+          region_id: regions(:regional).id,
           max_national_challenges: 2,
           max_regional_challenges: 2
         }
