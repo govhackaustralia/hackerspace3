@@ -12,7 +12,7 @@ class ChallengeEntryCounterTest < ActiveSupport::TestCase
   end
 
   test 'count with challenge_ids' do
-    counter = PublishedEntryCounter.new(@competition, challenge_ids: [1])
+    counter = PublishedEntryCounter.new(@competition, challenge_ids: [challenges(:one).id])
     assert counter.count(@challenge).instance_of?(Integer)
   end
 end
