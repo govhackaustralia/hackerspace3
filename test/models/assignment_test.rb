@@ -6,7 +6,7 @@ class AssignmentTest < ActiveSupport::TestCase
     @competition = competitions(:one)
     @region_assignment = assignments(:region_director)
     @region = regions(:national)
-    @holder = Holder.first
+    @holder = holders(:one)
     @user = users(:one)
     @judge = assignments(:judge)
     @participant = assignments(:participant)
