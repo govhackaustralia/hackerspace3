@@ -3,7 +3,7 @@ require 'test_helper'
 class RegistrationTest < ActiveSupport::TestCase
   setup do
     @registration = registrations(:attending)
-    @holder = Holder.first
+    @holder = holders(:one)
     @assignment = assignments(:participant)
     @competition = competitions(:one)
     @user = users(:one)
