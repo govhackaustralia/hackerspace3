@@ -34,28 +34,28 @@ non_attending:
 
 five:
   event: competition
-  assignment: management_team3
+  assignment: other_participant
   holder: three
   time_notified: 2018-07-22 12:34:03
   status: Attending
 
 attending_three:
   event: award
-  assignment: management_team3
+  assignment: other_participant
   holder: three
   time_notified: 2018-07-22 12:34:03
   status: Attending
 
 invited:
   event: award
-  assignment: management_team3
+  assignment: other_participant
   holder: three
   time_notified: 2018-07-22 12:34:03
   status: Invited
 
 conference_registration:
   event: conference
-  assignment: management_team3
+  assignment: other_participant
   holder: three
   time_notified: 2018-07-22 12:34:03
   status: Invited
