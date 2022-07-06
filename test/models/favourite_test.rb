@@ -4,7 +4,7 @@ class FavouriteTest < ActiveSupport::TestCase
   setup do
     @favourite = favourites(:one)
     @team = teams(:one)
-    @holder = Holder.first
+    @holder = holders(:one)
     @assignment = assignments(:participant)
     @project = projects(:one)
   end
