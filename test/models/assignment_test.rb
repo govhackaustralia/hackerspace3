@@ -82,7 +82,7 @@ class AssignmentTest < ActiveSupport::TestCase
     assert_not assignment.persisted?
     # Valid Title
     @user.assignments.destroy_all
-    assignment = @competition.assignments.create user: @user, title: PARTICIPANT, holder: @holder
+    assignment = @competition.assignments.create user: @user, title: PARTICIPANT
     assert assignment.persisted?
   end
 
