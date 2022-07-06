@@ -14,6 +14,5 @@ two:
 
 three:
   user: three
-  profile_id: 3
   competition: one
   aws_credits_requested:
