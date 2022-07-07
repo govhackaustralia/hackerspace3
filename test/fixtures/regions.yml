@@ -1,37 +1,33 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 national:
-  id: 1
   name: Australia
-  parent_id: 3
+  parent: international
   time_zone: ''
-  competition_id: 1
+  competition: one
   category: National
   identifier: australia
 
 regional:
-  id: 2
   name: Queensland
-  parent_id: 1
+  parent: national
   time_zone: Brisbane
-  competition_id: 1
+  competition: one
   category: Regional
   identifier: queensland
 
 international:
-  id: 3
   name: International
   parent_id:
   time_zone:
-  competition_id: 1
+  competition: one
   category: International
   identifier: international
 
 other_national:
-  id: 4
   name: New Zealand
-  parent_id: 3
+  parent: international
   time_zone: Wellington
-  competition_id: 1
+  competition: one
   category: National
   identifier: new_zealand

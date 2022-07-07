@@ -1,26 +1,23 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  id: 1
-  team_id: 1
-  challenge_id: 1
-  checkpoint_id: 1
+  team: one
+  challenge: one
+  checkpoint: one
   justification: MyText
   eligible: false
 
 two:
-  id: 2
-  team_id: 1
-  challenge_id: 2
-  checkpoint_id: 1
+  team: one
+  challenge: two
+  checkpoint: one
   justification: MyText
   eligible: false
 
 three:
-  id: 3
-  team_id: 1
-  challenge_id: 3
-  checkpoint_id: 1
+  team: one
+  challenge: three
+  checkpoint: one
   justification: MyText
   eligible: true
   award: Winner

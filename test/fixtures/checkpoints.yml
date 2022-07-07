@@ -1,16 +1,14 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  id: 1
-  competition_id: 1
+  competition: one
   name: Checkpoint One
   end_time: <%= Time.current + 2.day %>
   max_regional_challenges: 2
   max_national_challenges: 2
 
 two:
-  id: 2
-  competition_id: 1
+  competition: one
   name: Checkpoint Two
   end_time: <%= Time.current + 1.day %>
   max_regional_challenges: 2

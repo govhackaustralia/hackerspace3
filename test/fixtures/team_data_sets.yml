@@ -1,16 +1,14 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  id: 1
-  team_id: 1
+  team: one
   name: MyString
   description: MyText
   description_of_use: MyText
   url: MyString
 
 two:
-  id: 2
-  team_id: 1
+  team: one
   name: MyString
   description: MyText
   description_of_use: MyText

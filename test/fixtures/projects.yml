@@ -5,8 +5,7 @@
 # below each fixture, per the syntax in the comments below
 #
 one:
-  id: 1
-  team_id: 1
+  team: one
   team_name: Open Data Team
   project_name: xxx
   description: An awesome team full of people who work well together.
@@ -15,11 +14,10 @@ one:
   video_url:
   homepage_url:
   identifier: open_data_team
-  user_id: 1
+  user: one
 
 two:
-  id: 2
-  team_id: 1
+  team: one
   team_name: Open Data Team
   project_name: xxx
   description: An awesome team full of people who work well together. version 2
@@ -28,11 +26,10 @@ two:
   video_url:
   homepage_url:
   identifier: open_data_team
-  user_id: 1
+  user: one
 
 unpublished_project:
-  id: 3
-  team_id: 3
+  team: unpublished_team
   team_name: Unpublished Team
   project_name: zzz
   description: An awesome team full of people who work well together. version 2
@@ -41,4 +38,4 @@ unpublished_project:
   video_url:
   homepage_url:
   identifier: unpublished_team
-  user_id: 1
+  user: one

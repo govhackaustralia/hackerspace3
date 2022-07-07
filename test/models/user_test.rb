@@ -4,7 +4,7 @@ class UserTest < ActiveSupport::TestCase
   setup do
     @user = users(:one)
     @profile = profiles(:one)
-    @holder = Holder.first
+    @holder = holders(:one)
     @assignment = assignments(:management_team)
     @team = teams(:one)
     @header= headers(:two)
@@ -144,7 +144,7 @@ class UserTest < ActiveSupport::TestCase
 
   test 'peoples_assignment' do
     assert @user.peoples_assignment(@competition).present?
-    assert_not User.find(3).peoples_assignment(@competition).present?
+    assert_not users(:three).peoples_assignment(@competition).present?
   end
 
   test 'judge_assignment' do
@@ -158,7 +158,7 @@ class UserTest < ActiveSupport::TestCase
 
   test 'site_admin?' do
     assert_not @user.site_admin? @competition
-    @user.assignments.create assignable: @competition, title: ADMIN, holder: @holder
+    @user.assignments.create assignable: @competition, title: ADMIN
     assert @user.site_admin? @competition
   end
 

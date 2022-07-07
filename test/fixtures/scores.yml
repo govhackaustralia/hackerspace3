@@ -1,31 +1,26 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  id: 1
-  header_id: 1
-  criterion_id: 1
+  header: one
+  criterion: one
   entry: 1
 
 two:
-  id: 2
-  header_id: 1
-  criterion_id: 2
+  header: one
+  criterion: two
   entry: 1
 
 three:
-  id: 3
-  header_id: 2
-  criterion_id: 1
+  header: two
+  criterion: one
   entry: 1
 
 four:
-  id: 4
-  header_id: 3
-  criterion_id: 2
+  header: three
+  criterion: two
   entry: 1
 
 five:
-  id: 5
-  header_id: 4
-  criterion_id: 1
+  header: four
+  criterion: one
   entry: 1

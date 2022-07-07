@@ -23,14 +23,23 @@ class Admin::Regions::SponsorshipsControllerTest < ActionDispatch::IntegrationTe
 
   test 'should post create success' do
     assert_difference 'Sponsorship.count' do
-      post admin_region_sponsorships_url @region, params: { sponsorship: { sponsorship_type_id: 1, sponsor_id: 1 } }
+      post admin_region_sponsorships_url @region, params: {
+        sponsorship: {
+          sponsorship_type_id: sponsorship_types(:one).id,
+          sponsor_id: sponsors(:one).id
+        }
+      }
     end
     assert_redirected_to admin_region_sponsorships_url @region
   end
 
   test 'should post create fail' do
     assert_no_difference 'Sponsorship.count' do
-      post admin_region_sponsorships_url @region, params: { sponsorship: { sponsorship_type_id: 1 } }
+      post admin_region_sponsorships_url @region, params: {
+        sponsorship: {
+          sponsorship_type_id: sponsorship_types(:one).id
+        }
+      }
     end
     assert_response :success
   end

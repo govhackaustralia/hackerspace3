@@ -1,27 +1,19 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  id: 1
-  assignment_id: 7
-  scoreable_type: Entry
-  scoreable_id: 1
+  assignment: judge
+  scoreable: one (Entry)
   included: true
 
 two:
-  id: 2
-  assignment_id: 4
-  scoreable_type: Team
-  scoreable_id: 1
+  assignment: participant
+  scoreable: one (Team)
   included: false
 
 three:
-  id: 3
-  assignment_id: 8
-  scoreable_type: Team
-  scoreable_id: 1
+  assignment: volunteer
+  scoreable: one (Team)
 
 four:
-  id: 4
-  assignment_id: 6
-  scoreable_type: Team
-  scoreable_id: 1
+  assignment: vip
+  scoreable: one (Team)

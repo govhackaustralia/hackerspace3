@@ -1,15 +1,13 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  id: 1
-  region_id: 1
+  region: national
   name: MyString
   url: MyString
   description: MyText
 
 two:
-  id: 2
-  region_id: 1
+  region: national
   name: MyString
   url: MyString
   description: MyText

@@ -5,154 +5,120 @@
 # below each fixture, per the syntax in the comments below
 #
 management_team:
-  id: 1
-  user_id: 1
-  holder_id: 1
-  assignable_id: 1
-  assignable_type: Competition
+  user: one
+  holder: one
+  assignable: one (Competition)
   title: GovHack Management Team
-  competition_id: 1
+  competition: one
 
 region_director:
-  id: 2
-  user_id: 1
-  holder_id: 1
-  assignable_id: 1
-  assignable_type: Region
+  user: one
+  holder: one
+  assignable: national (Region)
   title: Region Director
-  competition_id: 1
+  competition: one
 
 event_host:
-  id: 3
-  user_id: 1
-  holder_id: 1
-  assignable_id: 1
-  assignable_type: Event
+  user: one
+  holder: one
+  assignable: connection (Event)
   title: Event Host
-  competition_id: 1
+  competition: one
 
 participant:
-  id: 4
-  user_id: 1
-  holder_id: 1
-  assignable_id: 1
-  assignable_type: Competition
+  user: one
+  holder: one
+  assignable: one (Competition)
   title: Participant
-  competition_id: 1
+  competition: one
 
 sponsor_contact:
-  id: 5
-  user_id: 1
-  holder_id: 1
-  assignable_id: 1
-  assignable_type: Sponsor
+  user: one
+  holder: one
+  assignable: one (Sponsor)
   title: Sponsor Contact
-  competition_id: 1
+  competition: one
 
 vip:
-  id: 6
-  user_id: 2
-  holder_id: 2
-  assignable_id: 1
-  assignable_type: Competition
+  user: two
+  holder: two
+  assignable: one (Competition)
   title: VIP
-  competition_id: 1
+  competition: one
 
 judge:
-  id: 7
-  user_id: 2
-  holder_id: 2
-  assignable_id: 1
-  assignable_type: Challenge
+  user: two
+  holder: two
+  assignable: one (Challenge)
   title: Judge
-  competition_id: 1
+  competition: one
 
 volunteer:
-  id: 8
-  user_id: 1
-  holder_id: 1
-  assignable_id: 1
-  assignable_type: Competition
+  user: one
+  holder: one
+  assignable: one (Competition)
   title: GovHack Volunteer
-  competition_id: 1
+  competition: one
 
 team_member:
-  id: 9
-  user_id: 2
-  holder_id: 2
-  assignable_id: 1
-  assignable_type: Team
+  user: two
+  holder: two
+  assignable: one (Team)
   title: Team Member
-  competition_id: 1
+  competition: one
 
 event_support:
-  id: 10
-  user_id: 1
-  holder_id: 1
-  assignable_id: 1
-  assignable_type: Event
+  user: one
+  holder: one
+  assignable: connection (Event)
   title: Event Support
-  competition_id: 1
+  competition: one
 
 team_leader:
-  id: 11
-  user_id: 1
-  holder_id: 1
-  assignable_id: 1
-  assignable_type: Team
+  user: one
+  holder: one
+  assignable: one (Team)
   title: Team Leader
-  competition_id: 1
+  competition: one
 
 invitee:
-  id: 12
-  user_id: 3
-  holder_id: 3
-  assignable_id: 1
-  assignable_type: Team
+  user: three
+  holder: three
+  assignable: one (Team)
   title: Invitee
-  competition_id: 1
+  competition: one
 
 other_participant:
-  id: 13
-  user_id: 3
-  holder_id: 3
-  assignable_id: 1
-  assignable_type: Competition
+  user: three
+  holder: three
+  assignable: one (Competition)
   title: Participant
-  competition_id: 1
+  competition: one
 
 region_support:
-  id: 14
-  user_id: 1
-  holder_id: 1
-  assignable_id: 1
-  assignable_type: Region
+  user: one
+  holder: one
+  assignable: national (Region)
   title: Region Support
-  competition_id: 1
+  competition: one
 
 chief_judge:
-  id: 15
-  user_id: 1
-  holder_id: 1
-  assignable_id: 1
-  assignable_type: Competition
+  user: one
+  holder: one
+  assignable: one (Competition)
   title: Chief Judge
-  competition_id: 1
+  competition: one
 
 badge_assignment:
-  id: 16
-  user_id: 1
-  holder_id: 1
-  assignable_id: 1
-  assignable_type: Badge
+  user: one
+  holder: one
+  assignable: one (Badge)
   title: Assignee
-  competition_id: 1
+  competition: one
 
 to_unpublished_team:
-  id: 17
-  user_id: 1
-  holder_id: 1
-  assignable_id: 3
-  assignable_type: Team
+  user: one
+  holder: one
+  assignable: unpublished_team (Team)
   title: Team Member
-  competition_id: 1
+  competition: one

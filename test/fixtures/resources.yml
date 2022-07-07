@@ -5,8 +5,7 @@
 # below each fixture, per the syntax in the comments below
 #
 one:
-  id: 1
-  competition_id: 1
+  competition: one
   position: 1
   category: 0
   name: resource 1
@@ -15,8 +14,7 @@ one:
 
 #
 two:
-  id: 2
-  competition_id: 1
+  competition: one
   position: 2
   category: 1
   name: resource 2
@@ -24,8 +22,7 @@ two:
   short_url: url2
 
 information:
-  id: 3
-  competition_id: 1
+  competition: one
   position: 3
   category: 2
   name: resource 3

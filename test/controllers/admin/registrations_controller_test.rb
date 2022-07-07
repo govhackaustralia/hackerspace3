@@ -30,8 +30,8 @@ class Admin::RegistrationsControllerTest < ActionDispatch::IntegrationTest
       post admin_event_registrations_url @event, params: {
         registration: {
           status: VALID_ATTENDANCE_STATUSES.sample,
-          assignment_id: 4,
-          holder_id: 1
+          assignment_id: assignments(:participant).id,
+          holder_id: holders(:one)
         }
       }
     end
@@ -44,7 +44,7 @@ class Admin::RegistrationsControllerTest < ActionDispatch::IntegrationTest
       post admin_event_registrations_url @event, params: {
         registration: {
           status: 'test',
-          assignment_id: 4
+          assignment_id: assignments(:participant).id
         }
       }
     end

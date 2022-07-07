@@ -1,8 +1,7 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  id: 1
-  region_id: 1
+  region: national
   name: Australia Challenge 0
   short_desc: MyText
   long_desc: MyText
@@ -12,8 +11,7 @@ one:
   identifier: australia_challenge_0
 
 two:
-  id: 2
-  region_id: 1
+  region: national
   name: Australia Challenge 1
   short_desc: MyText
   long_desc: MyText
@@ -23,8 +21,7 @@ two:
   identifier: australia_challenge_1
 
 three:
-  id: 3
-  region_id: 2
+  region: regional
   name: Queensland Challenge 1
   short_desc: MyText
   long_desc: MyText
@@ -35,8 +32,7 @@ three:
   nation_wide: true
 
 four:
-  id: 4
-  region_id: 3
+  region: international
   name: International Challenge 1
   short_desc: MyText
   long_desc: MyText

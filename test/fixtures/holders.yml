@@ -1,22 +1,18 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  id: 1
-  user_id: 1
-  profile_id: 1
-  competition_id: 1
+  user: one
+  profile: one
+  competition: one
   aws_credits_requested: false
 
 two:
-  id: 2
-  user_id: 2
-  profile_id: 2
-  competition_id: 1
+  user: two
+  profile: two
+  competition: one
   aws_credits_requested: true
 
 three:
-  id: 3
-  user_id: 3
-  profile_id: 3
-  competition_id: 1
+  user: three
+  competition: one
   aws_credits_requested:

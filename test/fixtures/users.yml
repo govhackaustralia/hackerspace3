@@ -5,7 +5,6 @@
 # below each fixture, per the syntax in the comments below
 #
 one:
-  id: 1
   email: user1@example.com
   full_name: User Number One
   accepted_terms_and_conditions: true
@@ -16,10 +15,9 @@ one:
   mailing_list: true
   region: South Australia
   registration_type: Competitor
-  acting_on_behalf_of_id: 3
+  acting_on_behalf_of_user: three
 
 two:
-  id: 2
   email: user2@example.com
   full_name: User Number Two
   accepted_terms_and_conditions: true
@@ -31,7 +29,6 @@ two:
   registration_type: Mentor
 
 three:
-  id: 3
   email: user3@example.com
   full_name: User Number Three
   accepted_terms_and_conditions: true
@@ -42,7 +39,6 @@ three:
   registration_type: Organiser
 
 unconfirmed_user:
-  id: 4
   email: user4@example.com
   full_name: User Number Four
   accepted_terms_and_conditions: true

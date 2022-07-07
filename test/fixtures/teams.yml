@@ -5,22 +5,19 @@
 # below each fixture, per the syntax in the comments below
 #
 one:
-  id: 1
-  event_id: 2
-  project_id: 1
+  event: competition
+  current_project: one
   published: true
   youth_team: false
   slack_channel_id: team_one_1
   slack_channel_name: project-open_data_team
 
 two:
-  id: 2
-  event_id: 4
-  project_id: 1
+  event: other_competition
+  current_project: one
   published: true
 
 unpublished_team:
-  id: 3
-  event_id: 4
-  project_id: 3
+  event: other_competition
+  current_project: unpublished_project
   published: false

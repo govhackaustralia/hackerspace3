@@ -5,14 +5,12 @@
 # below each fixture, per the syntax in the comments below
 #
 one:
-  id: 1
-  competition_id: 1
+  competition: one
   name: Vandelay Industries
   description: xzzx
   url: www.website.com
 
 #
 two:
-  id: 2
-  competition_id: 1
+  competition: one
   name: Mandalay Industries

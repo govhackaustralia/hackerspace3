@@ -5,7 +5,7 @@ class VisitsControllerTest < ActionDispatch::IntegrationTest
     assert_difference 'Visit.count' do
       get visits_path(params: {
         visit: {
-          visitable_id: 1,
+          visitable_id: data_sets(:one).id,
           visitable_type: 'DataSet'
         }
       })
@@ -17,7 +17,7 @@ class VisitsControllerTest < ActionDispatch::IntegrationTest
     assert_difference 'Visit.count' do
       get visits_path(params: {
         visit: {
-          visitable_id: 1,
+          visitable_id: resources(:one).id,
           visitable_type: 'Resource'
         }
       })
@@ -29,7 +29,7 @@ class VisitsControllerTest < ActionDispatch::IntegrationTest
     assert_difference 'Visit.count' do
       get visits_path(params: {
         visit: {
-          visitable_id: 1,
+          visitable_id: sponsors(:one).id,
           visitable_type: 'Sponsor'
         }
       })
@@ -42,7 +42,7 @@ class VisitsControllerTest < ActionDispatch::IntegrationTest
     assert_difference 'Visit.count' do
       get visits_path(params: {
         visit: {
-          visitable_id: 1,
+          visitable_id: sponsors(:one).id,
           visitable_type: 'Sponsor'
         }
       })
