@@ -7,7 +7,7 @@
       <br />
       <div class="sponsors">
         <% sponsorship_type.sponsors.where(sponsorships: { sponsorable: @region }).with_attached_logo.each do |sponsor| %>
-          <div class="clickable_tile">
+          <div class="clickable_tile sponsor">
             <%= link_to visits_path(visit: {visitable_type: 'Sponsor', visitable_id: sponsor.id}), target: '_blank' do %>
               <% if sponsor.logo.attached? %>
                 <%= image_tag url_for(sponsor.logo) %>
