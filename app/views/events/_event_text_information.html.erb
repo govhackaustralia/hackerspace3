@@ -96,3 +96,19 @@
     </p>
   </div>
 <% end %>
+<% if @event_partners.present? %>
+  <div class="event-info">
+    <h4><%= 'Event Partner'.pluralize(@event_partners.count) %></h4>
+    <% @event_partners.each do |event_partner| %>
+      <div class="clickable_tile">
+        <%= link_to visits_path(visit: {visitable_type: 'Sponsor', visitable_id: event_partner.id}), target: '_blank' do %>
+          <% if event_partner.logo.attached? %>
+            <%= image_tag url_for(event_partner.logo) %>
+          <% else %>
+            <%= image_tag 'default_profile_pic.png' %>
+          <% end %>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+<% end %>

@@ -1,0 +1,24 @@
+<% if @sponsorship_types.present? %>
+  <div class="info">
+    <h3><%= @region.name %> Sponsors</h3>
+    <br />
+    <% @sponsorship_types.each do |sponsorship_type| %>
+      <h4><%= sponsorship_type.name %></h4>
+      <br />
+      <div class="sponsors">
+        <% sponsorship_type.sponsors.where(sponsorships: { sponsorable: @region }).with_attached_logo.each do |sponsor| %>
+          <div class="clickable_tile sponsor">
+            <%= link_to visits_path(visit: {visitable_type: 'Sponsor', visitable_id: sponsor.id}), target: '_blank' do %>
+              <% if sponsor.logo.attached? %>
+                <%= image_tag url_for(sponsor.logo) %>
+              <% else %>
+                <%= image_tag 'default_profile_pic.png' %>
+              <% end %>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+    <br />
+  </div>
+<% end %>

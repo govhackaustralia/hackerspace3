@@ -47,7 +47,6 @@
     padding: 1em;
     transition: all 0.4s ease;
     cursor: pointer;
-    width: 30%;
     box-sizing: border-box;
     height: calc(125px + 2em);
     margin: 2px;
@@ -70,6 +69,10 @@
       max-height: 125px;
       max-width: 100%;
     }
+  }
+
+  .sponsor {
+    width: 30%;
   }
 }
 
