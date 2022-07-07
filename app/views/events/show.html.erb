@@ -58,22 +58,7 @@
             </div>
           <% end %>
           <br />
-          <% if @event_partners.present? %>
-            <h3><%= 'Event Partner'.pluralize(@event_partners.count) %></h3>
-            <br />
-            <% @event_partners.each do |event_partner| %>
-              <div class="clickable_tile">
-                <%= link_to visits_path(visit: {visitable_type: 'Sponsor', visitable_id: event_partner.id}), target: '_blank' do %>
-                  <% if event_partner.logo.attached? %>
-                    <%= image_tag url_for(event_partner.logo) %>
-                  <% else %>
-                    <%= image_tag 'default_profile_pic.png' %>
-                  <% end %>
-                <% end %>
-              </div>
-              <br />
-            <% end %>
-          <% end %>
+          <%= render partial: 'event_partners' %>
         </div>
       <% end %>
     </div>
