@@ -1,7 +1,6 @@
 class TeamsController < ApplicationController
-  before_action :authenticate_user!,
-                :check_participating!,
-                :check_in_form_or_comp_window!
+  before_action :authenticate_user!, :check_participating!,
+    :check_in_form_or_comp_window!
 
   def new
     @team = Team.new
@@ -10,7 +9,7 @@ class TeamsController < ApplicationController
   def create
     @team = Team.new team_params
     @team.event = @participating_competition_event
-    if @competition.in_form_or_comp_window? @team.time_zone
+    if @competition.in_form_or_comp_window? @team.region.time_zone
       create_team
     else
       flash[:alert] = "The competition has closed in region #{@team.region.name}"
@@ -25,7 +24,7 @@ class TeamsController < ApplicationController
   end
 
   def check_in_form_or_comp_window!
-    return if @competition.in_form_or_comp_window? @participating_competition_event.region.national_time_zone
+    return if @competition.in_form_or_comp_window? @participating_competition_event.region.time_zone
 
     flash[:alert] = 'Team formation is not available at this time.'
     redirect_to projects_path

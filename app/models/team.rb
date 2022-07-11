@@ -85,12 +85,6 @@ class Team < ApplicationRecord
     current_project.team_name
   end
 
-  # Returns the time_zone from the parent region.
-  # ENHANCEMENT: Remove and replace with preload region.
-  def time_zone
-    region.national_time_zone
-  end
-
   # Returns true if a given user has an assignment attached to the team.
   # ENHANCEMENT: Move to Helper/Controller
   def permission?(user)

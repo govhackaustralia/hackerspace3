@@ -75,7 +75,7 @@ class TeamManagement::TeamsController < ApplicationController
 
   def authorise_user!
     @team = Team.find params[:team_id] || params[:id]
-    @time_zone = @team.time_zone
+    @time_zone = @team.region.time_zone
     @competition = @team.competition
     return if @team.permission? current_user
 

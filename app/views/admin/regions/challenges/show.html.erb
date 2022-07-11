@@ -51,7 +51,7 @@
         <strong>This challenge is yet to be approved.</strong>
       </p>
     <% end %>
-    <% if @competition.started? @region.national_time_zone %>
+    <% if @competition.started? @region.time_zone %>
       <p>
         <%= link_to 'Go to Challenge Page', challenge_path(@challenge.identifier) %>
       </p>

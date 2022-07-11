@@ -6,7 +6,7 @@ class ShowChallengesChecker
   end
 
   def show?(region)
-    return false unless competition.started?(region.national_time_zone) ||
+    return false unless competition.started?(region.time_zone) ||
                         region.international?
 
     region.approved_challenges.any?

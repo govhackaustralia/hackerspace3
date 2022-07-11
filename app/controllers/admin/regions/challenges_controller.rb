@@ -49,7 +49,7 @@ class Admin::Regions::ChallengesController < ApplicationController
 
   def check_for_competition_start!
     @challenge = Challenge.find params[:id]
-    return unless @competition.started? @region.national_time_zone
+    return unless @competition.started? @region.time_zone
 
     flash[:alert] = 'Competition has started, no need for challenge preview'
     redirect_to challenge_path @challenge.identifier
