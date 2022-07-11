@@ -1,24 +1,14 @@
+<% content_for :title, 'Update Personal Details' %>
 <main class="registration single-col edit-account">
   <container>
-    <% if params[:banking].present? %>
-      <section class="signup-form">
-        <h2 class="heading">Update Banking Details</h2>
-        <%= render 'edit_banking' %>
-        <div class="links">
-          <%= link_to 'Back to Account Management', manage_account_path %>
-        </div>
-      </section>
-    <% else %>
-      <% content_for :title, 'Update Personal Details' %>
-      <section class="signup-form">
-        <h2 class="heading">
-          <%= yield :title %>
-        </h2>
-        <%= render 'full_form' %>
-        <div class="links">
-          <%= link_to 'Back to Account Management', manage_account_path %>
-        </div>
-      </section>
-    <% end %>
+    <section class="signup-form">
+      <h2 class="heading">
+        <%= yield :title %>
+      </h2>
+      <%= render 'full_form' %>
+      <div class="links">
+        <%= link_to 'Back to Account Management', manage_account_path %>
+      </div>
+    </section>
   </container>
 </main>
