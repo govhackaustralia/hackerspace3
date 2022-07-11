@@ -24,7 +24,6 @@ class UsersController < ApplicationController
     @joined_teams = @user.joined_teams.competition(@competition).preload :event, :current_project, :region
     @invited_team_assignments = @user.invited_team_assignments.where(competition: @competition)
 
-    @public_winning_entries = has_public_winning_entries? @competition
     @region_privileges = @user.region_privileges? @competition
 
     @participating_competition_event = @user.participating_competition_event @competition
@@ -53,10 +52,6 @@ class UsersController < ApplicationController
       :govhack_contact,
       :dietary_requirements,
       :govhack_img,
-      :bsb,
-      :acc_number,
-      :acc_name,
-      :branch_name,
       *user_permitted_attributes
     )
   end
@@ -81,35 +76,10 @@ class UsersController < ApplicationController
   def handle_update_user
     @user.update user_params unless params.nil?
     if @user.save
-      account_update_successfully
+      flash[:notice] = 'Your personal details have been updated.'
+      redirect_to manage_account_path
     else
       render 'edit'
     end
-  end
-
-  def account_update_successfully
-    if params[:banking].present?
-      handle_bank_update
-    else
-      handle_personal_details
-    end
-  end
-
-  def handle_bank_update
-    BankMailer.notify_finance(@user).deliver_later
-    flash[:notice] = 'Your banking details have been updated.'
-    redirect_to manage_account_path
-  end
-
-  def handle_personal_details
-    flash[:notice] = 'Your personal details have been updated.'
-    redirect_to manage_account_path
-  end
-
-  def has_public_winning_entries?(competition)
-    @user.winning_entries.competition(competition).preload(challenge: :region).each do |entry|
-      return true if entry.challenge.region.awards_released?
-    end
-    false
   end
 end

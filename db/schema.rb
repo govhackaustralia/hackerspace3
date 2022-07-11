@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_06_27_085655) do
+ActiveRecord::Schema[7.0].define(version: 2022_07_11_130633) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -513,10 +513,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_27_085655) do
     t.boolean "coder", default: false
     t.boolean "creative", default: false
     t.boolean "facilitator", default: false
-    t.string "bsb"
-    t.string "acc_number"
-    t.string "acc_name"
-    t.string "branch_name"
     t.string "slack"
     t.datetime "accepted_code_of_conduct", precision: nil
     t.boolean "under_18"

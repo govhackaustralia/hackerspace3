@@ -38,13 +38,6 @@
             Update Profile Picture
           </button>
         <% end %>
-        <% if @public_winning_entries %>
-          <%= link_to update_personal_details_path(banking: true) do %>
-            <button class="red-button">
-              Update Banking Details
-            </button>
-          <% end %>
-        <% end %>
       </article>
       <article class="left-menu">
         <% if user_has_admin_privileges? %>

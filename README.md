@@ -88,7 +88,6 @@ Set if running in staging or production environments.
 - AWS_SES_KEY
 - AWS_SES_SERVER
 - DEFAULT_FROM_EMAIL
-- FINANCE_EMAIL
 
 ### AWS S3
 
