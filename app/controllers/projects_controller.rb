@@ -50,7 +50,7 @@ class ProjectsController < ApplicationController
     @participating_competition_event = current_user.participating_competition_event @competition
     return unless @participating_competition_event.present?
 
-    @time_zone = @participating_competition_event.region.national_time_zone
+    @time_zone = @participating_competition_event.region.time_zone
   end
 
   def user_records_show
@@ -99,7 +99,7 @@ class ProjectsController < ApplicationController
 
   def check_competition_started!
     @team = Project.find_by(identifier: params[:identifier]).team
-    @time_zone = @team.time_zone
+    @time_zone = @team.region.time_zone
     return if @competition.started? @time_zone
 
     redirect_to projects_path,

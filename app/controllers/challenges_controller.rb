@@ -72,7 +72,7 @@ class ChallengesController < ApplicationController
     @challenge = Challenge.find_by identifier: params[:identifier]
     @challenge = Challenge.find(params[:identifier]) if @challenge.nil?
     @region = @challenge.region
-    return if @competition.started?(@region.national_time_zone) ||
+    return if @competition.started?(@region.time_zone) ||
       (@region.international? && @competition.started?(FIRST_COMPETITION_TIME_ZONE))
 
     flash[:alert] = 'Challenges will become visible at the start of the competition'

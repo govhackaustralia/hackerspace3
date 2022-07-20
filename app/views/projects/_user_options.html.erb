@@ -1,5 +1,5 @@
 <% if user_signed_in? %>
-  <% if @users_team && @competition.in_comp_window?(@team.time_zone) %>
+  <% if @users_team && @competition.in_comp_window?(@team.region.time_zone) %>
     <%= link_to team_management_team_path(@team) do %>
       <button class="blue-button">
         Manage this Team Project

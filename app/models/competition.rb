@@ -122,7 +122,7 @@ class Competition < ApplicationRecord
   # ENHANCEMENT: This should be somewhere else.
   def available_checkpoints(team, _region)
     valid_checkpoints = []
-    team_time_zone = team.time_zone
+    team_time_zone = team.region.time_zone
     checkpoints.each do |checkpoint|
       next if checkpoint.passed?(team_time_zone)
 

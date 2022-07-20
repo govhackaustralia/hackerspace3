@@ -170,12 +170,6 @@ class RegionTest < ActiveSupport::TestCase
     assert region.zone_code_when(event.end_time) == 'NZST'
   end
 
-  test 'national_time_zone' do
-    assert @national.national_time_zone == @national.time_zone
-    assert @regional.national_time_zone == @regional.parent.time_zone
-    assert @international.national_time_zone == LAST_COMPETITION_TIME_ZONE
-  end
-
   test 'try to add parent when already child' do
     assert_equal @international, @national.parent
 
