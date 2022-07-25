@@ -9,7 +9,7 @@ MAX_SCORE = 10
 CODE_OF_CONDUCT_URL = 'https://govhack.org/competition/code-of-conduct/'
 
 FIRST_COMPETITION_TIME_ZONE = 'Wellington'
-LAST_COMPETITION_TIME_ZONE = 'Sydney'
+LAST_COMPETITION_TIME_ZONE = 'Perth'
 
 LAST_EVENT_TIME_ZONE = 'Perth'
 
