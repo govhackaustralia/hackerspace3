@@ -45,8 +45,6 @@ class ProjectsController < ApplicationController
   end
 
   def retrieve_attending_events
-    return unless @competition.in_form_or_comp_window? FIRST_COMPETITION_TIME_ZONE
-
     @participating_competition_event = current_user.participating_competition_event @competition
     return unless @participating_competition_event.present?
 
