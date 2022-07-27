@@ -24,7 +24,7 @@
             <%= @user.region %>
           </p>
         <% end %>
-        <% if @profile.team_status.present? && @competition.not_finished? %>
+        <% if @profile.team_status.present? && @competition.not_finished?(LAST_COMPETITION_TIME_ZONE) %>
           <p class="team-status">
             <strong>
               <%= fa_icon('user-friends') %>

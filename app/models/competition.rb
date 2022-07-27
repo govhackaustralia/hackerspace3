@@ -146,40 +146,40 @@ class Competition < ApplicationRecord
   end
 
   # Returns true if the competition has started, false otherwise.
-  def started?(time_zone = nil)
+  def started?(time_zone)
     start_time.to_formatted_s(:number) < Region.region_time(time_zone)
   end
 
   # Returns true if the competition has not finished, false otherwise.
-  def not_finished?(time_zone = nil)
+  def not_finished?(time_zone)
     Region.region_time(time_zone) < end_time.to_formatted_s(:number)
   end
 
   # Returns true if the competition is running, false otherwise.
-  def in_comp_window?(time_zone = nil)
+  def in_comp_window?(time_zone)
     started?(time_zone) && not_finished?(time_zone)
   end
 
   # Returns true if the competition is running or if the competition is in the
   # team form period, false oherwise
-  def in_form_or_comp_window?(time_zone = nil)
+  def in_form_or_comp_window?(time_zone)
     in_team_form_window?(time_zone) || in_comp_window?(time_zone)
   end
 
   # Returns true if the competition is in the judging period, false oherwise.
-  def in_challenge_judging_window?(time_zone = nil)
+  def in_challenge_judging_window?(time_zone)
     in_region_window? time_zone, challenge_judging_start, challenge_judging_end
   end
 
   # Returns true if the competition is in the peoples choice judging window
   # false otherwise.
-  def in_peoples_judging_window?(time_zone = nil)
+  def in_peoples_judging_window?(time_zone)
     in_region_window? time_zone, peoples_choice_start, peoples_choice_end
   end
 
   # Returns true if the competition is in either the challenge judging window
   # or the competition judging window.
-  def either_judging_window_open?(time_zone = nil)
+  def either_judging_window_open?(time_zone)
     in_challenge_judging_window?(time_zone) ||
       in_peoples_judging_window?(time_zone)
   end
@@ -191,7 +191,7 @@ class Competition < ApplicationRecord
   private
 
   # Returns true if the competition is in the team form period, false oherwise.
-  def in_team_form_window?(time_zone = nil)
+  def in_team_form_window?(time_zone)
     in_region_window? time_zone, team_form_start, team_form_end
   end
 

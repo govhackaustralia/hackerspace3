@@ -3,7 +3,6 @@ require 'test_helper'
 class CompetitionTest < ActiveSupport::TestCase
   setup do
     @competition = competitions(:one)
-    @region = regions(:international)
     @assignment = assignments(:management_team)
     @sponsor = sponsors(:one)
     @sponsorship_type = sponsorship_types(:one)
@@ -37,7 +36,7 @@ class CompetitionTest < ActiveSupport::TestCase
     assert @competition.criteria.include? @criterion
     assert_includes @competition.resources, resources(:one)
     assert @competition.sponsorship_types.include? @sponsorship_type
-    assert @competition.regions.include? @region
+    assert @competition.regions.include? regions(:international)
     assert @competition.sponsors.include? @sponsor
     assert @competition.checkpoints.include? @checkpoint
   end
@@ -75,7 +74,7 @@ class CompetitionTest < ActiveSupport::TestCase
   end
 
   test 'competition belongs to associations' do
-    assert @competition.hunt_badge == badges(:hunt_badge)
+    assert_equal badges(:hunt_badge), @competition.hunt_badge
   end
 
   test 'competition validations' do
@@ -86,74 +85,116 @@ class CompetitionTest < ActiveSupport::TestCase
   end
 
   test 'competition callbacks' do
-    @new_competition.update current: true
+    @new_competition.update! current: true
+
     assert_not @old_competition.reload.current
   end
 
   test 'root region' do
-    assert @competition.international_region == @region
+    assert_equal regions(:international), @competition.international_region
   end
 
   test 'started?' do
-    @competition.update start_time: Time.now - 1.day
-    assert @competition.started?
-    @competition.update start_time: Time.now + 1.day
-    assert_not @competition.started?
+    @competition.update! start_time: Time.now - 1.day
+
+    assert @competition.started?('Sydney')
+  end
+
+  test 'not started?' do
+    @competition.update! start_time: Time.now + 1.day
+
+    assert_not @competition.started?('Sydney')
   end
 
   test 'not_finished?' do
-    @competition.update end_time: Time.now - 1.day
-    assert_not @competition.not_finished?
-    @competition.update end_time: Time.now + 1.day
-    assert @competition.not_finished?
+    @competition.update! end_time: Time.now - 1.day
+
+    assert_not @competition.not_finished?('Sydney')
+  end
+
+  test 'not not_finished?' do
+    @competition.update! end_time: Time.now + 1.day
+
+    assert @competition.not_finished?('Sydney')
   end
 
   test 'in_comp_window?' do
-    @competition.update start_time: Time.now - 1.day, end_time: Time.now + 1.day
-    assert @competition.in_comp_window?
-    @competition.update end_time: Time.now - 1.hour
-    assert_not @competition.in_comp_window?
+    @competition.update! start_time: Time.now - 1.day, end_time: Time.now + 1.day
+
+    assert @competition.in_comp_window?('Sydney')
+  end
+
+  test 'not in_comp_window?' do
+    @competition.update! end_time: Time.now - 1.hour
+
+    assert_not @competition.in_comp_window?('Sydney')
   end
 
   test 'in_form_or_comp_window?' do
-    @competition.update(
+    @competition.update!(
       start_time: Time.now - 1.day,
       end_time: Time.now + 1.day,
       team_form_start: Time.now - 1.day,
       team_form_end: Time.now - 1.day
     )
-    assert @competition.in_form_or_comp_window?
-    @competition.update(
+
+    assert @competition.in_form_or_comp_window?('Sydney')
+  end
+
+  test 'not in_form_or_comp_window?' do
+    @competition.update!(
       end_time: Time.now - 1.hour,
       team_form_end: Time.now - 1.hour
     )
-    assert_not @competition.in_form_or_comp_window?
+
+    assert_not @competition.in_form_or_comp_window?('Sydney')
   end
 
   test 'in_challenge_judging_window?' do
-    @competition.update challenge_judging_start: Time.now - 1.day,
-                        challenge_judging_end: Time.now + 1.day
-    assert @competition.in_challenge_judging_window?
-    @competition.update challenge_judging_end: Time.now - 1.hour
-    assert_not @competition.in_challenge_judging_window?
+    @competition.update!(
+      challenge_judging_start: Time.now - 1.day,
+      challenge_judging_end: Time.now + 1.day
+    )
+
+    assert @competition.in_challenge_judging_window?('Sydney')
+  end
+
+  test 'not in_challenge_judging_window?' do
+    @competition.update! challenge_judging_end: Time.now - 1.hour
+
+    assert_not @competition.in_challenge_judging_window?('Sydney')
   end
 
   test 'in_peoples_judging_window?' do
-    @competition.update peoples_choice_start: Time.now - 1.day,
-                        peoples_choice_end: Time.now + 1.day
-    assert @competition.in_peoples_judging_window?
-    @competition.update peoples_choice_end: Time.now - 1.hour
-    assert_not @competition.in_peoples_judging_window?
+    @competition.update!(
+      peoples_choice_start: Time.now - 1.day,
+      peoples_choice_end: Time.now + 1.day
+    )
+
+    assert @competition.in_peoples_judging_window?('Sydney')
   end
 
-  test 'either_judging_window_open?' do
-    @competition.update peoples_choice_start: Time.now - 1.day,
-                        peoples_choice_end: Time.now + 1.day,
-                        challenge_judging_start: Time.now - 1.day,
-                        challenge_judging_end: Time.now - 1.hour
-    assert @competition.either_judging_window_open?
-    @competition.update peoples_choice_end: Time.now - 1.hour
-    assert_not @competition.either_judging_window_open?
+  test 'not in_peoples_judging_window?' do
+    @competition.update! peoples_choice_end: Time.now - 1.hour
+
+    assert_not @competition.in_peoples_judging_window?('Sydney')
+  end
+
+  test 'in either_judging_window_open?' do
+    @competition.update!(
+      peoples_choice_start: Time.now - 1.day,
+      peoples_choice_end: Time.now + 1.day,
+      challenge_judging_start: Time.now - 1.day,
+      challenge_judging_end: Time.now - 1.hour
+    )
+
+    assert @competition.either_judging_window_open?('Sydney')
+  end
+
+  test 'not in either_judging_window_open?' do
+    @competition.update! peoples_choice_end: Time.now - 1.hour
+
+    assert_not @competition.either_judging_window_open?('Sydney')
   end
 
   test 'already_participating_in_a_competition_event?' do
