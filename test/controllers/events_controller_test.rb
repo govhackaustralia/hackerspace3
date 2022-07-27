@@ -10,6 +10,11 @@ class EventsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
+  test 'should get index csv' do
+    get events_url format: :csv
+    assert_response :success
+  end
+
   test 'should get show' do
     event = events(:connection)
     get event_url event.identifier

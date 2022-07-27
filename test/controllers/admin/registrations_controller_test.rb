@@ -13,6 +13,11 @@ class Admin::RegistrationsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
+  test 'should get index csv' do
+    get admin_event_registrations_url @event, format: :csv
+    assert_response :success
+  end
+
   test 'should get new' do
     get new_admin_event_registration_url @event
     assert_response :success

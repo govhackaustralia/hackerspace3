@@ -158,9 +158,9 @@ class Event < ApplicationRecord
   end
 
   # Return a CSV file of event attributes.
-  def self.to_csv(competition, options = {})
+  def self.to_csv(competition)
     desired_columns = %w[id name capacity email twitter address accessibility youth_support parking public_transport operation_hours catering video_id start_time end_time created_at updated_at place_id identifier event_type]
-    CSV.generate(options) do |csv|
+    CSV.generate do |csv|
       csv << desired_columns
       competition.events.each do |event|
         csv << event.attributes.values_at(*desired_columns)
@@ -169,10 +169,10 @@ class Event < ApplicationRecord
   end
 
   # Returns a CSV file of Registrations associated with an event.
-  def registrations_to_csv(options = {})
+  def registrations_to_csv
     user_columns = %w[full_name email slack preferred_name organisation_name dietary_requirements registration_type parent_guardian request_not_photographed data_cruncher coder creative facilitator]
     combined = user_columns + ['status']
-    CSV.generate(options) do |csv|
+    CSV.generate do |csv|
       csv << combined
       registrations.each do |registration|
         user_values = registration.user.attributes.values_at(*user_columns)
