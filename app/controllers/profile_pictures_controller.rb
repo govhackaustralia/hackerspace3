@@ -1,5 +1,8 @@
 class ProfilePicturesController < ApplicationController
+  include ContentPolicy
+
   before_action :authenticate_user!, :profile
+  before_action :check_content_policy!, only: :update
 
   def edit; end
 
@@ -14,6 +17,10 @@ class ProfilePicturesController < ApplicationController
   end
 
   private
+
+  def edit_template
+    :edit
+  end
 
   def profile_params
     params.require(:profile).permit(:profile_picture)

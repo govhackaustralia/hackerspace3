@@ -1,0 +1,4 @@
+<div class="form-group">
+  <%= label_tag :accepted_content_policy, "This #{content_type} adheres to Govhack's #{link_to('Content Upload Policy', "", target: '_blank')}".html_safe %>
+  <%= check_box_tag :accepted_content_policy, 'true', false, required: true %>
+</div>
