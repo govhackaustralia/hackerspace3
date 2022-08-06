@@ -12,7 +12,7 @@
         <div class="form-group">
           <%= form.label :profile_picture, 'Upload a Profile Picture (only png/gif/jpeg/jpg)' %>
           <br>
-          <%= form.file_field :profile_picture, accept: 'image/png,image/gif,image/jpeg'%>
+          <%= form.file_field :profile_picture, accept: 'image/png,image/gif,image/jpeg', required: true %>
         </div>
         <div class="actions">
           <%= form.submit 'Upload Image' %>
