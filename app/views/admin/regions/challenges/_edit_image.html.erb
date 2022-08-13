@@ -7,9 +7,11 @@
     <br/>
   <% end %>
   <%= form.label :image, 'Upload a New Image (only png/gif/jpeg/jpg)' %>
-  <br/>
+  <br>
   <%= form.file_field :image, accept: 'image/png,image/gif,image/jpeg' %>
-  <br/>
+  <br>
+  <br>
+  <%= render partial: 'layouts/open_license' %>
   <%= hidden_field_tag(:image, true) %>
   <% if @challenge.image.attached? %>
     <%= form.submit 'Replace Image' %>

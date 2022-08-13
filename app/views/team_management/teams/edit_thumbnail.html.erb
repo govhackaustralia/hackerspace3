@@ -14,8 +14,11 @@
       </div>
       <div class="form-field">
         <%= form.label :thumbnail, 'Upload a New Thumbnail (only png/gif/jpeg/jpg)' %>
+        <br>
         <%= form.file_field :thumbnail, accept: 'image/png,image/gif,image/jpeg' %>
       </div>
+      <br>
+      <%= render partial: 'layouts/open_license' %>
       <%= hidden_field_tag(:thumbnail, true) %>
       <div class="actions">
         <% if @team.thumbnail.attached? %>
