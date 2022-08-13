@@ -14,8 +14,11 @@
       </div>
       <div class="field">
         <%= form.label :high_res_image, 'Upload a Project Image (only png/gif/jpeg/jpg)' %>
+        <br>
         <%= form.file_field :high_res_image, accept: 'image/png,image/gif,image/jpeg' %>
       </div>
+      <br>
+      <%= render partial: 'layouts/open_license' %>
       <div class="actions">
         <%= hidden_field_tag(:high_res_image, true) %>
         <% if @team.high_res_image.attached? %>
