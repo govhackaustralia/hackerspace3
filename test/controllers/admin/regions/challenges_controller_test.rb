@@ -60,4 +60,20 @@ class Admin::Regions::ChallengesControllerTest < ActionDispatch::IntegrationTest
     get preview_admin_region_challenge_path @region, @challenge
     assert_response :success
   end
+
+  test 'should get edit banner image' do
+    get edit_banner_image_admin_region_challenge_path @region, @challenge
+    assert_response :success
+  end
+
+  test 'should patch update banner image' do
+    picture_path = Rails.root.join('public', 'apple-touch-icon.png')
+    picture = fixture_file_upload(picture_path, 'image/png')
+    assert_difference -> { ActiveStorage::Attachment.count }, 1 do
+      patch update_banner_image_admin_region_challenge_path(@region, @challenge), params: {
+        challenge: { banner_image: picture }
+      }
+    end
+    assert_response :success
+  end
 end

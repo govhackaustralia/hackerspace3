@@ -2,6 +2,9 @@
 <main class="challenge_page">
   <section class="challenge_head">
     <article>
+      <% if @challenge.banner_image.attached? %>
+        <img alt="<%= @challenge.name %> banner image" class="challenge_banner" src="<%= url_for(@challenge.banner_image) %>"/>
+      <% end %>
       <h2>
         <%= @challenge.name %>
       </h2>

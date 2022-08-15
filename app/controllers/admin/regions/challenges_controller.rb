@@ -45,6 +45,20 @@ class Admin::Regions::ChallengesController < ApplicationController
     handle_update
   end
 
+  def edit_banner_image
+    @challenge = Challenge.find params[:id]
+  end
+
+  def update_banner_image
+    @challenge = Challenge.find params[:id]
+    if @challenge.update(challenge_params)
+      flash[:notice] = 'Challenge Image Updated'
+    else
+      flash[:alert] = @challenge.errors.full_messages.to_sentence
+    end
+    render :edit_banner_image
+  end
+
   private
 
   def check_for_competition_start!
@@ -109,7 +123,7 @@ class Admin::Regions::ChallengesController < ApplicationController
   def challenge_params
     params.require(:challenge).permit(
       :name, :short_desc, :long_desc, :eligibility, :video_url, :approved,
-      :image, :pdf, :pdf_preview, :nation_wide
+      :banner_image, :image, :pdf, :pdf_preview, :nation_wide
     )
   end
 end
