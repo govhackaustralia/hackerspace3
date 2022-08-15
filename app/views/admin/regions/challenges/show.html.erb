@@ -4,62 +4,72 @@
       <%= @challenge.name %>
       Challenge <%= @region.name %> Region
     </h2>
-    <% unless @challenge.short_desc.blank? %>
-      <p>Short Description: <%= truncate(@challenge.short_desc, length: 100, omission: '... ') %></p>
-    <% end %>
-    <% unless @challenge.long_desc.blank? %>
-      <p>Long Description: <%= truncate(@challenge.long_desc, length: 100, omission: '... ') %></p>
-    <% end %>
-    <% unless @challenge.eligibility.blank? %>
-      <p>Eligibility: <%= @challenge.eligibility %></p>
-    <% end %>
-    <p>
-      Entry:
-      <%= render 'challenges/challenge_entry' %>
-    </p>
-    <% unless @challenge.video_url.blank? %>
-      <p>This challenge has a video attached</p>
-    <% end %>
-    <p>
-      <%= link_to 'Update Challenge', edit_admin_region_challenge_path(@region, @challenge) %>
-    </p>
-    <% if @challenge.image.attached? %>
-      <p>This challenge has an image attached.</p>
-    <% else %>
-      <p>This challenge does not have an image attached.</p>
-    <% end %>
-    <p>
-      <%= link_to 'Update Image', edit_admin_region_challenge_path(@region, @challenge, image: true) %>
-    </p>
-    <% if @challenge.pdf.attached? && @challenge.pdf_preview.attached? %>
-      <p>This challenge has a pdf and pdf preview attached.</p>
-    <% end %>
-    <% unless @challenge.pdf.attached? %>
-      <p>This Challenge does not have a PDF.</p>
-    <% end %>
-    <p>
-      <%= link_to 'Update PDF', edit_admin_region_challenge_path(@region, @challenge, pdf: true) %>
-    </p>
-    <% unless @challenge.pdf_preview.attached? %>
-      <p>This Challenge does not have a PDF Preview.</p>
-    <% end %>
-    <p>
-      <%= link_to 'Update PDF Preview', edit_admin_region_challenge_path(@region, @challenge, pdf_preview: true) %>
-    </p>
-    <% unless @challenge.approved %>
+    <section>
+      <% unless @challenge.short_desc.blank? %>
+        <p>Short Description: <%= truncate(@challenge.short_desc, length: 100, omission: '... ') %></p>
+      <% end %>
+      <% unless @challenge.long_desc.blank? %>
+        <p>Long Description: <%= truncate(@challenge.long_desc, length: 100, omission: '... ') %></p>
+      <% end %>
+      <% unless @challenge.eligibility.blank? %>
+        <p>Eligibility: <%= @challenge.eligibility %></p>
+      <% end %>
       <p>
-        <strong>This challenge is yet to be approved.</strong>
+        Entry:
+        <%= render 'challenges/challenge_entry' %>
       </p>
-    <% end %>
-    <% if @competition.started? @region.time_zone %>
+      <% unless @challenge.video_url.blank? %>
+        <p>This challenge has a video attached</p>
+      <% end %>
       <p>
-        <%= link_to 'Go to Challenge Page', challenge_path(@challenge.identifier) %>
+        <%= link_to 'Update Challenge', edit_admin_region_challenge_path(@region, @challenge) %>
       </p>
-    <% else %>
+    </section>
+    <section>
+      <% if @challenge.image.attached? %>
+        <p>This challenge has an image attached.</p>
+      <% else %>
+        <p>This challenge does not have an image attached.</p>
+      <% end %>
       <p>
-        <%= link_to 'Go to Challenge Preview Page', preview_admin_region_challenge_path(@region, @challenge) %>
+        <%= link_to 'Update Image', edit_admin_region_challenge_path(@region, @challenge, image: true) %>
       </p>
-    <% end %>
+    </section>
+    <section>
+      <% if @challenge.pdf.attached? && @challenge.pdf_preview.attached? %>
+        <p>This challenge has a pdf and pdf preview attached.</p>
+      <% end %>
+      <% unless @challenge.pdf.attached? %>
+        <p>This Challenge does not have a PDF.</p>
+      <% end %>
+      <p>
+        <%= link_to 'Update PDF', edit_admin_region_challenge_path(@region, @challenge, pdf: true) %>
+      </p>
+    </section>
+    <section>
+      <% unless @challenge.pdf_preview.attached? %>
+        <p>This Challenge does not have a PDF Preview.</p>
+      <% end %>
+      <p>
+        <%= link_to 'Update PDF Preview', edit_admin_region_challenge_path(@region, @challenge, pdf_preview: true) %>
+      </p>
+    </section>
+    <section>
+      <% unless @challenge.approved %>
+        <p>
+          <strong>This challenge is yet to be approved.</strong>
+        </p>
+      <% end %>
+      <% if @competition.started? @region.time_zone %>
+        <p>
+          <%= link_to 'Go to Challenge Page', challenge_path(@challenge.identifier) %>
+        </p>
+      <% else %>
+        <p>
+          <%= link_to 'Go to Challenge Preview Page', preview_admin_region_challenge_path(@region, @challenge) %>
+        </p>
+      <% end %>
+    </section>
     <h3>Teams Competing</h3>
     <p><%= pluralize(@challenge.entries.count, 'team') %> entered challenge.</p>
     <p>
