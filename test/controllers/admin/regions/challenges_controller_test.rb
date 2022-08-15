@@ -74,5 +74,6 @@ class Admin::Regions::ChallengesControllerTest < ActionDispatch::IntegrationTest
         challenge: { banner_image: picture }
       }
     end
+    assert_response :success
   end
 end
