@@ -26,6 +26,16 @@
       </p>
     </section>
     <section>
+      <% if @challenge.banner_image.attached? %>
+        <p>This challenge has a banner image attached.</p>
+      <% else %>
+        <p>This challenge does not have a banner image attached.</p>
+      <% end %>
+      <p>
+        <%= link_to 'Update Banner Image', edit_banner_image_admin_region_challenge_path(@region, @challenge) %>
+      </p>
+    </section>
+    <section>
       <% if @challenge.image.attached? %>
         <p>This challenge has an image attached.</p>
       <% else %>

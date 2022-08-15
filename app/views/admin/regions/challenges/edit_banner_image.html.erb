@@ -1,0 +1,23 @@
+<main class="challenge_admin">
+  <h2>Update <%= @challenge.name %> Banner Image</h2>
+  <%= form_for [:admin, @region, @challenge], url: update_banner_image_admin_region_challenge_path(@region, @challenge) do |form| %>
+    <% if @challenge.banner_image.attached? %>
+      <img alt="<%= @challenge.name %> image" src="<%= url_for(@challenge.banner_image) %>"/>
+      <br>
+    <% end %>
+    <%= form.label :image, 'Upload a New Banner Image (only png/gif/jpeg/jpg)' %>
+    <br>
+    <%= form.file_field :banner_image, accept: 'image/png,image/gif,image/jpeg' %>
+    <br>
+    <br>
+    <%= render partial: 'layouts/open_license' %>
+    <% if @challenge.banner_image.attached? %>
+      <%= form.submit 'Replace Banner Image' %>
+    <% else %>
+      <%= form.submit 'Upload Banner Image' %>
+    <% end %>
+  <% end %>
+  <p>
+    <%= link_to 'Back to Challenge', admin_region_challenge_path(@region, @challenge) %>
+  </p>
+</main>

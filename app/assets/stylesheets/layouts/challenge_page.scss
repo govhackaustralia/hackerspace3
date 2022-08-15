@@ -122,6 +122,11 @@
       max-height: 20%;
     }
 
+    .challenge_banner {
+      padding-bottom: 9px;
+      max-width: 100%;
+    }
+
     .sponsors {
       display: flex;
       flex-wrap: wrap;
@@ -207,6 +212,10 @@
 
     .challenge_image {
       max-width: 40%;
+    }
+
+    .challenge_banner {
+      padding-bottom: 17px;
     }
 
     .sponsors {

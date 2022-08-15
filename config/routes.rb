@@ -131,7 +131,11 @@ Rails.application.routes.draw do
         member { get :preview }
       end
       resources :challenges, except: :destroy, controller: 'regions/challenges' do
-        member { get :preview }
+        member do
+          get :preview
+          get :edit_banner_image
+          patch :update_banner_image
+        end
       end
     end
 

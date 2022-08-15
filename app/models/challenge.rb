@@ -15,6 +15,7 @@ class Challenge < ApplicationRecord
   has_many :challenge_data_sets, dependent: :destroy
   has_many :data_sets, through: :challenge_data_sets
 
+  has_one_attached :banner_image
   has_one_attached :image
   has_one_attached :pdf
   has_one_attached :pdf_preview
