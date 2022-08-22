@@ -146,9 +146,6 @@
               <p class="title">
                 <%= badge.name %>
               </p>
-              <p class="date-issued">
-                <%= badge_assignment.created_at.strftime '%B %Y' %>
-              </p>
             </div>
             <% if badge.art.attached? %>
               <%= image_tag(url_for(badge.art), alt: 'GovHack Badge Art') %>
