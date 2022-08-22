@@ -91,10 +91,11 @@
       <%= link_to 'Assignments Management', admin_competition_assignments_path(@competition) %>
     </p>
     <h3>CheckPoints</h3>
-    <p>
-      <%= pluralize @checkpoints.count, 'checkpoint' %>
-      saved.
-    </p>
+    <% if @checkpoints.count.zero? %>
+      <p><strong>❗️ No CheckPoints Set, Hackerspace will break when competition starts ❗️</strong></p>
+    <% else %>
+      <p><%= pluralize @checkpoints.count, 'checkpoint' %> saved.</p>
+    <% end %>
     <p>
       <%= link_to 'Competition Checkpoints', admin_competition_checkpoints_path(@competition) %>
     </p>
