@@ -1,3 +1,17 @@
+# == Schema Information
+#
+# Table name: teams
+#
+#  id                 :bigint           not null, primary key
+#  event_id           :integer
+#  project_id         :integer
+#  created_at         :datetime         not null
+#  updated_at         :datetime         not null
+#  published          :boolean          default(TRUE)
+#  youth_team         :boolean          default(FALSE)
+#  slack_channel_id   :string
+#  slack_channel_name :string
+#
 require 'test_helper'
 
 class TeamTest < ActiveSupport::TestCase

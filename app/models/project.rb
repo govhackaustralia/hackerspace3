@@ -1,3 +1,21 @@
+# == Schema Information
+#
+# Table name: projects
+#
+#  id              :bigint           not null, primary key
+#  team_id         :integer
+#  team_name       :string
+#  description     :text
+#  data_story      :text
+#  source_code_url :string
+#  video_url       :string
+#  homepage_url    :string
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
+#  user_id         :integer
+#  project_name    :string
+#  identifier      :string
+#
 class Project < ApplicationRecord
   belongs_to :team
   belongs_to :user

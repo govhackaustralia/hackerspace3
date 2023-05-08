@@ -1,3 +1,15 @@
+# == Schema Information
+#
+# Table name: badges
+#
+#  id             :bigint           not null, primary key
+#  competition_id :integer
+#  name           :string
+#  identifier     :string
+#  capacity       :integer
+#  created_at     :datetime         not null
+#  updated_at     :datetime         not null
+#
 require 'test_helper'
 
 class BadgeTest < ActiveSupport::TestCase

@@ -1,3 +1,15 @@
+# == Schema Information
+#
+# Table name: region_limits
+#
+#  id                      :bigint           not null, primary key
+#  region_id               :integer
+#  checkpoint_id           :integer
+#  max_regional_challenges :integer
+#  max_national_challenges :integer
+#  created_at              :datetime         not null
+#  updated_at              :datetime         not null
+#
 require 'test_helper'
 
 class RegionLimitTest < ActiveSupport::TestCase

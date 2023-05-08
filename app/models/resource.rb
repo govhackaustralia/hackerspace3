@@ -1,3 +1,18 @@
+# == Schema Information
+#
+# Table name: resources
+#
+#  id                 :bigint           not null, primary key
+#  competition_id     :integer
+#  category           :integer
+#  position           :integer
+#  url                :string
+#  name               :string
+#  short_url          :string
+#  created_at         :datetime         not null
+#  updated_at         :datetime         not null
+#  show_on_front_page :boolean
+#
 class Resource < ApplicationRecord
   include Position
 

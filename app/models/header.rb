@@ -1,3 +1,15 @@
+# == Schema Information
+#
+# Table name: headers
+#
+#  id             :bigint           not null, primary key
+#  assignment_id  :integer
+#  scoreable_type :string
+#  scoreable_id   :bigint
+#  created_at     :datetime         not null
+#  updated_at     :datetime         not null
+#  included       :boolean          default(TRUE)
+#
 class Header < ApplicationRecord
   belongs_to :scoreable, polymorphic: true
   belongs_to :assignment

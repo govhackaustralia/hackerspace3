@@ -1,3 +1,32 @@
+# == Schema Information
+#
+# Table name: events
+#
+#  id                :bigint           not null, primary key
+#  region_id         :integer
+#  name              :string
+#  registration_type :string
+#  capacity          :integer
+#  email             :string
+#  twitter           :string
+#  address           :text
+#  accessibility     :text
+#  youth_support     :text
+#  parking           :text
+#  public_transport  :text
+#  operation_hours   :text
+#  catering          :text
+#  video_id          :string
+#  start_time        :datetime
+#  end_time          :datetime
+#  published         :boolean          default(FALSE)
+#  created_at        :datetime         not null
+#  updated_at        :datetime         not null
+#  place_id          :string
+#  identifier        :string
+#  event_type        :string
+#  description       :text
+#
 class Event < ApplicationRecord
   belongs_to :region
   has_one :competition, through: :region

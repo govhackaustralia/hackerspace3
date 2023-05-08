@@ -1,3 +1,14 @@
+# == Schema Information
+#
+# Table name: sponsorship_types
+#
+#  id             :bigint           not null, primary key
+#  competition_id :integer
+#  name           :string
+#  position       :integer
+#  created_at     :datetime         not null
+#  updated_at     :datetime         not null
+#
 require 'test_helper'
 
 class SponsorshipTypeTest < ActiveSupport::TestCase

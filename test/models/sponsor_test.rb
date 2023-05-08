@@ -1,3 +1,15 @@
+# == Schema Information
+#
+# Table name: sponsors
+#
+#  id             :bigint           not null, primary key
+#  name           :string
+#  description    :text
+#  url            :string
+#  created_at     :datetime         not null
+#  updated_at     :datetime         not null
+#  competition_id :integer
+#
 require 'test_helper'
 
 class SponsorTest < ActiveSupport::TestCase

@@ -1,3 +1,23 @@
+# == Schema Information
+#
+# Table name: competitions
+#
+#  id                      :bigint           not null, primary key
+#  year                    :integer
+#  created_at              :datetime         not null
+#  updated_at              :datetime         not null
+#  start_time              :datetime
+#  end_time                :datetime
+#  peoples_choice_start    :datetime
+#  peoples_choice_end      :datetime
+#  challenge_judging_start :datetime
+#  challenge_judging_end   :datetime
+#  current                 :boolean
+#  team_form_start         :datetime
+#  team_form_end           :datetime
+#  hunt_badge_id           :integer
+#  hunt_published          :boolean
+#
 require 'test_helper'
 
 class CompetitionTest < ActiveSupport::TestCase

@@ -1,3 +1,16 @@
+# == Schema Information
+#
+# Table name: checkpoints
+#
+#  id                      :bigint           not null, primary key
+#  competition_id          :integer
+#  end_time                :datetime
+#  created_at              :datetime         not null
+#  updated_at              :datetime         not null
+#  max_regional_challenges :integer
+#  max_national_challenges :integer
+#  name                    :string
+#
 class Checkpoint < ApplicationRecord
   belongs_to :competition
   has_many :entries, dependent: :destroy

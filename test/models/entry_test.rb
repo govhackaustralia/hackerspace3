@@ -1,3 +1,17 @@
+# == Schema Information
+#
+# Table name: entries
+#
+#  id            :bigint           not null, primary key
+#  team_id       :integer
+#  challenge_id  :integer
+#  checkpoint_id :integer
+#  justification :text
+#  eligible      :boolean
+#  created_at    :datetime         not null
+#  updated_at    :datetime         not null
+#  award         :string
+#
 require 'test_helper'
 
 class EntryTest < ActiveSupport::TestCase

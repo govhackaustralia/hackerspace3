@@ -1,3 +1,15 @@
+# == Schema Information
+#
+# Table name: data_sets
+#
+#  id          :bigint           not null, primary key
+#  region_id   :integer
+#  name        :string
+#  url         :string
+#  description :text
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#
 class DataSet < ApplicationRecord
   belongs_to :region
   has_one :competition, through: :region

@@ -1,3 +1,18 @@
+# == Schema Information
+#
+# Table name: regions
+#
+#  id             :bigint           not null, primary key
+#  name           :string
+#  time_zone      :string
+#  parent_id      :integer
+#  created_at     :datetime         not null
+#  updated_at     :datetime         not null
+#  award_release  :datetime
+#  competition_id :integer
+#  category       :string
+#  identifier     :string
+#
 class Region < ApplicationRecord
   # Region Categories
   INTERNATIONAL = 'International'.freeze

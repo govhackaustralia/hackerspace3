@@ -53,7 +53,7 @@ gem 'bundler-audit'
 gem 'acts-as-taggable-on', '~> 9.0'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 gem 'mini_racer', platforms: :ruby
-# Bootstrap rubygem for Rails / Sprockets / Hanami / etc 
+# Bootstrap rubygem for Rails / Sprockets / Hanami / etc
 gem 'bootstrap', '~> 5.1.3'
 # This gem provides only Free icons from Font-Awesome.
 gem 'font_awesome5_rails'
@@ -72,6 +72,7 @@ group :development, :test do
 end
 
 group :development do
+  gem "annotate"
   # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
   gem 'web-console', '>= 3.3.0'
   gem 'listen', '>= 3.0.5', '< 3.2'

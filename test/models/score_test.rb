@@ -1,3 +1,14 @@
+# == Schema Information
+#
+# Table name: scores
+#
+#  id           :bigint           not null, primary key
+#  header_id    :integer
+#  criterion_id :integer
+#  entry        :integer
+#  created_at   :datetime         not null
+#  updated_at   :datetime         not null
+#
 require 'test_helper'
 
 class ScoreTest < ActiveSupport::TestCase

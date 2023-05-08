@@ -1,3 +1,17 @@
+# == Schema Information
+#
+# Table name: teams
+#
+#  id                 :bigint           not null, primary key
+#  event_id           :integer
+#  project_id         :integer
+#  created_at         :datetime         not null
+#  updated_at         :datetime         not null
+#  published          :boolean          default(TRUE)
+#  youth_team         :boolean          default(FALSE)
+#  slack_channel_id   :string
+#  slack_channel_name :string
+#
 class Team < ApplicationRecord
   belongs_to :event
   belongs_to :current_project, class_name: 'Project', foreign_key: 'project_id', optional: true

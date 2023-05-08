@@ -1,3 +1,15 @@
+# == Schema Information
+#
+# Table name: data_sets
+#
+#  id          :bigint           not null, primary key
+#  region_id   :integer
+#  name        :string
+#  url         :string
+#  description :text
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#
 require 'test_helper'
 
 class DataSetTest < ActiveSupport::TestCase

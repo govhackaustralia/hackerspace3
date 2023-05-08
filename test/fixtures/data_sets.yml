@@ -1,4 +1,15 @@
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+# == Schema Information
+#
+# Table name: data_sets
+#
+#  id          :bigint           not null, primary key
+#  region_id   :integer
+#  name        :string
+#  url         :string
+#  description :text
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#
 
 one:
   region: national

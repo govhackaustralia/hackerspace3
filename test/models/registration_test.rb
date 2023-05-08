@@ -1,3 +1,16 @@
+# == Schema Information
+#
+# Table name: registrations
+#
+#  id            :bigint           not null, primary key
+#  assignment_id :integer
+#  time_notified :datetime
+#  status        :string
+#  created_at    :datetime         not null
+#  updated_at    :datetime         not null
+#  event_id      :integer
+#  holder_id     :integer
+#
 require 'test_helper'
 
 class RegistrationTest < ActiveSupport::TestCase

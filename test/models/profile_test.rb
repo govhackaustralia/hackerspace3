@@ -1,3 +1,29 @@
+# == Schema Information
+#
+# Table name: profiles
+#
+#  id                 :bigint           not null, primary key
+#  user_id            :integer
+#  age                :integer
+#  gender             :string
+#  first_peoples      :integer
+#  disability         :integer
+#  education          :integer
+#  users              :string
+#  postcode           :string
+#  created_at         :datetime         not null
+#  updated_at         :datetime         not null
+#  identifier         :string
+#  team_status        :integer
+#  website            :string
+#  linkedin           :string
+#  twitter            :string
+#  description        :string
+#  github             :string
+#  published          :boolean
+#  slack_user_id      :string
+#  slack_access_token :string
+#
 require 'test_helper'
 
 class ProfileTest < ActiveSupport::TestCase

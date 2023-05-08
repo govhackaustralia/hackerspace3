@@ -1,3 +1,17 @@
+# == Schema Information
+#
+# Table name: assignments
+#
+#  id              :bigint           not null, primary key
+#  user_id         :integer
+#  assignable_type :string
+#  assignable_id   :integer
+#  title           :string
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
+#  competition_id  :integer
+#  holder_id       :integer
+#
 class Assignment < ApplicationRecord
   belongs_to :assignable, polymorphic: true
   belongs_to :holder

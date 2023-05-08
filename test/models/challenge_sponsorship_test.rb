@@ -1,3 +1,14 @@
+# == Schema Information
+#
+# Table name: challenge_sponsorships
+#
+#  id           :bigint           not null, primary key
+#  challenge_id :integer
+#  sponsor_id   :integer
+#  created_at   :datetime         not null
+#  updated_at   :datetime         not null
+#  approved     :boolean          default(FALSE)
+#
 require 'test_helper'
 
 class ChallengeSponsorshipTest < ActiveSupport::TestCase

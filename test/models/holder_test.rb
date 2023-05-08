@@ -1,3 +1,16 @@
+# == Schema Information
+#
+# Table name: holders
+#
+#  id                    :bigint           not null, primary key
+#  user_id               :bigint           not null
+#  competition_id        :bigint           not null
+#  aws_credits_requested :boolean
+#  created_at            :datetime         not null
+#  updated_at            :datetime         not null
+#  team_status           :integer
+#  profile_id            :bigint
+#
 require 'test_helper'
 
 class HolderTest < ActiveSupport::TestCase
