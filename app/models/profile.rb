@@ -1,3 +1,33 @@
+# == Schema Information
+#
+# Table name: profiles
+#
+#  id                 :bigint           not null, primary key
+#  age                :integer
+#  description        :string
+#  disability         :integer
+#  education          :integer
+#  first_peoples      :integer
+#  gender             :string
+#  github             :string
+#  identifier         :string
+#  linkedin           :string
+#  postcode           :string
+#  published          :boolean
+#  slack_access_token :string
+#  team_status        :integer
+#  twitter            :string
+#  users              :string
+#  website            :string
+#  created_at         :datetime         not null
+#  updated_at         :datetime         not null
+#  slack_user_id      :string
+#  user_id            :integer
+#
+# Indexes
+#
+#  index_profiles_on_identifier  (identifier)
+#
 class Profile < ApplicationRecord
   belongs_to :user
 

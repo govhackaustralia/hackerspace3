@@ -1,3 +1,22 @@
+# == Schema Information
+#
+# Table name: resources
+#
+#  id                 :bigint           not null, primary key
+#  category           :integer
+#  name               :string
+#  position           :integer
+#  short_url          :string
+#  show_on_front_page :boolean
+#  url                :string
+#  created_at         :datetime         not null
+#  updated_at         :datetime         not null
+#  competition_id     :integer
+#
+# Indexes
+#
+#  index_resources_on_show_on_front_page  (show_on_front_page)
+#
 require 'test_helper'
 
 class ResourceTest < ActiveSupport::TestCase

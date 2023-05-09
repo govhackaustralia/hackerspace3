@@ -1,3 +1,28 @@
+# == Schema Information
+#
+# Table name: competitions
+#
+#  id                      :bigint           not null, primary key
+#  challenge_judging_end   :datetime
+#  challenge_judging_start :datetime
+#  current                 :boolean
+#  end_time                :datetime
+#  hunt_published          :boolean
+#  peoples_choice_end      :datetime
+#  peoples_choice_start    :datetime
+#  start_time              :datetime
+#  team_form_end           :datetime
+#  team_form_start         :datetime
+#  year                    :integer
+#  created_at              :datetime         not null
+#  updated_at              :datetime         not null
+#  hunt_badge_id           :integer
+#
+# Indexes
+#
+#  index_competitions_on_current  (current)
+#  index_competitions_on_year     (year)
+#
 class Competition < ApplicationRecord
   has_many :assignments, as: :assignable
   has_many :holders, dependent: :destroy

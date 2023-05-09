@@ -1,3 +1,19 @@
+# == Schema Information
+#
+# Table name: badges
+#
+#  id             :bigint           not null, primary key
+#  capacity       :integer
+#  identifier     :string
+#  name           :string
+#  created_at     :datetime         not null
+#  updated_at     :datetime         not null
+#  competition_id :integer
+#
+# Indexes
+#
+#  index_badges_on_identifier  (identifier)
+#
 require 'test_helper'
 
 class BadgeTest < ActiveSupport::TestCase

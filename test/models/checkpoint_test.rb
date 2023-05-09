@@ -1,3 +1,20 @@
+# == Schema Information
+#
+# Table name: checkpoints
+#
+#  id                      :bigint           not null, primary key
+#  end_time                :datetime
+#  max_national_challenges :integer
+#  max_regional_challenges :integer
+#  name                    :string
+#  created_at              :datetime         not null
+#  updated_at              :datetime         not null
+#  competition_id          :integer
+#
+# Indexes
+#
+#  index_checkpoints_on_competition_id  (competition_id)
+#
 require 'test_helper'
 
 class CheckpointTest < ActiveSupport::TestCase

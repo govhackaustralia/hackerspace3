@@ -1,3 +1,27 @@
+# == Schema Information
+#
+# Table name: challenges
+#
+#  id          :bigint           not null, primary key
+#  approved    :boolean          default(FALSE)
+#  eligibility :text
+#  identifier  :string
+#  long_desc   :text
+#  name        :string
+#  nation_wide :boolean
+#  short_desc  :text
+#  video_url   :string
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#  region_id   :integer
+#
+# Indexes
+#
+#  index_challenges_on_approved     (approved)
+#  index_challenges_on_identifier   (identifier)
+#  index_challenges_on_nation_wide  (nation_wide)
+#  index_challenges_on_region_id    (region_id)
+#
 class Challenge < ApplicationRecord
   belongs_to :region
   has_one :competition, through: :region
