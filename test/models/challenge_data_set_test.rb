@@ -1,3 +1,18 @@
+# == Schema Information
+#
+# Table name: challenge_data_sets
+#
+#  id           :bigint           not null, primary key
+#  created_at   :datetime         not null
+#  updated_at   :datetime         not null
+#  challenge_id :integer
+#  data_set_id  :integer
+#
+# Indexes
+#
+#  index_challenge_data_sets_on_challenge_id  (challenge_id)
+#  index_challenge_data_sets_on_data_set_id   (data_set_id)
+#
 require 'test_helper'
 
 class ChallengeDataSetTest < ActiveSupport::TestCase

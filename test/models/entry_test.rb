@@ -1,3 +1,25 @@
+# == Schema Information
+#
+# Table name: entries
+#
+#  id            :bigint           not null, primary key
+#  award         :string
+#  eligible      :boolean
+#  justification :text
+#  created_at    :datetime         not null
+#  updated_at    :datetime         not null
+#  challenge_id  :integer
+#  checkpoint_id :integer
+#  team_id       :integer
+#
+# Indexes
+#
+#  index_entries_on_award          (award)
+#  index_entries_on_challenge_id   (challenge_id)
+#  index_entries_on_checkpoint_id  (checkpoint_id)
+#  index_entries_on_eligible       (eligible)
+#  index_entries_on_team_id        (team_id)
+#
 require 'test_helper'
 
 class EntryTest < ActiveSupport::TestCase

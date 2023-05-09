@@ -1,4 +1,22 @@
-# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+# == Schema Information
+#
+# Table name: resources
+#
+#  id                 :bigint           not null, primary key
+#  category           :integer
+#  name               :string
+#  position           :integer
+#  short_url          :string
+#  show_on_front_page :boolean
+#  url                :string
+#  created_at         :datetime         not null
+#  updated_at         :datetime         not null
+#  competition_id     :integer
+#
+# Indexes
+#
+#  index_resources_on_show_on_front_page  (show_on_front_page)
+#
 
 # This model initially had no columns defined. If you add columns to the
 # model remove the '{}' from the fixture names and add the columns immediately
