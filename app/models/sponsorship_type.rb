@@ -3,11 +3,16 @@
 # Table name: sponsorship_types
 #
 #  id             :bigint           not null, primary key
-#  competition_id :integer
 #  name           :string
 #  position       :integer
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
+#  competition_id :integer
+#
+# Indexes
+#
+#  index_sponsorship_types_on_competition_id  (competition_id)
+#  index_sponsorship_types_on_position        (position)
 #
 class SponsorshipType < ApplicationRecord
   include Position

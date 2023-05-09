@@ -3,13 +3,17 @@
 # Table name: checkpoints
 #
 #  id                      :bigint           not null, primary key
-#  competition_id          :integer
 #  end_time                :datetime
+#  max_national_challenges :integer
+#  max_regional_challenges :integer
+#  name                    :string
 #  created_at              :datetime         not null
 #  updated_at              :datetime         not null
-#  max_regional_challenges :integer
-#  max_national_challenges :integer
-#  name                    :string
+#  competition_id          :integer
+#
+# Indexes
+#
+#  index_checkpoints_on_competition_id  (competition_id)
 #
 class Checkpoint < ApplicationRecord
   belongs_to :competition

@@ -3,26 +3,30 @@
 # Table name: profiles
 #
 #  id                 :bigint           not null, primary key
-#  user_id            :integer
 #  age                :integer
-#  gender             :string
-#  first_peoples      :integer
+#  description        :string
 #  disability         :integer
 #  education          :integer
-#  users              :string
+#  first_peoples      :integer
+#  gender             :string
+#  github             :string
+#  identifier         :string
+#  linkedin           :string
 #  postcode           :string
+#  published          :boolean
+#  slack_access_token :string
+#  team_status        :integer
+#  twitter            :string
+#  users              :string
+#  website            :string
 #  created_at         :datetime         not null
 #  updated_at         :datetime         not null
-#  identifier         :string
-#  team_status        :integer
-#  website            :string
-#  linkedin           :string
-#  twitter            :string
-#  description        :string
-#  github             :string
-#  published          :boolean
 #  slack_user_id      :string
-#  slack_access_token :string
+#  user_id            :integer
+#
+# Indexes
+#
+#  index_profiles_on_identifier  (identifier)
 #
 require 'test_helper'
 

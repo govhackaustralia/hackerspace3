@@ -3,13 +3,19 @@
 # Table name: sponsorships
 #
 #  id                  :bigint           not null, primary key
-#  sponsor_id          :integer
-#  sponsorship_type_id :integer
+#  approved            :boolean          default(FALSE)
 #  sponsorable_type    :string
-#  sponsorable_id      :integer
 #  created_at          :datetime         not null
 #  updated_at          :datetime         not null
-#  approved            :boolean          default(FALSE)
+#  sponsor_id          :integer
+#  sponsorable_id      :integer
+#  sponsorship_type_id :integer
+#
+# Indexes
+#
+#  index_sponsorships_on_approved                             (approved)
+#  index_sponsorships_on_sponsor_id                           (sponsor_id)
+#  index_sponsorships_on_sponsorable_type_and_sponsorable_id  (sponsorable_type,sponsorable_id)
 #
 class Sponsorship < ApplicationRecord
   belongs_to :sponsor

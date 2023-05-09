@@ -3,11 +3,16 @@
 # Table name: challenge_sponsorships
 #
 #  id           :bigint           not null, primary key
-#  challenge_id :integer
-#  sponsor_id   :integer
+#  approved     :boolean          default(FALSE)
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null
-#  approved     :boolean          default(FALSE)
+#  challenge_id :integer
+#  sponsor_id   :integer
+#
+# Indexes
+#
+#  index_challenge_sponsorships_on_challenge_id  (challenge_id)
+#  index_challenge_sponsorships_on_sponsor_id    (sponsor_id)
 #
 class ChallengeSponsorship < ApplicationRecord
   belongs_to :sponsor

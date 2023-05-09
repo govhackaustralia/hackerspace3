@@ -3,18 +3,24 @@
 # Table name: projects
 #
 #  id              :bigint           not null, primary key
-#  team_id         :integer
-#  team_name       :string
-#  description     :text
 #  data_story      :text
-#  source_code_url :string
-#  video_url       :string
+#  description     :text
 #  homepage_url    :string
+#  identifier      :string
+#  project_name    :string
+#  source_code_url :string
+#  team_name       :string
+#  video_url       :string
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
+#  team_id         :integer
 #  user_id         :integer
-#  project_name    :string
-#  identifier      :string
+#
+# Indexes
+#
+#  index_projects_on_identifier  (identifier)
+#  index_projects_on_team_id     (team_id)
+#  index_projects_on_user_id     (user_id)
 #
 
 # This model initially had no columns defined. If you add columns to the

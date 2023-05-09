@@ -3,29 +3,35 @@
 # Table name: events
 #
 #  id                :bigint           not null, primary key
-#  region_id         :integer
-#  name              :string
-#  registration_type :string
-#  capacity          :integer
-#  email             :string
-#  twitter           :string
-#  address           :text
 #  accessibility     :text
-#  youth_support     :text
+#  address           :text
+#  capacity          :integer
+#  catering          :text
+#  description       :text
+#  email             :string
+#  end_time          :datetime
+#  event_type        :string
+#  identifier        :string
+#  name              :string
+#  operation_hours   :text
 #  parking           :text
 #  public_transport  :text
-#  operation_hours   :text
-#  catering          :text
-#  video_id          :string
-#  start_time        :datetime
-#  end_time          :datetime
 #  published         :boolean          default(FALSE)
+#  registration_type :string
+#  start_time        :datetime
+#  twitter           :string
+#  youth_support     :text
 #  created_at        :datetime         not null
 #  updated_at        :datetime         not null
 #  place_id          :string
-#  identifier        :string
-#  event_type        :string
-#  description       :text
+#  region_id         :integer
+#  video_id          :string
+#
+# Indexes
+#
+#  index_events_on_identifier  (identifier)
+#  index_events_on_published   (published)
+#  index_events_on_region_id   (region_id)
 #
 require 'test_helper'
 

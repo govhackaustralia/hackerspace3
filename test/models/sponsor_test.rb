@@ -3,12 +3,16 @@
 # Table name: sponsors
 #
 #  id             :bigint           not null, primary key
-#  name           :string
 #  description    :text
+#  name           :string
 #  url            :string
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
 #  competition_id :integer
+#
+# Indexes
+#
+#  index_sponsors_on_competition_id  (competition_id)
 #
 require 'test_helper'
 

@@ -3,20 +3,25 @@
 # Table name: competitions
 #
 #  id                      :bigint           not null, primary key
+#  challenge_judging_end   :datetime
+#  challenge_judging_start :datetime
+#  current                 :boolean
+#  end_time                :datetime
+#  hunt_published          :boolean
+#  peoples_choice_end      :datetime
+#  peoples_choice_start    :datetime
+#  start_time              :datetime
+#  team_form_end           :datetime
+#  team_form_start         :datetime
 #  year                    :integer
 #  created_at              :datetime         not null
 #  updated_at              :datetime         not null
-#  start_time              :datetime
-#  end_time                :datetime
-#  peoples_choice_start    :datetime
-#  peoples_choice_end      :datetime
-#  challenge_judging_start :datetime
-#  challenge_judging_end   :datetime
-#  current                 :boolean
-#  team_form_start         :datetime
-#  team_form_end           :datetime
 #  hunt_badge_id           :integer
-#  hunt_published          :boolean
+#
+# Indexes
+#
+#  index_competitions_on_current  (current)
+#  index_competitions_on_year     (year)
 #
 
 # This model initially had no columns defined. If you add columns to the

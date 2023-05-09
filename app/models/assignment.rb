@@ -3,14 +3,22 @@
 # Table name: assignments
 #
 #  id              :bigint           not null, primary key
-#  user_id         :integer
 #  assignable_type :string
-#  assignable_id   :integer
 #  title           :string
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
+#  assignable_id   :integer
 #  competition_id  :integer
 #  holder_id       :integer
+#  user_id         :integer
+#
+# Indexes
+#
+#  index_assignments_on_assignable_type_and_assignable_id  (assignable_type,assignable_id)
+#  index_assignments_on_competition_id                     (competition_id)
+#  index_assignments_on_holder_id                          (holder_id)
+#  index_assignments_on_title                              (title)
+#  index_assignments_on_user_id                            (user_id)
 #
 class Assignment < ApplicationRecord
   belongs_to :assignable, polymorphic: true

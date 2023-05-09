@@ -3,12 +3,16 @@
 # Table name: data_sets
 #
 #  id          :bigint           not null, primary key
-#  region_id   :integer
+#  description :text
 #  name        :string
 #  url         :string
-#  description :text
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
+#  region_id   :integer
+#
+# Indexes
+#
+#  index_data_sets_on_region_id  (region_id)
 #
 require 'test_helper'
 

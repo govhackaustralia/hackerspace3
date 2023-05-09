@@ -3,12 +3,16 @@
 # Table name: badges
 #
 #  id             :bigint           not null, primary key
-#  competition_id :integer
-#  name           :string
-#  identifier     :string
 #  capacity       :integer
+#  identifier     :string
+#  name           :string
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
+#  competition_id :integer
+#
+# Indexes
+#
+#  index_badges_on_identifier  (identifier)
 #
 class Badge < ApplicationRecord
   belongs_to :competition
