@@ -26,7 +26,7 @@ class Admin::Sponsors::AssignmentsControllerTest < ActionDispatch::IntegrationTe
     assignments(:sponsor_contact).destroy!
     assert_difference 'Assignment.count', 1 do
       post admin_sponsor_assignments_url @sponsor, params: {
-        title: SPONSOR_CONTACT, user_id: @user
+        title: SPONSOR_CONTACT, user_id: @user,
       }
     end
     assert_redirected_to admin_competition_sponsor_url(
@@ -37,7 +37,7 @@ class Admin::Sponsors::AssignmentsControllerTest < ActionDispatch::IntegrationTe
   test 'should post create fail' do
     assert_no_difference 'Assignment.count' do
       post admin_sponsor_assignments_url @sponsor, params: {
-        title: SPONSOR_CONTACT, user_id: nil
+        title: SPONSOR_CONTACT, user_id: nil,
       }
     end
     assert_response :success

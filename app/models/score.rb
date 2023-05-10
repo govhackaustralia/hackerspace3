@@ -22,6 +22,6 @@ class Score < ApplicationRecord
 
   validates :header_id, uniqueness: {
     scope: :criterion_id,
-    message: 'Score already exists.'
+    message: 'Score already exists.',
   }
 end

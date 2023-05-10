@@ -58,13 +58,13 @@ class Profile < ApplicationRecord
     'No' => 0,
     'Yes, Aboriginal' => 1,
     'Yes, Torres Strait Islander' => 2,
-    'Prefer not to say' => 3
+    'Prefer not to say' => 3,
   }
 
   enum disability: {
     'Yes' => 0,
     'No' => 1,
-    'Prefer not to say' => 2
+    'Prefer not to say' => 2,
   }, _suffix: true
 
   enum education: {
@@ -77,7 +77,7 @@ class Profile < ApplicationRecord
     'Postgraduate diploma (includes graduate certificate)' => 6,
     "Master's degree" => 7,
     'Doctorate' => 8,
-    'Prefer not to say' => 9
+    'Prefer not to say' => 9,
   }, _prefix: true
 
   enum age: {
@@ -89,14 +89,14 @@ class Profile < ApplicationRecord
     '55-64 years old' => 5,
     '64-75 years old' => 6,
     '75 years and older' => 7,
-    'Prefer not to say' => 8
+    'Prefer not to say' => 8,
   }, _prefix: true
 
   enum team_status: {
     'Looking for a Team' => 0,
     'Looking for Team Mates' => 1,
     'Team Full' => 2,
-    'In a Team' => 3
+    'In a Team' => 3,
   }
 
   def update_identifier(identifier_name = nil)

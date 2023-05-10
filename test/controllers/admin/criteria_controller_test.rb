@@ -25,8 +25,8 @@ class Admin::CriteriaControllerTest < ActionDispatch::IntegrationTest
         criterion: {
           category: JUDGEMENT_CATEGORIES.sample,
           name: 'Fun Criterion',
-          description: 'Lorem Ipsum'
-        }
+          description: 'Lorem Ipsum',
+        },
       }
     end
     assert_redirected_to admin_competition_criteria_url @competition
@@ -38,8 +38,8 @@ class Admin::CriteriaControllerTest < ActionDispatch::IntegrationTest
         criterion: {
           category: 'Test',
           name: 'Fun Criterion',
-          description: 'Lorem Ipsum'
-        }
+          description: 'Lorem Ipsum',
+        },
       }
     end
     assert_response :success
@@ -54,8 +54,8 @@ class Admin::CriteriaControllerTest < ActionDispatch::IntegrationTest
     patch admin_competition_criterion_url(@competition), @criterion, params: {
       criterion: {
         name: 'Updated',
-        description: 'Lorem Ipsum'
-      }
+        description: 'Lorem Ipsum',
+      },
     }
     assert_redirected_to admin_competition_criteria_url @competition
     @criterion.reload

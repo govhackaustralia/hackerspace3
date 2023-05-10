@@ -21,8 +21,8 @@ class Admin::RegionLimitsControllerTest < ActionDispatch::IntegrationTest
         region_limit: {
           region_id: regions(:regional).id,
           max_national_challenges: 2,
-          max_regional_challenges: 2
-        }
+          max_regional_challenges: 2,
+        },
       }
     end
     assert_redirected_to admin_competition_checkpoints_url @competition
@@ -33,8 +33,8 @@ class Admin::RegionLimitsControllerTest < ActionDispatch::IntegrationTest
       post admin_checkpoint_region_limits_url(@checkpoint), params: {
         region_limit: {
           max_national_challenges: 2,
-          max_regional_challenges: 2
-        }
+          max_regional_challenges: 2,
+        },
       }
     end
     assert_response :success

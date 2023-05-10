@@ -16,7 +16,7 @@ class TeamManagement::ProjectsControllerTest < ActionDispatch::IntegrationTest
 
   test 'should post create success' do
     post team_management_team_projects_url @team, params: {project: {
-      team_name: 'Updated', project_name: 'Same'
+      team_name: 'Updated', project_name: 'Same',
     }}
     new_project = Project.last
     assert_redirected_to edit_team_management_team_project_url @team, new_project
@@ -30,7 +30,7 @@ class TeamManagement::ProjectsControllerTest < ActionDispatch::IntegrationTest
 
   test 'should patch update success' do
     patch team_management_team_project_url @team, @project, params: {project: {
-      team_name: 'Updated', project_name: 'Same', tag_list: 'test, #Test2'
+      team_name: 'Updated', project_name: 'Same', tag_list: 'test, #Test2',
     }}
     new_project = Project.last
     assert_redirected_to edit_team_management_team_project_url @team, new_project
@@ -41,7 +41,7 @@ class TeamManagement::ProjectsControllerTest < ActionDispatch::IntegrationTest
 
   test 'should patch update fail' do
     patch team_management_team_project_url @team, @project, params: {project: {
-      team_name: nil
+      team_name: nil,
     }}
     assert_response :success
     @project.reload

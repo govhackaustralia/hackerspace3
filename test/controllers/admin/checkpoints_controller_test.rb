@@ -26,8 +26,8 @@ class Admin::CheckpointsControllerTest < ActionDispatch::IntegrationTest
           name: 'Fun Checkpoint',
           end_time: Time.now + 1.week,
           max_national_challenges: 2,
-          max_regional_challenges: 2
-        }
+          max_regional_challenges: 2,
+        },
       }
     end
     assert_redirected_to admin_competition_checkpoints_url(@competition)
@@ -40,8 +40,8 @@ class Admin::CheckpointsControllerTest < ActionDispatch::IntegrationTest
           name: nil,
           end_time: Time.now + 1.week,
           max_national_challenges: 2,
-          max_regional_challenges: 2
-        }
+          max_regional_challenges: 2,
+        },
       }
     end
     assert_response :success
@@ -54,7 +54,7 @@ class Admin::CheckpointsControllerTest < ActionDispatch::IntegrationTest
 
   test 'should patch update success' do
     patch admin_competition_checkpoint_url(@competition, @checkpoint), params: {
-      checkpoint: {name: 'updated'}
+      checkpoint: {name: 'updated'},
     }
     assert_redirected_to admin_competition_checkpoints_url(@competition)
     @checkpoint.reload

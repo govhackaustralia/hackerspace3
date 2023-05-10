@@ -19,7 +19,7 @@ class DemographicsControllerTest < ActionDispatch::IntegrationTest
       hash.update(attribute => true)
     end
     patch demographic_path(@user), params: {profile: {
-      postcode: '1111', employment_status_attributes: employment_status_attributes
+      postcode: '1111', employment_status_attributes: employment_status_attributes,
     }}
     assert_redirected_to manage_account_path
     @user.reload

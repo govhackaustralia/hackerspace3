@@ -31,13 +31,13 @@ class Resource < ApplicationRecord
   validates :category, :position, :name, :url, :short_url, presence: true
   validates :position, :name, uniqueness: {
     scope: %i[competition_id category],
-    message: 'already taken in this competition'
+    message: 'already taken in this competition',
   }
 
   enum category: {
     data_portal: 0,
     tech: 1,
-    information: 2
+    information: 2,
   }
 
   private

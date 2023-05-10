@@ -66,7 +66,7 @@ class Registration < ApplicationRecord
   validates :status, inclusion: {in: VALID_ATTENDANCE_STATUSES}
   validates :assignment_id, uniqueness: {
     scope: :event_id,
-    message: 'Registration already exists'
+    message: 'Registration already exists',
   }
 
   validate :check_for_existing_competition_registrations,

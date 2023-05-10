@@ -19,7 +19,7 @@ class Admin::ChallengeSponsorshipsControllerTest < ActionDispatch::IntegrationTe
     ChallengeSponsorship.destroy_all
     assert_difference('ChallengeSponsorship.count') do
       post admin_challenge_challenge_sponsorships_url(@challenge), params: {
-        sponsor_id: sponsors(:one).id
+        sponsor_id: sponsors(:one).id,
       }
     end
     assert_redirected_to admin_region_challenge_url(@region, @challenge)
@@ -28,7 +28,7 @@ class Admin::ChallengeSponsorshipsControllerTest < ActionDispatch::IntegrationTe
   test 'should post create fail' do
     assert_no_difference('ChallengeSponsorship.count') do
       post admin_challenge_challenge_sponsorships_url(@challenge), params: {
-        sponsor_id: sponsors(:one).id
+        sponsor_id: sponsors(:one).id,
       }
     end
     assert_response :success

@@ -73,7 +73,7 @@ class Admin::Regions::ChallengesControllerTest < ActionDispatch::IntegrationTest
     picture = fixture_file_upload(picture_path, 'image/png')
     assert_difference -> { ActiveStorage::Attachment.count }, 1 do
       patch update_banner_image_admin_region_challenge_path(@region, @challenge), params: {
-        challenge: {banner_image: picture}
+        challenge: {banner_image: picture},
       }
     end
     assert_response :success

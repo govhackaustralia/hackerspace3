@@ -36,6 +36,6 @@ class Holder < ApplicationRecord
     looking_for_team_members: 0,
     working_solo: 1,
     team_full: 2,
-    in_team: 3
+    in_team: 3,
   }
 end

@@ -35,7 +35,7 @@ class Admin::CompetitionsControllerTest < ActionDispatch::IntegrationTest
         peoples_choice_start: Time.current,
         peoples_choice_end: Time.current,
         challenge_judging_start: Time.current,
-        challenge_judging_end: Time.current
+        challenge_judging_end: Time.current,
       }}
     end
     assert_redirected_to admin_competition_url(new_comp = Competition.last)
@@ -58,7 +58,7 @@ class Admin::CompetitionsControllerTest < ActionDispatch::IntegrationTest
   test 'should patch update success' do
     old_time = @competition.end_time
     patch admin_competition_url @competition, params: {
-      competition: {end_time: Time.now + 1.week}
+      competition: {end_time: Time.now + 1.week},
     }
     assert_redirected_to admin_competition_url @competition
     @competition.reload
@@ -68,7 +68,7 @@ class Admin::CompetitionsControllerTest < ActionDispatch::IntegrationTest
   test 'should patch update fail' do
     old_time = @competition.end_time
     patch admin_competition_url @competition, params: {
-      competition: {end_time: nil}
+      competition: {end_time: nil},
     }
     assert_response :success
     @competition.reload

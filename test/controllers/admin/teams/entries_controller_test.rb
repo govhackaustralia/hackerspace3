@@ -23,7 +23,7 @@ class Admin::Teams::EntriesControllerTest < ActionDispatch::IntegrationTest
       post admin_team_entries_url @team, params: {entry: {
         challenge_id: @challenge.id,
         checkpoint_id: @checkpoint.id,
-        justification: 'Test'
+        justification: 'Test',
       }}
     end
     assert_redirected_to admin_competition_team_url @competition, @team
@@ -34,7 +34,7 @@ class Admin::Teams::EntriesControllerTest < ActionDispatch::IntegrationTest
       post admin_team_entries_url @team, params: {entry: {
         challenge_id: @challenge.id,
         checkpoint_id: @checkpoint.id,
-        justification: 'Test'
+        justification: 'Test',
       }}
     end
     assert_response :success
@@ -47,7 +47,7 @@ class Admin::Teams::EntriesControllerTest < ActionDispatch::IntegrationTest
 
   test 'should patch update success' do
     patch admin_team_entry_url @team, @entry, params: {entry: {
-      justification: 'Updated'
+      justification: 'Updated',
     }}
     assert_redirected_to admin_competition_team_url @competition, @team
     @entry.reload
@@ -56,7 +56,7 @@ class Admin::Teams::EntriesControllerTest < ActionDispatch::IntegrationTest
 
   test 'should patch update fail' do
     patch admin_team_entry_url @team, @entry, params: {entry: {
-      checkpoint_id: nil
+      checkpoint_id: nil,
     }}
     assert_response :success
     @entry.reload

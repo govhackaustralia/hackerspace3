@@ -23,6 +23,6 @@ class RegionLimit < ApplicationRecord
 
   validates :region_id, uniqueness: {
     scope: :checkpoint_id,
-    message: 'Custom Limit for this Region already exists for this Checkpoint'
+    message: 'Custom Limit for this Region already exists for this Checkpoint',
   }
 end

@@ -27,12 +27,12 @@ class Badge < ApplicationRecord
 
   validates :name, uniqueness: {
     scope: :competition_id,
-    message: 'Badge name already taken in this competition'
+    message: 'Badge name already taken in this competition',
   }
 
   validates :capacity, numericality: {
     only_integer: true,
-    greater_than_or_equal_to: 0
+    greater_than_or_equal_to: 0,
   }, allow_nil: true
 
   after_save_commit :update_identifier

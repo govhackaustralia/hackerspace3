@@ -23,7 +23,7 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
   test 'should patch update' do
     patch user_path(@user), params: {user: {
       full_name: 'updated',
-      slack: 'updated_slack'
+      slack: 'updated_slack',
     }}
     assert_redirected_to manage_account_url
     @user.reload

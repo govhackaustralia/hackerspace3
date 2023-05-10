@@ -33,8 +33,8 @@ class UpdateSlackChannelNameJobTest < ActiveJob::TestCase
       ).returns({
         'ok' => true,
         'channel' => {
-          'name' => new_project_name
-        }
+          'name' => new_project_name,
+        },
       })
 
     UpdateSlackChannelNameJob.perform_now(projects(:one))

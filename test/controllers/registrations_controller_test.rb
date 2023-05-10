@@ -26,7 +26,7 @@ class RegistrationsControllerTest < ActionDispatch::IntegrationTest
 
   test 'should patch update' do
     patch event_registration_url(@event, @registration), params: {
-      registration: {status: NON_ATTENDING}
+      registration: {status: NON_ATTENDING},
     }
     assert_redirected_to event_registration_url(@event.identifier, @registration)
     @registration.reload

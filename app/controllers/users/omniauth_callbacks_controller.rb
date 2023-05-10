@@ -40,7 +40,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   def profile_params
     {
       slack_user_id: data.dig('authed_user', 'id'),
-      slack_access_token: data.fetch(:access_token)
+      slack_access_token: data.fetch(:access_token),
     }
   end
 

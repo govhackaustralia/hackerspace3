@@ -41,8 +41,8 @@ class Admin::ResourcesControllerTest < ActionDispatch::IntegrationTest
             category: 'data_portal',
             position: 1,
             url: 'www.example.com',
-            short_url: 'example.short'
-          }
+            short_url: 'example.short',
+          },
         }
       )
     end
@@ -53,7 +53,7 @@ class Admin::ResourcesControllerTest < ActionDispatch::IntegrationTest
     assert_no_difference 'Resource.count' do
       post admin_competition_resources_path(
         @competition, params: {
-          resource: {name: 'Example', position: nil}
+          resource: {name: 'Example', position: nil},
         }
       )
     end
@@ -70,7 +70,7 @@ class Admin::ResourcesControllerTest < ActionDispatch::IntegrationTest
   test 'should patch update success' do
     patch admin_competition_resource_path(
       @competition, @resource, params: {
-        resource: {name: 'Updated'}
+        resource: {name: 'Updated'},
       }
     )
     assert_redirected_to admin_competition_resources_path @competition
@@ -81,7 +81,7 @@ class Admin::ResourcesControllerTest < ActionDispatch::IntegrationTest
   test 'should patch update fail' do
     patch admin_competition_resource_path(
       @competition, @resource, params: {
-        resource: {name: nil}
+        resource: {name: nil},
       }
     )
     assert_response :success

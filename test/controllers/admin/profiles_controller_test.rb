@@ -7,8 +7,8 @@ class Admin::ProfilesControllerTest < ActionDispatch::IntegrationTest
     profiles(:one).update! published: true
     patch admin_profile_path(profiles(:one)), params: {
       profile: {
-        published: false
-      }
+        published: false,
+      },
     }
     assert profiles(:one).reload.published
     assert_redirected_to new_user_session_path
@@ -19,8 +19,8 @@ class Admin::ProfilesControllerTest < ActionDispatch::IntegrationTest
     profiles(:one).update! published: true
     patch admin_profile_path(profiles(:one)), params: {
       profile: {
-        published: false
-      }
+        published: false,
+      },
     }
     assert profiles(:one).reload.published
     assert_redirected_to root_path
@@ -31,8 +31,8 @@ class Admin::ProfilesControllerTest < ActionDispatch::IntegrationTest
     profiles(:one).update! published: true
     patch admin_profile_path(profiles(:one)), params: {
       profile: {
-        published: false
-      }
+        published: false,
+      },
     }
     assert_not profiles(:one).reload.published
     assert_redirected_to admin_user_path(users(:one))

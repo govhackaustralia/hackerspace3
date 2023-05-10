@@ -37,7 +37,7 @@ class Entry < ApplicationRecord
 
   validates :team_id, uniqueness: {
     scope: :challenge_id,
-    message: 'Teams are not able to enter the same Challenge twice.'
+    message: 'Teams are not able to enter the same Challenge twice.',
   }
   validates :award, allow_nil: true, inclusion: {in: AWARD_NAMES}
   validate :entries_must_not_exceed_max_national_allowed_for_checkpoint,

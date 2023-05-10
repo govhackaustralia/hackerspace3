@@ -36,8 +36,8 @@ class Admin::Regions::EventsControllerTest < ActionDispatch::IntegrationTest
           name: 'Test',
           capacity: 100,
           registration_type: EVENT_REGISTRATION_TYPES.sample,
-          event_type: EVENT_TYPES.sample
-        }
+          event_type: EVENT_TYPES.sample,
+        },
       }
     end
     assert_redirected_to admin_region_event_url @region, Event.last

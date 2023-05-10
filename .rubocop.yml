@@ -62,3 +62,6 @@ Layout/EndAlignment:
 
 Layout/MultilineOperationIndentation:
   EnforcedStyle: indented
+
+Style/TrailingCommaInHashLiteral:
+  EnforcedStyleForMultiline: consistent_comma

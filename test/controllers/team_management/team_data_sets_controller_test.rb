@@ -22,7 +22,7 @@ class TeamManagement::TeamDataSetsControllerTest < ActionDispatch::IntegrationTe
   test 'should post create success' do
     assert_difference 'TeamDataSet.count' do
       post team_management_team_team_data_sets_url @team, params: {team_data_set: {
-        name: 'Test'
+        name: 'Test',
       }}
     end
     assert_redirected_to team_management_team_team_data_sets_url @team
@@ -31,7 +31,7 @@ class TeamManagement::TeamDataSetsControllerTest < ActionDispatch::IntegrationTe
   test 'should post create fail' do
     assert_no_difference 'TeamDataSet.count' do
       post team_management_team_team_data_sets_url @team, params: {team_data_set: {
-        name: nil
+        name: nil,
       }}
     end
     assert_response :success
@@ -44,7 +44,7 @@ class TeamManagement::TeamDataSetsControllerTest < ActionDispatch::IntegrationTe
 
   test 'should patch update success' do
     patch team_management_team_team_data_set_url @team, @team_data_set, params: {team_data_set: {
-      name: 'Updated'
+      name: 'Updated',
     }}
     assert_redirected_to team_management_team_team_data_sets_url @team
     @team_data_set.reload
@@ -53,7 +53,7 @@ class TeamManagement::TeamDataSetsControllerTest < ActionDispatch::IntegrationTe
 
   test 'should patch update fail' do
     patch team_management_team_team_data_set_url @team, @team_data_set, params: {team_data_set: {
-      name: nil
+      name: nil,
     }}
     assert_response :success
     @team_data_set.reload

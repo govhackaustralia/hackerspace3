@@ -207,7 +207,7 @@ class User < ApplicationRecord
     'Northern Territory' => 6,
     'Australian Capital Territory' => 7,
     'New Zealand' => 8,
-    'Outside Australia and New Zealand' => 9
+    'Outside Australia and New Zealand' => 9,
   }
 
   def registration_complete?

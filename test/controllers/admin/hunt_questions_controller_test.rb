@@ -24,8 +24,8 @@ class Admin::HuntQuestionsControllerTest < ActionDispatch::IntegrationTest
       post admin_competition_hunt_questions_url(@competition), params: {
         hunt_question: {
           question: 'one',
-          answer: 'two'
-        }
+          answer: 'two',
+        },
       }
     end
     assert_redirected_to admin_competition_hunt_questions_url(@competition)
@@ -35,8 +35,8 @@ class Admin::HuntQuestionsControllerTest < ActionDispatch::IntegrationTest
     assert_no_difference('HuntQuestion.count') do
       post admin_competition_hunt_questions_url(@competition), params: {
         hunt_question: {
-          question: 'one'
-        }
+          question: 'one',
+        },
       }
     end
     assert_response :success
@@ -49,7 +49,7 @@ class Admin::HuntQuestionsControllerTest < ActionDispatch::IntegrationTest
 
   test 'should patch update success' do
     patch admin_competition_hunt_question_url(@competition, @hunt_question), params: {
-      hunt_question: {question: 'updated'}
+      hunt_question: {question: 'updated'},
     }
     assert_redirected_to admin_competition_hunt_questions_url(@competition)
     @hunt_question.reload
@@ -58,7 +58,7 @@ class Admin::HuntQuestionsControllerTest < ActionDispatch::IntegrationTest
 
   test 'should patch badge' do
     patch badge_admin_competition_hunt_questions_url(@competition, params: {
-      competition: {hunt_badge_id: badges(:two).id}
+      competition: {hunt_badge_id: badges(:two).id},
     })
     @competition.reload
     assert @competition.hunt_badge == badges(:two)
@@ -66,7 +66,7 @@ class Admin::HuntQuestionsControllerTest < ActionDispatch::IntegrationTest
 
   test 'should publish the treasure hunt' do
     patch hunt_published_admin_competition_hunt_questions_url(@competition, params: {
-      competition: {hunt_published: true}
+      competition: {hunt_published: true},
     })
     @competition.reload
     assert @competition.hunt_published

@@ -21,7 +21,7 @@ class TeamManagement::TeamsControllerTest < ActionDispatch::IntegrationTest
 
   test 'should patch update success' do
     patch team_management_team_url @team, params: {team: {
-      youth_team: true
+      youth_team: true,
     }}
     assert_redirected_to team_management_team_url @team
     @team.reload
@@ -30,7 +30,7 @@ class TeamManagement::TeamsControllerTest < ActionDispatch::IntegrationTest
 
   test 'should patch update fail' do
     patch team_management_team_url @team, params: {team: {
-      event_id: nil
+      event_id: nil,
     }}
     assert_response :success
     @team.reload

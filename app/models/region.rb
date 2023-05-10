@@ -64,7 +64,7 @@ class Region < ApplicationRecord
 
   validates :name, uniqueness: {
     scope: :competition_id,
-    message: 'Region name already taken in this competition'
+    message: 'Region name already taken in this competition',
   }
 
   validates :category, inclusion: {in: CATEGORIES}
@@ -75,7 +75,7 @@ class Region < ApplicationRecord
     :only_non_descendants_can_be_parents
 
   validates :time_zone, allow_blank: true, inclusion: {
-    in: VALID_TIME_ZONES.map(&:name)
+    in: VALID_TIME_ZONES.map(&:name),
   }
 
   after_save_commit :update_identifier
