@@ -47,7 +47,3 @@ Metrics/ParameterLists:
 
 Performance/CollectionLiteralInLoop:
   Enabled: false
-
-Naming/VariableNumber:
-  Exclude:
-    - app/controllers/accounts_controller.rb
