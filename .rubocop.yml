@@ -36,9 +36,6 @@ Style/ClassAndModuleChildren:
 Layout:
   Enabled: false
 
-Lint/UselessAssignment:
-  Enabled: false
-
 Metrics/ClassLength:
   Enabled: false
 

@@ -137,9 +137,8 @@ class Team < ApplicationRecord
   # Returns all the available checkpoints left in a given challenge for a team
   # taking into only challenges already entered.
   # ENHANCEMENT: Move to controller or helper.
-  def admin_available_checkpoints(challenge)
+  def admin_available_checkpoints(_challenge)
     valid_checkpoints = []
-    challenge_region = challenge.region
     competition.checkpoints.each do |checkpoint|
       # ERROR: Not working correctly at the moment
       # next if checkpoint.limit_reached?(self, challenge_region)
