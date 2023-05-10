@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class EventsController < ApplicationController
   before_action :check_event_found!, :check_event_published!, only: :show
 
@@ -26,7 +28,6 @@ class EventsController < ApplicationController
   end
 
   def check_event_published!
-
     @competition = @event.competition
     return if @event.published
 

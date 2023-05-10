@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: data_sets
@@ -23,9 +25,11 @@ class DataSet < ApplicationRecord
   has_many :sponsors, through: :challenges
   has_many :visits, as: :visitable, dependent: :destroy
 
-  scope :search, ->(term) {
-    where 'data_sets.name ILIKE ? OR url ILIKE ? OR description ILIKE ?',
-    "%#{term}%", "%#{term}%", "%#{term}%"
+  scope :search, lambda { |term|
+    where(
+      'data_sets.name ILIKE ? OR url ILIKE ? OR description ILIKE ?',
+      "%#{term}%", "%#{term}%", "%#{term}%"
+    )
   }
 
   validates :name, presence: true

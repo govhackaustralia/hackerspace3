@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class RegistrationsController < ApplicationController
   before_action :authenticate_user!
 
@@ -98,10 +100,11 @@ class RegistrationsController < ApplicationController
 
   def handle_new_save
     flash[:notice] = if params[:status] == ATTENDING
-                       'You have registered for this event.'
-                     else
-                       'You have been added to the waitlist.'
-                     end
+      'You have registered for this event.'
+    else
+      'You have been added to the waitlist.'
+    end
+
     redirect_to event_registration_path(@event.identifier, @registration)
   end
 

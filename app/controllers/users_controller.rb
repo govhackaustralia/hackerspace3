@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class UsersController < ApplicationController
   before_action :authenticate_user!
 
@@ -33,7 +35,6 @@ class UsersController < ApplicationController
   def edit
     @user = current_user
   end
-
 
   def update
     @user = current_user
