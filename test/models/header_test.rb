@@ -22,7 +22,7 @@ require 'test_helper'
 
 class HeaderTest < ActiveSupport::TestCase
   setup do
-    @challenge_header = @header= headers(:one)
+    @challenge_header = @header = headers(:one)
     @peoples_header = headers(:two)
     @particpiant = assignments(:participant)
     @user = users(:one)

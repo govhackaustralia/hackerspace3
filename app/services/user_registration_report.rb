@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 class UserRegistrationReport
-
   USER_COLUMNS = %w[
     id
     email

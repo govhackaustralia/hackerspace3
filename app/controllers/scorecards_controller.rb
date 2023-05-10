@@ -8,7 +8,7 @@ class ScorecardsController < ApplicationController
     @judgeable_assignment = @user.judgeable_assignment @competition
     Header.transaction do
       Score.transaction do
-        @header= @team.headers.find_or_create_by(assignment: @judgeable_assignment)
+        @header = @team.headers.find_or_create_by(assignment: @judgeable_assignment)
         @scores = organise_scores
       end
     end
@@ -32,7 +32,7 @@ class ScorecardsController < ApplicationController
   private
 
   def authorise_edit_update!
-    @header= Header.find params[:id]
+    @header = Header.find params[:id]
     return if @user == @header.user
 
     redirect_to root_path,

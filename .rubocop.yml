@@ -27,10 +27,13 @@ AllCops:
 Style/Documentation:
   Enabled: false
 
-Style/ClassAndModuleChildren:
-  Enabled: false
+Layout/MultilineMethodCallIndentation:
+  EnforcedStyle: indented
 
-Layout:
+Layout/SpaceInsideHashLiteralBraces:
+  EnforcedStyle: no_space
+
+Style/ClassAndModuleChildren:
   Enabled: false
 
 Metrics/ClassLength:

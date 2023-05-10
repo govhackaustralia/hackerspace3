@@ -21,7 +21,7 @@ require 'test_helper'
 class ScoreTest < ActiveSupport::TestCase
   setup do
     @score = scores(:one)
-    @header= headers(:one)
+    @header = headers(:one)
     @criterion = criteria(:one)
   end
 

@@ -68,7 +68,7 @@ class ProjectsController < ApplicationController
       assignment: @user.event_assignment(@competition),
       team: @team
     )
-    @header= Header.find_by(
+    @header = Header.find_by(
       assignment: @user.event_assignment(@competition),
       scoreable: @team
     )
