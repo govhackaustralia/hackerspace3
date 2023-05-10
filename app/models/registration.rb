@@ -70,8 +70,8 @@ class Registration < ApplicationRecord
   }
 
   validate :check_for_existing_competition_registrations,
-           :check_for_team_assignments,
-           :check_code_of_conduct
+    :check_for_team_assignments,
+    :check_code_of_conduct
 
   validate :check_user_registration_type, on: :create
 

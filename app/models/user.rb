@@ -64,8 +64,8 @@
 class User < ApplicationRecord
   # Devise options
   devise :database_authenticatable, :registerable, :recoverable, :rememberable,
-         :trackable, :validatable, :confirmable, :lockable, :timeoutable,
-         :omniauthable
+    :trackable, :validatable, :confirmable, :lockable, :timeoutable,
+    :omniauthable
 
   has_one :profile, dependent: :destroy
 
@@ -127,7 +127,7 @@ class User < ApplicationRecord
 
   has_many :challenges_judging,
 
-  through: :judge_assignments,
+    through: :judge_assignments,
     source: :assignable,
     source_type: 'Challenge'
 
@@ -165,7 +165,7 @@ class User < ApplicationRecord
 
   scope :search, lambda { |term|
     where 'full_name ILIKE ? OR email ILIKE ? OR preferred_name ILIKE ?',
-          "%#{term}%", "%#{term}%", "%#{term}%"
+      "%#{term}%", "%#{term}%", "%#{term}%"
   }
 
   scope :mailing_list, -> { where mailing_list: true }

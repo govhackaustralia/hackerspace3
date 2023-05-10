@@ -23,7 +23,7 @@ class Checkpoint < ApplicationRecord
   has_many :region_limits
 
   validates :name, :end_time, :max_national_challenges,
-            :max_regional_challenges, presence: true
+    :max_regional_challenges, presence: true
 
   # Returns a boolean based on whether a team has reached the maximum
   # number of challenges for a particular region.

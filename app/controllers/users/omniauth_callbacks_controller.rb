@@ -64,7 +64,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
   def new_user_from_google(data)
     User.new full_name: data['name'], email: data['email'],
-             password: Devise.friendly_token[0, 20]
+      password: Devise.friendly_token[0, 20]
   end
 
   def update_user_info_from_google(user, data)

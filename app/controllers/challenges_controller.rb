@@ -3,7 +3,7 @@
 class ChallengesController < ApplicationController
   before_action :check_competition_start!, only: %i[show entries entries_table]
   before_action :check_competition_index_landing_page!,
-                :preferred_index_view, only: %i[index table]
+    :preferred_index_view, only: %i[index table]
   before_action :check_competition_landing_page_index!, only: :landing_page
 
   def index

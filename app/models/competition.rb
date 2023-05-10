@@ -66,11 +66,11 @@ class Competition < ApplicationRecord
   belongs_to :hunt_badge, class_name: 'Badge', optional: true
 
   validates :year,
-            :team_form_start, :team_form_end,
-            :start_time, :end_time,
-            :peoples_choice_start, :peoples_choice_end,
-            :challenge_judging_start, :challenge_judging_end,
-            presence: true
+    :team_form_start, :team_form_end,
+    :start_time, :end_time,
+    :peoples_choice_start, :peoples_choice_end,
+    :challenge_judging_start, :challenge_judging_end,
+    presence: true
 
   validates :year, uniqueness: true
 

@@ -10,14 +10,14 @@ module Types
     # They will be entry points for queries on your schema.
 
     field :events,
-          [Types::EventType],
-          null: false,
-          description: 'Returns a list of events in the hackerspace'
+      [Types::EventType],
+      null: false,
+      description: 'Returns a list of events in the hackerspace'
 
     field :regions,
-          [Types::RegionType],
-          null: false,
-          description: 'Returns a list of region in the hackerspace'
+      [Types::RegionType],
+      null: false,
+      description: 'Returns a list of region in the hackerspace'
 
     def events
       Event.all.preload(:region)

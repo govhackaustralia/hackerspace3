@@ -25,9 +25,9 @@ module SlackApiWrapper
     response = Excon.post('https://slack.com/api/conversations.invite',
       headers: {'Content-Type' => 'application/x-www-form-urlencoded'},
       body: URI.encode_www_form(
-       token: ENV.fetch('SLACK_BOT_TOKEN', nil),
-       channel: channel_id,
-       users: slack_user_ids
+        token: ENV.fetch('SLACK_BOT_TOKEN', nil),
+        channel: channel_id,
+        users: slack_user_ids
       )
     )
     JSON.parse response.body
@@ -37,9 +37,9 @@ module SlackApiWrapper
     response = Excon.post('https://slack.com/api/conversations.rename',
       headers: {'Content-Type' => 'application/x-www-form-urlencoded'},
       body: URI.encode_www_form(
-       token: ENV.fetch('SLACK_BOT_TOKEN', nil),
-       channel: channel_id,
-       name: channel_name[...MAX_CHANNEL_LENGTH]
+        token: ENV.fetch('SLACK_BOT_TOKEN', nil),
+        channel: channel_id,
+        name: channel_name[...MAX_CHANNEL_LENGTH]
       )
     )
     JSON.parse response.body
@@ -49,9 +49,9 @@ module SlackApiWrapper
     response = Excon.post('https://slack.com/api/conversations.setTopic',
       headers: {'Content-Type' => 'application/x-www-form-urlencoded'},
       body: URI.encode_www_form(
-       token: ENV.fetch('SLACK_BOT_TOKEN', nil),
-       channel: channel_id,
-       topic: 'Public Slack channel for team members, mentors, and the rest of the GovHack community to discuss this project'
+        token: ENV.fetch('SLACK_BOT_TOKEN', nil),
+        channel: channel_id,
+        topic: 'Public Slack channel for team members, mentors, and the rest of the GovHack community to discuss this project'
       )
     )
     JSON.parse response.body

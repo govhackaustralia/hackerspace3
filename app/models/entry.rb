@@ -41,8 +41,8 @@ class Entry < ApplicationRecord
   }
   validates :award, allow_nil: true, inclusion: {in: AWARD_NAMES}
   validate :entries_must_not_exceed_max_national_allowed_for_checkpoint,
-           :teams_cannot_enter_challenges_they_are_not_eligible_for,
-           on: :create
+    :teams_cannot_enter_challenges_they_are_not_eligible_for,
+    on: :create
 
   after_create_commit :update_eligible
 

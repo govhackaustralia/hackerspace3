@@ -86,11 +86,11 @@ class EventTest < ActiveSupport::TestCase
 
   test 'event scopes past future' do
     @event.update start_time: Time.now.in_time_zone(LAST_COMPETITION_TIME_ZONE) - 1.week,
-                  end_time: Time.now.in_time_zone(LAST_COMPETITION_TIME_ZONE) - 1.week
+      end_time: Time.now.in_time_zone(LAST_COMPETITION_TIME_ZONE) - 1.week
     assert Event.past.include? @event
     assert Event.future.exclude? @event
     @event.update start_time: Time.now.in_time_zone(LAST_COMPETITION_TIME_ZONE) + 1.week,
-                  end_time: Time.now.in_time_zone(LAST_COMPETITION_TIME_ZONE) + 1.week
+      end_time: Time.now.in_time_zone(LAST_COMPETITION_TIME_ZONE) + 1.week
     assert Event.future.include? @event
     assert Event.past.exclude? @event
   end

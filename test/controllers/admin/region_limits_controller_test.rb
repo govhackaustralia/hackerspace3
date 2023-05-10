@@ -47,7 +47,7 @@ class Admin::RegionLimitsControllerTest < ActionDispatch::IntegrationTest
 
   test 'should patch update success' do
     patch admin_checkpoint_region_limit_url(@checkpoint, @region_limit),
-          params: {region_limit: {max_national_challenges: 5}}
+      params: {region_limit: {max_national_challenges: 5}}
     assert_redirected_to admin_competition_checkpoints_url @competition
     @region_limit.reload
     assert @region_limit.max_national_challenges == 5

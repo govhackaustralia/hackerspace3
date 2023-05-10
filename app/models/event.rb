@@ -80,11 +80,11 @@ class Event < ApplicationRecord
 
   scope :locations, lambda {
     where 'events.name NOT LIKE ? AND event_type = ?',
-          '%Remote%', COMPETITION_EVENT
+      '%Remote%', COMPETITION_EVENT
   }
   scope :remotes, lambda {
     where 'events.name LIKE ? AND event_type = ?',
-          '%Remote%', COMPETITION_EVENT
+      '%Remote%', COMPETITION_EVENT
   }
 
   scope :competition, lambda { |competition|
