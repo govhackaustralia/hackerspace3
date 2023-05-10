@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Admin::ProjectsController < ApplicationController
   before_action :authenticate_user!, :check_for_privileges!
 

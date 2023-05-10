@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class PeoplesJudgesReport
   attr_reader :competition, :event_assignments
 

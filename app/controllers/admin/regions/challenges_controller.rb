@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Admin::Regions::ChallengesController < ApplicationController
   before_action :authenticate_user!, :check_for_privileges
   before_action :check_for_competition_start!, only: :preview

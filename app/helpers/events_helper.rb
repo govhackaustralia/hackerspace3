@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module EventsHelper
   def participant_able_to_enter?
     return true unless @event.competition_event?

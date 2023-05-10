@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class TeamManagement::TeamDataSetsController < TeamManagement::TeamsController
   before_action :check_in_comp_window!
 

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ScorecardsController < ApplicationController
   before_action :authenticate_user!, :check_for_privileges
   before_action :authorise_edit_update!, only: %i[edit update]

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Events::TeamsController < ApplicationController
   def index
     @event = Event.find_by(identifier: params[:event_identifier])

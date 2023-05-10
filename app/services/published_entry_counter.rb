@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class PublishedEntryCounter
   attr_reader :competition, :challenge, :challenge_ids
 

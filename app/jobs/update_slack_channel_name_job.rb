@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class UpdateSlackChannelNameJob < ApplicationJob
   queue_as :default
 

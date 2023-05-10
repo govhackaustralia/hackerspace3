@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class BadgeMailer < ApplicationMailer
   def notify_badge_awarded(user, badge)
     @user = user

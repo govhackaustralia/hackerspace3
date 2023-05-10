@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class MailchimpUpdateJob < ApplicationJob
   queue_as :default
 

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module EntriesHelper
   def challenges_event_counts(region, checkpoint_ids = nil)
     events = region.events.competitions

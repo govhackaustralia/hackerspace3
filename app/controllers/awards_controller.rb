@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AwardsController < ApplicationController
   def index
     all = @competition.events.published.preload(:region).order(start_time: :asc, name: :asc)

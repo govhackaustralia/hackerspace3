@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Admin::TeamsController < ApplicationController
   before_action :authenticate_user!, :check_for_privileges!
   before_action :retrieve_team, except: :index

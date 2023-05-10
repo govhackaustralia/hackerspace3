@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module SlackApiWrapper
 
   MAX_CHANNEL_LENGTH = 80

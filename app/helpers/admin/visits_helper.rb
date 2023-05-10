@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Admin::VisitsHelper
   def visitable(visits, type, id)
     visits.find do |visit|

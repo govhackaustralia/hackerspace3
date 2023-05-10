@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class HuntQuestionsController < ApplicationController
   before_action :check_published!, :hunt_questions, :hunt_badge
   before_action :authenticate_user!, :check_for_previous_correct_answer!, only: :update

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ScorecardsHelper
   def challenge_title_required?(score)
     return false if score.header_id == @header.id

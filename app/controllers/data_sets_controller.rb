@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class DataSetsController < ApplicationController
   def index
     @data_sets = @competition.data_sets.order(:name).preload(:region)

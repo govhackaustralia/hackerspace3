@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ProjectsController < ApplicationController
   before_action :check_competition_started!, :check_team_published!, except: :index
   before_action :authenticate_user!, :check_slack_chat!, only: :slack_chat

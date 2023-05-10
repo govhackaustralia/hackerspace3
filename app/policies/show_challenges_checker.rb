@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ShowChallengesChecker
   attr_reader :competition
 

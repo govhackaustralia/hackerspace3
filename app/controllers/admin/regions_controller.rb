@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Admin::RegionsController < ApplicationController
   before_action :authenticate_user!, :check_for_privileges
   before_action :retrieve_parent_regions, except: %i[index show]

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ProfilesController < ApplicationController
   before_action :authenticate_user!, only: %i[edit update]
   before_action :authorize_user!, only: %i[edit update]

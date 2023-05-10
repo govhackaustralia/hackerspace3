@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class VisitsController < ApplicationController
   def index
     visit = Visit.create(visit_params)

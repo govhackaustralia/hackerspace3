@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # ENHANCEMENT: Extremely inefficient when used, rework. Move DB queries out.
 # Can split into judge_compile and participant_compile.
 class JudgeableScores

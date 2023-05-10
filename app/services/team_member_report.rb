@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class TeamMemberReport
   attr_accessor :competition
 

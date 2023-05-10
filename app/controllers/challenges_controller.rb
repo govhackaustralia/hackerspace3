@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ChallengesController < ApplicationController
   before_action :check_competition_start!, only: %i[show entries entries_table]
   before_action :check_competition_index_landing_page!,
