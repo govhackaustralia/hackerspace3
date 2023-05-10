@@ -2,7 +2,7 @@
 
 class ApplicationController < ActionController::Base
   before_action :competition, :check_accepted_terms_and_conditions!,
-                :check_required_fields!, :holder, :acting_on_behalf_of_user
+    :check_required_fields!, :holder, :acting_on_behalf_of_user
 
   private
 
