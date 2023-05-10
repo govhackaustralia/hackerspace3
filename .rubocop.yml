@@ -27,15 +27,6 @@ AllCops:
 Style/Documentation:
   Enabled: false
 
-Layout/MultilineMethodCallIndentation:
-  EnforcedStyle: indented
-
-Layout/SpaceInsideHashLiteralBraces:
-  EnforcedStyle: no_space
-
-Layout/FirstHashElementIndentation:
-  EnforcedStyle: consistent
-
 Style/ClassAndModuleChildren:
   Enabled: false
 
@@ -47,3 +38,15 @@ Metrics/ParameterLists:
 
 Performance/CollectionLiteralInLoop:
   Enabled: false
+
+Layout/MultilineMethodCallIndentation:
+  EnforcedStyle: indented
+
+Layout/SpaceInsideHashLiteralBraces:
+  EnforcedStyle: no_space
+
+Layout/FirstHashElementIndentation:
+  EnforcedStyle: consistent
+
+Layout/ArgumentAlignment:
+  EnforcedStyle: with_fixed_indentation
