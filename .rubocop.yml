@@ -8,7 +8,6 @@ AllCops:
   Exclude:
     - config/**/*
     - app/main/config/**/*
-    - Gemfile
     - Guardfile
     - Rakefile
     - bin/*
