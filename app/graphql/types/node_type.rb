@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module Types
+module Types # rubocop:disable Style/ClassAndModuleChildren
   module NodeType
     include Types::BaseInterface
     # Add the `id` field

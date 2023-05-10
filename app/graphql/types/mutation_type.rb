@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module Types
+module Types # rubocop:disable Style/ClassAndModuleChildren
   class MutationType < Types::BaseObject
     # TODO: remove me
     field :test_field, String, null: false,

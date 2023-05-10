@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module ApplicationCable
+module ApplicationCable # rubocop:disable Style/ClassAndModuleChildren
   class Connection < ActionCable::Connection::Base
     identified_by :current_user
 

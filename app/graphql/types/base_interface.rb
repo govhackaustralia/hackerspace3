@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module Types
+module Types # rubocop:disable Style/ClassAndModuleChildren
   module BaseInterface
     include GraphQL::Schema::Interface
     edge_type_class(Types::BaseEdge)

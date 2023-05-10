@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module Types
+module Types # rubocop:disable Style/ClassAndModuleChildren
   class RegionType < Types::BaseObject
     field :id, ID, null: false
     field :name, String, null: true

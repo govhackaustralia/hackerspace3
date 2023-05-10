@@ -15,9 +15,6 @@ AllCops:
 Style/Documentation:
   Enabled: false
 
-Style/ClassAndModuleChildren:
-  Enabled: false
-
 Metrics/ClassLength:
   Enabled: false
 
@@ -62,3 +59,6 @@ Layout/MultilineOperationIndentation:
 
 Style/TrailingCommaInHashLiteral:
   EnforcedStyleForMultiline: consistent_comma
+
+Style/ClassAndModuleChildren:
+  EnforcedStyle: compact

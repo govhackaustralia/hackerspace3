@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module Types
+module Types # rubocop:disable Style/ClassAndModuleChildren
   class QueryType < Types::BaseObject
     # Add `node(id: ID!) and `nodes(ids: [ID!]!)`
     include GraphQL::Types::Relay::HasNodeField
