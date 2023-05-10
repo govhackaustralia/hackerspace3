@@ -15,7 +15,7 @@ class AccountsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'should patch update success' do
-    patch account_path(@user), params: { user: {
+    patch account_path(@user), params: {user: {
       full_name: 'Full Name',
       region: 'South Australia'
     }}
@@ -26,7 +26,7 @@ class AccountsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'should patch update fail' do
-    patch account_path(@user), params: { user: {
+    patch account_path(@user), params: {user: {
       full_name: ''
     }}
     assert_redirected_to complete_registration_path

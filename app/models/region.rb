@@ -67,7 +67,7 @@ class Region < ApplicationRecord
     message: 'Region name already taken in this competition'
   }
 
-  validates :category, inclusion: { in: CATEGORIES }
+  validates :category, inclusion: {in: CATEGORIES}
 
   validate :only_one_international_per_competition,
            :only_international_can_be_parent_of_national,

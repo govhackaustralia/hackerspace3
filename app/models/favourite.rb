@@ -24,5 +24,5 @@ class Favourite < ApplicationRecord
 
   has_one :project, through: :team, source: :current_project
 
-  validates :team, uniqueness: { scope: :assignment }
+  validates :team, uniqueness: {scope: :assignment}
 end

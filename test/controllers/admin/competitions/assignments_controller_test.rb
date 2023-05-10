@@ -25,14 +25,14 @@ class Admin::Competitions::AssignmentsControllerTest < ActionDispatch::Integrati
 
   test 'should post create success' do
     assert_difference 'Assignment.count', 1 do
-      post admin_competition_assignments_url @competition, params: { title: MANAGEMENT_TEAM, user_id: users(:two) }
+      post admin_competition_assignments_url @competition, params: {title: MANAGEMENT_TEAM, user_id: users(:two)}
     end
     assert_redirected_to admin_competition_assignments_url @competition
   end
 
   test 'should post create fail' do
     assert_no_difference 'Assignment.count' do
-      post admin_competition_assignments_url @competition, params: { title: MANAGEMENT_TEAM, user_id: nil }
+      post admin_competition_assignments_url @competition, params: {title: MANAGEMENT_TEAM, user_id: nil}
     end
     assert_response :success
   end

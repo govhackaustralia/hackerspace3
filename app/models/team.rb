@@ -82,7 +82,7 @@ class Team < ApplicationRecord
     }
 
   scope :competition, lambda { |competition|
-    joins(event: :region).where(regions: { competition: competition })
+    joins(event: :region).where(regions: {competition: competition})
   }
 
   validate :check_for_ineligible_challenge_entries

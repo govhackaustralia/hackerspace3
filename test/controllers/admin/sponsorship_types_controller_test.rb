@@ -23,7 +23,7 @@ class Admin::SponsorshipTypesControllerTest < ActionDispatch::IntegrationTest
     assert_difference 'SponsorshipType.count' do
       post admin_competition_sponsorship_types_url(
         @competition, params: {
-          sponsorship_type: { name: 'Example', position: 1 }
+          sponsorship_type: {name: 'Example', position: 1}
         }
       )
     end
@@ -34,7 +34,7 @@ class Admin::SponsorshipTypesControllerTest < ActionDispatch::IntegrationTest
     assert_no_difference 'SponsorshipType.count' do
       post admin_competition_sponsorship_types_url(
         @competition, params: {
-          sponsorship_type: { name: 'Example', position: nil }
+          sponsorship_type: {name: 'Example', position: nil}
         }
       )
     end
@@ -51,7 +51,7 @@ class Admin::SponsorshipTypesControllerTest < ActionDispatch::IntegrationTest
   test 'should patch update success' do
     patch admin_competition_sponsorship_type_url(
       @competition, @sponsorship_type, params: {
-        sponsorship_type: { name: 'Updated' }
+        sponsorship_type: {name: 'Updated'}
       }
     )
     assert_redirected_to admin_competition_sponsorship_types_url @competition
@@ -62,7 +62,7 @@ class Admin::SponsorshipTypesControllerTest < ActionDispatch::IntegrationTest
   test 'should patch update fail' do
     patch admin_competition_sponsorship_type_url(
       @competition, @sponsorship_type, params: {
-        sponsorship_type: { name: nil }
+        sponsorship_type: {name: nil}
       }
     )
     assert_response :success

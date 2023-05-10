@@ -33,6 +33,9 @@ Layout/MultilineMethodCallIndentation:
 Layout/SpaceInsideHashLiteralBraces:
   EnforcedStyle: no_space
 
+Layout/FirstHashElementIndentation:
+  EnforcedStyle: consistent
+
 Style/ClassAndModuleChildren:
   Enabled: false
 

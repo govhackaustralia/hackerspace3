@@ -29,8 +29,8 @@ class Resource < ApplicationRecord
   scope :show_on_front_page, -> { where show_on_front_page: true }
 
   validates :category, :position, :name, :url, :short_url, presence: true
-  validates :position, :name, uniqueness: { scope: %i[competition_id category],
-    message: 'already taken in this competition' }
+  validates :position, :name, uniqueness: {scope: %i[competition_id category],
+    message: 'already taken in this competition'}
 
   enum category: {
     data_portal: 0,

@@ -73,6 +73,6 @@ class JudgeableScores
               else
                 scores.sum
               end
-    @scoreable_scores_obj[team.id] = { display_score_status: verdict }
+    @scoreable_scores_obj[team.id] = {display_score_status: verdict}
   end
 end

@@ -23,7 +23,7 @@ class Admin::BadgesControllerTest < ActionDispatch::IntegrationTest
   test 'should post award success' do
     assert_difference 'Assignment.count', 1 do
       post award_admin_competition_badge_path(@competition, @badge), params: {
-        assignment: { user_id: @user.id }
+        assignment: {user_id: @user.id}
       }
     end
   end
@@ -31,7 +31,7 @@ class Admin::BadgesControllerTest < ActionDispatch::IntegrationTest
   test 'should post award fail' do
     assert_no_difference 'Badge.count', 1 do
       post award_admin_competition_badge_path(@competition, @badge), params: {
-        assignment: { user_id: users(:one).id }
+        assignment: {user_id: users(:one).id}
       }
     end
   end

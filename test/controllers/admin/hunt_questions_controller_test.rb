@@ -49,7 +49,7 @@ class Admin::HuntQuestionsControllerTest < ActionDispatch::IntegrationTest
 
   test 'should patch update success' do
     patch admin_competition_hunt_question_url(@competition, @hunt_question), params: {
-      hunt_question: { question: 'updated' }
+      hunt_question: {question: 'updated'}
     }
     assert_redirected_to admin_competition_hunt_questions_url(@competition)
     @hunt_question.reload

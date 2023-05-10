@@ -54,7 +54,7 @@ class Admin::CheckpointsControllerTest < ActionDispatch::IntegrationTest
 
   test 'should patch update success' do
     patch admin_competition_checkpoint_url(@competition, @checkpoint), params: {
-      checkpoint: { name: 'updated' }
+      checkpoint: {name: 'updated'}
     }
     assert_redirected_to admin_competition_checkpoints_url(@competition)
     @checkpoint.reload

@@ -27,7 +27,7 @@ class Admin::SponsorsControllerTest < ActionDispatch::IntegrationTest
   test 'should post create success' do
     assert_difference 'Sponsor.count' do
       post admin_competition_sponsors_url @competition, params: {
-        sponsor: { name: 'Example', description: 'Example' }
+        sponsor: {name: 'Example', description: 'Example'}
       }
     end
     assert_redirected_to admin_competition_sponsor_url @competition, Sponsor.last
@@ -36,7 +36,7 @@ class Admin::SponsorsControllerTest < ActionDispatch::IntegrationTest
   test 'should post create fail' do
     assert_no_difference 'Sponsor.count' do
       post admin_competition_sponsors_url @competition, params: {
-        sponsor: { description: 'Example' }
+        sponsor: {description: 'Example'}
       }
     end
     assert_response :success
@@ -49,7 +49,7 @@ class Admin::SponsorsControllerTest < ActionDispatch::IntegrationTest
 
   test 'should patch update success' do
     patch admin_competition_sponsor_url @competition, @sponsor, params: {
-      sponsor: { description: 'Updated' }
+      sponsor: {description: 'Updated'}
     }
     assert_redirected_to admin_competition_sponsor_url @competition, @sponsor
     @sponsor.reload
@@ -58,7 +58,7 @@ class Admin::SponsorsControllerTest < ActionDispatch::IntegrationTest
 
   test 'should patch update fail' do
     patch admin_competition_sponsor_url @competition, @sponsor, params: {
-      sponsor: { name: nil }
+      sponsor: {name: nil}
     }
     assert_response :success
     @sponsor.reload

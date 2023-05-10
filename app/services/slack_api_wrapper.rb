@@ -12,7 +12,7 @@ module SlackApiWrapper
   #   and must be 80 characters or less.
   def self.slack_conversatons_create(channel_name)
     response = Excon.post('https://slack.com/api/conversations.create',
-      headers: { 'Content-Type' => 'application/x-www-form-urlencoded' },
+      headers: {'Content-Type' => 'application/x-www-form-urlencoded'},
       body: URI.encode_www_form(
         token: ENV.fetch('SLACK_BOT_TOKEN', nil),
         name: channel_name[...MAX_CHANNEL_LENGTH]
@@ -23,7 +23,7 @@ module SlackApiWrapper
 
   def self.slack_conversations_invite(channel_id:, slack_user_ids:)
     response = Excon.post('https://slack.com/api/conversations.invite',
-      headers: { 'Content-Type' => 'application/x-www-form-urlencoded' },
+      headers: {'Content-Type' => 'application/x-www-form-urlencoded'},
       body: URI.encode_www_form(
        token: ENV.fetch('SLACK_BOT_TOKEN', nil),
        channel: channel_id,
@@ -35,7 +35,7 @@ module SlackApiWrapper
 
   def self.slack_conversatons_rename(channel_id:, channel_name:)
     response = Excon.post('https://slack.com/api/conversations.rename',
-      headers: { 'Content-Type' => 'application/x-www-form-urlencoded' },
+      headers: {'Content-Type' => 'application/x-www-form-urlencoded'},
       body: URI.encode_www_form(
        token: ENV.fetch('SLACK_BOT_TOKEN', nil),
        channel: channel_id,
@@ -47,7 +47,7 @@ module SlackApiWrapper
 
   def self.slack_conversatons_set_topic(channel_id:)
     response = Excon.post('https://slack.com/api/conversations.setTopic',
-      headers: { 'Content-Type' => 'application/x-www-form-urlencoded' },
+      headers: {'Content-Type' => 'application/x-www-form-urlencoded'},
       body: URI.encode_www_form(
        token: ENV.fetch('SLACK_BOT_TOKEN', nil),
        channel: channel_id,

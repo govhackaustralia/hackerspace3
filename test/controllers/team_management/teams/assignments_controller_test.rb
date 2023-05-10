@@ -30,18 +30,18 @@ class TeamManagement::Teams::AssignmentsControllerTest < ActionDispatch::Integra
     @member_assignment.destroy
     registrations(:non_attending).update status: ATTENDING
     assert_difference 'Assignment.count' do
-      post team_management_team_assignments_url @team, params: { assignment: {
+      post team_management_team_assignments_url @team, params: {assignment: {
         user_id: @member.id
-      } }
+      }}
     end
     assert_redirected_to team_management_team_assignments_path @team
   end
 
   test 'should post create fail' do
     assert_no_difference 'Assignment.count' do
-      post team_management_team_assignments_url @team, params: { assignment: {
+      post team_management_team_assignments_url @team, params: {assignment: {
         user_id: @member.id
-      } }
+      }}
     end
     assert_response :success
   end

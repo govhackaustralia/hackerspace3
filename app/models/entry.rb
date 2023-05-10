@@ -39,7 +39,7 @@ class Entry < ApplicationRecord
     scope: :challenge_id,
     message: 'Teams are not able to enter the same Challenge twice.'
   }
-  validates :award, allow_nil: true, inclusion: { in: AWARD_NAMES }
+  validates :award, allow_nil: true, inclusion: {in: AWARD_NAMES}
   validate :entries_must_not_exceed_max_national_allowed_for_checkpoint,
            :teams_cannot_enter_challenges_they_are_not_eligible_for,
            on: :create
@@ -47,19 +47,19 @@ class Entry < ApplicationRecord
   after_create_commit :update_eligible
 
   scope :regional, lambda {
-    joins(:region).where(regions: { category: Region::REGIONAL })
+    joins(:region).where(regions: {category: Region::REGIONAL})
   }
   scope :national, lambda {
     joins(:region).where(
-      regions: { category: [Region::INTERNATIONAL, Region::NATIONAL] }
+      regions: {category: [Region::INTERNATIONAL, Region::NATIONAL]}
     )
   }
   scope :winners, -> { where award: WINNER }
   scope :competition, lambda { |competition|
-    joins(challenge: :region).where(regions: { competition: competition })
+    joins(challenge: :region).where(regions: {competition: competition})
   }
 
-  scope :published, -> { joins(:team).where(teams: { published: true }) }
+  scope :published, -> { joins(:team).where(teams: {published: true}) }
 
   # Checks that a project has enough information entered for the entry to be
   # marked eligible, and then marks accordingly.

@@ -88,12 +88,12 @@ class Event < ApplicationRecord
   }
 
   scope :competition, lambda { |competition|
-    joins(:region).where(regions: { competition: competition })
+    joins(:region).where(regions: {competition: competition})
   }
 
   validates :name, :capacity, presence: true
-  validates :registration_type, inclusion: { in: EVENT_REGISTRATION_TYPES }
-  validates :event_type, inclusion: { in: EVENT_TYPES }
+  validates :registration_type, inclusion: {in: EVENT_REGISTRATION_TYPES}
+  validates :event_type, inclusion: {in: EVENT_TYPES}
 
   after_save_commit :update_identifier
 

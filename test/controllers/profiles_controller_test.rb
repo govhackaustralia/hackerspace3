@@ -56,7 +56,7 @@ class ProfilesControllerTest < ActionDispatch::IntegrationTest
     sign_in users(:one)
     old_team_status = @profile.team_status
     patch profile_path @profile, params: {
-      profile: { team_status: 'Team Full' }
+      profile: {team_status: 'Team Full'}
     }
     assert_redirected_to profile_path(@profile)
     @profile.reload
@@ -67,7 +67,7 @@ class ProfilesControllerTest < ActionDispatch::IntegrationTest
     sign_in users(:one)
     users(:one).update! accepted_code_of_conduct: nil
     patch profile_path @profile, params: {
-      profile: { team_status: 'Team Full' }
+      profile: {team_status: 'Team Full'}
     }
     assert_response :success
   end

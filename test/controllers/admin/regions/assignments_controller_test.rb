@@ -26,14 +26,14 @@ class Admin::Regions::AssignmentsControllerTest < ActionDispatch::IntegrationTes
   test 'should post create success' do
     assignments(:region_director).destroy!
     assert_difference 'Assignment.count', 1 do
-      post admin_region_assignments_url @region, params: { title: REGION_DIRECTOR, user_id: @user }
+      post admin_region_assignments_url @region, params: {title: REGION_DIRECTOR, user_id: @user}
     end
     assert_redirected_to admin_region_assignments_url @region
   end
 
   test 'should post create fail' do
     assert_no_difference 'Assignment.count' do
-      post admin_region_assignments_url @region, params: { title: REGION_DIRECTOR, user_id: nil }
+      post admin_region_assignments_url @region, params: {title: REGION_DIRECTOR, user_id: nil}
     end
     assert_response :success
   end
