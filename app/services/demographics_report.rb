@@ -1,15 +1,17 @@
+# frozen_string_literal: true
+
 class DemographicsReport
   require 'csv'
 
   attr_reader :competition, :profiles, :fieldtype
 
-  def initialize(competition, fieldtype )
+  def initialize(competition, fieldtype)
     @competition = competition
     @fieldtype = fieldtype.downcase
     @profiles = @competition.profiles.preload(:employment_status).compact
   end
 
-  def report
+  def report # rubocop:disable
     grouped_data = case @fieldtype
     when 'age'
       @profiles.group_by(&:age)
@@ -29,7 +31,7 @@ class DemographicsReport
       raise 'field does not exist'
     end
 
-    grouped_data.collect { |key, profile| data_set_object(key,profile)  }
+    grouped_data.collect { |key, profile| data_set_object(key, profile) }
   end
 
   def to_csv
@@ -63,7 +65,7 @@ class DemographicsReport
   def data_set_object(key, profile)
     {
       input: key,
-      count: profile.count
+      count: profile.count,
     }
   end
 end
