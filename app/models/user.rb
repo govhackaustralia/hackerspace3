@@ -126,7 +126,6 @@ class User < ApplicationRecord
     class_name: 'Assignment'
 
   has_many :challenges_judging,
-
     through: :judge_assignments,
     source: :assignable,
     source_type: 'Challenge'
@@ -289,16 +288,14 @@ class User < ApplicationRecord
 
   # Returns a user's event_assignment if they have permission to vote.
   def judgeable_assignment(competition)
-    event_assignment competition if
-      joined_teams.competition(competition).published.present? ||
+    event_assignment competition if joined_teams.competition(competition).published.present? ||
       assignments.judgeables.where(competition: competition).present?
   end
 
   # Returns a user's event_assignment if they have permission to vote in the
   # people's choice awards.
   def peoples_assignment(competition)
-    event_assignment competition if
-      joined_teams.published.competition(competition).present? ||
+    event_assignment competition if joined_teams.published.competition(competition).present? ||
       assignments.volunteers.where(competition: competition).present?
   end
 

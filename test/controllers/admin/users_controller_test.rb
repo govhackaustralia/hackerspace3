@@ -21,7 +21,6 @@ class Admin::UsersControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to root_path
   end
 
-
   test 'should get index' do
     get admin_users_url
     assert_response :success

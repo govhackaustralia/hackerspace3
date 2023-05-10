@@ -15,7 +15,9 @@ class ProfilesController < ApplicationController
   def show
     @user = @profile.user
     @badge_assignments = @user.badge_assignments
-    @joined_published_projects = @user.joined_published_projects.joins(:competition).where(competitions: {id: @competition.id})
+    @joined_published_projects = @user.joined_published_projects
+      .joins(:competition)
+      .where(competitions: {id: @competition.id})
   end
 
   def edit

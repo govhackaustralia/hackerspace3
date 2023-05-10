@@ -25,8 +25,10 @@ class SponsorshipType < ApplicationRecord
   has_many :sponsors, through: :sponsorships
 
   validates :name, :position, presence: true
-  validates :position, uniqueness: {scope: :competition_id,
-    message: 'already taken in this competition'}
+  validates :position, uniqueness: {
+    scope: :competition_id,
+    message: 'already taken in this competition',
+  }
 
   private
 

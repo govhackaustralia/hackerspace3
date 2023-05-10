@@ -65,14 +65,14 @@ class JudgeableScores
 
   def assign_verdict(team)
     verdict = if @assignment.title != JUDGE && @user_team_ids.include?(team.id)
-                'Your Team'
-              elsif (header = @team_id_to_header[team.id]).nil?
-                'Not Marked'
-              elsif (scores = @header_id_to_scores[header.id]).include? nil
-                'Incomplete'
-              else
-                scores.sum
-              end
+      'Your Team'
+    elsif (header = @team_id_to_header[team.id]).nil?
+      'Not Marked'
+    elsif (scores = @header_id_to_scores[header.id]).include? nil
+      'Incomplete'
+    else
+      scores.sum
+    end
     @scoreable_scores_obj[team.id] = {display_score_status: verdict}
   end
 end

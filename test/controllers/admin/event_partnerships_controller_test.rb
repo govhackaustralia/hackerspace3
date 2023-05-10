@@ -17,8 +17,8 @@ class Admin::EventPartnershipsControllerTest < ActionDispatch::IntegrationTest
 
   test 'should post create' do
     assert_difference 'EventPartnership.count' do
-      post admin_event_event_partnerships_url @event, params: {
-        event_partnership: {sponsor_id: sponsors(:one).id} 
+      post admin_event_event_partnerships_url(@event), params: {
+        event_partnership: {sponsor_id: sponsors(:one).id}
       }
     end
     assert_redirected_to admin_region_event_url @event.region, @event

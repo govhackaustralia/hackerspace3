@@ -67,7 +67,7 @@ class ChallengesController < ApplicationController
   end
 
   def show_landing_page?
-    ! @competition.started?(FIRST_COMPETITION_TIME_ZONE)
+    !@competition.started?(FIRST_COMPETITION_TIME_ZONE)
   end
 
   def check_competition_start!

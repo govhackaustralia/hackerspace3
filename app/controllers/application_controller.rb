@@ -63,7 +63,7 @@ class ApplicationController < ActionController::Base
 
   def user_editing_updating_account?
     %w[agreements accounts].include?(controller_name) &&
-    %w[edit update].include?(action_name)
+      %w[edit update].include?(action_name)
   end
 
   def google_authing?

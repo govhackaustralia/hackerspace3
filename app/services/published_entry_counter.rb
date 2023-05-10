@@ -18,7 +18,7 @@ class PublishedEntryCounter
   private
 
   def challenge_entries
-    challenges.detect { |c| c == challenge  }.published_entries
+    challenges.detect { |c| c == challenge }.published_entries
   end
 
   def challenges

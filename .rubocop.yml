@@ -36,6 +36,9 @@ Metrics/ClassLength:
 Metrics/ParameterLists:
   Enabled: false
 
+Metrics/MethodLength:
+  Enabled: false
+
 Performance/CollectionLiteralInLoop:
   Enabled: false
 
@@ -56,3 +59,6 @@ Layout/CaseIndentation:
 
 Layout/EndAlignment:
   EnforcedStyleAlignWith: variable
+
+Layout/MultilineOperationIndentation:
+  EnforcedStyle: indented

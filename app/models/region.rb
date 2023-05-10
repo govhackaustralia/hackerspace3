@@ -23,9 +23,9 @@
 #
 class Region < ApplicationRecord
   # Region Categories
-  INTERNATIONAL = 'International'.freeze
-  NATIONAL = 'National'.freeze
-  REGIONAL = 'Regional'.freeze
+  INTERNATIONAL = 'International'
+  NATIONAL = 'National'
+  REGIONAL = 'Regional'
 
   CATEGORIES = [INTERNATIONAL, NATIONAL, REGIONAL].freeze
 
