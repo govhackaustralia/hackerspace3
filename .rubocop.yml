@@ -29,6 +29,15 @@ Metrics/MethodLength:
 Performance/CollectionLiteralInLoop:
   Enabled: false
 
+Metrics/PerceivedComplexity:
+  Enabled: false
+
+Metrics/CyclomaticComplexity:
+  Enabled: false
+
+Metrics/AbcSize:
+  Enabled: false
+
 Layout/MultilineMethodCallIndentation:
   EnforcedStyle: indented
 
@@ -52,12 +61,3 @@ Layout/MultilineOperationIndentation:
 
 Style/TrailingCommaInHashLiteral:
   EnforcedStyleForMultiline: consistent_comma
-
-Metrics/PerceivedComplexity:
-  Enabled: false
-
-Metrics/CyclomaticComplexity:
-  Enabled: false
-
-Metrics/AbcSize:
-  Enabled: false
