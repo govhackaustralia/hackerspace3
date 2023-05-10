@@ -94,7 +94,7 @@ class Competition < ApplicationRecord
   # director.
   def director
     assignment = assignments.where(title: COMPETITION_DIRECTOR).first
-    assignment.nil? ? nil : assignment.user
+    assignment&.user
   end
 
   # Returns the User of the current Sponsorship Director, if any
@@ -102,7 +102,7 @@ class Competition < ApplicationRecord
   # director.
   def sponsorship_director
     assignment = assignments.where(title: SPONSORSHIP_DIRECTOR).first
-    assignment.nil? ? nil : assignment.user
+    assignment&.user
   end
 
   # Returns the User of the current Chief Judge, if any
@@ -110,7 +110,7 @@ class Competition < ApplicationRecord
   # chief judge.
   def chief_judge
     assignment = assignments.where(title: CHIEF_JUDGE).first
-    assignment.nil? ? nil : assignment.user
+    assignment&.user
   end
 
   # Returns an active record query with all site admins, if any
