@@ -10,6 +10,7 @@ AllCops:
     - Guardfile
     - bin/*
     - db/**/*
+    - vendor/bundle/**/*
 
 Style/Documentation:
   Enabled: false
