@@ -51,7 +51,7 @@ class Admin::CriteriaControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'should patch update' do
-    patch admin_competition_criterion_url(@competition), @criterion, params: {
+    patch admin_competition_criterion_url(@competition, @criterion), params: {
       criterion: {
         name: 'Updated',
         description: 'Lorem Ipsum',
