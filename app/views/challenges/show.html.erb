@@ -5,12 +5,12 @@
       <% if @challenge.banner_image.attached? %>
         <img alt="<%= @challenge.name %> banner image" class="challenge_banner" src="<%= url_for(@challenge.banner_image) %>"/>
       <% end %>
-      <h2>
+      <h1>
         <%= @challenge.name %>
-      </h2>
-      <h3>
+      </h1>
+      <h2>
         Jurisdiction: <%= @region.name %>
-      </h3>
+      </h2>
     </article>
     <aside class="sponsors">
       <% @sponsors.each do |sponsor| %>

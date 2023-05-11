@@ -2,7 +2,7 @@
 <main class="events_page single-event">
   <section class="events_row">
     <div class="side-menu">
-      <h2><%= yield :title %></h2>
+      <h1><%= yield :title %></h1>
       <div class="event-info">
         <h4>Registration Type:</h4>
         <p><%= @event.registration_type %></p>
@@ -20,7 +20,7 @@
     </div>
     <div class="content">
       <div class="info">
-        <h3>Event Information</h3>
+        <h2>Event Information</h2>
         <% if @event.description.present? %>
           <% @event.description.split(/\r\n/).each do |paragraph| %>
             <p><%= simple_format(paragraph) %></p>

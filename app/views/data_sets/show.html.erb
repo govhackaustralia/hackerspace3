@@ -1,26 +1,26 @@
 <% content_for :title, @data_set.name %>
-<main class="project_index">
-  <h2>
+<main class="project_index dataset_index">
+  <h1>
     <%= @data_set.name %>
-  </h2>
+  </h1>
   <p>
-    Region: <%= @data_set.region.name %>
+    <strong>Region:</strong> <%= @data_set.region.name %>
   </p>
   <p>
-    Description: <%= @data_set.description %>
+    <strong>Description:</strong> <%= @data_set.description %>
   </p>
   <p>
     <%= link_to 'URL', visits_path(visit: {visitable_type: 'DataSet', visitable_id: @data_set.id}), target: '_blank' %>
   </p>
-  <h3>
+  <h2>
     Team Projects Utilising <%= @data_set.name %>
-  </h3>
+  </h2>
   <% if @competition.started? FIRST_COMPETITION_TIME_ZONE %>
     <% if @team_data_sets.present? %>
       <% @teams.each do |team| %>
-        <h4>
+        <h3>
           <%= "#{ team.current_project.team_name } - #{ team.current_project.project_name }" %>
-        </h4>
+        </h3>
         <p>
           <%= link_to 'Go to Team Project', project_path(team.current_project.identifier) %>
         </p>
@@ -34,7 +34,7 @@
       are utilising this data set.
     </p>
   <% end %>
+  <p class="back_link">
+    <%= link_to 'Back to Datasets', data_sets_path %>
+  </p>
 </main>
-<p>
-  <%= link_to 'Back to Datasets', data_sets_path %>
-</p>

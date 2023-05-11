@@ -9,7 +9,7 @@
     background: #fff;
 
     h2 {
-      color: #ca1e56;
+      color: var(--primary);
       font-size: 2em;
       line-height: 1.2em;
       font-family: "Roboto";
@@ -17,17 +17,17 @@
 
     a {
       text-decoration: underline;
-      color: #ca1e56;
+      color: var(--primary);
     }
 
     .links {
       a {
-        color: #4c9ad2;
+        color: var(--secondary);
         text-decoration: none;
       }
 
       a:hover {
-        color: #4c9ad2;
+        color: var(--secondary);
         text-decoration: underline;
       }
     }
@@ -219,7 +219,7 @@
         article {
           padding: 0;
           .eyebrow {
-            color: #ca1e56;
+            color: var(--primary);
             font-family: "Roboto";
             font-style: normal;
             font-weight: bold;
@@ -250,7 +250,7 @@
           }
           ul li::before {
             content: "\2022";
-            color: #ca1e56;
+            color: var(--primary);
             font-weight: bold;
             display: inline-block;
             width: 1em;
@@ -271,8 +271,8 @@
               font-family: Open Sans;
               font-size: 1rem;
               text-align: left;
-              background-color: #ca1e56;
-              border: 1px solid #ca1e56;
+              background-color: var(--primary);
+              border: 1px solid var(--primary);
               color: #fff;
             }
           }
@@ -298,8 +298,8 @@
         font-family: Open Sans;
         font-size: 1rem;
         text-align: left;
-        background-color: #ca1e56;
-        border: 1px solid #ca1e56;
+        background-color: var(--primary);
+        border: 1px solid var(--primary);
         color: #fff;
       }
     }
@@ -356,7 +356,7 @@
     background: #fff;
 
     h2 {
-      color: #ca1e56;
+      color: var(--primary);
       font-size: 2em;
       line-height: 1.2em;
     }
@@ -469,8 +469,8 @@
             font-family: Open Sans;
             font-size: 1rem;
             text-align: left;
-            background-color: #ca1e56;
-            border: 1px solid #ca1e56;
+            background-color: var(--primary);
+            border: 1px solid var(--primary);
             color: #fff;
           }
         }
@@ -701,7 +701,7 @@
           }
           ul li::before {
             content: "\2022";
-            color: #ca1e56;
+            color: var(--primary);
             font-weight: bold;
             display: inline-block;
             width: 1em;

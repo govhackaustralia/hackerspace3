@@ -3,9 +3,6 @@
 /* Custom, iPhone Retina */
 @media only screen and (min-device-width: 320px) and (min-width : 320px) {
   .team_page {
-    padding: 1em .5em;
-    background-color: #ffffff;
-
     hr.grey-border {
       border-radius: 5px;
       height: 2px;
@@ -14,18 +11,14 @@
       margin: 0 1rem;
     }
 
-    h2 {
-      color: #4c9ad2;
-      font-size: 2em;
-      line-height: 30px;
-      text-align: center;
+    h3 {
+      margin: 1em 0;
+      font-size: 1.5em;
+      font-weight: 600;
     }
 
-    h3 {
-      font-size: 1.5em;
-      padding: 1em;
-      margin-bottom: 1em;
-      line-height: 30px;
+    > section > section {
+      padding: 0.25em 1.5em;
     }
 
     a {
@@ -39,14 +32,14 @@
           font-family: Open Sans;
           font-size: 1rem;
           text-align: center;
-          background-color: #4c9ad2;
-          border: 1px solid #4c9ad2;
+          background-color: var(--secondary);
+          border: 1px solid var(--secondary);
           color: #fff;
         }
 
         &.blue-button:hover {
-          background-color: #6dbff9;
-          border: 1px solid #6dbff9;
+          background-color: var(--secondary);
+          border: 1px solid var(--secondary);
           color: #ffffff;
         }
       }
@@ -54,12 +47,12 @@
 
     .links {
       a {
-        color: #4c9ad2;
+        color: var(--secondary);
         text-decoration: none;
       }
 
       a:hover {
-        color: #4c9ad2;
+        color: var(--secondary);
         text-decoration: underline;
       }
     }
@@ -83,8 +76,8 @@
             font-family: Open Sans;
             font-size: 1rem;
             text-align: left;
-            background-color: #ca1e56;
-            border: 1px solid #ca1e56;
+            background-color: var(--primary);
+            border: 1px solid var(--primary);
             color: #fff;
           }
         }
@@ -92,7 +85,7 @@
     }
 
     section {
-      padding: 0.25em .5em;
+      padding: 0.25em 0;
 
       &.team_page_header {
         display: flex;
@@ -144,14 +137,14 @@
                     font-family: Open Sans;
                     font-size: 1rem;
                     text-align: center;
-                    background-color: #fd266c;
-                    border: 1px solid #fd266c;
+                    background-color: var(--primary);
+                    border: 1px solid var(--primary);
                     color: #fff;
                   }
 
                   &.content-red-button:hover {
-                    background-color: #fd266c;
-                    border: 1px solid #fd266c;
+                    background-color: var(--primary);
+                    border: 1px solid var(--primary);
                     color: #ffffff;
                   }
 
@@ -164,14 +157,14 @@
                     font-family: Open Sans;
                     font-size: 1rem;
                     text-align: center;
-                    background-color: #6dbff9;
-                    border: 1px solid #6dbff9;
+                    background-color: var(--secondary);
+                    border: 1px solid var(--secondary);
                     color: #fff;
                   }
 
                   &.content-blue-button:hover {
-                    background-color: #6dbff9;
-                    border: 1px solid #6dbff9;
+                    background-color: var(--secondary);
+                    border: 1px solid var(--secondary);
                     color: #ffffff;
                   }
 
@@ -234,8 +227,8 @@
             }
 
             &.red-button:hover {
-              background-color: #fd266c;
-              border: 1px solid #fd266c;
+              background-color: var(--primary);
+              border: 1px solid var(--primary);
               color: #ffffff;
             }
 
@@ -256,8 +249,8 @@
             }
 
             &.blue-button:hover {
-              background-color: #6dbff9;
-              border: 1px solid #6dbff9;
+              background-color: var(--secondary);
+              border: 1px solid var(--secondary);
               color: #ffffff;
             }
 
@@ -278,8 +271,8 @@
             }
 
             &.black-button:hover {
-              background-color: #323232;
-              border: 1px solid #323232;
+              background-color: var(--dark-gray);
+              border: 1px solid var(--dark-gray);
               color: #ffffff;
             }
           }
@@ -315,14 +308,12 @@
 /* Small Devices, Tablets */
 @media only screen and (min-width : 768px) {
   .team_page {
-    padding: 2em 5em;
-
     h2 {
       text-align: left;
     }
 
     section {
-      padding: 0.25em 1.5em;
+      padding: 0.25em 0;
     }
   }
 }

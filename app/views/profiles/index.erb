@@ -1,8 +1,8 @@
 <% content_for :title, 'Profiles' %>
 <main class="profiles_index">
   <section class="header">
-    <h2>GovHack <%= @competition.year %> Profiles</h2>
-    <h3>Find a Participant, Mentor, Industry partner, or GovHack Support here.</h3>
+    <h1>GovHack <%= @competition.year %> Profiles</h1>
+    <strong>Find a Participant, Mentor, Industry partner, or GovHack Support here.</strong>
     <% if user_signed_in? %>
       <% if current_user.profile&.published %>
         <p>Your Profile is Published</p>

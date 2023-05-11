@@ -22,8 +22,8 @@
       display: block;
       text-align: center;
       margin-top: 0em;
-      background-color: #ca1e56;
-      color: #ddd;
+      background-color: var(--primary);
+      color: #fff;
       font-weight: 700;
       text-transform: uppercase;
       text-decoration: none;
@@ -31,11 +31,11 @@
 
     p a {
       &.evidence_video {
-        background-color: #4c9ad2;
+        background-color: var(--secondary);
       }
 
       &.evidence_homepage {
-        background-color: #717171;
+        background-color: var(--dark-gray);
       }
     }
   }

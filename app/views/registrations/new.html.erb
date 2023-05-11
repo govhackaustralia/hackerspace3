@@ -1,9 +1,9 @@
 <% content_for :title, "Register to attend #{@event.name} - #{@region.name}" %>
 <main class="register">
   <section class="register_section">
-    <h2>
+    <h1>
       <%= yield :title %>
-    </h2>
+    </h1>
     <% if @event.below_capacity? %>
       <%= render 'new_form', locals: { status: ATTENDING, label: 'Register to Attend Event' }, class: 'red' %>
     <% else %>

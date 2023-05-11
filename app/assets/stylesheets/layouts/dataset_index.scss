@@ -1,18 +1,5 @@
 .dataset_page {
-  padding: 2em 5em;
-
-  h2 {
-    color: #4c9ad2;
-    font-size: 2em;
-  }
-
-  h3 {
-    font-size: 1.5em;
-    padding: 1em;
-  }
-
   .dataportals {
-    padding: 1em;
     padding-top: 0;
     display: flex;
     flex-wrap: wrap;
@@ -52,13 +39,13 @@
 
       &:nth-of-type(3n+1) div {
         background-color: rgba(202, 30, 86, 0.5);
-        border-bottom: 1em solid #ca1e56;
+        border-bottom: 1em solid var(--primary);
         overflow: hidden;
       }
 
       &:nth-of-type(3n+2) div {
         background-color: rgba(76, 154, 210, 0.5);
-        border-bottom: 1em solid #4c9ad2;
+        border-bottom: 1em solid var(--secondary);
         overflow: hidden;
       }
 
@@ -70,13 +57,13 @@
 
       &:nth-of-type(3n+1) div:hover {
         background-color: rgba(253, 37, 107, 0.5);
-        border-bottom: 1em solid #fd266c;
+        border-bottom: 1em solid var(--primary);
         overflow: hidden;
       }
 
       &:nth-of-type(3n+2) div:hover {
         background-color: rgba(94, 191, 261, 0.5);
-        border-bottom: 1em solid #6dbff9;
+        border-bottom: 1em solid var(--secondary);
         overflow: hidden;
       }
 
@@ -91,21 +78,18 @@
   table {
     box-sizing: border-box;
     margin-top: 2em;
-    margin-left: 2em;
-    padding: 2em 2em;
     border-collapse: collapse;
 
     .dataseturl {
       font-size: small;
     }
 
-    border: 1px solid #ca1e56;
-    padding: 0.25em 1em;
+    border: 1px solid var(--primary);
     box-sizing: border-box;
   }
 
   th, td {
-    border: 1px solid #ca1e56;
+    border: 1px solid var(--primary);
     padding: 0.25em 1em;
     box-sizing: border-box;
   }
@@ -125,8 +109,8 @@
   }
 
   th {
-    background-color: #ca1e56;
-    color: #ddd;
+    background-color: var(--primary);
+    color: #fff;
   }
 
   form {
@@ -172,7 +156,7 @@
           -webkit-appearance: none;
           -moz-appearance: none;
           appearance: none;
-          background-color: #ca1e56;
+          background-color: var(--primary);
           color: #ddd;
           font-weight: 700;
           text-transform: uppercase;
@@ -188,5 +172,18 @@
     font-size: 1em;
     padding: 0.5em;
     display: none;
+  }
+}
+
+.dataset_index {
+  h2 {
+    margin-top: 2em;
+    font-size: 1.5em;
+    color: black;
+    font-weight: 600;
+  }
+
+  .back_link {
+    margin-top: 2em;
   }
 }

@@ -1,9 +1,9 @@
 <% content_for :title, "Registration for #{@event.name}" %>
 <main class="register">
   <section class="register_section">
-    <h2>
+    <h1>
       <%= "Update Registration for #{@event.name} #{@event.region.name}" %>
-    </h2>
+    </h1>
     <% if @event.not_attending?(@assignment) && @event.at_capacity? %>
       <p>
         This event is at capacity. Please add yourself to the waitlist below and you

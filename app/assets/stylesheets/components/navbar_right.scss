@@ -54,8 +54,8 @@
     }
 
     .nav-button:hover {
-      background-color: #fd266c;
-      border: 1px solid #fd266c;
+      background-color: var(--primary);
+      border: 1px solid var(--primary);
 
       >a {
         color: #ffffff;
@@ -97,7 +97,7 @@
     .buttons-group {
       flex-direction: column;
     }
-    
+
     .nav-button {
       margin: 10px 5px;
     }

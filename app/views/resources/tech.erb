@@ -1,8 +1,8 @@
 <% content_for :title, "Tech for #{@competition.name}" %>
 <main class="dataset_page">
-  <h2>
+  <h1>
     <%= yield :title %>
-  </h2>
+  </h1>
   <section class="dataportals">
     <%= render partial: 'resource', collection: @tech %>
   </section>

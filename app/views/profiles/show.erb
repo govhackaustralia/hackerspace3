@@ -3,9 +3,9 @@
   <section class="profile-header">
     <%= image_tag default_profile_picture_url(@user, @profile), class: "profile-picture" %>
     <div class="profile-content">
-      <h2 class="name">
+      <h1 class="name">
         <%= yield :title %>
-      </h2>
+      </h1>
       <div class="bio">
         <% if @profile.description.present? %>
           <p>

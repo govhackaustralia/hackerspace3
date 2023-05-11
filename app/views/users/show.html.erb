@@ -4,9 +4,9 @@
     <%= link_to profile_path(current_user.profile) do %>
       <%= image_tag(default_profile_picture_url(current_user, current_user.profile), class: "profile-picture") %>
     <% end %>
-    <h2 class="name">
+    <h1 class="name">
       <%= @user.display_name %>
-    </h2>
+    </h1>
   </section>
   <hr class="grey-border"/>
   <section class="profile-contents">

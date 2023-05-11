@@ -1,29 +1,21 @@
 .events_page {
-  background-color: #fff;
   section {
     &.events_row {
       display: flex;
       flex-direction: column;
       flex-wrap: wrap;
       width: 100%;
+      gap: 4em;
 
       .menu_col {
         display: flex;
         flex-direction: column;
-        padding: 2rem 0rem;
         width: 100%;
 
         .menu_section {
           padding: 2em;
         }
-        
-        h2 {
-          color: #4C9AD2;
-          text-align: left;
-          line-height: 1.2em;
-          font-size: 2em;
-        }
-  
+
         p {
           margin-top: 0.5em;
           font-size: 1.25em;
@@ -32,21 +24,15 @@
           width: 100%;
           margin: 5px 0px;
         }
-  
+
       }
       .contents {
-        padding: 2rem 0rem;
         display: flex;
         flex-direction: column;
         width: 100%;
 
         .tile_wrapper {
           padding: 2em;
-        }
-  
-        h3 {
-          font-size: 1.5em;
-          line-height: 1.3em;
         }
       }
       .grey-line {
@@ -55,7 +41,7 @@
         border: 1px solid #F4F4F4;
       }
     }
-    
+
     &.info p {
       margin-top: 0.5em;
       font-size: 1.25em;
@@ -68,23 +54,14 @@
   .events_page {
     section {
       &.events_row {
-        display: flex;
         flex-direction: column;
         flex-wrap: wrap;
 
         .menu_col {
           display: flex;
           flex-direction: column;
-          padding: 4rem;
           width: 100%;
-    
-          h2 {
-            color: #4C9AD2;
-            text-align: left;
-            line-height: 1.2em;
-            font-size: 2em;
-          }
-    
+
           p {
             margin-top: 0.5em;
             font-size: 1.25em;
@@ -93,19 +70,12 @@
             width: 100%;
             margin: 5px 0px;
           }
-    
+
         }
         .contents {
-          padding: 4rem;
           display: flex;
           flex-direction: column;
           width: 100%;
-
-    
-          h3 {
-            font-size: 1.5em;
-            line-height: 1.3em;
-          }
         }
         .grey-line {
           width: 90%;
@@ -113,7 +83,7 @@
           border: 1px solid #F4F4F4;
         }
       }
-      
+
       &.info p {
         margin-top: 0.5em;
         font-size: 1.25em;
@@ -127,28 +97,19 @@
   .events_page {
     section {
       &.events_row {
-        display: flex;
         flex-direction: row;
         flex-wrap: nowrap;
 
         .menu_col {
           display: flex;
           flex-direction: column;
-          padding: 5rem;
           width: 30%;
 
           .menu_section {
             margin: 10px 0px;
-            padding: 0; 
+            padding: 0;
           }
-    
-          h2 {
-            color: #4C9AD2;
-            text-align: left;
-            line-height: 1.2em;
-            font-size: 2em;
-          }
-    
+
           p {
             margin-top: 0.5em;
             font-size: 1.25em;
@@ -157,21 +118,15 @@
             width: 100%;
             margin: 5px 0px;
           }
-    
+
         }
         .contents {
-          padding: 5rem;
           display: flex;
           flex-direction: column;
           width: 70%;
-    
-          h3 {
-            font-size: 1.5em;
-            line-height: 1.3em;
-          }
         }
       }
-      
+
       &.info p {
         margin-top: 0.5em;
         font-size: 1.25em;
@@ -185,28 +140,19 @@
   .events_page {
     section {
       &.events_row {
-        display: flex;
         flex-direction: row;
         flex-wrap: nowrap;
 
         .menu_col {
           display: flex;
           flex-direction: column;
-          padding: 4rem;
           width: 20%;
 
           .menu_section {
             margin: 10px 0px;
-            padding: 0; 
+            padding: 0;
           }
-    
-          h2 {
-            color: #4C9AD2;
-            text-align: left;
-            line-height: 1.5em;
-            font-size: 2em;
-          }
-    
+
           p {
             font-size: 20px;
             line-height: 30px;
@@ -218,27 +164,21 @@
             margin: 0 auto;
             border: 1px solid #F4F4F4;
           }
-    
+
         }
         .contents {
-          padding: 4rem;
           display: flex;
           flex-direction: column;
           width: 80%;
-    
-          h3 {
-            font-size: 25px;
-            line-height: 30px;
-          }
         }
 
         .subtitle {
           font-size: 30px;
           line-height: 30px;
-          color: #ca1e56;
+          color: var(--primary);
         }
       }
-      
+
       &.info p {
         margin-top: 0.5em;
         font-size: 1.25em;

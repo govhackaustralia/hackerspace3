@@ -1,5 +1,26 @@
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:400,700');
 
+:root {
+  --primary: #CC1E57;
+  --primary-shade: #9C1040;
+  --secondary: #4B99D2;
+  --secondary-shade: #3C7CAB;
+
+  --dark-gray: #717272;
+  --light-gray: #F4F4F4;
+
+  --purple: #4D13D1;
+  --red: #EB0B43;
+  --yellow: #FABC1E;
+  --green: #0ADDA0;
+
+  --font-size-base: 14px;
+
+  --text-h1: 2.5rem;
+  --text-h2: 2rem;
+  --text-h3: 1.75rem;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -11,21 +32,53 @@ ul {
 
 body {
   font-family: "Open Sans", Helvetica, Arial, sans-serif;
-  font-size: 14px;
-  line-height: 1.5em;
-  background-color: #eee;
-  color: #626262;
+  font-size: var(--font-size-base);
+  line-height: 1.5rem;
 }
 
-h1, h2, h3, h4, h5, h6 {
-  color: #424242;
-  line-height: 1em;
+h1 {
+  font-size: var(--text-h1);
+  font-weight: 600;
+  margin-top: 1rem;
+  margin-bottom: 1.5rem;
+  color: var(--secondary);
+  letter-spacing: 0.05rem;
+  line-height: var(--text-h1);
 }
 
 h2 {
-  margin-bottom: 1%;
+  font-size:  var(--text-h2);
+  line-height: var(--text-h2);
+  font-weight: 300;
+  color: var(--primary);
+  margin-bottom: 0.75rem;
+}
+
+h3 {
+  font-size: var(--text-h3);
+  line-height: var(--text-h3);
+  font-weight: 300;
+  color: #000;
+}
+
+h4, h5, h6 {
+  color: #000;
 }
 
 .acting-on-behalf-of-user {
   text-align: center;
+}
+
+/* Custom, iPhone Retina */
+@media only screen and (min-device-width: 320px) and (min-width : 320px) {
+  main {
+    padding: 2em 1em;
+  }
+}
+
+/* Small Devices, Tablets */
+@media only screen and (min-width : 768px) {
+  main {
+    padding: 2em 5em;
+  }
 }

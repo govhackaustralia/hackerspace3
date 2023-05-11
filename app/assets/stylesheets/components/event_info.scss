@@ -5,7 +5,7 @@
 	h4 {
 		font-size: 1em;
 		line-height: 1.2em;
-		color: #CA1E56;
+		color: var(--primary);
 	}
 }
 
@@ -13,11 +13,11 @@
 @media only screen and (min-width : 768px) {
 	.event-info {
 		padding: 0.5em 0em;
-	
+
 		h4 {
 			font-size: 1em;
 			line-height: 1.2em;
-			color: #CA1E56;
+			color: var(--primary);
 		}
 	}
 }
@@ -26,11 +26,11 @@
 @media only screen and (min-width : 1200px) {
 	.event-info {
 		padding: 0.7em 0em;
-		
+
 		h4 {
 			font-size: 1.2em;
 			line-height: 1.8em;
-			color: #CA1E56;
+			color: var(--primary);
 		}
 	}
 }

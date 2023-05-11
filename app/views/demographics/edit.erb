@@ -2,9 +2,9 @@
 <main class="registration single-col edit-account">
   <container>
     <section class="signup-form">
-      <h2 class="heading">
+      <h1 class="heading">
         <%= yield :title %>
-      </h2>
+      </h1>
       <%= render 'components/registration_status', page: 'demographics' %>
       <%= form_with model: @profile, url: demographic_path(@profile), method: :patch do |form| %>
         <article>
