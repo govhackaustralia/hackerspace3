@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: resources
@@ -41,7 +43,7 @@ class ResourceTest < ActiveSupport::TestCase
         position: 1,
         name: 'New Name',
         url: 'www.new.com',
-        short_url: 'new'
+        short_url: 'new',
       }
       attributes[attribute] = nil
       resource = competitions(:two).resources.new(attributes)

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'test_helper'
 
 class TeamManagement::ProjectsControllerTest < ActionDispatch::IntegrationTest
@@ -13,9 +15,9 @@ class TeamManagement::ProjectsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'should post create success' do
-    post team_management_team_projects_url @team, params: { project: {
-      team_name: 'Updated', project_name: 'Same'
-    } }
+    post team_management_team_projects_url @team, params: {project: {
+      team_name: 'Updated', project_name: 'Same',
+    }}
     new_project = Project.last
     assert_redirected_to edit_team_management_team_project_url @team, new_project
     assert new_project.team_name == 'Updated'
@@ -27,9 +29,9 @@ class TeamManagement::ProjectsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'should patch update success' do
-    patch team_management_team_project_url @team, @project, params: { project: {
-      team_name: 'Updated', project_name: 'Same', tag_list: 'test, #Test2'
-    } }
+    patch team_management_team_project_url @team, @project, params: {project: {
+      team_name: 'Updated', project_name: 'Same', tag_list: 'test, #Test2',
+    }}
     new_project = Project.last
     assert_redirected_to edit_team_management_team_project_url @team, new_project
     assert new_project.team_name == 'Updated'
@@ -38,9 +40,9 @@ class TeamManagement::ProjectsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'should patch update fail' do
-    patch team_management_team_project_url @team, @project, params: { project: {
-      team_name: nil
-    } }
+    patch team_management_team_project_url @team, @project, params: {project: {
+      team_name: nil,
+    }}
     assert_response :success
     @project.reload
     assert_not @project.team_name.nil?

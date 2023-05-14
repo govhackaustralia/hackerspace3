@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'test_helper'
 
 class HuntQuestionsControllerTest < ActionDispatch::IntegrationTest
@@ -25,8 +27,8 @@ class HuntQuestionsControllerTest < ActionDispatch::IntegrationTest
     assert_difference 'Assignment.count', 1 do
       patch hunt_question_path(@hunt_question), params: {
         hunt_question: {
-          answer: 'AAAbbbCCc'
-        }
+          answer: 'AAAbbbCCc',
+        },
       }
     end
     assert_redirected_to treasure_hunt_path
@@ -37,8 +39,8 @@ class HuntQuestionsControllerTest < ActionDispatch::IntegrationTest
     assert_no_difference 'Assignment.count' do
       patch hunt_question_path(@hunt_question), params: {
         hunt_question: {
-          answer: 'Wrong Answer'
-        }
+          answer: 'Wrong Answer',
+        },
       }
     end
     assert_redirected_to treasure_hunt_path
@@ -56,8 +58,8 @@ class HuntQuestionsControllerTest < ActionDispatch::IntegrationTest
     assert_difference 'Assignment.count', 2 do
       patch hunt_question_path(@last_hunt_question), params: {
         hunt_question: {
-          answer: @last_hunt_question.answer
-        }
+          answer: @last_hunt_question.answer,
+        },
       }
     end
   end
@@ -82,8 +84,8 @@ class HuntQuestionsControllerTest < ActionDispatch::IntegrationTest
       assert_raises(NoMethodError) do
         patch hunt_question_path(@last_hunt_question), params: {
           hunt_question: {
-            answer: @last_hunt_question.answer
-          }
+            answer: @last_hunt_question.answer,
+          },
         }
       end
     end

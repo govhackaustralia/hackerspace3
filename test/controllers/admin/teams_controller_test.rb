@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'test_helper'
 
 class Admin::TeamsControllerTest < ActionDispatch::IntegrationTest
@@ -35,7 +37,7 @@ class Admin::TeamsControllerTest < ActionDispatch::IntegrationTest
 
   test 'should patch update project' do
     patch update_version_admin_competition_team_path(
-      @competition, @team, params: { project_id: @project.id }
+      @competition, @team, params: {project_id: @project.id}
     )
     assert_redirected_to admin_team_project_url @team, @project
     @team.reload
@@ -44,7 +46,7 @@ class Admin::TeamsControllerTest < ActionDispatch::IntegrationTest
 
   test 'should patch update published' do
     patch update_published_admin_competition_team_path(
-      @competition, @team, params: { published: false }
+      @competition, @team, params: {published: false}
     )
     assert_redirected_to admin_competition_team_url @competition, @team
     @team.reload

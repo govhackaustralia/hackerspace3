@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class BadgePolicy
   def self.enough_badges?(badge)
     return true if badge.capacity.nil?

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: headers
@@ -29,7 +31,7 @@ class Header < ApplicationRecord
 
   validates :assignment, uniqueness: {
     scope: :scoreable,
-    message: 'Only one scorecard allowed per scoreable entity'
+    message: 'Only one scorecard allowed per scoreable entity',
   }
 
   validate :cannot_judge_your_own_team
@@ -109,14 +111,11 @@ class Header < ApplicationRecord
     # scores.
     region_helper = {}
     teams.each do |team|
-      region_helper[team.id] = { headers: [], scores: [] }
+      region_helper[team.id] = {headers: [], scores: []}
     end
 
     headers.each do |header|
       region_helper[header.scoreable_id][:headers] << header.id
-    end
-
-    headers.each do |header|
       header_count = region_helper[header.scoreable_id][:headers].count
       region_helper[header.scoreable_id][:total_card_count] = header_count
     end

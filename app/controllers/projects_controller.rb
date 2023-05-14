@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ProjectsController < ApplicationController
   before_action :check_competition_started!, :check_team_published!, except: :index
   before_action :authenticate_user!, :check_slack_chat!, only: :slack_chat
@@ -66,7 +68,7 @@ class ProjectsController < ApplicationController
       assignment: @user.event_assignment(@competition),
       team: @team
     )
-    @header= Header.find_by(
+    @header = Header.find_by(
       assignment: @user.event_assignment(@competition),
       scoreable: @team
     )

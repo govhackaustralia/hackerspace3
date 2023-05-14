@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'test_helper'
 
 class Admin::RegistrationsControllerTest < ActionDispatch::IntegrationTest
@@ -36,8 +38,8 @@ class Admin::RegistrationsControllerTest < ActionDispatch::IntegrationTest
         registration: {
           status: VALID_ATTENDANCE_STATUSES.sample,
           assignment_id: assignments(:participant).id,
-          holder_id: holders(:one)
-        }
+          holder_id: holders(:one),
+        },
       }
     end
     assert_redirected_to admin_event_registrations_url @event
@@ -49,8 +51,8 @@ class Admin::RegistrationsControllerTest < ActionDispatch::IntegrationTest
       post admin_event_registrations_url @event, params: {
         registration: {
           status: 'test',
-          assignment_id: assignments(:participant).id
-        }
+          assignment_id: assignments(:participant).id,
+        },
       }
     end
     assert_response :success
@@ -63,7 +65,7 @@ class Admin::RegistrationsControllerTest < ActionDispatch::IntegrationTest
 
   test 'should patch update success' do
     patch admin_event_registration_url @event, @registration, params: {
-      registration: { status: NON_ATTENDING }
+      registration: {status: NON_ATTENDING},
     }
     assert_redirected_to admin_event_registrations_url @event
     @registration.reload
@@ -73,7 +75,7 @@ class Admin::RegistrationsControllerTest < ActionDispatch::IntegrationTest
   test 'should patch update fail' do
     new_status = 'test'
     patch admin_event_registration_url @event, @registration, params: {
-      registration: { status: new_status }
+      registration: {status: new_status},
     }
     assert_response :success
     @registration.reload

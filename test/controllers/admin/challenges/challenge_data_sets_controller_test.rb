@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'test_helper'
 
 class Admin::Challenges::ChallengeDataSetsControllerTest < ActionDispatch::IntegrationTest
@@ -17,7 +19,7 @@ class Admin::Challenges::ChallengeDataSetsControllerTest < ActionDispatch::Integ
     ChallengeDataSet.destroy_all
     assert_difference 'ChallengeDataSet.count' do
       post admin_challenge_challenge_data_sets_url @challenge, params: {
-        challenge_data_set: { data_set_id: @data_set.id }
+        challenge_data_set: {data_set_id: @data_set.id},
       }
     end
     assert_redirected_to admin_region_challenge_url @challenge.region, @challenge
@@ -27,7 +29,7 @@ class Admin::Challenges::ChallengeDataSetsControllerTest < ActionDispatch::Integ
     ChallengeDataSet.destroy_all
     assert_no_difference 'ChallengeDataSet.count' do
       post admin_challenge_challenge_data_sets_url @challenge, params: {
-        challenge_data_set: { data_set_id: nil }
+        challenge_data_set: {data_set_id: nil},
       }
     end
     assert_response :success

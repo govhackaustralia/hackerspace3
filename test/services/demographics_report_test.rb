@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'test_helper'
 
 class DemographicsReportTest < ActiveSupport::TestCase
@@ -13,5 +15,4 @@ class DemographicsReportTest < ActiveSupport::TestCase
   test 'to_csv' do
     assert @demographics_report.to_csv.instance_of?(String)
   end
-
 end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'test_helper'
 
 class SponsorshipManagement::SponsorsControllerTest < ActionDispatch::IntegrationTest
@@ -18,7 +20,7 @@ class SponsorshipManagement::SponsorsControllerTest < ActionDispatch::Integratio
 
   test 'should patch update success' do
     patch sponsorship_management_sponsor_url @sponsor, params: {
-      sponsor: { description: 'Updated' }
+      sponsor: {description: 'Updated'},
     }
     assert_redirected_to sponsorship_management_sponsor_url @sponsor
     @sponsor.reload
@@ -27,7 +29,7 @@ class SponsorshipManagement::SponsorsControllerTest < ActionDispatch::Integratio
 
   test 'should patch update fail' do
     patch sponsorship_management_sponsor_url @sponsor, params: {
-      sponsor: { name: nil }
+      sponsor: {name: nil},
     }
     assert_response :success
     @sponsor.reload

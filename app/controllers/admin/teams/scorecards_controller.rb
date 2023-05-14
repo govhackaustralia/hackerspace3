@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Admin::Teams::ScorecardsController < ApplicationController
   before_action :authenticate_user!, :check_for_privileges
 
@@ -8,13 +10,13 @@ class Admin::Teams::ScorecardsController < ApplicationController
   end
 
   def update
-    @header= Header.find params[:id]
+    @header = Header.find params[:id]
     @header.update included: !@header.included
     redirect_to admin_team_scorecards_path @header.scoreable, popup: true, include_judges: params[:include_judges]
   end
 
   def destroy
-    @header= Header.find params[:id]
+    @header = Header.find params[:id]
     @header.destroy
     flash[:notice] = 'Scorecard Deleted'
     redirect_to admin_team_scorecards_path @header.scoreable, popup: true, include_judges: params[:include_judges]

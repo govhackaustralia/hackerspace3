@@ -1,9 +1,11 @@
+# frozen_string_literal: true
+
 require 'test_helper'
 
 class ScorecardsControllerTest < ActionDispatch::IntegrationTest
   setup do
     @project = projects(:one)
-    @header= headers(:three)
+    @header = headers(:three)
     competitions(:one).update(
       peoples_choice_start: Time.now.yesterday,
       peoples_choice_end: Time.now.tomorrow

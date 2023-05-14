@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: users
@@ -62,8 +64,8 @@
 class User < ApplicationRecord
   # Devise options
   devise :database_authenticatable, :registerable, :recoverable, :rememberable,
-         :trackable, :validatable, :confirmable, :lockable, :timeoutable,
-         :omniauthable
+    :trackable, :validatable, :confirmable, :lockable, :timeoutable,
+    :omniauthable
 
   has_one :profile, dependent: :destroy
 
@@ -124,8 +126,7 @@ class User < ApplicationRecord
     class_name: 'Assignment'
 
   has_many :challenges_judging,
-
-  through: :judge_assignments,
+    through: :judge_assignments,
     source: :assignable,
     source_type: 'Challenge'
 
@@ -163,7 +164,7 @@ class User < ApplicationRecord
 
   scope :search, lambda { |term|
     where 'full_name ILIKE ? OR email ILIKE ? OR preferred_name ILIKE ?',
-          "%#{term}%", "%#{term}%", "%#{term}%"
+      "%#{term}%", "%#{term}%", "%#{term}%"
   }
 
   scope :mailing_list, -> { where mailing_list: true }
@@ -206,7 +207,7 @@ class User < ApplicationRecord
     'Northern Territory' => 6,
     'Australian Capital Territory' => 7,
     'New Zealand' => 8,
-    'Outside Australia and New Zealand' => 9
+    'Outside Australia and New Zealand' => 9,
   }
 
   def registration_complete?
@@ -287,16 +288,14 @@ class User < ApplicationRecord
 
   # Returns a user's event_assignment if they have permission to vote.
   def judgeable_assignment(competition)
-    event_assignment competition if
-      joined_teams.competition(competition).published.present? ||
+    event_assignment competition if joined_teams.competition(competition).published.present? ||
       assignments.judgeables.where(competition: competition).present?
   end
 
   # Returns a user's event_assignment if they have permission to vote in the
   # people's choice awards.
   def peoples_assignment(competition)
-    event_assignment competition if
-      joined_teams.published.competition(competition).present? ||
+    event_assignment competition if joined_teams.published.competition(competition).present? ||
       assignments.volunteers.where(competition: competition).present?
   end
 

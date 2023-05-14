@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ProfilesHelper
   def default_profile_picture_url(user, profile)
     if profile.present? && profile.profile_picture.attached?

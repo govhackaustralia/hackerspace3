@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Admin::CompetitionsController < ApplicationController
   before_action :authenticate_user!
   before_action :check_for_manegement_privileges, except: %i[new create]

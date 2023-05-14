@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'test_helper'
 
 class ProjectsControllerTest < ActionDispatch::IntegrationTest
@@ -79,8 +81,8 @@ class ProjectsControllerTest < ActionDispatch::IntegrationTest
         'ok' => true,
         'channel' => {
           'id' => slack_channel_id,
-          'name' => slack_channel_name
-        }
+          'name' => slack_channel_name,
+        },
       })
 
     FinishTeamSlackChannelJob.expects(:perform_later)

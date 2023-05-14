@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: regions
@@ -21,9 +23,9 @@
 #
 class Region < ApplicationRecord
   # Region Categories
-  INTERNATIONAL = 'International'.freeze
-  NATIONAL = 'National'.freeze
-  REGIONAL = 'Regional'.freeze
+  INTERNATIONAL = 'International'
+  NATIONAL = 'National'
+  REGIONAL = 'Regional'
 
   CATEGORIES = [INTERNATIONAL, NATIONAL, REGIONAL].freeze
 
@@ -62,18 +64,18 @@ class Region < ApplicationRecord
 
   validates :name, uniqueness: {
     scope: :competition_id,
-    message: 'Region name already taken in this competition'
+    message: 'Region name already taken in this competition',
   }
 
-  validates :category, inclusion: { in: CATEGORIES }
+  validates :category, inclusion: {in: CATEGORIES}
 
   validate :only_one_international_per_competition,
-           :only_international_can_be_parent_of_national,
-           :only_national_can_be_parent_of_regional,
-           :only_non_descendants_can_be_parents
+    :only_international_can_be_parent_of_national,
+    :only_national_can_be_parent_of_regional,
+    :only_non_descendants_can_be_parents
 
   validates :time_zone, allow_blank: true, inclusion: {
-    in: VALID_TIME_ZONES.map(&:name)
+    in: VALID_TIME_ZONES.map(&:name),
   }
 
   after_save_commit :update_identifier

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: teams
@@ -60,27 +62,28 @@ class Team < ApplicationRecord
   scope :published, -> { where published: true }
   scope :unpublished, -> { where published: false }
   scope :with_assignments, lambda {
-    joins(:assignments)
-      .where('EXISTS(
+    joins(:assignments).where(
+      'EXISTS(
         SELECT assignments.assignable_id
         FROM assignments
         WHERE
           teams.id = assignments.assignable_id
         AND
           assignments.assignable_type = ?
-        )', 'Team').distinct
-    }
-    scope :with_entries, lambda {
-      joins(:entries)
-        .where('EXISTS(
-          SELECT entries.team_id
-          FROM entries
-          WHERE teams.id = entries.team_id
-        )').distinct
-    }
+      )', 'Team'
+    ).distinct
+  }
+  scope :with_entries, lambda {
+    joins(:entries)
+      .where('EXISTS(
+        SELECT entries.team_id
+        FROM entries
+        WHERE teams.id = entries.team_id
+      )').distinct
+  }
 
   scope :competition, lambda { |competition|
-    joins(event: :region).where(regions: { competition: competition })
+    joins(event: :region).where(regions: {competition: competition})
   }
 
   validate :check_for_ineligible_challenge_entries
@@ -137,9 +140,8 @@ class Team < ApplicationRecord
   # Returns all the available checkpoints left in a given challenge for a team
   # taking into only challenges already entered.
   # ENHANCEMENT: Move to controller or helper.
-  def admin_available_checkpoints(challenge)
+  def admin_available_checkpoints(_challenge)
     valid_checkpoints = []
-    challenge_region = challenge.region
     competition.checkpoints.each do |checkpoint|
       # ERROR: Not working correctly at the moment
       # next if checkpoint.limit_reached?(self, challenge_region)
@@ -197,7 +199,12 @@ class Team < ApplicationRecord
   # ENHANCEMENT: move to controller.
   def self.compile_csv(competition, csv, project_columns)
     competition.teams.published.preload(:current_project, :team_data_sets, :challenges, :assignments).each do |team|
-      csv << (team.current_project.attributes.values_at(*project_columns) + [team.assignments.length, team.team_data_sets.pluck(:url), team.challenges.pluck(:name)])
+      csv << [
+        *team.current_project.attributes.values_at(*project_columns),
+        team.assignments.length,
+        team.team_data_sets.pluck(:url),
+        team.challenges.pluck(:name)
+      ]
     end
   end
 

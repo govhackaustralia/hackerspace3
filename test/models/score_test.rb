@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: scores
@@ -19,7 +21,7 @@ require 'test_helper'
 class ScoreTest < ActiveSupport::TestCase
   setup do
     @score = scores(:one)
-    @header= headers(:one)
+    @header = headers(:one)
     @criterion = criteria(:one)
   end
 

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'test_helper'
 # Up to here
 class ScorecardsHelperTest < ActionView::TestCase

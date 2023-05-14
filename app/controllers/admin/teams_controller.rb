@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Admin::TeamsController < ApplicationController
   before_action :authenticate_user!, :check_for_privileges!
   before_action :retrieve_team, except: :index
@@ -26,7 +28,7 @@ class Admin::TeamsController < ApplicationController
 
   def update_published
     if @team.update published: !@team.published
-      flash[:notice] = "Team #{'un' unless @team.published }published"
+      flash[:notice] = "Team #{'un' unless @team.published}published"
     else
       flash[:error] = @team.errors.full_messages.to_sentence
     end
@@ -56,13 +58,13 @@ class Admin::TeamsController < ApplicationController
 
   def handle_csv(format)
     output = case params[:category]
-      when 'members'
-        TeamMemberReport.new(@competition).to_csv
-      when 'entries'
-        TeamEntryReport.new(@competition).to_csv
-      else
-        PublishedTeamMemberReport.new(@competition).to_csv
-      end
+    when 'members'
+      TeamMemberReport.new(@competition).to_csv
+    when 'entries'
+      TeamEntryReport.new(@competition).to_csv
+    else
+      PublishedTeamMemberReport.new(@competition).to_csv
+    end
     format.csv { send_data output }
   end
 end

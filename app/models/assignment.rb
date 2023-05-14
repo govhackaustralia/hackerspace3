@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: assignments
@@ -53,8 +55,8 @@ class Assignment < ApplicationRecord
 
   before_validation :check_competition, :check_holder
 
-  validates :user_id, uniqueness: { scope: %i[assignable_id assignable_type title] }
-  validates :title, inclusion: { in: VALID_ASSIGNMENT_TITLES }
+  validates :user_id, uniqueness: {scope: %i[assignable_id assignable_type title]}
+  validates :title, inclusion: {in: VALID_ASSIGNMENT_TITLES}
   validate :can_only_join_team_if_registered_for_a_competition_event
   validate :correct_competition
   validate :correct_holder

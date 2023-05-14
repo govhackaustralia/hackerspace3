@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Users::MembershipsController < ApplicationController
   before_action :authenticate_user!
   before_action :user_is_owner

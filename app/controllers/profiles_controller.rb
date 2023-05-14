@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ProfilesController < ApplicationController
   before_action :authenticate_user!, only: %i[edit update]
   before_action :authorize_user!, only: %i[edit update]
@@ -13,7 +15,9 @@ class ProfilesController < ApplicationController
   def show
     @user = @profile.user
     @badge_assignments = @user.badge_assignments
-    @joined_published_projects = @user.joined_published_projects.joins(:competition).where(competitions: {id: @competition.id})
+    @joined_published_projects = @user.joined_published_projects
+      .joins(:competition)
+      .where(competitions: {id: @competition.id})
   end
 
   def edit

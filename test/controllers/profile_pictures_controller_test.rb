@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'test_helper'
 
 class ProfilePicturesControllerTest < ActionDispatch::IntegrationTest
@@ -15,7 +17,7 @@ class ProfilePicturesControllerTest < ActionDispatch::IntegrationTest
     picture = fixture_file_upload(picture_path, 'image/png')
     assert_difference -> { ActiveStorage::Attachment.count }, 1 do
       patch profile_picture_path(profiles(:one)), params: {
-        profile: { profile_picture: picture }
+        profile: {profile_picture: picture},
       }
     end
   end

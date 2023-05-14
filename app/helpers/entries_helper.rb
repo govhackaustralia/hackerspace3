@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module EntriesHelper
   def challenges_event_counts(region, checkpoint_ids = nil)
     events = region.events.competitions
@@ -46,12 +48,26 @@ module EntriesHelper
     challenge_to_entity_array[challenge.name] = {}
     challenge_count = 0
     entities.each do |entity|
-      challenge_count += entry_count_entity(challenge_entries, unpublished_entries, entity_to_entries, challenge_to_entity_array, challenge, entity)
+      challenge_count += entry_count_entity(
+        challenge_entries,
+        unpublished_entries,
+        entity_to_entries,
+        challenge_to_entity_array,
+        challenge,
+        entity
+      )
     end
     challenge_to_entity_array[challenge.name][:total_entries] = challenge_count
   end
 
-  def entry_count_entity(challenge_entries, unpublished_entries, entity_to_entries, challenge_to_entity_array, challenge, entity)
+  def entry_count_entity(
+    challenge_entries,
+    unpublished_entries,
+    entity_to_entries,
+    challenge_to_entity_array,
+    challenge,
+    entity
+  )
     entry_count = ((challenge_entries - unpublished_entries) & entity_to_entries[entity]).count
     challenge_to_entity_array[challenge.name][entity.name] = entry_count
   end

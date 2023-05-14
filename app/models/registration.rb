@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: registrations
@@ -33,43 +35,43 @@ class Registration < ApplicationRecord
   scope :participating, -> { where status: [ATTENDING, WAITLIST] }
 
   scope :participants, lambda {
-    joins(:assignment).where(assignments: { title: PARTICIPANT })
+    joins(:assignment).where(assignments: {title: PARTICIPANT})
   }
   scope :vips, lambda {
-    joins(:assignment).where(assignments: { title: VIP })
+    joins(:assignment).where(assignments: {title: VIP})
   }
   scope :connection_events, lambda {
-    joins(:event).where(events: { event_type: CONNECTION_EVENT })
+    joins(:event).where(events: {event_type: CONNECTION_EVENT})
   }
   scope :conference_events, lambda {
-    joins(:event).where(events: { event_type: CONFERENCE })
+    joins(:event).where(events: {event_type: CONFERENCE})
   }
   scope :competition_events, lambda {
-    joins(:event).where(events: { event_type: COMPETITION_EVENT })
+    joins(:event).where(events: {event_type: COMPETITION_EVENT})
   }
   scope :award_events, lambda {
-    joins(:event).where(events: { event_type: AWARD_EVENT })
+    joins(:event).where(events: {event_type: AWARD_EVENT})
   }
   scope :competition, lambda { |competition|
-    joins(:assignment).where(assignments: { competition_id: competition.id })
+    joins(:assignment).where(assignments: {competition_id: competition.id})
   }
 
   scope :aws_credits_requested, lambda {
-    joins(:holder).where(holders: { aws_credits_requested: true })
+    joins(:holder).where(holders: {aws_credits_requested: true})
   }
 
   after_update_commit :check_for_newly_freed_space
 
   validates :status, presence: true
-  validates :status, inclusion: { in: VALID_ATTENDANCE_STATUSES }
+  validates :status, inclusion: {in: VALID_ATTENDANCE_STATUSES}
   validates :assignment_id, uniqueness: {
     scope: :event_id,
-    message: 'Registration already exists'
+    message: 'Registration already exists',
   }
 
   validate :check_for_existing_competition_registrations,
-           :check_for_team_assignments,
-           :check_code_of_conduct
+    :check_for_team_assignments,
+    :check_code_of_conduct
 
   validate :check_user_registration_type, on: :create
 

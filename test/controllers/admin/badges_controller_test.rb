@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'test_helper'
 
 class Admin::BadgesControllerTest < ActionDispatch::IntegrationTest
@@ -21,7 +23,7 @@ class Admin::BadgesControllerTest < ActionDispatch::IntegrationTest
   test 'should post award success' do
     assert_difference 'Assignment.count', 1 do
       post award_admin_competition_badge_path(@competition, @badge), params: {
-        assignment: { user_id: @user.id }
+        assignment: {user_id: @user.id},
       }
     end
   end
@@ -29,7 +31,7 @@ class Admin::BadgesControllerTest < ActionDispatch::IntegrationTest
   test 'should post award fail' do
     assert_no_difference 'Badge.count', 1 do
       post award_admin_competition_badge_path(@competition, @badge), params: {
-        assignment: { user_id: users(:one).id }
+        assignment: {user_id: users(:one).id},
       }
     end
   end
@@ -43,8 +45,8 @@ class Admin::BadgesControllerTest < ActionDispatch::IntegrationTest
     assert_difference 'Badge.count' do
       post admin_competition_badges_path(@competition), params: {
         badge: {
-          name: 'test'
-        }
+          name: 'test',
+        },
       }
     end
     assert_redirected_to admin_competition_badge_path @competition, Badge.last
@@ -54,8 +56,8 @@ class Admin::BadgesControllerTest < ActionDispatch::IntegrationTest
     assert_no_difference 'Badge.count' do
       post admin_competition_badges_path(@competition), params: {
         badge: {
-          name: nil
-        }
+          name: nil,
+        },
       }
     end
     assert_response :success
@@ -70,8 +72,8 @@ class Admin::BadgesControllerTest < ActionDispatch::IntegrationTest
     patch admin_competition_badge_path(@competition, @badge), params: {
       badge: {
         name: 'updated',
-        capacity: 4
-      }
+        capacity: 4,
+      },
     }
     @badge.reload
     assert_redirected_to admin_competition_badge_url(@competition, @badge)
@@ -82,8 +84,8 @@ class Admin::BadgesControllerTest < ActionDispatch::IntegrationTest
     patch admin_competition_badge_path(@competition, @badge), params: {
       badge: {
         name: 'updated',
-        capacity: -1
-      }
+        capacity: -1,
+      },
     }
     @badge.reload
     assert_response :success

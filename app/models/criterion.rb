@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: criteria
@@ -19,5 +21,5 @@ class Criterion < ApplicationRecord
   has_many :scores
 
   validates :name, :description, presence: true
-  validates :category, inclusion: { in: JUDGEMENT_CATEGORIES }
+  validates :category, inclusion: {in: JUDGEMENT_CATEGORIES}
 end

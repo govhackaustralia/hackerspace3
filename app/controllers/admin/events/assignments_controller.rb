@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Admin::Events::AssignmentsController < Admin::AssignmentsController
   before_action :authenticate_user!
 

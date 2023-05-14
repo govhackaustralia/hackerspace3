@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'test_helper'
 
 class TeamSlackChatServiceTest < ActiveSupport::TestCase
@@ -42,8 +44,8 @@ class TeamSlackChatServiceTest < ActiveSupport::TestCase
         'ok' => true,
         'channel' => {
           'id' => slack_channel_id,
-          'name' => slack_channel_name
-        }
+          'name' => slack_channel_name,
+        },
       })
 
     FinishTeamSlackChannelJob.expects(:perform_later)

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: assignments
@@ -34,7 +36,7 @@ class AssignmentTest < ActiveSupport::TestCase
     @participant = assignments(:participant)
     @favourite = favourites(:one)
     @team = teams(:one)
-    @header= headers(:two)
+    @header = headers(:two)
     @score = scores(:three)
     @registration = registrations(:attending)
     @competition_event = events(:competition)

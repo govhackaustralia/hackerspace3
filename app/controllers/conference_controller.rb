@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ConferenceController < ApplicationController
   def index
     all = @competition.events.published.preload(:region, :event_partners)

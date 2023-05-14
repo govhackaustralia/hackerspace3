@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'test_helper'
 
 class Admin::Regions::SponsorshipsControllerTest < ActionDispatch::IntegrationTest
@@ -26,8 +28,8 @@ class Admin::Regions::SponsorshipsControllerTest < ActionDispatch::IntegrationTe
       post admin_region_sponsorships_url @region, params: {
         sponsorship: {
           sponsorship_type_id: sponsorship_types(:one).id,
-          sponsor_id: sponsors(:one).id
-        }
+          sponsor_id: sponsors(:one).id,
+        },
       }
     end
     assert_redirected_to admin_region_sponsorships_url @region
@@ -37,8 +39,8 @@ class Admin::Regions::SponsorshipsControllerTest < ActionDispatch::IntegrationTe
     assert_no_difference 'Sponsorship.count' do
       post admin_region_sponsorships_url @region, params: {
         sponsorship: {
-          sponsorship_type_id: sponsorship_types(:one).id
-        }
+          sponsorship_type_id: sponsorship_types(:one).id,
+        },
       }
     end
     assert_response :success

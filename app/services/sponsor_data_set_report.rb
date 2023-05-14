@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class SponsorDataSetReport
   require 'csv'
 
@@ -47,7 +49,7 @@ class SponsorDataSetReport
       challenges: data_set.challenges.pluck(:name),
       sponsors: data_set.sponsors.pluck(:name),
       team_data_sets_count: team_data_sets.length,
-      teams_count: team_data_sets.pluck(:team_id).uniq.length
+      teams_count: team_data_sets.pluck(:team_id).uniq.length,
     }
   end
 end

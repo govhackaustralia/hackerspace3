@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'test_helper'
 
 class UsersControllerTest < ActionDispatch::IntegrationTest
@@ -19,10 +21,10 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
   # FIX: Should be testing update, but want it broken up into smaller
   # controllers first
   test 'should patch update' do
-    patch user_path(@user), params: { user: {
+    patch user_path(@user), params: {user: {
       full_name: 'updated',
-      slack: 'updated_slack'
-    } }
+      slack: 'updated_slack',
+    }}
     assert_redirected_to manage_account_url
     @user.reload
     assert @user.full_name == 'updated'

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Admin::VisitsController < ApplicationController
   before_action :authenticate_user!, :authorize_user!
 

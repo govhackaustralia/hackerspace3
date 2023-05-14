@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Hackerspace3Schema < GraphQL::Schema
   mutation(Types::MutationType)
   query(Types::QueryType)

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'test_helper'
 
 class DemographicsControllerTest < ActionDispatch::IntegrationTest
@@ -16,8 +18,8 @@ class DemographicsControllerTest < ActionDispatch::IntegrationTest
     employment_status_attributes = EmploymentStatus.options.reduce({}) do |hash, attribute|
       hash.update(attribute => true)
     end
-    patch demographic_path(@user), params: { profile: {
-      postcode: '1111', employment_status_attributes: employment_status_attributes
+    patch demographic_path(@user), params: {profile: {
+      postcode: '1111', employment_status_attributes: employment_status_attributes,
     }}
     assert_redirected_to manage_account_path
     @user.reload

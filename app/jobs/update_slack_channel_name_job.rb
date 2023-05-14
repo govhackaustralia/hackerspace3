@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class UpdateSlackChannelNameJob < ApplicationJob
   queue_as :default
 
@@ -18,6 +20,7 @@ class UpdateSlackChannelNameJob < ApplicationJob
       channel_name: project.slack_channel_name
     )
     raise response['error'] unless response['ok']
+
     update_team_channel_name(team, response)
   end
 

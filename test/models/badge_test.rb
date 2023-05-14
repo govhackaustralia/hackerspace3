@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: badges
@@ -24,7 +26,7 @@ class BadgeTest < ActiveSupport::TestCase
   end
 
   test 'associations' do
-    assert @badge.competition ==  @competition
+    assert @badge.competition == @competition
     assert @badge.assignments.include? @assignment
   end
 

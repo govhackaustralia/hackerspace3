@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'test_helper'
 
 class TeamManagement::TeamDataSetsControllerTest < ActionDispatch::IntegrationTest
@@ -19,18 +21,18 @@ class TeamManagement::TeamDataSetsControllerTest < ActionDispatch::IntegrationTe
 
   test 'should post create success' do
     assert_difference 'TeamDataSet.count' do
-      post team_management_team_team_data_sets_url @team, params: { team_data_set: {
-        name: 'Test'
-      } }
+      post team_management_team_team_data_sets_url @team, params: {team_data_set: {
+        name: 'Test',
+      }}
     end
     assert_redirected_to team_management_team_team_data_sets_url @team
   end
 
   test 'should post create fail' do
     assert_no_difference 'TeamDataSet.count' do
-      post team_management_team_team_data_sets_url @team, params: { team_data_set: {
-        name: nil
-      } }
+      post team_management_team_team_data_sets_url @team, params: {team_data_set: {
+        name: nil,
+      }}
     end
     assert_response :success
   end
@@ -41,18 +43,18 @@ class TeamManagement::TeamDataSetsControllerTest < ActionDispatch::IntegrationTe
   end
 
   test 'should patch update success' do
-    patch team_management_team_team_data_set_url @team, @team_data_set, params: { team_data_set: {
-      name: 'Updated'
-    } }
+    patch team_management_team_team_data_set_url @team, @team_data_set, params: {team_data_set: {
+      name: 'Updated',
+    }}
     assert_redirected_to team_management_team_team_data_sets_url @team
     @team_data_set.reload
     assert @team_data_set.name == 'Updated'
   end
 
   test 'should patch update fail' do
-    patch team_management_team_team_data_set_url @team, @team_data_set, params: { team_data_set: {
-      name: nil
-    } }
+    patch team_management_team_team_data_set_url @team, @team_data_set, params: {team_data_set: {
+      name: nil,
+    }}
     assert_response :success
     @team_data_set.reload
     assert_not @team_data_set.name.nil?

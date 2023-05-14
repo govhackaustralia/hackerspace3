@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ResourcesController < ApplicationController
   def index
     @any_tech = @competition.resources.tech.any?

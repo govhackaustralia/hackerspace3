@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class TeamManagement::TeamsController < ApplicationController
   before_action :authenticate_user!, :authorise_user!
   before_action :check_in_form_or_comp_window!, only: %i[

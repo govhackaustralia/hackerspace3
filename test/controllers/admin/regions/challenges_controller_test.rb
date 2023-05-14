@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'test_helper'
 
 class Admin::Regions::ChallengesControllerTest < ActionDispatch::IntegrationTest
@@ -24,14 +26,14 @@ class Admin::Regions::ChallengesControllerTest < ActionDispatch::IntegrationTest
 
   test 'should post create success' do
     assert_difference 'Challenge.count' do
-      post admin_region_challenges_url @region, params: { challenge: { name: 'Test' } }
+      post admin_region_challenges_url @region, params: {challenge: {name: 'Test'}}
     end
     assert_redirected_to admin_region_challenge_url @region, Challenge.last
   end
 
   test 'should post create fail' do
     assert_no_difference 'Challenge.count' do
-      post admin_region_challenges_url @region, params: { challenge: { name: nil } }
+      post admin_region_challenges_url @region, params: {challenge: {name: nil}}
     end
     assert_response :success
   end
@@ -42,14 +44,14 @@ class Admin::Regions::ChallengesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'should patch update success' do
-    patch admin_region_challenge_url @region, @challenge, params: { challenge: { name: 'Updated' } }
+    patch admin_region_challenge_url @region, @challenge, params: {challenge: {name: 'Updated'}}
     assert_redirected_to admin_region_challenge_url @region, @challenge
     @challenge.reload
     assert @challenge.name == 'Updated'
   end
 
   test 'should patch update fail' do
-    patch admin_region_challenge_url @region, @challenge, params: { challenge: { name: nil } }
+    patch admin_region_challenge_url @region, @challenge, params: {challenge: {name: nil}}
     assert_response :success
     @challenge.reload
     assert_not @challenge.name == 'Updated'
@@ -71,7 +73,7 @@ class Admin::Regions::ChallengesControllerTest < ActionDispatch::IntegrationTest
     picture = fixture_file_upload(picture_path, 'image/png')
     assert_difference -> { ActiveStorage::Attachment.count }, 1 do
       patch update_banner_image_admin_region_challenge_path(@region, @challenge), params: {
-        challenge: { banner_image: picture }
+        challenge: {banner_image: picture},
       }
     end
     assert_response :success

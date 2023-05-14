@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AccountsController < ApplicationController
   before_action :authenticate_user!, :user
 
@@ -23,6 +25,7 @@ class AccountsController < ApplicationController
     @user = current_user
   end
 
+  # rubocop:disable Naming/VariableNumber
   ACCOUNT_PARAMS = %i[
     full_name
     preferred_name
@@ -36,4 +39,5 @@ class AccountsController < ApplicationController
     under_18
     region
   ].freeze
+  # rubocop:enable Naming/VariableNumber
 end

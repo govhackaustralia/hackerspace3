@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Admin::EventPartnershipsController < ApplicationController
   before_action :authenticate_user!
   before_action :check_for_privileges_from_event!, except: :destroy

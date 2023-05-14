@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: competitions
@@ -64,11 +66,11 @@ class Competition < ApplicationRecord
   belongs_to :hunt_badge, class_name: 'Badge', optional: true
 
   validates :year,
-            :team_form_start, :team_form_end,
-            :start_time, :end_time,
-            :peoples_choice_start, :peoples_choice_end,
-            :challenge_judging_start, :challenge_judging_end,
-            presence: true
+    :team_form_start, :team_form_end,
+    :start_time, :end_time,
+    :peoples_choice_start, :peoples_choice_end,
+    :challenge_judging_start, :challenge_judging_end,
+    presence: true
 
   validates :year, uniqueness: true
 
@@ -94,7 +96,7 @@ class Competition < ApplicationRecord
   # director.
   def director
     assignment = assignments.where(title: COMPETITION_DIRECTOR).first
-    assignment.nil? ? nil : assignment.user
+    assignment&.user
   end
 
   # Returns the User of the current Sponsorship Director, if any
@@ -102,7 +104,7 @@ class Competition < ApplicationRecord
   # director.
   def sponsorship_director
     assignment = assignments.where(title: SPONSORSHIP_DIRECTOR).first
-    assignment.nil? ? nil : assignment.user
+    assignment&.user
   end
 
   # Returns the User of the current Chief Judge, if any
@@ -110,7 +112,7 @@ class Competition < ApplicationRecord
   # chief judge.
   def chief_judge
     assignment = assignments.where(title: CHIEF_JUDGE).first
-    assignment.nil? ? nil : assignment.user
+    assignment&.user
   end
 
   # Returns an active record query with all site admins, if any

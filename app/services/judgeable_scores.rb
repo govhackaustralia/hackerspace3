@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # ENHANCEMENT: Extremely inefficient when used, rework. Move DB queries out.
 # Can split into judge_compile and participant_compile.
 class JudgeableScores
@@ -63,14 +65,14 @@ class JudgeableScores
 
   def assign_verdict(team)
     verdict = if @assignment.title != JUDGE && @user_team_ids.include?(team.id)
-                'Your Team'
-              elsif (header = @team_id_to_header[team.id]).nil?
-                'Not Marked'
-              elsif (scores = @header_id_to_scores[header.id]).include? nil
-                'Incomplete'
-              else
-                scores.sum
-              end
-    @scoreable_scores_obj[team.id] = { display_score_status: verdict }
+      'Your Team'
+    elsif (header = @team_id_to_header[team.id]).nil?
+      'Not Marked'
+    elsif (scores = @header_id_to_scores[header.id]).include? nil
+      'Incomplete'
+    else
+      scores.sum
+    end
+    @scoreable_scores_obj[team.id] = {display_score_status: verdict}
   end
 end

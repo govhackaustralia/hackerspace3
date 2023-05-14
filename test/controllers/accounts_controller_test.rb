@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'test_helper'
 
 class AccountsControllerTest < ActionDispatch::IntegrationTest
@@ -13,9 +15,9 @@ class AccountsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'should patch update success' do
-    patch account_path(@user), params: { user: {
+    patch account_path(@user), params: {user: {
       full_name: 'Full Name',
-      region: 'South Australia'
+      region: 'South Australia',
     }}
     assert_redirected_to demographics_path
     @user.reload
@@ -24,8 +26,8 @@ class AccountsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'should patch update fail' do
-    patch account_path(@user), params: { user: {
-      full_name: ''
+    patch account_path(@user), params: {user: {
+      full_name: '',
     }}
     assert_redirected_to complete_registration_path
     @user.reload

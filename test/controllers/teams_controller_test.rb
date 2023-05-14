@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'test_helper'
 
 class TeamsControllerTest < ActionDispatch::IntegrationTest
@@ -32,7 +34,7 @@ class TeamsControllerTest < ActionDispatch::IntegrationTest
 
   test 'should post create' do
     assert_difference('Team.count') do
-      post teams_url params: { team: { event_id: 2, youth_team: false } }
+      post teams_url params: {team: {event_id: 2, youth_team: false}}
     end
     assert_redirected_to team_management_team_path(Team.last)
   end

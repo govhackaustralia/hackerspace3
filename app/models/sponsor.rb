@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: sponsors
@@ -29,7 +31,7 @@ class Sponsor < ApplicationRecord
 
   validates :name, uniqueness: {
     scope: :competition_id,
-    message: 'Sponsor name already taken in this competition'
+    message: 'Sponsor name already taken in this competition',
   }
 
   scope :search, lambda { |term|

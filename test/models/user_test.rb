@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: users
@@ -68,7 +70,7 @@ class UserTest < ActiveSupport::TestCase
     @holder = holders(:one)
     @assignment = assignments(:management_team)
     @team = teams(:one)
-    @header= headers(:two)
+    @header = headers(:two)
     @registration = registrations(:attending)
     @joined_team_assignment = assignments(:team_leader)
     @joined_team = @team

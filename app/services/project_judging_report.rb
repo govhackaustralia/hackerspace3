@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ProjectJudgingReport
   attr_accessor :competition, :projects, :judge_users
 

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'test_helper'
 
 class UpdateSlackChannelNameJobTest < ActiveJob::TestCase
@@ -27,12 +29,12 @@ class UpdateSlackChannelNameJobTest < ActiveJob::TestCase
     SlackApiWrapper.expects(:slack_conversatons_rename)
       .with(
         channel_id: teams(:one).slack_channel_id,
-        channel_name: new_project_name)
-      .returns({
+        channel_name: new_project_name
+      ).returns({
         'ok' => true,
         'channel' => {
-          'name' => new_project_name
-        }
+          'name' => new_project_name,
+        },
       })
 
     UpdateSlackChannelNameJob.perform_now(projects(:one))
@@ -48,8 +50,8 @@ class UpdateSlackChannelNameJobTest < ActiveJob::TestCase
     SlackApiWrapper.expects(:slack_conversatons_rename)
       .with(
         channel_id: teams(:one).slack_channel_id,
-        channel_name: new_project_name)
-      .returns({'ok' => false, 'error' => 'error message'})
+        channel_name: new_project_name
+      ).returns({'ok' => false, 'error' => 'error message'})
 
     assert_raises RuntimeError do
       UpdateSlackChannelNameJob.perform_now(projects(:one))

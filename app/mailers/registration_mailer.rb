@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class RegistrationMailer < ApplicationMailer
   def attendance_email(registration)
     @registration = registration

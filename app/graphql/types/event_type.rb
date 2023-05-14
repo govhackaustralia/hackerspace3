@@ -1,4 +1,6 @@
-module Types
+# frozen_string_literal: true
+
+module Types # rubocop:disable Style/ClassAndModuleChildren
   class EventType < Types::BaseObject
     field :id, ID, null: false
     field :region, Types::RegionType, null: false

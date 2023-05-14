@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class HuntQuestionsController < ApplicationController
   before_action :check_published!, :hunt_questions, :hunt_badge
   before_action :authenticate_user!, :check_for_previous_correct_answer!, only: :update
@@ -78,7 +80,8 @@ class HuntQuestionsController < ApplicationController
   end
 
   def all_questions_answered?
-    (hunt_questions.pluck(:id) - current_user.assignments.where(assignable: hunt_questions).pluck(:assignable_id)).empty?
+    user_hunt_assignment_ids = current_user.assignments.where(assignable: hunt_questions).pluck(:assignable_id)
+    (hunt_questions.pluck(:id) - user_hunt_assignment_ids).empty?
   end
 
   def check_for_previous_correct_answer!

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class TeamsController < ApplicationController
   before_action :authenticate_user!, :check_participating!,
     :check_in_form_or_comp_window!

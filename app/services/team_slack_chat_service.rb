@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class TeamSlackChatService
   attr_reader :team
 
@@ -21,7 +23,8 @@ class TeamSlackChatService
 
   def connect_team_to_slack
     response = SlackApiWrapper.slack_conversatons_create(
-      team.current_project.slack_channel_name)
+      team.current_project.slack_channel_name
+    )
     raise response['error'] unless response['ok']
 
     update_team_slack_details(response)

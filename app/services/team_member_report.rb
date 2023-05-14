@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class TeamMemberReport
   attr_accessor :competition
 
@@ -10,10 +12,10 @@ class TeamMemberReport
   def to_csv
     CSV.generate do |csv|
       csv << header_names
-      competition.competition_assignments.team_participants.preload(
-          *preload_entities).each do |assignment|
-        csv << row_values(assignment)
-      end
+      competition.competition_assignments.team_participants.preload(*preload_entities)
+        .each do |assignment|
+          csv << row_values(assignment)
+        end
     end
   end
 

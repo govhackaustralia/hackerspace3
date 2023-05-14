@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class PublishedEntryCounter
   attr_reader :competition, :challenge, :challenge_ids
 
@@ -16,7 +18,7 @@ class PublishedEntryCounter
   private
 
   def challenge_entries
-    challenges.detect { |c| c == challenge  }.published_entries
+    challenges.detect { |c| c == challenge }.published_entries
   end
 
   def challenges

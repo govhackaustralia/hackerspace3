@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: events
@@ -78,20 +80,20 @@ class Event < ApplicationRecord
 
   scope :locations, lambda {
     where 'events.name NOT LIKE ? AND event_type = ?',
-          '%Remote%', COMPETITION_EVENT
+      '%Remote%', COMPETITION_EVENT
   }
   scope :remotes, lambda {
     where 'events.name LIKE ? AND event_type = ?',
-          '%Remote%', COMPETITION_EVENT
+      '%Remote%', COMPETITION_EVENT
   }
 
   scope :competition, lambda { |competition|
-    joins(:region).where(regions: { competition: competition })
+    joins(:region).where(regions: {competition: competition})
   }
 
   validates :name, :capacity, presence: true
-  validates :registration_type, inclusion: { in: EVENT_REGISTRATION_TYPES }
-  validates :event_type, inclusion: { in: EVENT_TYPES }
+  validates :registration_type, inclusion: {in: EVENT_REGISTRATION_TYPES}
+  validates :event_type, inclusion: {in: EVENT_TYPES}
 
   after_save_commit :update_identifier
 
@@ -194,7 +196,28 @@ class Event < ApplicationRecord
 
   # Return a CSV file of event attributes.
   def self.to_csv(competition)
-    desired_columns = %w[id name capacity email twitter address accessibility youth_support parking public_transport operation_hours catering video_id start_time end_time created_at updated_at place_id identifier event_type]
+    desired_columns = %w[
+      id
+      name
+      capacity
+      email
+      twitter
+      address
+      accessibility
+      youth_support
+      parking
+      public_transport
+      operation_hours
+      catering
+      video_id
+      start_time
+      end_time
+      created_at
+      updated_at
+      place_id
+      identifier
+      event_type
+    ]
     CSV.generate do |csv|
       csv << desired_columns
       competition.events.each do |event|
@@ -205,7 +228,21 @@ class Event < ApplicationRecord
 
   # Returns a CSV file of Registrations associated with an event.
   def registrations_to_csv
-    user_columns = %w[full_name email slack preferred_name organisation_name dietary_requirements registration_type parent_guardian request_not_photographed data_cruncher coder creative facilitator]
+    user_columns = %w[
+      full_name
+      email
+      slack
+      preferred_name
+      organisation_name
+      dietary_requirements
+      registration_type
+      parent_guardian
+      request_not_photographed
+      data_cruncher
+      coder
+      creative
+      facilitator
+    ]
     combined = user_columns + ['status']
     CSV.generate do |csv|
       csv << combined

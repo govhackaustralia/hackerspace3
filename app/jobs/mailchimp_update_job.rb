@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class MailchimpUpdateJob < ApplicationJob
   queue_as :default
 
@@ -29,9 +31,9 @@ class MailchimpUpdateJob < ApplicationJob
         email_address: user.email,
         status: status_label(user),
         merge_fields: {
-          FNAME: user.display_name
-        }
-      }
+          FNAME: user.display_name,
+        },
+      },
     }
   end
 

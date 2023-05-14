@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AwsCreditsRequestedReport
   def initialize(competition)
     @requests = competition.competition_registrations.aws_credits_requested.pluck(:event_id)

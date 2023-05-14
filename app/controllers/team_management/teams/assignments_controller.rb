@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class TeamManagement::Teams::AssignmentsController < TeamManagement::TeamsController
   before_action :check_in_form_or_comp_window!
 

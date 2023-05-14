@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   before_action :authenticate_user!, :confirm_success!, only: :slack
 
@@ -38,7 +40,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   def profile_params
     {
       slack_user_id: data.dig('authed_user', 'id'),
-      slack_access_token: data.fetch(:access_token)
+      slack_access_token: data.fetch(:access_token),
     }
   end
 
@@ -47,7 +49,8 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   end
 
   def handle_auth_error
-    session['devise.google_data'] = request.env['omniauth.auth'].except(:extra) # Removing extra as it can overflow some session stores
+    # Removing extra as it can overflow some session stores
+    session['devise.google_data'] = request.env['omniauth.auth'].except(:extra)
     redirect_to new_user_registration_url, alert: @user.errors.full_messages.join("\n")
   end
 
@@ -62,7 +65,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
   def new_user_from_google(data)
     User.new full_name: data['name'], email: data['email'],
-             password: Devise.friendly_token[0, 20]
+      password: Devise.friendly_token[0, 20]
   end
 
   def update_user_info_from_google(user, data)

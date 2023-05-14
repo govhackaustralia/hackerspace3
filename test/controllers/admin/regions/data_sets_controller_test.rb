@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'test_helper'
 
 class Admin::Regions::DataSetsControllerTest < ActionDispatch::IntegrationTest
@@ -19,14 +21,14 @@ class Admin::Regions::DataSetsControllerTest < ActionDispatch::IntegrationTest
 
   test 'should post create success' do
     assert_difference 'DataSet.count' do
-      post admin_region_data_sets_url @region, params: { data_set: { name: 'Test' } }
+      post admin_region_data_sets_url @region, params: {data_set: {name: 'Test'}}
     end
     assert_redirected_to admin_region_data_sets_url @region
   end
 
   test 'should post create fail' do
     assert_no_difference 'DataSet.count' do
-      post admin_region_data_sets_url @region, params: { data_set: { name: nil } }
+      post admin_region_data_sets_url @region, params: {data_set: {name: nil}}
     end
     assert_response :success
   end
@@ -37,14 +39,14 @@ class Admin::Regions::DataSetsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'should patch update success' do
-    patch admin_region_data_set_url @region, @data_set, params: { data_set: { name: 'Updated' } }
+    patch admin_region_data_set_url @region, @data_set, params: {data_set: {name: 'Updated'}}
     assert_redirected_to admin_region_data_sets_url @region
     @data_set.reload
     assert @data_set.name == 'Updated'
   end
 
   test 'should patch update fail' do
-    patch admin_region_data_set_url @region, @data_set, params: { data_set: { name: nil } }
+    patch admin_region_data_set_url @region, @data_set, params: {data_set: {name: nil}}
     assert_response :success
     @data_set.reload
     assert_not @data_set.name == 'Updated'

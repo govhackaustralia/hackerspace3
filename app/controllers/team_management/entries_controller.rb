@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class TeamManagement::EntriesController < TeamManagement::TeamsController
   before_action :check_in_comp_window!
 
@@ -89,9 +91,9 @@ class TeamManagement::EntriesController < TeamManagement::TeamsController
 
   def flash_alert(checkpoint_not_passed, checkpoint)
     flash[:alert] = if checkpoint_not_passed
-                      @entry.errors.full_messages.to_sentence
-                    else
-                      "#{checkpoint.name} has passed."
-                    end
+      @entry.errors.full_messages.to_sentence
+    else
+      "#{checkpoint.name} has passed."
+    end
   end
 end
