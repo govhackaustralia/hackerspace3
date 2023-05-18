@@ -1,7 +1,6 @@
 class DataSetsController < ApplicationController
   def index
     @data_sets = @competition.data_sets.order(:name).preload(:region)
-    @regions = @data_sets.map(&:region).uniq
     respond_to do |format|
       format.html
       format.csv { send_data @data_sets.to_csv @competition }
