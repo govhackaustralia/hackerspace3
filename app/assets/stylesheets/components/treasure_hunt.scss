@@ -32,7 +32,7 @@
   flex-direction: column;
   background: url("/assets/hunt-scroll.png") top left no-repeat;
   background-size: contain;
-  
+
   font-weight: bold;
   color: black;
   font-size: 0.9rem;
@@ -57,7 +57,7 @@
 }
 .treasure_hunt section.header {
   display: block;
-  background-color: #4c9ad2;
+  background-color: var(--secondary);
   padding: 5rem;
   align-content: center;
   h2 {

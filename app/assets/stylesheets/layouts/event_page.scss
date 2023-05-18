@@ -1,35 +1,21 @@
 /*==========  Mobile First Method  ==========*/
 .single-event {
-  background-color: #fff;
   .events_row {
     display: flex;
     flex-direction: column;
     flex-grow: grow;
+    gap: 4em;
   }
   .side-menu {
     display: flex;
     flex-direction: column;
-    padding: 3rem 2rem;
     width: auto;
-
-    h2 {
-      font-size: 20px;
-      line-height: 25px;
-      color: #4C9AD2;
-    }
   }
   .content {
     display: flex;
     flex-direction: column;
-    padding: 2rem 0;
     width: 100%;
     height: 100%;
-
-    h3 {
-      font-size: 18px;
-      line-height: 20px;
-      color: #CC1E57;
-    }
   }
 
   .info {
@@ -59,7 +45,7 @@
 
     &:hover {
       opacity: 0.7;
-      border: 1px solid #4C9AD2;
+      border: 1px solid var(--secondary);
     }
 
     img {
@@ -101,7 +87,7 @@
 
     &:hover {
       opacity: 0.7;
-      border: 1px solid #4C9AD2;
+      border: 1px solid var(--secondary);
     }
 
     img {
@@ -135,35 +121,20 @@
 /* desktops */
 @media only screen and (min-width : 992px) {
   .single-event {
-    background-color: #fff;
     .events_row {
-      display: flex;
       flex-direction: row;
       flex-grow: none;
     }
     .side-menu {
       display: flex;
       flex-direction: column;
-      padding: 4rem;
       width: 20%;
-
-      h2 {
-        font-size: 25px;
-        line-height: 30px;
-        color: #4C9AD2;
-      }
     }
     .content {
       display: flex;
       flex-direction: column;
       padding: 4rem;
       width: 80%;
-
-      h3 {
-        font-size: 20px;
-        line-height: 25px;
-        color: #CC1E57;
-      }
     }
 
     .info {

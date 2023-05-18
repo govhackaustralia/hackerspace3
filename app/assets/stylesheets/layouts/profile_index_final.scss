@@ -65,12 +65,12 @@
                           }
 
                           a {
-                              color: #4c9ad2;
+                              color: var(--secondary);
                               text-decoration: none;
                           }
 
                           a:hover {
-                              color: #4c9ad2;
+                              color: var(--secondary);
                               text-decoration: underline;
                           }
                       }
@@ -97,8 +97,8 @@
                           }
 
                           &.black-button:hover {
-                              background-color: #323232;
-                              border: 1px solid #323232;
+                              background-color: var(--dark-gray);
+                              border: 1px solid var(--dark-gray);
 
                               a {
                                   color: #ffffff;
@@ -132,7 +132,7 @@
                       padding: 5px 10px;
                       align-items: center;
                       margin: 3px;
-                      background: #4c9ad2;
+                      background: var(--secondary);
                   }
               }
           }
@@ -237,8 +237,8 @@
                   }
 
                   &.black-button:hover {
-                      background-color: #323232;
-                      border: 1px solid #323232;
+                      background-color: var(--dark-gray);
+                      border: 1px solid var(--dark-gray);
 
                       a {
                           color: #ffffff;
@@ -258,9 +258,7 @@
 
 /* Small Devices, Tablets */
 @media only screen and (min-width : 768px) {
-  .profile_page {
-    margin: 0rem 5rem;
-  }
+
 }
 
 /* Medium Devices, Desktops */

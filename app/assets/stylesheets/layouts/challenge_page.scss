@@ -3,18 +3,6 @@
 /* Custom, iPhone Retina */
 @media only screen and (min-device-width: 320px) and (min-width : 320px) {
   .challenge_page {
-    padding: 2em 0em;
-
-    h2 {
-      color: #4c9ad2;
-      font-size: 2em;
-    }
-
-    h3 {
-      font-size: 1.5em;
-      padding: 1em;
-    }
-
     .challenge_head, .challenge_body {
       article {
         width: 60%;
@@ -35,12 +23,12 @@
 
       &.teams {
         h4 {
-          color: #ca1e56;
+          color: var(--primary);
           padding: 0.25em 0.25em;
         }
 
         h5 {
-          color: #4c9ad2;
+          color: var(--secondary);
           padding: 0.25em 0.55em;
         }
       }
@@ -54,7 +42,7 @@
           display: block;
           text-align: center;
           margin-top: 0.25em;
-          background-color: #ca1e56;
+          background-color: var(--primary);
           color: #ddd;
           font-weight: 700;
           text-transform: uppercase;
@@ -72,7 +60,7 @@
 
       article {
         h4 {
-          color: #ca1e56;
+          color: var(--primary);
           font-weight: 400;
           font-size: 1.5em;
           font-style: italic;
@@ -168,25 +156,25 @@
       padding: 2em 2em;
       border-collapse: collapse;
       width: 100%;
-      border: 1px solid #ca1e56;
+      border: 1px solid var(--primary);
       padding: 0.25em 1em;
       box-sizing: border-box;
     }
 
     th, td {
-      border: 1px solid #ca1e56;
+      border: 1px solid var(--primary);
       padding: 0.25em 1em;
       box-sizing: border-box;
     }
 
     th {
-      background-color: #ca1e56;
-      color: #ddd;
+      background-color: var(--primary);
+      color: #fff;
     }
 
     table a {
       text-decoration: none;
-      color: #4c9ad2;
+      color: var(--secondary);
     }
   }
 }
@@ -204,8 +192,6 @@
 /* Medium Devices, Desktops */
 @media only screen and (min-width : 992px) {
   .challenge_page {
-    padding: 2em 5em;
-
     .pdf_preview {
       width: 50%;
     }

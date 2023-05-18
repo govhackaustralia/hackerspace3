@@ -3,23 +3,6 @@
 /* Custom, iPhone Retina */
 @media only screen and (min-device-width: 320px) and (min-width : 320px) {
   .project_index {
-    padding: 1em .5em;
-
-    h2 {
-      color: #4c9ad2;
-      font-size: 2em;
-      text-align: center;
-    }
-
-    h3 {
-      font-size: 1.5em;
-      padding: 1em;
-    }
-
-    p {
-      padding: 0em 2.25em;
-    }
-
     aside {
       float: right;
 
@@ -31,7 +14,7 @@
         display: block;
         text-align: center;
         margin-top: 1em;
-        background-color: #ca1e56;
+        background-color: var(--primary);
         color: #ddd;
         font-weight: 700;
         text-transform: uppercase;
@@ -41,10 +24,6 @@
 
     .download-csv {
       display: none;
-    }
-
-    .projects-table {
-      width: 85%;
     }
   }
 }
@@ -57,18 +36,12 @@
 /* Small Devices, Tablets */
 @media only screen and (min-width : 768px) {
   .project_index {
-    padding: 2em 5em;
-
-    h2 {
-      text-align: left;
-    }
-
     .download-csv {
       display: inherit;
     }
 
     .projects-table {
-      width: inherit;
+      width: 100%;
     }
   }
 }

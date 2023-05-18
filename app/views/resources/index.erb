@@ -1,8 +1,8 @@
 <% content_for :title, "Resources for #{@competition.name}" %>
 <main class="dataset_page">
-  <h2>
+  <h1>
     <%= yield :title %>
-  </h2>
+  </h1>
   <section class="dataportals">
     <% if @any_data_portals %>
       <%= link_to data_portals_resources_path do %>

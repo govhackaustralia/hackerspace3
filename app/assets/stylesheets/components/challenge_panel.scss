@@ -13,12 +13,12 @@
       box-sizing: border-box;
 
       h4 {
-        color: #4c9ad2;
+        color: var(--secondary);
         font-size: 1em;
       }
 
       h5 {
-        color: #ca1e56;
+        color: var(--primary);
         font-weight: 400;
         font-style: italic;
         font-size: 0.9em;

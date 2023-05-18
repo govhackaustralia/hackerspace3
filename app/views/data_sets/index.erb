@@ -1,8 +1,8 @@
 <% content_for :title, "Datasets for #{@competition.name}" %>
 <main class="dataset_page">
-  <h2>
+  <h1>
     <%= yield :title %>
-  </h2>
+  </h1>
   <% if @data_sets.present? %>
     <%= link_to 'Download CSV', data_sets_path(format: 'csv'), class: 'download-csv' %>
     <table class="projects-table" data-turbolinks="false" id="dataset_table">

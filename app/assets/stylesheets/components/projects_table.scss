@@ -1,28 +1,25 @@
 table.projects-table {
   box-sizing: border-box;
   margin-top: 2em;
-  margin-left: 2em;
-  padding: 2em 2em;
   border-collapse: collapse;
 
   width: 100%;
-  border: 1px solid #ca1e56;
-  padding: 0.25em 1em;
+  border: 1px solid var(--primary);
   box-sizing: border-box;
 
   th, td {
-    border: 1px solid #ca1e56;
+    border: 1px solid var(--primary);
     padding: 0.25em 1em;
     box-sizing: border-box;
   }
 
   th {
-    background-color: #ca1e56;
-    color: #ddd;
+    background-color: var(--primary);
+    color: #fff;
   }
 
   a {
     text-decoration: none;
-    color: #4c9ad2;
+    color: var(--secondary);
   }
 }

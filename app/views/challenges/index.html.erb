@@ -6,13 +6,15 @@
       <%= link_to (render 'region_tile', region: region ), region_path(region) %>
     <% end %>
   </section>
+  <section class="challenges_list">
   <% @regions.each do |region| %>
     <% next unless @checker.show?(region) %>
-    <h3>
+    <h2>
       <%= region.name %>
-    </h3>
+    </h2>
     <% region.approved_challenges.each do |challenge| %>
       <%= render 'challenge_panel', challenge: challenge, entry_count: challenge.published_entries.length %>
     <% end %>
   <% end %>
+  </section>
 </main>

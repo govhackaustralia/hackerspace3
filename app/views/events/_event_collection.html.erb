@@ -1,8 +1,8 @@
 <% if events.present? %>
   <div class="tile_wrapper">
-    <h3 class="subtitle">
+    <h2 class="subtitle">
       <%= title %>
-    </h3>
+    </h2>
     <section class="tiles">
       <% events.each do |event| %>
         <% unless event.end_time.blank? %>

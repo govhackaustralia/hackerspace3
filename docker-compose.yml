@@ -3,6 +3,7 @@ version: '3.1'
 services:
 
   hackerspace3:
+    platform: linux/x86_64
     build: .
     depends_on:
       - postgres

@@ -36,8 +36,8 @@
                 }
 
                 &.red-button:hover {
-                    background-color: #fd266c;
-                    border: 1px solid #fd266c;
+                    background-color: var(--primary);
+                    border: 1px solid var(--primary);
                     color: #ffffff;
                 }
 
@@ -58,8 +58,8 @@
                 }
 
                 &.blue-button:hover {
-                    background-color: #6dbff9;
-                    border: 1px solid #6dbff9;
+                    background-color: var(--secondary);
+                    border: 1px solid var(--secondary);
                     color: #ffffff;
                 }
 
@@ -80,8 +80,8 @@
                 }
 
                 &.black-button:hover {
-                    background-color: #323232;
-                    border: 1px solid #323232;
+                    background-color: var(--dark-gray);
+                    border: 1px solid var(--dark-gray);
                     color: #ffffff;
                 }
             }
@@ -129,14 +129,14 @@
                         font-family: Open Sans;
                         font-size: 1rem;
                         text-align: center;
-                        background-color: #fd266c;
-                        border: 1px solid #fd266c;
+                        background-color: var(--primary);
+                        border: 1px solid var(--primary);
                         color: #fff;
                     }
 
                     &.content-red-button:hover {
-                        background-color: #fd266c;
-                        border: 1px solid #fd266c;
+                        background-color: var(--primary);
+                        border: 1px solid var(--primary);
                         color: #ffffff;
                     }
 
@@ -149,14 +149,14 @@
                         font-family: Open Sans;
                         font-size: 1rem;
                         text-align: center;
-                        background-color: #6dbff9;
-                        border: 1px solid #6dbff9;
+                        background-color: var(--secondary);
+                        border: 1px solid var(--secondary);
                         color: #fff;
                     }
 
                     &.content-blue-button:hover {
-                        background-color: #6dbff9;
-                        border: 1px solid #6dbff9;
+                        background-color: var(--secondary);
+                        border: 1px solid var(--secondary);
                         color: #ffffff;
                     }
 
@@ -268,7 +268,7 @@
 
                         h3 {
                             &.sub-heading {
-                                color: #323232;
+                                color: var(--dark-gray);
                                 margin-bottom: 5px;
                                 text-transform: uppercase;
                             }
@@ -292,14 +292,14 @@
                                         font-family: Open Sans;
                                         font-size: 1rem;
                                         text-align: center;
-                                        background-color: #fd266c;
-                                        border: 1px solid #fd266c;
+                                        background-color: var(--primary);
+                                        border: 1px solid var(--primary);
                                         color: #fff;
                                     }
 
                                     &.red-events-button:hover {
-                                        background-color: #fd266c;
-                                        border: 1px solid #fd266c;
+                                        background-color: var(--primary);
+                                        border: 1px solid var(--primary);
                                         color: #ffffff;
                                     }
 
@@ -312,14 +312,14 @@
                                         font-family: Open Sans;
                                         font-size: 1rem;
                                         text-align: center;
-                                        background-color: #6dbff9;
-                                        border: 1px solid #6dbff9;
+                                        background-color: var(--secondary);
+                                        border: 1px solid var(--secondary);
                                         color: #fff;
                                     }
 
                                     &.blue-events-button:hover {
-                                        background-color: #6dbff9;
-                                        border: 1px solid #6dbff9;
+                                        background-color: var(--secondary);
+                                        border: 1px solid var(--secondary);
                                         color: #ffffff;
                                     }
 

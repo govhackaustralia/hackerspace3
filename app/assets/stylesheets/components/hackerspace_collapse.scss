@@ -31,13 +31,13 @@
           }
 
           &:nth-child(odd):hover {
-            color: #ca1e56;
-            border-bottom-color: #ca1e56;
+            color: var(--primary);
+            border-bottom-color: var(--primary);
           }
 
           &:nth-child(even):hover {
-            color: #4c9ad2;
-            border-bottom-color: #4c9ad2;
+            color: var(--secondary);
+            border-bottom-color: var(--secondary);
           }
         }
       }

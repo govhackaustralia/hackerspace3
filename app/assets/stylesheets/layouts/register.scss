@@ -8,7 +8,7 @@
   }
 
   h2 {
-    color: #ca1e56;
+    color: var(--primary);
     font-size: 1.5em;
     line-height: 2em;
   }
@@ -33,7 +33,7 @@
       box-sizing: border-box;
       font-size: 1.5em;
       padding: 0.25em 1.25em;
-      background-color: #4c9ad2;
+      background-color: var(--secondary);
       color: #ddd;
       font-weight: 700;
       text-transform: uppercase;
@@ -82,7 +82,7 @@
       font-size: 1.15em;
 
       a {
-        color: #ca1e56;
+        color: var(--primary);
       }
     }
 
@@ -109,8 +109,8 @@
     font-family: Open Sans;
     font-size: 1rem;
     text-align: left;
-    background-color: #ca1e56;
-    border: 1px solid #ca1e56;
+    background-color: var(--primary);
+    border: 1px solid var(--primary);
     color: #fff;
     text-decoration: none;
     width: fit-content;
@@ -118,7 +118,7 @@
 
   .code_of_conduct {
     a {
-      color: #ca1e56;
+      color: var(--primary);
     }
   }
 }
@@ -126,39 +126,32 @@
 /* Small Devices, Tablets */
 @media only screen and (min-width : 768px) {
   .register {
-    background-color: #fff;
-    padding: 2em 5em;
-  
     .register_section {
       display: flex;
       flex-direction: column;
     }
-    h2 {
-      color: #ca1e56;
-      font-size: 2em;
-    }
-  
+
     > section {
       display: flex;
     }
-  
+
     form {
       box-sizing: border-box;
     }
-  
+
     article {
       box-sizing: border-box;
       padding: 2em 2em;
-  
+
       h3 {
         margin-top: 1em;
       }
-  
+
       a.update-button {
         box-sizing: border-box;
         font-size: 1.5em;
         padding: 0.25em 1.25em;
-        background-color: #4c9ad2;
+        background-color: var(--secondary);
         color: #ddd;
         font-weight: 700;
         text-transform: uppercase;
@@ -169,21 +162,21 @@
         text-align: center;
       }
     }
-  
+
     form > div {
       &.field {
         display: flex;
         flex-direction: column;
         padding: 1em 0em;
         align-items: flex-start;
-  
+
         > label {
           box-sizing: border-box;
           padding-right: 1em;
           text-align: right;
           font-size: 1.15em;
         }
-  
+
         > {
           input, select {
             box-sizing: border-box;
@@ -195,22 +188,22 @@
           }
         }
       }
-  
+
       > div em {
         font-size: 0.85em;
       }
-  
+
       > div {
         box-sizing: border-box;
         padding-right: 1em;
         text-align: left;
         font-size: 1.15em;
-  
+
         a {
-          color: #ca1e56;
+          color: var(--primary);
         }
       }
-  
+
       &.actions {
         display: flex;
         justify-content: flex-start;
@@ -218,13 +211,13 @@
         margin-bottom: 1em;
       }
     }
-  
+
     div.actions {
       display: flex;
       justify-content: flex-start;
       padding-top: 20px;
     }
-  
+
     form > div.actions input {
       margin: 5px 0px;
       border-radius: 0.5em;
@@ -234,8 +227,8 @@
       font-family: Open Sans;
       font-size: 1rem;
       text-align: left;
-      background-color: #ca1e56;
-      border: 1px solid #ca1e56;
+      background-color: var(--primary);
+      border: 1px solid var(--primary);
       color: #fff;
       text-decoration: none;
       width: fit-content;
@@ -246,40 +239,37 @@
 /* Medium Devices, Desktops */
 @media only screen and (min-width : 992px) {
   .register {
-    background-color: #fff;
-    padding: 2em 5em;
-  
     .register_section {
       display: flex;
       flex-direction: column;
     }
     h2 {
-      color: #ca1e56;
+      color: var(--primary);
       font-size: 2em;
       line-height: 2.2em;
     }
-  
+
     > section {
       display: flex;
     }
-  
+
     form {
       box-sizing: border-box;
     }
-  
+
     article {
       box-sizing: border-box;
       padding: 2em 2em;
-  
+
       h3 {
         margin-top: 1em;
       }
-  
+
       a.update-button {
         box-sizing: border-box;
         font-size: 1.5em;
         padding: 0.25em 1.25em;
-        background-color: #4c9ad2;
+        background-color: var(--secondary);
         color: #ddd;
         font-weight: 700;
         text-transform: uppercase;
@@ -290,21 +280,21 @@
         text-align: center;
       }
     }
-  
+
     form > div {
       &.field {
         display: flex;
         flex-direction: column;
         padding: 1em 0em;
         align-items: flex-start;
-  
+
         > label {
           box-sizing: border-box;
           padding-right: 1em;
           text-align: right;
           font-size: 1.15em;
         }
-  
+
         > {
           input, select {
             box-sizing: border-box;
@@ -316,22 +306,22 @@
           }
         }
       }
-  
+
       > div em {
         font-size: 0.85em;
       }
-  
+
       > div {
         box-sizing: border-box;
         padding-right: 1em;
         text-align: left;
         font-size: 1.15em;
-  
+
         a {
-          color: #ca1e56;
+          color: var(--primary);
         }
       }
-  
+
       &.actions {
         display: flex;
         justify-content: flex-start;
@@ -339,13 +329,13 @@
         margin-bottom: 1em;
       }
     }
-  
+
     div.actions {
       display: flex;
       justify-content: flex-start;
       padding-top: 20px;
     }
-  
+
     form > div.actions input {
       margin: 5px 0px;
       border-radius: 0.5em;
@@ -355,8 +345,8 @@
       font-family: Open Sans;
       font-size: 1rem;
       text-align: left;
-      background-color: #ca1e56;
-      border: 1px solid #ca1e56;
+      background-color: var(--primary);
+      border: 1px solid var(--primary);
       color: #fff;
       text-decoration: none;
       width: fit-content;
@@ -367,39 +357,32 @@
 /* Large Devices, Wide Screens */
 @media only screen and (min-width : 1200px) {
   .register {
-    background-color: #fff;
-    padding: 5em 4em;
-  
     .register_section {
       display: flex;
       flex-direction: column;
     }
-    h2 {
-      color: #ca1e56;
-      font-size: 2em;
-    }
-  
+
     > section {
       display: flex;
     }
-  
+
     form {
       box-sizing: border-box;
     }
-  
+
     article {
       box-sizing: border-box;
       padding: 2em 2em;
-  
+
       h3 {
         margin-top: 1em;
       }
-  
+
       a.update-button {
         box-sizing: border-box;
         font-size: 1.5em;
         padding: 0.25em 1.25em;
-        background-color: #4c9ad2;
+        background-color: var(--secondary);
         color: #ddd;
         font-weight: 700;
         text-transform: uppercase;
@@ -410,21 +393,21 @@
         text-align: center;
       }
     }
-  
+
     form > div {
       &.field {
         display: flex;
         flex-direction: column;
         padding: 1em 0em;
         align-items: flex-start;
-  
+
         > label {
           box-sizing: border-box;
           padding-right: 1em;
           text-align: right;
           font-size: 1.15em;
         }
-  
+
         > {
           input, select {
             box-sizing: border-box;
@@ -436,22 +419,22 @@
           }
         }
       }
-  
+
       > div em {
         font-size: 0.85em;
       }
-  
+
       > div {
         box-sizing: border-box;
         padding-right: 1em;
         text-align: left;
         font-size: 1.15em;
-  
+
         a {
-          color: #ca1e56;
+          color: var(--primary);
         }
       }
-  
+
       &.actions {
         display: flex;
         justify-content: flex-start;
@@ -459,13 +442,13 @@
         margin-bottom: 1em;
       }
     }
-  
+
     div.actions {
       display: flex;
       justify-content: flex-start;
       padding-top: 20px;
     }
-  
+
     form > div.actions input {
       margin: 5px 0px;
       border-radius: 0.5em;
@@ -475,8 +458,8 @@
       font-family: Open Sans;
       font-size: 1rem;
       text-align: left;
-      background-color: #ca1e56;
-      border: 1px solid #ca1e56;
+      background-color: var(--primary);
+      border: 1px solid var(--primary);
       color: #fff;
       text-decoration: none;
       width: fit-content;

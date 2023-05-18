@@ -1,11 +1,11 @@
 <% content_for :title, "Projects #{params[:search]}" %>
 <main class="project_index">
-  <h2>
+  <h1>
     Team Projects for Competition <%= @competition.year %>
     <span class="search">
       <%= params[:search] %>
     </span>
-  </h2>
+  </h1>
   <% if @competition.started? FIRST_COMPETITION_TIME_ZONE %>
     <p>
       <%= link_to 'Download CSV', projects_path(format: 'csv'), class: 'download-csv' %>

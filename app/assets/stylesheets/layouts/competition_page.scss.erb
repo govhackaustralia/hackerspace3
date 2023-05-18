@@ -9,12 +9,14 @@
     font-size: .8em;
     line-height: 1.5em;
     background-image: url(<%= asset_path 'sydneyback.jpg' %>);
+    padding: 0;
 
-    h2 {
-      padding-top: 5em;
-      padding-bottom: 4em;
-      margin-bottom: 0%;
+    h1 {
+      padding: 3em 0;
+      margin-bottom: 0;
       background-color: rgba(255, 255, 255, 0.75);
+      color: black;
+      font-size: 1.5em;
     }
 
     nav {
@@ -57,22 +59,22 @@
 
           &:nth-of-type(even) a {
             background-color: rgba(202, 30, 86, 0.5);
-            border-bottom: 1em solid #ca1e56;
+            border-bottom: 1em solid var(--primary);
           }
 
           &:nth-of-type(odd) a {
             background-color: rgba(76, 154, 210, 0.5);
-            border-bottom: 1em solid #4c9ad2;
+            border-bottom: 1em solid var(--secondary);
           }
 
           &:nth-of-type(even) a:hover {
             background-color: rgba(253, 37, 107, 0.5);
-            border-bottom: 1em solid #fd266c;
+            border-bottom: 1em solid var(--primary);
           }
 
           &:nth-of-type(odd) a:hover {
             background-color: rgba(94, 191, 261, 0.5);
-            border-bottom: 1em solid #6dbff9;
+            border-bottom: 1em solid var(--secondary);
           }
         }
       }

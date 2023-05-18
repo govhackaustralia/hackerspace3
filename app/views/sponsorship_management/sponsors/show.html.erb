@@ -1,7 +1,7 @@
 <main class="project_index">
-  <h2>
+  <h1>
     <%= @sponsor.name %>
-  </h2>
+  </h1>
   <% if @sponsor.logo.attached? %>
     <img alt="<%= @sponsor.name %> logo" src="<%= url_for(@sponsor.logo) %>"/>
     <br/>

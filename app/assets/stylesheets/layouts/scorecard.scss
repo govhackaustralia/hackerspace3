@@ -2,11 +2,11 @@ main.scorecard {
   padding: 1em;
 
   h2 {
-    color: #ca1e56;
+    color: var(--primary);
   }
 
   h3 {
-    color: #4c9ad2;
+    color: var(--secondary);
   }
 }
 
@@ -87,7 +87,7 @@ main.scorecard {
           -webkit-appearance: none;
           -moz-appearance: none;
           appearance: none;
-          background-color: #ca1e56;
+          background-color: var(--primary);
           color: #ddd;
           font-weight: 700;
           text-transform: uppercase;
@@ -119,7 +119,7 @@ main.scorecard {
 
   .justification {
     padding: 0.5em;
-    border: 1px solid #ca1e56;
+    border: 1px solid var(--primary);
     margin: 0.5em;
     font-size: 0.85em;
   }

@@ -1,9 +1,9 @@
 <% content_for :title, "Registration for #{@event.name}" %>
 <main class="register">
   <section class="register_section">
-    <h2>
+    <h1>
       <%= yield :title %>
-    </h2>
+    </h1>
     <% if @event.attending? @assignment %>
       <p>You are registered to attend the event.</p>
       <p>If you no longer wish to attend, please update your registration below.</p>

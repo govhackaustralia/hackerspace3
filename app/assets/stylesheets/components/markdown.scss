@@ -11,37 +11,37 @@ section.markdown {
   }
 
   .sectionHeading {
-    color: #4c9ad2;
+    color: var(--secondary);
   }
 
   h1 {
     font-size: 1.5em;
-    color: #ca1e56;
+    color: var(--primary);
   }
 
   h2 {
     font-size: 1.4em;
-    color: #ca1e56;
+    color: var(--primary);
   }
 
   h3 {
     font-size: 1.3em;
-    color: #ca1e56;
+    color: var(--primary);
   }
 
   h4 {
     font-size: 1.2em;
-    color: #ca1e56;
+    color: var(--primary);
   }
 
   h5 {
     font-size: 1.1em;
-    color: #ca1e56;
+    color: var(--primary);
   }
 
   h6 {
     font-size: 1em;
-    color: #ca1e56;
+    color: var(--primary);
   }
 
   p {
