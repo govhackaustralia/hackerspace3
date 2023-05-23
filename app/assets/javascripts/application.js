@@ -30,7 +30,7 @@ $(document).ready(function() {
 
 $( document ).on('turbolinks:load', function() {
 	// Initilize the table and save any state changes.
-	var table = $('[id$="table"]').DataTable({
+	const table = $('[id$="table"]').DataTable({
 		stateSave: true,
 		responsive: true
 	});
@@ -50,10 +50,10 @@ $( document ).on('turbolinks:load', function() {
 		// Clear the filter in the URL when the search param is updated.
 		table.on( 'search.dt', function () {
 			if ((table.search() !== window._search) && (window._search.length > 0 )) {
-				var url = window.location.href;
-				var tail = url.substring(url.lastIndexOf('/') + 1);
-				var clean_tail = tail.substring(0, tail.lastIndexOf('?'));
-				var clean_title = document.title.replace(/#(.*?)\s/, '');
+				const url = window.location.href;
+				const tail = url.substring(url.lastIndexOf('/') + 1);
+				const clean_tail = tail.substring(0, tail.lastIndexOf('?'));
+				const clean_title = document.title.replace(/#(.*?)\s/, '');
 
 				history.replaceState({}, clean_title, clean_tail);
 				document.title = clean_title;
