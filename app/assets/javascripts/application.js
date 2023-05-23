@@ -52,7 +52,11 @@ $( document ).on('turbolinks:load', function() {
 			if ((table.search() !== window._search) && (window._search.length > 0 )) {
 				const url = window.location.href;
 				const tail = url.substring(url.lastIndexOf('/') + 1);
+				
+				// Remove any query parameters from the segment
 				const clean_tail = tail.substring(0, tail.lastIndexOf('?'));
+
+				// Clean up the document title by removing text after '#' symbol and whitespace
 				const clean_title = document.title.replace(/#(.*?)\s/, '');
 
 				history.replaceState({}, clean_title, clean_tail);
