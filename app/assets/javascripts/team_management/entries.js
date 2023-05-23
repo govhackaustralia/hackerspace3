@@ -33,6 +33,6 @@ $( document ).on('ready turbolinks:load', function() {
 	$("#hiddendescription").html(content);
 	$("#team_data_set_description").css("height", $("#hiddendescription").outerHeight());
 	} catch (e) {
-		
+		console.error('An error occured.', e)
 	}
 });
