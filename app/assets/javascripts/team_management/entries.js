@@ -3,15 +3,15 @@
 
 $( document ).on('ready turbolinks:load', function() {
 	$("#team_data_set_url").blur(function() {
-		const dataset = $("#team_data_set_url").val().split("/dataset/");
+		const teamUrlData = $("#team_data_set_url").val().split("/dataset/");
 		
 		var data = {
-			id: dataset[1]
+			id: teamUrlData[1]
 		}
 		$.ajax({
 			type: "GET",
 			data: data,
-			url: dataset[0] + "/api/3/action/package_show",
+			url: teamUrlData[0] + "/api/3/action/package_show",
 			success: function (data) {
 				$("#team_data_set_name").val(data.result.title);
 				$("#team_data_set_description").val(data.result.notes);
