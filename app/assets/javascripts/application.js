@@ -42,14 +42,14 @@ $( document ).on('turbolinks:load', function() {
 	});
 
 	// Check if filter needs to be applied
-	if ((window._search != undefined) && (window._search.length > 0 )) {
+	if ((window._search !== undefined) && (window._search.length > 0 )) {
 		// Apply the filter param to the filter box.
 		table.search(window._search);
 		table.draw();
 
 		// Clear the filter in the URL when the search param is updated.
 		table.on( 'search.dt', function () {
-			if ((table.search() != window._search) && (window._search.length > 0 )) {
+			if ((table.search() !== window._search) && (window._search.length > 0 )) {
 				var url = window.location.href;
 				var tail = url.substring(url.lastIndexOf('/') + 1);
 				var clean_tail = tail.substring(0, tail.lastIndexOf('?'));
