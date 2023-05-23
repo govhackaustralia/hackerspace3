@@ -27,14 +27,19 @@ $(document).ready(function() {
 			dataType: "jsonp"
 		})
 	});
+	
 	try {
+
 	$("#hiddendescription").width($("#team_data_set_description").width());
 
 	const content = $("#team_data_set_description").val().replace(/\n/g, "<br>");
 
 	$("#hiddendescription").html(content);
 	$("#team_data_set_description").css("height", $("#hiddendescription").outerHeight());
+
 	} catch (e) {
+
 		console.error("An error occurred:", e);
+
 	}
 });
