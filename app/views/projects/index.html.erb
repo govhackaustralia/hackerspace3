@@ -46,7 +46,7 @@
         <% end %>
       </thead>
       <tbody>
-        <% @projects.each do |project| %>
+        <% projects.each do |project| %>
           <% next if project.identifier.blank? %>
           <tr>
             <td>

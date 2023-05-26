@@ -5,14 +5,14 @@ class ProjectsController < ApplicationController
   before_action :authenticate_user!, :check_slack_chat!, only: :slack_chat
 
   def index
-    @projects = @competition.published_projects_by_name
-      .preload(:event, :team)
-      .includes(:tags)
-    @teams = Team.where(id: @projects.pluck(:team_id))
-    project_counts
     user_records_index if user_signed_in?
+
     respond_to do |format|
-      format.html
+      format.html do
+        render locals: {
+          projects: @competition.published_projects_by_name.preload(:event, :team).includes(:tags),
+        }
+      end
       format.csv { send_data @teams.to_csv @competition }
     end
   end
@@ -39,11 +39,6 @@ class ProjectsController < ApplicationController
     @judgeable_assignment = current_user.judgeable_assignment @competition
     @project_judging = JudgeableScores.new(@judgeable_assignment, @teams).compile
     @project_judging_total = @competition.score_total PROJECT
-  end
-
-  def project_counts
-    @challenge_counts = @competition.entries.group(:team_id).count
-    @team_data_set_counts = @competition.team_data_sets.group(:team_id).count
   end
 
   def retrieve_attending_events
