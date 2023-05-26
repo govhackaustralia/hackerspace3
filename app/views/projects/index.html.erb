@@ -35,50 +35,11 @@
         </p>
       <% end %>
     <% end %>
-    <table class="projects-table" data-turbolinks="false" id="projects_table">
-      <thead>
-        <th>Project</th>
-        <th>Team</th>
-        <th>Location</th>
-        <th>Tags</th>
-        <% if show_peoples_choice_stuff? %>
-          <th>Project Scorecard</th>
-        <% end %>
-      </thead>
-      <tbody>
-        <% projects.each do |project| %>
-          <% next if project.identifier.blank? %>
-          <tr>
-            <td>
-              <%= link_to "#{project.project_name}", project_path(project.identifier) %>
-            </td>
-            <td>
-              <%= project.team_name %>
-            </td>
-            <td>
-              <%= project.event.name %>
-            </td>
-            <td>
-              <% project.tags.each do |tag| %>
-                <span>
-                  <%= link_to "##{tag}", projects_path(search: "##{tag}") %>
-                </span>
-              <% end %>
-            </td>
-            <% if show_peoples_choice_stuff? %>
-              <% if (display_score = @project_judging[project.team_id][:display_score_status]).is_a? Integer %>
-                <% score_value = ((display_score.to_f / @project_judging_total.to_f) * 100).to_i %>
-                <%= render 'challenges/judging_cell', locals: { total: score_value } %>
-              <% else %>
-                <td>
-                  <%= display_score %>
-                </td>
-              <% end %>
-            <% end %>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
+    <div class="projects">
+      <% projects.each do |project| %>
+        <%= render partial: 'project_card', locals: { project: project } %>
+      <% end %>
+    </div>
   <% else %>
     <section class="later">
       <strong>
