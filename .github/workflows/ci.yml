@@ -24,7 +24,7 @@ jobs:
     services:
       postgres:
         image: postgres
-        ports: ['5432:5432']
+        ports: ["5432:5432"]
         options: >-
           --health-cmd pg_isready
           --health-interval 10s
@@ -35,18 +35,55 @@ jobs:
           POSTGRES_PASSWORD: postgres
 
     steps:
-    - name: Checkout Code
-      uses: actions/checkout@v3
-    - name: Setup Ruby
-      uses: ruby/setup-ruby@v1
-      with:
-        bundler-cache: true
-    - name: Setup DB
-      run: |
-        sudo apt-get -yqq install libpq-dev
-        bundle exec rails db:create
-        bundle exec rails db:schema:load
-    - name: Check Annotations
-      run: bundle exec rake annotate_models
-      env:
-        frozen: true
+      - name: Checkout Code
+        uses: actions/checkout@v3
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
+      - name: Setup DB
+        run: |
+          sudo apt-get -yqq install libpq-dev
+          bundle exec rails db:create
+          bundle exec rails db:schema:load
+      - name: Check Annotations
+        run: bundle exec rake annotate_models
+        env:
+          frozen: true
+
+  tests:
+    runs-on: ubuntu-latest
+
+    env:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+
+    services:
+      postgres:
+        image: postgres
+        ports: ["5432:5432"]
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
+      - name: Setup DB
+        run: |
+          sudo apt-get -yqq install libpq-dev
+          bundle exec rails db:create
+          bundle exec rails db:schema:load
+      - name: Run tests
+        run: bundle exec rake test
+        env:
+          frozen: true
