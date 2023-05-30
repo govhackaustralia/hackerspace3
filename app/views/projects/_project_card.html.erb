@@ -1,23 +1,24 @@
 <div class="project-card card mb-3">
-  <div class="row g-0">
-    <div class="col">
-      <div class="card-body">
-        <div class="team-section mb-2">
-          <%= image_tag("default_profile_pic", class: "rounded-circle thumbnail") %>
-          <%= project.team_name %>
-        </div>
-        <h3 class="card-title">
-          <%= project.project_name %>
-        </h3>
-        <p class="card-text">
-          <%= project.description %>
-        </p>
-        <div class="tag-buttons">
-          <% project.tags.each do |tag| %>
-            <%= link_to "#{tag}", "", class: "tag" %>
-          <% end %>
-        </div>
+  <div class="card-body">
+    <div class="team-section mb-2">
+      <%= image_tag("default_profile_pic", class: "rounded-circle thumbnail") %>
+      <%= project.team_name %>
+    </div>
+    <h3 class="card-title">
+      <%= project.project_name %>
+    </h3>
+    <div class="card-text mb-5">
+      <%= project.description %>
+    </div>
+    <div class="footer">
+      <div class="tag-buttons">
+        <% project.tags.each do |tag| %>
+          <%= link_to "#{tag}", "", class: "tag" %>
+        <% end %>
       </div>
+      <%= link_to project_path(project.identifier), class: "project-link" do %>
+        <%= image_tag("arrow-right-circle-fill.svg", size: "30") %>
+      <% end %>
     </div>
   </div>
 </div>

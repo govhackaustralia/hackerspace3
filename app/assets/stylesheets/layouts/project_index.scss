@@ -27,6 +27,11 @@
     }
 
     .project-card {
+      h3 {
+        color: var(--secondary);
+        font-size: 1.7rem;
+      }
+
       .team-section {
         display: flex;
         align-items: center;
@@ -37,18 +42,27 @@
         }
       }
 
-      .tag-buttons {
+      .footer {
         display: flex;
-        gap: 10px;
-        flex-wrap: wrap;
+        justify-content: space-between;
 
-        .tag {
-          background-color: var(--primary);
-          padding: 2px 10px;
-          border-radius: 5px;
-          text-decoration: none;
-          color: white;
-          flex-shrink: none;
+        .tag-buttons {
+          display: flex;
+          gap: 10px;
+          flex-wrap: wrap;
+
+          .tag {
+            background-color: var(--primary);
+            padding: 2px 10px;
+            border-radius: 5px;
+            text-decoration: none;
+            color: white;
+            flex-shrink: none;
+          }
+        }
+
+        .project-link {
+          align-self: flex-end;
         }
       }
     }
