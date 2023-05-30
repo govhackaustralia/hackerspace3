@@ -38,7 +38,7 @@ class Admin::ChallengeSponsorshipsController < ApplicationController
     if @sponsor.present?
       @existing_sponsorship = ChallengeSponsorship.find_by(
         sponsor: @sponsor,
-        challenge: @challenge
+        challenge: @challenge,
       )
     else
       @sponsors = @competition.sponsors.search params[:term]

@@ -83,7 +83,7 @@ class Admin::CompetitionsController < ApplicationController
       :end_time, :start_time,
       :peoples_choice_start, :peoples_choice_end,
       :challenge_judging_start, :challenge_judging_end,
-      :current
+      :current,
     )
   end
 
@@ -151,7 +151,7 @@ class Admin::CompetitionsController < ApplicationController
   def post_create_tasks
     @competition.regions.internationals.create(
       name: Region::INTERNATIONAL,
-      category: Region::INTERNATIONAL
+      category: Region::INTERNATIONAL,
     )
     current_user.make_site_admin @competition
   end

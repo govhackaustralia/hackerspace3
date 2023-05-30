@@ -49,8 +49,8 @@ class PublishedTeamMemberReport
     # ENHANCEMENT: Create a scope for the below.
     User.where(
       id: competition.competition_assignments.team_participants.where(
-        assignable: competition.teams.published
-      ).pluck(:user_id).uniq
+        assignable: competition.teams.published,
+      ).pluck(:user_id).uniq,
     )
   end
 end

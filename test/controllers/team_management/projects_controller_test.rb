@@ -10,7 +10,7 @@ class TeamManagement::ProjectsControllerTest < ActionDispatch::IntegrationTest
     competition = @team.competition
     competition.update(
       start_time: Time.now - 1.day,
-      end_time: Time.now + 1.day
+      end_time: Time.now + 1.day,
     )
   end
 

@@ -38,7 +38,7 @@ class PublishedEntryCounter
     @region_passed_checkpoints = {}
     competition.regions.each do |region|
       @region_passed_checkpoints[region.id] = competition.passed_checkpoint_ids(
-        region.time_zone
+        region.time_zone,
       )
     end
   end

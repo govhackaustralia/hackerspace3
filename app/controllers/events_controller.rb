@@ -62,7 +62,7 @@ class EventsController < ApplicationController
     @event_assignment = @user.event_assignment(@competition)
     @registration = Registration.find_by(
       event: @event,
-      assignment: @event_assignment
+      assignment: @event_assignment,
     )
   end
 end

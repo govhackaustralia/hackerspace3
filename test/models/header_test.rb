@@ -49,7 +49,7 @@ class HeaderTest < ActiveSupport::TestCase
   test 'cannot_judge_your_own_team' do
     assert_not Header.create(
       assignment: @team_user.event_assignment(@team.competition),
-      scoreable: @team
+      scoreable: @team,
     ).persisted?
   end
 

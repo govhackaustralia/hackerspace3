@@ -17,7 +17,7 @@ class UpdateSlackChannelNameJob < ApplicationJob
 
     response = SlackApiWrapper.slack_conversatons_rename(
       channel_id: team.slack_channel_id,
-      channel_name: project.slack_channel_name
+      channel_name: project.slack_channel_name,
     )
     raise response['error'] unless response['ok']
 

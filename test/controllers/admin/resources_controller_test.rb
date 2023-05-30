@@ -43,7 +43,7 @@ class Admin::ResourcesControllerTest < ActionDispatch::IntegrationTest
             url: 'www.example.com',
             short_url: 'example.short',
           },
-        }
+        },
       )
     end
     assert_redirected_to admin_competition_resources_path @competition
@@ -54,7 +54,7 @@ class Admin::ResourcesControllerTest < ActionDispatch::IntegrationTest
       post admin_competition_resources_path(
         @competition, params: {
           resource: {name: 'Example', position: nil},
-        }
+        },
       )
     end
     assert_response :success
@@ -62,7 +62,7 @@ class Admin::ResourcesControllerTest < ActionDispatch::IntegrationTest
 
   test 'should get edit' do
     get edit_admin_competition_resource_path(
-      @competition, @resource
+      @competition, @resource,
     )
     assert_response :success
   end
@@ -71,7 +71,7 @@ class Admin::ResourcesControllerTest < ActionDispatch::IntegrationTest
     patch admin_competition_resource_path(
       @competition, @resource, params: {
         resource: {name: 'Updated'},
-      }
+      },
     )
     assert_redirected_to admin_competition_resources_path @competition
     @resource.reload
@@ -82,7 +82,7 @@ class Admin::ResourcesControllerTest < ActionDispatch::IntegrationTest
     patch admin_competition_resource_path(
       @competition, @resource, params: {
         resource: {name: nil},
-      }
+      },
     )
     assert_response :success
     @resource.reload

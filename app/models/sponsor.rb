@@ -50,7 +50,7 @@ class Sponsor < ApplicationRecord
     collected = assignments.where(title: SPONSOR_ADMIN).to_a
     collected << competition.admin_assignments
     collected << Assignment.where(
-      title: REGION_ADMIN, competition: competition
+      title: REGION_ADMIN, competition: competition,
     ).to_a
     collected.flatten
   end

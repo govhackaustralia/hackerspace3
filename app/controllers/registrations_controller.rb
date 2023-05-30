@@ -147,13 +147,13 @@ class RegistrationsController < ApplicationController
       organisation_name: params[:organisation_name],
       dietary_requirements: params[:dietary_requirements],
       registration_type: params[:registration_type],
-      parent_guardian: params[:parent_guardian]
+      parent_guardian: params[:parent_guardian],
     )
   end
 
   def update_competition_event_attrs
     @user.update(
-      request_not_photographed: params[:request_not_photographed]
+      request_not_photographed: params[:request_not_photographed],
     )
   end
 
@@ -162,7 +162,7 @@ class RegistrationsController < ApplicationController
       data_cruncher: params[:data_cruncher],
       coder: params[:coder],
       creative: params[:creative],
-      facilitator: params[:facilitator]
+      facilitator: params[:facilitator],
     )
   end
 end

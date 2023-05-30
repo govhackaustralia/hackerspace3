@@ -147,7 +147,7 @@ class AssignmentTest < ActiveSupport::TestCase
     assert_not @user.assignments.new(
       title: ASSIGNEE,
       assignable: badges(:one),
-      holder: holders(:one)
+      holder: holders(:one),
     ).save
 
     @user.assignments.destroy_all
@@ -155,7 +155,7 @@ class AssignmentTest < ActiveSupport::TestCase
     assert @user.assignments.new(
       title: ASSIGNEE,
       assignable: badges(:one),
-      holder: holders(:one)
+      holder: holders(:one),
     ).save
   end
 
@@ -165,13 +165,13 @@ class AssignmentTest < ActiveSupport::TestCase
     assert_not @user.assignments.new(
       title: ASSIGNEE,
       assignable: badges(:two),
-      holder: holders(:one)
+      holder: holders(:one),
     ).save
 
     assert @user.assignments.new(
       title: ASSIGNEE,
       assignable: badges(:one),
-      holder: holders(:one)
+      holder: holders(:one),
     ).save
   end
 end

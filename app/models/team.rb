@@ -70,7 +70,7 @@ class Team < ApplicationRecord
           teams.id = assignments.assignable_id
         AND
           assignments.assignable_type = ?
-      )', 'Team'
+      )', 'Team',
     ).distinct
   }
   scope :with_entries, lambda {

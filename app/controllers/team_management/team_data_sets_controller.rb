@@ -50,7 +50,7 @@ class TeamManagement::TeamDataSetsController < TeamManagement::TeamsController
       :name,
       :description,
       :description_of_use,
-      :url
+      :url,
     )
   end
 end

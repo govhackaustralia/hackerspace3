@@ -56,7 +56,7 @@ class Admin::RegionsController < ApplicationController
       :name,
       :award_release,
       :category,
-      :parent_id
+      :parent_id,
     )
   end
 

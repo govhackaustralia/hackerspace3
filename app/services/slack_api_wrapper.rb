@@ -15,8 +15,8 @@ module SlackApiWrapper
       headers: {'Content-Type' => 'application/x-www-form-urlencoded'},
       body: URI.encode_www_form(
         token: ENV.fetch('SLACK_BOT_TOKEN', nil),
-        name: channel_name[...MAX_CHANNEL_LENGTH]
-      )
+        name: channel_name[...MAX_CHANNEL_LENGTH],
+      ),
     )
     JSON.parse response.body
   end
@@ -28,8 +28,8 @@ module SlackApiWrapper
       body: URI.encode_www_form(
         token: ENV.fetch('SLACK_BOT_TOKEN', nil),
         channel: channel_id,
-        users: slack_user_ids
-      )
+        users: slack_user_ids,
+      ),
     )
     JSON.parse response.body
   end
@@ -41,8 +41,8 @@ module SlackApiWrapper
       body: URI.encode_www_form(
         token: ENV.fetch('SLACK_BOT_TOKEN', nil),
         channel: channel_id,
-        name: channel_name[...MAX_CHANNEL_LENGTH]
-      )
+        name: channel_name[...MAX_CHANNEL_LENGTH],
+      ),
     )
     JSON.parse response.body
   end
@@ -54,10 +54,10 @@ module SlackApiWrapper
       body: URI.encode_www_form(
         token: ENV.fetch('SLACK_BOT_TOKEN', nil),
         channel: channel_id,
-        topic: <<~TOPIC.squish
+        topic: <<~TOPIC.squish,
           Public Slack channel for team members, mentors, and the rest of the GovHack community to discuss this project
         TOPIC
-      )
+      ),
     )
     JSON.parse response.body
   end

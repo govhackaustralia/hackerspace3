@@ -48,7 +48,7 @@ class Admin::ProjectsController < ApplicationController
       %i[
         team_name description data_story source_code_url
         video_url homepage_url project_name tag_list
-      ]
+      ],
     )
   end
 

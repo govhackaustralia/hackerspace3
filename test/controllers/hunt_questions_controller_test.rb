@@ -52,7 +52,7 @@ class HuntQuestionsControllerTest < ActionDispatch::IntegrationTest
       user: @user,
       assignable: @hunt_question,
       holder: holders(:one),
-      title: ASSIGNEE
+      title: ASSIGNEE,
     )
 
     assert_difference 'Assignment.count', 2 do
@@ -69,14 +69,14 @@ class HuntQuestionsControllerTest < ActionDispatch::IntegrationTest
       user: @user,
       assignable: @hunt_question,
       holder: holders(:one),
-      title: ASSIGNEE
+      title: ASSIGNEE,
     )
 
     Assignment.create!(
       user: @user,
       assignable: @competition.hunt_badge,
       holder: holders(:one),
-      title: ASSIGNEE
+      title: ASSIGNEE,
     )
 
     assert_no_difference 'Assignment.count' do

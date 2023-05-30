@@ -75,19 +75,19 @@ class RegistrationTest < ActiveSupport::TestCase
     # Must have status
     assert_not @event.registrations.create(
       assignment: @assignment,
-      status: nil
+      status: nil,
     ).persisted?
     # Non valid status
     assert_not @event.registrations.create(
       assignment: @assignment,
       holder: @holder,
-      status: 'Maybe'
+      status: 'Maybe',
     ).persisted?
     # Valid status
     assert @event.registrations.create(
       assignment: @assignment,
       holder: @holder,
-      status: VALID_ATTENDANCE_STATUSES.sample
+      status: VALID_ATTENDANCE_STATUSES.sample,
     ).persisted?
     @assignment.destroy
     # Dependant destroy
@@ -99,11 +99,11 @@ class RegistrationTest < ActiveSupport::TestCase
       events(:other_competition).registrations.create!(
         assignment: @assignment,
         holder: @holder,
-        status: ATTENDING
+        status: ATTENDING,
       )
     end
     assert exception.message.include?(
-      'Validation failed: User already registered for a competition event'
+      'Validation failed: User already registered for a competition event',
     )
   end
 
@@ -112,7 +112,7 @@ class RegistrationTest < ActiveSupport::TestCase
       @competition_event_registration.update! status: NON_ATTENDING
     end
     assert exception.message.include?(
-      'needs to leave teams or decline invitations before amending registration'
+      'needs to leave teams or decline invitations before amending registration',
     )
   end
 
@@ -127,7 +127,7 @@ class RegistrationTest < ActiveSupport::TestCase
     Registration.destroy_all
     assert_not @assignment.registrations.create(
       event: @event,
-      status: VALID_ATTENDANCE_STATUSES.sample
+      status: VALID_ATTENDANCE_STATUSES.sample,
     ).persisted?
   end
 
@@ -144,7 +144,7 @@ class RegistrationTest < ActiveSupport::TestCase
       events(:competition).registrations.new(
         user: users(:one),
         holder: holders(:one),
-        status: ATTENDING
+        status: ATTENDING,
       ).save!
     end
   end

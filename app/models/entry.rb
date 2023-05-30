@@ -51,7 +51,7 @@ class Entry < ApplicationRecord
   }
   scope :national, lambda {
     joins(:region).where(
-      regions: {category: [Region::INTERNATIONAL, Region::NATIONAL]}
+      regions: {category: [Region::INTERNATIONAL, Region::NATIONAL]},
     )
   }
   scope :winners, -> { where award: WINNER }
@@ -68,7 +68,7 @@ class Entry < ApplicationRecord
     update(
       eligible: project.data_story.present? &&
       project.video_url.present? &&
-      project.source_code_url.present?
+      project.source_code_url.present?,
     )
   end
 
@@ -83,7 +83,7 @@ class Entry < ApplicationRecord
 
     errors.add(
       :checkpoint_id,
-      'Maximum Regional Challenges already entered for this Checkpoint'
+      'Maximum Regional Challenges already entered for this Checkpoint',
     )
   end
 
@@ -96,7 +96,7 @@ class Entry < ApplicationRecord
 
     errors.add(
       :checkpoint_id,
-      'Maximum number of Challenges already entered for this Checkpoint'
+      'Maximum number of Challenges already entered for this Checkpoint',
     )
   end
 

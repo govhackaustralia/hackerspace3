@@ -15,13 +15,13 @@ class ChallengesControllerTest < ActionDispatch::IntegrationTest
   test 'should get table' do
     @competition.update(
       start_time: Time.now.yesterday,
-      end_time: Time.now.yesterday
+      end_time: Time.now.yesterday,
     )
     get table_challenges_url
     assert_response :success
     @competition.update(
       start_time: Time.now.tomorrow,
-      end_time: Time.now.tomorrow
+      end_time: Time.now.tomorrow,
     )
     get table_challenges_url
     assert_redirected_to landing_page_challenges_url

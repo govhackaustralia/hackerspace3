@@ -28,7 +28,7 @@ class DataSet < ApplicationRecord
   scope :search, lambda { |term|
     where(
       'data_sets.name ILIKE ? OR url ILIKE ? OR description ILIKE ?',
-      "%#{term}%", "%#{term}%", "%#{term}%"
+      "%#{term}%", "%#{term}%", "%#{term}%",
     )
   }
 

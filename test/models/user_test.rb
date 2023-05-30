@@ -152,13 +152,13 @@ class UserTest < ActiveSupport::TestCase
     # no full name don't save
     assert_not User.create(
       email: 'name@example.com',
-      full_name: nil
+      full_name: nil,
     ).save
 
     assert_not User.create(
       email: 'name@example.com',
       full_name: 'Full Name',
-      accepted_terms_and_conditions: false
+      accepted_terms_and_conditions: false,
     ).save
   end
 

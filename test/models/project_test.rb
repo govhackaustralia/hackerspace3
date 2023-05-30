@@ -55,7 +55,7 @@ class ProjectTest < ActiveSupport::TestCase
     project = @team.projects.create!(
       team_name: 'new name',
       project_name: 'new_name',
-      user: @user
+      user: @user,
     )
     @team.reload
     assert @team.current_project == project

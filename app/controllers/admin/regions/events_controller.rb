@@ -19,7 +19,7 @@ class Admin::Regions::EventsController < ApplicationController
     @event_assignment = @user.event_assignment(@competition)
     @registration = Registration.find_by(
       event: @event,
-      assignment: @event_assignment
+      assignment: @event_assignment,
     )
     render 'events/show'
   end
@@ -72,7 +72,7 @@ class Admin::Regions::EventsController < ApplicationController
       :name, :event_type, :registration_type, :capacity, :email, :twitter,
       :address, :accessibility, :youth_support, :parking, :public_transport,
       :operation_hours, :catering, :video_id, :start_time, :end_time, :place_id,
-      :description, :published
+      :description, :published,
     )
   end
 end

@@ -54,7 +54,7 @@ class TeamsController < ApplicationController
     @team.projects.create(
       team_name: "Team #{@team.id}",
       project_name: "Project #{@team.id}",
-      user: current_user
+      user: current_user,
     )
     flash[:notice] = 'New Team Project Created'
     redirect_to team_management_team_path @team
