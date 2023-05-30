@@ -54,7 +54,7 @@ module EntriesHelper
         entity_to_entries,
         challenge_to_entity_array,
         challenge,
-        entity
+        entity,
       )
     end
     challenge_to_entity_array[challenge.name][:total_entries] = challenge_count

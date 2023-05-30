@@ -14,7 +14,7 @@ class Admin::Sponsors::SponsorshipsControllerTest < ActionDispatch::IntegrationT
       delete admin_sponsor_sponsorship_url @sponsor, @sponsorship
     end
     assert_redirected_to admin_competition_sponsor_path(
-      @sponsor.competition_id, @sponsor
+      @sponsor.competition_id, @sponsor,
     )
   end
 end

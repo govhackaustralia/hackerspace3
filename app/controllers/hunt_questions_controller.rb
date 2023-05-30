@@ -62,7 +62,7 @@ class HuntQuestionsController < ApplicationController
     current_user.assignments.create!(
       title: ASSIGNEE,
       assignable: hunt_question,
-      holder: holder
+      holder: holder,
     )
   end
 
@@ -74,7 +74,7 @@ class HuntQuestionsController < ApplicationController
     current_user.assignments.find_or_create_by!(
       title: ASSIGNEE,
       assignable: hunt_badge,
-      holder: holder
+      holder: holder,
     )
     @badge_won = true
   end

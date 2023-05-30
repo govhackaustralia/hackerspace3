@@ -40,7 +40,7 @@ class Checkpoint < ApplicationRecord
   # time zone.
   def passed?(time_zone)
     end_time.to_formatted_s(:number) < Time.now.in_time_zone(
-      time_zone.presence || LAST_COMPETITION_TIME_ZONE
+      time_zone.presence || LAST_COMPETITION_TIME_ZONE,
     ).to_formatted_s(:number)
   end
 

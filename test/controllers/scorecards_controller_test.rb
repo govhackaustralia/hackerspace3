@@ -8,7 +8,7 @@ class ScorecardsControllerTest < ActionDispatch::IntegrationTest
     @header = headers(:three)
     competitions(:one).update(
       peoples_choice_start: Time.now.yesterday,
-      peoples_choice_end: Time.now.tomorrow
+      peoples_choice_end: Time.now.tomorrow,
     )
   end
 

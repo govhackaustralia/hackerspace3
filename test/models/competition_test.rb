@@ -162,7 +162,7 @@ class CompetitionTest < ActiveSupport::TestCase
       start_time: Time.now - 1.day,
       end_time: Time.now + 1.day,
       team_form_start: Time.now - 1.day,
-      team_form_end: Time.now - 1.day
+      team_form_end: Time.now - 1.day,
     )
 
     assert @competition.in_form_or_comp_window?('Sydney')
@@ -171,7 +171,7 @@ class CompetitionTest < ActiveSupport::TestCase
   test 'not in_form_or_comp_window?' do
     @competition.update!(
       end_time: Time.now - 1.hour,
-      team_form_end: Time.now - 1.hour
+      team_form_end: Time.now - 1.hour,
     )
 
     assert_not @competition.in_form_or_comp_window?('Sydney')
@@ -180,7 +180,7 @@ class CompetitionTest < ActiveSupport::TestCase
   test 'in_challenge_judging_window?' do
     @competition.update!(
       challenge_judging_start: Time.now - 1.day,
-      challenge_judging_end: Time.now + 1.day
+      challenge_judging_end: Time.now + 1.day,
     )
 
     assert @competition.in_challenge_judging_window?('Sydney')
@@ -195,7 +195,7 @@ class CompetitionTest < ActiveSupport::TestCase
   test 'in_peoples_judging_window?' do
     @competition.update!(
       peoples_choice_start: Time.now - 1.day,
-      peoples_choice_end: Time.now + 1.day
+      peoples_choice_end: Time.now + 1.day,
     )
 
     assert @competition.in_peoples_judging_window?('Sydney')
@@ -212,7 +212,7 @@ class CompetitionTest < ActiveSupport::TestCase
       peoples_choice_start: Time.now - 1.day,
       peoples_choice_end: Time.now + 1.day,
       challenge_judging_start: Time.now - 1.day,
-      challenge_judging_end: Time.now - 1.hour
+      challenge_judging_end: Time.now - 1.hour,
     )
 
     assert @competition.either_judging_window_open?('Sydney')

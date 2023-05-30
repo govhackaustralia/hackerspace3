@@ -68,7 +68,7 @@ class ResourceTest < ActiveSupport::TestCase
       position: 1,
       name: 'resource 2',
       url: 'www.resource.2',
-      short_url: 'resourcee.2'
+      short_url: 'resourcee.2',
     ).save!
 
     assert_equal 2, @resource.reload.position

@@ -71,7 +71,7 @@ class TeamManagement::TeamsController < ApplicationController
       :event_id,
       :thumbnail,
       :high_res_image,
-      :youth_team
+      :youth_team,
     )
   end
 

@@ -304,7 +304,7 @@ class User < ApplicationRecord
   def holder_for(competition)
     holders.find_or_create_by(
       competition: competition,
-      profile: Profile.find_or_create_by(user: self)
+      profile: Profile.find_or_create_by(user: self),
     )
   end
 

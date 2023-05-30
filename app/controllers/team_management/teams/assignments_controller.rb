@@ -55,13 +55,13 @@ class TeamManagement::Teams::AssignmentsController < TeamManagement::TeamsContro
   def search_for_existing_assignment
     @existing_assignment = @user.assignments.team_participants.find_by(
       assignable: @team,
-      competition: @competition
+      competition: @competition,
     )
   end
 
   def search_user_competition_event
     event_ids = Registration.participating.where(
-      assignment: @user.event_assignment(@team.competition)
+      assignment: @user.event_assignment(@team.competition),
     ).pluck(:event_id)
     @participating_events = Event.competitions.where id: event_ids
   end

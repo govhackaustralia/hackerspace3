@@ -80,7 +80,7 @@ class EntryTest < ActiveSupport::TestCase
     entry = @team.entries.create(
       checkpoint: @checkpoint,
       challenge: @challenge,
-      justification: 'Test'
+      justification: 'Test',
     )
     assert_not entry.eligible
     @team.projects.create(
@@ -89,7 +89,7 @@ class EntryTest < ActiveSupport::TestCase
       project_name: 'test',
       data_story: 'test',
       video_url: 'test',
-      source_code_url: 'test'
+      source_code_url: 'test',
     )
     assert entry.eligible
   end
@@ -100,16 +100,16 @@ class EntryTest < ActiveSupport::TestCase
       Entry.create!(
         challenge: challenges(:one),
         team: teams(:two),
-        checkpoint: checkpoints(:one)
+        checkpoint: checkpoints(:one),
       )
     end
     assert exception.message.include?(
-      'Challenge Team not eligible to enter this challenge'
+      'Challenge Team not eligible to enter this challenge',
     )
     assert Entry.create!(
       challenge: challenges(:one),
       team: teams(:one),
-      checkpoint: checkpoints(:one)
+      checkpoint: checkpoints(:one),
     ).persisted?
   end
 end

@@ -29,7 +29,7 @@ class UpdateSlackChannelNameJobTest < ActiveJob::TestCase
     SlackApiWrapper.expects(:slack_conversatons_rename)
       .with(
         channel_id: teams(:one).slack_channel_id,
-        channel_name: new_project_name
+        channel_name: new_project_name,
       ).returns({
         'ok' => true,
         'channel' => {
@@ -50,7 +50,7 @@ class UpdateSlackChannelNameJobTest < ActiveJob::TestCase
     SlackApiWrapper.expects(:slack_conversatons_rename)
       .with(
         channel_id: teams(:one).slack_channel_id,
-        channel_name: new_project_name
+        channel_name: new_project_name,
       ).returns({'ok' => false, 'error' => 'error message'})
 
     assert_raises RuntimeError do

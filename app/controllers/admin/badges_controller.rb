@@ -84,7 +84,7 @@ class Admin::BadgesController < ApplicationController
     @assignment = @badge.assignments.new(
       user: @user,
       holder: @user.holder_for(@competition),
-      title: ASSIGNEE
+      title: ASSIGNEE,
     )
   end
 

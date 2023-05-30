@@ -52,7 +52,7 @@ class Admin::CheckpointsController < ApplicationController
       :end_time,
       :name,
       :max_national_challenges,
-      :max_regional_challenges
+      :max_regional_challenges,
     )
   end
 end

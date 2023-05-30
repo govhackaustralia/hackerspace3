@@ -8,7 +8,7 @@ class Admin::Competitions::ScorecardsController < ApplicationController
     @teams = @competition.teams.published
     @projects = @competition.published_projects_by_name.preload :event, :team
     @region_helper = Header.region_helper(
-      @competition, @teams, PROJECT, params[:include_judges] == true.to_s
+      @competition, @teams, PROJECT, params[:include_judges] == true.to_s,
     )
     handle_index
   end

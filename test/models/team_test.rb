@@ -138,7 +138,7 @@ class TeamTest < ActiveSupport::TestCase
       @team.update! event: events(:other_competition)
     end
     assert exception.message.include?(
-      'some challenge entries will not be eligible'
+      'some challenge entries will not be eligible',
     )
     assert teams(:two).update event: @event
   end

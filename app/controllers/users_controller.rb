@@ -53,7 +53,7 @@ class UsersController < ApplicationController
       :govhack_contact,
       :dietary_requirements,
       :govhack_img,
-      *user_permitted_attributes
+      *user_permitted_attributes,
     )
   end
 

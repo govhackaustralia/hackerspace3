@@ -12,7 +12,7 @@ class Admin::Challenges::ChallengeDataSetsController < ApplicationController
 
   def create
     @challenge_data_set = @challenge.challenge_data_sets.new(
-      challenge_data_set_params
+      challenge_data_set_params,
     )
     handle_create_save
   end
@@ -52,7 +52,7 @@ class Admin::Challenges::ChallengeDataSetsController < ApplicationController
     @data_set = DataSet.find_by_url params[:term]
     if @data_set.present?
       @existing_challenge_data_set = ChallengeDataSet.find_by(
-        data_set: @data_set, challenge: @challenge
+        data_set: @data_set, challenge: @challenge,
       )
     else
       @data_sets = @competition.data_sets.search params[:term]

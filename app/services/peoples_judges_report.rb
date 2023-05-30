@@ -44,15 +44,15 @@ class PeoplesJudgesReport
 
   def all_challenge_judges
     event_assignments.where(
-      user_id: competition.competition_assignments.judges.pluck(:user_id)
+      user_id: competition.competition_assignments.judges.pluck(:user_id),
     )
   end
 
   def all_competition_judges
     event_assignments.where(
       id: Header.where(
-        assignment: event_assignments
-      ).pluck(:assignment_id)
+        assignment: event_assignments,
+      ).pluck(:assignment_id),
     ).preload(:user, :headers, :scores)
   end
 end

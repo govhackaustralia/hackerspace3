@@ -13,11 +13,11 @@ class Admin::Sponsors::AssignmentsControllerTest < ActionDispatch::IntegrationTe
     get new_admin_sponsor_assignment_url @sponsor, title: SPONSOR_CONTACT
     assert_response :success
     get new_admin_sponsor_assignment_url(
-      @sponsor, title: SPONSOR_CONTACT, term: 'x'
+      @sponsor, title: SPONSOR_CONTACT, term: 'x',
     )
     assert_response :success
     get new_admin_sponsor_assignment_url(
-      @sponsor, title: SPONSOR_CONTACT, term: 'a'
+      @sponsor, title: SPONSOR_CONTACT, term: 'a',
     )
     assert_response :success
   end
@@ -30,7 +30,7 @@ class Admin::Sponsors::AssignmentsControllerTest < ActionDispatch::IntegrationTe
       }
     end
     assert_redirected_to admin_competition_sponsor_url(
-      @sponsor.competition_id, @sponsor
+      @sponsor.competition_id, @sponsor,
     )
   end
 

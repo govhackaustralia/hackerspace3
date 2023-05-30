@@ -24,7 +24,7 @@ class Admin::SponsorshipTypesControllerTest < ActionDispatch::IntegrationTest
       post admin_competition_sponsorship_types_url(
         @competition, params: {
           sponsorship_type: {name: 'Example', position: 1},
-        }
+        },
       )
     end
     assert_redirected_to admin_competition_sponsorship_types_url @competition
@@ -35,7 +35,7 @@ class Admin::SponsorshipTypesControllerTest < ActionDispatch::IntegrationTest
       post admin_competition_sponsorship_types_url(
         @competition, params: {
           sponsorship_type: {name: 'Example', position: nil},
-        }
+        },
       )
     end
     assert_response :success
@@ -43,7 +43,7 @@ class Admin::SponsorshipTypesControllerTest < ActionDispatch::IntegrationTest
 
   test 'should get edit' do
     get edit_admin_competition_sponsorship_type_url(
-      @competition, @sponsorship_type
+      @competition, @sponsorship_type,
     )
     assert_response :success
   end
@@ -52,7 +52,7 @@ class Admin::SponsorshipTypesControllerTest < ActionDispatch::IntegrationTest
     patch admin_competition_sponsorship_type_url(
       @competition, @sponsorship_type, params: {
         sponsorship_type: {name: 'Updated'},
-      }
+      },
     )
     assert_redirected_to admin_competition_sponsorship_types_url @competition
     @sponsorship_type.reload
@@ -63,7 +63,7 @@ class Admin::SponsorshipTypesControllerTest < ActionDispatch::IntegrationTest
     patch admin_competition_sponsorship_type_url(
       @competition, @sponsorship_type, params: {
         sponsorship_type: {name: nil},
-      }
+      },
     )
     assert_response :success
     @sponsorship_type.reload

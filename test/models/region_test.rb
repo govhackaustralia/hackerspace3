@@ -90,27 +90,27 @@ class RegionTest < ActiveSupport::TestCase
     # Time zone not required
     assert @competition.regions.nationals.create(
       name: 'y',
-      parent: @international
+      parent: @international,
     ).persisted?
     # Incorrect Region
     assert_not @competition.regions.create(
-      name: 'x', time_zone: 'Timbuktu'
+      name: 'x', time_zone: 'Timbuktu',
     ).persisted?
     # Correct Region
     assert @competition.regions.regionals.create(
       name: 'x',
       time_zone: 'Brisbane',
-      parent: @national
+      parent: @national,
     ).persisted?
     # Same Name Same Competition
     assert_not @competition.regions.create(
-      name: 'x', time_zone: 'Brisbane', parent: @national
+      name: 'x', time_zone: 'Brisbane', parent: @national,
     ).persisted?
     # Same Name Different Competition
     assert @next_competition.regions.regionals.create(
       name: 'x',
       time_zone: 'Brisbane',
-      parent: @next_competition.international_region
+      parent: @next_competition.international_region,
     ).persisted?
   end
 
@@ -149,11 +149,11 @@ class RegionTest < ActiveSupport::TestCase
   test 'only_international_can_be_parent_of_national' do
     assert_not @competition.regions.nationals.create(
       name: 'New National',
-      parent: @regional
+      parent: @regional,
     ).persisted?
     assert @competition.regions.nationals.create(
       name: 'New National',
-      parent: @international
+      parent: @international,
     ).persisted?
   end
 
@@ -169,11 +169,11 @@ class RegionTest < ActiveSupport::TestCase
   test 'only_national_can_be_parent_of_regional' do
     assert_not @competition.regions.regionals.create(
       name: 'New Regional',
-      parent: @international
+      parent: @international,
     ).persisted?
     assert @competition.regions.regionals.create(
       name: 'New Regional',
-      parent: @national
+      parent: @national,
     ).persisted?
   end
 

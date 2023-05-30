@@ -66,11 +66,11 @@ class ProjectsController < ApplicationController
   def retrieve_favourite_and_scorecard
     @favourite = Favourite.find_by(
       assignment: @user.event_assignment(@competition),
-      team: @team
+      team: @team,
     )
     @header = Header.find_by(
       assignment: @user.event_assignment(@competition),
-      scoreable: @team
+      scoreable: @team,
     )
   end
 

@@ -53,7 +53,7 @@ class TeamManagement::EntriesController < TeamManagement::TeamsController
     params.require(:entry).permit(
       :checkpoint_id,
       :justification,
-      :challenge_id
+      :challenge_id,
     )
   end
 

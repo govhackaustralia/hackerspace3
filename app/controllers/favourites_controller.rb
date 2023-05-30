@@ -25,7 +25,7 @@ class FavouritesController < ApplicationController
   def favourite_params
     params.require(:favourite).permit(:team_id).merge(
       assignment: current_user.event_assignment(@competition),
-      holder: current_user.holder_for(@competition)
+      holder: current_user.holder_for(@competition),
     )
   end
 end

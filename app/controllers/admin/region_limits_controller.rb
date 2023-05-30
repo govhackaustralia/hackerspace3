@@ -48,7 +48,7 @@ class Admin::RegionLimitsController < ApplicationController
     params.require(:region_limit).permit(
       :region_id,
       :max_national_challenges,
-      :max_regional_challenges
+      :max_regional_challenges,
     )
   end
 
