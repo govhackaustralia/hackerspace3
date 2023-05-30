@@ -20,7 +20,9 @@ class ProjectsController < ApplicationController
           pagy: pagy,
         }
       end
-      format.csv { send_data @teams.to_csv @competition }
+      format.csv do
+        send_data(Team.where(id: projects.pluck(:team_id)).to_csv(@competition))
+      end
     end
   end
 
