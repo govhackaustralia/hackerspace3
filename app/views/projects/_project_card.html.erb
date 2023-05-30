@@ -1,13 +1,22 @@
-<div class="card mb-3">
+<div class="project-card card mb-3">
   <div class="row g-0">
-    <div class="col-md-3">
-      <%= image_tag("default_profile_pic.png", class: "img-fluid rounded-start", style: "width: 100%; max-height: 200px;") %>
-    </div>
-    <div class="col-md-9">
+    <div class="col">
       <div class="card-body">
-        <h5 class="card-title">Card title</h5>
-        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-        <p class="card-text"><small class="text-body-secondary">Last updated 3 mins ago</small></p>
+        <div class="team-section mb-2">
+          <%= image_tag("default_profile_pic", class: "rounded-circle thumbnail") %>
+          <%= project.team_name %>
+        </div>
+        <h3 class="card-title">
+          <%= project.project_name %>
+        </h3>
+        <p class="card-text">
+          <%= project.description %>
+        </p>
+        <div class="tag-buttons">
+          <% project.tags.each do |tag| %>
+            <%= link_to "#{tag}", "", class: "tag" %>
+          <% end %>
+        </div>
       </div>
     </div>
   </div>
