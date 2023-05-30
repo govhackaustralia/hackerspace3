@@ -1,16 +1,23 @@
 # frozen_string_literal: true
 
 class ProjectsController < ApplicationController
+  include Pagy::Backend
+
   before_action :check_competition_started!, :check_team_published!, except: :index
   before_action :authenticate_user!, :check_slack_chat!, only: :slack_chat
 
   def index
     user_records_index if user_signed_in?
+    pagy, projects = pagy(
+      @competition.published_projects_by_name.preload(:event, :team).includes(:tags),
+      items: 4,
+    )
 
     respond_to do |format|
       format.html do
         render locals: {
-          projects: @competition.published_projects_by_name.preload(:event, :team).includes(:tags),
+          projects: projects,
+          pagy: pagy,
         }
       end
       format.csv { send_data @teams.to_csv @competition }

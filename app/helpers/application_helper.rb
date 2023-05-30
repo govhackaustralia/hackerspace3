@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 module ApplicationHelper
+  include Pagy::Frontend
+
   # Convert markdown to HTML.
   def markdown(text)
     options = {
