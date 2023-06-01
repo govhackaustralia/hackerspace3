@@ -2,9 +2,15 @@
 
 class ResourcesController < ApplicationController
   def index
-    @any_tech = @competition.resources.tech.any?
-    @any_data_portals = @competition.resources.data_portal.any?
+    @tech = @competition.resources.tech.order(position: :asc)
+    @any_tech = @tech.any?
+    @data_portals = @competition.resources.data_portal.order(position: :asc)
+    @any_data_portals = @data_portals.any?
     @information = @competition.resources.information.order(position: :asc)
+    respond_to do |format|
+      format.html
+      format.json { render json: {information: @information, tech: @tech, data_portals: @data_portals} }
+    end
   end
 
   def data_portals

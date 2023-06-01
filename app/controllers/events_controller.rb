@@ -8,6 +8,7 @@ class EventsController < ApplicationController
     respond_to do |format|
       format.html
       format.csv { send_data @events.to_csv @competition }
+      format.json  { render json: @events }
     end
   end
 
@@ -16,6 +17,11 @@ class EventsController < ApplicationController
     @region = @event.region
     @sponsorship_types = @region.sponsorship_types.distinct.order position: :asc
     set_signed_in_user_vars if user_signed_in?
+
+    respond_to do |format|
+      format.html
+      format.json { render json: @event }
+    end
   end
 
   private

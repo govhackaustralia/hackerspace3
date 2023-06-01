@@ -14,6 +14,7 @@ class ProjectsController < ApplicationController
     respond_to do |format|
       format.html
       format.csv { send_data @teams.to_csv @competition }
+      format.json  { render json: @projects }
     end
   end
 
@@ -22,6 +23,10 @@ class ProjectsController < ApplicationController
     @passed_checkpoint_ids = @competition.passed_checkpoint_ids @time_zone
     entries_and_users
     user_records_show if user_signed_in?
+    respond_to do |format|
+      format.html
+      format.json { render json: @current_project }
+    end
   end
 
   def slack_chat

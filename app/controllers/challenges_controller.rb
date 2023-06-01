@@ -21,6 +21,7 @@ class ChallengesController < ApplicationController
     respond_to do |format|
       format.html
       format.csv { send_data @challenges.to_csv @competition }
+      format.json { render json: @challenges }
     end
   end
 
@@ -36,6 +37,11 @@ class ChallengesController < ApplicationController
     @sponsors = @challenge.sponsors.with_attached_logo
 
     @user_eligible_teams = @challenge.eligible_teams & current_user.joined_teams if user_signed_in?
+
+    respond_to do |format|
+      format.html
+      format.json { render json: @challenge }
+    end
   end
 
   def entries
