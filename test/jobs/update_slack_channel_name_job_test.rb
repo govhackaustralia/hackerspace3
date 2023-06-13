@@ -30,12 +30,14 @@ class UpdateSlackChannelNameJobTest < ActiveJob::TestCase
       .with(
         channel_id: teams(:one).slack_channel_id,
         channel_name: new_project_name,
-      ).returns({
-        'ok' => true,
-        'channel' => {
-          'name' => new_project_name,
+      ).returns(
+        {
+          'ok' => true,
+          'channel' => {
+            'name' => new_project_name,
+          },
         },
-      })
+      )
 
     UpdateSlackChannelNameJob.perform_now(projects(:one))
     assert_equal new_project_name, teams(:one).reload.slack_channel_name

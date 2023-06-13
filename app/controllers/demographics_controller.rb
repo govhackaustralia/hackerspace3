@@ -21,8 +21,10 @@ class DemographicsController < ApplicationController
   end
 
   def profile_params
-    params.require(:profile).permit(*DEMOGRAPHIC_PARAMS,
-      employment_status_attributes: EmploymentStatus.options,)
+    params.require(:profile).permit(
+      *DEMOGRAPHIC_PARAMS,
+      employment_status_attributes: EmploymentStatus.options,
+    )
   end
 
   DEMOGRAPHIC_PARAMS = %i[

@@ -39,7 +39,8 @@ class ProfilesController < ApplicationController
 
   def profile_params
     params.require(:profile).permit(:team_status, :description, :website,
-      :github, :twitter, :linkedin, :skill_list, :interest_list, :published,).merge(published: true)
+      :github, :twitter, :linkedin, :skill_list, :interest_list, :published,
+    ).merge(published: true)
   end
 
   def authorize_user!

@@ -57,17 +57,21 @@ class Admin::HuntQuestionsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'should patch badge' do
-    patch badge_admin_competition_hunt_questions_url(@competition, params: {
-      competition: {hunt_badge_id: badges(:two).id},
-    },)
+    patch badge_admin_competition_hunt_questions_url(
+      @competition, params: {
+        competition: {hunt_badge_id: badges(:two).id},
+      },
+    )
     @competition.reload
     assert @competition.hunt_badge == badges(:two)
   end
 
   test 'should publish the treasure hunt' do
-    patch hunt_published_admin_competition_hunt_questions_url(@competition, params: {
-      competition: {hunt_published: true},
-    },)
+    patch hunt_published_admin_competition_hunt_questions_url(
+      @competition, params: {
+        competition: {hunt_published: true},
+      },
+    )
     @competition.reload
     assert @competition.hunt_published
   end

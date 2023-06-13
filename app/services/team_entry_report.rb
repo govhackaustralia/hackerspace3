@@ -44,7 +44,7 @@ class TeamEntryReport
       (time_zone = entry.team_region.time_zone),
       entry.created_at.in_time_zone(time_zone),
       entry.checkpoint.name,
-      entry.eligible
+      entry.eligible,
     ]
   end
 end

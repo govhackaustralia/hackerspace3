@@ -40,13 +40,15 @@ class TeamSlackChatServiceTest < ActiveSupport::TestCase
 
     SlackAPIWrapper.expects(:slack_conversatons_create)
       .with(slack_channel_name)
-      .returns({
-        'ok' => true,
-        'channel' => {
-          'id' => slack_channel_id,
-          'name' => slack_channel_name,
+      .returns(
+        {
+          'ok' => true,
+          'channel' => {
+            'id' => slack_channel_id,
+            'name' => slack_channel_name,
+          },
         },
-      })
+      )
 
     FinishTeamSlackChannelJob.expects(:perform_later)
       .with(teams(:one))
