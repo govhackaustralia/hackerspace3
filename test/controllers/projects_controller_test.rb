@@ -75,7 +75,7 @@ class ProjectsControllerTest < ActionDispatch::IntegrationTest
     slack_channel_id = 'slack channel id'
     slack_channel_name = @team.current_project.slack_channel_name
 
-    SlackApiWrapper.expects(:slack_conversatons_create)
+    SlackAPIWrapper.expects(:slack_conversatons_create)
       .with(slack_channel_name)
       .returns({
         'ok' => true,

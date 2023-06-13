@@ -16,7 +16,7 @@ class FinishTeamSlackChannelJob < ApplicationJob
 
   def add_team_slack_users(team)
     slack_user_ids = team.confirmed_slack_profiles.pluck(:slack_user_id).join(',')
-    response = SlackApiWrapper.slack_conversations_invite(
+    response = SlackAPIWrapper.slack_conversations_invite(
       channel_id: team.slack_channel_id,
       slack_user_ids: slack_user_ids,
     )
@@ -24,7 +24,7 @@ class FinishTeamSlackChannelJob < ApplicationJob
   end
 
   def add_channel_topic(team)
-    response = SlackApiWrapper.slack_conversatons_set_topic(
+    response = SlackAPIWrapper.slack_conversatons_set_topic(
       channel_id: team.slack_channel_id,
     )
     raise response['error'] unless response['ok']

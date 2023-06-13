@@ -22,7 +22,7 @@ class TeamSlackChatService
   private
 
   def connect_team_to_slack
-    response = SlackApiWrapper.slack_conversatons_create(
+    response = SlackAPIWrapper.slack_conversatons_create(
       team.current_project.slack_channel_name,
     )
     raise response['error'] unless response['ok']

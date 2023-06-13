@@ -15,7 +15,7 @@ class UpdateSlackChannelNameJob < ApplicationJob
 
     return unless should_update_channel?(project, team)
 
-    response = SlackApiWrapper.slack_conversatons_rename(
+    response = SlackAPIWrapper.slack_conversatons_rename(
       channel_id: team.slack_channel_id,
       channel_name: project.slack_channel_name,
     )

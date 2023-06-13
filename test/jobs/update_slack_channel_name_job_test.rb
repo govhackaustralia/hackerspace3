@@ -6,7 +6,7 @@ class UpdateSlackChannelNameJobTest < ActiveJob::TestCase
   test 'perform cannot update channel' do
     teams(:one).update! slack_channel_id: nil
 
-    SlackApiWrapper.expects(:slack_conversatons_rename).never
+    SlackAPIWrapper.expects(:slack_conversatons_rename).never
 
     UpdateSlackChannelNameJob.perform_now(projects(:one))
   end
@@ -15,7 +15,7 @@ class UpdateSlackChannelNameJobTest < ActiveJob::TestCase
     assert teams(:one).slack_channel_id.present?
     assert_equal projects(:one).slack_channel_name, teams(:one).slack_channel_name
 
-    SlackApiWrapper.expects(:slack_conversatons_rename).never
+    SlackAPIWrapper.expects(:slack_conversatons_rename).never
 
     UpdateSlackChannelNameJob.perform_now(projects(:one))
   end
@@ -26,7 +26,7 @@ class UpdateSlackChannelNameJobTest < ActiveJob::TestCase
     new_project_name = projects(:one).slack_channel_name
     assert_not_equal new_project_name, teams(:one).slack_channel_name
 
-    SlackApiWrapper.expects(:slack_conversatons_rename)
+    SlackAPIWrapper.expects(:slack_conversatons_rename)
       .with(
         channel_id: teams(:one).slack_channel_id,
         channel_name: new_project_name,
@@ -47,7 +47,7 @@ class UpdateSlackChannelNameJobTest < ActiveJob::TestCase
     new_project_name = projects(:one).slack_channel_name
     assert_not_equal new_project_name, teams(:one).slack_channel_name
 
-    SlackApiWrapper.expects(:slack_conversatons_rename)
+    SlackAPIWrapper.expects(:slack_conversatons_rename)
       .with(
         channel_id: teams(:one).slack_channel_id,
         channel_name: new_project_name,
