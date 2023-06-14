@@ -75,11 +75,13 @@ class Team < ApplicationRecord
   }
   scope :with_entries, lambda {
     joins(:entries)
-      .where('EXISTS(
-        SELECT entries.team_id
-        FROM entries
-        WHERE teams.id = entries.team_id
-      )').distinct
+      .where(
+        'EXISTS(
+          SELECT entries.team_id
+          FROM entries
+          WHERE teams.id = entries.team_id
+        )',
+      ).distinct
   }
 
   scope :competition, lambda { |competition|
@@ -203,7 +205,7 @@ class Team < ApplicationRecord
         *team.current_project.attributes.values_at(*project_columns),
         team.assignments.length,
         team.team_data_sets.pluck(:url),
-        team.challenges.pluck(:name)
+        team.challenges.pluck(:name),
       ]
     end
   end

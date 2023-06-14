@@ -8,11 +8,11 @@ class FinishTeamSlackChannelJobTest < ActiveJob::TestCase
 
     slack_user_ids = teams(:one).confirmed_slack_profiles.pluck(:slack_user_id).join(',')
 
-    SlackApiWrapper.expects(:slack_conversations_invite)
+    SlackAPIWrapper.expects(:slack_conversations_invite)
       .with(channel_id: teams(:one).slack_channel_id, slack_user_ids: slack_user_ids)
       .returns({'ok' => true})
 
-    SlackApiWrapper.expects(:slack_conversatons_set_topic)
+    SlackAPIWrapper.expects(:slack_conversatons_set_topic)
       .with(channel_id: teams(:one).slack_channel_id)
       .returns({'ok' => true})
 
@@ -24,7 +24,7 @@ class FinishTeamSlackChannelJobTest < ActiveJob::TestCase
 
     slack_user_ids = teams(:one).confirmed_slack_profiles.pluck(:slack_user_id).join(',')
 
-    SlackApiWrapper.expects(:slack_conversations_invite)
+    SlackAPIWrapper.expects(:slack_conversations_invite)
       .with(channel_id: teams(:one).slack_channel_id, slack_user_ids: slack_user_ids)
       .returns({'ok' => false, 'error' => 'error message'})
 
@@ -38,11 +38,11 @@ class FinishTeamSlackChannelJobTest < ActiveJob::TestCase
 
     slack_user_ids = teams(:one).confirmed_slack_profiles.pluck(:slack_user_id).join(',')
 
-    SlackApiWrapper.expects(:slack_conversations_invite)
+    SlackAPIWrapper.expects(:slack_conversations_invite)
       .with(channel_id: teams(:one).slack_channel_id, slack_user_ids: slack_user_ids)
       .returns({'ok' => true})
 
-    SlackApiWrapper.expects(:slack_conversatons_set_topic)
+    SlackAPIWrapper.expects(:slack_conversatons_set_topic)
       .with(channel_id: teams(:one).slack_channel_id)
       .returns({'ok' => false, 'error' => 'error message'})
 

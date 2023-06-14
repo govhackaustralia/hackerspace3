@@ -45,7 +45,7 @@ class TeamMemberReport
       assignment.assignable.event.name,
       user.full_name,
       user.email,
-      assignment.title
+      assignment.title,
     ]
   end
 end

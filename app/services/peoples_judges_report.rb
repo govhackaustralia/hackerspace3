@@ -34,7 +34,7 @@ class PeoplesJudgesReport
       assignment.user.full_name,
       assignment.user.email,
       assignment.headers.count,
-      assignment.scores.mean(&:entry)
+      assignment.scores.mean(&:entry),
     ]
   end
 

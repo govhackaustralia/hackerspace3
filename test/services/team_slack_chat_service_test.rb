@@ -38,15 +38,17 @@ class TeamSlackChatServiceTest < ActiveSupport::TestCase
     slack_channel_id = 'slack channel id'
     slack_channel_name = teams(:one).current_project.slack_channel_name
 
-    SlackApiWrapper.expects(:slack_conversatons_create)
+    SlackAPIWrapper.expects(:slack_conversatons_create)
       .with(slack_channel_name)
-      .returns({
-        'ok' => true,
-        'channel' => {
-          'id' => slack_channel_id,
-          'name' => slack_channel_name,
+      .returns(
+        {
+          'ok' => true,
+          'channel' => {
+            'id' => slack_channel_id,
+            'name' => slack_channel_name,
+          },
         },
-      })
+      )
 
     FinishTeamSlackChannelJob.expects(:perform_later)
       .with(teams(:one))
@@ -64,7 +66,7 @@ class TeamSlackChatServiceTest < ActiveSupport::TestCase
     teams(:one).update! slack_channel_id: nil
     slack_channel_name = teams(:one).current_project.slack_channel_name
 
-    SlackApiWrapper.expects(:slack_conversatons_create)
+    SlackAPIWrapper.expects(:slack_conversatons_create)
       .with(slack_channel_name)
       .returns({'ok' => false, 'error' => 'error message'})
 

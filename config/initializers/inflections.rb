@@ -17,4 +17,5 @@
 
 ActiveSupport::Inflector.inflections(:en) do |inflect|
   inflect.irregular 'criterion', 'criteria'
+  inflect.acronym 'API'
 end

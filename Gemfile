@@ -5,6 +5,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 gem 'acts-as-taggable-on', '~> 9.0'
 gem 'aws-sdk-s3', require: false
+gem 'blueprinter'
 gem 'bootsnap', '>= 1.1.0', require: false
 gem 'bootstrap', '~> 5.1.3'
 gem 'bundler-audit'
@@ -38,6 +39,8 @@ gem 'uglifier', '>= 1.3.0'
 
 group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
+  gem 'factory_bot_rails'
+  gem 'rspec-rails', '~> 6.0.0'
 end
 
 group :development do

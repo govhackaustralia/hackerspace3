@@ -65,3 +65,13 @@ Style/TrailingCommaInArguments:
 
 Style/ClassAndModuleChildren:
   EnforcedStyle: compact
+
+Layout/MultilineMethodCallBraceLayout:
+  EnforcedStyle: new_line
+
+Style/TrailingCommaInArrayLiteral:
+  EnforcedStyleForMultiline: consistent_comma
+
+Metrics/BlockLength:
+  Exclude:
+    - "spec/**/*"

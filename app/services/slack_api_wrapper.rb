@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module SlackApiWrapper
+module SlackAPIWrapper
   MAX_CHANNEL_LENGTH = 80
 
   # Channel names may only contain

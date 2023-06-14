@@ -146,9 +146,7 @@ class Region < ApplicationRecord
   # Return an array of the challenges a team 'under' the region can enter
   def eligible_challenges
     [
-      challenges +
-        sub_region_challenges.nation_wides +
-        [parent&.eligible_challenges]
+      challenges + sub_region_challenges.nation_wides + [parent&.eligible_challenges],
     ].flatten.uniq.compact
   end
 
