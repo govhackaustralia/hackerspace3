@@ -27,6 +27,7 @@ gem 'jquery-rails'
 gem 'mini_racer', platforms: :ruby
 gem 'omniauth-google-oauth2'
 gem 'omniauth-rails_csrf_protection'
+gem 'pagy', '~> 6.0'
 gem 'pg', '>= 0.18', '< 2.0'
 gem 'puma', '~> 4.3.5'
 gem 'rails', '~> 7.0.3'
@@ -61,6 +62,7 @@ end
 
 group :test do
   gem 'capybara', '>= 2.15', '< 4.0'
+  gem 'database_cleaner-active_record'
   gem 'mocha'
   gem 'selenium-webdriver'
   gem 'webdrivers'
