@@ -27,5 +27,6 @@
 FactoryBot.define do
   factory :project do
     description { 'Default Description' }
+    team_name { 'Team #1' }
   end
 end
