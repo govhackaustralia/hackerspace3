@@ -43,7 +43,7 @@ RSpec.describe '/api/v1/projects' do
     )
   end
 
-  context "with many projects" do
+  context 'with many projects' do
     before do
       Project.destroy_all
       base_time = DateTime.parse('2020-02-03 13:00:00')
@@ -59,7 +59,7 @@ RSpec.describe '/api/v1/projects' do
       end
     end
 
-    it "returns a paginated list of projects ordered by created_at, newest first" do
+    it 'returns a paginated list of projects ordered by created_at, newest first' do
       get '/api/v1/projects?page=2'
       expect(response).to have_http_status(:success)
 

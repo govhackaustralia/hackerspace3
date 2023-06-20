@@ -11,7 +11,7 @@ class API::V1::ProjectsController < API::V1::BaseController
     pagy, projects = pagy(Project.order(created_at: :desc))
     render json: {
       links: pagy_index_links(pagy),
-      data: ProjectBlueprint.render_as_hash(projects)
+      data: ProjectBlueprint.render_as_hash(projects),
     }
   end
 end
