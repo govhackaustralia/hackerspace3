@@ -13,6 +13,6 @@
 </div>
 <div class="event-info">
   <h4>Challenges Open</h4>
-  <p>7pm <%= start_weekday_name %> <%= start_day %> <%= start_month %></p>
+  <p><%= @competition.start_time.strftime("%l%P %A %e %B").strip %></p>
   <p>(Local Times)</p>
 </div>
