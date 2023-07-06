@@ -98,7 +98,7 @@
 <% end %>
 <% if @event_partners.present? %>
   <div class="event-info">
-    <h4><%= 'Event Partner'.pluralize(@event_partners.count) %></h4>
+    <h4><%= 'Venue/Event Partner'.pluralize(@event_partners.count) %></h4>
     <% @event_partners.each do |event_partner| %>
       <div class="clickable_tile">
         <%= link_to visits_path(visit: {visitable_type: 'Sponsor', visitable_id: event_partner.id}), target: '_blank' do %>
