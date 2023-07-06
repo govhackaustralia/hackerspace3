@@ -8,4 +8,10 @@ class API::V1::EventsController < API::V1::BaseController
       data: EventBlueprint.render_as_hash(events),
     }
   end
+
+  def show
+    event = Event.find(params[:id])
+
+    render json: {data: EventBlueprint.render_as_hash(event)}
+  end
 end
