@@ -1,5 +1,6 @@
 <% start_day = @competition.start_time.day.ordinalize %>
 <% end_day = @competition.end_time.day.ordinalize %>
+<% start_weekday_name = @competition.start_time.strftime("%A") %>
 
 <% start_month = @competition.start_time.strftime("%B") %>
 <% end_month = @competition.end_time.strftime("%B") %>
@@ -12,6 +13,6 @@
 </div>
 <div class="event-info">
   <h4>Challenges Open</h4>
-  <p>7pm Friday 19th August</p>
+  <p><%= @competition.start_time.strftime("%l%P %A %e %B").strip %></p>
   <p>(Local Times)</p>
 </div>
