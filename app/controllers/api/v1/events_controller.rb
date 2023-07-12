@@ -12,6 +12,6 @@ class API::V1::EventsController < API::V1::BaseController
   def show
     event = Event.find(params[:id])
 
-    render json: {data: EventBlueprint.render_as_hash(event)}
+    render json: {data: EventBlueprint.render_as_hash(event, view: :extended)}
   end
 end

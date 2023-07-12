@@ -4,7 +4,7 @@ class API::V1::ProjectsController < API::V1::BaseController
   def show
     project = Project.find(params[:id])
 
-    render json: {data: ProjectBlueprint.render_as_hash(project)}
+    render json: {data: ProjectBlueprint.render_as_hash(project, view: :extended)}
   end
 
   def index
