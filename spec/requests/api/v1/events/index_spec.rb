@@ -2,8 +2,8 @@
 
 RSpec.describe '/api/v1/events' do
   before do
-    create :event, id: 1, region: region, created_at: Time.current - 4.seconds
-    create :event, id: 2, region: region, created_at: Time.current - 2.seconds
+    create :event, id: 1, region: region, created_at: Time.current - 4.seconds, name: 'Event 1'
+    create :event, id: 2, region: region, created_at: Time.current - 2.seconds, name: 'Event 2'
   end
   let(:region) { create :region, competition: create(:competition) }
 
@@ -15,8 +15,8 @@ RSpec.describe '/api/v1/events' do
 
     expect(parsed_body.fetch(:data)).to match(
       [
-        a_hash_including(id: 2),
-        a_hash_including(id: 1),
+        a_hash_including(id: 2, name: 'Event 2'),
+        a_hash_including(id: 1, name: 'Event 1'),
       ],
     )
   end

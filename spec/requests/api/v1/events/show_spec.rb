@@ -2,7 +2,7 @@
 
 RSpec.describe '/api/v1/events' do
   before do
-    create(:event, id: 1, region: region)
+    create(:event, id: 1, region: region, name: 'Event 1', email: 'test@test.com')
   end
   let(:region) { create(:region, competition: create(:competition)) }
   let(:requested_id) { 1 }
@@ -16,6 +16,8 @@ RSpec.describe '/api/v1/events' do
     expect(parsed_body.fetch(:data)).to eq(
       {
         id: 1,
+        name: 'Event 1',
+        email: 'test@email.com',
       },
     )
   end
