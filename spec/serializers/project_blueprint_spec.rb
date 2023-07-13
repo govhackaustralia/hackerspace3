@@ -20,6 +20,7 @@ RSpec.describe ProjectBlueprint do
       {
         id: 1234,
         project_name: 'Pied Piper',
+        team_name: 'Aviato',
       },
     )
   end
