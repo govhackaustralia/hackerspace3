@@ -15,7 +15,7 @@ RSpec.describe '/api/v1/events' do
 
     expect(parsed_body.fetch(:data)).to eq(
       {
-        id: 1
+        id: 1,
       },
     )
   end
