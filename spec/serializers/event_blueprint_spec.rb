@@ -10,6 +10,7 @@ RSpec.describe EventBlueprint do
     expect(subject).to eq(
       {
         id: 1234,
+        region_id: region.id,
       },
     )
   end
