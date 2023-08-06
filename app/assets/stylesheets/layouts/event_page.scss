@@ -57,6 +57,10 @@
   .sponsor {
     width: 30%;
   }
+
+  .info {
+    margin-bottom: 2rem;
+  }
 }
 
   .sponsors {
@@ -137,10 +141,6 @@
       display: flex;
       flex-direction: column;
       width: 75%;
-    }
-
-    .info {
-      padding: 0 1rem;
     }
 
     .grey-line {
