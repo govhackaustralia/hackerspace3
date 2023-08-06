@@ -1,9 +1,9 @@
 <% unless @event.place_id.blank? %>
-  <iframe frameborder="0" height="450" src="https://www.google.com/maps/embed/v1/place?q=place_id:<%= @event.place_id %>&key=<%= ENV['GOOGLE_API_KEY'] %>" style="border:0" width="600"></iframe>
+  <iframe id="event-gmaps" frameborder="0" height="450" src="https://www.google.com/maps/embed/v1/place?q=place_id:<%= @event.place_id %>&key=<%= ENV['GOOGLE_API_KEY'] %>" style="border:0"></iframe>
   <br/>
 <% end %>
 <% unless @event.video_id.blank? %>
   <br />
-    <iframe frameborder="0" height="360" id="ytplayer" src="https://www.youtube.com/embed/<%= @event.video_id %>" type="text/html" width="640"></iframe>
+    <iframe id="event-video" frameborder="0" height="360" id="ytplayer" src="https://www.youtube.com/embed/<%= @event.video_id %>" type="text/html"></iframe>
   <br/>
 <% end %>

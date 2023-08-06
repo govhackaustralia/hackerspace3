@@ -6,13 +6,15 @@
       <div class="event-info">
         <h4>Registration Type:</h4>
         <p><%= @event.registration_type %></p>
+        <br />
+        <%= render 'events/event_registration_team_links' %>
       </div>
+      <br />
       <hr class="grey-line" />
       <%= render 'events/event_text_information' %>
       <br />
       <hr class="grey-line" />
       <br />
-      <%= render 'events/event_registration_team_links' %>
       <% if user_signed_in? && @event.admin_privileges?(current_user) %>
         <p><%= link_to 'Manage this Event', admin_region_event_path(@region, @event), class: 'black' %></p>
       <% end %>
