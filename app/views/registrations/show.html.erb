@@ -37,7 +37,7 @@
         <%= @user.dietary_requirements %>
       </p>
     <% end %>
-    <%= link_to 'Update Registration', edit_event_registration_path(@event.identifier, @registration), class: 'red'%>
+    <%= link_to 'Update Registration', edit_event_registration_path(@event.identifier, @registration), class: 'red-button'%>
     <%= link_to 'Back to Event Page', event_path(@event.identifier), class: 'blue-button'%>
     <%= link_to 'Back to Account Management', manage_account_path,  class: 'blue-button'%>
   </section>

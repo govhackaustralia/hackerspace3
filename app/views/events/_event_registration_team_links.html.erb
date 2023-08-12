@@ -1,19 +1,19 @@
 <% unless @event.closed? || event_registration_closed?(@event, @region, @competition) %>
   <% if user_signed_in? %>
     <% if @registration.present? %>
-      <%= link_to 'Manage your Event Registration', event_registration_path(@event.identifier, @registration), class: 'red' %>
+      <%= link_to 'Manage your Event Registration', event_registration_path(@event.identifier, @registration), class: 'red-button' %>
       <br/>
     <% elsif participant_able_to_enter? %>
-      <%= link_to 'Register to Attend this Event', new_event_registration_path(@event.identifier), class: 'red' %>
+      <%= link_to 'Register to Attend this Event', new_event_registration_path(@event.identifier), class: 'red-button' %>
       <br/>
     <% else %>
-      <%= link_to 'Register to Attend this Event', limit_reached_event_registrations_path(@event.identifier), class: 'red' %>
+      <%= link_to 'Register to Attend this Event', limit_reached_event_registrations_path(@event.identifier), class: 'red-button' %>
     <% end %>
   <% else %>
-    <%= link_to 'Register to Attend this Event', new_event_registration_path(@event.identifier), class: 'red'%>
+    <%= link_to 'Register to Attend this Event', new_event_registration_path(@event.identifier), class: 'red-button'%>
     <br/>
   <% end %>
 <% end %>
 <% if @event.competition_event? && @competition.started?(@region.time_zone) && @event.teams.published.present? %>
-  <%= link_to 'See Participating Teams', event_teams_path(@event.identifier), class: 'red' %>
+  <%= link_to 'See Participating Teams', event_teams_path(@event.identifier), class: 'red-button' %>
 <% end %>

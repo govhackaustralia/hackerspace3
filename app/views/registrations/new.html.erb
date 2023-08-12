@@ -5,7 +5,7 @@
       <%= yield :title %>
     </h1>
     <% if @event.below_capacity? %>
-      <%= render 'new_form', locals: { status: ATTENDING, label: 'Register to Attend Event' }, class: 'red' %>
+      <%= render 'new_form', locals: { status: ATTENDING, label: 'Register to Attend Event' }, class: 'red-button' %>
     <% else %>
       <p>
         This event is at capacity.
