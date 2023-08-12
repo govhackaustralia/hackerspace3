@@ -34,9 +34,9 @@
         </h4>
       <% end %>
       <% unless @challenge.long_desc.blank? %>
-        <p>
+        <div class="long-desc">
           <%= markdown @challenge.long_desc %>
-        </p>
+        </div>
       <% end %>
       <% unless @challenge.eligibility.blank? %>
         <p>
