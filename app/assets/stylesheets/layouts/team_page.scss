@@ -3,20 +3,6 @@
 /* Custom, iPhone Retina */
 @media only screen and (min-device-width: 320px) and (min-width : 320px) {
   .team_page {
-    hr.grey-border {
-      border-radius: 5px;
-      height: 2px;
-      background-color: #eee;
-      border: none;
-      margin: 0 1rem;
-    }
-
-    h3 {
-      margin: 1em 0;
-      font-size: 1.5em;
-      font-weight: 600;
-    }
-
     > section > section {
       padding: 0.25em 1.5em;
     }
@@ -296,6 +282,14 @@
       font-size: 0.5em;
       padding: 0.5em;
       display: none;
+    }
+
+    h4 {
+      margin-top: 1rem;
+    }
+
+    h3 {
+      margin-top: 1.5rem;
     }
   }
 }
