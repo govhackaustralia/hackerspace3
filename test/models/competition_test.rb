@@ -227,4 +227,22 @@ class CompetitionTest < ActiveSupport::TestCase
   test 'already_participating_in_a_competition_event?' do
     assert @competition.already_participating_in_a_competition_event? @event_assignment
   end
+
+  test 'before_sunday_judging?' do
+    @competition.update! end_time: Time.now - 1.hour
+
+    assert_not @competition.before_sunday_judging?('Sydney')
+  end
+
+  test 'during_sunday_judging?' do
+    @competition.update! end_time: Time.now + 1.hour
+
+    assert @competition.before_sunday_judging?('Sydney')
+  end
+
+  test 'after_sunday_judging?' do
+    @competition.update! end_time: Time.now + 21.hours
+
+    assert_not @competition.before_sunday_judging?('Sydney')
+  end
 end
