@@ -43,7 +43,7 @@ SHA=$(git rev-parse HEAD)
 
 # Kill the process
 echo "Killing process $PID..."
-# kill $PID
+kill $PID
 
-echo "COMMIT_SHA=$SHA RAILS_ENV=$ENV rails s -p $PORT -d"
-# COMMIT_SHA=$SHA RAILS_ENV=$ENV rails s -p $PORT -d
+echo "Running COMMIT_SHA=$SHA RAILS_ENV=$ENV rails s -p $PORT -d"
+COMMIT_SHA=$SHA RAILS_ENV=$ENV rails s -p $PORT -d
