@@ -215,6 +215,13 @@ class Competition < ApplicationRecord
     competition_registrations.participating.where(assignment: event_assignment).present?
   end
 
+  # Returns true if the competition has ended and is before 12pm local time on the next dat
+  def in_sunday_judging?(time_zone)
+    has_ended = end_time.to_formatted_s(:number) < Region.region_time(time_zone)
+    is_before_midday_next_day = Region.region_time(time_zone) < (end_time + 20.hours)
+    has_ended && is_before_midday_next_day
+  end
+
   private
 
   # Returns true if the competition is in the team form period, false oherwise.
@@ -234,12 +241,5 @@ class Competition < ApplicationRecord
     return unless current
 
     Competition.where.not(id: id).update_all current: false
-  end
-
-  # Returns true if the competition has ended and is before 12pm local time on the next dat
-  def in_sunday_judging?(time_zone)
-    has_ended = end_time.to_formatted_s(:number) < Region.region_time(time_zone)
-    is_before_midday_next_day = Region.region_time(time_zone) < (end_time + 20.hours)
-    has_ended && is_before_midday_next_day
   end
 end
