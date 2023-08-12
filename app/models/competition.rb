@@ -237,7 +237,7 @@ class Competition < ApplicationRecord
   end
 
   # Returns true if the competition has ended and is before 12pm local time on the next dat
-  def in_sunday_judging
+  def in_sunday_judging?(time_zone)
     has_ended = end_time.to_formatted_s(:number) < Region.region_time(time_zone)
     is_before_midday_next_day = Region.region_time(time_zone) < (end_time + 20.hours)
     has_ended && is_before_midday_next_day
