@@ -228,20 +228,6 @@ class CompetitionTest < ActiveSupport::TestCase
     assert @competition.already_participating_in_a_competition_event? @event_assignment
   end
 
-  test 'is_finished?' do
-    # end time in the past
-    @competition.update! end_time: Time.now - 1.day
-
-    assert @competition.is_finished?('Sydney')
-  end
-
-  test 'not_is_finished?' do
-    # end time still in the future
-    @competition.update! end_time: Time.now + 1.day
-
-    assert_not @competition.is_finished?('Sydney')
-  end
-
   test 'before sunday judging?' do
     # end time in the future
     @competition.update! end_time: Time.now + 1.day

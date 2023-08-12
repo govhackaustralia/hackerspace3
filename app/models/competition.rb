@@ -215,13 +215,9 @@ class Competition < ApplicationRecord
     competition_registrations.participating.where(assignment: event_assignment).present?
   end
 
-  def is_finished?(time_zone)
-    Region.region_time(time_zone) > end_time.to_formatted_s(:number)
-  end
-
   # Returns true if the competition has ended and is before 12pm local time on the next dat
   def in_sunday_judging?(time_zone)
-    has_ended = is_finished?(time_zone)
+    has_ended = Region.region_time(time_zone) > end_time.to_formatted_s(:number)
     midday_after_end_date = Time.new(end_time.year, end_time.month, end_time.day + 1, 12, 0, 0, end_time.utc_offset)
     is_before_midday_next_day = Region.region_time(time_zone) < midday_after_end_date.to_formatted_s(:number)
     has_ended && is_before_midday_next_day
