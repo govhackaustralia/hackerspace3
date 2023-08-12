@@ -21,6 +21,6 @@
       </p>
       <%= render 'edit_form', locals: { options: [ATTENDING, NON_ATTENDING] } %>
     <% end %>
-  <%= link_to 'Back to Registration', event_registration_path(@event.identifier, @registration), class: "blue"%>
+  <%= link_to 'Back to Registration', event_registration_path(@event.identifier, @registration), class: "blue-button"%>
   </section>
 </main>

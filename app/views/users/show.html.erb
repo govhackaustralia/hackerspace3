@@ -103,7 +103,7 @@
               </div>
               <div class="content-wrapper-button">
                 <%= link_to sponsorship_management_sponsor_path(assignment.assignable) do %>
-                  <button class="content-black-button">
+                  <button class="black-button">
                     Go to Sponsor
                   </button>
                 <% end %>
@@ -124,7 +124,7 @@
                 </h4>
                 <div class="content-wrapper-button">
                   <%= link_to challenge_path(challenge.identifier) do %>
-                    <button class="content-black-button">
+                    <button class="black-button">
                       Go to Challenge
                     </button>
                   <% end %>
@@ -174,7 +174,7 @@
             <div class="message">
               <p class="message-text">You are not currently registered for any events.</p>
               <%= link_to events_path do %>
-                <button class="message-button">
+                <button class="black-button">
                   Find more events
                 </button>
               <% end %>
@@ -195,12 +195,20 @@
               <div class="message">
                 <p class="message-text">Join a Competition Event to create a team.</p>
                 <%= link_to competition_events_path do %>
-                  <button class="message-button">
+                  <button class="black-button">
                     Go to Competition Events
                   </button>
                 <% end %>
               </div>
             </section>
+          <% else %>
+          <section>
+            <div class="message">
+              <p class="message-text">
+                You are not currently registered for any competition events and the event is no longer in progress.
+              </p>
+            </div>
+          </section>
           <% end %>
         <% end %>
       </article>
@@ -211,12 +219,13 @@
             <% @favourite_teams.each do |team| %>
               <div class="content-wrapper">
                 <div class="content-wrapper-content">
-                  <h2><%= team.current_project.team_name %> - <%= team.current_project.project_name %></h2>
+                  <h3><%= team.current_project.project_name %><h3>
+                  <h4><%= team.current_project.team_name %></h4>
                   <p>Event: <%= team.event.name %></p>
                 </div>
                 <div class="content-wrapper-button">
                   <%= link_to project_path(team.current_project.identifier) do %>
-                    <button class="content-blue-button">
+                    <button class="blue-button">
                       Go to Team Project
                     </button>
                   <% end %>

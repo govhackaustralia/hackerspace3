@@ -13,6 +13,14 @@
   <% if (show_challenge_score_stuff? || show_peoples_choice_stuff?) && !@users_team %>
     <%= render partial: 'scorecard_management' %>
   <% end %>
+  <% if !@users_team && @competition.in_sunday_judging?(@team.region.time_zone) %>
+    <br />
+    <%= link_to @judging_link, target: '_blank' do %>
+      <button class="red-button">
+        Sunday Project Judging
+      </button>
+    <% end %>
+  <% end %>
 <% elsif @competition.in_peoples_judging_window? LAST_COMPETITION_TIME_ZONE %>
   <div>
     <p>
