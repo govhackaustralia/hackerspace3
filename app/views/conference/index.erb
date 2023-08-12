@@ -4,7 +4,7 @@
     <div class="menu_col">
       <h2><%= yield :title %></h2>
       <p>The conference presents a great opportunity to network and learn from industry experts, all from the comfort of your own home.</p>
-      <%= link_to 'All Events', events_path, class: 'blue' %>
+      <%= link_to 'All Events', events_path, class: 'blue-button' %>
     </div>
     <div class="contents">
       <%= render partial: 'events/event_collection', locals: { events: @future_sessions, title: 'Upcoming Conference Sessions' } %>

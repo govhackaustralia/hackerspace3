@@ -1,18 +1,22 @@
-button {
+button,
+a {
   &.red-button,
   &.blue-button,
-  &.black-button {
+  &.black-button,
+  &.download-csv {
     margin: 0.25rem 0px;
     border-radius: 0.5em;
     display: inline-block;
     cursor: pointer;
-    padding: 0.25rem 0.75rem;
+    padding: 0.5rem 1rem;
     font-family: Open Sans;
     font-size: 1rem;
     text-align: left;
+    text-decoration: none;
   }
 
-  &.red-button {
+  &.red-button,
+  &.download-csv {
     background-color: var(--primary);
     border: 1px solid var(--primary);
     color: #fff;
