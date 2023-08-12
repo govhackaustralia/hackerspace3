@@ -20,40 +20,14 @@ class ProjectsController < ApplicationController
   def show
     @current_project = @team.current_project
     @passed_checkpoint_ids = @competition.passed_checkpoint_ids @time_zone
-    params = {
-      'tid': @team.id,
-      'pn': @team.current_project.project_name,
-      'tn': @team.current_project.team_name,
-      'uid': current_user.id,
-      'jn': current_user.full_name,
-      'c': @team.id * current_user.id + 17 * @team.id,
-    }
-    uri = URI('https://govhack.formstack.com/forms/spj')
-    uri.query = URI.encode_www_form(params)
-    @judging_link = uri.to_s
     entries_and_users
     user_records_show if user_signed_in?
+    set_judging_link if user_signed_in?
   end
 
   def slack_chat
     redirect_to team_slack_chat_service.team_slack_chat_url,
       allow_other_host: true
-  end
-
-  def judging_link
-    "hello, world"
-  #   params = {
-  #     'tid': @team.id,
-  #     'pn': @team.current_project.project_name,
-  #     'tn': @team.current_project.team_name,
-  #     'uid': current_user.id,
-  #     'jn': current_user.full_name,
-  #     'c': @team.id * current_user.id + 17 * @team.id,
-  #   }
-  #   uri = URI('https://govhack.formstack.com/forms/spj')
-  #   uri.query = params.to_query
-  #   puts "Judging link: #{uri.to_s}"
-  #   uri.to_s
   end
 
   private
@@ -145,5 +119,19 @@ class ProjectsController < ApplicationController
 
     redirect_to projects_path,
       alert: 'Unable to slack chat with this team'
+  end
+
+  def set_judging_link
+    params = {
+      'tid': @team.id,
+      'pn': @team.current_project.project_name,
+      'tn': @team.current_project.team_name,
+      'uid': current_user.id,
+      'jn': current_user.full_name,
+      'c': @team.id * current_user.id + 17 * @team.id,
+    }
+    uri = URI('https://govhack.formstack.com/forms/spj')
+    uri.query = URI.encode_www_form(params)
+    @judging_link = uri.to_s
   end
 end
