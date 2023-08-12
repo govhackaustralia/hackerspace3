@@ -231,18 +231,18 @@ class CompetitionTest < ActiveSupport::TestCase
   test 'before_sunday_judging?' do
     @competition.update! end_time: Time.now - 1.hour
 
-    assert_not @competition.before_sunday_judging?('Sydney')
+    assert_not @competition.in_sunday_judging?('Sydney')
   end
 
   test 'during_sunday_judging?' do
     @competition.update! end_time: Time.now + 1.hour
 
-    assert @competition.before_sunday_judging?('Sydney')
+    assert @competition.in_sunday_judging?('Sydney')
   end
 
   test 'after_sunday_judging?' do
     @competition.update! end_time: Time.now + 21.hours
 
-    assert_not @competition.before_sunday_judging?('Sydney')
+    assert_not @competition.in_sunday_judging?('Sydney')
   end
 end
