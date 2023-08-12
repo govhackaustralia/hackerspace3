@@ -251,14 +251,14 @@ class CompetitionTest < ActiveSupport::TestCase
 
   test 'during sunday judging?' do
     # end time in the past, but within 20hrs
-    @competition.update! end_time: Time.now + 12.hours
+    @competition.update! end_time: Time.now - 12.hours
 
     assert @competition.in_sunday_judging?('Sydney')
   end
 
   test 'after sunday judging?' do
     # end time in the past by more than 20hrs
-    @competition.update! end_time: Time.now + 1.day
+    @competition.update! end_time: Time.now - 1.day
 
     assert_not @competition.in_sunday_judging?('Sydney')
   end
