@@ -71,9 +71,11 @@
           -moz-appearance: none;
           appearance: none;
           background-color: var(--primary);
-          color: #ddd;
+          color: #fff;
           font-weight: 700;
           text-transform: uppercase;
+          border-radius: 0.5rem;
+          border: none;
         }
       }
 

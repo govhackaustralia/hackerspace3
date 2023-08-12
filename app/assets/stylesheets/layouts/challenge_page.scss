@@ -14,11 +14,9 @@
     }
 
     section {
-      padding: 0 1.5em;
-
       &.challenge_body, &.challenge_head {
-        padding: 0 1.5em;
         display: flex;
+        gap: 1rem;
       }
 
       &.teams {
@@ -34,6 +32,9 @@
       }
 
       article {
+        box-sizing: border-box;
+        padding: 0.25em;
+
         p.challenge_enter a {
           box-sizing: border-box;
           font-size: 1.5em;
@@ -43,39 +44,42 @@
           text-align: center;
           margin-top: 0.25em;
           background-color: var(--primary);
-          color: #ddd;
+          color: #fff;
           font-weight: 700;
           text-transform: uppercase;
           text-decoration: none;
         }
 
-        box-sizing: border-box;
-        padding: 0.25em;
-      }
+        ol, ul {
+          margin-left: 2rem;
+        }
 
-      aside {
-        box-sizing: border-box;
-        padding: 0.25em;
-      }
+        h3 {
+          margin-top: 1rem;
+        }
 
-      article {
         h4 {
           color: var(--primary);
           font-weight: 400;
           font-size: 1.5em;
           font-style: italic;
-        }
-
-        p {
-          padding-bottom: 0.5em;
-          padding-left: 0.5em;
-          padding-right: 0.5em;
+          margin-bottom: 1rem;
         }
 
         h5 {
           font-weight: 400;
           font-size: 1.25em;
         }
+
+        .long-desc {
+          margin-bottom: 2rem;
+        }
+      }
+
+
+      aside {
+        box-sizing: border-box;
+        padding: 0.25em;
       }
     }
 
