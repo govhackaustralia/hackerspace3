@@ -11,12 +11,12 @@
       </div>
       <div class="content-wrapper-button">
         <%= link_to users_invitation_path(assignment), method: :patch do %>
-          <button class="content-blue-button">
+          <button class="blue-button">
             Accept Invitation and Go to Team
           </button>
         <% end %>
         <%= link_to users_invitation_path(assignment), method: :delete, data: { confirm: 'Are you sure?' } do %>
-          <button class="content-black-button">
+          <button class="black-button">
             Decline Invitation
           </button>
         <% end %>

@@ -1,18 +1,18 @@
-@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,700');
+@import url("https://fonts.googleapis.com/css?family=Open+Sans:400,700");
 
 :root {
-  --primary: #CC1E57;
-  --primary-shade: #9C1040;
-  --secondary: #4B99D2;
-  --secondary-shade: #3C7CAB;
+  --primary: #cc1e57;
+  --primary-shade: #9c1040;
+  --secondary: #4b99d2;
+  --secondary-shade: #3c7cab;
 
   --dark-gray: #717272;
-  --light-gray: #F4F4F4;
+  --light-gray: #f4f4f4;
 
-  --purple: #4D13D1;
-  --red: #EB0B43;
-  --yellow: #FABC1E;
-  --green: #0ADDA0;
+  --purple: #4d13d1;
+  --red: #eb0b43;
+  --yellow: #fabc1e;
+  --green: #0adda0;
 
   --font-size-base: 14px;
   --font-size-lg: 16px;
@@ -48,7 +48,7 @@ h1 {
 }
 
 h2 {
-  font-size:  var(--text-h2);
+  font-size: var(--text-h2);
   line-height: var(--text-h2);
   font-weight: 300;
   color: var(--primary);
@@ -63,7 +63,9 @@ h3 {
   color: #000;
 }
 
-h4, h5, h6 {
+h4,
+h5,
+h6 {
   color: #000;
 }
 
@@ -80,14 +82,14 @@ hr.grey-border {
 }
 
 /* Custom, iPhone Retina */
-@media only screen and (min-device-width: 320px) and (min-width : 320px) {
+@media only screen and (min-device-width: 320px) and (min-width: 320px) {
   main {
     padding: 2em 1em;
   }
 }
 
 /* Small Devices, Tablets */
-@media only screen and (min-width : 768px) {
+@media only screen and (min-width: 768px) {
   main {
     padding: 2em 5em;
   }

@@ -16,9 +16,9 @@
       <hr class="grey-line" />
       <br />
       <% if user_signed_in? && @event.admin_privileges?(current_user) %>
-        <p><%= link_to 'Manage this Event', admin_region_event_path(@region, @event), class: 'black' %></p>
+        <p><%= link_to 'Manage this Event', admin_region_event_path(@region, @event), class: 'black-button' %></p>
       <% end %>
-      <p><%= link_to 'Back to Events', events_path, class: "blue"%></p>
+      <p><%= link_to 'Back to Events', events_path, class: "blue-button"%></p>
     </div>
     <div class="content">
       <div class="info">

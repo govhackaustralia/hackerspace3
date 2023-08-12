@@ -4,7 +4,7 @@
     <div class="menu_col">
       <h2>Award Events</h2>
       <%= render 'award_description' %>
-      <%= link_to 'Back to Events', events_path, class: 'blue' %>
+      <%= link_to 'Back to Events', events_path, class: 'blue-button' %>
     </div>
     <div class="contents">
     <%= render partial: 'events/event_collection', locals: { events: @future_awards, title: 'Upcoming Awards Events' } %>

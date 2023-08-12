@@ -11,18 +11,18 @@
   <div class="content-wrapper-button">
     <% if registration.status == INVITED %>
       <%= link_to edit_event_registration_path(event.identifier, registration) do %>
-        <button class="content-black-button">
+        <button class="black-button">
           Respond to Invitation
         </button>
       <% end %>
     <% end %>
     <%= link_to event_registration_path(event.identifier, registration) do %>
-      <button class="content-blue-button">
+      <button class="blue-button">
         View Registration
       </button>
     <% end %>
     <%= link_to event_path(event.identifier) do %>
-      <button class="content-red-button">
+      <button class="red-button">
         Go to Event Page
       </button>
     <% end %>

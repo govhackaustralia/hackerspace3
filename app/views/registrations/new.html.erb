@@ -14,8 +14,8 @@
         If you add yourself to the waitlist below, you will be emailed should a space
         become available.
       </p>
-      <%= render 'new_form', locals: { status: WAITLIST, label: 'Add to Waitlist' }, class: 'blue' %>
+      <%= render 'new_form', locals: { status: WAITLIST, label: 'Add to Waitlist' }, class: 'blue-button' %>
     <% end %>
-    <%= link_to 'Back to Event', event_path(@event.identifier), class: 'blue' %>
+    <%= link_to 'Back to Event', event_path(@event.identifier), class: 'blue-button' %>
   </section>
 </main>

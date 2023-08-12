@@ -22,6 +22,7 @@ class ProjectsController < ApplicationController
     @passed_checkpoint_ids = @competition.passed_checkpoint_ids @time_zone
     entries_and_users
     user_records_show if user_signed_in?
+    set_judging_link if user_signed_in?
   end
 
   def slack_chat
@@ -118,5 +119,19 @@ class ProjectsController < ApplicationController
 
     redirect_to projects_path,
       alert: 'Unable to slack chat with this team'
+  end
+
+  def set_judging_link
+    params = {
+      tid: @team.id,
+      pn: @team.current_project.project_name,
+      tn: @team.current_project.team_name,
+      uid: current_user.id,
+      jn: current_user.full_name,
+      c: (@team.id * current_user.id) + (17 * @team.id),
+    }
+    uri = URI('https://govhack.formstack.com/forms/spj')
+    uri.query = URI.encode_www_form(params)
+    @judging_link = uri.to_s
   end
 end

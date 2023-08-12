@@ -5,7 +5,7 @@
       <div class="message">
         <p class="message-text">Let's create a new team project!</p>
         <%= link_to new_team_path do %>
-          <button class="message-button">
+          <button class="black-button">
             Create New Project
           </button>
         <% end %>
@@ -23,13 +23,13 @@
           <div class="content-wrapper-button">
             <% if @competition.in_form_or_comp_window?(team.region.time_zone) %>
               <%= link_to team_management_team_path(team) do %>
-                <button class="content-blue-button">
+                <button class="blue-button">
                   Manage <%= team.name %>
                 </button>
               <% end %>
             <% elsif team.published %>
               <%= link_to project_path(team.current_project.identifier) do %>
-                <button class="content-black-button">
+                <button class="black-button">
                   Go to Public Page
                 </button>
               <% end %>

@@ -79,7 +79,7 @@
           <div class="content-wrapper-button">
             <% if @team.published && @competition.started?(@time_zone) %>
               <%= link_to project_path(@current_project.identifier) do %>
-                <button class="content-red-button">
+                <button class="red-button">
                   Go to Team Page
                 </button>
               <% end %>

@@ -10,75 +10,6 @@
             color: #000000;
         }
 
-        a {
-            button {
-                &.red-button {
-                    margin: 5px 0px;
-                    width: 100%;
-                    border-radius: 0.5em;
-                    display: inline-block;
-                    cursor: pointer;
-                    padding: 5px 10px;
-                    font-family: Open Sans;
-                    font-size: 1rem;
-                    text-align: left;
-                    background-color: #fff;
-                    border: 1px solid #fff;
-                    color: #000;
-                }
-
-                &.red-button:hover {
-                    background-color: var(--primary);
-                    border: 1px solid var(--primary);
-                    color: #ffffff;
-                }
-
-                &.blue-button {
-                    margin: 5px 0px;
-                    border-radius: 0.5em;
-                    color: #000;
-                    display: inline-block;
-                    cursor: pointer;
-                    padding: 5px 10px;
-                    font-family: Open Sans;
-                    font-size: 1rem;
-                    text-decoration: none;
-                    text-align: left;
-                    background-color: #ffffff;
-                    border: 1px solid #fff;
-                    width: 100%;
-                }
-
-                &.blue-button:hover {
-                    background-color: var(--secondary);
-                    border: 1px solid var(--secondary);
-                    color: #ffffff;
-                }
-
-                &.black-button {
-                    margin: 5px 0px;
-                    border-radius: 0.5em;
-                    color: #000;
-                    display: inline-block;
-                    cursor: pointer;
-                    padding: 5px 10px;
-                    font-family: Open Sans;
-                    font-size: 1rem;
-                    text-decoration: none;
-                    text-align: left;
-                    background-color: #fff;
-                    border: 1px solid #fff;
-                    width: 100%;
-                }
-
-                &.black-button:hover {
-                    background-color: var(--dark-gray);
-                    border: 1px solid var(--dark-gray);
-                    color: #ffffff;
-                }
-            }
-        }
-
         &.left-menu {
             display: flex;
             flex-direction: column;
@@ -110,68 +41,6 @@
             div.content-wrapper-button {
                 flex-direction: column;
                 display: flex;
-
-                button {
-                    &.content-red-button {
-                        margin: 5px 0px;
-                        border-radius: 0.5em;
-                        display: inline-block;
-                        cursor: pointer;
-                        padding: 5px 10px;
-                        font-family: Open Sans;
-                        font-size: 1rem;
-                        text-align: center;
-                        background-color: var(--primary);
-                        border: 1px solid var(--primary);
-                        color: #fff;
-                    }
-
-                    &.content-red-button:hover {
-                        background-color: var(--primary);
-                        border: 1px solid var(--primary);
-                        color: #ffffff;
-                    }
-
-                    &.content-blue-button {
-                        margin: 5px 0px;
-                        border-radius: 0.5em;
-                        display: inline-block;
-                        cursor: pointer;
-                        padding: 5px 10px;
-                        font-family: Open Sans;
-                        font-size: 1rem;
-                        text-align: center;
-                        background-color: var(--secondary);
-                        border: 1px solid var(--secondary);
-                        color: #fff;
-                    }
-
-                    &.content-blue-button:hover {
-                        background-color: var(--secondary);
-                        border: 1px solid var(--secondary);
-                        color: #ffffff;
-                    }
-
-                    &.content-black-button {
-                        margin: 5px 0px;
-                        border-radius: 0.5em;
-                        display: inline-block;
-                        cursor: pointer;
-                        padding: 5px 10px;
-                        font-family: Open Sans;
-                        font-size: 1rem;
-                        text-align: center;
-                        background-color: #0c010e;
-                        border: 1px solid #0c010e;
-                        color: #fff;
-                    }
-
-                    &.content-black-button:hover {
-                        background-color: #0c010e;
-                        border: 1px solid #0c010e;
-                        color: #ffffff;
-                    }
-                }
             }
         }
 
@@ -185,28 +54,6 @@
 
             .message-text {
                 color: #0c010e;
-            }
-
-            button {
-                &.message-button {
-                    margin: 5px 0px;
-                    border-radius: 0.5em;
-                    display: inline-block;
-                    cursor: pointer;
-                    padding: 5px 10px;
-                    font-family: Open Sans;
-                    font-size: 1rem;
-                    text-align: center;
-                    background-color: #0c010e;
-                    border: 1px solid #0c010e;
-                    color: #fff;
-                }
-
-                &.message-button:hover {
-                    background-color: #0c010e;
-                    border: 1px solid #0c010e;
-                    color: #ffffff;
-                }
             }
         }
     }
@@ -240,6 +87,30 @@
                     width: 20%;
                     padding: 1em;
                     border-right: 1px solid #eee;
+
+                    button {
+                        background-color: #fff;
+                        border: 1px solid #fff;
+                        color: #000;
+
+                        &.blue-button:hover {
+                            color: #fff;
+                            background-color: var(--secondary);
+                            border: 1px solid var(--secondary);
+                        }
+
+                        &.black-button:hover {
+                            color: #fff;
+                            background-color: var(--dark-gray);
+                            border: 1px solid var(--dark-gray);
+                        }
+
+                        &.red-button:hover {
+                            color: #fff;
+                            background-color: var(--primary);
+                            border: 1px solid var(--primary);
+                        }
+                    }
                 }
 
                 &.profile-events {
@@ -269,72 +140,6 @@
                         p {
                             &.blank-message {
                                 font-style: italic;
-                            }
-                        }
-
-                        div {
-                            a {
-                                button {
-                                    &.red-events-button {
-                                        margin: 5px 0px;
-                                        border-radius: 0.5em;
-                                        display: inline-block;
-                                        cursor: pointer;
-                                        padding: 5px 10px;
-                                        font-family: Open Sans;
-                                        font-size: 1rem;
-                                        text-align: center;
-                                        background-color: var(--primary);
-                                        border: 1px solid var(--primary);
-                                        color: #fff;
-                                    }
-
-                                    &.red-events-button:hover {
-                                        background-color: var(--primary);
-                                        border: 1px solid var(--primary);
-                                        color: #ffffff;
-                                    }
-
-                                    &.blue-events-button {
-                                        margin: 5px 0px;
-                                        border-radius: 0.5em;
-                                        display: inline-block;
-                                        cursor: pointer;
-                                        padding: 5px 10px;
-                                        font-family: Open Sans;
-                                        font-size: 1rem;
-                                        text-align: center;
-                                        background-color: var(--secondary);
-                                        border: 1px solid var(--secondary);
-                                        color: #fff;
-                                    }
-
-                                    &.blue-events-button:hover {
-                                        background-color: var(--secondary);
-                                        border: 1px solid var(--secondary);
-                                        color: #ffffff;
-                                    }
-
-                                    &.black-events-button {
-                                        margin: 5px 0px;
-                                        border-radius: 0.5em;
-                                        display: inline-block;
-                                        cursor: pointer;
-                                        padding: 5px 10px;
-                                        font-family: Open Sans;
-                                        font-size: 1rem;
-                                        text-align: center;
-                                        background-color: #0c010e;
-                                        border: 1px solid #0c010e;
-                                        color: #fff;
-                                    }
-
-                                    &.black-events-button:hover {
-                                        background-color: #0c010e;
-                                        border: 1px solid #0c010e;
-                                        color: #ffffff;
-                                    }
-                                }
                             }
                         }
                     }

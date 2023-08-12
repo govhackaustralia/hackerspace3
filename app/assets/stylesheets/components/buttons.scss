@@ -1,47 +1,51 @@
-.red {
-    margin: 5px 0px;
+button,
+a {
+  &.red-button,
+  &.blue-button,
+  &.black-button,
+  &.download-csv {
+    margin: 0.25rem 0px;
     border-radius: 0.5em;
     display: inline-block;
     cursor: pointer;
-    padding: 10px 20px;
+    padding: 0.5rem 1rem;
     font-family: Open Sans;
     font-size: 1rem;
     text-align: left;
+    text-decoration: none;
+  }
+
+  &.red-button,
+  &.download-csv {
     background-color: var(--primary);
     border: 1px solid var(--primary);
     color: #fff;
-    text-decoration: none;
-    width: fit-content;
-}
 
-.blue {
-    margin: 5px 0px;
-    border-radius: 0.5em;
-    display: inline-block;
-    cursor: pointer;
-    padding: 10px 20px;
-    font-family: Open Sans;
-    font-size: 1rem;
-    text-align: left;
-    background-color: #57A4FF;
-    border: 1px solid #57A4FF;
+    &:hover {
+      background-color: var(--primary-shade);
+      border: 1px solid var(--primary-shade);
+    }
+  }
+
+  &.blue-button {
     color: #fff;
-    text-decoration: none;
-    width: fit-content;
-}
+    background-color: var(--secondary);
+    border: 1px solid var(--secondary);
 
-.black {
-    margin: 5px 0px;
-    border-radius: 0.5em;
-    display: inline-block;
-    cursor: pointer;
-    padding: 10px 20px;
-    font-family: Open Sans;
-    font-size: 1rem;
-    text-align: left;
+    &:hover {
+      background-color: var(--secondary-shade);
+      border: 1px solid var(--secondary-shade);
+    }
+  }
+
+  &.black-button {
+    color: #fff;
     background-color: #000;
     border: 1px solid #000;
-    color: #fff;
-    text-decoration: none;
-    width: fit-content;
+
+    &:hover {
+      background-color: var(--dark-gray);
+      border: 1px solid var(--dark-gray);
+    }
+  }
 }
