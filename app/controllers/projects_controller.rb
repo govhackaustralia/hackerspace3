@@ -123,12 +123,12 @@ class ProjectsController < ApplicationController
 
   def set_judging_link
     params = {
-      'tid': @team.id,
-      'pn': @team.current_project.project_name,
-      'tn': @team.current_project.team_name,
-      'uid': current_user.id,
-      'jn': current_user.full_name,
-      'c': @team.id * current_user.id + 17 * @team.id,
+      tid: @team.id,
+      pn: @team.current_project.project_name,
+      tn: @team.current_project.team_name,
+      uid: current_user.id,
+      jn: current_user.full_name,
+      c: (@team.id * current_user.id) + (17 * @team.id),
     }
     uri = URI('https://govhack.formstack.com/forms/spj')
     uri.query = URI.encode_www_form(params)
