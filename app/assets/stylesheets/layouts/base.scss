@@ -15,10 +15,11 @@
   --green: #0ADDA0;
 
   --font-size-base: 14px;
+  --font-size-lg: 16px;
 
   --text-h1: 2.25rem;
   --text-h2: 2rem;
-  --text-h3: 1.75rem;
+  --text-h3: 1.5rem;
 }
 
 * {
@@ -57,7 +58,8 @@ h2 {
 h3 {
   font-size: var(--text-h3);
   line-height: var(--text-h3);
-  font-weight: 300;
+  font-weight: 600;
+  margin: 0.5rem 0;
   color: #000;
 }
 
@@ -67,6 +69,14 @@ h4, h5, h6 {
 
 .acting-on-behalf-of-user {
   text-align: center;
+}
+
+hr.grey-border {
+  border-radius: 5px;
+  height: 2px;
+  background-color: #eee;
+  border: none;
+  margin: 0 1rem;
 }
 
 /* Custom, iPhone Retina */

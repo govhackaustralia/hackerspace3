@@ -1,272 +1,121 @@
-/*==========  Mobile First Method  ==========*/
-
-/* Custom, iPhone Retina */
-@media only screen and (min-device-width: 320px) and (min-width : 320px) {
-  .profile_page {
-      margin: 0rem 1rem;
-      background-color: #ffffff;
-
-      hr.grey-border {
-          border-radius: 5px;
-          height: 2px;
-          background-color: #eee;
-          border: none;
-          margin: 0 1rem;
+.profile_page {
+  .profile-header {
+    .profile-picture {
+      border-radius: 50%;
+      height: 5rem;
+      width: 5rem;
+      object-fit: cover;
+      border: 1px solid #eee;
+    }
+    .profile-content {
+      .bio {
+        font-style: italic;
+        margin-bottom: 0.5rem;
       }
 
-      section {
-          &.profile-header {
-              display: flex;
-              margin: 0 2rem 1rem 0rem;
-              padding: 2rem 1rem 0 1rem;
+      .links {
+        display: flex;
+        gap: 1rem;
+        flex-wrap: wrap;
+        font-size: var(--font-size-lg);
 
-              img.profile-picture {
-                  border-radius: 50%;
-                  height: 5rem;
-                  width: 5rem;
-                  object-fit: cover;
-                  border: 1px solid #eee;
-              }
+        a {
+          color: var(--secondary);
+          text-decoration: none;
 
-              div.profile-content {
-                  margin-left: 1.5rem;
-                  align-self: center;
-                  display: flex;
-                  flex-direction: column;
-
-                  .name {
-                      color: #0c010e;
-                  }
-
-                  .bio {
-                      display: flex;
-
-                      p {
-                          color: #201d21;
-                          margin-right: 15px;
-                          font-style: italic;
-                          font-size: 1rem;
-                      }
-                  }
-
-                  .links {
-                      align-items: center;
-                      flex-direction: row;
-                      display: flex;
-                      flex-flow: wrap;
-
-                      p {
-                          font-size: 1rem;
-                          line-height: 2rem;
-                          color: #201d21;
-
-                          &:nth-of-type(n+2) {
-                              margin: 0 20px;
-                          }
-
-                          a {
-                              color: var(--secondary);
-                              text-decoration: none;
-                          }
-
-                          a:hover {
-                              color: var(--secondary);
-                              text-decoration: underline;
-                          }
-                      }
-
-                      button {
-                          &.black-button {
-                              margin: 5px 0px;
-                              border-radius: 0.5em;
-
-                              a {
-                                  color: #ffffff;
-                                  text-decoration: none;
-                              }
-
-                              display: inline-block;
-                              cursor: pointer;
-                              padding: 5px 10px;
-                              font-family: Open Sans;
-                              font-size: 1rem;
-                              text-decoration: none;
-                              text-align: center;
-                              background-color: #0c010e;
-                              border: 1px solid #0c010e;
-                          }
-
-                          &.black-button:hover {
-                              background-color: var(--dark-gray);
-                              border: 1px solid var(--dark-gray);
-
-                              a {
-                                  color: #ffffff;
-                                  text-decoration: none;
-                              }
-                          }
-                      }
-                  }
-              }
+          &:hover {
+            text-decoration: underline;
           }
-
-          &.profile-skills {
-              display: flex;
-              flex-direction: column;
-              padding: 2rem;
-
-              @media only screen and (max-width: 425px) {
-                  flex-direction: column;
-                  margin-top: 10px;
-              }
-
-              .profile-skills-content {
-                  padding: 1rem 0rem;
-                  align-items: center;
-                  display: flex;
-
-                  .tag {
-                      color: white;
-                      width: fit-content;
-                      border-radius: 10px;
-                      padding: 5px 10px;
-                      align-items: center;
-                      margin: 3px;
-                      background: var(--secondary);
-                  }
-              }
-          }
-
-          &.profile-interests {
-              display: flex;
-              padding: 2rem;
-              flex-direction: column;
-
-              @media only screen and (max-width: 425px) {
-                  flex-direction: column;
-                  margin-top: 10px;
-              }
-
-              .profile-interests-content {
-                  padding: 1rem 0rem;
-                  align-items: center;
-                  display: flex;
-
-                  .tag {
-                      color: white;
-                      width: fit-content;
-                      border-radius: 10px;
-                      padding: 5px 10px;
-                      align-items: center;
-                      margin: 3px;
-                      background: #c61f55;
-                  }
-              }
-          }
-
-          &.profile-badges {
-              display: flex;
-              padding: 2rem;
-              flex-direction: column;
-
-              @media only screen and (max-width: 425px) {
-                  flex-direction: column;
-                  margin-top: 10px;
-              }
-
-              .profile-badges-content {
-                  padding: 1rem 0rem;
-                  align-items: center;
-                  flex-direction: row;
-                  display: flex;
-                  flex-flow: wrap;
-
-                  .badge-wrapper {
-                      padding: 10px;
-                      margin: 5px;
-                      align-items: center;
-                      width: 300px;
-                      border: 1px solid black;
-                      border-radius: 10px;
-                      display: flex;
-                      flex-direction: row-reverse;
-
-                      div.text-content {
-                          width: 70%;
-                          margin-left: 10px;
-
-                          p.title {
-                              text-transform: uppercase;
-                              font-size: medium;
-                          }
-                      }
-
-                      img {
-                          display: block;
-                          width: 100px;
-                      }
-                  }
-              }
-          }
-
-          &.profile-footer {
-              display: flex;
-              padding: 2rem;
-              align-items: center;
-              flex-direction: column;
-
-              button {
-                  &.black-button {
-                      margin: 5px 0px;
-                      border-radius: 0.5em;
-
-                      a {
-                          color: #ffffff;
-                          text-decoration: none;
-                      }
-
-                      display: inline-block;
-                      cursor: pointer;
-                      padding: 5px 10px;
-                      font-family: Open Sans;
-                      font-size: 1rem;
-                      text-decoration: none;
-                      text-align: center;
-                      background-color: #0c010e;
-                      border: 1px solid #0c010e;
-                  }
-
-                  &.black-button:hover {
-                      background-color: var(--dark-gray);
-                      border: 1px solid var(--dark-gray);
-
-                      a {
-                          color: #ffffff;
-                          text-decoration: none;
-                      }
-                  }
-              }
-          }
+        }
       }
+    }
   }
-}
 
-/* Extra Small Devices, Phones */
-@media only screen and (min-device-width: 480px) and (min-width : 480px) {
+  .profile-badges {
+    .profile-badges-content {
+      display: flex;
+      flex-wrap: wrap;
 
-}
+      .badge-wrapper {
+        padding: 1rem;
+        margin: 0.5rem;
+        align-items: center;
+        width: 18rem;
+        border: 1px solid black;
+        border-radius: 1rem;
+        display: flex;
+        flex-direction: row-reverse;
 
-/* Small Devices, Tablets */
-@media only screen and (min-width : 768px) {
+        div.text-content {
+          width: 70%;
+          margin-left: 1rem;
 
-}
+          p.title {
+            text-transform: uppercase;
+            font-size: medium;
+          }
+        }
 
-/* Medium Devices, Desktops */
-@media only screen and (min-width : 992px) {
+        img {
+          display: block;
+          width: 6rem;
+        }
+      }
+    }
+  }
 
-}
+  section {
+    margin: 2rem 0;
+  }
 
-/* Large Devices, Wide Screens */
-@media only screen and (min-width : 1200px) {
+  .profile-skills,
+  .profile-interests {
+    .profile-interests-content,
+    .profile-skills-content {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
 
+      .tag {
+        color: white;
+        width: fit-content;
+        border-radius: 0.5rem;
+        padding: 0.25rem 0.5rem;
+      }
+    }
+  }
+
+  .profile-skills .tag {
+    background-color: var(--secondary);
+  }
+
+  .profile-interests .tag {
+    background-color: var(--primary);
+  }
+
+  .profile-footer {
+    text-align: center;
+  }
+
+  .black-button > a {
+    padding: 0.5rem 1rem;
+    background-color: #000;
+    color: white;
+    border-radius: 0.5rem;
+    border: none;
+    text-decoration: none;
+    font-size: var(--font-size-lg);
+
+    &:hover {
+      background-color: var(--dark-gray);
+    }
+  }
+
+  .grey-border {
+    border-radius: 1rem;
+    height: 2px;
+    background-color: #eee;
+    margin: 2rem 0;
+    border: none;
+  }
 }
