@@ -38,7 +38,7 @@ module ApplicationHelper
         description: 'Hackerspace is GovHack\'s official platform for the competition weekend.',
         type: 'website',
         url: request.original_url,
-        image: image_url('/assets/bannerlogo.png'),
+        image: image_url('/assets/bannerlogo_padding.png'),
       },
     }
   end
