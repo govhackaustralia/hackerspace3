@@ -35,11 +35,11 @@ module ApplicationHelper
       og: {
         site_name: 'https://hackerspace.govhack.org/',
         title: 'GovHack Hackerspace',
-        description: 'Hackerspace is GovHack\'s official platform for the competition weekend.', 
+        description: 'Hackerspace is GovHack\'s official platform for the competition weekend.',
         type: 'website',
         url: request.original_url,
-        image: image_url('/assets/bannerlogo.png')
-      }
+        image: image_url('/assets/bannerlogo.png'),
+      },
     }
   end
 end
