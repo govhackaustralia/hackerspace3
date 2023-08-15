@@ -1,4 +1,8 @@
 <% content_for :title, "#{@event.name} #{ "- #{@region.name}" unless @event.event_type == CONFERENCE }" %>
+<% if @event.description %>
+  <% set_meta_tags description: @event.description %>
+  <% set_meta_tags og: { description: @event.description } %>
+<% end %>
 <main class="events_page single-event">
   <section class="events_row">
     <div class="side-menu">

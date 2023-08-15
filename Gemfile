@@ -24,6 +24,8 @@ gem 'gravtastic'
 gem 'invisible_captcha'
 gem 'jbuilder', '~> 2.5'
 gem 'jquery-rails'
+gem 'meta-tags'
+gem 'mini_portile2'
 gem 'mini_racer', platforms: :ruby
 gem 'omniauth-google-oauth2'
 gem 'omniauth-rails_csrf_protection'

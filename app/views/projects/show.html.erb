@@ -1,4 +1,8 @@
 <% content_for :title, @current_project.project_name %>
+<% if @current_project.description %>
+  <% set_meta_tags description: @current_project.description %>
+  <% set_meta_tags og: { description: @current_project.description } %>
+<% end %>
 <main class="team_page">
   <section>
     <h1>
