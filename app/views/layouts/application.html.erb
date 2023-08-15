@@ -11,7 +11,6 @@
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
-
         gtag('config', 'G-CLN1YGF8DW');
       </script>
     <% end %>
@@ -22,6 +21,7 @@
       <%= yield(:title).presence || 'GovHack' %>
       | Hackerspace
     </title>
+    <%= display_meta_tags(default_meta_tags) %>
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
     <%= render 'application/favicon' %>

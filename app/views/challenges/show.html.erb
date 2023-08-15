@@ -1,4 +1,8 @@
 <% content_for :title, @challenge.name %>
+<% if @challenge.short_desc %>
+  <% set_meta_tags description: @challenge.short_desc %>
+  <% set_meta_tags og: { description: @challenge.short_desc } %>
+<% end %>
 <main class="challenge_page">
   <section class="challenge_head">
     <article>
