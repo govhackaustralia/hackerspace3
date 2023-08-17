@@ -4,6 +4,7 @@
 /* Custom, iPhone Retina */
 @media only screen and (min-device-width: 320px) and (min-width : 320px) {
   .challenge-dataset {
+    max-width: 800px;
     padding: 0.5em 1em;
     box-sizing: border-box;
     border: 1px solid darkgray;

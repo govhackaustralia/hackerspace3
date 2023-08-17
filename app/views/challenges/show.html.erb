@@ -67,24 +67,27 @@
         <%= link_to 'Challenge Entries', entries_challenge_path(@challenge.identifier), class: 'download-csv' %>
       </p>
     </article>
-    <aside>
+    <aside id="challenge_links">
       <% unless @challenge.video_url.blank? %>
         <div class="videoWrapper">
           <iframe allow="autoplay; encrypted-media" frameborder="0" height="315" src="<%= @challenge.video_url %>" width="560"></iframe>
         </div>
       <% end %>
       <% if @challenge.pdf.attached? && @challenge.pdf_preview.attached? %>
-        <%= link_to url_for(@challenge.pdf), target: '_blank' do %>
-          <%= image_tag url_for(@challenge.pdf_preview), alt: "#{@challenge.name} pdf_preview", title: 'Govhack Hackerspace', class: 'pdf_preview' %>
-          <br/>
-        <% end %>
+        <div id="pdf_preview_wrapper">
+          <%= link_to url_for(@challenge.pdf), target: '_blank' do %>
+            <%= image_tag url_for(@challenge.pdf_preview), alt: "#{@challenge.name} pdf_preview", title: 'Govhack Hackerspace', class: 'pdf_preview' %>
+            <br/>
+          <% end %>
+        </div>
+      <% end %>
+
+      <% if @challenge.image.attached? %>
+        <img alt="<%= @challenge.name %> image" class="challenge_image" src="<%= url_for(@challenge.image) %>"/>
+        <br/>
       <% end %>
     </aside>
   </section>
-  <% if @challenge.image.attached? %>
-    <img alt="<%= @challenge.name %> image" class="challenge_image" src="<%= url_for(@challenge.image) %>"/>
-    <br/>
-  <% end %>
   <section>
     <% if user_signed_in? %>
       <% unless @user_eligible_teams.empty? %>

@@ -91,6 +91,12 @@ hr.grey-border {
 /* Small Devices, Tablets */
 @media only screen and (min-width: 768px) {
   main {
+    padding: 2em;
+  }
+}
+
+@media only screen and (min-width : 1268px) {
+  main {
     padding: 2em 5em;
   }
 }
