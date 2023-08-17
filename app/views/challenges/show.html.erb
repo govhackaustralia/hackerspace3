@@ -4,7 +4,7 @@
   <% set_meta_tags og: { description: @challenge.short_desc } %>
 <% end %>
 <main class="challenge_page">
-  <section class="challenge_head">
+  <section class="challenge_body">
     <article>
       <% if @challenge.banner_image.attached? %>
         <img alt="<%= @challenge.name %> banner image" class="challenge_banner" src="<%= url_for(@challenge.banner_image) %>"/>
@@ -15,23 +15,19 @@
       <h2>
         Jurisdiction: <%= @region.name %>
       </h2>
-    </article>
-    <aside class="sponsors">
-      <% @sponsors.each do |sponsor| %>
-        <figure>
-          <%= link_to visits_path(visit: {visitable_type: 'Sponsor', visitable_id: sponsor.id}), target: '_blank' do %>
-            <% if sponsor.logo.attached? %>
-              <%= image_tag url_for sponsor.logo %>
-            <% else %>
-              <%= image_tag 'default_profile_pic.png' %>
+      <div class="sponsors mobile-only">
+        <% @sponsors.each do |sponsor| %>
+          <figure>
+            <%= link_to visits_path(visit: {visitable_type: 'Sponsor', visitable_id: sponsor.id}), target: '_blank' do %>
+              <% if sponsor.logo.attached? %>
+                <%= image_tag url_for sponsor.logo %>
+              <% else %>
+                <%= image_tag 'default_profile_pic.png' %>
+              <% end %>
             <% end %>
-          <% end %>
-        </figure>
-      <% end %>
-    </aside>
-  </section>
-  <section class="challenge_body">
-    <article>
+          </figure>
+        <% end %>
+      </div>
       <% unless @challenge.short_desc.blank? %>
         <h4>
           <%= @challenge.short_desc %>
@@ -68,6 +64,19 @@
       </p>
     </article>
     <aside id="challenge_links">
+      <div class="sponsors">
+        <% @sponsors.each do |sponsor| %>
+          <figure>
+            <%= link_to visits_path(visit: {visitable_type: 'Sponsor', visitable_id: sponsor.id}), target: '_blank' do %>
+              <% if sponsor.logo.attached? %>
+                <%= image_tag url_for sponsor.logo %>
+              <% else %>
+                <%= image_tag 'default_profile_pic.png' %>
+              <% end %>
+            <% end %>
+          </figure>
+        <% end %>
+      </div>
       <% unless @challenge.video_url.blank? %>
         <div class="videoWrapper">
           <iframe allow="autoplay; encrypted-media" frameborder="0" height="315" src="<%= @challenge.video_url %>" width="560"></iframe>

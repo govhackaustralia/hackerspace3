@@ -1,18 +1,20 @@
-<section class="challenge-panel">
-  <article>
-    <h5><%= team.current_project.project_name %></h5>
-    <% unless team.current_project.description.blank? %>
-      <p><%= truncate team.current_project.description, length: 300 %></p>
-    <% end %>
-    <p>
-      <%= link_to 'Go to Project', project_path(team.current_project.identifier) %>
-      |
-      <%= team.current_project.team_name %>
-    </p>
-  </article>
-  <aside>
-    <figure>
-      <%= link_to (image_tag(team_thumbnail_asset_path(team))), project_path(team.current_project.identifier) %>
-    </figure>
-  </aside>
-</section>
+<% if team.current_project %>
+  <section class="challenge-panel">
+    <article>
+      <h5><%= team.current_project.project_name %></h5>
+      <% unless team.current_project.description.blank? %>
+        <p><%= truncate team.current_project.description, length: 300 %></p>
+      <% end %>
+      <p>
+        <%= link_to 'Go to Project', project_path(team.current_project.identifier) %>
+        |
+        <%= team.current_project.team_name %>
+      </p>
+    </article>
+    <aside>
+      <figure>
+        <%= link_to (image_tag(team_thumbnail_asset_path(team))), project_path(team.current_project.identifier) %>
+      </figure>
+    </aside>
+  </section>
+<% end %>

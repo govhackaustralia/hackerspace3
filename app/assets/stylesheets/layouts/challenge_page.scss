@@ -3,19 +3,18 @@
 /* Custom, iPhone Retina */
 @media only screen and (min-device-width: 320px) and (min-width : 320px) {
   .challenge_page {
-    .challenge_head, .challenge_body {
+    .challenge_body {
       article {
         width: 70%;
       }
 
       aside {
         width: 30%;
-        padding: 1rem;
       }
     }
 
     section {
-      &.challenge_body, &.challenge_head {
+      &.challenge_body {
         display: flex;
         gap: 1rem;
       }
@@ -118,9 +117,10 @@
       transition: all 0.2s ease;
       display: block;
       text-align: center;
-
+      
       &:hover {
-        filter: brightness(0.9);
+        box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+        // filter: brightness(0.9);
       }
 
       .pdf_preview {
@@ -131,7 +131,7 @@
 
     .challenge_image {
       max-width: 100%;
-      max-height: 20%;
+      max-height: 200px;
     }
 
     .challenge_banner {
@@ -144,24 +144,24 @@
       flex-wrap: wrap;
       align-content: center;
       align-items: flex-start;
+      gap: 1rem;
 
       figure {
         display: flex;
         flex-direction: column;
         align-content: center;
         align-items: center;
-        padding: 1em 2em;
+        padding: 2em;
         border: 1px solid #dde4e6;
-        transition: all 0.4s ease;
+        transition: all 0.2s ease;
         cursor: pointer;
         width: 100%;
         box-sizing: border-box;
-        height: calc(75px + 2em);
         justify-content: center;
         margin: auto;
 
         &:hover {
-          background-color: #fff;
+          box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
         }
 
         img {
@@ -227,6 +227,10 @@
 
     .sponsors {
       justify-content: flex-end;
+
+      figure {
+        padding: 6em 2em;
+      }
     }
   }
 }
@@ -242,15 +246,31 @@
       flex-direction: column;
     }
 
-    .challenge_head {
+    .challenge_body {
       article, aside {
         width: 100%;
       }
     }
 
-    .challenge_body {
-      article, aside {
-        width: 100%;
+    .sponsors {
+      &:not(.mobile-only) {
+        display: none !important;
+      }
+      &.mobile-only {
+        display: block;
+      }
+    }
+  }
+}
+
+@media only screen and (min-width: 800px) {
+  .challenge_page {
+    .sponsors {
+      &:not(.mobile-only) {
+        display: block;
+      }
+      &.mobile-only {
+        display: none !important;
       }
     }
   }
