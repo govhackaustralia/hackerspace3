@@ -6,6 +6,10 @@
   </section>
   <% if @published_users.any? || @unpublished_users.any? %>
     <section class="markdown">
+      <h4 class="sectionHeading">Team Name</h4>
+      <hr />
+      <p><%= @team.name %></p>
+      <hr />
       <h4 class="sectionHeading">Team Members</h4>
       <hr/>
       <% if @published_users.any? %>
