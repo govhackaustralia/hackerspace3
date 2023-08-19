@@ -228,7 +228,6 @@ class Competition < ApplicationRecord
     # one_hour_before_comp_close = end_time - 1.hour
     # is_after_one_hour_before_comp_close = Region.region_time(time_zone) > one_hour_before_comp_close.to_formatted_s(:number)
     # is_after_one_hour_before_comp_close && is_before_midday_next_day
-    
   end
 
   private
