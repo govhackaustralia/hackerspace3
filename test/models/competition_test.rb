@@ -230,22 +230,22 @@ class CompetitionTest < ActiveSupport::TestCase
 
   test 'before sunday judging?' do
     # end time in the future
-    @competition.update! end_time: Time.new(Time.now.year, Time.now.month, Time.now.day, 15, 59, 0)
+    @competition.update! end_time: Time.new(Time.now.year, Time.now.month, Time.now.day, 16, 1, 0)
 
-    assert_not @competition.in_sunday_judging?('Sydney')
+    assert_not @competition.in_sunday_judging?('Brisbane')
   end
 
   test 'during sunday judging?' do
     # end time in the past and after 4pm
-    @competition.update! end_time: Time.new(Time.now.year, Time.now.month, Time.now.day, 16, 1, 0)
+    @competition.update! end_time: Time.new(Time.now.year, Time.now.month, Time.now.day, 15, 59, 0)
 
-    assert @competition.in_sunday_judging?('Sydney')
+    assert @competition.in_sunday_judging?('Brisbane')
   end
 
   test 'after sunday judging?' do
     # end time in the past and after midday
     @competition.update! end_time: Time.now - 1.day
 
-    assert_not @competition.in_sunday_judging?('Sydney')
+    assert_not @competition.in_sunday_judging?('Brisbane')
   end
 end
