@@ -157,7 +157,7 @@ class Team < ApplicationRecord
   # otherwise.
   # ENHANCEMENT: Move to controller or helper.
   def all_checkpoints_passed?
-    team_time_zone = time_zone
+    team_time_zone = region.time_zone || FIRST_COMPETITION_TIME_ZONE
     competition.checkpoints.each do |checkpoint|
       return false unless checkpoint.passed?(team_time_zone)
     end
@@ -169,7 +169,7 @@ class Team < ApplicationRecord
   # ENHANCEMENT: Move to controller or helper.
   def available_challenges(challenge_type)
     if challenge_type == REGIONAL
-      available_regional_challenges
+      region.eligible_challenges
     else
       available_national_challenges
     end
