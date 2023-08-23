@@ -223,11 +223,6 @@ class Competition < ApplicationRecord
     is_before_midday_next_day = Region.region_time(time_zone) < midday_after_end_date.to_formatted_s(:number)
 
     is_after_four_pm && is_before_midday_next_day
-
-    # in case times aren't working, just check if competition is over minus 1 hour
-    # hour_before_comp_close = end_time - 1.hour
-    # is_after_hour_before_comp_close = Region.region_time(time_zone) > hour_before_comp_close.to_formatted_s(:number)
-    # is_after_hour_before_comp_close && is_before_midday_next_day
   end
 
   private

@@ -231,7 +231,7 @@ class CompetitionTest < ActiveSupport::TestCase
   test 'before sunday judging?' do
     time_now = Time.now.in_time_zone('Brisbane')
     # end time in the future
-    @competition.update! end_time: Time.new(time_now.year, time_now.month, time_now.day + 1)
+    @competition.update! end_time: time_now + 1.day
 
     assert_not @competition.in_sunday_judging?('Brisbane')
   end
