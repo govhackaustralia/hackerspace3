@@ -1,6 +1,6 @@
 # GovHack - Hackerspace
 
-A system for competition participants, sponsors, and volunteers.
+A system for competition participants, sponsors, and volunteers. For details on how to reset Hackerspace for the new year, scroll down.
 
 ## Framework
 
@@ -104,6 +104,18 @@ Set if running in staging or production environments.
 
 - MAILCHIMP_API_KEY
 - MAILCHIMP_LIST_ID
+
+## Restting Hackerspace for the new year
+
+### Knowledge/Exp required: AWS, SSH, Unix, Nginx, Postgres experience.
+
+1. Added new DNS entry for 2024 (AWS Console -> Route 53)
+2. Updated /etc/nginx/sites-enabled/hackerspace-production.conf server_name to include 2024
+3. Restarted nginx (needed to create my own sudo account with a password)
+4. Insert a new competition row into competitions table via postgres
+5. Insert an admin role for self and the new competition year via postgres
+6. In hackerspace switch over current year
+7. In hackerspace assign the competition management team
 
 ## Contributing
 
