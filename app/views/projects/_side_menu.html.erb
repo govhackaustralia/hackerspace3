@@ -1,0 +1,35 @@
+<section class='side_menu'>
+  <div>
+    <%= image_tag 'cta' %>
+    <%= link_to 'Back to Projects', projects_path %>
+  </div>
+  <hr/>
+  <div>
+    <p>Team Name:</p>
+    <p>Mock Team Name</p>
+  </div>
+  <hr/>
+  <div>
+    <p>Team Members:</p>
+    <ul>
+      <% @team.members.map do |member| %>
+        <li>
+          <% if member.preferred_img.present? %>
+            <%= image_tag 'cta' %>
+          <% else %>  
+            <%= image_tag 'default_profile_pic' %>
+          <% end %>  
+          <p>Homer Simpson</p>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+  <hr/>
+  <div>
+    <%= button_to 'Evidence of Work', project_path %>
+    <%= button_to 'Vote for this Project', project_path %>
+    <% @current_project.tags.map do |tag| %>
+      <%= link_to '#faketag', project_path %>
+    <% end %>
+  </div>
+</section>

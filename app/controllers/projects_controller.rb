@@ -19,6 +19,7 @@ class ProjectsController < ApplicationController
 
   def show
     @current_project = @team.current_project
+    @tags = ['nativeapp', 'COVID19', 'reactnative', 'datanalytics']
     @passed_checkpoint_ids = @competition.passed_checkpoint_ids @time_zone
     entries_and_users
     user_records_show if user_signed_in?
