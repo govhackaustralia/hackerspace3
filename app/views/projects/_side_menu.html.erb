@@ -1,12 +1,14 @@
 <section class='side_menu'>
   <div>
-    <%= image_tag 'cta' %>
-    <%= link_to 'Back to Projects', projects_path %>
+    <div>
+      <%= image_tag 'cta' %>
+      <%= link_to 'Back to Projects', projects_path %>
+    </div>
   </div>
   <hr/>
   <div>
     <p>Team Name:</p>
-    <p>Mock Team Name</p>
+    <p class="team_name">Mock Team Name</p>
   </div>
   <hr/>
   <div>
@@ -28,6 +30,8 @@
   <div>
     <%= button_to 'Evidence of Work', project_path %>
     <%= button_to 'Vote for this Project', project_path %>
+  </div>
+  <div class="tags">  
     <% @current_project.tags.map do |tag| %>
       <%= link_to '#faketag', project_path %>
     <% end %>

@@ -1,8 +1,10 @@
 /*==========  Mobile First Method  ==========*/
 
 /* Custom, iPhone Retina */
-@media only screen and (min-device-width: 320px) and (min-width : 320px) {
+@media only screen and (min-device-width: 320px) and (min-width: 320px) {
   .team_page {
+    display: flex;
+
     > section > section {
       padding: 0.25em 1.5em;
     }
@@ -94,7 +96,6 @@
     }
 
     article {
-
       &.menu-group,
       &.menu-group-footer {
         display: flex;
@@ -138,12 +139,11 @@
 }
 
 /* Extra Small Devices, Phones */
-@media only screen and (min-device-width: 480px) and (min-width : 480px) {
-
+@media only screen and (min-device-width: 480px) and (min-width: 480px) {
 }
 
 /* Small Devices, Tablets */
-@media only screen and (min-width : 768px) {
+@media only screen and (min-width: 768px) {
   .team_page {
     h2 {
       text-align: left;
@@ -156,18 +156,16 @@
 }
 
 /* Medium Devices, Desktops */
-@media only screen and (min-width : 992px) {
-
+@media only screen and (min-width: 992px) {
 }
 
 /* Large Devices, Wide Screens */
-@media only screen and (min-width : 1200px) {
-
+@media only screen and (min-width: 1200px) {
 }
 
 @media only screen and (max-width: 1000px) {
   .team_page {
-    >section {
+    > section {
       flex-direction: column;
     }
 
