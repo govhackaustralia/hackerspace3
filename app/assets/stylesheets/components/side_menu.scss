@@ -14,7 +14,7 @@
       flex-direction: row;
       flex-wrap: wrap;
       justify-content: flex-start;
-      width: 200px;
+      width: 240px;
 
       a {
         width: max-content;
@@ -87,6 +87,10 @@
       border-radius: 4px;
       font-size: 20px;
       box-shadow: 0 4px 4px rgba(0, 0, 0, 0.4);
+
+      &:hover {
+        cursor: pointer;
+      }
     }
   }
 
