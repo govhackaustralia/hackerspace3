@@ -1,0 +1,38 @@
+<section class='side_menu'>
+  <div>
+    <div>
+      <%= image_tag 'left-arrow' %>
+      <%= link_to 'Back to Projects', projects_path %>
+    </div>
+  </div>
+  <hr/>
+  <div>
+    <p>Team Name:</p>
+    <p class="team_name"><%= @team.name %></p>
+  </div>
+  <hr/>
+  <div>
+    <p>Team Members:</p>
+    <ul>
+      <% @team.members.map do |member| %>
+        <li>
+          <% if member.preferred_img.present? %>
+            <%= image_tag member.preferred_img %>
+          <% else %>  
+            <%= image_tag 'default_profile_pic' %>
+          <% end %>  
+          <p><%= member.full_name %></p>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+  <hr/>
+  <div>
+    <%= button_to 'Evidence of Work', @current_project.source_code_url %>
+  </div>
+  <div class="tags">  
+    <% @current_project.tags.map do |tag| %>
+      <%= link_to "##{tag}", "/projects?search=%23#{tag}" %>
+    <% end %>
+  </div>
+</section>

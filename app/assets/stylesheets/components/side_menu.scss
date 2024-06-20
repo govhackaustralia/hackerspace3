@@ -1,0 +1,105 @@
+.side_menu {
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+  margin-right: 40px;
+
+  > div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-bottom: 16px;
+
+    &.tags {
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: flex-start;
+      width: 240px;
+
+      a {
+        width: max-content;
+        margin-right: 16px;
+        margin-bottom: 4px;
+        padding: 0 4px;
+        border: 1px solid #5c5e60;
+        border-radius: 4px;
+        color: #5c5e60;
+        text-decoration: none;
+      }
+    }
+
+    div {
+      display: flex;
+      align-items: center;
+
+      img {
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+      }
+
+      a {
+        margin-left: 12px;
+        color: black;
+        font-size: 20px;
+        font-weight: 600;
+        text-decoration: none;
+        padding-bottom: 8px;
+      }
+    }
+
+    p {
+      padding-left: 8px;
+
+      &.team_name {
+        color: #4c9ad2;
+        font-size: 20px;
+      }
+    }
+
+    ul {
+      margin: 36px 0 20px;
+
+      li {
+        display: flex;
+        align-items: center;
+        margin: 12px 0;
+
+        img {
+          width: 48px;
+          height: 48px;
+          border-radius: 50%;
+        }
+
+        p {
+          margin-left: 12px;
+          text-decoration: underline;
+        }
+      }
+    }
+
+    button {
+      width: 100%;
+      margin: 16px 0 48px;
+      padding: 20px;
+      background: none;
+      border-width: 1px;
+      border-radius: 4px;
+      font-size: 20px;
+      box-shadow: 0 4px 4px rgba(0, 0, 0, 0.4);
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
+  }
+
+  hr {
+    height: 2px;
+    margin-right: 40px;
+    margin-bottom: 20px;
+    color: #f4f4f4;
+    background-color: #f4f4f4;
+    border: none;
+  }
+}
