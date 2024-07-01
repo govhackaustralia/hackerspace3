@@ -1,0 +1,28 @@
+<h1><%= yield :title %></h1>
+
+<p>Browse challenges to solve for GovHack</p>
+
+<hr/>
+
+<h3>Filter By Theme</h3>
+
+<ul>
+  <li><%= link_to "Energy and Infrastructure", challenges_path %></li>
+  <li><%= link_to "Agriculture and the Environment", challenges_path %></li>
+  <li><%= link_to "Our Digital Future", challenges_path %></li>
+  <li><%= link_to "Health and Wellbeing", challenges_path %></li>
+</ul>
+
+<h3>Filter By State Elegibility</h3>
+
+<div>
+  <%= link_to "NSW", challenges_path %>
+  <%= link_to "QLD", challenges_path %>
+  <%= link_to "VIC", challenges_path %>
+  <%= link_to "SA", challenges_path %>
+  <%= link_to "WA", challenges_path %>
+  <%= link_to "TAS", challenges_path %>
+  <%= link_to "Australia", challenges_path %>
+  <%= link_to "New Zealand", challenges_path %>
+  <%= link_to "International", challenges_path %>
+</div>

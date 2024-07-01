@@ -1,8 +1,6 @@
 <% content_for :title,"#{@region.name} Challenges" %>
 <main class="challenge_index">
-  <h1>
-    <%= yield :title %>
-  </h1>
+  <%= render partial: 'side_menu' %>
   <% @challenges.each do |challenge| %>
     <%= render 'challenges/challenge_panel',
       challenge: challenge,
