@@ -6,6 +6,8 @@ class RegionsController < ApplicationController
   def show
     @challenges = @region.approved_challenges
       .preload(:sponsors_with_logos, :published_entries)
+    @themes = ['Energy and Infrastructure', 'Agriculture and the Environment', 'Our Digital Future', 'Health and Wellbeing']
+    @eligible_locations = ['NSW', 'QLD', 'VIC', 'SA', 'WA', 'TAS', 'Australia', 'New Zealand', 'International']
     national_challenges
     nation_wides
     international_challenges
