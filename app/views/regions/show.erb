@@ -1,58 +1,62 @@
 <% content_for :title,"#{@region.name} Challenges" %>
 <main class="challenge_index">
+  <section class="challenges_list_container">
   <%= render partial: 'side_menu' %>
-  <% @challenges.each do |challenge| %>
-    <%= render 'challenges/challenge_panel',
-      challenge: challenge,
-      entry_count: challenge.published_entries.length
-    %>
-  <% end %>
-  <% if @nation_wides.any? %>
-    <h3>Nation Wide (<%= @national.name %>) Challenges</h3>
-    <% @nation_wides.each do |challenge| %>
-      <%= render 'challenges/challenge_panel',
-        challenge: challenge,
-        entry_count: challenge.published_entries.length
-      %>
-    <% end %>
-  <% end %>
-  <% if @national.present? %>
-    <% unless @region.national? %>
-      <h3><%= @national.name %> (National) Challenges</h3>
-      <% @national_challenges.each do |challenge| %>
+    <div>
+      <% @challenges.each do |challenge| %>
         <%= render 'challenges/challenge_panel',
           challenge: challenge,
           entry_count: challenge.published_entries.length
         %>
       <% end %>
-    <% end %>
-  <% end %>
-  <% unless @region.international? %>
-    <h3>International Challenges</h3>
-    <% @international_challenges.each do |challenge| %>
-      <%= render 'challenges/challenge_panel',
-        challenge: challenge,
-        entry_count: challenge.published_entries.length
-      %>
-    <% end %>
-  <% end %>
-  <% if @national_regions.any? %>
-    <h3>National Regions</h3>
-    <section class="tiles">
-      <% @national_regions.each do |region| %>
-        <% next unless @checker.show?(region) %>
-        <%= link_to (render 'challenges/region_tile', region: region ), region_path(region) %>
+      <% if @nation_wides.any? %>
+        <h3>Nation Wide (<%= @national.name %>) Challenges</h3>
+        <% @nation_wides.each do |challenge| %>
+          <%= render 'challenges/challenge_panel',
+            challenge: challenge,
+            entry_count: challenge.published_entries.length
+          %>
+        <% end %>
       <% end %>
-    </section>
-  <% end %>
-  <% if @regions.any? %>
-    <h3>Regions</h3>
-    <section class="tiles">
-      <% @regions.each do |region| %>
-        <% next unless @checker.show?(region) %>
-        <%= link_to (render 'challenges/region_tile', region: region ), region_path(region) %>
+      <% if @national.present? %>
+        <% unless @region.national? %>
+          <h3><%= @national.name %> (National) Challenges</h3>
+          <% @national_challenges.each do |challenge| %>
+            <%= render 'challenges/challenge_panel',
+              challenge: challenge,
+              entry_count: challenge.published_entries.length
+            %>
+          <% end %>
+        <% end %>
       <% end %>
-    </section>
-  <% end %>
+      <% unless @region.international? %>
+        <h3>International Challenges</h3>
+        <% @international_challenges.each do |challenge| %>
+          <%= render 'challenges/challenge_panel',
+            challenge: challenge,
+            entry_count: challenge.published_entries.length
+          %>
+        <% end %>
+      <% end %>
+      <% if @national_regions.any? %>
+        <h3>National Regions</h3>
+        <section class="tiles">
+          <% @national_regions.each do |region| %>
+            <% next unless @checker.show?(region) %>
+            <%= link_to (render 'challenges/region_tile', region: region ), region_path(region) %>
+          <% end %>
+        </section>
+      <% end %>
+      <% if @regions.any? %>
+        <h3>Regions</h3>
+        <section class="tiles">
+          <% @regions.each do |region| %>
+            <% next unless @checker.show?(region) %>
+            <%= link_to (render 'challenges/region_tile', region: region ), region_path(region) %>
+          <% end %>
+        </section>
+      <% end %>
+    </div>
+  </section>
 </main>
 <%= link_to 'Back to Challenges Catalogue', challenges_path %>

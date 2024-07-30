@@ -1,21 +1,26 @@
-<h1><%= yield :title %></h1>
+<section class="side_menu">
+  <h1><%= yield :title %></h1>
+ 
+  <p>Browse challenges to solve for GovHack</p>
 
-<p>Browse challenges to solve for GovHack</p>
+  <hr/>
 
-<hr/>
+  <h3>Filter By Theme</h3>
 
-<h3>Filter By Theme</h3>
+  <ul>
+    <li><%= link_to "Energy and Infrastructure", challenges_path %></li> 
+    <li><%= link_to "Agriculture and Environment", challenges_path, class: "selected" %></li> 
+    <li><%= link_to "Our Digital Future", challenges_path %></li> 
+    <li><%= link_to "Health and Welling", challenges_path %></li> 
+  </ul>
 
-<ul>
-  <% @themes.map do |theme| %>
-    <li><%= link_to theme, challenges_path %></li>
-  <% end %>  
-</ul>
+  <hr/>
 
-<h3>Filter By State Elegibility</h3>
+  <h3>Filter By State Elegibility</h3>
 
-<div>
-  <% @eligible_locations.map do |location| %>
-    <%= link_to location, challenges_path %>
-  <% end %>  
-</div>
+  <div class="tags">
+    <% @eligible_locations.map do |location| %>
+      <%= link_to location, challenges_path %>
+    <% end %>  
+  </div>
+</section>  
