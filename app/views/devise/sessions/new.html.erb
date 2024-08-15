@@ -13,11 +13,18 @@
         <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
           <div class="form-group">
             <%= f.label :email %>
-            <%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control' %>
+            <div class="email-wrapper">
+              <%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control' %>
+            </div>
           </div>
           <div class="form-group">
             <%= f.label :password %>
-            <%= f.password_field :password, autocomplete: "off", class: 'form-control' %>
+            <div class="password-wrapper">
+              <%= f.password_field :password, autocomplete: "off", class: 'form-control', id: 'password-field' %>
+              <span class="toggle-password" onclick="togglePasswordVisibility()">
+                <i class="fa fa-eye" id="toggle-password-icon"></i>
+              </span>
+            </div>
           </div>
           <% if devise_mapping.rememberable? %>
             <div class="custom-control custom-checkbox">
