@@ -6,7 +6,17 @@ class RegionsController < ApplicationController
   def show
     @challenges = @region.approved_challenges
       .preload(:sponsors_with_logos, :published_entries)
-    @eligible_locations = ['NSW', 'QLD', 'VIC', 'SA', 'WA', 'TAS', 'Australia', 'New Zealand', 'International']
+    @eligible_locations = [
+      ['NSW', 'new_south_wales_2024'], 
+      ['QLD', 'queensland_2024'],
+      ['VIC', 'victoria_2024'],
+      ['SA', 'south_australia_2024'],
+      ['WA', 'western_australia_2024'],
+      ['TAS', 'tasmania_2024'],
+      ['Australia', 'australia2024'],
+      ['New Zealand', 'new_zealand2024'],
+      ['International', 'international_2024'],
+    ]
     national_challenges
     nation_wides
     international_challenges
