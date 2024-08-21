@@ -9,7 +9,7 @@
 
   <div class="tags">
     <% @eligible_locations.map do |location| %>
-      <%= link_to location[0], region_path(location[1]) %>
+      <%= link_to location[:label], region_path(location[:path]) %>
     <% end %>  
   </div>
-</section>  
+</section>
