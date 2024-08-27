@@ -2,8 +2,10 @@
 
 /* Custom, iPhone Retina */
 @media only screen and (min-device-width: 320px) and (min-width: 320px) {
-  .team_page {
+  .team_page:has(> .side_menu){
     display: flex;
+  }
+  .team_page {
 
     > section > section {
       padding: 0.25em 1.5em;
