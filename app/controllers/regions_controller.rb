@@ -11,6 +11,7 @@ class RegionsController < ApplicationController
     international_challenges
     regions
     national_regions
+    eligible_locations
   end
 
   private
@@ -77,5 +78,19 @@ class RegionsController < ApplicationController
     return if @checker.show? @region
 
     redirect_to challenges_path, alert: 'Region not visible at this time'
+  end
+
+  def eligible_locations
+    @eligible_locations = [
+      {label: 'NSW', path: 'new_south_wales_2024'},
+      {label: 'QLD', path: 'queensland_2024'},
+      {label: 'VIC', path: 'victoria_2024'},
+      {label: 'SA', path: 'south_australia_2024'},
+      {label: 'WA', path: 'western_australia_2024'},
+      {label: 'TAS', path: 'tasmania_2024'},
+      {label: 'Australia', path: 'australia2024'},
+      {label: 'New Zealand', path: 'new_zealand2024'},
+      {label: 'International', path: 'international_2024'},
+    ]
   end
 end

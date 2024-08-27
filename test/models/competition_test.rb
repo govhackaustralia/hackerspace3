@@ -238,10 +238,20 @@ class CompetitionTest < ActiveSupport::TestCase
 
   test 'during sunday judging?' do
     time_now = Time.now.in_time_zone('Brisbane')
-    # end time in the past and after 4pm
-    @competition.update! end_time: Time.new(time_now.year, time_now.month, time_now.day, 0, 0, 0)
 
-    assert @competition.in_sunday_judging?('Brisbane')
+    if time_now.hour < 12
+      # when current time is before 12pm, set previous day as end day and expect competition to be in sunday judging
+      @competition.update! end_time: time_now - 1.day
+      assert @competition.in_sunday_judging?('Brisbane')
+    elsif time_now.hour >= 16
+      # when current time is after 4pm, set current day as end day and expect competition to be in current judging
+      @competition.update! end_time: time_now
+      assert @competition.in_sunday_judging?('Brisbane')
+    else
+      # when the current time is not a valid sunday judging time expect the competition not to be in current judging
+      @competition.update! end_time: time_now
+      assert_not @competition.in_sunday_judging?('Brisbane')
+    end
   end
 
   test 'after sunday judging?' do
