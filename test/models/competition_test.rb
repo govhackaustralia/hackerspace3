@@ -248,8 +248,8 @@ class CompetitionTest < ActiveSupport::TestCase
       @competition.update! end_time: time_now
       assert @competition.in_sunday_judging?('Brisbane')
     else
-      # when the current time is not a valid sunday judging time expect the competition not to be in current judging  
-      @competition.update! end_time: time_now  
+      # when the current time is not a valid sunday judging time expect the competition not to be in current judging
+      @competition.update! end_time: time_now
       assert_not @competition.in_sunday_judging?('Brisbane')
     end
   end
