@@ -25,7 +25,7 @@
 #  index_competitions_on_current  (current)
 #  index_competitions_on_year     (year)
 #
-require './test_helper'
+require 'test_helper'
 
 class CompetitionTest < ActiveSupport::TestCase
   setup do
