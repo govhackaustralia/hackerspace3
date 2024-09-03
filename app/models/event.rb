@@ -35,6 +35,7 @@
 #  index_events_on_published   (published)
 #  index_events_on_region_id   (region_id)
 #
+require 'csv'
 class Event < ApplicationRecord
   belongs_to :region
   has_one :competition, through: :region
@@ -229,6 +230,7 @@ class Event < ApplicationRecord
   # Returns a CSV file of Registrations associated with an event.
   def registrations_to_csv
     user_columns = %w[
+      id
       full_name
       email
       slack
@@ -246,7 +248,8 @@ class Event < ApplicationRecord
     combined = user_columns + ['status']
     CSV.generate do |csv|
       csv << combined
-      registrations.each do |registration|
+      sorted_registrations = registrations.sort_by { |r| r.user.id }.reverse
+      sorted_registrations.each do |registration|
         user_values = registration.user.attributes.values_at(*user_columns)
         csv << (user_values + [registration.status])
       end
