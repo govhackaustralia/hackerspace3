@@ -4,35 +4,19 @@
     <%= yield :title %>
   </h1>
   <% if @data_sets.present? %>
-    <%= link_to 'Download CSV', data_sets_path(format: 'csv'), class: 'download-csv' %>
-    <table class="projects-table" data-turbolinks="false" id="dataset_table">
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Description</th>
-          <th>Dataset URL</th>
-          <th>Jurisdiction</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% @data_sets.each do |data_set| %>
-          <tr>
-            <td>
-              <%= link_to data_set.name, data_set_path(data_set) %>
-            </td>
-            <td>
-              <%= markdown truncate(data_set.description, length: 100, omission: '... ') %>
-            </td>
-            <td>
-              <%= link_to data_set.url, visits_path(visit: {visitable_type: 'DataSet', visitable_id: data_set.id}), class: 'dataseturl' %>
-            </td>
-            <td>
-              <%= data_set.region.name %>
-            </td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
+    <% @data_sets.each do |data_set| %>
+      <section>
+        <div>
+          <h2><%= data_set.name %></h2>
+          <p><%= markdown truncate(data_set.description, length: 100, omission: '... ') %></p>
+          <p><%= data_set.region.name %></p>
+        </div>  
+        <%= link_to "Go to Dataset", data_set_path(data_set) %>
+      </section> 
+      <% unless data_set == @data_sets.last %> 
+        <hr/>
+      <% end %>    
+    <% end %>
   <% else %>
     <p>
       <strong>No Data Set Highlights saved for <%= @competition.name %> at this time.</strong>
