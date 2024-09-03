@@ -13,6 +13,7 @@
     <table data-turbolinks="false" id="admin-registrations-table">
       <thead>
         <tr>
+          <th>ID</th>
           <th>Full Name</th>
           <th>Email</th>
           <th>Slack</th>
@@ -35,6 +36,9 @@
           <% assignment = registration.assignment %>
           <% user = assignment.user %>
           <tr>
+            <td>
+              <%= user.id %>
+            </td>
             <td>
               <%= user.full_name %>
             </td>
