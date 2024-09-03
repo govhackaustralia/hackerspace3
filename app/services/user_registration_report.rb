@@ -6,6 +6,7 @@ class UserRegistrationReport
     email
     full_name
     preferred_name
+    region
     dietary_requirements
     tshirt_size
     slack
@@ -26,7 +27,9 @@ class UserRegistrationReport
   def self.report(competition)
     CSV.generate do |csv|
       csv << (USER_COLUMNS + ['events'])
-      User.all.preload(:participating_events).each do |user|
+      all_users = User.all.preload(:participating_events)
+      sorted_users = all_users.sort_by(&:id).reverse
+      sorted_users.each do |user|
         event_names = user.participating_events.competition(competition).pluck(:name)
         csv << (user.attributes.values_at(*USER_COLUMNS) << event_names)
       end
