@@ -12,6 +12,7 @@
 #  name        :string
 #  nation_wide :boolean
 #  short_desc  :text
+#  teaser  :text
 #  video_url   :string
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
