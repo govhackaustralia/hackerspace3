@@ -17,6 +17,12 @@ class Admin::UsersController < ApplicationController
     end
   end
 
+  def mailing_list_export_id_desc
+    respond_to do |format|
+      format.csv { send_data MailingListExport.new(@competition).to_csv_by_date }
+    end
+  end
+
   def show
     @user = User.find params[:id]
     @profile = @user.profile
