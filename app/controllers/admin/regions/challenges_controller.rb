@@ -125,7 +125,8 @@ class Admin::Regions::ChallengesController < ApplicationController
   def challenge_params
     params.require(:challenge).permit(
       :name, :short_desc, :long_desc, :eligibility, :video_url, :approved,
-      :banner_image, :image, :pdf, :pdf_preview, :nation_wide,
+      :banner_image, :image, :pdf, :pdf_preview, :nation_wide, :teaser,
+      :outcome_expectations, :sponsor_values
     )
   end
 end
