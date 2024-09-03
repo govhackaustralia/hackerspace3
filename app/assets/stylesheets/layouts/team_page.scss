@@ -5,9 +5,7 @@
   .team_page:has(> .side_menu){
     display: flex;
   }
-
   .team_page {
-    //display: flex;
 
     > section > section {
       padding: 0.25em 1.5em;
