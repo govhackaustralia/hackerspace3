@@ -9,16 +9,24 @@
   <p>
     <%= link_to "Download CSV (Mailing List Export #{@competition.year})", mailing_list_export_admin_users_path(format: 'csv'), class: 'download-csv' %>
   </p>
+  <p>
+    <%= link_to "Download CSV by ID (Mailing List Export #{@competition.year})", mailing_list_export_id_desc_admin_users_path(format: 'csv'), class: 'download-csv' %>
+  </p>
   <table class="projects-table" data-turbolinks="false" id="admin-users-table">
     <thead>
+      <th>ID</th>
       <th>Full Name</th>
       <th>Preferred Name</th>
       <th>Email</th>
+      <th>Region</th>
       <th>Confirmed Status</th>
     </thead>
     <tbody>
       <% @users.each do |user| %>
         <tr>
+          <td>
+            <%= user.id %>
+          </td>
           <td>
             <%= link_to (user.full_name || '[no name]'), admin_user_path(user) %>
           </td>
@@ -27,6 +35,9 @@
           </td>
           <td>
             <%= user.email %>
+          </td>
+          <td>
+            <%= user.region %>
           </td>
           <td>
             <%= user.confirmed_status %>
