@@ -5,14 +5,16 @@
       <%= yield :title %>
     </h1>
   </section>
-  <section>
+  <section class="dataset_list">
     <% if @data_sets.present? %>
-      <h2><%= @data_sets.length %> Datasets available</h2>
-      <p>
-       <span>Filters:</span>
-       <span class="filter">Australia <%= link_to "X", data_sets_path %></span>
-       <span class="filter">Agriculture and the Environment <%= link_to "X", data_sets_path %></span>
-      </p>
+      <div class="dataset_list_header mx-3 mb-5">
+        <h2 class="fw-bold"><%= @data_sets.length %> Datasets available</h2>
+        <p class="mt-4">
+          <span>Filters:</span>
+          <span class="filter mx-2 px-2 rounded">Australia <%= link_to "x", data_sets_path %></span>
+          <span class="filter mx-2 px-2 rounded">Agriculture and the Environment <%= link_to "x", data_sets_path, class: "spaced" %></span>
+        </p>
+      </div>
       <% @data_sets.each do |data_set| %>
         <section>
           <div>
