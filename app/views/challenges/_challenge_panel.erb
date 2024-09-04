@@ -6,6 +6,9 @@
     <% end %>
     <% if challenge.eligibility.present? && @competition.current %>
       <p>
+        <%= challenge.teaser %>
+      </p>
+      <p>
         <strong>Eligibility:</strong>
         <%= challenge.eligibility %>
       </p>
