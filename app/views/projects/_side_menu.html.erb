@@ -21,14 +21,16 @@
           <% else %>  
             <%= image_tag 'default_profile_pic' %>
           <% end %>  
-          <p><%= member.full_name %></p>
+          <p>
+              <%= link_to member.full_name, profile_path(member.profile) %>
+          </p>
         </li>
       <% end %>
     </ul>
   </div>
   <hr/>
   <div>
-    <%= button_to 'Evidence of Work', @current_project.source_code_url %>
+    <a class="btn-evidence" href="<%= @current_project.source_code_url %>" target="_blank">Evidence of Work</a>
   </div>
   <div class="tags">  
     <% @current_project.tags.map do |tag| %>

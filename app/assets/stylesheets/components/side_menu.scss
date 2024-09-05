@@ -89,7 +89,7 @@
       }
     }
 
-    button {
+    button{
       width: 100%;
       margin: 16px 0 48px;
       padding: 20px;
@@ -98,6 +98,23 @@
       border-radius: 4px;
       font-size: 20px;
       box-shadow: 0 4px 4px rgba(0, 0, 0, 0.4);
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
+
+    .btn-evidence {
+      margin: 16px 0 48px;
+      padding: 20px;
+      background: none;
+      border: 1px solid gray;
+      border-radius: 4px;
+      font-size: 20px;
+      box-shadow: 0 4px 4px rgba(0, 0, 0, 0.4);
+      text-decoration:none;
+      text-align:center;
+      color:black;
 
       &:hover {
         cursor: pointer;
