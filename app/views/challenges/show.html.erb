@@ -33,9 +33,10 @@
           <%= @challenge.teaser %>
         </p>
       <% end %>
+      <br>
       <% unless @challenge.short_desc.blank? %>
         <h4>
-          <%= @challenge.short_desc %>
+          <%= markdown @challenge.short_desc %>
         </h4>
       <% end %>
       <% unless @challenge.long_desc.blank? %>
