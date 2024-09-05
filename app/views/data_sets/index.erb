@@ -7,14 +7,7 @@
   </section>
   <section class="dataset_list">
     <% if @data_sets.present? %>
-      <div class="dataset_list_header mx-3 mb-5">
-        <h2 class="fw-bold"><%= @data_sets.length %> Datasets available</h2>
-        <p class="mt-4">
-          <span>Filters:</span>
-          <span class="filter mx-2 px-2 rounded">Australia <%= link_to "x", data_sets_path %></span>
-          <span class="filter mx-2 px-2 rounded">Agriculture and the Environment <%= link_to "x", data_sets_path, class: "spaced" %></span>
-        </p>
-      </div>
+      <h2 class="mx-3 mb-5 fw-bold"><%= @data_sets.length %> Datasets available</h2>
       <% @data_sets.each do |data_set| %>
         <section>
           <div>

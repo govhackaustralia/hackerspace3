@@ -1,30 +1,7 @@
 .dataset_page {
   .dataset_list {
-    .dataset_list_header {
-      h2 {
-        letter-spacing: 0.025rem;
-      }
-
-      p {
-        font-size: 18px;
-
-        span.filter {
-          display: inline-block;
-          font-size: 16px;
-          color: var(--secondary);
-          border: 1px solid var(--secondary);
-
-          a {
-            padding-left: 0.25rem;
-            color: var(--secondary);
-            text-decoration: none;
-
-            &.spaced {
-              padding-left: 2rem;
-            }
-          }
-        }
-      }
+    h2 {
+      letter-spacing: 0.025rem;
     }
   }
 
@@ -104,46 +81,6 @@
         overflow: hidden;
       }
     }
-  }
-
-  table {
-    box-sizing: border-box;
-    margin-top: 2em;
-    border-collapse: collapse;
-
-    .dataseturl {
-      font-size: small;
-    }
-
-    border: 1px solid var(--primary);
-    box-sizing: border-box;
-  }
-
-  th,
-  td {
-    border: 1px solid var(--primary);
-    padding: 0.25em 1em;
-    box-sizing: border-box;
-  }
-
-  tr td {
-    &:nth-of-type(1),
-    &:nth-of-type(3) {
-      width: 25%;
-    }
-
-    &:nth-of-type(2) {
-      width: 40%;
-    }
-
-    &:nth-of-type(4) {
-      width: 10%;
-    }
-  }
-
-  th {
-    background-color: var(--primary);
-    color: #fff;
   }
 
   form {
