@@ -91,6 +91,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_11_130633) do
     t.integer "region_id"
     t.string "name"
     t.text "short_desc"
+    t.text "teaser"
     t.text "long_desc"
     t.text "eligibility"
     t.string "video_url"

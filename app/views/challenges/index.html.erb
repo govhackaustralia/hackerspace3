@@ -2,13 +2,13 @@
   <%= render 'challenges_header' %>
   <section class="tiles">
     <% @regions.each do |region| %>
-      <% next unless @checker.show?(region) %>
+      <% next unless @checker.show?(region) || region.is_show == 1 %>
       <%= link_to (render 'region_tile', region: region ), region_path(region) %>
     <% end %>
   </section>
   <section class="challenges_list">
   <% @regions.each do |region| %>
-    <% next unless @checker.show?(region) %>
+    <% next unless @checker.show?(region) || region.is_show == 1 %>
     <h2>
       <%= region.name %>
     </h2>

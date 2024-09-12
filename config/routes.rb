@@ -168,6 +168,7 @@ Rails.application.routes.draw do
       end
       collection do
         get 'mailing_list_export'
+        get 'mailing_list_export_id_desc'
       end
       resources :assignments, only: :destroy, controller: 'users/assignments'
     end

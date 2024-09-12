@@ -1,40 +1,79 @@
-<%= form_for [:admin, @region, @challenge] do |form| %>
-  <div class="form-group">
-    <%= form.label :name %>
-    <%= form.text_field :name %>
+<%= form_for [:admin, @region, @challenge], html: { class: 'form-horizontal' } do |form| %>
+
+  <div class="form-group row mb-1">
+    <%= form.label :name, class: 'col-sm-1 col-form-label' %>
+    <div class="col-sm-10">
+      <%= form.text_field :name, class: 'form-control' %>
+    </div>
   </div>
-  <div class="form-group">
-    <%= form.label :short_desc %>
-    <%= form.text_area :short_desc %>
+  
+  <div class="form-group row mb-1">
+    <%= form.label "Teaser (hashtags)", class: 'col-sm-1 col-form-label' %>
+    <div class="col-10">
+      <%= form.text_area :teaser,  class: 'form-control' , :cols => 20, :maxlength => 200 %>
+    </div>
   </div>
-  <div class="form-group">
-    <%= form.label :long_desc %>
-    <%= form.text_area :long_desc %>
+  
+  <div class="form-group row mb-1">
+    <%= form.label :problem_statement, class: 'col-sm-1 col-form-label' %>
+    <div class="col-sm-10">
+      <%= form.text_area :short_desc, class: 'form-control', rows: 3 %>
+    </div>
   </div>
-  <div class="form-group">
-    <%= form.label :eligibility %>
-    <%= form.text_area :eligibility %>
+  
+  <div class="form-group row mb-1">
+    <%= form.label :long_description, class: 'col-sm-1 col-form-label' %>
+    <div class="col-sm-10">
+      <%= form.text_area :long_desc, class: 'form-control', rows: 3 %>
+    </div>
   </div>
-  <div class="form-group">
-    <%= form.label :video_url %>
-    <%= form.url_field :video_url %>
+  
+  <div class="form-group row mb-1">
+    <%= form.label :outcome_expectations, class: 'col-sm-1 col-form-label' %>
+    <div class="col-sm-10">
+      <%= form.text_area :outcome_expectations, class: 'form-control', rows: 3 %>
+    </div>
   </div>
+  
+  <div class="form-group row mb-1">
+    <%= form.label :sponsor_values, class: 'col-sm-1 col-form-label' %>
+    <div class="col-sm-10">
+      <%= form.text_area :sponsor_values, class: 'form-control', rows: 3 %>
+    </div>
+  </div>
+  
+  <div class="form-group row mb-1">
+    <%= form.label :eligibility, class: 'col-sm-1 col-form-label' %>
+    <div class="col-sm-10">
+      <%= form.text_area :eligibility, class: 'form-control', rows: 3 %>
+    </div>
+  </div>
+  
+  <div class="form-group row mb-1">
+    <%= form.label :video_url, class: 'col-sm-1 col-form-label' %>
+    <div class="col-sm-10">
+      <%= form.url_field :video_url, class: 'form-control' %>
+    </div>
+  </div>
+  
   <% if current_user.admin_privileges?(@region.competition) %>
     <div class="form-group">
-      <%= form.label :approved %>
-      <%= form.check_box :approved, { checked: @challenge.approved } %>
+      <%= form.label :approved, class: 'col-sm-1 col-form-label' %>
+        <%= form.check_box :approved, { checked: @challenge.approved }, class: 'form-check-input' %>
     </div>
+    
     <% if @challenge.type == REGIONAL %>
-      <p>
+      <p class="form-text text-muted">
         Nation wide: This option makes this Regional Challenge available
         to any team in <%= @region.parent.name %>.
       </p>
       <div class="form-group">
         <%= form.label :nation_wide %>
-        <%= form.check_box :nation_wide, { checked: @challenge.nation_wide } %>
+          <%= form.check_box :nation_wide, { checked: @challenge.nation_wide }%>
       </div>
     <% end %>
   <% end %>
+  
   <div class="actions">
     <%= form.submit %>
   </div>

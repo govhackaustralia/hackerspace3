@@ -28,14 +28,30 @@
           </figure>
         <% end %>
       </div>
+      <% unless @challenge.teaser.blank? %>
+        <p>
+          <%= @challenge.teaser %>
+        </p>
+      <% end %>
+      <br>
       <% unless @challenge.short_desc.blank? %>
         <h4>
-          <%= @challenge.short_desc %>
+          <%= markdown @challenge.short_desc %>
         </h4>
       <% end %>
       <% unless @challenge.long_desc.blank? %>
         <div class="long-desc">
           <%= markdown @challenge.long_desc %>
+        </div>
+      <% end %>
+      <% unless @challenge.outcome_expectations.blank? %>
+        <div class="long-desc">
+          <%= markdown @challenge.outcome_expectations %>
+        </div>
+      <% end %>
+      <% unless @challenge.sponsor_values.blank? %>
+        <div class="long-desc">
+          <%= markdown @challenge.sponsor_values %>
         </div>
       <% end %>
       <% unless @challenge.eligibility.blank? %>
