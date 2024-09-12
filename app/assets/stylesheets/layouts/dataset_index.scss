@@ -3,6 +3,26 @@
     h2 {
       letter-spacing: 0.025rem;
     }
+
+    .dataset {
+      font-size: 1.1rem;
+
+      h3 {
+        color: var(--primary);
+      }
+
+      .region {
+        font-size: 0.9rem;
+      }
+
+      .link_container a {
+        color: var(--primary);
+      }
+    }
+
+    hr {
+      border-top: 1px solid #a0a0a0;
+    }
   }
 
   .dataportals {

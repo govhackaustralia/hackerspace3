@@ -1,7 +1,7 @@
 <% content_for :title, "GovHack Datasets" %>
 <main class="dataset_page">
   <section>
-    <h1>
+    <h1 class="mx-3">
       <%= yield :title %>
     </h1>
   </section>
@@ -9,13 +9,13 @@
     <% if @data_sets.present? %>
       <h2 class="mx-3 mb-5 fw-bold"><%= @data_sets.length %> Datasets available</h2>
       <% @data_sets.each do |data_set| %>
-        <section>
+        <section class="dataset d-flex justify-content-between align-items-center mx-3 my-5">
           <div>
-            <h3><%= data_set.name %></h3>
-            <p><%= markdown truncate(data_set.description, length: 100, omission: '... ') %></p>
-            <p><%= data_set.region.name %></p>
+            <h3 class="mb-3"><%= data_set.name %></h3>
+            <p class="mb-2"><%= data_set.description %></p>
+            <p class="region"><%= data_set.region.name %></p>
           </div>  
-          <div>
+          <div class="link_container">
             <%= link_to "Go to Dataset", data_set_path(data_set) %>
           </div>  
         </section> 
