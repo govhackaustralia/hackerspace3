@@ -1,4 +1,10 @@
 .dataset_page {
+  .dataset_list {
+    h2 {
+      letter-spacing: 0.025rem;
+    }
+  }
+
   .dataportals {
     padding-top: 0;
     display: flex;
@@ -24,7 +30,9 @@
         align-items: stretch;
       }
 
-      h3, h4, p {
+      h3,
+      h4,
+      p {
         color: #fff;
       }
 
@@ -37,80 +45,42 @@
         transition: all 0.4s ease;
       }
 
-      &:nth-of-type(3n+1) div {
+      &:nth-of-type(3n + 1) div {
         background-color: rgba(202, 30, 86, 0.5);
         border-bottom: 1em solid var(--primary);
         overflow: hidden;
       }
 
-      &:nth-of-type(3n+2) div {
+      &:nth-of-type(3n + 2) div {
         background-color: rgba(76, 154, 210, 0.5);
         border-bottom: 1em solid var(--secondary);
         overflow: hidden;
       }
 
-      &:nth-of-type(3n+0) div {
+      &:nth-of-type(3n + 0) div {
         background-color: rgba(113, 113, 113, 0.5);
         border-bottom: 1em solid #717171;
         overflow: hidden;
       }
 
-      &:nth-of-type(3n+1) div:hover {
+      &:nth-of-type(3n + 1) div:hover {
         background-color: rgba(253, 37, 107, 0.5);
         border-bottom: 1em solid var(--primary);
         overflow: hidden;
       }
 
-      &:nth-of-type(3n+2) div:hover {
+      &:nth-of-type(3n + 2) div:hover {
         background-color: rgba(94, 191, 261, 0.5);
         border-bottom: 1em solid var(--secondary);
         overflow: hidden;
       }
 
-      &:nth-of-type(3n+0) div:hover {
+      &:nth-of-type(3n + 0) div:hover {
         background-color: rgba(161, 161, 161, 0.5);
         border-bottom: 1em solid #a0a0a0;
         overflow: hidden;
       }
     }
-  }
-
-  table {
-    box-sizing: border-box;
-    margin-top: 2em;
-    border-collapse: collapse;
-
-    .dataseturl {
-      font-size: small;
-    }
-
-    border: 1px solid var(--primary);
-    box-sizing: border-box;
-  }
-
-  th, td {
-    border: 1px solid var(--primary);
-    padding: 0.25em 1em;
-    box-sizing: border-box;
-  }
-
-  tr td {
-    &:nth-of-type(1), &:nth-of-type(3) {
-      width: 25%;
-    }
-
-    &:nth-of-type(2) {
-      width: 40%;
-    }
-
-    &:nth-of-type(4) {
-      width: 10%;
-    }
-  }
-
-  th {
-    background-color: var(--primary);
-    color: #fff;
   }
 
   form {
@@ -132,7 +102,8 @@
             font-size: 1.15em;
           }
 
-          input, textarea {
+          input,
+          textarea {
             box-sizing: border-box;
             width: 50%;
             padding-left: 1em;
