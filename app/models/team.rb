@@ -201,12 +201,27 @@ class Team < ApplicationRecord
   # ENHANCEMENT: move to controller.
   def self.compile_csv(competition, csv, project_columns)
     competition.teams.published.preload(:current_project, :team_data_sets, :challenges, :assignments).each do |team|
-      csv << [
-        *team.current_project.attributes.values_at(*project_columns),
-        team.assignments.length,
-        team.team_data_sets.pluck(:url),
-        team.challenges.pluck(:name),
-      ]
+      #csv << [
+      #  *team.current_project.attributes.values_at(*project_columns),
+      #  team.assignments.length,
+      #  team.team_data_sets.pluck(:url),
+      #  team.challenges.pluck(:name),
+      #]
+      if team.current_project
+        csv << [
+          *team.current_project.attributes.values_at(*project_columns),
+          team.assignments.length,
+          team.team_data_sets.pluck(:url),
+          team.challenges.pluck(:name),
+        ]
+      else
+        # Handle the case where current_project is nil
+        csv << [nil] * project_columns.length + [
+          team.assignments.length, 
+          team.team_data_sets.pluck(:url),
+          team.challenges.pluck(:name)
+        ]
+      end
     end
   end
 
