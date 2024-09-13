@@ -190,7 +190,7 @@ class Team < ApplicationRecord
   # Returns a CSV file with information on the team.
   # ENHANCEMENT: move to controller.
   def self.to_csv(competition)
-    project_columns = %w[id team_name project_name source_code_url video_url homepage_url created_at updated_at identifier]
+    project_columns = %w[id identifier team_name project_name source_code_url video_url homepage_url created_at updated_at identifier]
     CSV.generate do |csv|
       csv << (project_columns + %w[member_count data_sets challenge_names])
       compile_csv(competition, csv, project_columns)
