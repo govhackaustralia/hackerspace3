@@ -11,7 +11,8 @@ class DemographicsReport
     @profiles = @competition.profiles.preload(:employment_status).compact
   end
 
-  def report # rubocop:disable
+  # rubocop:disable
+  def report
     grouped_data = case @fieldtype
     when 'age'
       @profiles.group_by(&:age)

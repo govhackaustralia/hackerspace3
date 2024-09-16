@@ -120,7 +120,7 @@ class Entry < ApplicationRecord
       total_score += score
       voted += 1
     end
-    return (total_score / voted) unless voted.zero?
+    (total_score / voted) unless voted.zero?
   end
 
   # Returns a count of the number of judges that have completed votes for an

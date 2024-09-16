@@ -194,7 +194,8 @@ class User < ApplicationRecord
     return 'Participant' if participant?
     return 'Mentor' if mentor?
     return 'Industry' if industry?
-    return 'Support' if support?
+
+    'Support' if support?
   end
 
   enum region: {

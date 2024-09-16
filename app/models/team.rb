@@ -143,14 +143,12 @@ class Team < ApplicationRecord
   # taking into only challenges already entered.
   # ENHANCEMENT: Move to controller or helper.
   def admin_available_checkpoints(_challenge)
-    valid_checkpoints = []
-    competition.checkpoints.each do |checkpoint|
+    competition.checkpoints.map do |checkpoint|
       # ERROR: Not working correctly at the moment
       # next if checkpoint.limit_reached?(self, challenge_region)
 
-      valid_checkpoints << checkpoint
+      checkpoint
     end
-    valid_checkpoints
   end
 
   # Returns true if all the checkpoints have passed for a given team. false
@@ -179,10 +177,9 @@ class Team < ApplicationRecord
   # for.
   # ENHANCEMENT: Move to active record query.
   def member_competition_events
-    events = []
     comp = competition
-    confirmed_members.each do |user|
-      events << user.participating_competition_event(comp)
+    events = confirmed_members.map do |user|
+      user.participating_competition_event(comp)
     end
     events.uniq
   end
