@@ -1,42 +1,33 @@
-<% content_for :title, "Datasets for #{@competition.name}" %>
+<% content_for :title, "GovHack Datasets" %>
 <main class="dataset_page">
-  <h1>
-    <%= yield :title %>
-  </h1>
-  <% if @data_sets.present? %>
-    <%= link_to 'Download CSV', data_sets_path(format: 'csv'), class: 'download-csv' %>
-    <table class="projects-table" data-turbolinks="false" id="dataset_table">
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Description</th>
-          <th>Dataset URL</th>
-          <th>Jurisdiction</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% @data_sets.each do |data_set| %>
-          <tr>
-            <td>
-              <%= link_to data_set.name, data_set_path(data_set) %>
-            </td>
-            <td>
-              <%= markdown truncate(data_set.description, length: 100, omission: '... ') %>
-            </td>
-            <td>
-              <%= link_to data_set.url, visits_path(visit: {visitable_type: 'DataSet', visitable_id: data_set.id}), class: 'dataseturl' %>
-            </td>
-            <td>
-              <%= data_set.region.name %>
-            </td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
-  <% else %>
-    <p>
-      <strong>No Data Set Highlights saved for <%= @competition.name %> at this time.</strong>
-    </p>
-  <% end %>
+  <section>
+    <h1 class="mx-3">
+      <%= yield :title %>
+    </h1>
+  </section>
+  <section class="dataset_list">
+    <% if @data_sets.present? %>
+      <h2 class="mx-3 mb-5 fw-bold"><%= @data_sets.length %> Datasets available</h2>
+      <% @data_sets.each do |data_set| %>
+        <section class="dataset d-flex justify-content-between align-items-center mx-3 my-5">
+          <div>
+            <h3 class="mb-3"><%= data_set.name %></h3>
+            <p class="mb-2"><%= data_set.description %></p>
+            <p class="region"><%= data_set.region.name %></p>
+          </div>  
+          <div class="link_container">
+            <%= link_to "Go to Dataset", data_set_path(data_set) %>
+          </div>  
+        </section> 
+        <% unless data_set == @data_sets.last %> 
+          <hr/>
+        <% end %>    
+      <% end %>
+    <% else %>
+      <p>
+        <strong>No matching datasets at this time.</strong>
+      </p>
+    <% end %>
+  </section>  
+  <%= link_to 'Back to Resources', resources_path %>
 </main>
-<%= link_to 'Back to Resources', resources_path %>
