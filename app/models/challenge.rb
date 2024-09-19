@@ -106,7 +106,8 @@ class Challenge < ApplicationRecord
   def self.challenge_csv_line(challenge, competition, challenge_columns)
     values = [challenge.region.name, competition.year]
     values += challenge.attributes.values_at(*challenge_columns)
-    values << challenge.sponsors.pluck(:name)
+    #values << challenge.sponsors.pluck(:name)
+    values << challenge.sponsors&.pluck(:name)&.compact&.join(',')
     values << challenge.published_entries.length
   end
 
