@@ -81,18 +81,6 @@ class RegionsController < ApplicationController
   end
 
   def eligible_locations
-    #@eligible_locations = [
-    #  {label: 'NSW', path: 'new_south_wales_2024'},
-    #  {label: 'QLD', path: 'queensland_2024'},
-    #  {label: 'VIC', path: 'victoria_2024'},
-    #  {label: 'SA', path: 'south_australia_2024'},
-    #  {label: 'WA', path: 'western_australia_2024'},
-    #  {label: 'TAS', path: 'tasmania_2024'},
-    #  {label: 'Australia', path: 'australia2024'},
-    #  {label: 'New Zealand', path: 'new_zealand2024'},
-    #  {label: 'International', path: 'international_2024'},
-    #]
-
     regions = @competition.regions.order(:category, :name)
 
     @eligible_locations = regions.map do |region|
