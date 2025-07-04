@@ -1,8 +1,8 @@
 InvisibleCaptcha.setup do |config|
-  config.timestamp_enabled = !Rails.env.test?
-  # config.honeypots           << ['more', 'fake', 'attribute', 'names']
-  # config.visual_honeypots    = false
-  # config.timestamp_threshold = 2
+  config.honeypots           = [:additional_information, :contact_options, :custom, :extra_details, :leave_blank, :optional_data, :other, :phone, :preferred_contact, :secondary_input, :special_instructions, :terms_and_conditions, :web_site]
+  config.visual_honeypots    = ENV['HONEYPOTS_SHOW'].to_s.downcase == 'true' || false
+  config.timestamp_enabled   = ENV['HONEYPOTS_TIMEOUT_ENABLED'] || false
+  config.timestamp_threshold = ENV['HONEYPOTS_TIMEOUT'].to_i || 2
   # config.timestamp_enabled   = true
   # config.injectable_styles   = false
   # config.spinner_enabled     = true
