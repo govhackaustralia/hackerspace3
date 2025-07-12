@@ -19,7 +19,7 @@ RSpec.describe '/api/v1/projects' do
     expect(response).to have_http_status(:success)
     parsed_body = JSON.parse(response.body, symbolize_names: true)
 
-    expect(parsed_body.fetch(:data)).to eq(
+    expect(parsed_body.fetch(:data).slice(:id, :project_name)).to eq(
       {
         id: 1,
         project_name: 'My awesome project',

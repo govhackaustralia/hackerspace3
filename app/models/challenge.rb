@@ -4,19 +4,22 @@
 #
 # Table name: challenges
 #
-#  id          :bigint           not null, primary key
-#  approved    :boolean          default(FALSE)
-#  eligibility :text
-#  identifier  :string
-#  long_desc   :text
-#  name        :string
-#  nation_wide :boolean
-#  short_desc  :text
-#  teaser  :text
-#  video_url   :string
-#  created_at  :datetime         not null
-#  updated_at  :datetime         not null
-#  region_id   :integer
+#  id                   :bigint           not null, primary key
+#  approved             :boolean          default(FALSE)
+#  eligibility          :text
+#  identifier           :string
+#  is_show              :integer
+#  long_desc            :text
+#  name                 :string
+#  nation_wide          :boolean
+#  outcome_expectations :text
+#  short_desc           :text
+#  sponsor_values       :text
+#  teaser               :text
+#  video_url            :string
+#  created_at           :datetime         not null
+#  updated_at           :datetime         not null
+#  region_id            :integer
 #
 # Indexes
 #
@@ -91,15 +94,15 @@ class Challenge < ApplicationRecord
 
   # Compiles a CSV file of all challenges.
   # ENHANCEMENT: This should be in a helper object or own model.
-  def self.to_csv(competition, options={})
+  def self.to_csv(competition, _options = {})
     challenge_columns = %w[id name short_desc long_desc eligibility video_url created_at updated_at]
-    #CSV.generate(options) do |csv|
+    # CSV.generate(options) do |csv|
     CSV.generate do |csv|
       csv << (%w[region_name competition_year] + challenge_columns + %w[sponsors entries])
       competition.challenges.preload(:region, :sponsors, :published_entries).each do |challenge|
         formatted_values = challenge_csv_line(challenge, competition, challenge_columns).map(&:to_s)
         csv << formatted_values
-        #csv << challenge_csv_line(challenge, competition, challenge_columns)
+        # csv << challenge_csv_line(challenge, competition, challenge_columns)
       end
     end
   end
@@ -109,7 +112,7 @@ class Challenge < ApplicationRecord
   def self.challenge_csv_line(challenge, competition, challenge_columns)
     values = [challenge.region.name, competition.year]
     values += challenge.attributes.values_at(*challenge_columns)
-    #values << challenge.sponsors.pluck(:name)
+    # values << challenge.sponsors.pluck(:name)
     values << challenge.sponsors&.pluck(:name)&.compact&.join(',')
     values << challenge.published_entries.length
   end

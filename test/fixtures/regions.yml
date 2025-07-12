@@ -6,6 +6,7 @@
 #  award_release  :datetime
 #  category       :string
 #  identifier     :string
+#  is_show        :integer
 #  name           :string
 #  time_zone      :string
 #  created_at     :datetime         not null

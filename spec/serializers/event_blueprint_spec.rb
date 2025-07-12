@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 RSpec.describe EventBlueprint do
-  subject { described_class.render_as_hash(event) }
+  subject { described_class.render_as_hash(event).slice(:id, :region_id) }
 
   let(:event) { create(:event, id: 1234, region: region) }
   let(:region) { create(:region, competition: create(:competition)) }

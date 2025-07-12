@@ -86,9 +86,8 @@ class RegionsController < ApplicationController
     @eligible_locations = regions.map do |region|
       {
         label: region.name,
-        path: region.identifier
+        path: region.identifier,
       }
     end
-
   end
 end
