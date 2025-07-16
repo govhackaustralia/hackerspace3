@@ -1,5 +1,8 @@
 # frozen_string_literal: true
 
+# Needed to fix DNS resolutions due to libc package incompatibility when performing server side api calls to google
+require 'resolv-replace'
+
 class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   before_action :authenticate_user!, :confirm_success!, only: :slack
 
