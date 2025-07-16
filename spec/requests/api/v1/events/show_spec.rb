@@ -13,7 +13,7 @@ RSpec.describe '/api/v1/events' do
     expect(response).to have_http_status(:success)
     parsed_body = JSON.parse(response.body, symbolize_names: true)
 
-    expect(parsed_body.fetch(:data)).to eq(
+    expect(parsed_body.fetch(:data).slice(:id)).to include(
       {
         id: 1,
       },

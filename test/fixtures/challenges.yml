@@ -2,18 +2,22 @@
 #
 # Table name: challenges
 #
-#  id          :bigint           not null, primary key
-#  approved    :boolean          default(FALSE)
-#  eligibility :text
-#  identifier  :string
-#  long_desc   :text
-#  name        :string
-#  nation_wide :boolean
-#  short_desc  :text
-#  video_url   :string
-#  created_at  :datetime         not null
-#  updated_at  :datetime         not null
-#  region_id   :integer
+#  id                   :bigint           not null, primary key
+#  approved             :boolean          default(FALSE)
+#  eligibility          :text
+#  identifier           :string
+#  is_show              :integer
+#  long_desc            :text
+#  name                 :string
+#  nation_wide          :boolean
+#  outcome_expectations :text
+#  short_desc           :text
+#  sponsor_values       :text
+#  teaser               :text
+#  video_url            :string
+#  created_at           :datetime         not null
+#  updated_at           :datetime         not null
+#  region_id            :integer
 #
 # Indexes
 #

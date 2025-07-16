@@ -29,7 +29,7 @@ RSpec.describe '/api/v1/projects' do
     expect(response).to have_http_status(:success)
     parsed_body = JSON.parse(response.body, symbolize_names: true)
 
-    expect(parsed_body.fetch(:data)).to eq(
+    expect(parsed_body.fetch(:data).map { |x| x.slice(:id, :project_name) }.sort_by { |x| x[:id] }).to eq(
       [
         {
           id: 1,

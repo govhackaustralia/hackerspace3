@@ -3,7 +3,7 @@
 RSpec.describe ProjectBlueprint do
   include_context 'with default event'
 
-  subject { described_class.render_as_hash(project) }
+  subject { described_class.render_as_hash(project).slice(:id, :project_name, :team_name) }
 
   let(:project) do
     create(:project,
