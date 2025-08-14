@@ -62,6 +62,8 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     user = User.find_by_email data['email']
     user ||= new_user_from_google(data)
     update_user_info_from_google user, data
+    # Automatically mark user as "confirmed" if logging in via Google SSO
+    user.confirmed_at = Time.now.in_time_zone(LAST_COMPETITION_TIME_ZONE) if user.confirmed_at.blank?
     user.save
     user
   end
