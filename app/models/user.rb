@@ -17,6 +17,7 @@
 #  current_sign_in_at              :datetime
 #  current_sign_in_ip              :inet
 #  data_cruncher                   :boolean          default(FALSE)
+#  deactivated_at                  :datetime
 #  dietary_requirements            :text
 #  email                           :string           default(""), not null
 #  encrypted_password              :string           default(""), not null

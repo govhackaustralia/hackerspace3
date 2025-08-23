@@ -7,6 +7,7 @@ class ProfilesController < ApplicationController
 
   def index
     @profiles = @competition.profiles.published
+      .where("#{User.table_name}.deactivated_at is null")
       .where.not(identifier: [nil, ''])
       .preload(:user)
       .includes(:skills)
