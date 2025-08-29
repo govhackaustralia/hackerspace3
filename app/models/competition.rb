@@ -219,7 +219,8 @@ class Competition < ApplicationRecord
   def in_sunday_judging?(time_zone)
     four_pm = Time.new(end_time.year, end_time.month, end_time.day, 16, 0, 0, end_time.utc_offset)
     is_after_four_pm = Region.region_time(time_zone) > four_pm.to_formatted_s(:number)
-    midday_after_end_date = Time.new(end_time.year, end_time.month, end_time.day + 1, 12, 0, 0, end_time.utc_offset)
+    end_date = Time.new(end_time.year, end_time.month, end_time.day) + 1.day
+    midday_after_end_date = Time.new(end_date.year, end_date.month, end_date.day, 12, 0, 0, end_time.utc_offset)
     is_before_midday_next_day = Region.region_time(time_zone) < midday_after_end_date.to_formatted_s(:number)
 
     is_after_four_pm && is_before_midday_next_day
