@@ -5,7 +5,7 @@
       <h2 class="heading">Register for GovHack <%= @competition.year %></h2>
       <%= render 'components/registration_status', page: 'sign_up' %>
       <div class="google-oath">
-        <%= link_to (render "devise/shared/google"), user_google_omniauth_authorize_path, method: :post %>
+        <%= link_to (render "devise/shared/google", locals: { google_label: 'Sign up with Google' }), user_google_omniauth_authorize_path, method: :post %>
         <hr class="grey-border">
         <p class="alt-text">or register below</p>
       </div>

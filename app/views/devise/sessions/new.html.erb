@@ -4,7 +4,7 @@
     <section class="signup-form">
       <h2 class="heading">Log in to Hackerspace</h2>
       <div class="google-oath">
-        <%= link_to (render "devise/shared/google"), user_google_omniauth_authorize_path, method: :post %>
+        <%= link_to (render "devise/shared/google", locals: { google_label: 'Log in with Google'}), user_google_omniauth_authorize_path, method: :post %>
         <hr class="grey-border">
         <p class="alt-text"> or log in below</p>
       </div>
