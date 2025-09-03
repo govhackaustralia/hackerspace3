@@ -6,9 +6,34 @@ class ProfilesController < ApplicationController
   before_action :check_profile_found!, :check_published!, only: :show
 
   def index
-    @profiles = @competition.profiles.published
-      .where("#{User.table_name}.deactivated_at is null")
-      .where.not(identifier: [nil, ''])
+    # Original filter
+    # @profiles = @competition.profiles.published
+    #   .where.not(identifier: [nil, ''])
+    #   .preload(:user)
+    #   .includes(:skills)
+    #
+    # Changed to only display profiles for users that have registered
+    # for a Competition Event Type for the given @competition (i.e. Current Competition)
+    @profiles = Profile
+      .joins(
+        user: {
+          assignments: {
+            registrations: %i[event competition],
+          },
+        },
+      )
+      .where.not(
+        identifier: [nil, ''],
+      )
+      .where(
+        events: {
+          event_type: 'Competition',
+        },
+        competitions: {
+          id: @competition.id,
+        },
+      )
+      .published
       .preload(:user)
       .includes(:skills)
   end
