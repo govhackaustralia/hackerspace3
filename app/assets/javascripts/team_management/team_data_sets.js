@@ -3,8 +3,8 @@
 
 $(document).ready(function() {
 	$("#team_data_set_url").blur(function() {
-		var url = $("#team_data_set_url").val();
-		var separated = url.split("/dataset/");
+		const url = $("#team_data_set_url").val();
+		const separated = url.split("/dataset/");
 		
 		var data = {
 			id: separated[1]
@@ -18,19 +18,28 @@ $(document).ready(function() {
 				$("#team_data_set_description").val(data.result.notes);
 				
 				$("#hiddendescription").width($("#team_data_set_description").width());
-				var content = data.result.notes.replace(/\n/g, "<br>");
+
+				const content = data.result.notes.replace(/\n/g, "<br>");
+
 				$("#hiddendescription").html(content);
 				$("#team_data_set_description").css("height", $("#hiddendescription").outerHeight());
 			},
 			dataType: "jsonp"
 		})
 	});
+	
 	try {
+
 	$("#hiddendescription").width($("#team_data_set_description").width());
-	var content = $("#team_data_set_description").val().replace(/\n/g, "<br>");
+
+	const content = $("#team_data_set_description").val().replace(/\n/g, "<br>");
+
 	$("#hiddendescription").html(content);
 	$("#team_data_set_description").css("height", $("#hiddendescription").outerHeight());
+
 	} catch (e) {
-		
+
+		console.error("An error occurred:", e);
+
 	}
 });
